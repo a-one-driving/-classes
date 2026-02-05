@@ -1278,50 +1278,29 @@ max-width:90%;">
 
 
 
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
-  authDomain: "abinash-driving.firebaseapp.com",
-  projectId: "abinash-driving"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-const popup = document.getElementById("holidayPopup");
-
+<script>
 function showHoliday(msg){
+  const popup = document.getElementById("holidayPopup");
   popup.innerHTML = "⚠ " + msg;
   popup.style.transform = "translateX(-50%) scale(1)";
+
   setTimeout(()=>{
     popup.style.transform = "translateX(-50%) scale(0)";
   },5000);
 }
 
-/* 🔔 Weekend auto */
+// check weekend
 const day = new Date().getDay();
-if(day===0 || day===6){
- setTimeout(()=>showHoliday("Weekend Holiday"),2000);
+
+if(day === 0){
+  setTimeout(()=>showHoliday("Sunday Holiday"),2000);
 }
 
-/* 🔥 Local holiday realtime */
-onSnapshot(collection(db,"localHolidays"),(snap)=>{
- const today = new Date().toISOString().split("T")[0];
+if(day === 6){
+  setTimeout(()=>showHoliday("Saturday Holiday"),2000);
+}
 
- snap.forEach(doc=>{
-   const h = doc.data();
 
-   if(h.date === today){
-     setTimeout(()=>{
-       showHoliday("Holiday Today: "+h.title);
-     },2000);
-   }
- });
-});
 
 
 
