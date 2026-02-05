@@ -1279,7 +1279,6 @@ max-width:90%;">
 
 
 
-
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
 import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
@@ -1293,23 +1292,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-/* 🔔 Create popup */
-const popup = document.createElement("div");
-popup.style.position = "fixed";
-popup.style.top = "20px";
-popup.style.left = "50%";
-popup.style.transform = "translateX(-50%) scale(0)";
-popup.style.background = "#111";
-popup.style.color = "#fff";
-popup.style.padding = "14px 22px";
-popup.style.borderRadius = "14px";
-popup.style.fontWeight = "900";
-popup.style.zIndex = "9999";
-popup.style.border = "2px solid gold";
-popup.style.transition = "0.4s";
-document.body.appendChild(popup);
+const popup = document.getElementById("holidayPopup");
 
-function show(msg){
+function showHoliday(msg){
   popup.innerHTML = "⚠ " + msg;
   popup.style.transform = "translateX(-50%) scale(1)";
   setTimeout(()=>{
@@ -1317,32 +1302,27 @@ function show(msg){
   },5000);
 }
 
-/* 📅 Weekend auto holiday */
-function checkWeekend(){
-  const d = new Date().getDay();
-  if(d === 0 || d === 6){
-    show("Weekend Holiday (Saturday & Sunday)");
-  }
+/* 🔔 Weekend auto */
+const day = new Date().getDay();
+if(day===0 || day===6){
+ setTimeout(()=>showHoliday("Weekend Holiday"),2000);
 }
 
-/* 📌 Local holidays from admin */
+/* 🔥 Local holiday realtime */
 onSnapshot(collection(db,"localHolidays"),(snap)=>{
-  const today = new Date().toISOString().split("T")[0];
+ const today = new Date().toISOString().split("T")[0];
 
-  snap.forEach(doc=>{
-    const h = doc.data();
-    console.log("Holiday found:", h.date);
+ snap.forEach(doc=>{
+   const h = doc.data();
 
-    if(h.date === today){
-      show("Holiday Today: " + h.title);
-    }
-  });
+   if(h.date === today){
+     setTimeout(()=>{
+       showHoliday("Holiday Today: "+h.title);
+     },2000);
+   }
+ });
 });
 
-/* 🔄 Run checks */
-setTimeout(()=>{
-  checkWeekend();
-},2000);
 
 
 </script>
