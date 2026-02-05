@@ -1,1 +1,1239 @@
-g
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abhinaash A One Driving Classes</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg1:#0b1020;
+      --bg2:#0a2a43;
+      --card:rgba(255,255,255,.08);
+      --border:rgba(255,255,255,.12);
+      --txt:#ffffff;
+      --muted:rgba(255,255,255,.72);
+      --accent:#00d4ff;
+      --accent2:#00ff88;
+      --warn:#ffcc00;
+      --danger:#ff4d4d;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0;font-family:'Poppins',sans-serif;}
+    body{
+      min-height:100vh;
+      color:var(--txt);
+      background: radial-gradient(1200px 600px at 20% 10%, rgba(0,212,255,.18), transparent 60%),
+                  radial-gradient(900px 500px at 80% 40%, rgba(0,255,136,.10), transparent 60%),
+                  linear-gradient(180deg,var(--bg1),var(--bg2));
+      overflow-x:hidden;
+      padding-bottom:90px; /* important because fixed bar */
+    }
+
+    header{
+      padding:14px 14px;
+      position:sticky;
+      top:0;
+      z-index:10;
+      background:rgba(0,0,0,.25);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .nav{
+      max-width:1100px;margin:auto;
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      flex-wrap:wrap;
+    }
+    .logo{
+      display:flex;align-items:center;gap:10px;
+      font-weight:800;
+      letter-spacing:.4px;
+      font-size:16px;
+    }
+    .dot{
+      width:12px;height:12px;border-radius:50%;
+      background:linear-gradient(45deg,var(--accent),var(--accent2));
+      box-shadow:0 0 15px rgba(0,212,255,.6);
+      flex:0 0 auto;
+    }
+    .idTag{
+      padding:8px 10px;
+      border-radius:12px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      font-size:12px;
+      color:var(--muted);
+      display:flex;
+      align-items:center;
+      gap:8px;
+      max-width:360px;
+      overflow:hidden;
+      white-space:nowrap;
+      text-overflow:ellipsis;
+    }
+    .copyBtn{
+      border:none;
+      background:rgba(0,212,255,.18);
+      color:var(--txt);
+      font-weight:800;
+      padding:6px 10px;
+      border-radius:10px;
+      cursor:pointer;
+      font-size:12px;
+    }
+    .copyBtn:hover{background:rgba(0,212,255,.28);}
+
+    .container{max-width:1100px;margin:auto;padding:22px 14px 78px;}
+
+    /* Hero */
+    .hero{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:16px;
+      align-items:center;
+      padding-top:18px;
+    }
+    @media(max-width:900px){
+      .hero{grid-template-columns:1fr;}
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:9px 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      width:fit-content;
+      color:var(--muted);
+      font-weight:700;
+      font-size:13px;
+      margin-bottom:14px;
+    }
+    .badge span{
+      padding:3px 9px;
+      background:rgba(0,255,136,.16);
+      border:1px solid rgba(0,255,136,.25);
+      border-radius:999px;
+      color:var(--accent2);
+      font-size:12px;
+    }
+
+    h1{
+      font-size:42px;
+      line-height:1.05;
+      font-weight:800;
+      margin-bottom:12px;
+    }
+    @media(max-width:900px){h1{font-size:34px;}}
+    .hero p{
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.65;
+      margin-bottom:18px;
+    }
+
+    /* CTA */
+    .ctaRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-bottom:20px;
+    }
+    .btn{
+      border:none;
+      cursor:pointer;
+      padding:12px 14px;
+      font-weight:900;
+      border-radius:14px;
+      font-size:14px;
+      transition:.2s ease;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      min-height:46px;
+      user-select:none;
+    }
+    .btnPrimary{
+      background:linear-gradient(45deg,var(--accent),var(--accent2));
+      color:#041018;
+      box-shadow:0 12px 30px rgba(0,212,255,.18);
+    }
+    .btnPrimary:hover{transform:translateY(-2px);}
+    .btnGhost{
+      background:rgba(255,255,255,.06);
+      color:var(--txt);
+      border:1px solid rgba(255,255,255,.12);
+    }
+    .btnGhost:hover{background:rgba(255,255,255,.10);}
+
+    @media(max-width:520px){
+      .ctaRow .btn{flex:1 1 48%;}
+    }
+
+    /* Pricing cards */
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:14px;
+      margin-top:10px;
+    }
+    @media(max-width:700px){.cards{grid-template-columns:1fr;}}
+    .card{
+      border:1px solid var(--border);
+      background:var(--card);
+      border-radius:18px;
+      padding:16px;
+      position:relative;
+      overflow:hidden;
+    }
+    .card::before{
+      content:"";
+      position:absolute;inset:-40px;
+      background: radial-gradient(circle at 20% 10%, rgba(0,212,255,.18), transparent 40%),
+                  radial-gradient(circle at 90% 60%, rgba(0,255,136,.12), transparent 38%);
+      filter: blur(10px);
+      z-index:0;
+    }
+    .card > *{position:relative;z-index:1;}
+    .card h3{font-size:18px;margin-bottom:6px;}
+    .price{
+      font-size:28px;
+      font-weight:900;
+      margin:10px 0 10px;
+    }
+    .line{color:var(--muted);font-size:14px;margin:4px 0;}
+    .tag{
+      position:absolute;
+      top:12px;
+      right:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:900;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,204,0,.12);
+      color:var(--warn);
+      z-index:3;
+    }
+
+    /* Right Slider */
+    .scene{
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      border-radius:20px;
+      padding:18px 18px 16px;
+      overflow:hidden;
+      position:relative;
+    }
+    .slider{
+      margin-top:14px;
+      position:relative;
+      overflow:hidden;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.05);
+      box-shadow:0 20px 50px rgba(0,0,0,.35);
+      height:260px;
+    }
+    @media(max-width:900px){
+      .slider{height:230px;}
+    }
+    .slides{width:100%;height:100%;position:relative;}
+    .slide{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      opacity:0;
+      transform:scale(1.03);
+      transition:opacity .6s ease, transform .6s ease;
+    }
+    .slide.active{opacity:1;transform:scale(1);}
+    .navBtn{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      border:none;
+      cursor:pointer;
+      padding:10px 12px;
+      border-radius:12px;
+      background:rgba(0,0,0,.45);
+      color:white;
+      font-weight:900;
+      font-size:18px;
+      z-index:2;
+      border:1px solid rgba(255,255,255,.12);
+    }
+    .navBtn:hover{background:rgba(0,0,0,.6);}
+    .navBtn.prev{left:10px;}
+    .navBtn.next{right:10px;}
+    .dots{
+      position:absolute;
+      bottom:10px;
+      left:50%;
+      transform:translateX(-50%);
+      display:flex;
+      gap:8px;
+      z-index:2;
+    }
+    .dotBtn{
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      border:none;
+      cursor:pointer;
+      background:rgba(255,255,255,.35);
+    }
+    .dotBtn.active{
+      background:rgba(0,212,255,.95);
+      box-shadow:0 0 12px rgba(0,212,255,.5);
+    }
+
+    /* Features */
+    .section{
+      margin-top:28px;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+    }
+    @media(max-width:900px){.section{grid-template-columns:1fr;}}
+    .feature{
+      padding:16px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+    }
+    .feature h4{font-size:16px;margin-bottom:6px;}
+    .feature p{color:var(--muted);font-size:14px;line-height:1.6;}
+
+    /* Batch Timing */
+    .batchGrid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:14px;
+    }
+    @media(max-width:800px){.batchGrid{grid-template-columns:1fr;}}
+    .batchCard{
+      border-radius:18px;
+      padding:16px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      overflow:hidden;
+      position:relative;
+      transform:translateY(18px);
+      opacity:0;
+    }
+    .batchCard::before{
+      content:"";
+      position:absolute;
+      inset:-50px;
+      background: radial-gradient(circle at 20% 10%, rgba(0,212,255,.18), transparent 55%),
+                  radial-gradient(circle at 90% 60%, rgba(0,255,136,.10), transparent 55%);
+      filter:blur(18px);
+      z-index:0;
+    }
+    .batchCard *{position:relative;z-index:1;}
+    .batchIcon{
+      width:46px;height:46px;border-radius:14px;
+      display:flex;align-items:center;justify-content:center;
+      background:rgba(0,0,0,.22);
+      border:1px solid rgba(255,255,255,.12);
+      font-size:22px;
+      margin-bottom:10px;
+    }
+    .batchCard h3{font-size:18px;margin-bottom:8px;}
+    .batchCard p{color:rgba(255,255,255,.72);font-size:14px;line-height:1.6;}
+    .animateBatch.show{animation: batchPop .7s ease forwards;}
+    .animateBatch.delay1.show{animation-delay:.18s;}
+    @keyframes batchPop{
+      0%{transform:translateY(18px);opacity:0;}
+      100%{transform:translateY(0);opacity:1;}
+    }
+
+    /* Slot Booking */
+    .slotWrap{
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      padding:16px;
+      overflow:hidden;
+      position:relative;
+    }
+    .slotTop{
+      display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;
+      margin-bottom:12px;
+    }
+    .slotTop p{color:rgba(255,255,255,.7);font-size:14px;margin-top:6px;}
+    .slotGrid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin-top:14px;
+    }
+    @media(max-width:900px){.slotGrid{grid-template-columns:1fr;}}
+    .slotCard{
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.18);
+      padding:14px;
+    }
+    .slotTitle{
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      margin-bottom:10px;
+      font-weight:900;
+    }
+
+    .pill{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      color:rgba(255,255,255,.85);
+      font-weight:800;
+    }
+    .pill.green{
+      color:rgba(0,255,136,.95);
+      border-color:rgba(0,255,136,.22);
+      background:rgba(0,255,136,.08);
+    }
+    .pill.red{
+      color:#ffbdbd;
+      border-color:rgba(255,77,77,.22);
+      background:rgba(255,77,77,.10);
+    }
+
+    .seatGrid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:10px;
+      margin-top:12px;
+    }
+
+    /* Available seat: green */
+    .seat{
+      min-height:42px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:#14c45a;
+      cursor:pointer;
+      font-weight:900;
+      color:#ffffff;
+      transition:.15s ease;
+      font-size:14px;
+      letter-spacing:.2px;
+    }
+    .seat:hover{transform:translateY(-2px);}
+
+    /* Selected: blue glow */
+    .seat.selected{
+      background:#00d4ff;
+      border-color:rgba(0,212,255,.55);
+      color:#041018;
+      box-shadow:0 0 22px rgba(0,212,255,.45),
+                 0 0 50px rgba(0,212,255,.18);
+      transform:scale(1.03);
+    }
+
+    /* Booked: red with black text */
+    .seat.booked{
+      background:#ff3b3b;
+      color:#000000;
+      border-color:rgba(255,77,77,.60);
+      opacity:1;
+      cursor:not-allowed;
+      text-decoration:none;
+    }
+
+    .slotFooter{
+      margin-top:16px;
+      display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;
+      padding-top:12px;
+      border-top:1px solid rgba(255,255,255,.10);
+      color:rgba(255,255,255,.7);
+      font-size:13px;
+    }
+
+    /* Students */
+    .studentGrid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+    }
+    @media(max-width:900px){.studentGrid{grid-template-columns:repeat(2,1fr);}}
+    .studentCard{
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.05);
+      border-radius:18px;
+      overflow:hidden;
+      position:relative;
+    }
+    .studentCard img{
+      width:100%;
+      height:180px;
+      object-fit:cover;
+      display:block;
+      transition:.25s ease;
+    }
+    .studentCard.blurOn img{
+      filter: blur(10px);
+      transform: scale(1.06);
+    }
+    .studentName{
+      position:absolute;
+      left:10px;
+      bottom:10px;
+      padding:6px 10px;
+      border-radius:12px;
+      background:rgba(0,0,0,.45);
+      border:1px solid rgba(255,255,255,.12);
+      color:white;
+      font-size:12px;
+      font-weight:900;
+    }
+
+    /* Modal */
+    .modal{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      z-index:1000;
+      background:rgba(0,0,0,.55);
+      backdrop-filter: blur(10px);
+    }
+    .modal.show{display:flex;}
+    .modalBox{
+      width:100%;
+      max-width:420px;
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(10,16,32,.95);
+      box-shadow:0 25px 70px rgba(0,0,0,.45);
+      overflow:hidden;
+    }
+    .modalTop{
+      padding:14px 16px;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+    }
+    .closeBtn{
+      border:none;
+      cursor:pointer;
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      background:rgba(255,255,255,.06);
+      color:white;
+      border:1px solid rgba(255,255,255,.12);
+      font-size:16px;
+      font-weight:900;
+    }
+    .form{padding:16px;}
+    .form label{
+      display:block;
+      margin:10px 0 6px;
+      font-size:13px;
+      font-weight:900;
+      color:rgba(255,255,255,.88);
+    }
+    .form input, .form select{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      outline:none;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      color:white;
+      font-size:14px;
+    }
+    .form input::placeholder{color:rgba(255,255,255,.45);}
+
+    /* Floating WhatsApp */
+    .waFloat{
+      position:fixed;
+      right:16px;
+      bottom:92px; /* above fixed bar */
+      width:56px;
+      height:56px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:50%;
+      text-decoration:none;
+      font-size:26px;
+      font-weight:900;
+      z-index:999;
+      background:linear-gradient(45deg,#25D366,#12b85a);
+      color:white;
+      box-shadow:0 20px 45px rgba(0,0,0,.35);
+      border:1px solid rgba(255,255,255,.18);
+      transition:.2s ease;
+    }
+    .waFloat:hover{transform:translateY(-3px) scale(1.03);}
+
+    footer{
+      margin-top:45px;
+      padding-top:20px;
+      border-top:1px solid rgba(255,255,255,.10);
+      color:rgba(255,255,255,.55);
+      font-size:13px;
+      text-align:center;
+    }
+
+    /* Fixed DL/LL bottom bar */
+    .dlFixedBar{
+      position:fixed;
+      left:12px;
+      right:12px;
+      bottom:12px;
+      z-index:998;
+      border-radius:18px;
+      padding:12px 12px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      background:rgba(0,0,0,.45);
+      border:1px solid rgba(255,255,255,.14);
+      backdrop-filter: blur(12px);
+      overflow:hidden;
+    }
+    .dlFixedBar::before{
+      content:"";
+      position:absolute;
+      inset:-100px;
+      background: radial-gradient(circle at 20% 20%, rgba(0,212,255,.24), transparent 55%),
+                  radial-gradient(circle at 85% 80%, rgba(0,255,136,.18), transparent 55%);
+      filter: blur(22px);
+      animation: dlGlow 1.2s ease-in-out infinite;
+    }
+    @keyframes dlGlow{
+      0%,100%{opacity:.35; transform:scale(1);}
+      50%{opacity:1; transform:scale(1.12);}
+    }
+    .dlMsg{
+      position:relative;
+      z-index:1;
+      font-weight:900;
+      font-size:14px;
+      color:white;
+      animation: dlBlink 1s linear infinite;
+    }
+    @keyframes dlBlink{
+      0%,100%{opacity:1;}
+      50%{opacity:.5;}
+    }
+    .dlMsg b{color:var(--warn);}
+
+    .dlBtns{
+      position:relative;
+      z-index:1;
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+    .dlBtn{
+      text-decoration:none;
+      font-weight:900;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      color:white;
+      font-size:13px;
+      min-width:92px;
+      text-align:center;
+      transition:.2s ease;
+      white-space:nowrap;
+    }
+    .dlBtn.call{
+      background:linear-gradient(45deg,var(--accent),var(--accent2));
+      color:#041018;
+    }
+    .dlBtn.wa{
+      background:rgba(255,255,255,.10);
+    }
+    .dlBtn:hover{
+      transform:translateY(-2px) scale(1.02);
+    }
+
+    @media(max-width:420px){
+      .dlFixedBar{left:10px; right:10px; bottom:10px; padding:10px;}
+      .dlMsg{font-size:13px;}
+      .dlBtn{min-width:82px;padding:9px 10px;font-size:12px;}
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="nav">
+    <div class="logo">
+      <div class="dot"></div>
+      <div>Abhinaash A One Driving Classes</div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+      <div class="idTag" id="visitorBox">Visitor ID: Loading...</div>
+      <button class="copyBtn" onclick="copyVisitorId()">Copy</button>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero" id="home">
+    <!-- LEFT -->
+    <div>
+      <div class="badge">
+        <span>PRO</span>
+        Safe • Confident • Road Ready
+      </div>
+
+      <h1>Learn Driving Like a Pro 🚗<br/>With Abhinaash A One</h1>
+
+      <p>
+        Professional driving training with modern learning style.
+        We help you become confident on city roads, highways and traffic situations.
+      </p>
+
+      <div class="ctaRow">
+        <button class="btn btnPrimary" onclick="scrollToPricing()">View Fees</button>
+        <button class="btn btnPrimary" onclick="openAdmission()">Admission Form</button>
+        <button class="btn btnGhost" onclick="scrollToSlots()">Book Slot</button>
+        <button class="btn btnGhost" onclick="scrollToContact()">Contact</button>
+      </div>
+
+      <div class="cards" id="pricing">
+        <div class="card">
+          <div class="tag">Best Value</div>
+          <h3>Group Driving Classes</h3>
+          <div class="price">₹4500</div>
+          <div class="line">✅ Total: 30 Classes</div>
+          <div class="line">✅ Smart traffic learning</div>
+          <div class="line">✅ Best for beginners</div>
+        </div>
+
+        <div class="card">
+          <div class="tag">Premium</div>
+          <h3>Personal Driving Classes</h3>
+          <div class="price">₹8000</div>
+          <div class="line">✅ Total: 30 Classes</div>
+          <div class="line">✅ 1-to-1 attention</div>
+          <div class="line">✅ Fast improvement</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="scene">
+      <h3 style="font-size:18px;margin-bottom:6px;">Training Car</h3>
+      <p style="color:var(--muted);font-size:14px;line-height:1.6;">
+        Tata Tigor • Smooth handling • Beginner friendly
+      </p>
+
+      <div class="slider" id="carSlider">
+        <div class="slides">
+          <img src="assets/tigor1.jpg" class="slide active" alt="Tata Tigor 1">
+          <img src="assets/tigor2.jpg" class="slide" alt="Tata Tigor 2">
+          <img src="assets/tigor3.jpg" class="slide" alt="Tata Tigor 3">
+        </div>
+        <button class="navBtn prev" onclick="prevSlide()">❮</button>
+        <button class="navBtn next" onclick="nextSlide()">❯</button>
+        <div class="dots" id="dots"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section" id="about">
+    <div class="feature">
+      <h4>✅ Professional Trainer</h4>
+      <p>Learn driving from experienced instructors with simple techniques.</p>
+    </div>
+    <div class="feature">
+      <h4>✅ Traffic Confidence</h4>
+      <p>Master turns, reverse, hill-start, parking, signal & traffic judgement.</p>
+    </div>
+    <div class="feature">
+      <h4>✅ Safety First</h4>
+      <p>We focus on discipline, rules and safe driving habits.</p>
+    </div>
+  </section>
+
+  <!-- BATCH TIMING -->
+  <section id="batches" style="margin-top:28px;">
+    <div class="feature" style="border-radius:20px;">
+      <h4 style="font-size:18px;">🕒 Batches Timing</h4>
+      <p style="margin-top:6px;color:rgba(255,255,255,.7);font-size:14px;">
+        Choose your preferred batch and start learning with confidence.
+      </p>
+
+      <div class="batchGrid" style="margin-top:16px;">
+        <div class="batchCard animateBatch">
+          <div class="batchIcon">🌅</div>
+          <h3>Morning</h3>
+          <p>7:00 AM – 8:00 AM</p>
+          <p>8:00 AM – 9:00 AM</p>
+        </div>
+
+        <div class="batchCard animateBatch delay1">
+          <div class="batchIcon">🌇</div>
+          <h3>Evening</h3>
+          <p>3:00 PM – 4:00 PM</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLOT BOOKING -->
+  <section id="slots" style="margin-top:28px;">
+    <div class="slotWrap">
+      <div class="slotTop">
+        <div>
+          <h4 style="font-size:18px;">🎟️ Book Your Slot</h4>
+          <p>Select your seat like BookMyShow (4 seats per batch).</p>
+        </div>
+        <button class="btn btnPrimary" onclick="confirmSlotBooking()">Confirm Booking</button>
+      </div>
+
+      <div class="slotGrid" id="slotGrid"></div>
+
+      <div class="slotFooter">
+        <div>
+          <b>Selected:</b> <span id="selectedInfo">None</span>
+          <div style="margin-top:4px;">
+            <b>Your Booking:</b> <span id="myBookingInfo">Not booked</span>
+          </div>
+        </div>
+        <div>
+          <span class="pill green">Available</span>
+          <span class="pill" style="margin-left:8px;">Selected</span>
+          <span class="pill red" style="margin-left:8px;">Booked</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STUDENTS -->
+  <section id="students" style="margin-top:28px;">
+    <div class="feature" style="border-radius:20px;">
+      <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;">
+        <div>
+          <h4 style="font-size:18px;">👨‍🎓 Our Students</h4>
+          <p style="margin-top:6px;color:rgba(255,255,255,.7);font-size:14px;">
+            Real learners from Abhinaash A One Driving Classes.
+          </p>
+        </div>
+
+        <button class="btn btnGhost" onclick="toggleBlur()" id="blurBtn"
+          style="border:1px solid rgba(255,255,255,.16);">
+          Blur: ON
+        </button>
+      </div>
+
+      <div class="studentGrid" style="margin-top:16px;">
+        <div class="studentCard blurOn">
+          <img src="assets/student1.jpg" alt="Student 1">
+          <div class="studentName">Student</div>
+        </div>
+        <div class="studentCard blurOn">
+          <img src="assets/student2.jpg" alt="Student 2">
+          <div class="studentName">Student</div>
+        </div>
+        <div class="studentCard blurOn">
+          <img src="assets/student3.jpg" alt="Student 3">
+          <div class="studentName">Student</div>
+        </div>
+        <div class="studentCard blurOn">
+          <img src="assets/student4.jpg" alt="Student 4">
+          <div class="studentName">Student</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact" style="margin-top:28px;">
+    <div class="feature" style="grid-column:1/-1;">
+      <h4 style="font-size:18px;">📞 Contact Abhinaash A One Driving Classes</h4>
+      <p style="margin-top:6px;color:rgba(255,255,255,.7);font-size:14px;">
+        Call / WhatsApp anytime for admission & class timings.
+      </p>
+
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:14px;">
+        <a href="tel:+917008186187" class="btn btnPrimary" style="text-decoration:none;display:inline-block;">
+          Call Now: 7008186187
+        </a>
+        <a href="https://wa.me/917008186187" target="_blank" class="btn btnGhost"
+           style="text-decoration:none;display:inline-block;border:1px solid rgba(255,255,255,.18);">
+          WhatsApp: 7008186187
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © <span id="year"></span> Abhinaash A One Driving Classes • Made with ❤️
+  </footer>
+</main>
+
+<!-- Floating WhatsApp -->
+<a href="https://wa.me/917008186187" target="_blank" class="waFloat" aria-label="WhatsApp">💬</a>
+
+<!-- Fixed Bottom DL/LL Bar -->
+<div class="dlFixedBar">
+  <div class="dlMsg">
+    ⚡ Contact us for <b>DL</b> & <b>LL</b>
+  </div>
+  <div class="dlBtns">
+    <a href="tel:+917008186187" class="dlBtn call">📞 Call</a>
+    <a href="https://wa.me/917008186187" target="_blank" class="dlBtn wa">💬 WhatsApp</a>
+  </div>
+</div>
+
+<!-- Admission Popup -->
+<div class="modal" id="admissionModal">
+  <div class="modalBox">
+    <div class="modalTop">
+      <div>
+        <h3 style="font-size:18px;">📝 Admission Form</h3>
+        <p style="color:rgba(255,255,255,.65);font-size:13px;margin-top:4px;">
+          Fill your details, we will contact you soon.
+        </p>
+      </div>
+      <button class="closeBtn" onclick="closeAdmission()">✕</button>
+    </div>
+
+    <form onsubmit="submitAdmission(event)" class="form">
+      <label>Full Name</label>
+      <input type="text" id="sName" placeholder="Enter your name" required>
+
+      <label>Phone Number</label>
+      <input type="tel" id="sPhone" placeholder="10 digit mobile number" required>
+
+      <label>Class Type</label>
+      <select id="sClass" required>
+        <option value="">Select</option>
+        <option value="Group - 30 Classes (₹4500)">Group - 30 Classes (₹4500)</option>
+        <option value="Personal - 30 Classes (₹8000)">Personal - 30 Classes (₹8000)</option>
+      </select>
+
+      <button type="submit" class="btn btnPrimary" style="width:100%;margin-top:10px;">
+        Submit
+      </button>
+    </form>
+  </div>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+  import {
+    getFirestore, collection, doc, setDoc, getDoc,
+    onSnapshot, serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
+    authDomain: "abinash-driving.firebaseapp.com",
+    projectId: "abinash-driving",
+    storageBucket: "abinash-driving.firebasestorage.app",
+    messagingSenderId: "641148830173",
+    appId: "1:641148830173:web:b7a500e5e7e2463da0f634",
+    measurementId: "G-BSL54XEDVX"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  function generateVisitorId() {
+    const random = Math.random().toString(16).slice(2, 10).toUpperCase();
+    const year = new Date().getFullYear();
+    return `ABO-${year}-${random}`;
+  }
+  function getOrCreateVisitorId() {
+    let vid = localStorage.getItem("ABO_VISITOR_ID");
+    if (!vid) {
+      vid = generateVisitorId();
+      localStorage.setItem("ABO_VISITOR_ID", vid);
+    }
+    return vid;
+  }
+
+  const vid = getOrCreateVisitorId();
+  document.getElementById("visitorBox").innerText = "Visitor ID: " + vid;
+  document.getElementById("year").innerText = new Date().getFullYear();
+
+  window.copyVisitorId = function(){
+    navigator.clipboard.writeText(vid);
+    alert("Visitor ID copied: " + vid);
+  };
+
+  window.scrollToPricing = ()=> document.getElementById("pricing").scrollIntoView({behavior:"smooth"});
+  window.scrollToContact = ()=> document.getElementById("contact").scrollIntoView({behavior:"smooth"});
+  window.scrollToSlots = ()=> document.getElementById("slots").scrollIntoView({behavior:"smooth"});
+
+  /* Slider */
+  let currentSlide = 0;
+  let slideInterval;
+
+  function initSlider(){
+    const slides = document.querySelectorAll("#carSlider .slide");
+    const dotsBox = document.getElementById("dots");
+    dotsBox.innerHTML = "";
+
+    slides.forEach((_, i)=>{
+      const b = document.createElement("button");
+      b.className = "dotBtn" + (i===0 ? " active" : "");
+      b.onclick = ()=> goToSlide(i);
+      dotsBox.appendChild(b);
+    });
+
+    slideInterval = setInterval(()=> nextSlide(), 3500);
+  }
+
+  function goToSlide(i){
+    const slides = document.querySelectorAll("#carSlider .slide");
+    const dots = document.querySelectorAll("#dots .dotBtn");
+    slides[currentSlide].classList.remove("active");
+    dots[currentSlide].classList.remove("active");
+    currentSlide = i;
+    slides[currentSlide].classList.add("active");
+    dots[currentSlide].classList.add("active");
+    clearInterval(slideInterval);
+    slideInterval = setInterval(()=> nextSlide(), 3500);
+  }
+
+  function nextSlide(){
+    const slides = document.querySelectorAll("#carSlider .slide");
+    goToSlide((currentSlide + 1) % slides.length);
+  }
+  function prevSlide(){
+    const slides = document.querySelectorAll("#carSlider .slide");
+    goToSlide((currentSlide - 1 + slides.length) % slides.length);
+  }
+
+  window.nextSlide = nextSlide;
+  window.prevSlide = prevSlide;
+
+  /* Batch animation */
+  function revealBatches(){
+    const items = document.querySelectorAll(".animateBatch");
+    const trigger = window.innerHeight * 0.86;
+    items.forEach(el=>{
+      if(el.getBoundingClientRect().top < trigger) el.classList.add("show");
+    });
+  }
+  window.addEventListener("scroll", revealBatches);
+
+  /* Students blur toggle */
+  let blurEnabled = true;
+  window.toggleBlur = function(){
+    blurEnabled = !blurEnabled;
+    document.querySelectorAll(".studentCard").forEach(card=>{
+      if(blurEnabled) card.classList.add("blurOn");
+      else card.classList.remove("blurOn");
+    });
+    document.getElementById("blurBtn").innerText = "Blur: " + (blurEnabled ? "ON" : "OFF");
+  };
+
+  /* Admission popup */
+  window.openAdmission = ()=> document.getElementById("admissionModal").classList.add("show");
+  window.closeAdmission = ()=> document.getElementById("admissionModal").classList.remove("show");
+  document.addEventListener("click",(e)=>{
+    const modal = document.getElementById("admissionModal");
+    if(modal.classList.contains("show") && e.target === modal) window.closeAdmission();
+  });
+
+  window.submitAdmission = function(e){
+    e.preventDefault();
+    const name = document.getElementById("sName").value.trim();
+    const phone = document.getElementById("sPhone").value.trim();
+    const classType = document.getElementById("sClass").value;
+
+    if(phone.length < 10) return alert("Please enter valid phone number");
+
+    const msg =
+      `Admission Request%0A%0A`+
+      `Name: ${encodeURIComponent(name)}%0A`+
+      `Phone: ${encodeURIComponent(phone)}%0A`+
+      `Class: ${encodeURIComponent(classType)}%0A`+
+      `Visitor ID: ${encodeURIComponent(vid)}`;
+
+    window.open(`https://wa.me/917008186187?text=${msg}`, "_blank");
+    window.closeAdmission();
+    document.querySelector(".form").reset();
+  };
+
+  /* Slot booking */
+  const SLOT_DATA = [
+    { id:"M7_8", label:"Morning 7–8", time:"7:00 AM – 8:00 AM", total:4 },
+    { id:"M8_9", label:"Morning 8–9", time:"8:00 AM – 9:00 AM", total:4 },
+    { id:"E3_4", label:"Evening 3–4", time:"3:00 PM – 4:00 PM", total:4 }
+  ];
+
+  function seatLabel(seatNo){ return `A${seatNo}`; }
+
+  const slotCollection = collection(db, "slotBookings");
+
+  let selectedSlot = null;
+  let selectedSeat = null;
+  let BOOKED_MAP = {}; // slotId_seat -> data
+
+  function seatDocId(slotId, seat){ return `${slotId}_${seat}`; }
+  function isSeatBooked(slotId, seat){ return !!BOOKED_MAP[seatDocId(slotId, seat)]; }
+
+  function countBooked(slotId){
+    let c=0;
+    for(let i=1;i<=4;i++){ if(isSeatBooked(slotId,i)) c++; }
+    return c;
+  }
+
+  function findVisitorBooking(visitorId){
+    for(const key of Object.keys(BOOKED_MAP)){
+      if(BOOKED_MAP[key]?.visitorId === visitorId) return BOOKED_MAP[key];
+    }
+    return null;
+  }
+
+  function renderSlots(){
+    const grid = document.getElementById("slotGrid");
+    grid.innerHTML = "";
+
+    SLOT_DATA.forEach(slot=>{
+      const bookedCount = countBooked(slot.id);
+      const availableCount = slot.total - bookedCount;
+
+      const availabilityPill = availableCount === 0
+        ? `<span class="pill red">Slot Full</span>`
+        : `<span class="pill green">${availableCount} Seats</span>`;
+
+      let seatsHTML = "";
+      for(let i=1;i<=slot.total;i++){
+        const booked = isSeatBooked(slot.id, i);
+        const selected = (selectedSlot === slot.id && selectedSeat === i);
+        seatsHTML += `
+          <button class="seat ${booked ? "booked" : ""} ${selected ? "selected" : ""}"
+            onclick="selectSeat('${slot.id}', ${i})" ${booked ? "disabled" : ""}>
+            ${seatLabel(i)}
+          </button>
+        `;
+      }
+
+      const card = document.createElement("div");
+      card.className = "slotCard";
+      card.innerHTML = `
+        <div class="slotTitle">
+          <div>${slot.label}</div>
+          ${availabilityPill}
+        </div>
+        <div style="color:rgba(255,255,255,.65);font-size:13px;">${slot.time}</div>
+        <div style="margin-top:6px;color:rgba(255,255,255,.70);font-size:13px;">
+          Remaining seats: <b>${availableCount}/${slot.total}</b>
+        </div>
+        <div class="seatGrid">${seatsHTML}</div>
+      `;
+      grid.appendChild(card);
+    });
+
+    updateSelectedInfo();
+  }
+
+  window.selectSeat = function(slotId, seat){
+    selectedSlot = slotId;
+    selectedSeat = seat;
+    renderSlots();
+  };
+
+  function updateSelectedInfo(){
+    const info = document.getElementById("selectedInfo");
+    if(!selectedSlot || !selectedSeat) info.innerText = "None";
+    else {
+      const slotLabelTxt = SLOT_DATA.find(s=>s.id===selectedSlot)?.label || selectedSlot;
+      info.innerText = `${slotLabelTxt} • Seat ${seatLabel(selectedSeat)}`;
+    }
+
+    const my = document.getElementById("myBookingInfo");
+    const existing = findVisitorBooking(vid);
+    if(existing){
+      const slotLabelTxt = SLOT_DATA.find(s=>s.id===existing.slotId)?.label || existing.slotId;
+      my.innerText = `${slotLabelTxt} • Seat ${seatLabel(existing.seat)}`;
+    } else my.innerText = "Not booked";
+  }
+
+  window.confirmSlotBooking = async function(){
+    const already = findVisitorBooking(vid);
+    if(already){
+      const slotLabelTxt = SLOT_DATA.find(s=>s.id===already.slotId)?.label || already.slotId;
+      alert(`You already booked ✅\n\nSlot: ${slotLabelTxt}\nSeat: ${seatLabel(already.seat)}`);
+      return;
+    }
+
+    if(!selectedSlot || !selectedSeat){
+      alert("Please select slot & seat first!");
+      return;
+    }
+
+    if(isSeatBooked(selectedSlot, selectedSeat)){
+      alert("Seat already booked. Please choose another.");
+      return;
+    }
+
+    const docRef = doc(db, "slotBookings", seatDocId(selectedSlot, selectedSeat));
+    const snap = await getDoc(docRef);
+    if(snap.exists()){
+      alert("Seat already booked. Please choose another.");
+      return;
+    }
+
+    await setDoc(docRef, {
+      slotId: selectedSlot,
+      seat: selectedSeat,
+      visitorId: vid,
+      bookedAt: serverTimestamp()
+    });
+
+    const slotLabelTxt = SLOT_DATA.find(s=>s.id===selectedSlot)?.label || selectedSlot;
+    const msg =
+      `Slot Booking Confirm%0A%0A`+
+      `Slot: ${encodeURIComponent(slotLabelTxt)}%0A`+
+      `Seat: ${encodeURIComponent(seatLabel(selectedSeat))}%0A`+
+      `Visitor ID: ${encodeURIComponent(vid)}`;
+
+    window.open(`https://wa.me/917008186187?text=${msg}`, "_blank");
+    alert("Seat booked successfully ✅");
+
+    selectedSlot = null;
+    selectedSeat = null;
+    renderSlots();
+  };
+
+  function startRealtimeListener(){
+    onSnapshot(slotCollection, (snapshot)=>{
+      BOOKED_MAP = {};
+      snapshot.forEach((d)=>{ BOOKED_MAP[d.id] = d.data(); });
+      renderSlots();
+    });
+  }
+
+  window.addEventListener("load", ()=>{
+    initSlider();
+    revealBatches();
+    startRealtimeListener();
+  });
+</script>
+</body>
+</html>
