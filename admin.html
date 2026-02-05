@@ -201,7 +201,14 @@ to{box-shadow:0 0 25px rgba(0,255,136,.9)}
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+import {
+getFirestore,
+collection,
+addDoc,
+deleteDoc,
+doc,
+onSnapshot
+} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
 const firebaseConfig = {
 apiKey: "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
@@ -221,41 +228,44 @@ const studentsCol = collection(db,"students");
 
 
 
+/* 🔔 LOCAL HOLIDAY FIREBASE */
+const holidayCol = collection(db,"localHolidays");
 
+window.addHoliday = async () => {
+  if(!hTitle.value || !hDate.value) return;
 
+  await addDoc(holidayCol,{
+    title: hTitle.value,
+    date: hDate.value
+  });
 
-
-
-
-import { addDoc, deleteDoc } from
-"https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
-
-const holidayCol=collection(db,"localHolidays");
-
-window.addHoliday=async()=>{
-if(!hTitle.value||!hDate.value) return;
-await addDoc(holidayCol,{
-title:hTitle.value,
-date:hDate.value
-});
-hTitle.value=hDate.value="";
+  hTitle.value="";
+  hDate.value="";
 };
 
 onSnapshot(holidayCol,(snap)=>{
-holidayList.innerHTML="";
-snap.forEach(d=>{
-const h=d.data();
-holidayList.innerHTML+=`
-<div class="card">
-<b>${h.title}</b> – ${h.date}
-<button class="btnDel" onclick="deleteHoliday('${d.id}')">Delete</button>
-</div>`;
-});
+  holidayList.innerHTML="";
+  snap.forEach(d=>{
+    const h=d.data();
+
+    holidayList.innerHTML += `
+    <div class="card">
+      <b>${h.title}</b> – ${h.date}
+      <button class="btnDel"
+      onclick="deleteHoliday('${d.id}')">Delete</button>
+    </div>`;
+  });
 });
 
-window.deleteHoliday=async(id)=>{
-await deleteDoc(doc(db,"localHolidays",id));
+window.deleteHoliday = async(id)=>{
+  await deleteDoc(doc(db,"localHolidays",id));
 };
+
+
+
+
+
+
 
 
 
