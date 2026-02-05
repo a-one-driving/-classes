@@ -1285,58 +1285,65 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebas
 import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
 const firebaseConfig = {
-apiKey: "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
-authDomain: "abinash-driving.firebaseapp.com",
-projectId: "abinash-driving"
+  apiKey: "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
+  authDomain: "abinash-driving.firebaseapp.com",
+  projectId: "abinash-driving"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-/* popup box */
-const box=document.createElement("div");
-box.style.position="fixed";
-box.style.top="20px";
-box.style.left="50%";
-box.style.transform="translateX(-50%)";
-box.style.background="#111";
-box.style.color="#fff";
-box.style.padding="14px 22px";
-box.style.borderRadius="14px";
-box.style.fontWeight="900";
-box.style.zIndex="9999";
-box.style.display="none";
-box.style.border="2px solid gold";
-document.body.appendChild(box);
+/* 🔔 Create popup */
+const popup = document.createElement("div");
+popup.style.position = "fixed";
+popup.style.top = "20px";
+popup.style.left = "50%";
+popup.style.transform = "translateX(-50%) scale(0)";
+popup.style.background = "#111";
+popup.style.color = "#fff";
+popup.style.padding = "14px 22px";
+popup.style.borderRadius = "14px";
+popup.style.fontWeight = "900";
+popup.style.zIndex = "9999";
+popup.style.border = "2px solid gold";
+popup.style.transition = "0.4s";
+document.body.appendChild(popup);
 
 function show(msg){
-box.innerHTML="⚠ "+msg;
-box.style.display="block";
-setTimeout(()=>box.style.display="none",5000);
+  popup.innerHTML = "⚠ " + msg;
+  popup.style.transform = "translateX(-50%) scale(1)";
+  setTimeout(()=>{
+    popup.style.transform = "translateX(-50%) scale(0)";
+  },5000);
 }
 
-/* weekend auto */
+/* 📅 Weekend auto holiday */
 function checkWeekend(){
-const d=new Date().getDay();
-if(d===0||d===6){
-show("Today is Weekend Holiday");
-}
+  const d = new Date().getDay();
+  if(d === 0 || d === 6){
+    show("Weekend Holiday (Saturday & Sunday)");
+  }
 }
 
-/* local holiday from admin */
+/* 📌 Local holidays from admin */
 onSnapshot(collection(db,"localHolidays"),(snap)=>{
-const today=new Date().toISOString().split("T")[0];
+  const today = new Date().toISOString().split("T")[0];
 
-snap.forEach(doc=>{
-const h=doc.data();
+  snap.forEach(doc=>{
+    const h = doc.data();
+    console.log("Holiday found:", h.date);
 
-if(h.date===today){
-show("Holiday Today: "+h.title);
-}
+    if(h.date === today){
+      show("Holiday Today: " + h.title);
+    }
+  });
 });
-});
 
-setTimeout(checkWeekend,3000);
+/* 🔄 Run checks */
+setTimeout(()=>{
+  checkWeekend();
+},2000);
+</script>
 
 </script>
 </body>
