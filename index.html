@@ -1284,71 +1284,60 @@ max-width:90%;">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
 import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
-/* 🔥 Firebase */
 const firebaseConfig = {
 apiKey: "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
 authDomain: "abinash-driving.firebaseapp.com",
 projectId: "abinash-driving"
 };
+
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-/* 🔔 Popup */
-const box=document.getElementById("holidayPopup");
-function showHoliday(msg){
+/* popup box */
+const box=document.createElement("div");
+box.style.position="fixed";
+box.style.top="20px";
+box.style.left="50%";
+box.style.transform="translateX(-50%)";
+box.style.background="#111";
+box.style.color="#fff";
+box.style.padding="14px 22px";
+box.style.borderRadius="14px";
+box.style.fontWeight="900";
+box.style.zIndex="9999";
+box.style.display="none";
+box.style.border="2px solid gold";
+document.body.appendChild(box);
+
+function show(msg){
 box.innerHTML="⚠ "+msg;
-box.classList.add("showHoliday");
-setTimeout(()=>box.classList.remove("showHoliday"),5000);
+box.style.display="block";
+setTimeout(()=>box.style.display="none",5000);
 }
 
-/* 🇮🇳 Fixed calendar holidays (auto every year) */
-const fixedHolidays=[
-{d:1,m:0,name:"New Year"},
-{d:26,m:0,name:"Republic Day"},
-{d:15,m:7,name:"Independence Day"},
-{d:2,m:9,name:"Gandhi Jayanti"},
-{d:25,m:11,name:"Christmas"}
-];
-
-/* 🔄 Check holidays */
-function checkHoliday(localHolidays){
-const today=new Date();
-const day=today.getDay();
-
-/* Weekend auto */
-if(day===0||day===6){
-showHoliday("Weekend Holiday (Saturday & Sunday)");
-return;
+/* weekend auto */
+function checkWeekend(){
+const d=new Date().getDay();
+if(d===0||d===6){
+show("Today is Weekend Holiday");
+}
 }
 
-/* Fixed calendar holidays */
-fixedHolidays.forEach(h=>{
-const hDate=new Date(today.getFullYear(),h.m,h.d);
-const diff=(hDate-today)/(1000*60*60*24);
-if(diff>=0 && diff<=3){
-showHoliday(`Upcoming Holiday: ${h.name}`);
-}
-});
-
-/* Local admin holidays */
-localHolidays.forEach(h=>{
-const hDate=new Date(h.date);
-const diff=(hDate-today)/(1000*60*60*24);
-if(diff>=0 && diff<=3){
-showHoliday(`Local Holiday: ${h.title}`);
-}
-});
-}
-
-/* 🔥 Listen admin controlled holidays */
+/* local holiday from admin */
 onSnapshot(collection(db,"localHolidays"),(snap)=>{
-const list=[];
-snap.forEach(d=>list.push(d.data()));
-checkHoliday(list);
+const today=new Date().toISOString().split("T")[0];
+
+snap.forEach(doc=>{
+const h=doc.data();
+
+if(h.date===today){
+show("Holiday Today: "+h.title);
+}
+});
 });
 
-/* Random show */
-setInterval(()=>{ checkHoliday([]); },180000);
+setTimeout(checkWeekend,3000);
+
 </script>
 </body>
 </html>
