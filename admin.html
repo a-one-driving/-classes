@@ -150,6 +150,26 @@ to{box-shadow:0 0 25px rgba(0,255,136,.9)}
 <canvas id="chart" height="120"></canvas>
 </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="section">
+<h3>📅 Local Holidays</h3>
+<input id="hTitle" placeholder="Holiday name">
+<input id="hDate" type="date">
+<button class="btn" onclick="addHoliday()">➕ Add Holiday</button>
+<div id="holidayList"></div>
+</div>
+
 <!-- STUDENT DATABASE -->
 <div class="section">
 <h3>👨‍🎓 Student Database</h3>
@@ -312,6 +332,39 @@ backgroundColor:"#00d4ff"
 options:{plugins:{legend:{display:false}}}
 });
 }
+
+
+
+
+import { addDoc, deleteDoc } from
+"https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
+const holidayCol=collection(db,"localHolidays");
+
+window.addHoliday=async()=>{
+if(!hTitle.value||!hDate.value) return;
+await addDoc(holidayCol,{
+title:hTitle.value,
+date:hDate.value
+});
+hTitle.value=hDate.value="";
+};
+
+onSnapshot(holidayCol,(snap)=>{
+holidayList.innerHTML="";
+snap.forEach(d=>{
+const h=d.data();
+holidayList.innerHTML+=`
+<div class="card">
+<b>${h.title}</b> – ${h.date}
+<button class="btnDel" onclick="deleteHoliday('${d.id}')">Delete</button>
+</div>`;
+});
+});
+
+window.deleteHoliday=async(id)=>{
+await deleteDoc(doc(db,"localHolidays",id));
+};
 </script>
 
 </body>
