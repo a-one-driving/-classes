@@ -216,6 +216,49 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const studentsCol = collection(db,"students");
 
+
+
+
+
+
+
+
+
+
+
+
+import { addDoc, deleteDoc } from
+"https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
+const holidayCol=collection(db,"localHolidays");
+
+window.addHoliday=async()=>{
+if(!hTitle.value||!hDate.value) return;
+await addDoc(holidayCol,{
+title:hTitle.value,
+date:hDate.value
+});
+hTitle.value=hDate.value="";
+};
+
+onSnapshot(holidayCol,(snap)=>{
+holidayList.innerHTML="";
+snap.forEach(d=>{
+const h=d.data();
+holidayList.innerHTML+=`
+<div class="card">
+<b>${h.title}</b> – ${h.date}
+<button class="btnDel" onclick="deleteHoliday('${d.id}')">Delete</button>
+</div>`;
+});
+});
+
+window.deleteHoliday=async(id)=>{
+await deleteDoc(doc(db,"localHolidays",id));
+};
+
+
+
 let STUDENTS=[];
 let chart; 
 
@@ -336,35 +379,7 @@ options:{plugins:{legend:{display:false}}}
 
 
 
-import { addDoc, deleteDoc } from
-"https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
-const holidayCol=collection(db,"localHolidays");
-
-window.addHoliday=async()=>{
-if(!hTitle.value||!hDate.value) return;
-await addDoc(holidayCol,{
-title:hTitle.value,
-date:hDate.value
-});
-hTitle.value=hDate.value="";
-};
-
-onSnapshot(holidayCol,(snap)=>{
-holidayList.innerHTML="";
-snap.forEach(d=>{
-const h=d.data();
-holidayList.innerHTML+=`
-<div class="card">
-<b>${h.title}</b> – ${h.date}
-<button class="btnDel" onclick="deleteHoliday('${d.id}')">Delete</button>
-</div>`;
-});
-});
-
-window.deleteHoliday=async(id)=>{
-await deleteDoc(doc(db,"localHolidays",id));
-};
 </script>
 
 </body>
