@@ -3,72 +3,154 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Panel - Abhinaash Driving</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+<title>Admin Panel – Abhinaash A One Driving Classes</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <style>
-body{
-font-family:Poppins,sans-serif;
-background:#0b1020;
-color:white;
-margin:0;
-padding:20px;
-}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Poppins,sans-serif}
+body{background:#0b1020;color:white;padding:20px}
+h2,h3{margin-bottom:10px}
+
 .loginBox{
-max-width:400px;
-margin:80px auto;
-background:#111;
-padding:25px;
-border-radius:14px;
-text-align:center;
+max-width:420px;margin:80px auto;background:#111;
+padding:25px;border-radius:16px;text-align:center;
 }
-input{
-width:100%;
-padding:12px;
-margin:10px 0;
-border-radius:8px;
-border:none;
+
+input,select{
+width:100%;padding:12px;margin:8px 0;
+border-radius:10px;border:none;font-size:14px;
 }
+
 button{
-padding:12px;
-border:none;
-border-radius:8px;
-font-weight:900;
-cursor:pointer;
-background:#00d4ff;
-width:100%;
+padding:12px;border:none;border-radius:10px;
+font-weight:800;cursor:pointer;
 }
-.panel{
-display:none;
-max-width:900px;
-margin:auto;
+
+.btnMain{background:#00d4ff;color:#041018;width:100%}
+.btnDanger{background:#ff4d4d;color:white}
+.btnSmall{padding:6px 10px;font-size:12px;margin-top:6px}
+
+.panel{display:none;max-width:1200px;margin:auto}
+
+.section{
+background:#111;padding:20px;border-radius:16px;
+margin-bottom:25px;
 }
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:14px;
+}
+
 .card{
-background:#111;
-padding:16px;
-border-radius:12px;
-margin:10px 0;
+background:#1a1a1a;padding:14px;border-radius:12px;
+border:1px solid rgba(255,255,255,.1);
 }
-.reset{
-background:red;
-margin-top:20px;
+
+.badgePaid{color:#00ff88;font-weight:800}
+.badgePending{color:#ffcc00;font-weight:800}
+
+.search{margin-bottom:12px}
+
+.stat{
+background:#1a1a1a;border-radius:14px;
+padding:14px;text-align:center;
 }
+.stat h3{font-size:22px}
+.stat p{color:rgba(255,255,255,.7);font-size:13px}
 </style>
 </head>
+
 <body>
+
 <!-- LOGIN -->
 <div class="loginBox" id="loginBox">
 <h2>🔐 Admin Login</h2>
-<input type="password" id="pass" placeholder="Enter password">
-<button onclick="login()">Enter Admin Panel</button>
+<input type="password" id="adminPass" placeholder="Enter password">
+<button class="btnMain" onclick="login()">Login</button>
 </div>
+
 <!-- PANEL -->
 <div class="panel" id="panel">
-<h2>🚗 Booking Admin Panel</h2>
-<div id="list"></div>
+
+<h2>👑 Abhinaash Driving – Admin Dashboard</h2>
+
+<!-- DASHBOARD -->
+<div class="section">
+<h3>📊 Group Students Monthly Dashboard</h3>
+
+<div class="grid">
+<div class="stat">
+<h3 id="thisMonth">0</h3>
+<p>This Month Group Students</p>
 </div>
+<div class="stat">
+<h3 id="lastMonth">0</h3>
+<p>Last Month Group Students</p>
+</div>
+<div class="stat">
+<h3 id="growth">0%</h3>
+<p>Growth</p>
+</div>
+<div class="stat">
+<h3 id="totalGroup">0</h3>
+<p>Total Group Students</p>
+</div>
+</div>
+
+<div class="grid" style="margin-top:14px">
+<div class="stat">
+<h3 id="monthEarning">₹0</h3>
+<p>This Month Group Earning</p>
+</div>
+<div class="stat">
+<h3 id="totalEarning">₹0</h3>
+<p>Total Group Earning</p>
+</div>
+</div>
+</div>
+
+<!-- CHART -->
+<div class="section">
+<h3>📈 Monthly Group Joining Chart</h3>
+<canvas id="chart" height="120"></canvas>
+</div>
+
+<!-- STUDENT DATABASE -->
+<div class="section">
+<h3>👨‍🎓 Student Database</h3>
+
+<div class="grid">
+<input id="sName" placeholder="Student Name">
+<input id="sPhone" placeholder="Phone Number">
+<select id="sClass">
+<option value="">Class Type</option>
+<option value="Group">Group</option>
+<option value="Personal">Personal</option>
+</select>
+<select id="sFee">
+<option value="">Fee Status</option>
+<option value="Paid">Paid</option>
+<option value="Pending">Pending</option>
+</select>
+</div>
+
+<button class="btnMain" style="margin-top:10px" onclick="addStudent()">➕ Add Student</button>
+</div>
+
+<div class="section">
+<input class="search" id="searchBox" placeholder="🔍 Search by name or phone" oninput="renderStudents()">
+<div id="studentList"></div>
+</div>
+
+</div>
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-import { getFirestore, collection, onSnapshot, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
 const firebaseConfig = {
 apiKey: "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
@@ -81,52 +163,112 @@ appId: "1:641148830173:web:b7a500e5e7e2463da0f634"
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-const col = collection(db,"slotBookings");
+const studentsCol = collection(db,"students");
+
+let STUDENTS=[];
+let chart;
 
 window.login=function(){
-const p=document.getElementById("pass").value;
-if(p==="Admin5 rigorously"){
-document.getElementById("loginBox").style.display="none";
-document.getElementById("panel").style.display="block";
-load();
-}else{
-alert("Wrong password");
-}
+if(document.getElementById("adminPass").value==="Admin5 rigorously"){
+loginBox.style.display="none";
+panel.style.display="block";
+loadStudents();
+}else alert("Wrong password");
 }
 
-function load(){
-onSnapshot(col,(snap)=>{
+window.addStudent=async function(){
+if(!sName.value||!sPhone.value||!sClass.value||!sFee.value){
+alert("Fill all fields");return;
+}
+await addDoc(studentsCol,{
+name:sName.value,
+phone:sPhone.value,
+classType:sClass.value,
+feeStatus:sFee.value,
+joinedAt:serverTimestamp()
+});
+sName.value=sPhone.value="";
+sClass.value=sFee.value="";
+}
+
+function loadStudents(){
+onSnapshot(studentsCol,(snap)=>{
+STUDENTS=[];
+snap.forEach(d=>STUDENTS.push({id:d.id,...d.data()}));
+renderStudents();
+updateDashboard();
+});
+}
+
+window.renderStudents=function(){
+const q=searchBox.value.toLowerCase();
 let html="";
-snap.forEach(d=>{
-const data=d.data();
+STUDENTS.filter(s=>
+s.name.toLowerCase().includes(q)||s.phone.includes(q)
+).forEach(s=>{
 html+=`
 <div class="card">
-<b>Slot:</b> ${data.slotId}<br>
-<b>Seat:</b> ${data.seat}<br>
-<b>Visitor:</b> ${data.visitorId}<br>
-<button onclick="deleteSeat('${d.id}')">Cancel Seat</button>
-</div>
-`;
+<b>${s.name}</b><br>
+📞 ${s.phone}<br>
+🎓 ${s.classType}<br>
+💰 <span class="${s.feeStatus==="Paid"?"badgePaid":"badgePending"}">${s.feeStatus}</span><br>
+<button class="btnSmall btnDanger" onclick="deleteStudent('${s.id}')">Delete</button>
+</div>`;
 });
-document.getElementById("list").innerHTML=html||"No bookings yet";
-});
+studentList.innerHTML=html||"No students found";
 }
 
-window.deleteSeat=async function(id){
-if(!confirm("Cancel this booking?"))return;
-await deleteDoc(doc(db,"slotBookings",id));
-alert("Seat cancelled");
+window.deleteStudent=async function(id){
+if(confirm("Delete student?")){
+await deleteDoc(doc(db,"students",id));
+}
 }
 
-window.resetAll=async function(){
-if(!confirm("Delete ALL bookings?"))return;
-onSnapshot(col,(snap)=>{
-snap.forEach(async(d)=>{
-await deleteDoc(doc(db,"slotBookings",d.id));
+function updateDashboard(){
+const now=new Date();
+const m=now.getMonth(), y=now.getFullYear();
+const lastM=m===0?11:m-1;
+const lastY=m===0?y-1:y;
+
+let thisMonth=0,lastMonth=0,totalGroup=0;
+let monthlyCounts=Array(12).fill(0);
+
+STUDENTS.forEach(s=>{
+if(s.classType!=="Group"||!s.joinedAt)return;
+const d=s.joinedAt.toDate();
+totalGroup++;
+monthlyCounts[d.getMonth()]++;
+if(d.getMonth()===m && d.getFullYear()===y) thisMonth++;
+if(d.getMonth()===lastM && d.getFullYear()===lastY) lastMonth++;
 });
+
+thisMonthEl.innerText=thisMonth;
+lastMonthEl.innerText=lastMonth;
+growthEl.innerText=lastMonth?(((thisMonth-lastMonth)/lastMonth)*100).toFixed(1)+"%":"100%";
+totalGroupEl.innerText=totalGroup;
+monthEarning.innerText="₹"+(thisMonth*4500);
+totalEarning.innerText="₹"+(totalGroup*4500);
+
+drawChart(monthlyCounts);
+}
+
+function drawChart(data){
+const ctx=document.getElementById("chart");
+if(chart) chart.destroy();
+chart=new Chart(ctx,{
+type:"bar",
+data:{
+labels:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+datasets:[{
+label:"Group Students",
+data,
+backgroundColor:"#00d4ff"
+}]
+},
+options:{plugins:{legend:{display:false}}}
 });
-alert("All bookings cleared");
 }
 </script>
+
 </body>
 </html>
