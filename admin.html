@@ -61,6 +61,37 @@ padding:14px;text-align:center;
 }
 .stat h3{font-size:22px}
 .stat p{color:rgba(255,255,255,.7);font-size:13px}
+
+
+
+.newBadge{
+background:#00ff88;
+color:#041018;
+font-size:11px;
+padding:4px 8px;
+border-radius:8px;
+font-weight:900;
+margin-left:6px;
+animation:newBlink 1s infinite;
+}
+
+@keyframes newBlink{
+0%{opacity:1; transform:scale(1)}
+50%{opacity:.4; transform:scale(1.1)}
+100%{opacity:1; transform:scale(1)}
+}
+
+.newCard{
+box-shadow:0 0 20px rgba(0,255,136,.6);
+border:1px solid #00ff88 !important;
+animation:newGlow 1.5s infinite alternate;
+}
+
+@keyframes newGlow{
+from{box-shadow:0 0 10px rgba(0,255,136,.4)}
+to{box-shadow:0 0 25px rgba(0,255,136,.9)}
+}
+
 </style>
 </head>
 
@@ -203,18 +234,31 @@ updateDashboard();
 window.renderStudents=function(){
 const q=searchBox.value.toLowerCase();
 let html="";
+
 STUDENTS.filter(s=>
 s.name.toLowerCase().includes(q)||s.phone.includes(q)
 ).forEach(s=>{
+
+let isNew=false;
+
+if(s.joinedAt){
+const joinDate=s.joinedAt.toDate();
+const now=new Date();
+const diff=(now-joinDate)/(1000*60*60); // hours
+if(diff<24) isNew=true;
+}
+
 html+=`
-<div class="card">
-<b>${s.name}</b><br>
+<div class="card ${isNew?"newCard":""}">
+<b>${s.name}</b> ${isNew?'<span class="newBadge">NEW</span>':""}<br>
 📞 ${s.phone}<br>
 🎓 ${s.classType}<br>
 💰 <span class="${s.feeStatus==="Paid"?"badgePaid":"badgePending"}">${s.feeStatus}</span><br>
 <button class="btnSmall btnDanger" onclick="deleteStudent('${s.id}')">Delete</button>
-</div>`;
+</div>
+`;
 });
+
 studentList.innerHTML=html||"No students found";
 }
 
