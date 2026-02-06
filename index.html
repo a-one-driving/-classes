@@ -735,6 +735,53 @@ padding:6px 0;
 }
 }
 
+
+
+
+
+
+
+
+
+/* ===== NEXT CLASS PREMIUM BAR ===== */
+.next-class-bar{
+width:100%;
+margin-top:14px;
+padding:12px;
+border-radius:14px;
+text-align:center;
+background:rgba(0,0,0,.35);
+backdrop-filter: blur(10px);
+border:1px solid rgba(0,229,255,.4);
+box-shadow:0 0 25px rgba(0,229,255,.35);
+animation:pulseGlow 2s infinite alternate;
+}
+
+.next-class-text{
+font-weight:900;
+font-size:16px;
+color:#00e5ff;
+letter-spacing:.5px;
+text-shadow:0 0 12px rgba(0,229,255,.9);
+}
+
+#countdownTimer{
+color:#00ff9c;
+margin-left:8px;
+font-size:18px;
+}
+
+@keyframes pulseGlow{
+from{box-shadow:0 0 10px rgba(0,229,255,.25)}
+to{box-shadow:0 0 35px rgba(0,229,255,.65)}
+}
+
+/* mobile */
+@media(max-width:600px){
+.next-class-text{font-size:14px}
+#countdownTimer{font-size:16px}
+}
+
   </style>
 </head>
 
@@ -768,6 +815,17 @@ padding:6px 0;
         Safe • Confident • Road Ready
       </div>
       
+
+
+
+<!-- NEXT CLASS COUNTDOWN -->
+<div id="nextClassBar" class="next-class-bar" style="display:none;">
+  <div class="next-class-text">
+    ⏳ Next class starts in 
+    <span id="countdownTimer">00:00:00</span>
+  </div>
+</div>
+
 
 
       <h1>Learn Driving Like a Pro 🚗<br/>With Abhinaash A One</h1>
@@ -1341,10 +1399,78 @@ if(day === 0){
 if(day === 6){
   setTimeout(()=>showHoliday("Saturday Holiday"),2000);
 }
+</script>
 
 
 
 
+
+
+
+
+<script>
+// ===== SET YOUR BATCH TIMES HERE =====
+const batchTimes = [
+"7:00 AM",
+"8:00 AM",
+"3:00 PM"
+];
+
+// convert to today date time
+function parseTime(t){
+const now = new Date();
+const d = new Date(now.toDateString()+" "+t);
+return d;
+}
+
+function startCountdown(){
+const now = new Date();
+let nextClass=null;
+
+// find next class
+batchTimes.forEach(t=>{
+const classTime=parseTime(t);
+const diff=(classTime-now)/1000;
+
+if(diff>0){
+if(!nextClass || classTime<nextClass){
+nextClass=classTime;
+}
+}
+});
+
+if(!nextClass) return;
+
+const diffSec=(nextClass-now)/1000;
+
+// show only if within 1 hour
+if(diffSec>0 && diffSec<=3600){
+document.getElementById("nextClassBar").style.display="block";
+
+setInterval(()=>{
+const now2=new Date();
+const remaining=(nextClass-now2)/1000;
+
+if(remaining<=0){
+document.getElementById("nextClassBar").style.display="none";
+location.reload();
+return;
+}
+
+const h=Math.floor(remaining/3600);
+const m=Math.floor((remaining%3600)/60);
+const s=Math.floor(remaining%60);
+
+document.getElementById("countdownTimer").innerHTML=
+`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+
+},1000);
+}
+
+}
+
+// start after load
+setTimeout(startCountdown,2000);
 
 </script>
 </body>
