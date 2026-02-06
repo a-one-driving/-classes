@@ -1410,78 +1410,11 @@ if(day === 6){
 
 
 <script>
-// ===== SET YOUR BATCH TIMES HERE =====
-const batchTimes = [
-"7:00 AM",
-"8:00 AM",
-"2:00 PM"
-"3:00 PM"
-];
-
-// convert to today date time
-function parseTime(t){
-const now = new Date();
-const d = new Date(now.toDateString()+" "+t);
-return d;
-}
-
-function startCountdown(){
-const now = new Date();
-let nextClass=null;
-
-// find next class
-batchTimes.forEach(t=>{
-const classTime=parseTime(t);
-const diff=(classTime-now)/1000;
-
-if(diff>0){
-if(!nextClass || classTime<nextClass){
-nextClass=classTime;
-}
-}
-});
-
-if(!nextClass) return;
-
-const diffSec=(nextClass-now)/1000;
-
-// show only if within 1 hour
-if(diffSec>0 && diffSec<=3600){
-document.getElementById("nextClassBar").style.display="block";
-
-setInterval(()=>{
-const now2=new Date();
-const remaining=(nextClass-now2)/1000;
-
-if(remaining<=0){
-document.getElementById("nextClassBar").style.display="none";
-location.reload();
-return;
-}
-
-const h=Math.floor(remaining/3600);
-const m=Math.floor((remaining%3600)/60);
-const s=Math.floor(remaining%60);
-
-document.getElementById("countdownTimer").innerHTML=
-`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-
-},1000);
-}
-
-}
-
-// start after load
-setTimeout(startCountdown,2000);
-
-
-
-
-<script>
-// ===== SET BATCH TIMES =====
+// ===== BATCH TIMES =====
 const batchTimes = [
 "11:00 AM",
 "8:00 AM",
+"2:00 PM",
 "3:00 PM"
 ];
 
@@ -1498,7 +1431,7 @@ let liveClass=null;
 
 batchTimes.forEach(t=>{
 const start=parseTime(t);
-const end=new Date(start.getTime()+60*60*1000); // 1 hr class
+const end=new Date(start.getTime()+60*60*1000);
 
 if(now>=start && now<end){
 liveClass=start;
@@ -1514,7 +1447,7 @@ nextClass=start;
 const bar=document.getElementById("nextClassBar");
 const timer=document.getElementById("countdownTimer");
 
-// ===== LIVE CLASS =====
+// LIVE CLASS
 if(liveClass){
 bar.style.display="block";
 bar.innerHTML=`
@@ -1524,7 +1457,7 @@ bar.innerHTML=`
 return;
 }
 
-// ===== COUNTDOWN =====
+// COUNTDOWN
 if(nextClass){
 const diff=(nextClass-now)/1000;
 
@@ -1537,7 +1470,6 @@ const s=Math.floor(diff%60);
 
 timer.innerHTML=
 `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-
 return;
 }
 }
@@ -1548,8 +1480,6 @@ bar.style.display="none";
 }
 
 setTimeout(startSystem,2000);
-
-
 </script>
 </body>
 </html>
