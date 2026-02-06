@@ -698,27 +698,34 @@ to{box-shadow:0 0 28px #ff9900}
 
 
 
-.dl-marquee{
+.top-scroll{
 width:100%;
 overflow:hidden;
-border-radius:14px;
-margin-bottom:12px;
+margin:8px 0 14px 0;
+border-radius:12px;
 background:linear-gradient(90deg,#00d4ff,#00ff88);
-box-shadow:0 0 20px rgba(0,212,255,.25);
 }
 
-.dl-track{
+.top-scroll-text{
+display:inline-block;
 white-space:nowrap;
-font-weight:900;
+font-weight:800;
 color:#041018;
-font-size:15px;
-padding:10px 0;
-animation:scrollDL 12s linear infinite;
+padding:8px 0;
+font-size:14px;
+animation:marq 14s linear infinite;
 }
 
-@keyframes scrollDL{
-0%{transform:translateX(100%);}
-100%{transform:translateX(-100%);}
+/* mobile safe */
+@media(max-width:600px){
+.top-scroll-text{
+font-size:13px;
+}
+}
+
+@keyframes marq{
+0%{transform:translateX(100%)}
+100%{transform:translateX(-100%)}
 }
   </style>
 </head>
@@ -747,9 +754,9 @@ animation:scrollDL 12s linear infinite;
         Safe • Confident • Road Ready
       </div>
       
-      <div class="dl-marquee">
-  <div class="dl-track">
-    ⚡ DL & LL AVAILABLE HERE • APPLY NOW • DL & LL AVAILABLE HERE • APPLY NOW •
+   <div class="top-scroll">
+  <div class="top-scroll-text">
+    ⚡ DL & LL AVAILABLE HERE • CONTACT NOW • DL & LL AVAILABLE HERE • CONTACT NOW •
   </div>
 </div>
 
