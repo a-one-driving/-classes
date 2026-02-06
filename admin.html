@@ -88,10 +88,7 @@ margin-top:20px;
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-import { 
-  getFirestore, collection, onSnapshot, deleteDoc,
-  doc, setDoc 
-} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+import { getFirestore, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
 const firebaseConfig = {
 apiKey: "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
@@ -104,58 +101,39 @@ appId: "1:641148830173:web:b7a500e5e7e2463da0f634"
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-const col = collection(db,"slotBookings");
 
-window.login=function(){
-const p=document.getElementById("pass").value;
-if(p==="Admin5"){
-document.getElementById("loginBox").style.display="none";
-document.getElementById("panel").style.display="block";
-load();
+// 🔴 reason mapping
+const reasons={
+rain:{icon:"🌧",text:"Class Off Today - Due to Rain"},
+health:{icon:"🏥",text:"Class Off Today - Health Issue"},
+repair:{icon:"🔧",text:"Class Off - Vehicle Maintenance"},
+emergency:{icon:"🚨",text:"Class Off Today - Emergency"}
+};
+
+// realtime listen
+onSnapshot(doc(db,"siteControl","classStatus"),(snap)=>{
+if(!snap.exists()) return;
+
+const data=snap.data();
+const panel=document.getElementById("classOffPanel");
+const nextBar=document.getElementById("nextClassBar");
+
+if(data.isOff===true){
+
+panel.style.display="block";
+
+const r=reasons[data.reason] || reasons["emergency"];
+document.getElementById("offIcon").innerText=r.icon;
+document.getElementById("offText").innerText=r.text;
+
+// hide live system
+if(nextBar) nextBar.style.display="none";
+
 }else{
-alert("Wrong password");
-}
-}
-
-function load(){
-onSnapshot(col,(snap)=>{
-let html="";
-snap.forEach(d=>{
-const data=d.data();
-html+=`
-<div class="card">
-<b>Slot:</b> ${data.slotId}<br>
-<b>Seat:</b> ${data.seat}<br>
-<b>Visitor:</b> ${data.visitorId}<br>
-<button onclick="deleteSeat('${d.id}')">Cancel Seat</button>
-</div>`;
-});
-document.getElementById("list").innerHTML=html||"No bookings yet";
-});
+panel.style.display="none";
 }
 
-window.deleteSeat=async function(id){
-if(!confirm("Cancel this booking?"))return;
-await deleteDoc(doc(db,"slotBookings",id));
-alert("Seat cancelled");
-}
-
-/* 🔴 CLASS CONTROL */
-window.classOn = async function(){
-await setDoc(doc(db,"siteControl","classStatus"),{
-isOff:false,
-reason:""
 });
-alert("🟢 Class ON ho gaya");
-}
-
-window.classOff = async function(r){
-await setDoc(doc(db,"siteControl","classStatus"),{
-isOff:true,
-reason:r
-});
-alert("🔴 Class OFF set ho gaya");
-}
 </script>
 
 
