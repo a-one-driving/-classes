@@ -1620,8 +1620,22 @@ emergency:{ icon:"🚨", text:"Class Off Today - Emergency"}
 };
 
 if(classOff){
+
+window.addEventListener("load",()=>{
+
 const panel=document.getElementById("classOffPanel");
-panel.style.display="block";
+if(panel) panel.style.display="block";
+
+document.getElementById("offIcon").innerText=reasons[offReason].icon;
+document.getElementById("offText").innerText=reasons[offReason].text;
+
+// hide countdown if off
+const nextBar=document.getElementById("nextClassBar");
+if(nextBar) nextBar.style.display="none";
+
+});
+
+}
 
 document.getElementById("offIcon").innerText=reasons[offReason].icon;
 document.getElementById("offText").innerText=reasons[offReason].text;
