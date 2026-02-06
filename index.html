@@ -1625,41 +1625,52 @@ setTimeout(startSystem,2000);
 
 
 
-<script>
-// ===== MASTER CLASS CONTROL SYSTEM =====
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+import { getFirestore, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
-window.addEventListener("load", ()=>{
-
-const classOff = true;   // true = OFF | false = normal
-const offReason = "health"; // health | rain | repair | emergency
-
-const reasons = {
-health:{ icon:"🏥", text:"Class Off Today - Health Issue"},
-rain:{ icon:"🌧", text:"Class Off Today - Due to Rain"},
-repair:{ icon:"🔧", text:"Class Off - Vehicle Maintenance"},
-emergency:{ icon:"🚨", text:"Class Off Today - Emergency"}
+const firebaseConfig = {
+apiKey: "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
+authDomain: "abinash-driving.firebaseapp.com",
+projectId: "abinash-driving",
+storageBucket: "abinash-driving.firebasestorage.app",
+messagingSenderId: "641148830173",
+appId: "1:641148830173:web:b7a500e5e7e2463da0f634"
 };
 
-// ===== IF CLASS OFF =====
-if(classOff){
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-// show bottom panel
+// reason mapping
+const reasons={
+rain:{icon:"🌧",text:"Class Off Today - Due to Rain"},
+health:{icon:"🏥",text:"Class Off Today - Health Issue"},
+repair:{icon:"🔧",text:"Class Off - Vehicle Maintenance"},
+emergency:{icon:"🚨",text:"Class Off Today - Emergency"}
+};
+
+// realtime listen
+onSnapshot(doc(db,"siteControl","classStatus"),(snap)=>{
+if(!snap.exists()) return;
+
+const data=snap.data();
 const panel=document.getElementById("classOffPanel");
+const nextBar=document.getElementById("nextClassBar");
+
+if(data.isOff===true){
+
 panel.style.display="block";
 
-document.getElementById("offIcon").innerText=reasons[offReason].icon;
-document.getElementById("offText").innerText=reasons[offReason].text;
+const r=reasons[data.reason] || reasons["emergency"];
+document.getElementById("offIcon").innerText=r.icon;
+document.getElementById("offText").innerText=r.text;
 
-// 🚫 STOP ALL CLASS SYSTEMS
-const nextBar=document.getElementById("nextClassBar");
+// hide live class system
 if(nextBar) nextBar.style.display="none";
 
-// kill LIVE system fully
-window.stopLiveSystem = true;
-
-return; // VERY IMPORTANT → stops further scripts
+}else{
+panel.style.display="none";
 }
-
 });
 </script>
 
