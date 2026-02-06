@@ -82,7 +82,10 @@ margin-top:20px;
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-import { getFirestore, collection, onSnapshot, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+import { 
+  getFirestore, collection, onSnapshot, deleteDoc,
+  doc, setDoc 
+} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
 const firebaseConfig = {
 apiKey: "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
@@ -119,8 +122,7 @@ html+=`
 <b>Seat:</b> ${data.seat}<br>
 <b>Visitor:</b> ${data.visitorId}<br>
 <button onclick="deleteSeat('${d.id}')">Cancel Seat</button>
-</div>
-`;
+</div>`;
 });
 document.getElementById("list").innerHTML=html||"No bookings yet";
 });
@@ -132,22 +134,7 @@ await deleteDoc(doc(db,"slotBookings",id));
 alert("Seat cancelled");
 }
 
-window.resetAll=async function(){
-if(!confirm("Delete ALL bookings?"))return;
-onSnapshot(col,(snap)=>{
-snap.forEach(async(d)=>{
-await deleteDoc(doc(db,"slotBookings",d.id));
-});
-});
-alert("All bookings cleared");
-}
-
-
-
-
-/* 🔴 CLASS CONTROL SYSTEM */
-import { doc, setDoc } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
-
+/* 🔴 CLASS CONTROL */
 window.classOn = async function(){
 await setDoc(doc(db,"siteControl","classStatus"),{
 isOff:false,
