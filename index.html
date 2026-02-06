@@ -1482,28 +1482,12 @@ to{transform:translateY(-4px)}
 
 
 
-<script type="module">
-import { doc, onSnapshot } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-
-const firebaseConfig = {
-apiKey: "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
-authDomain: "abinash-driving.firebaseapp.com",
-projectId: "abinash-driving",
-storageBucket: "abinash-driving.firebasestorage.app",
-messagingSenderId: "641148830173",
-appId: "1:641148830173:web:b7a500e5e7e2463da0f634"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
+// 🔴 CLASS OFF REALTIME CONTROL
 const reasons={
 rain:{icon:"🌧",text:"Class Off Today - Due to Rain"},
 health:{icon:"🏥",text:"Class Off Today - Health Issue"},
-repair:{icon:"🔧",text:"Class Off - Vehicle Maintenance"},
-emergency:{icon:"🚨",text:"Class Off Today - Emergency"}
+repair:{icon:"🔧 Vehicle Under Repair"},
+emergency:{icon:"🚨 Emergency - Class Cancelled"}
 };
 
 onSnapshot(doc(db,"siteControl","classStatus"),(snap)=>{
@@ -1521,13 +1505,14 @@ const r=reasons[data.reason] || reasons["emergency"];
 document.getElementById("offIcon").innerText=r.icon;
 document.getElementById("offText").innerText=r.text;
 
+// hide countdown
 if(nextBar) nextBar.style.display="none";
 
 }else{
 panel.style.display="none";
+if(nextBar) nextBar.style.display="block";
 }
 });
-</script>
 
 
 <!-- CLASS OFF PANEL -->
