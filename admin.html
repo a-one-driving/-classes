@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Panel - Abhinaash Driving</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+
 <style>
 body{
 font-family:Poppins,sans-serif;
@@ -29,13 +30,14 @@ border-radius:8px;
 border:none;
 }
 button{
-padding:12px;
+padding:14px;
 border:none;
-border-radius:8px;
+border-radius:10px;
 font-weight:900;
 cursor:pointer;
 background:#00d4ff;
 width:100%;
+margin-top:10px;
 }
 .panel{
 display:none;
@@ -48,27 +50,24 @@ padding:16px;
 border-radius:12px;
 margin:10px 0;
 }
-.reset{
-background:red;
-margin-top:20px;
-}
 </style>
 </head>
+
 <body>
+
 <!-- LOGIN -->
 <div class="loginBox" id="loginBox">
 <h2>🔐 Admin Login</h2>
 <input type="password" id="pass" placeholder="Enter password">
 <button onclick="login()">Enter Admin Panel</button>
 </div>
+
 <!-- PANEL -->
 <div class="panel" id="panel">
 <h2>🚗 Booking Admin Panel</h2>
 <div id="list"></div>
 
-
-
-<h3 style="margin-top:20px">🎛 Class Control</h3>
+<h3 style="margin-top:25px">🎛 Class Control</h3>
 
 <button onclick="classOn()">🟢 Class ON</button>
 <button onclick="classOff('rain')">🌧 Rain Off</button>
@@ -78,17 +77,11 @@ margin-top:20px;
 
 </div>
 
-
-
-
-
-
-
-
-
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-import { getFirestore, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+import { 
+getFirestore, collection, onSnapshot, deleteDoc, doc, setDoc 
+} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
 const firebaseConfig = {
 apiKey: "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
@@ -101,43 +94,71 @@ appId: "1:641148830173:web:b7a500e5e7e2463da0f634"
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const col = collection(db,"slotBookings");
 
-// 🔴 reason mapping
-const reasons={
-rain:{icon:"🌧",text:"Class Off Today - Due to Rain"},
-health:{icon:"🏥",text:"Class Off Today - Health Issue"},
-repair:{icon:"🔧",text:"Class Off - Vehicle Maintenance"},
-emergency:{icon:"🚨",text:"Class Off Today - Emergency"}
-};
 
-// realtime listen
-onSnapshot(doc(db,"siteControl","classStatus"),(snap)=>{
-if(!snap.exists()) return;
+// 🔐 LOGIN
+window.login=function(){
+const p=document.getElementById("pass").value;
 
-const data=snap.data();
-const panel=document.getElementById("classOffPanel");
-const nextBar=document.getElementById("nextClassBar");
-
-if(data.isOff===true){
-
-panel.style.display="block";
-
-const r=reasons[data.reason] || reasons["emergency"];
-document.getElementById("offIcon").innerText=r.icon;
-document.getElementById("offText").innerText=r.text;
-
-// hide live system
-if(nextBar) nextBar.style.display="none";
-
+if(p==="Admin5"){
+document.getElementById("loginBox").style.display="none";
+document.getElementById("panel").style.display="block";
+loadBookings();
 }else{
-panel.style.display="none";
+alert("Wrong password");
+}
 }
 
+
+// 📋 LOAD BOOKINGS
+function loadBookings(){
+onSnapshot(col,(snap)=>{
+let html="";
+snap.forEach(d=>{
+const data=d.data();
+html+=`
+<div class="card">
+<b>Slot:</b> ${data.slotId}<br>
+<b>Seat:</b> ${data.seat}<br>
+<b>Visitor:</b> ${data.visitorId}<br>
+<button onclick="deleteSeat('${d.id}')">Cancel Seat</button>
+</div>
+`;
 });
+document.getElementById("list").innerHTML=html||"No bookings yet";
+});
+}
+
+
+// ❌ CANCEL SEAT
+window.deleteSeat=async function(id){
+if(!confirm("Cancel this booking?")) return;
+await deleteDoc(doc(db,"slotBookings",id));
+alert("Seat cancelled");
+}
+
+
+// 🟢 CLASS ON
+window.classOn = async function(){
+await setDoc(doc(db,"siteControl","classStatus"),{
+isOff:false,
+reason:""
+});
+alert("🟢 Class ON");
+}
+
+
+// 🔴 CLASS OFF
+window.classOff = async function(r){
+await setDoc(doc(db,"siteControl","classStatus"),{
+isOff:true,
+reason:r
+});
+alert("🔴 Class OFF set");
+}
+
 </script>
-
-
-
 
 </body>
 </html>
