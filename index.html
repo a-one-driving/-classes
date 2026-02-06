@@ -1641,7 +1641,18 @@ appId: "1:641148830173:web:b7a500e5e7e2463da0f634"
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// reason mapping
+
+
+
+
+
+
+
+
+
+import { doc, onSnapshot } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
+// 🔴 reason mapping
 const reasons={
 rain:{icon:"🌧",text:"Class Off Today - Due to Rain"},
 health:{icon:"🏥",text:"Class Off Today - Health Issue"},
@@ -1665,13 +1676,15 @@ const r=reasons[data.reason] || reasons["emergency"];
 document.getElementById("offIcon").innerText=r.icon;
 document.getElementById("offText").innerText=r.text;
 
-// hide live class system
+// hide live + countdown
 if(nextBar) nextBar.style.display="none";
 
 }else{
 panel.style.display="none";
 }
+
 });
+
 </script>
 
 
