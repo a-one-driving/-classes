@@ -1538,6 +1538,7 @@ return new Date(now.toDateString()+" "+t);
 }
 
 function startSystem(){
+if(window.stopLiveSystem) return;
 setInterval(()=>{
 const now=new Date();
 let nextClass=null;
@@ -1600,11 +1601,11 @@ setTimeout(startSystem,2000);
 
 
 <script>
-// ===== CLASS OFF CONTROL =====
+// ===== MASTER CLASS CONTROL SYSTEM =====
 
 window.addEventListener("load", ()=>{
 
-const classOff = true;   // true = OFF show | false = normal
+const classOff = true;   // true = OFF | false = normal
 const offReason = "health"; // health | rain | repair | emergency
 
 const reasons = {
@@ -1614,16 +1615,24 @@ repair:{ icon:"🔧", text:"Class Off - Vehicle Maintenance"},
 emergency:{ icon:"🚨", text:"Class Off Today - Emergency"}
 };
 
+// ===== IF CLASS OFF =====
 if(classOff){
+
+// show bottom panel
 const panel=document.getElementById("classOffPanel");
 panel.style.display="block";
 
 document.getElementById("offIcon").innerText=reasons[offReason].icon;
 document.getElementById("offText").innerText=reasons[offReason].text;
 
-// hide countdown
+// 🚫 STOP ALL CLASS SYSTEMS
 const nextBar=document.getElementById("nextClassBar");
 if(nextBar) nextBar.style.display="none";
+
+// kill LIVE system fully
+window.stopLiveSystem = true;
+
+return; // VERY IMPORTANT → stops further scripts
 }
 
 });
