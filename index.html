@@ -1468,10 +1468,10 @@ to{transform:translateY(-4px)}
   
   // 🔴 CLASS OFF REALTIME CONTROL
 const reasons={
-rain:{icon:"🌧",text:"Class Off Today - Due to Rain"},
-health:{icon:"🏥",text:"Class Off Today - Health Issue"},
-repair:{icon:"🔧 Vehicle Under Repair"},
-emergency:{icon:"🚨 Emergency - Class Cancelled"}
+ rain:{icon:"🌧",text:"Class Off Today - Due to Rain"},
+ health:{icon:"🏥",text:"Class Off Today - Health Issue"},
+ repair:{icon:"🔧",text:"Vehicle Under Maintenance"},
+ emergency:{icon:"🚨",text:"Emergency - Class Cancelled"}
 };
 
 onSnapshot(doc(db,"siteControl","classStatus"),(snap)=>{
