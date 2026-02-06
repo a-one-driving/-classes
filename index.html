@@ -842,6 +842,57 @@ to{width:100%;}
 50%{border-color:transparent;}
 }
 
+
+
+
+
+
+
+
+
+
+
+/* ===== CLASS OFF STICKY PANEL ===== */
+.class-off-panel{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+background:linear-gradient(45deg,#ff3b3b,#ff7b00);
+color:#fff;
+padding:14px 10px;
+text-align:center;
+font-weight:900;
+z-index:99999;
+box-shadow:0 -5px 25px rgba(0,0,0,.4);
+animation:shakePanel .6s infinite alternate;
+}
+
+.off-content{
+font-size:16px;
+letter-spacing:.5px;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+}
+
+#offIcon{
+font-size:22px;
+}
+
+/* shake animation */
+@keyframes shakePanel{
+from{transform:translateY(0)}
+to{transform:translateY(-4px)}
+}
+
+/* mobile */
+@media(max-width:600px){
+.off-content{font-size:14px}
+#offIcon{font-size:18px}
+}
+
   </style>
 </head>
 
@@ -1547,6 +1598,60 @@ setTimeout(startSystem,2000);
 
 
 
+
+
+<script>
+// ===== CLASS OFF CONTROL =====
+
+// OFF enable/disable
+const classOff = false;  
+// true = OFF show
+// false = normal day
+
+// select reason:
+const offReason = "rain"; 
+// options: health | rain | repair | emergency
+
+const reasons = {
+health:{ icon:"🏥", text:"Class Off Today - Health Issue"},
+rain:{ icon:"🌧", text:"Class Off Today - Due to Rain"},
+repair:{ icon:"🔧", text:"Class Off - Vehicle Maintenance"},
+emergency:{ icon:"🚨", text:"Class Off Today - Emergency"}
+};
+
+if(classOff){
+const panel=document.getElementById("classOffPanel");
+panel.style.display="block";
+
+document.getElementById("offIcon").innerText=reasons[offReason].icon;
+document.getElementById("offText").innerText=reasons[offReason].text;
+
+// hide countdown/live if off
+const nextBar=document.getElementById("nextClassBar");
+if(nextBar) nextBar.style.display="none";
+}
+
+
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- CLASS OFF PANEL -->
+<div id="classOffPanel" class="class-off-panel" style="display:none;">
+  <div class="off-content">
+    <span id="offIcon">⚠️</span>
+    <span id="offText">Class off today</span>
+  </div>
+</div>
 </body>
 </html>
