@@ -141,26 +141,32 @@ await deleteDoc(doc(db,"slotBookings",d.id));
 });
 alert("All bookings cleared");
 }
-</script>
 
 
 
+
+/* 🔴 CLASS CONTROL SYSTEM */
 import { doc, setDoc } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
-async function classOn(){
+window.classOn = async function(){
 await setDoc(doc(db,"siteControl","classStatus"),{
 isOff:false,
 reason:""
 });
-alert("Class ON");
+alert("🟢 Class ON ho gaya");
 }
 
-async function classOff(r){
+window.classOff = async function(r){
 await setDoc(doc(db,"siteControl","classStatus"),{
 isOff:true,
 reason:r
 });
-alert("Class OFF set");
+alert("🔴 Class OFF set ho gaya");
 }
+</script>
+
+
+
+
 </body>
 </html>
