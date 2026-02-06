@@ -697,40 +697,31 @@ to{box-shadow:0 0 28px #ff9900}
 
 
 
-
-.dl-strip{
+.dl-alert-bar{
 width:100%;
 overflow:hidden;
-margin:6px 0 10px 0;
-border-radius:8px;
-background:#111;
-border:1px solid rgba(255,0,0,.4);
-box-shadow:0 0 12px rgba(255,0,0,.6);
+background:#0b0b0b;
+border-top:1px solid rgba(255,0,0,.4);
+border-bottom:1px solid rgba(255,0,0,.4);
+box-shadow:0 0 15px rgba(255,0,0,.6);
 }
 
-.dl-move{
+.dl-alert-text{
 white-space:nowrap;
-display:inline-block;
-font-weight:700;
 font-size:12px;
+font-weight:700;
 color:#ff3b3b;
 padding:6px 0;
-animation:dlrun 12s linear infinite;
-text-shadow:0 0 8px red;
+display:inline-block;
+animation:dlmove 15s linear infinite;
+text-shadow:0 0 6px red;
 }
 
-@keyframes dlrun{
+@keyframes dlmove{
 0%{transform:translateX(100%)}
 100%{transform:translateX(-100%)}
 }
 
-/* mobile safe */
-@media(max-width:600px){
-.dl-move{
-font-size:11px;
-padding:5px 0;
-}
-}
   </style>
 </head>
 
@@ -749,6 +740,12 @@ padding:5px 0;
   </div>
 </header>
 
+<div class="dl-alert-bar">
+  <div class="dl-alert-text">
+    🚗 DL & LL AVAILABLE HERE • CONTACT NOW • DL & LL AVAILABLE HERE • CONTACT NOW •
+  </div>
+</div>
+
 <main class="container">
   <section class="hero" id="home">
     <!-- LEFT -->
@@ -758,11 +755,7 @@ padding:5px 0;
         Safe • Confident • Road Ready
       </div>
       
-<div class="dl-strip">
-  <div class="dl-move">
-    🚗 DL & LL AVAILABLE HERE • CONTACT NOW • DL & LL AVAILABLE HERE • CONTACT NOW •
-  </div>
-</div>
+
 
       <h1>Learn Driving Like a Pro 🚗<br/>With Abhinaash A One</h1>
 
