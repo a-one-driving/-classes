@@ -692,6 +692,34 @@ animation:holidayPulse 1.2s infinite alternate;
 from{box-shadow:0 0 10px #ffcc00}
 to{box-shadow:0 0 28px #ff9900}
 }
+
+
+
+
+
+
+.dl-marquee{
+width:100%;
+overflow:hidden;
+border-radius:14px;
+margin-bottom:12px;
+background:linear-gradient(90deg,#00d4ff,#00ff88);
+box-shadow:0 0 20px rgba(0,212,255,.25);
+}
+
+.dl-track{
+white-space:nowrap;
+font-weight:900;
+color:#041018;
+font-size:15px;
+padding:10px 0;
+animation:scrollDL 12s linear infinite;
+}
+
+@keyframes scrollDL{
+0%{transform:translateX(100%);}
+100%{transform:translateX(-100%);}
+}
   </style>
 </head>
 
@@ -718,6 +746,12 @@ to{box-shadow:0 0 28px #ff9900}
         <span>PRO</span>
         Safe • Confident • Road Ready
       </div>
+      
+      <div class="dl-marquee">
+  <div class="dl-track">
+    ⚡ DL & LL AVAILABLE HERE • APPLY NOW • DL & LL AVAILABLE HERE • APPLY NOW •
+  </div>
+</div>
 
       <h1>Learn Driving Like a Pro 🚗<br/>With Abhinaash A One</h1>
 
@@ -910,16 +944,7 @@ to{box-shadow:0 0 28px #ff9900}
 <!-- Floating WhatsApp -->
 <a href="https://wa.me/917008186187" target="_blank" class="waFloat" aria-label="WhatsApp">💬</a>
 
-<!-- Fixed Bottom DL/LL Bar -->
-<div class="dlFixedBar">
-  <div class="dlMsg">
-    ⚡ Contact us for <b>DL</b> & <b>LL</b>
-  </div>
-  <div class="dlBtns">
-    <a href="tel:+917008186187" class="dlBtn call">📞 Call</a>
-    <a href="https://wa.me/917008186187" target="_blank" class="dlBtn wa">💬 WhatsApp</a>
-  </div>
-</div>
+
 
 <!-- Admission Popup -->
 <div class="modal" id="admissionModal">
