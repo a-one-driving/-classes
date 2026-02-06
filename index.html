@@ -1470,76 +1470,6 @@ to{transform:translateY(-4px)}
 
 
 
-<script>
-
-// 🔥 FIREBASE CONTROLLED CLASS OFF SYSTEM
-
-import { doc, onSnapshot } 
-from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
-import { getFirestore } 
-from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
-
-const db = getFirestore();
-const ref = doc(db,"siteControl","classStatus");
-
-onSnapshot(ref,(snap)=>{
- if(!snap.exists()) return;
-
- const data=snap.data();
- const classOff=data.isOff;
- const reason=data.reason;
-
- const reasons={
-  health:{icon:"🏥",text:"Class Off Today - Health Issue"},
-
-
-
-
-
-
-<div id="holidayPopup" style="
-position:fixed;
-top:20px;
-left:50%;
-transform:translateX(-50%) scale(0);
-background:#111;
-color:#fff;
-padding:14px 20px;
-border-radius:14px;
-font-weight:800;
-z-index:9999;
-border:2px solid #ffcc00;
-box-shadow:0 0 20px rgba(0,0,0,.5);
-transition:.4s;
-text-align:center;
-max-width:90%;">
-⚠ Holiday Alert
-</div>
-
-
-
-<script>
-function showHoliday(msg){
-  const popup = document.getElementById("holidayPopup");
-  popup.innerHTML = "⚠ " + msg;
-  popup.style.transform = "translateX(-50%) scale(1)";
-
-  setTimeout(()=>{
-    popup.style.transform = "translateX(-50%) scale(0)";
-  },5000);
-}
-
-// check weekend
-const day = new Date().getDay();
-
-if(day === 0){
-  setTimeout(()=>showHoliday("Sunday Holiday"),2000);
-}
-
-if(day === 6){
-  setTimeout(()=>showHoliday("Saturday Holiday"),2000);
-}
-</script>
 
 
 
@@ -1548,86 +1478,14 @@ if(day === 6){
 
 
 
-<script>
-// ===== BATCH TIMES =====
-const batchTimes = [
-"7:00 AM",
-"8:00 AM",
-"2:00 PM",
-"3:00 PM"
-];
-
-function parseTime(t){
-const now = new Date();
-return new Date(now.toDateString()+" "+t);
-}
-
-function startSystem(){
-if(window.stopLiveSystem) return;
-setInterval(()=>{
-const now=new Date();
-let nextClass=null;
-let liveClass=null;
-
-batchTimes.forEach(t=>{
-const start=parseTime(t);
-const end=new Date(start.getTime()+60*60*1000);
-
-if(now>=start && now<end){
-liveClass=start;
-}
-
-if(start>now){
-if(!nextClass || start<nextClass){
-nextClass=start;
-}
-}
-});
-
-const bar=document.getElementById("nextClassBar");
-const timer=document.getElementById("countdownTimer");
-
-// LIVE CLASS
-if(liveClass){
-bar.style.display="block";
-bar.innerHTML=`
-<div class="next-class-text" style="color:#ff3b3b">
-🔴 LIVE: Class Running Now
-</div>`;
-return;
-}
-
-// COUNTDOWN
-if(nextClass){
-const diff=(nextClass-now)/1000;
-
-if(diff>0 && diff<=3600){
-bar.style.display="block";
-
-const h=Math.floor(diff/3600);
-const m=Math.floor((diff%3600)/60);
-const s=Math.floor(diff%60);
-
-timer.innerHTML=
-`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-return;
-}
-}
-
-bar.style.display="none";
-
-},1000);
-}
-
-setTimeout(startSystem,2000);
-</script>
 
 
 
 
 <script type="module">
+import { doc, onSnapshot } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-import { getFirestore, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
 const firebaseConfig = {
 apiKey: "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
@@ -1641,18 +1499,6 @@ appId: "1:641148830173:web:b7a500e5e7e2463da0f634"
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-
-
-
-
-
-
-
-
-
-import { doc, onSnapshot } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
-
-// 🔴 reason mapping
 const reasons={
 rain:{icon:"🌧",text:"Class Off Today - Due to Rain"},
 health:{icon:"🏥",text:"Class Off Today - Health Issue"},
@@ -1660,7 +1506,6 @@ repair:{icon:"🔧",text:"Class Off - Vehicle Maintenance"},
 emergency:{icon:"🚨",text:"Class Off Today - Emergency"}
 };
 
-// realtime listen
 onSnapshot(doc(db,"siteControl","classStatus"),(snap)=>{
 if(!snap.exists()) return;
 
@@ -1676,28 +1521,13 @@ const r=reasons[data.reason] || reasons["emergency"];
 document.getElementById("offIcon").innerText=r.icon;
 document.getElementById("offText").innerText=r.text;
 
-// hide live + countdown
 if(nextBar) nextBar.style.display="none";
 
 }else{
 panel.style.display="none";
 }
-
 });
-
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <!-- CLASS OFF PANEL -->
