@@ -782,6 +782,66 @@ to{box-shadow:0 0 35px rgba(0,229,255,.65)}
 #countdownTimer{font-size:16px}
 }
 
+
+
+
+
+
+
+
+
+
+
+/* ===== PREMIUM HEADING STYLE ===== */
+.heroTitle{
+font-size:44px;
+line-height:1.05;
+font-weight:900;
+margin-bottom:14px;
+}
+
+@media(max-width:900px){
+.heroTitle{font-size:32px;}
+}
+
+/* shining gradient */
+.heroTitle .shine{
+background: linear-gradient(90deg, #fff, #00e5ff, #00ff9c, #fff);
+background-size: 200% auto;
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+animation: shine 3s linear infinite;
+display:inline-block;
+}
+
+@keyframes shine{
+0%{background-position:0% center;}
+100%{background-position:200% center;}
+}
+
+/* typing effect */
+.typingLine{
+display:block;
+margin-top:8px;
+font-size:16px;
+color:rgba(255,255,255,.85);
+font-weight:800;
+white-space:nowrap;
+overflow:hidden;
+border-right:2px solid rgba(255,255,255,.7);
+width:0;
+animation: typing 3s steps(45,end) forwards, blink .7s step-end infinite;
+}
+
+@keyframes typing{
+from{width:0;}
+to{width:100%;}
+}
+
+@keyframes blink{
+50%{border-color:transparent;}
+}
+
   </style>
 </head>
 
@@ -828,8 +888,11 @@ to{box-shadow:0 0 35px rgba(0,229,255,.65)}
 
 
 
-      <h1>Learn Driving Like a Pro 🚗<br/>With Abhinaash A One</h1>
-
+<!-- PASTE HERE -->
+<div class="heroTitle">
+  <span class="shine">Learn Driving Like a Pro</span>
+  <span class="typingLine">with Abhinaash A One Driving Classes</span>
+</div>
       <p>
         Professional driving training with modern learning style.
         We help you become confident on city roads, highways and traffic situations.
