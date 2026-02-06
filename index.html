@@ -1599,18 +1599,13 @@ setTimeout(startSystem,2000);
 
 
 
-
 <script>
 // ===== CLASS OFF CONTROL =====
 
-// OFF enable/disable
-const classOff = true;  
-// true = OFF show
-// false = normal day
+window.addEventListener("load", ()=>{
 
-// select reason:
-const offReason = "rain"; 
-// options: health | rain | repair | emergency
+const classOff = true;   // true = OFF show | false = normal
+const offReason = "rain"; // health | rain | repair | emergency
 
 const reasons = {
 health:{ icon:"🏥", text:"Class Off Today - Health Issue"},
@@ -1620,33 +1615,20 @@ emergency:{ icon:"🚨", text:"Class Off Today - Emergency"}
 };
 
 if(classOff){
-
-window.addEventListener("load",()=>{
-
 const panel=document.getElementById("classOffPanel");
-if(panel) panel.style.display="block";
+panel.style.display="block";
 
 document.getElementById("offIcon").innerText=reasons[offReason].icon;
 document.getElementById("offText").innerText=reasons[offReason].text;
 
-// hide countdown if off
+// hide countdown
 const nextBar=document.getElementById("nextClassBar");
 if(nextBar) nextBar.style.display="none";
+}
 
 });
-
-}
-
-document.getElementById("offIcon").innerText=reasons[offReason].icon;
-document.getElementById("offText").innerText=reasons[offReason].text;
-
-// hide countdown/live if off
-const nextBar=document.getElementById("nextClassBar");
-if(nextBar) nextBar.style.display="none";
-}
-
-
 </script>
+
 
 
 
