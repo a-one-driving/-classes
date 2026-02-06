@@ -1465,24 +1465,8 @@ to{transform:translateY(-4px)}
     revealBatches();
     startRealtimeListener();
   });
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// 🔴 CLASS OFF REALTIME CONTROL
+  
+  // 🔴 CLASS OFF REALTIME CONTROL
 const reasons={
 rain:{icon:"🌧",text:"Class Off Today - Due to Rain"},
 health:{icon:"🏥",text:"Class Off Today - Health Issue"},
@@ -1505,7 +1489,6 @@ const r=reasons[data.reason] || reasons["emergency"];
 document.getElementById("offIcon").innerText=r.icon;
 document.getElementById("offText").innerText=r.text;
 
-// hide countdown
 if(nextBar) nextBar.style.display="none";
 
 }else{
@@ -1513,6 +1496,23 @@ panel.style.display="none";
 if(nextBar) nextBar.style.display="block";
 }
 });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <!-- CLASS OFF PANEL -->
