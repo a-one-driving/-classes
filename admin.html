@@ -66,6 +66,20 @@ margin-top:20px;
 <h2>🚗 Booking Admin Panel</h2>
 <div id="list"></div>
 </div>
+
+<button onclick="classOn()">🟢 Class ON</button>
+<button onclick="classOff('rain')">🌧 Rain Off</button>
+<button onclick="classOff('health')">🏥 Health</button>
+<button onclick="classOff('repair')">🔧 Repair</button>
+<button onclick="classOff('emergency')">🚨 Emergency</button>
+
+
+
+
+
+
+
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
 import { getFirestore, collection, onSnapshot, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
@@ -128,5 +142,25 @@ await deleteDoc(doc(db,"slotBookings",d.id));
 alert("All bookings cleared");
 }
 </script>
+
+
+
+import { doc, setDoc } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
+async function classOn(){
+await setDoc(doc(db,"siteControl","classStatus"),{
+isOff:false,
+reason:""
+});
+alert("Class ON");
+}
+
+async function classOff(r){
+await setDoc(doc(db,"siteControl","classStatus"),{
+isOff:true,
+reason:r
+});
+alert("Class OFF set");
+}
 </body>
 </html>
