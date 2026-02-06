@@ -1413,7 +1413,7 @@ if(day === 6){
 // ===== SET YOUR BATCH TIMES HERE =====
 const batchTimes = [
 "7:00 AM",
-"8:00 AM",
+"11:00 AM",
 "2:00 PM"
 "3:00 PM"
 ];
@@ -1473,6 +1473,82 @@ document.getElementById("countdownTimer").innerHTML=
 
 // start after load
 setTimeout(startCountdown,2000);
+
+
+
+
+<script>
+// ===== SET BATCH TIMES =====
+const batchTimes = [
+"7:00 AM",
+"8:00 AM",
+"3:00 PM"
+];
+
+function parseTime(t){
+const now = new Date();
+return new Date(now.toDateString()+" "+t);
+}
+
+function startSystem(){
+setInterval(()=>{
+const now=new Date();
+let nextClass=null;
+let liveClass=null;
+
+batchTimes.forEach(t=>{
+const start=parseTime(t);
+const end=new Date(start.getTime()+60*60*1000); // 1 hr class
+
+if(now>=start && now<end){
+liveClass=start;
+}
+
+if(start>now){
+if(!nextClass || start<nextClass){
+nextClass=start;
+}
+}
+});
+
+const bar=document.getElementById("nextClassBar");
+const timer=document.getElementById("countdownTimer");
+
+// ===== LIVE CLASS =====
+if(liveClass){
+bar.style.display="block";
+bar.innerHTML=`
+<div class="next-class-text" style="color:#ff3b3b">
+🔴 LIVE: Class Running Now
+</div>`;
+return;
+}
+
+// ===== COUNTDOWN =====
+if(nextClass){
+const diff=(nextClass-now)/1000;
+
+if(diff>0 && diff<=3600){
+bar.style.display="block";
+
+const h=Math.floor(diff/3600);
+const m=Math.floor((diff%3600)/60);
+const s=Math.floor(diff%60);
+
+timer.innerHTML=
+`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+
+return;
+}
+}
+
+bar.style.display="none";
+
+},1000);
+}
+
+setTimeout(startSystem,2000);
+</script>
 
 </script>
 </body>
