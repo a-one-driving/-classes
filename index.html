@@ -697,29 +697,42 @@ to{box-shadow:0 0 28px #ff9900}
 
 
 
+/* ===== DL LL TOP STRIP ===== */
 .dl-alert-bar{
 width:100%;
 overflow:hidden;
-background:#0b0b0b;
-border-top:1px solid rgba(255,0,0,.4);
-border-bottom:1px solid rgba(255,0,0,.4);
-box-shadow:0 0 15px rgba(255,0,0,.6);
+background:rgba(0,0,0,.35);
+backdrop-filter: blur(8px);
+border-top:1px solid rgba(0,229,255,.4);
+border-bottom:1px solid rgba(0,229,255,.4);
+box-shadow:0 0 18px rgba(0,229,255,.35);
+margin-top:2px;
 }
 
 .dl-alert-text{
 white-space:nowrap;
-font-size:12px;
-font-weight:700;
-color:#ff3b3b;
-padding:6px 0;
+font-size:13px;
+font-weight:800;
+color:#00e5ff;
+padding:7px 0;
 display:inline-block;
-animation:dlmove 15s linear infinite;
-text-shadow:0 0 6px red;
+animation:dlmove 18s linear infinite;
+text-shadow:0 0 10px rgba(0,229,255,.9);
+letter-spacing:.5px;
 }
 
+/* smooth scroll */
 @keyframes dlmove{
 0%{transform:translateX(100%)}
 100%{transform:translateX(-100%)}
+}
+
+/* mobile perfect */
+@media(max-width:600px){
+.dl-alert-text{
+font-size:12px;
+padding:6px 0;
+}
 }
 
   </style>
