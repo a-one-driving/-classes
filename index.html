@@ -1470,6 +1470,31 @@ to{transform:translateY(-4px)}
 
 
 
+<script>
+
+// 🔥 FIREBASE CONTROLLED CLASS OFF SYSTEM
+
+import { doc, onSnapshot } 
+from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+import { getFirestore } 
+from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
+const db = getFirestore();
+const ref = doc(db,"siteControl","classStatus");
+
+onSnapshot(ref,(snap)=>{
+ if(!snap.exists()) return;
+
+ const data=snap.data();
+ const classOff=data.isOff;
+ const reason=data.reason;
+
+ const reasons={
+  health:{icon:"🏥",text:"Class Off Today - Health Issue"},
+
+
+
+
 
 
 <div id="holidayPopup" style="
