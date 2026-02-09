@@ -3,161 +3,181 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Panel - Abhinaash Driving</title>
+<title>Admin Dashboard - Abhinaash Driving</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
 
 <style>
-body{
-font-family:Poppins,sans-serif;
-background:#0b1020;
-color:white;
-margin:0;
-padding:20px;
-}
-.loginBox{
-max-width:400px;
-margin:80px auto;
-background:#111;
-padding:25px;
-border-radius:14px;
-text-align:center;
-}
-input{
-width:100%;
-padding:12px;
-margin:10px 0;
-border-radius:8px;
-border:none;
-}
-button{
-padding:14px;
-border:none;
-border-radius:10px;
-font-weight:900;
-cursor:pointer;
-background:#00d4ff;
-width:100%;
-margin-top:10px;
-}
-.panel{
-display:none;
-max-width:900px;
-margin:auto;
-}
-.card{
-background:#111;
-padding:16px;
-border-radius:12px;
-margin:10px 0;
-}
+    :root { --accent: #00d4ff; --danger: #ff4d4d; --bg: #0b1020; --card: #161b2d; --green: #00ff88; }
+    body{ font-family:Poppins,sans-serif; background:var(--bg); color:white; margin:0; padding:20px; }
+    
+    .loginBox{ max-width:400px; margin:80px auto; background:#111; padding:25px; border-radius:14px; text-align:center; border:1px solid #333; }
+    .panel{ display:none; max-width:1000px; margin:auto; }
+    
+    .grid-layout { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 20px; }
+    @media (max-width: 850px) { .grid-layout { grid-template-columns: 1fr; } }
+
+    .card{ background:var(--card); padding:16px; border-radius:15px; margin-bottom: 20px; border:1px solid #2d3548; position: relative; }
+    .booking-card { border-left: 4px solid var(--accent); }
+    
+    input, textarea, select { 
+        width:100%; padding:12px; margin:8px 0; border-radius:8px; border:1px solid #444; 
+        background:#000; color:#fff; box-sizing: border-box; font-family: inherit;
+    }
+    
+    button{ padding:12px; border:none; border-radius:10px; font-weight:700; cursor:pointer; background:var(--accent); color:#000; width:100%; margin-top:10px; transition: 0.2s; }
+    .btn-red { background: var(--danger); color: white; }
+    .btn-green { background: var(--green); color: #000; }
+
+    .header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+    .time-stamp { font-size: 10px; color: #888; position: absolute; top: 12px; right: 12px; }
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
 <div class="loginBox" id="loginBox">
-<h2>🔐 Admin Login</h2>
-<input type="password" id="pass" placeholder="Enter password">
-<button onclick="login()">Enter Admin Panel</button>
+    <h2 style="color:var(--accent)">🛡️ Admin Login</h2>
+    <input type="password" id="pass" placeholder="Enter password">
+    <button onclick="login()">Enter Dashboard</button>
 </div>
 
-<!-- PANEL -->
 <div class="panel" id="panel">
-<h2>🚗 Booking Admin Panel</h2>
-<div id="list"></div>
+    <div class="header-row">
+        <h2>📊 Admin Dashboard</h2>
+        <button onclick="clearAllBookings()" style="width: auto; background: var(--danger); font-size: 12px; padding: 8px 15px;">Clear All Data</button>
+    </div>
 
-<h3 style="margin-top:25px">🎛 Class Control</h3>
+    <div class="grid-layout">
+        <div>
+            <h3>📋 Active Bookings</h3>
+            <div id="list">Loading...</div>
+        </div>
 
-<button onclick="classOn()">🟢 Class ON</button>
-<button onclick="classOff('rain')">🌧 Rain Off</button>
-<button onclick="classOff('health')">🏥 Health</button>
-<button onclick="classOff('repair')">🔧 Repair</button>
-<button onclick="classOff('emergency')">🚨 Emergency</button>
+        <div>
+            <div class="card" style="border-top: 4px solid var(--green);">
+                <h3>📝 Manual Slot Booking</h3>
+                <p style="font-size: 12px; color: #bbb;">Offline bookings yahan se add karein.</p>
+                <input type="text" id="mName" placeholder="Student Name">
+                <input type="tel" id="mPhone" placeholder="Phone Number">
+                
+                <select id="mSlot">
+                    <option value="">Select Batch</option>
+                    <option value="MORNING_1">Morning Batch 1 (7-8 AM)</option>
+                    <option value="MORNING_2">Morning Batch 2 (8-9 AM)</option>
+                    <option value="EVENING_1">Evening Batch 1 (3-4 PM)</option>
+                </select>
 
+                <select id="mSeat">
+                    <option value="">Select Seat</option>
+                    <option value="1">Seat A1</option>
+                    <option value="2">Seat A2</option>
+                    <option value="3">Seat A3</option>
+                    <option value="4">Seat A4</option>
+                </select>
+
+                <button class="btn-green" id="manualBtn" onclick="manualBook()">Lock Seat ✅</button>
+            </div>
+
+            <div class="card" style="border-top: 4px solid #f1c40f;">
+                <h3>📢 Custom Status</h3>
+                <textarea id="customReason" placeholder="Type custom message..." rows="2"></textarea>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn-green" style="font-size:12px" onclick="setStatus(false)">Class ON</button>
+                    <button class="btn-red" style="font-size:12px" onclick="setStatus(true)">Set Off</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
 import { 
-getFirestore, collection, onSnapshot, deleteDoc, doc, setDoc 
+    getFirestore, collection, onSnapshot, deleteDoc, doc, setDoc, getDocs, serverTimestamp 
 } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
 const firebaseConfig = {
-apiKey: "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
-authDomain: "abinash-driving.firebaseapp.com",
-projectId: "abinash-driving",
-storageBucket: "abinash-driving.firebasestorage.app",
-messagingSenderId: "641148830173",
-appId: "1:641148830173:web:b7a500e5e7e2463da0f634"
+    apiKey: "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
+    authDomain: "abinash-driving.firebaseapp.com",
+    projectId: "abinash-driving",
+    storageBucket: "abinash-driving.firebasestorage.app",
+    messagingSenderId: "641148830173",
+    appId: "1:641148830173:web:b7a500e5e7e2463da0f634"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const col = collection(db,"slotBookings");
 
-
-// 🔐 LOGIN
 window.login=function(){
-const p=document.getElementById("pass").value;
-
-if(p==="Admin5"){
-document.getElementById("loginBox").style.display="none";
-document.getElementById("panel").style.display="block";
-loadBookings();
-}else{
-alert("Wrong password");
-}
+    if(document.getElementById("pass").value === "Admin5"){
+        document.getElementById("loginBox").style.display="none";
+        document.getElementById("panel").style.display="block";
+        loadBookings();
+    } else { alert("Wrong password!"); }
 }
 
-
-// 📋 LOAD BOOKINGS
 function loadBookings(){
-onSnapshot(col,(snap)=>{
-let html="";
-snap.forEach(d=>{
-const data=d.data();
-html+=`
-<div class="card">
-<b>Slot:</b> ${data.slotId}<br>
-<b>Seat:</b> ${data.seat}<br>
-<b>Visitor:</b> ${data.visitorId}<br>
-<button onclick="deleteSeat('${d.id}')">Cancel Seat</button>
-</div>
-`;
-});
-document.getElementById("list").innerHTML=html||"No bookings yet";
-});
+    onSnapshot(col,(snap)=>{
+        let html="";
+        snap.forEach(d=>{
+            const data=d.data();
+            const time = data.bookedAt ? data.bookedAt.toDate().toLocaleString('en-IN') : "Manual";
+            html+=`
+            <div class="card booking-card">
+                <span class="time-stamp">${time}</span>
+                <b>👤 Student:</b> ${data.name}<br>
+                <b>📞 Mobile:</b> ${data.phone}<br>
+                <b>🚗 Slot:</b> ${data.slotId} | <b>🪑 Seat:</b> ${data.seat}<br>
+                <button onclick="deleteSeat('${d.id}')" style="width:auto; padding:4px 10px; background:#444; color:white; font-size:10px; margin-top:8px;">Cancel</button>
+            </div>
+            `;
+        });
+        document.getElementById("list").innerHTML=html || "No bookings.";
+    });
 }
 
+// --- MANUAL BOOKING LOGIC ---
+window.manualBook = async function(){
+    const name = document.getElementById("mName").value.trim();
+    const phone = document.getElementById("mPhone").value.trim();
+    const slot = document.getElementById("mSlot").value;
+    const seat = document.getElementById("mSeat").value;
+    const btn = document.getElementById("manualBtn");
 
-// ❌ CANCEL SEAT
+    if(!name || !phone || !slot || !seat) return alert("Fill all details!");
+
+    btn.innerText = "Booking..."; btn.disabled = true;
+
+    try {
+        const docId = `${slot}_${seat}`;
+        await setDoc(doc(db, "slotBookings", docId), {
+            name, phone, slotId: slot, seat: parseInt(seat),
+            visitorId: "ADMIN_OFFLINE",
+            bookedAt: serverTimestamp()
+        });
+        alert("Booking Added! ✅");
+        document.getElementById("mName").value = ""; 
+        document.getElementById("mPhone").value = "";
+    } catch(e) { alert("Error: " + e.message); }
+    finally { btn.innerText = "Lock Seat ✅"; btn.disabled = false; }
+}
+
 window.deleteSeat=async function(id){
-if(!confirm("Cancel this booking?")) return;
-await deleteDoc(doc(db,"slotBookings",id));
-alert("Seat cancelled");
+    if(confirm("Cancel booking?")) await deleteDoc(doc(db,"slotBookings",id));
 }
 
-
-// 🟢 CLASS ON
-window.classOn = async function(){
-await setDoc(doc(db,"siteControl","classStatus"),{
-isOff:false,
-reason:""
-});
-alert("🟢 Class ON");
+window.clearAllBookings = async function() {
+    if(!confirm("Clear all data?")) return;
+    const snap = await getDocs(col);
+    snap.forEach(async (d) => await deleteDoc(d.ref));
 }
 
-
-// 🔴 CLASS OFF
-window.classOff = async function(r){
-await setDoc(doc(db,"siteControl","classStatus"),{
-isOff:true,
-reason:r
-});
-alert("🔴 Class OFF set");
+window.setStatus = async function(isOff){
+    const reason = document.getElementById("customReason").value;
+    await setDoc(doc(db,"siteControl","classStatus"),{ isOff, reason: isOff ? reason : "" });
+    alert("Website Status Updated!");
 }
-
 </script>
 
 </body>
