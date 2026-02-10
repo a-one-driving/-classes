@@ -40,15 +40,23 @@
     }
     .price-tag { font-size: 28px; font-weight: 900; color: #fff; margin: 10px 0; }
 
-    /* PERSONAL CLASS BANNER (Matches Image) */
+    /* PERSONAL CLASS BANNER */
     .personal-banner {
         background: var(--gold); color: #000; padding: 20px; border-radius: 20px;
         margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center;
     }
     .btn-book-black { background: #000; color: var(--gold); border: none; padding: 10px 22px; border-radius: 12px; font-weight: 900; cursor: pointer; }
 
-    /* REFER & EARN */
+    /* REFER CARD & LINK UI */
     .refer-card { background: var(--card); border: 2px dashed var(--gold); border-radius: 20px; padding: 25px; margin-bottom: 30px; text-align: center; }
+    #referUI { margin-top: 15px; display: none; background: #000; padding: 15px; border-radius: 15px; border: 1px solid #333; }
+    
+    .link-box { 
+        background: #1a1a1a; padding: 12px; border-radius: 10px; font-size: 11px; 
+        color: var(--gold); display: flex; align-items: center; justify-content: space-between; 
+        gap: 10px; margin-top: 15px; border: 1px solid #333; 
+    }
+    .copy-mini-btn { background: var(--gold); color: #000; border: none; padding: 6px 12px; border-radius: 6px; font-size: 10px; font-weight: 800; cursor: pointer; }
 
     /* SLOTS */
     .slotWrap { border-radius: 20px; border: 1px solid var(--gold); background: var(--card); padding: 20px; margin-bottom: 30px;}
@@ -104,9 +112,16 @@
       <p style="font-size:14px;">Refer & Earn</p>
       <h3 style="font-size:32px; color:var(--gold); margin: 10px 0;">₹500 <span style="font-size:12px; color:var(--muted)">PER FRIEND</span></h3>
       <button id="showRefBtn" onclick="toggleReferUI()" class="btn-gold" style="width:auto; padding:10px 30px;">Get My Referral Link</button>
-      <div id="referUI" style="display:none; margin-top:15px;">
+      
+      <div id="referUI">
         <input type="tel" id="refPhone" class="status-input" placeholder="Your Mobile Number">
-        <button onclick="generateRefLink()" class="btn-gold">Copy Link</button>
+        <button onclick="generateRefLink()" class="btn-gold" style="font-size: 13px;">Generate Link</button>
+        <div id="linkDisplayBox" style="display:none;">
+            <div class="link-box">
+                <span id="referLinkText" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"></span>
+                <button class="copy-mini-btn" onclick="copyRefLink()">COPY</button>
+            </div>
+        </div>
       </div>
   </div>
 
@@ -151,13 +166,24 @@
 
   let ALL_SLOTS = []; let BOOKINGS = {}; let selectedItem = "";
 
-  // REFERRAL
-  window.toggleReferUI = () => document.getElementById("referUI").style.display = "block";
+  // REFERRAL LOGIC
+  window.toggleReferUI = () => {
+    document.getElementById("referUI").style.display = "block";
+    document.getElementById("showRefBtn").style.display = "none";
+  };
+  
   window.generateRefLink = () => {
     const p = document.getElementById("refPhone").value;
     if(p.length < 10) return alert("Enter valid number!");
     const link = `${window.location.origin}${window.location.pathname}?ref=${p}`;
-    navigator.clipboard.writeText(link); alert("Referral Link Copied!");
+    document.getElementById("referLinkText").innerText = link;
+    document.getElementById("linkDisplayBox").style.display = "block";
+  };
+
+  window.copyRefLink = () => {
+    const link = document.getElementById("referLinkText").innerText;
+    navigator.clipboard.writeText(link);
+    alert("Link Copied!");
   };
 
   // FETCH SLOTS
@@ -185,7 +211,6 @@
     const p = document.getElementById("userPhone").value;
     if(!n || p.length < 10) return alert("Valid details please!");
     
-    // Send to WhatsApp
     const msg = `Hi A1 Driving, I am ${n} (${p}). I want to book: ${selectedItem}.`;
     window.open(`https://wa.me/917008186187?text=${encodeURIComponent(msg)}`);
     closeModal();
