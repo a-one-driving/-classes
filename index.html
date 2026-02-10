@@ -105,7 +105,7 @@
             <li>Steering Control</li>
             <li>Traffic Rules</li>
         </ul>
-        <button class="btn-gold" onclick="openBooking('Standard Package (₹3500)')">Join Now</button>
+        <button class="btn-gold" onclick="openBooking('PKG_STD', 'Standard Package')">Join Now</button>
     </div>
     <div class="price-card featured">
         <div class="best-label">BEST</div>
@@ -116,7 +116,7 @@
             <li>Highway & Parking</li>
             <li>DL/LL Assistance</li>
         </ul>
-        <button class="btn-gold" onclick="openBooking('Premium Package (₹5000)')">Join Now</button>
+        <button class="btn-gold" onclick="openBooking('PKG_PREM', 'Premium Package')">Join Now</button>
     </div>
   </div>
 
@@ -125,7 +125,7 @@
           <h3 style="margin:0;">Personal 1-on-1 ₹8,000</h3>
           <p style="font-size:12px; opacity:0.9;">Single student, specialized focus.</p>
       </div>
-      <button class="btn-book-black" onclick="openBooking('Personal 1-on-1 Class (₹8000)')">BOOK</button>
+      <button class="btn-book-black" onclick="openBooking('PKG_PERS', 'Personal 1-on-1 Class')">BOOK</button>
   </div>
 
   <div class="refer-card">
@@ -185,7 +185,6 @@
 
   let ALL_SLOTS = []; let BOOKINGS = {}; let selectedSeatId = ""; let selectedLabel = "";
 
-  // REFERRAL LOGIC
   const urlParams = new URLSearchParams(window.location.search);
   const referredBy = urlParams.get('ref') || "Direct Join";
 
@@ -202,7 +201,6 @@
     alert("Link Copied!");
   };
 
-  // FETCH DATA
   onSnapshot(collection(db, "siteSlots"), (snap) => { ALL_SLOTS = []; snap.forEach(d => ALL_SLOTS.push({ id: d.id, ...d.data() })); render(); });
   onSnapshot(collection(db, "slotBookings"), (snap) => { BOOKINGS = {}; snap.forEach(d => BOOKINGS[d.id] = d.data()); render(); });
 
@@ -220,6 +218,7 @@
     });
   }
 
+  // FIXED: Function now correctly handles ID and Label
   window.openBooking = (id, label) => { 
     selectedSeatId = id; 
     selectedLabel = label; 
@@ -235,7 +234,6 @@
     
     if(!n || p.length < 10) return alert("Please enter Name and 10-digit Phone!");
 
-    // SAVE TO FIREBASE (Admin will see this)
     try {
         await setDoc(doc(db, "slotBookings", selectedSeatId), {
             name: n,
@@ -245,7 +243,7 @@
             timestamp: new Date()
         });
 
-        const msg = encodeURIComponent(`Hi A1 Driving, I am ${n} (${p}). I have booked ${selectedLabel}.`);
+        const msg = encodeURIComponent(`Hi A1 Driving, I am ${n} (${p}). I want to join ${selectedLabel}.`);
         window.open(`https://wa.me/917008186187?text=${msg}`);
         closeModal();
     } catch (e) {
