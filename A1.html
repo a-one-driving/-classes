@@ -6,7 +6,7 @@
   <title>A1 Admin | Dashboard</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
-    :root { --gold: #d4af37; --bg: #0b0b0b; --card: #1a1a1a; --txt: #ffffff; --danger: #ff4d4d; }
+    :root { --gold: #d4af37; --bg: #0b0b0b; --card: #1a1a1a; --txt: #ffffff; --danger: #ff4d4d; --success: #00ff88; }
     body { background: var(--bg); color: var(--txt); font-family: 'Poppins', sans-serif; padding: 15px; }
     .section { background: var(--card); padding: 20px; border-radius: 15px; border: 1px solid var(--gold); margin-bottom: 25px; }
     h2 { color: var(--gold); font-size: 18px; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
@@ -17,8 +17,12 @@
     .booking-card { background: #000; padding: 12px; border-radius: 10px; border-left: 4px solid var(--gold); margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
     .booking-info b { color: var(--gold); display: block; font-size: 14px; }
     .booking-info span { font-size: 12px; color: #aaa; }
-    .btn-del { background: var(--danger); color: white; width: auto; padding: 5px 12px; font-size: 11px; }
+    .btn-del { background: var(--danger); color: white; width: auto; padding: 5px 12px; font-size: 11px; border: none; }
     
+    /* Referral Specific */
+    .ref-badge { background: rgba(0, 255, 136, 0.1); color: var(--success); padding: 2px 8px; border-radius: 5px; font-size: 10px; font-weight: 800; display: inline-block; margin-top: 5px; border: 1px solid var(--success); }
+    .btn-pay { background: var(--success); color: #000; width: auto; padding: 6px 12px; font-size: 11px; border-radius: 5px; border: none; font-weight: 800; }
+
     .batch-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #333; font-size: 13px; }
   </style>
 </head>
@@ -27,9 +31,15 @@
 <h1 style="font-size: 22px;">👑 A1 Control Panel</h1>
 <p style="font-size: 11px; color: var(--gold); margin-bottom: 20px;">Abhinaash A1 Academy Management</p>
 
+<div class="section" style="border-color: var(--success);">
+  <h2 style="color: var(--success);">💸 AUTO-REFERRAL TRACKER (₹500)</h2>
+  <div id="referralList">
+    <p style="font-size: 12px; color: #555;">No referrals yet...</p>
+  </div>
+</div>
+
 <div class="section" style="border-color: #00ff88;">
   <h2 style="color: #00ff88;">📱 LIVE BOOKINGS (Students)</h2>
-  <p style="font-size: 10px; color: #888; margin-bottom: 10px;">Yahan dikhega kisne konsi seat book ki hai:</p>
   <div id="liveBookingList">
     <p style="font-size: 12px; color: #555;">No bookings yet...</p>
   </div>
@@ -37,7 +47,7 @@
 
 <div class="section">
   <h2>📢 Notice Bar</h2>
-  <input type="text" id="notifText" placeholder="Message (e.g. 10% Discount on Morning Batch)">
+  <input type="text" id="notifText" placeholder="Message (e.g. 10% Discount)">
   <select id="notifStatus">
     <option value="true">Show Now</option>
     <option value="false">Hide Bar</option>
@@ -84,31 +94,56 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  // 1. LIVE BOOKING TRACKER LOGIC
+  // 1. LIVE BOOKING & REFERRAL TRACKER
   onSnapshot(collection(db, "slotBookings"), (snap) => {
     const list = document.getElementById("liveBookingList");
-    list.innerHTML = "";
-    if(snap.empty) list.innerHTML = "<p style='color:#555; font-size:12px;'>No active bookings.</p>";
+    const refList = document.getElementById("referralList");
     
+    list.innerHTML = "";
+    refList.innerHTML = "";
+    
+    let refFound = false;
+
     snap.forEach(d => {
       const data = d.data();
+      
+      // Regular Booking UI
       list.innerHTML += `
         <div class="booking-card">
           <div class="booking-info">
             <b>${data.name}</b>
-            <span>📞 ${data.phone}</span>
-            <span>📍 Seat: ${d.id}</span>
+            <span>📞 ${data.phone} | Seat: ${d.id}</span>
           </div>
           <button class="btn-del" onclick="cancelBooking('${d.id}')">Cancel</button>
         </div>`;
+      
+      // Referral Tracker UI
+      if(data.referredBy && data.referredBy !== "Direct Join") {
+        refFound = true;
+        refList.innerHTML += `
+          <div class="booking-card" style="border-left-color: var(--success); background: #051a10;">
+            <div class="booking-info">
+              <b>${data.name} (Referred)</b>
+              <span class="ref-badge">Referrer: ${data.referredBy}</span>
+            </div>
+            <button class="btn-pay" onclick="payRef('${data.referredBy}', '${data.name}')">WhatsApp Pay</button>
+          </div>`;
+      }
     });
+
+    if(snap.empty) list.innerHTML = "<p style='color:#555; font-size:12px;'>No bookings.</p>";
+    if(!refFound) refList.innerHTML = "<p style='color:#555; font-size:12px;'>No active referrals to pay.</p>";
   });
+
+  window.payRef = (phone, student) => {
+    const msg = `Hi! Your friend ${student} has joined A1 Academy. Please share your GPay/PhonePe number for your ₹500 Reward!`;
+    window.open(`https://wa.me/91${phone}?text=${encodeURIComponent(msg)}`);
+  };
 
   window.cancelBooking = async (id) => {
     if(confirm("Booking delete karein?")) await deleteDoc(doc(db, "slotBookings", id));
   };
 
-  // 2. OTHER FUNCTIONS
   window.updateNotif = async () => {
     const txt = document.getElementById("notifText").value;
     const stat = document.getElementById("notifStatus").value === "true";
@@ -133,7 +168,7 @@
       list.innerHTML += `
         <div class="batch-item">
           <span>${d.id} (${d.data().time})</span>
-          <button class="btn-del" style="background:#222" onclick="deleteBatch('${d.id}')">X</button>
+          <button class="btn-del" style="background:#222; border:none; width:30px;" onclick="deleteBatch('${d.id}')">X</button>
         </div>`;
     });
   });
