@@ -23,9 +23,7 @@
       background: var(--gold); color: #000; padding: 12px;
       text-align: center; font-weight: 800; z-index: 5000;
       display: none; font-size: 14px; box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-      animation: slideDown 0.5s ease-out;
     }
-    @keyframes slideDown { from { transform: translateY(-100%); } to { transform: translateY(0); } }
 
     header {
       padding: 15px; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
@@ -43,6 +41,7 @@
       background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       animation: shine 3s linear infinite;
     }
+    @keyframes shine { to { background-position: 200% center; } }
 
     /* Pricing Section */
     .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-bottom: 30px; }
@@ -50,10 +49,16 @@
       background: var(--card); padding: 20px; border-radius: 20px;
       border: 1px solid var(--border); position: relative; overflow: hidden;
     }
-    .price-card.featured { border-color: var(--gold); }
+    .price-card.featured { border: 1px solid var(--gold); }
     .price-card h3 { color: var(--gold); font-size: 20px; margin-bottom: 5px; }
     .price-tag { font-size: 28px; font-weight: 900; color: #fff; margin: 10px 0; }
     .price-features { list-style: none; color: var(--muted); font-size: 13px; line-height: 1.8; margin-bottom: 15px; }
+
+    /* Personal Banner */
+    .personal-banner {
+        background: var(--gold); color: #000; padding: 20px; border-radius: 20px;
+        margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center;
+    }
 
     /* Slot Section */
     .slotWrap { border-radius: 20px; border: 1px solid var(--border); background: var(--card); padding: 20px; margin-bottom: 30px;}
@@ -96,38 +101,46 @@
   <h2 style="font-size:18px; margin-bottom:15px; padding-left:5px; color: var(--gold);">💎 TRAINING PACKAGES</h2>
   <div class="pricing-grid">
     <div class="price-card">
-        <h3>Basic Course</h3>
+        <h3>Standard</h3>
         <div class="price-tag">₹3,500</div>
         <ul class="price-features">
-            <li>✓ 15 Days Training</li>
+            <li>✓ 15 Days Classes</li>
             <li>✓ Steering Control</li>
             <li>✓ Traffic Rules</li>
         </ul>
-        <button class="btn-gold" onclick="window.open('https://wa.me/917008186187?text=Enquiry: Basic Course')">Enquire</button>
+        <button class="btn-gold" onclick="window.open('https://wa.me/917008186187?text=Enquiry: Standard Course')">Join Now</button>
     </div>
     <div class="price-card featured">
         <div style="position:absolute; top:10px; right:-30px; background:var(--gold); color:#000; padding:5px 40px; transform:rotate(45deg); font-size:10px; font-weight:900;">BEST</div>
-        <h3>Premium Plus</h3>
+        <h3>Premium</h3>
         <div class="price-tag">₹5,500</div>
         <ul class="price-features">
-            <li>✓ 30 Days Training</li>
-            <li>✓ Highway & Night Drive</li>
-            <li>✓ DL Assistance</li>
+            <li>✓ 30 Days Classes</li>
+            <li>✓ Highway & Parking</li>
+            <li>✓ DL/LL Assistance</li>
         </ul>
-        <button class="btn-gold" onclick="window.open('https://wa.me/917008186187?text=Enquiry: Premium Plus')">Enquire</button>
+        <button class="btn-gold" onclick="window.open('https://wa.me/917008186187?text=Enquiry: Premium Course')">Join Now</button>
     </div>
+  </div>
+
+  <div class="personal-banner">
+      <div>
+          <h3 style="font-weight:900">Personal 1-on-1</h3>
+          <p style="font-size:12px; opacity:0.8">Single student, specialized focus.</p>
+      </div>
+      <button onclick="window.open('https://wa.me/917008186187?text=Interested in Personal Class')" style="background:#000; color:var(--gold); border:none; padding:10px 15px; border-radius:10px; font-weight:800; cursor:pointer;">BOOK</button>
   </div>
 
   <section class="slotWrap">
     <h2 style="font-size:16px; margin-bottom:10px;">🎟️ LIVE BATCH BOOKING</h2>
     <div id="dynamicSlotGrid" class="slotGrid">
-        <p style="text-align:center; color:var(--muted); font-size:12px;">Loading Batches...</p>
+        <p style="text-align:center; color:var(--muted); font-size:12px;">Connecting...</p>
     </div>
   </section>
 
   <section class="status-checker">
-    <h3 style="color:var(--gold); margin-bottom:10px;">📊 My Class Progress</h3>
-    <input type="tel" id="checkPhone" placeholder="Enter Mobile Number">
+    <h3 style="color:var(--gold); margin-bottom:10px;">📊 My Class Status</h3>
+    <input type="tel" id="checkPhone" placeholder="Mobile Number">
     <button class="btn-gold" onclick="checkRemaining()">Check Now</button>
     <div id="remainingResult" style="margin-top:15px; font-weight:800; color: var(--accent2);"></div>
   </section>
@@ -135,11 +148,11 @@
 
 <div class="modal" id="bookingModal">
   <div class="modal-content">
-    <h2 style="color:var(--gold); margin-bottom:10px;">Book Seat</h2>
+    <h2 style="color:var(--gold); margin-bottom:10px;">Confirm Seat</h2>
     <p id="slotDisplay" style="font-size:12px; margin-bottom:15px; color:var(--muted);"></p>
     <input type="text" id="userName" placeholder="Your Name" style="width:100%; padding:12px; margin-bottom:10px; background:#000; color:#fff; border:1px solid #333; border-radius:10px;">
     <input type="tel" id="userPhone" placeholder="Mobile Number" style="width:100%; padding:12px; margin-bottom:15px; background:#000; color:#fff; border:1px solid #333; border-radius:10px;">
-    <button class="btn-gold" onclick="finalSubmit()">Confirm Booking</button>
+    <button class="btn-gold" onclick="finalSubmit()">Confirm</button>
     <button class="btn-gold" style="background:#222; color:#fff; margin-top:10px;" onclick="closeModal()">Cancel</button>
   </div>
 </div>
@@ -151,7 +164,7 @@
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-  import { getFirestore, collection, doc, setDoc, getDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+  import { getFirestore, collection, doc, setDoc, getDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
@@ -165,32 +178,32 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  const vid = "A1-" + Math.floor(Math.random()*9999);
+  const vid = localStorage.getItem("ABO_VID") || "A1-" + Math.floor(Math.random()*9999);
+  localStorage.setItem("ABO_VID", vid);
   document.getElementById("vidDisplay").innerText = "ID: " + vid;
 
   let ALL_SLOTS = [];
   let BOOKINGS = {};
   let tempSelection = { slotId: null, seat: null };
 
-  // 1. LIVE NOTIFICATION
+  // Notification
   onSnapshot(doc(db, "siteControl", "notification"), (snap) => {
-      if(snap.exists()){
-          const bar = document.getElementById("notifBar");
-          bar.innerText = "📢 " + snap.data().text;
-          bar.style.display = "block";
-          setTimeout(() => { bar.style.display = "none"; }, 8000); 
-      }
+    if(snap.exists()){
+      const bar = document.getElementById("notifBar");
+      bar.innerText = "📢 " + snap.data().text;
+      bar.style.display = "block";
+      setTimeout(() => { bar.style.display = "none"; }, 8000); 
+    }
   });
 
-  // 2. FETCH SLOTS (ORDERED BY RANK)
-  const qSlots = query(collection(db, "siteSlots"), orderBy("order", "asc"));
-  onSnapshot(qSlots, (snap) => {
+  // Fetch Slots (No Order - Direct Fetch)
+  onSnapshot(collection(db, "siteSlots"), (snap) => {
     ALL_SLOTS = [];
     snap.forEach(d => ALL_SLOTS.push({ id: d.id, ...d.data() }));
     render();
   });
 
-  // 3. FETCH BOOKINGS
+  // Fetch Bookings
   onSnapshot(collection(db, "slotBookings"), (snap) => {
     BOOKINGS = {};
     snap.forEach(d => BOOKINGS[d.id] = d.data());
@@ -200,8 +213,6 @@
   function render() {
     const grid = document.getElementById("dynamicSlotGrid");
     grid.innerHTML = "";
-    if(ALL_SLOTS.length === 0) { grid.innerHTML = "<p style='color:gray;text-align:center;'>No batches available.</p>"; return; }
-
     ALL_SLOTS.forEach(slot => {
         let seats = "";
         for(let i=1; i<=4; i++) {
@@ -210,33 +221,33 @@
             seats += `<button class="seat ${booked ? 'booked' : 'available'}" 
                       onclick="openBooking('${slot.id}', ${i}, ${!!booked})">A${i}</button>`;
         }
-        const planHtml = slot.showPlan ? `<div class="daily-plan-box">📍 Route: ${slot.route}<br>🎯 Skill: ${slot.skill}</div>` : '';
+        const plan = slot.showPlan ? `<div class="daily-plan-box">📍 Route: ${slot.route}<br>🎯 Skill: ${slot.skill}</div>` : '';
         grid.innerHTML += `<div class="slotCard">
             <div style="display:flex; justify-content:space-between; align-items:center;"><b>${slot.name}</b><small>${slot.time}</small></div>
-            ${planHtml}<div class="seatGrid">${seats}</div>
+            ${plan}<div class="seatGrid">${seats}</div>
         </div>`;
     });
   }
 
-  window.openBooking = (id, seat, b) => { if(!b){ tempSelection={slotId:id, seat}; document.getElementById("slotDisplay").innerText=`Batch: ${id} | Seat: A${seat}`; document.getElementById("bookingModal").style.display="flex"; }};
+  window.openBooking = (id, s, b) => { if(!b){ tempSelection={slotId:id, seat:s}; document.getElementById("slotDisplay").innerText=`Batch: ${id} | Seat: A${s}`; document.getElementById("bookingModal").style.display="flex"; }};
   window.closeModal = () => document.getElementById("bookingModal").style.display="none";
 
   window.finalSubmit = async () => {
     const n = document.getElementById("userName").value;
     const p = document.getElementById("userPhone").value;
-    if(!n || !p) return alert("Details bhariye!");
+    if(!n || !p) return alert("Fill details!");
     await setDoc(doc(db, "slotBookings", `${tempSelection.slotId}_${tempSelection.seat}`), {
       slotId: tempSelection.slotId, seat: tempSelection.seat, name: n, phone: p, bookedAt: serverTimestamp()
     });
     alert("Booked!"); closeModal();
-    window.open(`https://wa.me/917008186187?text=Booking: ${n} | ${tempSelection.slotId} | Seat A${tempSelection.seat}`);
+    window.open(`https://wa.me/917008186187?text=Booking: ${n} | Seat A${tempSelection.seat} in ${tempSelection.slotId}`);
   };
 
   window.checkRemaining = async () => {
     const p = document.getElementById("checkPhone").value;
     const snap = await getDoc(doc(db, "studentData", p));
-    if(snap.exists()) document.getElementById("remainingResult").innerHTML = `${snap.data().name}: ${snap.data().remaining} Left`;
-    else alert("No record found!");
+    if(snap.exists()) document.getElementById("remainingResult").innerHTML = `Hi ${snap.data().name}, Classes Left: ${snap.data().remaining}`;
+    else alert("Not found!");
   };
 </script>
 </body>
