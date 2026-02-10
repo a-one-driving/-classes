@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile | A1 Driving</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --gold: #d4af37; --bg: #000; --card: #161616; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+        body { background: var(--bg); color: #fff; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+
+        .header-box { text-align: center; margin-bottom: 30px; margin-top: 20px; }
+        .header-box h1 { font-size: 24px; color: var(--gold); font-weight: 800; letter-spacing: 1px; }
+
+        .search-container { width: 100%; max-width: 400px; background: var(--card); padding: 25px; border-radius: 24px; border: 1px solid #333; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .input-group label { display: block; font-size: 11px; color: #888; margin-bottom: 8px; text-transform: uppercase; }
+        input { width: 100%; padding: 15px; border-radius: 14px; border: 1px solid #333; background: #000; color: #fff; font-size: 16px; margin-bottom: 20px; outline: none; transition: 0.3s; }
+        input:focus { border-color: var(--gold); }
+        
+        .btn-gold { background: linear-gradient(45deg, var(--gold), #f9e29d); color: #000; border: none; padding: 15px; border-radius: 14px; font-weight: 800; cursor: pointer; width: 100%; transition: 0.3s; }
+        .btn-gold:active { transform: scale(0.98); }
+
+        /* PROFILE CARD */
+        #profileCard { display: none; width: 100%; max-width: 400px; margin-top: 20px; animation: slideUp 0.4s ease-out; }
+        .main-card { background: linear-gradient(145deg, #1e1e1e, #111); border-radius: 30px; padding: 30px; border: 1px solid rgba(212, 175, 55, 0.3); position: relative; }
+        
+        .user-info h2 { font-size: 26px; font-weight: 800; color: #fff; margin-bottom: 5px; }
+        .user-info p { font-size: 13px; color: var(--gold); margin-bottom: 25px; }
+
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; }
+        .stat-box { background: rgba(255,255,255,0.03); padding: 15px; border-radius: 20px; border: 1px solid #222; text-align: center; }
+        .stat-box span { display: block; font-size: 10px; color: #888; text-transform: uppercase; margin-bottom: 5px; }
+        .stat-box b { font-size: 22px; color: #fff; }
+
+        .progress-section { margin-top: 20px; }
+        .progress-text { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 10px; }
+        .progress-bar { height: 12px; background: #222; border-radius: 10px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--gold); width: 0%; transition: 1s cubic-bezier(0.17, 0.67, 0.83, 0.67); }
+
+        .earn-tag { background: rgba(0, 255, 136, 0.1); border: 1px dotted #00ff88; padding: 12px; border-radius: 15px; margin-top: 25px; display: flex; justify-content: space-between; align-items: center; }
+        .earn-tag span { font-size: 12px; color: #00ff88; }
+        .earn-tag b { color: #fff; font-size: 16px; }
+
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <div class="header-box">
+        <h1>ABHINAASH A1</h1>
+        <p style="font-size: 10px; color: #666;">STUDENT DIGITAL PORTAL</p>
+    </div>
+
+    <div class="search-container" id="searchPanel">
+        <div class="input-group">
+            <label>Registered Phone Number</label>
+            <input type="tel" id="userPhone" placeholder="Enter Mobile Number">
+        </div>
+        <button class="btn-gold" onclick="loadProfile()">View My Progress</button>
+    </div>
+
+    <div id="profileCard">
+        <div class="main-card">
+            <div class="user-info">
+                <h2 id="dispName">Student Name</h2>
+                <p id="dispPkg">Standard Package</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <span>Classes Left</span>
+                    <b id="dispRem">0</b>
+                </div>
+                <div class="stat-box">
+                    <span>Total Days</span>
+                    <b id="dispTotal">0</b>
+                </div>
+            </div>
+
+            <div class="progress-section">
+                <div class="progress-text">
+                    <span>Course Completion</span>
+                    <span id="dispPercent">0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="dispBar"></div>
+                </div>
+            </div>
+
+            <div class="earn-tag">
+                <span>Referral Earnings:</span>
+                <b id="dispEarn">₹0</b>
+            </div>
+        </div>
+        <button onclick="location.reload()" style="background:none; border:none; color:#555; width:100%; margin-top:20px; font-size:12px; cursor:pointer;">← Logout / Change Number</button>
+    </div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
+        authDomain: "abinash-driving.firebaseapp.com",
+        projectId: "abinash-driving",
+        storageBucket: "abinash-driving.appspot.com",
+        messagingSenderId: "641148830173",
+        appId: "1:641148830173:web:b7a500e5e7e2463da0f634"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    window.loadProfile = async () => {
+        const ph = document.getElementById('userPhone').value;
+        if(ph.length < 10) return alert("Sahi number daleye!");
+
+        const snap = await getDoc(doc(db, "studentData", ph));
+
+        if(snap.exists()) {
+            const data = snap.data();
+            const total = data.totalClasses || 15;
+            const rem = data.remaining || 0;
+            const done = total - rem;
+            const percent = Math.round((done / total) * 100);
+
+            document.getElementById('dispName').innerText = data.name;
+            document.getElementById('dispPkg').innerText = total == 30 ? "Premium 30-Day Course" : "Standard 15-Day Course";
+            document.getElementById('dispRem').innerText = rem;
+            document.getElementById('dispTotal').innerText = total;
+            document.getElementById('dispPercent').innerText = percent + "%";
+            document.getElementById('dispBar').style.width = percent + "%";
+            document.getElementById('dispEarn').innerText = "₹" + (data.totalRefers * 500 || 0);
+
+            document.getElementById('searchPanel').style.display = "none";
+            document.getElementById('profileCard').style.display = "block";
+        } else {
+            alert("No record found! Admin se contact karein.");
+        }
+    }
+</script>
+</body>
+</html>
