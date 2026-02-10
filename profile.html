@@ -3,73 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Profile | A1 Driving</title>
+    <title>My Dashboard | A1 Driving</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #d4af37; --bg: #000; --card: #161616; }
+        :root { --gold: #d4af37; --bg: #000; --card: #161616; --success: #00ff88; }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
-        body { background: var(--bg); color: #fff; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        body { background: var(--bg); color: #fff; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
 
-        .header-box { text-align: center; margin-bottom: 30px; margin-top: 20px; }
-        .header-box h1 { font-size: 24px; color: var(--gold); font-weight: 800; letter-spacing: 1px; }
+        .header-box { text-align: center; margin: 30px 0; }
+        .header-box h1 { font-size: 26px; color: var(--gold); font-weight: 800; letter-spacing: 2px; }
+        .header-box p { font-size: 10px; color: #666; letter-spacing: 3px; }
 
-        .search-container { width: 100%; max-width: 400px; background: var(--card); padding: 25px; border-radius: 24px; border: 1px solid #333; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .input-group label { display: block; font-size: 11px; color: #888; margin-bottom: 8px; text-transform: uppercase; }
-        input { width: 100%; padding: 15px; border-radius: 14px; border: 1px solid #333; background: #000; color: #fff; font-size: 16px; margin-bottom: 20px; outline: none; transition: 0.3s; }
-        input:focus { border-color: var(--gold); }
+        .search-container { width: 100%; max-width: 400px; background: var(--card); padding: 30px; border-radius: 28px; border: 1px solid #333; box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
+        .input-group label { display: block; font-size: 11px; color: #888; margin-bottom: 10px; font-weight: 600; }
+        input { width: 100%; padding: 16px; border-radius: 16px; border: 1px solid #333; background: #080808; color: #fff; font-size: 16px; margin-bottom: 20px; outline: none; transition: 0.3s; text-align: center; }
+        input:focus { border-color: var(--gold); box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
         
-        .btn-gold { background: linear-gradient(45deg, var(--gold), #f9e29d); color: #000; border: none; padding: 15px; border-radius: 14px; font-weight: 800; cursor: pointer; width: 100%; transition: 0.3s; }
-        .btn-gold:active { transform: scale(0.98); }
+        .btn-gold { background: linear-gradient(45deg, var(--gold), #f9e29d); color: #000; border: none; padding: 16px; border-radius: 16px; font-weight: 800; cursor: pointer; width: 100%; font-size: 15px; box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3); }
 
         /* PROFILE CARD */
-        #profileCard { display: none; width: 100%; max-width: 400px; margin-top: 20px; animation: slideUp 0.4s ease-out; }
-        .main-card { background: linear-gradient(145deg, #1e1e1e, #111); border-radius: 30px; padding: 30px; border: 1px solid rgba(212, 175, 55, 0.3); position: relative; }
+        #profileCard { display: none; width: 100%; max-width: 400px; animation: slideUp 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .main-card { background: linear-gradient(160deg, #1e1e1e 0%, #0a0a0a 100%); border-radius: 35px; padding: 30px; border: 1px solid rgba(212, 175, 55, 0.25); position: relative; overflow: hidden; }
+        .main-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(212,175,55,0.05) 0%, transparent 70%); pointer-events: none; }
         
-        .user-info h2 { font-size: 26px; font-weight: 800; color: #fff; margin-bottom: 5px; }
-        .user-info p { font-size: 13px; color: var(--gold); margin-bottom: 25px; }
+        .user-info h2 { font-size: 28px; font-weight: 800; color: #fff; }
+        .user-info p { font-size: 13px; color: var(--gold); margin-bottom: 30px; font-weight: 500; }
 
         .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; }
-        .stat-box { background: rgba(255,255,255,0.03); padding: 15px; border-radius: 20px; border: 1px solid #222; text-align: center; }
-        .stat-box span { display: block; font-size: 10px; color: #888; text-transform: uppercase; margin-bottom: 5px; }
-        .stat-box b { font-size: 22px; color: #fff; }
+        .stat-box { background: rgba(255,255,255,0.04); padding: 18px; border-radius: 22px; border: 1px solid rgba(255,255,255,0.05); text-align: center; }
+        .stat-box span { display: block; font-size: 10px; color: #aaa; text-transform: uppercase; margin-bottom: 8px; font-weight: 600; }
+        .stat-box b { font-size: 24px; color: #fff; }
 
-        .progress-section { margin-top: 20px; }
-        .progress-text { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 10px; }
-        .progress-bar { height: 12px; background: #222; border-radius: 10px; overflow: hidden; }
-        .progress-fill { height: 100%; background: var(--gold); width: 0%; transition: 1s cubic-bezier(0.17, 0.67, 0.83, 0.67); }
+        .progress-section { margin-top: 10px; background: rgba(0,0,0,0.3); padding: 20px; border-radius: 20px; }
+        .progress-text { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 12px; font-weight: 600; }
+        .progress-bar { height: 10px; background: #222; border-radius: 10px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold), #fff); width: 0%; transition: 1.5s ease-out; }
 
-        .earn-tag { background: rgba(0, 255, 136, 0.1); border: 1px dotted #00ff88; padding: 12px; border-radius: 15px; margin-top: 25px; display: flex; justify-content: space-between; align-items: center; }
-        .earn-tag span { font-size: 12px; color: #00ff88; }
-        .earn-tag b { color: #fff; font-size: 16px; }
+        .earn-tag { background: rgba(0, 255, 136, 0.08); border: 1px solid rgba(0, 255, 136, 0.2); padding: 15px; border-radius: 18px; margin-top: 25px; display: flex; justify-content: space-between; align-items: center; }
+        .earn-tag span { font-size: 12px; color: var(--success); font-weight: 600; }
+        .earn-tag b { color: #fff; font-size: 18px; }
 
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .action-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+        .btn-outline { background: #111; border: 1px solid #333; color: #fff; padding: 12px; border-radius: 14px; font-size: 12px; cursor: pointer; font-weight: 600; transition: 0.3s; }
+        .btn-outline:hover { border-color: var(--gold); }
+
+        @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* LOADING SPINNER */
+        #loader { display: none; margin-top: 20px; border: 3px solid #333; border-top: 3px solid var(--gold); border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
     <div class="header-box">
         <h1>ABHINAASH A1</h1>
-        <p style="font-size: 10px; color: #666;">STUDENT DIGITAL PORTAL</p>
+        <p>DRIVING ACADEMY</p>
     </div>
 
     <div class="search-container" id="searchPanel">
         <div class="input-group">
-            <label>Registered Phone Number</label>
-            <input type="tel" id="userPhone" placeholder="Enter Mobile Number">
+            <label>ENTER REGISTERED NUMBER</label>
+            <input type="tel" id="userPhone" placeholder="9933xxxxxx" maxlength="10">
         </div>
-        <button class="btn-gold" onclick="loadProfile()">View My Progress</button>
+        <button class="btn-gold" id="loadBtn" onclick="loadProfile()">Access Dashboard</button>
+        <div id="loader" style="margin: 20px auto;"></div>
     </div>
 
     <div id="profileCard">
         <div class="main-card">
             <div class="user-info">
                 <h2 id="dispName">Student Name</h2>
-                <p id="dispPkg">Standard Package</p>
+                <p id="dispPkg">Loading Package...</p>
             </div>
 
             <div class="stats-grid">
                 <div class="stat-box">
-                    <span>Classes Left</span>
+                    <span>Remaining</span>
                     <b id="dispRem">0</b>
                 </div>
                 <div class="stat-box">
@@ -80,7 +90,7 @@
 
             <div class="progress-section">
                 <div class="progress-text">
-                    <span>Course Completion</span>
+                    <span>Course Progress</span>
                     <span id="dispPercent">0%</span>
                 </div>
                 <div class="progress-bar">
@@ -89,11 +99,17 @@
             </div>
 
             <div class="earn-tag">
-                <span>Referral Earnings:</span>
+                <span>Referral Wallet</span>
                 <b id="dispEarn">₹0</b>
             </div>
+
+            <div class="action-buttons">
+                <button class="btn-outline" onclick="contactAdmin()">💬 Help</button>
+                <button class="btn-outline" onclick="shareReferral()" style="color: var(--success); border-color: rgba(0,255,136,0.3);">🚀 Share & Earn</button>
+            </div>
         </div>
-        <button onclick="location.reload()" style="background:none; border:none; color:#555; width:100%; margin-top:20px; font-size:12px; cursor:pointer;">← Logout / Change Number</button>
+        
+        <button onclick="location.reload()" style="background:none; border:none; color:#555; width:100%; margin:20px 0; font-size:11px; cursor:pointer; letter-spacing: 1px;">← LOGOUT SESSION</button>
     </div>
 
 <script type="module">
@@ -112,33 +128,68 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
+    let currentStudent = null;
+
     window.loadProfile = async () => {
         const ph = document.getElementById('userPhone').value;
-        if(ph.length < 10) return alert("Sahi number daleye!");
+        if(ph.length < 10) return alert("Please enter a valid 10-digit number.");
 
-        const snap = await getDoc(doc(db, "studentData", ph));
+        // Show Loader
+        document.getElementById('loadBtn').style.display = "none";
+        document.getElementById('loader').style.display = "block";
 
-        if(snap.exists()) {
-            const data = snap.data();
-            const total = data.totalClasses || 15;
-            const rem = data.remaining || 0;
-            const done = total - rem;
-            const percent = Math.round((done / total) * 100);
+        try {
+            const snap = await getDoc(doc(db, "studentData", ph));
 
-            document.getElementById('dispName').innerText = data.name;
-            document.getElementById('dispPkg').innerText = total == 30 ? "Premium 30-Day Course" : "Standard 15-Day Course";
-            document.getElementById('dispRem').innerText = rem;
-            document.getElementById('dispTotal').innerText = total;
-            document.getElementById('dispPercent').innerText = percent + "%";
-            document.getElementById('dispBar').style.width = percent + "%";
-            document.getElementById('dispEarn').innerText = "₹" + (data.totalRefers * 500 || 0);
+            if(snap.exists()) {
+                const data = snap.data();
+                currentStudent = { ...data, phone: ph };
+                
+                const total = data.totalClasses || 15;
+                const rem = data.remaining || 0;
+                const done = total - rem;
+                const percent = Math.round((done / total) * 100);
 
-            document.getElementById('searchPanel').style.display = "none";
-            document.getElementById('profileCard').style.display = "block";
-        } else {
-            alert("No record found! Admin se contact karein.");
+                document.getElementById('dispName').innerText = data.name;
+                document.getElementById('dispPkg').innerText = total >= 30 ? "Premium 30-Day Course" : "Standard 15-Day Course";
+                document.getElementById('dispRem').innerText = rem;
+                document.getElementById('dispTotal').innerText = total;
+                document.getElementById('dispPercent').innerText = percent + "%";
+                
+                // Switch Panels
+                document.getElementById('searchPanel').style.display = "none";
+                document.getElementById('profileCard').style.display = "block";
+
+                // Animate Bar
+                setTimeout(() => {
+                    document.getElementById('dispBar').style.width = percent + "%";
+                }, 100);
+
+                document.getElementById('dispEarn').innerText = "₹" + (data.totalRefers * 500 || 0);
+            } else {
+                alert("No active record found for this number.");
+                document.getElementById('loadBtn').style.display = "block";
+                document.getElementById('loader').style.display = "none";
+            }
+        } catch (e) {
+            alert("Connection Error. Try again.");
+            document.getElementById('loadBtn').style.display = "block";
+            document.getElementById('loader').style.display = "none";
         }
     }
+
+    // Help Button Logic
+    window.contactAdmin = () => {
+        const msg = encodeURIComponent(`Hi Abhinaash, I am ${currentStudent.name}. I have a query regarding my driving classes.`);
+        window.location.href = `https://wa.me/917008186187?text=${msg}`;
+    };
+
+    // Share Referral Logic
+    window.shareReferral = () => {
+        const url = `${window.location.origin}/index.html?ref=${currentStudent.phone}`;
+        const text = encodeURIComponent(`Hey! I'm learning car driving at A1 Driving Academy. Use my link to join and we both can get rewards! 🚗💨\n\nJoin here: ${url}`);
+        window.location.href = `https://wa.me/?text=${text}`;
+    };
 </script>
 </body>
 </html>
