@@ -17,7 +17,6 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
     body { background-color: var(--bg); color: var(--txt); overflow-x: hidden; padding-bottom: 120px; }
 
-    /* HEADER WITH ID */
     header {
       padding: 15px; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--gold); position: sticky; top: 0; z-index: 1000;
@@ -28,7 +27,7 @@
 
     .container { max-width: 1100px; margin: auto; padding: 20px 15px; }
 
-    /* PRICING & BEST LABEL */
+    /* TRAINING PACKAGES & LISTS */
     .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-bottom: 30px; }
     .price-card { background: var(--card); padding: 20px; border-radius: 20px; border: 1px solid var(--border); position: relative; overflow: hidden; }
     .price-card.featured { border: 2px solid var(--gold); }
@@ -38,7 +37,12 @@
       padding: 5px 40px; transform: rotate(45deg); 
       font-size: 10px; font-weight: 900;
     }
-    .price-tag { font-size: 28px; font-weight: 900; color: #fff; margin: 10px 0; }
+    .price-tag { font-size: 32px; font-weight: 900; color: #fff; margin: 10px 0; }
+    
+    /* Points inside cards (missing part) */
+    .feature-list { list-style: none; margin: 15px 0; padding: 0; }
+    .feature-list li { color: var(--muted); font-size: 13px; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+    .feature-list li::before { content: "✓"; color: var(--gold); font-weight: 900; }
 
     /* PERSONAL CLASS BANNER */
     .personal-banner {
@@ -49,8 +53,7 @@
 
     /* REFER CARD & LINK UI */
     .refer-card { background: var(--card); border: 2px dashed var(--gold); border-radius: 20px; padding: 25px; margin-bottom: 30px; text-align: center; }
-    #referUI { margin-top: 15px; display: none; background: #000; padding: 15px; border-radius: 15px; border: 1px solid #333; }
-    
+    #referUI { margin-top: 15px; display: none; }
     .link-box { 
         background: #1a1a1a; padding: 12px; border-radius: 10px; font-size: 11px; 
         color: var(--gold); display: flex; align-items: center; justify-content: space-between; 
@@ -58,7 +61,7 @@
     }
     .copy-mini-btn { background: var(--gold); color: #000; border: none; padding: 6px 12px; border-radius: 6px; font-size: 10px; font-weight: 800; cursor: pointer; }
 
-    /* SLOTS */
+    /* SLOTS & PLANS */
     .slotWrap { border-radius: 20px; border: 1px solid var(--gold); background: var(--card); padding: 20px; margin-bottom: 30px;}
     .slotCard { background: #000; border: 1px solid var(--border); padding: 15px; border-radius: 18px; margin-bottom: 15px; }
     .daily-plan-box { margin: 10px 0; padding: 10px; background: #111; border-radius: 12px; border-left: 4px solid var(--gold); font-size: 11px; }
@@ -86,16 +89,27 @@
 </header>
 
 <div class="container">
+  <h2 style="font-size:16px; margin-bottom:15px; color:var(--gold);">💎 TRAINING PACKAGES</h2>
   <div class="pricing-grid">
     <div class="price-card">
         <h3>Standard</h3>
         <div class="price-tag">₹3,500</div>
+        <ul class="feature-list">
+            <li>15 Days Classes</li>
+            <li>Steering Control</li>
+            <li>Traffic Rules</li>
+        </ul>
         <button class="btn-gold" onclick="openBooking('Standard Package (₹3500)')">Join Now</button>
     </div>
     <div class="price-card featured">
         <div class="best-label">BEST</div>
         <h3>Premium</h3>
         <div class="price-tag">₹5,000</div>
+        <ul class="feature-list">
+            <li>30 Days Classes</li>
+            <li>Highway & Parking</li>
+            <li>DL/LL Assistance</li>
+        </ul>
         <button class="btn-gold" onclick="openBooking('Premium Package (₹5000)')">Join Now</button>
     </div>
   </div>
@@ -143,7 +157,7 @@
     <h2 id="modalTitle" style="color:var(--gold); margin-bottom:15px; font-size:18px;">Confirm Booking</h2>
     <input type="text" id="userName" placeholder="Your Name" class="status-input">
     <input type="tel" id="userPhone" placeholder="Mobile Number" class="status-input">
-    <button class="btn-gold" onclick="finalSubmit()">Send to WhatsApp</button>
+    <button class="btn-gold" onclick="finalSubmit()">Confirm & WhatsApp</button>
     <button class="btn-gold" style="background:#222; color:#fff; margin-top:10px;" onclick="closeModal()">Cancel</button>
   </div>
 </div>
@@ -166,12 +180,8 @@
 
   let ALL_SLOTS = []; let BOOKINGS = {}; let selectedItem = "";
 
-  // REFERRAL LOGIC
-  window.toggleReferUI = () => {
-    document.getElementById("referUI").style.display = "block";
-    document.getElementById("showRefBtn").style.display = "none";
-  };
-  
+  // REFERRAL
+  window.toggleReferUI = () => { document.getElementById("referUI").style.display = "block"; document.getElementById("showRefBtn").style.display = "none"; };
   window.generateRefLink = () => {
     const p = document.getElementById("refPhone").value;
     if(p.length < 10) return alert("Enter valid number!");
@@ -179,14 +189,12 @@
     document.getElementById("referLinkText").innerText = link;
     document.getElementById("linkDisplayBox").style.display = "block";
   };
-
   window.copyRefLink = () => {
-    const link = document.getElementById("referLinkText").innerText;
-    navigator.clipboard.writeText(link);
+    navigator.clipboard.writeText(document.getElementById("referLinkText").innerText);
     alert("Link Copied!");
   };
 
-  // FETCH SLOTS
+  // SYNC
   onSnapshot(collection(db, "siteSlots"), (snap) => { ALL_SLOTS = []; snap.forEach(d => ALL_SLOTS.push({ id: d.id, ...d.data() })); render(); });
   onSnapshot(collection(db, "slotBookings"), (snap) => { BOOKINGS = {}; snap.forEach(d => BOOKINGS[d.id] = d.data()); render(); });
 
@@ -197,9 +205,9 @@
         let seats = "";
         for(let i=1; i<=4; i++) {
             const bId = `${slot.id}_${i}`; const booked = BOOKINGS[bId];
-            seats += `<button class="seat ${booked ? 'booked' : 'available'}" onclick="${booked ? '' : `openBooking('Batch ${slot.id} - Seat A${i}')`}">A${i}</button>`;
+            seats += `<button class="seat ${booked ? 'booked' : 'available'}" onclick="${booked ? '' : `openBooking('Batch ${slot.id} - A${i}')`}">A${i}</button>`;
         }
-        grid.innerHTML += `<div class="slotCard"><b>${slot.name}</b> <small style="float:right; color:var(--gold);">${slot.time}</small>${plan}<div class="seatGrid">${seats}</div></div>`;
+        grid.innerHTML += `<div class="slotCard"><b>${slot.name}</b> <small style="float:right; color:var(--gold); font-weight:700;">${slot.time}</small>${plan}<div class="seatGrid">${seats}</div></div>`;
     });
   }
 
@@ -210,9 +218,8 @@
     const n = document.getElementById("userName").value;
     const p = document.getElementById("userPhone").value;
     if(!n || p.length < 10) return alert("Valid details please!");
-    
-    const msg = `Hi A1 Driving, I am ${n} (${p}). I want to book: ${selectedItem}.`;
-    window.open(`https://wa.me/917008186187?text=${encodeURIComponent(msg)}`);
+    const msg = encodeURIComponent(`Hi A1 Driving, I am ${n} (${p}). I want to book: ${selectedItem}`);
+    window.open(`https://wa.me/917008186187?text=${msg}`);
     closeModal();
   };
 
@@ -220,7 +227,7 @@
     const p = document.getElementById("checkPhone").value;
     const snap = await getDoc(doc(db, "studentData", p));
     if(snap.exists()) document.getElementById("remainingResult").innerText = `Classes Left: ${snap.data().remaining}`;
-    else alert("Record not found!");
+    else alert("Not found!");
   };
 </script>
 </body>
