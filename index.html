@@ -43,6 +43,21 @@
     }
     @keyframes shine { to { background-position: 200% center; } }
 
+    /* REFER & EARN NEW UI */
+    .refer-card {
+      background: linear-gradient(135deg, #1a1a1a 0%, #000 100%);
+      border: 2px dashed var(--gold); border-radius: 20px;
+      padding: 25px; margin-bottom: 30px; text-align: center;
+    }
+    .refer-amount { font-size: 34px; font-weight: 900; color: var(--gold); display: block; text-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
+    #referUI { margin-top: 15px; display: none; background: #000; padding: 15px; border-radius: 15px; border: 1px solid #333; }
+    .ref-input { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #444; background: #111; color: #fff; text-align: center; margin-bottom: 10px; outline: none; }
+    .link-display { 
+      background: #1a1a1a; padding: 10px; border-radius: 8px; font-size: 11px; color: var(--gold);
+      display: flex; align-items: center; justify-content: space-between; gap: 5px; margin-top: 10px;
+      border: 1px solid #333; overflow: hidden;
+    }
+
     /* Pricing Section */
     .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-bottom: 30px; }
     .price-card {
@@ -72,14 +87,13 @@
     .slotGrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-top: 15px; }
     .slotCard { background: #000; border: 1px solid var(--border); padding: 15px; border-radius: 18px; position: relative; }
     .new-badge { position: absolute; top: -10px; right: 10px; background: var(--accent2); color: #000; font-size: 9px; padding: 3px 10px; border-radius: 10px; font-weight: 900; box-shadow: 0 0 10px var(--accent2); }
-    .daily-plan-box { margin: 10px 0; padding: 10px; background: #111; border-radius: 12px; border-left: 4px solid var(--gold); font-size: 12px; }
     .seatGrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 15px; }
     .seat { height: 45px; border-radius: 10px; border: 1px solid #333; font-weight: 800; cursor: pointer; background: #1a1a1a; color: #fff; }
     .seat.available { border-color: #00ff88; color: #00ff88; }
     .seat.booked { background: var(--danger); border: none; cursor: not-allowed; opacity: 0.5; }
 
     /* Status Checker */
-    .status-checker { background: var(--card); border: 1px solid var(--gold); border-radius: 20px; padding: 20px; text-align: center; }
+    .status-checker { background: var(--card); border: 1px solid var(--gold); border-radius: 20px; padding: 20px; text-align: center; margin-bottom: 20px; }
     .status-checker input { padding: 12px; width: 100%; max-width: 300px; border-radius: 10px; border: 1px solid var(--border); background: #000; color: #fff; margin-bottom: 10px; text-align: center; outline: none;}
 
     .btn-gold { background: linear-gradient(45deg, var(--gold), #f9e29d); color: #000; border: none; padding: 12px 20px; border-radius: 10px; font-weight: 800; cursor: pointer; width: 100%; }
@@ -133,21 +147,29 @@
 
   <h2 style="font-size:18px; margin-bottom:15px; padding-left:5px; color: var(--gold);">🚗 OUR PREMIUM FLEET</h2>
   <div class="fleet-gallery">
-      <div class="fleet-item">
-          <img src="tigor1.PNG" alt="A1 Tigor">
-          <div class="fleet-label">TATA TIGOR - A1</div>
-      </div>
-      <div class="fleet-item">
-          <img src="tigor2.PNG" alt="A1 Interior">
-          <div class="fleet-label">LUXURY COMFORT</div>
-      </div>
-      <div class="fleet-item">
-          <img src="tigor3.png" alt="A1 Exterior">
-          <div class="fleet-label">EXPERT READY</div>
-      </div>
-      <div class="fleet-item">
-          <img src="tigor2.PNG" alt="A1 Standard">
-          <div class="fleet-label">A1 STANDARDS</div>
+      <div class="fleet-item"><img src="tigor1.PNG"><div class="fleet-label">TATA TIGOR - A1</div></div>
+      <div class="fleet-item"><img src="tigor2.PNG"><div class="fleet-label">LUXURY COMFORT</div></div>
+      <div class="fleet-item"><img src="tigor3.png"><div class="fleet-label">EXPERT READY</div></div>
+  </div>
+
+  <div class="refer-card">
+      <div style="background:var(--gold); color:#000; display:inline-block; padding:2px 10px; border-radius:50px; font-size:9px; font-weight:900; margin-bottom:10px;">EARN CASHBACK</div>
+      <h3 style="font-size:18px;">Refer & Earn</h3>
+      <span class="refer-amount">₹500 <small style="font-size:12px; color:#fff; font-weight:400;">PER FRIEND</small></span>
+      
+      <button id="showRefBtn" onclick="toggleReferUI()" class="btn-gold" style="width:auto; padding:10px 30px; margin-top:10px;">Get My Referral Link</button>
+
+      <div id="referUI">
+        <input type="tel" id="refPhone" class="ref-input" placeholder="Enter Your Mobile Number">
+        <button onclick="generateRefLink()" class="btn-gold" style="font-size: 12px; padding: 8px;">Generate & Copy</button>
+        
+        <div id="linkBox" style="display:none;">
+          <div class="link-display">
+            <span id="finalLink" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"></span>
+            <button onclick="copyLink()" style="background:var(--gold); border:none; padding:5px 10px; border-radius:5px; font-size:10px; font-weight:800; cursor:pointer;">COPY</button>
+          </div>
+          <p style="font-size:10px; color:var(--accent2); margin-top:8px;">✅ Link copied! Share it on WhatsApp.</p>
+        </div>
       </div>
   </div>
 
@@ -161,9 +183,7 @@
 
   <section class="slotWrap">
     <h2 style="font-size:16px; margin-bottom:10px; color:var(--gold);">🎟️ LIVE BATCH BOOKING</h2>
-    <div id="dynamicSlotGrid" class="slotGrid">
-        <p style="text-align:center; color:var(--muted); font-size:12px;">Connecting...</p>
-    </div>
+    <div id="dynamicSlotGrid" class="slotGrid">Connecting...</div>
   </section>
 
   <section class="status-checker">
@@ -217,100 +237,75 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  let ALL_SLOTS = [];
-  let BOOKINGS = {};
-  let tempSelection = { slotId: null, seat: null };
-  let currentPackage = "";
+  let ALL_SLOTS = []; let BOOKINGS = {}; let tempSelection = { slotId: null, seat: null }; let currentPackage = "";
 
-  // 1. NOTIFICATION LOGIC
-  onSnapshot(doc(db, "siteSettings", "announcement"), (doc) => {
+  // REFERRAL UI FUNCTIONS
+  window.toggleReferUI = () => {
+    document.getElementById("referUI").style.display = "block";
+    document.getElementById("showRefBtn").style.display = "none";
+  };
+
+  window.generateRefLink = () => {
+    const phone = document.getElementById("refPhone").value;
+    if(phone.length < 10) return alert("Sahi mobile number daalein!");
+    const refLink = `${window.location.origin}${window.location.pathname}?ref=${phone}`;
+    document.getElementById("finalLink").innerText = refLink;
+    document.getElementById("linkBox").style.display = "block";
+    navigator.clipboard.writeText(`Hi, join A1 Driving Academy using my link: ${refLink}`);
+  };
+
+  window.copyLink = () => {
+    const link = document.getElementById("finalLink").innerText;
+    navigator.clipboard.writeText(`Hi, join A1 Driving Academy using my link: ${link}`);
+    alert("Link Copied!");
+  };
+
+  // SYNC & RENDER
+  onSnapshot(doc(db, "siteSettings", "announcement"), (d) => {
     const bar = document.getElementById("notifBar");
-    if(doc.exists() && doc.data().active) {
-      bar.innerText = doc.data().text;
-      bar.style.display = "block";
-      document.body.style.paddingTop = "45px";
-    } else {
-      bar.style.display = "none";
-      document.body.style.paddingTop = "0";
-    }
+    if(d.exists() && d.data().active) { bar.innerText = d.data().text; bar.style.display = "block"; document.body.style.paddingTop = "45px"; }
+    else { bar.style.display = "none"; document.body.style.paddingTop = "0"; }
   });
 
-  // 2. INQUIRY MODAL LOGIC
-  window.openPackageInquiry = (packageName) => {
-    currentPackage = packageName;
-    document.getElementById("packageDisplay").innerText = "Interested in: " + packageName;
-    document.getElementById("inquiryModal").style.display = "flex";
-  };
-
-  window.closeInquiryModal = () => {
-    document.getElementById("inquiryModal").style.display = "none";
-  };
-
-  window.submitInquiry = () => {
-    const name = document.getElementById("inquiryName").value;
-    const phone = document.getElementById("inquiryPhone").value;
-    if(!name || phone.length < 10) return alert("Please enter valid name and mobile number!");
-    
-    const message = `Hi Abhinaash A1, I am ${name}. I am interested in joining the ${currentPackage}. My contact is ${phone}.`;
-    window.open(`https://wa.me/917008186187?text=${encodeURIComponent(message)}`);
-    closeInquiryModal();
-  };
-
-  // 3. BATCH LOGIC
-  onSnapshot(collection(db, "siteSlots"), (snap) => {
-    ALL_SLOTS = [];
-    snap.forEach(d => ALL_SLOTS.push({ id: d.id, ...d.data() }));
-    render();
-  });
-
-  onSnapshot(collection(db, "slotBookings"), (snap) => {
-    BOOKINGS = {};
-    snap.forEach(d => BOOKINGS[d.id] = d.data());
-    render();
-  });
+  onSnapshot(collection(db, "siteSlots"), (snap) => { ALL_SLOTS = []; snap.forEach(d => ALL_SLOTS.push({ id: d.id, ...d.data() })); render(); });
+  onSnapshot(collection(db, "slotBookings"), (snap) => { BOOKINGS = {}; snap.forEach(d => BOOKINGS[d.id] = d.data()); render(); });
 
   function render() {
-    const grid = document.getElementById("dynamicSlotGrid");
-    grid.innerHTML = "";
+    const grid = document.getElementById("dynamicSlotGrid"); grid.innerHTML = "";
     ALL_SLOTS.forEach(slot => {
-        let badge = slot.status === "new" ? `<div class="new-badge">NEW BATCH</div>` : "";
         let seats = "";
         for(let i=1; i<=4; i++) {
-            const bId = `${slot.id}_${i}`;
-            const booked = BOOKINGS[bId];
-            seats += `<button class="seat ${booked ? 'booked' : 'available'}" 
-                      onclick="openBooking('${slot.id}', ${i}, ${!!booked})">A${i}</button>`;
+            const bId = `${slot.id}_${i}`; const booked = BOOKINGS[bId];
+            seats += `<button class="seat ${booked ? 'booked' : 'available'}" onclick="openBooking('${slot.id}', ${i}, ${!!booked})">A${i}</button>`;
         }
-        const plan = slot.showPlan ? `<div class="daily-plan-box">📍 Route: ${slot.route}<br>🎯 Skill: ${slot.skill}</div>` : '';
-        grid.innerHTML += `<div class="slotCard">
-            ${badge}
-            <div style="display:flex; justify-content:space-between; align-items:center;"><b>${slot.name}</b><small style="color:var(--gold);">${slot.time}</small></div>
-            ${plan}<div class="seatGrid">${seats}</div>
-        </div>`;
+        grid.innerHTML += `<div class="slotCard"><b>${slot.name}</b> <small style="color:var(--gold);">${slot.time}</small><div class="seatGrid">${seats}</div></div>`;
     });
   }
 
-  window.openBooking = (id, s, b) => { 
-    if(!b){ 
-      tempSelection={slotId:id, seat:s}; 
-      document.getElementById("slotDisplay").innerText=`Batch: ${id} | Seat: A${s}`; 
-      document.getElementById("bookingModal").style.display="flex"; 
-    }
+  // BOOKING & INQUIRY
+  window.openPackageInquiry = (pn) => { currentPackage = pn; document.getElementById("packageDisplay").innerText = "Interested: " + pn; document.getElementById("inquiryModal").style.display = "flex"; };
+  window.closeInquiryModal = () => document.getElementById("inquiryModal").style.display = "none";
+  window.submitInquiry = () => {
+    const n = document.getElementById("inquiryName").value; const p = document.getElementById("inquiryPhone").value;
+    if(!n || p.length < 10) return alert("Invalid details!");
+    window.open(`https://wa.me/917008186187?text=Hi, I am ${n}. Interested in ${currentPackage}. Contact: ${p}`);
+    closeInquiryModal();
   };
 
+  window.openBooking = (id, s, b) => { if(!b){ tempSelection={slotId:id, seat:s}; document.getElementById("slotDisplay").innerText=`Batch: ${id} | Seat: A${s}`; document.getElementById("bookingModal").style.display="flex"; } };
   window.closeModal = () => document.getElementById("bookingModal").style.display="none";
 
   window.finalSubmit = async () => {
-    const n = document.getElementById("userName").value;
-    const p = document.getElementById("userPhone").value;
+    const n = document.getElementById("userName").value; const p = document.getElementById("userPhone").value;
+    const urlParams = new URLSearchParams(window.location.search);
+    const referredBy = urlParams.get('ref') || "Direct Join";
+
     if(!n || p.length < 10) return alert("Fill valid details!");
     await setDoc(doc(db, "slotBookings", `${tempSelection.slotId}_${tempSelection.seat}`), {
-      slotId: tempSelection.slotId, seat: tempSelection.seat, name: n, phone: p, bookedAt: serverTimestamp()
+      name: n, phone: p, referredBy: referredBy, bookedAt: serverTimestamp()
     });
-    alert("Seat Booked!"); 
-    closeModal();
-    const message = `Booking Alert: Hi, I am ${n}. I have booked Seat A${tempSelection.seat} in the ${tempSelection.slotId} batch. Contact: ${p}`;
-    window.open(`https://wa.me/917008186187?text=${encodeURIComponent(message)}`);
+    alert("Seat Booked!"); closeModal();
+    window.open(`https://wa.me/917008186187?text=Hi, I am ${n}. Booked Seat A${tempSelection.seat} in ${tempSelection.slotId}. Referred by: ${referredBy}`);
   };
 
   window.checkRemaining = async () => {
