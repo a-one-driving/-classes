@@ -113,7 +113,7 @@
     <div class="price-card featured">
         <div style="position:absolute; top:10px; right:-30px; background:var(--gold); color:#000; padding:5px 40px; transform:rotate(45deg); font-size:10px; font-weight:900;">BEST</div>
         <h3>Premium</h3>
-        <div class="price-tag">₹5,500</div>
+        <div class="price-tag">₹5,000</div>
         <ul class="price-features">
             <li>✓ 30 Days Classes</li>
             <li>✓ Highway & Parking</li>
@@ -125,10 +125,10 @@
 
   <div class="personal-banner">
       <div>
-          <h3 style="font-weight:900">Personal 1-on-1</h3>
+          <h3 style="font-weight:900">Personal 1-on-1 <span style="margin-left:10px;">₹8,000</span></h3>
           <p style="font-size:12px; opacity:0.8">Single student, specialized focus.</p>
       </div>
-      <button onclick="window.open('https://wa.me/917008186187?text=Interested in Personal Class')" style="background:#000; color:var(--gold); border:none; padding:10px 15px; border-radius:10px; font-weight:800; cursor:pointer;">BOOK</button>
+      <button onclick="window.open('https://wa.me/917008186187?text=Interested in Personal Class (₹8,000)')" style="background:#000; color:var(--gold); border:none; padding:10px 15px; border-radius:10px; font-weight:800; cursor:pointer;">BOOK</button>
   </div>
 
   <section class="slotWrap">
@@ -186,7 +186,6 @@
   let BOOKINGS = {};
   let tempSelection = { slotId: null, seat: null };
 
-  // Notification
   onSnapshot(doc(db, "siteControl", "notification"), (snap) => {
     if(snap.exists()){
       const bar = document.getElementById("notifBar");
@@ -196,14 +195,12 @@
     }
   });
 
-  // Fetch Slots (No Order - Direct Fetch)
   onSnapshot(collection(db, "siteSlots"), (snap) => {
     ALL_SLOTS = [];
     snap.forEach(d => ALL_SLOTS.push({ id: d.id, ...d.data() }));
     render();
   });
 
-  // Fetch Bookings
   onSnapshot(collection(db, "slotBookings"), (snap) => {
     BOOKINGS = {};
     snap.forEach(d => BOOKINGS[d.id] = d.data());
