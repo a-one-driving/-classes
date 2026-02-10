@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A1 Attendance | Digital Register</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --gold: #d4af37; --bg: #000; --card: #111; --success: #00ff88; --danger: #ff4d4d; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+    
+    body { background: var(--bg); color: #fff; padding: 15px; padding-bottom: 100px; }
+
+    /* Glassmorphic Header */
+    .header { 
+        background: rgba(20, 20, 20, 0.8); backdrop-filter: blur(10px);
+        padding: 20px; position: sticky; top: 0; z-index: 1000;
+        border-bottom: 1px solid #222; margin: -15px -15px 20px -15px;
+    }
+    .header h1 { font-size: 18px; color: var(--gold); letter-spacing: 1px; }
+    .header p { font-size: 10px; color: #666; text-transform: uppercase; }
+
+    /* Search Bar Modern */
+    .search-container { margin-bottom: 20px; }
+    .search-bar { 
+        width: 100%; background: #161616; border: 1px solid #333; 
+        padding: 15px 20px; border-radius: 50px; color: #fff; outline: none;
+        transition: 0.3s; font-size: 14px;
+    }
+    .search-bar:focus { border-color: var(--gold); box-shadow: 0 0 15px rgba(212, 175, 55, 0.1); }
+
+    /* Attendance Card */
+    .attendance-grid { display: grid; gap: 12px; }
+    .st-card { 
+        background: var(--card); border-radius: 20px; padding: 15px;
+        border: 1px solid #222; display: flex; align-items: center;
+        transition: 0.3s;
+    }
+    
+    .st-initial {
+        width: 50px; height: 50px; background: #1a1a1a; 
+        border-radius: 15px; display: flex; align-items: center;
+        justify-content: center; font-weight: 800; color: var(--gold);
+        font-size: 20px; border: 1px solid #333; margin-right: 15px;
+    }
+
+    .st-details { flex: 1; }
+    .st-details b { font-size: 15px; display: block; }
+    .st-details span { font-size: 11px; color: #555; }
+
+    .progress-mini { 
+        width: 60px; text-align: right; margin-right: 15px;
+    }
+    .progress-mini b { color: var(--gold); font-size: 16px; }
+    .progress-mini p { font-size: 8px; color: #444; font-weight: bold; }
+
+    /* Action Buttons */
+    .mark-btn {
+        background: var(--gold); color: #000; border: none;
+        width: 45px; height: 45px; border-radius: 15px;
+        font-size: 22px; font-weight: bold; cursor: pointer;
+        box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2);
+    }
+    .mark-btn:active { transform: scale(0.9); }
+    
+    /* Stats Footer */
+    .bottom-nav {
+        position: fixed; bottom: 0; left: 0; right: 0;
+        background: #000; border-top: 1px solid #222;
+        padding: 15px; display: flex; justify-content: space-around;
+        z-index: 1000;
+    }
+    .stat-box { text-align: center; }
+    .stat-box b { display: block; font-size: 16px; color: var(--gold); }
+    .stat-box small { font-size: 9px; color: #666; }
+
+    /* Complete Status Overlay */
+    .status-done { border-color: var(--success) !important; opacity: 0.7; }
+  </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>A1 ATTENDANCE</h1>
+    <p id="dateDisplay">Loading date...</p>
+</div>
+
+<div class="search-container">
+    <input type="text" id="studentSearch" class="search-bar" placeholder="Search student name..." onkeyup="filterList()">
+</div>
+
+<div id="attendanceList" class="attendance-grid">
+    </div>
+
+<div class="bottom-nav">
+    <div class="stat-box">
+        <b id="totalActive">0</b>
+        <small>ACTIVE</small>
+    </div>
+    <div class="stat-box">
+        <b id="totalFinished">0</b>
+        <small>FINISHED</small>
+    </div>
+    <div class="stat-box" onclick="location.href='admin.html'" style="cursor:pointer;">
+        <b>⚙️</b>
+        <small>SETTINGS</small>
+    </div>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+  import { getFirestore, collection, onSnapshot, doc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
+    authDomain: "abinash-driving.firebaseapp.com",
+    projectId: "abinash-driving",
+    storageBucket: "abinash-driving.appspot.com",
+    messagingSenderId: "641148830173",
+    appId: "1:641148830173:web:b7a500e5e7e2463da0f634"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // Set Current Date
+  const d = new Date();
+  document.getElementById('dateDisplay').innerText = d.toDateString();
+
+  // Load Students for Attendance
+  onSnapshot(collection(db, "studentData"), (snap) => {
+    const list = document.getElementById("attendanceList");
+    list.innerHTML = "";
+    let activeCount = 0;
+    let finishCount = 0;
+
+    snap.forEach(d => {
+      const data = d.data();
+      const done = data.remaining || 0;
+      const total = data.totalClasses || 15;
+      const isFinished = done >= total;
+
+      if(isFinished) finishCount++; else activeCount++;
+
+      list.innerHTML += `
+        <div class="st-card ${isFinished ? 'status-done' : ''}" data-name="${data.name.toLowerCase()}">
+          <div class="st-initial">${data.name.charAt(0)}</div>
+          <div class="st-details">
+            <b>${data.name}</b>
+            <span>📞 ${d.id}</span>
+          </div>
+          <div class="progress-mini">
+            <b>${done}/${total}</b>
+            <p>PRESENT</p>
+          </div>
+          <button class="mark-btn" onclick="markPresent('${d.id}')" ${isFinished ? 'disabled style="background:#222; color:#444;"' : ''}>+</button>
+        </div>`;
+    });
+
+    document.getElementById('totalActive').innerText = activeCount;
+    document.getElementById('totalFinished').innerText = finishCount;
+  });
+
+  window.markPresent = async (id) => {
+      const audio = new Audio('https://www.soundjay.com/buttons/sounds/button-3.mp3'); // Optional Click Sound
+      audio.play().catch(() => {}); 
+      await updateDoc(doc(db, "studentData", id), { remaining: increment(1) });
+  };
+
+  window.filterList = () => {
+    const val = document.getElementById("studentSearch").value.toLowerCase();
+    document.querySelectorAll('.st-card').forEach(c => {
+        c.style.display = c.getAttribute('data-name').includes(val) ? "flex" : "none";
+    });
+  };
+</script>
+</body>
+</html>
