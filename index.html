@@ -44,48 +44,36 @@
       animation: shine 3s linear infinite;
     }
 
-    /* Status Checker */
-    .status-checker {
-      background: var(--card); border: 1px solid var(--gold);
-      border-radius: 20px; padding: 20px; margin-bottom: 30px; text-align: center;
-    }
-    .status-checker input {
-      padding: 12px; width: 100%; max-width: 300px; border-radius: 10px; border: 1px solid var(--border);
-      background: #000; color: #fff; outline: none; margin-bottom: 10px; text-align: center;
-    }
-
-    /* Slot Section */
-    .slotWrap { border-radius: 20px; border: 1px solid var(--border); background: var(--card); padding: 20px; margin-bottom: 30px;}
-    .slotGrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-top: 20px; }
-    .slotCard { background: #000; border: 1px solid var(--border); padding: 15px; border-radius: 18px; }
-    .daily-plan-box { margin: 12px 0; padding: 12px; background: #111; border-radius: 12px; border-left: 4px solid var(--gold); font-size: 13px; }
-    .seatGrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 15px; }
-    .seat { height: 45px; border-radius: 10px; border: 1px solid #333; font-weight: 800; cursor: pointer; background: #1a1a1a; color: #fff; transition: 0.2s; }
-    .seat.available { border-color: #00ff88; color: #00ff88; }
-    .seat.booked { background: var(--danger); border: none; cursor: not-allowed; opacity: 0.5; }
-
-    /* --- NEW: PRICING & PERSONAL SECTION --- */
-    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px; }
+    /* Pricing Section */
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-bottom: 30px; }
     .price-card {
-      background: linear-gradient(145deg, #1a1a1a, #000); padding: 25px; border-radius: 25px;
+      background: var(--card); padding: 20px; border-radius: 20px;
       border: 1px solid var(--border); position: relative; overflow: hidden;
     }
     .price-card.featured { border-color: var(--gold); }
-    .price-card h3 { color: var(--gold); font-size: 22px; margin-bottom: 10px; }
-    .price-tag { font-size: 32px; font-weight: 900; margin: 15px 0; color: #fff; }
-    .price-features { list-style: none; color: var(--muted); font-size: 14px; line-height: 2; }
-    .price-features li::before { content: "✓ "; color: var(--gold); font-weight: bold; }
+    .price-card h3 { color: var(--gold); font-size: 20px; margin-bottom: 5px; }
+    .price-tag { font-size: 28px; font-weight: 900; color: #fff; margin: 10px 0; }
+    .price-features { list-style: none; color: var(--muted); font-size: 13px; line-height: 1.8; margin-bottom: 15px; }
 
-    .personal-banner {
-        background: var(--gold); color: #000; padding: 20px; border-radius: 20px;
-        margin-top: 30px; display: flex; justify-content: space-between; align-items: center;
-    }
+    /* Slot Section */
+    .slotWrap { border-radius: 20px; border: 1px solid var(--border); background: var(--card); padding: 20px; margin-bottom: 30px;}
+    .slotGrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-top: 15px; }
+    .slotCard { background: #000; border: 1px solid var(--border); padding: 15px; border-radius: 18px; }
+    .daily-plan-box { margin: 10px 0; padding: 10px; background: #111; border-radius: 12px; border-left: 4px solid var(--gold); font-size: 12px; }
+    .seatGrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 15px; }
+    .seat { height: 45px; border-radius: 10px; border: 1px solid #333; font-weight: 800; cursor: pointer; background: #1a1a1a; color: #fff; }
+    .seat.available { border-color: #00ff88; color: #00ff88; }
+    .seat.booked { background: var(--danger); border: none; cursor: not-allowed; opacity: 0.5; }
 
-    /* Modal & Buttons */
-    .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); display: none; align-items: center; justify-content: center; z-index: 6000; }
-    .modal-content { background: var(--card); padding: 25px; border-radius: 20px; border: 1px solid var(--gold); width: 90%; max-width: 400px; }
+    /* Status Checker */
+    .status-checker { background: var(--card); border: 1px solid var(--gold); border-radius: 20px; padding: 20px; text-align: center; }
+    .status-checker input { padding: 12px; width: 100%; max-width: 300px; border-radius: 10px; border: 1px solid var(--border); background: #000; color: #fff; margin-bottom: 10px; text-align: center; outline: none;}
+
     .btn-gold { background: linear-gradient(45deg, var(--gold), #f9e29d); color: #000; border: none; padding: 12px 20px; border-radius: 10px; font-weight: 800; cursor: pointer; width: 100%; }
     .fixedBar { position: fixed; bottom: 15px; left: 15px; right: 15px; background: rgba(18,18,18,0.9); border: 1px solid var(--gold); padding: 12px 20px; border-radius: 50px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); z-index: 999; }
+    
+    .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); display: none; align-items: center; justify-content: center; z-index: 6000; }
+    .modal-content { background: var(--card); padding: 25px; border-radius: 20px; border: 1px solid var(--gold); width: 90%; max-width: 400px; }
   </style>
 </head>
 <body>
@@ -105,65 +93,151 @@
     <p style="color: var(--muted); font-size: 14px;">Premium Driving Academy in Odisha</p>
   </section>
 
-  <section class="slotWrap">
-    <div style="display:flex; justify-content:space-between; align-items:center;">
-        <h2 style="font-size:16px;">🎟️ LIVE BATCHES</h2>
-        <span style="font-size:10px; color:var(--gold)">TAP SEAT TO BOOK</span>
-    </div>
-    <div id="dynamicSlotGrid" class="slotGrid"></div>
-  </section>
-
-  <h2 style="font-size:18px; margin-bottom:15px; padding-left:5px;">💎 TRAINING PACKAGES</h2>
+  <h2 style="font-size:18px; margin-bottom:15px; padding-left:5px; color: var(--gold);">💎 TRAINING PACKAGES</h2>
   <div class="pricing-grid">
     <div class="price-card">
         <h3>Basic Course</h3>
         <div class="price-tag">₹3,500</div>
         <ul class="price-features">
-            <li>15 Days Training</li>
-            <li>Basic Steering Control</li>
-            <li>Traffic Rules Guidance</li>
+            <li>✓ 15 Days Training</li>
+            <li>✓ Steering Control</li>
+            <li>✓ Traffic Rules</li>
         </ul>
-        <button class="btn-gold" style="margin-top:20px;" onclick="window.open('https://wa.me/917008186187?text=Interested in Basic Course')">Enquire Now</button>
+        <button class="btn-gold" onclick="window.open('https://wa.me/917008186187?text=Enquiry: Basic Course')">Enquire</button>
     </div>
-
     <div class="price-card featured">
         <div style="position:absolute; top:10px; right:-30px; background:var(--gold); color:#000; padding:5px 40px; transform:rotate(45deg); font-size:10px; font-weight:900;">BEST</div>
         <h3>Premium Plus</h3>
         <div class="price-tag">₹5,500</div>
         <ul class="price-features">
-            <li>30 Days Training</li>
-            <li>Highway & Night Drive</li>
-            <li>DL/LL Assistance</li>
-            <li>Advanced Parking Skills</li>
+            <li>✓ 30 Days Training</li>
+            <li>✓ Highway & Night Drive</li>
+            <li>✓ DL Assistance</li>
         </ul>
-        <button class="btn-gold" style="margin-top:20px;" onclick="window.open('https://wa.me/917008186187?text=Interested in Premium Plus')">Enquire Now</button>
+        <button class="btn-gold" onclick="window.open('https://wa.me/917008186187?text=Enquiry: Premium Plus')">Enquire</button>
     </div>
   </div>
 
-  <div class="personal-banner">
-      <div>
-          <h3 style="font-weight:900">Personal 1-on-1 Class</h3>
-          <p style="font-size:12px; opacity:0.8">Single student, single focus. Specialized training.</p>
-      </div>
-      <button onclick="window.open('https://wa.me/917008186187?text=Interested in Personal Class')" style="background:#000; color:var(--gold); border:none; padding:10px 15px; border-radius:10px; font-weight:800; cursor:pointer;">BOOK</button>
-  </div>
+  <section class="slotWrap">
+    <h2 style="font-size:16px; margin-bottom:10px;">🎟️ LIVE BATCH BOOKING</h2>
+    <div id="dynamicSlotGrid" class="slotGrid">
+        <p style="text-align:center; color:var(--muted); font-size:12px;">Loading Batches...</p>
+    </div>
+  </section>
 
-  <section class="status-checker" style="margin-top:40px;">
+  <section class="status-checker">
     <h3 style="color:var(--gold); margin-bottom:10px;">📊 My Class Progress</h3>
-    <input type="tel" id="checkPhone" placeholder="Your Registered Number">
+    <input type="tel" id="checkPhone" placeholder="Enter Mobile Number">
     <button class="btn-gold" onclick="checkRemaining()">Check Now</button>
     <div id="remainingResult" style="margin-top:15px; font-weight:800; color: var(--accent2);"></div>
   </section>
 </div>
 
-<div class="modal" id="bookingModal">...</div>
-<div class="fixedBar">...</div>
+<div class="modal" id="bookingModal">
+  <div class="modal-content">
+    <h2 style="color:var(--gold); margin-bottom:10px;">Book Seat</h2>
+    <p id="slotDisplay" style="font-size:12px; margin-bottom:15px; color:var(--muted);"></p>
+    <input type="text" id="userName" placeholder="Your Name" style="width:100%; padding:12px; margin-bottom:10px; background:#000; color:#fff; border:1px solid #333; border-radius:10px;">
+    <input type="tel" id="userPhone" placeholder="Mobile Number" style="width:100%; padding:12px; margin-bottom:15px; background:#000; color:#fff; border:1px solid #333; border-radius:10px;">
+    <button class="btn-gold" onclick="finalSubmit()">Confirm Booking</button>
+    <button class="btn-gold" style="background:#222; color:#fff; margin-top:10px;" onclick="closeModal()">Cancel</button>
+  </div>
+</div>
+
+<div class="fixedBar">
+    <div style="font-size:12px;"><b>DL/LL</b> Service</div>
+    <a href="tel:+917008186187" class="btn-gold" style="width:auto; text-decoration:none; padding:8px 20px;">CALL A1</a>
+</div>
 
 <script type="module">
-  // [Saara purana Firebase script yahan paste karein]
-  // Note: Render function mein "orderBy('order', 'asc')" zaroori hai.
-  // ... (Baaki code aapke purane version wala hi rahega)
-</script>
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+  import { getFirestore, collection, doc, setDoc, getDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
+  const firebaseConfig = {
+    apiKey: "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
+    authDomain: "abinash-driving.firebaseapp.com",
+    projectId: "abinash-driving",
+    storageBucket: "abinash-driving.appspot.com",
+    messagingSenderId: "641148830173",
+    appId: "1:641148830173:web:b7a500e5e7e2463da0f634"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  const vid = "A1-" + Math.floor(Math.random()*9999);
+  document.getElementById("vidDisplay").innerText = "ID: " + vid;
+
+  let ALL_SLOTS = [];
+  let BOOKINGS = {};
+  let tempSelection = { slotId: null, seat: null };
+
+  // 1. LIVE NOTIFICATION
+  onSnapshot(doc(db, "siteControl", "notification"), (snap) => {
+      if(snap.exists()){
+          const bar = document.getElementById("notifBar");
+          bar.innerText = "📢 " + snap.data().text;
+          bar.style.display = "block";
+          setTimeout(() => { bar.style.display = "none"; }, 8000); 
+      }
+  });
+
+  // 2. FETCH SLOTS (ORDERED BY RANK)
+  const qSlots = query(collection(db, "siteSlots"), orderBy("order", "asc"));
+  onSnapshot(qSlots, (snap) => {
+    ALL_SLOTS = [];
+    snap.forEach(d => ALL_SLOTS.push({ id: d.id, ...d.data() }));
+    render();
+  });
+
+  // 3. FETCH BOOKINGS
+  onSnapshot(collection(db, "slotBookings"), (snap) => {
+    BOOKINGS = {};
+    snap.forEach(d => BOOKINGS[d.id] = d.data());
+    render();
+  });
+
+  function render() {
+    const grid = document.getElementById("dynamicSlotGrid");
+    grid.innerHTML = "";
+    if(ALL_SLOTS.length === 0) { grid.innerHTML = "<p style='color:gray;text-align:center;'>No batches available.</p>"; return; }
+
+    ALL_SLOTS.forEach(slot => {
+        let seats = "";
+        for(let i=1; i<=4; i++) {
+            const bId = `${slot.id}_${i}`;
+            const booked = BOOKINGS[bId];
+            seats += `<button class="seat ${booked ? 'booked' : 'available'}" 
+                      onclick="openBooking('${slot.id}', ${i}, ${!!booked})">A${i}</button>`;
+        }
+        const planHtml = slot.showPlan ? `<div class="daily-plan-box">📍 Route: ${slot.route}<br>🎯 Skill: ${slot.skill}</div>` : '';
+        grid.innerHTML += `<div class="slotCard">
+            <div style="display:flex; justify-content:space-between; align-items:center;"><b>${slot.name}</b><small>${slot.time}</small></div>
+            ${planHtml}<div class="seatGrid">${seats}</div>
+        </div>`;
+    });
+  }
+
+  window.openBooking = (id, seat, b) => { if(!b){ tempSelection={slotId:id, seat}; document.getElementById("slotDisplay").innerText=`Batch: ${id} | Seat: A${seat}`; document.getElementById("bookingModal").style.display="flex"; }};
+  window.closeModal = () => document.getElementById("bookingModal").style.display="none";
+
+  window.finalSubmit = async () => {
+    const n = document.getElementById("userName").value;
+    const p = document.getElementById("userPhone").value;
+    if(!n || !p) return alert("Details bhariye!");
+    await setDoc(doc(db, "slotBookings", `${tempSelection.slotId}_${tempSelection.seat}`), {
+      slotId: tempSelection.slotId, seat: tempSelection.seat, name: n, phone: p, bookedAt: serverTimestamp()
+    });
+    alert("Booked!"); closeModal();
+    window.open(`https://wa.me/917008186187?text=Booking: ${n} | ${tempSelection.slotId} | Seat A${tempSelection.seat}`);
+  };
+
+  window.checkRemaining = async () => {
+    const p = document.getElementById("checkPhone").value;
+    const snap = await getDoc(doc(db, "studentData", p));
+    if(snap.exists()) document.getElementById("remainingResult").innerHTML = `${snap.data().name}: ${snap.data().remaining} Left`;
+    else alert("No record found!");
+  };
+</script>
 </body>
 </html>
