@@ -27,7 +27,7 @@
 
     .container { max-width: 1100px; margin: auto; padding: 20px 15px; }
 
-    /* TRAINING PACKAGES & LISTS */
+    /* PRICING CARDS */
     .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-bottom: 30px; }
     .price-card { background: var(--card); padding: 20px; border-radius: 20px; border: 1px solid var(--border); position: relative; overflow: hidden; }
     .price-card.featured { border: 2px solid var(--gold); }
@@ -38,30 +38,38 @@
       font-size: 10px; font-weight: 900;
     }
     .price-tag { font-size: 32px; font-weight: 900; color: #fff; margin: 10px 0; }
-    
-    /* Points inside cards (missing part) */
     .feature-list { list-style: none; margin: 15px 0; padding: 0; }
     .feature-list li { color: var(--muted); font-size: 13px; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
     .feature-list li::before { content: "✓"; color: var(--gold); font-weight: 900; }
 
-    /* PERSONAL CLASS BANNER */
+    /* PERSONAL CLASS */
     .personal-banner {
         background: var(--gold); color: #000; padding: 20px; border-radius: 20px;
         margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center;
     }
     .btn-book-black { background: #000; color: var(--gold); border: none; padding: 10px 22px; border-radius: 12px; font-weight: 900; cursor: pointer; }
 
-    /* REFER CARD & LINK UI */
+    /* NEW COMPACT REFER DESIGN */
     .refer-card { background: var(--card); border: 2px dashed var(--gold); border-radius: 20px; padding: 25px; margin-bottom: 30px; text-align: center; }
-    #referUI { margin-top: 15px; display: none; }
-    .link-box { 
-        background: #1a1a1a; padding: 12px; border-radius: 10px; font-size: 11px; 
-        color: var(--gold); display: flex; align-items: center; justify-content: space-between; 
-        gap: 10px; margin-top: 15px; border: 1px solid #333; 
+    #referUI { margin-top: 20px; display: none; }
+    
+    .compact-copy-box {
+      display: flex; align-items: center; background: #000; 
+      border: 1px solid #333; border-radius: 12px; 
+      overflow: hidden; margin-top: 15px; height: 50px;
     }
-    .copy-mini-btn { background: var(--gold); color: #000; border: none; padding: 6px 12px; border-radius: 6px; font-size: 10px; font-weight: 800; cursor: pointer; }
+    .link-text {
+      flex: 1; padding: 0 15px; font-size: 11px; color: var(--gold);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: left;
+    }
+    .copy-trigger {
+      background: var(--gold); color: #000; border: none;
+      height: 100%; padding: 0 20px; font-weight: 900; 
+      font-size: 12px; cursor: pointer; transition: 0.3s;
+    }
+    .copy-trigger:active { opacity: 0.7; }
 
-    /* SLOTS & PLANS */
+    /* SLOTS */
     .slotWrap { border-radius: 20px; border: 1px solid var(--gold); background: var(--card); padding: 20px; margin-bottom: 30px;}
     .slotCard { background: #000; border: 1px solid var(--border); padding: 15px; border-radius: 18px; margin-bottom: 15px; }
     .daily-plan-box { margin: 10px 0; padding: 10px; background: #111; border-radius: 12px; border-left: 4px solid var(--gold); font-size: 11px; }
@@ -70,11 +78,10 @@
     .seat.available { border-color: var(--accent2); color: var(--accent2); }
     .seat.booked { background: var(--danger); border: none; opacity: 0.5; }
 
-    /* STATUS CHECKER */
-    .status-checker { background: var(--card); border: 1px solid var(--gold); border-radius: 20px; padding: 25px; text-align: center; }
+    /* BUTTONS & INPUTS */
     .status-input { width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #333; background: #000; color: #fff; text-align: center; margin-bottom: 15px; outline: none; }
-
     .btn-gold { background: linear-gradient(45deg, var(--gold), #f9e29d); color: #000; border: none; padding: 12px 20px; border-radius: 10px; font-weight: 800; cursor: pointer; width: 100%; }
+    
     .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); display: none; align-items: center; justify-content: center; z-index: 6000; }
     .modal-content { background: var(--card); padding: 25px; border-radius: 20px; border: 1px solid var(--gold); width: 90%; max-width: 400px; }
   </style>
@@ -128,12 +135,12 @@
       <button id="showRefBtn" onclick="toggleReferUI()" class="btn-gold" style="width:auto; padding:10px 30px;">Get My Referral Link</button>
       
       <div id="referUI">
-        <input type="tel" id="refPhone" class="status-input" placeholder="Your Mobile Number">
+        <input type="tel" id="refPhone" class="status-input" placeholder="Enter Mobile Number">
         <button onclick="generateRefLink()" class="btn-gold" style="font-size: 13px;">Generate Link</button>
-        <div id="linkDisplayBox" style="display:none;">
-            <div class="link-box">
-                <span id="referLinkText" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"></span>
-                <button class="copy-mini-btn" onclick="copyRefLink()">COPY</button>
+        <div id="linkContainer" style="display:none;">
+            <div class="compact-copy-box">
+                <div class="link-text" id="finalLink"></div>
+                <button class="copy-trigger" onclick="copyAction()">COPY</button>
             </div>
         </div>
       </div>
@@ -186,15 +193,15 @@
     const p = document.getElementById("refPhone").value;
     if(p.length < 10) return alert("Enter valid number!");
     const link = `${window.location.origin}${window.location.pathname}?ref=${p}`;
-    document.getElementById("referLinkText").innerText = link;
-    document.getElementById("linkDisplayBox").style.display = "block";
+    document.getElementById("finalLink").innerText = link;
+    document.getElementById("linkContainer").style.display = "block";
   };
-  window.copyRefLink = () => {
-    navigator.clipboard.writeText(document.getElementById("referLinkText").innerText);
+  window.copyAction = () => {
+    navigator.clipboard.writeText(document.getElementById("finalLink").innerText);
     alert("Link Copied!");
   };
 
-  // SYNC
+  // FETCH
   onSnapshot(collection(db, "siteSlots"), (snap) => { ALL_SLOTS = []; snap.forEach(d => ALL_SLOTS.push({ id: d.id, ...d.data() })); render(); });
   onSnapshot(collection(db, "slotBookings"), (snap) => { BOOKINGS = {}; snap.forEach(d => BOOKINGS[d.id] = d.data()); render(); });
 
@@ -217,7 +224,7 @@
   window.finalSubmit = async () => {
     const n = document.getElementById("userName").value;
     const p = document.getElementById("userPhone").value;
-    if(!n || p.length < 10) return alert("Valid details please!");
+    if(!n || p.length < 10) return alert("Details please!");
     const msg = encodeURIComponent(`Hi A1 Driving, I am ${n} (${p}). I want to book: ${selectedItem}`);
     window.open(`https://wa.me/917008186187?text=${msg}`);
     closeModal();
@@ -226,8 +233,8 @@
   window.checkRemaining = async () => {
     const p = document.getElementById("checkPhone").value;
     const snap = await getDoc(doc(db, "studentData", p));
-    if(snap.exists()) document.getElementById("remainingResult").innerText = `Classes Left: ${snap.data().remaining}`;
-    else alert("Not found!");
+    if(snap.exists()) document.getElementById("remainingResult").innerText = `Classes Remaining: ${snap.data().remaining}`;
+    else alert("No record found!");
   };
 </script>
 </body>
