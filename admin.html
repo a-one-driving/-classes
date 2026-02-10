@@ -3,129 +3,93 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A1 Admin | Premium Control</title>
+  <title>A1 Admin | Master Control</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
-  
   <style>
-    :root {
-      --gold: #d4af37;
-      --bg: #000;
-      --card: #121212;
-      --border: #2a2a2a;
-      --txt: #fff;
-    }
-
+    :root { --gold: #d4af37; --bg: #000; --card: #121212; --border: #2a2a2a; --txt: #fff; --danger: #ff4d4d; }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
-    body { background: var(--bg); color: var(--txt); padding: 20px; padding-bottom: 50px; }
-
-    .header { border-bottom: 1px solid var(--gold); padding-bottom: 10px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; }
-    
-    .section { background: var(--card); border: 1px solid var(--border); border-radius: 15px; padding: 20px; margin-bottom: 30px; }
-    h2 { color: var(--gold); margin-bottom: 20px; font-size: 20px; display: flex; align-items: center; gap: 10px; }
-
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
-
-    input, select { 
-      width: 100%; padding: 12px; background: #000; border: 1px solid var(--border); 
-      color: #fff; border-radius: 10px; margin-bottom: 10px; outline: none;
-    }
-    input:focus { border-color: var(--gold); }
-
-    .btn { 
-      padding: 12px 20px; border-radius: 10px; cursor: pointer; font-weight: 800; 
-      border: none; transition: 0.3s; width: 100%;
-    }
+    body { background: var(--bg); color: var(--txt); padding: 15px; padding-bottom: 50px; }
+    .header { border-bottom: 1px solid var(--gold); padding-bottom: 10px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; }
+    .section { background: var(--card); border: 1px solid var(--border); border-radius: 15px; padding: 18px; margin-bottom: 25px; }
+    h2 { color: var(--gold); margin-bottom: 15px; font-size: 18px; display: flex; align-items: center; gap: 8px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+    input, select { width: 100%; padding: 12px; background: #000; border: 1px solid var(--border); color: #fff; border-radius: 10px; outline: none; margin-bottom: 5px; }
+    .btn { padding: 12px; border-radius: 10px; cursor: pointer; font-weight: 800; border: none; transition: 0.3s; width: 100%; }
     .btn-gold { background: var(--gold); color: #000; }
-    .btn-danger { background: #ff4d4d22; color: #ff4d4d; border: 1px solid #ff4d4d; }
-    .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212,175,55,0.3); }
-
-    table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 14px; }
+    .btn-danger { background: var(--danger); color: #fff; }
+    .btn-outline { background: transparent; border: 1px solid var(--border); color: #fff; }
+    table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 13px; }
     th, td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border); }
     th { color: var(--gold); }
-
-    .batch-preview { 
-        background: #000; border: 1px solid var(--border); padding: 15px; 
-        border-radius: 12px; margin-top: 10px;
-    }
+    .batch-card { background: #000; padding: 12px; border-radius: 12px; border: 1px solid var(--border); }
   </style>
 </head>
 <body>
 
 <div class="header">
     <h1>A1 <span style="font-weight:300; color:var(--gold);">ADMIN</span></h1>
-    <div id="liveClock" style="color:var(--gold); font-weight:800;"></div>
+    <div id="liveClock" style="color:var(--gold); font-size: 12px;"></div>
 </div>
 
+<section class="section" style="border: 1px solid var(--gold);">
+    <h2>📢 Global Notification</h2>
+    <div style="display:flex; gap:10px;">
+        <input type="text" id="notifMsg" placeholder="Type message for all students...">
+        <button class="btn btn-gold" style="width:120px;" onclick="sendNotif()">Send</button>
+    </div>
+</section>
+
 <section class="section">
-    <h2>⚙️ Website Status</h2>
+    <h2>📍 Today's Route & Skill (Manual)</h2>
     <div class="grid">
-        <select id="isOff">
-            <option value="false">✅ Website Active</option>
-            <option value="true">⚠️ Class Cancelled</option>
+        <select id="updateBatchId"><option value="">Select Batch</option></select>
+        <input type="text" id="dailyRoute" placeholder="Route Name">
+        <input type="text" id="dailySkill" placeholder="Skill Name">
+        <select id="showPlan">
+            <option value="true">✅ Show Plan (ON)</option>
+            <option value="false">❌ Hide Plan (OFF)</option>
         </select>
-        <input type="text" id="offReason" placeholder="Reason (e.g. Heavy Rain)">
-        <button class="btn btn-gold" onclick="updateStatus()">Update Status</button>
+        <button class="btn btn-gold" onclick="updateDailyPlan()">Update & Apply</button>
+    </div>
+    <div style="margin-top:15px; display:flex; gap:10px;">
+        <button class="btn btn-outline" onclick="manualBook()">➕ Manual Slot Booking</button>
     </div>
 </section>
 
 <section class="section">
-    <h2>👨‍🎓 Student Class Counter</h2>
+    <h2>🎟️ Manage Batches</h2>
     <div class="grid">
-        <input type="text" id="stuName" placeholder="Student Name">
-        <input type="tel" id="stuPhone" placeholder="Phone (ID)">
-        <input type="number" id="stuRemaining" placeholder="Classes Left">
-        <button class="btn btn-gold" onclick="saveStudent()">Add/Update Student</button>
-    </div>
-    <div style="overflow-x:auto;">
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Phone</th>
-                    <th>Remaining</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody id="studentTable"></tbody>
-        </table>
-    </div>
-</section>
-
-<section class="section">
-    <h2>🎟️ Manage Batches & Daily Plan</h2>
-    <p style="font-size: 12px; color: var(--gold); margin-bottom: 10px;">Yahan se aap Route aur Skill update kar sakte hain jo bacchon ko dikhega.</p>
-    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));">
         <input type="text" id="slotName" placeholder="Batch Name">
-        <input type="text" id="slotTime" placeholder="Time (e.g. 6-7 AM)">
-        <input type="text" id="slotRoute" placeholder="Today's Route">
-        <input type="text" id="slotSkill" placeholder="Today's Skill">
-        <button class="btn btn-gold" onclick="addSlot()">Save Batch Plan</button>
+        <input type="text" id="slotTime" placeholder="Time (e.g. 7-8 AM)">
+        <button class="btn btn-gold" onclick="addSlot()">Add Batch</button>
     </div>
-    <div id="batchList" class="grid" style="margin-top:20px;"></div>
+    <div id="batchContainer" class="grid" style="margin-top:15px;"></div>
 </section>
 
 <section class="section">
-    <h2>🚗 Current Bookings</h2>
+    <h2>🚗 Recent Bookings</h2>
     <div style="overflow-x:auto;">
         <table>
-            <thead>
-                <tr>
-                    <th>Student</th>
-                    <th>Phone</th>
-                    <th>Batch</th>
-                    <th>Seat</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody id="bookingTable"></tbody>
+            <thead><tr><th>Student</th><th>Batch</th><th>Seat</th><th>Action</th></tr></thead>
+            <tbody id="bookingBody"></tbody>
         </table>
+    </div>
+</section>
+
+<section class="section">
+    <h2>👨‍🎓 Registered Students</h2>
+    <div class="grid">
+        <input type="text" id="stuName" placeholder="Name">
+        <input type="tel" id="stuPhone" placeholder="Phone">
+        <input type="number" id="stuCount" placeholder="Classes Left">
+        <button class="btn btn-gold" onclick="saveStudent()">Save Student</button>
     </div>
 </section>
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-  import { getFirestore, collection, doc, setDoc, deleteDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+  import { getFirestore, collection, doc, setDoc, updateDoc, deleteDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
@@ -139,106 +103,84 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  // 1. Status Control
-  window.updateStatus = async () => {
-    const isOff = document.getElementById("isOff").value === "true";
-    const reason = document.getElementById("offReason").value;
-    await setDoc(doc(db, "siteControl", "classStatus"), { isOff, reason });
-    alert("Status Updated!");
+  // --- NOTIFICATION ---
+  window.sendNotif = async () => {
+    const text = document.getElementById("notifMsg").value;
+    if(!text) return;
+    await setDoc(doc(db, "siteControl", "notification"), { text, time: Date.now() });
+    alert("Notification sent!");
+    document.getElementById("notifMsg").value = "";
   };
 
-  // 2. Student Manager
-  window.saveStudent = async () => {
-    const name = document.getElementById("stuName").value;
-    const phone = document.getElementById("stuPhone").value;
-    const remaining = document.getElementById("stuRemaining").value;
-    if(!name || !phone || !remaining) return alert("Fill All Fields");
-    await setDoc(doc(db, "studentData", phone), { name, phone, remaining: parseInt(remaining) });
-    alert("Student Data Updated!");
-    ["stuName","stuPhone","stuRemaining"].forEach(id => document.getElementById(id).value = "");
+  // --- DAILY PLAN ---
+  window.updateDailyPlan = async () => {
+    const id = document.getElementById("updateBatchId").value;
+    const route = document.getElementById("dailyRoute").value;
+    const skill = document.getElementById("dailySkill").value;
+    const show = document.getElementById("showPlan").value === "true";
+    if(!id) return alert("Select batch!");
+    await updateDoc(doc(db, "siteSlots", id), { route, skill, showPlan: show });
+    alert("Plan Updated!");
   };
 
-  onSnapshot(collection(db, "studentData"), (snap) => {
-    const tbody = document.getElementById("studentTable");
-    tbody.innerHTML = "";
-    snap.forEach(d => {
-        const s = d.data();
-        tbody.innerHTML += `<tr>
-            <td>${s.name}</td>
-            <td>${s.phone}</td>
-            <td style="color:var(--gold); font-weight:800;">${s.remaining}</td>
-            <td>
-                <button onclick="editStu('${s.name}','${s.phone}',${s.remaining})" style="color:var(--gold); background:none; border:none; cursor:pointer;">Edit</button> | 
-                <button onclick="delStu('${s.phone}')" style="color:red; background:none; border:none; cursor:pointer;">Del</button>
-            </td>
-        </tr>`;
+  // --- MANUAL BOOKING ---
+  window.manualBook = async () => {
+    const id = document.getElementById("updateBatchId").value;
+    if(!id) return alert("Select batch from dropdown first!");
+    const seat = prompt("Seat Number (1-4)?");
+    const name = prompt("Student Name?");
+    if(!seat || !name) return;
+    await setDoc(doc(db, "slotBookings", `${id}_${seat}`), {
+        slotId: id, seat: parseInt(seat), name: name + " (Manual)", phone: "ADMIN", bookedAt: serverTimestamp()
     });
-  });
-
-  window.delStu = async (id) => { if(confirm("Delete Student?")) await deleteDoc(doc(db, "studentData", id)); };
-  window.editStu = (n,p,r) => { 
-      document.getElementById("stuName").value = n; 
-      document.getElementById("stuPhone").value = p; 
-      document.getElementById("stuRemaining").value = r; 
+    alert("Booked!");
   };
 
-  // 3. Batch Manager with Route & Skill
+  // --- BATCH MANAGER ---
   window.addSlot = async () => {
     const name = document.getElementById("slotName").value;
     const time = document.getElementById("slotTime").value;
-    const route = document.getElementById("slotRoute").value;
-    const skill = document.getElementById("slotSkill").value;
-    if(!name || !time) return alert("Name & Time mandatory!");
-    
-    await setDoc(doc(db, "siteSlots", name), { 
-        name, time, 
-        route: route || "Local Road", 
-        skill: skill || "General Practice" 
-    });
-    alert("Batch Plan Updated!");
-    ["slotName","slotTime","slotRoute","slotSkill"].forEach(id => document.getElementById(id).value = "");
+    if(!name || !time) return;
+    await setDoc(doc(db, "siteSlots", name), { name, time, route: "", skill: "", showPlan: false });
+    alert("Batch Added!");
   };
 
+  // --- REAL-TIME LISTENERS ---
   onSnapshot(collection(db, "siteSlots"), (snap) => {
-    const list = document.getElementById("batchList");
-    list.innerHTML = "";
+    const cont = document.getElementById("batchContainer");
+    const drop = document.getElementById("updateBatchId");
+    cont.innerHTML = "";
+    drop.innerHTML = '<option value="">Select Batch</option>';
     snap.forEach(d => {
         const s = d.data();
-        list.innerHTML += `
-        <div class="batch-preview">
-            <b style="color:var(--gold);">${s.name}</b> <small>(${s.time})</small>
-            <div style="font-size:11px; color:#aaa; margin:5px 0;">📍 ${s.route} | 🎯 ${s.skill}</div>
-            <div style="display:flex; gap:5px;">
-                <button onclick="editBatch('${s.name}','${s.time}','${s.route}','${s.skill}')" style="font-size:10px; background:none; border:1px solid #555; color:#fff; cursor:pointer; padding:2px 5px; border-radius:4px;">Edit Plan</button>
-                <button onclick="delSlot('${d.id}')" style="font-size:10px; background:none; border:1px solid #ff4d4d; color:#ff4d4d; cursor:pointer; padding:2px 5px; border-radius:4px;">Delete</button>
-            </div>
+        drop.innerHTML += `<option value="${d.id}">${s.name}</option>`;
+        cont.innerHTML += `<div class="batch-card">
+            <b>${s.name}</b> <small>${s.time}</small><br>
+            <span style="font-size:10px; color:${s.showPlan?'#00ff88':'#ff4d4d'}">${s.showPlan?'Plan: Live':'Plan: OFF'}</span>
+            <button onclick="delBatch('${d.id}')" style="float:right; color:red; background:none; border:none; cursor:pointer;">Del</button>
         </div>`;
     });
   });
-  window.delSlot = async (id) => { if(confirm("Delete Batch?")) await deleteDoc(doc(db, "siteSlots", id)); };
-  window.editBatch = (n,t,r,s) => {
-      document.getElementById("slotName").value = n;
-      document.getElementById("slotTime").value = t;
-      document.getElementById("slotRoute").value = r;
-      document.getElementById("slotSkill").value = s;
-  };
 
-  // 4. Booking Logic
   onSnapshot(collection(db, "slotBookings"), (snap) => {
-    const tbody = document.getElementById("bookingTable");
-    tbody.innerHTML = "";
+    const body = document.getElementById("bookingBody");
+    body.innerHTML = "";
     snap.forEach(d => {
         const b = d.data();
-        tbody.innerHTML += `<tr>
-            <td>${b.name}</td>
-            <td>${b.phone}</td>
-            <td>${b.slotId}</td>
-            <td>A${b.seat}</td>
-            <td><button class="btn-danger" onclick="clearB('${d.id}')" style="padding:2px 10px; width:auto;">Clear</button></td>
-        </tr>`;
+        body.innerHTML += `<tr><td>${b.name}</td><td>${b.slotId}</td><td>A${b.seat}</td><td><button class="btn-danger" style="padding:2px 8px;" onclick="clearB('${d.id}')">Clear</button></td></tr>`;
     });
   });
-  window.clearB = async (id) => { if(confirm("Clear this seat?")) await deleteDoc(doc(db, "slotBookings", id)); };
+
+  window.delBatch = async (id) => { if(confirm("Delete batch?")) await deleteDoc(doc(db, "siteSlots", id)); };
+  window.clearB = async (id) => { if(confirm("Clear seat?")) await deleteDoc(doc(db, "slotBookings", id)); };
+  
+  window.saveStudent = async () => {
+    const name = document.getElementById("stuName").value;
+    const phone = document.getElementById("stuPhone").value;
+    const count = document.getElementById("stuCount").value;
+    await setDoc(doc(db, "studentData", phone), { name, phone, remaining: parseInt(count) });
+    alert("Student Saved!");
+  };
 
   setInterval(() => { document.getElementById("liveClock").innerText = new Date().toLocaleTimeString(); }, 1000);
 </script>
