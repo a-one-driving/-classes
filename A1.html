@@ -3,63 +3,70 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A1 Admin | Control Center</title>
+  <title>A1 Admin | Dashboard</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
-    :root { --gold: #d4af37; --bg: #0b0b0b; --card: #1a1a1a; --txt: #ffffff; }
-    body { background: var(--bg); color: var(--txt); font-family: 'Poppins', sans-serif; padding: 20px; }
+    :root { --gold: #d4af37; --bg: #0b0b0b; --card: #1a1a1a; --txt: #ffffff; --danger: #ff4d4d; }
+    body { background: var(--bg); color: var(--txt); font-family: 'Poppins', sans-serif; padding: 15px; }
     .section { background: var(--card); padding: 20px; border-radius: 15px; border: 1px solid var(--gold); margin-bottom: 25px; }
-    h2 { color: var(--gold); font-size: 18px; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 5px; }
+    h2 { color: var(--gold); font-size: 18px; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
     input, select, button { width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #333; background: #000; color: #fff; outline: none; }
     button { background: var(--gold); color: #000; font-weight: 800; border: none; cursor: pointer; }
-    .btn-del { background: #ff4d4d; color: #fff; padding: 5px 10px; width: auto; font-size: 10px; }
-    .list-item { display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #333; }
+    
+    /* Booking List Styling */
+    .booking-card { background: #000; padding: 12px; border-radius: 10px; border-left: 4px solid var(--gold); margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+    .booking-info b { color: var(--gold); display: block; font-size: 14px; }
+    .booking-info span { font-size: 12px; color: #aaa; }
+    .btn-del { background: var(--danger); color: white; width: auto; padding: 5px 12px; font-size: 11px; }
+    
+    .batch-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #333; font-size: 13px; }
   </style>
 </head>
 <body>
 
-<h1>👑 A1 Control Center</h1>
-<p style="font-size: 12px; color: var(--gold); margin-bottom: 20px;">Abhinaash A1 Driving Academy</p>
+<h1 style="font-size: 22px;">👑 A1 Control Panel</h1>
+<p style="font-size: 11px; color: var(--gold); margin-bottom: 20px;">Abhinaash A1 Academy Management</p>
+
+<div class="section" style="border-color: #00ff88;">
+  <h2 style="color: #00ff88;">📱 LIVE BOOKINGS (Students)</h2>
+  <p style="font-size: 10px; color: #888; margin-bottom: 10px;">Yahan dikhega kisne konsi seat book ki hai:</p>
+  <div id="liveBookingList">
+    <p style="font-size: 12px; color: #555;">No bookings yet...</p>
+  </div>
+</div>
 
 <div class="section">
-  <h2>📢 Update Announcement Bar</h2>
-  <input type="text" id="notifText" placeholder="Message (e.g. New Batches Starting Monday!)">
+  <h2>📢 Notice Bar</h2>
+  <input type="text" id="notifText" placeholder="Message (e.g. 10% Discount on Morning Batch)">
   <select id="notifStatus">
-    <option value="true">Show Bar</option>
+    <option value="true">Show Now</option>
     <option value="false">Hide Bar</option>
   </select>
-  <button onclick="updateNotif()">Update Bar</button>
+  <button onclick="updateNotif()">Save Notice</button>
 </div>
 
 <div class="section">
-  <h2>🎟️ Add New Batch</h2>
-  <input type="text" id="bId" placeholder="Batch ID (e.g. MORNING_7AM)">
-  <input type="text" id="bName" placeholder="Batch Name (e.g. Early Bird)">
-  <input type="text" id="bTime" placeholder="Time (e.g. 7:00 AM - 8:00 AM)">
+  <h2>🎟️ Manage Batches</h2>
+  <input type="text" id="bId" placeholder="Batch ID (Unique)">
+  <input type="text" id="bName" placeholder="Batch Name">
+  <input type="text" id="bTime" placeholder="Time (e.g. 8AM-9AM)">
   <select id="bStatus">
-    <option value="old">Regular Batch</option>
-    <option value="new">Mark as NEW BATCH</option>
+    <option value="old">Regular</option>
+    <option value="new">Mark as NEW</option>
   </select>
-  <button onclick="addBatch()">Create Batch</button>
-  
-  <div id="batchList" style="margin-top: 20px;">
-    <h3>Current Batches:</h3>
-    </div>
+  <button onclick="addBatch()">Add Batch</button>
+  <div id="batchList" style="margin-top: 15px;"></div>
 </div>
 
 <div class="section">
-  <h2>📊 Update Student Classes</h2>
-  <input type="tel" id="sPhone" placeholder="Student Mobile Number">
+  <h2>📊 Student Classes</h2>
+  <input type="tel" id="sPhone" placeholder="Mobile Number">
   <input type="text" id="sName" placeholder="Student Name">
-  <input type="number" id="sRem" placeholder="Remaining Classes (e.g. 12)">
-  <button onclick="updateStudent()">Save Student Data</button>
+  <input type="number" id="sRem" placeholder="Classes Remaining">
+  <button onclick="updateStudent()">Update Balance</button>
 </div>
 
-<div class="section">
-  <h2 style="color: #ff4d4d;">⚠️ Reset Bookings</h2>
-  <p style="font-size: 10px; color: #888;">Naye hafte ke liye purani seats khali karein.</p>
-  <button style="background: #333; color: #fff;" onclick="clearAllBookings()">Clear All Seats</button>
-</div>
+<button style="background: #333; color: #888; margin-top: 20px;" onclick="clearAllBookings()">Clear All Bookings (Reset Week)</button>
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
@@ -77,21 +84,44 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  // 1. NOTIFICATION UPDATE
+  // 1. LIVE BOOKING TRACKER LOGIC
+  onSnapshot(collection(db, "slotBookings"), (snap) => {
+    const list = document.getElementById("liveBookingList");
+    list.innerHTML = "";
+    if(snap.empty) list.innerHTML = "<p style='color:#555; font-size:12px;'>No active bookings.</p>";
+    
+    snap.forEach(d => {
+      const data = d.data();
+      list.innerHTML += `
+        <div class="booking-card">
+          <div class="booking-info">
+            <b>${data.name}</b>
+            <span>📞 ${data.phone}</span>
+            <span>📍 Seat: ${d.id}</span>
+          </div>
+          <button class="btn-del" onclick="cancelBooking('${d.id}')">Cancel</button>
+        </div>`;
+    });
+  });
+
+  window.cancelBooking = async (id) => {
+    if(confirm("Booking delete karein?")) await deleteDoc(doc(db, "slotBookings", id));
+  };
+
+  // 2. OTHER FUNCTIONS
   window.updateNotif = async () => {
     const txt = document.getElementById("notifText").value;
     const stat = document.getElementById("notifStatus").value === "true";
     await setDoc(doc(db, "siteSettings", "announcement"), { text: txt, active: stat });
-    alert("Announcement Updated!");
+    alert("Notice Updated!");
   };
 
-  // 2. BATCH MANAGEMENT
   window.addBatch = async () => {
     const id = document.getElementById("bId").value;
     const name = document.getElementById("bName").value;
     const time = document.getElementById("bTime").value;
     const status = document.getElementById("bStatus").value;
-    if(!id || !name) return alert("Fill ID and Name!");
+    if(!id || !name) return alert("Fill data!");
     await setDoc(doc(db, "siteSlots", id), { name, time, status });
     alert("Batch Added!");
   };
@@ -101,35 +131,30 @@
     list.innerHTML = "<h3>Current Batches:</h3>";
     snap.forEach(d => {
       list.innerHTML += `
-        <div class="list-item">
-          <span>${d.id} (${d.data().status})</span>
-          <button class="btn-del" onclick="deleteBatch('${d.id}')">Delete</button>
+        <div class="batch-item">
+          <span>${d.id} (${d.data().time})</span>
+          <button class="btn-del" style="background:#222" onclick="deleteBatch('${d.id}')">X</button>
         </div>`;
     });
   });
 
   window.deleteBatch = async (id) => {
-    if(confirm("Delete this batch?")) await deleteDoc(doc(db, "siteSlots", id));
+    if(confirm("Delete batch?")) await deleteDoc(doc(db, "siteSlots", id));
   };
 
-  // 3. STUDENT DATA
   window.updateStudent = async () => {
     const p = document.getElementById("sPhone").value;
     const n = document.getElementById("sName").value;
     const r = document.getElementById("sRem").value;
-    if(!p || !n) return alert("Need Phone and Name!");
     await setDoc(doc(db, "studentData", p), { name: n, remaining: r });
-    alert("Student Data Saved!");
+    alert("Student Updated!");
   };
 
-  // 4. CLEAR BOOKINGS
   window.clearAllBookings = async () => {
-    if(confirm("Are you sure? This will empty all booked seats!")) {
+    if(confirm("Reset all seats?")) {
       const snap = await getDocs(collection(db, "slotBookings"));
-      snap.forEach(async (d) => {
-        await deleteDoc(doc(db, "slotBookings", d.id));
-      });
-      alert("All seats are now available!");
+      snap.forEach(async (d) => await deleteDoc(doc(db, "slotBookings", d.id)));
+      alert("All seats cleared!");
     }
   };
 </script>
