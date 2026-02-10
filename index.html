@@ -17,28 +17,21 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
     body { background-color: var(--bg); color: var(--txt); overflow-x: hidden; padding-bottom: 120px; }
 
+    /* HEADER WITH ID */
     header {
       padding: 15px; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--gold); position: sticky; top: 0; z-index: 1000;
     }
     .nav { max-width: 1100px; margin: auto; display: flex; justify-content: space-between; align-items: center; }
     .logo { font-weight: 900; font-size: 20px; color: var(--gold); letter-spacing: 1px; }
+    .header-id { font-size: 10px; color: var(--gold); opacity: 0.8; font-weight: 600; }
 
     .container { max-width: 1100px; margin: auto; padding: 20px 15px; }
-
-    .hero { text-align: center; padding: 25px 0; }
-    .hero h1 { font-size: 36px; font-weight: 900; line-height: 1.1; margin-bottom: 10px; }
-    .shine-gold {
-      background: linear-gradient(90deg, #d4af37, #f9e29d, #aa891b, #d4af37);
-      background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      animation: shine 3s linear infinite;
-    }
-    @keyframes shine { to { background-position: 200% center; } }
 
     /* PRICING & BEST LABEL */
     .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-bottom: 30px; }
     .price-card { background: var(--card); padding: 20px; border-radius: 20px; border: 1px solid var(--border); position: relative; overflow: hidden; }
-    .price-card.featured { border: 2px solid var(--gold); transform: scale(1.02); }
+    .price-card.featured { border: 2px solid var(--gold); }
     .best-label { 
       position: absolute; top: 12px; right: -35px; 
       background: var(--gold); color: #000; 
@@ -47,37 +40,27 @@
     }
     .price-tag { font-size: 28px; font-weight: 900; color: #fff; margin: 10px 0; }
 
-    /* PERSONAL CLASS BANNER */
+    /* PERSONAL CLASS BANNER (Matches Image) */
     .personal-banner {
         background: var(--gold); color: #000; padding: 20px; border-radius: 20px;
         margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center;
     }
     .btn-book-black { background: #000; color: var(--gold); border: none; padding: 10px 22px; border-radius: 12px; font-weight: 900; cursor: pointer; }
 
-    /* FLEET GALLERY */
-    .fleet-gallery { display: flex; overflow-x: auto; gap: 12px; padding: 10px 5px 20px 5px; margin-bottom: 20px; scrollbar-width: none; }
-    .fleet-gallery::-webkit-scrollbar { display: none; }
-    .fleet-item { flex-shrink: 0; width: 260px; position: relative; }
-    .fleet-item img { width: 100%; height: 160px; object-fit: cover; border-radius: 18px; border: 1px solid var(--gold); }
-    .fleet-label { position: absolute; bottom: 10px; left: 10px; background: rgba(0,0,0,0.7); color: var(--gold); padding: 3px 10px; border-radius: 20px; font-size: 9px; font-weight: 800; border: 1px solid var(--gold); }
-
     /* REFER & EARN */
     .refer-card { background: var(--card); border: 2px dashed var(--gold); border-radius: 20px; padding: 25px; margin-bottom: 30px; text-align: center; }
-    #referUI { margin-top: 15px; display: none; background: #000; padding: 15px; border-radius: 15px; border: 1px solid #333; }
 
-    /* SLOTS & PLANS */
+    /* SLOTS */
     .slotWrap { border-radius: 20px; border: 1px solid var(--gold); background: var(--card); padding: 20px; margin-bottom: 30px;}
-    .slotGrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-top: 15px; }
-    .slotCard { background: #000; border: 1px solid var(--border); padding: 15px; border-radius: 18px; position: relative; }
+    .slotCard { background: #000; border: 1px solid var(--border); padding: 15px; border-radius: 18px; margin-bottom: 15px; }
     .daily-plan-box { margin: 10px 0; padding: 10px; background: #111; border-radius: 12px; border-left: 4px solid var(--gold); font-size: 11px; }
-    
     .seatGrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 15px; }
     .seat { height: 45px; border-radius: 10px; border: 1px solid #333; font-weight: 800; cursor: pointer; background: #1a1a1a; color: #fff; }
     .seat.available { border-color: var(--accent2); color: var(--accent2); }
-    .seat.booked { background: var(--danger); border: none; cursor: not-allowed; opacity: 0.5; }
+    .seat.booked { background: var(--danger); border: none; opacity: 0.5; }
 
     /* STATUS CHECKER */
-    .status-checker { background: var(--card); border: 1px solid var(--gold); border-radius: 20px; padding: 25px; text-align: center; margin-bottom: 20px; }
+    .status-checker { background: var(--card); border: 1px solid var(--gold); border-radius: 20px; padding: 25px; text-align: center; }
     .status-input { width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #333; background: #000; color: #fff; text-align: center; margin-bottom: 15px; outline: none; }
 
     .btn-gold { background: linear-gradient(45deg, var(--gold), #f9e29d); color: #000; border: none; padding: 12px 20px; border-radius: 10px; font-weight: 800; cursor: pointer; width: 100%; }
@@ -90,59 +73,46 @@
 <header>
   <div class="nav">
     <div class="logo">ABHINAASH <span style="font-weight:300">A1</span></div>
+    <div class="header-id">ID: ABO-9921</div>
   </div>
 </header>
 
 <div class="container">
-  <section class="hero">
-    <h1 class="shine-gold">DRIVE WITH ROYALTY</h1>
-    <p style="color: var(--muted); font-size: 14px;">Premium Driving Academy in Odisha</p>
-  </section>
-
   <div class="pricing-grid">
     <div class="price-card">
         <h3>Standard</h3>
         <div class="price-tag">₹3,500</div>
-        <ul style="list-style:none; font-size:13px; color:var(--muted); margin-bottom:15px;"><li>✓ 15 Days Classes</li><li>✓ Steering Control</li></ul>
-        <button class="btn-gold" onclick="openContextBooking('Standard Package')">Join Now</button>
+        <button class="btn-gold" onclick="openBooking('Standard Package (₹3500)')">Join Now</button>
     </div>
     <div class="price-card featured">
         <div class="best-label">BEST</div>
         <h3>Premium</h3>
         <div class="price-tag">₹5,000</div>
-        <ul style="list-style:none; font-size:13px; color:var(--muted); margin-bottom:15px;"><li>✓ 30 Days Classes</li><li>✓ Highway & Parking</li></ul>
-        <button class="btn-gold" onclick="openContextBooking('Premium Package')">Join Now</button>
+        <button class="btn-gold" onclick="openBooking('Premium Package (₹5000)')">Join Now</button>
     </div>
   </div>
 
   <div class="personal-banner">
       <div>
           <h3 style="margin:0;">Personal 1-on-1 ₹8,000</h3>
-          <p style="font-size:12px; margin:4px 0 0 0; opacity:0.9;">Single student, specialized focus.</p>
+          <p style="font-size:12px; opacity:0.9;">Single student, specialized focus.</p>
       </div>
-      <button class="btn-book-black" onclick="openContextBooking('Personal 1-on-1 Class')">BOOK</button>
+      <button class="btn-book-black" onclick="openBooking('Personal 1-on-1 Class (₹8000)')">BOOK</button>
   </div>
 
   <div class="refer-card">
-      <p style="font-size:14px; margin-bottom:5px;">Refer & Earn</p>
-      <h3 style="font-size:32px; color:var(--gold); margin-bottom:15px;">₹500 <span style="font-size:12px; color:var(--muted)">PER FRIEND</span></h3>
+      <p style="font-size:14px;">Refer & Earn</p>
+      <h3 style="font-size:32px; color:var(--gold); margin: 10px 0;">₹500 <span style="font-size:12px; color:var(--muted)">PER FRIEND</span></h3>
       <button id="showRefBtn" onclick="toggleReferUI()" class="btn-gold" style="width:auto; padding:10px 30px;">Get My Referral Link</button>
-      <div id="referUI">
-        <input type="tel" id="refPhone" class="status-input" placeholder="Enter Mobile Number">
-        <button onclick="generateRefLink()" class="btn-gold">Generate & Copy</button>
+      <div id="referUI" style="display:none; margin-top:15px;">
+        <input type="tel" id="refPhone" class="status-input" placeholder="Your Mobile Number">
+        <button onclick="generateRefLink()" class="btn-gold">Copy Link</button>
       </div>
-  </div>
-
-  <h2 style="font-size:16px; margin-bottom:15px; color: var(--gold);">🚗 OUR PREMIUM FLEET</h2>
-  <div class="fleet-gallery">
-      <div class="fleet-item"><img src="tigor1.PNG"><div class="fleet-label">TATA TIGOR - A1</div></div>
-      <div class="fleet-item"><img src="tigor2.PNG"><div class="fleet-label">LUXURY COMFORT</div></div>
-      <div class="fleet-item"><img src="tigor3.png"><div class="fleet-label">EXPERT READY</div></div>
   </div>
 
   <section class="slotWrap">
     <h2 style="font-size:16px; margin-bottom:15px; color:var(--gold);">🎟️ LIVE BATCH BOOKING</h2>
-    <div id="dynamicSlotGrid" class="slotGrid">Connecting...</div>
+    <div id="dynamicSlotGrid">Connecting...</div>
   </section>
 
   <section class="status-checker">
@@ -155,10 +125,10 @@
 
 <div class="modal" id="bookingModal">
   <div class="modal-content">
-    <h2 id="modalTitle" style="color:var(--gold); margin-bottom:15px;">Confirm Seat</h2>
+    <h2 id="modalTitle" style="color:var(--gold); margin-bottom:15px; font-size:18px;">Confirm Booking</h2>
     <input type="text" id="userName" placeholder="Your Name" class="status-input">
     <input type="tel" id="userPhone" placeholder="Mobile Number" class="status-input">
-    <button class="btn-gold" onclick="finalSubmit()">Confirm</button>
+    <button class="btn-gold" onclick="finalSubmit()">Send to WhatsApp</button>
     <button class="btn-gold" style="background:#222; color:#fff; margin-top:10px;" onclick="closeModal()">Cancel</button>
   </div>
 </div>
@@ -179,56 +149,52 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  let ALL_SLOTS = []; let BOOKINGS = {}; let tempSelection = { type: null, slotId: null, seat: null };
+  let ALL_SLOTS = []; let BOOKINGS = {}; let selectedItem = "";
 
   // REFERRAL
-  window.toggleReferUI = () => { document.getElementById("referUI").style.display = "block"; document.getElementById("showRefBtn").style.display = "none"; };
+  window.toggleReferUI = () => document.getElementById("referUI").style.display = "block";
   window.generateRefLink = () => {
     const p = document.getElementById("refPhone").value;
     if(p.length < 10) return alert("Enter valid number!");
     const link = `${window.location.origin}${window.location.pathname}?ref=${p}`;
-    navigator.clipboard.writeText(link); alert("Link Copied!");
+    navigator.clipboard.writeText(link); alert("Referral Link Copied!");
   };
 
-  // SYNC
+  // FETCH SLOTS
   onSnapshot(collection(db, "siteSlots"), (snap) => { ALL_SLOTS = []; snap.forEach(d => ALL_SLOTS.push({ id: d.id, ...d.data() })); render(); });
   onSnapshot(collection(db, "slotBookings"), (snap) => { BOOKINGS = {}; snap.forEach(d => BOOKINGS[d.id] = d.data()); render(); });
 
   function render() {
     const grid = document.getElementById("dynamicSlotGrid"); grid.innerHTML = "";
     ALL_SLOTS.forEach(slot => {
-        const plan = slot.showPlan ? `<div class="daily-plan-box">📍 <b>Route:</b> ${slot.route || 'Local'}<br>🎯 <b>Focus:</b> ${slot.skill || 'Control'}</div>` : '';
+        const plan = slot.showPlan ? `<div class="daily-plan-box">📍 <b>Route:</b> ${slot.route}<br>🎯 <b>Focus:</b> ${slot.skill}</div>` : '';
         let seats = "";
         for(let i=1; i<=4; i++) {
             const bId = `${slot.id}_${i}`; const booked = BOOKINGS[bId];
-            seats += `<button class="seat ${booked ? 'booked' : 'available'}" onclick="${booked ? '' : `openSeatBooking('${slot.id}', ${i})`}">A${i}</button>`;
+            seats += `<button class="seat ${booked ? 'booked' : 'available'}" onclick="${booked ? '' : `openBooking('Batch ${slot.id} - Seat A${i}')`}">A${i}</button>`;
         }
-        grid.innerHTML += `<div class="slotCard"><div style="display:flex; justify-content:space-between;"><b>${slot.name}</b><small style="color:var(--gold);">${slot.time}</small></div>${plan}<div class="seatGrid">${seats}</div></div>`;
+        grid.innerHTML += `<div class="slotCard"><b>${slot.name}</b> <small style="float:right; color:var(--gold);">${slot.time}</small>${plan}<div class="seatGrid">${seats}</div></div>`;
     });
   }
 
-  window.openSeatBooking = (id, s) => { tempSelection={type:'seat', slotId:id, seat:s}; document.getElementById("modalTitle").innerText=`Batch ${id} (Seat A${s})`; document.getElementById("bookingModal").style.display="flex"; };
-  window.openContextBooking = (name) => { tempSelection={type:'context', slotId:name, seat:null}; document.getElementById("modalTitle").innerText=name; document.getElementById("bookingModal").style.display="flex"; };
-  window.closeModal = () => document.getElementById("bookingModal").style.display="none";
+  window.openBooking = (item) => { selectedItem = item; document.getElementById("modalTitle").innerText = item; document.getElementById("bookingModal").style.display = "flex"; };
+  window.closeModal = () => document.getElementById("bookingModal").style.display = "none";
 
   window.finalSubmit = async () => {
-    const n = document.getElementById("userName").value; const p = document.getElementById("userPhone").value;
-    const urlParams = new URLSearchParams(window.location.search);
-    const referredBy = urlParams.get('ref') || "Direct Join";
-    if(!n || p.length < 10) return alert("Fill valid details!");
+    const n = document.getElementById("userName").value;
+    const p = document.getElementById("userPhone").value;
+    if(!n || p.length < 10) return alert("Valid details please!");
     
-    if(tempSelection.type === 'seat') {
-      await setDoc(doc(db, "slotBookings", `${tempSelection.slotId}_${tempSelection.seat}`), { name: n, phone: p, referredBy: referredBy, bookedAt: serverTimestamp() });
-    }
-    
-    alert("Inquiry Sent!"); closeModal();
-    window.open(`https://wa.me/917008186187?text=Hi, I am ${n}. Booking for: ${tempSelection.slotId} ${tempSelection.seat ? 'Seat A'+tempSelection.seat : ''}. Ref: ${referredBy}`);
+    // Send to WhatsApp
+    const msg = `Hi A1 Driving, I am ${n} (${p}). I want to book: ${selectedItem}.`;
+    window.open(`https://wa.me/917008186187?text=${encodeURIComponent(msg)}`);
+    closeModal();
   };
 
   window.checkRemaining = async () => {
     const p = document.getElementById("checkPhone").value;
     const snap = await getDoc(doc(db, "studentData", p));
-    if(snap.exists()) document.getElementById("remainingResult").innerHTML = `Hi ${snap.data().name}, Classes Left: ${snap.data().remaining}`;
+    if(snap.exists()) document.getElementById("remainingResult").innerText = `Classes Left: ${snap.data().remaining}`;
     else alert("Record not found!");
   };
 </script>
