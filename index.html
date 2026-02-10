@@ -49,7 +49,7 @@
     }
     .btn-book-black { background: #000; color: var(--gold); border: none; padding: 10px 22px; border-radius: 12px; font-weight: 900; cursor: pointer; }
 
-    /* NEW COMPACT REFER DESIGN */
+    /* COMPACT REFER DESIGN */
     .refer-card { background: var(--card); border: 2px dashed var(--gold); border-radius: 20px; padding: 25px; margin-bottom: 30px; text-align: center; }
     #referUI { margin-top: 20px; display: none; }
     
@@ -67,7 +67,6 @@
       height: 100%; padding: 0 20px; font-weight: 900; 
       font-size: 12px; cursor: pointer; transition: 0.3s;
     }
-    .copy-trigger:active { opacity: 0.7; }
 
     /* SLOTS */
     .slotWrap { border-radius: 20px; border: 1px solid var(--gold); background: var(--card); padding: 20px; margin-bottom: 30px;}
@@ -76,7 +75,7 @@
     .seatGrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 15px; }
     .seat { height: 45px; border-radius: 10px; border: 1px solid #333; font-weight: 800; cursor: pointer; background: #1a1a1a; color: #fff; }
     .seat.available { border-color: var(--accent2); color: var(--accent2); }
-    .seat.booked { background: var(--danger); border: none; opacity: 0.5; }
+    .seat.booked { background: var(--danger); border: none; opacity: 0.5; cursor: not-allowed; }
 
     /* BUTTONS & INPUTS */
     .status-input { width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #333; background: #000; color: #fff; text-align: center; margin-bottom: 15px; outline: none; }
@@ -133,7 +132,6 @@
       <p style="font-size:14px;">Refer & Earn</p>
       <h3 style="font-size:32px; color:var(--gold); margin: 10px 0;">₹500 <span style="font-size:12px; color:var(--muted)">PER FRIEND</span></h3>
       <button id="showRefBtn" onclick="toggleReferUI()" class="btn-gold" style="width:auto; padding:10px 30px;">Get My Referral Link</button>
-      
       <div id="referUI">
         <input type="tel" id="refPhone" class="status-input" placeholder="Enter Mobile Number">
         <button onclick="generateRefLink()" class="btn-gold" style="font-size: 13px;">Generate Link</button>
@@ -162,7 +160,7 @@
 <div class="modal" id="bookingModal">
   <div class="modal-content">
     <h2 id="modalTitle" style="color:var(--gold); margin-bottom:15px; font-size:18px;">Confirm Booking</h2>
-    <input type="text" id="userName" placeholder="Your Name" class="status-input">
+    <input type="text" id="userName" placeholder="Student Name" class="status-input">
     <input type="tel" id="userPhone" placeholder="Mobile Number" class="status-input">
     <button class="btn-gold" onclick="finalSubmit()">Confirm & WhatsApp</button>
     <button class="btn-gold" style="background:#222; color:#fff; margin-top:10px;" onclick="closeModal()">Cancel</button>
@@ -171,7 +169,7 @@
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-  import { getFirestore, collection, doc, setDoc, getDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+  import { getFirestore, collection, doc, setDoc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
@@ -185,9 +183,12 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  let ALL_SLOTS = []; let BOOKINGS = {}; let selectedItem = "";
+  let ALL_SLOTS = []; let BOOKINGS = {}; let selectedSeatId = ""; let selectedLabel = "";
 
-  // REFERRAL
+  // REFERRAL LOGIC
+  const urlParams = new URLSearchParams(window.location.search);
+  const referredBy = urlParams.get('ref') || "Direct Join";
+
   window.toggleReferUI = () => { document.getElementById("referUI").style.display = "block"; document.getElementById("showRefBtn").style.display = "none"; };
   window.generateRefLink = () => {
     const p = document.getElementById("refPhone").value;
@@ -201,7 +202,7 @@
     alert("Link Copied!");
   };
 
-  // FETCH
+  // FETCH DATA
   onSnapshot(collection(db, "siteSlots"), (snap) => { ALL_SLOTS = []; snap.forEach(d => ALL_SLOTS.push({ id: d.id, ...d.data() })); render(); });
   onSnapshot(collection(db, "slotBookings"), (snap) => { BOOKINGS = {}; snap.forEach(d => BOOKINGS[d.id] = d.data()); render(); });
 
@@ -212,22 +213,44 @@
         let seats = "";
         for(let i=1; i<=4; i++) {
             const bId = `${slot.id}_${i}`; const booked = BOOKINGS[bId];
-            seats += `<button class="seat ${booked ? 'booked' : 'available'}" onclick="${booked ? '' : `openBooking('Batch ${slot.id} - A${i}')`}">A${i}</button>`;
+            seats += `<button class="seat ${booked ? 'booked' : 'available'}" 
+                      onclick="${booked ? "alert('Seat already booked!')" : `openBooking('${bId}', '${slot.name} - A${i}')`}">A${i}</button>`;
         }
         grid.innerHTML += `<div class="slotCard"><b>${slot.name}</b> <small style="float:right; color:var(--gold); font-weight:700;">${slot.time}</small>${plan}<div class="seatGrid">${seats}</div></div>`;
     });
   }
 
-  window.openBooking = (item) => { selectedItem = item; document.getElementById("modalTitle").innerText = item; document.getElementById("bookingModal").style.display = "flex"; };
+  window.openBooking = (id, label) => { 
+    selectedSeatId = id; 
+    selectedLabel = label; 
+    document.getElementById("modalTitle").innerText = label; 
+    document.getElementById("bookingModal").style.display = "flex"; 
+  };
+  
   window.closeModal = () => document.getElementById("bookingModal").style.display = "none";
 
   window.finalSubmit = async () => {
     const n = document.getElementById("userName").value;
     const p = document.getElementById("userPhone").value;
-    if(!n || p.length < 10) return alert("Details please!");
-    const msg = encodeURIComponent(`Hi A1 Driving, I am ${n} (${p}). I want to book: ${selectedItem}`);
-    window.open(`https://wa.me/917008186187?text=${msg}`);
-    closeModal();
+    
+    if(!n || p.length < 10) return alert("Please enter Name and 10-digit Phone!");
+
+    // SAVE TO FIREBASE (Admin will see this)
+    try {
+        await setDoc(doc(db, "slotBookings", selectedSeatId), {
+            name: n,
+            phone: p,
+            batch: selectedLabel,
+            referredBy: referredBy,
+            timestamp: new Date()
+        });
+
+        const msg = encodeURIComponent(`Hi A1 Driving, I am ${n} (${p}). I have booked ${selectedLabel}.`);
+        window.open(`https://wa.me/917008186187?text=${msg}`);
+        closeModal();
+    } catch (e) {
+        alert("Booking failed. Try again.");
+    }
   };
 
   window.checkRemaining = async () => {
