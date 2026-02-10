@@ -41,7 +41,6 @@
       background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       animation: shine 3s linear infinite;
     }
-    @keyframes shine { to { background-position: 200% center; } }
 
     /* Pricing Section */
     .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-bottom: 30px; }
@@ -88,7 +87,7 @@
 <header>
   <div class="nav">
     <div class="logo">ABHINAASH <span style="font-weight:300">A1</span></div>
-    <div id="vidDisplay" style="font-size: 9px; color: var(--gold);">ID: ...</div>
+    <div id="vidDisplay" style="font-size: 9px; color: var(--gold);">ID: ABO-9921</div>
   </div>
 </header>
 
@@ -108,7 +107,7 @@
             <li>✓ Steering Control</li>
             <li>✓ Traffic Rules</li>
         </ul>
-        <button class="btn-gold" onclick="window.open('https://wa.me/917008186187?text=Enquiry: Standard Course')">Join Now</button>
+        <button class="btn-gold" onclick="openPackageInquiry('Standard Course (₹3,500)')">Join Now</button>
     </div>
     <div class="price-card featured">
         <div style="position:absolute; top:10px; right:-30px; background:var(--gold); color:#000; padding:5px 40px; transform:rotate(45deg); font-size:10px; font-weight:900;">BEST</div>
@@ -119,7 +118,7 @@
             <li>✓ Highway & Parking</li>
             <li>✓ DL/LL Assistance</li>
         </ul>
-        <button class="btn-gold" onclick="window.open('https://wa.me/917008186187?text=Enquiry: Premium Course')">Join Now</button>
+        <button class="btn-gold" onclick="openPackageInquiry('Premium Course (₹5,000)')">Join Now</button>
     </div>
   </div>
 
@@ -128,7 +127,7 @@
           <h3 style="font-weight:900">Personal 1-on-1 <span style="margin-left:10px;">₹8,000</span></h3>
           <p style="font-size:12px; opacity:0.8">Single student, specialized focus.</p>
       </div>
-      <button onclick="window.open('https://wa.me/917008186187?text=Interested in Personal Class (₹8,000)')" style="background:#000; color:var(--gold); border:none; padding:10px 15px; border-radius:10px; font-weight:800; cursor:pointer;">BOOK</button>
+      <button onclick="openPackageInquiry('Personal 1-on-1 Class (₹8,000)')" style="background:#000; color:var(--gold); border:none; padding:10px 15px; border-radius:10px; font-weight:800; cursor:pointer;">BOOK</button>
   </div>
 
   <section class="slotWrap">
@@ -146,12 +145,23 @@
   </section>
 </div>
 
+<div class="modal" id="inquiryModal">
+  <div class="modal-content">
+    <h2 style="color:var(--gold); margin-bottom:10px;">Course Inquiry</h2>
+    <p id="packageDisplay" style="font-size:13px; margin-bottom:15px; color:var(--gold); font-weight:600;"></p>
+    <input type="text" id="inquiryName" placeholder="Your Full Name" style="width:100%; padding:12px; margin-bottom:10px; background:#000; color:#fff; border:1px solid #333; border-radius:10px; outline:none;">
+    <input type="tel" id="inquiryPhone" placeholder="Mobile Number" style="width:100%; padding:12px; margin-bottom:15px; background:#000; color:#fff; border:1px solid #333; border-radius:10px; outline:none;">
+    <button class="btn-gold" onclick="submitInquiry()">Confirm & Chat</button>
+    <button class="btn-gold" style="background:#222; color:#fff; margin-top:10px;" onclick="closeInquiryModal()">Cancel</button>
+  </div>
+</div>
+
 <div class="modal" id="bookingModal">
   <div class="modal-content">
     <h2 style="color:var(--gold); margin-bottom:10px;">Confirm Seat</h2>
     <p id="slotDisplay" style="font-size:12px; margin-bottom:15px; color:var(--muted);"></p>
-    <input type="text" id="userName" placeholder="Your Name" style="width:100%; padding:12px; margin-bottom:10px; background:#000; color:#fff; border:1px solid #333; border-radius:10px;">
-    <input type="tel" id="userPhone" placeholder="Mobile Number" style="width:100%; padding:12px; margin-bottom:15px; background:#000; color:#fff; border:1px solid #333; border-radius:10px;">
+    <input type="text" id="userName" placeholder="Your Name" style="width:100%; padding:12px; margin-bottom:10px; background:#000; color:#fff; border:1px solid #333; border-radius:10px; outline:none;">
+    <input type="tel" id="userPhone" placeholder="Mobile Number" style="width:100%; padding:12px; margin-bottom:15px; background:#000; color:#fff; border:1px solid #333; border-radius:10px; outline:none;">
     <button class="btn-gold" onclick="finalSubmit()">Confirm</button>
     <button class="btn-gold" style="background:#222; color:#fff; margin-top:10px;" onclick="closeModal()">Cancel</button>
   </div>
@@ -178,23 +188,33 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  const vid = localStorage.getItem("ABO_VID") || "A1-" + Math.floor(Math.random()*9999);
-  localStorage.setItem("ABO_VID", vid);
-  document.getElementById("vidDisplay").innerText = "ID: " + vid;
-
   let ALL_SLOTS = [];
   let BOOKINGS = {};
   let tempSelection = { slotId: null, seat: null };
+  let currentPackage = "";
 
-  onSnapshot(doc(db, "siteControl", "notification"), (snap) => {
-    if(snap.exists()){
-      const bar = document.getElementById("notifBar");
-      bar.innerText = "📢 " + snap.data().text;
-      bar.style.display = "block";
-      setTimeout(() => { bar.style.display = "none"; }, 8000); 
-    }
-  });
+  // 1. INQUIRY MODAL LOGIC
+  window.openPackageInquiry = (packageName) => {
+    currentPackage = packageName;
+    document.getElementById("packageDisplay").innerText = "Interested in: " + packageName;
+    document.getElementById("inquiryModal").style.display = "flex";
+  };
 
+  window.closeInquiryModal = () => {
+    document.getElementById("inquiryModal").style.display = "none";
+  };
+
+  window.submitInquiry = () => {
+    const name = document.getElementById("inquiryName").value;
+    const phone = document.getElementById("inquiryPhone").value;
+    if(!name || phone.length < 10) return alert("Please enter valid name and mobile number!");
+    
+    const message = `Hi Abhinaash A1, I am ${name}. I am interested in joining the ${currentPackage}. My contact is ${phone}.`;
+    window.open(`https://wa.me/917008186187?text=${encodeURIComponent(message)}`);
+    closeInquiryModal();
+  };
+
+  // 2. BATCH LOGIC
   onSnapshot(collection(db, "siteSlots"), (snap) => {
     ALL_SLOTS = [];
     snap.forEach(d => ALL_SLOTS.push({ id: d.id, ...d.data() }));
@@ -226,18 +246,27 @@
     });
   }
 
-  window.openBooking = (id, s, b) => { if(!b){ tempSelection={slotId:id, seat:s}; document.getElementById("slotDisplay").innerText=`Batch: ${id} | Seat: A${s}`; document.getElementById("bookingModal").style.display="flex"; }};
+  window.openBooking = (id, s, b) => { 
+    if(!b){ 
+      tempSelection={slotId:id, seat:s}; 
+      document.getElementById("slotDisplay").innerText=`Batch: ${id} | Seat: A${s}`; 
+      document.getElementById("bookingModal").style.display="flex"; 
+    }
+  };
+
   window.closeModal = () => document.getElementById("bookingModal").style.display="none";
 
   window.finalSubmit = async () => {
     const n = document.getElementById("userName").value;
     const p = document.getElementById("userPhone").value;
-    if(!n || !p) return alert("Fill details!");
+    if(!n || p.length < 10) return alert("Fill valid details!");
     await setDoc(doc(db, "slotBookings", `${tempSelection.slotId}_${tempSelection.seat}`), {
       slotId: tempSelection.slotId, seat: tempSelection.seat, name: n, phone: p, bookedAt: serverTimestamp()
     });
-    alert("Booked!"); closeModal();
-    window.open(`https://wa.me/917008186187?text=Booking: ${n} | Seat A${tempSelection.seat} in ${tempSelection.slotId}`);
+    alert("Seat Booked!"); 
+    closeModal();
+    const message = `Booking Alert: Hi, I am ${n}. I have booked Seat A${tempSelection.seat} in the ${tempSelection.slotId} batch. Contact: ${p}`;
+    window.open(`https://wa.me/917008186187?text=${encodeURIComponent(message)}`);
   };
 
   window.checkRemaining = async () => {
