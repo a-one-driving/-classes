@@ -32,7 +32,7 @@
 
     .container { max-width: 1100px; margin: auto; padding: 20px 15px; position: relative; z-index: 1; }
 
-    /* --- NEW SHOWROOM STYLES --- */
+    /* --- SHOWROOM STYLES (BACK TO ORIGINAL) --- */
     .showroom-section {
       width: 100%;
       padding: 30px 15px;
@@ -70,7 +70,28 @@
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
     }
-    /* -------------------------- */
+
+    /* --- NEW ROUTES STYLES --- */
+    .routes-container {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 15px;
+      scrollbar-width: none;
+    }
+    .routes-container::-webkit-scrollbar { display: none; }
+    .route-chip {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 8px 15px;
+      border-radius: 50px;
+      white-space: nowrap;
+      font-size: 11px;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
 
     /* PRICING */
     .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-bottom: 30px; }
@@ -85,27 +106,10 @@
     .personal-banner { background: var(--gold); color: #000; padding: 20px; border-radius: 20px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; }
     .btn-book-black { background: #000; color: var(--gold); border: none; padding: 10px 22px; border-radius: 12px; font-weight: 900; cursor: pointer; }
 
-    /* --- COMPACT SLIDER FOR BATCHES --- */
-    .batch-slider { 
-      display: flex; 
-      gap: 15px; 
-      overflow-x: auto; 
-      padding-bottom: 10px; 
-      scroll-snap-type: x mandatory; 
-      scrollbar-width: none; 
-    }
+    /* BATCHES */
+    .batch-slider { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 10px; scroll-snap-type: x mandatory; scrollbar-width: none; }
     .batch-slider::-webkit-scrollbar { display: none; } 
-
-    .batch-card { 
-      min-width: 280px; 
-      max-width: 280px;
-      background: var(--card); 
-      border: 1px solid var(--border); 
-      padding: 15px; 
-      border-radius: 20px; 
-      backdrop-filter: blur(10px); 
-      scroll-snap-align: start;
-    }
+    .batch-card { min-width: 280px; max-width: 280px; background: var(--card); border: 1px solid var(--border); padding: 15px; border-radius: 20px; backdrop-filter: blur(10px); scroll-snap-align: start; }
     .progress-bar-bg { width: 100%; height: 4px; background: #111; border-radius: 10px; margin-top: 5px; overflow: hidden; }
     .progress-bar-fill { height: 100%; background: var(--gold); transition: 1s ease; }
 
@@ -139,7 +143,20 @@
     </div>
   </section>
 
-  <h2 style="font-size:14px; margin-bottom:15px; color:var(--gold); letter-spacing:1px; text-transform:uppercase;">💎 Training Packages</h2>
+  <h2 style="font-size:12px; margin-bottom:12px; color:var(--muted); letter-spacing:1px; text-transform:uppercase;">📍 Training Routes</h2>
+  <div class="routes-container">
+    <div class="route-chip">Bhanjpur</div>
+    <div class="route-chip">Kuchei road</div>
+    <div class="route-chip">Deuli road</div>
+    <div class="route-chip">Udala road</div>
+    <div class="route-chip">Lal bazar road</div>
+    <div class="route-chip">Bad bazar road</div>
+    <div class="route-chip">Station bazar road</div>
+    <div class="route-chip">Medical college road</div>
+    <div class="route-chip">Baleswer route</div>
+  </div>
+
+  <h2 style="font-size:14px; margin-bottom:15px; color:var(--gold); letter-spacing:1px; text-transform:uppercase; margin-top:20px;">💎 Training Packages</h2>
   <div class="pricing-grid">
     <div class="price-card">
         <h3>Standard</h3>
@@ -209,10 +226,7 @@
     snap.forEach(doc => {
       const data = doc.data();
       if(data.name) {
-        attendanceMap[data.name] = {
-          done: data.remaining || 0,
-          total: data.totalClasses || 15
-        };
+        attendanceMap[data.name] = { done: data.remaining || 0, total: data.totalClasses || 15 };
       }
     });
     loadBatches();
@@ -222,17 +236,14 @@
     onSnapshot(collection(db, "activeBatches"), (snap) => {
       const grid = document.getElementById('batchGrid');
       grid.innerHTML = "";
-      
       snap.forEach(doc => {
         const b = doc.data();
         let studentHTML = "";
-
         if (b.students) {
           b.students.forEach(s => {
             const liveData = attendanceMap[s.name] || { done: 0, total: 15 };
             const left = liveData.total - liveData.done;
             const percent = Math.round((liveData.done / liveData.total) * 100);
-
             studentHTML += `
               <div style="margin-bottom:10px; background:rgba(255,255,255,0.03); padding:8px; border-radius:10px;">
                 <div style="display:flex; justify-content:space-between; font-size:11px; margin-bottom:3px;">
@@ -243,30 +254,14 @@
               </div>`;
           });
         }
-
-        grid.innerHTML += `
-          <div class="batch-card">
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-              <b style="color:var(--gold); font-size:14px;">${b.batchName}</b>
-              <span style="font-size:8px; border:1px solid var(--gold); padding:1px 4px; color:var(--gold); border-radius:3px;">LIVE</span>
-            </div>
-            <p style="font-size:9px; color:var(--muted); margin:2px 0 10px;">🕒 ${b.time}</p>
-            <div style="max-height: 150px; overflow-y: auto; scrollbar-width: none;">
-                ${studentHTML || '<p style="font-size:10px; color:#444;">No students.</p>'}
-            </div>
-          </div>`;
+        grid.innerHTML += `<div class="batch-card"><b>${b.batchName}</b><p>${b.time}</p>${studentHTML}</div>`;
       });
     });
   }
 
   window.openBooking = (label) => { document.getElementById("modalTitle").innerText = label; document.getElementById("bookingModal").style.display = "flex"; };
   window.closeModal = () => document.getElementById("bookingModal").style.display = "none";
-  window.finalSubmit = async () => {
-    const n = document.getElementById("userName").value;
-    const p = document.getElementById("userPhone").value;
-    if(!n || p.length < 10) return alert("Fill details!");
-    window.location.href = `https://wa.me/917008186187?text=${encodeURIComponent("New Booking: "+n)}`;
-  };
+  window.finalSubmit = () => { window.location.href = `https://wa.me/917008186187?text=Booking`; };
 
   async function updateWeatherUI() {
     const container = document.getElementById('weather-container');
