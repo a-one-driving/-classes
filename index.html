@@ -85,31 +85,31 @@
         <h3>Standard</h3>
         <div class="price-tag">₹3,500</div>
         <ul class="feature-list">
-            <li>15 Days Classes</li>
+            <li>20 Days Classes</li>
             <li>Steering Control</li>
             <li>Traffic Rules</li>
         </ul>
-        <button class="btn-gold" onclick="openBooking('PKG_STD', 'Standard Package')">Join Now</button>
+        <button class="btn-gold" onclick="openBooking('PKG_STD', 'Standard Package (₹3500)')">Join Now</button>
     </div>
     <div class="price-card featured">
         <div class="best-label">BEST</div>
         <h3>Premium</h3>
-        <div class="price-tag">₹5,000</div>
+        <div class="price-tag">₹4,500</div>
         <ul class="feature-list">
             <li>30 Days Classes</li>
             <li>Highway & Parking</li>
             <li>DL/LL Assistance</li>
         </ul>
-        <button class="btn-gold" onclick="openBooking('PKG_PREM', 'Premium Package')">Join Now</button>
+        <button class="btn-gold" onclick="openBooking('PKG_PREM', 'Premium Package (₹4500)')">Join Now</button>
     </div>
   </div>
 
   <div class="personal-banner">
       <div>
           <h3 style="margin:0; font-size:16px;">Personal 1-on-1 ₹8,000</h3>
-          <p style="font-size:11px; opacity:0.9;">Single student, specialized focus.</p>
+          <p style="font-size:11px; opacity:0.9;">Single student, dedicated focus.</p>
       </div>
-      <button class="btn-book-black" onclick="openBooking('PKG_PERS', 'Personal 1-on-1 Class')">BOOK</button>
+      <button class="btn-book-black" onclick="openBooking('PKG_PERS', 'Personal 1-on-1 Class (₹8000)')">BOOK</button>
   </div>
 
   <div class="refer-card">
@@ -220,7 +220,8 @@
   onSnapshot(collection(db, "slotBookings"), (snap) => { BOOKINGS = {}; snap.forEach(d => BOOKINGS[d.id] = d.data()); render(); });
 
   function render() {
-    const grid = document.getElementById("dynamicSlotGrid"); grid.innerHTML = "";
+    const grid = document.getElementById("dynamicSlotGrid"); if(!grid) return;
+    grid.innerHTML = "";
     ALL_SLOTS.forEach(slot => {
         const plan = slot.showPlan ? `<div class="daily-plan-box">📍 <b>Route:</b> ${slot.route}<br>🎯 <b>Focus:</b> ${slot.skill}</div>` : '';
         let seats = "";
