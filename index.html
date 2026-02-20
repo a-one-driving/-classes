@@ -95,6 +95,25 @@
     .route-chip[data-level="med"] { border-left: 4px solid var(--warning); }
     .route-chip[data-level="hard"] { border-left: 4px solid var(--danger); }
 
+    /* NEW DIFFICULTY GUIDE STYLES */
+    .difficulty-guide {
+      display: flex;
+      justify-content: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+      padding: 0 5px;
+    }
+    .guide-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 9px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .dot { width: 7px; height: 7px; border-radius: 50%; }
+
     /* PRICING */
     .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-bottom: 30px; }
     .price-card { background: var(--card); padding: 20px; border-radius: 20px; border: 1px solid var(--border); position: relative; overflow: hidden; backdrop-filter: blur(10px); }
@@ -146,15 +165,22 @@
     </div>
   </section>
 
-  <h2 style="font-size:12px; margin-bottom:12px; color:var(--muted); letter-spacing:1px; text-transform:uppercase;">📍 Training Routes & Levels</h2>
+  <h2 style="font-size:12px; margin-bottom:8px; color:var(--muted); letter-spacing:1px; text-transform:uppercase;">📍 Training Routes & Levels</h2>
+  
+  <div class="difficulty-guide">
+    <div class="guide-item"><span class="dot" style="background:var(--success)"></span> Easy</div>
+    <div class="guide-item"><span class="dot" style="background:var(--warning)"></span> Medium</div>
+    <div class="guide-item"><span class="dot" style="background:var(--danger)"></span> Hard</div>
+  </div>
+
   <div class="routes-container">
     <div class="route-chip" data-level="easy">Bhanjpur 🟡</div>
-    <div class="route-chip" data-level="med">Kuchei road 🟢</div>
-    <div class="route-chip" data-level="hard">Lal bazar road 🔴</div>
-    <div class="route-chip" data-level="hard">Medical college 🟢</div>
-    <div class="route-chip" data-level="med">Station bazar 🔴</div>
     <div class="route-chip" data-level="easy">Deuli road 🟢</div>
-    <div class="route-chip" data-level="hard">Baleswer route 🔴</div>
+    <div class="route-chip" data-level="med">Kuchei road 🟢</div>
+    <div class="route-chip" data-level="med">Medical college 🟡</div>
+    <div class="route-chip" data-level="hard">Lal bazar road 🔴</div>
+    <div class="route-chip" data-level="hard">Station bazar 🔴</div>
+    <div class="route-chip" data-level="hard">Baleswer route 🟢</div>
   </div>
 
   <h2 style="font-size:14px; margin-bottom:15px; color:var(--gold); letter-spacing:1px; text-transform:uppercase; margin-top:20px;">💎 Training Packages</h2>
