@@ -76,6 +76,20 @@
 
     .weather-alert { font-size: 10px; font-weight: 700; margin-top: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
 
+    /* --- TRAFFIC RULE SECTION (FIXED) --- */
+    .traffic-rule-card {
+      background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+      border: 1px solid var(--border); border-radius: 20px; padding: 15px; margin-bottom: 25px;
+      display: flex; align-items: center; gap: 15px; border-left: 4px solid var(--gold);
+    }
+    .rule-icon-box {
+      width: 60px; height: 60px; background: #fff; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0;
+    }
+    .rule-icon-box img { width: 80%; height: 80%; object-fit: contain; transition: opacity 0.3s ease; }
+    .rule-content h4 { font-size: 10px; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px; }
+    .rule-content p { font-size: 13px; font-weight: 600; color: #fff; line-height: 1.3; }
+
     /* --- ROUTES WITH DIFFICULTY --- */
     .routes-container { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 15px; scrollbar-width: none; }
     .routes-container::-webkit-scrollbar { display: none; }
@@ -95,7 +109,6 @@
     .route-chip[data-level="med"] { border-left: 4px solid var(--warning); }
     .route-chip[data-level="hard"] { border-left: 4px solid var(--danger); }
 
-    /* NEW DIFFICULTY GUIDE STYLES */
     .difficulty-guide {
       display: flex;
       justify-content: flex-start;
@@ -164,6 +177,16 @@
         <img src="https://a-one-driving.github.io/-classes/tigor10.PNG" class="main-car">
     </div>
   </section>
+
+  <div class="traffic-rule-card">
+    <div class="rule-icon-box">
+      <img id="ruleImage" src="" alt="Sign" style="opacity: 0;">
+    </div>
+    <div class="rule-content">
+      <h4>Rule of the Day</h4>
+      <p id="ruleText">Loading safe driving tip...</p>
+    </div>
+  </div>
 
   <h2 style="font-size:12px; margin-bottom:8px; color:var(--muted); letter-spacing:1px; text-transform:uppercase;">📍 Training Routes & Levels</h2>
   
@@ -246,6 +269,27 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
+  // --- TRAFFIC RULES RANDOMIZER (FIXED CDN) ---
+  const rules = [
+    { img: "https://cdn-icons-png.flaticon.com/512/564/564619.png", txt: "No Entry: Is raste par jana mana hai." },
+    { img: "https://cdn-icons-png.flaticon.com/512/564/564617.png", txt: "Stop: Pehle ruko, phir dekho aur chalo." },
+    { img: "https://cdn-icons-png.flaticon.com/512/4844/4844427.png", txt: "Speed Limit: Over-speeding se bachein." },
+    { img: "https://cdn-icons-png.flaticon.com/512/2641/2641411.png", txt: "No Parking: Yahan gaadi khadi karna mana hai." },
+    { img: "https://cdn-icons-png.flaticon.com/512/595/595067.png", txt: "Danger: Aage savdhani se gaadi chalayein." }
+  ];
+
+  function setRandomRule() {
+    const random = rules[Math.floor(Math.random() * rules.length)];
+    const imgEl = document.getElementById('ruleImage');
+    imgEl.style.opacity = 0;
+    setTimeout(() => {
+        imgEl.src = random.img;
+        document.getElementById('ruleText').innerText = random.txt;
+        imgEl.style.opacity = 1;
+    }, 250);
+  }
+  setRandomRule();
+
   // --- CAR SLIDER ---
   let currentCar = 0;
   const cars = document.querySelectorAll('.main-car');
@@ -322,7 +366,8 @@
             alertMsg.style.color = "#ff4d4d";
             for(let i=0; i<30; i++) {
                 let d = document.createElement('div'); d.className = 'rain-drop';
-                d.style.left = Math.random()*100+'vw'; d.style.animationDuration = Math.random()*0.5+0.5+'s';
+                d.style.left = Math.random()*100+'vw'; 
+                d.style.animationDuration = Math.random()*0.5+0.5+'s';
                 container.appendChild(d);
             }
         } else {
