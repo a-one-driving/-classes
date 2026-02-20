@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A1 Admin | Master Control</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;900&display=swap" rel="stylesheet">
+  <style>
+    :root { --gold: #d4af37; --bg: #0a0a0a; --card: #1a1a1a; --txt: #ffffff; --danger: #ff4d4d; }
+    body { background: var(--bg); color: var(--txt); font-family: 'Poppins', sans-serif; padding: 20px; }
+    .container { max-width: 900px; margin: auto; }
+    h1 { color: var(--gold); font-weight: 900; text-align: center; margin-bottom: 30px; letter-spacing: 2px; }
+    
+    .panel-card { background: var(--card); border: 1px solid #333; padding: 25px; border-radius: 15px; margin-bottom: 25px; }
+    input, select { width: 100%; padding: 12px; margin: 10px 0; background: #000; border: 1px solid #444; color: #fff; border-radius: 8px; outline: none; }
+    input:focus, select:focus { border-color: var(--gold); }
+    
+    .btn { background: var(--gold); color: #000; border: none; padding: 12px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; width: 100%; transition: 0.3s; }
+    .btn:hover { background: #fff; }
+    
+    .batch-list-item { border: 1px solid #333; margin-bottom: 20px; background: #111; padding: 20px; border-radius: 15px; }
+    .batch-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; padding-bottom: 10px; margin-bottom: 15px; }
+    
+    .student-row { display: grid; grid-template-columns: 2fr 1.5fr 1fr 50px; gap: 10px; background: #1a1a1a; padding: 10px; border-radius: 10px; margin-bottom: 8px; align-items: center; border: 1px solid #222; }
+    .btn-del { background: var(--danger); color: #fff; border: none; padding: 8px; border-radius: 6px; cursor: pointer; font-size: 10px; }
+    
+    .progress-bar { width: 100%; height: 4px; background: #333; border-radius: 5px; margin-top: 5px; }
+    .progress-fill { height: 100%; background: var(--gold); transition: 0.5s; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>A1 MASTER ADMIN</h1>
+
+  <div class="panel-card">
+    <h3 style="color:var(--gold); margin-top:0;">+ Setup New Batch</h3>
+    <div style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px;">
+      <input type="text" id="newBatchName" placeholder="e.g. Morning 7AM">
+      <input type="text" id="newBatchTime" placeholder="e.g. 07:00-08:00 AM">
+      <button class="btn" style="width: 120px; margin-top: 10px;" onclick="createNewBatch()">CREATE</button>
+    </div>
+  </div>
+
+  <div id="editorZone">
+    <p style="text-align: center; color: #888;">Connecting to A1 Database...</p>
+  </div>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+  import { getFirestore, collection, doc, setDoc, onSnapshot, deleteDoc, updateDoc, getDocs } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
+    authDomain: "abinash-driving.firebaseapp.com",
+    projectId: "abinash-driving",
+    storageBucket: "abinash-driving.appspot.com",
+    messagingSenderId: "641148830173",
+    appId: "1:641148830173:web:b7a500e5e7e2463da0f634"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  let studentDataMap = []; // Pure students ki attendance info rakhne ke liye
+  let allBatches = [];
+
+  // 1. Sync Student Names & Attendance Data
+  async function syncAttendanceData() {
+    const snap = await getDocs(collection(db, "studentData"));
+    studentDataMap = [];
+    snap.forEach(d => {
+      studentDataMap.push({ id: d.id, ...d.data() });
+    });
+    renderUI();
+  }
+
+  // 2. Real-time Batch Listener
+  onSnapshot(collection(db, "activeBatches"), (snap) => {
+    allBatches = [];
+    snap.forEach(d => allBatches.push({ id: d.id, ...d.data() }));
+    syncAttendanceData();
+  });
+
+  function renderUI() {
+    const zone = document.getElementById('editorZone');
+    zone.innerHTML = "";
+
+    allBatches.forEach(batch => {
+      let studentRows = "";
+      batch.students.forEach((s, index) => {
+        // Calculation assuming 15 is total classes
+        const progress = Math.round(((15 - s.daysLeft) / 15) * 100);
+        studentRows += `
+          <div class="student-row">
+            <div>
+                <b style="font-size:13px; color:var(--gold)">${s.name}</b>
+                <div class="progress-bar"><div class="progress-fill" style="width:${progress > 0 ? progress : 0}%"></div></div>
+            </div>
+            <div style="font-size:11px;">Class Left: 
+                <input type="number" value="${s.daysLeft}" style="width:45px; padding:4px; margin:0;" onchange="updateClassCount('${batch.id}', ${index}, this.value)">
+            </div>
+            <div style="font-size:10px; color:#666;">${progress > 0 ? progress : 0}% Done</div>
+            <button class="btn-del" onclick="removeStudent('${batch.id}', ${index})">×</button>
+          </div>`;
+      });
+
+      const options = studentDataMap.map(st => `<option value="${st.name}">${st.name}</option>`).join('');
+
+      zone.innerHTML += `
+        <div class="batch-list-item">
+          <div class="batch-header">
+            <div><b>${batch.batchName}</b> <br> <small style="color:#666">${batch.time}</small></div>
+            <button onclick="deleteBatch('${batch.id}')" style="background:none; border:none; color:var(--danger); cursor:pointer;">Delete</button>
+          </div>
+          <div>${studentRows || '<p style="font-size:11px; color:#444;">No students added.</p>'}</div>
+          <div style="margin-top:15px; display:flex; gap:10px; border-top:1px solid #222; padding-top:15px;">
+            <select id="sel_${batch.id}"><option value="">-- Choose Student --</option>${options}</select>
+            <button class="btn" style="width:80px; padding:10px;" onclick="addStudentToBatch('${batch.id}')">ADD</button>
+          </div>
+        </div>`;
+    });
+  }
+
+  // --- ACTIONS ---
+
+  window.createNewBatch = async () => {
+    const name = document.getElementById('newBatchName').value;
+    const time = document.getElementById('newBatchTime').value;
+    if(!name || !time) return alert("Fill Name & Time!");
+    await setDoc(doc(db, "activeBatches", "batch_" + Date.now()), { batchName: name, time: time, students: [] });
+    document.getElementById('newBatchName').value = "";
+  };
+
+  window.addStudentToBatch = async (batchId) => {
+    const name = document.getElementById(`sel_${batchId}`).value;
+    if(!name) return alert("Student select karein!");
+    
+    // Auto-Sync Attendance Logic
+    const studentInfo = studentDataMap.find(st => st.name === name);
+    const total = studentInfo.totalClasses || 15;
+    const done = studentInfo.remaining || 0;
+    const autoDaysLeft = total - done;
+
+    const batch = allBatches.find(b => b.id === batchId);
+    const newStudents = [...batch.students, { 
+        name: name, 
+        daysLeft: autoDaysLeft > 0 ? autoDaysLeft : 0 
+    }];
+    
+    await updateDoc(doc(db, "activeBatches", batchId), { students: newStudents });
+    alert(`${name} added with ${autoDaysLeft} classes remaining!`);
+  };
+
+  window.updateClassCount = async (batchId, index, newVal) => {
+    const batch = allBatches.find(b => b.id === batchId);
+    batch.students[index].daysLeft = parseInt(newVal);
+    await updateDoc(doc(db, "activeBatches", batchId), { students: batch.students });
+  };
+
+  window.removeStudent = async (batchId, index) => {
+    if(!confirm("Remove student?")) return;
+    const batch = allBatches.find(b => b.id === batchId);
+    batch.students.splice(index, 1);
+    await updateDoc(doc(db, "activeBatches", batchId), { students: batch.students });
+  };
+
+  window.deleteBatch = async (id) => {
+    if(confirm("Delete batch?")) await deleteDoc(doc(db, "activeBatches", id));
+  };
+
+</script>
+</body>
+</html>
