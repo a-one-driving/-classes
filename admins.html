@@ -8,127 +8,37 @@
   <style>
     :root { --gold: #d4af37; --bg: #000; --card: #111; --success: #00ff88; --danger: #ff4d4d; }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
-    
-    body { background: var(--bg); color: #fff; padding: 15px; padding-bottom: 100px; overflow-x: hidden; }
-
-    /* Glassmorphic Header */
-    .header { 
-        background: rgba(10, 10, 10, 0.9); backdrop-filter: blur(15px);
-        padding: 20px; position: sticky; top: 0; z-index: 100;
-        border-bottom: 1px solid #222; margin: -15px -15px 20px -15px;
-        display: flex; justify-content: space-between; align-items: center;
-    }
+    body { background: var(--bg); color: #fff; padding: 15px; padding-bottom: 100px; }
+    .header { background: rgba(10, 10, 10, 0.9); backdrop-filter: blur(15px); padding: 20px; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #222; margin: -15px -15px 20px -15px; display: flex; justify-content: space-between; align-items: center; }
     .header h1 { font-size: 18px; color: var(--gold); letter-spacing: 1px; }
-    .header p { font-size: 10px; color: #666; text-transform: uppercase; }
-
-    /* Search Bar Modern */
-    .search-container { margin-bottom: 20px; }
-    .search-bar { 
-        width: 100%; background: #121212; border: 1px solid #222; 
-        padding: 15px 20px; border-radius: 15px; color: #fff; outline: none;
-        transition: 0.3s; font-size: 14px;
-    }
-    .search-bar:focus { border-color: var(--gold); }
-
-    /* Attendance Card */
+    .search-bar { width: 100%; background: #121212; border: 1px solid #222; padding: 15px; border-radius: 15px; color: #fff; outline: none; margin-bottom: 20px; }
     .attendance-grid { display: grid; gap: 12px; }
-    .st-card { 
-        background: var(--card); border-radius: 20px; padding: 15px;
-        border: 1px solid #222; display: flex; align-items: center;
-        transition: 0.3s; position: relative;
-    }
-    
-    .st-initial {
-        width: 45px; height: 45px; background: #1a1a1a; 
-        border-radius: 12px; display: flex; align-items: center;
-        justify-content: center; font-weight: 800; color: var(--gold);
-        font-size: 18px; border: 1px solid #333; margin-right: 12px;
-    }
-
+    .st-card { background: var(--card); border-radius: 20px; padding: 15px; border: 1px solid #222; display: flex; align-items: center; position: relative; }
+    .st-initial { width: 45px; height: 45px; background: #1a1a1a; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 800; color: var(--gold); border: 1px solid #333; margin-right: 12px; }
     .st-details { flex: 1; }
     .st-details b { font-size: 15px; display: block; text-transform: capitalize; }
     .st-details span { font-size: 11px; color: #555; }
-
     .progress-mini { width: 60px; text-align: right; margin-right: 10px; }
-    .progress-mini b { color: var(--gold); font-size: 16px; }
-    .progress-mini p { font-size: 8px; color: #444; font-weight: bold; }
-
-    /* Buttons */
-    .mark-btn {
-        background: var(--gold); color: #000; border: none;
-        width: 42px; height: 42px; border-radius: 12px;
-        font-size: 20px; font-weight: bold; cursor: pointer;
-    }
-    
-    .del-btn {
-        background: none; border: none; color: #333;
-        font-size: 18px; margin-left: 10px; cursor: pointer;
-    }
-    .del-btn:hover { color: var(--danger); }
-
-    /* Floating Add Button */
-    .fab {
-        position: fixed; bottom: 85px; right: 20px;
-        width: 55px; height: 55px; background: var(--gold);
-        border-radius: 50%; display: flex; align-items: center;
-        justify-content: center; font-size: 30px; color: #000;
-        box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
-        z-index: 999; cursor: pointer; border: none;
-    }
-
-    /* Modal Styling */
-    .modal {
-        display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0,0,0,0.9); z-index: 2000; align-items: center; justify-content: center;
-        padding: 20px;
-    }
-    .modal-content {
-        background: #111; padding: 25px; border-radius: 25px; border: 1px solid #222;
-        width: 100%; max-width: 400px;
-    }
-    .modal-content h2 { color: var(--gold); margin-bottom: 20px; font-size: 20px; }
-    input { 
-        width: 100%; padding: 15px; margin-bottom: 15px; 
-        background: #000; border: 1px solid #333; border-radius: 12px; color: #fff;
-    }
-    .save-btn {
-        width: 100%; padding: 15px; background: var(--gold); border: none;
-        border-radius: 12px; font-weight: 800; cursor: pointer;
-    }
-
-    /* Stats Footer */
-    .bottom-nav {
-        position: fixed; bottom: 0; left: 0; right: 0;
-        background: #000; border-top: 1px solid #222;
-        padding: 15px; display: flex; justify-content: space-around; z-index: 1000;
-    }
-    .stat-box { text-align: center; }
-    .stat-box b { display: block; font-size: 16px; color: var(--gold); }
-    .stat-box small { font-size: 9px; color: #666; }
-
+    .mark-btn { background: var(--gold); color: #000; border: none; width: 42px; height: 42px; border-radius: 12px; font-size: 20px; font-weight: bold; cursor: pointer; }
+    .fab { position: fixed; bottom: 85px; right: 20px; width: 55px; height: 55px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; color: #000; z-index: 999; cursor: pointer; border: none; }
+    .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+    .modal-content { background: #111; padding: 25px; border-radius: 25px; border: 1px solid #222; width: 100%; max-width: 400px; }
+    input { width: 100%; padding: 15px; margin-bottom: 15px; background: #000; border: 1px solid #333; border-radius: 12px; color: #fff; }
+    .save-btn { width: 100%; padding: 15px; background: var(--gold); border: none; border-radius: 12px; font-weight: 800; cursor: pointer; }
+    .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: #000; border-top: 1px solid #222; padding: 15px; display: flex; justify-content: space-around; }
     .status-done { border-color: var(--success) !important; opacity: 0.6; }
-    .status-done .mark-btn { background: #222; color: #444; }
   </style>
 </head>
 <body>
 
 <div class="header">
-    <div>
-        <h1>A1 ATTENDANCE</h1>
-        <p id="dateDisplay"></p>
-    </div>
-    <div style="text-align: right">
-        <p>A1 ACADEMY</p>
-        <p style="color: var(--gold)">MANAGEMENT</p>
-    </div>
+    <h1>A1 ATTENDANCE</h1>
+    <p id="dateDisplay" style="font-size: 10px; color: #666;"></p>
 </div>
 
-<div class="search-container">
-    <input type="text" id="studentSearch" class="search-bar" placeholder="🔍 Search student name..." onkeyup="filterList()">
-</div>
+<input type="text" id="studentSearch" class="search-bar" placeholder="🔍 Search student name..." onkeyup="filterList()">
 
-<div id="attendanceList" class="attendance-grid">
-    </div>
+<div id="attendanceList" class="attendance-grid"></div>
 
 <button class="fab" onclick="toggleModal(true)">+</button>
 
@@ -144,18 +54,8 @@
 </div>
 
 <div class="bottom-nav">
-    <div class="stat-box">
-        <b id="totalActive">0</b>
-        <small>ACTIVE</small>
-    </div>
-    <div class="stat-box">
-        <b id="totalFinished">0</b>
-        <small>FINISHED</small>
-    </div>
-    <div class="stat-box" onclick="location.href='A1.html'" style="cursor:pointer;">
-        <b>⚙️</b>
-        <small>SLOTS</small>
-    </div>
+    <div style="text-align:center"><b id="totalActive" style="color:var(--gold)">0</b><br><small style="font-size:9px">ACTIVE</small></div>
+    <div style="text-align:center"><b id="totalFinished" style="color:var(--gold)">0</b><br><small style="font-size:9px">FINISHED</small></div>
 </div>
 
 <script type="module">
@@ -176,69 +76,45 @@
 
   document.getElementById('dateDisplay').innerText = new Date().toDateString();
 
-  // Load List
   onSnapshot(collection(db, "studentData"), (snap) => {
     const list = document.getElementById("attendanceList");
     list.innerHTML = "";
     let active = 0, finished = 0;
-
     snap.forEach(d => {
       const data = d.data();
       const done = data.remaining || 0;
       const total = data.totalClasses || 15;
       const isDone = done >= total;
-
       if(isDone) finished++; else active++;
 
       list.innerHTML += `
         <div class="st-card ${isDone ? 'status-done' : ''}" data-name="${data.name.toLowerCase()}">
           <div class="st-initial">${data.name.charAt(0)}</div>
-          <div class="st-details">
-            <b>${data.name}</b>
-            <span>📞 ${d.id}</span>
-          </div>
-          <div class="progress-mini">
-            <b>${done}/${total}</b>
-            <p>PRESENT</p>
-          </div>
+          <div class="st-details"><b>${data.name}</b><span>📞 ${d.id}</span></div>
+          <div class="progress-mini"><b>${done}/${total}</b><p style="font-size:8px">DONE</p></div>
           <button class="mark-btn" onclick="markPresent('${d.id}')" ${isDone ? 'disabled' : ''}>+</button>
-          <button class="del-btn" onclick="removeStudent('${d.id}')">×</button>
+          <button style="background:none; border:none; color:#333; margin-left:10px; font-size:18px;" onclick="removeStudent('${d.id}')">×</button>
         </div>`;
     });
     document.getElementById('totalActive').innerText = active;
     document.getElementById('totalFinished').innerText = finished;
   });
 
-  // Actions
-  window.markPresent = async (id) => {
-      await updateDoc(doc(db, "studentData", id), { remaining: increment(1) });
-  };
-
   window.addNewStudent = async () => {
-      const p = document.getElementById('newPhone').value;
-      const n = document.getElementById('newName').value;
-      const t = document.getElementById('newTotal').value;
-      if(!p || !n) return alert("Fill Name and Phone");
-      
-      await setDoc(doc(db, "studentData", p), {
-          name: n,
-          remaining: 0,
-          totalClasses: parseInt(t)
-      });
-      toggleModal(false);
-      alert("Student Added!");
+    const p = document.getElementById('newPhone').value;
+    const n = document.getElementById('newName').value;
+    const t = document.getElementById('newTotal').value;
+    if(!p || !n) return alert("Fill Name and Phone");
+    try {
+        await setDoc(doc(db, "studentData", p), { name: n, remaining: 0, totalClasses: parseInt(t) });
+        toggleModal(false);
+        alert("Student Saved!");
+    } catch (e) { alert("Permission Denied! Check Firebase Rules."); }
   };
 
-  window.removeStudent = async (id) => {
-      if(confirm("Are you sure? This will delete the student permanently!")) {
-          await deleteDoc(doc(db, "studentData", id));
-      }
-  };
-
-  window.toggleModal = (show) => {
-      document.getElementById('addModal').style.display = show ? 'flex' : 'none';
-  };
-
+  window.markPresent = async (id) => { await updateDoc(doc(db, "studentData", id), { remaining: increment(1) }); };
+  window.removeStudent = async (id) => { if(confirm("Delete student?")) await deleteDoc(doc(db, "studentData", id)); };
+  window.toggleModal = (show) => document.getElementById('addModal').style.display = show ? 'flex' : 'none';
   window.filterList = () => {
     const val = document.getElementById("studentSearch").value.toLowerCase();
     document.querySelectorAll('.st-card').forEach(c => {
