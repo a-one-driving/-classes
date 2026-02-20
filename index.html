@@ -11,13 +11,13 @@
     :root {
       --gold: #d4af37; --bg: #000000; --card: rgba(18, 18, 18, 0.85);
       --border: #2a2a2a; --txt: #ffffff; --muted: #a0a0a0;
-      --danger: #ff4d4d; --accent2: #00ff88;
+      --danger: #ff4d4d;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; -webkit-tap-highlight-color: transparent; }
-    body { background-color: var(--bg); color: var(--txt); overflow-x: hidden; padding-bottom: 120px; }
+    body { background-color: var(--bg); color: var(--txt); overflow-x: hidden; padding-bottom: 50px; }
 
-    /* --- WEATHER ANIMATIONS --- */
+    /* WEATHER ANIMATIONS */
     #weather-container { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
     .cloud { position: absolute; background: rgba(255, 255, 255, 0.07); border-radius: 100px; filter: blur(40px); animation: drift linear infinite; }
     @keyframes drift { from { transform: translateX(-400px); } to { transform: translateX(100vw); } }
@@ -28,12 +28,11 @@
     header { padding: 12px 15px; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); border-bottom: 1px solid var(--gold); position: sticky; top: 0; z-index: 1000; }
     .nav { max-width: 1100px; margin: auto; display: flex; justify-content: space-between; align-items: center; }
     .logo { font-weight: 900; font-size: 18px; color: var(--gold); letter-spacing: 1px; }
-    
     .btn-profile-nav { border: 1px solid var(--gold); color: var(--gold); padding: 5px 12px; border-radius: 8px; font-size: 11px; font-weight: 700; text-decoration: none; text-transform: uppercase; }
 
     .container { max-width: 1100px; margin: auto; padding: 20px 15px; position: relative; z-index: 1; }
 
-    /* PRICING CARDS */
+    /* PRICING */
     .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-bottom: 30px; }
     .price-card { background: var(--card); padding: 20px; border-radius: 20px; border: 1px solid var(--border); position: relative; overflow: hidden; backdrop-filter: blur(10px); }
     .price-card.featured { border: 2px solid var(--gold); }
@@ -43,20 +42,20 @@
     .feature-list li { color: var(--muted); font-size: 13px; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
     .feature-list li::before { content: "✓"; color: var(--gold); font-weight: 900; }
 
-    .personal-banner { background: var(--gold); color: #000; padding: 20px; border-radius: 20px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 1; }
+    .personal-banner { background: var(--gold); color: #000; padding: 20px; border-radius: 20px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; }
     .btn-book-black { background: #000; color: var(--gold); border: none; padding: 10px 22px; border-radius: 12px; font-weight: 900; cursor: pointer; }
 
-    .refer-card { background: var(--card); border: 2px dashed var(--gold); border-radius: 20px; padding: 25px; margin-bottom: 30px; text-align: center; backdrop-filter: blur(10px); }
-    #referUI { margin-top: 20px; display: none; }
-    .compact-copy-box { display: flex; align-items: center; background: #000; border: 1px solid #333; border-radius: 12px; overflow: hidden; margin-top: 15px; height: 50px; }
-    .link-text { flex: 1; padding: 0 15px; font-size: 11px; color: var(--gold); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: left; }
-    .copy-trigger { background: var(--gold); color: #000; border: none; height: 100%; padding: 0 20px; font-weight: 900; font-size: 12px; cursor: pointer; }
+    /* BATCH SECTION */
+    .batch-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-top: 15px; }
+    .batch-card { background: var(--card); border: 1px solid var(--border); padding: 20px; border-radius: 20px; backdrop-filter: blur(10px); }
+    .progress-bar-bg { width: 100%; height: 5px; background: #111; border-radius: 10px; margin-top: 8px; overflow: hidden; }
+    .progress-bar-fill { height: 100%; background: var(--gold); transition: 1s ease; }
+    .urgent-row { border: 1px solid var(--danger) !important; }
 
     .btn-gold { background: linear-gradient(45deg, var(--gold), #f9e29d); color: #000; border: none; padding: 12px 20px; border-radius: 10px; font-weight: 800; cursor: pointer; width: 100%; }
-    .status-input { width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #333; background: #000; color: #fff; text-align: center; margin-bottom: 15px; outline: none; }
-    
+    .status-input { width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #333; background: #000; color: #fff; margin-bottom: 15px; outline: none; }
     .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); display: none; align-items: center; justify-content: center; z-index: 9999; }
-    .modal-content { background: #121212; padding: 25px; border-radius: 20px; border: 1px solid var(--gold); width: 90%; max-width: 400px; text-align: center; }
+    .modal-content { background: #121212; padding: 25px; border-radius: 20px; border: 1px solid var(--gold); width: 90% }
   </style>
 </head>
 <body>
@@ -71,58 +70,35 @@
 </header>
 
 <div class="container">
-  <h2 style="font-size:14px; margin-bottom:15px; color:var(--gold); letter-spacing:1px;">💎 TRAINING PACKAGES</h2>
+  <h2 style="font-size:14px; margin-bottom:15px; color:var(--gold); letter-spacing:1px; text-transform:uppercase;">💎 Training Packages</h2>
   <div class="pricing-grid">
     <div class="price-card">
         <h3>Standard</h3>
         <div class="price-tag">₹3,500</div>
-        <ul class="feature-list">
-            <li>20 Days Classes</li>
-            <li>Steering Control</li>
-            <li>Traffic Rules</li>
-        </ul>
-        <button class="btn-gold" onclick="openBooking('PKG_STD', 'Standard Package (₹3500)')">Join Now</button>
+        <ul class="feature-list"><li>20 Days Classes</li><li>Traffic Rules</li></ul>
+        <button class="btn-gold" onclick="openBooking('Standard (₹3500)')">Join Now</button>
     </div>
     <div class="price-card featured">
         <div class="best-label">BEST</div>
         <h3>Premium</h3>
         <div class="price-tag">₹4,500</div>
-        <ul class="feature-list">
-            <li>30 Days Classes</li>
-            <li>Highway & Parking</li>
-            <li>DL/LL Assistance</li>
-        </ul>
-        <button class="btn-gold" onclick="openBooking('PKG_PREM', 'Premium Package (₹4500)')">Join Now</button>
+        <ul class="feature-list"><li>30 Days Classes</li><li>DL/LL Assistance</li></ul>
+        <button class="btn-gold" onclick="openBooking('Premium (₹4500)')">Join Now</button>
     </div>
   </div>
 
   <div class="personal-banner">
-      <div>
-          <h3 style="margin:0; font-size:16px;">Personal 1-on-1 ₹8,000</h3>
-          <p style="font-size:11px; opacity:0.9;">Single student, dedicated focus.</p>
-      </div>
-      <button class="btn-book-black" onclick="openBooking('PKG_PERS', 'Personal 1-on-1 Class (₹8000)')">BOOK</button>
+      <div><h3 style="margin:0; font-size:16px;">Personal 1-on-1 ₹8,000</h3></div>
+      <button class="btn-book-black" onclick="openBooking('Personal 1-on-1 (₹8000)')">BOOK</button>
   </div>
 
-  <div class="refer-card">
-      <p style="font-size:13px; color:var(--muted);">Refer & Earn</p>
-      <h3 style="font-size:32px; color:var(--gold); margin: 5px 0;">₹500 <span style="font-size:12px; color:var(--muted)">PER FRIEND</span></h3>
-      <button id="showRefBtn" onclick="toggleReferUI()" class="btn-gold" style="width:auto; padding:10px 30px; font-size:12px;">Get My Referral Link</button>
-      <div id="referUI">
-        <input type="tel" id="refPhone" class="status-input" placeholder="Enter Mobile Number">
-        <button onclick="generateRefLink()" class="btn-gold" style="font-size: 13px;">Generate Link</button>
-        <div id="linkContainer" style="display:none;">
-            <div class="compact-copy-box">
-                <div class="link-text" id="finalLink"></div>
-                <button class="copy-trigger" onclick="copyAction()">COPY</button>
-            </div>
-        </div>
-      </div>
+  <h2 style="font-size:14px; margin:30px 0 15px; color:var(--gold); letter-spacing:1px; text-transform:uppercase;">🚗 Live Training Batches</h2>
+  <div id="batchGrid" class="batch-grid">
+    <p style="text-align:center; color:var(--muted); font-size:12px; width:100%;">Connecting to live database...</p>
   </div>
 
-  <section style="background: var(--card); padding: 25px; border-radius: 20px; border: 1px solid #333; text-align: center; backdrop-filter: blur(10px);">
-    <h3 style="color:var(--gold); margin-bottom:10px; font-size: 18px;">📊 Student Dashboard</h3>
-    <p style="font-size:12px; color:var(--muted); margin-bottom:20px; line-height: 1.6;">Check your attendance, remaining classes and referral earnings.</p>
+  <section style="background: var(--card); padding: 25px; border-radius: 20px; border: 1px solid #333; text-align: center; backdrop-filter: blur(10px); margin-top: 30px;">
+    <h3 style="color:var(--gold); margin-bottom:10px;">📊 Student Dashboard</h3>
     <button class="btn-gold" onclick="location.href='profile.html'" style="width: auto; padding: 12px 40px;">Open My Profile</button>
   </section>
 </div>
@@ -130,7 +106,7 @@
 <div class="modal" id="bookingModal">
   <div class="modal-content">
     <h2 id="modalTitle" style="color:var(--gold); margin-bottom:15px; font-size:18px;">Confirm Booking</h2>
-    <input type="text" id="userName" placeholder="Student Name" class="status-input">
+    <input type="text" id="userName" placeholder="Your Name" class="status-input">
     <input type="tel" id="userPhone" placeholder="Mobile Number" class="status-input">
     <button class="btn-gold" onclick="finalSubmit()">Confirm & WhatsApp</button>
     <button class="btn-gold" style="background:#222; color:#fff; margin-top:10px;" onclick="closeModal()">Cancel</button>
@@ -139,7 +115,7 @@
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-  import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+  import { getFirestore, collection, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
@@ -153,11 +129,49 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  let selectedLabel = "";
-  const urlParams = new URLSearchParams(window.location.search);
-  const referredBy = urlParams.get('ref') || "Direct Join";
+  // --- LIVE BATCH SYNC ---
+  onSnapshot(collection(db, "activeBatches"), (snap) => {
+    const grid = document.getElementById('batchGrid');
+    grid.innerHTML = "";
+    snap.forEach(doc => {
+      const b = doc.data();
+      let studentHTML = "";
+      b.students.forEach(s => {
+        const percent = Math.round(((15 - s.daysLeft) / 15) * 100);
+        studentHTML += `
+          <div style="margin-bottom:15px; background:rgba(0,0,0,0.3); padding:10px; border-radius:12px; border:1px solid #222;">
+            <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:5px;">
+              <span>${s.name}</span>
+              <span style="color:var(--gold)">${s.daysLeft} Left</span>
+            </div>
+            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:${percent}%"></div></div>
+          </div>`;
+      });
+      grid.innerHTML += `
+        <div class="batch-card">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <b style="color:var(--gold); font-size:16px;">${b.batchName}</b>
+            <span style="font-size:9px; border:1px solid var(--gold); padding:2px 5px; color:var(--gold); border-radius:4px;">LIVE</span>
+          </div>
+          <p style="font-size:10px; color:var(--muted); margin:5px 0 15px;">🕒 ${b.time}</p>
+          ${studentHTML || '<p style="font-size:10px; color:#444;">No active students.</p>'}
+        </div>`;
+    });
+  });
 
-  // --- WEATHER ENGINE ---
+  // --- BOOKING LOGIC ---
+  let selectedLabel = "";
+  window.openBooking = (label) => { selectedLabel = label; document.getElementById("modalTitle").innerText = label; document.getElementById("bookingModal").style.display = "flex"; };
+  window.closeModal = () => document.getElementById("bookingModal").style.display = "none";
+  window.finalSubmit = async () => {
+    const n = document.getElementById("userName").value;
+    const p = document.getElementById("userPhone").value;
+    if(!n || p.length < 10) return alert("Fill details!");
+    const msg = encodeURIComponent(`*NEW BOOKING*\n\nName: ${n}\nPhone: ${p}\nPackage: ${selectedLabel}`);
+    window.location.href = `https://wa.me/917008186187?text=${msg}`;
+  };
+
+  // --- WEATHER UI ---
   async function updateWeatherUI() {
     const container = document.getElementById('weather-container');
     try {
@@ -174,7 +188,7 @@
         } else {
             for(let i=0; i<6; i++) {
                 let c = document.createElement('div'); c.className = 'cloud';
-                c.style.width = (Math.random()*200 + 150) + 'px'; c.style.height = '80px';
+                c.style.width = (Math.random()*200 + 150)+'px'; c.style.height = '80px';
                 c.style.top = Math.random()*60+'vh'; c.style.animationDuration = (Math.random()*20+20)+'s';
                 c.style.left = '-300px'; container.appendChild(c);
             }
@@ -185,43 +199,6 @@
     } catch (e) { console.log("Weather error"); }
   }
   updateWeatherUI();
-
-  // REFERRAL LOGIC
-  window.toggleReferUI = () => { document.getElementById("referUI").style.display = "block"; document.getElementById("showRefBtn").style.display = "none"; };
-  window.generateRefLink = () => {
-    const p = document.getElementById("refPhone").value;
-    if(p.length < 10) return alert("Enter valid number!");
-    const link = `${window.location.origin}${window.location.pathname}?ref=${p}`;
-    document.getElementById("finalLink").innerText = link;
-    document.getElementById("linkContainer").style.display = "block";
-    navigator.clipboard.writeText(link);
-    alert("Link Generated & Copied!");
-  };
-  window.copyAction = () => {
-    navigator.clipboard.writeText(document.getElementById("finalLink").innerText);
-    alert("Link Copied!");
-  };
-
-  window.openBooking = (id, label) => { 
-    selectedLabel = label; 
-    document.getElementById("modalTitle").innerText = label; 
-    document.getElementById("bookingModal").style.display = "flex"; 
-  };
-  window.closeModal = () => document.getElementById("bookingModal").style.display = "none";
-
-  window.finalSubmit = async () => {
-    const n = document.getElementById("userName").value;
-    const p = document.getElementById("userPhone").value;
-    if(!n || p.length < 10) return alert("Details enter karein!");
-    try {
-        const leadId = Date.now().toString();
-        await setDoc(doc(db, "packageEnquiries", leadId), {
-            name: n, phone: p, package: selectedLabel, referredBy: referredBy, timestamp: new Date()
-        });
-        const msg = encodeURIComponent(`*NEW PACKAGE BOOKING*\n\nName: ${n}\nPhone: ${p}\nPackage: ${selectedLabel}\nRef: ${referredBy}`);
-        window.location.href = `https://wa.me/917008186187?text=${msg}`;
-    } catch (e) { alert("Try again!"); }
-  };
 </script>
 </body>
 </html>
