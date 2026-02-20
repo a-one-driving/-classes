@@ -21,7 +21,6 @@
     #weather-container { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
     .cloud { position: absolute; background: rgba(255, 255, 255, 0.07); border-radius: 100px; filter: blur(40px); animation: drift linear infinite; }
     @keyframes drift { from { transform: translateX(-400px); } to { transform: translateX(100vw); } }
-    .sun-glow { position: absolute; top: -100px; right: -100px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%); filter: blur(60px); }
     .rain-drop { position: absolute; width: 2px; height: 30px; background: rgba(255,255,255,0.4); top: -50px; animation: rain-fall linear infinite; }
     @keyframes rain-fall { to { transform: translateY(110vh); } }
 
@@ -32,7 +31,7 @@
 
     .container { max-width: 1100px; margin: auto; padding: 20px 15px; position: relative; z-index: 1; }
 
-    /* --- SHOWROOM STYLES (BACK TO ORIGINAL) --- */
+    /* --- SHOWROOM SECTION (AUTO SLIDING ONLY) --- */
     .showroom-section {
       width: 100%;
       padding: 30px 15px;
@@ -41,11 +40,13 @@
       margin-bottom: 30px;
       border: 1px solid #1a1a1a;
       text-align: center;
+      position: relative;
     }
     .car-platform {
       position: relative;
       width: 100%;
       max-width: 400px;
+      height: 160px; /* Fixed height for stability */
       margin: 20px auto 0;
       display: flex;
       justify-content: center;
@@ -63,35 +64,19 @@
     .main-car {
       width: 90%;
       z-index: 10;
-      position: relative;
-      animation: float 3s ease-in-out infinite;
+      position: absolute;
+      bottom: 15%;
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out; /* Smooth fade slide */
     }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+    .main-car.active {
+      opacity: 1;
     }
 
-    /* --- NEW ROUTES STYLES --- */
-    .routes-container {
-      display: flex;
-      gap: 10px;
-      overflow-x: auto;
-      padding-bottom: 15px;
-      scrollbar-width: none;
-    }
+    /* --- ROUTES STYLES --- */
+    .routes-container { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 15px; scrollbar-width: none; }
     .routes-container::-webkit-scrollbar { display: none; }
-    .route-chip {
-      background: var(--card);
-      border: 1px solid var(--border);
-      padding: 8px 15px;
-      border-radius: 50px;
-      white-space: nowrap;
-      font-size: 11px;
-      color: var(--gold);
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
+    .route-chip { background: var(--card); border: 1px solid var(--border); padding: 8px 15px; border-radius: 50px; white-space: nowrap; font-size: 11px; color: var(--gold); display: flex; align-items: center; gap: 5px; }
 
     /* PRICING */
     .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-bottom: 30px; }
@@ -108,7 +93,6 @@
 
     /* BATCHES */
     .batch-slider { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 10px; scroll-snap-type: x mandatory; scrollbar-width: none; }
-    .batch-slider::-webkit-scrollbar { display: none; } 
     .batch-card { min-width: 280px; max-width: 280px; background: var(--card); border: 1px solid var(--border); padding: 15px; border-radius: 20px; backdrop-filter: blur(10px); scroll-snap-align: start; }
     .progress-bar-bg { width: 100%; height: 4px; background: #111; border-radius: 10px; margin-top: 5px; overflow: hidden; }
     .progress-bar-fill { height: 100%; background: var(--gold); transition: 1s ease; }
@@ -139,7 +123,9 @@
     </div>
     <div class="car-platform">
         <div class="yellow-road"></div>
-        <img src="https://a-one-driving.github.io/-classes/tigor6.PNG" alt="Tata Tigor" class="main-car">
+        <img src="https://a-one-driving.github.io/-classes/tigor6.PNG" class="main-car active">
+        <img src="https://a-one-driving.github.io/-classes/tigor7.PNG" class="main-car">
+        <img src="https://a-one-driving.github.io/-classes/tigor8.JPG" class="main-car">
     </div>
   </section>
 
@@ -219,6 +205,15 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
+  // --- CAR SLIDER LOGIC (NO FLOATING) ---
+  let currentCar = 0;
+  const cars = document.querySelectorAll('.main-car');
+  setInterval(() => {
+    cars[currentCar].classList.remove('active');
+    currentCar = (currentCar + 1) % cars.length;
+    cars[currentCar].classList.add('active');
+  }, 3500);
+
   let attendanceMap = {};
 
   onSnapshot(collection(db, "studentData"), (snap) => {
@@ -254,7 +249,7 @@
               </div>`;
           });
         }
-        grid.innerHTML += `<div class="batch-card"><b>${b.batchName}</b><p>${b.time}</p>${studentHTML}</div>`;
+        grid.innerHTML += `<div class="batch-card"><b style="color:var(--gold)">${b.batchName}</b><p style="font-size:10px; color:var(--muted); margin-bottom:8px;">${b.time}</p>${studentHTML}</div>`;
       });
     });
   }
