@@ -50,7 +50,6 @@
     .batch-card { background: var(--card); border: 1px solid var(--border); padding: 20px; border-radius: 20px; backdrop-filter: blur(10px); }
     .progress-bar-bg { width: 100%; height: 5px; background: #111; border-radius: 10px; margin-top: 8px; overflow: hidden; }
     .progress-bar-fill { height: 100%; background: var(--gold); transition: 1s ease; }
-    .urgent-row { border: 1px solid var(--danger) !important; }
 
     .btn-gold { background: linear-gradient(45deg, var(--gold), #f9e29d); color: #000; border: none; padding: 12px 20px; border-radius: 10px; font-weight: 800; cursor: pointer; width: 100%; }
     .status-input { width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #333; background: #000; color: #fff; margin-bottom: 15px; outline: none; }
@@ -115,7 +114,7 @@
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-  import { getFirestore, collection, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+  import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
@@ -129,35 +128,65 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  // --- LIVE BATCH SYNC ---
-  onSnapshot(collection(db, "activeBatches"), (snap) => {
-    const grid = document.getElementById('batchGrid');
-    grid.innerHTML = "";
+  // 1. Pehle studentData (Attendance) ko sync karenge ek Map mein
+  let attendanceMap = {};
+
+  onSnapshot(collection(db, "studentData"), (snap) => {
+    attendanceMap = {};
     snap.forEach(doc => {
-      const b = doc.data();
-      let studentHTML = "";
-      b.students.forEach(s => {
-        const percent = Math.round(((15 - s.daysLeft) / 15) * 100);
-        studentHTML += `
-          <div style="margin-bottom:15px; background:rgba(0,0,0,0.3); padding:10px; border-radius:12px; border:1px solid #222;">
-            <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:5px;">
-              <span>${s.name}</span>
-              <span style="color:var(--gold)">${s.daysLeft} Left</span>
+      const data = doc.data();
+      if(data.name) {
+        attendanceMap[data.name] = {
+          done: data.remaining || 0,
+          total: data.totalClasses || 15
+        };
+      }
+    });
+    // Attendance sync hone ke baad Batch render karein
+    renderBatches();
+  });
+
+  // 2. Batches ko render karne wala function
+  function renderBatches() {
+    onSnapshot(collection(db, "activeBatches"), (snap) => {
+      const grid = document.getElementById('batchGrid');
+      grid.innerHTML = "";
+      
+      snap.forEach(doc => {
+        const b = doc.data();
+        let studentHTML = "";
+
+        if (b.students && b.students.length > 0) {
+          b.students.forEach(s => {
+            // AUTO-UPDATE LOGIC:
+            // Agar ye student attendance map mein hai, toh wahan se live data uthao
+            const liveData = attendanceMap[s.name] || { done: 0, total: 15 };
+            const left = liveData.total - liveData.done;
+            const percent = Math.round((liveData.done / liveData.total) * 100);
+
+            studentHTML += `
+              <div style="margin-bottom:15px; background:rgba(0,0,0,0.3); padding:10px; border-radius:12px; border:1px solid #222;">
+                <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:5px;">
+                  <span>${s.name}</span>
+                  <span style="color:var(--gold)">${left > 0 ? left : 0} Days Left</span>
+                </div>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:${percent}%"></div></div>
+              </div>`;
+          });
+        }
+
+        grid.innerHTML += `
+          <div class="batch-card">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <b style="color:var(--gold); font-size:16px;">${b.batchName}</b>
+              <span style="font-size:9px; border:1px solid var(--gold); padding:2px 5px; color:var(--gold); border-radius:4px;">LIVE</span>
             </div>
-            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:${percent}%"></div></div>
+            <p style="font-size:10px; color:var(--muted); margin:5px 0 15px;">🕒 ${b.time}</p>
+            ${studentHTML || '<p style="font-size:10px; color:#444;">No active students.</p>'}
           </div>`;
       });
-      grid.innerHTML += `
-        <div class="batch-card">
-          <div style="display:flex; justify-content:space-between; align-items:center;">
-            <b style="color:var(--gold); font-size:16px;">${b.batchName}</b>
-            <span style="font-size:9px; border:1px solid var(--gold); padding:2px 5px; color:var(--gold); border-radius:4px;">LIVE</span>
-          </div>
-          <p style="font-size:10px; color:var(--muted); margin:5px 0 15px;">🕒 ${b.time}</p>
-          ${studentHTML || '<p style="font-size:10px; color:#444;">No active students.</p>'}
-        </div>`;
     });
-  });
+  }
 
   // --- BOOKING LOGIC ---
   let selectedLabel = "";
@@ -167,8 +196,7 @@
     const n = document.getElementById("userName").value;
     const p = document.getElementById("userPhone").value;
     if(!n || p.length < 10) return alert("Fill details!");
-    const msg = encodeURIComponent(`*NEW BOOKING*\n\nName: ${n}\nPhone: ${p}\nPackage: ${selectedLabel}`);
-    window.location.href = `https://wa.me/917008186187?text=${msg}`;
+    window.location.href = `https://wa.me/917008186187?text=${encodeURIComponent("*NEW BOOKING*\nName: "+n+"\nPackage: "+selectedLabel)}`;
   };
 
   // --- WEATHER UI ---
@@ -188,9 +216,9 @@
         } else {
             for(let i=0; i<6; i++) {
                 let c = document.createElement('div'); c.className = 'cloud';
-                c.style.width = (Math.random()*200 + 150)+'px'; c.style.height = '80px';
-                c.style.top = Math.random()*60+'vh'; c.style.animationDuration = (Math.random()*20+20)+'s';
-                c.style.left = '-300px'; container.appendChild(c);
+                c.style.width = (Math.random()*200+150)+'px'; c.style.height='80px';
+                c.style.top = Math.random()*60+'vh'; c.style.animationDuration=(Math.random()*20+20)+'s';
+                c.style.left='-300px'; container.appendChild(c);
             }
             if(weather === "Clear" || weather === "Haze") {
                 let s = document.createElement('div'); s.className = 'sun-glow'; container.appendChild(s);
