@@ -52,14 +52,6 @@
     .link-text { flex: 1; padding: 0 15px; font-size: 11px; color: var(--gold); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: left; }
     .copy-trigger { background: var(--gold); color: #000; border: none; height: 100%; padding: 0 20px; font-weight: 900; font-size: 12px; cursor: pointer; }
 
-    .slotWrap { border-radius: 20px; border: 1px solid var(--gold); background: var(--card); padding: 20px; margin-bottom: 30px; backdrop-filter: blur(10px); }
-    .slotCard { background: rgba(0,0,0,0.6); border: 1px solid var(--border); padding: 15px; border-radius: 18px; margin-bottom: 15px; }
-    .daily-plan-box { margin: 10px 0; padding: 10px; background: #111; border-radius: 12px; border-left: 4px solid var(--gold); font-size: 11px; }
-    .seatGrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 15px; }
-    .seat { height: 45px; border-radius: 10px; border: 1px solid #333; font-weight: 800; cursor: pointer; background: #1a1a1a; color: #fff; }
-    .seat.available { border-color: var(--accent2); color: var(--accent2); }
-    .seat.booked { background: var(--danger); border: none; opacity: 0.5; cursor: not-allowed; }
-
     .btn-gold { background: linear-gradient(45deg, var(--gold), #f9e29d); color: #000; border: none; padding: 12px 20px; border-radius: 10px; font-weight: 800; cursor: pointer; width: 100%; }
     .status-input { width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #333; background: #000; color: #fff; text-align: center; margin-bottom: 15px; outline: none; }
     
@@ -128,11 +120,6 @@
       </div>
   </div>
 
-  <section class="slotWrap">
-    <h2 style="font-size:14px; margin-bottom:15px; color:var(--gold); letter-spacing:1px;">🎟️ LIVE BATCH BOOKING</h2>
-    <div id="dynamicSlotGrid">Connecting...</div>
-  </section>
-
   <section style="background: var(--card); padding: 25px; border-radius: 20px; border: 1px solid #333; text-align: center; backdrop-filter: blur(10px);">
     <h3 style="color:var(--gold); margin-bottom:10px; font-size: 18px;">📊 Student Dashboard</h3>
     <p style="font-size:12px; color:var(--muted); margin-bottom:20px; line-height: 1.6;">Check your attendance, remaining classes and referral earnings.</p>
@@ -152,7 +139,7 @@
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-  import { getFirestore, collection, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+  import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
@@ -166,7 +153,7 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  let ALL_SLOTS = []; let BOOKINGS = {}; let selectedSeatId = ""; let selectedLabel = "";
+  let selectedLabel = "";
   const urlParams = new URLSearchParams(window.location.search);
   const referredBy = urlParams.get('ref') || "Direct Join";
 
@@ -215,27 +202,8 @@
     alert("Link Copied!");
   };
 
-  // FETCH DATA
-  onSnapshot(collection(db, "siteSlots"), (snap) => { ALL_SLOTS = []; snap.forEach(d => ALL_SLOTS.push({ id: d.id, ...d.data() })); render(); });
-  onSnapshot(collection(db, "slotBookings"), (snap) => { BOOKINGS = {}; snap.forEach(d => BOOKINGS[d.id] = d.data()); render(); });
-
-  function render() {
-    const grid = document.getElementById("dynamicSlotGrid"); if(!grid) return;
-    grid.innerHTML = "";
-    ALL_SLOTS.forEach(slot => {
-        const plan = slot.showPlan ? `<div class="daily-plan-box">📍 <b>Route:</b> ${slot.route}<br>🎯 <b>Focus:</b> ${slot.skill}</div>` : '';
-        let seats = "";
-        for(let i=1; i<=4; i++) {
-            const bId = `${slot.id}_${i}`; const booked = BOOKINGS[bId];
-            seats += `<button class="seat ${booked ? 'booked' : 'available'}" 
-                      onclick="${booked ? "alert('Seat taken!')" : `openBooking('${bId}', '${slot.name} - A${i}')`}">A${i}</button>`;
-        }
-        grid.innerHTML += `<div class="slotCard"><b>${slot.name}</b> <small style="float:right; color:var(--gold); font-weight:700;">${slot.time}</small>${plan}<div class="seatGrid">${seats}</div></div>`;
-    });
-  }
-
   window.openBooking = (id, label) => { 
-    selectedSeatId = id; selectedLabel = label; 
+    selectedLabel = label; 
     document.getElementById("modalTitle").innerText = label; 
     document.getElementById("bookingModal").style.display = "flex"; 
   };
@@ -246,10 +214,11 @@
     const p = document.getElementById("userPhone").value;
     if(!n || p.length < 10) return alert("Details enter karein!");
     try {
-        await setDoc(doc(db, "slotBookings", selectedSeatId), {
-            name: n, phone: p, batch: selectedLabel, referredBy: referredBy, timestamp: new Date()
+        const leadId = Date.now().toString();
+        await setDoc(doc(db, "packageEnquiries", leadId), {
+            name: n, phone: p, package: selectedLabel, referredBy: referredBy, timestamp: new Date()
         });
-        const msg = encodeURIComponent(`*NEW BOOKING*\n\nName: ${n}\nPhone: ${p}\nBatch: ${selectedLabel}\nRef: ${referredBy}`);
+        const msg = encodeURIComponent(`*NEW PACKAGE BOOKING*\n\nName: ${n}\nPhone: ${p}\nPackage: ${selectedLabel}\nRef: ${referredBy}`);
         window.location.href = `https://wa.me/917008186187?text=${msg}`;
     } catch (e) { alert("Try again!"); }
   };
