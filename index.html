@@ -32,6 +32,46 @@
 
     .container { max-width: 1100px; margin: auto; padding: 20px 15px; position: relative; z-index: 1; }
 
+    /* --- NEW SHOWROOM STYLES --- */
+    .showroom-section {
+      width: 100%;
+      padding: 30px 15px;
+      background: radial-gradient(circle at center, #111 0%, #000 100%);
+      border-radius: 24px;
+      margin-bottom: 30px;
+      border: 1px solid #1a1a1a;
+      text-align: center;
+    }
+    .car-platform {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      margin: 20px auto 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .yellow-road {
+      position: absolute;
+      bottom: 15%;
+      width: 100%;
+      height: 4px;
+      background: var(--gold);
+      box-shadow: 0 0 15px var(--gold);
+      z-index: 1;
+    }
+    .main-car {
+      width: 90%;
+      z-index: 10;
+      position: relative;
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    /* -------------------------- */
+
     /* PRICING */
     .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-bottom: 30px; }
     .price-card { background: var(--card); padding: 20px; border-radius: 20px; border: 1px solid var(--border); position: relative; overflow: hidden; backdrop-filter: blur(10px); }
@@ -52,9 +92,9 @@
       overflow-x: auto; 
       padding-bottom: 10px; 
       scroll-snap-type: x mandatory; 
-      scrollbar-width: none; /* Firefox */
+      scrollbar-width: none; 
     }
-    .batch-slider::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+    .batch-slider::-webkit-scrollbar { display: none; } 
 
     .batch-card { 
       min-width: 280px; 
@@ -87,6 +127,18 @@
 </header>
 
 <div class="container">
+
+  <section class="showroom-section">
+    <div style="text-align: left; margin-bottom: 5px;">
+        <h1 style="font-size: 20px; font-weight: 900; color: #fff;">TATA TIGOR <span style="color:var(--gold)">XZ+</span></h1>
+        <p style="font-size: 9px; color: var(--gold); letter-spacing: 1px; text-transform: uppercase;">Our Primary Training Vehicle</p>
+    </div>
+    <div class="car-platform">
+        <div class="yellow-road"></div>
+        <img src="https://a-one-driving.github.io/-classes/tigor6.PNG" alt="Tata Tigor" class="main-car">
+    </div>
+  </section>
+
   <h2 style="font-size:14px; margin-bottom:15px; color:var(--gold); letter-spacing:1px; text-transform:uppercase;">💎 Training Packages</h2>
   <div class="pricing-grid">
     <div class="price-card">
@@ -152,7 +204,6 @@
 
   let attendanceMap = {};
 
-  // Sync Attendance data first
   onSnapshot(collection(db, "studentData"), (snap) => {
     attendanceMap = {};
     snap.forEach(doc => {
@@ -208,7 +259,6 @@
     });
   }
 
-  // BOOKING LOGIC
   window.openBooking = (label) => { document.getElementById("modalTitle").innerText = label; document.getElementById("bookingModal").style.display = "flex"; };
   window.closeModal = () => document.getElementById("bookingModal").style.display = "none";
   window.finalSubmit = async () => {
@@ -218,7 +268,6 @@
     window.location.href = `https://wa.me/917008186187?text=${encodeURIComponent("New Booking: "+n)}`;
   };
 
-  // WEATHER ENGINE
   async function updateWeatherUI() {
     const container = document.getElementById('weather-container');
     try {
