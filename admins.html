@@ -59,8 +59,9 @@
 </div>
 
 <script type="module">
+  // Added arrayUnion here
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-  import { getFirestore, collection, onSnapshot, doc, setDoc, updateDoc, deleteDoc, increment } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+  import { getFirestore, collection, onSnapshot, doc, setDoc, updateDoc, deleteDoc, increment, arrayUnion } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
@@ -82,7 +83,8 @@
     let active = 0, finished = 0;
     snap.forEach(d => {
       const data = d.data();
-      const done = data.remaining || 0;
+      // Changed to use attendanceLogs length for accurate 'done' count
+      const done = (data.attendanceLogs) ? data.attendanceLogs.length : 0;
       const total = data.totalClasses || 15;
       const isDone = done >= total;
       if(isDone) finished++; else active++;
@@ -106,13 +108,31 @@
     const t = document.getElementById('newTotal').value;
     if(!p || !n) return alert("Fill Name and Phone");
     try {
-        await setDoc(doc(db, "studentData", p), { name: n, remaining: 0, totalClasses: parseInt(t) });
+        // Initialize with empty attendanceLogs array
+        await setDoc(doc(db, "studentData", p), { 
+            name: n, 
+            remaining: 0, 
+            totalClasses: parseInt(t),
+            attendanceLogs: [] 
+        });
         toggleModal(false);
         alert("Student Saved!");
     } catch (e) { alert("Permission Denied! Check Firebase Rules."); }
   };
 
-  window.markPresent = async (id) => { await updateDoc(doc(db, "studentData", id), { remaining: increment(1) }); };
+  window.markPresent = async (id) => { 
+    const now = new Date();
+    // Unique timestamp with seconds and milliseconds to allow multiple clicks
+    const stamp = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }) + " | " + 
+                  now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }) + 
+                  ":" + now.getMilliseconds();
+    
+    await updateDoc(doc(db, "studentData", id), { 
+        remaining: increment(1),
+        attendanceLogs: arrayUnion(stamp) // New logic: Adds date to the list
+    }); 
+  };
+
   window.removeStudent = async (id) => { if(confirm("Delete student?")) await deleteDoc(doc(db, "studentData", id)); };
   window.toggleModal = (show) => document.getElementById('addModal').style.display = show ? 'flex' : 'none';
   window.filterList = () => {
