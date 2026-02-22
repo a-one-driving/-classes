@@ -37,7 +37,6 @@
 </div>
 
 <input type="text" id="studentSearch" class="search-bar" placeholder="🔍 Search student name..." onkeyup="filterList()">
-
 <div id="attendanceList" class="attendance-grid"></div>
 
 <button class="fab" onclick="toggleModal(true)">+</button>
@@ -47,7 +46,7 @@
         <h2>Add New Student</h2>
         <input type="tel" id="newPhone" placeholder="Phone Number">
         <input type="text" id="newName" placeholder="Full Name">
-        <input type="number" id="newTotal" placeholder="Total Classes (Default 15)" value="15">
+        <input type="number" id="newTotal" placeholder="Total Classes" value="15">
         <button class="save-btn" onclick="addNewStudent()">SAVE STUDENT</button>
         <button onclick="toggleModal(false)" style="background:none; border:none; color:#666; width:100%; margin-top:15px;">Close</button>
     </div>
@@ -59,7 +58,6 @@
 </div>
 
 <script type="module">
-  // Added arrayUnion here
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
   import { getFirestore, collection, onSnapshot, doc, setDoc, updateDoc, deleteDoc, increment, arrayUnion } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
@@ -75,16 +73,17 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  document.getElementById('dateDisplay').innerText = new Date().toDateString();
-
   onSnapshot(collection(db, "studentData"), (snap) => {
     const list = document.getElementById("attendanceList");
     list.innerHTML = "";
     let active = 0, finished = 0;
     snap.forEach(d => {
       const data = d.data();
-      // Changed to use attendanceLogs length for accurate 'done' count
-      const done = (data.attendanceLogs) ? data.attendanceLogs.length : 0;
+      
+      // 🔥 SMART RECOVERY: Recovering old data
+      const logCount = (data.attendanceLogs) ? data.attendanceLogs.length : 0;
+      const done = Math.max(logCount, data.remaining || 0);
+      
       const total = data.totalClasses || 15;
       const isDone = done >= total;
       if(isDone) finished++; else active++;
@@ -102,35 +101,24 @@
     document.getElementById('totalFinished').innerText = finished;
   });
 
+  window.markPresent = async (id) => { 
+    const now = new Date();
+    const stamp = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }) + " | " + 
+                  now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }) + 
+                  ":" + now.getMilliseconds();
+    await updateDoc(doc(db, "studentData", id), { 
+        remaining: increment(1),
+        attendanceLogs: arrayUnion(stamp) 
+    }); 
+  };
+
   window.addNewStudent = async () => {
     const p = document.getElementById('newPhone').value;
     const n = document.getElementById('newName').value;
     const t = document.getElementById('newTotal').value;
     if(!p || !n) return alert("Fill Name and Phone");
-    try {
-        // Initialize with empty attendanceLogs array
-        await setDoc(doc(db, "studentData", p), { 
-            name: n, 
-            remaining: 0, 
-            totalClasses: parseInt(t),
-            attendanceLogs: [] 
-        });
-        toggleModal(false);
-        alert("Student Saved!");
-    } catch (e) { alert("Permission Denied! Check Firebase Rules."); }
-  };
-
-  window.markPresent = async (id) => { 
-    const now = new Date();
-    // Unique timestamp with seconds and milliseconds to allow multiple clicks
-    const stamp = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }) + " | " + 
-                  now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }) + 
-                  ":" + now.getMilliseconds();
-    
-    await updateDoc(doc(db, "studentData", id), { 
-        remaining: increment(1),
-        attendanceLogs: arrayUnion(stamp) // New logic: Adds date to the list
-    }); 
+    await setDoc(doc(db, "studentData", p), { name: n, remaining: 0, totalClasses: parseInt(t), attendanceLogs: [] });
+    toggleModal(false);
   };
 
   window.removeStudent = async (id) => { if(confirm("Delete student?")) await deleteDoc(doc(db, "studentData", id)); };
