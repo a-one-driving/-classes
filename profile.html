@@ -18,94 +18,24 @@
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
         
-        body { 
-            background: var(--bg); 
-            color: #fff; 
-            padding: 20px; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center;
-            min-height: 100vh; 
-        }
+        body { background: var(--bg); color: #fff; padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; }
 
         .header-box { text-align: center; margin-bottom: 40px; }
-        .header-box h1 { 
-            font-size: 28px; 
-            color: var(--gold); 
-            font-weight: 800; 
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-        .header-box p { 
-            font-size: 11px; 
-            color: #666; 
-            letter-spacing: 4px; 
-            margin-top: 5px;
-            text-transform: uppercase;
-        }
+        .header-box h1 { font-size: 28px; color: var(--gold); font-weight: 800; letter-spacing: 2px; text-transform: uppercase; }
+        .header-box p { font-size: 11px; color: #666; letter-spacing: 4px; margin-top: 5px; text-transform: uppercase; }
 
-        .main-container { 
-            width: 100%; 
-            max-width: 380px; 
-            background: var(--card-bg); 
-            padding: 35px 25px; 
-            border-radius: 32px; 
-            border: 1px solid #222; 
-            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
-            text-align: center;
-        }
+        .main-container { width: 100%; max-width: 380px; background: var(--card-bg); padding: 35px 25px; border-radius: 32px; border: 1px solid #222; box-shadow: 0 30px 60px rgba(0,0,0,0.8); text-align: center; }
 
-        .input-label { 
-            display: block; 
-            font-size: 12px; 
-            color: #888; 
-            margin-bottom: 15px; 
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
+        .input-label { display: block; font-size: 12px; color: #888; margin-bottom: 15px; font-weight: 600; letter-spacing: 1px; }
 
-        input { 
-            width: 100%; 
-            padding: 18px; 
-            border-radius: 18px; 
-            border: 1px solid #333; 
-            background: var(--input-bg); 
-            color: #fff; 
-            font-size: 17px; 
-            margin-bottom: 25px; 
-            outline: none; 
-            text-align: center;
-            letter-spacing: 1px;
-        }
+        input { width: 100%; padding: 18px; border-radius: 18px; border: 1px solid #333; background: var(--input-bg); color: #fff; font-size: 17px; margin-bottom: 25px; outline: none; text-align: center; letter-spacing: 1px; }
 
-        .btn-gold { 
-            background: linear-gradient(to bottom, #f9e29d, #d4af37); 
-            color: #000; 
-            border: none; 
-            padding: 18px; 
-            border-radius: 18px; 
-            font-weight: 800; 
-            cursor: pointer; 
-            width: 100%; 
-            font-size: 16px; 
-            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
-        }
+        .btn-gold { background: linear-gradient(to bottom, #f9e29d, #d4af37); color: #000; border: none; padding: 18px; border-radius: 18px; font-weight: 800; cursor: pointer; width: 100%; font-size: 16px; box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2); }
 
-        /* NEW: PREMIUM CERTIFICATE STYLES */
-        #premiumCertificate {
-            display: none;
-            margin-bottom: 25px;
-            padding: 2px;
-            background: linear-gradient(45deg, #d4af37, #f9e29d, #aa841e, #d4af37);
-            background-size: 400% 400%;
-            animation: borderGlow 3s ease infinite;
-            border-radius: 25px;
-        }
+        #premiumCertificate { display: none; margin-bottom: 25px; padding: 2px; background: linear-gradient(45deg, #d4af37, #f9e29d, #aa841e, #d4af37); background-size: 400% 400%; animation: borderGlow 3s ease infinite; border-radius: 25px; }
         @keyframes borderGlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         .cert-card-ui { background: rgba(10, 10, 10, 0.95); border-radius: 23px; padding: 25px; border: 1px solid rgba(255,255,255,0.05); }
 
-        /* PROFILE CONTENT */
         #profileContent { display: none; width: 100%; animation: fadeIn 0.6s ease; }
         
         .student-name { font-size: 24px; font-weight: 800; margin-bottom: 5px; }
@@ -120,29 +50,25 @@
         .progress-bar { height: 8px; background: #222; border-radius: 10px; overflow: hidden; margin-top: 10px; }
         .progress-fill { height: 100%; background: var(--gold); width: 0%; transition: 1.2s ease; }
 
+        /* FIXED FEEDBACK LAYOUT */
         .timeline-box { background: #000; padding: 20px; border-radius: 20px; border: 1px solid #222; margin-top: 15px; text-align: left; }
-        #attendanceTimeline { display: flex; flex-direction: column; gap: 10px; max-height: 200px; overflow-y: auto; margin-top: 10px; }
+        #attendanceTimeline { display: flex; flex-direction: column; gap: 12px; max-height: 250px; overflow-y: auto; margin-top: 10px; }
+        
         .log-entry { 
-            background: #111; padding: 10px 15px; border-radius: 12px; border-left: 3px solid var(--gold); 
-            display: flex; justify-content: space-between; align-items: center; 
+            background: #111; padding: 12px 15px; border-radius: 16px; border-left: 3px solid var(--gold); 
+            display: flex; flex-direction: column; gap: 4px;
         }
+        .log-row-top { display: flex; justify-content: space-between; align-items: center; width: 100%; }
         .log-entry b { font-size: 13px; color: #fff; }
-        .log-date { font-size: 10px; color: var(--gold); }
+        .log-date { font-size: 10px; color: #666; }
+        .log-msg { font-size: 11px; color: var(--gold-light); font-style: italic; line-height: 1.4; margin-top: 2px; }
 
-        .earn-banner { 
-            background: rgba(0, 255, 136, 0.05); 
-            border: 1px solid rgba(0, 255, 136, 0.1); 
-            padding: 15px; border-radius: 20px; margin-top: 15px; 
-            display: flex; justify-content: space-between; align-items: center;
-        }
+        .earn-banner { background: rgba(0, 255, 136, 0.05); border: 1px solid rgba(0, 255, 136, 0.1); padding: 15px; border-radius: 20px; margin-top: 15px; display: flex; justify-content: space-between; align-items: center; }
         .earn-banner span { font-size: 11px; color: var(--success); font-weight: 600; }
         .earn-banner b { font-size: 18px; color: #fff; }
 
         .action-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
-        .btn-action { 
-            background: #000; border: 1px solid #333; color: #fff; padding: 14px; 
-            border-radius: 16px; font-size: 12px; font-weight: 600; cursor: pointer; 
-        }
+        .btn-action { background: #000; border: 1px solid #333; color: #fff; padding: 14px; border-radius: 16px; font-size: 12px; font-weight: 600; cursor: pointer; }
 
         .logout-link { color: #444; font-size: 11px; margin-top: 25px; cursor: pointer; display: block; }
 
@@ -150,7 +76,6 @@
         #loader { display: none; margin: 10px auto; border: 3px solid #333; border-top: 3px solid var(--gold); border-radius: 50%; width: 25px; height: 25px; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* HIDDEN PDF TEMPLATE */
         #pdfTemplate { width: 800px; height: 600px; background: #000; color: #fff; padding: 40px; border: 15px solid #d4af37; display: none; position: absolute; left: -9999px; text-align: center; }
     </style>
 </head>
@@ -196,7 +121,7 @@
             </div>
 
             <div class="timeline-box">
-                <span style="color:var(--gold); font-size: 10px; font-weight: 800; letter-spacing: 1px;">CLASS HISTORY</span>
+                <span style="color:var(--gold); font-size: 10px; font-weight: 800; letter-spacing: 1px;">CLASS HISTORY & FEEDBACK</span>
                 <div id="attendanceTimeline"></div>
             </div>
 
@@ -216,13 +141,10 @@
 
     <div id="pdfTemplate">
         <div style="border: 2px solid #d4af37; height: 100%; padding: 40px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-            <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" style="width:80px;">
             <h1 style="color:#d4af37; font-size: 45px; margin: 15px 0;">ABHINAASH A1 DRIVING ACADEMY</h1>
             <p style="font-size: 18px; color: #888;">OFFICIAL CERTIFICATE OF EXCELLENCE</p>
-            <p style="font-size: 16px; margin-top: 20px;">This is to certify that</p>
             <h2 id="pdfName" style="font-size: 40px; color: #fff; text-decoration: underline; margin: 10px 0;">NAME</h2>
-            <p style="font-size: 16px; width: 80%; margin: 15px auto;">Has successfully completed the Advanced Driving Training with superior skill and dedication.</p>
-            <div style="margin-top: 40px; border-top: 1px solid #555; width: 250px; padding-top:10px; font-size: 14px;">AUTHORIZED SIGNATURE</div>
+            <p style="font-size: 16px; width: 80%; margin: 15px auto;">Has successfully completed the Advanced Driving Training.</p>
         </div>
     </div>
 
@@ -247,20 +169,14 @@
     window.loadProfile = () => {
         const ph = document.getElementById('userPhone').value;
         if(ph.length < 10) return alert("Please enter 10 digit number.");
-
-        document.getElementById('loadBtn').style.display = "none";
         document.getElementById('loader').style.display = "block";
 
         onSnapshot(doc(db, "studentData", ph), (snap) => {
             if(snap.exists()) {
                 const data = snap.data();
                 currentData = { ...data, phone: ph };
-                
                 const logs = data.attendanceLogs || [];
-                
-                // 🔥 SMART LOGIC: Recovering Geetika's 17/30 correctly
                 const done = Math.max(logs.length, data.remaining || 0);
-                
                 const total = data.totalClasses || 15;
                 const percent = Math.min(Math.round((done / total) * 100), 100);
 
@@ -271,7 +187,6 @@
                 document.getElementById('dispPercent').innerText = percent + "%";
                 document.getElementById('dispEarn').innerText = "₹" + (data.totalRefers * 500 || 0);
                 
-                // 🔥 CERTIFICATE UNLOCK
                 if(done >= total) {
                     document.getElementById('premiumCertificate').style.display = 'block';
                     document.getElementById('pdfName').innerText = data.name.toUpperCase();
@@ -281,31 +196,32 @@
                 timeline.innerHTML = "";
                 [...logs].reverse().forEach((log, i) => {
                     const sessionNum = logs.length - i;
-                    const displayTime = log.split(':')[0] + ":" + log.split(':')[1];
+                    // Logic to split Date and Message
+                    const parts = log.split(' — ');
+                    const dateInfo = parts[0];
+                    const message = parts[1] || "Session Completed";
+
                     timeline.innerHTML += `
                         <div class="log-entry">
-                            <b>Session ${sessionNum}</b>
-                            <span class="log-date">${displayTime}</span>
+                            <div class="log-row-top">
+                                <b>Session ${sessionNum}</b>
+                                <span class="log-date">${dateInfo}</span>
+                            </div>
+                            <div class="log-msg">📝 ${message}</div>
                         </div>`;
                 });
 
                 document.getElementById('searchPanel').style.display = "none";
                 document.getElementById('profileContent').style.display = "block";
                 setTimeout(() => { document.getElementById('dispBar').style.width = percent + "%"; }, 100);
-            } else {
-                alert("No record found!");
-                document.getElementById('loadBtn').style.display = "block";
-                document.getElementById('loader').style.display = "none";
-            }
+            } else { alert("No record found!"); }
         });
     }
 
-    // PDF DOWNLOAD LOGIC
     window.downloadPDF = () => {
         const element = document.getElementById('pdfTemplate');
         element.style.display = 'block';
-        const opt = { margin: 0, filename: 'A1_Driving_Certificate.pdf', html2canvas: { scale: 2 }, jsPDF: { orientation: 'landscape' } };
-        html2pdf().set(opt).from(element).save().then(() => element.style.display = 'none');
+        html2pdf().from(element).set({ margin: 0, filename: 'A1_Certificate.pdf', jsPDF: { orientation: 'landscape' } }).save().then(() => element.style.display = 'none');
     };
 
     window.contactAdmin = () => {
