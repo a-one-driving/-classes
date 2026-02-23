@@ -6,7 +6,7 @@
   <title>A1 Master | Command Center</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
   <style>
-    :root { --gold: #d4af37; --bg: #000; --card: #111; --accent: #1a1a1a; }
+    :root { --gold: #d4af37; --bg: #000; --card: #111; --accent: #1a1a1a; --gold-glow: rgba(212, 175, 55, 0.3); }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
     
     body { 
@@ -16,82 +16,104 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 30px 15px;
+        padding: 40px 15px;
+        /* Subtle Grid Background for Premium Feel */
+        background-image: radial-gradient(#1a1a1a 1px, transparent 1px);
+        background-size: 30px 30px;
     }
 
-    .header { text-align: center; margin-bottom: 40px; }
-    .header h1 { font-size: 26px; color: var(--gold); letter-spacing: 2px; font-weight: 800; }
-    .header p { font-size: 12px; color: #666; text-transform: uppercase; margin-top: 5px; }
+    .header { text-align: center; margin-bottom: 50px; }
+    .header h1 { 
+        font-size: 32px; 
+        color: var(--gold); 
+        letter-spacing: 4px; 
+        font-weight: 800; 
+        text-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+    }
+    .header p { font-size: 11px; color: #666; text-transform: uppercase; margin-top: 8px; letter-spacing: 2px; }
 
     .grid-container {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
         width: 100%;
-        max-width: 900px;
+        max-width: 1000px;
     }
 
     .admin-card {
-        background: var(--card);
+        background: linear-gradient(145deg, #111, #080808);
         border: 1px solid #222;
-        border-radius: 25px;
-        padding: 25px;
+        border-radius: 28px;
+        padding: 30px;
         text-decoration: none;
         color: #fff;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         position: relative;
         overflow: hidden;
+        min-height: 200px;
     }
 
     .admin-card:hover {
-        transform: translateY(-10px);
+        transform: translateY(-12px) scale(1.02);
         border-color: var(--gold);
-        background: #161616;
-        box-shadow: 0 15px 30px rgba(212, 175, 55, 0.1);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 20px rgba(212, 175, 55, 0.1);
     }
 
     .card-icon {
-        font-size: 40px;
-        margin-bottom: 15px;
+        font-size: 35px;
+        margin-bottom: 20px;
+        background: rgba(212, 175, 55, 0.1);
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 18px;
+        border: 1px solid rgba(212, 175, 55, 0.2);
     }
 
-    .admin-card h2 { font-size: 18px; color: var(--gold); margin-bottom: 8px; }
-    .admin-card p { font-size: 12px; color: #888; line-height: 1.5; }
+    .admin-card h2 { font-size: 19px; color: var(--gold); margin-bottom: 10px; font-weight: 600; }
+    .admin-card p { font-size: 12px; color: #888; line-height: 1.6; font-weight: 300; }
 
     .launch-btn {
-        margin-top: 20px;
-        font-size: 11px;
+        margin-top: 25px;
+        font-size: 10px;
         font-weight: 800;
         text-transform: uppercase;
         color: var(--gold);
         display: flex;
         align-items: center;
-        gap: 5px;
+        gap: 8px;
+        letter-spacing: 1px;
     }
 
-    /* Glow Effect behind cards */
-    .admin-card::before {
+    /* Premium Animation on Hover */
+    .admin-card::after {
         content: '';
         position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(circle, rgba(212,175,55,0.05) 0%, transparent 70%);
-        pointer-events: none;
+        top: 0; left: -100%;
+        width: 100%; height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent);
+        transition: 0.5s;
     }
+    .admin-card:hover::after { left: 100%; }
 
-    .footer { margin-top: auto; padding: 40px 0; color: #333; font-size: 10px; letter-spacing: 1px; }
+    .footer { margin-top: auto; padding: 60px 0 20px 0; color: #333; font-size: 10px; letter-spacing: 2px; }
+    
+    @media (max-width: 600px) {
+        .grid-container { grid-template-columns: 1fr; }
+        .header h1 { font-size: 24px; }
+    }
   </style>
 </head>
 <body>
 
 <div class="header">
     <h1>A1 COMMAND CENTER</h1>
-    <p>A1 Driving Academy Master Control</p>
+    <p>Premium Administrative Interface</p>
 </div>
 
 <div class="grid-container">
@@ -100,42 +122,51 @@
         <div class="card-icon">📋</div>
         <div>
             <h2>Attendance System</h2>
-            <p>Students ki daily attendance mark karein, naye students add karein aur record manage karein.</p>
+            <p>Students ki daily attendance mark karein aur logs maintain karein.</p>
         </div>
-        <div class="launch-btn">Open Dashboard ↗</div>
+        <div class="launch-btn">Launch System ↗</div>
+    </a>
+
+    <a href="https://a-one-driving.github.io/-classes/batch.html" target="_blank" class="admin-card" style="border-color: rgba(212, 175, 55, 0.3);">
+        <div class="card-icon">🕒</div>
+        <div>
+            <h2>Batch Control</h2>
+            <p>Morning aur Evening batches ko modify karein aur capacity set karein.</p>
+        </div>
+        <div class="launch-btn">Manage Batches ↗</div>
     </a>
 
     <a href="https://a-one-driving.github.io/-classes/admin.html" target="_blank" class="admin-card">
         <div class="card-icon">⚙️</div>
         <div>
             <h2>Slot Management</h2>
-            <p>Live bookings check karein, batches update karein aur website ki notice badlein.</p>
+            <p>Live bookings, manual entries aur website settings control karein.</p>
         </div>
-        <div class="launch-btn">Open Control Panel ↗</div>
+        <div class="launch-btn">System Settings ↗</div>
     </a>
 
     <a href="https://a-one-driving.github.io/-classes/A1.html" target="_blank" class="admin-card">
         <div class="card-icon">⚡</div>
         <div>
             <h2>Quick Access</h2>
-            <p>Shortcuts aur fast actions ke liye mobile-optimized quick admin panel.</p>
+            <p>Mobile optimized shortcuts aur urgent fast actions ke liye.</p>
         </div>
-        <div class="launch-btn">Open Quick Admin ↗</div>
+        <div class="launch-btn">Open Fast Panel ↗</div>
     </a>
 
     <a href="https://a-one-driving.github.io/-classes/" target="_blank" class="admin-card">
         <div class="card-icon">🌐</div>
         <div>
             <h2>Live Website</h2>
-            <p>Apni driving academy ki live website dekhein jaisa students ko dikhti hai.</p>
+            <p>Real-time website view jo aapke students dekh rahe hain.</p>
         </div>
-        <div class="launch-btn">Visit Website ↗</div>
+        <div class="launch-btn">Visit Portal ↗</div>
     </a>
 
 </div>
 
 <div class="footer">
-    DESIGNED FOR A1 ACADEMY | 2026
+    A1 DRIVING ACADEMY | MASTER PANEL 2026
 </div>
 
 </body>
