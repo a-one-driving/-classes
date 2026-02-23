@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Dashboard | A1 Driving</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root { 
@@ -91,6 +92,19 @@
             box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
         }
 
+        /* NEW: PREMIUM CERTIFICATE STYLES */
+        #premiumCertificate {
+            display: none;
+            margin-bottom: 25px;
+            padding: 2px;
+            background: linear-gradient(45deg, #d4af37, #f9e29d, #aa841e, #d4af37);
+            background-size: 400% 400%;
+            animation: borderGlow 3s ease infinite;
+            border-radius: 25px;
+        }
+        @keyframes borderGlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .cert-card-ui { background: rgba(10, 10, 10, 0.95); border-radius: 23px; padding: 25px; border: 1px solid rgba(255,255,255,0.05); }
+
         /* PROFILE CONTENT */
         #profileContent { display: none; width: 100%; animation: fadeIn 0.6s ease; }
         
@@ -106,7 +120,6 @@
         .progress-bar { height: 8px; background: #222; border-radius: 10px; overflow: hidden; margin-top: 10px; }
         .progress-fill { height: 100%; background: var(--gold); width: 0%; transition: 1.2s ease; }
 
-        /* TIMELINE SECTION */
         .timeline-box { background: #000; padding: 20px; border-radius: 20px; border: 1px solid #222; margin-top: 15px; text-align: left; }
         #attendanceTimeline { display: flex; flex-direction: column; gap: 10px; max-height: 200px; overflow-y: auto; margin-top: 10px; }
         .log-entry { 
@@ -136,6 +149,9 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         #loader { display: none; margin: 10px auto; border: 3px solid #333; border-top: 3px solid var(--gold); border-radius: 50%; width: 25px; height: 25px; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* HIDDEN PDF TEMPLATE */
+        #pdfTemplate { width: 800px; height: 600px; background: #000; color: #fff; padding: 40px; border: 15px solid #d4af37; display: none; position: absolute; left: -9999px; text-align: center; }
     </style>
 </head>
 <body>
@@ -154,6 +170,15 @@
         </div>
 
         <div id="profileContent">
+            <div id="premiumCertificate">
+                <div class="cert-card-ui">
+                    <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" style="width:50px; margin-bottom:10px;">
+                    <h2 style="color:var(--gold); font-size:18px;">ELITE CERTIFIED</h2>
+                    <p style="font-size:10px; color:#888; margin-bottom:15px;">Congratulations on completing your course!</p>
+                    <button class="btn-gold" style="padding:10px; font-size:12px;" onclick="downloadPDF()">⬇️ DOWNLOAD PREMIUM PDF</button>
+                </div>
+            </div>
+
             <div class="student-name" id="dispName">Student Name</div>
             <div class="pkg-name" id="dispPkg">Driving Course</div>
 
@@ -189,6 +214,18 @@
         </div>
     </div>
 
+    <div id="pdfTemplate">
+        <div style="border: 2px solid #d4af37; height: 100%; padding: 40px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+            <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" style="width:80px;">
+            <h1 style="color:#d4af37; font-size: 45px; margin: 15px 0;">ABHINAASH A1 DRIVING ACADEMY</h1>
+            <p style="font-size: 18px; color: #888;">OFFICIAL CERTIFICATE OF EXCELLENCE</p>
+            <p style="font-size: 16px; margin-top: 20px;">This is to certify that</p>
+            <h2 id="pdfName" style="font-size: 40px; color: #fff; text-decoration: underline; margin: 10px 0;">NAME</h2>
+            <p style="font-size: 16px; width: 80%; margin: 15px auto;">Has successfully completed the Advanced Driving Training with superior skill and dedication.</p>
+            <div style="margin-top: 40px; border-top: 1px solid #555; width: 250px; padding-top:10px; font-size: 14px;">AUTHORIZED SIGNATURE</div>
+        </div>
+    </div>
+
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
     import { getFirestore, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
@@ -214,14 +251,16 @@
         document.getElementById('loadBtn').style.display = "none";
         document.getElementById('loader').style.display = "block";
 
-        // Logic Change: onSnapshot use kiya hai Live Sync ke liye
         onSnapshot(doc(db, "studentData", ph), (snap) => {
             if(snap.exists()) {
                 const data = snap.data();
                 currentData = { ...data, phone: ph };
                 
                 const logs = data.attendanceLogs || [];
-                const done = logs.length; // Count from logs
+                
+                // 🔥 SMART LOGIC: Recovering Geetika's 17/30 correctly
+                const done = Math.max(logs.length, data.remaining || 0);
+                
                 const total = data.totalClasses || 15;
                 const percent = Math.min(Math.round((done / total) * 100), 100);
 
@@ -232,12 +271,16 @@
                 document.getElementById('dispPercent').innerText = percent + "%";
                 document.getElementById('dispEarn').innerText = "₹" + (data.totalRefers * 500 || 0);
                 
-                // Timeline update
+                // 🔥 CERTIFICATE UNLOCK
+                if(done >= total) {
+                    document.getElementById('premiumCertificate').style.display = 'block';
+                    document.getElementById('pdfName').innerText = data.name.toUpperCase();
+                }
+
                 const timeline = document.getElementById('attendanceTimeline');
                 timeline.innerHTML = "";
                 [...logs].reverse().forEach((log, i) => {
                     const sessionNum = logs.length - i;
-                    // Clean view for profile (removing milliseconds)
                     const displayTime = log.split(':')[0] + ":" + log.split(':')[1];
                     timeline.innerHTML += `
                         <div class="log-entry">
@@ -256,6 +299,14 @@
             }
         });
     }
+
+    // PDF DOWNLOAD LOGIC
+    window.downloadPDF = () => {
+        const element = document.getElementById('pdfTemplate');
+        element.style.display = 'block';
+        const opt = { margin: 0, filename: 'A1_Driving_Certificate.pdf', html2canvas: { scale: 2 }, jsPDF: { orientation: 'landscape' } };
+        html2pdf().set(opt).from(element).save().then(() => element.style.display = 'none');
+    };
 
     window.contactAdmin = () => {
         const msg = encodeURIComponent(`Hi Abhinaash, I am ${currentData.name}. I need help.`);
