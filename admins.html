@@ -80,7 +80,6 @@
     snap.forEach(d => {
       const data = d.data();
       
-      // 🔥 SMART RECOVERY: Recovering old data
       const logCount = (data.attendanceLogs) ? data.attendanceLogs.length : 0;
       const done = Math.max(logCount, data.remaining || 0);
       
@@ -102,13 +101,20 @@
   });
 
   window.markPresent = async (id) => { 
+    // 🔥 FEEDBACK LOGIC ADDED
+    const remark = prompt("Aaj ki galti ya improvement likhein:");
+    if (remark === null) return; // Cancel handle
+
     const now = new Date();
     const stamp = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }) + " | " + 
-                  now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }) + 
-                  ":" + now.getMilliseconds();
+                  now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    
+    // Yahan hum stamp aur remark ko " — " se join kar rahe hain
+    const entry = `${stamp} — ${remark || "Session completed"}`;
+
     await updateDoc(doc(db, "studentData", id), { 
         remaining: increment(1),
-        attendanceLogs: arrayUnion(stamp) 
+        attendanceLogs: arrayUnion(entry) 
     }); 
   };
 
