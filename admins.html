@@ -110,7 +110,7 @@
                   now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     
     // Yahan hum stamp aur remark ko " — " se join kar rahe hain
-    const entry = `${stamp} — ${remark || "Session completed"}`;
+    const entry = `${stamp} — ${remark || "Progressing well"}`;
 
     await updateDoc(doc(db, "studentData", id), { 
         remaining: increment(1),
