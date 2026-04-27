@@ -18,53 +18,63 @@
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
         
-        body { background: var(--bg); color: #fff; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        body { background: var(--bg); color: #fff; padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; }
 
-        .header-box { text-align: center; margin: 30px 0; }
+        .header-box { text-align: center; margin-bottom: 40px; }
         .header-box h1 { font-size: 28px; color: var(--gold); font-weight: 800; letter-spacing: 2px; text-transform: uppercase; }
         .header-box p { font-size: 11px; color: #666; letter-spacing: 4px; margin-top: 5px; text-transform: uppercase; }
 
-        .main-container { width: 100%; max-width: 400px; background: var(--card-bg); padding: 30px 20px; border-radius: 32px; border: 1px solid #222; box-shadow: 0 30px 60px rgba(0,0,0,0.8); }
+        .main-container { width: 100%; max-width: 380px; background: var(--card-bg); padding: 35px 25px; border-radius: 32px; border: 1px solid #222; box-shadow: 0 30px 60px rgba(0,0,0,0.8); text-align: center; }
 
-        .input-label { display: block; font-size: 11px; color: #888; margin-bottom: 15px; font-weight: 600; letter-spacing: 1px; text-align: center;}
+        .input-label { display: block; font-size: 12px; color: #888; margin-bottom: 15px; font-weight: 600; letter-spacing: 1px; }
 
-        input { width: 100%; padding: 18px; border-radius: 18px; border: 1px solid #333; background: var(--input-bg); color: #fff; font-size: 17px; margin-bottom: 25px; outline: none; text-align: center; }
+        input { width: 100%; padding: 18px; border-radius: 18px; border: 1px solid #333; background: var(--input-bg); color: #fff; font-size: 17px; margin-bottom: 25px; outline: none; text-align: center; letter-spacing: 1px; }
 
-        .btn-gold { background: linear-gradient(to bottom, #f9e29d, #d4af37); color: #000; border: none; padding: 18px; border-radius: 18px; font-weight: 800; cursor: pointer; width: 100%; font-size: 15px; text-transform: uppercase; }
+        .btn-gold { background: linear-gradient(to bottom, #f9e29d, #d4af37); color: #000; border: none; padding: 18px; border-radius: 18px; font-weight: 800; cursor: pointer; width: 100%; font-size: 16px; box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2); }
 
-        #profileContent { display: none; animation: fadeIn 0.6s ease; }
+        #premiumCertificate { display: none; margin-bottom: 25px; padding: 2px; background: linear-gradient(45deg, #d4af37, #f9e29d, #aa841e, #d4af37); background-size: 400% 400%; animation: borderGlow 3s ease infinite; border-radius: 25px; }
+        @keyframes borderGlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .cert-card-ui { background: rgba(10, 10, 10, 0.95); border-radius: 23px; padding: 25px; border: 1px solid rgba(255,255,255,0.05); }
+
+        #profileContent { display: none; width: 100%; animation: fadeIn 0.6s ease; }
         
-        /* Dashboard Stats */
-        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
-        .stat-card { background: #000; padding: 15px; border-radius: 20px; border: 1px solid #222; text-align: center; }
-        .stat-card span { font-size: 9px; color: #666; display: block; text-transform: uppercase; margin-bottom: 5px; }
-        .stat-card b { font-size: 20px; color: #fff; }
-        .stat-card.highlight b { color: var(--gold); }
+        .student-name { font-size: 24px; font-weight: 800; margin-bottom: 5px; }
+        .pkg-name { color: var(--gold); font-size: 13px; margin-bottom: 25px; font-weight: 600; }
 
-        /* KM Odometer Style */
-        .odometer-box { background: linear-gradient(180deg, #111, #000); padding: 20px; border-radius: 24px; border: 1px solid #333; margin-bottom: 20px; text-align: center; position: relative; overflow: hidden; }
-        .odometer-box::after { content: 'ODOMETER'; position: absolute; top: 5px; right: 15px; font-size: 8px; color: #333; font-weight: 800; }
-        .km-value { font-size: 32px; font-weight: 800; color: var(--gold); letter-spacing: 2px; }
-        .km-sub { font-size: 10px; color: #555; text-transform: uppercase; margin-top: -5px; }
+        .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px; }
+        .stat-item { background: #000; padding: 15px; border-radius: 20px; border: 1px solid #222; }
+        .stat-item span { font-size: 10px; color: #666; display: block; text-transform: uppercase; margin-bottom: 5px; }
+        .stat-item b { font-size: 22px; color: #fff; }
 
-        .progress-box { background: #000; padding: 20px; border-radius: 20px; border: 1px solid #222; margin-bottom: 20px; }
-        .progress-bar { height: 10px; background: #222; border-radius: 10px; overflow: hidden; margin-top: 10px; }
-        .progress-fill { height: 100%; background: var(--gold); width: 0%; transition: 1.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .progress-box { background: #000; padding: 20px; border-radius: 20px; border: 1px solid #222; margin-top: 10px; text-align: left; }
+        .progress-bar { height: 8px; background: #222; border-radius: 10px; overflow: hidden; margin-top: 10px; }
+        .progress-fill { height: 100%; background: var(--gold); width: 0%; transition: 1.2s ease; }
 
-        .timeline-box { background: #000; padding: 20px; border-radius: 20px; border: 1px solid #222; margin-top: 15px; }
-        #attendanceTimeline { display: flex; flex-direction: column; gap: 10px; max-height: 200px; overflow-y: auto; margin-top: 12px; }
+        /* FIXED FEEDBACK LAYOUT */
+        .timeline-box { background: #000; padding: 20px; border-radius: 20px; border: 1px solid #222; margin-top: 15px; text-align: left; }
+        #attendanceTimeline { display: flex; flex-direction: column; gap: 12px; max-height: 250px; overflow-y: auto; margin-top: 10px; }
         
-        .log-entry { background: #111; padding: 12px; border-radius: 15px; border-left: 3px solid var(--gold); }
-        .log-row-top { display: flex; justify-content: space-between; margin-bottom: 4px; font-size: 12px; }
-        .log-msg { font-size: 11px; color: #888; font-style: italic; }
-        .km-tag { background: rgba(212, 175, 55, 0.1); color: var(--gold); font-size: 9px; padding: 2px 6px; border-radius: 5px; font-weight: 700; }
+        .log-entry { 
+            background: #111; padding: 12px 15px; border-radius: 16px; border-left: 3px solid var(--gold); 
+            display: flex; flex-direction: column; gap: 4px;
+        }
+        .log-row-top { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .log-entry b { font-size: 13px; color: #fff; }
+        .log-date { font-size: 10px; color: #666; }
+        .log-msg { font-size: 11px; color: var(--gold-light); font-style: italic; line-height: 1.4; margin-top: 2px; }
+
+        .earn-banner { background: rgba(0, 255, 136, 0.05); border: 1px solid rgba(0, 255, 136, 0.1); padding: 15px; border-radius: 20px; margin-top: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .earn-banner span { font-size: 11px; color: var(--success); font-weight: 600; }
+        .earn-banner b { font-size: 18px; color: #fff; }
 
         .action-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
-        .btn-action { background: #000; border: 1px solid #333; color: #fff; padding: 15px; border-radius: 16px; font-size: 12px; font-weight: 600; cursor: pointer; }
+        .btn-action { background: #000; border: 1px solid #333; color: #fff; padding: 14px; border-radius: 16px; font-size: 12px; font-weight: 600; cursor: pointer; }
+
+        .logout-link { color: #444; font-size: 11px; margin-top: 25px; cursor: pointer; display: block; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        #loader { display: none; margin: 15px auto; border: 3px solid #222; border-top: 3px solid var(--gold); border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
+        #loader { display: none; margin: 10px auto; border: 3px solid #333; border-top: 3px solid var(--gold); border-radius: 50%; width: 25px; height: 25px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         #pdfTemplate { width: 800px; height: 600px; background: #000; color: #fff; padding: 40px; border: 15px solid #d4af37; display: none; position: absolute; left: -9999px; text-align: center; }
     </style>
@@ -78,59 +88,63 @@
 
     <div class="main-container">
         <div id="searchPanel">
-            <span class="input-label">LOGIN TO DASHBOARD</span>
-            <input type="tel" id="userPhone" placeholder="Mobile Number" maxlength="10">
-            <button class="btn-gold" onclick="loadProfile()">Verify & Enter</button>
+            <span class="input-label">ENTER REGISTERED NUMBER</span>
+            <input type="tel" id="userPhone" placeholder="9933xxxxxx" maxlength="10">
+            <button class="btn-gold" id="loadBtn" onclick="loadProfile()">Access Dashboard</button>
             <div id="loader"></div>
         </div>
 
         <div id="profileContent">
-            <div id="premiumCertificate" style="display:none; margin-bottom: 20px; text-align: center; background: rgba(212, 175, 55, 0.1); padding: 15px; border-radius: 20px; border: 1px dashed var(--gold);">
-                <p style="color:var(--gold); font-weight: 800; font-size: 14px;">COURSE COMPLETED!</p>
-                <button class="btn-gold" style="margin-top: 10px; padding: 10px;" onclick="downloadPDF()">Download Certificate</button>
+            <div id="premiumCertificate">
+                <div class="cert-card-ui">
+                    <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" style="width:50px; margin-bottom:10px;">
+                    <h2 style="color:var(--gold); font-size:18px;">ELITE CERTIFIED</h2>
+                    <p style="font-size:10px; color:#888; margin-bottom:15px;">Congratulations on completing your course!</p>
+                    <button class="btn-gold" style="padding:10px; font-size:12px;" onclick="downloadPDF()">⬇️ DOWNLOAD PREMIUM PDF</button>
+                </div>
             </div>
 
-            <h2 id="dispName" style="font-size: 22px; text-align: center;">---</h2>
-            <p id="dispPkg" style="color: var(--gold); font-size: 12px; text-align: center; margin-bottom: 20px;">---</p>
+            <div class="student-name" id="dispName">Student Name</div>
+            <div class="pkg-name" id="dispPkg">Driving Course</div>
 
-            <div class="odometer-box">
-                <div class="km-value" id="dispKM">0.0</div>
-                <div class="km-sub">Total Kilometers Driven</div>
-            </div>
-
-            <div class="stats-grid">
-                <div class="stat-card"><span>Sessions</span><b id="dispDone">0</b></div>
-                <div class="stat-card highlight"><span>Credits (5km=1)</span><b id="dispCredits">0</b></div>
+            <div class="stats-row">
+                <div class="stat-item"><span>Done</span><b id="dispDone">0</b></div>
+                <div class="stat-item"><span>Target</span><b id="dispTotal">0</b></div>
             </div>
 
             <div class="progress-box">
-                <div style="display:flex; justify-content:space-between; font-size: 10px; font-weight: 700;">
-                    <span style="color:#555;">TRAINING MILESTONE</span>
+                <div style="display:flex; justify-content:space-between; font-size:11px;">
+                    <span style="color:#888;">LEARNING PROGRESS</span>
                     <span id="dispPercent" style="color:var(--gold);">0%</span>
                 </div>
                 <div class="progress-bar"><div class="progress-fill" id="dispBar"></div></div>
             </div>
 
             <div class="timeline-box">
-                <span style="color:var(--gold); font-size: 10px; font-weight: 800; letter-spacing: 1px;">SESSION HISTORY</span>
+                <span style="color:var(--gold); font-size: 10px; font-weight: 800; letter-spacing: 1px;">CLASS HISTORY & FEEDBACK</span>
                 <div id="attendanceTimeline"></div>
             </div>
 
-            <div class="action-grid">
-                <button class="btn-action" onclick="contactAdmin()">💬 SUPPORT</button>
-                <button class="btn-action" onclick="shareReferral()" style="color:var(--success);">🚀 REFER</button>
+            <div class="earn-banner">
+                <span>REFERRAL WALLET</span>
+                <b id="dispEarn">₹0</b>
             </div>
 
-            <p onclick="location.reload()" style="text-align: center; margin-top: 25px; font-size: 10px; color: #444; cursor: pointer;">LOGOUT SESSION</p>
+            <div class="action-grid">
+                <button class="btn-action" onclick="contactAdmin()">💬 HELP</button>
+                <button class="btn-action" onclick="shareReferral()" style="color:var(--success); border-color:rgba(0,255,136,0.2);">🚀 SHARE</button>
+            </div>
+
+            <a class="logout-link" onclick="location.reload()">← LOGOUT SESSION</a>
         </div>
     </div>
 
     <div id="pdfTemplate">
         <div style="border: 2px solid #d4af37; height: 100%; padding: 40px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-            <h1 style="color:#d4af37; font-size: 45px;">ABHINAASH A1</h1>
-            <p style="font-size: 18px; color: #888;">OFFICIAL DRIVING CERTIFICATE</p>
-            <h2 id="pdfName" style="font-size: 40px; color: #fff; margin: 20px 0;">NAME</h2>
-            <p style="font-size: 16px; width: 80%;">Successfully completed the road safety and advanced driving module.</p>
+            <h1 style="color:#d4af37; font-size: 45px; margin: 15px 0;">ABHINAASH A1 DRIVING ACADEMY</h1>
+            <p style="font-size: 18px; color: #888;">OFFICIAL CERTIFICATE OF EXCELLENCE</p>
+            <h2 id="pdfName" style="font-size: 40px; color: #fff; text-decoration: underline; margin: 10px 0;">NAME</h2>
+            <p style="font-size: 16px; width: 80%; margin: 15px auto;">Has successfully completed the Advanced Driving Training.</p>
         </div>
     </div>
 
@@ -150,34 +164,30 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
+    let currentData = null;
+
     window.loadProfile = () => {
         const ph = document.getElementById('userPhone').value;
-        if(ph.length < 10) return alert("Enter valid number");
+        if(ph.length < 10) return alert("Please enter 10 digit number.");
         document.getElementById('loader').style.display = "block";
 
         onSnapshot(doc(db, "studentData", ph), (snap) => {
             if(snap.exists()) {
                 const data = snap.data();
+                currentData = { ...data, phone: ph };
                 const logs = data.attendanceLogs || [];
-                
-                // 5km = 1 Class Logic
-                const totalKm = data.totalKm || 0;
-                const kmCredits = Math.floor(totalKm / 5);
-                const sessionCount = logs.length;
-                
-                // Final progress is whichever is higher: sessions attended or distance credits
-                const effectiveDone = Math.max(sessionCount, kmCredits);
-                const totalTarget = data.totalClasses || 15;
-                const percent = Math.min(Math.round((effectiveDone / totalTarget) * 100), 100);
+                const done = Math.max(logs.length, data.remaining || 0);
+                const total = data.totalClasses || 15;
+                const percent = Math.min(Math.round((done / total) * 100), 100);
 
                 document.getElementById('dispName').innerText = data.name;
-                document.getElementById('dispPkg').innerText = totalTarget + " Days Elite Program";
-                document.getElementById('dispKM').innerText = totalKm.toFixed(1);
-                document.getElementById('dispDone').innerText = sessionCount;
-                document.getElementById('dispCredits').innerText = kmCredits;
+                document.getElementById('dispPkg').innerText = total + "-Day Training";
+                document.getElementById('dispDone').innerText = done;
+                document.getElementById('dispTotal').innerText = total;
                 document.getElementById('dispPercent').innerText = percent + "%";
+                document.getElementById('dispEarn').innerText = "₹" + (data.totalRefers * 500 || 0);
                 
-                if(percent >= 100) {
+                if(done >= total) {
                     document.getElementById('premiumCertificate').style.display = 'block';
                     document.getElementById('pdfName').innerText = data.name.toUpperCase();
                 }
@@ -185,27 +195,26 @@
                 const timeline = document.getElementById('attendanceTimeline');
                 timeline.innerHTML = "";
                 [...logs].reverse().forEach((log, i) => {
+                    const sessionNum = logs.length - i;
+                    // Logic to split Date and Message
                     const parts = log.split(' — ');
-                    // Assuming log format: "Date — Message — KM"
-                    const kmVal = parts[2] ? parts[2] : "5"; 
+                    const dateInfo = parts[0];
+                    const message = parts[1] || "Session Completed";
+
                     timeline.innerHTML += `
                         <div class="log-entry">
                             <div class="log-row-top">
-                                <b>Session ${logs.length - i}</b>
-                                <span class="km-tag">${kmVal} KM</span>
-                                <span style="color:#444">${parts[0]}</span>
+                                <b>Session ${sessionNum}</b>
+                                <span class="log-date">${dateInfo}</span>
                             </div>
-                            <div class="log-msg">"${parts[1] || 'Successfully practiced steering and gear control.'}"</div>
+                            <div class="log-msg">📝 ${message}</div>
                         </div>`;
                 });
 
                 document.getElementById('searchPanel').style.display = "none";
                 document.getElementById('profileContent').style.display = "block";
-                setTimeout(() => { document.getElementById('dispBar').style.width = percent + "%"; }, 200);
-            } else { 
-                alert("Student not found!");
-                document.getElementById('loader').style.display = "none";
-            }
+                setTimeout(() => { document.getElementById('dispBar').style.width = percent + "%"; }, 100);
+            } else { alert("No record found!"); }
         });
     }
 
@@ -216,11 +225,13 @@
     };
 
     window.contactAdmin = () => {
-        window.location.href = `https://wa.me/917008186187?text=Hi Abhinaash, help me with my dashboard.`;
+        const msg = encodeURIComponent(`Hi Abhinaash, I am ${currentData.name}. I need help.`);
+        window.location.href = `https://wa.me/917008186187?text=${msg}`;
     };
 
     window.shareReferral = () => {
-        window.location.href = `https://wa.me/?text=Learn Driving with A1 Academy! Mention my name for a discount.`;
+        const text = encodeURIComponent(`Hey! join A1 Driving Academy. Use my referral.`);
+        window.location.href = `https://wa.me/?text=${text}`;
     };
 </script>
 </body>
