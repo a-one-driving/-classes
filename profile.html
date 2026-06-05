@@ -9,200 +9,223 @@
   <style>
     :root { 
       --gold: #d4af37; 
-      --gold-gradient: linear-gradient(135deg, #f9e29d 0%, #d4af37 100%);
-      --bg-dark: #070709; 
-      --panel-bg: rgba(22, 22, 28, 0.7);
-      --input-bg: #0f0f14;
-      --success: #30d158;
-      --card-border: rgba(255, 255, 255, 0.05);
-      --text-muted: #8e8e93;
+      --gold-gradient: linear-gradient(135deg, #fce08d 0%, #d4af37 50%, #aa8210 100%);
+      --bg-dark: #0b0b0e; 
+      --panel-bg: rgba(18, 18, 24, 0.8);
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --input-bg: #121217;
+      --success: #34c759;
+      --card-border: rgba(255, 255, 255, 0.07);
+      --text-muted: #98989d;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
     
     body { 
       background: var(--bg-dark); 
-      background-image: radial-gradient(circle at 50% -20%, rgba(212, 175, 55, 0.12) 0%, transparent 50%);
+      background-image: 
+        radial-gradient(circle at 50% -20%, rgba(212, 175, 55, 0.15) 0%, transparent 60%),
+        radial-gradient(circle at 0% 100%, rgba(255, 255, 255, 0.02) 0%, transparent 40%);
       color: #fff; 
       min-height: 100vh; 
       display: flex; 
       flex-direction: column; 
       align-items: center; 
-      justify-content: center; 
-      padding: 20px;
+      justify-content: flex-start; 
+      padding: 16px;
       -webkit-tap-highlight-color: transparent;
+      overflow-x: hidden;
     }
 
-    /* Core Premium Dashboard Layout */
+    /* Premium Container Layout */
+    .dashboard-container {
+      width: 100%;
+      max-width: 440px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin: auto 0;
+    }
+
+    .brand-section { text-align: center; margin-top: 10px; }
+    .brand-section h1 { font-size: 26px; font-weight: 800; letter-spacing: 3px; background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.2; }
+    .brand-section p { font-size: 10px; color: var(--text-muted); letter-spacing: 5px; font-weight: 600; margin-top: 4px; text-transform: uppercase; }
+
     .dashboard-wrapper { 
       width: 100%; 
-      max-width: 400px; 
       background: var(--panel-bg); 
-      backdrop-filter: blur(24px); 
-      -webkit-backdrop-filter: blur(24px);
-      padding: 30px 24px; 
-      border-radius: 30px; 
+      backdrop-filter: blur(30px); 
+      -webkit-backdrop-filter: blur(30px);
+      padding: 28px 20px; 
+      border-radius: 28px; 
       border: 1px solid var(--card-border); 
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4); 
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255,255,255,0.1); 
     }
 
-    .brand-section { text-align: center; margin-bottom: 30px; }
-    .brand-section h1 { font-size: 24px; font-weight: 800; letter-spacing: 2px; background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .brand-section p { font-size: 10px; color: var(--text-muted); letter-spacing: 4px; font-weight: 600; margin-top: 2px; }
-
-    /* Auth Panel Components */
-    .input-group { position: relative; margin-bottom: 20px; }
-    .input-label { display: block; font-size: 11px; color: var(--text-muted); font-weight: 600; letter-spacing: 1px; margin-bottom: 8px; text-transform: uppercase; }
+    /* Auth Framework components */
+    .input-group { margin-bottom: 24px; }
+    .input-label { display: block; font-size: 11px; color: var(--text-muted); font-weight: 600; letter-spacing: 1.5px; margin-bottom: 10px; text-transform: uppercase; }
     
     input { 
       width: 100%; 
-      padding: 16px; 
+      padding: 18px; 
       border-radius: 16px; 
       border: 1px solid var(--card-border); 
       background: var(--input-bg); 
       color: #fff; 
-      font-size: 16px; 
+      font-size: 18px; 
+      font-weight: 500;
+      letter-spacing: 1px;
       outline: none; 
       text-align: center; 
-      transition: all 0.25s ease; 
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
     }
-    input:focus { border-color: var(--gold); box-shadow: 0 0 15px rgba(212, 175, 55, 0.15); }
+    input:focus { border-color: var(--gold); box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); background: #15151f; }
 
     .btn-primary { 
       background: var(--gold-gradient); 
-      color: #000; 
+      color: #0b0b0e; 
       border: none; 
-      padding: 16px; 
+      padding: 18px; 
       border-radius: 16px; 
       font-weight: 700; 
       cursor: pointer; 
       width: 100%; 
-      font-size: 15px; 
-      box-shadow: 0 8px 20px rgba(212, 175, 55, 0.25); 
-      transition: transform 0.2s;
+      font-size: 16px; 
+      letter-spacing: 0.5px;
+      box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3); 
+      transition: all 0.2s ease;
     }
-    .btn-primary:active { transform: scale(0.98); }
+    .btn-primary:active { transform: scale(0.97); opacity: 0.9; }
 
-    /* Modern Profile Grid View */
-    #profileContent { display: none; width: 100%; animation: slideUp 0.5s cubic-bezier(0.1, 1, 0.1, 1); }
-    @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    /* Structural Framework Animations */
+    #profileContent { display: none; width: 100%; animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-    .profile-meta { text-align: center; margin-bottom: 25px; }
-    .student-title { font-size: 22px; font-weight: 700; color: #fff; letter-spacing: -0.5px; }
-    .course-badge { display: inline-block; padding: 4px 12px; background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 20px; font-size: 11px; color: var(--gold); font-weight: 600; margin-top: 6px; }
+    .profile-meta { text-align: center; margin-bottom: 24px; }
+    .student-title { font-size: 24px; font-weight: 700; color: #fff; letter-spacing: -0.5px; }
+    .course-badge { display: inline-flex; align-items: center; padding: 6px 14px; background: rgba(212, 175, 55, 0.08); border: 1px solid rgba(212, 175, 55, 0.25); border-radius: 100px; font-size: 11px; color: #fce08d; font-weight: 600; margin-top: 8px; letter-spacing: 0.5px; }
 
-    /* Ring Progress Widget */
-    .progress-widget { background: rgba(0,0,0,0.25); border: 1px solid var(--card-border); border-radius: 24px; padding: 20px; display: flex; align-items: center; justify-content: space-around; margin-bottom: 16px; }
-    .metrics-box { display: flex; flex-direction: column; gap: 10px; }
-    .metric-pill { background: rgba(255,255,255,0.02); border: 1px solid var(--card-border); padding: 8px 14px; border-radius: 14px; display: flex; flex-direction: column; }
-    .metric-pill span { font-size: 9px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
-    .metric-pill b { font-size: 18px; color: #fff; }
+    /* Multi-Ring Dashboard Metric Track */
+    .progress-widget { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 22px; padding: 20px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; gap: 12px; }
+    .metrics-box { display: flex; flex-direction: column; gap: 12px; flex: 1; }
+    .metric-pill { background: rgba(0, 0, 0, 0.2); border: 1px solid var(--card-border); padding: 10px 14px; border-radius: 14px; display: flex; flex-direction: column; }
+    .metric-pill span { font-size: 9px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+    .metric-pill b { font-size: 20px; color: #fff; margin-top: 2px; line-height: 1.2; }
 
-    .radial-progress-svg { width: 85px; height: 85px; transform: rotate(-90deg); }
-    .radial-bg { fill: none; stroke: rgba(255,255,255,0.04); stroke-width: 8; }
-    .radial-fill { fill: none; stroke: var(--gold); stroke-width: 8; stroke-linecap: round; stroke-dasharray: 220; stroke-dashoffset: 220; transition: stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1); }
-    .radial-text { font-size: 15px; font-weight: 700; fill: #fff; font-family: 'Poppins'; }
+    .radial-container { position: relative; width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; margin-right: 8px; }
+    .radial-progress-svg { width: 100px; height: 100px; transform: rotate(-90deg); }
+    .radial-bg { fill: none; stroke: rgba(255,255,255,0.03); stroke-width: 9; }
+    .radial-fill { fill: none; stroke: var(--gold); stroke-width: 9; stroke-linecap: round; stroke-dasharray: 251.3; stroke-dashoffset: 251.3; transition: stroke-dashoffset 1.4s cubic-bezier(0.16, 1, 0.3, 1); }
+    .radial-text { position: absolute; font-size: 16px; font-weight: 700; color: #fff; letter-spacing: -0.5px; }
 
-    /* Timeline Infrastructure */
-    .timeline-widget { background: rgba(0,0,0,0.25); border: 1px solid var(--card-border); border-radius: 24px; padding: 20px; margin-bottom: 16px; }
-    .timeline-header { font-size: 11px; color: var(--text-muted); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; display: block; }
-    #attendanceTimeline { display: flex; flex-direction: column; gap: 10px; max-height: 200px; overflow-y: auto; padding-right: 4px; }
+    /* Timeline Tracking Structure */
+    .timeline-widget { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 22px; padding: 20px; margin-bottom: 16px; }
+    .timeline-header { font-size: 11px; color: var(--text-muted); font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 14px; display: block; }
+    #attendanceTimeline { display: flex; flex-direction: column; gap: 12px; max-height: 220px; overflow-y: auto; padding-right: 4px; }
     
-    .log-row { background: rgba(255,255,255,0.02); border: 1px solid var(--card-border); padding: 12px; border-radius: 16px; display: flex; flex-direction: column; gap: 4px; border-left: 3px solid var(--gold); }
+    /* Elegant Custom Scrollbar */
+    #attendanceTimeline::-webkit-scrollbar { width: 4px; }
+    #attendanceTimeline::-webkit-scrollbar-track { background: transparent; }
+    #attendanceTimeline::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+
+    .log-row { background: rgba(0, 0, 0, 0.15); border: 1px solid var(--card-border); padding: 14px; border-radius: 16px; display: flex; flex-direction: column; gap: 6px; border-left: 4px solid var(--gold); transition: transform 0.2s; }
     .log-meta { display: flex; justify-content: space-between; align-items: center; }
-    .log-meta b { font-size: 12px; font-weight: 600; color: #fff; }
-    .log-meta span { font-size: 9px; color: var(--text-muted); }
-    .log-feedback { font-size: 11px; color: var(--gold-light); opacity: 0.95; padding-top: 2px; }
+    .log-meta b { font-size: 13px; font-weight: 600; color: #fff; }
+    .log-meta span { font-size: 10px; color: var(--text-muted); font-weight: 500; }
+    .log-feedback { font-size: 12px; color: #e5e5ea; opacity: 0.9; line-height: 1.4; }
 
-    /* Shared Referral Wallet */
-    .wallet-banner { background: linear-gradient(90deg, rgba(48,209,88,0.06) 0%, rgba(48,209,88,0) 100%); border: 1px solid rgba(48,209,88,0.15); padding: 16px 20px; border-radius: 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+    /* Micro Wallet Framework */
+    .wallet-banner { background: linear-gradient(90deg, rgba(52,199,89,0.08) 0%, rgba(52,199,89,0.01) 100%); border: 1px solid rgba(52,199,89,0.2); padding: 16px 20px; border-radius: 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
     .wallet-banner div { display: flex; flex-direction: column; }
-    .wallet-banner span { font-size: 10px; color: var(--success); font-weight: 700; letter-spacing: 0.5px; }
-    .wallet-banner p { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
-    .wallet-banner b { font-size: 20px; color: #fff; }
+    .wallet-banner span { font-size: 10px; color: var(--success); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+    .wallet-banner p { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+    .wallet-banner b { font-size: 22px; color: #fff; font-weight: 700; letter-spacing: -0.5px; }
 
-    /* Action Deck matrix */
-    .actions-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .btn-secondary { background: rgba(255,255,255,0.02); border: 1px solid var(--card-border); color: #fff; padding: 14px; border-radius: 16px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
-    .btn-secondary:active { background: rgba(255,255,255,0.06); }
+    /* Action Deck Matrix */
+    .actions-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .btn-secondary { background: var(--card-bg); border: 1px solid var(--card-border); color: #fff; padding: 16px; border-radius: 16px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .btn-secondary:active { background: rgba(255,255,255,0.08); transform: scale(0.98); }
 
-    /* Premium Certificate Glowing Overlay */
-    #premiumCertificate { display: none; background: linear-gradient(135deg, rgba(212,175,55,0.15) 0%, rgba(212,175,55,0.02) 100%); border: 1px solid rgba(212,175,55,0.3); border-radius: 24px; padding: 20px; text-align: center; margin-bottom: 16px; }
+    /* Premium Certificate Floating Block */
+    #premiumCertificate { display: none; background: linear-gradient(135deg, rgba(212,175,55,0.15) 0%, rgba(212,175,55,0.03) 100%); border: 1px solid rgba(212,175,55,0.35); border-radius: 24px; padding: 22px 20px; text-align: center; margin-bottom: 16px; box-shadow: 0 15px 35px rgba(212,175,55,0.1); }
     
-    .logout-btn { color: #555; font-size: 11px; font-weight: 500; margin-top: 25px; text-align: center; cursor: pointer; display: block; text-decoration: none; }
+    .logout-btn { color: rgba(255,255,255,0.3); font-size: 12px; font-weight: 500; margin-top: 28px; text-align: center; cursor: pointer; display: block; text-decoration: none; transition: color 0.2s; letter-spacing: 0.5px; }
     .logout-btn:hover { color: var(--gold); }
 
-    #loader { display: none; margin: 15px auto 0 auto; border: 2px solid #222; border-top: 2px solid var(--gold); border-radius: 50%; width: 24px; height: 24px; animation: spin 0.8s linear infinite; }
+    #loader { display: none; margin: 20px auto 0 auto; border: 2.5px solid rgba(255,255,255,0.05); border-top: 2.5px solid var(--gold); border-radius: 50%; width: 28px; height: 28px; animation: spin 0.75s linear infinite; }
     @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-    /* PDF Rendering Output Template */
+    /* PDF Engine Base Layout Profile */
     #pdfTemplate { width: 842px; height: 595px; background: #000; color: #fff; padding: 50px; border: 20px solid #d4af37; display: none; position: absolute; left: -9999px; text-align: center; }
   </style>
 </head>
 <body>
 
-  <div class="brand-section">
-    <h1>ABHINAASH A1</h1>
-    <p>DRIVING ACADEMY</p>
-  </div>
-
-  <div class="dashboard-wrapper">
-    <div id="searchPanel">
-      <span class="input-label">Enter Registered Number</span>
-      <input type="tel" id="userPhone" placeholder="9933xxxxxx" maxlength="10">
-      <button class="btn-primary" onclick="loadProfile()">Access Dashboard</button>
-      <div id="loader"></div>
+  <div class="dashboard-container">
+    <div class="brand-section">
+      <h1>ABHINAASH A1</h1>
+      <p>DRIVING ACADEMY</p>
     </div>
 
-    <div id="profileContent">
-      <div id="premiumCertificate">
-        <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" style="width:42px; filter: drop-shadow(0 0 8px var(--gold)); margin-bottom:8px;">
-        <h3 style="color:var(--gold); font-size:16px; font-weight:700;">ELITE COURSE GRADUATE</h3>
-        <p style="font-size:11px; color:var(--text-muted); margin-bottom:14px;">Your official driving track record is successfully parsed.</p>
-        <button class="btn-primary" style="padding:10px; font-size:12px; border-radius:12px;" onclick="downloadPDF()">⬇️ DOWNLOAD PREMIUM PDF</button>
-      </div>
-
-      <div class="profile-meta">
-        <div class="student-title" id="dispName">Driver Name</div>
-        <div class="course-badge" id="dispPkg">Track Scheme</div>
-      </div>
-
-      <div class="progress-widget">
-        <div class="metrics-box">
-          <div class="metric-pill"><span>Done</span><b id="dispDone">0</b></div>
-          <div class="metric-pill"><span>Target</span><b id="dispTotal">0</b></div>
+    <div class="dashboard-wrapper">
+      <div id="searchPanel">
+        <span class="input-label">Enter Registered Number</span>
+        <div class="input-group">
+          <input type="tel" id="userPhone" placeholder="9933xxxxxx" maxlength="10" autocomplete="tel">
         </div>
-        
-        <div style="position:relative; width:85px; height:85px;">
-          <svg class="radial-progress-svg">
-            <circle class="radial-bg" cx="42.5" cy="42.5" r="35"></circle>
-            <circle class="radial-fill" id="radialFillCircle" cx="42.5" cy="42.5" r="35"></circle>
-          </svg>
-          <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-            <span id="dispPercent" style="font-size:14px; font-weight:700; color:#fff;">0%</span>
+        <button class="btn-primary" onclick="loadProfile()">Access Dashboard</button>
+        <div id="loader"></div>
+      </div>
+
+      <div id="profileContent">
+        <div id="premiumCertificate">
+          <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" style="width:46px; filter: drop-shadow(0 0 10px rgba(212,175,55,0.4)); margin-bottom:10px;" alt="Elite Graduate">
+          <h3 style="color:#fce08d; font-size:17px; font-weight:700; letter-spacing: 0.5px;">ELITE COURSE GRADUATE</h3>
+          <p style="font-size:12px; color:var(--text-muted); margin-bottom:16px; line-height: 1.4;">Your official driving track record is successfully parsed.</p>
+          <button class="btn-primary" style="padding: 12px; font-size: 13px; border-radius: 12px; box-shadow: 0 6px 15px rgba(212,175,55,0.2);" onclick="downloadPDF()">⬇️ DOWNLOAD PREMIUM PDF</button>
+        </div>
+
+        <div class="profile-meta">
+          <div class="student-title" id="dispName">Driver Name</div>
+          <div class="course-badge" id="dispPkg">Track Scheme</div>
+        </div>
+
+        <div class="progress-widget">
+          <div class="metrics-box">
+            <div class="metric-pill"><span>Done</span><b id="dispDone">0</b></div>
+            <div class="metric-pill"><span>Target</span><b id="dispTotal">0</b></div>
+          </div>
+          
+          <div class="radial-container">
+            <svg class="radial-progress-svg">
+              <circle class="radial-bg" cx="50" cy="50" r="40"></circle>
+              <circle class="radial-fill" id="radialFillCircle" cx="50" cy="50" r="40"></circle>
+            </svg>
+            <div class="radial-text" id="dispPercent">0%</div>
           </div>
         </div>
-      </div>
 
-      <div class="timeline-widget">
-        <span class="timeline-header">Class History & Feedback</span>
-        <div id="attendanceTimeline"></div>
-      </div>
-
-      <div class="wallet-banner">
-        <div>
-          <span>REFERRAL WALLET</span>
-          <p>Earned per subscription</p>
+        <div class="timeline-widget">
+          <span class="timeline-header">Class History & Feedback</span>
+          <div id="attendanceTimeline"></div>
         </div>
-        <b id="dispEarn">₹0</b>
-      </div>
 
-      <div class="actions-grid">
-        <button class="btn-secondary" onclick="contactAdmin()">💬 HELP</button>
-        <button class="btn-secondary" onclick="shareReferral()" style="color:var(--success); border-color:rgba(48,209,88,0.15);">🚀 SHARE</button>
-      </div>
+        <div class="wallet-banner">
+          <div>
+            <span>REFERRAL WALLET</span>
+            <p>Earned per subscription</p>
+          </div>
+          <b id="dispEarn">₹0</b>
+        </div>
 
-      <a class="logout-btn" onclick="location.reload()">← LOGOUT SESSION</a>
+        <div class="actions-grid">
+          <button class="btn-secondary" onclick="contactAdmin()">💬 HELP</button>
+          <button class="btn-secondary" onclick="shareReferral()" style="color:var(--success); border-color:rgba(52,199,89,0.25); background: linear-gradient(135deg, rgba(52,199,89,0.05) 0%, transparent 100%);">🚀 SHARE</button>
+        </div>
+
+        <a class="logout-btn" onclick="location.reload()">← LOGOUT SESSION</a>
+      </div>
     </div>
   </div>
 
@@ -256,8 +279,8 @@
         document.getElementById('dispEarn').innerText = "₹" + (data.totalRefers * 500 || 0);
         
         // Calculate Radial Progress Ring Fill
-        const radius = 35;
-        const circumference = 2 * Math.PI * radius; // Around 220
+        const radius = 40;
+        const circumference = 2 * Math.PI * radius; // 251.3
         const strokeDashoffset = circumference - (percent / 100) * circumference;
         document.getElementById('radialFillCircle').style.strokeDashoffset = strokeDashoffset;
 
