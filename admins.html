@@ -3,10 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>A1 Attendance | Management</title>
+  <title>A1 Attendance | Route Management</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght=300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* Fixed Premium Dark Gold Theme System */
     :root {
       --gold-primary: #d4af37;
       --gold-glow: rgba(212, 175, 55, 0.15);
@@ -18,16 +17,15 @@
       --success: #30d158;
       --danger: #ff453a;
       --whatsapp: #34c759;
+      --route-color: #3a86ff;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
     body { background: var(--bg-main); color: var(--text-main); padding: 15px; padding-bottom: 120px; -webkit-tap-highlight-color: transparent; }
     
-    /* Clean Sticky Header */
     .header { background: rgba(10, 10, 12, 0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 16px 20px; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border-color); margin: -15px -15px 20px -15px; display: flex; justify-content: space-between; align-items: center; }
     .header h1 { font-size: 18px; font-weight: 700; color: var(--gold-primary); letter-spacing: 1px; text-transform: uppercase; }
     
-    /* Mobile Responsive Components */
     .search-bar { width: 100%; background: var(--surface-card); border: 1px solid var(--border-color); padding: 14px 18px; border-radius: 14px; color: #fff; font-size: 14px; outline: none; margin-bottom: 20px; transition: all 0.2s ease; }
     .search-bar:focus { border-color: var(--gold-primary); box-shadow: 0 0 12px var(--gold-glow); }
 
@@ -43,27 +41,28 @@
     .progress-mini b { font-size: 12px; color: var(--text-main); display: block; }
     .progress-mini p { font-size: 8px; color: var(--text-muted); font-weight: 600; }
 
-    /* Action Buttons Architecture */
     .btn-action { border: none; width: 38px; height: 38px; border-radius: 10px; font-size: 15px; cursor: pointer; display: flex; align-items: center; justify-content: center; margin-left: 6px; flex-shrink: 0; }
     .mark-btn { background: var(--gold-primary); color: #000; font-weight: 700; font-size: 18px; }
     .wa-btn { background: rgba(52, 199, 89, 0.1); color: var(--whatsapp); border: 1px solid rgba(52, 199, 89, 0.2); }
     .del-btn { background: rgba(255, 69, 58, 0.1); color: var(--danger); border: 1px solid rgba(255, 69, 58, 0.15); font-size: 16px; }
 
-    /* Floating Dialog Layouts */
     .fab { position: fixed; bottom: 85px; right: 20px; width: 56px; height: 56px; background: var(--gold-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; color: #000; z-index: 999; border: none; box-shadow: 0 4px 16px var(--gold-glow); cursor: pointer; }
     .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 2000; align-items: center; justify-content: center; padding: 15px; }
-    .modal-content { background: #16161a; padding: 24px; border-radius: 20px; border: 1px solid var(--border-color); width: 100%; max-width: 360px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-    .modal-content h2 { font-size: 18px; margin-bottom: 16px; font-weight: 600; }
+    .modal-content { background: #16161a; padding: 24px; border-radius: 20px; border: 1px solid var(--border-color); width: 100%; max-width: 380px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    .modal-content h2 { font-size: 18px; margin-bottom: 12px; font-weight: 600; }
     .modal-content input { width: 100%; padding: 12px; margin-bottom: 14px; background: #0b0b0d; border: 1px solid var(--border-color); border-radius: 10px; color: #fff; font-size: 14px; outline: none; }
     .modal-content input:focus { border-color: var(--gold-primary); }
     .save-btn { width: 100%; padding: 12px; background: var(--gold-primary); border: none; border-radius: 10px; font-weight: 700; font-size: 14px; color: #000; cursor: pointer; }
     
-    /* Auto Feedback Labels Layout */
-    .tag-container { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; max-height: 180px; overflow-y: auto; padding-right: 4px; }
-    .tag-chip { background: rgba(255,255,255,0.04); border: 1px solid var(--border-color); color: #fff; padding: 6px 12px; border-radius: 20px; font-size: 11px; cursor: pointer; transition: all 0.2s ease; }
-    .tag-chip:active { background: var(--gold-primary); color: #000; border-color: var(--gold-primary); }
-
-    /* Fixed Bottom Footer Bar */
+    /* Dual Grid Tag Containers */
+    .section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 6px; font-weight: 600; }
+    .tag-container { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; max-height: 110px; overflow-y: auto; padding-right: 2px; }
+    .tag-chip { background: rgba(255,255,255,0.04); border: 1px solid var(--border-color); color: #fff; padding: 5px 10px; border-radius: 15px; font-size: 11px; cursor: pointer; transition: all 0.15s ease; }
+    
+    /* Theme Colors for Chips */
+    .route-chip { border-color: rgba(58, 134, 255, 0.2); background: rgba(58, 134, 255, 0.03); }
+    .route-chip.selected { background: var(--route-color) !important; color: #fff !important; border-color: var(--route-color); font-weight: 500; }
+    
     .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(18, 18, 22, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-top: 1px solid var(--border-color); padding: 14px; display: flex; justify-content: space-around; z-index: 100; }
     .nav-item { text-align: center; width: 50%; }
     .nav-item b { font-size: 16px; color: var(--gold-primary); display: block; font-weight: 700; }
@@ -83,10 +82,8 @@
 <input type="text" id="studentSearch" class="search-bar" placeholder="🔍 Search student by name..." onkeyup="filterList()">
 <div id="attendanceList" class="attendance-grid"></div>
 
-<!-- Add Button Floating -->
 <button class="fab" onclick="toggleModal('addModal', true)">+</button>
 
-<!-- Modal: Add Student Profile -->
 <div id="addModal" class="modal">
     <div class="modal-content">
         <h2>Add New Student</h2>
@@ -98,28 +95,37 @@
     </div>
 </div>
 
-<!-- Modal: Quick Labels & Attendance Updates -->
 <div id="remarkModal" class="modal">
     <div class="modal-content">
-        <h2>Select Student Remark</h2>
-        <p style="font-size:11px; color:var(--text-muted); margin-bottom:12px;">Tap any auto-label to auto fill input box:</p>
+        <h2>Driving Track Entry</h2>
         
-        <div class="tag-container">
-          <div class="tag-chip" onclick="selectLabel(this)">🌟 Perfect Drive</div>
-          <div class="tag-chip" onclick="selectLabel(this)">⚙️ Clutch Issue</div>
-          <div class="tag-chip" onclick="selectLabel(this)">⚠️ Engine Stalling</div>
-          <div class="tag-chip" onclick="selectLabel(this)">🔄 Good Turns</div>
-          <div class="tag-chip" onclick="selectLabel(this)">🚀 Speed Control</div>
-          <div class="tag-chip" onclick="selectLabel(this)">🅿️ Reverse Park</div>
+        <div class="section-label">📍 Select Track Route:</div>
+        <div class="tag-container" id="routeContainer">
+          <div class="tag-chip route-chip" onclick="selectRoute(this)">Baghra road</div>
+          <div class="tag-chip route-chip" onclick="selectRoute(this)">Badbazar</div>
+          <div class="tag-chip route-chip" onclick="selectRoute(this)">Bhanjpur road</div>
+          <div class="tag-chip route-chip" onclick="selectRoute(this)">Udala road</div>
+          <div class="tag-chip route-chip" onclick="selectRoute(this)">Station bazar road</div>
+          <div class="tag-chip route-chip" onclick="selectRoute(this)">Fire station turning</div>
+          <div class="tag-chip route-chip" onclick="selectRoute(this)">Lal bazar road</div>
         </div>
 
-        <input type="text" id="customRemark" placeholder="Or compose custom feedback...">
+        <div class="section-label">⚡ Practice Performance:</div>
+        <div class="tag-container">
+          <div class="tag-chip" onclick="selectRemarkTag(this)">🌟 Perfect Drive</div>
+          <div class="tag-chip" onclick="selectRemarkTag(this)">⚙️ Clutch Issue</div>
+          <div class="tag-chip" onclick="selectRemarkTag(this)">⚠️ Engine Stalling</div>
+          <div class="tag-chip" onclick="selectRemarkTag(this)">🔄 Good Turns</div>
+          <div class="tag-chip" onclick="selectRemarkTag(this)">🚀 Speed Control</div>
+          <div class="tag-chip" onclick="selectRemarkTag(this)">🅿️ Reverse Park</div>
+        </div>
+
+        <input type="text" id="customRemark" placeholder="Compiled overview text...">
         <button class="save-btn" onclick="submitAttendance()">CONFIRM ENTRY</button>
-        <button onclick="toggleModal('remarkModal', false)" style="background:none; border:none; color:var(--text-muted); width:100%; margin-top:14px; font-size:13px; cursor:pointer;">Cancel Track</button>
+        <button onclick="toggleModal('remarkModal', false)" style="background:none; border:none; color:var(--text-muted); width:100%; margin-top:12px; font-size:13px; cursor:pointer;">Cancel Track</button>
     </div>
 </div>
 
-<!-- Static Footer Counters -->
 <div class="bottom-nav">
     <div class="nav-item">
       <b id="totalActive">0</b>
@@ -134,7 +140,6 @@
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
   import { getFirestore, collection, onSnapshot, doc, setDoc, updateDoc, deleteDoc, increment, arrayUnion } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
-  // Firebase Configuration Engine
   const firebaseConfig = {
     apiKey: "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
     authDomain: "abinash-driving.firebaseapp.com",
@@ -146,7 +151,10 @@
 
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
+  
   let activeStudentID = null; 
+  let currentSelectedRoute = "";
+  let currentSelectedRemark = "";
 
   // Database Synchronization & UI Renderer
   onSnapshot(collection(db, "studentData"), (snap) => {
@@ -192,7 +200,6 @@
     setupCardEventListeners();
   });
 
-  // Safe Dynamic Click Bindings
   function setupCardEventListeners() {
     document.querySelectorAll('.mark-btn').forEach(btn => {
       btn.onclick = () => window.openRemarkModal(btn.getAttribute('data-id'));
@@ -205,26 +212,45 @@
     });
   }
 
-  // Open Feedback UI Dashboard
+  // Open & Reset Remark Layouts
   window.openRemarkModal = (id) => {
     activeStudentID = id;
+    currentSelectedRoute = "";
+    currentSelectedRemark = "";
     document.getElementById('customRemark').value = '';
+    
+    // Clear previously highlighted visual route selections
+    document.querySelectorAll('.route-chip').forEach(chip => chip.classList.remove('selected'));
     window.toggleModal('remarkModal', true);
   };
 
-  // Fixed Bug: Object HTML Extraction Layer
-  window.selectLabel = (param) => {
-    // Agar direct text string pass ho ya element content, dono scenario me clean text pick hoga
-    if (param && typeof param === 'object' && param.innerText) {
-      document.getElementById('customRemark').value = param.innerText.replace(/[^\w\s!?.,-]/g, '').trim();
-    } else if (typeof param === 'string') {
-      document.getElementById('customRemark').value = param.replace(/[^\w\s!?.,-]/g, '').trim();
-    } else {
-      document.getElementById('customRemark').value = param;
-    }
+  // Route Engine Action Builder
+  window.selectRoute = (element) => {
+    document.querySelectorAll('.route-chip').forEach(chip => chip.classList.remove('selected'));
+    element.classList.add('selected');
+    currentSelectedRoute = element.innerText.trim();
+    compileFinalInputString();
   };
 
-  // Push Attendance Entry to Firestore Log Array
+  // Performance Engine Action Builder (Object Proof Checked)
+  window.selectRemarkTag = (element) => {
+    currentSelectedRemark = element.innerText.trim();
+    compileFinalInputString();
+  };
+
+  // Auto-Compiler Master Controller
+  function compileFinalInputString() {
+    let finalPhrase = "";
+    if (currentSelectedRoute) {
+      finalPhrase += `Route: ${currentSelectedRoute}`;
+    }
+    if (currentSelectedRemark) {
+      finalPhrase += finalPhrase ? ` | ${currentSelectedRemark}` : currentSelectedRemark;
+    }
+    document.getElementById('customRemark').value = finalPhrase;
+  }
+
+  // Push Operations to Firestore Engine
   window.submitAttendance = async () => {
     if(!activeStudentID) return;
     const remarkValue = document.getElementById('customRemark').value.trim();
@@ -233,7 +259,7 @@
     const stamp = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }) + " | " + 
                   now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     
-    const entry = `${stamp} — ${remarkValue || "Progressed normally"}`;
+    const entry = `${stamp} — ${remarkValue || "Regular drive tracking completed"}`;
 
     await updateDoc(doc(db, "studentData", activeStudentID), { 
         remaining: increment(1),
@@ -244,19 +270,19 @@
     activeStudentID = null;
   };
 
-  // WhatsApp Message Generator
+  // WhatsApp Compiler
   window.sendWhatsApp = (phone, name, done, total, left) => {
     const rem = parseInt(left);
     const message = `Hello *${name.trim()}*,\n\n*A1 Attendance Report*:\n✅ Completed: *${done}/${total}*\n⏳ Balance Sessions: *${rem < 0 ? 0 : rem}*\n\nKeep learning! 🔥`;
     window.open(`https://wa.me/${phone.replace(/\+/g, '')}?text=${encodeURIComponent(message)}`, '_blank');
   };
 
-  // Register New Drivers
+  // Global Context Features
   window.addNewStudent = async () => {
     const p = document.getElementById('newPhone').value.trim();
     const n = document.getElementById('newName').value.trim();
     const t = document.getElementById('newTotal').value;
-    if(!p || !n) return alert("Validation Failed: Check Phone and Name configurations.");
+    if(!p || !n) return alert("Validation Error: Name and Phone required.");
     
     await setDoc(doc(db, "studentData", p), { name: n, remaining: 0, totalClasses: parseInt(t), attendanceLogs: [] });
     
@@ -265,17 +291,13 @@
     window.toggleModal('addModal', false);
   };
 
-  // Wipe Profile Records
   window.removeStudent = async (id) => { 
     if(confirm("Confirm deletion of student data track?")) await deleteDoc(doc(db, "studentData", id)); 
   };
 
-  // Interface Visibility Engine
   window.toggleModal = (modalId, show) => {
     document.getElementById(modalId).style.display = show ? 'flex' : 'none';
   };
-  
-  window.switchTheme = (val) => document.documentElement.setAttribute('data-theme', val);
   
   window.filterList = () => {
     const val = document.getElementById("studentSearch").value.toLowerCase().trim();
