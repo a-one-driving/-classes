@@ -88,7 +88,6 @@
 
 <button class="fab" onclick="toggleModal('addModal', true)">+</button>
 
-<!-- Modal: Add Student Profile -->
 <div id="addModal" class="modal">
     <div class="modal-content">
         <h2>Add New Student</h2>
@@ -100,12 +99,10 @@
     </div>
 </div>
 
-<!-- Modal: Route, KM & Attendance Updates Dashboard -->
 <div id="remarkModal" class="modal">
     <div class="modal-content">
         <h2>Driving Track Entry</h2>
         
-        <!-- Step 1: Route Selection -->
         <div class="section-label">📍 Step 1: Select Track Route:</div>
         <div class="tag-container" id="routeContainer">
           <div class="tag-chip route-chip" onclick="selectRoute(this)">Baghra road</div>
@@ -117,7 +114,6 @@
           <div class="tag-chip route-chip" onclick="selectRoute(this)">Lal bazar road</div>
         </div>
 
-        <!-- Step 2: Kilometer Tracking Selection -->
         <div class="section-label">🛣️ Step 2: Track Distance (KM):</div>
         <div class="tag-container" id="kmContainer">
           <div class="tag-chip km-chip" onclick="selectKM(this)">2 KM</div>
@@ -129,7 +125,6 @@
           <div class="tag-chip km-chip" onclick="selectKM(this)">20 KM</div>
         </div>
 
-        <!-- Step 3: Practice Performance Remarks -->
         <div class="section-label">⚡ Step 3: Performance Remark:</div>
         <div class="tag-container" id="remarkContainer">
           <div class="tag-chip remark-chip" onclick="selectRemarkTag(this)">🌟 Perfect Drive</div>
@@ -146,7 +141,6 @@
     </div>
 </div>
 
-<!-- Static Footer Counters -->
 <div class="bottom-nav">
     <div class="nav-item">
       <b id="totalActive">0</b>
@@ -157,6 +151,7 @@
       <small>COMPLETED TRACKS</small>
     </div>
 </div>
+
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
   import { getFirestore, collection, onSnapshot, doc, setDoc, updateDoc, deleteDoc, increment, arrayUnion } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
@@ -176,6 +171,7 @@
   
   let activeStudentID = null; 
   let currentSelectedRoute = "";
+  let currentSelectedKM = "";      // Naya Variable add kiya KM hold karne ke liye
   let currentSelectedRemark = "";
 
   // Database Synchronization & UI Renderer
@@ -239,11 +235,14 @@
   window.openRemarkModal = (id) => {
     activeStudentID = id;
     currentSelectedRoute = "";
+    currentSelectedKM = ""; // KM state clear kiya
     currentSelectedRemark = "";
     document.getElementById('customRemark').value = '';
     
-    // Clear previously highlighted visual route selections
+    // Purani saari UI chips ka highlight hatane ke liye reset logic
     document.querySelectorAll('.route-chip').forEach(chip => chip.classList.remove('selected'));
+    document.querySelectorAll('.km-chip').forEach(chip => chip.classList.remove('selected'));
+    document.querySelectorAll('.remark-chip').forEach(chip => chip.classList.remove('selected'));
     window.toggleModal('remarkModal', true);
   };
 
@@ -255,9 +254,19 @@
     compileFinalInputString();
   };
 
-  // Performance Remark Tag Handler (Object / [object HTMLDivElement] Protected)
+  // Naya Function: KM selection ko manage karne ke liye
+  window.selectKM = (element) => {
+    document.querySelectorAll('.km-chip').forEach(chip => chip.classList.remove('selected'));
+    element.classList.add('selected');
+    currentSelectedKM = element.innerText.trim();
+    compileFinalInputString();
+  };
+
+  // Performance Remark Tag Handler
   window.selectRemarkTag = (element) => {
+    document.querySelectorAll('.remark-chip').forEach(chip => chip.classList.remove('selected'));
     if (element && typeof element === 'object' && element.innerText) {
+      element.classList.add('selected');
       currentSelectedRemark = element.innerText.trim();
     } else if (typeof element === 'string') {
       currentSelectedRemark = element.trim();
@@ -265,16 +274,14 @@
     compileFinalInputString();
   };
 
-  // Auto-Compiler Master Controller
+  // Auto-Compiler Controller (Ab yeh Route, Distance aur Remark teeno ko formatted string banayega)
   function compileFinalInputString() {
-    let finalPhrase = "";
-    if (currentSelectedRoute) {
-      finalPhrase += `Route: ${currentSelectedRoute}`;
-    }
-    if (currentSelectedRemark) {
-      finalPhrase += finalPhrase ? ` | ${currentSelectedRemark}` : currentSelectedRemark;
-    }
-    document.getElementById('customRemark').value = finalPhrase;
+    let pieces = [];
+    if (currentSelectedRoute) pieces.push(`Route: ${currentSelectedRoute}`);
+    if (currentSelectedKM) pieces.push(`Distance: ${currentSelectedKM}`);
+    if (currentSelectedRemark) pieces.push(`Remark: ${currentSelectedRemark}`);
+    
+    document.getElementById('customRemark').value = pieces.join(' | ');
   }
 
   // Push Attendance Entry to Firestore Log Array
