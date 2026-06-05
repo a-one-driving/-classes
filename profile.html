@@ -1,238 +1,312 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Dashboard | A1 Driving</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <style>
-        :root { 
-            --gold: #d4af37; 
-            --gold-light: #f9e29d;
-            --bg: #000; 
-            --card-bg: #161616; 
-            --input-bg: #080808;
-            --success: #00ff88;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Elite Dashboard | A1 Driving Academy</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { 
+      --gold: #d4af37; 
+      --gold-gradient: linear-gradient(135deg, #f9e29d 0%, #d4af37 100%);
+      --bg-dark: #070709; 
+      --panel-bg: rgba(22, 22, 28, 0.7);
+      --input-bg: #0f0f14;
+      --success: #30d158;
+      --card-border: rgba(255, 255, 255, 0.05);
+      --text-muted: #8e8e93;
+    }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
-        
-        body { background: var(--bg); color: #fff; padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+    
+    body { 
+      background: var(--bg-dark); 
+      background-image: radial-gradient(circle at 50% -20%, rgba(212, 175, 55, 0.12) 0%, transparent 50%);
+      color: #fff; 
+      min-height: 100vh; 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      justify-content: center; 
+      padding: 20px;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-        .header-box { text-align: center; margin-bottom: 40px; }
-        .header-box h1 { font-size: 28px; color: var(--gold); font-weight: 800; letter-spacing: 2px; text-transform: uppercase; }
-        .header-box p { font-size: 11px; color: #666; letter-spacing: 4px; margin-top: 5px; text-transform: uppercase; }
+    /* Core Premium Dashboard Layout */
+    .dashboard-wrapper { 
+      width: 100%; 
+      max-width: 400px; 
+      background: var(--panel-bg); 
+      backdrop-filter: blur(24px); 
+      -webkit-backdrop-filter: blur(24px);
+      padding: 30px 24px; 
+      border-radius: 30px; 
+      border: 1px solid var(--card-border); 
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4); 
+    }
 
-        .main-container { width: 100%; max-width: 380px; background: var(--card-bg); padding: 35px 25px; border-radius: 32px; border: 1px solid #222; box-shadow: 0 30px 60px rgba(0,0,0,0.8); text-align: center; }
+    .brand-section { text-align: center; margin-bottom: 30px; }
+    .brand-section h1 { font-size: 24px; font-weight: 800; letter-spacing: 2px; background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .brand-section p { font-size: 10px; color: var(--text-muted); letter-spacing: 4px; font-weight: 600; margin-top: 2px; }
 
-        .input-label { display: block; font-size: 12px; color: #888; margin-bottom: 15px; font-weight: 600; letter-spacing: 1px; }
+    /* Auth Panel Components */
+    .input-group { position: relative; margin-bottom: 20px; }
+    .input-label { display: block; font-size: 11px; color: var(--text-muted); font-weight: 600; letter-spacing: 1px; margin-bottom: 8px; text-transform: uppercase; }
+    
+    input { 
+      width: 100%; 
+      padding: 16px; 
+      border-radius: 16px; 
+      border: 1px solid var(--card-border); 
+      background: var(--input-bg); 
+      color: #fff; 
+      font-size: 16px; 
+      outline: none; 
+      text-align: center; 
+      transition: all 0.25s ease; 
+    }
+    input:focus { border-color: var(--gold); box-shadow: 0 0 15px rgba(212, 175, 55, 0.15); }
 
-        input { width: 100%; padding: 18px; border-radius: 18px; border: 1px solid #333; background: var(--input-bg); color: #fff; font-size: 17px; margin-bottom: 25px; outline: none; text-align: center; letter-spacing: 1px; }
+    .btn-primary { 
+      background: var(--gold-gradient); 
+      color: #000; 
+      border: none; 
+      padding: 16px; 
+      border-radius: 16px; 
+      font-weight: 700; 
+      cursor: pointer; 
+      width: 100%; 
+      font-size: 15px; 
+      box-shadow: 0 8px 20px rgba(212, 175, 55, 0.25); 
+      transition: transform 0.2s;
+    }
+    .btn-primary:active { transform: scale(0.98); }
 
-        .btn-gold { background: linear-gradient(to bottom, #f9e29d, #d4af37); color: #000; border: none; padding: 18px; border-radius: 18px; font-weight: 800; cursor: pointer; width: 100%; font-size: 16px; box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2); }
+    /* Modern Profile Grid View */
+    #profileContent { display: none; width: 100%; animation: slideUp 0.5s cubic-bezier(0.1, 1, 0.1, 1); }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        #premiumCertificate { display: none; margin-bottom: 25px; padding: 2px; background: linear-gradient(45deg, #d4af37, #f9e29d, #aa841e, #d4af37); background-size: 400% 400%; animation: borderGlow 3s ease infinite; border-radius: 25px; }
-        @keyframes borderGlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        .cert-card-ui { background: rgba(10, 10, 10, 0.95); border-radius: 23px; padding: 25px; border: 1px solid rgba(255,255,255,0.05); }
+    .profile-meta { text-align: center; margin-bottom: 25px; }
+    .student-title { font-size: 22px; font-weight: 700; color: #fff; letter-spacing: -0.5px; }
+    .course-badge { display: inline-block; padding: 4px 12px; background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 20px; font-size: 11px; color: var(--gold); font-weight: 600; margin-top: 6px; }
 
-        #profileContent { display: none; width: 100%; animation: fadeIn 0.6s ease; }
-        
-        .student-name { font-size: 24px; font-weight: 800; margin-bottom: 5px; }
-        .pkg-name { color: var(--gold); font-size: 13px; margin-bottom: 25px; font-weight: 600; }
+    /* Ring Progress Widget */
+    .progress-widget { background: rgba(0,0,0,0.25); border: 1px solid var(--card-border); border-radius: 24px; padding: 20px; display: flex; align-items: center; justify-content: space-around; margin-bottom: 16px; }
+    .metrics-box { display: flex; flex-direction: column; gap: 10px; }
+    .metric-pill { background: rgba(255,255,255,0.02); border: 1px solid var(--card-border); padding: 8px 14px; border-radius: 14px; display: flex; flex-direction: column; }
+    .metric-pill span { font-size: 9px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
+    .metric-pill b { font-size: 18px; color: #fff; }
 
-        .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px; }
-        .stat-item { background: #000; padding: 15px; border-radius: 20px; border: 1px solid #222; }
-        .stat-item span { font-size: 10px; color: #666; display: block; text-transform: uppercase; margin-bottom: 5px; }
-        .stat-item b { font-size: 22px; color: #fff; }
+    .radial-progress-svg { width: 85px; height: 85px; transform: rotate(-90deg); }
+    .radial-bg { fill: none; stroke: rgba(255,255,255,0.04); stroke-width: 8; }
+    .radial-fill { fill: none; stroke: var(--gold); stroke-width: 8; stroke-linecap: round; stroke-dasharray: 220; stroke-dashoffset: 220; transition: stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1); }
+    .radial-text { font-size: 15px; font-weight: 700; fill: #fff; font-family: 'Poppins'; }
 
-        .progress-box { background: #000; padding: 20px; border-radius: 20px; border: 1px solid #222; margin-top: 10px; text-align: left; }
-        .progress-bar { height: 8px; background: #222; border-radius: 10px; overflow: hidden; margin-top: 10px; }
-        .progress-fill { height: 100%; background: var(--gold); width: 0%; transition: 1.2s ease; }
+    /* Timeline Infrastructure */
+    .timeline-widget { background: rgba(0,0,0,0.25); border: 1px solid var(--card-border); border-radius: 24px; padding: 20px; margin-bottom: 16px; }
+    .timeline-header { font-size: 11px; color: var(--text-muted); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; display: block; }
+    #attendanceTimeline { display: flex; flex-direction: column; gap: 10px; max-height: 200px; overflow-y: auto; padding-right: 4px; }
+    
+    .log-row { background: rgba(255,255,255,0.02); border: 1px solid var(--card-border); padding: 12px; border-radius: 16px; display: flex; flex-direction: column; gap: 4px; border-left: 3px solid var(--gold); }
+    .log-meta { display: flex; justify-content: space-between; align-items: center; }
+    .log-meta b { font-size: 12px; font-weight: 600; color: #fff; }
+    .log-meta span { font-size: 9px; color: var(--text-muted); }
+    .log-feedback { font-size: 11px; color: var(--gold-light); opacity: 0.95; padding-top: 2px; }
 
-        /* FIXED FEEDBACK LAYOUT */
-        .timeline-box { background: #000; padding: 20px; border-radius: 20px; border: 1px solid #222; margin-top: 15px; text-align: left; }
-        #attendanceTimeline { display: flex; flex-direction: column; gap: 12px; max-height: 250px; overflow-y: auto; margin-top: 10px; }
-        
-        .log-entry { 
-            background: #111; padding: 12px 15px; border-radius: 16px; border-left: 3px solid var(--gold); 
-            display: flex; flex-direction: column; gap: 4px;
-        }
-        .log-row-top { display: flex; justify-content: space-between; align-items: center; width: 100%; }
-        .log-entry b { font-size: 13px; color: #fff; }
-        .log-date { font-size: 10px; color: #666; }
-        .log-msg { font-size: 11px; color: var(--gold-light); font-style: italic; line-height: 1.4; margin-top: 2px; }
+    /* Shared Referral Wallet */
+    .wallet-banner { background: linear-gradient(90deg, rgba(48,209,88,0.06) 0%, rgba(48,209,88,0) 100%); border: 1px solid rgba(48,209,88,0.15); padding: 16px 20px; border-radius: 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+    .wallet-banner div { display: flex; flex-direction: column; }
+    .wallet-banner span { font-size: 10px; color: var(--success); font-weight: 700; letter-spacing: 0.5px; }
+    .wallet-banner p { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+    .wallet-banner b { font-size: 20px; color: #fff; }
 
-        .earn-banner { background: rgba(0, 255, 136, 0.05); border: 1px solid rgba(0, 255, 136, 0.1); padding: 15px; border-radius: 20px; margin-top: 15px; display: flex; justify-content: space-between; align-items: center; }
-        .earn-banner span { font-size: 11px; color: var(--success); font-weight: 600; }
-        .earn-banner b { font-size: 18px; color: #fff; }
+    /* Action Deck matrix */
+    .actions-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .btn-secondary { background: rgba(255,255,255,0.02); border: 1px solid var(--card-border); color: #fff; padding: 14px; border-radius: 16px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+    .btn-secondary:active { background: rgba(255,255,255,0.06); }
 
-        .action-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
-        .btn-action { background: #000; border: 1px solid #333; color: #fff; padding: 14px; border-radius: 16px; font-size: 12px; font-weight: 600; cursor: pointer; }
+    /* Premium Certificate Glowing Overlay */
+    #premiumCertificate { display: none; background: linear-gradient(135deg, rgba(212,175,55,0.15) 0%, rgba(212,175,55,0.02) 100%); border: 1px solid rgba(212,175,55,0.3); border-radius: 24px; padding: 20px; text-align: center; margin-bottom: 16px; }
+    
+    .logout-btn { color: #555; font-size: 11px; font-weight: 500; margin-top: 25px; text-align: center; cursor: pointer; display: block; text-decoration: none; }
+    .logout-btn:hover { color: var(--gold); }
 
-        .logout-link { color: #444; font-size: 11px; margin-top: 25px; cursor: pointer; display: block; }
+    #loader { display: none; margin: 15px auto 0 auto; border: 2px solid #222; border-top: 2px solid var(--gold); border-radius: 50%; width: 24px; height: 24px; animation: spin 0.8s linear infinite; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        #loader { display: none; margin: 10px auto; border: 3px solid #333; border-top: 3px solid var(--gold); border-radius: 50%; width: 25px; height: 25px; animation: spin 1s linear infinite; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        #pdfTemplate { width: 800px; height: 600px; background: #000; color: #fff; padding: 40px; border: 15px solid #d4af37; display: none; position: absolute; left: -9999px; text-align: center; }
-    </style>
+    /* PDF Rendering Output Template */
+    #pdfTemplate { width: 842px; height: 595px; background: #000; color: #fff; padding: 50px; border: 20px solid #d4af37; display: none; position: absolute; left: -9999px; text-align: center; }
+  </style>
 </head>
 <body>
 
-    <div class="header-box">
-        <h1>ABHINAASH A1</h1>
-        <p>DRIVING ACADEMY</p>
+  <div class="brand-section">
+    <h1>ABHINAASH A1</h1>
+    <p>DRIVING ACADEMY</p>
+  </div>
+
+  <div class="dashboard-wrapper">
+    <div id="searchPanel">
+      <span class="input-label">Enter Registered Number</span>
+      <input type="tel" id="userPhone" placeholder="9933xxxxxx" maxlength="10">
+      <button class="btn-primary" onclick="loadProfile()">Access Dashboard</button>
+      <div id="loader"></div>
     </div>
 
-    <div class="main-container">
-        <div id="searchPanel">
-            <span class="input-label">ENTER REGISTERED NUMBER</span>
-            <input type="tel" id="userPhone" placeholder="9933xxxxxx" maxlength="10">
-            <button class="btn-gold" id="loadBtn" onclick="loadProfile()">Access Dashboard</button>
-            <div id="loader"></div>
+    <div id="profileContent">
+      <div id="premiumCertificate">
+        <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" style="width:42px; filter: drop-shadow(0 0 8px var(--gold)); margin-bottom:8px;">
+        <h3 style="color:var(--gold); font-size:16px; font-weight:700;">ELITE COURSE GRADUATE</h3>
+        <p style="font-size:11px; color:var(--text-muted); margin-bottom:14px;">Your official driving track record is successfully parsed.</p>
+        <button class="btn-primary" style="padding:10px; font-size:12px; border-radius:12px;" onclick="downloadPDF()">⬇️ DOWNLOAD PREMIUM PDF</button>
+      </div>
+
+      <div class="profile-meta">
+        <div class="student-title" id="dispName">Driver Name</div>
+        <div class="course-badge" id="dispPkg">Track Scheme</div>
+      </div>
+
+      <div class="progress-widget">
+        <div class="metrics-box">
+          <div class="metric-pill"><span>Done</span><b id="dispDone">0</b></div>
+          <div class="metric-pill"><span>Target</span><b id="dispTotal">0</b></div>
         </div>
-
-        <div id="profileContent">
-            <div id="premiumCertificate">
-                <div class="cert-card-ui">
-                    <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" style="width:50px; margin-bottom:10px;">
-                    <h2 style="color:var(--gold); font-size:18px;">ELITE CERTIFIED</h2>
-                    <p style="font-size:10px; color:#888; margin-bottom:15px;">Congratulations on completing your course!</p>
-                    <button class="btn-gold" style="padding:10px; font-size:12px;" onclick="downloadPDF()">⬇️ DOWNLOAD PREMIUM PDF</button>
-                </div>
-            </div>
-
-            <div class="student-name" id="dispName">Student Name</div>
-            <div class="pkg-name" id="dispPkg">Driving Course</div>
-
-            <div class="stats-row">
-                <div class="stat-item"><span>Done</span><b id="dispDone">0</b></div>
-                <div class="stat-item"><span>Target</span><b id="dispTotal">0</b></div>
-            </div>
-
-            <div class="progress-box">
-                <div style="display:flex; justify-content:space-between; font-size:11px;">
-                    <span style="color:#888;">LEARNING PROGRESS</span>
-                    <span id="dispPercent" style="color:var(--gold);">0%</span>
-                </div>
-                <div class="progress-bar"><div class="progress-fill" id="dispBar"></div></div>
-            </div>
-
-            <div class="timeline-box">
-                <span style="color:var(--gold); font-size: 10px; font-weight: 800; letter-spacing: 1px;">CLASS HISTORY & FEEDBACK</span>
-                <div id="attendanceTimeline"></div>
-            </div>
-
-            <div class="earn-banner">
-                <span>REFERRAL WALLET</span>
-                <b id="dispEarn">₹0</b>
-            </div>
-
-            <div class="action-grid">
-                <button class="btn-action" onclick="contactAdmin()">💬 HELP</button>
-                <button class="btn-action" onclick="shareReferral()" style="color:var(--success); border-color:rgba(0,255,136,0.2);">🚀 SHARE</button>
-            </div>
-
-            <a class="logout-link" onclick="location.reload()">← LOGOUT SESSION</a>
+        
+        <div style="position:relative; width:85px; height:85px;">
+          <svg class="radial-progress-svg">
+            <circle class="radial-bg" cx="42.5" cy="42.5" r="35"></circle>
+            <circle class="radial-fill" id="radialFillCircle" cx="42.5" cy="42.5" r="35"></circle>
+          </svg>
+          <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
+            <span id="dispPercent" style="font-size:14px; font-weight:700; color:#fff;">0%</span>
+          </div>
         </div>
+      </div>
+
+      <div class="timeline-widget">
+        <span class="timeline-header">Class History & Feedback</span>
+        <div id="attendanceTimeline"></div>
+      </div>
+
+      <div class="wallet-banner">
+        <div>
+          <span>REFERRAL WALLET</span>
+          <p>Earned per subscription</p>
+        </div>
+        <b id="dispEarn">₹0</b>
+      </div>
+
+      <div class="actions-grid">
+        <button class="btn-secondary" onclick="contactAdmin()">💬 HELP</button>
+        <button class="btn-secondary" onclick="shareReferral()" style="color:var(--success); border-color:rgba(48,209,88,0.15);">🚀 SHARE</button>
+      </div>
+
+      <a class="logout-btn" onclick="location.reload()">← LOGOUT SESSION</a>
     </div>
+  </div>
 
-    <div id="pdfTemplate">
-        <div style="border: 2px solid #d4af37; height: 100%; padding: 40px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-            <h1 style="color:#d4af37; font-size: 45px; margin: 15px 0;">ABHINAASH A1 DRIVING ACADEMY</h1>
-            <p style="font-size: 18px; color: #888;">OFFICIAL CERTIFICATE OF EXCELLENCE</p>
-            <h2 id="pdfName" style="font-size: 40px; color: #fff; text-decoration: underline; margin: 10px 0;">NAME</h2>
-            <p style="font-size: 16px; width: 80%; margin: 15px auto;">Has successfully completed the Advanced Driving Training.</p>
-        </div>
+  <div id="pdfTemplate">
+    <div style="border: 3px solid #d4af37; height: 100%; padding: 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #050505;">
+      <h1 style="color:#d4af37; font-size: 42px; font-weight:800; margin-bottom: 10px;">ABHINAASH A1 DRIVING ACADEMY</h1>
+      <p style="font-size: 16px; color: #888; letter-spacing: 3px; text-transform:uppercase;">Official Certificate of Excellence</p>
+      <div style="width:80px; height:2px; background:#d4af37; margin:30px 0;"></div>
+      <h2 id="pdfName" style="font-size: 38px; color: #fff; font-weight:600; text-transform:uppercase; letter-spacing:1px;">NAME</h2>
+      <p style="font-size: 16px; width: 75%; color:#aaa; line-height:1.6; margin-top: 20px;">Has successfully qualified and completed the structured Advanced Smart Driving & Traffic Regulation Track operations program.</p>
     </div>
+  </div>
 
 <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-    import { getFirestore, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+  import { getFirestore, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
-        authDomain: "abinash-driving.firebaseapp.com",
-        projectId: "abinash-driving",
-        storageBucket: "abinash-driving.appspot.com",
-        messagingSenderId: "641148830173",
-        appId: "1:641148830173:web:b7a500e5e7e2463da0f634"
-    };
+  const firebaseConfig = {
+    apiKey: "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
+    authDomain: "abinash-driving.firebaseapp.com",
+    projectId: "abinash-driving",
+    storageBucket: "abinash-driving.appspot.com",
+    messagingSenderId: "641148830173",
+    appId: "1:641148830173:web:b7a500e5e7e2463da0f634"
+  };
 
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  let currentData = null;
 
-    let currentData = null;
+  window.loadProfile = () => {
+    const ph = document.getElementById('userPhone').value.trim();
+    if(ph.length < 10) return alert("Please enter 10 digit number.");
+    document.getElementById('loader').style.display = "block";
 
-    window.loadProfile = () => {
-        const ph = document.getElementById('userPhone').value;
-        if(ph.length < 10) return alert("Please enter 10 digit number.");
-        document.getElementById('loader').style.display = "block";
+    onSnapshot(doc(db, "studentData", ph), (snap) => {
+      document.getElementById('loader').style.display = "none";
+      if(snap.exists()) {
+        const data = snap.data();
+        currentData = { ...data, phone: ph };
+        const logs = data.attendanceLogs || [];
+        const done = Math.max(logs.length, data.remaining || 0);
+        const total = data.totalClasses || 15;
+        const percent = Math.min(Math.round((done / total) * 100), 100);
 
-        onSnapshot(doc(db, "studentData", ph), (snap) => {
-            if(snap.exists()) {
-                const data = snap.data();
-                currentData = { ...data, phone: ph };
-                const logs = data.attendanceLogs || [];
-                const done = Math.max(logs.length, data.remaining || 0);
-                const total = data.totalClasses || 15;
-                const percent = Math.min(Math.round((done / total) * 100), 100);
+        document.getElementById('dispName').innerText = data.name;
+        document.getElementById('dispPkg').innerText = total + "-Day Driving Package";
+        document.getElementById('dispDone').innerText = done;
+        document.getElementById('dispTotal').innerText = total;
+        document.getElementById('dispPercent').innerText = percent + "%";
+        document.getElementById('dispEarn').innerText = "₹" + (data.totalRefers * 500 || 0);
+        
+        // Calculate Radial Progress Ring Fill
+        const radius = 35;
+        const circumference = 2 * Math.PI * radius; // Around 220
+        const strokeDashoffset = circumference - (percent / 100) * circumference;
+        document.getElementById('radialFillCircle').style.strokeDashoffset = strokeDashoffset;
 
-                document.getElementById('dispName').innerText = data.name;
-                document.getElementById('dispPkg').innerText = total + "-Day Training";
-                document.getElementById('dispDone').innerText = done;
-                document.getElementById('dispTotal').innerText = total;
-                document.getElementById('dispPercent').innerText = percent + "%";
-                document.getElementById('dispEarn').innerText = "₹" + (data.totalRefers * 500 || 0);
-                
-                if(done >= total) {
-                    document.getElementById('premiumCertificate').style.display = 'block';
-                    document.getElementById('pdfName').innerText = data.name.toUpperCase();
-                }
+        if(done >= total) {
+          document.getElementById('premiumCertificate').style.display = 'block';
+          document.getElementById('pdfName').innerText = data.name.toUpperCase();
+        }
 
-                const timeline = document.getElementById('attendanceTimeline');
-                timeline.innerHTML = "";
-                [...logs].reverse().forEach((log, i) => {
-                    const sessionNum = logs.length - i;
-                    // Logic to split Date and Message
-                    const parts = log.split(' — ');
-                    const dateInfo = parts[0];
-                    const message = parts[1] || "Session Completed";
+        const timeline = document.getElementById('attendanceTimeline');
+        timeline.innerHTML = "";
+        [...logs].reverse().forEach((log, i) => {
+          const sessionNum = logs.length - i;
+          const parts = log.split(' — ');
+          const dateInfo = parts[0];
+          const message = parts[1] || "Track Session Processed";
 
-                    timeline.innerHTML += `
-                        <div class="log-entry">
-                            <div class="log-row-top">
-                                <b>Session ${sessionNum}</b>
-                                <span class="log-date">${dateInfo}</span>
-                            </div>
-                            <div class="log-msg">📝 ${message}</div>
-                        </div>`;
-                });
-
-                document.getElementById('searchPanel').style.display = "none";
-                document.getElementById('profileContent').style.display = "block";
-                setTimeout(() => { document.getElementById('dispBar').style.width = percent + "%"; }, 100);
-            } else { alert("No record found!"); }
+          timeline.innerHTML += `
+            <div class="log-row">
+              <div class="log-meta">
+                <b>Session ${sessionNum}</b>
+                <span>${dateInfo}</span>
+              </div>
+              <div class="log-feedback">📝 ${message}</div>
+            </div>`;
         });
-    }
 
-    window.downloadPDF = () => {
-        const element = document.getElementById('pdfTemplate');
-        element.style.display = 'block';
-        html2pdf().from(element).set({ margin: 0, filename: 'A1_Certificate.pdf', jsPDF: { orientation: 'landscape' } }).save().then(() => element.style.display = 'none');
-    };
+        document.getElementById('searchPanel').style.display = "none";
+        document.getElementById('profileContent').style.display = "block";
+      } else { 
+        alert("No active training record associated with this parameter."); 
+      }
+    });
+  }
 
-    window.contactAdmin = () => {
-        const msg = encodeURIComponent(`Hi Abhinaash, I am ${currentData.name}. I need help.`);
-        window.location.href = `https://wa.me/917008186187?text=${msg}`;
-    };
+  window.downloadPDF = () => {
+    const element = document.getElementById('pdfTemplate');
+    element.style.display = 'block';
+    html2pdf().from(element).set({ margin: 0, filename: 'A1_Driving_Certificate.pdf', jsPDF: { orientation: 'landscape', format: 'a4' } }).save().then(() => element.style.display = 'none');
+  };
 
-    window.shareReferral = () => {
-        const text = encodeURIComponent(`Hey! join A1 Driving Academy. Use my referral.`);
-        window.location.href = `https://wa.me/?text=${text}`;
-    };
+  window.contactAdmin = () => {
+    const msg = encodeURIComponent(`Hi Abhinaash, I am ${currentData.name}. I need help regarding my running slots.`);
+    window.location.href = `https://wa.me/917008186187?text=${msg}`;
+  };
+
+  window.shareReferral = () => {
+    const text = encodeURIComponent(`Hey! I am learning smart car driving at A1 Driving Academy. Highly recommended! Apply via my track code: ${currentData.phone}`);
+    window.location.href = `https://wa.me/?text=${text}`;
+  };
 </script>
 </body>
 </html>
