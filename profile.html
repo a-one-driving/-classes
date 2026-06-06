@@ -216,44 +216,12 @@
           </div>
         </div>
 
-               <div class="timeline-widget">
+        <div class="timeline-widget">
           <span class="timeline-header">Class History & Feedback</span>
           <div id="attendanceTimeline"></div>
         </div>
 
-        <!-- NEW TERMS & CONDITIONS CAROUSEL START -->
-        <style>
-          .tnc-carousel { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--card-border); border-radius: 20px; padding: 16px; margin-bottom: 16px; position: relative; overflow: hidden; }
-          .tnc-header { font-size: 10px; color: #aa8210; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px; display: block; }
-          .tnc-wrapper { display: flex; transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); width: 500%; }
-          .tnc-slide { width: 20%; flex-shrink: 0; font-size: 11.5px; color: var(--text-muted); line-height: 1.5; padding-right: 5px; }
-          .tnc-slide b { color: #fff; font-weight: 500; display: block; margin-bottom: 2px; }
-          .tnc-dots { display: flex; justify-content: center; gap: 6px; margin-top: 12px; }
-          .tnc-dot { width: 6px; height: 6px; background: rgba(255,255,255,0.15); border-radius: 50%; transition: all 0.3s ease; cursor: pointer; }
-          .tnc-dot.active { background: var(--gold); width: 14px; border-radius: 100px; }
-        </style>
-
-        <div class="tnc-carousel">
-          <span class="tnc-header">⚠️ Terms & Conditions</span>
-          <div class="tnc-wrapper" id="tncWrapper">
-            <div class="tnc-slide"><b>01 / 05 • Non-Refundable Policy</b>Payment once paid cannot be refunded under any circumstances.</div>
-            <div class="tnc-slide"><b>02 / 05 • Non-RTO Affiliation</b>We are a private institution and we are not registered under the RTO.</div>
-            <div class="tnc-slide"><b>03 / 05 • Safety Assurance</b>We do not have secondary dual controllers, but we fully ensure top-tier safety.</div>
-            <div class="tnc-slide"><b>04 / 05 • Dynamic Cancellations</b>Classes will remain closed during heavy rain, health issues, vehicle maintenance, and festival holidays.</div>
-            <div class="tnc-slide"><b>05 / 05 • Weekly Schedule Offs</b>Saturday and Sunday of every week will remain strictly closed.</div>
-          </div>
-          <div class="tnc-dots" id="tncDots">
-            <span class="tnc-dot active" onclick="moveTncSlide(0)"></span>
-            <span class="tnc-dot" onclick="moveTncSlide(1)"></span>
-            <span class="tnc-dot" onclick="moveTncSlide(2)"></span>
-            <span class="tnc-dot" onclick="moveTncSlide(3)"></span>
-            <span class="tnc-dot" onclick="moveTncSlide(4)"></span>
-          </div>
-        </div>
-        <!-- NEW TERMS & CONDITIONS CAROUSEL END -->
-
         <div class="wallet-banner">
-
           <div>
             <span>REFERRAL WALLET</span>
             <p>Earned per subscription</p>
@@ -378,60 +346,26 @@
           document.getElementById('pdfName').innerText = data.name.toUpperCase();
         }
 
-                        // 1. Dynamic Feedback & Timeline Parser
         const timeline = document.getElementById('attendanceTimeline');
         timeline.innerHTML = "";
-        
         [...logs].reverse().forEach((log, i) => {
           const sessionNum = logs.length - i;
-          
-          // Date pattern dhoondhne ke liye (e.g., "05 Jun | 03:18 PM")
-          const dateMatch = log.match(/^[^—–\-]+/);
-          let dateInfo = dateMatch ? dateMatch[0].trim() : "Track Session";
-          
-          // Baaki bache poore string ko dynamic feedback text banana
-          let message = log.replace(dateInfo, "").replace(/^[—–\-|\s]+/, "").trim();
-          if(!message) message = "Track Session Processed Successfully.";
+          const parts = log.split(' — ');
+          const dateInfo = parts[0];
+          const message = parts[1] || "Track Session Processed";
 
           timeline.innerHTML += `
             <div class="log-row">
               <div class="log-meta">
                 <b>Session ${sessionNum}</b>
-                <span style="color: var(--text-muted); font-size: 11px;">${dateInfo}</span>
+                <span>${dateInfo}</span>
               </div>
-              <div class="log-feedback" style="margin-top: 4px; font-size: 12px; color: #e5e5ea;">📝 ${message}</div>
+              <div class="log-feedback">📝 ${message}</div>
             </div>`;
         });
 
-                // 2. Clean Premium iOS-Style Auto Sliding Animation Trigger
         document.getElementById('searchPanel').style.display = "none";
-        
-        const profile = document.getElementById('profileContent');
-        profile.style.display = "block";
-        profile.style.opacity = "0";
-        profile.style.transform = "translateY(40px)";
-        profile.style.transition = "all 0.6s cubic-bezier(0.16, 1, 0.3, 1)";
-        
-        setTimeout(() => {
-          profile.style.opacity = "1";
-          profile.style.transform = "translateY(0)";
-        }, 50);
-
-
-        
-        // Profile content ko premium transition ke sath dynamic display aur auto-slide dena
-        const profile = document.getElementById('profileContent');
-        profile.style.display = "block";
-        profile.style.opacity = "0";
-        profile.style.transform = "translateY(40px)";
-        profile.style.transition = "all 0.6s cubic-bezier(0.16, 1, 0.3, 1)";
-        
-        // Micro-timeout lagakar hardware acceleration trigger karna dynamic sliding ke liye
-        setTimeout(() => {
-          profile.style.opacity = "1";
-          profile.style.transform = "translateY(0)";
-        }, 50);
-
+        document.getElementById('profileContent').style.display = "block";
       } else { 
         alert("No active training record associated with this parameter."); 
       }
@@ -453,20 +387,6 @@
     const text = encodeURIComponent(`Hey! I am learning smart car driving at A1 Driving Academy. Highly recommended! Apply via my track code: ${currentData.phone}`);
     window.location.href = `https://wa.me/?text=${text}`;
   };
-  
-    // Terms & Conditions Carousel Controller
-  window.moveTncSlide = (slideIndex) => {
-    const wrapper = document.getElementById('tncWrapper');
-    const dots = document.querySelectorAll('.tnc-dot');
-    
-    if (wrapper) wrapper.style.transform = `translateX(-${slideIndex * 20}%)`;
-    
-    dots.forEach((dot, idx) => {
-      if (idx === slideIndex) dot.classList.add('active');
-      else dot.classList.remove('active');
-    });
-  };
-
 </script>
 </body>
 </html>
