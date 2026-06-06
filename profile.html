@@ -403,7 +403,7 @@
             </div>`;
         });
 
-        // 2. Premium iOS-Style Auto Sliding Animation Trigger
+                // 2. Clean Premium iOS-Style Auto Sliding Animation Trigger
         document.getElementById('searchPanel').style.display = "none";
         
         const profile = document.getElementById('profileContent');
@@ -412,11 +412,11 @@
         profile.style.transform = "translateY(40px)";
         profile.style.transition = "all 0.6s cubic-bezier(0.16, 1, 0.3, 1)";
         
-        // Hardware acceleration toggle smooth sliding ke liye
         setTimeout(() => {
           profile.style.opacity = "1";
           profile.style.transform = "translateY(0)";
         }, 50);
+
 
         
         // Profile content ko premium transition ke sath dynamic display aur auto-slide dena
@@ -453,6 +453,20 @@
     const text = encodeURIComponent(`Hey! I am learning smart car driving at A1 Driving Academy. Highly recommended! Apply via my track code: ${currentData.phone}`);
     window.location.href = `https://wa.me/?text=${text}`;
   };
+  
+    // Terms & Conditions Carousel Controller
+  window.moveTncSlide = (slideIndex) => {
+    const wrapper = document.getElementById('tncWrapper');
+    const dots = document.querySelectorAll('.tnc-dot');
+    
+    if (wrapper) wrapper.style.transform = `translateX(-${slideIndex * 20}%)`;
+    
+    dots.forEach((dot, idx) => {
+      if (idx === slideIndex) dot.classList.add('active');
+      else dot.classList.remove('active');
+    });
+  };
+
 </script>
 </body>
 </html>
