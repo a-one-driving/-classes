@@ -346,23 +346,31 @@
           document.getElementById('pdfName').innerText = data.name.toUpperCase();
         }
 
-        const timeline = document.getElementById('attendanceTimeline');
+                const timeline = document.getElementById('attendanceTimeline');
         timeline.innerHTML = "";
+        
+        // Logs ko reverse order mein loop chalayenge taaki naya session upar dikhe
         [...logs].reverse().forEach((log, i) => {
           const sessionNum = logs.length - i;
-          const parts = log.split(' — ');
-          const dateInfo = parts[0];
-          const message = parts[1] || "Track Session Processed";
+          
+          // Date pattern dhoondhne ke liye (e.g., "05 Jun | 03:18 PM" ya "05 Jun")
+          const dateMatch = log.match(/^[^—–\-]+/);
+          let dateInfo = dateMatch ? dateMatch[0].trim() : "Track Session";
+          
+          // Baaki bache poore string ko dynamic feedback text banana
+          let message = log.replace(dateInfo, "").replace(/^[—–\-|\s]+/, "").trim();
+          if(!message) message = "Track Session Processed Successfully.";
 
           timeline.innerHTML += `
             <div class="log-row">
               <div class="log-meta">
                 <b>Session ${sessionNum}</b>
-                <span>${dateInfo}</span>
+                <span style="color: var(--text-muted); font-size: 11px;">${dateInfo}</span>
               </div>
-              <div class="log-feedback">📝 ${message}</div>
+              <div class="log-feedback" style="margin-top: 4px; font-size: 12px; color: #e5e5ea;">📝 ${message}</div>
             </div>`;
         });
+
 
         document.getElementById('searchPanel').style.display = "none";
         document.getElementById('profileContent').style.display = "block";
