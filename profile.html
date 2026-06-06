@@ -191,13 +191,18 @@
           <div class="course-badge" id="dispPkg">Track Scheme</div>
         </div>
 
-        <div class="progress-widget">
+               <div class="progress-widget">
           <div class="metrics-box">
             <div class="metric-pill"><span>Done</span><b id="dispDone">0</b></div>
             <div class="metric-pill"><span>Target</span><b id="dispTotal">0</b></div>
+            <!-- Naya Kilometer Tracker Pill -->
+            <div class="metric-pill" style="border-color: rgba(214, 175, 55, 0.25);">
+              <span>Distance Tracker</span><b id="dispKm">0 / 150 km</b>
+            </div>
           </div>
           
           <div class="radial-container">
+
             <svg class="radial-progress-svg">
               <circle class="radial-bg" cx="50" cy="50" r="40"></circle>
               <circle class="radial-fill" id="radialFillCircle" cx="50" cy="50" r="40"></circle>
@@ -271,6 +276,9 @@
         const total = data.totalClasses || 15;
         const percent = Math.min(Math.round((done / total) * 100), 100);
 
+                // Firebase se kilometer data fetch karne ke liye variable (Default: 0)
+        const drivenKm = data.drivenKm || 0;
+
         document.getElementById('dispName').innerText = data.name;
         document.getElementById('dispPkg').innerText = total + "-Day Driving Package";
         document.getElementById('dispDone').innerText = done;
@@ -278,7 +286,11 @@
         document.getElementById('dispPercent').innerText = percent + "%";
         document.getElementById('dispEarn').innerText = "₹" + (data.totalRefers * 500 || 0);
         
+        // Screen par update karne ke liye line
+        document.getElementById('dispKm').innerText = drivenKm + " / 150 km";
+        
         // Calculate Radial Progress Ring Fill
+
         const radius = 40;
         const circumference = 2 * Math.PI * radius; // 251.3
         const strokeDashoffset = circumference - (percent / 100) * circumference;
