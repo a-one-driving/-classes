@@ -195,13 +195,18 @@
           <div class="metrics-box">
             <div class="metric-pill"><span>Done</span><b id="dispDone">0</b></div>
             <div class="metric-pill"><span>Target</span><b id="dispTotal">0</b></div>
-            <!-- Naya Kilometer Tracker Pill -->
+                        <!-- Naya Kilometer Tracker Pill -->
             <div class="metric-pill" style="border-color: rgba(214, 175, 55, 0.25);">
               <span>Distance Tracker</span><b id="dispKm">0 / 150 km</b>
+            </div>
+            <!-- Naya Expected Ending Date Pill -->
+            <div class="metric-pill" style="border-color: rgba(52, 199, 89, 0.2);">
+              <span>Expected Completion</span><b id="dispEndDate">Calculating...</b>
             </div>
           </div>
           
           <div class="radial-container">
+
 
             <svg class="radial-progress-svg">
               <circle class="radial-bg" cx="50" cy="50" r="40"></circle>
@@ -276,16 +281,44 @@
         const total = data.totalClasses || 15;
         const percent = Math.min(Math.round((done / total) * 100), 100);
 
-                        // Auto-calculate kilometers directly from your session logs text
+                                // 1. Auto-calculate kilometers directly from your session logs text
         let totalDrivenKm = 0;
         if (data.attendanceLogs && data.attendanceLogs.length > 0) {
           data.attendanceLogs.forEach(log => {
-            // Looks for patterns like "Distance: 15 KM" or "Distance: 15KM" (case insensitive)
             const match = log.match(/Distance:\s*(\d+)\s*KM/i);
             if (match && match[1]) {
               totalDrivenKm += parseInt(match[1], 10);
             }
           });
+        }
+
+        // 2. Auto-calculate Expected Ending Date from First Attendance
+        let expectedEndDateStr = "No Logs Found";
+        if (data.attendanceLogs && data.attendanceLogs.length > 0) {
+          try {
+            // Pehla attendance log array ka sabse pehla element hota hai (index 0)
+            const firstLog = data.attendanceLogs[0]; 
+            const datePart = firstLog.split(' | ')[0].trim(); // Extract karega "05 Jun"
+            
+            if (datePart) {
+              const currentYear = new Date().getFullYear(); // 2026
+              // Date parse karne ke liye format: "05 Jun 2026"
+              const startDate = new Date(`${datePart} ${currentYear}`);
+              
+              if (!isNaN(startDate.getTime())) {
+                // Pehli class ki date mein total package days (e.g., 30) plus kar rahe hain
+                startDate.setDate(startDate.getDate() + total); 
+                
+                // Date ko wapas sundar format mein convert karne ke liye (e.g., "05 Jul")
+                expectedEndDateStr = startDate.toLocaleDateString('en-GB', {
+                  day: '2-digit',
+                  month: 'short'
+                });
+              }
+            }
+          } catch (e) {
+            expectedEndDateStr = "Date Error";
+          }
         }
 
         document.getElementById('dispName').innerText = data.name;
@@ -295,8 +328,10 @@
         document.getElementById('dispPercent').innerText = percent + "%";
         document.getElementById('dispEarn').innerText = "₹" + (data.totalRefers * 500 || 0);
         
-        // Dynamically displays the calculated total kilometers
+        // UI Updates
         document.getElementById('dispKm').innerText = totalDrivenKm + " / 150 km";
+        document.getElementById('dispEndDate').innerText = expectedEndDateStr;
+
 
         
         // Calculate Radial Progress Ring Fill
