@@ -276,8 +276,17 @@
         const total = data.totalClasses || 15;
         const percent = Math.min(Math.round((done / total) * 100), 100);
 
-                // Firebase se kilometer data fetch karne ke liye variable (Default: 0)
-        const drivenKm = data.drivenKm || 0;
+                        // Auto-calculate kilometers directly from your session logs text
+        let totalDrivenKm = 0;
+        if (data.attendanceLogs && data.attendanceLogs.length > 0) {
+          data.attendanceLogs.forEach(log => {
+            // Looks for patterns like "Distance: 15 KM" or "Distance: 15KM" (case insensitive)
+            const match = log.match(/Distance:\s*(\d+)\s*KM/i);
+            if (match && match[1]) {
+              totalDrivenKm += parseInt(match[1], 10);
+            }
+          });
+        }
 
         document.getElementById('dispName').innerText = data.name;
         document.getElementById('dispPkg').innerText = total + "-Day Driving Package";
@@ -286,8 +295,9 @@
         document.getElementById('dispPercent').innerText = percent + "%";
         document.getElementById('dispEarn').innerText = "₹" + (data.totalRefers * 500 || 0);
         
-        // Screen par update karne ke liye line
-        document.getElementById('dispKm').innerText = drivenKm + " / 150 km";
+        // Dynamically displays the calculated total kilometers
+        document.getElementById('dispKm').innerText = totalDrivenKm + " / 150 km";
+
         
         // Calculate Radial Progress Ring Fill
 
