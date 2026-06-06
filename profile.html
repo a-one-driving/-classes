@@ -378,14 +378,14 @@
           document.getElementById('pdfName').innerText = data.name.toUpperCase();
         }
 
-                const timeline = document.getElementById('attendanceTimeline');
+                        // 1. Dynamic Feedback & Timeline Parser
+        const timeline = document.getElementById('attendanceTimeline');
         timeline.innerHTML = "";
         
-        // Logs ko reverse order mein loop chalayenge taaki naya session upar dikhe
         [...logs].reverse().forEach((log, i) => {
           const sessionNum = logs.length - i;
           
-          // Date pattern dhoondhne ke liye (e.g., "05 Jun | 03:18 PM" ya "05 Jun")
+          // Date pattern dhoondhne ke liye (e.g., "05 Jun | 03:18 PM")
           const dateMatch = log.match(/^[^—–\-]+/);
           let dateInfo = dateMatch ? dateMatch[0].trim() : "Track Session";
           
@@ -403,9 +403,21 @@
             </div>`;
         });
 
-
-                // Search panel ko instantly hide karna
+        // 2. Premium iOS-Style Auto Sliding Animation Trigger
         document.getElementById('searchPanel').style.display = "none";
+        
+        const profile = document.getElementById('profileContent');
+        profile.style.display = "block";
+        profile.style.opacity = "0";
+        profile.style.transform = "translateY(40px)";
+        profile.style.transition = "all 0.6s cubic-bezier(0.16, 1, 0.3, 1)";
+        
+        // Hardware acceleration toggle smooth sliding ke liye
+        setTimeout(() => {
+          profile.style.opacity = "1";
+          profile.style.transform = "translateY(0)";
+        }, 50);
+
         
         // Profile content ko premium transition ke sath dynamic display aur auto-slide dena
         const profile = document.getElementById('profileContent');
