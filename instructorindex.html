@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Instructor Portal | A1 Driving Academy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght=300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { 
+      --gold: #d4af37; 
+      --gold-gradient: linear-gradient(135deg, #fce08d 0%, #d4af37 50%, #aa8210 100%);
+      --bg-dark: #0b0b0e; 
+      --panel-bg: rgba(18, 18, 24, 0.8);
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --input-bg: #121217;
+      --success: #34c759;
+      --card-border: rgba(255, 255, 255, 0.07);
+      --text-muted: #98989d;
+      --instructor-blue: #00b4d8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+    
+    body { 
+      background: var(--bg-dark); 
+      background-image: 
+        radial-gradient(circle at 50% -20%, rgba(212, 175, 55, 0.12) 0%, transparent 60%),
+        radial-gradient(circle at 100% 100%, rgba(0, 180, 216, 0.03) 0%, transparent 40%);
+      color: #fff; 
+      min-height: 100vh; 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      justify-content: flex-start; 
+      padding: 16px;
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .portal-container { width: 100%; max-width: 440px; display: flex; flex-direction: column; gap: 20px; }
+    
+    .brand-section { text-align: center; margin-top: 10px; }
+    .brand-section h1 { font-size: 24px; font-weight: 800; letter-spacing: 2px; background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.2; }
+    .brand-section p { font-size: 9px; color: var(--text-muted); letter-spacing: 4px; font-weight: 600; margin-top: 4px; text-transform: uppercase; }
+
+    .wrapper-panel { 
+      width: 100%; 
+      background: var(--panel-bg); 
+      backdrop-filter: blur(30px); 
+      -webkit-backdrop-filter: blur(30px);
+      padding: 24px 20px; 
+      border-radius: 24px; 
+      border: 1px solid var(--card-border); 
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6); 
+    }
+
+    /* Auth & Form Components */
+    .form-title { font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 16px; text-align: center; letter-spacing: 0.5px; }
+    .input-block { margin-bottom: 16px; }
+    .field-label { display: block; font-size: 11px; color: var(--text-muted); font-weight: 600; letter-spacing: 1px; margin-bottom: 8px; text-transform: uppercase; }
+    
+    input, select { 
+      width: 100%; 
+      padding: 14px; 
+      border-radius: 12px; 
+      border: 1px solid var(--card-border); 
+      background: var(--input-bg); 
+      color: #fff; 
+      font-size: 15px; 
+      outline: none; 
+      transition: all 0.2s ease; 
+    }
+    input:focus, select:focus { border-color: var(--gold); box-shadow: 0 0 12px rgba(212, 175, 55, 0.15); }
+
+    .btn-action { 
+      background: var(--gold-gradient); color: #0b0b0e; border: none; padding: 16px; border-radius: 12px; 
+      font-weight: 700; cursor: pointer; width: 100%; font-size: 15px; letter-spacing: 0.5px;
+      box-shadow: 0 8px 20px rgba(212, 175, 55, 0.2); transition: all 0.2s ease;
+    }
+    .btn-action:active { transform: scale(0.98); }
+
+    .toggle-auth-link { font-size: 12px; color: var(--text-muted); text-align: center; display: block; margin-top: 16px; cursor: pointer; text-decoration: underline; }
+    .toggle-auth-link:hover { color: var(--gold); }
+
+    /* Dashboard Layout Panels */
+    #dashboardContent { display: none; width: 100%; animation: fadeIn 0.5s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+    .instructor-meta { text-align: center; margin-bottom: 20px; }
+    .instructor-name { font-size: 22px; font-weight: 700; color: #fff; }
+    .badge-status { display: inline-flex; padding: 4px 12px; background: rgba(0, 180, 216, 0.1); border: 1px solid rgba(0, 180, 216, 0.3); border-radius: 100px; font-size: 11px; color: var(--instructor-blue); font-weight: 600; margin-top: 6px; }
+
+    /* Performance Metrics Grid */
+    .metrics-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+    .metric-card { background: var(--card-bg); border: 1px solid var(--card-border); padding: 14px; border-radius: 16px; display: flex; flex-direction: column; }
+    .metric-card span { font-size: 9px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+    .metric-card b { font-size: 20px; color: #fff; margin-top: 4px; }
+    .card-full { grid-column: span 2; border-color: rgba(52, 199, 89, 0.2); background: linear-gradient(90deg, rgba(52,199,89,0.05) 0%, transparent 100%); }
+    .card-full b { color: var(--success); }
+
+    /* Student List Section */
+    .section-title { font-size: 11px; color: var(--text-muted); font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; display: block; }
+    .student-roster { display: flex; flex-direction: column; gap: 10px; max-height: 240px; overflow-y: auto; margin-bottom: 16px; padding-right: 2px; }
+    .student-roster::-webkit-scrollbar { width: 3px; }
+    .student-roster::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+    
+    .roster-card { background: rgba(0,0,0,0.2); border: 1px solid var(--card-border); padding: 12px; border-radius: 14px; display: flex; flex-direction: column; gap: 6px; }
+    .roster-info { display: flex; justify-content: space-between; align-items: center; }
+    .roster-info b { font-size: 13px; color: #fff; text-transform: capitalize; }
+    .roster-info span { font-size: 11px; color: var(--text-muted); }
+    .progress-bar-container { width: 100%; height: 5px; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden; position: relative; }
+    .progress-bar-fill { height: 100%; background: var(--gold-gradient); width: 0%; transition: width 0.5s ease; }
+
+    /* Slot Preferences Panel */
+    .preference-panel { background: var(--card-bg); border: 1px solid var(--card-border); padding: 14px; border-radius: 16px; margin-bottom: 20px; }
+
+    .logout-session { color: rgba(255,255,255,0.25); font-size: 12px; text-align: center; display: block; cursor: pointer; margin-top: 20px; transition: color 0.2s; }
+    .logout-session:hover { color: var(--gold); }
+    
+    #loader { display: none; margin: 15px auto 0 auto; border: 2px solid rgba(255,255,255,0.05); border-top: 2px solid var(--gold); border-radius: 50%; width: 24px; height: 24px; animation: spin 0.8s linear infinite; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+
+  <div class="portal-container">
+    <div class="brand-section">
+      <h1>ABHINAASH A1</h1>
+      <p>INSTRUCTOR PORTAL</p>
+    </div>
+
+    <div class="wrapper-panel">
+      <!-- Authentication Panel (Registration & Login Bundle) -->
+      <div id="authPanel">
+        <h2 id="authTitle" class="form-title">Instructor Login</h2>
+        
+        <div class="input-block">
+          <span class="field-label">Mobile Number</span>
+          <input type="tel" id="instPhone" placeholder="Enter 10 Digit Number" maxlength="10">
+        </div>
+        
+        <div class="input-block" id="registerFields" style="display: none;">
+          <div class="input-block">
+            <span class="field-label">Full Name</span>
+            <input type="text" id="instName" placeholder="Enter Full Name">
+          </div>
+          <div class="input-block">
+            <span class="field-label">Vehicle Expertise</span>
+            <select id="instVehicle">
+              <option value="Manual Car (LMV)">Manual Car (LMV)</option>
+              <option value="Automatic Car (LMV)">Automatic Car (LMV)</option>
+              <option value="Heavy Vehicle (HMV)">Heavy Vehicle (HMV)</option>
+              <option value="Both Manual & Auto">Both Manual & Auto</option>
+            </select>
+          </div>
+        </div>
+
+        <button class="btn-action" id="authBtn" onclick="handleAuth()">Access Portal</button>
+        <span class="toggle-auth-link" id="authToggle" onclick="toggleAuthMode()">New Instructor? Register Here</span>
+        <div id="loader"></div>
+      </div>
+
+      <!-- Instructor Dashboard Panel -->
+      <div id="dashboardContent">
+        <div class="instructor-meta">
+          <div class="instructor-name" id="dispInstName">Instructor Name</div>
+          <div class="badge-status" id="dispInstExp">Expertise Scheme</div>
+        </div>
+
+        <!-- Metrics Dashboard Block -->
+        <div class="metrics-row">
+          <div class="metric-card card-full">
+            <span>Total Pay Earnings</span>
+            <b id="dispEarnings">₹0</b>
+          </div>
+          <div class="metric-card">
+            <span>Assigned Drivers</span>
+            <b id="dispActiveStudents">0</b>
+          </div>
+          <div class="metric-card">
+            <span>Classes Delivered</span>
+            <b id="dispTotalSessions">0</b>
+          </div>
+        </div>
+
+        <!-- Dynamic Assigned Student Roster -->
+        <span class="section-title">Assigned Students Roster</span>
+        <div class="student-roster" id="studentRosterContainer">
+          <!-- Live Roster Cards Injection -->
+        </div>
+
+        <!-- Work Shifts Preference Framework -->
+        <div class="preference-panel">
+          <span class="section-title" style="margin-bottom: 8px;">Duty Preference Setup</span>
+          <div class="input-block" style="margin-bottom: 0;">
+            <select id="instShift" onchange="updateShiftPreference()">
+              <option value="Morning Shift (6 AM - 12 PM)">Morning Shift (6 AM - 12 PM)</option>
+              <option value="Evening Shift (1 PM - 7 PM)">Evening Shift (1 PM - 7 PM)</option>
+              <option value="Full Day Availability">Full Day Availability</option>
+            </select>
+          </div>
+        </div>
+
+        <a class="logout-session" onclick="location.reload()">← SECURE LOGOUT</a>
+      </div>
+    </div>
+  </div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+  import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
+    authDomain: "abinash-driving.firebaseapp.com",
+    projectId: "abinash-driving",
+    storageBucket: "abinash-driving.appspot.com",
+    messagingSenderId: "641148830173",
+    appId: "1:641148830173:web:b7a500e5e7e2463da0f634"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  let isRegisterMode = false;
+  let loggedInstructorPhone = null;
+  const INCENTIVE_PER_CLASS = 150; // प्रति क्लास इंस्ट्रक्टर को मिलने वाला कमीशन/पेमेंट राशि
+
+  // Auth Layout Toggle Router
+  window.toggleAuthMode = () => {
+    isRegisterMode = !isRegisterMode;
+    document.getElementById('registerFields').style.display = isRegisterMode ? 'block' : 'none';
+    document.getElementById('authTitle').innerText = isRegisterMode ? 'Instructor Registration' : 'Instructor Login';
+    document.getElementById('authBtn').innerText = isRegisterMode ? 'Create Profile & Onboard' : 'Access Portal';
+    document.getElementById('authToggle').innerText = isRegisterMode ? 'Already Registered? Login Here' : 'New Instructor? Register Here';
+  };
+
+  // Authentication Flow Engine (Login/Registration Handler)
+  window.handleAuth = async () => {
+    const phone = document.getElementById('instPhone').value.trim();
+    if(phone.length < 10) return alert("Please enter a valid 10-digit mobile number.");
+
+    document.getElementById('loader').style.display = "block";
+
+    try {
+      const instDocRef = doc(db, "instructorData", phone);
+      const snap = await getDoc(instDocRef);
+
+      if (isRegisterMode) {
+        // Registration Block Logic
+        if (snap.exists()) {
+          document.getElementById('loader').style.display = "none";
+          return alert("This instructor number is already registered. Please login directly.");
+        }
+        const name = document.getElementById('instName').value.trim();
+        const expertise = document.getElementById('instVehicle').value;
+        if(!name) {
+          document.getElementById('loader').style.display = "none";
+          return alert("Please enter your full name.");
+        }
+
+        await setDoc(instDocRef, {
+          name: name,
+          expertise: expertise,
+          shiftPreference: "Morning Shift (6 AM - 12 PM)",
+          registeredAt: new Date().toISOString()
+        });
+      } else {
+        // Login Block Logic
+        if (!snap.exists()) {
+          document.getElementById('loader').style.display = "none";
+          return alert("No instructor record found with this number. Please register first.");
+        }
+      }
+
+      loggedInstructorPhone = phone;
+      document.getElementById('authPanel').style.display = "none";
+      document.getElementById('dashboardContent').style.display = "block";
+      
+      // Load Dashboard Live Stream
+      initInstructorDashboard(phone);
+
+    } catch (error) {
+      console.error("Auth Error: ", error);
+      alert("Database Connection Failed. Check Console.");
+    } finally {
+      document.getElementById('loader').style.display = "none";
+    }
+  };
+
+  // Live Stream Dashboard Aggregator
+  function initInstructorDashboard(phone) {
+    // 1. Instructor Ke Personal Fields Load Karna
+    onSnapshot(doc(db, "instructorData", phone), (snap) => {
+      if(snap.exists()) {
+        const data = snap.data();
+        document.getElementById('dispInstName').innerText = data.name;
+        document.getElementById('dispInstExp').innerText = data.expertise;
+        document.getElementById('instShift').value = data.shiftPreference || "Morning Shift (6 AM - 12 PM)";
+      }
+    });
+
+    // 2. Student Analytics & Roster Parsing (Connecting Student Database)
+    onSnapshot(collection(db, "studentData"), (snapshot) => {
+      let totalAssignedStudents = 0;
+      let aggregateClassesDelivered = 0;
+      const rosterContainer = document.getElementById('studentRosterContainer');
+      rosterContainer.innerHTML = "";
+
+      snapshot.forEach((studentDoc) => {
+        const studentData = studentDoc.data();
+        
+        // Note: यहाँ हम मान रहे हैं कि अटेंडेंस डेटाबेस में छात्र के पास एक 'assignedInstructor' फील्ड है। 
+        // अगर यह फील्ड नहीं भी है, तो सिस्टम डेमो के लिए सभी छात्रों को मैप कर देगा जब तक आप अलॉट नहीं करते।
+        if (!studentData.assignedInstructor || studentData.assignedInstructor === phone || studentData.assignedInstructor === studentData.assignedInstructor) {
+          totalAssignedStudents++;
+          
+          const logs = studentData.attendanceLogs || [];
+          const doneClasses = Math.max(logs.length, studentData.remaining || 0);
+          const totalTarget = studentData.totalClasses || 15;
+          const classPercent = Math.min(Math.round((doneClasses / totalTarget) * 100), 100);
+          
+          aggregateClassesDelivered += doneClasses;
+
+          // Roster Element Dynamic Generation
+          const rosterCard = document.createElement('div');
+          rosterCard.className = "roster-card";
+          rosterCard.innerHTML = `
+            <div class="roster-info">
+              <b>${studentData.name}</b>
+              <span>${doneClasses}/${totalTarget} Sessions</span>
+            </div>
+            <div class="progress-bar-container">
+              <div class="progress-bar-fill" style="width: ${classPercent}%"></div>
+            </div>
+          `;
+          rosterContainer.innerHTML += rosterCard.outerHTML;
+        }
+      });
+
+      // Update Dashboard Metrics Box
+      document.getElementById('dispActiveStudents').innerText = totalAssignedStudents;
+      document.getElementById('dispTotalSessions').innerText = aggregateClassesDelivered;
+      document.getElementById('dispEarnings').innerText = "₹" + (aggregateClassesDelivered * INCENTIVE_PER_CLASS);
+      
+      if(totalAssignedStudents === 0) {
+        rosterContainer.innerHTML = `<div style="text-align:center; font-size:12px; color:var(--text-muted); padding:20px;">No students assigned to your profile yet.</div>`;
+      }
+    });
+  }
+
+  // Shift Change Settings Sync
+  window.updateShiftPreference = async () => {
+    if(!loggedInstructorPhone) return;
+    const selectedShift = document.getElementById('instShift').value;
+    try {
+      await updateDoc(doc(db, "instructorData", loggedInstructorPhone), {
+        shiftPreference: selectedShift
+      });
+    } catch (e) {
+      alert("Error updating preference strategy.");
+    }
+  };
+</script>
+</body>
+</html>
