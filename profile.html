@@ -267,9 +267,26 @@
         const total = data.totalClasses || 15;
         const percent = Math.min(Math.round((done / total) * 100), 100);
 
-        // --- DIRECT CLASS BASED CALCULATION FIXED ---
-        // Har session standard 5 KM ka hota hai, toh sidhe multiply kar diya.
-        const totalDrivenKm = done * 5;
+        // --- SMART CONDITIONAL KILOMETER TRACKER ---
+        let totalDrivenKm = 0;
+        
+        // Pehle hum actual array logs par check karenge
+        logs.forEach(log => {
+          const match = log.match(/(\d+)\s*KM/i);
+          if (match && match[1]) {
+            totalDrivenKm += parseInt(match[1], 10); // Bheja hua number add karega (Jaise: 2)
+          } else {
+            totalDrivenKm += 5; // Agar admin text mein KM na de, toh fallback 5 KM add hoga
+          }
+        });
+
+        // Agar admin ne manual direct 'done' session count badhaya hai jo logs array se bada hai, 
+        // toh baaki bache extra sessions ke liye default 5 KM multiplier automatic add ho jayega
+        if (done > logs.length) {
+          const extraSessions = done - logs.length;
+          totalDrivenKm += (extraSessions * 5);
+        }
+
 
         // Expected Completion Date calculation
         let expectedEndDateStr = "No Logs Found";
