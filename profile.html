@@ -37,7 +37,6 @@
       overflow-x: hidden;
     }
 
-    /* Premium Container Layout */
     .dashboard-container {
       width: 100%;
       max-width: 440px;
@@ -62,7 +61,6 @@
       box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255,255,255,0.1); 
     }
 
-    /* Auth Framework components */
     .input-group { margin-bottom: 24px; }
     .input-label { display: block; font-size: 11px; color: var(--text-muted); font-weight: 600; letter-spacing: 1.5px; margin-bottom: 10px; text-transform: uppercase; }
     
@@ -98,7 +96,6 @@
     }
     .btn-primary:active { transform: scale(0.97); opacity: 0.9; }
 
-    /* Structural Framework Animations */
     #profileContent { display: none; width: 100%; animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
     @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -106,7 +103,6 @@
     .student-title { font-size: 24px; font-weight: 700; color: #fff; letter-spacing: -0.5px; }
     .course-badge { display: inline-flex; align-items: center; padding: 6px 14px; background: rgba(212, 175, 55, 0.08); border: 1px solid rgba(212, 175, 55, 0.25); border-radius: 100px; font-size: 11px; color: #fce08d; font-weight: 600; margin-top: 8px; letter-spacing: 0.5px; }
 
-    /* Multi-Ring Dashboard Metric Track */
     .progress-widget { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 22px; padding: 20px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; gap: 12px; }
     .metrics-box { display: flex; flex-direction: column; gap: 12px; flex: 1; }
     .metric-pill { background: rgba(0, 0, 0, 0.2); border: 1px solid var(--card-border); padding: 10px 14px; border-radius: 14px; display: flex; flex-direction: column; }
@@ -119,12 +115,10 @@
     .radial-fill { fill: none; stroke: var(--gold); stroke-width: 9; stroke-linecap: round; stroke-dasharray: 251.3; stroke-dashoffset: 251.3; transition: stroke-dashoffset 1.4s cubic-bezier(0.16, 1, 0.3, 1); }
     .radial-text { position: absolute; font-size: 16px; font-weight: 700; color: #fff; letter-spacing: -0.5px; }
 
-    /* Timeline Tracking Structure */
     .timeline-widget { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 22px; padding: 20px; margin-bottom: 16px; }
     .timeline-header { font-size: 11px; color: var(--text-muted); font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 14px; display: block; }
     #attendanceTimeline { display: flex; flex-direction: column; gap: 12px; max-height: 220px; overflow-y: auto; padding-right: 4px; }
     
-    /* Elegant Custom Scrollbar */
     #attendanceTimeline::-webkit-scrollbar { width: 4px; }
     #attendanceTimeline::-webkit-scrollbar-track { background: transparent; }
     #attendanceTimeline::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
@@ -135,19 +129,16 @@
     .log-meta span { font-size: 10px; color: var(--text-muted); font-weight: 500; }
     .log-feedback { font-size: 12px; color: #e5e5ea; opacity: 0.9; line-height: 1.4; }
 
-    /* Micro Wallet Framework */
     .wallet-banner { background: linear-gradient(90deg, rgba(52,199,89,0.08) 0%, rgba(52,199,89,0.01) 100%); border: 1px solid rgba(52,199,89,0.2); padding: 16px 20px; border-radius: 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
     .wallet-banner div { display: flex; flex-direction: column; }
     .wallet-banner span { font-size: 10px; color: var(--success); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
     .wallet-banner p { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
     .wallet-banner b { font-size: 22px; color: #fff; font-weight: 700; letter-spacing: -0.5px; }
 
-    /* Action Deck Matrix */
     .actions-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .btn-secondary { background: var(--card-bg); border: 1px solid var(--card-border); color: #fff; padding: 16px; border-radius: 16px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
     .btn-secondary:active { background: rgba(255,255,255,0.08); transform: scale(0.98); }
 
-    /* Premium Certificate Floating Block */
     #premiumCertificate { display: none; background: linear-gradient(135deg, rgba(212,175,55,0.15) 0%, rgba(212,175,55,0.03) 100%); border: 1px solid rgba(212,175,55,0.35); border-radius: 24px; padding: 22px 20px; text-align: center; margin-bottom: 16px; box-shadow: 0 15px 35px rgba(212,175,55,0.1); }
     
     .logout-btn { color: rgba(255,255,255,0.3); font-size: 12px; font-weight: 500; margin-top: 28px; text-align: center; cursor: pointer; display: block; text-decoration: none; transition: color 0.2s; letter-spacing: 0.5px; }
@@ -156,7 +147,6 @@
     #loader { display: none; margin: 20px auto 0 auto; border: 2.5px solid rgba(255,255,255,0.05); border-top: 2.5px solid var(--gold); border-radius: 50%; width: 28px; height: 28px; animation: spin 0.75s linear infinite; }
     @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-    /* PDF Engine Base Layout Profile */
     #pdfTemplate { width: 842px; height: 595px; background: #000; color: #fff; padding: 50px; border: 20px solid #d4af37; display: none; position: absolute; left: -9999px; text-align: center; }
   </style>
 </head>
@@ -191,23 +181,19 @@
           <div class="course-badge" id="dispPkg">Track Scheme</div>
         </div>
 
-               <div class="progress-widget">
+        <div class="progress-widget">
           <div class="metrics-box">
             <div class="metric-pill"><span>Done</span><b id="dispDone">0</b></div>
             <div class="metric-pill"><span>Target</span><b id="dispTotal">0</b></div>
-                        <!-- Naya Kilometer Tracker Pill -->
             <div class="metric-pill" style="border-color: rgba(214, 175, 55, 0.25);">
               <span>Distance Tracker</span><b id="dispKm">0 / 150 km</b>
             </div>
-            <!-- Naya Expected Ending Date Pill -->
             <div class="metric-pill" style="border-color: rgba(52, 199, 89, 0.2);">
               <span>Expected Completion</span><b id="dispEndDate">Calculating...</b>
             </div>
           </div>
           
           <div class="radial-container">
-
-
             <svg class="radial-progress-svg">
               <circle class="radial-bg" cx="50" cy="50" r="40"></circle>
               <circle class="radial-fill" id="radialFillCircle" cx="50" cy="50" r="40"></circle>
@@ -281,35 +267,21 @@
         const total = data.totalClasses || 15;
         const percent = Math.min(Math.round((done / total) * 100), 100);
 
-                                // 1. Auto-calculate kilometers directly from your session logs text
-        let totalDrivenKm = 0;
-        if (data.attendanceLogs && data.attendanceLogs.length > 0) {
-          data.attendanceLogs.forEach(log => {
-            const match = log.match(/Distance:\s*(\d+)\s*KM/i);
-            if (match && match[1]) {
-              totalDrivenKm += parseInt(match[1], 10);
-            }
-          });
-        }
+        // --- DIRECT CLASS BASED CALCULATION FIXED ---
+        // Har session standard 5 KM ka hota hai, toh sidhe multiply kar diya.
+        const totalDrivenKm = done * 5;
 
-        // 2. Auto-calculate Expected Ending Date from First Attendance
+        // Expected Completion Date calculation
         let expectedEndDateStr = "No Logs Found";
-        if (data.attendanceLogs && data.attendanceLogs.length > 0) {
+        if (logs.length > 0) {
           try {
-            // Pehla attendance log array ka sabse pehla element hota hai (index 0)
-            const firstLog = data.attendanceLogs[0]; 
-            const datePart = firstLog.split(' | ')[0].trim(); // Extract karega "05 Jun"
-            
+            const firstLog = logs[0]; 
+            const datePart = firstLog.split(' | ')[0].trim();
             if (datePart) {
-              const currentYear = new Date().getFullYear(); // 2026
-              // Date parse karne ke liye format: "05 Jun 2026"
+              const currentYear = new Date().getFullYear();
               const startDate = new Date(`${datePart} ${currentYear}`);
-              
               if (!isNaN(startDate.getTime())) {
-                // Pehli class ki date mein total package days (e.g., 30) plus kar rahe hain
                 startDate.setDate(startDate.getDate() + total); 
-                
-                // Date ko wapas sundar format mein convert karne ke liye (e.g., "05 Jul")
                 expectedEndDateStr = startDate.toLocaleDateString('en-GB', {
                   day: '2-digit',
                   month: 'short'
@@ -321,6 +293,7 @@
           }
         }
 
+        // Set UI labels
         document.getElementById('dispName').innerText = data.name;
         document.getElementById('dispPkg').innerText = total + "-Day Driving Package";
         document.getElementById('dispDone').innerText = done;
@@ -328,16 +301,13 @@
         document.getElementById('dispPercent').innerText = percent + "%";
         document.getElementById('dispEarn').innerText = "₹" + (data.totalRefers * 500 || 0);
         
-        // UI Updates
+        // Correct Dynamic UI Tracker Update
         document.getElementById('dispKm').innerText = totalDrivenKm + " / 150 km";
         document.getElementById('dispEndDate').innerText = expectedEndDateStr;
 
-
-        
         // Calculate Radial Progress Ring Fill
-
         const radius = 40;
-        const circumference = 2 * Math.PI * radius; // 251.3
+        const circumference = 2 * Math.PI * radius; 
         const strokeDashoffset = circumference - (percent / 100) * circumference;
         document.getElementById('radialFillCircle').style.strokeDashoffset = strokeDashoffset;
 
@@ -346,23 +316,30 @@
           document.getElementById('pdfName').innerText = data.name.toUpperCase();
         }
 
+        // --- DYNAMIC TIMELINE GENERATION ---
         const timeline = document.getElementById('attendanceTimeline');
         timeline.innerHTML = "";
-        [...logs].reverse().forEach((log, i) => {
-          const sessionNum = logs.length - i;
-          const parts = log.split(' — ');
-          const dateInfo = parts[0];
-          const message = parts[1] || "Track Session Processed";
+
+        for (let i = done; i >= 1; i--) {
+          const logIndex = i - 1; 
+          let dateInfo = "Track Session";
+          let message = "Session auto-verified by academy administration.";
+
+          if (logs[logIndex]) {
+            const parts = logs[logIndex].split(' — ');
+            dateInfo = parts[0];
+            message = parts[1] || "Track Session Processed";
+          }
 
           timeline.innerHTML += `
             <div class="log-row">
               <div class="log-meta">
-                <b>Session ${sessionNum}</b>
+                <b>Session ${i}</b>
                 <span>${dateInfo}</span>
               </div>
               <div class="log-feedback">📝 ${message}</div>
             </div>`;
-        });
+        }
 
         document.getElementById('searchPanel').style.display = "none";
         document.getElementById('profileContent').style.display = "block";
