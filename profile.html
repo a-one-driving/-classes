@@ -20,16 +20,21 @@
   --panel:#101014;
   --card:#141419;
   --card2:#19191f;
-  --border:#24242b;
+  --border:#25252c;
   --gold-border:rgba(212,175,55,.24);
   --text:#f5f5f5;
-  --muted:#89898f;
+  --muted:#85858c;
+
   --green:#39dc7d;
-  --green-bg:rgba(57,220,125,.09);
+  --green-bg:rgba(57,220,125,.08);
   --green-border:rgba(57,220,125,.22);
-  --red:#ff6767;
-  --red-bg:rgba(255,103,103,.09);
-  --red-border:rgba(255,103,103,.22);
+
+  --red:#ff6868;
+  --red-bg:rgba(255,104,104,.08);
+  --red-border:rgba(255,104,104,.22);
+
+  --blue:#5aa8ff;
+  --blue-bg:rgba(90,168,255,.08);
 }
 
 *{
@@ -38,17 +43,30 @@
   padding:0;
 }
 
+html{
+  scroll-behavior:smooth;
+}
+
 body{
   min-height:100vh;
   background:
-    radial-gradient(circle at top,rgba(212,175,55,.09),transparent 280px),
+    radial-gradient(
+      circle at top,
+      rgba(212,175,55,.09),
+      transparent 300px
+    ),
     var(--bg);
   color:var(--text);
   font-family:Poppins,sans-serif;
 }
 
-button,input{
+button,
+input{
   font-family:inherit;
+}
+
+button{
+  -webkit-tap-highlight-color:transparent;
 }
 
 .hidden{
@@ -59,12 +77,12 @@ button,input{
   width:100%;
   max-width:460px;
   margin:auto;
-  padding:16px 13px 40px;
+  padding:15px 13px 45px;
 }
 
-/* =========================
+/* =========================================================
    LOGIN
-========================= */
+========================================================= */
 
 .login-screen{
   min-height:100vh;
@@ -77,12 +95,12 @@ button,input{
 .login-card{
   width:100%;
   max-width:410px;
-  padding:30px 22px;
+  padding:31px 22px;
   background:#101014;
   border:1px solid var(--gold-border);
   border-radius:24px;
   text-align:center;
-  box-shadow:0 25px 60px rgba(0,0,0,.4);
+  box-shadow:0 25px 70px rgba(0,0,0,.45);
 }
 
 .login-logo{
@@ -92,7 +110,7 @@ button,input{
   display:flex;
   align-items:center;
   justify-content:center;
-  border-radius:20px;
+  border-radius:21px;
   background:linear-gradient(145deg,#241e0c,#111);
   border:1px solid rgba(212,175,55,.35);
   color:var(--gold-light);
@@ -148,15 +166,15 @@ button,input{
   font-size:10px;
 }
 
-/* =========================
+/* =========================================================
    HEADER
-========================= */
+========================================================= */
 
 .header{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  margin-bottom:14px;
+  margin-bottom:13px;
 }
 
 .brand{
@@ -179,13 +197,17 @@ button,input{
   cursor:pointer;
 }
 
-/* =========================
+/* =========================================================
    PROFILE
-========================= */
+========================================================= */
 
 .profile-card{
   background:
-    linear-gradient(140deg,rgba(212,175,55,.10),transparent 55%),
+    linear-gradient(
+      140deg,
+      rgba(212,175,55,.10),
+      transparent 58%
+    ),
     #111115;
   border:1px solid var(--gold-border);
   border-radius:20px;
@@ -253,30 +275,34 @@ button,input{
   font-size:10px;
 }
 
-/* =========================
-   LATEST SESSION HERO CARD
-========================= */
+/* =========================================================
+   LATEST SESSION
+========================================================= */
 
 .latest-card{
   position:relative;
-  margin-top:12px;
   overflow:hidden;
+  margin-top:12px;
+  padding:18px;
   background:
-    radial-gradient(circle at right top,rgba(212,175,55,.16),transparent 150px),
+    radial-gradient(
+      circle at right top,
+      rgba(212,175,55,.16),
+      transparent 155px
+    ),
     linear-gradient(145deg,#171719,#101014);
   border:1px solid rgba(212,175,55,.30);
   border-radius:22px;
-  padding:18px;
   box-shadow:0 15px 35px rgba(0,0,0,.23);
 }
 
 .latest-card:before{
   content:"";
   position:absolute;
-  width:90px;
-  height:90px;
-  right:-35px;
-  bottom:-45px;
+  width:100px;
+  height:100px;
+  right:-42px;
+  bottom:-48px;
   border-radius:50%;
   background:rgba(212,175,55,.06);
 }
@@ -297,8 +323,8 @@ button,input{
 }
 
 .latest-icon{
-  width:33px;
-  height:33px;
+  width:34px;
+  height:34px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -332,7 +358,7 @@ button,input{
   font-weight:600;
 }
 
-/* DATE + TIME */
+/* TIME */
 
 .latest-datetime{
   position:relative;
@@ -361,14 +387,13 @@ button,input{
   font-size:27px;
   line-height:1.15;
   font-weight:700;
-  letter-spacing:-.5px;
 }
 
 .latest-time span{
   color:var(--gold-light);
 }
 
-/* ROUTE + DISTANCE */
+/* ROUTE / DISTANCE */
 
 .latest-info-grid{
   position:relative;
@@ -411,7 +436,7 @@ button,input{
   font-size:15px;
 }
 
-/* FEEDBACK HIGHLIGHT */
+/* FEEDBACK */
 
 .latest-feedback{
   position:relative;
@@ -460,14 +485,14 @@ button,input{
 }
 
 .feedback-text{
+  color:#ddd;
   font-size:10px;
   line-height:1.55;
-  color:#ddd;
 }
 
-/* =========================
-   TITLES
-========================= */
+/* =========================================================
+   SECTION TITLE
+========================================================= */
 
 .section-title{
   margin:20px 2px 8px;
@@ -487,15 +512,15 @@ button,input{
   letter-spacing:.8px;
 }
 
-/* =========================
+/* =========================================================
    TRAINING PROGRESS
-========================= */
+========================================================= */
 
 .progress-card{
+  padding:16px;
   background:var(--card);
   border:1px solid var(--border);
   border-radius:18px;
-  padding:16px;
 }
 
 .progress-numbers{
@@ -537,7 +562,11 @@ button,input{
 .bar-fill{
   height:100%;
   width:0;
-  background:linear-gradient(90deg,#b78a1e,var(--gold-light));
+  background:linear-gradient(
+    90deg,
+    #b78a1e,
+    var(--gold-light)
+  );
   border-radius:20px;
   transition:.4s;
 }
@@ -556,94 +585,40 @@ button,input{
   font-size:9px;
 }
 
-/* =========================
-   ROUTE PROGRESS
-========================= */
+/* =========================================================
+   SIMPLE CARD
+========================================================= */
 
-.route-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-}
-
-.route-stat{
-  padding:13px;
+.simple-card{
+  padding:15px;
   background:var(--card);
   border:1px solid var(--border);
-  border-radius:14px;
+  border-radius:16px;
 }
 
-.route-stat strong{
-  display:block;
-  color:var(--gold-light);
-  font-size:20px;
-}
-
-.route-stat span{
+.simple-card span{
   color:#777;
   font-size:7px;
   text-transform:uppercase;
+  letter-spacing:.5px;
 }
 
-.route-list{
-  margin-top:8px;
-  display:flex;
-  flex-direction:column;
-  gap:7px;
-}
-
-.route-item{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:8px;
-  padding:11px 12px;
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:12px;
-}
-
-.route-name{
-  min-width:0;
-  font-size:9px;
-  font-weight:500;
-  word-break:break-word;
-}
-
-.route-name small{
+.simple-card strong{
   display:block;
-  margin-top:2px;
-  color:#666;
-  font-size:7px;
-}
-
-.route-count{
-  flex:0 0 31px;
-  height:31px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:9px;
-  background:rgba(212,175,55,.08);
-  border:1px solid rgba(212,175,55,.14);
+  margin-top:4px;
   color:var(--gold-light);
-  font-size:9px;
-  font-weight:700;
+  font-size:15px;
 }
 
-.route-item.remaining{
-  opacity:.65;
-}
-
-/* =========================
+/* =========================================================
    PERFORMANCE
-========================= */
+========================================================= */
 
 .analysis-card{
+  padding:15px;
   background:var(--card);
   border:1px solid var(--border);
   border-radius:18px;
-  padding:15px;
 }
 
 .analysis-top{
@@ -727,9 +702,70 @@ button,input{
   background:var(--red);
 }
 
-/* =========================
+/* =========================================================
+   RECENT FEEDBACK
+========================================================= */
+
+.feedback-list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.feedback-item{
+  padding:12px;
+  border-radius:13px;
+  border:1px solid;
+}
+
+.feedback-item.good{
+  background:var(--green-bg);
+  border-color:var(--green-border);
+}
+
+.feedback-item.bad{
+  background:var(--red-bg);
+  border-color:var(--red-border);
+}
+
+.feedback-item.neutral{
+  background:#15151a;
+  border-color:#29292f;
+}
+
+.feedback-item-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.feedback-item-title{
+  font-size:9px;
+  font-weight:600;
+}
+
+.feedback-item-date{
+  color:#666;
+  font-size:7px;
+}
+
+.feedback-item-text{
+  margin-top:5px;
+  color:#ccc;
+  font-size:8px;
+  line-height:1.5;
+}
+
+.feedback-item-route{
+  margin-top:5px;
+  color:#777;
+  font-size:7px;
+}
+
+/* =========================================================
    HISTORY
-========================= */
+========================================================= */
 
 .history{
   display:flex;
@@ -789,7 +825,7 @@ button,input{
 
 .history-feedback.bad{
   color:#ff8888;
-  background:rgba(255,103,103,.06);
+  background:rgba(255,104,104,.06);
 }
 
 .history-feedback.neutral{
@@ -797,33 +833,119 @@ button,input{
   background:#1b1b20;
 }
 
-/* =========================
-   EXPECTED / REFERRAL
-========================= */
+/* =========================================================
+   ACHIEVEMENTS
+========================================================= */
 
-.simple-card{
-  padding:15px;
+.achievement-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:7px;
+}
+
+.achievement{
+  min-height:91px;
+  padding:11px 7px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
   background:var(--card);
   border:1px solid var(--border);
+  border-radius:14px;
+  opacity:.38;
+}
+
+.achievement.unlocked{
+  opacity:1;
+  border-color:rgba(212,175,55,.22);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(212,175,55,.08),
+      #141419
+    );
+}
+
+.achievement-icon{
+  font-size:21px;
+  margin-bottom:5px;
+  filter:grayscale(1);
+}
+
+.achievement.unlocked .achievement-icon{
+  filter:none;
+}
+
+.achievement strong{
+  font-size:7px;
+  line-height:1.3;
+}
+
+.achievement small{
+  margin-top:3px;
+  color:#666;
+  font-size:6px;
+}
+
+/* =========================================================
+   REFERRAL
+========================================================= */
+
+.referral-card{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:15px;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(212,175,55,.09),
+      transparent
+    ),
+    var(--card);
+  border:1px solid var(--gold-border);
   border-radius:16px;
 }
 
-.simple-card span{
+.referral-left span{
+  display:block;
   color:#777;
   font-size:7px;
   text-transform:uppercase;
 }
 
-.simple-card strong{
+.referral-left strong{
   display:block;
   margin-top:3px;
   color:var(--gold-light);
-  font-size:15px;
+  font-size:19px;
 }
 
-/* =========================
+.referral-count{
+  padding:9px 11px;
+  background:rgba(212,175,55,.07);
+  border:1px solid rgba(212,175,55,.14);
+  border-radius:10px;
+  text-align:center;
+}
+
+.referral-count strong{
+  display:block;
+  color:var(--gold-light);
+  font-size:14px;
+}
+
+.referral-count span{
+  color:#777;
+  font-size:6px;
+}
+
+/* =========================================================
    ACTIONS
-========================= */
+========================================================= */
 
 .actions{
   margin-top:18px;
@@ -845,7 +967,11 @@ button,input{
 }
 
 .action-btn.gold{
-  background:linear-gradient(135deg,#d8b43d,#9d7718);
+  background:linear-gradient(
+    135deg,
+    #d8b43d,
+    #9d7718
+  );
   color:#090909;
   border:0;
 }
@@ -858,9 +984,9 @@ button,input{
   line-height:1.7;
 }
 
-/* =========================
+/* =========================================================
    EMPTY
-========================= */
+========================================================= */
 
 .empty{
   padding:15px;
@@ -871,9 +997,9 @@ button,input{
   font-size:8px;
 }
 
-/* =========================
+/* =========================================================
    CERTIFICATE
-========================= */
+========================================================= */
 
 .certificate{
   position:fixed;
@@ -921,19 +1047,52 @@ button,input{
   justify-content:space-between;
   font-size:11px;
 }
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:370px){
+
+  .container{
+    padding-left:10px;
+    padding-right:10px;
+  }
+
+  .latest-time{
+    font-size:24px;
+  }
+
+  .achievement-grid{
+    gap:5px;
+  }
+
+  .achievement{
+    padding:8px 4px;
+  }
+
+}
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
+
+<!-- =======================================================
+     LOGIN SCREEN
+======================================================= -->
+
 <div id="loginScreen" class="login-screen">
 
   <div class="login-card">
 
-    <div class="login-logo">A1</div>
+    <div class="login-logo">
+      A1
+    </div>
 
-    <h1>A1 Driving Academy</h1>
+    <h1>
+      A1 Driving Academy
+    </h1>
 
     <p>
       Enter your registered mobile number
@@ -956,15 +1115,25 @@ button,input{
       VIEW DASHBOARD
     </button>
 
-    <div id="loginError" class="error"></div>
+    <div
+      id="loginError"
+      class="error"
+    ></div>
 
   </div>
 
 </div>
 
 
-<!-- DASHBOARD -->
-<div id="dashboard" class="container hidden">
+<!-- =======================================================
+     DASHBOARD
+======================================================= -->
+
+<div
+  id="dashboard"
+  class="container hidden"
+>
+
 
   <!-- HEADER -->
 
@@ -984,13 +1153,18 @@ button,input{
   </div>
 
 
-  <!-- PROFILE -->
+  <!-- =====================================================
+       STUDENT PROFILE
+  ====================================================== -->
 
   <div class="profile-card">
 
     <div class="profile-row">
 
-      <div id="avatar" class="avatar">
+      <div
+        id="avatar"
+        class="avatar"
+      >
         A
       </div>
 
@@ -1008,9 +1182,12 @@ button,input{
 
     </div>
 
+
     <div class="class-badge">
 
-      <span>Training Mode</span>
+      <span>
+        Training Mode
+      </span>
 
       <strong id="classType">
         👥 GROUP CLASS
@@ -1021,11 +1198,14 @@ button,input{
   </div>
 
 
-  <!-- ==========================================
-       LATEST DRIVING SESSION - MAIN HIGHLIGHT
-  =========================================== -->
+  <!-- =====================================================
+       LATEST DRIVING SESSION
+  ====================================================== -->
 
-  <div id="latestSessionCard" class="latest-card">
+  <div
+    id="latestSessionCard"
+    class="latest-card"
+  >
 
     <div class="latest-top">
 
@@ -1036,13 +1216,23 @@ button,input{
         </div>
 
         <div>
-          <small>Latest Attendance</small>
-          <strong>Last Driving Session</strong>
+
+          <small>
+            Latest Attendance
+          </small>
+
+          <strong>
+            Last Driving Session
+          </strong>
+
         </div>
 
       </div>
 
-      <div id="latestSessionNumber" class="latest-number">
+      <div
+        id="latestSessionNumber"
+        class="latest-number"
+      >
         SESSION #0
       </div>
 
@@ -1055,11 +1245,17 @@ button,input{
         Attendance Time
       </div>
 
-      <div id="latestDate" class="latest-date">
+      <div
+        id="latestDate"
+        class="latest-date"
+      >
         —
       </div>
 
-      <div id="latestTime" class="latest-time">
+      <div
+        id="latestTime"
+        class="latest-time"
+      >
         —
       </div>
 
@@ -1131,17 +1327,22 @@ button,input{
   </div>
 
 
-  <!-- PROGRESS -->
+  <!-- =====================================================
+       TRAINING PROGRESS
+  ====================================================== -->
 
   <div class="section-title">
 
-    <h3>Training Progress</h3>
+    <h3>
+      Training Progress
+    </h3>
 
     <span id="progressPercent">
       0% Complete
     </span>
 
   </div>
+
 
   <div class="progress-card">
 
@@ -1156,7 +1357,9 @@ button,input{
           0
         </strong>
 
-        <span>Completed</span>
+        <span>
+          Completed
+        </span>
 
       </div>
 
@@ -1167,7 +1370,9 @@ button,input{
           0
         </strong>
 
-        <span>Total Classes</span>
+        <span>
+          Total Classes
+        </span>
 
       </div>
 
@@ -1178,7 +1383,9 @@ button,input{
           0
         </strong>
 
-        <span>Remaining</span>
+        <span>
+          Remaining
+        </span>
 
       </div>
 
@@ -1197,7 +1404,9 @@ button,input{
 
     <div class="distance-row">
 
-      <span>Driving Distance</span>
+      <span>
+        🚗 Driving Distance
+      </span>
 
       <strong id="distanceValue">
         0 / 0 KM
@@ -1208,15 +1417,24 @@ button,input{
   </div>
 
 
-  <!-- EXPECTED -->
+  <!-- =====================================================
+       EXPECTED COMPLETION
+  ====================================================== -->
 
   <div class="section-title">
-    <h3>Course Schedule</h3>
+
+    <h3>
+      Course Schedule
+    </h3>
+
   </div>
+
 
   <div class="simple-card">
 
-    <span>Expected Completion</span>
+    <span>
+      Expected Completion
+    </span>
 
     <strong id="expectedDate">
       —
@@ -1225,72 +1443,22 @@ button,input{
   </div>
 
 
-  <!-- ROUTES -->
+  <!-- =====================================================
+       DRIVING PERFORMANCE
+  ====================================================== -->
 
   <div class="section-title">
 
-    <h3>Route Progress</h3>
+    <h3>
+      Driving Performance
+    </h3>
 
-    <span>Training Routes</span>
-
-  </div>
-
-  <div class="route-grid">
-
-    <div class="route-stat">
-
-      <strong id="coveredRouteCount">
-        0
-      </strong>
-
-      <span>Covered Routes</span>
-
-    </div>
-
-    <div class="route-stat">
-
-      <strong id="remainingRouteCount">
-        0
-      </strong>
-
-      <span>Still Remaining</span>
-
-    </div>
+    <span>
+      Feedback Analysis
+    </span>
 
   </div>
 
-
-  <div class="section-title">
-
-    <h3>Routes Covered</h3>
-
-    <span>Times Visited</span>
-
-  </div>
-
-  <div id="coveredRoutes"></div>
-
-
-  <div class="section-title">
-
-    <h3>Routes Remaining</h3>
-
-    <span>Not Covered</span>
-
-  </div>
-
-  <div id="remainingRoutes"></div>
-
-
-  <!-- PERFORMANCE -->
-
-  <div class="section-title">
-
-    <h3>Driving Performance</h3>
-
-    <span>Feedback Analysis</span>
-
-  </div>
 
   <div class="analysis-card">
 
@@ -1302,9 +1470,12 @@ button,input{
           0
         </strong>
 
-        <span>Positive Feedback</span>
+        <span>
+          Positive Feedback
+        </span>
 
       </div>
+
 
       <div class="analysis-stat bad">
 
@@ -1312,22 +1483,52 @@ button,input{
           0
         </strong>
 
-        <span>Need Improvement</span>
+        <span>
+          Need Improvement
+        </span>
 
       </div>
 
     </div>
+
 
     <div id="skillsContainer"></div>
 
   </div>
 
 
-  <!-- HISTORY -->
+  <!-- =====================================================
+       RECENT FEEDBACK
+  ====================================================== -->
 
   <div class="section-title">
 
-    <h3>Class History</h3>
+    <h3>
+      Recent Feedback
+    </h3>
+
+    <span>
+      Latest 5
+    </span>
+
+  </div>
+
+
+  <div
+    id="feedbackList"
+    class="feedback-list"
+  ></div>
+
+
+  <!-- =====================================================
+       CLASS HISTORY
+  ====================================================== -->
+
+  <div class="section-title">
+
+    <h3>
+      Class History
+    </h3>
 
     <span id="historyCount">
       0 Sessions
@@ -1335,27 +1536,82 @@ button,input{
 
   </div>
 
-  <div id="history" class="history"></div>
+
+  <div
+    id="history"
+    class="history"
+  ></div>
 
 
-  <!-- REFERRAL -->
+  <!-- =====================================================
+       ACHIEVEMENTS
+  ====================================================== -->
 
   <div class="section-title">
-    <h3>Referral Wallet</h3>
-  </div>
 
-  <div class="simple-card">
+    <h3>
+      Achievements
+    </h3>
 
-    <span>Total Referral Reward</span>
-
-    <strong id="referralWallet">
-      ₹0
-    </strong>
+    <span>
+      Milestones
+    </span>
 
   </div>
 
 
-  <!-- ACTIONS -->
+  <div
+    id="achievementGrid"
+    class="achievement-grid"
+  ></div>
+
+
+  <!-- =====================================================
+       REFERRAL WALLET
+  ====================================================== -->
+
+  <div class="section-title">
+
+    <h3>
+      Referral Wallet
+    </h3>
+
+  </div>
+
+
+  <div class="referral-card">
+
+    <div class="referral-left">
+
+      <span>
+        Total Reward
+      </span>
+
+      <strong id="referralWallet">
+        ₹0
+      </strong>
+
+    </div>
+
+
+    <div class="referral-count">
+
+      <strong id="referralCount">
+        0
+      </strong>
+
+      <span>
+        Referrals
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       ACTIONS
+  ====================================================== -->
 
   <div class="actions">
 
@@ -1366,12 +1622,14 @@ button,input{
       📲 SHARE PROFILE
     </button>
 
+
     <button
       class="action-btn"
       onclick="contactHelp()"
     >
       💬 GET HELP
     </button>
+
 
     <button
       id="certificateBtn"
@@ -1387,6 +1645,7 @@ button,input{
   <div class="footer">
 
     ABHINAASH A1 DRIVING ACADEMY
+
     <br>
 
     Drive Safe • Drive Smart • Drive Confidently
@@ -1396,7 +1655,9 @@ button,input{
 </div>
 
 
-<!-- CERTIFICATE -->
+<!-- =======================================================
+     CERTIFICATE
+======================================================= -->
 
 <div
   id="certificate"
@@ -1457,22 +1718,24 @@ button,input{
 
 <script type="module">
 
+/* =========================================================
+   FIREBASE
+========================================================= */
+
 import {
   initializeApp
-} from
+}
+from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
   getFirestore,
   doc,
   onSnapshot
-} from
+}
+from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-
-/* ==========================================
-   FIREBASE
-========================================== */
 
 const firebaseConfig = {
 
@@ -1511,45 +1774,22 @@ let currentPhone = "";
 let currentData = null;
 
 
-const $ = id =>
-document.getElementById(id);
+const $ =
+id => document.getElementById(id);
 
 
-/* ==========================================
-   STANDARD ROUTES
-========================================== */
-
-const STANDARD_ROUTES = [
-
-  "Bhanjpur",
-
-  "Deuli Road",
-
-  "Kuchei Road",
-
-  "Medical College",
-
-  "Lal Bazar Road",
-
-  "Station Bazar",
-
-  "Baleswar Route"
-
-];
-
-
-/* ==========================================
+/* =========================================================
    HELPERS
-========================================== */
+========================================================= */
 
 function escapeHtml(value){
 
   return String(value ?? "")
-  .replace(/&/g,"&amp;")
-  .replace(/</g,"&lt;")
-  .replace(/>/g,"&gt;")
-  .replace(/"/g,"&quot;")
-  .replace(/'/g,"&#039;");
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
 }
 
@@ -1557,49 +1797,33 @@ function escapeHtml(value){
 function normalizeRoute(route){
 
   return String(route || "")
-  .trim()
-  .replace(/\s+/g," ");
+    .trim()
+    .replace(/\s+/g," ");
 
 }
 
 
-function routeKey(route){
-
-  return normalizeRoute(route)
-  .toLowerCase();
-
-}
-
-
-/* ==========================================
+/* =========================================================
    FEEDBACK TYPE
-========================================== */
+========================================================= */
 
 function getFeedbackType(remark){
 
   const text =
-  String(remark || "")
-  .toLowerCase();
+    String(remark || "")
+      .toLowerCase();
 
 
   const negativeWords = [
 
     "needs improvement",
-
     "need improvement",
-
     "improvement",
-
     "bad",
-
     "poor",
-
     "weak",
-
     "not good",
-
     "mistake",
-
     "practice more"
 
   ];
@@ -1608,15 +1832,10 @@ function getFeedbackType(remark){
   const positiveWords = [
 
     "good",
-
     "excellent",
-
     "great",
-
     "perfect",
-
     "well",
-
     "nice"
 
   ];
@@ -1649,44 +1868,41 @@ function getFeedbackType(remark){
 }
 
 
-/* ==========================================
+/* =========================================================
    PARSE ATTENDANCE LOG
-========================================== */
+
+   Example:
+
+   02 Oct | 04:35 PM —
+   Route: Medical College |
+   Distance: 5 KM |
+   Remark: 👍 Good Braking
+========================================================= */
 
 function parseLog(log){
 
   const text =
-  String(log || "");
-
-
-  /*
-    Format:
-
-    DD Mon | HH:MM AM/PM —
-    Route: ... |
-    Distance: 5 KM |
-    Remark: ...
-  */
+    String(log || "");
 
 
   const beforeDash =
-  text.split(" — ")[0] || "";
+    text.split(" — ")[0] || "";
 
 
-  const dateTimeParts =
-  beforeDash.split(" | ");
+  const dateTime =
+    beforeDash.split(" | ");
 
 
   const date =
-  dateTimeParts[0]
-  ? dateTimeParts[0].trim()
-  : "";
+    dateTime[0]
+      ? dateTime[0].trim()
+      : "";
 
 
   const time =
-  dateTimeParts[1]
-  ? dateTimeParts[1].trim()
-  : "";
+    dateTime[1]
+      ? dateTime[1].trim()
+      : "";
 
 
   /* ROUTE */
@@ -1695,15 +1911,15 @@ function parseLog(log){
 
 
   const routeMatch =
-  text.match(
-    /Route:\s*([^|]+)/i
-  );
+    text.match(
+      /Route:\s*([^|]+)/i
+    );
 
 
   if(routeMatch){
 
     route =
-    routeMatch[1].trim();
+      routeMatch[1].trim();
 
   }
 
@@ -1714,28 +1930,28 @@ function parseLog(log){
 
 
   const distanceMatch =
-  text.match(
-    /Distance:\s*(\d+(?:\.\d+)?)\s*KM/i
-  );
+    text.match(
+      /Distance:\s*(\d+(?:\.\d+)?)\s*KM/i
+    );
 
 
   if(distanceMatch){
 
     distance =
-    distanceMatch[1] + " KM";
+      distanceMatch[1] + " KM";
 
   }else{
 
     const oldDistance =
-    text.match(
-      /(\d+(?:\.\d+)?)\s*KM/i
-    );
+      text.match(
+        /(\d+(?:\.\d+)?)\s*KM/i
+      );
 
 
     distance =
-    oldDistance
-    ? oldDistance[1] + " KM"
-    : "5 KM";
+      oldDistance
+        ? oldDistance[1] + " KM"
+        : "5 KM";
 
   }
 
@@ -1746,15 +1962,15 @@ function parseLog(log){
 
 
   const remarkMatch =
-  text.match(
-    /Remark:\s*(.+)$/i
-  );
+    text.match(
+      /Remark:\s*(.+)$/i
+    );
 
 
   if(remarkMatch){
 
     remark =
-    remarkMatch[1].trim();
+      remarkMatch[1].trim();
 
   }
 
@@ -1762,59 +1978,56 @@ function parseLog(log){
   return {
 
     date,
-
     time,
-
     route,
-
     distance,
-
     remark,
 
     feedbackType:
-    getFeedbackType(remark)
+      getFeedbackType(remark)
 
   };
 
 }
 
 
-/* ==========================================
+/* =========================================================
    LOGIN
-========================================== */
+========================================================= */
 
 $("phoneInput")
-.addEventListener(
-"keydown",
-event => {
+  .addEventListener(
+    "keydown",
+    event => {
 
-  if(event.key === "Enter"){
+      if(event.key === "Enter"){
 
-    loadProfile();
+        loadProfile();
 
-  }
+      }
 
-});
+    }
+  );
 
 
 window.loadProfile =
 function(){
 
   const phone =
-  $("phoneInput")
-  .value
-  .trim();
+    $("phoneInput")
+      .value
+      .trim();
 
 
   $("loginError")
-  .textContent = "";
+    .textContent = "";
 
 
   if(!/^\d{10}$/.test(phone)){
 
     $("loginError")
-    .textContent =
-    "Please enter a valid 10 digit mobile number.";
+      .textContent =
+      "Please enter a valid 10 digit mobile number.";
 
     return;
 
@@ -1825,227 +2038,205 @@ function(){
 
     unsubscribeProfile();
 
+    unsubscribeProfile =
+      null;
+
   }
 
 
   currentPhone =
-  phone;
+    phone;
 
 
   const studentRef =
-  doc(
-    db,
-    "studentData",
-    phone
-  );
+    doc(
+      db,
+      "studentData",
+      phone
+    );
 
 
   unsubscribeProfile =
-  onSnapshot(
+    onSnapshot(
 
-    studentRef,
+      studentRef,
 
-    snapshot => {
+      snapshot => {
 
-      if(!snapshot.exists()){
+        if(!snapshot.exists()){
+
+          $("loginError")
+            .textContent =
+            "Student profile not found.";
+
+          return;
+
+        }
+
+
+        currentData =
+          snapshot.data();
+
+
+        $("loginScreen")
+          .classList
+          .add("hidden");
+
+
+        $("dashboard")
+          .classList
+          .remove("hidden");
+
+
+        renderProfile(
+          currentData
+        );
+
+      },
+
+      error => {
+
+        console.error(error);
 
         $("loginError")
-        .textContent =
-        "Student profile not found.";
-
-        return;
+          .textContent =
+          "Unable to load profile. Please try again.";
 
       }
 
-
-      currentData =
-      snapshot.data();
-
-
-      $("loginScreen")
-      .classList
-      .add("hidden");
-
-
-      $("dashboard")
-      .classList
-      .remove("hidden");
-
-
-      renderProfile(
-        currentData
-      );
-
-    },
-
-    error => {
-
-      console.error(error);
-
-      $("loginError")
-      .textContent =
-      "Unable to load profile.";
-
-    }
-
-  );
+    );
 
 };
 
 
-/* ==========================================
+/* =========================================================
    MAIN RENDER
-========================================== */
+========================================================= */
 
 function renderProfile(data){
 
   const logs =
-  Array.isArray(
-    data.attendanceLogs
-  )
-  ? data.attendanceLogs
-  : [];
+    Array.isArray(data.attendanceLogs)
+      ? data.attendanceLogs
+      : [];
 
 
   const done =
-  Math.max(
-
-    logs.length,
-
-    Number(
-      data.remaining || 0
-    ),
-
-    0
-
-  );
+    Math.max(
+      logs.length,
+      Number(data.remaining || 0),
+      0
+    );
 
 
   const total =
-  Math.max(
-
-    Number(
-      data.totalClasses || 0
-    ),
-
-    1
-
-  );
+    Math.max(
+      Number(data.totalClasses || 0),
+      1
+    );
 
 
   const remaining =
-  Math.max(
-    total - done,
-    0
-  );
+    Math.max(
+      total - done,
+      0
+    );
 
 
   const percentage =
-  Math.min(
-
-    Math.round(
-      (done / total) * 100
-    ),
-
-    100
-
-  );
+    Math.min(
+      Math.round(
+        (done / total) * 100
+      ),
+      100
+    );
 
 
   const name =
-  data.name || "Student";
+    data.name || "Student";
 
 
   /* PROFILE */
 
   $("studentName")
-  .textContent =
-  name;
+    .textContent =
+    name;
 
 
   $("studentPhone")
-  .textContent =
-  currentPhone;
+    .textContent =
+    currentPhone;
 
 
   $("avatar")
-  .textContent =
-  name.charAt(0)
-  .toUpperCase();
+    .textContent =
+    name
+      .charAt(0)
+      .toUpperCase();
 
 
   const classType =
-  data.classType === "Personal"
-  ? "Personal"
-  : "Group";
+    data.classType === "Personal"
+      ? "Personal"
+      : "Group";
 
 
   $("classType")
-  .textContent =
-
-  classType === "Personal"
-
-  ? "👤 PERSONAL CLASS"
-
-  : "👥 GROUP CLASS";
+    .textContent =
+      classType === "Personal"
+        ? "👤 PERSONAL CLASS"
+        : "👥 GROUP CLASS";
 
 
   /* PROGRESS */
 
   $("doneClasses")
-  .textContent =
-  done;
+    .textContent =
+    done;
 
 
   $("totalClasses")
-  .textContent =
-  total;
+    .textContent =
+    total;
 
 
   $("remainingClasses")
-  .textContent =
-  remaining;
+    .textContent =
+    remaining;
 
 
   $("progressPercent")
-  .textContent =
-  percentage + "% COMPLETE";
+    .textContent =
+    percentage + "% COMPLETE";
 
 
   $("classBar")
-  .style.width =
-  percentage + "%";
+    .style
+    .width =
+    percentage + "%";
 
 
   /* DISTANCE */
 
   const distance =
-  calculateDistance(
-    logs,
-    done,
-    total
-  );
+    calculateDistance(
+      logs,
+      done,
+      total
+    );
 
 
   $("distanceValue")
-  .textContent =
+    .textContent =
+    distance.driven +
+    " / " +
+    distance.target +
+    " KM";
 
-  distance.driven +
-  " / " +
-  distance.target +
-  " KM";
 
-
-  /* LATEST SESSION */
+  /* LATEST */
 
   renderLatestSession(
-    logs
-  );
-
-
-  /* ROUTES */
-
-  renderRoutes(
     logs
   );
 
@@ -2053,12 +2244,19 @@ function renderProfile(data){
   /* PERFORMANCE */
 
   const feedback =
-  analyzeFeedback(
-    logs
-  );
+    analyzeFeedback(
+      logs
+    );
 
 
   renderPerformance(
+    feedback
+  );
+
+
+  /* RECENT FEEDBACK */
+
+  renderRecentFeedback(
     feedback
   );
 
@@ -2073,32 +2271,42 @@ function renderProfile(data){
   /* EXPECTED */
 
   $("expectedDate")
-  .textContent =
-  calculateExpectedCompletion(
-    logs,
-    total
+    .textContent =
+    calculateExpectedCompletion(
+      logs,
+      total
+    );
+
+
+  /* ACHIEVEMENTS */
+
+  renderAchievements(
+    done,
+    total,
+    feedback,
+    distance
   );
 
 
-  /* REFERRAL */
+  /* REFERRALS */
 
   const referrals =
-  Number(
-    data.totalRefers || 0
-  );
+    Number(
+      data.totalRefers || 0
+    );
 
 
   $("referralWallet")
-  .textContent =
+    .textContent =
+    "₹" +
+    (
+      referrals * 500
+    ).toLocaleString("en-IN");
 
-  "₹" +
 
-  (
-    referrals * 500
-  )
-  .toLocaleString(
-    "en-IN"
-  );
+  $("referralCount")
+    .textContent =
+    referrals;
 
 
   /* CERTIFICATE */
@@ -2106,56 +2314,56 @@ function renderProfile(data){
   if(done >= total){
 
     $("certificateBtn")
-    .classList
-    .remove("hidden");
+      .classList
+      .remove("hidden");
 
 
     $("certName")
-    .textContent =
-    name;
+      .textContent =
+      name;
 
   }else{
 
     $("certificateBtn")
-    .classList
-    .add("hidden");
+      .classList
+      .add("hidden");
 
   }
 
 }
 
 
-/* ==========================================
-   ⭐ LATEST SESSION CARD
-========================================== */
+/* =========================================================
+   LATEST SESSION
+========================================================= */
 
 function renderLatestSession(logs){
 
   if(!logs.length){
 
     $("latestSessionNumber")
-    .textContent =
-    "NO SESSION";
+      .textContent =
+      "NO SESSION";
 
 
     $("latestDate")
-    .textContent =
-    "Training not started";
+      .textContent =
+      "Training not started";
 
 
     $("latestTime")
-    .textContent =
-    "—";
+      .textContent =
+      "—";
 
 
     $("latestRoute")
-    .textContent =
-    "No route yet";
+      .textContent =
+      "No route recorded";
 
 
     $("latestDistance")
-    .textContent =
-    "0 KM";
+      .textContent =
+      "0 KM";
 
 
     setLatestFeedback(
@@ -2169,75 +2377,62 @@ function renderLatestSession(logs){
   }
 
 
-  /*
-    Attendance logs are stored
-    chronologically.
-
-    Last item = latest attendance.
-  */
-
   const latestLog =
-  logs[
-    logs.length - 1
-  ];
+    logs[
+      logs.length - 1
+    ];
 
 
   const latest =
-  parseLog(
-    latestLog
-  );
+    parseLog(
+      latestLog
+    );
 
 
   $("latestSessionNumber")
-  .textContent =
-
-  "SESSION #" +
-  logs.length;
+    .textContent =
+    "SESSION #" +
+    logs.length;
 
 
   $("latestDate")
-  .textContent =
-
-  latest.date ||
-  "Latest Attendance";
+    .textContent =
+    latest.date ||
+    "Latest Attendance";
 
 
   $("latestTime")
-  .innerHTML =
-
-  formatTimeHighlight(
-    latest.time
-  );
+    .innerHTML =
+    formatTime(
+      latest.time
+    );
 
 
   $("latestRoute")
-  .textContent =
-
-  latest.route ||
-  "Route not recorded";
+    .textContent =
+    latest.route ||
+    "Route not recorded";
 
 
   $("latestDistance")
-  .textContent =
-
-  latest.distance ||
-  "5 KM";
+    .textContent =
+    latest.distance ||
+    "5 KM";
 
 
   setLatestFeedback(
-
     latest.remark,
-
     latest.feedbackType
-
   );
 
 }
 
 
-/* TIME HIGHLIGHT */
+/* =========================================================
+   TIME FORMAT
+========================================================= */
 
-function formatTimeHighlight(time){
+function formatTime(time){
 
   if(!time){
 
@@ -2247,10 +2442,10 @@ function formatTimeHighlight(time){
 
 
   const match =
-  String(time)
-  .match(
-    /^(.+?)\s+(AM|PM)$/i
-  );
+    String(time)
+      .match(
+        /^(.+?)\s+(AM|PM)$/i
+      );
 
 
   if(!match){
@@ -2261,25 +2456,20 @@ function formatTimeHighlight(time){
 
 
   return (
-
+    escapeHtml(match[1]) +
+    " <span>" +
     escapeHtml(
-      match[1]
-    )
-
-    +
-
-    ` <span>${
-      escapeHtml(
-        match[2].toUpperCase()
-      )
-    }</span>`
-
+      match[2].toUpperCase()
+    ) +
+    "</span>"
   );
 
 }
 
 
-/* LATEST FEEDBACK */
+/* =========================================================
+   LATEST FEEDBACK
+========================================================= */
 
 function setLatestFeedback(
   remark,
@@ -2287,69 +2477,65 @@ function setLatestFeedback(
 ){
 
   const box =
-  $("latestFeedback");
+    $("latestFeedback");
 
 
   box.className =
-  "latest-feedback " +
-  type;
+    "latest-feedback " +
+    type;
 
 
   if(type === "good"){
 
     $("latestFeedbackIcon")
-    .textContent =
-    "👍";
+      .textContent =
+      "👍";
 
 
     $("latestFeedbackTitle")
-    .textContent =
-    "Positive Feedback";
+      .textContent =
+      "Positive Feedback";
 
   }
-
 
   else if(type === "bad"){
 
     $("latestFeedbackIcon")
-    .textContent =
-    "⚠️";
+      .textContent =
+      "⚠️";
 
 
     $("latestFeedbackTitle")
-    .textContent =
-    "Needs Improvement";
+      .textContent =
+      "Needs Improvement";
 
   }
-
 
   else{
 
     $("latestFeedbackIcon")
-    .textContent =
-    "📝";
+      .textContent =
+      "📝";
 
 
     $("latestFeedbackTitle")
-    .textContent =
-    "Instructor Feedback";
+      .textContent =
+      "Instructor Feedback";
 
   }
 
 
   $("latestFeedbackText")
-  .textContent =
-
-  remark ||
-
-  "No feedback recorded for this session.";
+    .textContent =
+    remark ||
+    "No feedback recorded for this session.";
 
 }
 
 
-/* ==========================================
+/* =========================================================
    DISTANCE
-========================================== */
+========================================================= */
 
 function calculateDistance(
   logs,
@@ -2360,35 +2546,42 @@ function calculateDistance(
   let driven = 0;
 
 
-  logs.forEach(log => {
+  logs.forEach(
+    log => {
 
-    const parsed =
-    parseLog(log);
-
-
-    const match =
-    parsed.distance
-    .match(
-      /(\d+(?:\.\d+)?)/
-    );
+      const parsed =
+        parseLog(log);
 
 
-    driven +=
-    match
-    ? Number(match[1])
-    : 5;
+      const match =
+        parsed.distance
+          .match(
+            /(\d+(?:\.\d+)?)/
+          );
 
-  });
 
+      driven +=
+        match
+          ? Number(match[1])
+          : 5;
+
+    }
+  );
+
+
+  /*
+    If class count is greater
+    than attendance log count,
+    remaining sessions use 5 KM.
+  */
 
   if(done > logs.length){
 
     driven +=
-
-    (
-      done -
-      logs.length
-    ) * 5;
+      (
+        done -
+        logs.length
+      ) * 5;
 
   }
 
@@ -2396,257 +2589,21 @@ function calculateDistance(
   return {
 
     driven:
-    Number(
-      driven.toFixed(1)
-    ),
+      Number(
+        driven.toFixed(1)
+      ),
 
     target:
-    total * 5
+      total * 5
 
   };
 
 }
 
 
-/* ==========================================
-   ROUTES
-========================================== */
-
-function renderRoutes(logs){
-
-  const routeMap =
-  new Map();
-
-
-  logs.forEach(log => {
-
-    const parsed =
-    parseLog(log);
-
-
-    const route =
-    normalizeRoute(
-      parsed.route
-    );
-
-
-    if(!route){
-      return;
-    }
-
-
-    const key =
-    routeKey(route);
-
-
-    if(
-      !routeMap.has(key)
-    ){
-
-      routeMap.set(
-        key,
-        {
-          name:route,
-          count:0
-        }
-      );
-
-    }
-
-
-    routeMap.get(key)
-    .count++;
-
-  });
-
-
-  const covered =
-  Array.from(
-    routeMap.values()
-  )
-  .sort(
-    (a,b) =>
-    b.count - a.count
-  );
-
-
-  const remaining =
-  STANDARD_ROUTES
-  .filter(
-    route =>
-    !routeMap.has(
-      routeKey(route)
-    )
-  );
-
-
-  $("coveredRouteCount")
-  .textContent =
-  covered.length;
-
-
-  $("remainingRouteCount")
-  .textContent =
-  remaining.length;
-
-
-  /* COVERED */
-
-  const coveredBox =
-  $("coveredRoutes");
-
-
-  coveredBox.innerHTML = "";
-
-
-  if(!covered.length){
-
-    coveredBox.innerHTML =
-    `<div class="empty">
-      No route covered yet.
-    </div>`;
-
-  }else{
-
-    const list =
-    document.createElement(
-      "div"
-    );
-
-
-    list.className =
-    "route-list";
-
-
-    covered.forEach(route => {
-
-      const item =
-      document.createElement(
-        "div"
-      );
-
-
-      item.className =
-      "route-item";
-
-
-      item.innerHTML = `
-
-        <div class="route-name">
-
-          📍
-          ${escapeHtml(
-            route.name
-          )}
-
-          <small>
-            Route covered
-          </small>
-
-        </div>
-
-        <div class="route-count">
-          ${route.count}×
-        </div>
-
-      `;
-
-
-      list.appendChild(
-        item
-      );
-
-    });
-
-
-    coveredBox
-    .appendChild(
-      list
-    );
-
-  }
-
-
-  /* REMAINING */
-
-  const remainingBox =
-  $("remainingRoutes");
-
-
-  remainingBox.innerHTML = "";
-
-
-  if(!remaining.length){
-
-    remainingBox.innerHTML =
-    `<div class="empty">
-      🎉 All standard routes covered.
-    </div>`;
-
-  }else{
-
-    const list =
-    document.createElement(
-      "div"
-    );
-
-
-    list.className =
-    "route-list";
-
-
-    remaining.forEach(route => {
-
-      const item =
-      document.createElement(
-        "div"
-      );
-
-
-      item.className =
-      "route-item remaining";
-
-
-      item.innerHTML = `
-
-        <div class="route-name">
-
-          📍
-          ${escapeHtml(route)}
-
-          <small>
-            Not covered yet
-          </small>
-
-        </div>
-
-        <div class="route-count">
-          —
-        </div>
-
-      `;
-
-
-      list.appendChild(
-        item
-      );
-
-    });
-
-
-    remainingBox
-    .appendChild(
-      list
-    );
-
-  }
-
-}
-
-
-/* ==========================================
+/* =========================================================
    FEEDBACK ANALYSIS
-========================================== */
+========================================================= */
 
 function analyzeFeedback(logs){
 
@@ -2655,6 +2612,10 @@ function analyzeFeedback(logs){
     good:0,
 
     bad:0,
+
+    neutral:0,
+
+    feedback:[],
 
     skills:{
 
@@ -2698,148 +2659,177 @@ function analyzeFeedback(logs){
   };
 
 
-  logs.forEach(log => {
+  logs.forEach(
+    log => {
 
-    const parsed =
-    parseLog(log);
-
-
-    if(!parsed.remark){
-      return;
-    }
+      const parsed =
+        parseLog(log);
 
 
-    const type =
-    parsed.feedbackType;
+      if(!parsed.remark){
 
-
-    const text =
-    parsed.remark
-    .toLowerCase();
-
-
-    if(type === "good"){
-
-      result.good++;
-
-    }
-
-
-    if(type === "bad"){
-
-      result.bad++;
-
-    }
-
-
-    const mapping = [
-
-      [
-        "Driving",
-        [
-          "driving",
-          "drive"
-        ]
-      ],
-
-      [
-        "Turning",
-        [
-          "turning",
-          "turn"
-        ]
-      ],
-
-      [
-        "Braking",
-        [
-          "braking",
-          "brake"
-        ]
-      ],
-
-      [
-        "Clutch",
-        [
-          "clutch"
-        ]
-      ],
-
-      [
-        "Traffic Control",
-        [
-          "traffic"
-        ]
-      ],
-
-      [
-        "Vehicle Control",
-        [
-          "vehicle control"
-        ]
-      ],
-
-      [
-        "Parking",
-        [
-          "parking",
-          "park"
-        ]
-      ]
-
-    ];
-
-
-    let matched = false;
-
-
-    mapping.forEach(
-    ([skill,words]) => {
-
-      if(
-        words.some(
-          word =>
-          text.includes(word)
-        )
-      ){
-
-        matched = true;
-
-
-        if(type === "good"){
-
-          result
-          .skills[skill]
-          .good++;
-
-        }
-
-
-        if(type === "bad"){
-
-          result
-          .skills[skill]
-          .bad++;
-
-        }
+        return;
 
       }
 
-    });
+
+      const type =
+        parsed.feedbackType;
 
 
-    if(
-      !matched &&
-      type !== "neutral"
-    ){
+      if(type === "good"){
 
-      result
-      .skills["Driving"]
-      [type]++;
+        result.good++;
+
+      }
+
+      else if(type === "bad"){
+
+        result.bad++;
+
+      }
+
+      else{
+
+        result.neutral++;
+
+      }
+
+
+      result.feedback.push({
+
+        text:
+          parsed.remark,
+
+        type:
+          type,
+
+        date:
+          parsed.date,
+
+        time:
+          parsed.time,
+
+        route:
+          parsed.route
+
+      });
+
+
+      const text =
+        parsed.remark
+          .toLowerCase();
+
+
+      const mapping = [
+
+        [
+          "Driving",
+          [
+            "driving",
+            "drive"
+          ]
+        ],
+
+        [
+          "Turning",
+          [
+            "turning",
+            "turn"
+          ]
+        ],
+
+        [
+          "Braking",
+          [
+            "braking",
+            "brake"
+          ]
+        ],
+
+        [
+          "Clutch",
+          [
+            "clutch"
+          ]
+        ],
+
+        [
+          "Traffic Control",
+          [
+            "traffic"
+          ]
+        ],
+
+        [
+          "Vehicle Control",
+          [
+            "vehicle control"
+          ]
+        ],
+
+        [
+          "Parking",
+          [
+            "parking",
+            "park"
+          ]
+        ]
+
+      ];
+
+
+      let matched = false;
+
+
+      mapping.forEach(
+        ([skill,words]) => {
+
+          if(
+            words.some(
+              word =>
+                text.includes(word)
+            )
+          ){
+
+            matched = true;
+
+
+            if(type === "good"){
+
+              result.skills[skill].good++;
+
+            }
+
+
+            if(type === "bad"){
+
+              result.skills[skill].bad++;
+
+            }
+
+          }
+
+        }
+      );
+
+
+      if(
+        !matched &&
+        (
+          type === "good" ||
+          type === "bad"
+        )
+      ){
+
+        result
+          .skills
+          .Driving[type]++;
+
+      }
 
     }
-
-  });
+  );
 
 
   return result;
@@ -2847,24 +2837,24 @@ function analyzeFeedback(logs){
 }
 
 
-/* ==========================================
-   PERFORMANCE RENDER
-========================================== */
+/* =========================================================
+   PERFORMANCE
+========================================================= */
 
 function renderPerformance(data){
 
   $("goodCount")
-  .textContent =
-  data.good;
+    .textContent =
+    data.good;
 
 
   $("badCount")
-  .textContent =
-  data.bad;
+    .textContent =
+    data.bad;
 
 
   const box =
-  $("skillsContainer");
+    $("skillsContainer");
 
 
   box.innerHTML = "";
@@ -2874,72 +2864,75 @@ function renderPerformance(data){
     data.skills
   )
   .forEach(
-  ([skill,value]) => {
+    ([skill,value]) => {
 
-    const total =
-    value.good +
-    value.bad;
+      const total =
+        value.good +
+        value.bad;
 
 
-    if(!total){
-      return;
+      if(!total){
+
+        return;
+
+      }
+
+
+      const score =
+        Math.round(
+          (
+            value.good /
+            total
+          ) * 100
+        );
+
+
+      const row =
+        document.createElement(
+          "div"
+        );
+
+
+      row.className =
+        "skill";
+
+
+      row.innerHTML = `
+
+        <div class="skill-head">
+
+          <span>
+            ${escapeHtml(skill)}
+          </span>
+
+          <strong>
+            ${score}% Positive
+          </strong>
+
+        </div>
+
+        <div class="skill-bar">
+
+          <div
+            class="skill-fill ${
+              score >= 60
+                ? "good"
+                : "bad"
+            }"
+            style="width:${score}%"
+          ></div>
+
+        </div>
+
+      `;
+
+
+      box.appendChild(
+        row
+      );
+
     }
-
-
-    const score =
-    Math.round(
-      (
-        value.good /
-        total
-      ) * 100
-    );
-
-
-    const row =
-    document.createElement(
-      "div"
-    );
-
-
-    row.className =
-    "skill";
-
-
-    row.innerHTML = `
-
-      <div class="skill-head">
-
-        <span>
-          ${escapeHtml(skill)}
-        </span>
-
-        <strong>
-          ${score}% Positive
-        </strong>
-
-      </div>
-
-      <div class="skill-bar">
-
-        <div
-          class="skill-fill ${
-            score >= 60
-            ? "good"
-            : "bad"
-          }"
-          style="width:${score}%"
-        ></div>
-
-      </div>
-
-    `;
-
-
-    box.appendChild(
-      row
-    );
-
-  });
+  );
 
 
   if(!box.children.length){
@@ -2947,11 +2940,8 @@ function renderPerformance(data){
     box.innerHTML = `
 
       <div class="empty">
-
-        Performance analysis will
-        appear after instructor
-        feedback is recorded.
-
+        Performance analysis will appear
+        after instructor feedback is recorded.
       </div>
 
     `;
@@ -2961,21 +2951,154 @@ function renderPerformance(data){
 }
 
 
-/* ==========================================
-   HISTORY
-========================================== */
+/* =========================================================
+   RECENT FEEDBACK
+========================================================= */
+
+function renderRecentFeedback(data){
+
+  const box =
+    $("feedbackList");
+
+
+  box.innerHTML = "";
+
+
+  if(!data.feedback.length){
+
+    box.innerHTML = `
+      <div class="empty">
+        No feedback recorded yet.
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  const latest =
+    [...data.feedback]
+      .reverse()
+      .slice(0,5);
+
+
+  latest.forEach(
+    item => {
+
+      const card =
+        document.createElement(
+          "div"
+        );
+
+
+      card.className =
+        "feedback-item " +
+        item.type;
+
+
+      let title =
+        "Instructor Feedback";
+
+
+      let icon =
+        "📝";
+
+
+      if(item.type === "good"){
+
+        title =
+          "Good Performance";
+
+        icon =
+          "👍";
+
+      }
+
+      else if(item.type === "bad"){
+
+        title =
+          "Needs Improvement";
+
+        icon =
+          "⚠️";
+
+      }
+
+
+      card.innerHTML = `
+
+        <div class="feedback-item-top">
+
+          <div class="feedback-item-title">
+
+            ${icon}
+            ${title}
+
+          </div>
+
+          <div class="feedback-item-date">
+
+            ${escapeHtml(
+              item.date || ""
+            )}
+
+          </div>
+
+        </div>
+
+
+        <div class="feedback-item-text">
+
+          ${escapeHtml(
+            item.text
+          )}
+
+        </div>
+
+
+        ${
+          item.route
+          ? `
+            <div class="feedback-item-route">
+
+              📍
+              ${escapeHtml(
+                item.route
+              )}
+
+            </div>
+          `
+          : ""
+        }
+
+      `;
+
+
+      box.appendChild(
+        card
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   CLASS HISTORY
+========================================================= */
 
 function renderHistory(logs){
 
   $("historyCount")
-  .textContent =
-
-  logs.length +
-  " SESSIONS";
+    .textContent =
+    logs.length +
+    " SESSIONS";
 
 
   const box =
-  $("history");
+    $("history");
 
 
   box.innerHTML = "";
@@ -2983,10 +3106,11 @@ function renderHistory(logs){
 
   if(!logs.length){
 
-    box.innerHTML =
-    `<div class="empty">
-      No class history yet.
-    </div>`;
+    box.innerHTML = `
+      <div class="empty">
+        No class history yet.
+      </div>
+    `;
 
     return;
 
@@ -2994,125 +3118,264 @@ function renderHistory(logs){
 
 
   [...logs]
-  .reverse()
-  .forEach(
-  (log,index) => {
+    .reverse()
+    .forEach(
+      (log,index) => {
 
-    const data =
-    parseLog(log);
-
-
-    const sessionNumber =
-    logs.length -
-    index;
+        const data =
+          parseLog(log);
 
 
-    const card =
-    document.createElement(
-      "div"
-    );
+        const sessionNumber =
+          logs.length -
+          index;
 
 
-    card.className =
-    "history-card";
+        const card =
+          document.createElement(
+            "div"
+          );
 
 
-    let feedbackHTML = "";
+        card.className =
+          "history-card";
 
 
-    if(data.remark){
-
-      feedbackHTML = `
-
-        <div
-          class="history-feedback ${
-            data.feedbackType
-          }"
-        >
-
-          ${
-            data.feedbackType === "good"
-            ? "👍"
-            :
-            data.feedbackType === "bad"
-            ? "⚠️"
-            : "📝"
-          }
-
-          ${escapeHtml(
-            data.remark
-          )}
-
-        </div>
-
-      `;
-
-    }
+        let feedbackHTML = "";
 
 
-    card.innerHTML = `
+        if(data.remark){
 
-      <div class="history-top">
+          feedbackHTML = `
 
-        <strong>
-          Session #${sessionNumber}
-        </strong>
+            <div
+              class="history-feedback ${
+                data.feedbackType
+              }"
+            >
 
-        <span>
-          ${escapeHtml(data.date)}
-          ${
-            data.time
-            ? " • " +
-              escapeHtml(data.time)
-            : ""
-          }
-        </span>
+              ${
+                data.feedbackType === "good"
+                  ? "👍"
+                  : data.feedbackType === "bad"
+                    ? "⚠️"
+                    : "📝"
+              }
 
-      </div>
-
-
-      <div class="history-details">
-
-        ${
-          data.route
-          ? `
-            <div class="chip">
-              📍
               ${escapeHtml(
-                data.route
+                data.remark
               )}
+
             </div>
-          `
-          : ""
+
+          `;
+
         }
 
-        <div class="chip">
-          🚗
-          ${escapeHtml(
-            data.distance
-          )}
-        </div>
 
-      </div>
+        card.innerHTML = `
+
+          <div class="history-top">
+
+            <strong>
+              Session #${sessionNumber}
+            </strong>
+
+            <span>
+
+              ${escapeHtml(
+                data.date
+              )}
+
+              ${
+                data.time
+                ? " • " +
+                  escapeHtml(
+                    data.time
+                  )
+                : ""
+              }
+
+            </span>
+
+          </div>
 
 
-      ${feedbackHTML}
+          <div class="history-details">
 
-    `;
+            ${
+              data.route
+              ? `
+                <div class="chip">
+
+                  📍
+                  ${escapeHtml(
+                    data.route
+                  )}
+
+                </div>
+              `
+              : ""
+            }
 
 
-    box.appendChild(
-      card
+            <div class="chip">
+
+              🚗
+              ${escapeHtml(
+                data.distance
+              )}
+
+            </div>
+
+          </div>
+
+
+          ${feedbackHTML}
+
+        `;
+
+
+        box.appendChild(
+          card
+        );
+
+      }
     );
-
-  });
 
 }
 
 
-/* ==========================================
+/* =========================================================
+   ACHIEVEMENTS
+========================================================= */
+
+function renderAchievements(
+  done,
+  total,
+  feedback,
+  distance
+){
+
+  const box =
+    $("achievementGrid");
+
+
+  box.innerHTML = "";
+
+
+  const achievements = [
+
+    {
+      icon:"🏁",
+      title:"First Class",
+      desc:"Complete first class",
+      unlocked:
+        done >= 1
+    },
+
+    {
+      icon:"🚗",
+      title:"50 KM",
+      desc:"Drive 50 KM",
+      unlocked:
+        distance.driven >= 50
+    },
+
+    {
+      icon:"🔥",
+      title:"10 Classes",
+      desc:"Complete 10 classes",
+      unlocked:
+        done >= 10
+    },
+
+    {
+      icon:"⭐",
+      title:"5 Positives",
+      desc:"Get 5 positive feedbacks",
+      unlocked:
+        feedback.good >= 5
+    },
+
+    {
+      icon:"🏆",
+      title:"Halfway",
+      desc:"Complete 50% training",
+      unlocked:
+        total > 0 &&
+        done >= Math.ceil(total / 2)
+    },
+
+    {
+      icon:"🎓",
+      title:"Graduate",
+      desc:"Complete course",
+      unlocked:
+        done >= total
+    }
+
+  ];
+
+
+  achievements.forEach(
+    achievement => {
+
+      const card =
+        document.createElement(
+          "div"
+        );
+
+
+      card.className =
+        "achievement" +
+        (
+          achievement.unlocked
+            ? " unlocked"
+            : ""
+        );
+
+
+      card.innerHTML = `
+
+        <div class="achievement-icon">
+
+          ${achievement.icon}
+
+        </div>
+
+        <strong>
+
+          ${escapeHtml(
+            achievement.title
+          )}
+
+        </strong>
+
+        <small>
+
+          ${escapeHtml(
+            achievement.desc
+          )}
+
+        </small>
+
+      `;
+
+
+      box.appendChild(
+        card
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
    EXPECTED COMPLETION
-========================================== */
+========================================================= */
 
 function calculateExpectedCompletion(
   logs,
@@ -3127,9 +3390,9 @@ function calculateExpectedCompletion(
 
 
   const first =
-  parseLog(
-    logs[0]
-  );
+    parseLog(
+      logs[0]
+    );
 
 
   if(!first.date){
@@ -3158,9 +3421,9 @@ function calculateExpectedCompletion(
 
 
   const match =
-  first.date.match(
-    /(\d{1,2})\s+([A-Za-z]{3})/
-  );
+    first.date.match(
+      /(\d{1,2})\s+([A-Za-z]{3})/
+    );
 
 
   if(!match){
@@ -3171,13 +3434,11 @@ function calculateExpectedCompletion(
 
 
   const day =
-  Number(
-    match[1]
-  );
+    Number(match[1]);
 
 
   const month =
-  match[2];
+    match[2];
 
 
   if(
@@ -3190,19 +3451,15 @@ function calculateExpectedCompletion(
 
 
   const now =
-  new Date();
+    new Date();
 
 
   let start =
-  new Date(
-
-    now.getFullYear(),
-
-    months[month],
-
-    day
-
-  );
+    new Date(
+      now.getFullYear(),
+      months[month],
+      day
+    );
 
 
   if(start > now){
@@ -3215,30 +3472,28 @@ function calculateExpectedCompletion(
 
 
   start.setDate(
-
     start.getDate() +
     total -
     1
-
   );
 
 
   return start
-  .toLocaleDateString(
-    "en-IN",
-    {
-      day:"2-digit",
-      month:"short",
-      year:"numeric"
-    }
-  );
+    .toLocaleDateString(
+      "en-IN",
+      {
+        day:"2-digit",
+        month:"short",
+        year:"numeric"
+      }
+    );
 
 }
 
 
-/* ==========================================
-   WHATSAPP SHARE
-========================================== */
+/* =========================================================
+   SHARE PROFILE
+========================================================= */
 
 window.shareDashboard =
 function(){
@@ -3247,7 +3502,8 @@ function(){
 
 `🚗 A1 Driving Academy
 
-Student: ${$("studentName").textContent}
+Student:
+${$("studentName").textContent}
 
 Training:
 ${$("classType").textContent}
@@ -3268,7 +3524,6 @@ ${$("latestFeedbackText").textContent}`;
   window.open(
 
     "https://wa.me/?text=" +
-
     encodeURIComponent(
       message
     ),
@@ -3280,9 +3535,9 @@ ${$("latestFeedbackText").textContent}`;
 };
 
 
-/* ==========================================
+/* =========================================================
    HELP
-========================================== */
+========================================================= */
 
 window.contactHelp =
 function(){
@@ -3293,15 +3548,16 @@ function(){
 
 I need help regarding my driving training.
 
-Student: ${$("studentName").textContent}
+Student:
+${$("studentName").textContent}
 
-Phone: ${currentPhone}`;
+Phone:
+${currentPhone}`;
 
 
   window.open(
 
     "https://wa.me/917008186187?text=" +
-
     encodeURIComponent(
       message
     ),
@@ -3313,9 +3569,9 @@ Phone: ${currentPhone}`;
 };
 
 
-/* ==========================================
+/* =========================================================
    LOGOUT
-========================================== */
+========================================================= */
 
 window.logout =
 function(){
@@ -3325,7 +3581,7 @@ function(){
     unsubscribeProfile();
 
     unsubscribeProfile =
-    null;
+      null;
 
   }
 
@@ -3336,38 +3592,38 @@ function(){
 
 
   $("dashboard")
-  .classList
-  .add("hidden");
+    .classList
+    .add("hidden");
 
 
   $("loginScreen")
-  .classList
-  .remove("hidden");
+    .classList
+    .remove("hidden");
 
 
   $("phoneInput")
-  .value = "";
+    .value = "";
 
 
   $("loginError")
-  .textContent = "";
+    .textContent = "";
 
 };
 
 
-/* ==========================================
-   CERTIFICATE PDF
-========================================== */
+/* =========================================================
+   CERTIFICATE
+========================================================= */
 
 window.downloadPDF =
 async function(){
 
   const certificate =
-  $("certificate");
+    $("certificate");
 
 
   certificate.style.left =
-  "0";
+    "0";
 
 
   const options = {
@@ -3375,7 +3631,7 @@ async function(){
     margin:0,
 
     filename:
-    "A1_Driving_Certificate.pdf",
+      "A1_Driving_Certificate.pdf",
 
     image:{
       type:"jpeg",
@@ -3399,9 +3655,9 @@ async function(){
   try{
 
     await html2pdf()
-    .set(options)
-    .from(certificate)
-    .save();
+      .set(options)
+      .from(certificate)
+      .save();
 
   }
 
@@ -3417,23 +3673,23 @@ async function(){
 
 
   certificate.style.left =
-  "-9999px";
+    "-9999px";
 
 };
 
 
-/* ==========================================
-   URL AUTO LOGIN
-========================================== */
+/* =========================================================
+   AUTO LOGIN FROM URL
+========================================================= */
 
 const params =
-new URLSearchParams(
-  window.location.search
-);
+  new URLSearchParams(
+    window.location.search
+  );
 
 
 const phoneFromURL =
-params.get("phone");
+  params.get("phone");
 
 
 if(
@@ -3444,8 +3700,8 @@ if(
 ){
 
   $("phoneInput")
-  .value =
-  phoneFromURL;
+    .value =
+    phoneFromURL;
 
 
   loadProfile();
