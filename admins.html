@@ -1,409 +1,3823 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>A1 Attendance | Route & KM Tracking</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght=300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --gold-primary: #d4af37;
-      --gold-glow: rgba(212, 175, 55, 0.15);
-      --bg-main: #0a0a0c;
-      --surface-card: #121216;
-      --border-color: rgba(255, 255, 255, 0.06);
-      --text-main: #ffffff;
-      --text-muted: #8e8e93;
-      --success: #30d158;
-      --danger: #ff453a;
-      --whatsapp: #34c759;
-      --route-color: #3a86ff;
-      --km-color: #af40ff;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
-    body { background: var(--bg-main); color: var(--text-main); padding: 15px; padding-bottom: 120px; -webkit-tap-highlight-color: transparent; }
-    
-    .header { background: rgba(10, 10, 12, 0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 16px 20px; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border-color); margin: -15px -15px 20px -15px; display: flex; justify-content: space-between; align-items: center; }
-    .header h1 { font-size: 18px; font-weight: 700; color: var(--gold-primary); letter-spacing: 1px; text-transform: uppercase; }
-    
-    .search-bar { width: 100%; background: var(--surface-card); border: 1px solid var(--border-color); padding: 14px 18px; border-radius: 14px; color: #fff; font-size: 14px; outline: none; margin-bottom: 20px; transition: all 0.2s ease; }
-    .search-bar:focus { border-color: var(--gold-primary); box-shadow: 0 0 12px var(--gold-glow); }
+<title>A1 Attendance | Smart Driving Tracker</title>
 
-    .attendance-grid { display: grid; gap: 12px; }
-    .st-card { background: var(--surface-card); border-radius: 16px; padding: 14px; border: 1px solid var(--border-color); display: flex; align-items: center; position: relative; }
-    
-    .st-initial { width: 45px; height: 45px; background: rgba(255,255,255,0.03); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--gold-primary); border: 1px solid var(--border-color); margin-right: 12px; font-size: 16px; }
-    .st-details { flex: 1; min-width: 0; padding-right: 4px; }
-    .st-details b { font-size: 14px; display: block; text-transform: capitalize; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px; }
-    .st-details span { font-size: 11px; color: var(--text-muted); display: block; }
-    
-    .progress-mini { width: 60px; text-align: center; margin-right: 8px; background: rgba(255,255,255,0.02); padding: 6px; border-radius: 10px; border: 1px solid var(--border-color); }
-    .progress-mini b { font-size: 12px; color: var(--text-main); display: block; }
-    .progress-mini p { font-size: 8px; color: var(--text-muted); font-weight: 600; }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    .btn-action { border: none; width: 38px; height: 38px; border-radius: 10px; font-size: 15px; cursor: pointer; display: flex; align-items: center; justify-content: center; margin-left: 6px; flex-shrink: 0; }
-    .mark-btn { background: var(--gold-primary); color: #000; font-weight: 700; font-size: 18px; }
-    .wa-btn { background: rgba(52, 199, 89, 0.1); color: var(--whatsapp); border: 1px solid rgba(52, 199, 89, 0.2); }
-    .del-btn { background: rgba(255, 69, 58, 0.1); color: var(--danger); border: 1px solid rgba(255, 69, 58, 0.15); font-size: 16px; }
+<style>
 
-    .fab { position: fixed; bottom: 85px; right: 20px; width: 56px; height: 56px; background: var(--gold-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; color: #000; z-index: 999; border: none; box-shadow: 0 4px 16px var(--gold-glow); cursor: pointer; }
-    .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 2000; align-items: center; justify-content: center; padding: 15px; }
-    .modal-content { background: #16161a; padding: 20px; border-radius: 20px; border: 1px solid var(--border-color); width: 100%; max-width: 380px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow-y: auto; max-height: 90vh; }
-    .modal-content h2 { font-size: 18px; margin-bottom: 12px; font-weight: 600; }
-    .modal-content input { width: 100%; padding: 12px; margin-bottom: 14px; background: #0b0b0d; border: 1px solid var(--border-color); border-radius: 10px; color: #fff; font-size: 14px; outline: none; }
-    .modal-content input:focus { border-color: var(--gold-primary); }
-    .save-btn { width: 100%; padding: 12px; background: var(--gold-primary); border: none; border-radius: 10px; font-weight: 700; font-size: 14px; color: #000; cursor: pointer; }
-    
-    .section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 6px; font-weight: 600; }
-    .tag-container { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; max-height: 95px; overflow-y: auto; padding-right: 2px; }
-    .tag-chip { background: rgba(255,255,255,0.04); border: 1px solid var(--border-color); color: #fff; padding: 5px 10px; border-radius: 15px; font-size: 11px; cursor: pointer; transition: all 0.15s ease; }
-    
-    .route-chip { border-color: rgba(58, 134, 255, 0.2); background: rgba(58, 134, 255, 0.03); }
-    .route-chip.selected { background: var(--route-color) !important; color: #fff !important; border-color: var(--route-color); font-weight: 500; }
-    
-    .km-chip { border-color: rgba(175, 64, 255, 0.2); background: rgba(175, 64, 255, 0.03); }
-    .km-chip.selected { background: var(--km-color) !important; color: #fff !important; border-color: var(--km-color); font-weight: 500; }
+:root{
+  --gold:#d4af37;
+  --gold2:#f5d76e;
+  --bg:#070709;
+  --card:#121216;
+  --card2:#18181d;
+  --border:rgba(255,255,255,.07);
+  --muted:#8e8e93;
+  --green:#30d158;
+  --blue:#3a86ff;
+  --purple:#af40ff;
+  --wa:#34c759;
+  --red:#ff453a;
+  --inactive:#68686f;
+}
 
-    .remark-chip.selected { background: var(--gold-primary) !important; color: #000 !important; border-color: var(--gold-primary); font-weight: 500; }
-    
-    .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(18, 18, 22, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-top: 1px solid var(--border-color); padding: 14px; display: flex; justify-content: space-around; z-index: 100; }
-    .nav-item { text-align: center; width: 50%; }
-    .nav-item b { font-size: 16px; color: var(--gold-primary); display: block; font-weight: 700; }
-    .nav-item small { font-size: 9px; color: var(--text-muted); font-weight: 600; letter-spacing: 0.5px; display: block; margin-top: 2px; }
-    
-    .status-done { border-color: var(--success); background: rgba(48, 209, 88, 0.02); }
-    .status-done .st-initial { color: var(--success); }
-    .status-done .progress-mini b { color: var(--success); }
-  </style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Poppins,sans-serif;
+}
+
+body{
+  background:
+    radial-gradient(circle at 90% 0%,rgba(212,175,55,.08),transparent 30%),
+    radial-gradient(circle at 0% 60%,rgba(58,134,255,.035),transparent 25%),
+    var(--bg);
+
+  color:#fff;
+
+  padding:15px;
+  padding-bottom:110px;
+
+  -webkit-tap-highlight-color:transparent;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.header{
+
+  margin:-15px -15px 18px;
+
+  padding:14px 17px;
+
+  position:sticky;
+  top:0;
+
+  z-index:1000;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  background:rgba(7,7,9,.90);
+
+  backdrop-filter:blur(22px);
+  -webkit-backdrop-filter:blur(22px);
+
+  border-bottom:1px solid var(--border);
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.logo{
+
+  width:40px;
+  height:40px;
+
+  border-radius:13px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:
+    linear-gradient(
+      145deg,
+      #f5d76e,
+      #9b7212
+    );
+
+  color:#000;
+
+  font-size:14px;
+  font-weight:800;
+
+  box-shadow:
+    0 0 22px rgba(212,175,55,.18);
+}
+
+.brand h1{
+  font-size:16px;
+  font-weight:800;
+  letter-spacing:.7px;
+}
+
+.brand small{
+  display:block;
+  color:var(--muted);
+  font-size:8px;
+  letter-spacing:.7px;
+}
+
+.clock{
+  text-align:right;
+}
+
+.clock b{
+  color:var(--gold2);
+  font-size:12px;
+}
+
+.clock span{
+  display:block;
+  color:var(--muted);
+  font-size:8px;
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+.search-box{
+  position:relative;
+  margin-bottom:14px;
+}
+
+.search-icon{
+
+  position:absolute;
+
+  left:14px;
+  top:50%;
+
+  transform:translateY(-50%);
+
+  opacity:.55;
+}
+
+.search{
+
+  width:100%;
+
+  padding:13px 15px 13px 40px;
+
+  border-radius:14px;
+
+  background:#121216;
+
+  border:1px solid var(--border);
+
+  color:#fff;
+
+  outline:none;
+
+  font-size:12px;
+
+  transition:.2s;
+}
+
+.search:focus{
+  border-color:rgba(212,175,55,.65);
+
+  box-shadow:
+    0 0 16px rgba(212,175,55,.08);
+}
+
+
+/* =====================================================
+   STATS
+===================================================== */
+
+.stats{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  gap:7px;
+
+  margin-bottom:17px;
+}
+
+.stat{
+
+  padding:9px 4px;
+
+  text-align:center;
+
+  border-radius:13px;
+
+  background:#111115;
+
+  border:1px solid var(--border);
+}
+
+.stat b{
+
+  display:block;
+
+  color:var(--gold2);
+
+  font-size:16px;
+}
+
+.stat small{
+
+  color:var(--muted);
+
+  font-size:6.5px;
+
+  font-weight:700;
+
+  letter-spacing:.3px;
+}
+
+.stat.inactive-stat b{
+  color:#8b8b91;
+}
+
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+.list-title{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  margin:0 2px 10px;
+}
+
+.list-title b{
+  font-size:13px;
+}
+
+.list-title span{
+  color:var(--muted);
+  font-size:9px;
+}
+
+
+/* =====================================================
+   LIST
+===================================================== */
+
+#attendanceList{
+
+  display:grid;
+
+  gap:10px;
+}
+
+
+/* =====================================================
+   STUDENT CARD
+===================================================== */
+
+.st-card{
+
+  position:relative;
+
+  padding:13px;
+
+  border-radius:19px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #18181d,
+      #101014
+    );
+
+  border:1px solid var(--border);
+
+  overflow:hidden;
+
+  box-shadow:
+    0 7px 25px rgba(0,0,0,.22);
+
+  transition:
+    transform .2s,
+    opacity .25s,
+    border-color .25s,
+    box-shadow .25s;
+}
+
+
+/* GOLD ACTIVE LINE */
+
+.st-card.active-card::before{
+
+  content:"";
+
+  position:absolute;
+
+  left:0;
+  top:12px;
+  bottom:12px;
+
+  width:3px;
+
+  border-radius:0 5px 5px 0;
+
+  background:var(--gold);
+
+  box-shadow:
+    0 0 13px var(--gold);
+}
+
+
+/* LIVE CARD */
+
+.st-card.live-card{
+
+  border-color:
+    rgba(212,175,55,.72);
+
+  box-shadow:
+    0 0 0 1px rgba(212,175,55,.04),
+    0 0 28px rgba(212,175,55,.13);
+}
+
+
+/* =====================================================
+   NOT ACTIVE CARD
+===================================================== */
+
+.st-card.inactive-card{
+
+  order:999;
+
+  opacity:.58;
+
+  background:
+    linear-gradient(
+      145deg,
+      #111114,
+      #0d0d0f
+    );
+
+  border-color:
+    rgba(255,255,255,.045);
+
+  box-shadow:none;
+
+  filter:saturate(.65);
+}
+
+.st-card.inactive-card::before{
+
+  content:"";
+
+  position:absolute;
+
+  left:0;
+  top:12px;
+  bottom:12px;
+
+  width:3px;
+
+  border-radius:0 5px 5px 0;
+
+  background:#55555b;
+}
+
+.inactive-card .avatar{
+
+  background:rgba(255,255,255,.025);
+
+  border-color:rgba(255,255,255,.06);
+
+  color:#77777e;
+}
+
+.inactive-card .student-info h3{
+  color:#aaaab0;
+}
+
+.inactive-card .time-status{
+  color:#68686e;
+}
+
+.inactive-card .progress-fill{
+
+  background:#55555b;
+
+  box-shadow:none;
+}
+
+
+/* =====================================================
+   STATUS BADGE
+===================================================== */
+
+.status-badge{
+
+  position:absolute;
+
+  top:10px;
+  right:11px;
+
+  padding:4px 8px;
+
+  border-radius:20px;
+
+  font-size:7px;
+
+  font-weight:800;
+
+  letter-spacing:.5px;
+
+  background:
+    rgba(255,255,255,.04);
+
+  color:var(--muted);
+
+  border:1px solid var(--border);
+}
+
+.active-card .status-badge{
+
+  color:var(--gold2);
+
+  background:
+    rgba(212,175,55,.08);
+
+  border-color:
+    rgba(212,175,55,.18);
+}
+
+.live-card .status-badge{
+
+  color:#000;
+
+  background:var(--gold2);
+
+  border-color:var(--gold2);
+
+  animation:
+    pulse 1.6s infinite;
+}
+
+.inactive-card .status-badge{
+
+  color:#77777e;
+
+  background:
+    rgba(255,255,255,.025);
+}
+
+@keyframes pulse{
+
+  0%,100%{
+    opacity:1;
+  }
+
+  50%{
+    opacity:.55;
+  }
+
+}
+
+
+/* =====================================================
+   STUDENT TOP
+===================================================== */
+
+.student-head{
+
+  display:flex;
+
+  align-items:center;
+
+  padding-right:85px;
+}
+
+.avatar{
+
+  width:47px;
+  height:47px;
+
+  flex-shrink:0;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  border-radius:14px;
+
+  background:
+    rgba(212,175,55,.08);
+
+  border:
+    1px solid rgba(212,175,55,.18);
+
+  color:var(--gold2);
+
+  font-size:17px;
+
+  font-weight:800;
+
+  margin-right:11px;
+}
+
+.student-info{
+
+  min-width:0;
+
+  flex:1;
+}
+
+.student-info h3{
+
+  font-size:14px;
+
+  font-weight:700;
+
+  white-space:nowrap;
+
+  overflow:hidden;
+
+  text-overflow:ellipsis;
+
+  margin-bottom:2px;
+}
+
+.phone{
+
+  color:var(--muted);
+
+  font-size:9px;
+}
+
+.time-status{
+
+  margin-top:4px;
+
+  color:var(--gold);
+
+  font-size:9px;
+
+  white-space:nowrap;
+
+  overflow:hidden;
+
+  text-overflow:ellipsis;
+}
+
+.live-card .time-status{
+  color:var(--green);
+}
+
+
+/* =====================================================
+   PROGRESS
+===================================================== */
+
+.progress-section{
+  margin-top:13px;
+}
+
+.progress-row{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  margin-bottom:5px;
+}
+
+.progress-row span{
+
+  color:var(--muted);
+
+  font-size:8px;
+
+  font-weight:600;
+}
+
+.progress-row b{
+
+  color:var(--gold2);
+
+  font-size:10px;
+}
+
+.progress-bar{
+
+  height:5px;
+
+  border-radius:10px;
+
+  background:
+    rgba(255,255,255,.06);
+
+  overflow:hidden;
+}
+
+.progress-fill{
+
+  height:100%;
+
+  border-radius:10px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #9e7718,
+      #f5d76e
+    );
+
+  transition:.4s;
+}
+
+.inactive-card .progress-fill{
+  background:#55555b;
+}
+
+
+/* =====================================================
+   INFO
+===================================================== */
+
+.info-line{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:7px;
+
+  margin-top:9px;
+
+  padding:7px 9px;
+
+  border-radius:10px;
+
+  background:
+    rgba(255,255,255,.025);
+
+  border:
+    1px solid rgba(255,255,255,.035);
+
+  color:var(--muted);
+
+  font-size:8px;
+}
+
+.info-line strong{
+
+  color:#ddd;
+
+  font-weight:600;
+}
+
+.inactive-card .info-line strong{
+  color:#77777d;
+}
+
+
+/* =====================================================
+   ACTIONS
+===================================================== */
+
+.actions{
+
+  display:grid;
+
+  grid-template-columns:
+    1.25fr
+    1fr
+    1fr
+    1fr;
+
+  gap:6px;
+
+  margin-top:11px;
+}
+
+.action{
+
+  height:36px;
+
+  border-radius:10px;
+
+  border:
+    1px solid var(--border);
+
+  background:
+    rgba(255,255,255,.035);
+
+  color:#fff;
+
+  font-size:8px;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:.15s;
+}
+
+.action:active{
+  transform:scale(.95);
+}
+
+
+/* ATTEND */
+
+.attend{
+
+  background:
+    linear-gradient(
+      145deg,
+      #f0cf61,
+      #b68b1e
+    );
+
+  color:#000;
+
+  border:none;
+
+  font-weight:800;
+}
+
+
+/* NOT ACTIVE */
+
+.not-active{
+
+  color:#aaaab0;
+
+  background:
+    rgba(255,255,255,.035);
+}
+
+
+/* ACTIVE AGAIN */
+
+.make-active{
+
+  color:var(--green);
+
+  background:
+    rgba(48,209,88,.06);
+
+  border-color:
+    rgba(48,209,88,.16);
+}
+
+
+/* WHATSAPP */
+
+.whatsapp{
+
+  color:var(--wa);
+
+  background:
+    rgba(52,199,89,.05);
+
+  border-color:
+    rgba(52,199,89,.16);
+}
+
+
+/* CALL */
+
+.call{
+
+  color:var(--blue);
+
+  background:
+    rgba(58,134,255,.05);
+
+  border-color:
+    rgba(58,134,255,.16);
+}
+
+
+/* =====================================================
+   FAB
+===================================================== */
+
+.fab{
+
+  position:fixed;
+
+  right:18px;
+  bottom:76px;
+
+  width:56px;
+  height:56px;
+
+  border:none;
+
+  border-radius:50%;
+
+  background:
+    linear-gradient(
+      145deg,
+      #f5d76e,
+      #a67c16
+    );
+
+  color:#000;
+
+  font-size:25px;
+
+  z-index:1500;
+
+  box-shadow:
+    0 8px 25px rgba(0,0,0,.5),
+    0 0 20px rgba(212,175,55,.15);
+
+  cursor:pointer;
+}
+
+
+/* =====================================================
+   BOTTOM
+===================================================== */
+
+.bottom{
+
+  position:fixed;
+
+  left:0;
+  right:0;
+  bottom:0;
+
+  z-index:1000;
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  padding:10px 10px;
+
+  background:
+    rgba(17,17,21,.94);
+
+  backdrop-filter:blur(20px);
+
+  border-top:1px solid var(--border);
+}
+
+.bottom-item{
+
+  text-align:center;
+
+  border-right:
+    1px solid var(--border);
+}
+
+.bottom-item:last-child{
+  border-right:none;
+}
+
+.bottom-item b{
+
+  display:block;
+
+  color:var(--gold2);
+
+  font-size:15px;
+}
+
+.bottom-item small{
+
+  color:var(--muted);
+
+  font-size:6.5px;
+
+  font-weight:700;
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.modal{
+
+  display:none;
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:3000;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:15px;
+
+  background:
+    rgba(0,0,0,.88);
+
+  backdrop-filter:blur(12px);
+}
+
+.modal-content{
+
+  width:100%;
+
+  max-width:390px;
+
+  max-height:91vh;
+
+  overflow-y:auto;
+
+  padding:20px;
+
+  border-radius:22px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #1a1a1f,
+      #111115
+    );
+
+  border:
+    1px solid var(--border);
+
+  box-shadow:
+    0 25px 70px rgba(0,0,0,.7);
+
+  animation:
+    modalIn .2s ease;
+}
+
+@keyframes modalIn{
+
+  from{
+    opacity:0;
+    transform:
+      translateY(15px)
+      scale(.97);
+  }
+
+  to{
+    opacity:1;
+    transform:
+      translateY(0)
+      scale(1);
+  }
+
+}
+
+
+/* =====================================================
+   MODAL HEADER
+===================================================== */
+
+.modal-head{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  margin-bottom:18px;
+}
+
+.modal-head h2{
+  font-size:17px;
+}
+
+.modal-head small{
+
+  display:block;
+
+  color:var(--muted);
+
+  font-size:9px;
+
+  margin-top:2px;
+}
+
+.close{
+
+  width:32px;
+  height:32px;
+
+  border-radius:10px;
+
+  background:
+    rgba(255,255,255,.05);
+
+  border:
+    1px solid var(--border);
+
+  color:#fff;
+
+  font-size:18px;
+
+  cursor:pointer;
+}
+
+
+/* =====================================================
+   INPUT
+===================================================== */
+
+.modal input{
+
+  width:100%;
+
+  padding:13px;
+
+  margin-bottom:11px;
+
+  border-radius:11px;
+
+  background:#0b0b0d;
+
+  border:
+    1px solid var(--border);
+
+  color:#fff;
+
+  outline:none;
+
+  font-size:12px;
+}
+
+.modal input:focus{
+  border-color:var(--gold);
+}
+
+
+/* =====================================================
+   SAVE
+===================================================== */
+
+.save{
+
+  width:100%;
+
+  padding:13px;
+
+  border:none;
+
+  border-radius:11px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #f0cf61,
+      #b58b1e
+    );
+
+  color:#000;
+
+  font-weight:800;
+
+  font-size:11px;
+
+  cursor:pointer;
+}
+
+
+/* =====================================================
+   DRIVING TRACK
+===================================================== */
+
+.track-box{
+
+  padding:15px;
+
+  border-radius:17px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(212,175,55,.08),
+      rgba(255,255,255,.025)
+    );
+
+  border:
+    1px solid rgba(212,175,55,.15);
+
+  margin-bottom:12px;
+}
+
+.track-title{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:9px;
+
+  margin-bottom:13px;
+}
+
+.track-icon{
+
+  width:38px;
+  height:38px;
+
+  border-radius:12px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:
+    rgba(212,175,55,.12);
+
+  font-size:19px;
+}
+
+.track-title b{
+
+  display:block;
+
+  font-size:13px;
+}
+
+.track-title span{
+
+  display:block;
+
+  color:var(--muted);
+
+  font-size:8px;
+
+  margin-top:1px;
+}
+
+.track-label{
+
+  color:var(--muted);
+
+  font-size:9px;
+
+  font-weight:700;
+
+  margin:13px 0 7px;
+}
+
+
+/* =====================================================
+   ROUTES
+===================================================== */
+
+.track-options{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap:7px;
+}
+
+.track-option{
+
+  min-height:40px;
+
+  padding:8px;
+
+  border-radius:11px;
+
+  border:
+    1px solid var(--border);
+
+  background:
+    rgba(255,255,255,.035);
+
+  color:#eee;
+
+  font-size:10px;
+
+  font-weight:600;
+
+  cursor:pointer;
+}
+
+.track-option.selected{
+
+  background:var(--gold);
+
+  border-color:var(--gold);
+
+  color:#000;
+
+  font-weight:800;
+
+  box-shadow:
+    0 0 15px rgba(212,175,55,.15);
+}
+
+
+/* =====================================================
+   KM
+===================================================== */
+
+.km-options{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  gap:6px;
+}
+
+.km-option{
+
+  height:36px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  border-radius:10px;
+
+  border:
+    1px solid rgba(175,64,255,.15);
+
+  background:
+    rgba(175,64,255,.035);
+
+  color:#ddd;
+
+  font-size:9px;
+
+  font-weight:700;
+
+  cursor:pointer;
+}
+
+.km-option.selected{
+
+  background:var(--purple);
+
+  border-color:var(--purple);
+
+  color:#fff;
+}
+
+
+/* =====================================================
+   REMARK
+===================================================== */
+
+.remark-options{
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:6px;
+}
+
+.remark-option{
+
+  padding:7px 10px;
+
+  border-radius:15px;
+
+  background:
+    rgba(255,255,255,.035);
+
+  border:
+    1px solid var(--border);
+
+  color:#ddd;
+
+  font-size:8px;
+
+  font-weight:600;
+
+  cursor:pointer;
+}
+
+.remark-option.selected{
+
+  background:var(--gold);
+
+  border-color:var(--gold);
+
+  color:#000;
+}
+
+textarea{
+
+  width:100%;
+
+  min-height:55px;
+
+  resize:none;
+
+  padding:10px;
+
+  margin-top:10px;
+
+  border-radius:10px;
+
+  background:#0b0b0d;
+
+  border:
+    1px solid var(--border);
+
+  color:#fff;
+
+  outline:none;
+
+  font-size:10px;
+}
+
+
+/* =====================================================
+   HISTORY
+===================================================== */
+
+.history-item{
+
+  padding:11px;
+
+  margin-bottom:7px;
+
+  border-radius:11px;
+
+  background:
+    rgba(255,255,255,.035);
+
+  border:
+    1px solid var(--border);
+}
+
+.history-time{
+
+  color:var(--gold2);
+
+  font-size:9px;
+
+  font-weight:700;
+
+  margin-bottom:4px;
+}
+
+.history-text{
+
+  color:#ddd;
+
+  font-size:9px;
+
+  line-height:1.5;
+}
+
+.no-history{
+
+  text-align:center;
+
+  color:var(--muted);
+
+  padding:20px;
+
+  font-size:10px;
+}
+
+
+/* =====================================================
+   EMPTY
+===================================================== */
+
+.empty{
+
+  text-align:center;
+
+  padding:45px 20px;
+
+  color:var(--muted);
+}
+
+.empty div{
+
+  font-size:35px;
+
+  margin-bottom:8px;
+}
+
+.empty b{
+
+  display:block;
+
+  color:#fff;
+
+  font-size:13px;
+}
+
+.empty span{
+  font-size:9px;
+}
+
+
+/* =====================================================
+   SMALL PHONE
+===================================================== */
+
+@media(max-width:370px){
+
+  .stats{
+    grid-template-columns:
+      repeat(2,1fr);
+  }
+
+  .actions{
+    grid-template-columns:
+      1.3fr 1fr 1fr;
+  }
+
+  .call{
+    display:none;
+  }
+
+  .bottom{
+    grid-template-columns:
+      repeat(4,1fr);
+  }
+
+  .track-options{
+    grid-template-columns:
+      1fr 1fr;
+  }
+
+  .km-options{
+    grid-template-columns:
+      repeat(3,1fr);
+  }
+
+}
+
+</style>
 </head>
+
+
 <body>
 
-<div class="header">
-    <h1>A1 Attendance</h1>
-</div>
 
-<input type="text" id="studentSearch" class="search-bar" placeholder="🔍 Search student by name..." onkeyup="filterList()">
-<div id="attendanceList" class="attendance-grid"></div>
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
-<button class="fab" onclick="toggleModal('addModal', true)">+</button>
+<header class="header">
 
-<div id="addModal" class="modal">
-    <div class="modal-content">
-        <h2>Add New Student</h2>
-        <input type="tel" id="newPhone" placeholder="Phone Number">
-        <input type="text" id="newName" placeholder="Full Name">
-        <input type="number" id="newTotal" placeholder="Total Track Classes" value="15">
-        <button class="save-btn" onclick="addNewStudent()">SAVE DISCIPLINE</button>
-        <button onclick="toggleModal('addModal', false)" style="background:none; border:none; color:var(--text-muted); width:100%; margin-top:14px; font-size:13px; cursor:pointer;">Dismiss</button>
+  <div class="brand">
+
+    <div class="logo">
+      A1
     </div>
+
+    <div>
+
+      <h1>A1 Attendance</h1>
+
+      <small>
+        DRIVING TRACKING SYSTEM
+      </small>
+
+    </div>
+
+  </div>
+
+
+  <div class="clock">
+
+    <b id="clock">
+      --:--
+    </b>
+
+    <span id="date">
+      --
+    </span>
+
+  </div>
+
+</header>
+
+
+<!-- =====================================================
+     SEARCH
+===================================================== -->
+
+<div class="search-box">
+
+  <span class="search-icon">
+    🔍
+  </span>
+
+  <input
+    id="studentSearch"
+    class="search"
+    placeholder="Search student..."
+    oninput="filterList()"
+  >
+
 </div>
 
-<div id="remarkModal" class="modal">
-    <div class="modal-content">
-        <h2>Driving Track Entry</h2>
-        
-        <div class="section-label">📍 Step 1: Select Track Route:</div>
-        <div class="tag-container" id="routeContainer">
-          <div class="tag-chip route-chip" onclick="selectRoute(this)">Baghra road</div>
-          <div class="tag-chip route-chip" onclick="selectRoute(this)">Badbazar</div>
-          <div class="tag-chip route-chip" onclick="selectRoute(this)">Bhanjpur road</div>
-          <div class="tag-chip route-chip" onclick="selectRoute(this)">Udala road</div>
-          <div class="tag-chip route-chip" onclick="selectRoute(this)">Station bazar road</div>
-          <div class="tag-chip route-chip" onclick="selectRoute(this)">Fire station turning</div>
-          <div class="tag-chip route-chip" onclick="selectRoute(this)">Lal bazar road</div>
-           <div class="tag-chip route-chip" onclick="selectRoute(this)">kuchei road</div>
+
+<!-- =====================================================
+     STATS
+===================================================== -->
+
+<div class="stats">
+
+  <div class="stat">
+
+    <b id="totalActive">
+      0
+    </b>
+
+    <small>
+      ACTIVE
+    </small>
+
+  </div>
+
+
+  <div class="stat">
+
+    <b id="totalFinished">
+      0
+    </b>
+
+    <small>
+      COMPLETED
+    </small>
+
+  </div>
+
+
+  <div class="stat">
+
+    <b id="liveCount">
+      0
+    </b>
+
+    <small>
+      LIVE NOW
+    </small>
+
+  </div>
+
+
+  <div class="stat inactive-stat">
+
+    <b id="inactiveCount">
+      0
+    </b>
+
+    <small>
+      NOT ACTIVE
+    </small>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     LIST TITLE
+===================================================== -->
+
+<div class="list-title">
+
+  <b>
+    Student Attendance
+  </b>
+
+  <span id="studentCount">
+    0 Students
+  </span>
+
+</div>
+
+
+<!-- =====================================================
+     STUDENTS
+===================================================== -->
+
+<div id="attendanceList"></div>
+
+
+<!-- =====================================================
+     ADD
+===================================================== -->
+
+<button
+  class="fab"
+  onclick="toggleModal('addModal',true)"
+>
+  +
+</button>
+
+
+<!-- =====================================================
+     ADD STUDENT MODAL
+===================================================== -->
+
+<div
+  id="addModal"
+  class="modal"
+>
+
+  <div class="modal-content">
+
+    <div class="modal-head">
+
+      <div>
+
+        <h2>
+          Add Student
+        </h2>
+
+        <small>
+          Create driving account
+        </small>
+
+      </div>
+
+
+      <button
+        class="close"
+        onclick="toggleModal('addModal',false)"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <input
+      type="tel"
+      id="newPhone"
+      placeholder="📱 Phone Number"
+    >
+
+
+    <input
+      type="text"
+      id="newName"
+      placeholder="👤 Full Name"
+    >
+
+
+    <input
+      type="number"
+      id="newTotal"
+      value="15"
+      min="1"
+      placeholder="Total Classes"
+    >
+
+
+    <button
+      class="save"
+      onclick="addNewStudent()"
+    >
+      SAVE STUDENT
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     DRIVING TRACK MODAL
+===================================================== -->
+
+<div
+  id="remarkModal"
+  class="modal"
+>
+
+  <div class="modal-content">
+
+
+    <div class="modal-head">
+
+      <div>
+
+        <h2>
+          Driving Track 🚗
+        </h2>
+
+        <small>
+          Quick session entry
+        </small>
+
+      </div>
+
+
+      <button
+        class="close"
+        onclick="toggleModal('remarkModal',false)"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="track-box">
+
+
+      <div class="track-title">
+
+        <div class="track-icon">
+          🚗
         </div>
 
-        <div class="section-label">🛣️ Step 2: Track Distance (KM):</div>
-        <div class="tag-container" id="kmContainer">
-          <div class="tag-chip km-chip" onclick="selectKM(this)">2 KM</div>
-          <div class="tag-chip km-chip" onclick="selectKM(this)">5 KM</div>
-          <div class="tag-chip km-chip" onclick="selectKM(this)">7 KM</div>
-          <div class="tag-chip km-chip" onclick="selectKM(this)">10 KM</div>
-          <div class="tag-chip km-chip" onclick="selectKM(this)">12 KM</div>
-          <div class="tag-chip km-chip" onclick="selectKM(this)">15 KM</div>
-          <div class="tag-chip km-chip" onclick="selectKM(this)">20 KM</div>
+        <div>
+
+          <b>
+            Today's Drive
+          </b>
+
+          <span>
+            Select your session
+          </span>
+
         </div>
 
-        <div class="section-label">⚡ Step 3: Performance Remark:</div>
-        <div class="tag-container" id="remarkContainer">
-          <div class="tag-chip remark-chip" onclick="selectRemarkTag(this)">🌟 Perfect Drive</div>
-          <div class="tag-chip remark-chip" onclick="selectRemarkTag(this)">⚙️ Clutch Issue</div>
-          <div class="tag-chip remark-chip" onclick="selectRemarkTag(this)">⚠️ Engine Stalling</div>
-          <div class="tag-chip remark-chip" onclick="selectRemarkTag(this)">🔄 Good Turns</div>
-          <div class="tag-chip remark-chip" onclick="selectRemarkTag(this)">🚀 Speed Control</div>
-          <div class="tag-chip remark-chip" onclick="selectRemarkTag(this)">Breaking issue</div>
-            <div class="tag-chip remark-chip" onclick="selectRemarkTag(this)">Breaking Improve</div>
-        </div>
+      </div>
 
-        <input type="text" id="customRemark" placeholder="Compiled overview text...">
-        <button class="save-btn" onclick="submitAttendance()">CONFIRM ENTRY</button>
-        <button onclick="toggleModal('remarkModal', false)" style="background:none; border:none; color:var(--text-muted); width:100%; margin-top:12px; font-size:13px; cursor:pointer;">Cancel Track</button>
+
+      <!-- ROUTE -->
+
+      <div class="track-label">
+        📍 ROUTE
+      </div>
+
+
+      <div class="track-options">
+
+
+        <button
+          class="track-option route-option"
+          onclick="selectRoute(this)"
+        >
+          Bhanjpur
+        </button>
+
+
+        <button
+          class="track-option route-option"
+          onclick="selectRoute(this)"
+        >
+          Baghra
+        </button>
+
+
+        <button
+          class="track-option route-option"
+          onclick="selectRoute(this)"
+        >
+          Badbazar
+        </button>
+
+
+        <button
+          class="track-option route-option"
+          onclick="selectRoute(this)"
+        >
+          Udala
+        </button>
+
+
+        <button
+          class="track-option route-option"
+          onclick="selectRoute(this)"
+        >
+          Station Bazar
+        </button>
+
+
+        <button
+          class="track-option route-option"
+          onclick="selectRoute(this)"
+        >
+          Lal Bazar
+        </button>
+
+
+        <button
+          class="track-option route-option"
+          onclick="selectRoute(this)"
+        >
+          Kuchei
+        </button>
+
+
+        <button
+          class="track-option route-option"
+          onclick="selectRoute(this)"
+        >
+          Other Route
+        </button>
+
+      </div>
+
+
+      <!-- KM -->
+
+      <div class="track-label">
+        🛣️ DISTANCE
+      </div>
+
+
+      <div class="km-options">
+
+
+        <button
+          class="km-option"
+          onclick="selectKM(this)"
+        >
+          2 KM
+        </button>
+
+
+        <button
+          class="km-option"
+          onclick="selectKM(this)"
+        >
+          5 KM
+        </button>
+
+
+        <button
+          class="km-option"
+          onclick="selectKM(this)"
+        >
+          7 KM
+        </button>
+
+
+        <button
+          class="km-option"
+          onclick="selectKM(this)"
+        >
+          10 KM
+        </button>
+
+
+        <button
+          class="km-option"
+          onclick="selectKM(this)"
+        >
+          12 KM
+        </button>
+
+
+        <button
+          class="km-option"
+          onclick="selectKM(this)"
+        >
+          15 KM
+        </button>
+
+
+        <button
+          class="km-option"
+          onclick="selectKM(this)"
+        >
+          20 KM
+        </button>
+
+      </div>
+
+
+      <!-- REMARK -->
+
+      <div class="track-label">
+        ⭐ QUICK REMARK
+      </div>
+
+
+      <div class="remark-options">
+
+
+        <button
+          class="remark-option"
+          onclick="selectRemarkTag(this)"
+        >
+          🌟 Perfect
+        </button>
+
+
+        <button
+          class="remark-option"
+          onclick="selectRemarkTag(this)"
+        >
+          👍 Good
+        </button>
+
+
+        <button
+          class="remark-option"
+          onclick="selectRemarkTag(this)"
+        >
+          🔄 Turns
+        </button>
+
+
+        <button
+          class="remark-option"
+          onclick="selectRemarkTag(this)"
+        >
+          ⚙️ Clutch
+        </button>
+
+
+        <button
+          class="remark-option"
+          onclick="selectRemarkTag(this)"
+        >
+          🚦 Traffic
+        </button>
+
+
+        <button
+          class="remark-option"
+          onclick="selectRemarkTag(this)"
+        >
+          🛑 Braking
+        </button>
+
+      </div>
+
+
+      <textarea
+        id="customRemark"
+        placeholder="Optional note..."
+      ></textarea>
+
+
     </div>
+
+
+    <button
+      class="save"
+      onclick="submitAttendance()"
+    >
+      ✓ SAVE ATTENDANCE
+    </button>
+
+
+  </div>
+
 </div>
 
-<div class="bottom-nav">
-    <div class="nav-item">
-      <b id="totalActive">0</b>
-      <small>ACTIVE ACCOUNTS</small>
+
+<!-- =====================================================
+     HISTORY MODAL
+===================================================== -->
+
+<div
+  id="historyModal"
+  class="modal"
+>
+
+  <div class="modal-content">
+
+
+    <div class="modal-head">
+
+      <div>
+
+        <h2 id="historyTitle">
+          Attendance Logs
+        </h2>
+
+        <small>
+          Previous driving sessions
+        </small>
+
+      </div>
+
+
+      <button
+        class="close"
+        onclick="toggleModal('historyModal',false)"
+      >
+        ×
+      </button>
+
     </div>
-    <div class="nav-item" style="border-left: 1px solid var(--border-color);">
-      <b id="totalFinished">0</b>
-      <small>COMPLETED TRACKS</small>
-    </div>
+
+
+    <div id="historyList"></div>
+
+
+  </div>
+
 </div>
+
+
+<!-- =====================================================
+     BOTTOM
+===================================================== -->
+
+<div class="bottom">
+
+
+  <div class="bottom-item">
+
+    <b id="bottomActive">
+      0
+    </b>
+
+    <small>
+      ACTIVE
+    </small>
+
+  </div>
+
+
+  <div class="bottom-item">
+
+    <b id="bottomCompleted">
+      0
+    </b>
+
+    <small>
+      COMPLETED
+    </small>
+
+  </div>
+
+
+  <div class="bottom-item">
+
+    <b id="bottomLive">
+      0
+    </b>
+
+    <small>
+      LIVE
+    </small>
+
+  </div>
+
+
+  <div class="bottom-item">
+
+    <b id="bottomInactive">
+      0
+    </b>
+
+    <small>
+      NOT ACTIVE
+    </small>
+
+  </div>
+
+
+</div>
+
 
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-  import { getFirestore, collection, onSnapshot, doc, setDoc, updateDoc, deleteDoc, increment, arrayUnion } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
-  // Firebase Configuration Engine
-  const firebaseConfig = {
-    apiKey: "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
-    authDomain: "abinash-driving.firebaseapp.com",
-    projectId: "abinash-driving",
-    storageBucket: "abinash-driving.appspot.com",
-    messagingSenderId: "641148830173",
-    appId: "1:641148830173:web:b7a500e5e7e2463da0f634"
+
+/* =====================================================
+   FIREBASE
+===================================================== */
+
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+
+import {
+  getFirestore,
+  collection,
+  onSnapshot,
+  doc,
+  setDoc,
+  updateDoc,
+  increment,
+  arrayUnion
+} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
+
+const firebaseConfig={
+
+  apiKey:
+    "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
+
+  authDomain:
+    "abinash-driving.firebaseapp.com",
+
+  projectId:
+    "abinash-driving",
+
+  storageBucket:
+    "abinash-driving.appspot.com",
+
+  messagingSenderId:
+    "641148830173",
+
+  appId:
+    "1:641148830173:web:b7a500e5e7e2463da0f634"
+
+};
+
+
+const app =
+  initializeApp(firebaseConfig);
+
+const db =
+  getFirestore(app);
+
+
+/* =====================================================
+   GLOBAL
+===================================================== */
+
+let students=[];
+
+let activeStudentID=null;
+
+let currentRoute="";
+let currentKM="";
+let currentRemark="";
+
+
+/* =====================================================
+   SAFE HTML
+===================================================== */
+
+function safe(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =====================================================
+   GET TIME FROM ATTENDANCE LOG
+===================================================== */
+
+function getLogTime(log){
+
+  if(!log)
+    return null;
+
+
+  const parts =
+    log.split(" | ");
+
+
+  if(parts.length<2)
+    return null;
+
+
+  const timeText =
+    parts[1]
+      .split(" — ")[0]
+      .trim();
+
+
+  const match =
+    timeText.match(
+      /^(\d{1,2}):(\d{2})\s*(AM|PM)?$/i
+    );
+
+
+  if(!match)
+    return null;
+
+
+  let hour =
+    parseInt(match[1],10);
+
+
+  const minute =
+    parseInt(match[2],10);
+
+
+  const ap =
+    match[3]
+      ? match[3].toUpperCase()
+      : null;
+
+
+  if(ap==="PM" && hour!==12)
+    hour+=12;
+
+
+  if(ap==="AM" && hour===12)
+    hour=0;
+
+
+  return {
+    hour,
+    minute,
+    text:timeText
   };
 
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-  
-  let activeStudentID = null; 
-  let currentSelectedRoute = "";
-  let currentSelectedKM = "";      // Naya Variable add kiya KM hold karne ke liye
-  let currentSelectedRemark = "";
+}
 
-  // Database Synchronization & UI Renderer
-  onSnapshot(collection(db, "studentData"), (snap) => {
-    const list = document.getElementById("attendanceList");
-    list.innerHTML = "";
-    let active = 0, finished = 0;
-    
-    snap.forEach(d => {
-      const data = d.data();
-      if (!data.name) return;
 
-            const logs = data.attendanceLogs || [];
-      const logCount = logs.length;
-      const done = Math.max(logCount, data.remaining || 0);
-      const total = data.totalClasses || 15;
-      const left = total - done;
-      const isDone = done >= total;
-      
-      if(isDone) finished++; else active++;
+/* =====================================================
+   LAST ATTENDANCE TIME
+===================================================== */
 
-      // --- DATE & DAYS REMAINING ENGINE ---
-      let dateStatusText = "No Logs Found";
-      if (logs.length > 0) {
-        try {
-          const firstLog = logs[0]; // First class log
-          const datePart = firstLog.split(' | ')[0].trim(); // Extract "05 Jun"
-          
-          if (datePart) {
-            const currentYear = new Date().getFullYear(); // Dynamic current year (2026)
-            const startDate = new Date(`${datePart} ${currentYear}`);
-            
-            if (!isNaN(startDate.getTime())) {
-              // Expected completion date calculate karna
-              const endDate = new Date(startDate);
-              endDate.setDate(startDate.getDate() + total);
-              
-              const formattedEndDate = endDate.toLocaleDateString('en-GB', {
-                day: '2-digit',
-                month: 'short'
-              });
+function getLastAttendanceMinutes(logs){
 
-              // Aaj se kitne din bache hain calculate karna
-              const today = new Date();
-              today.setHours(0,0,0,0);
-              endDate.setHours(0,0,0,0);
-              
-              const diffTime = endDate.getTime() - today.getTime();
-              const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  if(!logs || !logs.length)
+    return null;
 
-              if (isDone) {
-                dateStatusText = `🏁 Completed on ${formattedEndDate}`;
-              } else if (diffDays > 0) {
-                dateStatusText = `📅 End: ${formattedEndDate} (${diffDays} Days Left)`;
-              } else if (diffDays === 0) {
-                dateStatusText = `📅 Ends Today! (${formattedEndDate})`;
-              } else {
-                dateStatusText = `⚠️ Overdue since ${formattedEndDate}`;
-              }
-            }
-          }
-        } catch (e) {
-          dateStatusText = "Date Error";
+
+  const last =
+    logs[logs.length-1];
+
+
+  const time =
+    getLogTime(last);
+
+
+  if(!time)
+    return null;
+
+
+  return (
+    time.hour*60+
+    time.minute
+  );
+
+}
+
+
+/* =====================================================
+   TIME DISTANCE
+===================================================== */
+
+function timeDistance(logs){
+
+  const target =
+    getLastAttendanceMinutes(logs);
+
+
+  if(target===null)
+    return 99999;
+
+
+  const now =
+    new Date();
+
+
+  const current =
+    now.getHours()*60+
+    now.getMinutes();
+
+
+  let diff =
+    Math.abs(
+      current-target
+    );
+
+
+  if(diff>720)
+    diff=1440-diff;
+
+
+  return diff;
+
+}
+
+
+/* =====================================================
+   LIVE STATUS
+===================================================== */
+
+function getLiveStatus(logs){
+
+  if(!logs || !logs.length){
+
+    return {
+      live:false,
+      text:"No attendance yet"
+    };
+
+  }
+
+
+  const last =
+    logs[logs.length-1];
+
+
+  const time =
+    getLogTime(last);
+
+
+  if(!time){
+
+    return {
+      live:false,
+      text:"Time unavailable"
+    };
+
+  }
+
+
+  const target =
+    time.hour*60+
+    time.minute;
+
+
+  const now =
+    new Date();
+
+
+  const current =
+    now.getHours()*60+
+    now.getMinutes();
+
+
+  let diff =
+    Math.abs(
+      current-target
+    );
+
+
+  if(diff>720)
+    diff=1440-diff;
+
+
+  if(diff<=30){
+
+    return {
+      live:true,
+      text:`● LAST ATTENDANCE ${time.text}`
+    };
+
+  }
+
+
+  return {
+    live:false,
+    text:`Last attendance ${time.text}`
+  };
+
+}
+
+
+/* =====================================================
+   DATE STATUS
+===================================================== */
+
+function getDateStatus(
+  logs,
+  total,
+  done
+){
+
+  if(!logs.length)
+    return "📅 No attendance recorded";
+
+
+  try{
+
+    const datePart =
+      logs[0]
+        .split(" | ")[0]
+        .trim();
+
+
+    const year =
+      new Date().getFullYear();
+
+
+    const start =
+      new Date(
+        `${datePart} ${year}`
+      );
+
+
+    if(isNaN(start.getTime()))
+      return "📅 Date unavailable";
+
+
+    const end =
+      new Date(start);
+
+
+    end.setDate(
+      start.getDate()+total
+    );
+
+
+    const endText =
+      end.toLocaleDateString(
+        "en-GB",
+        {
+          day:"2-digit",
+          month:"short"
         }
-      }
+      );
 
-      const card = document.createElement('div');
-      card.className = `st-card ${isDone ? 'status-done' : ''}`;
-      card.setAttribute('data-name', data.name.toLowerCase());
-      
-      card.innerHTML = `
-        <div class="st-initial">${data.name.trim().charAt(0).toUpperCase()}</div>
-        <div class="st-details">
-          <b>${data.name}</b>
-          <span>📞 ${d.id}</span>
-          <span style="color: var(--gold-primary); font-size: 10px; margin-top: 4px; font-weight: 500;">${dateStatusText}</span>
-        </div>
-        <div class="progress-mini">
-          <b>${done}/${total}</b>
-          <p>CLASSES</p>
-        </div>
-        <button class="btn-action mark-btn" data-id="${d.id}" ${isDone ? 'disabled style="opacity:0.15;"' : ''}>+</button>
-        <button class="btn-action wa-btn" data-id="${d.id}" data-name="${data.name}" data-done="${done}" data-total="${total}" data-left="${left}">💬</button>
-        <button class="btn-action del-btn" data-id="${d.id}">×</button>
-      `;
-      list.appendChild(card);
+
+    if(done>=total)
+      return `🏁 Completed • ${endText}`;
+
+
+    const today =
+      new Date();
+
+
+    today.setHours(0,0,0,0);
+
+    end.setHours(0,0,0,0);
+
+
+    const diff =
+      Math.ceil(
+        (
+          end.getTime()-
+          today.getTime()
+        )/86400000
+      );
+
+
+    if(diff>0)
+      return `📅 End ${endText} • ${diff} days left`;
+
+
+    if(diff===0)
+      return `🔥 Ends Today • ${endText}`;
+
+
+    return `⚠️ Overdue • ${endText}`;
+
+  }catch(e){
+
+    return "📅 Date error";
+
+  }
+
+}
+
+
+/* =====================================================
+   FIREBASE REALTIME
+===================================================== */
+
+onSnapshot(
+  collection(db,"studentData"),
+  snap=>{
+
+    students=[];
+
+
+    snap.forEach(d=>{
+
+      const data =
+        d.data();
+
+
+      if(!data.name)
+        return;
+
+
+      students.push({
+
+        id:d.id,
+
+        data:data
+
+      });
 
     });
-    
-    document.getElementById('totalActive').innerText = active;
-    document.getElementById('totalFinished').innerText = finished;
-    setupCardEventListeners();
+
+
+    render();
+
+  }
+);
+
+
+/* =====================================================
+   RENDER
+===================================================== */
+
+function render(){
+
+  const list =
+    document.getElementById(
+      "attendanceList"
+    );
+
+
+  list.innerHTML="";
+
+
+  /*
+    SORTING:
+
+    1. Active students first.
+    2. Among active students,
+       last attendance time closest
+       to current time comes first.
+    3. Not Active students always go bottom.
+    4. Among Not Active students,
+       same time sorting is retained.
+  */
+
+  students.sort((a,b)=>{
+
+    const aInactive =
+      a.data.notActive === true;
+
+    const bInactive =
+      b.data.notActive === true;
+
+
+    if(aInactive && !bInactive)
+      return 1;
+
+
+    if(!aInactive && bInactive)
+      return -1;
+
+
+    const aLogs =
+      a.data.attendanceLogs || [];
+
+    const bLogs =
+      b.data.attendanceLogs || [];
+
+
+    return (
+      timeDistance(aLogs)-
+      timeDistance(bLogs)
+    );
+
   });
 
-  // Safe Dynamic Click Bindings
-  function setupCardEventListeners() {
-    document.querySelectorAll('.mark-btn').forEach(btn => {
-      btn.onclick = () => window.openRemarkModal(btn.getAttribute('data-id'));
-    });
-    document.querySelectorAll('.wa-btn').forEach(btn => {
-      btn.onclick = () => window.sendWhatsApp(btn.getAttribute('data-id'), btn.getAttribute('data-name'), btn.getAttribute('data-done'), btn.getAttribute('data-total'), btn.getAttribute('data-left'));
-    });
-    document.querySelectorAll('.del-btn').forEach(btn => {
-      btn.onclick = () => window.removeStudent(btn.getAttribute('data-id'));
-    });
+
+  let active=0;
+  let completed=0;
+  let live=0;
+  let inactive=0;
+
+
+  if(!students.length){
+
+    list.innerHTML=`
+
+      <div class="empty">
+
+        <div>🚗</div>
+
+        <b>No Students Yet</b>
+
+        <span>
+          Tap + to add a student
+        </span>
+
+      </div>
+
+    `;
+
+    updateStats(
+      active,
+      completed,
+      live,
+      inactive
+    );
+
+    return;
+
   }
 
-  // Open & Reset Remark Layouts
-  window.openRemarkModal = (id) => {
-    activeStudentID = id;
-    currentSelectedRoute = "";
-    currentSelectedKM = ""; // KM state clear kiya
-    currentSelectedRemark = "";
-    document.getElementById('customRemark').value = '';
-    
-    // Purani saari UI chips ka highlight hatane ke liye reset logic
-    document.querySelectorAll('.route-chip').forEach(chip => chip.classList.remove('selected'));
-    document.querySelectorAll('.km-chip').forEach(chip => chip.classList.remove('selected'));
-    document.querySelectorAll('.remark-chip').forEach(chip => chip.classList.remove('selected'));
-    window.toggleModal('remarkModal', true);
-  };
 
-  // Route Selection Core Handler
-  window.selectRoute = (element) => {
-    document.querySelectorAll('.route-chip').forEach(chip => chip.classList.remove('selected'));
-    element.classList.add('selected');
-    currentSelectedRoute = element.innerText.trim();
-    compileFinalInputString();
-  };
+  students.forEach(student=>{
 
-  // Naya Function: KM selection ko manage karne ke liye
-  window.selectKM = (element) => {
-    document.querySelectorAll('.km-chip').forEach(chip => chip.classList.remove('selected'));
-    element.classList.add('selected');
-    currentSelectedKM = element.innerText.trim();
-    compileFinalInputString();
-  };
+    const id =
+      student.id;
 
-  // Performance Remark Tag Handler
-  window.selectRemarkTag = (element) => {
-    document.querySelectorAll('.remark-chip').forEach(chip => chip.classList.remove('selected'));
-    if (element && typeof element === 'object' && element.innerText) {
-      element.classList.add('selected');
-      currentSelectedRemark = element.innerText.trim();
-    } else if (typeof element === 'string') {
-      currentSelectedRemark = element.trim();
+
+    const data =
+      student.data;
+
+
+    const logs =
+      Array.isArray(
+        data.attendanceLogs
+      )
+        ? data.attendanceLogs
+        : [];
+
+
+    const total =
+      parseInt(
+        data.totalClasses
+      ) || 15;
+
+
+    const done =
+      Math.max(
+        logs.length,
+        parseInt(
+          data.remaining
+        ) || 0
+      );
+
+
+    const isCompleted =
+      done>=total;
+
+
+    const isInactive =
+      data.notActive === true;
+
+
+    if(isInactive){
+
+      inactive++;
+
+    }else if(isCompleted){
+
+      completed++;
+
+    }else{
+
+      active++;
+
     }
-    compileFinalInputString();
-  };
 
-  // Auto-Compiler Controller (Ab yeh Route, Distance aur Remark teeno ko formatted string banayega)
-  function compileFinalInputString() {
-    let pieces = [];
-    if (currentSelectedRoute) pieces.push(`Route: ${currentSelectedRoute}`);
-    if (currentSelectedKM) pieces.push(`Distance: ${currentSelectedKM}`);
-    if (currentSelectedRemark) pieces.push(`Remark: ${currentSelectedRemark}`);
-    
-    document.getElementById('customRemark').value = pieces.join(' | ');
+
+    const status =
+      getLiveStatus(logs);
+
+
+    /*
+      Not Active student should
+      not count as Live Now.
+    */
+
+    if(
+      status.live &&
+      !isInactive
+    ){
+
+      live++;
+
+    }
+
+
+    const percentage =
+      Math.min(
+        100,
+        Math.round(
+          done/total*100
+        )
+      );
+
+
+    const card =
+      document.createElement(
+        "div"
+      );
+
+
+    card.className =
+      `st-card
+      ${
+        isInactive
+          ? "inactive-card"
+          : "active-card"
+      }
+      ${
+        status.live &&
+        !isInactive
+          ? "live-card"
+          : ""
+      }`;
+
+
+    card.dataset.name =
+      data.name.toLowerCase();
+
+
+    let badgeText;
+
+
+    if(isInactive){
+
+      badgeText="NOT ACTIVE";
+
+    }else if(status.live){
+
+      badgeText="ACTIVE NOW";
+
+    }else if(isCompleted){
+
+      badgeText="COMPLETED";
+
+    }else{
+
+      badgeText="ACTIVE";
+
+    }
+
+
+    const statusText =
+      isInactive
+        ? "⏸ Not Active • Mark attendance to activate"
+        : status.text;
+
+
+    card.innerHTML=`
+
+      <div class="status-badge">
+
+        ${badgeText}
+
+      </div>
+
+
+      <div class="student-head">
+
+        <div class="avatar">
+
+          ${safe(
+            data.name
+              .trim()
+              .charAt(0)
+              .toUpperCase()
+          )}
+
+        </div>
+
+
+        <div class="student-info">
+
+          <h3>
+            ${safe(data.name)}
+          </h3>
+
+          <div class="phone">
+            📱 ${safe(id)}
+          </div>
+
+          <div class="time-status">
+
+            ${safe(statusText)}
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="progress-section">
+
+        <div class="progress-row">
+
+          <span>
+            TRAINING PROGRESS
+          </span>
+
+          <b>
+            ${done}/${total}
+          </b>
+
+        </div>
+
+
+        <div class="progress-bar">
+
+          <div
+            class="progress-fill"
+            style="width:${percentage}%"
+          ></div>
+
+        </div>
+
+      </div>
+
+
+      <div class="info-line">
+
+        <span>
+          ${isInactive ? "⏸️" : isCompleted ? "🏁" : "📅"}
+        </span>
+
+        <strong>
+
+          ${
+            isInactive
+              ? "Student marked Not Active"
+              : getDateStatus(
+                  logs,
+                  total,
+                  done
+                )
+          }
+
+        </strong>
+
+      </div>
+
+
+      <div class="actions">
+
+
+        ${
+          isInactive
+
+          ?
+
+          `
+          <button
+            class="action make-active"
+            onclick="makeStudentActive('${safe(id)}')"
+          >
+            ✓ ACTIVE
+          </button>
+          `
+
+          :
+
+          `
+          <button
+            class="action attend"
+            onclick="openRemarkModal('${safe(id)}')"
+            ${
+              isCompleted
+                ? "disabled style='opacity:.25'"
+                : ""
+            }
+          >
+            + ATTEND
+          </button>
+          `
+        }
+
+
+        <button
+          class="action"
+          onclick="showHistory('${safe(id)}')"
+        >
+          📋 LOGS
+        </button>
+
+
+        <button
+          class="action whatsapp"
+          onclick="sendWhatsApp('${safe(id)}')"
+        >
+          💬 WA
+        </button>
+
+
+        <button
+          class="action call"
+          onclick="callStudent('${safe(id)}')"
+        >
+          📞 CALL
+        </button>
+
+
+      </div>
+
+
+      ${
+        !isInactive && !isCompleted
+
+        ?
+
+        `
+        <button
+          class="action not-active"
+          style="width:100%;margin-top:6px;height:31px;"
+          onclick="markNotActive('${safe(id)}')"
+        >
+          ⏸ MARK NOT ACTIVE
+        </button>
+        `
+
+        :
+
+        ""
+      }
+
+
+    `;
+
+
+    list.appendChild(card);
+
+  });
+
+
+  updateStats(
+    active,
+    completed,
+    live,
+    inactive
+  );
+
+
+  filterList();
+
+}
+
+
+/* =====================================================
+   UPDATE STATS
+===================================================== */
+
+function updateStats(
+  active,
+  completed,
+  live,
+  inactive
+){
+
+  document.getElementById(
+    "totalActive"
+  ).innerText=active;
+
+
+  document.getElementById(
+    "totalFinished"
+  ).innerText=completed;
+
+
+  document.getElementById(
+    "liveCount"
+  ).innerText=live;
+
+
+  document.getElementById(
+    "inactiveCount"
+  ).innerText=inactive;
+
+
+  document.getElementById(
+    "bottomActive"
+  ).innerText=active;
+
+
+  document.getElementById(
+    "bottomCompleted"
+  ).innerText=completed;
+
+
+  document.getElementById(
+    "bottomLive"
+  ).innerText=live;
+
+
+  document.getElementById(
+    "bottomInactive"
+  ).innerText=inactive;
+
+
+  document.getElementById(
+    "studentCount"
+  ).innerText=
+    students.length+
+    (
+      students.length===1
+        ? " Student"
+        : " Students"
+    );
+
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+window.filterList=()=>{
+
+  const value =
+    document.getElementById(
+      "studentSearch"
+    ).value
+      .toLowerCase()
+      .trim();
+
+
+  document.querySelectorAll(
+    ".st-card"
+  ).forEach(card=>{
+
+    const name =
+      card.dataset.name || "";
+
+
+    card.style.display =
+      name.includes(value)
+        ? "block"
+        : "none";
+
+  });
+
+};
+
+
+/* =====================================================
+   MARK NOT ACTIVE
+===================================================== */
+
+window.markNotActive=async(id)=>{
+
+  try{
+
+    await updateDoc(
+
+      doc(
+        db,
+        "studentData",
+        id
+      ),
+
+      {
+        notActive:true
+      }
+
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      "Unable to change status."
+    );
+
   }
 
-  // Push Attendance Entry to Firestore Log Array
-  window.submitAttendance = async () => {
-    if(!activeStudentID) return;
-    const remarkValue = document.getElementById('customRemark').value.trim();
-    
-    const now = new Date();
-    const stamp = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }) + " | " + 
-                  now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    
-    const entry = `${stamp} — ${remarkValue || "Regular drive tracking completed"}`;
+};
 
-    await updateDoc(doc(db, "studentData", activeStudentID), { 
-        remaining: increment(1),
-        attendanceLogs: arrayUnion(entry) 
-    });
 
-    window.toggleModal('remarkModal', false);
-    activeStudentID = null;
-  };
+/* =====================================================
+   MAKE ACTIVE
+===================================================== */
 
-    // WhatsApp Message Generator with Expected Completion Details
-  window.sendWhatsApp = (phone, name, done, total, left) => {
-    const rem = parseInt(left);
-    
-    // UI card se custom date text live fetch karna messaging sync ke liye
-    let dateExtra = "";
-    const cards = document.querySelectorAll('.st-card');
-    cards.forEach(c => {
-      if(c.innerHTML.includes(phone)) {
-        const spans = c.querySelectorAll('.st-details span');
-        if(spans[1]) { dateExtra = `\n${spans[1].innerText}`; }
+window.makeStudentActive=async(id)=>{
+
+  try{
+
+    await updateDoc(
+
+      doc(
+        db,
+        "studentData",
+        id
+      ),
+
+      {
+        notActive:false
       }
-    });
 
-    const message = `Hello *${name.trim()}*,\n\n*A1 Attendance Report*:\n✅ Completed: *${done}/${total}*\n⏳ Balance Sessions: *${rem < 0 ? 0 : rem}*${dateExtra ? '\n' + dateExtra : ''}\n\nKeep learning! 🔥`;
-    window.open(`https://wa.me/${phone.replace(/\+/g, '')}?text=${encodeURIComponent(message)}`, '_blank');
-  };
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      "Unable to activate student."
+    );
+
+  }
+
+};
 
 
-  // Register New Drivers
-  window.addNewStudent = async () => {
-    const p = document.getElementById('newPhone').value.trim();
-    const n = document.getElementById('newName').value.trim();
-    const t = document.getElementById('newTotal').value;
-    if(!p || !n) return alert("Validation Error: Name and Phone required.");
-    
-    await setDoc(doc(db, "studentData", p), { name: n, remaining: 0, totalClasses: parseInt(t), attendanceLogs: [] });
-    
-    document.getElementById('newPhone').value = '';
-    document.getElementById('newName').value = '';
-    window.toggleModal('addModal', false);
-  };
+/* =====================================================
+   OPEN DRIVING TRACK
+===================================================== */
 
-  // Wipe Profile Records
-  window.removeStudent = async (id) => { 
-    if(confirm("Confirm deletion of student data track?")) await deleteDoc(doc(db, "studentData", id)); 
-  };
+window.openRemarkModal=(id)=>{
 
-  // Interface Visibility Engine
-  window.toggleModal = (modalId, show) => {
-    document.getElementById(modalId).style.display = show ? 'flex' : 'none';
-  };
-  
-  // Realtime Client-side Search Filter
-  window.filterList = () => {
-    const val = document.getElementById("studentSearch").value.toLowerCase().trim();
-    document.querySelectorAll('.st-card').forEach(c => {
-        c.style.display = c.getAttribute('data-name').includes(val) ? "flex" : "none";
-    });
-  };
+  activeStudentID=id;
+
+  currentRoute="";
+  currentKM="";
+  currentRemark="";
+
+
+  document.getElementById(
+    "customRemark"
+  ).value="";
+
+
+  document.querySelectorAll(
+    ".route-option"
+  ).forEach(x=>
+    x.classList.remove(
+      "selected"
+    )
+  );
+
+
+  document.querySelectorAll(
+    ".km-option"
+  ).forEach(x=>
+    x.classList.remove(
+      "selected"
+    )
+  );
+
+
+  document.querySelectorAll(
+    ".remark-option"
+  ).forEach(x=>
+    x.classList.remove(
+      "selected"
+    )
+  );
+
+
+  toggleModal(
+    "remarkModal",
+    true
+  );
+
+};
+
+
+/* =====================================================
+   ROUTE
+===================================================== */
+
+window.selectRoute=(el)=>{
+
+  document.querySelectorAll(
+    ".route-option"
+  ).forEach(x=>
+    x.classList.remove(
+      "selected"
+    )
+  );
+
+
+  el.classList.add(
+    "selected"
+  );
+
+
+  currentRoute =
+    el.innerText.trim();
+
+
+  compileRemark();
+
+};
+
+
+/* =====================================================
+   KM
+===================================================== */
+
+window.selectKM=(el)=>{
+
+  document.querySelectorAll(
+    ".km-option"
+  ).forEach(x=>
+    x.classList.remove(
+      "selected"
+    )
+  );
+
+
+  el.classList.add(
+    "selected"
+  );
+
+
+  currentKM =
+    el.innerText.trim();
+
+
+  compileRemark();
+
+};
+
+
+/* =====================================================
+   REMARK
+===================================================== */
+
+window.selectRemarkTag=(el)=>{
+
+  document.querySelectorAll(
+    ".remark-option"
+  ).forEach(x=>
+    x.classList.remove(
+      "selected"
+    )
+  );
+
+
+  el.classList.add(
+    "selected"
+  );
+
+
+  currentRemark =
+    el.innerText.trim();
+
+
+  compileRemark();
+
+};
+
+
+/* =====================================================
+   COMPILE REMARK
+===================================================== */
+
+function compileRemark(){
+
+  const parts=[];
+
+
+  if(currentRoute){
+
+    parts.push(
+      `Route: ${currentRoute}`
+    );
+
+  }
+
+
+  if(currentKM){
+
+    parts.push(
+      `Distance: ${currentKM}`
+    );
+
+  }
+
+
+  if(currentRemark){
+
+    parts.push(
+      `Remark: ${currentRemark}`
+    );
+
+  }
+
+
+  document.getElementById(
+    "customRemark"
+  ).value =
+    parts.join(" | ");
+
+}
+
+
+/* =====================================================
+   SAVE ATTENDANCE
+===================================================== */
+
+window.submitAttendance=async()=>{
+
+  if(!activeStudentID)
+    return;
+
+
+  const remark =
+    document.getElementById(
+      "customRemark"
+    ).value.trim();
+
+
+  const now =
+    new Date();
+
+
+  const stamp =
+    now.toLocaleDateString(
+      "en-GB",
+      {
+        day:"2-digit",
+        month:"short"
+      }
+    )
+    +
+    " | "
+    +
+    now.toLocaleTimeString(
+      [],
+      {
+        hour:"2-digit",
+        minute:"2-digit"
+      }
+    );
+
+
+  const entry =
+    `${stamp} — ${
+      remark ||
+      "Regular drive tracking completed"
+    }`;
+
+
+  try{
+
+    /*
+      IMPORTANT:
+
+      Attendance add hone par
+      student automatically ACTIVE ho jayega.
+
+      Isliye notActive:false.
+    */
+
+    await updateDoc(
+
+      doc(
+        db,
+        "studentData",
+        activeStudentID
+      ),
+
+      {
+
+        remaining:
+          increment(1),
+
+        attendanceLogs:
+          arrayUnion(entry),
+
+        notActive:false
+
+      }
+
+    );
+
+
+    toggleModal(
+      "remarkModal",
+      false
+    );
+
+
+    activeStudentID=null;
+
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      "Attendance save failed."
+    );
+
+  }
+
+};
+
+
+/* =====================================================
+   HISTORY
+===================================================== */
+
+window.showHistory=(id)=>{
+
+  const student =
+    students.find(
+      x=>x.id===id
+    );
+
+
+  if(!student)
+    return;
+
+
+  const logs =
+    student.data.attendanceLogs || [];
+
+
+  document.getElementById(
+    "historyTitle"
+  ).innerText =
+    `${student.data.name} • Logs`;
+
+
+  const list =
+    document.getElementById(
+      "historyList"
+    );
+
+
+  if(!logs.length){
+
+    list.innerHTML=`
+
+      <div class="no-history">
+
+        No attendance records yet.
+
+      </div>
+
+    `;
+
+  }else{
+
+    list.innerHTML =
+      logs
+        .slice()
+        .reverse()
+        .map(
+          (log,index)=>{
+
+            const split =
+              log.split(" — ");
+
+
+            return `
+
+              <div class="history-item">
+
+                <div class="history-time">
+
+                  #${logs.length-index}
+                  • ${safe(split[0])}
+
+                </div>
+
+
+                <div class="history-text">
+
+                  ${safe(
+                    split
+                      .slice(1)
+                      .join(" — ")
+                  )}
+
+                </div>
+
+              </div>
+
+            `;
+
+          }
+        )
+        .join("");
+
+  }
+
+
+  toggleModal(
+    "historyModal",
+    true
+  );
+
+};
+
+
+/* =====================================================
+   WHATSAPP
+===================================================== */
+
+window.sendWhatsApp=(id)=>{
+
+  const student =
+    students.find(
+      x=>x.id===id
+    );
+
+
+  if(!student)
+    return;
+
+
+  const data =
+    student.data;
+
+
+  const logs =
+    data.attendanceLogs || [];
+
+
+  const total =
+    parseInt(
+      data.totalClasses
+    ) || 15;
+
+
+  const done =
+    Math.max(
+      logs.length,
+      parseInt(
+        data.remaining
+      ) || 0
+    );
+
+
+  const left =
+    Math.max(
+      0,
+      total-done
+    );
+
+
+  const message=
+
+`Hello *${data.name.trim()}*,
+
+*A1 Driving Classes Attendance*
+
+🚗 Completed: *${done}/${total}*
+⏳ Balance: *${left} Sessions*
+
+Keep learning and drive safely! 🚗🔥`;
+
+
+  window.open(
+    `https://wa.me/${id}?text=${encodeURIComponent(message)}`,
+    "_blank"
+  );
+
+};
+
+
+/* =====================================================
+   CALL
+===================================================== */
+
+window.callStudent=(id)=>{
+
+  window.location.href=
+    `tel:${id}`;
+
+};
+
+
+/* =====================================================
+   ADD STUDENT
+===================================================== */
+
+window.addNewStudent=async()=>{
+
+  const phone =
+    document.getElementById(
+      "newPhone"
+    ).value.trim();
+
+
+  const name =
+    document.getElementById(
+      "newName"
+    ).value.trim();
+
+
+  const total =
+    parseInt(
+      document.getElementById(
+        "newTotal"
+      ).value
+    ) || 15;
+
+
+  if(!phone || !name){
+
+    alert(
+      "Name and phone required."
+    );
+
+    return;
+
+  }
+
+
+  if(
+    !/^[0-9]{10}$/.test(phone)
+  ){
+
+    alert(
+      "Enter valid 10 digit mobile number."
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    await setDoc(
+
+      doc(
+        db,
+        "studentData",
+        phone
+      ),
+
+      {
+
+        name:name,
+
+        remaining:0,
+
+        totalClasses:total,
+
+        attendanceLogs:[],
+
+        notActive:false
+
+      }
+
+    );
+
+
+    document.getElementById(
+      "newPhone"
+    ).value="";
+
+
+    document.getElementById(
+      "newName"
+    ).value="";
+
+
+    document.getElementById(
+      "newTotal"
+    ).value="15";
+
+
+    toggleModal(
+      "addModal",
+      false
+    );
+
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      "Student creation failed."
+    );
+
+  }
+
+};
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+window.toggleModal=(id,show)=>{
+
+  document.getElementById(
+    id
+  ).style.display=
+    show
+      ? "flex"
+      : "none";
+
+};
+
+
+/* =====================================================
+   CLOCK
+===================================================== */
+
+function updateClock(){
+
+  const now =
+    new Date();
+
+
+  document.getElementById(
+    "clock"
+  ).innerText =
+    now.toLocaleTimeString(
+      [],
+      {
+        hour:"2-digit",
+        minute:"2-digit"
+      }
+    );
+
+
+  document.getElementById(
+    "date"
+  ).innerText =
+    now.toLocaleDateString(
+      "en-GB",
+      {
+        day:"2-digit",
+        month:"short"
+      }
+    );
+
+}
+
+
+updateClock();
+
+
+/* =====================================================
+   AUTO REFRESH
+
+   Every 30 seconds:
+
+   - Time updates
+   - Active status updates
+   - Last attendance sorting updates
+   - Not Active cards remain at bottom
+===================================================== */
+
+setInterval(()=>{
+
+  updateClock();
+
+  render();
+
+},30000);
+
+
+/* =====================================================
+   CLOSE MODAL OUTSIDE
+===================================================== */
+
+document.querySelectorAll(
+  ".modal"
+).forEach(modal=>{
+
+  modal.addEventListener(
+    "click",
+    e=>{
+
+      if(e.target===modal){
+
+        modal.style.display=
+          "none";
+
+      }
+
+    }
+  );
+
+});
+
+
+/* =====================================================
+   ESC
+===================================================== */
+
+document.addEventListener(
+  "keydown",
+  e=>{
+
+    if(e.key==="Escape"){
+
+      document
+        .querySelectorAll(".modal")
+        .forEach(m=>{
+
+          m.style.display="none";
+
+        });
+
+    }
+
+  }
+);
+
 </script>
+
 </body>
 </html>
