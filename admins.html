@@ -57,6 +57,7 @@ select{
 
 button{
   cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
 }
 
 /* ================= HEADER ================= */
@@ -136,7 +137,7 @@ button{
   padding:18px 16px 30px;
 }
 
-/* SEARCH */
+/* ================= SEARCH ================= */
 
 .search{
   position:relative;
@@ -333,7 +334,7 @@ button{
   border:1px solid #2c2c2c;
 }
 
-/* CLASS TYPE */
+/* ================= CLASS TYPE ================= */
 
 .typeRow{
   margin-top:13px;
@@ -375,7 +376,7 @@ button{
   font-weight:700;
 }
 
-/* LAST ATTENDANCE */
+/* ================= LAST ATTENDANCE ================= */
 
 .lastAttendance{
   margin-top:9px;
@@ -399,7 +400,7 @@ button{
   margin-top:5px;
 }
 
-/* PROGRESS */
+/* ================= PROGRESS ================= */
 
 .progressBox{
   margin-top:12px;
@@ -442,7 +443,7 @@ button{
   );
 }
 
-/* ACTIONS */
+/* ================= ACTIONS ================= */
 
 .actions{
   display:grid;
@@ -657,7 +658,7 @@ button{
   font-size:17px;
 }
 
-/* FORM */
+/* ================= FORM ================= */
 
 .formGroup{
   margin-bottom:14px;
@@ -698,7 +699,7 @@ button{
   resize:vertical;
 }
 
-/* TYPE */
+/* ================= TYPE ================= */
 
 .typeGrid{
   display:grid;
@@ -732,7 +733,7 @@ button{
   font-weight:800;
 }
 
-/* OPTIONS */
+/* ================= OPTIONS ================= */
 
 .optionGrid{
   display:grid;
@@ -747,6 +748,7 @@ button{
   border-radius:9px;
   color:#888;
   font-size:9px;
+  padding:5px;
 }
 
 .optionBtn.selected{
@@ -755,6 +757,53 @@ button{
   border-color:var(--gold-light);
   font-weight:800;
 }
+
+/* ================= CUSTOM ROUTE ================= */
+
+.customRouteBox{
+  display:none;
+  margin-top:8px;
+}
+
+.customRouteBox.show{
+  display:block;
+}
+
+.customRouteHint{
+  color:#555;
+  font-size:7px;
+  margin-top:5px;
+  line-height:1.4;
+}
+
+/* ================= CUSTOM REMARK ================= */
+
+.customRemarkBox{
+  display:none;
+  margin-top:8px;
+}
+
+.customRemarkBox.show{
+  display:block;
+}
+
+.customRemarkHint{
+  color:#555;
+  font-size:7px;
+  margin-top:5px;
+  line-height:1.4;
+}
+
+/* ================= DISTANCE DEFAULT ================= */
+
+.distanceDefault{
+  border-color:var(--gold-light);
+  background:var(--gold-light);
+  color:#111;
+  font-weight:800;
+}
+
+/* ================= GOLD BUTTON ================= */
 
 .goldBtn{
   width:100%;
@@ -771,7 +820,7 @@ button{
   font-weight:800;
 }
 
-/* HISTORY */
+/* ================= HISTORY ================= */
 
 .historyItem{
   padding:12px;
@@ -794,7 +843,7 @@ button{
   line-height:1.6;
 }
 
-/* TOAST */
+/* ================= TOAST ================= */
 
 .toast{
   position:fixed;
@@ -895,6 +944,7 @@ button{
       </div>
 
       <div>
+
         <div class="brandTitle">
           A1 Attendance
         </div>
@@ -902,18 +952,25 @@ button{
         <div class="brandSub">
           DRIVING TRACKING SYSTEM
         </div>
+
       </div>
 
     </div>
 
     <div class="clock">
-      <div class="clockTime" id="clockTime">
+
+      <div
+        class="clockTime"
+        id="clockTime">
         --:--
       </div>
 
-      <div class="clockDate" id="clockDate">
+      <div
+        class="clockDate"
+        id="clockDate">
         ---
       </div>
+
     </div>
 
   </div>
@@ -940,28 +997,52 @@ button{
   </div>
 
 
-  <!-- STATS -->
+  <!-- ================= STATS ================= -->
 
   <div class="stats">
 
     <div class="stat">
-      <div class="statValue" id="activeCount">0</div>
-      <div class="statLabel">ACTIVE</div>
+      <div
+        class="statValue"
+        id="activeCount">
+        0
+      </div>
+      <div class="statLabel">
+        ACTIVE
+      </div>
     </div>
 
     <div class="stat">
-      <div class="statValue" id="completedCount">0</div>
-      <div class="statLabel">COMPLETED</div>
+      <div
+        class="statValue"
+        id="completedCount">
+        0
+      </div>
+      <div class="statLabel">
+        COMPLETED
+      </div>
     </div>
 
     <div class="stat">
-      <div class="statValue" id="liveCount">0</div>
-      <div class="statLabel">LIVE NOW</div>
+      <div
+        class="statValue"
+        id="liveCount">
+        0
+      </div>
+      <div class="statLabel">
+        LIVE NOW
+      </div>
     </div>
 
     <div class="stat">
-      <div class="statValue" id="inactiveCount">0</div>
-      <div class="statLabel">NOT ACTIVE</div>
+      <div
+        class="statValue"
+        id="inactiveCount">
+        0
+      </div>
+      <div class="statLabel">
+        NOT ACTIVE
+      </div>
     </div>
 
   </div>
@@ -969,18 +1050,24 @@ button{
 
   <div class="sectionHeader">
 
-    <div class="sectionTitle" id="sectionTitle">
+    <div
+      class="sectionTitle"
+      id="sectionTitle">
       Active Students
     </div>
 
-    <div class="sectionCount" id="studentCount">
+    <div
+      class="sectionCount"
+      id="studentCount">
       0 Students
     </div>
 
   </div>
 
 
-  <div id="studentCards" class="cards">
+  <div
+    id="studentCards"
+    class="cards">
 
     <div class="loading">
       Loading students...
@@ -1014,7 +1101,6 @@ button{
 
   </button>
 
-
   <button
     class="navBtn"
     id="navCompleted"
@@ -1025,7 +1111,6 @@ button{
 
   </button>
 
-
   <button
     class="navBtn"
     id="navLive"
@@ -1035,7 +1120,6 @@ button{
     LIVE
 
   </button>
-
 
   <button
     class="navBtn"
@@ -1052,13 +1136,16 @@ button{
 
 <!-- ================= ADD STUDENT ================= -->
 
-<div class="modal" id="addModal">
+<div
+  class="modal"
+  id="addModal">
 
   <div class="modalBox">
 
     <div class="modalHeader">
 
       <div>
+
         <div class="modalTitle">
           Add Student
         </div>
@@ -1066,6 +1153,7 @@ button{
         <div class="modalSub">
           Create a new driving student
         </div>
+
       </div>
 
       <button
@@ -1186,13 +1274,16 @@ button{
 
 <!-- ================= ATTENDANCE ================= -->
 
-<div class="modal" id="attendanceModal">
+<div
+  class="modal"
+  id="attendanceModal">
 
   <div class="modalBox">
 
     <div class="modalHeader">
 
       <div>
+
         <div class="modalTitle">
           Driving Track
         </div>
@@ -1201,6 +1292,7 @@ button{
           class="modalSub"
           id="attendanceStudentName">
         </div>
+
       </div>
 
       <button
@@ -1211,6 +1303,8 @@ button{
 
     </div>
 
+
+    <!-- ROUTE -->
 
     <div class="formGroup">
 
@@ -1265,13 +1359,33 @@ button{
         <button
           class="optionBtn routeOption"
           onclick="selectRoute(this,'Other Route')">
-          Other Route
+          ✏️ Other Route
         </button>
+
+      </div>
+
+
+      <div
+        class="customRouteBox"
+        id="customRouteBox">
+
+        <input
+          id="customRoute"
+          class="formInput"
+          type="text"
+          maxlength="80"
+          placeholder="Enter custom route name...">
+
+        <div class="customRouteHint">
+          Example: Deuli Road, Medical College Road, Baripada Bypass
+        </div>
 
       </div>
 
     </div>
 
+
+    <!-- DISTANCE -->
 
     <div class="formGroup">
 
@@ -1282,45 +1396,12 @@ button{
       <div class="optionGrid">
 
         <button
-          class="optionBtn distanceOption"
-          onclick="selectDistance(this,'2 KM')">
-          2 KM
-        </button>
-
-        <button
-          class="optionBtn distanceOption"
+          type="button"
+          class="optionBtn distanceOption distanceDefault selected"
           onclick="selectDistance(this,'5 KM')">
+
           5 KM
-        </button>
 
-        <button
-          class="optionBtn distanceOption"
-          onclick="selectDistance(this,'7 KM')">
-          7 KM
-        </button>
-
-        <button
-          class="optionBtn distanceOption"
-          onclick="selectDistance(this,'10 KM')">
-          10 KM
-        </button>
-
-        <button
-          class="optionBtn distanceOption"
-          onclick="selectDistance(this,'12 KM')">
-          12 KM
-        </button>
-
-        <button
-          class="optionBtn distanceOption"
-          onclick="selectDistance(this,'15 KM')">
-          15 KM
-        </button>
-
-        <button
-          class="optionBtn distanceOption"
-          onclick="selectDistance(this,'20 KM')">
-          20 KM
         </button>
 
       </div>
@@ -1328,65 +1409,166 @@ button{
     </div>
 
 
+    <!-- REMARK -->
+
     <div class="formGroup">
 
       <label class="formLabel">
-        Quick Remark
+        Driving Remark
       </label>
 
       <div class="optionGrid">
 
         <button
+          type="button"
           class="optionBtn remarkOption"
-          onclick="selectRemark(this,'🌟 Perfect')">
-          🌟 Perfect
+          onclick="selectRemark(this,'👍 Good Driving')">
+
+          👍 Good Driving
+
         </button>
 
-        <button
-          class="optionBtn remarkOption"
-          onclick="selectRemark(this,'👍 Good')">
-          👍 Good
-        </button>
 
         <button
+          type="button"
           class="optionBtn remarkOption"
-          onclick="selectRemark(this,'🔄 Turns')">
-          🔄 Turns
+          onclick="selectRemark(this,'⚠️ Needs Improvement')">
+
+          ⚠️ Needs Improvement
+
         </button>
 
-        <button
-          class="optionBtn remarkOption"
-          onclick="selectRemark(this,'⚙️ Clutch')">
-          ⚙️ Clutch
-        </button>
 
         <button
+          type="button"
           class="optionBtn remarkOption"
-          onclick="selectRemark(this,'🚦 Traffic')">
-          🚦 Traffic
+          onclick="selectRemark(this,'🔄 Good Turning')">
+
+          🔄 Good Turning
+
         </button>
 
+
         <button
+          type="button"
           class="optionBtn remarkOption"
-          onclick="selectRemark(this,'🛑 Braking')">
-          🛑 Braking
+          onclick="selectRemark(this,'⚠️ Bad Turning')">
+
+          ⚠️ Bad Turning
+
+        </button>
+
+
+        <button
+          type="button"
+          class="optionBtn remarkOption"
+          onclick="selectRemark(this,'🛑 Good Braking')">
+
+          🛑 Good Braking
+
+        </button>
+
+
+        <button
+          type="button"
+          class="optionBtn remarkOption"
+          onclick="selectRemark(this,'⚠️ Bad Braking')">
+
+          ⚠️ Bad Braking
+
+        </button>
+
+
+        <button
+          type="button"
+          class="optionBtn remarkOption"
+          onclick="selectRemark(this,'⚙️ Good Clutch')">
+
+          ⚙️ Good Clutch
+
+        </button>
+
+
+        <button
+          type="button"
+          class="optionBtn remarkOption"
+          onclick="selectRemark(this,'⚙️ Clutch Improvement')">
+
+          ⚙️ Clutch Improvement
+
+        </button>
+
+
+        <button
+          type="button"
+          class="optionBtn remarkOption"
+          onclick="selectRemark(this,'🚦 Good Traffic Control')">
+
+          🚦 Good Traffic Control
+
+        </button>
+
+
+        <button
+          type="button"
+          class="optionBtn remarkOption"
+          onclick="selectRemark(this,'🚗 Good Vehicle Control')">
+
+          🚗 Good Vehicle Control
+
+        </button>
+
+
+        <button
+          type="button"
+          class="optionBtn remarkOption"
+          onclick="selectRemark(this,'🅿️ Good Parking')">
+
+          🅿️ Good Parking
+
+        </button>
+
+
+        <button
+          type="button"
+          class="optionBtn remarkOption"
+          onclick="selectRemark(this,'⚠️ Parking Improvement')">
+
+          ⚠️ Parking Improvement
+
+        </button>
+
+
+        <button
+          type="button"
+          class="optionBtn remarkOption"
+          onclick="selectRemark(this,'📝 Custom Remark')">
+
+          📝 Custom Remark
+
         </button>
 
       </div>
 
-    </div>
 
+      <!-- CUSTOM REMARK -->
 
-    <div class="formGroup">
+      <div
+        class="customRemarkBox"
+        id="customRemarkBox">
 
-      <label class="formLabel">
-        Additional Remark
-      </label>
+        <input
+          id="customRemark"
+          class="formInput"
+          type="text"
+          maxlength="150"
+          placeholder="Write your custom remark...">
 
-      <textarea
-        id="customRemark"
-        class="formTextarea"
-        placeholder="Optional note..."></textarea>
+        <div class="customRemarkHint">
+          Example: Excellent control on slope / Needs more practice on reverse
+        </div>
+
+      </div>
 
     </div>
 
@@ -1406,13 +1588,16 @@ button{
 
 <!-- ================= HISTORY ================= -->
 
-<div class="modal" id="historyModal">
+<div
+  class="modal"
+  id="historyModal">
 
   <div class="modalBox">
 
     <div class="modalHeader">
 
       <div>
+
         <div class="modalTitle">
           Attendance History
         </div>
@@ -1421,6 +1606,7 @@ button{
           class="modalSub"
           id="historyStudentName">
         </div>
+
       </div>
 
       <button
@@ -1431,7 +1617,6 @@ button{
 
     </div>
 
-
     <div id="historyList"></div>
 
   </div>
@@ -1441,13 +1626,16 @@ button{
 
 <!-- ================= EDIT TYPE ================= -->
 
-<div class="modal" id="typeModal">
+<div
+  class="modal"
+  id="typeModal">
 
   <div class="modalBox">
 
     <div class="modalHeader">
 
       <div>
+
         <div class="modalTitle">
           Edit Class Type
         </div>
@@ -1456,6 +1644,7 @@ button{
           class="modalSub"
           id="typeStudentName">
         </div>
+
       </div>
 
       <button
@@ -1526,6 +1715,8 @@ button{
 </div>
 
 
+<!-- ================= TOAST ================= -->
+
 <div
   class="toast"
   id="toast">
@@ -1585,7 +1776,10 @@ const db =
   getFirestore(app);
 
 const studentCollection =
-  collection(db,"studentData");
+  collection(
+    db,
+    "studentData"
+  );
 
 
 /* ==================================================
@@ -1599,7 +1793,7 @@ let currentFilter = "active";
 let currentStudentId = null;
 
 let selectedRoute = "";
-let selectedDistance = "";
+let selectedDistance = "5 KM";
 let selectedRemark = "";
 
 let addClassType = "Group";
@@ -1626,7 +1820,9 @@ function safe(value){
 
 function getLogs(student){
 
-  return Array.isArray(student.attendanceLogs)
+  return Array.isArray(
+    student.attendanceLogs
+  )
     ? student.attendanceLogs
     : [];
 
@@ -1639,7 +1835,9 @@ function getDone(student){
     getLogs(student);
 
   const oldValue =
-    Number(student.remaining || 0);
+    Number(
+      student.remaining || 0
+    );
 
   return Math.max(
     logs.length,
@@ -1653,7 +1851,9 @@ function getDone(student){
 function getTotal(student){
 
   return Math.max(
-    Number(student.totalClasses || 0),
+    Number(
+      student.totalClasses || 0
+    ),
     1
   );
 
@@ -1662,7 +1862,10 @@ function getTotal(student){
 
 function isCompleted(student){
 
-  return getDone(student) >= getTotal(student);
+  return (
+    getDone(student) >=
+    getTotal(student)
+  );
 
 }
 
@@ -1706,14 +1909,18 @@ function parseAttendanceTime(log){
     ampm === "PM" &&
     hour !== 12
   ){
+
     hour += 12;
+
   }
 
   if(
     ampm === "AM" &&
     hour === 12
   ){
+
     hour = 0;
+
   }
 
   return {
@@ -1780,7 +1987,9 @@ function isLive(student){
     return false;
   }
 
-  return timeDistance(logs) <= 30;
+  return (
+    timeDistance(logs) <= 30
+  );
 
 }
 
@@ -1837,19 +2046,30 @@ setInterval(
 function showToast(message){
 
   const toast =
-    document.getElementById("toast");
+    document.getElementById(
+      "toast"
+    );
 
   toast.textContent =
     message;
 
-  toast.classList.add("show");
+  toast.classList.add(
+    "show"
+  );
 
-  clearTimeout(toastTimer);
+  clearTimeout(
+    toastTimer
+  );
 
   toastTimer =
-    setTimeout(()=>{
-      toast.classList.remove("show");
-    },2200);
+    setTimeout(
+      ()=>{
+        toast.classList.remove(
+          "show"
+        );
+      },
+      2200
+    );
 
 }
 
@@ -1916,12 +2136,13 @@ async function loadStudents(){
 function render(){
 
   const search =
-    document.getElementById(
-      "searchInput"
-    )
-    .value
-    .trim()
-    .toLowerCase();
+    document
+      .getElementById(
+        "searchInput"
+      )
+      .value
+      .trim()
+      .toLowerCase();
 
 
   const activeStudents =
@@ -1967,13 +2188,14 @@ function render(){
   let filtered = [];
 
 
-  if(currentFilter === "active"){
+  if(
+    currentFilter === "active"
+  ){
 
     filtered =
       [...activeStudents];
 
   }
-
 
   else if(
     currentFilter === "completed"
@@ -1986,7 +2208,6 @@ function render(){
 
   }
 
-
   else if(
     currentFilter === "live"
   ){
@@ -1997,7 +2218,6 @@ function render(){
       );
 
   }
-
 
   else if(
     currentFilter === "inactive"
@@ -2012,24 +2232,26 @@ function render(){
   if(search){
 
     filtered =
-      filtered.filter(student=>{
+      filtered.filter(
+        student=>{
 
-        const name =
-          String(
-            student.name || ""
-          ).toLowerCase();
+          const name =
+            String(
+              student.name || ""
+            ).toLowerCase();
 
-        const phone =
-          String(
-            student.id || ""
-          ).toLowerCase();
+          const phone =
+            String(
+              student.id || ""
+            ).toLowerCase();
 
-        return (
-          name.includes(search) ||
-          phone.includes(search)
-        );
+          return (
+            name.includes(search) ||
+            phone.includes(search)
+          );
 
-      });
+        }
+      );
 
   }
 
@@ -2054,10 +2276,13 @@ function render(){
 
     filtered.sort(
       (a,b)=>
-        String(a.name || "")
-          .localeCompare(
-            String(b.name || "")
+        String(
+          a.name || ""
+        ).localeCompare(
+          String(
+            b.name || ""
           )
+        )
     );
 
   }
@@ -2127,7 +2352,9 @@ function render(){
 
   container.innerHTML =
     filtered
-      .map(studentCard)
+      .map(
+        studentCard
+      )
       .join("");
 
 }
@@ -2171,14 +2398,6 @@ function studentCard(student){
 
   const completed =
     isCompleted(student);
-
-
-  /*
-    IMPORTANT:
-    Old students which don't have
-    classType will also display
-    as GROUP by default.
-  */
 
   const type =
     student.classType === "Personal"
@@ -2477,11 +2696,15 @@ function(filter){
 
 
   document
-    .querySelectorAll(".navBtn")
+    .querySelectorAll(
+      ".navBtn"
+    )
     .forEach(btn=>{
+
       btn.classList.remove(
         "active"
       );
+
     });
 
 
@@ -2541,25 +2764,17 @@ function(){
     "studentPhone"
   ).value = "";
 
-
   document.getElementById(
     "studentName"
   ).value = "";
-
 
   document.getElementById(
     "totalClasses"
   ).value = "20";
 
-
-  /*
-    DEFAULT = GROUP
-  */
-
   selectAddType(
     "Group"
   );
-
 
   document
     .getElementById(
@@ -2689,11 +2904,6 @@ async function(){
 
         attendanceLogs:[],
 
-        /*
-          NEW STUDENTS ARE
-          GROUP BY DEFAULT
-        */
-
         classType:
           addClassType || "Group",
 
@@ -2755,12 +2965,6 @@ function(id){
     return;
   }
 
-
-  /*
-    If old student has
-    no classType,
-    treat it as GROUP.
-  */
 
   editClassType =
     student.classType === "Personal"
@@ -2915,8 +3119,20 @@ function(id){
 
 
   selectedRoute = "";
-  selectedDistance = "";
+
+  /*
+    DISTANCE DEFAULT = 5 KM
+  */
+
+  selectedDistance =
+    "5 KM";
+
   selectedRemark = "";
+
+
+  document.getElementById(
+    "customRoute"
+  ).value = "";
 
 
   document.getElementById(
@@ -2925,13 +3141,64 @@ function(id){
 
 
   document
+    .getElementById(
+      "customRouteBox"
+    )
+    .classList.remove(
+      "show"
+    );
+
+
+  document
+    .getElementById(
+      "customRemarkBox"
+    )
+    .classList.remove(
+      "show"
+    );
+
+
+  document
     .querySelectorAll(
-      ".optionBtn"
+      ".routeOption"
     )
     .forEach(btn=>{
+
       btn.classList.remove(
         "selected"
       );
+
+    });
+
+
+  document
+    .querySelectorAll(
+      ".remarkOption"
+    )
+    .forEach(btn=>{
+
+      btn.classList.remove(
+        "selected"
+      );
+
+    });
+
+
+  /*
+    Always select 5 KM
+    by default.
+  */
+
+  document
+    .querySelectorAll(
+      ".distanceOption"
+    )
+    .forEach(btn=>{
+
+      btn.classList.add(
+        "selected"
+      );
+
     });
 
 
@@ -2946,6 +3213,10 @@ function(id){
 };
 
 
+/* ==================================================
+   ROUTE
+================================================== */
+
 window.selectRoute =
 function(btn,value){
 
@@ -2958,9 +3229,11 @@ function(btn,value){
       ".routeOption"
     )
     .forEach(x=>{
+
       x.classList.remove(
         "selected"
       );
+
     });
 
 
@@ -2968,8 +3241,49 @@ function(btn,value){
     "selected"
   );
 
+
+  const customBox =
+    document.getElementById(
+      "customRouteBox"
+    );
+
+  const customInput =
+    document.getElementById(
+      "customRoute"
+    );
+
+
+  if(
+    value === "Other Route"
+  ){
+
+    customBox.classList.add(
+      "show"
+    );
+
+    setTimeout(
+      ()=>{
+        customInput.focus();
+      },
+      100
+    );
+
+  }else{
+
+    customBox.classList.remove(
+      "show"
+    );
+
+    customInput.value = "";
+
+  }
+
 };
 
+
+/* ==================================================
+   DISTANCE
+================================================== */
 
 window.selectDistance =
 function(btn,value){
@@ -2983,9 +3297,11 @@ function(btn,value){
       ".distanceOption"
     )
     .forEach(x=>{
+
       x.classList.remove(
         "selected"
       );
+
     });
 
 
@@ -2995,6 +3311,10 @@ function(btn,value){
 
 };
 
+
+/* ==================================================
+   REMARK
+================================================== */
 
 window.selectRemark =
 function(btn,value){
@@ -3008,9 +3328,11 @@ function(btn,value){
       ".remarkOption"
     )
     .forEach(x=>{
+
       x.classList.remove(
         "selected"
       );
+
     });
 
 
@@ -3018,8 +3340,49 @@ function(btn,value){
     "selected"
   );
 
+
+  const customBox =
+    document.getElementById(
+      "customRemarkBox"
+    );
+
+  const customInput =
+    document.getElementById(
+      "customRemark"
+    );
+
+
+  if(
+    value === "📝 Custom Remark"
+  ){
+
+    customBox.classList.add(
+      "show"
+    );
+
+    setTimeout(
+      ()=>{
+        customInput.focus();
+      },
+      100
+    );
+
+  }else{
+
+    customBox.classList.remove(
+      "show"
+    );
+
+    customInput.value = "";
+
+  }
+
 };
 
+
+/* ==================================================
+   SAVE ATTENDANCE
+================================================== */
 
 window.saveAttendance =
 async function(){
@@ -3028,6 +3391,8 @@ async function(){
     return;
   }
 
+
+  /* ================= ROUTE ================= */
 
   if(!selectedRoute){
 
@@ -3040,24 +3405,103 @@ async function(){
   }
 
 
-  if(!selectedDistance){
+  /*
+    CUSTOM ROUTE
+  */
 
-    showToast(
-      "Select distance"
-    );
+  if(
+    selectedRoute === "Other Route"
+  ){
 
-    return;
+    const customRoute =
+      document
+        .getElementById(
+          "customRoute"
+        )
+        .value
+        .trim();
+
+
+    if(!customRoute){
+
+      showToast(
+        "Enter custom route"
+      );
+
+      document
+        .getElementById(
+          "customRoute"
+        )
+        .focus();
+
+      return;
+
+    }
+
+
+    selectedRoute =
+      customRoute;
 
   }
 
 
-  const custom =
-    document
-      .getElementById(
-        "customRemark"
-      )
-      .value
-      .trim();
+  /* ================= DISTANCE ================= */
+
+  /*
+    Distance is ALWAYS 5 KM.
+    Even if user doesn't touch
+    the distance option.
+  */
+
+  if(!selectedDistance){
+
+    selectedDistance =
+      "5 KM";
+
+  }
+
+
+  /* ================= REMARK ================= */
+
+  let finalRemark =
+    selectedRemark;
+
+
+  if(
+    selectedRemark ===
+    "📝 Custom Remark"
+  ){
+
+    const customRemark =
+      document
+        .getElementById(
+          "customRemark"
+        )
+        .value
+        .trim();
+
+
+    if(!customRemark){
+
+      showToast(
+        "Enter custom remark"
+      );
+
+      document
+        .getElementById(
+          "customRemark"
+        )
+        .focus();
+
+      return;
+
+    }
+
+
+    finalRemark =
+      customRemark;
+
+  }
 
 
   const now =
@@ -3085,22 +3529,12 @@ async function(){
     );
 
 
-  let remark =
-    selectedRemark;
-
-
-  if(custom){
-
-    remark =
-      remark
-        ? `${remark} | ${custom}`
-        : custom;
-
-  }
-
-
   const log =
-    `${datePart} | ${timePart} — Route: ${selectedRoute} | Distance: ${selectedDistance}${remark ? ` | Remark: ${remark}` : ""}`;
+    `${datePart} | ${timePart} — Route: ${selectedRoute} | Distance: 5 KM${
+      finalRemark
+        ? ` | Remark: ${finalRemark}`
+        : ""
+    }`;
 
 
   const student =
@@ -3132,11 +3566,6 @@ async function(){
 
         attendanceLogs:
           arrayUnion(log),
-
-        /*
-          Attendance automatically
-          makes the student ACTIVE.
-        */
 
         notActive:false
 
@@ -3318,23 +3747,25 @@ function(id){
   }else{
 
     list.innerHTML =
-      logs.map(
-        (log,index)=>`
+      logs
+        .map(
+          (log,index)=>`
 
-          <div class="historyItem">
+            <div class="historyItem">
 
-            <div class="historyNumber">
-              SESSION ${logs.length-index}
+              <div class="historyNumber">
+                SESSION ${logs.length-index}
+              </div>
+
+              <div class="historyText">
+                ${safe(log)}
+              </div>
+
             </div>
 
-            <div class="historyText">
-              ${safe(log)}
-            </div>
-
-          </div>
-
-        `
-      ).join("");
+          `
+        )
+        .join("");
 
   }
 
