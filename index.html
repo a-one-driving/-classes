@@ -1,389 +1,3151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Abhinaash A One | Driving Excellence</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800;900&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
-      --gold: #d4af37; --bg: #000000; --card: rgba(18, 18, 18, 0.85);
-      --border: #2a2a2a; --txt: #ffffff; --muted: #a0a0a0;
-      --danger: #ff4d4d; --success: #2ecc71; --warning: #f1c40f;
-    }
+<meta charset="UTF-8">
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; -webkit-tap-highlight-color: transparent; }
-    body { background-color: var(--bg); color: var(--txt); overflow-x: hidden; padding-bottom: 50px; }
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+>
 
-    /* WEATHER ANIMATIONS */
-    #weather-container { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
-    .cloud { position: absolute; background: rgba(255, 255, 255, 0.07); border-radius: 100px; filter: blur(40px); animation: drift linear infinite; }
-    @keyframes drift { from { transform: translateX(-400px); } to { transform: translateX(100vw); } }
-    .rain-drop { position: absolute; width: 2px; height: 30px; background: rgba(255,255,255,0.4); top: -50px; animation: rain-fall linear infinite; }
-    @keyframes rain-fall { to { transform: translateY(110vh); } }
+<title>Abhinaash A One | Driving Excellence</title>
 
-    header { padding: 12px 15px; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); border-bottom: 1px solid var(--gold); position: sticky; top: 0; z-index: 1000; }
-    .nav { max-width: 1100px; margin: auto; display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-weight: 900; font-size: 18px; color: var(--gold); letter-spacing: 1px; }
-    .btn-profile-nav { border: 1px solid var(--gold); color: var(--gold); padding: 5px 12px; border-radius: 8px; font-size: 11px; font-weight: 700; text-decoration: none; text-transform: uppercase; }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    .container { max-width: 1100px; margin: auto; padding: 20px 15px; position: relative; z-index: 1; }
+<link
+  href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+  rel="stylesheet"
+>
 
-    /* --- SHOWROOM SECTION --- */
-    .showroom-section {
-      width: 100%;
-      padding: 30px 15px;
-      background: radial-gradient(circle at center, #111 0%, #000 100%);
-      border-radius: 24px;
-      margin-bottom: 30px;
-      border: 1px solid #1a1a1a;
-      text-align: center;
-      position: relative;
-    }
-    .car-platform {
-      position: relative;
-      width: 100%;
-      max-width: 400px;
-      height: 180px;
-      margin: 20px auto 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-    }
-    .yellow-road {
-      position: absolute;
-      bottom: 20%;
-      width: 100%;
-      height: 4px;
-      background: var(--gold);
-      box-shadow: 0 0 15px var(--gold);
-      z-index: 1;
-    }
-    .main-car {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      z-index: 10;
-      position: absolute;
-      bottom: 5%;
-      opacity: 0;
-      transition: opacity 0.8s ease-in-out;
-    }
-    .main-car.active { opacity: 1; }
+<style>
 
-    .weather-alert { font-size: 10px; font-weight: 700; margin-top: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
+/* =====================================================
+   ROOT
+===================================================== */
 
-    /* --- TRAFFIC RULE SECTION (FIXED) --- */
-    .traffic-rule-card {
-      background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
-      border: 1px solid var(--border); border-radius: 20px; padding: 15px; margin-bottom: 25px;
-      display: flex; align-items: center; gap: 15px; border-left: 4px solid var(--gold);
-    }
-    .rule-icon-box {
-      width: 60px; height: 60px; background: #fff; border-radius: 12px;
-      display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0;
-    }
-    .rule-icon-box img { width: 80%; height: 80%; object-fit: contain; transition: opacity 0.3s ease; }
-    .rule-content h4 { font-size: 10px; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px; }
-    .rule-content p { font-size: 13px; font-weight: 600; color: #fff; line-height: 1.3; }
+:root{
+  --gold:#d4af37;
+  --gold2:#f4d675;
+  --black:#050505;
+  --dark:#0b0b0b;
+  --green:#2ecc71;
+  --yellow:#f1c40f;
+  --red:#ff4d4d;
+}
 
-    /* --- ROUTES WITH DIFFICULTY --- */
-    .routes-container { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 15px; scrollbar-width: none; }
-    .routes-container::-webkit-scrollbar { display: none; }
-    .route-chip {
-      background: var(--card);
-      border: 1px solid var(--border);
-      padding: 8px 15px;
-      border-radius: 50px;
-      white-space: nowrap;
-      font-size: 11px;
-      color: var(--gold);
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .route-chip[data-level="easy"] { border-left: 4px solid var(--success); }
-    .route-chip[data-level="med"] { border-left: 4px solid var(--warning); }
-    .route-chip[data-level="hard"] { border-left: 4px solid var(--danger); }
 
-    .difficulty-guide {
-      display: flex;
-      justify-content: flex-start;
-      gap: 12px;
-      margin-bottom: 12px;
-      padding: 0 5px;
-    }
-    .guide-item {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 9px;
-      font-weight: 600;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .dot { width: 7px; height: 7px; border-radius: 50%; }
+/* =====================================================
+   RESET
+===================================================== */
 
-    /* PRICING */
-    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-bottom: 30px; }
-    .price-card { background: var(--card); padding: 20px; border-radius: 20px; border: 1px solid var(--border); position: relative; overflow: hidden; backdrop-filter: blur(10px); }
-    .price-card.featured { border: 2px solid var(--gold); }
-    .best-label { position: absolute; top: 12px; right: -35px; background: var(--gold); color: #000; padding: 5px 40px; transform: rotate(45deg); font-size: 10px; font-weight: 900; }
-    .price-tag { font-size: 32px; font-weight: 900; color: #fff; margin: 10px 0; }
-    .feature-list { list-style: none; margin: 15px 0; padding: 0; }
-    .feature-list li { color: var(--muted); font-size: 13px; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
-    .feature-list li::before { content: "✓"; color: var(--gold); font-weight: 900; }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+  -webkit-tap-highlight-color:transparent;
+}
 
-    .personal-banner { background: var(--gold); color: #000; padding: 20px; border-radius: 20px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; }
-    .btn-book-black { background: #000; color: var(--gold); border: none; padding: 10px 22px; border-radius: 12px; font-weight: 900; cursor: pointer; }
+html{
+  scroll-behavior:smooth;
+}
 
-    /* BATCHES */
-    .batch-slider { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 10px; scroll-snap-type: x mandatory; scrollbar-width: none; }
-    .batch-card { min-width: 280px; max-width: 280px; background: var(--card); border: 1px solid var(--border); padding: 15px; border-radius: 20px; backdrop-filter: blur(10px); scroll-snap-align: start; }
-    .progress-bar-bg { width: 100%; height: 4px; background: #111; border-radius: 10px; margin-top: 5px; overflow: hidden; }
-    .progress-bar-fill { height: 100%; background: var(--gold); transition: 1s ease; }
+body{
+  background:
+    radial-gradient(
+      circle at 50% -10%,
+      rgba(212,175,55,.13),
+      transparent 35%
+    ),
+    #050505;
 
-    .btn-gold { background: linear-gradient(45deg, var(--gold), #f9e29d); color: #000; border: none; padding: 12px 20px; border-radius: 10px; font-weight: 800; cursor: pointer; width: 100%; }
-    .status-input { width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #333; background: #000; color: #fff; margin-bottom: 15px; outline: none; }
-    .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); display: none; align-items: center; justify-content: center; z-index: 9999; }
-    .modal-content { background: #121212; padding: 25px; border-radius: 20px; border: 1px solid var(--gold); width: 90% }
-  </style>
+  color:#fff;
+  overflow-x:hidden;
+  padding-bottom:40px;
+}
+
+
+/* =====================================================
+   WEATHER
+===================================================== */
+
+#weather-container{
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+  z-index:0;
+}
+
+.cloud{
+  position:absolute;
+  background:rgba(255,255,255,.055);
+  border-radius:100px;
+  filter:blur(35px);
+  animation:cloudMove linear infinite;
+}
+
+@keyframes cloudMove{
+  from{
+    transform:translateX(-300px);
+  }
+
+  to{
+    transform:translateX(110vw);
+  }
+}
+
+.rain-drop{
+  position:absolute;
+  width:2px;
+  height:30px;
+  background:rgba(255,255,255,.35);
+  top:-50px;
+  animation:rainFall linear infinite;
+}
+
+@keyframes rainFall{
+  to{
+    transform:translateY(110vh);
+  }
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+
+  padding:13px 16px;
+
+  background:rgba(5,5,5,.88);
+
+  backdrop-filter:blur(18px);
+
+  border-bottom:
+    1px solid
+    rgba(212,175,55,.35);
+}
+
+.nav{
+  max-width:1100px;
+  margin:auto;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  font-size:18px;
+  font-weight:900;
+  letter-spacing:1.5px;
+  color:var(--gold);
+}
+
+.logo span{
+  color:#fff;
+  font-weight:400;
+}
+
+.btn-profile-nav{
+  text-decoration:none;
+
+  color:var(--gold);
+
+  border:
+    1px solid
+    rgba(212,175,55,.65);
+
+  padding:7px 13px;
+
+  border-radius:20px;
+
+  font-size:10px;
+
+  font-weight:700;
+
+  letter-spacing:.6px;
+
+  transition:.3s;
+}
+
+.btn-profile-nav:active{
+  transform:scale(.94);
+  background:var(--gold);
+  color:#000;
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:18px 14px;
+
+  position:relative;
+  z-index:1;
+}
+
+
+/* =====================================================
+   SHOWROOM
+===================================================== */
+
+.showroom-section{
+  position:relative;
+  overflow:hidden;
+
+  padding:22px 18px 12px;
+  margin-bottom:18px;
+
+  border-radius:25px;
+
+  border:
+    1px solid
+    rgba(212,175,55,.22);
+
+  background:
+
+    radial-gradient(
+      circle at 50% 70%,
+      rgba(212,175,55,.12),
+      transparent 38%
+    ),
+
+    linear-gradient(
+      145deg,
+      #151515,
+      #070707
+    );
+
+  box-shadow:
+
+    0 20px 60px
+    rgba(0,0,0,.55),
+
+    inset 0 1px
+    rgba(255,255,255,.04);
+}
+
+.showroom-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+}
+
+.hero-small{
+  color:var(--gold);
+
+  font-size:8px;
+
+  letter-spacing:1.8px;
+
+  text-transform:uppercase;
+
+  font-weight:700;
+
+  margin-bottom:4px;
+}
+
+.showroom-section h1{
+  font-size:23px;
+  font-weight:900;
+  line-height:1.1;
+}
+
+.showroom-section h1 span{
+  color:var(--gold);
+}
+
+.showroom-description{
+  font-size:9px;
+  color:#777;
+  margin-top:3px;
+}
+
+.vehicle-badge{
+  padding:6px 9px;
+
+  border-radius:10px;
+
+  background:
+    rgba(212,175,55,.1);
+
+  border:
+    1px solid
+    rgba(212,175,55,.3);
+
+  color:var(--gold);
+
+  font-size:8px;
+
+  font-weight:700;
+
+  text-transform:uppercase;
+}
+
+
+/* =====================================================
+   CAR SHOWROOM
+===================================================== */
+
+.car-platform{
+  width:100%;
+  max-width:500px;
+
+  height:205px;
+
+  margin:5px auto 0;
+
+  position:relative;
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  overflow:hidden;
+}
+
+.yellow-road{
+  position:absolute;
+
+  bottom:16%;
+
+  width:90%;
+
+  height:2px;
+
+  background:var(--gold);
+
+  box-shadow:
+    0 0 12px rgba(212,175,55,.7),
+    0 0 30px rgba(212,175,55,.25);
+
+  opacity:.8;
+
+  z-index:1;
+}
+
+.yellow-road:before{
+  content:"";
+
+  position:absolute;
+
+  left:10%;
+  right:10%;
+
+  top:-15px;
+
+  height:25px;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(212,175,55,.15),
+      transparent 70%
+    );
+
+  filter:blur(7px);
+}
+
+.yellow-road:after{
+  content:"";
+
+  position:absolute;
+
+  left:0;
+  right:0;
+
+  top:7px;
+
+  height:1px;
+
+  background:
+    rgba(212,175,55,.18);
+}
+
+
+/* =====================================================
+   CAR TRANSITION
+===================================================== */
+
+.main-car{
+  position:absolute;
+
+  width:100%;
+  height:100%;
+
+  object-fit:contain;
+
+  bottom:0;
+
+  z-index:5;
+
+  opacity:0;
+
+  filter:
+    blur(8px)
+    brightness(.75);
+
+  transform:
+    translateX(35px)
+    scale(.92);
+
+  pointer-events:none;
+}
+
+.main-car.active{
+  opacity:1;
+
+  animation:
+    premiumCarEnter
+    1.25s
+    cubic-bezier(.16,1,.3,1)
+    forwards;
+}
+
+@keyframes premiumCarEnter{
+
+  0%{
+    opacity:0;
+
+    filter:
+      blur(12px)
+      brightness(.55);
+
+    transform:
+      translateX(55px)
+      scale(.88);
+  }
+
+  35%{
+    opacity:.65;
+
+    filter:
+      blur(5px)
+      brightness(.82);
+
+    transform:
+      translateX(22px)
+      scale(.94);
+  }
+
+  70%{
+    opacity:.95;
+
+    filter:
+      blur(1px)
+      brightness(.98);
+
+    transform:
+      translateX(-4px)
+      scale(1.015);
+  }
+
+  100%{
+    opacity:1;
+
+    filter:
+      blur(0)
+      brightness(1);
+
+    transform:
+      translateX(0)
+      scale(1);
+  }
+}
+
+
+/* =====================================================
+   LIGHT SWEEP
+===================================================== */
+
+.car-platform:after{
+  content:"";
+
+  position:absolute;
+
+  top:0;
+  left:-30%;
+
+  width:15%;
+  height:100%;
+
+  z-index:8;
+
+  pointer-events:none;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,.12),
+      rgba(212,175,55,.15),
+      transparent
+    );
+
+  transform:skewX(-18deg);
+
+  opacity:0;
+}
+
+.car-platform.light-sweep:after{
+  animation:
+    lightSweep
+    1.2s
+    ease-out;
+}
+
+@keyframes lightSweep{
+
+  0%{
+    left:-30%;
+    opacity:0;
+  }
+
+  20%{
+    opacity:.7;
+  }
+
+  70%{
+    opacity:.4;
+  }
+
+  100%{
+    left:120%;
+    opacity:0;
+  }
+}
+
+.car-platform:before{
+  content:"";
+
+  position:absolute;
+
+  bottom:15%;
+
+  width:55%;
+  height:20px;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(0,0,0,.9),
+      transparent 70%
+    );
+
+  filter:blur(8px);
+
+  z-index:2;
+
+  pointer-events:none;
+}
+
+
+/* =====================================================
+   SECTION TITLE
+===================================================== */
+
+.section-title{
+  display:flex;
+
+  justify-content:space-between;
+  align-items:center;
+
+  margin:25px 2px 12px;
+}
+
+.section-title h2{
+  font-size:13px;
+
+  color:var(--gold);
+
+  letter-spacing:1px;
+
+  text-transform:uppercase;
+}
+
+.section-title span{
+  font-size:9px;
+  color:#666;
+}
+
+
+/* =====================================================
+   ROUTES
+===================================================== */
+
+.routes-box{
+  position:relative;
+
+  padding:14px;
+
+  border-radius:20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #151515,
+      #0b0b0b
+    );
+
+  border:
+    1px solid #242424;
+
+  box-shadow:
+    0 15px 40px
+    rgba(0,0,0,.28);
+}
+
+.routes-header{
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  padding-bottom:13px;
+
+  margin-bottom:12px;
+
+  border-bottom:
+    1px solid #222;
+}
+
+.routes-header-left{
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+}
+
+.route-main-icon{
+  width:38px;
+  height:38px;
+
+  border-radius:12px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  background:
+    rgba(212,175,55,.1);
+
+  border:
+    1px solid
+    rgba(212,175,55,.25);
+
+  font-size:18px;
+}
+
+.routes-header h3{
+  font-size:12px;
+  font-weight:700;
+  color:#fff;
+}
+
+.routes-header p{
+  font-size:8px;
+  color:#666;
+  margin-top:2px;
+}
+
+.route-count{
+  padding:6px 9px;
+
+  border-radius:10px;
+
+  background:#191919;
+
+  color:var(--gold);
+
+  font-size:8px;
+
+  font-weight:700;
+
+  border:
+    1px solid #292929;
+}
+
+.routes-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap:9px;
+}
+
+.route-card{
+  position:relative;
+
+  min-height:78px;
+
+  padding:11px;
+
+  border-radius:15px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #191919,
+      #101010
+    );
+
+  border:
+    1px solid #292929;
+
+  overflow:hidden;
+
+  transition:.25s;
+}
+
+.route-card:active{
+  transform:scale(.97);
+}
+
+.route-card:before{
+  content:"";
+
+  position:absolute;
+
+  left:0;
+  top:0;
+  bottom:0;
+
+  width:3px;
+
+  background:var(--green);
+}
+
+.route-card.medium:before{
+  background:var(--yellow);
+}
+
+.route-card.hard:before{
+  background:var(--red);
+}
+
+.route-card-top{
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:flex-start;
+
+  gap:6px;
+}
+
+.route-name{
+  display:flex;
+
+  align-items:center;
+
+  gap:7px;
+
+  min-width:0;
+}
+
+.route-icon{
+  width:26px;
+  height:26px;
+
+  border-radius:8px;
+
+  background:#222;
+
+  display:flex;
+
+  justify-content:center;
+  align-items:center;
+
+  flex-shrink:0;
+
+  font-size:12px;
+}
+
+.route-name strong{
+  font-size:10px;
+
+  font-weight:700;
+
+  line-height:1.25;
+
+  color:#eee;
+}
+
+.route-level{
+  font-size:7px;
+
+  font-weight:800;
+
+  text-transform:uppercase;
+
+  letter-spacing:.4px;
+
+  padding:4px 6px;
+
+  border-radius:7px;
+
+  background:
+    rgba(46,204,113,.1);
+
+  color:var(--green);
+
+  white-space:nowrap;
+}
+
+.route-card.medium .route-level{
+  background:
+    rgba(241,196,15,.1);
+
+  color:var(--yellow);
+}
+
+.route-card.hard .route-level{
+  background:
+    rgba(255,77,77,.1);
+
+  color:var(--red);
+}
+
+.route-bottom{
+  margin-top:8px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+}
+
+.route-status{
+  font-size:7px;
+
+  color:#666;
+
+  text-transform:uppercase;
+
+  letter-spacing:.5px;
+}
+
+.route-arrow{
+  color:#555;
+  font-size:12px;
+}
+
+.route-legend{
+  display:flex;
+
+  justify-content:center;
+
+  gap:15px;
+
+  margin-top:13px;
+
+  padding-top:11px;
+
+  border-top:
+    1px solid #202020;
+}
+
+.legend-item{
+  display:flex;
+
+  align-items:center;
+
+  gap:5px;
+
+  font-size:7px;
+
+  color:#666;
+
+  text-transform:uppercase;
+
+  font-weight:700;
+}
+
+.legend-dot{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+}
+
+
+/* =====================================================
+   PACKAGES
+===================================================== */
+
+.pricing-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(270px,1fr)
+    );
+
+  gap:13px;
+}
+
+.price-card{
+  position:relative;
+
+  overflow:hidden;
+
+  padding:20px;
+
+  border-radius:22px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #171717,
+      #0b0b0b
+    );
+
+  border:
+    1px solid #292929;
+
+  box-shadow:
+    0 15px 40px
+    rgba(0,0,0,.3);
+}
+
+.price-card.featured{
+  border:
+    1px solid var(--gold);
+
+  box-shadow:
+    0 0 0 1px
+    rgba(212,175,55,.08),
+
+    0 18px 50px
+    rgba(212,175,55,.09);
+}
+
+
+/* =====================================================
+   PACKAGE HEADER WITH DAYS
+===================================================== */
+
+.package-header{
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:flex-start;
+
+  gap:10px;
+}
+
+.package-title h3{
+  font-size:14px;
+  font-weight:700;
+}
+
+.price-sub{
+  font-size:9px;
+  color:#777;
+  margin-top:2px;
+}
+
+
+/* =====================================================
+   DAYS BOX
+===================================================== */
+
+.days-box{
+
+  min-width:62px;
+
+  padding:7px 9px;
+
+  border-radius:12px;
+
+  text-align:center;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(212,175,55,.16),
+      rgba(212,175,55,.05)
+    );
+
+  border:
+    1px solid
+    rgba(212,175,55,.38);
+
+  box-shadow:
+    inset 0 0 15px
+    rgba(212,175,55,.04);
+}
+
+.days-box strong{
+
+  display:block;
+
+  color:var(--gold2);
+
+  font-size:20px;
+
+  font-weight:900;
+
+  line-height:1;
+}
+
+.days-box span{
+
+  display:block;
+
+  color:#777;
+
+  font-size:6px;
+
+  font-weight:700;
+
+  letter-spacing:.8px;
+
+  text-transform:uppercase;
+
+  margin-top:3px;
+}
+
+
+/* =====================================================
+   PRICE
+===================================================== */
+
+.price-tag{
+  font-size:32px;
+
+  font-weight:900;
+
+  margin:14px 0;
+
+  letter-spacing:-1px;
+}
+
+.feature-list{
+  list-style:none;
+
+  margin:
+    12px 0 17px;
+}
+
+.feature-list li{
+  color:#aaa;
+
+  font-size:11px;
+
+  margin-bottom:8px;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:7px;
+}
+
+.feature-list li:before{
+  content:"✓";
+
+  color:var(--gold);
+
+  font-weight:900;
+}
+
+.best-label{
+  position:absolute;
+
+  top:12px;
+
+  right:-31px;
+
+  background:var(--gold);
+
+  color:#000;
+
+  padding:
+    4px 35px;
+
+  transform:rotate(45deg);
+
+  font-size:8px;
+
+  font-weight:900;
+}
+
+
+/* =====================================================
+   GOLD BUTTON
+===================================================== */
+
+.btn-gold{
+  width:100%;
+
+  border:0;
+
+  padding:
+    12px 18px;
+
+  border-radius:12px;
+
+  cursor:pointer;
+
+  color:#000;
+
+  font-weight:900;
+
+  font-size:11px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--gold),
+      var(--gold2)
+    );
+
+  box-shadow:
+    0 7px 20px
+    rgba(212,175,55,.15);
+
+  transition:.25s;
+}
+
+.btn-gold:active{
+  transform:scale(.96);
+}
+
+
+/* =====================================================
+   PERSONAL PREMIUM
+===================================================== */
+
+.personal-card{
+
+  position:relative;
+
+  overflow:hidden;
+
+  margin-top:18px;
+
+  padding:20px;
+
+  border-radius:22px;
+
+  background:
+
+    radial-gradient(
+      circle at 90% 0%,
+      rgba(244,214,117,.18),
+      transparent 34%
+    ),
+
+    linear-gradient(
+      145deg,
+      #1b180d,
+      #0b0b0b
+    );
+
+  border:
+    1px solid
+    rgba(212,175,55,.7);
+
+  box-shadow:
+
+    0 0 0 1px
+    rgba(212,175,55,.05),
+
+    0 20px 55px
+    rgba(212,175,55,.1);
+}
+
+.personal-card:after{
+
+  content:"";
+
+  position:absolute;
+
+  width:180px;
+  height:180px;
+
+  right:-100px;
+  top:-100px;
+
+  background:
+    rgba(212,175,55,.12);
+
+  filter:blur(45px);
+
+  pointer-events:none;
+}
+
+.personal-top{
+
+  position:relative;
+  z-index:2;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:flex-start;
+
+  gap:10px;
+}
+
+.personal-title small{
+
+  display:block;
+
+  color:var(--gold2);
+
+  font-size:7px;
+
+  font-weight:800;
+
+  letter-spacing:1.3px;
+
+  margin-bottom:5px;
+}
+
+.personal-title h2{
+
+  font-size:21px;
+
+  font-weight:900;
+
+  line-height:1.1;
+}
+
+.personal-title h2 span{
+  color:var(--gold2);
+}
+
+.personal-title p{
+
+  color:#777;
+
+  font-size:8px;
+
+  margin-top:5px;
+}
+
+.personal-badge{
+
+  padding:7px 9px;
+
+  border-radius:9px;
+
+  background:var(--gold);
+
+  color:#000;
+
+  font-size:6px;
+
+  line-height:1.2;
+
+  font-weight:900;
+
+  text-align:center;
+
+  letter-spacing:.5px;
+}
+
+
+/* =====================================================
+   PERSONAL PRICE + DAYS
+===================================================== */
+
+.personal-main-row{
+
+  position:relative;
+
+  z-index:2;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:10px;
+
+  margin-top:15px;
+
+  padding-top:13px;
+
+  border-top:
+    1px solid
+    rgba(212,175,55,.15);
+}
+
+.personal-price{
+
+  font-size:30px;
+
+  font-weight:900;
+
+  letter-spacing:-1px;
+}
+
+.personal-price small{
+
+  display:block;
+
+  color:#666;
+
+  font-size:6px;
+
+  font-weight:600;
+
+  letter-spacing:.8px;
+
+  text-transform:uppercase;
+
+  margin-top:1px;
+}
+
+
+/* Personal Days */
+
+.personal-days-box{
+
+  min-width:62px;
+
+  padding:7px 9px;
+
+  border-radius:12px;
+
+  text-align:center;
+
+  background:
+    rgba(212,175,55,.10);
+
+  border:
+    1px solid
+    rgba(212,175,55,.3);
+}
+
+.personal-days-box strong{
+
+  display:block;
+
+  color:var(--gold2);
+
+  font-size:20px;
+
+  line-height:1;
+
+  font-weight:900;
+}
+
+.personal-days-box span{
+
+  display:block;
+
+  color:#777;
+
+  font-size:6px;
+
+  font-weight:700;
+
+  text-transform:uppercase;
+
+  letter-spacing:.7px;
+
+  margin-top:3px;
+}
+
+
+/* =====================================================
+   PERSONAL MINI INFO
+===================================================== */
+
+.personal-mini-info{
+
+  position:relative;
+
+  z-index:2;
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap:7px;
+
+  margin-top:12px;
+}
+
+.personal-mini-item{
+
+  padding:8px;
+
+  border-radius:10px;
+
+  background:
+    rgba(255,255,255,.035);
+
+  border:
+    1px solid
+    rgba(255,255,255,.05);
+}
+
+.personal-mini-item strong{
+
+  display:block;
+
+  color:#eee;
+
+  font-size:8px;
+}
+
+.personal-mini-item span{
+
+  display:block;
+
+  color:#666;
+
+  font-size:6px;
+
+  margin-top:2px;
+}
+
+
+/* =====================================================
+   PERSONAL BENEFITS
+===================================================== */
+
+.personal-features{
+
+  position:relative;
+
+  z-index:2;
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:6px;
+
+  margin-top:12px;
+}
+
+.personal-feature{
+
+  padding:6px 8px;
+
+  border-radius:8px;
+
+  background:
+    rgba(212,175,55,.06);
+
+  border:
+    1px solid
+    rgba(212,175,55,.12);
+
+  color:#aaa;
+
+  font-size:7px;
+}
+
+.personal-feature span{
+
+  color:var(--gold2);
+
+  margin-right:3px;
+}
+
+
+/* =====================================================
+   PERSONAL BUTTON
+===================================================== */
+
+.personal-button{
+
+  position:relative;
+
+  z-index:2;
+
+  margin-top:14px;
+
+  width:100%;
+
+  border:0;
+
+  padding:13px;
+
+  border-radius:12px;
+
+  cursor:pointer;
+
+  color:#000;
+
+  font-size:10px;
+
+  font-weight:900;
+
+  letter-spacing:.5px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--gold),
+      var(--gold2)
+    );
+
+  box-shadow:
+    0 8px 25px
+    rgba(212,175,55,.15);
+}
+
+
+/* =====================================================
+   DASHBOARD
+===================================================== */
+
+.dashboard-box{
+
+  margin-top:28px;
+
+  padding:
+    24px 18px;
+
+  text-align:center;
+
+  border-radius:22px;
+
+  background:
+
+    radial-gradient(
+      circle at center,
+      rgba(212,175,55,.08),
+      transparent 60%
+    ),
+
+    #101010;
+
+  border:
+    1px solid #292929;
+}
+
+.dashboard-box h3{
+
+  color:var(--gold);
+
+  font-size:15px;
+
+  margin-bottom:5px;
+}
+
+.dashboard-box p{
+
+  color:#777;
+
+  font-size:10px;
+
+  margin-bottom:15px;
+}
+
+.dashboard-btn{
+
+  width:auto;
+
+  padding:
+    11px 30px;
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.modal{
+
+  position:fixed;
+
+  inset:0;
+
+  display:none;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:20px;
+
+  background:
+    rgba(0,0,0,.88);
+
+  backdrop-filter:
+    blur(12px);
+
+  z-index:9999;
+}
+
+.modal-content{
+
+  width:100%;
+
+  max-width:400px;
+
+  padding:24px;
+
+  border-radius:23px;
+
+  background:
+
+    linear-gradient(
+      145deg,
+      #181818,
+      #0b0b0b
+    );
+
+  border:
+    1px solid
+    var(--gold);
+
+  box-shadow:
+    0 25px 80px
+    rgba(0,0,0,.7);
+
+  animation:
+    modalIn .25s ease;
+}
+
+@keyframes modalIn{
+
+  from{
+    transform:scale(.92);
+    opacity:0;
+  }
+
+  to{
+    transform:scale(1);
+    opacity:1;
+  }
+}
+
+.modal-content h2{
+
+  color:var(--gold);
+
+  font-size:17px;
+
+  margin-bottom:17px;
+}
+
+.status-input{
+
+  width:100%;
+
+  padding:
+    13px 14px;
+
+  margin-bottom:11px;
+
+  border-radius:12px;
+
+  border:
+    1px solid #292929;
+
+  background:#050505;
+
+  color:#fff;
+
+  outline:none;
+
+  font-size:12px;
+}
+
+.status-input:focus{
+  border-color:var(--gold);
+}
+
+.cancel-btn{
+
+  width:100%;
+
+  padding:12px;
+
+  margin-top:9px;
+
+  border:
+    1px solid #292929;
+
+  border-radius:12px;
+
+  background:#171717;
+
+  color:#aaa;
+
+  font-weight:700;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:600px){
+
+  .container{
+    padding:
+      13px 11px;
+  }
+
+  .showroom-section{
+    padding:
+      19px 15px 8px;
+
+    border-radius:22px;
+  }
+
+  .showroom-section h1{
+    font-size:21px;
+  }
+
+  .car-platform{
+    height:185px;
+  }
+
+  .routes-box{
+    padding:12px;
+
+    border-radius:18px;
+  }
+
+  .routes-grid{
+    grid-template-columns:
+      1fr 1fr;
+
+    gap:8px;
+  }
+
+  .route-card{
+    min-height:82px;
+
+    padding:9px;
+  }
+
+  .route-name strong{
+    font-size:9px;
+  }
+
+  .route-level{
+    font-size:6px;
+
+    padding:
+      3px 5px;
+  }
+
+  .route-icon{
+    width:24px;
+    height:24px;
+
+    font-size:11px;
+  }
+
+  .route-bottom{
+    margin-top:7px;
+  }
+
+  .route-status{
+    font-size:6px;
+  }
+
+  .pricing-grid{
+    grid-template-columns:1fr;
+  }
+
+  .price-card{
+    padding:18px;
+  }
+
+  .personal-card{
+    padding:18px;
+  }
+
+  .personal-title h2{
+    font-size:20px;
+  }
+
+  .personal-mini-info{
+    grid-template-columns:
+      1fr 1fr;
+  }
+
+}
+
+
+/* =====================================================
+   VERY SMALL SCREEN
+===================================================== */
+
+@media(max-width:360px){
+
+  .routes-grid{
+    grid-template-columns:1fr;
+  }
+
+  .route-card{
+    min-height:70px;
+  }
+
+}
+
+</style>
+
 </head>
+
+
 <body>
+
+
+<!-- WEATHER -->
 
 <div id="weather-container"></div>
 
+
+<!-- HEADER -->
+
 <header>
+
   <div class="nav">
-    <div class="logo">ABHINAASH <span style="font-weight:300">A1</span></div>
-    <a href="profile.html" class="btn-profile-nav">My Profile</a>
+
+
+    <div class="logo">
+
+      ABHINAASH
+
+      <span>
+        A1
+      </span>
+
+    </div>
+
+
+    <a
+      href="profile.html"
+      class="btn-profile-nav"
+    >
+      MY PROFILE
+    </a>
+
+
   </div>
+
 </header>
+
+
+<!-- MAIN -->
 
 <div class="container">
 
-  <section class="showroom-section">
-    <div style="text-align: left; margin-bottom: 5px;" id="showroom-header">
-        <h1 style="font-size: 20px; font-weight: 900; color: #fff;">TATA TIGOR <span style="color:var(--gold)">XZ+</span></h1>
-        <p style="font-size: 9px; color: var(--gold); letter-spacing: 1px; text-transform: uppercase;">Our Primary Training Vehicle</p>
+
+<!-- =====================================================
+     SHOWROOM
+===================================================== -->
+
+<section class="showroom-section">
+
+
+  <div class="showroom-top">
+
+
+    <div>
+
+      <div class="hero-small">
+        Driving Excellence
+      </div>
+
+
+      <h1>
+
+        TATA TIGOR
+
+        <span>
+          XZ+
+        </span>
+
+      </h1>
+
+
+      <p class="showroom-description">
+        Our Primary Training Vehicle
+      </p>
+
+
     </div>
-    <div class="car-platform">
-        <div class="yellow-road"></div>
-        <img src="https://a-one-driving.github.io/-classes/tigor6.PNG" class="main-car active">
-        <img src="https://a-one-driving.github.io/-classes/tigor7.PNG" class="main-car">
-        <img src="https://a-one-driving.github.io/-classes/tigor10.PNG" class="main-car">
+
+
+    <div class="vehicle-badge">
+      Training Car
     </div>
-  </section>
 
-  <div class="traffic-rule-card">
-    <div class="rule-icon-box">
-      <img id="ruleImage" src="" alt="Sign" style="opacity: 0;">
-    </div>
-    <div class="rule-content">
-      <h4>Rule of the Day</h4>
-      <p id="ruleText">Loading safe driving tip...</p>
-    </div>
+
   </div>
 
-  <h2 style="font-size:12px; margin-bottom:8px; color:var(--muted); letter-spacing:1px; text-transform:uppercase;">📍 Training Routes & Levels</h2>
-  
-  <div class="difficulty-guide">
-    <div class="guide-item"><span class="dot" style="background:var(--success)"></span> Easy</div>
-    <div class="guide-item"><span class="dot" style="background:var(--warning)"></span> Medium</div>
-    <div class="guide-item"><span class="dot" style="background:var(--danger)"></span> Hard</div>
+
+  <div
+    class="car-platform"
+    id="carPlatform"
+  >
+
+
+    <div class="yellow-road"></div>
+
+
+    <img
+      src="https://a-one-driving.github.io/-classes/tigor6.PNG"
+      class="main-car active"
+      alt="Tata Tigor"
+    >
+
+
+    <img
+      src="https://a-one-driving.github.io/-classes/tigor7.PNG"
+      class="main-car"
+      alt="Tata Tigor"
+    >
+
+
+    <img
+      src="https://a-one-driving.github.io/-classes/tigor10.PNG"
+      class="main-car"
+      alt="Tata Tigor"
+    >
+
+
   </div>
 
-  <div class="routes-container">
-    <div class="route-chip" data-level="easy">Bhanjpur 🟡</div>
-    <div class="route-chip" data-level="easy">Deuli road 🟢</div>
-    <div class="route-chip" data-level="med">Kuchei road 🟢</div>
-    <div class="route-chip" data-level="med">Medical college 🟡</div>
-    <div class="route-chip" data-level="hard">Lal bazar road 🔴</div>
-    <div class="route-chip" data-level="hard">Station bazar 🔴</div>
-    <div class="route-chip" data-level="hard">Baleswer route 🟢</div>
-  </div>
 
-  <h2 style="font-size:14px; margin-bottom:15px; color:var(--gold); letter-spacing:1px; text-transform:uppercase; margin-top:20px;">💎 Training Packages</h2>
-  <div class="pricing-grid">
-    <div class="price-card">
-        <h3>Standard</h3>
-        <div class="price-tag">₹3,500</div>
-        <ul class="feature-list"><li>20 Days Classes</li><li>Traffic Rules</li></ul>
-        <button class="btn-gold" onclick="openBooking('Standard (₹3500)')">Join Now</button>
-    </div>
-    <div class="price-card featured">
-        <div class="best-label">BEST</div>
-        <h3>Premium</h3>
-        <div class="price-tag">₹4,500</div>
-        <ul class="feature-list"><li>30 Days Classes</li><li>DL/LL Assistance</li></ul>
-        <button class="btn-gold" onclick="openBooking('Premium (₹4500)')">Join Now</button>
-    </div>
-  </div>
+</section>
 
-  <div class="personal-banner">
-      <div><h3 style="margin:0; font-size:16px;">Personal 1-on-1 ₹8,000</h3></div>
-      <button class="btn-book-black" onclick="openBooking('Personal 1-on-1 (₹8000)')">BOOK</button>
-  </div>
 
-  <div style="display:flex; justify-content:space-between; align-items:center; margin:30px 0 15px;">
-    <h2 style="font-size:14px; color:var(--gold); letter-spacing:1px; text-transform:uppercase;">🚗 Live Batches</h2>
-    <span style="font-size:10px; color:var(--muted)">Swipe ⟷</span>
-  </div>
-  
-  <div id="batchGrid" class="batch-slider">
-    <p style="text-align:center; color:var(--muted); font-size:12px; width:100%;">Connecting...</p>
-  </div>
+<!-- =====================================================
+     ROUTES
+===================================================== -->
 
-  <section style="background: var(--card); padding: 25px; border-radius: 20px; border: 1px solid #333; text-align: center; backdrop-filter: blur(10px); margin-top: 30px;">
-    <h3 style="color:var(--gold); margin-bottom:10px;">📊 Student Dashboard</h3>
-    <button class="btn-gold" onclick="location.href='profile.html'" style="width: auto; padding: 12px 40px;">Open My Profile</button>
-  </section>
+<div class="section-title">
+
+  <h2>
+    📍 Training Routes
+  </h2>
+
+  <span>
+    7 Routes
+  </span>
+
 </div>
 
-<div class="modal" id="bookingModal">
+
+<div class="routes-box">
+
+
+  <div class="routes-header">
+
+
+    <div class="routes-header-left">
+
+
+      <div class="route-main-icon">
+        🛣️
+      </div>
+
+
+      <div>
+
+        <h3>
+          Driving Practice Areas
+        </h3>
+
+        <p>
+          Routes selected for practical training
+        </p>
+
+      </div>
+
+
+    </div>
+
+
+    <div class="route-count">
+      7 ROUTES
+    </div>
+
+
+  </div>
+
+
+  <div class="routes-grid">
+
+
+    <div class="route-card">
+
+      <div class="route-card-top">
+
+        <div class="route-name">
+
+          <div class="route-icon">
+            📍
+          </div>
+
+          <strong>
+            Bhanjpur
+          </strong>
+
+        </div>
+
+        <span class="route-level">
+          Easy
+        </span>
+
+      </div>
+
+      <div class="route-bottom">
+
+        <span class="route-status">
+          Beginner Friendly
+        </span>
+
+        <span class="route-arrow">
+          →
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="route-card">
+
+      <div class="route-card-top">
+
+        <div class="route-name">
+
+          <div class="route-icon">
+            📍
+          </div>
+
+          <strong>
+            Deuli Road
+          </strong>
+
+        </div>
+
+        <span class="route-level">
+          Easy
+        </span>
+
+      </div>
+
+      <div class="route-bottom">
+
+        <span class="route-status">
+          Beginner Friendly
+        </span>
+
+        <span class="route-arrow">
+          →
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="route-card medium">
+
+      <div class="route-card-top">
+
+        <div class="route-name">
+
+          <div class="route-icon">
+            📍
+          </div>
+
+          <strong>
+            Kuchei Road
+          </strong>
+
+        </div>
+
+        <span class="route-level">
+          Medium
+        </span>
+
+      </div>
+
+      <div class="route-bottom">
+
+        <span class="route-status">
+          Intermediate
+        </span>
+
+        <span class="route-arrow">
+          →
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="route-card medium">
+
+      <div class="route-card-top">
+
+        <div class="route-name">
+
+          <div class="route-icon">
+            📍
+          </div>
+
+          <strong>
+            Medical College
+          </strong>
+
+        </div>
+
+        <span class="route-level">
+          Medium
+        </span>
+
+      </div>
+
+      <div class="route-bottom">
+
+        <span class="route-status">
+          Intermediate
+        </span>
+
+        <span class="route-arrow">
+          →
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="route-card hard">
+
+      <div class="route-card-top">
+
+        <div class="route-name">
+
+          <div class="route-icon">
+            📍
+          </div>
+
+          <strong>
+            Lal Bazar Road
+          </strong>
+
+        </div>
+
+        <span class="route-level">
+          Hard
+        </span>
+
+      </div>
+
+      <div class="route-bottom">
+
+        <span class="route-status">
+          Advanced
+        </span>
+
+        <span class="route-arrow">
+          →
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="route-card hard">
+
+      <div class="route-card-top">
+
+        <div class="route-name">
+
+          <div class="route-icon">
+            📍
+          </div>
+
+          <strong>
+            Station Bazar
+          </strong>
+
+        </div>
+
+        <span class="route-level">
+          Hard
+        </span>
+
+      </div>
+
+      <div class="route-bottom">
+
+        <span class="route-status">
+          Advanced
+        </span>
+
+        <span class="route-arrow">
+          →
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="route-card hard">
+
+      <div class="route-card-top">
+
+        <div class="route-name">
+
+          <div class="route-icon">
+            📍
+          </div>
+
+          <strong>
+            Baleswar Route
+          </strong>
+
+        </div>
+
+        <span class="route-level">
+          Hard
+        </span>
+
+      </div>
+
+      <div class="route-bottom">
+
+        <span class="route-status">
+          Advanced
+        </span>
+
+        <span class="route-arrow">
+          →
+        </span>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+  <div class="route-legend">
+
+    <div class="legend-item">
+
+      <span
+        class="legend-dot"
+        style="background:var(--green)"
+      ></span>
+
+      Easy
+
+    </div>
+
+
+    <div class="legend-item">
+
+      <span
+        class="legend-dot"
+        style="background:var(--yellow)"
+      ></span>
+
+      Medium
+
+    </div>
+
+
+    <div class="legend-item">
+
+      <span
+        class="legend-dot"
+        style="background:var(--red)"
+      ></span>
+
+      Hard
+
+    </div>
+
+  </div>
+
+
+</div>
+
+
+<!-- =====================================================
+     PACKAGES
+===================================================== -->
+
+<div class="section-title">
+
+  <h2>
+    💎 Training Packages
+  </h2>
+
+</div>
+
+
+<div class="pricing-grid">
+
+
+  <!-- STANDARD -->
+
+  <div class="price-card">
+
+
+    <div class="package-header">
+
+
+      <div class="package-title">
+
+        <h3>
+          Standard
+        </h3>
+
+        <div class="price-sub">
+          Basic Driving Training
+        </div>
+
+      </div>
+
+
+      <div class="days-box">
+
+        <strong>
+          20
+        </strong>
+
+        <span>
+          Days
+        </span>
+
+      </div>
+
+
+    </div>
+
+
+    <div class="price-tag">
+      ₹3,500
+    </div>
+
+
+    <ul class="feature-list">
+
+      <li>
+        20 Days Classes
+      </li>
+
+      <li>
+        Traffic Rules
+      </li>
+
+      <li>
+        Practical Driving
+      </li>
+
+    </ul>
+
+
+    <button
+      class="btn-gold"
+      onclick="openBooking('Standard - 20 Days (₹3500)')"
+    >
+      JOIN NOW
+    </button>
+
+
+  </div>
+
+
+  <!-- PREMIUM -->
+
+  <div class="price-card featured">
+
+
+    <div class="best-label">
+      POPULAR
+    </div>
+
+
+    <div class="package-header">
+
+
+      <div class="package-title">
+
+        <h3>
+          Premium
+        </h3>
+
+        <div class="price-sub">
+          Complete Driving Training
+        </div>
+
+      </div>
+
+
+      <div class="days-box">
+
+        <strong>
+          30
+        </strong>
+
+        <span>
+          Days
+        </span>
+
+      </div>
+
+
+    </div>
+
+
+    <div class="price-tag">
+      ₹4,500
+    </div>
+
+
+    <ul class="feature-list">
+
+      <li>
+        30 Days Classes
+      </li>
+
+      <li>
+        Traffic Rules
+      </li>
+
+      <li>
+        DL / LL Assistance
+      </li>
+
+      <li>
+        Practical Training
+      </li>
+
+    </ul>
+
+
+    <button
+      class="btn-gold"
+      onclick="openBooking('Premium - 30 Days (₹4500)')"
+    >
+      JOIN NOW
+    </button>
+
+
+  </div>
+
+
+</div>
+
+
+<!-- =====================================================
+     PERSONAL PREMIUM
+===================================================== -->
+
+<section class="personal-card">
+
+
+  <div class="personal-top">
+
+
+    <div class="personal-title">
+
+      <small>
+        ⭐ PREMIUM TRAINING
+      </small>
+
+      <h2>
+
+        Personal
+        <span>
+          1-on-1
+        </span>
+
+      </h2>
+
+      <p>
+        Dedicated personal instructor
+      </p>
+
+    </div>
+
+
+    <div class="personal-badge">
+
+      PERSONAL<br>
+      PREMIUM
+
+    </div>
+
+
+  </div>
+
+
+  <!-- PRICE + DAYS -->
+
+  <div class="personal-main-row">
+
+
+    <div class="personal-price">
+
+      ₹8,000
+
+      <small>
+        Complete Personal Training
+      </small>
+
+    </div>
+
+
+    <div class="personal-days-box">
+
+      <strong>
+        30
+      </strong>
+
+      <span>
+        Days
+      </span>
+
+    </div>
+
+
+  </div>
+
+
+  <!-- MINI INFORMATION -->
+
+  <div class="personal-mini-info">
+
+
+    <div class="personal-mini-item">
+
+      <strong>
+        🛣️ 5 KM = 1 Class
+      </strong>
+
+      <span>
+        Practical class calculation
+      </span>
+
+    </div>
+
+
+    <div class="personal-mini-item">
+
+      <strong>
+        ⏱️ 1 Hour Guidance
+      </strong>
+
+      <span>
+        Personal instructor guidance
+      </span>
+
+    </div>
+
+
+    <div class="personal-mini-item">
+
+      <strong>
+        📅 30 Days
+      </strong>
+
+      <span>
+        Flexible training period
+      </span>
+
+    </div>
+
+
+    <div class="personal-mini-item">
+
+      <strong>
+        🚗 2–4 Classes / Day
+      </strong>
+
+      <span>
+        Multiple classes possible
+      </span>
+
+    </div>
+
+
+  </div>
+
+
+  <!-- SIMPLE BENEFITS -->
+
+  <div class="personal-features">
+
+
+    <div class="personal-feature">
+      <span>✓</span>
+      1-on-1 Instructor
+    </div>
+
+
+    <div class="personal-feature">
+      <span>✓</span>
+      Flexible Training
+    </div>
+
+
+    <div class="personal-feature">
+      <span>✓</span>
+      Road Practice
+    </div>
+
+
+    <div class="personal-feature">
+      <span>✓</span>
+      DL / LL Guidance
+    </div>
+
+
+  </div>
+
+
+  <!-- BUTTON -->
+
+  <button
+    class="personal-button"
+    onclick="openBooking('Personal 1-on-1 - 30 Days (₹8000)')"
+  >
+
+    BOOK PERSONAL TRAINING
+
+  </button>
+
+
+</section>
+
+
+<!-- =====================================================
+     DASHBOARD
+===================================================== -->
+
+<section class="dashboard-box">
+
+
+  <h3>
+    📊 Student Dashboard
+  </h3>
+
+
+  <p>
+    Check your classes, progress and profile
+  </p>
+
+
+  <button
+    class="btn-gold dashboard-btn"
+    onclick="location.href='profile.html'"
+  >
+    OPEN MY PROFILE
+  </button>
+
+
+</section>
+
+
+</div>
+
+
+<!-- =====================================================
+     BOOKING MODAL
+===================================================== -->
+
+<div
+  class="modal"
+  id="bookingModal"
+>
+
+
   <div class="modal-content">
-    <h2 id="modalTitle" style="color:var(--gold); margin-bottom:15px; font-size:18px;">Confirm Booking</h2>
-    <input type="text" id="userName" placeholder="Your Name" class="status-input">
-    <input type="tel" id="userPhone" placeholder="Mobile Number" class="status-input">
-    <button class="btn-gold" onclick="finalSubmit()">Confirm & WhatsApp</button>
-    <button class="btn-gold" style="background:#222; color:#fff; margin-top:10px;" onclick="closeModal()">Cancel</button>
+
+
+    <h2 id="modalTitle">
+      Confirm Booking
+    </h2>
+
+
+    <input
+      type="text"
+      id="userName"
+      placeholder="Your Name"
+      class="status-input"
+    >
+
+
+    <input
+      type="tel"
+      id="userPhone"
+      placeholder="Mobile Number"
+      class="status-input"
+      maxlength="10"
+    >
+
+
+    <button
+      class="btn-gold"
+      onclick="finalSubmit()"
+    >
+      CONFIRM & WHATSAPP
+    </button>
+
+
+    <button
+      class="cancel-btn"
+      onclick="closeModal()"
+    >
+      CANCEL
+    </button>
+
+
   </div>
+
+
 </div>
 
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-  import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
-    authDomain: "abinash-driving.firebaseapp.com",
-    projectId: "abinash-driving",
-    storageBucket: "abinash-driving.appspot.com",
-    messagingSenderId: "641148830173",
-    appId: "1:641148830173:web:b7a500e5e7e2463da0f634"
-  };
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
 
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+<script>
 
-  // --- TRAFFIC RULES RANDOMIZER (FIXED CDN) ---
-  const rules = [
-    { img: "https://cdn-icons-png.flaticon.com/512/564/564619.png", txt: "No Entry: Is raste par jana mana hai." },
-    { img: "https://cdn-icons-png.flaticon.com/512/564/564617.png", txt: "Stop: Pehle ruko, phir dekho aur chalo." },
-    { img: "https://cdn-icons-png.flaticon.com/512/4844/4844427.png", txt: "Speed Limit: Over-speeding se bachein." },
-    { img: "https://cdn-icons-png.flaticon.com/512/2641/2641411.png", txt: "No Parking: Yahan gaadi khadi karna mana hai." },
-    { img: "https://cdn-icons-png.flaticon.com/512/595/595067.png", txt: "Danger: Aage savdhani se gaadi chalayein." }
-  ];
 
-  function setRandomRule() {
-    const random = rules[Math.floor(Math.random() * rules.length)];
-    const imgEl = document.getElementById('ruleImage');
-    imgEl.style.opacity = 0;
-    setTimeout(() => {
-        imgEl.src = random.img;
-        document.getElementById('ruleText').innerText = random.txt;
-        imgEl.style.opacity = 1;
-    }, 250);
+/* =====================================================
+   BOOKING
+===================================================== */
+
+let selectedPackage = "";
+
+
+window.openBooking = function(label){
+
+  selectedPackage = label;
+
+
+  if(navigator.vibrate){
+    navigator.vibrate(50);
   }
-  setRandomRule();
 
-  // --- CAR SLIDER ---
-  let currentCar = 0;
-  const cars = document.querySelectorAll('.main-car');
-  setInterval(() => {
-    cars[currentCar].classList.remove('active');
-    currentCar = (currentCar + 1) % cars.length;
-    cars[currentCar].classList.add('active');
-  }, 3500);
 
-  // --- FIREBASE LOGIC ---
-  let attendanceMap = {};
-  onSnapshot(collection(db, "studentData"), (snap) => {
-    attendanceMap = {};
-    snap.forEach(doc => {
-      const data = doc.data();
-      if(data.name) {
-        attendanceMap[data.name] = { done: data.remaining || 0, total: data.totalClasses || 15 };
+  document.getElementById(
+    "modalTitle"
+  ).innerText = label;
+
+
+  document.getElementById(
+    "bookingModal"
+  ).style.display = "flex";
+
+};
+
+
+window.closeModal = function(){
+
+  document.getElementById(
+    "bookingModal"
+  ).style.display = "none";
+
+};
+
+
+/* =====================================================
+   WHATSAPP
+===================================================== */
+
+window.finalSubmit = function(){
+
+  const name =
+    document.getElementById(
+      "userName"
+    ).value.trim();
+
+
+  const phone =
+    document.getElementById(
+      "userPhone"
+    ).value.trim();
+
+
+  if(!name){
+
+    alert(
+      "Please enter your name."
+    );
+
+    return;
+
+  }
+
+
+  if(
+    !/^[0-9]{10}$/.test(phone)
+  ){
+
+    alert(
+      "Please enter a valid 10-digit mobile number."
+    );
+
+    return;
+
+  }
+
+
+  const message =
+
+`🚗 *A ONE DRIVING CLASSES*
+
+Hello, I want to book a driving training package.
+
+👤 Name: ${name}
+
+📱 Mobile: ${phone}
+
+📦 Package: ${selectedPackage}
+
+Please contact me for further details.`;
+
+
+  const whatsappURL =
+
+    "https://wa.me/917008186187?text="
+
+    +
+
+    encodeURIComponent(
+      message
+    );
+
+
+  window.location.href =
+    whatsappURL;
+
+};
+
+
+/* =====================================================
+   CLOSE MODAL
+===================================================== */
+
+document
+  .getElementById(
+    "bookingModal"
+  )
+  .addEventListener(
+    "click",
+    function(e){
+
+      if(
+        e.target.id ===
+        "bookingModal"
+      ){
+
+        closeModal();
+
       }
-    });
-    loadBatches();
-  });
 
-  function loadBatches() {
-    onSnapshot(collection(db, "activeBatches"), (snap) => {
-      const grid = document.getElementById('batchGrid');
-      grid.innerHTML = "";
-      snap.forEach(doc => {
-        const b = doc.data();
-        let studentHTML = "";
-        if (b.students) {
-          b.students.forEach(s => {
-            const liveData = attendanceMap[s.name] || { done: 0, total: 15 };
-            const left = liveData.total - liveData.done;
-            const percent = Math.round((liveData.done / liveData.total) * 100);
-            studentHTML += `
-              <div style="margin-bottom:10px; background:rgba(255,255,255,0.03); padding:8px; border-radius:10px;">
-                <div style="display:flex; justify-content:space-between; font-size:11px; margin-bottom:3px;">
-                  <span>${s.name}</span>
-                  <span style="color:var(--gold)">${left > 0 ? left : 0} Left</span>
-                </div>
-                <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:${percent}%"></div></div>
-              </div>`;
-          });
-        }
-        grid.innerHTML += `<div class="batch-card"><b style="color:var(--gold)">${b.batchName}</b><p style="font-size:10px; color:var(--muted); margin-bottom:8px;">${b.time}</p>${studentHTML}</div>`;
-      });
-    });
+    }
+  );
+
+
+/* =====================================================
+   PREMIUM CAR SLIDER
+===================================================== */
+
+let currentCar = 0;
+
+
+const cars =
+  document.querySelectorAll(
+    ".main-car"
+  );
+
+
+const carPlatform =
+  document.getElementById(
+    "carPlatform"
+  );
+
+
+function showNextCar(){
+
+  cars[currentCar]
+    .classList
+    .remove(
+      "active"
+    );
+
+
+  currentCar =
+    (
+      currentCar + 1
+    )
+    %
+    cars.length;
+
+
+  void cars[currentCar]
+    .offsetWidth;
+
+
+  cars[currentCar]
+    .classList
+    .add(
+      "active"
+    );
+
+
+  carPlatform
+    .classList
+    .remove(
+      "light-sweep"
+    );
+
+
+  void carPlatform.offsetWidth;
+
+
+  carPlatform
+    .classList
+    .add(
+      "light-sweep"
+    );
+
+}
+
+
+setInterval(
+  showNextCar,
+  4000
+);
+
+
+setTimeout(
+  function(){
+
+    carPlatform
+      .classList
+      .add(
+        "light-sweep"
+      );
+
+  },
+  500
+);
+
+
+/* =====================================================
+   WEATHER
+===================================================== */
+
+async function updateWeatherUI(){
+
+  const container =
+    document.getElementById(
+      "weather-container"
+    );
+
+
+  try{
+
+    const response =
+      await fetch(
+
+        "https://api.openweathermap.org/data/2.5/weather?q=Baripada&appid=b4bf99632591fffc63fc18bb6e0f4caa&units=metric"
+
+      );
+
+
+    const data =
+      await response.json();
+
+
+    const weather =
+
+      data.weather &&
+      data.weather[0]
+
+      ?
+
+      data.weather[0].main
+
+      :
+
+      "";
+
+
+    container.innerHTML = "";
+
+
+    if(
+      weather
+        .toLowerCase()
+        .includes("rain")
+    ){
+
+      for(
+        let i=0;
+        i<35;
+        i++
+      ){
+
+        const drop =
+          document.createElement(
+            "div"
+          );
+
+
+        drop.className =
+          "rain-drop";
+
+
+        drop.style.left =
+          Math.random() *
+          100 +
+          "vw";
+
+
+        drop.style.animationDuration =
+
+          (
+            Math.random() *
+            .5 +
+            .5
+          )
+          + "s";
+
+
+        drop.style.opacity =
+
+          Math.random() *
+          .5 +
+          .2;
+
+
+        container.appendChild(
+          drop
+        );
+
+      }
+
+    }
+
+
+    else{
+
+      for(
+        let i=0;
+        i<4;
+        i++
+      ){
+
+        const cloud =
+          document.createElement(
+            "div"
+          );
+
+
+        cloud.className =
+          "cloud";
+
+
+        cloud.style.width =
+
+          (
+            Math.random() *
+            200 +
+            100
+          )
+          + "px";
+
+
+        cloud.style.height =
+          "60px";
+
+
+        cloud.style.top =
+
+          Math.random() *
+          50 +
+          "vh";
+
+
+        cloud.style.animationDuration =
+
+          (
+            Math.random() *
+            15 +
+            15
+          )
+          + "s";
+
+
+        cloud.style.left =
+          "-250px";
+
+
+        container.appendChild(
+          cloud
+        );
+
+      }
+
+    }
+
   }
 
-  // --- INTERACTION ---
-  window.openBooking = (label) => { 
-    if (navigator.vibrate) navigator.vibrate(50);
-    document.getElementById("modalTitle").innerText = label; 
-    document.getElementById("bookingModal").style.display = "flex"; 
-  };
-  window.closeModal = () => document.getElementById("bookingModal").style.display = "none";
-  window.finalSubmit = () => { window.location.href = `https://wa.me/917008186187?text=Booking`; };
+  catch(error){
 
-  // --- WEATHER & ALERTS ---
-  async function updateWeatherUI() {
-    const container = document.getElementById('weather-container');
-    const header = document.getElementById('showroom-header');
-    try {
-        const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=Baripada&appid=b4bf99632591fffc63fc18bb6e0f4caa&units=metric`);
-        const data = await res.json();
-        const weather = data.weather[0].main;
-        container.innerHTML = '';
-        
-        let alertMsg = document.createElement('div');
-        alertMsg.className = 'weather-alert';
+    console.log(
+      "Weather unavailable"
+    );
 
-        if (weather.includes("Rain")) {
-            alertMsg.innerHTML = "⚠️ Rain Alert: Drive with caution";
-            alertMsg.style.color = "#ff4d4d";
-            for(let i=0; i<30; i++) {
-                let d = document.createElement('div'); d.className = 'rain-drop';
-                d.style.left = Math.random()*100+'vw'; 
-                d.style.animationDuration = Math.random()*0.5+0.5+'s';
-                container.appendChild(d);
-            }
-        } else {
-            alertMsg.innerHTML = "✨ Perfect day for driving";
-            alertMsg.style.color = "#2ecc71";
-            for(let i=0; i<4; i++) {
-                let c = document.createElement('div'); c.className = 'cloud';
-                c.style.width = (Math.random()*200+100)+'px'; c.style.height='60px';
-                c.style.top = Math.random()*50+'vh'; c.style.animationDuration=(Math.random()*15+15)+'s';
-                c.style.left='-250px'; container.appendChild(c);
-            }
-        }
-        header.appendChild(alertMsg);
-    } catch (e) {}
   }
-  updateWeatherUI();
+
+}
+
+
+updateWeatherUI();
+
 </script>
+
+
 </body>
 </html>
