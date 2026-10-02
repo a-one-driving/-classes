@@ -1,1194 +1,1225 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-  <title>Elite Dashboard | A1 Driving Academy</title>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --gold: #d4af37;
-      --gold-light: #fce08d;
-      --gold-gradient: linear-gradient(
-        135deg,
-        #fce08d 0%,
-        #d4af37 50%,
-        #aa8210 100%
-      );
-
-      --bg-dark: #0b0b0e;
-      --panel-bg: rgba(18,18,24,0.82);
-      --card-bg: rgba(255,255,255,0.035);
-      --input-bg: #121217;
-
-      --success: #34c759;
-      --danger: #ff453a;
-      --blue: #5ac8fa;
-
-      --card-border: rgba(255,255,255,0.075);
-      --text-muted: #98989d;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    body {
-      background: var(--bg-dark);
-
-      background-image:
-        radial-gradient(
-          circle at 50% -20%,
-          rgba(212,175,55,0.15) 0%,
-          transparent 60%
-        ),
-        radial-gradient(
-          circle at 0% 100%,
-          rgba(255,255,255,0.02) 0%,
-          transparent 40%
-        );
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-      color: #fff;
-      min-height: 100vh;
+<title>A1 Driving Academy | Student Dashboard v2.0</title>
 
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
-      padding: 16px;
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-      -webkit-tap-highlight-color: transparent;
-      overflow-x: hidden;
-    }
+<style>
 
-    .dashboard-container {
-      width: 100%;
-      max-width: 440px;
+:root{
+  --gold:#d4af37;
+  --gold-light:#fce08d;
+  --gold-dark:#aa8210;
 
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
+  --gold-gradient:
+    linear-gradient(
+      135deg,
+      #fce08d 0%,
+      #d4af37 50%,
+      #aa8210 100%
+    );
 
-      margin: auto 0;
-    }
+  --bg:#08090c;
+  --panel:rgba(17,18,23,.88);
+  --card:rgba(255,255,255,.035);
+  --card-hover:rgba(255,255,255,.055);
 
-    /* BRAND */
+  --border:rgba(255,255,255,.075);
 
-    .brand-section {
-      text-align: center;
-      margin-top: 10px;
-    }
+  --text:#fff;
+  --muted:#92939a;
 
-    .brand-section h1 {
-      font-size: 26px;
-      font-weight: 800;
-      letter-spacing: 3px;
+  --green:#34c759;
+  --red:#ff453a;
+  --blue:#5ac8fa;
+}
 
-      background: var(--gold-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:'Poppins',sans-serif;
+}
 
-      line-height: 1.2;
-    }
+html{
+  scroll-behavior:smooth;
+}
 
-    .brand-section p {
-      font-size: 10px;
-      color: var(--text-muted);
-      letter-spacing: 5px;
-      font-weight: 600;
-      margin-top: 4px;
-      text-transform: uppercase;
-    }
+body{
+  background:
+    radial-gradient(
+      circle at 50% -10%,
+      rgba(212,175,55,.16),
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 100% 70%,
+      rgba(90,200,250,.035),
+      transparent 35%
+    ),
+    var(--bg);
 
-    /* MAIN WRAPPER */
+  color:var(--text);
 
-    .dashboard-wrapper {
-      width: 100%;
+  min-height:100vh;
 
-      background: var(--panel-bg);
+  padding:18px;
 
-      backdrop-filter: blur(30px);
-      -webkit-backdrop-filter: blur(30px);
+  overflow-x:hidden;
 
-      padding: 28px 20px;
+  -webkit-tap-highlight-color:transparent;
+}
 
-      border-radius: 28px;
-      border: 1px solid var(--card-border);
+body::before{
+  content:"";
 
-      box-shadow:
-        0 30px 60px rgba(0,0,0,0.6),
-        inset 0 1px 0 rgba(255,255,255,0.1);
-    }
+  position:fixed;
 
-    /* LOGIN */
+  width:250px;
+  height:250px;
 
-    .input-group {
-      margin-bottom: 24px;
-    }
+  border-radius:50%;
 
-    .input-label {
-      display: block;
+  background:rgba(212,175,55,.035);
 
-      font-size: 11px;
-      color: var(--text-muted);
-      font-weight: 600;
+  filter:blur(80px);
 
-      letter-spacing: 1.5px;
+  top:20%;
+  left:-100px;
 
-      margin-bottom: 10px;
+  pointer-events:none;
+}
 
-      text-transform: uppercase;
-    }
+/* ================================
+   CONTAINER
+================================ */
 
-    input,
-    textarea,
-    select {
-      width: 100%;
+.dashboard-container{
+  width:100%;
+  max-width:450px;
 
-      border-radius: 16px;
-      border: 1px solid var(--card-border);
+  margin:auto;
 
-      background: var(--input-bg);
-      color: #fff;
+  display:flex;
+  flex-direction:column;
 
-      outline: none;
+  gap:20px;
+}
 
-      transition: 0.3s ease;
-    }
+/* ================================
+   BRAND
+================================ */
 
-    input {
-      padding: 18px;
+.brand{
+  text-align:center;
 
-      font-size: 18px;
-      font-weight: 500;
+  padding-top:5px;
+}
 
-      letter-spacing: 1px;
+.brand h1{
+  font-size:25px;
 
-      text-align: center;
-    }
+  font-weight:800;
 
-    input:focus,
-    textarea:focus,
-    select:focus {
-      border-color: var(--gold);
+  letter-spacing:3px;
 
-      box-shadow:
-        0 0 20px rgba(212,175,55,0.18);
+  background:var(--gold-gradient);
 
-      background: #15151f;
-    }
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
 
-    textarea {
-      min-height: 80px;
-      resize: vertical;
+.brand p{
+  margin-top:4px;
 
-      padding: 13px;
+  color:var(--muted);
 
-      font-size: 12px;
-      line-height: 1.5;
-    }
+  font-size:9px;
 
-    .btn-primary {
-      background: var(--gold-gradient);
+  font-weight:600;
 
-      color: #0b0b0e;
+  letter-spacing:4px;
+}
 
-      border: none;
+.version{
+  display:inline-flex;
 
-      padding: 18px;
+  margin-top:9px;
 
-      border-radius: 16px;
+  padding:4px 9px;
 
-      font-weight: 700;
+  border-radius:30px;
 
-      cursor: pointer;
+  border:1px solid rgba(212,175,55,.22);
 
-      width: 100%;
+  background:rgba(212,175,55,.055);
 
-      font-size: 16px;
+  color:var(--gold-light);
 
-      letter-spacing: 0.5px;
+  font-size:8px;
 
-      box-shadow:
-        0 10px 25px rgba(212,175,55,0.3);
+  letter-spacing:1px;
 
-      transition: all 0.2s ease;
-    }
+  font-weight:700;
+}
 
-    .btn-primary:active {
-      transform: scale(0.97);
-      opacity: 0.9;
-    }
+/* ================================
+   MAIN PANEL
+================================ */
 
-    /* PROFILE */
+.dashboard-wrapper{
+  width:100%;
 
-    #profileContent {
-      display: none;
-      width: 100%;
+  background:var(--panel);
 
-      animation:
-        slideUp 0.6s cubic-bezier(0.16,1,0.3,1);
-    }
+  backdrop-filter:blur(30px);
 
-    @keyframes slideUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
+  -webkit-backdrop-filter:blur(30px);
 
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+  border:1px solid var(--border);
 
-    .profile-meta {
-      text-align: center;
-      margin-bottom: 14px;
-    }
+  border-radius:28px;
 
-    .student-title {
-      font-size: 25px;
-      font-weight: 700;
+  padding:25px 19px;
 
-      color: #fff;
+  box-shadow:
+    0 30px 70px rgba(0,0,0,.65),
+    inset 0 1px rgba(255,255,255,.07);
+}
 
-      letter-spacing: -0.5px;
-    }
+/* ================================
+   LOGIN
+================================ */
 
-    .course-badge {
-      display: inline-flex;
+.input-label{
+  display:block;
 
-      align-items: center;
-      justify-content: center;
+  font-size:10px;
 
-      padding: 7px 14px;
+  color:var(--muted);
 
-      background:
-        rgba(212,175,55,0.08);
+  letter-spacing:1.5px;
 
-      border:
-        1px solid rgba(212,175,55,0.25);
+  font-weight:700;
 
-      border-radius: 100px;
+  text-transform:uppercase;
 
-      font-size: 11px;
+  margin-bottom:9px;
+}
 
-      color: var(--gold-light);
+.input-group{
+  margin-bottom:17px;
+}
 
-      font-weight: 600;
+input,
+textarea{
+  width:100%;
 
-      margin-top: 8px;
+  border:none;
+  outline:none;
 
-      letter-spacing: 0.5px;
-    }
+  color:#fff;
 
-    /* MOTIVATION */
+  background:#111217;
 
-    .motivation-card {
-      position: relative;
+  border:1px solid var(--border);
 
-      overflow: hidden;
+  border-radius:15px;
 
-      margin-bottom: 18px;
+  transition:.3s;
+}
 
-      padding: 15px 16px;
+input{
+  padding:17px;
 
-      border-radius: 18px;
+  font-size:17px;
 
-      text-align: center;
+  text-align:center;
 
-      background:
-        linear-gradient(
-          135deg,
-          rgba(212,175,55,0.10),
-          rgba(212,175,55,0.025)
-        );
+  letter-spacing:1px;
+}
 
-      border:
-        1px solid rgba(212,175,55,0.22);
+input:focus,
+textarea:focus{
+  border-color:var(--gold);
 
-      box-shadow:
-        0 8px 25px rgba(0,0,0,0.18);
-    }
+  box-shadow:
+    0 0 20px rgba(212,175,55,.14);
+}
 
-    .motivation-card::before {
-      content: "";
+.btn-primary{
+  width:100%;
 
-      position: absolute;
+  border:0;
 
-      top: 0;
-      left: -120%;
+  padding:16px;
 
-      width: 70%;
-      height: 100%;
+  border-radius:15px;
 
-      background:
-        linear-gradient(
-          90deg,
-          transparent,
-          rgba(255,255,255,0.10),
-          transparent
-        );
+  background:var(--gold-gradient);
 
-      transform: skewX(-20deg);
+  color:#090909;
 
-      animation: shine 3.5s infinite;
-    }
+  font-weight:800;
 
-    @keyframes shine {
-      0% {
-        left: -120%;
-      }
+  font-size:14px;
 
-      55% {
-        left: 150%;
-      }
+  cursor:pointer;
 
-      100% {
-        left: 150%;
-      }
-    }
+  box-shadow:
+    0 10px 25px rgba(212,175,55,.22);
 
-    .motivation-icon {
-      font-size: 20px;
-      margin-bottom: 4px;
-    }
+  transition:.2s;
+}
 
-    .motivation-title {
-      font-size: 10px;
+.btn-primary:active{
+  transform:scale(.97);
+}
 
-      color: var(--gold-light);
+/* ================================
+   PROFILE
+================================ */
 
-      font-weight: 800;
+#profileContent{
+  display:none;
 
-      letter-spacing: 1.5px;
+  animation:
+    profileIn .6s cubic-bezier(.16,1,.3,1);
+}
 
-      text-transform: uppercase;
+@keyframes profileIn{
+  from{
+    opacity:0;
+    transform:translateY(25px);
+  }
 
-      margin-bottom: 5px;
-    }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
 
-    .motivation-text {
-      font-size: 11px;
+/* ================================
+   PROFILE HEADER
+================================ */
 
-      line-height: 1.5;
+.profile-header{
+  text-align:center;
 
-      color: #eee;
+  margin-bottom:16px;
+}
 
-      font-weight: 500;
+.student-title{
+  font-size:24px;
 
-      animation: motivationBlink 1.8s ease-in-out infinite;
-    }
+  font-weight:700;
 
-    @keyframes motivationBlink {
-      0%,100% {
-        opacity: 1;
-      }
+  line-height:1.25;
+}
 
-      45% {
-        opacity: 0.55;
-      }
+.course-badge{
+  display:inline-flex;
 
-      60% {
-        opacity: 1;
-      }
-    }
+  margin-top:8px;
 
-    /* PROGRESS */
+  padding:6px 13px;
 
-    .progress-widget {
-      background: var(--card-bg);
+  border-radius:30px;
 
-      border: 1px solid var(--card-border);
+  background:rgba(212,175,55,.08);
 
-      border-radius: 22px;
+  border:1px solid rgba(212,175,55,.23);
 
-      padding: 20px;
+  color:var(--gold-light);
 
-      display: flex;
+  font-size:10px;
 
-      align-items: center;
+  font-weight:700;
 
-      justify-content: space-between;
+  letter-spacing:.4px;
+}
 
-      margin-bottom: 16px;
+/* ================================
+   SESSION TYPE CARD
+================================ */
 
-      gap: 12px;
-    }
+.session-type{
+  position:relative;
 
-    .metrics-box {
-      display: flex;
+  overflow:hidden;
 
-      flex-direction: column;
+  border-radius:19px;
 
-      gap: 10px;
+  padding:17px;
 
-      flex: 1;
-    }
+  margin-bottom:16px;
 
-    .metric-row {
-      display: grid;
+  border:1px solid rgba(212,175,55,.2);
 
-      grid-template-columns: 1fr 1fr;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(212,175,55,.10),
+      rgba(212,175,55,.025)
+    );
+}
 
-      gap: 10px;
-    }
+.session-type::after{
+  content:"";
 
-    .metric-pill {
-      background: rgba(0,0,0,0.2);
+  position:absolute;
 
-      border: 1px solid var(--card-border);
+  width:100px;
+  height:100px;
 
-      padding: 10px 12px;
+  border-radius:50%;
 
-      border-radius: 14px;
+  background:rgba(212,175,55,.07);
 
-      display: flex;
+  filter:blur(25px);
 
-      flex-direction: column;
-    }
+  right:-40px;
+  top:-50px;
+}
 
-    .metric-pill span {
-      font-size: 8px;
+.session-top{
+  display:flex;
 
-      color: var(--text-muted);
+  align-items:center;
 
-      font-weight: 700;
+  gap:12px;
+}
 
-      text-transform: uppercase;
+.session-icon{
+  width:42px;
+  height:42px;
 
-      letter-spacing: 1px;
-    }
+  display:flex;
 
-    .metric-pill b {
-      font-size: 19px;
+  align-items:center;
+  justify-content:center;
 
-      color: #fff;
+  border-radius:13px;
 
-      margin-top: 2px;
+  background:rgba(212,175,55,.10);
 
-      line-height: 1.2;
-    }
+  border:1px solid rgba(212,175,55,.2);
 
-    .remaining-pill {
-      border-color:
-        rgba(255,69,58,0.20);
-    }
+  font-size:20px;
+}
 
-    .remaining-pill b {
-      color: #ff8179;
-    }
+.session-label{
+  font-size:8px;
 
-    .radial-container {
-      position: relative;
+  color:var(--muted);
 
-      width: 100px;
-      height: 100px;
+  text-transform:uppercase;
 
-      display: flex;
+  letter-spacing:1.2px;
 
-      align-items: center;
-      justify-content: center;
+  font-weight:700;
+}
 
-      margin-right: 5px;
-    }
+.session-name{
+  font-size:14px;
 
-    .radial-progress-svg {
-      width: 100px;
-      height: 100px;
+  font-weight:700;
 
-      transform: rotate(-90deg);
-    }
+  color:var(--gold-light);
 
-    .radial-bg {
-      fill: none;
+  margin-top:2px;
+}
 
-      stroke:
-        rgba(255,255,255,0.03);
+.session-description{
+  margin-top:11px;
 
-      stroke-width: 9;
-    }
+  color:#d8d8dc;
 
-    .radial-fill {
-      fill: none;
+  font-size:10px;
 
-      stroke: var(--gold);
+  line-height:1.55;
 
-      stroke-width: 9;
+  animation:softBlink 2.5s ease-in-out infinite;
+}
 
-      stroke-linecap: round;
+@keyframes softBlink{
+  0%,100%{opacity:1}
+  50%{opacity:.62}
+}
 
-      stroke-dasharray: 251.3;
+/* ================================
+   PROGRESS
+================================ */
 
-      stroke-dashoffset: 251.3;
+.progress-card{
+  padding:17px;
 
-      transition:
-        stroke-dashoffset 1.4s
-        cubic-bezier(0.16,1,0.3,1);
-    }
+  border-radius:20px;
 
-    .radial-text {
-      position: absolute;
+  background:var(--card);
 
-      font-size: 16px;
+  border:1px solid var(--border);
 
-      font-weight: 700;
+  margin-bottom:16px;
+}
 
-      color: #fff;
+.progress-head{
+  display:flex;
 
-      letter-spacing: -0.5px;
-    }
+  justify-content:space-between;
 
-    /* INFO CARD */
+  align-items:center;
 
-    .info-card {
-      background: var(--card-bg);
+  margin-bottom:14px;
+}
 
-      border: 1px solid var(--card-border);
+.progress-head span{
+  font-size:9px;
 
-      border-radius: 20px;
+  color:var(--muted);
 
-      padding: 16px;
+  text-transform:uppercase;
 
-      margin-bottom: 16px;
-    }
+  letter-spacing:1.2px;
 
-    .info-title {
-      font-size: 10px;
+  font-weight:700;
+}
 
-      color: var(--text-muted);
+.progress-percent{
+  color:var(--gold-light)!important;
 
-      font-weight: 700;
+  font-size:13px!important;
+}
 
-      letter-spacing: 1.5px;
+.progress-track{
+  width:100%;
 
-      text-transform: uppercase;
+  height:7px;
 
-      margin-bottom: 12px;
-    }
+  border-radius:10px;
 
-    .info-grid {
-      display: grid;
+  background:rgba(255,255,255,.055);
 
-      grid-template-columns: 1fr 1fr;
+  overflow:hidden;
+}
 
-      gap: 10px;
-    }
+.progress-fill{
+  height:100%;
 
-    .info-item {
-      padding: 11px;
+  width:0;
 
-      border-radius: 13px;
+  border-radius:10px;
 
-      background: rgba(0,0,0,0.17);
+  background:var(--gold-gradient);
 
-      border: 1px solid var(--card-border);
-    }
+  box-shadow:
+    0 0 12px rgba(212,175,55,.35);
 
-    .info-item span {
-      display: block;
+  transition:
+    width 1.2s cubic-bezier(.16,1,.3,1);
+}
 
-      font-size: 8px;
+/* ================================
+   METRICS
+================================ */
 
-      color: var(--text-muted);
+.metrics-grid{
+  display:grid;
 
-      text-transform: uppercase;
+  grid-template-columns:1fr 1fr;
 
-      letter-spacing: 0.8px;
-    }
+  gap:9px;
 
-    .info-item b {
-      display: block;
+  margin-top:13px;
+}
 
-      font-size: 12px;
+.metric{
+  padding:12px;
 
-      margin-top: 3px;
+  border-radius:14px;
 
-      color: #fff;
-    }
+  background:rgba(0,0,0,.18);
 
-    /* TIMELINE */
+  border:1px solid var(--border);
+}
 
-    .timeline-widget {
-      background: var(--card-bg);
+.metric span{
+  display:block;
 
-      border: 1px solid var(--card-border);
+  font-size:7px;
 
-      border-radius: 22px;
+  color:var(--muted);
 
-      padding: 20px;
+  text-transform:uppercase;
 
-      margin-bottom: 16px;
-    }
+  letter-spacing:.8px;
 
-    .timeline-header {
-      font-size: 11px;
+  font-weight:700;
+}
 
-      color: var(--text-muted);
+.metric b{
+  display:block;
 
-      font-weight: 700;
+  margin-top:3px;
 
-      letter-spacing: 1.5px;
+  font-size:18px;
+}
 
-      text-transform: uppercase;
+.metric.remaining b{
+  color:#ff8179;
+}
 
-      margin-bottom: 14px;
+.metric.distance b{
+  color:var(--gold-light);
+}
 
-      display: block;
-    }
+.metric.completion{
+  grid-column:1/-1;
+}
 
-    #attendanceTimeline {
-      display: flex;
+.metric.completion b{
+  color:var(--green);
 
-      flex-direction: column;
+  font-size:13px;
+}
 
-      gap: 13px;
+/* ================================
+   TRAINING INFO
+================================ */
 
-      max-height: 600px;
+.info-card{
+  padding:17px;
 
-      overflow-y: auto;
+  border-radius:20px;
 
-      padding-right: 4px;
-    }
+  background:var(--card);
 
-    #attendanceTimeline::-webkit-scrollbar {
-      width: 4px;
-    }
+  border:1px solid var(--border);
 
-    #attendanceTimeline::-webkit-scrollbar-track {
-      background: transparent;
-    }
+  margin-bottom:16px;
+}
 
-    #attendanceTimeline::-webkit-scrollbar-thumb {
-      background:
-        rgba(255,255,255,0.1);
+.section-title{
+  display:flex;
 
-      border-radius: 10px;
-    }
+  align-items:center;
 
-    .log-row {
-      background: rgba(0,0,0,0.15);
+  gap:8px;
 
-      border: 1px solid var(--card-border);
+  font-size:10px;
 
-      padding: 14px;
+  color:var(--muted);
 
-      border-radius: 17px;
+  text-transform:uppercase;
 
-      display: flex;
+  letter-spacing:1.3px;
 
-      flex-direction: column;
+  font-weight:700;
 
-      gap: 9px;
+  margin-bottom:12px;
+}
 
-      border-left: 4px solid var(--gold);
-    }
+.section-title::before{
+  content:"";
 
-    .log-row.good {
-      border-left-color: var(--success);
-    }
+  width:4px;
+  height:15px;
 
-    .log-row.bad {
-      border-left-color: var(--danger);
-    }
+  border-radius:4px;
 
-    .log-meta {
-      display: flex;
+  background:var(--gold);
+}
 
-      justify-content: space-between;
+.info-grid{
+  display:grid;
 
-      align-items: center;
+  grid-template-columns:1fr 1fr;
 
-      gap: 8px;
-    }
+  gap:9px;
+}
 
-    .session-number {
-      font-size: 13px;
+.info-item{
+  padding:11px;
 
-      font-weight: 700;
+  border-radius:13px;
 
-      color: #fff;
-    }
+  background:rgba(0,0,0,.17);
 
-    .session-date {
-      font-size: 9px;
+  border:1px solid var(--border);
+}
 
-      color: var(--text-muted);
+.info-item span{
+  display:block;
 
-      font-weight: 500;
+  font-size:7px;
 
-      text-align: right;
-    }
+  color:var(--muted);
 
-    .session-detail-grid {
-      display: grid;
+  text-transform:uppercase;
 
-      grid-template-columns: 1fr 1fr;
+  letter-spacing:.8px;
+}
 
-      gap: 7px;
-    }
+.info-item b{
+  display:block;
 
-    .session-detail {
-      background: rgba(255,255,255,0.025);
+  margin-top:3px;
 
-      border:
-        1px solid rgba(255,255,255,0.055);
+  font-size:11px;
 
-      padding: 8px 9px;
+  white-space:nowrap;
 
-      border-radius: 10px;
-    }
+  overflow:hidden;
 
-    .session-detail span {
-      display: block;
+  text-overflow:ellipsis;
+}
 
-      color: var(--text-muted);
+/* ================================
+   HISTORY
+================================ */
 
-      font-size: 7px;
+.timeline-widget{
+  padding:17px;
 
-      text-transform: uppercase;
+  border-radius:20px;
 
-      letter-spacing: 0.7px;
-    }
+  background:var(--card);
 
-    .session-detail b {
-      display: block;
+  border:1px solid var(--border);
 
-      font-size: 10px;
+  margin-bottom:16px;
+}
 
-      margin-top: 2px;
+#attendanceTimeline{
+  display:flex;
 
-      color: #fff;
+  flex-direction:column;
 
-      font-weight: 600;
+  gap:12px;
 
-      white-space: nowrap;
+  max-height:650px;
 
-      overflow: hidden;
+  overflow-y:auto;
 
-      text-overflow: ellipsis;
-    }
+  padding-right:3px;
+}
 
-    .feedback-box {
-      padding: 10px 11px;
+#attendanceTimeline::-webkit-scrollbar{
+  width:3px;
+}
 
-      border-radius: 12px;
+#attendanceTimeline::-webkit-scrollbar-thumb{
+  background:rgba(255,255,255,.12);
 
-      background: rgba(212,175,55,0.055);
+  border-radius:10px;
+}
 
-      border:
-        1px solid rgba(212,175,55,0.13);
-    }
+/* ================================
+   SESSION CARD
+================================ */
 
-    .feedback-label {
-      font-size: 8px;
+.log-row{
+  position:relative;
 
-      color: var(--gold-light);
+  padding:14px;
 
-      font-weight: 700;
+  border-radius:17px;
 
-      text-transform: uppercase;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.035),
+      rgba(255,255,255,.015)
+    );
 
-      letter-spacing: 1px;
-    }
+  border:1px solid var(--border);
 
-    .feedback-text {
-      font-size: 11px;
+  border-left:3px solid var(--gold);
+}
 
-      color: #e5e5ea;
+.log-row.good{
+  border-left-color:var(--green);
+}
 
-      margin-top: 3px;
+.log-row.bad{
+  border-left-color:var(--red);
+}
 
-      line-height: 1.45;
-    }
+.log-header{
+  display:flex;
 
-    .feedback-box.good {
-      background:
-        rgba(52,199,89,0.055);
+  justify-content:space-between;
 
-      border-color:
-        rgba(52,199,89,0.15);
-    }
+  align-items:center;
 
-    .feedback-box.good .feedback-label {
-      color: var(--success);
-    }
+  margin-bottom:11px;
+}
 
-    .feedback-box.bad {
-      background:
-        rgba(255,69,58,0.055);
+.session-number{
+  font-size:13px;
 
-      border-color:
-        rgba(255,69,58,0.15);
-    }
+  font-weight:700;
+}
 
-    .feedback-box.bad .feedback-label {
-      color: #ff8179;
-    }
+.session-date{
+  font-size:8px;
 
-    /* STUDENT FEEDBACK */
+  color:var(--muted);
 
-    .student-feedback-area {
-      margin-top: 3px;
+  text-align:right;
+}
 
-      padding-top: 10px;
+.details{
+  display:grid;
 
-      border-top:
-        1px solid rgba(255,255,255,0.06);
-    }
+  grid-template-columns:1fr 1fr;
 
-    .student-feedback-title {
-      font-size: 9px;
+  gap:7px;
+}
 
-      color: var(--text-muted);
+.detail{
+  padding:9px;
 
-      font-weight: 700;
+  border-radius:10px;
 
-      letter-spacing: 0.8px;
+  background:rgba(0,0,0,.16);
 
-      text-transform: uppercase;
+  border:1px solid rgba(255,255,255,.045);
+}
 
-      margin-bottom: 8px;
-    }
+.detail.route{
+  grid-column:1/-1;
+}
 
-    .rating-grid {
-      display: grid;
+.detail span{
+  display:block;
 
-      grid-template-columns:
-        repeat(3,1fr);
+  font-size:7px;
 
-      gap: 6px;
+  color:var(--muted);
 
-      margin-bottom: 8px;
-    }
+  text-transform:uppercase;
 
-    .rating-btn {
-      border:
-        1px solid var(--card-border);
+  letter-spacing:.7px;
+}
 
-      background:
-        rgba(255,255,255,0.025);
+.detail b{
+  display:block;
 
-      color: #ccc;
+  font-size:10px;
 
-      padding: 8px 4px;
+  margin-top:2px;
 
-      border-radius: 9px;
+  white-space:nowrap;
 
-      font-size: 8px;
+  overflow:hidden;
 
-      cursor: pointer;
+  text-overflow:ellipsis;
+}
 
-      transition: 0.2s;
-    }
+/* ================================
+   INSTRUCTOR FEEDBACK
+================================ */
 
-    .rating-btn.active {
-      border-color: var(--gold);
+.feedback{
+  margin-top:9px;
 
-      background:
-        rgba(212,175,55,0.12);
+  padding:10px;
 
-      color: var(--gold-light);
-    }
+  border-radius:11px;
 
-    .student-comment {
-      min-height: 65px;
+  background:rgba(212,175,55,.045);
 
-      font-size: 10px;
+  border:1px solid rgba(212,175,55,.11);
+}
 
-      text-align: left;
+.feedback.good{
+  background:rgba(52,199,89,.045);
 
-      margin-bottom: 7px;
-    }
+  border-color:rgba(52,199,89,.13);
+}
 
-    .submit-feedback-btn {
-      width: 100%;
+.feedback.bad{
+  background:rgba(255,69,58,.045);
 
-      border: 1px solid
-        rgba(212,175,55,0.28);
+  border-color:rgba(255,69,58,.13);
+}
 
-      background:
-        rgba(212,175,55,0.08);
+.feedback-label{
+  font-size:7px;
 
-      color: var(--gold-light);
+  font-weight:800;
 
-      padding: 9px;
+  color:var(--gold-light);
 
-      border-radius: 10px;
+  text-transform:uppercase;
 
-      font-size: 9px;
+  letter-spacing:1px;
+}
 
-      font-weight: 700;
+.feedback.good .feedback-label{
+  color:var(--green);
+}
 
-      cursor: pointer;
-    }
+.feedback.bad .feedback-label{
+  color:#ff8179;
+}
 
-    .feedback-saved {
-      display: none;
+.feedback-text{
+  font-size:10px;
 
-      font-size: 9px;
+  color:#ddd;
 
-      color: var(--success);
+  line-height:1.5;
 
-      text-align: center;
+  margin-top:3px;
+}
 
-      padding-top: 5px;
-    }
+/* ================================
+   STUDENT FEEDBACK
+================================ */
 
-    /* WALLET */
+.student-feedback{
+  margin-top:11px;
 
-    .wallet-banner {
-      background:
-        linear-gradient(
-          90deg,
-          rgba(52,199,89,0.08) 0%,
-          rgba(52,199,89,0.01) 100%
-        );
+  padding-top:10px;
 
-      border:
-        1px solid rgba(52,199,89,0.2);
+  border-top:1px solid rgba(255,255,255,.055);
+}
 
-      padding: 16px 20px;
+.student-feedback-title{
+  font-size:8px;
 
-      border-radius: 20px;
+  color:var(--muted);
 
-      display: flex;
+  text-transform:uppercase;
 
-      justify-content: space-between;
+  letter-spacing:.8px;
 
-      align-items: center;
+  font-weight:700;
 
-      margin-bottom: 16px;
-    }
+  margin-bottom:7px;
+}
 
-    .wallet-banner div {
-      display: flex;
+.rating-buttons{
+  display:grid;
 
-      flex-direction: column;
-    }
+  grid-template-columns:repeat(3,1fr);
 
-    .wallet-banner span {
-      font-size: 10px;
+  gap:5px;
 
-      color: var(--success);
+  margin-bottom:7px;
+}
 
-      font-weight: 700;
+.rating-btn{
+  padding:8px 3px;
 
-      letter-spacing: 1px;
+  border-radius:9px;
 
-      text-transform: uppercase;
-    }
+  border:1px solid var(--border);
 
-    .wallet-banner p {
-      font-size: 11px;
+  background:rgba(255,255,255,.025);
 
-      color: var(--text-muted);
+  color:#bbb;
 
-      margin-top: 2px;
-    }
+  font-size:8px;
 
-    .wallet-banner b {
-      font-size: 22px;
+  cursor:pointer;
+}
 
-      color: #fff;
+.rating-btn.active{
+  border-color:var(--gold);
 
-      font-weight: 700;
+  background:rgba(212,175,55,.10);
 
-      letter-spacing: -0.5px;
-    }
+  color:var(--gold-light);
+}
 
-    /* ACTIONS */
+.student-comment{
+  min-height:60px;
 
-    .actions-grid {
-      display: grid;
+  padding:9px;
 
-      grid-template-columns: 1fr 1fr;
+  font-size:9px;
 
-      gap: 12px;
-    }
+  text-align:left;
 
-    .btn-secondary {
-      background: var(--card-bg);
+  margin-bottom:6px;
 
-      border:
-        1px solid var(--card-border);
+  resize:none;
+}
 
-      color: #fff;
+.submit-feedback{
+  width:100%;
 
-      padding: 16px;
+  padding:9px;
 
-      border-radius: 16px;
+  border-radius:9px;
 
-      font-size: 14px;
+  border:1px solid rgba(212,175,55,.25);
 
-      font-weight: 600;
+  background:rgba(212,175,55,.07);
 
-      cursor: pointer;
+  color:var(--gold-light);
 
-      transition: all 0.2s;
+  font-size:8px;
 
-      display: flex;
+  font-weight:800;
 
-      align-items: center;
+  cursor:pointer;
+}
 
-      justify-content: center;
+.student-saved{
+  font-size:9px;
 
-      gap: 8px;
-    }
+  color:var(--green);
 
-    .btn-secondary:active {
-      background:
-        rgba(255,255,255,0.08);
+  line-height:1.5;
+}
 
-      transform: scale(0.98);
-    }
+/* ================================
+   WALLET
+================================ */
 
-    /* CERTIFICATE */
+.wallet{
+  padding:16px 18px;
 
-    #premiumCertificate {
-      display: none;
+  border-radius:18px;
 
-      background:
-        linear-gradient(
-          135deg,
-          rgba(212,175,55,0.15) 0%,
-          rgba(212,175,55,0.03) 100%
-        );
+  background:
+    linear-gradient(
+      90deg,
+      rgba(52,199,89,.075),
+      rgba(52,199,89,.01)
+    );
 
-      border:
-        1px solid rgba(212,175,55,0.35);
+  border:1px solid rgba(52,199,89,.18);
 
-      border-radius: 24px;
+  display:flex;
 
-      padding: 22px 20px;
+  align-items:center;
 
-      text-align: center;
+  justify-content:space-between;
 
-      margin-bottom: 16px;
+  margin-bottom:15px;
+}
 
-      box-shadow:
-        0 15px 35px rgba(212,175,55,0.1);
-    }
+.wallet span{
+  display:block;
 
-    /* LOGOUT */
+  color:var(--green);
 
-    .logout-btn {
-      color:
-        rgba(255,255,255,0.3);
+  font-size:8px;
 
-      font-size: 12px;
+  letter-spacing:1px;
 
-      font-weight: 500;
+  font-weight:800;
+}
 
-      margin-top: 28px;
+.wallet p{
+  color:var(--muted);
 
-      text-align: center;
+  font-size:9px;
 
-      cursor: pointer;
+  margin-top:2px;
+}
 
-      display: block;
+.wallet b{
+  font-size:21px;
+}
 
-      text-decoration: none;
+/* ================================
+   ACTIONS
+================================ */
 
-      transition: color 0.2s;
+.actions{
+  display:grid;
 
-      letter-spacing: 0.5px;
-    }
+  grid-template-columns:1fr 1fr;
 
-    .logout-btn:hover {
-      color: var(--gold);
-    }
+  gap:9px;
+}
 
-    /* LOADER */
+.action-btn{
+  padding:14px;
 
-    #loader {
-      display: none;
+  border-radius:14px;
 
-      margin: 20px auto 0 auto;
+  border:1px solid var(--border);
 
-      border:
-        2.5px solid rgba(255,255,255,0.05);
+  background:var(--card);
 
-      border-top:
-        2.5px solid var(--gold);
+  color:#fff;
 
-      border-radius: 50%;
+  font-size:11px;
 
-      width: 28px;
-      height: 28px;
+  font-weight:700;
 
-      animation:
-        spin 0.75s linear infinite;
-    }
+  cursor:pointer;
 
-    @keyframes spin {
-      0% {
-        transform: rotate(0deg);
-      }
+  transition:.2s;
+}
 
-      100% {
-        transform: rotate(360deg);
-      }
-    }
+.action-btn:active{
+  transform:scale(.97);
+}
 
-    /* PDF */
+.action-btn.share{
+  color:var(--green);
 
-    #pdfTemplate {
-      width: 842px;
+  border-color:rgba(52,199,89,.2);
+}
 
-      height: 595px;
+/* ================================
+   CERTIFICATE
+================================ */
 
-      background: #000;
+#premiumCertificate{
+  display:none;
 
-      color: #fff;
+  text-align:center;
 
-      padding: 50px;
+  padding:20px;
 
-      border: 20px solid #d4af37;
+  border-radius:20px;
 
-      display: none;
+  margin-bottom:16px;
 
-      position: absolute;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(212,175,55,.14),
+      rgba(212,175,55,.025)
+    );
 
-      left: -9999px;
+  border:1px solid rgba(212,175,55,.3);
+}
 
-      text-align: center;
-    }
+/* ================================
+   LOGOUT
+================================ */
 
-    /* MOBILE */
+.logout{
+  display:block;
 
-    @media(max-width:380px) {
+  margin-top:25px;
 
-      .dashboard-wrapper {
-        padding: 24px 15px;
-      }
+  text-align:center;
 
-      .progress-widget {
-        padding: 15px;
-      }
+  color:rgba(255,255,255,.28);
 
-      .radial-container,
-      .radial-progress-svg {
-        width: 86px;
-        height: 86px;
-      }
+  font-size:10px;
 
-      .metric-pill b {
-        font-size: 17px;
-      }
-    }
-  </style>
+  letter-spacing:.7px;
+
+  cursor:pointer;
+}
+
+.logout:hover{
+  color:var(--gold);
+}
+
+/* ================================
+   LOADER
+================================ */
+
+#loader{
+  display:none;
+
+  margin:17px auto 0;
+
+  width:26px;
+  height:26px;
+
+  border:2px solid rgba(255,255,255,.06);
+
+  border-top-color:var(--gold);
+
+  border-radius:50%;
+
+  animation:spin .7s linear infinite;
+}
+
+@keyframes spin{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+/* ================================
+   EMPTY
+================================ */
+
+.empty-history{
+  padding:25px 10px;
+
+  text-align:center;
+
+  color:var(--muted);
+
+  font-size:10px;
+
+  line-height:1.6;
+}
+
+/* ================================
+   PDF
+================================ */
+
+#pdfTemplate{
+  width:842px;
+  height:595px;
+
+  background:#000;
+
+  color:#fff;
+
+  padding:50px;
+
+  border:20px solid var(--gold);
+
+  display:none;
+
+  position:absolute;
+
+  left:-9999px;
+
+  text-align:center;
+}
+
+/* ================================
+   SMALL MOBILE
+================================ */
+
+@media(max-width:370px){
+
+  body{
+    padding:12px;
+  }
+
+  .dashboard-wrapper{
+    padding:21px 15px;
+  }
+
+  .student-title{
+    font-size:22px;
+  }
+
+  .metric b{
+    font-size:16px;
+  }
+
+}
+
+</style>
 </head>
+
 
 <body>
 
@@ -1196,18 +1227,23 @@
 
   <!-- BRAND -->
 
-  <div class="brand-section">
+  <div class="brand">
 
     <h1>ABHINAASH A1</h1>
 
     <p>DRIVING ACADEMY</p>
 
+    <div class="version">
+      DASHBOARD v2.0
+    </div>
+
   </div>
 
 
-  <!-- DASHBOARD -->
+  <!-- MAIN -->
 
   <div class="dashboard-wrapper">
+
 
     <!-- LOGIN -->
 
@@ -1233,7 +1269,7 @@
         class="btn-primary"
         onclick="loadProfile()"
       >
-        Access Dashboard
+        ACCESS MY DASHBOARD
       </button>
 
       <div id="loader"></div>
@@ -1245,6 +1281,7 @@
 
     <div id="profileContent">
 
+
       <!-- CERTIFICATE -->
 
       <div id="premiumCertificate">
@@ -1252,21 +1289,20 @@
         <img
           src="https://cdn-icons-png.flaticon.com/512/190/190411.png"
           style="
-            width:46px;
-            filter:drop-shadow(
-              0 0 10px rgba(212,175,55,0.4)
+            width:45px;
+            margin-bottom:8px;
+            filter:
+            drop-shadow(
+              0 0 10px
+              rgba(212,175,55,.4)
             );
-            margin-bottom:10px;
           "
-          alt="Elite Graduate"
         >
 
         <h3
           style="
             color:#fce08d;
-            font-size:17px;
-            font-weight:700;
-            letter-spacing:0.5px;
+            font-size:16px;
           "
         >
           ELITE COURSE GRADUATE
@@ -1274,35 +1310,28 @@
 
         <p
           style="
-            font-size:12px;
-            color:var(--text-muted);
-            margin-bottom:16px;
-            line-height:1.4;
+            color:var(--muted);
+            font-size:10px;
+            margin:6px 0 15px;
           "
         >
-          Your official driving track record is successfully parsed.
+          Your official driving training record is complete.
         </p>
 
         <button
           class="btn-primary"
-          style="
-            padding:12px;
-            font-size:13px;
-            border-radius:12px;
-            box-shadow:
-              0 6px 15px rgba(212,175,55,0.2);
-          "
+          style="padding:12px;font-size:11px;"
           onclick="downloadPDF()"
         >
-          ⬇️ DOWNLOAD PREMIUM PDF
+          DOWNLOAD PREMIUM CERTIFICATE
         </button>
 
       </div>
 
 
-      <!-- STUDENT HEADER -->
+      <!-- PROFILE HEADER -->
 
-      <div class="profile-meta">
+      <div class="profile-header">
 
         <div
           class="student-title"
@@ -1315,38 +1344,47 @@
           class="course-badge"
           id="dispPkg"
         >
-          Track Scheme
+          Driving Package
         </div>
 
       </div>
 
 
-      <!-- MOTIVATION -->
+      <!-- SESSION TYPE -->
 
-      <div
-        class="motivation-card"
-        id="motivationCard"
-      >
+      <div class="session-type">
 
-        <div
-          class="motivation-icon"
-          id="motivationIcon"
-        >
-          🚗
+        <div class="session-top">
+
+          <div
+            class="session-icon"
+            id="sessionIcon"
+          >
+            👥
+          </div>
+
+          <div>
+
+            <div class="session-label">
+              YOUR TRAINING MODE
+            </div>
+
+            <div
+              class="session-name"
+              id="sessionName"
+            >
+              GROUP SESSION
+            </div>
+
+          </div>
+
         </div>
 
         <div
-          class="motivation-title"
-          id="motivationTitle"
+          class="session-description"
+          id="sessionDescription"
         >
-          YOUR DRIVING JOURNEY
-        </div>
-
-        <div
-          class="motivation-text"
-          id="motivationText"
-        >
-          Keep learning. Keep improving.
+          Learn with real-world situations and improve your road awareness.
         </div>
 
       </div>
@@ -1354,81 +1392,88 @@
 
       <!-- PROGRESS -->
 
-      <div class="progress-widget">
+      <div class="progress-card">
 
-        <div class="metrics-box">
+        <div class="progress-head">
 
-          <div class="metric-row">
+          <span>
+            Training Progress
+          </span>
 
-            <div class="metric-pill">
+          <span
+            class="progress-percent"
+            id="dispPercent"
+          >
+            0%
+          </span>
 
-              <span>
-                Classes Done
-              </span>
+        </div>
 
-              <b id="dispDone">
-                0
-              </b>
-
-            </div>
-
-            <div class="metric-pill remaining-pill">
-
-              <span>
-                Remaining
-              </span>
-
-              <b id="dispRemaining">
-                0
-              </b>
-
-            </div>
-
-          </div>
-
-
-          <div class="metric-row">
-
-            <div class="metric-pill">
-
-              <span>
-                Total Classes
-              </span>
-
-              <b id="dispTotal">
-                0
-              </b>
-
-            </div>
-
-            <div
-              class="metric-pill"
-              style="
-                border-color:
-                rgba(214,175,55,0.25);
-              "
-            >
-
-              <span>
-                Distance
-              </span>
-
-              <b id="dispKm">
-                0 KM
-              </b>
-
-            </div>
-
-          </div>
-
+        <div class="progress-track">
 
           <div
-            class="metric-pill"
-            style="
-              border-color:
-              rgba(52,199,89,0.2);
-            "
-          >
+            class="progress-fill"
+            id="progressFill"
+          ></div>
+
+        </div>
+
+
+        <div class="metrics-grid">
+
+          <div class="metric">
+
+            <span>
+              Classes Done
+            </span>
+
+            <b id="dispDone">
+              0
+            </b>
+
+          </div>
+
+
+          <div class="metric remaining">
+
+            <span>
+              Classes Remaining
+            </span>
+
+            <b id="dispRemaining">
+              0
+            </b>
+
+          </div>
+
+
+          <div class="metric">
+
+            <span>
+              Total Classes
+            </span>
+
+            <b id="dispTotal">
+              0
+            </b>
+
+          </div>
+
+
+          <div class="metric distance">
+
+            <span>
+              Distance
+            </span>
+
+            <b id="dispKm">
+              0 KM
+            </b>
+
+          </div>
+
+
+          <div class="metric completion">
 
             <span>
               Expected Completion
@@ -1442,47 +1487,14 @@
 
         </div>
 
-
-        <!-- RADIAL -->
-
-        <div class="radial-container">
-
-          <svg class="radial-progress-svg">
-
-            <circle
-              class="radial-bg"
-              cx="50"
-              cy="50"
-              r="40"
-            ></circle>
-
-            <circle
-              class="radial-fill"
-              id="radialFillCircle"
-              cx="50"
-              cy="50"
-              r="40"
-            ></circle>
-
-          </svg>
-
-          <div
-            class="radial-text"
-            id="dispPercent"
-          >
-            0%
-          </div>
-
-        </div>
-
       </div>
 
 
-      <!-- ACADEMY INFORMATION -->
+      <!-- TRAINING INFO -->
 
       <div class="info-card">
 
-        <div class="info-title">
+        <div class="section-title">
           Training Information
         </div>
 
@@ -1491,7 +1503,7 @@
           <div class="info-item">
 
             <span>
-              Class Type
+              Session Type
             </span>
 
             <b id="infoClassType">
@@ -1499,6 +1511,7 @@
             </b>
 
           </div>
+
 
           <div class="info-item">
 
@@ -1512,6 +1525,7 @@
 
           </div>
 
+
           <div class="info-item">
 
             <span>
@@ -1523,6 +1537,7 @@
             </b>
 
           </div>
+
 
           <div class="info-item">
 
@@ -1541,13 +1556,13 @@
       </div>
 
 
-      <!-- CLASS HISTORY -->
+      <!-- HISTORY -->
 
       <div class="timeline-widget">
 
-        <span class="timeline-header">
-          Class History & Feedback
-        </span>
+        <div class="section-title">
+          Class History
+        </div>
 
         <div id="attendanceTimeline"></div>
 
@@ -1556,7 +1571,7 @@
 
       <!-- WALLET -->
 
-      <div class="wallet-banner">
+      <div class="wallet">
 
         <div>
 
@@ -1565,7 +1580,7 @@
           </span>
 
           <p>
-            Earned per subscription
+            Earned per successful referral
           </p>
 
         </div>
@@ -1579,29 +1594,18 @@
 
       <!-- ACTIONS -->
 
-      <div class="actions-grid">
+      <div class="actions">
 
         <button
-          class="btn-secondary"
+          class="action-btn"
           onclick="contactAdmin()"
         >
           💬 HELP
         </button>
 
         <button
-          class="btn-secondary"
+          class="action-btn share"
           onclick="shareReferral()"
-          style="
-            color:var(--success);
-            border-color:
-            rgba(52,199,89,0.25);
-            background:
-            linear-gradient(
-              135deg,
-              rgba(52,199,89,0.05),
-              transparent
-            );
-          "
         >
           🚀 SHARE
         </button>
@@ -1611,12 +1615,12 @@
 
       <!-- LOGOUT -->
 
-      <a
-        class="logout-btn"
+      <div
+        class="logout"
         onclick="logoutSession()"
       >
         ← LOGOUT SESSION
-      </a>
+      </div>
 
     </div>
 
@@ -1625,7 +1629,7 @@
 </div>
 
 
-<!-- PDF TEMPLATE -->
+<!-- PDF -->
 
 <div id="pdfTemplate">
 
@@ -1647,7 +1651,6 @@
         color:#d4af37;
         font-size:42px;
         font-weight:800;
-        margin-bottom:10px;
       "
     >
       ABHINAASH A1 DRIVING ACADEMY
@@ -1678,9 +1681,7 @@
       style="
         font-size:38px;
         color:#fff;
-        font-weight:600;
         text-transform:uppercase;
-        letter-spacing:1px;
       "
     >
       NAME
@@ -1695,8 +1696,8 @@
         margin-top:20px;
       "
     >
-      Has successfully qualified and completed the structured
-      Advanced Smart Driving & Traffic Regulation Track operations program.
+      Has successfully completed the structured Advanced Smart Driving
+      & Traffic Regulation training program.
     </p>
 
   </div>
@@ -1706,687 +1707,539 @@
 
 <script type="module">
 
-  import {
-    initializeApp
+import {
+  initializeApp
+}
+from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+
+
+import {
+  getFirestore,
+  doc,
+  onSnapshot,
+  updateDoc
+}
+from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
+
+/* =====================================
+   FIREBASE
+===================================== */
+
+const firebaseConfig={
+
+  apiKey:
+    "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
+
+  authDomain:
+    "abinash-driving.firebaseapp.com",
+
+  projectId:
+    "abinash-driving",
+
+  storageBucket:
+    "abinash-driving.appspot.com",
+
+  messagingSenderId:
+    "641148830173",
+
+  appId:
+    "1:641148830173:web:b7a500e5e7e2463da0f634"
+
+};
+
+
+const app=
+  initializeApp(firebaseConfig);
+
+const db=
+  getFirestore(app);
+
+
+let currentData=null;
+
+let unsubscribeProfile=null;
+
+
+/* =====================================
+   ESCAPE HTML
+===================================== */
+
+function escapeHtml(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =====================================
+   PARSE LOG
+===================================== */
+
+function parseLog(log){
+
+  const safe=
+    String(log || "");
+
+  const parts=
+    safe.split(" — ");
+
+  const first=
+    parts[0] ||
+    "Training Session";
+
+
+  let date=
+    first;
+
+  let time=
+    "Not recorded";
+
+
+  const dt=
+    first.match(
+      /^(.+?)\s*\|\s*(.+)$/
+    );
+
+
+  if(dt){
+
+    date=
+      dt[1].trim();
+
+    time=
+      dt[2].trim();
+
   }
-  from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
 
 
-  import {
-    getFirestore,
-    doc,
-    onSnapshot,
-    updateDoc
-  }
-  from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+  const routeMatch=
+    safe.match(
+      /Route:\s*([^|]+)/i
+    );
 
 
-  /* FIREBASE */
+  const distanceMatch=
+    safe.match(
+      /Distance:\s*(\d+(?:\.\d+)?)\s*KM/i
+    );
 
-  const firebaseConfig = {
 
-    apiKey:
-      "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
+  const anyKm=
+    safe.match(
+      /(\d+(?:\.\d+)?)\s*KM/i
+    );
 
-    authDomain:
-      "abinash-driving.firebaseapp.com",
 
-    projectId:
-      "abinash-driving",
+  const remarkMatch=
+    safe.match(
+      /Remark:\s*(.+)$/i
+    );
 
-    storageBucket:
-      "abinash-driving.appspot.com",
 
-    messagingSenderId:
-      "641148830173",
+  const route=
+    routeMatch
+      ? routeMatch[1].trim()
+      : "Training Route";
 
-    appId:
-      "1:641148830173:web:b7a500e5e7e2463da0f634"
+
+  const distance=
+    distanceMatch
+      ? parseFloat(distanceMatch[1])
+      : anyKm
+        ? parseFloat(anyKm[1])
+        : 5;
+
+
+  const remark=
+    remarkMatch
+      ? remarkMatch[1].trim()
+      : parts[1]
+        ? parts.slice(1).join(" — ").trim()
+        : "Session completed successfully.";
+
+
+  return{
+
+    date,
+    time,
+    route,
+    distance,
+    remark
 
   };
 
-
-  const app =
-    initializeApp(firebaseConfig);
-
-  const db =
-    getFirestore(app);
+}
 
 
-  let currentData = null;
+/* =====================================
+   FEEDBACK TYPE
+===================================== */
 
-  let unsubscribeProfile = null;
+function feedbackType(text){
 
-
-  /* ---------------------------------------
-     LOG PARSER
-  --------------------------------------- */
-
-  function parseLog(log) {
-
-    const safeLog = String(log || "");
-
-    const parts =
-      safeLog.split(" — ");
-
-    const dateInfo =
-      parts[0] ||
-      "Training Session";
+  const value=
+    String(text || "")
+      .toLowerCase();
 
 
-    const routeMatch =
-      safeLog.match(
-        /Route:\s*([^|]+)/i
-      );
+  const badWords=[
+
+    "bad",
+    "needs improvement",
+    "improvement",
+    "poor",
+    "weak",
+    "mistake",
+    "practice more",
+    "incorrect",
+    "wrong",
+    "⚠️"
+
+  ];
 
 
-    const distanceMatch =
-      safeLog.match(
-        /Distance:\s*(\d+(?:\.\d+)?)\s*KM/i
-      );
+  const goodWords=[
+
+    "good",
+    "excellent",
+    "great",
+    "perfect",
+    "well",
+    "nice",
+    "👍"
+
+  ];
 
 
-    const anyKmMatch =
-      safeLog.match(
-        /(\d+(?:\.\d+)?)\s*KM/i
-      );
+  if(
+    badWords.some(
+      x=>value.includes(x)
+    )
+  ){
 
-
-    const remarkMatch =
-      safeLog.match(
-        /Remark:\s*(.+)$/i
-      );
-
-
-    let route =
-      routeMatch
-        ? routeMatch[1].trim()
-        : "Training Route";
-
-
-    let distance =
-      distanceMatch
-        ? parseFloat(distanceMatch[1])
-        : (
-            anyKmMatch
-              ? parseFloat(anyKmMatch[1])
-              : 5
-          );
-
-
-    let remark =
-      remarkMatch
-        ? remarkMatch[1].trim()
-        : (
-            parts[1]
-              ? parts.slice(1).join(" — ").trim()
-              : "Session completed successfully."
-          );
-
-
-    let date = dateInfo;
-    let time = "Time not recorded";
-
-
-    const dateTimeMatch =
-      dateInfo.match(
-        /^(.+?)\s*\|\s*(.+)$/
-      );
-
-
-    if(dateTimeMatch) {
-
-      date =
-        dateTimeMatch[1].trim();
-
-      time =
-        dateTimeMatch[2].trim();
-
-    }
-
-
-    return {
-
-      original: safeLog,
-
-      date,
-
-      time,
-
-      route,
-
-      distance,
-
-      remark
-
-    };
+    return "bad";
 
   }
 
 
-  /* ---------------------------------------
-     FEEDBACK TYPE
-  --------------------------------------- */
+  if(
+    goodWords.some(
+      x=>value.includes(x)
+    )
+  ){
 
-  function getFeedbackType(text) {
+    return "good";
 
-    const value =
-      String(text || "").toLowerCase();
-
-
-    const negativeWords = [
-
-      "bad",
-      "needs improvement",
-      "improvement",
-      "poor",
-      "weak",
-      "not good",
-      "mistake",
-      "practice more",
-      "incorrect",
-      "wrong",
-      "⚠️"
-
-    ];
+  }
 
 
-    const positiveWords = [
+  return "neutral";
 
-      "good",
-      "excellent",
-      "great",
-      "perfect",
-      "well",
-      "nice",
-      "👍"
+}
 
-    ];
+
+/* =====================================
+   MOTIVATION
+===================================== */
+
+function updateSessionUI(type){
+
+  const icon=
+    document.getElementById(
+      "sessionIcon"
+    );
+
+  const name=
+    document.getElementById(
+      "sessionName"
+    );
+
+  const description=
+    document.getElementById(
+      "sessionDescription"
+    );
+
+
+  if(type==="Personal"){
+
+    icon.innerText="👤";
+
+    name.innerText=
+      "PERSONAL 1-ON-1 SESSION";
+
+
+    description.innerText=
+      "Focused one-to-one training gives you dedicated instructor attention, faster correction and practice designed around your driving level.";
+
+  }
+
+  else{
+
+    icon.innerText="👥";
+
+    name.innerText=
+      "GROUP DRIVING SESSION";
+
+
+    description.innerText=
+      "Learn with real-world situations, build road confidence and improve awareness while learning alongside other students.";
+
+  }
+
+}
+
+
+/* =====================================
+   EXPECTED COMPLETION
+===================================== */
+
+function expectedCompletion(
+  logs,
+  total
+){
+
+  if(!logs.length){
+
+    return "Not Started";
+
+  }
+
+
+  try{
+
+    const first=
+      parseLog(logs[0]);
+
+
+    const year=
+      new Date().getFullYear();
+
+
+    const date=
+      new Date(
+        `${first.date} ${year}`
+      );
 
 
     if(
-      negativeWords.some(
-        word => value.includes(word)
+      isNaN(
+        date.getTime()
       )
-    ) {
-
-      return "bad";
-
-    }
-
-
-    if(
-      positiveWords.some(
-        word => value.includes(word)
-      )
-    ) {
-
-      return "good";
-
-    }
-
-
-    return "neutral";
-
-  }
-
-
-  /* ---------------------------------------
-     MOTIVATION
-  --------------------------------------- */
-
-  function setMotivation(classType) {
-
-    const icon =
-      document.getElementById(
-        "motivationIcon"
-      );
-
-    const title =
-      document.getElementById(
-        "motivationTitle"
-      );
-
-    const text =
-      document.getElementById(
-        "motivationText"
-      );
-
-
-    if(classType === "Personal") {
-
-      icon.innerText = "👤";
-
-      title.innerText =
-        "PERSONAL DRIVING ADVANTAGE";
-
-      text.innerText =
-        "1-to-1 attention means your mistakes are noticed faster, your practice is focused, and every class is built around your driving improvement.";
-
-    }
-
-    else {
-
-      icon.innerText = "👥";
-
-      title.innerText =
-        "GROUP DRIVING ADVANTAGE";
-
-      text.innerText =
-        "Learn with real-world situations, build confidence around other learners, and improve your road awareness step by step.";
-
-    }
-
-  }
-
-
-  /* ---------------------------------------
-     EXPECTED END DATE
-  --------------------------------------- */
-
-  function calculateExpectedDate(
-    logs,
-    total
-  ) {
-
-    if(!logs.length) {
-
-      return "Not Started";
-
-    }
-
-
-    try {
-
-      const first =
-        parseLog(logs[0]);
-
-
-      const currentYear =
-        new Date().getFullYear();
-
-
-      let startDate =
-        new Date(
-          `${first.date} ${currentYear}`
-        );
-
-
-      if(
-        isNaN(
-          startDate.getTime()
-        )
-      ) {
-
-        return "Calculating...";
-
-      }
-
-
-      startDate.setDate(
-        startDate.getDate() + total
-      );
-
-
-      return startDate.toLocaleDateString(
-        "en-GB",
-        {
-          day: "2-digit",
-          month: "short"
-        }
-      );
-
-    }
-
-    catch(error) {
+    ){
 
       return "Calculating...";
 
     }
 
+
+    date.setDate(
+      date.getDate()+total
+    );
+
+
+    return date.toLocaleDateString(
+      "en-GB",
+      {
+        day:"2-digit",
+        month:"short"
+      }
+    );
+
+  }
+
+  catch(e){
+
+    return "Calculating...";
+
+  }
+
+}
+
+
+/* =====================================
+   RENDER HISTORY
+===================================== */
+
+function renderHistory(
+  logs,
+  feedbacks
+){
+
+  const container=
+    document.getElementById(
+      "attendanceTimeline"
+    );
+
+
+  container.innerHTML="";
+
+
+  if(!logs.length){
+
+    container.innerHTML=`
+
+      <div class="empty-history">
+
+        🚗 Your first driving session
+        will appear here after your class.
+
+      </div>
+
+    `;
+
+    return;
+
   }
 
 
-  /* ---------------------------------------
-     RENDER CLASS HISTORY
-  --------------------------------------- */
+  for(
+    let index=logs.length-1;
+    index>=0;
+    index--
+  ){
 
-  function renderTimeline(
-    logs,
-    done,
-    studentFeedbacks
-  ) {
+    const session=
+      index+1;
 
-    const timeline =
-      document.getElementById(
-        "attendanceTimeline"
+
+    const item=
+      parseLog(logs[index]);
+
+
+    const type=
+      feedbackType(
+        item.remark
       );
 
 
-    timeline.innerHTML = "";
+    const studentFeedback=
+      feedbacks &&
+      feedbacks[session]
+        ? feedbacks[session]
+        : null;
 
 
-    if(!logs.length) {
+    let studentHTML="";
 
-      timeline.innerHTML = `
 
-        <div
-          style="
-            text-align:center;
-            padding:25px 10px;
-            color:var(--text-muted);
-            font-size:11px;
-          "
-        >
-          🚗 Your first driving class record
-          will appear here.
+    if(studentFeedback){
+
+      studentHTML=`
+
+        <div class="student-feedback">
+
+          <div class="student-feedback-title">
+            YOUR FEEDBACK
+          </div>
+
+          <div class="student-saved">
+
+            ✓
+            ${escapeHtml(
+              studentFeedback.rating ||
+              "Feedback submitted"
+            )}
+
+            ${
+              studentFeedback.comment
+                ? " — "+
+                  escapeHtml(
+                    studentFeedback.comment
+                  )
+                : ""
+            }
+
+          </div>
+
         </div>
 
       `;
 
-      return;
-
     }
 
+    else{
 
-    /*
-      Latest session first
-    */
+      studentHTML=`
 
-    for(
-      let i = logs.length - 1;
-      i >= 0;
-      i--
-    ) {
+        <div class="student-feedback">
 
-      const sessionNo =
-        i + 1;
-
-
-      const item =
-        parseLog(logs[i]);
-
-
-      const feedbackType =
-        getFeedbackType(
-          item.remark
-        );
-
-
-      const adminClass =
-        feedbackType === "good"
-          ? "good"
-          : feedbackType === "bad"
-            ? "bad"
-            : "";
-
-
-      const existingStudentFeedback =
-        studentFeedbacks &&
-        studentFeedbacks[sessionNo]
-          ? studentFeedbacks[sessionNo]
-          : null;
-
-
-      let studentFeedbackHtml = "";
-
-
-      if(existingStudentFeedback) {
-
-        const rating =
-          existingStudentFeedback.rating ||
-          "Submitted";
-
-
-        studentFeedbackHtml = `
-
-          <div
-            class="student-feedback-area"
-          >
-
-            <div
-              class="student-feedback-title"
-            >
-              YOUR FEEDBACK
-            </div>
-
-            <div
-              style="
-                font-size:10px;
-                color:var(--success);
-                line-height:1.5;
-              "
-            >
-              ✓ ${escapeHtml(rating)}
-              ${
-                existingStudentFeedback.comment
-                  ? " — " +
-                    escapeHtml(
-                      existingStudentFeedback.comment
-                    )
-                  : ""
-              }
-            </div>
-
+          <div class="student-feedback-title">
+            HOW WAS THIS CLASS?
           </div>
 
-        `;
-
-      }
-
-      else {
-
-        studentFeedbackHtml = `
 
           <div
-            class="student-feedback-area"
+            class="rating-buttons"
+            id="rating-${session}"
           >
 
-            <div
-              class="student-feedback-title"
-            >
-              HOW WAS THIS CLASS?
-            </div>
-
-            <div
-              class="rating-grid"
-              id="rating-${sessionNo}"
-            >
-
-              <button
-                class="rating-btn"
-                type="button"
-                onclick="
-                  selectRating(
-                    ${sessionNo},
-                    'Excellent 👍',
-                    this
-                  )
-                "
-              >
-                Excellent 👍
-              </button>
-
-              <button
-                class="rating-btn"
-                type="button"
-                onclick="
-                  selectRating(
-                    ${sessionNo},
-                    'Good 🙂',
-                    this
-                  )
-                "
-              >
-                Good 🙂
-              </button>
-
-              <button
-                class="rating-btn"
-                type="button"
-                onclick="
-                  selectRating(
-                    ${sessionNo},
-                    'Needs Help',
-                    this
-                  )
-                "
-              >
-                Needs Help
-              </button>
-
-            </div>
-
-            <textarea
-              class="student-comment"
-              id="comment-${sessionNo}"
-              placeholder="Want to share something about this class?"
-            ></textarea>
-
             <button
-              class="submit-feedback-btn"
-              type="button"
+              class="rating-btn"
               onclick="
-                submitStudentFeedback(
-                  ${sessionNo}
+                chooseRating(
+                  ${session},
+                  'Excellent 👍',
+                  this
                 )
               "
             >
-              SEND MY FEEDBACK
+              Excellent
+            </button>
+
+
+            <button
+              class="rating-btn"
+              onclick="
+                chooseRating(
+                  ${session},
+                  'Good 🙂',
+                  this
+                )
+              "
+            >
+              Good
+            </button>
+
+
+            <button
+              class="rating-btn"
+              onclick="
+                chooseRating(
+                  ${session},
+                  'Needs Help',
+                  this
+                )
+              "
+            >
+              Needs Help
             </button>
 
           </div>
 
-        `;
 
-      }
-
-
-      timeline.innerHTML += `
-
-        <div
-          class="log-row ${adminClass}"
-        >
-
-          <div class="log-meta">
-
-            <div class="session-number">
-              🚗 Session ${sessionNo}
-            </div>
-
-            <div class="session-date">
-              ${escapeHtml(item.date)}
-              ${
-                item.time !== "Time not recorded"
-                  ? " • " +
-                    escapeHtml(item.time)
-                  : ""
-              }
-            </div>
-
-          </div>
+          <textarea
+            class="student-comment"
+            id="comment-${session}"
+            placeholder="Share your experience about this class..."
+          ></textarea>
 
 
-          <div class="session-detail-grid">
-
-            <div class="session-detail">
-
-              <span>
-                Date
-              </span>
-
-              <b>
-                ${escapeHtml(item.date)}
-              </b>
-
-            </div>
-
-
-            <div class="session-detail">
-
-              <span>
-                Time
-              </span>
-
-              <b>
-                ${escapeHtml(item.time)}
-              </b>
-
-            </div>
-
-
-            <div class="session-detail">
-
-              <span>
-                Instructor
-              </span>
-
-              <b>
-                Avinash
-              </b>
-
-            </div>
-
-
-            <div class="session-detail">
-
-              <span>
-                Distance
-              </span>
-
-              <b>
-                ${item.distance} KM
-              </b>
-
-            </div>
-
-
-            <div
-              class="session-detail"
-              style="
-                grid-column:1/-1;
-              "
-            >
-
-              <span>
-                Route
-              </span>
-
-              <b>
-                📍 ${escapeHtml(item.route)}
-              </b>
-
-            </div>
-
-          </div>
-
-
-          <div
-            class="feedback-box ${adminClass}"
+          <button
+            class="submit-feedback"
+            onclick="
+              submitFeedback(
+                ${session}
+              )
+            "
           >
-
-            <div class="feedback-label">
-
-              ${
-                feedbackType === "good"
-                  ? "POSITIVE FEEDBACK"
-                  : feedbackType === "bad"
-                    ? "IMPROVEMENT FEEDBACK"
-                    : "INSTRUCTOR FEEDBACK"
-              }
-
-            </div>
-
-            <div class="feedback-text">
-
-              ${escapeHtml(item.remark)}
-
-            </div>
-
-          </div>
-
-
-          ${studentFeedbackHtml}
+            SEND FEEDBACK
+          </button>
 
         </div>
 
@@ -2394,845 +2247,833 @@
 
     }
 
+
+    const rowClass=
+      type==="good"
+        ? "good"
+        : type==="bad"
+          ? "bad"
+          : "";
+
+
+    const feedbackLabel=
+      type==="good"
+        ? "POSITIVE FEEDBACK"
+        : type==="bad"
+          ? "IMPROVEMENT FEEDBACK"
+          : "INSTRUCTOR FEEDBACK";
+
+
+    container.innerHTML+=`
+
+      <div
+        class="log-row ${rowClass}"
+      >
+
+        <div class="log-header">
+
+          <div class="session-number">
+            🚗 Session ${session}
+          </div>
+
+          <div class="session-date">
+            ${escapeHtml(item.date)}
+            ${
+              item.time !== "Not recorded"
+                ? " • "+
+                  escapeHtml(item.time)
+                : ""
+            }
+          </div>
+
+        </div>
+
+
+        <div class="details">
+
+          <div class="detail">
+
+            <span>
+              Date
+            </span>
+
+            <b>
+              ${escapeHtml(item.date)}
+            </b>
+
+          </div>
+
+
+          <div class="detail">
+
+            <span>
+              Time
+            </span>
+
+            <b>
+              ${escapeHtml(item.time)}
+            </b>
+
+          </div>
+
+
+          <div class="detail">
+
+            <span>
+              Instructor
+            </span>
+
+            <b>
+              Avinash
+            </b>
+
+          </div>
+
+
+          <div class="detail">
+
+            <span>
+              Distance
+            </span>
+
+            <b>
+              ${item.distance} KM
+            </b>
+
+          </div>
+
+
+          <div class="detail route">
+
+            <span>
+              Route
+            </span>
+
+            <b>
+              📍 ${escapeHtml(item.route)}
+            </b>
+
+          </div>
+
+        </div>
+
+
+        <div
+          class="feedback ${rowClass}"
+        >
+
+          <div class="feedback-label">
+            ${feedbackLabel}
+          </div>
+
+          <div class="feedback-text">
+            ${escapeHtml(item.remark)}
+          </div>
+
+        </div>
+
+
+        ${studentHTML}
+
+      </div>
+
+    `;
+
   }
 
-
-  /* ---------------------------------------
-     HTML ESCAPE
-  --------------------------------------- */
-
-  function escapeHtml(value) {
-
-    return String(value ?? "")
-      .replace(
-        /&/g,
-        "&amp;"
-      )
-      .replace(
-        /</g,
-        "&lt;"
-      )
-      .replace(
-        />/g,
-        "&gt;"
-      )
-      .replace(
-        /"/g,
-        "&quot;"
-      )
-      .replace(
-        /'/g,
-        "&#039;"
-      );
-
-  }
+}
 
 
-  /* ---------------------------------------
-     LOAD PROFILE
-  --------------------------------------- */
+/* =====================================
+   LOAD PROFILE
+===================================== */
 
-  window.loadProfile = () => {
+window.loadProfile=()=>{
 
-    const ph =
-      document
-        .getElementById(
-          "userPhone"
-        )
-        .value
-        .trim();
-
-
-    if(ph.length < 10) {
-
-      alert(
-        "Please enter 10 digit number."
-      );
-
-      return;
-
-    }
-
-
+  const phone=
     document
       .getElementById(
-        "loader"
+        "userPhone"
       )
-      .style.display = "block";
+      .value
+      .trim();
 
 
-    /*
-      If previous listener exists,
-      stop it first.
-    */
+  if(phone.length<10){
 
-    if(unsubscribeProfile) {
+    alert(
+      "Please enter 10 digit number."
+    );
 
-      unsubscribeProfile();
+    return;
 
-      unsubscribeProfile = null;
-
-    }
+  }
 
 
-    const studentRef =
-      doc(
-        db,
-        "studentData",
-        ph
-      );
+  document
+    .getElementById(
+      "loader"
+    )
+    .style.display="block";
 
 
-    unsubscribeProfile =
-      onSnapshot(
-        studentRef,
+  if(unsubscribeProfile){
 
-        (snap) => {
+    unsubscribeProfile();
 
-          document
-            .getElementById(
-              "loader"
-            )
-            .style.display = "none";
+  }
 
 
-          if(!snap.exists()) {
-
-            alert(
-              "No active training record associated with this number."
-            );
-
-            return;
-
-          }
+  const ref=
+    doc(
+      db,
+      "studentData",
+      phone
+    );
 
 
-          const data =
-            snap.data();
+  unsubscribeProfile=
+    onSnapshot(
+      ref,
+
+      snap=>{
+
+        document
+          .getElementById(
+            "loader"
+          )
+          .style.display="none";
 
 
-          currentData = {
-            ...data,
-            phone: ph
-          };
+        if(!snap.exists()){
+
+          alert(
+            "No active training record associated with this number."
+          );
+
+          return;
+
+        }
 
 
-          const logs =
-            Array.isArray(
-              data.attendanceLogs
-            )
-              ? data.attendanceLogs
-              : [];
+        const data=
+          snap.data();
 
 
-          /*
-            COMPLETED CLASSES
+        currentData={
+          ...data,
+          phone
+        };
 
-            Existing system uses
-            "remaining" as completed count,
-            so both values are respected.
-          */
 
-          const storedDone =
+        const logs=
+          Array.isArray(
+            data.attendanceLogs
+          )
+            ? data.attendanceLogs
+            : [];
+
+
+        const done=
+          Math.max(
+            logs.length,
             Number(
               data.remaining || 0
-            );
-
-
-          const done =
-            Math.max(
-              logs.length,
-              storedDone,
-              0
-            );
-
-
-          const total =
-            Math.max(
-              Number(
-                data.totalClasses || 15
-              ),
-              1
-            );
-
-
-          const remaining =
-            Math.max(
-              total - done,
-              0
-            );
-
-
-          const percent =
-            Math.min(
-              Math.round(
-                (done / total) * 100
-              ),
-              100
-            );
-
-
-          /*
-            CLASS TYPE
-          */
-
-          const classType =
-            data.classType === "Personal"
-              ? "Personal"
-              : "Group";
-
-
-          /*
-            DISTANCE
-          */
-
-          let totalDrivenKm = 0;
-
-
-          logs.forEach(
-            (log) => {
-
-              const item =
-                parseLog(log);
-
-
-              totalDrivenKm +=
-                Number(
-                  item.distance || 5
-                );
-
-            }
+            ),
+            0
           );
 
 
-          /*
-            If done > logs,
-            assume 5 KM per extra class.
-          */
-
-          if(
-            done > logs.length
-          ) {
-
-            totalDrivenKm +=
-              (
-                done - logs.length
-              ) * 5;
-
-          }
+        const total=
+          Math.max(
+            Number(
+              data.totalClasses || 15
+            ),
+            1
+          );
 
 
-          /*
-            EXPECTED END DATE
-          */
+        const remaining=
+          Math.max(
+            total-done,
+            0
+          );
 
-          const expectedEndDate =
-            calculateExpectedDate(
+
+        const percent=
+          Math.min(
+            Math.round(
+              (done/total)*100
+            ),
+            100
+          );
+
+
+        const classType=
+          data.classType==="Personal"
+            ? "Personal"
+            : "Group";
+
+
+        /* DISTANCE */
+
+        let drivenKm=0;
+
+
+        logs.forEach(log=>{
+
+          const item=
+            parseLog(log);
+
+
+          drivenKm+=
+            Number(
+              item.distance || 5
+            );
+
+        });
+
+
+        if(done>logs.length){
+
+          drivenKm+=
+            (
+              done-logs.length
+            )*5;
+
+        }
+
+
+        const targetKm=
+          total*5;
+
+
+        /* HEADER */
+
+        document
+          .getElementById(
+            "dispName"
+          )
+          .innerText=
+            data.name ||
+            "Driver";
+
+
+        document
+          .getElementById(
+            "dispPkg"
+          )
+          .innerText=
+            classType==="Personal"
+              ? `👤 PERSONAL • ${total} CLASSES`
+              : `👥 GROUP • ${total} CLASSES`;
+
+
+        /* SESSION */
+
+        updateSessionUI(
+          classType
+        );
+
+
+        document
+          .getElementById(
+            "infoClassType"
+          )
+          .innerText=
+            classType==="Personal"
+              ? "👤 Personal"
+              : "👥 Group";
+
+
+        document
+          .getElementById(
+            "infoPhone"
+          )
+          .innerText=
+            phone;
+
+
+        document
+          .getElementById(
+            "infoStatus"
+          )
+          .innerText=
+            data.notActive
+              ? "Not Active"
+              : done>=total
+                ? "Completed"
+                : "Active";
+
+
+        /* PROGRESS */
+
+        document
+          .getElementById(
+            "dispDone"
+          )
+          .innerText=
+            done;
+
+
+        document
+          .getElementById(
+            "dispRemaining"
+          )
+          .innerText=
+            remaining;
+
+
+        document
+          .getElementById(
+            "dispTotal"
+          )
+          .innerText=
+            total;
+
+
+        document
+          .getElementById(
+            "dispPercent"
+          )
+          .innerText=
+            percent+"%";
+
+
+        document
+          .getElementById(
+            "progressFill"
+          )
+          .style.width=
+            percent+"%";
+
+
+        document
+          .getElementById(
+            "dispKm"
+          )
+          .innerText=
+            drivenKm+
+            " / "+
+            targetKm+
+            " KM";
+
+
+        document
+          .getElementById(
+            "dispEndDate"
+          )
+          .innerText=
+            expectedCompletion(
               logs,
               total
             );
 
 
-          /*
-            MAIN UI
-          */
+        /* WALLET */
 
-          document
-            .getElementById(
-              "dispName"
-            )
-            .innerText =
-              data.name ||
-              "Driver";
-
-
-          document
-            .getElementById(
-              "dispPkg"
-            )
-            .innerText =
-              classType === "Personal"
-                ? `👤 PERSONAL CLASS • ${total} CLASSES`
-                : `👥 GROUP CLASS • ${total} CLASSES`;
-
-
-          document
-            .getElementById(
-              "dispDone"
-            )
-            .innerText =
-              done;
-
-
-          document
-            .getElementById(
-              "dispRemaining"
-            )
-            .innerText =
-              remaining;
-
-
-          document
-            .getElementById(
-              "dispTotal"
-            )
-            .innerText =
-              total;
-
-
-          document
-            .getElementById(
-              "dispPercent"
-            )
-            .innerText =
-              percent + "%";
-
-
-          document
-            .getElementById(
-              "dispKm"
-            )
-            .innerText =
-              totalDrivenKm +
-              " / " +
-              (total * 5) +
-              " KM";
-
-
-          document
-            .getElementById(
-              "dispEndDate"
-            )
-            .innerText =
-              expectedEndDate;
-
-
-          document
-            .getElementById(
-              "dispEarn"
-            )
-            .innerText =
-              "₹" +
-              (
-                Number(
-                  data.totalRefers || 0
-                ) * 500
-              );
-
-
-          /*
-            TRAINING INFORMATION
-          */
-
-          document
-            .getElementById(
-              "infoClassType"
-            )
-            .innerText =
-              classType === "Personal"
-                ? "👤 Personal"
-                : "👥 Group";
-
-
-          document
-            .getElementById(
-              "infoPhone"
-            )
-            .innerText =
-              ph;
-
-
-          document
-            .getElementById(
-              "infoStatus"
-            )
-            .innerText =
-              data.notActive
-                ? "Not Active"
-                : done >= total
-                  ? "Completed"
-                  : "Active";
-
-
-          /*
-            MOTIVATION
-          */
-
-          setMotivation(
-            classType
-          );
-
-
-          /*
-            RADIAL PROGRESS
-          */
-
-          const radius = 40;
-
-          const circumference =
-            2 *
-            Math.PI *
-            radius;
-
-
-          const strokeDashoffset =
-            circumference -
+        document
+          .getElementById(
+            "dispEarn"
+          )
+          .innerText=
+            "₹"+
             (
-              percent / 100
-            ) *
-            circumference;
+              Number(
+                data.totalRefers || 0
+              )*500
+            );
 
 
-          document
-            .getElementById(
-              "radialFillCircle"
-            )
-            .style
-            .strokeDashoffset =
-              strokeDashoffset;
+        /* CERTIFICATE */
 
-
-          /*
-            CERTIFICATE
-          */
-
-          if(done >= total) {
-
-            document
-              .getElementById(
-                "premiumCertificate"
-              )
-              .style.display =
-                "block";
-
-
-            document
-              .getElementById(
-                "pdfName"
-              )
-              .innerText =
-                (
-                  data.name ||
-                  "STUDENT"
-                ).toUpperCase();
-
-          }
-
-          else {
-
-            document
-              .getElementById(
-                "premiumCertificate"
-              )
-              .style.display =
-                "none";
-
-          }
-
-
-          /*
-            STUDENT FEEDBACK STORAGE
-
-            This can be either map/object.
-          */
-
-          const studentFeedbacks =
-            data.studentFeedbacks || {};
-
-
-          /*
-            RENDER HISTORY
-          */
-
-          renderTimeline(
-            logs,
-            done,
-            studentFeedbacks
-          );
-
-
-          /*
-            SHOW PROFILE
-          */
+        if(done>=total){
 
           document
             .getElementById(
-              "searchPanel"
+              "premiumCertificate"
             )
-            .style.display =
-              "none";
-
-
-          document
-            .getElementById(
-              "profileContent"
-            )
-            .style.display =
+            .style.display=
               "block";
 
-        },
-
-        (error) => {
 
           document
             .getElementById(
-              "loader"
+              "pdfName"
             )
-            .style.display =
+            .innerText=
+              (
+                data.name ||
+                "STUDENT"
+              ).toUpperCase();
+
+        }
+
+        else{
+
+          document
+            .getElementById(
+              "premiumCertificate"
+            )
+            .style.display=
               "none";
 
-
-          console.error(
-            error
-          );
-
-
-          alert(
-            "Unable to load your training record. Please try again."
-          );
-
         }
-      );
-
-  };
 
 
-  /* ---------------------------------------
-     RATING
-  --------------------------------------- */
+        /* HISTORY */
 
-  window.selectRating = (
-    sessionNo,
-    rating,
-    button
-  ) => {
-
-    const container =
-      document.getElementById(
-        `rating-${sessionNo}`
-      );
-
-
-    if(!container) {
-      return;
-    }
-
-
-    container
-      .querySelectorAll(
-        ".rating-btn"
-      )
-      .forEach(
-        btn => {
-          btn.classList.remove(
-            "active"
-          );
-        }
-      );
-
-
-    button.classList.add(
-      "active"
-    );
-
-
-    container.dataset.rating =
-      rating;
-
-  };
-
-
-  /* ---------------------------------------
-     STUDENT FEEDBACK
-  --------------------------------------- */
-
-  window.submitStudentFeedback = async (
-    sessionNo
-  ) => {
-
-    if(!currentData) {
-
-      alert(
-        "Please login first."
-      );
-
-      return;
-
-    }
-
-
-    const ratingContainer =
-      document.getElementById(
-        `rating-${sessionNo}`
-      );
-
-
-    const commentInput =
-      document.getElementById(
-        `comment-${sessionNo}`
-      );
-
-
-    const rating =
-      ratingContainer
-        ? ratingContainer.dataset.rating
-        : "";
-
-
-    const comment =
-      commentInput
-        ? commentInput.value.trim()
-        : "";
-
-
-    if(!rating && !comment) {
-
-      alert(
-        "Please select a rating or write your feedback."
-      );
-
-      return;
-
-    }
-
-
-    try {
-
-      const feedbackData = {
-
-        rating:
-          rating ||
-          "Student Comment",
-
-        comment:
-          comment,
-
-        instructor:
-          "Avinash",
-
-        submittedAt:
-          new Date().toISOString()
-
-      };
-
-
-      const studentRef =
-        doc(
-          db,
-          "studentData",
-          currentData.phone
+        renderHistory(
+          logs,
+          data.studentFeedbacks || {}
         );
 
 
-      /*
-        Store by Session Number.
+        /* SHOW */
 
-        Example:
-
-        studentFeedbacks: {
-          "1": {...},
-          "2": {...}
-        }
-      */
-
-      await updateDoc(
-        studentRef,
-        {
-          [`studentFeedbacks.${sessionNo}`]:
-            feedbackData
-        }
-      );
-
-
-      alert(
-        "Thank you! Your feedback has been submitted."
-      );
-
-
-    }
-
-    catch(error) {
-
-      console.error(
-        error
-      );
-
-
-      alert(
-        "Feedback could not be submitted. Please try again."
-      );
-
-    }
-
-  };
-
-
-  /* ---------------------------------------
-     PDF
-  --------------------------------------- */
-
-  window.downloadPDF = () => {
-
-    const element =
-      document.getElementById(
-        "pdfTemplate"
-      );
-
-
-    element.style.display =
-      "block";
-
-
-    html2pdf()
-      .from(element)
-      .set({
-
-        margin: 0,
-
-        filename:
-          "A1_Driving_Certificate.pdf",
-
-        jsPDF: {
-
-          orientation:
-            "landscape",
-
-          format:
-            "a4"
-
-        }
-
-      })
-      .save()
-      .then(
-        () => {
-
-          element.style.display =
+        document
+          .getElementById(
+            "searchPanel"
+          )
+          .style.display=
             "none";
 
-        }
-      );
 
-  };
+        document
+          .getElementById(
+            "profileContent"
+          )
+          .style.display=
+            "block";
 
+      },
 
-  /* ---------------------------------------
-     HELP
-  --------------------------------------- */
+      error=>{
 
-  window.contactAdmin = () => {
+        console.error(error);
 
-    if(!currentData) {
-      return;
-    }
-
-
-    const msg =
-      encodeURIComponent(
-
-        `Hi Abhinaash, I am ${currentData.name}. I need help regarding my driving classes.`
-
-      );
+        document
+          .getElementById(
+            "loader"
+          )
+          .style.display=
+            "none";
 
 
-    window.location.href =
-      `https://wa.me/917008186187?text=${msg}`;
+        alert(
+          "Unable to load your training record."
+        );
 
-  };
+      }
 
+    );
 
-  /* ---------------------------------------
-     SHARE
-  --------------------------------------- */
-
-  window.shareReferral = () => {
-
-    if(!currentData) {
-      return;
-    }
+};
 
 
-    const text =
-      encodeURIComponent(
+/* =====================================
+   RATING
+===================================== */
 
-        `Hey! I am learning smart car driving at A1 Driving Academy. Highly recommended! Apply via my track code: ${currentData.phone}`
+window.chooseRating=(
+  session,
+  rating,
+  button
+)=>{
 
-      );
-
-
-    window.location.href =
-      `https://wa.me/?text=${text}`;
-
-  };
-
-
-  /* ---------------------------------------
-     LOGOUT
-  --------------------------------------- */
-
-  window.logoutSession = () => {
-
-    if(unsubscribeProfile) {
-
-      unsubscribeProfile();
-
-      unsubscribeProfile =
-        null;
-
-    }
+  const box=
+    document.getElementById(
+      `rating-${session}`
+    );
 
 
-    currentData =
-      null;
+  if(!box)return;
 
 
+  box
+    .querySelectorAll(
+      ".rating-btn"
+    )
+    .forEach(
+      b=>{
+        b.classList.remove(
+          "active"
+        );
+      }
+    );
+
+
+  button.classList.add(
+    "active"
+  );
+
+
+  box.dataset.rating=
+    rating;
+
+};
+
+
+/* =====================================
+   SUBMIT FEEDBACK
+===================================== */
+
+window.submitFeedback=
+async(
+  session
+)=>{
+
+  if(!currentData){
+
+    alert(
+      "Please login first."
+    );
+
+    return;
+
+  }
+
+
+  const ratingBox=
+    document.getElementById(
+      `rating-${session}`
+    );
+
+
+  const comment=
     document
       .getElementById(
-        "userPhone"
+        `comment-${session}`
       )
-      .value = "";
+      .value
+      .trim();
 
 
-    document
-      .getElementById(
-        "searchPanel"
-      )
-      .style.display =
-        "block";
+  const rating=
+    ratingBox
+      ? ratingBox.dataset.rating || ""
+      : "";
 
 
-    document
-      .getElementById(
-        "profileContent"
-      )
-      .style.display =
+  if(!rating && !comment){
+
+    alert(
+      "Please select a rating or write feedback."
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    const studentRef=
+      doc(
+        db,
+        "studentData",
+        currentData.phone
+      );
+
+
+    const feedback={
+
+      rating:
+        rating ||
+        "Student Comment",
+
+      comment,
+
+      instructor:
+        "Avinash",
+
+      submittedAt:
+        new Date().toISOString()
+
+    };
+
+
+    await updateDoc(
+      studentRef,
+      {
+        [`studentFeedbacks.${session}`]:
+          feedback
+      }
+    );
+
+
+    alert(
+      "Thank you! Your feedback has been submitted."
+    );
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    alert(
+      "Feedback could not be submitted."
+    );
+
+  }
+
+};
+
+
+/* =====================================
+   PDF
+===================================== */
+
+window.downloadPDF=()=>{
+
+  const element=
+    document.getElementById(
+      "pdfTemplate"
+    );
+
+
+  element.style.display=
+    "block";
+
+
+  html2pdf()
+    .from(element)
+    .set({
+
+      margin:0,
+
+      filename:
+        "A1_Driving_Certificate.pdf",
+
+      jsPDF:{
+
+        orientation:
+          "landscape",
+
+        format:"a4"
+
+      }
+
+    })
+    .save()
+    .then(()=>{
+
+      element.style.display=
         "none";
 
-  };
+    });
+
+};
 
 
-  /* ---------------------------------------
-     ENTER KEY LOGIN
-  --------------------------------------- */
+/* =====================================
+   HELP
+===================================== */
+
+window.contactAdmin=()=>{
+
+  if(!currentData)return;
+
+
+  const message=
+    encodeURIComponent(
+
+      `Hi Abhinaash, I am ${currentData.name}. I need help regarding my driving training.`
+
+    );
+
+
+  window.location.href=
+    `https://wa.me/917008186187?text=${message}`;
+
+};
+
+
+/* =====================================
+   SHARE
+===================================== */
+
+window.shareReferral=()=>{
+
+  if(!currentData)return;
+
+
+  const text=
+    encodeURIComponent(
+
+      `Hey! I am learning smart car driving at A1 Driving Academy. Highly recommended! Apply using my track code: ${currentData.phone}`
+
+    );
+
+
+  window.location.href=
+    `https://wa.me/?text=${text}`;
+
+};
+
+
+/* =====================================
+   LOGOUT
+===================================== */
+
+window.logoutSession=()=>{
+
+  if(unsubscribeProfile){
+
+    unsubscribeProfile();
+
+    unsubscribeProfile=null;
+
+  }
+
+
+  currentData=null;
+
 
   document
     .getElementById(
       "userPhone"
     )
-    .addEventListener(
-      "keydown",
-      (event) => {
+    .value="";
 
-        if(
-          event.key === "Enter"
-        ) {
 
-          loadProfile();
+  document
+    .getElementById(
+      "searchPanel"
+    )
+    .style.display="block";
 
-        }
+
+  document
+    .getElementById(
+      "profileContent"
+    )
+    .style.display="none";
+
+};
+
+
+/* =====================================
+   ENTER LOGIN
+===================================== */
+
+document
+  .getElementById(
+    "userPhone"
+  )
+  .addEventListener(
+    "keydown",
+    e=>{
+
+      if(e.key==="Enter"){
+
+        loadProfile();
 
       }
-    );
+
+    }
+  );
 
 </script>
 
