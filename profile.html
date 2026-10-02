@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<title>Elite Dashboard | A1 Driving Academy</title>
+<title>Student Dashboard | A1 Driving Academy</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,19 +15,21 @@
 <style>
 :root{
   --gold:#d4af37;
-  --gold-light:#fce08d;
+  --gold-light:#f8df88;
   --bg:#08080b;
   --panel:#101014;
-  --card:#15151b;
+  --card:#141419;
   --card2:#19191f;
-  --border:rgba(212,175,55,.18);
+  --border:#24242b;
+  --gold-border:rgba(212,175,55,.24);
   --text:#f5f5f5;
-  --muted:#999;
-  --green:#25d366;
-  --green-bg:rgba(37,211,102,.09);
-  --red:#ff5757;
-  --red-bg:rgba(255,87,87,.09);
-  --blue:#55aaff;
+  --muted:#89898f;
+  --green:#39dc7d;
+  --green-bg:rgba(57,220,125,.09);
+  --green-border:rgba(57,220,125,.22);
+  --red:#ff6767;
+  --red-bg:rgba(255,103,103,.09);
+  --red-border:rgba(255,103,103,.22);
 }
 
 *{
@@ -37,31 +39,34 @@
 }
 
 body{
-  font-family:Poppins,sans-serif;
-  background:
-    radial-gradient(circle at top,#17130a 0,#08080b 34%,#08080b 100%);
-  color:var(--text);
   min-height:100vh;
+  background:
+    radial-gradient(circle at top,rgba(212,175,55,.09),transparent 280px),
+    var(--bg);
+  color:var(--text);
+  font-family:Poppins,sans-serif;
 }
 
 button,input{
   font-family:inherit;
 }
 
-.container{
-  width:100%;
-  max-width:460px;
-  margin:auto;
-  padding:18px 14px 40px;
-}
-
 .hidden{
   display:none!important;
 }
 
-/* LOGIN */
+.container{
+  width:100%;
+  max-width:460px;
+  margin:auto;
+  padding:16px 13px 40px;
+}
 
-.login-box{
+/* =========================
+   LOGIN
+========================= */
+
+.login-screen{
   min-height:100vh;
   display:flex;
   align-items:center;
@@ -71,51 +76,52 @@ button,input{
 
 .login-card{
   width:100%;
-  max-width:420px;
-  background:rgba(16,16,20,.95);
-  border:1px solid var(--border);
+  max-width:410px;
+  padding:30px 22px;
+  background:#101014;
+  border:1px solid var(--gold-border);
   border-radius:24px;
-  padding:32px 24px;
-  box-shadow:0 20px 60px rgba(0,0,0,.45);
   text-align:center;
+  box-shadow:0 25px 60px rgba(0,0,0,.4);
 }
 
-.logo{
-  width:72px;
-  height:72px;
-  margin:0 auto 16px;
-  border-radius:22px;
-  border:1px solid rgba(212,175,55,.45);
+.login-logo{
+  width:70px;
+  height:70px;
+  margin:0 auto 15px;
   display:flex;
   align-items:center;
   justify-content:center;
+  border-radius:20px;
+  background:linear-gradient(145deg,#241e0c,#111);
+  border:1px solid rgba(212,175,55,.35);
   color:var(--gold-light);
-  font-size:24px;
+  font-size:23px;
   font-weight:700;
-  background:linear-gradient(145deg,#211d0d,#0e0e11);
 }
 
 .login-card h1{
-  font-size:23px;
-  margin-bottom:5px;
+  font-size:21px;
 }
 
 .login-card p{
+  margin:6px 0 22px;
   color:var(--muted);
-  font-size:13px;
-  margin-bottom:24px;
+  font-size:11px;
+  line-height:1.6;
 }
 
 .phone-input{
   width:100%;
-  padding:15px;
-  border-radius:14px;
-  border:1px solid #29292f;
-  background:#0c0c0f;
-  color:white;
+  height:50px;
+  padding:0 15px;
+  background:#0b0b0e;
+  border:1px solid #28282e;
+  border-radius:13px;
   outline:none;
-  font-size:15px;
+  color:white;
   text-align:center;
+  font-size:15px;
   letter-spacing:1px;
 }
 
@@ -125,35 +131,38 @@ button,input{
 
 .primary-btn{
   width:100%;
+  height:49px;
+  margin-top:11px;
   border:0;
-  padding:15px;
-  border-radius:14px;
-  margin-top:12px;
-  background:linear-gradient(135deg,var(--gold),#a67c12);
+  border-radius:13px;
+  background:linear-gradient(135deg,#e0bd45,#a77e17);
   color:#090909;
   font-weight:700;
   cursor:pointer;
 }
 
 .error{
-  color:#ff6868;
-  font-size:12px;
-  margin-top:12px;
+  min-height:18px;
+  margin-top:10px;
+  color:#ff7070;
+  font-size:10px;
 }
 
-/* HEADER */
+/* =========================
+   HEADER
+========================= */
 
 .header{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  margin-bottom:16px;
+  margin-bottom:14px;
 }
 
 .brand{
+  font-size:15px;
   font-weight:700;
-  letter-spacing:.8px;
-  font-size:17px;
+  letter-spacing:.7px;
 }
 
 .brand span{
@@ -161,398 +170,553 @@ button,input{
 }
 
 .logout-btn{
-  background:#15151a;
-  color:#aaa;
+  padding:7px 10px;
+  background:#141419;
+  color:#888;
   border:1px solid #25252b;
-  border-radius:10px;
-  padding:8px 11px;
-  font-size:11px;
+  border-radius:9px;
+  font-size:9px;
   cursor:pointer;
 }
 
-/* PROFILE */
+/* =========================
+   PROFILE
+========================= */
 
 .profile-card{
-  position:relative;
-  overflow:hidden;
   background:
-    linear-gradient(145deg,rgba(212,175,55,.12),rgba(16,16,20,.96) 48%);
-  border:1px solid var(--border);
-  border-radius:22px;
-  padding:21px;
-  margin-bottom:12px;
+    linear-gradient(140deg,rgba(212,175,55,.10),transparent 55%),
+    #111115;
+  border:1px solid var(--gold-border);
+  border-radius:20px;
+  padding:17px;
 }
 
-.profile-card:after{
-  content:"";
-  position:absolute;
-  width:130px;
-  height:130px;
-  right:-50px;
-  top:-50px;
-  border-radius:50%;
-  background:rgba(212,175,55,.08);
-}
-
-.profile-top{
+.profile-row{
   display:flex;
   align-items:center;
-  gap:14px;
-  position:relative;
-  z-index:1;
+  gap:12px;
 }
 
 .avatar{
-  width:58px;
-  height:58px;
-  border-radius:18px;
+  flex:0 0 51px;
+  height:51px;
   display:flex;
   align-items:center;
   justify-content:center;
-  background:#17140b;
-  border:1px solid rgba(212,175,55,.35);
+  border-radius:15px;
+  background:#1d190d;
+  border:1px solid rgba(212,175,55,.28);
   color:var(--gold-light);
-  font-size:23px;
+  font-size:20px;
   font-weight:700;
+}
+
+.profile-info{
+  min-width:0;
+  flex:1;
 }
 
 .profile-info h2{
-  font-size:19px;
-  margin-bottom:2px;
+  font-size:17px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
 .profile-info p{
-  color:var(--muted);
-  font-size:11px;
-}
-
-.class-type{
-  margin-top:17px;
-  border:1px solid var(--border);
-  background:rgba(212,175,55,.06);
-  border-radius:13px;
-  padding:11px 13px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-
-.class-type span:first-child{
-  color:#888;
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:1px;
-}
-
-.class-type strong{
-  color:var(--gold-light);
-  font-size:12px;
-}
-
-/* SECTION */
-
-.section-title{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin:21px 2px 9px;
-}
-
-.section-title h3{
-  font-size:14px;
-}
-
-.section-title span{
-  color:#777;
-  font-size:10px;
-}
-
-/* GRID */
-
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
-
-.stat-card{
-  background:var(--card);
-  border:1px solid #222229;
-  border-radius:17px;
-  padding:16px;
-}
-
-.stat-label{
-  color:#777;
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:.7px;
-}
-
-.stat-value{
-  font-size:22px;
-  font-weight:700;
-  margin-top:4px;
-}
-
-.stat-value.gold{
-  color:var(--gold-light);
-}
-
-/* PROGRESS */
-
-.progress-card{
-  background:var(--card);
-  border:1px solid #222229;
-  border-radius:19px;
-  padding:18px;
-}
-
-.progress-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:15px;
-}
-
-.progress-head strong{
-  font-size:13px;
-}
-
-.progress-head span{
-  font-size:11px;
-  color:var(--gold-light);
-}
-
-.radial-wrap{
-  display:flex;
-  justify-content:center;
-  margin:5px 0 18px;
-}
-
-.radial{
-  width:130px;
-  height:130px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  position:relative;
-  background:conic-gradient(
-    var(--gold) calc(var(--progress) * 1%),
-    #27272d 0
-  );
-}
-
-.radial:before{
-  content:"";
-  position:absolute;
-  width:104px;
-  height:104px;
-  border-radius:50%;
-  background:#111115;
-}
-
-.radial-content{
-  position:relative;
-  z-index:1;
-  text-align:center;
-}
-
-.radial-content strong{
-  display:block;
-  font-size:25px;
-}
-
-.radial-content span{
+  margin-top:2px;
   color:#777;
   font-size:9px;
 }
 
+.class-badge{
+  margin-top:13px;
+  padding:9px 11px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:rgba(212,175,55,.055);
+  border:1px solid rgba(212,175,55,.14);
+  border-radius:11px;
+}
+
+.class-badge span{
+  color:#777;
+  font-size:8px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+.class-badge strong{
+  color:var(--gold-light);
+  font-size:10px;
+}
+
+/* =========================
+   LATEST SESSION HERO CARD
+========================= */
+
+.latest-card{
+  position:relative;
+  margin-top:12px;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at right top,rgba(212,175,55,.16),transparent 150px),
+    linear-gradient(145deg,#171719,#101014);
+  border:1px solid rgba(212,175,55,.30);
+  border-radius:22px;
+  padding:18px;
+  box-shadow:0 15px 35px rgba(0,0,0,.23);
+}
+
+.latest-card:before{
+  content:"";
+  position:absolute;
+  width:90px;
+  height:90px;
+  right:-35px;
+  bottom:-45px;
+  border-radius:50%;
+  background:rgba(212,175,55,.06);
+}
+
+.latest-top{
+  position:relative;
+  z-index:1;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.latest-title{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.latest-icon{
+  width:33px;
+  height:33px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:10px;
+  background:rgba(212,175,55,.10);
+  border:1px solid rgba(212,175,55,.18);
+  font-size:15px;
+}
+
+.latest-title small{
+  display:block;
+  color:#777;
+  font-size:7px;
+  letter-spacing:1.1px;
+  text-transform:uppercase;
+}
+
+.latest-title strong{
+  display:block;
+  margin-top:1px;
+  font-size:12px;
+}
+
+.latest-number{
+  padding:5px 8px;
+  border-radius:8px;
+  background:rgba(212,175,55,.08);
+  color:var(--gold-light);
+  border:1px solid rgba(212,175,55,.14);
+  font-size:8px;
+  font-weight:600;
+}
+
+/* DATE + TIME */
+
+.latest-datetime{
+  position:relative;
+  z-index:1;
+  margin-top:16px;
+  padding-bottom:15px;
+  border-bottom:1px solid #242429;
+}
+
+.latest-date-label{
+  color:#6f6f75;
+  font-size:8px;
+  text-transform:uppercase;
+  letter-spacing:.8px;
+}
+
+.latest-date{
+  margin-top:3px;
+  color:#aaa;
+  font-size:10px;
+}
+
+.latest-time{
+  margin-top:2px;
+  color:#fff;
+  font-size:27px;
+  line-height:1.15;
+  font-weight:700;
+  letter-spacing:-.5px;
+}
+
+.latest-time span{
+  color:var(--gold-light);
+}
+
+/* ROUTE + DISTANCE */
+
+.latest-info-grid{
+  position:relative;
+  z-index:1;
+  display:grid;
+  grid-template-columns:1.5fr .8fr;
+  gap:8px;
+  margin-top:12px;
+}
+
+.latest-info{
+  min-width:0;
+  padding:12px;
+  background:rgba(255,255,255,.025);
+  border:1px solid #24242a;
+  border-radius:13px;
+}
+
+.latest-info-label{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  color:#6e6e74;
+  font-size:7px;
+  letter-spacing:.7px;
+  text-transform:uppercase;
+}
+
+.latest-info-value{
+  margin-top:5px;
+  color:#eee;
+  font-size:11px;
+  font-weight:600;
+  line-height:1.45;
+  word-break:break-word;
+}
+
+.latest-info-value.gold{
+  color:var(--gold-light);
+  font-size:15px;
+}
+
+/* FEEDBACK HIGHLIGHT */
+
+.latest-feedback{
+  position:relative;
+  z-index:1;
+  margin-top:9px;
+  padding:13px;
+  border-radius:13px;
+}
+
+.latest-feedback.good{
+  background:var(--green-bg);
+  border:1px solid var(--green-border);
+}
+
+.latest-feedback.bad{
+  background:var(--red-bg);
+  border:1px solid var(--red-border);
+}
+
+.latest-feedback.neutral{
+  background:#17171c;
+  border:1px solid #28282e;
+}
+
+.feedback-head{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  margin-bottom:5px;
+  font-size:8px;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.7px;
+}
+
+.latest-feedback.good .feedback-head{
+  color:var(--green);
+}
+
+.latest-feedback.bad .feedback-head{
+  color:var(--red);
+}
+
+.latest-feedback.neutral .feedback-head{
+  color:#999;
+}
+
+.feedback-text{
+  font-size:10px;
+  line-height:1.55;
+  color:#ddd;
+}
+
+/* =========================
+   TITLES
+========================= */
+
+.section-title{
+  margin:20px 2px 8px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.section-title h3{
+  font-size:12px;
+}
+
+.section-title span{
+  color:#666;
+  font-size:7px;
+  text-transform:uppercase;
+  letter-spacing:.8px;
+}
+
+/* =========================
+   TRAINING PROGRESS
+========================= */
+
+.progress-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:16px;
+}
+
+.progress-numbers{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:7px;
+}
+
+.progress-stat{
+  padding:10px 7px;
+  background:#19191e;
+  border-radius:11px;
+  text-align:center;
+}
+
+.progress-stat strong{
+  display:block;
+  font-size:17px;
+}
+
+.progress-stat strong.gold{
+  color:var(--gold-light);
+}
+
+.progress-stat span{
+  color:#707076;
+  font-size:7px;
+  text-transform:uppercase;
+}
+
 .bar{
-  height:8px;
-  background:#28282e;
+  height:6px;
+  margin-top:14px;
+  background:#29292f;
   border-radius:20px;
   overflow:hidden;
 }
 
 .bar-fill{
   height:100%;
+  width:0;
+  background:linear-gradient(90deg,#b78a1e,var(--gold-light));
   border-radius:20px;
-  background:linear-gradient(90deg,var(--gold),var(--gold-light));
-  transition:.5s;
+  transition:.4s;
 }
 
-/* DISTANCE */
-
-.distance-card{
-  background:var(--card);
-  border:1px solid #222229;
-  border-radius:19px;
-  padding:18px;
-}
-
-.distance-top{
+.distance-row{
+  margin-top:10px;
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  margin-bottom:14px;
-}
-
-.distance-top strong{
-  font-size:13px;
-}
-
-.distance-value{
-  color:var(--gold-light);
-  font-weight:700;
-  font-size:13px;
-}
-
-.distance-sub{
-  margin-top:8px;
+  justify-content:space-between;
   color:#777;
-  font-size:10px;
+  font-size:8px;
 }
 
-/* EXPECTED */
+.distance-row strong{
+  color:#ccc;
+  font-size:9px;
+}
 
-.expected{
-  background:linear-gradient(135deg,#15120b,#121216);
+/* =========================
+   ROUTE PROGRESS
+========================= */
+
+.route-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.route-stat{
+  padding:13px;
+  background:var(--card);
   border:1px solid var(--border);
-  border-radius:18px;
-  padding:17px;
+  border-radius:14px;
 }
 
-.expected-label{
-  font-size:10px;
+.route-stat strong{
+  display:block;
+  color:var(--gold-light);
+  font-size:20px;
+}
+
+.route-stat span{
   color:#777;
+  font-size:7px;
   text-transform:uppercase;
 }
 
-.expected-date{
-  margin-top:5px;
+.route-list{
+  margin-top:8px;
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+
+.route-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  padding:11px 12px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:12px;
+}
+
+.route-name{
+  min-width:0;
+  font-size:9px;
+  font-weight:500;
+  word-break:break-word;
+}
+
+.route-name small{
+  display:block;
+  margin-top:2px;
+  color:#666;
+  font-size:7px;
+}
+
+.route-count{
+  flex:0 0 31px;
+  height:31px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:9px;
+  background:rgba(212,175,55,.08);
+  border:1px solid rgba(212,175,55,.14);
   color:var(--gold-light);
-  font-size:17px;
+  font-size:9px;
   font-weight:700;
 }
 
-/* FEEDBACK */
+.route-item.remaining{
+  opacity:.65;
+}
 
-.feedback-grid{
+/* =========================
+   PERFORMANCE
+========================= */
+
+.analysis-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:15px;
+}
+
+.analysis-top{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:10px;
+  gap:8px;
+  margin-bottom:15px;
 }
 
-.feedback-card{
-  border-radius:17px;
-  padding:14px;
-  min-height:95px;
-  border:1px solid;
-}
-
-.feedback-card.good{
-  background:var(--green-bg);
-  border-color:rgba(37,211,102,.25);
-}
-
-.feedback-card.bad{
-  background:var(--red-bg);
-  border-color:rgba(255,87,87,.25);
-}
-
-.feedback-icon{
-  font-size:17px;
-  margin-bottom:7px;
-}
-
-.feedback-card strong{
-  display:block;
-  font-size:11px;
-  line-height:1.4;
-}
-
-.feedback-card small{
-  display:block;
-  color:#888;
-  font-size:9px;
-  margin-top:5px;
-  line-height:1.4;
-}
-
-/* PERFORMANCE */
-
-.performance-card{
-  background:var(--card);
-  border:1px solid #222229;
-  border-radius:19px;
-  padding:18px;
-}
-
-.performance-summary{
-  display:flex;
-  gap:10px;
-  margin-bottom:18px;
-}
-
-.performance-pill{
-  flex:1;
-  border-radius:14px;
-  padding:12px;
+.analysis-stat{
+  padding:11px;
+  border-radius:12px;
   text-align:center;
 }
 
-.performance-pill.good{
+.analysis-stat.good{
   background:var(--green-bg);
-  border:1px solid rgba(37,211,102,.18);
+  border:1px solid var(--green-border);
 }
 
-.performance-pill.bad{
+.analysis-stat.bad{
   background:var(--red-bg);
-  border:1px solid rgba(255,87,87,.18);
+  border:1px solid var(--red-border);
 }
 
-.performance-pill strong{
+.analysis-stat strong{
   display:block;
-  font-size:19px;
+  font-size:18px;
 }
 
-.performance-pill span{
+.analysis-stat.good strong{
+  color:var(--green);
+}
+
+.analysis-stat.bad strong{
+  color:var(--red);
+}
+
+.analysis-stat span{
   color:#777;
-  font-size:9px;
+  font-size:7px;
 }
 
-.skill-row{
-  margin-bottom:13px;
+.skill{
+  margin-top:11px;
 }
 
 .skill-head{
   display:flex;
   justify-content:space-between;
-  margin-bottom:6px;
+  gap:10px;
+  margin-bottom:5px;
 }
 
 .skill-head span{
-  font-size:10px;
+  font-size:8px;
 }
 
 .skill-head strong{
-  font-size:9px;
-  color:#888;
+  color:#777;
+  font-size:7px;
 }
 
 .skill-bar{
-  height:6px;
-  background:#28282d;
-  border-radius:20px;
+  height:5px;
   overflow:hidden;
+  background:#29292f;
+  border-radius:20px;
 }
 
 .skill-fill{
   height:100%;
   border-radius:20px;
-  transition:.5s;
 }
 
 .skill-fill.good{
@@ -563,250 +727,153 @@ button,input{
   background:var(--red);
 }
 
-.no-feedback{
-  color:#777;
-  font-size:11px;
-  text-align:center;
-  padding:18px 5px;
-}
+/* =========================
+   HISTORY
+========================= */
 
-/* ROUTES */
-
-.route-summary{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-bottom:10px;
-}
-
-.route-summary-card{
-  background:var(--card);
-  border:1px solid #222229;
-  border-radius:16px;
-  padding:15px;
-}
-
-.route-summary-card strong{
-  display:block;
-  font-size:21px;
-  color:var(--gold-light);
-}
-
-.route-summary-card span{
-  color:#777;
-  font-size:9px;
-  text-transform:uppercase;
-}
-
-.route-list{
+.history{
   display:flex;
   flex-direction:column;
   gap:8px;
 }
 
-.route-item{
+.history-card{
+  padding:12px;
   background:var(--card);
-  border:1px solid #222229;
-  border-radius:15px;
-  padding:13px 14px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
+  border:1px solid var(--border);
+  border-radius:13px;
 }
 
-.route-left{
-  min-width:0;
-}
-
-.route-name{
-  font-size:11px;
-  font-weight:600;
-  word-break:break-word;
-}
-
-.route-meta{
-  margin-top:3px;
-  color:#666;
-  font-size:8px;
-}
-
-.route-count{
-  min-width:34px;
-  height:34px;
-  border-radius:11px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:rgba(212,175,55,.08);
-  border:1px solid rgba(212,175,55,.18);
-  color:var(--gold-light);
-  font-size:11px;
-  font-weight:700;
-}
-
-.remaining-route{
-  border-color:rgba(255,87,87,.16);
-  background:rgba(255,87,87,.035);
-}
-
-.remaining-route .route-count{
-  color:#ff7777;
-  background:rgba(255,87,87,.07);
-  border-color:rgba(255,87,87,.15);
-}
-
-.route-empty{
-  background:var(--card);
-  border:1px dashed #29292f;
-  border-radius:15px;
-  padding:17px;
-  color:#777;
-  text-align:center;
-  font-size:10px;
-}
-
-/* TIMELINE */
-
-.timeline{
-  max-height:370px;
-  overflow:auto;
-  padding-right:3px;
-}
-
-.timeline::-webkit-scrollbar{
-  width:3px;
-}
-
-.timeline::-webkit-scrollbar-thumb{
-  background:#333;
-  border-radius:10px;
-}
-
-.session{
-  position:relative;
-  padding-left:24px;
-  padding-bottom:15px;
-}
-
-.session:before{
-  content:"";
-  position:absolute;
-  left:5px;
-  top:7px;
-  bottom:-2px;
-  width:1px;
-  background:#29292e;
-}
-
-.session:last-child:before{
-  display:none;
-}
-
-.session-dot{
-  position:absolute;
-  left:0;
-  top:4px;
-  width:11px;
-  height:11px;
-  border-radius:50%;
-  background:var(--gold);
-  box-shadow:0 0 0 4px rgba(212,175,55,.08);
-}
-
-.session-card{
-  background:var(--card);
-  border:1px solid #222229;
-  border-radius:15px;
-  padding:13px;
-}
-
-.session-title{
+.history-top{
   display:flex;
   justify-content:space-between;
-  gap:10px;
+  gap:8px;
 }
 
-.session-title strong{
-  font-size:11px;
+.history-top strong{
+  font-size:9px;
 }
 
-.session-title span{
-  font-size:8px;
+.history-top span{
   color:#666;
+  font-size:7px;
 }
 
-.session-data{
+.history-details{
   display:flex;
   flex-wrap:wrap;
-  gap:6px;
-  margin-top:9px;
+  gap:5px;
+  margin-top:8px;
 }
 
 .chip{
+  padding:4px 6px;
+  background:#1d1d22;
+  border-radius:7px;
+  color:#999;
+  font-size:7px;
+}
+
+.history-feedback{
+  margin-top:7px;
+  padding:7px 8px;
   border-radius:8px;
-  padding:5px 7px;
-  background:#1d1d23;
-  color:#aaa;
   font-size:8px;
-}
-
-.chip.route{
-  color:var(--gold-light);
-}
-
-.session-remark{
-  margin-top:9px;
-  padding:9px;
-  border-radius:10px;
-  font-size:9px;
   line-height:1.5;
 }
 
-.session-remark.good{
-  color:#6df09c;
-  background:rgba(37,211,102,.07);
-  border:1px solid rgba(37,211,102,.13);
+.history-feedback.good{
+  color:#76e9a4;
+  background:rgba(57,220,125,.06);
 }
 
-.session-remark.bad{
-  color:#ff8181;
-  background:rgba(255,87,87,.07);
-  border:1px solid rgba(255,87,87,.13);
+.history-feedback.bad{
+  color:#ff8888;
+  background:rgba(255,103,103,.06);
 }
 
-.session-remark.neutral{
+.history-feedback.neutral{
   color:#aaa;
-  background:#19191f;
+  background:#1b1b20;
 }
 
-/* ACTIONS */
+/* =========================
+   EXPECTED / REFERRAL
+========================= */
+
+.simple-card{
+  padding:15px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+}
+
+.simple-card span{
+  color:#777;
+  font-size:7px;
+  text-transform:uppercase;
+}
+
+.simple-card strong{
+  display:block;
+  margin-top:3px;
+  color:var(--gold-light);
+  font-size:15px;
+}
+
+/* =========================
+   ACTIONS
+========================= */
 
 .actions{
+  margin-top:18px;
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-top:20px;
+  gap:8px;
 }
 
 .action-btn{
+  min-height:43px;
+  padding:9px;
   border:1px solid #28282e;
+  border-radius:12px;
   background:#15151a;
   color:#ddd;
-  border-radius:14px;
-  padding:13px 8px;
+  font-size:8px;
+  font-weight:600;
   cursor:pointer;
-  font-size:10px;
 }
 
 .action-btn.gold{
-  background:linear-gradient(135deg,var(--gold),#9b7518);
+  background:linear-gradient(135deg,#d8b43d,#9d7718);
   color:#090909;
   border:0;
-  font-weight:700;
 }
 
-/* CERTIFICATE */
+.footer{
+  margin-top:24px;
+  text-align:center;
+  color:#4f4f54;
+  font-size:7px;
+  line-height:1.7;
+}
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty{
+  padding:15px;
+  border:1px dashed #29292f;
+  border-radius:12px;
+  color:#666;
+  text-align:center;
+  font-size:8px;
+}
+
+/* =========================
+   CERTIFICATE
+========================= */
 
 .certificate{
   position:fixed;
@@ -814,15 +881,15 @@ button,input{
   top:0;
   width:842px;
   min-height:595px;
-  background:#fff;
-  color:#111;
   padding:40px;
+  background:white;
+  color:#111;
 }
 
 .cert-inner{
   min-height:515px;
-  border:6px solid #c9a62d;
   padding:45px;
+  border:6px solid #c7a32b;
   text-align:center;
 }
 
@@ -832,59 +899,27 @@ button,input{
 }
 
 .cert-title{
+  margin:20px 0;
   font-size:38px;
-  margin:22px 0 10px;
-  color:#171717;
 }
 
 .cert-name{
+  margin:25px 0;
+  color:#af881c;
   font-size:32px;
   font-weight:700;
-  color:#b18a1d;
-  margin:25px 0;
 }
 
 .cert-text{
-  font-size:15px;
-  line-height:1.7;
+  font-size:14px;
+  line-height:1.8;
 }
 
 .cert-footer{
   margin-top:45px;
   display:flex;
   justify-content:space-between;
-  font-size:12px;
-}
-
-/* FOOTER */
-
-.footer{
-  text-align:center;
-  color:#555;
-  font-size:9px;
-  margin-top:25px;
-  line-height:1.6;
-}
-
-/* MOBILE */
-
-@media(max-width:360px){
-  .container{
-    padding-left:10px;
-    padding-right:10px;
-  }
-
-  .feedback-grid{
-    grid-template-columns:1fr;
-  }
-
-  .grid{
-    gap:7px;
-  }
-
-  .stat-card{
-    padding:13px;
-  }
+  font-size:11px;
 }
 </style>
 </head>
@@ -892,28 +927,33 @@ button,input{
 <body>
 
 <!-- LOGIN -->
-
-<div id="loginScreen" class="login-box">
+<div id="loginScreen" class="login-screen">
 
   <div class="login-card">
 
-    <div class="logo">A1</div>
+    <div class="login-logo">A1</div>
 
     <h1>A1 Driving Academy</h1>
 
-    <p>Enter your registered mobile number to view your driving progress.</p>
+    <p>
+      Enter your registered mobile number
+      to access your driving dashboard.
+    </p>
 
     <input
       id="phoneInput"
       class="phone-input"
       type="tel"
       maxlength="10"
-      placeholder="10 Digit Mobile Number"
       inputmode="numeric"
+      placeholder="10 Digit Mobile Number"
     >
 
-    <button class="primary-btn" onclick="loadProfile()">
-      VIEW MY DASHBOARD
+    <button
+      class="primary-btn"
+      onclick="loadProfile()"
+    >
+      VIEW DASHBOARD
     </button>
 
     <div id="loginError" class="error"></div>
@@ -924,8 +964,9 @@ button,input{
 
 
 <!-- DASHBOARD -->
-
 <div id="dashboard" class="container hidden">
+
+  <!-- HEADER -->
 
   <div class="header">
 
@@ -933,8 +974,11 @@ button,input{
       ABHINAASH <span>A1</span>
     </div>
 
-    <button class="logout-btn" onclick="logout()">
-      Logout
+    <button
+      class="logout-btn"
+      onclick="logout()"
+    >
+      LOGOUT
     </button>
 
   </div>
@@ -944,7 +988,7 @@ button,input{
 
   <div class="profile-card">
 
-    <div class="profile-top">
+    <div class="profile-row">
 
       <div id="avatar" class="avatar">
         A
@@ -964,13 +1008,12 @@ button,input{
 
     </div>
 
-
-    <div class="class-type">
+    <div class="class-badge">
 
       <span>Training Mode</span>
 
       <strong id="classType">
-        👥 GROUP
+        👥 GROUP CLASS
       </strong>
 
     </div>
@@ -978,162 +1021,206 @@ button,input{
   </div>
 
 
-  <!-- BASIC STATS -->
+  <!-- ==========================================
+       LATEST DRIVING SESSION - MAIN HIGHLIGHT
+  =========================================== -->
 
-  <div class="section-title">
-    <h3>Training Overview</h3>
-    <span>LIVE</span>
-  </div>
+  <div id="latestSessionCard" class="latest-card">
 
-  <div class="grid">
+    <div class="latest-top">
 
-    <div class="stat-card">
-      <div class="stat-label">Classes Done</div>
-      <div id="doneClasses" class="stat-value gold">0</div>
+      <div class="latest-title">
+
+        <div class="latest-icon">
+          🚗
+        </div>
+
+        <div>
+          <small>Latest Attendance</small>
+          <strong>Last Driving Session</strong>
+        </div>
+
+      </div>
+
+      <div id="latestSessionNumber" class="latest-number">
+        SESSION #0
+      </div>
+
     </div>
 
-    <div class="stat-card">
-      <div class="stat-label">Total Classes</div>
-      <div id="totalClasses" class="stat-value">0</div>
+
+    <div class="latest-datetime">
+
+      <div class="latest-date-label">
+        Attendance Time
+      </div>
+
+      <div id="latestDate" class="latest-date">
+        —
+      </div>
+
+      <div id="latestTime" class="latest-time">
+        —
+      </div>
+
     </div>
 
-  </div>
+
+    <div class="latest-info-grid">
+
+      <div class="latest-info">
+
+        <div class="latest-info-label">
+          📍 Route Covered
+        </div>
+
+        <div
+          id="latestRoute"
+          class="latest-info-value"
+        >
+          —
+        </div>
+
+      </div>
 
 
-  <!-- CLASS PROGRESS -->
+      <div class="latest-info">
 
-  <div class="section-title">
-    <h3>Class Progress</h3>
-  </div>
+        <div class="latest-info-label">
+          🚘 Distance
+        </div>
 
-  <div class="progress-card">
-
-    <div class="radial-wrap">
-
-      <div id="radial" class="radial" style="--progress:0">
-
-        <div class="radial-content">
-
-          <strong id="percentText">0%</strong>
-
-          <span>COMPLETED</span>
-
+        <div
+          id="latestDistance"
+          class="latest-info-value gold"
+        >
+          5 KM
         </div>
 
       </div>
 
     </div>
 
-    <div class="progress-head">
-      <strong>Course Completion</strong>
-      <span id="progressText">0 / 0</span>
-    </div>
 
-    <div class="bar">
-      <div id="classBar" class="bar-fill" style="width:0%"></div>
-    </div>
+    <div
+      id="latestFeedback"
+      class="latest-feedback neutral"
+    >
 
-  </div>
+      <div class="feedback-head">
 
+        <span id="latestFeedbackIcon">
+          📝
+        </span>
 
-  <!-- DISTANCE -->
+        <span id="latestFeedbackTitle">
+          Instructor Feedback
+        </span>
 
-  <div class="section-title">
-    <h3>Distance Tracker</h3>
-    <span>5 KM / CLASS</span>
-  </div>
+      </div>
 
-  <div class="distance-card">
-
-    <div class="distance-top">
-
-      <strong>Driving Distance</strong>
-
-      <div id="distanceValue" class="distance-value">
-        0 / 0 KM
+      <div
+        id="latestFeedbackText"
+        class="feedback-text"
+      >
+        No feedback recorded for this session.
       </div>
 
     </div>
 
-    <div class="bar">
-      <div id="distanceBar" class="bar-fill" style="width:0%"></div>
-    </div>
-
-    <div id="distanceSub" class="distance-sub">
-      0 KM completed
-    </div>
-
   </div>
 
 
-  <!-- EXPECTED COMPLETION -->
-
-  <div class="section-title">
-    <h3>Expected Completion</h3>
-  </div>
-
-  <div class="expected">
-
-    <div class="expected-label">
-      Estimated Course Completion
-    </div>
-
-    <div id="expectedDate" class="expected-date">
-      —
-    </div>
-
-  </div>
-
-
-  <!-- FEEDBACK -->
+  <!-- PROGRESS -->
 
   <div class="section-title">
 
-    <h3>Driving Feedback</h3>
+    <h3>Training Progress</h3>
 
-    <span id="feedbackCount">
-      0 FEEDBACK
+    <span id="progressPercent">
+      0% Complete
     </span>
 
   </div>
 
-  <div id="feedbackCards" class="feedback-grid"></div>
+  <div class="progress-card">
 
+    <div class="progress-numbers">
 
-  <!-- PERFORMANCE ANALYSIS -->
+      <div class="progress-stat">
 
-  <div class="section-title">
-    <h3>Performance Analysis</h3>
-    <span>BASED ON FEEDBACK</span>
-  </div>
-
-  <div class="performance-card">
-
-    <div class="performance-summary">
-
-      <div class="performance-pill good">
-
-        <strong id="goodCount">
+        <strong
+          id="doneClasses"
+          class="gold"
+        >
           0
         </strong>
 
-        <span>GOOD</span>
+        <span>Completed</span>
 
       </div>
 
-      <div class="performance-pill bad">
 
-        <strong id="badCount">
+      <div class="progress-stat">
+
+        <strong id="totalClasses">
           0
         </strong>
 
-        <span>IMPROVE</span>
+        <span>Total Classes</span>
+
+      </div>
+
+
+      <div class="progress-stat">
+
+        <strong id="remainingClasses">
+          0
+        </strong>
+
+        <span>Remaining</span>
 
       </div>
 
     </div>
 
-    <div id="skillsContainer"></div>
+
+    <div class="bar">
+
+      <div
+        id="classBar"
+        class="bar-fill"
+      ></div>
+
+    </div>
+
+
+    <div class="distance-row">
+
+      <span>Driving Distance</span>
+
+      <strong id="distanceValue">
+        0 / 0 KM
+      </strong>
+
+    </div>
+
+  </div>
+
+
+  <!-- EXPECTED -->
+
+  <div class="section-title">
+    <h3>Course Schedule</h3>
+  </div>
+
+  <div class="simple-card">
+
+    <span>Expected Completion</span>
+
+    <strong id="expectedDate">
+      —
+    </strong>
 
   </div>
 
@@ -1144,36 +1231,42 @@ button,input{
 
     <h3>Route Progress</h3>
 
-    <span id="routeTotalLabel">
-      0 ROUTES
-    </span>
+    <span>Training Routes</span>
 
   </div>
 
-  <div class="route-summary">
+  <div class="route-grid">
 
-    <div class="route-summary-card">
+    <div class="route-stat">
 
       <strong id="coveredRouteCount">
         0
       </strong>
 
-      <span>Routes Covered</span>
+      <span>Covered Routes</span>
 
     </div>
 
-    <div class="route-summary-card">
+    <div class="route-stat">
 
       <strong id="remainingRouteCount">
         0
       </strong>
 
-      <span>Routes Remaining</span>
+      <span>Still Remaining</span>
 
     </div>
 
   </div>
 
+
+  <div class="section-title">
+
+    <h3>Routes Covered</h3>
+
+    <span>Times Visited</span>
+
+  </div>
 
   <div id="coveredRoutes"></div>
 
@@ -1182,11 +1275,52 @@ button,input{
 
     <h3>Routes Remaining</h3>
 
-    <span>TO COVER</span>
+    <span>Not Covered</span>
 
   </div>
 
   <div id="remainingRoutes"></div>
+
+
+  <!-- PERFORMANCE -->
+
+  <div class="section-title">
+
+    <h3>Driving Performance</h3>
+
+    <span>Feedback Analysis</span>
+
+  </div>
+
+  <div class="analysis-card">
+
+    <div class="analysis-top">
+
+      <div class="analysis-stat good">
+
+        <strong id="goodCount">
+          0
+        </strong>
+
+        <span>Positive Feedback</span>
+
+      </div>
+
+      <div class="analysis-stat bad">
+
+        <strong id="badCount">
+          0
+        </strong>
+
+        <span>Need Improvement</span>
+
+      </div>
+
+    </div>
+
+    <div id="skillsContainer"></div>
+
+  </div>
 
 
   <!-- HISTORY -->
@@ -1196,12 +1330,12 @@ button,input{
     <h3>Class History</h3>
 
     <span id="historyCount">
-      0 SESSIONS
+      0 Sessions
     </span>
 
   </div>
 
-  <div id="timeline" class="timeline"></div>
+  <div id="history" class="history"></div>
 
 
   <!-- REFERRAL -->
@@ -1210,15 +1344,13 @@ button,input{
     <h3>Referral Wallet</h3>
   </div>
 
-  <div class="expected">
+  <div class="simple-card">
 
-    <div class="expected-label">
-      Total Referral Reward
-    </div>
+    <span>Total Referral Reward</span>
 
-    <div id="referralWallet" class="expected-date">
+    <strong id="referralWallet">
       ₹0
-    </div>
+    </strong>
 
   </div>
 
@@ -1238,7 +1370,7 @@ button,input{
       class="action-btn"
       onclick="contactHelp()"
     >
-      💬 HELP
+      💬 GET HELP
     </button>
 
     <button
@@ -1253,8 +1385,12 @@ button,input{
 
 
   <div class="footer">
-    ABHINAASH A1 DRIVING ACADEMY<br>
+
+    ABHINAASH A1 DRIVING ACADEMY
+    <br>
+
     Drive Safe • Drive Smart • Drive Confidently
+
   </div>
 
 </div>
@@ -1262,7 +1398,10 @@ button,input{
 
 <!-- CERTIFICATE -->
 
-<div id="certificate" class="certificate">
+<div
+  id="certificate"
+  class="certificate"
+>
 
   <div class="cert-inner">
 
@@ -1278,20 +1417,24 @@ button,input{
       This certificate is proudly presented to
     </div>
 
-    <div id="certName" class="cert-name">
-      Student Name
+    <div
+      id="certName"
+      class="cert-name"
+    >
+      Student
     </div>
 
     <div class="cert-text">
 
-      For successfully completing the driving training
-      programme at Abhinaash A1 Driving Academy.
+      For successfully completing the practical
+      driving training programme at
+      Abhinaash A1 Driving Academy.
 
       <br><br>
 
-      The student has successfully completed the required
-      practical driving sessions and demonstrated
-      responsible driving skills.
+      The student has successfully completed
+      the required driving sessions and
+      practical training.
 
     </div>
 
@@ -1316,43 +1459,50 @@ button,input{
 
 import {
   initializeApp
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+} from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
   getFirestore,
   doc,
   onSnapshot
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+} from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
-/* FIREBASE */
+/* ==========================================
+   FIREBASE
+========================================== */
 
 const firebaseConfig = {
 
   apiKey:
-    "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
+  "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
 
   authDomain:
-    "abinash-driving.firebaseapp.com",
+  "abinash-driving.firebaseapp.com",
 
   projectId:
-    "abinash-driving",
+  "abinash-driving",
 
   storageBucket:
-    "abinash-driving.appspot.com",
+  "abinash-driving.appspot.com",
 
   messagingSenderId:
-    "641148830173",
+  "641148830173",
 
   appId:
-    "1:641148830173:web:b7a500e5e7e2463da0f634"
+  "1:641148830173:web:b7a500e5e7e2463da0f634"
 
 };
 
 
-const app = initializeApp(firebaseConfig);
+const app =
+initializeApp(firebaseConfig);
 
-const db = getFirestore(app);
+const db =
+getFirestore(app);
+
 
 let unsubscribeProfile = null;
 
@@ -1361,72 +1511,13 @@ let currentPhone = "";
 let currentData = null;
 
 
-/* ELEMENTS */
-
-const $ = id => document.getElementById(id);
-
-
-/* ENTER KEY */
-
-$("phoneInput").addEventListener("keydown", e => {
-
-  if(e.key === "Enter"){
-    loadProfile();
-  }
-
-});
+const $ = id =>
+document.getElementById(id);
 
 
-/* ESCAPE HTML */
-
-function escapeHtml(value){
-
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-
-}
-
-
-/* NORMALIZE ROUTE */
-
-function normalizeRoute(route){
-
-  if(!route) return "";
-
-  let r = String(route)
-    .trim()
-    .replace(/\s+/g," ");
-
-  if(!r) return "";
-
-  return r;
-
-}
-
-
-/* ROUTE KEY */
-
-function routeKey(route){
-
-  return normalizeRoute(route)
-    .toLowerCase()
-    .replace(/\s+/g," ");
-
-}
-
-
-/* KNOWN ROUTES
-
-   Keep these routes as the academy's planned
-   standard routes.
-
-   Custom routes from attendance logs will
-   automatically appear under Covered Routes.
-*/
+/* ==========================================
+   STANDARD ROUTES
+========================================== */
 
 const STANDARD_ROUTES = [
 
@@ -1447,483 +1538,223 @@ const STANDARD_ROUTES = [
 ];
 
 
-/* LOAD PROFILE */
-
-window.loadProfile = function(){
-
-  const phone =
-    $("phoneInput").value.trim();
-
-  $("loginError").textContent = "";
-
-  if(!/^\d{10}$/.test(phone)){
-
-    $("loginError").textContent =
-      "Please enter a valid 10 digit mobile number.";
-
-    return;
-
-  }
-
-
-  if(unsubscribeProfile){
-
-    unsubscribeProfile();
-
-    unsubscribeProfile = null;
-
-  }
-
-
-  currentPhone = phone;
-
-
-  const studentRef =
-    doc(db,"studentData",phone);
-
-
-  unsubscribeProfile = onSnapshot(
-
-    studentRef,
-
-    snapshot => {
-
-      if(!snapshot.exists()){
-
-        $("loginError").textContent =
-          "Student profile not found.";
-
-        $("dashboard").classList.add("hidden");
-        $("loginScreen").classList.remove("hidden");
-
-        return;
-
-      }
-
-
-      currentData = snapshot.data();
-
-      $("loginScreen").classList.add("hidden");
-
-      $("dashboard").classList.remove("hidden");
-
-      renderProfile(currentData);
-
-    },
-
-    error => {
-
-      console.error(error);
-
-      $("loginError").textContent =
-        "Unable to load profile. Please try again.";
-
-    }
-
-  );
-
-};
-
-
-/* RENDER PROFILE */
-
-function renderProfile(data){
-
-  const logs =
-    Array.isArray(data.attendanceLogs)
-      ? data.attendanceLogs
-      : [];
-
-
-  /*
-    Existing system uses "remaining"
-    as completed class count.
-  */
-
-  const done =
-    Math.max(
-      logs.length,
-      Number(data.remaining || 0),
-      0
-    );
-
-
-  const total =
-    Math.max(
-      Number(data.totalClasses || 0),
-      1
-    );
-
-
-  const percent =
-    Math.min(
-      Math.round((done / total) * 100),
-      100
-    );
-
-
-  /* PROFILE */
-
-  const name =
-    data.name || "Student";
-
-
-  $("studentName").textContent =
-    name;
-
-
-  $("studentPhone").textContent =
-    currentPhone;
-
-
-  $("avatar").textContent =
-    name.charAt(0).toUpperCase();
-
-
-  /* CLASS TYPE */
-
-  const classType =
-    data.classType === "Personal"
-      ? "Personal"
-      : "Group";
-
-
-  $("classType").textContent =
-    classType === "Personal"
-      ? "👤 PERSONAL"
-      : "👥 GROUP";
-
-
-  /* BASIC */
-
-  $("doneClasses").textContent =
-    done;
-
-
-  $("totalClasses").textContent =
-    total;
-
-
-  $("percentText").textContent =
-    percent + "%";
-
-
-  $("progressText").textContent =
-    done + " / " + total;
-
-
-  $("radial").style
-    .setProperty("--progress",percent);
-
-
-  $("classBar").style.width =
-    percent + "%";
-
-
-  /* DISTANCE */
-
-  const distanceData =
-    calculateDistance(logs,done,total);
-
-
-  $("distanceValue").textContent =
-    distanceData.driven +
-    " / " +
-    distanceData.target +
-    " KM";
-
-
-  const distancePercent =
-    Math.min(
-      Math.round(
-        (distanceData.driven /
-        distanceData.target) * 100
-      ),
-      100
-    );
-
-
-  $("distanceBar").style.width =
-    distancePercent + "%";
-
-
-  $("distanceSub").textContent =
-    distanceData.driven +
-    " KM completed • " +
-    distanceData.remaining +
-    " KM remaining";
-
-
-  /* EXPECTED */
-
-  $("expectedDate").textContent =
-    calculateExpectedCompletion(logs,total);
-
-
-  /* FEEDBACK */
-
-  const feedback =
-    analyzeFeedback(logs);
-
-
-  renderFeedback(feedback);
-
-  renderPerformance(feedback);
-
-
-  /* ROUTES */
-
-  renderRoutes(logs);
-
-
-  /* HISTORY */
-
-  renderTimeline(logs);
-
-
-  /* REFERRAL */
-
-  const referrals =
-    Number(data.totalRefers || 0);
-
-
-  $("referralWallet").textContent =
-    "₹" + (referrals * 500).toLocaleString("en-IN");
-
-
-  /* CERTIFICATE */
-
-  if(done >= total){
-
-    $("certificateBtn")
-      .classList.remove("hidden");
-
-    $("certName").textContent =
-      name;
-
-  }else{
-
-    $("certificateBtn")
-      .classList.add("hidden");
-
-  }
+/* ==========================================
+   HELPERS
+========================================== */
+
+function escapeHtml(value){
+
+  return String(value ?? "")
+  .replace(/&/g,"&amp;")
+  .replace(/</g,"&lt;")
+  .replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;")
+  .replace(/'/g,"&#039;");
 
 }
 
 
-/* DISTANCE */
+function normalizeRoute(route){
 
-function calculateDistance(logs,done,total){
-
-  let driven = 0;
-
-
-  logs.forEach(log => {
-
-    const text =
-      String(log);
-
-
-    const newMatch =
-      text.match(
-        /Distance:\s*(\d+(?:\.\d+)?)\s*KM/i
-      );
-
-
-    if(newMatch){
-
-      driven += Number(newMatch[1]);
-
-      return;
-
-    }
-
-
-    const oldMatch =
-      text.match(
-        /(\d+(?:\.\d+)?)\s*KM/i
-      );
-
-
-    if(oldMatch){
-
-      driven += Number(oldMatch[1]);
-
-    }else{
-
-      driven += 5;
-
-    }
-
-  });
-
-
-  /*
-    If completed count is greater than
-    actual log count, assume 5 KM for
-    each missing session.
-  */
-
-  if(done > logs.length){
-
-    driven +=
-      (done - logs.length) * 5;
-
-  }
-
-
-  const target =
-    total * 5;
-
-
-  const remaining =
-    Math.max(target - driven,0);
-
-
-  return {
-
-    driven: Number(driven.toFixed(1)),
-
-    target: Number(target.toFixed(1)),
-
-    remaining: Number(remaining.toFixed(1))
-
-  };
+  return String(route || "")
+  .trim()
+  .replace(/\s+/g," ");
 
 }
 
 
-/* PARSE LOG */
+function routeKey(route){
+
+  return normalizeRoute(route)
+  .toLowerCase();
+
+}
+
+
+/* ==========================================
+   FEEDBACK TYPE
+========================================== */
+
+function getFeedbackType(remark){
+
+  const text =
+  String(remark || "")
+  .toLowerCase();
+
+
+  const negativeWords = [
+
+    "needs improvement",
+
+    "need improvement",
+
+    "improvement",
+
+    "bad",
+
+    "poor",
+
+    "weak",
+
+    "not good",
+
+    "mistake",
+
+    "practice more"
+
+  ];
+
+
+  const positiveWords = [
+
+    "good",
+
+    "excellent",
+
+    "great",
+
+    "perfect",
+
+    "well",
+
+    "nice"
+
+  ];
+
+
+  if(
+    negativeWords.some(
+      word => text.includes(word)
+    )
+  ){
+
+    return "bad";
+
+  }
+
+
+  if(
+    positiveWords.some(
+      word => text.includes(word)
+    )
+  ){
+
+    return "good";
+
+  }
+
+
+  return "neutral";
+
+}
+
+
+/* ==========================================
+   PARSE ATTENDANCE LOG
+========================================== */
 
 function parseLog(log){
 
   const text =
-    String(log || "");
+  String(log || "");
 
 
-  let date = "";
+  /*
+    Format:
 
-  let time = "";
-
-
-  const firstPart =
-    text.split(" — ")[0];
-
-
-  const parts =
-    firstPart.split(" | ");
+    DD Mon | HH:MM AM/PM —
+    Route: ... |
+    Distance: 5 KM |
+    Remark: ...
+  */
 
 
-  if(parts.length >= 1){
-
-    date =
-      parts[0].trim();
-
-  }
+  const beforeDash =
+  text.split(" — ")[0] || "";
 
 
-  if(parts.length >= 2){
+  const dateTimeParts =
+  beforeDash.split(" | ");
 
-    time =
-      parts[1].trim();
 
-  }
+  const date =
+  dateTimeParts[0]
+  ? dateTimeParts[0].trim()
+  : "";
 
+
+  const time =
+  dateTimeParts[1]
+  ? dateTimeParts[1].trim()
+  : "";
+
+
+  /* ROUTE */
 
   let route = "";
 
 
   const routeMatch =
-    text.match(
-      /Route:\s*([^|]+)/i
-    );
+  text.match(
+    /Route:\s*([^|]+)/i
+  );
 
 
   if(routeMatch){
 
     route =
-      routeMatch[1].trim();
+    routeMatch[1].trim();
 
   }
 
+
+  /* DISTANCE */
 
   let distance = "";
 
 
   const distanceMatch =
-    text.match(
-      /Distance:\s*([^|]+)/i
-    );
+  text.match(
+    /Distance:\s*(\d+(?:\.\d+)?)\s*KM/i
+  );
 
 
   if(distanceMatch){
 
     distance =
-      distanceMatch[1].trim();
+    distanceMatch[1] + " KM";
 
   }else{
 
     const oldDistance =
-      text.match(
-        /(\d+(?:\.\d+)?)\s*KM/i
-      );
+    text.match(
+      /(\d+(?:\.\d+)?)\s*KM/i
+    );
 
-    if(oldDistance){
 
-      distance =
-        oldDistance[1] + " KM";
-
-    }else{
-
-      distance =
-        "5 KM";
-
-    }
+    distance =
+    oldDistance
+    ? oldDistance[1] + " KM"
+    : "5 KM";
 
   }
 
+
+  /* REMARK */
 
   let remark = "";
 
 
   const remarkMatch =
-    text.match(
-      /Remark:\s*(.+)$/i
-    );
+  text.match(
+    /Remark:\s*(.+)$/i
+  );
 
 
   if(remarkMatch){
 
     remark =
-      remarkMatch[1].trim();
-
-  }else{
-
-    /*
-      Old format support
-    */
-
-    const dashParts =
-      text.split(" — ");
-
-
-    if(dashParts.length > 1){
-
-      const possible =
-        dashParts.slice(1).join(" — ");
-
-
-      if(
-        !/Route:/i.test(possible) &&
-        !/Distance:/i.test(possible)
-      ){
-
-        remark =
-          possible.trim();
-
-      }
-
-    }
+    remarkMatch[1].trim();
 
   }
 
@@ -1938,314 +1769,400 @@ function parseLog(log){
 
     distance,
 
-    remark
+    remark,
+
+    feedbackType:
+    getFeedbackType(remark)
 
   };
 
 }
 
 
-/* FEEDBACK ANALYSIS */
+/* ==========================================
+   LOGIN
+========================================== */
 
-function analyzeFeedback(logs){
+$("phoneInput")
+.addEventListener(
+"keydown",
+event => {
 
-  const feedback = [];
+  if(event.key === "Enter"){
 
-  let good = 0;
+    loadProfile();
 
-  let bad = 0;
+  }
+
+});
 
 
-  const skills = {
+window.loadProfile =
+function(){
 
-    "Driving": {
-      good:0,
-      bad:0
+  const phone =
+  $("phoneInput")
+  .value
+  .trim();
+
+
+  $("loginError")
+  .textContent = "";
+
+
+  if(!/^\d{10}$/.test(phone)){
+
+    $("loginError")
+    .textContent =
+    "Please enter a valid 10 digit mobile number.";
+
+    return;
+
+  }
+
+
+  if(unsubscribeProfile){
+
+    unsubscribeProfile();
+
+  }
+
+
+  currentPhone =
+  phone;
+
+
+  const studentRef =
+  doc(
+    db,
+    "studentData",
+    phone
+  );
+
+
+  unsubscribeProfile =
+  onSnapshot(
+
+    studentRef,
+
+    snapshot => {
+
+      if(!snapshot.exists()){
+
+        $("loginError")
+        .textContent =
+        "Student profile not found.";
+
+        return;
+
+      }
+
+
+      currentData =
+      snapshot.data();
+
+
+      $("loginScreen")
+      .classList
+      .add("hidden");
+
+
+      $("dashboard")
+      .classList
+      .remove("hidden");
+
+
+      renderProfile(
+        currentData
+      );
+
     },
 
-    "Turning": {
-      good:0,
-      bad:0
-    },
+    error => {
 
-    "Braking": {
-      good:0,
-      bad:0
-    },
+      console.error(error);
 
-    "Clutch": {
-      good:0,
-      bad:0
-    },
-
-    "Traffic Control": {
-      good:0,
-      bad:0
-    },
-
-    "Vehicle Control": {
-      good:0,
-      bad:0
-    },
-
-    "Parking": {
-      good:0,
-      bad:0
-    }
-
-  };
-
-
-  logs.forEach(log => {
-
-    const parsed =
-      parseLog(log);
-
-
-    const remark =
-      parsed.remark;
-
-
-    if(!remark) return;
-
-
-    const lower =
-      remark.toLowerCase();
-
-
-    const isNegative =
-      lower.includes("needs improvement") ||
-      lower.includes("improvement") ||
-      lower.includes("bad") ||
-      lower.includes("poor") ||
-      lower.includes("weak") ||
-      lower.includes("not good");
-
-
-    const isPositive =
-      lower.includes("good") ||
-      lower.includes("excellent") ||
-      lower.includes("great") ||
-      lower.includes("perfect") ||
-      lower.includes("well");
-
-
-    /*
-      If both aren't recognized,
-      treat it as neutral feedback.
-    */
-
-    const type =
-      isNegative
-        ? "bad"
-        : isPositive
-          ? "good"
-          : "neutral";
-
-
-    if(type === "good"){
-
-      good++;
+      $("loginError")
+      .textContent =
+      "Unable to load profile.";
 
     }
 
-    if(type === "bad"){
+  );
 
-      bad++;
+};
 
-    }
 
+/* ==========================================
+   MAIN RENDER
+========================================== */
 
-    feedback.push({
+function renderProfile(data){
 
-      text:remark,
+  const logs =
+  Array.isArray(
+    data.attendanceLogs
+  )
+  ? data.attendanceLogs
+  : [];
 
-      type:type,
 
-      date:parsed.date,
+  const done =
+  Math.max(
 
-      route:parsed.route
+    logs.length,
 
-    });
+    Number(
+      data.remaining || 0
+    ),
 
+    0
 
-    /* SKILL DETECTION */
+  );
 
-    let skillFound = false;
 
+  const total =
+  Math.max(
 
-    if(
-      lower.includes("driving") ||
-      lower.includes("drive")
-    ){
+    Number(
+      data.totalClasses || 0
+    ),
 
-      skillFound = true;
+    1
 
-      if(type === "good")
-        skills["Driving"].good++;
+  );
 
-      if(type === "bad")
-        skills["Driving"].bad++;
 
-    }
+  const remaining =
+  Math.max(
+    total - done,
+    0
+  );
 
 
-    if(lower.includes("turning")){
+  const percentage =
+  Math.min(
 
-      skillFound = true;
+    Math.round(
+      (done / total) * 100
+    ),
 
-      if(type === "good")
-        skills["Turning"].good++;
+    100
 
-      if(type === "bad")
-        skills["Turning"].bad++;
+  );
 
-    }
 
+  const name =
+  data.name || "Student";
 
-    if(lower.includes("braking") ||
-       lower.includes("brake")){
 
-      skillFound = true;
+  /* PROFILE */
 
-      if(type === "good")
-        skills["Braking"].good++;
+  $("studentName")
+  .textContent =
+  name;
 
-      if(type === "bad")
-        skills["Braking"].bad++;
 
-    }
+  $("studentPhone")
+  .textContent =
+  currentPhone;
 
 
-    if(lower.includes("clutch")){
+  $("avatar")
+  .textContent =
+  name.charAt(0)
+  .toUpperCase();
 
-      skillFound = true;
 
-      if(type === "good")
-        skills["Clutch"].good++;
+  const classType =
+  data.classType === "Personal"
+  ? "Personal"
+  : "Group";
 
-      if(type === "bad")
-        skills["Clutch"].bad++;
 
-    }
+  $("classType")
+  .textContent =
 
+  classType === "Personal"
 
-    if(
-      lower.includes("traffic")
-    ){
+  ? "👤 PERSONAL CLASS"
 
-      skillFound = true;
+  : "👥 GROUP CLASS";
 
-      if(type === "good")
-        skills["Traffic Control"].good++;
 
-      if(type === "bad")
-        skills["Traffic Control"].bad++;
+  /* PROGRESS */
 
-    }
+  $("doneClasses")
+  .textContent =
+  done;
 
 
-    if(
-      lower.includes("vehicle control") ||
-      lower.includes("vehicle")
-    ){
+  $("totalClasses")
+  .textContent =
+  total;
 
-      skillFound = true;
 
-      if(type === "good")
-        skills["Vehicle Control"].good++;
+  $("remainingClasses")
+  .textContent =
+  remaining;
 
-      if(type === "bad")
-        skills["Vehicle Control"].bad++;
 
-    }
+  $("progressPercent")
+  .textContent =
+  percentage + "% COMPLETE";
 
 
-    if(lower.includes("parking")){
+  $("classBar")
+  .style.width =
+  percentage + "%";
 
-      skillFound = true;
 
-      if(type === "good")
-        skills["Parking"].good++;
+  /* DISTANCE */
 
-      if(type === "bad")
-        skills["Parking"].bad++;
+  const distance =
+  calculateDistance(
+    logs,
+    done,
+    total
+  );
 
-    }
 
+  $("distanceValue")
+  .textContent =
 
-    /*
-      Generic Good Driving remark
-      is mapped to Driving.
-    */
+  distance.driven +
+  " / " +
+  distance.target +
+  " KM";
 
-    if(
-      !skillFound &&
-      type === "good"
-    ){
 
-      skills["Driving"].good++;
+  /* LATEST SESSION */
 
-    }
+  renderLatestSession(
+    logs
+  );
 
 
-    if(
-      !skillFound &&
-      type === "bad"
-    ){
+  /* ROUTES */
 
-      skills["Driving"].bad++;
+  renderRoutes(
+    logs
+  );
 
-    }
 
-  });
+  /* PERFORMANCE */
 
+  const feedback =
+  analyzeFeedback(
+    logs
+  );
 
-  return {
 
-    feedback,
+  renderPerformance(
+    feedback
+  );
 
-    good,
 
-    bad,
+  /* HISTORY */
 
-    skills
+  renderHistory(
+    logs
+  );
 
-  };
+
+  /* EXPECTED */
+
+  $("expectedDate")
+  .textContent =
+  calculateExpectedCompletion(
+    logs,
+    total
+  );
+
+
+  /* REFERRAL */
+
+  const referrals =
+  Number(
+    data.totalRefers || 0
+  );
+
+
+  $("referralWallet")
+  .textContent =
+
+  "₹" +
+
+  (
+    referrals * 500
+  )
+  .toLocaleString(
+    "en-IN"
+  );
+
+
+  /* CERTIFICATE */
+
+  if(done >= total){
+
+    $("certificateBtn")
+    .classList
+    .remove("hidden");
+
+
+    $("certName")
+    .textContent =
+    name;
+
+  }else{
+
+    $("certificateBtn")
+    .classList
+    .add("hidden");
+
+  }
 
 }
 
 
-/* RENDER FEEDBACK */
+/* ==========================================
+   ⭐ LATEST SESSION CARD
+========================================== */
 
-function renderFeedback(data){
+function renderLatestSession(logs){
 
-  $("goodCount").textContent =
-    data.good;
+  if(!logs.length){
 
-
-  $("badCount").textContent =
-    data.bad;
-
-
-  $("feedbackCount").textContent =
-    data.feedback.length +
-    " FEEDBACK";
+    $("latestSessionNumber")
+    .textContent =
+    "NO SESSION";
 
 
-  const container =
-    $("feedbackCards");
+    $("latestDate")
+    .textContent =
+    "Training not started";
 
 
-  container.innerHTML = "";
+    $("latestTime")
+    .textContent =
+    "—";
 
 
-  if(!data.feedback.length){
+    $("latestRoute")
+    .textContent =
+    "No route yet";
 
-    container.innerHTML =
-      `<div class="no-feedback" style="grid-column:1/-1">
-        No feedback recorded yet.
-      </div>`;
+
+    $("latestDistance")
+    .textContent =
+    "0 KM";
+
+
+    setLatestFeedback(
+      "",
+      "neutral"
+    );
+
 
     return;
 
@@ -2253,260 +2170,330 @@ function renderFeedback(data){
 
 
   /*
-    Show latest feedback first
+    Attendance logs are stored
+    chronologically.
+
+    Last item = latest attendance.
   */
 
+  const latestLog =
+  logs[
+    logs.length - 1
+  ];
+
+
   const latest =
-    [...data.feedback]
-      .reverse()
-      .slice(0,12);
+  parseLog(
+    latestLog
+  );
 
 
-  latest.forEach(item => {
+  $("latestSessionNumber")
+  .textContent =
 
-    const card =
-      document.createElement("div");
-
-
-    card.className =
-      "feedback-card " +
-      (
-        item.type === "bad"
-          ? "bad"
-          : "good"
-      );
+  "SESSION #" +
+  logs.length;
 
 
-    const icon =
-      item.type === "bad"
-        ? "⚠️"
-        : "👍";
+  $("latestDate")
+  .textContent =
+
+  latest.date ||
+  "Latest Attendance";
 
 
-    const title =
-      item.type === "bad"
-        ? "Needs Improvement"
-        : "Good Performance";
+  $("latestTime")
+  .innerHTML =
+
+  formatTimeHighlight(
+    latest.time
+  );
 
 
-    card.innerHTML = `
+  $("latestRoute")
+  .textContent =
 
-      <div class="feedback-icon">
-        ${icon}
-      </div>
-
-      <strong>
-        ${escapeHtml(title)}
-      </strong>
-
-      <small>
-        ${escapeHtml(item.text)}
-      </small>
-
-      ${
-        item.route
-          ? `<small>📍 ${escapeHtml(item.route)}</small>`
-          : ""
-      }
-
-    `;
+  latest.route ||
+  "Route not recorded";
 
 
-    container.appendChild(card);
+  $("latestDistance")
+  .textContent =
 
-  });
+  latest.distance ||
+  "5 KM";
+
+
+  setLatestFeedback(
+
+    latest.remark,
+
+    latest.feedbackType
+
+  );
 
 }
 
 
-/* PERFORMANCE */
+/* TIME HIGHLIGHT */
 
-function renderPerformance(data){
+function formatTimeHighlight(time){
 
-  const container =
-    $("skillsContainer");
+  if(!time){
 
-
-  container.innerHTML = "";
-
-
-  Object.entries(data.skills)
-    .forEach(([skill,stats]) => {
-
-      const total =
-        stats.good + stats.bad;
-
-
-      if(total === 0){
-
-        return;
-
-      }
-
-
-      const score =
-        Math.round(
-          (stats.good / total) * 100
-        );
-
-
-      const row =
-        document.createElement("div");
-
-
-      row.className =
-        "skill-row";
-
-
-      row.innerHTML = `
-
-        <div class="skill-head">
-
-          <span>
-            ${escapeHtml(skill)}
-          </span>
-
-          <strong>
-            ${score}% positive
-          </strong>
-
-        </div>
-
-        <div class="skill-bar">
-
-          <div
-            class="skill-fill ${
-              score >= 60
-                ? "good"
-                : "bad"
-            }"
-            style="width:${score}%"
-          ></div>
-
-        </div>
-
-      `;
-
-
-      container.appendChild(row);
-
-    });
-
-
-  if(!container.children.length){
-
-    container.innerHTML = `
-      <div class="no-feedback">
-        Feedback-based performance analysis
-        will appear here after your driving sessions.
-      </div>
-    `;
+    return "—";
 
   }
 
+
+  const match =
+  String(time)
+  .match(
+    /^(.+?)\s+(AM|PM)$/i
+  );
+
+
+  if(!match){
+
+    return escapeHtml(time);
+
+  }
+
+
+  return (
+
+    escapeHtml(
+      match[1]
+    )
+
+    +
+
+    ` <span>${
+      escapeHtml(
+        match[2].toUpperCase()
+      )
+    }</span>`
+
+  );
+
 }
 
 
-/* ROUTE ANALYSIS */
+/* LATEST FEEDBACK */
 
-function renderRoutes(logs){
+function setLatestFeedback(
+  remark,
+  type
+){
 
-  /*
-    Count routes from attendance logs.
-  */
+  const box =
+  $("latestFeedback");
 
-  const routeMap =
-    new Map();
+
+  box.className =
+  "latest-feedback " +
+  type;
+
+
+  if(type === "good"){
+
+    $("latestFeedbackIcon")
+    .textContent =
+    "👍";
+
+
+    $("latestFeedbackTitle")
+    .textContent =
+    "Positive Feedback";
+
+  }
+
+
+  else if(type === "bad"){
+
+    $("latestFeedbackIcon")
+    .textContent =
+    "⚠️";
+
+
+    $("latestFeedbackTitle")
+    .textContent =
+    "Needs Improvement";
+
+  }
+
+
+  else{
+
+    $("latestFeedbackIcon")
+    .textContent =
+    "📝";
+
+
+    $("latestFeedbackTitle")
+    .textContent =
+    "Instructor Feedback";
+
+  }
+
+
+  $("latestFeedbackText")
+  .textContent =
+
+  remark ||
+
+  "No feedback recorded for this session.";
+
+}
+
+
+/* ==========================================
+   DISTANCE
+========================================== */
+
+function calculateDistance(
+  logs,
+  done,
+  total
+){
+
+  let driven = 0;
 
 
   logs.forEach(log => {
 
     const parsed =
-      parseLog(log);
+    parseLog(log);
 
 
-    const route =
-      normalizeRoute(parsed.route);
+    const match =
+    parsed.distance
+    .match(
+      /(\d+(?:\.\d+)?)/
+    );
 
 
-    if(!route) return;
-
-
-    const key =
-      routeKey(route);
-
-
-    if(!routeMap.has(key)){
-
-      routeMap.set(key,{
-
-        name:route,
-
-        count:0
-
-      });
-
-    }
-
-
-    routeMap.get(key).count++;
+    driven +=
+    match
+    ? Number(match[1])
+    : 5;
 
   });
 
 
-  /*
-    Covered routes
-  */
+  if(done > logs.length){
 
-  const covered =
-    Array.from(routeMap.values())
-      .sort((a,b) => {
+    driven +=
 
-        if(b.count !== a.count){
+    (
+      done -
+      logs.length
+    ) * 5;
 
-          return b.count - a.count;
+  }
 
+
+  return {
+
+    driven:
+    Number(
+      driven.toFixed(1)
+    ),
+
+    target:
+    total * 5
+
+  };
+
+}
+
+
+/* ==========================================
+   ROUTES
+========================================== */
+
+function renderRoutes(logs){
+
+  const routeMap =
+  new Map();
+
+
+  logs.forEach(log => {
+
+    const parsed =
+    parseLog(log);
+
+
+    const route =
+    normalizeRoute(
+      parsed.route
+    );
+
+
+    if(!route){
+      return;
+    }
+
+
+    const key =
+    routeKey(route);
+
+
+    if(
+      !routeMap.has(key)
+    ){
+
+      routeMap.set(
+        key,
+        {
+          name:route,
+          count:0
         }
-
-        return a.name.localeCompare(b.name);
-
-      });
-
-
-  /*
-    Remaining routes are based on
-    standard academy route list.
-  */
-
-  const remaining =
-    STANDARD_ROUTES.filter(route => {
-
-      return !routeMap.has(
-        routeKey(route)
       );
 
-    });
+    }
 
 
-  $("coveredRouteCount").textContent =
-    covered.length;
+    routeMap.get(key)
+    .count++;
+
+  });
 
 
-  $("remainingRouteCount").textContent =
-    remaining.length;
+  const covered =
+  Array.from(
+    routeMap.values()
+  )
+  .sort(
+    (a,b) =>
+    b.count - a.count
+  );
 
 
-  $("routeTotalLabel").textContent =
-    (
-      covered.length +
-      remaining.length
-    ) + " ROUTES";
+  const remaining =
+  STANDARD_ROUTES
+  .filter(
+    route =>
+    !routeMap.has(
+      routeKey(route)
+    )
+  );
+
+
+  $("coveredRouteCount")
+  .textContent =
+  covered.length;
+
+
+  $("remainingRouteCount")
+  .textContent =
+  remaining.length;
 
 
   /* COVERED */
 
   const coveredBox =
-    $("coveredRoutes");
+  $("coveredRoutes");
 
 
   coveredBox.innerHTML = "";
@@ -2514,43 +2501,47 @@ function renderRoutes(logs){
 
   if(!covered.length){
 
-    coveredBox.innerHTML = `
-      <div class="route-empty">
-        No route has been recorded yet.
-      </div>
-    `;
+    coveredBox.innerHTML =
+    `<div class="empty">
+      No route covered yet.
+    </div>`;
 
   }else{
 
     const list =
-      document.createElement("div");
+    document.createElement(
+      "div"
+    );
 
 
     list.className =
-      "route-list";
+    "route-list";
 
 
     covered.forEach(route => {
 
       const item =
-        document.createElement("div");
+      document.createElement(
+        "div"
+      );
 
 
       item.className =
-        "route-item";
+      "route-item";
 
 
       item.innerHTML = `
 
-        <div class="route-left">
+        <div class="route-name">
 
-          <div class="route-name">
-            📍 ${escapeHtml(route.name)}
-          </div>
+          📍
+          ${escapeHtml(
+            route.name
+          )}
 
-          <div class="route-meta">
-            ROUTE COVERED
-          </div>
+          <small>
+            Route covered
+          </small>
 
         </div>
 
@@ -2561,12 +2552,17 @@ function renderRoutes(logs){
       `;
 
 
-      list.appendChild(item);
+      list.appendChild(
+        item
+      );
 
     });
 
 
-    coveredBox.appendChild(list);
+    coveredBox
+    .appendChild(
+      list
+    );
 
   }
 
@@ -2574,7 +2570,7 @@ function renderRoutes(logs){
   /* REMAINING */
 
   const remainingBox =
-    $("remainingRoutes");
+  $("remainingRoutes");
 
 
   remainingBox.innerHTML = "";
@@ -2582,43 +2578,45 @@ function renderRoutes(logs){
 
   if(!remaining.length){
 
-    remainingBox.innerHTML = `
-      <div class="route-empty">
-        🎉 All standard academy routes covered.
-      </div>
-    `;
+    remainingBox.innerHTML =
+    `<div class="empty">
+      🎉 All standard routes covered.
+    </div>`;
 
   }else{
 
     const list =
-      document.createElement("div");
+    document.createElement(
+      "div"
+    );
 
 
     list.className =
-      "route-list";
+    "route-list";
 
 
     remaining.forEach(route => {
 
       const item =
-        document.createElement("div");
+      document.createElement(
+        "div"
+      );
 
 
       item.className =
-        "route-item remaining-route";
+      "route-item remaining";
 
 
       item.innerHTML = `
 
-        <div class="route-left">
+        <div class="route-name">
 
-          <div class="route-name">
-            📍 ${escapeHtml(route)}
-          </div>
+          📍
+          ${escapeHtml(route)}
 
-          <div class="route-meta">
-            NOT COVERED YET
-          </div>
+          <small>
+            Not covered yet
+          </small>
 
         </div>
 
@@ -2629,36 +2627,514 @@ function renderRoutes(logs){
       `;
 
 
-      list.appendChild(item);
+      list.appendChild(
+        item
+      );
 
     });
 
 
-    remainingBox.appendChild(list);
+    remainingBox
+    .appendChild(
+      list
+    );
 
   }
 
 }
 
 
-/* EXPECTED COMPLETION */
+/* ==========================================
+   FEEDBACK ANALYSIS
+========================================== */
 
-function calculateExpectedCompletion(logs,total){
+function analyzeFeedback(logs){
+
+  const result = {
+
+    good:0,
+
+    bad:0,
+
+    skills:{
+
+      "Driving":{
+        good:0,
+        bad:0
+      },
+
+      "Turning":{
+        good:0,
+        bad:0
+      },
+
+      "Braking":{
+        good:0,
+        bad:0
+      },
+
+      "Clutch":{
+        good:0,
+        bad:0
+      },
+
+      "Traffic Control":{
+        good:0,
+        bad:0
+      },
+
+      "Vehicle Control":{
+        good:0,
+        bad:0
+      },
+
+      "Parking":{
+        good:0,
+        bad:0
+      }
+
+    }
+
+  };
+
+
+  logs.forEach(log => {
+
+    const parsed =
+    parseLog(log);
+
+
+    if(!parsed.remark){
+      return;
+    }
+
+
+    const type =
+    parsed.feedbackType;
+
+
+    const text =
+    parsed.remark
+    .toLowerCase();
+
+
+    if(type === "good"){
+
+      result.good++;
+
+    }
+
+
+    if(type === "bad"){
+
+      result.bad++;
+
+    }
+
+
+    const mapping = [
+
+      [
+        "Driving",
+        [
+          "driving",
+          "drive"
+        ]
+      ],
+
+      [
+        "Turning",
+        [
+          "turning",
+          "turn"
+        ]
+      ],
+
+      [
+        "Braking",
+        [
+          "braking",
+          "brake"
+        ]
+      ],
+
+      [
+        "Clutch",
+        [
+          "clutch"
+        ]
+      ],
+
+      [
+        "Traffic Control",
+        [
+          "traffic"
+        ]
+      ],
+
+      [
+        "Vehicle Control",
+        [
+          "vehicle control"
+        ]
+      ],
+
+      [
+        "Parking",
+        [
+          "parking",
+          "park"
+        ]
+      ]
+
+    ];
+
+
+    let matched = false;
+
+
+    mapping.forEach(
+    ([skill,words]) => {
+
+      if(
+        words.some(
+          word =>
+          text.includes(word)
+        )
+      ){
+
+        matched = true;
+
+
+        if(type === "good"){
+
+          result
+          .skills[skill]
+          .good++;
+
+        }
+
+
+        if(type === "bad"){
+
+          result
+          .skills[skill]
+          .bad++;
+
+        }
+
+      }
+
+    });
+
+
+    if(
+      !matched &&
+      type !== "neutral"
+    ){
+
+      result
+      .skills["Driving"]
+      [type]++;
+
+    }
+
+  });
+
+
+  return result;
+
+}
+
+
+/* ==========================================
+   PERFORMANCE RENDER
+========================================== */
+
+function renderPerformance(data){
+
+  $("goodCount")
+  .textContent =
+  data.good;
+
+
+  $("badCount")
+  .textContent =
+  data.bad;
+
+
+  const box =
+  $("skillsContainer");
+
+
+  box.innerHTML = "";
+
+
+  Object.entries(
+    data.skills
+  )
+  .forEach(
+  ([skill,value]) => {
+
+    const total =
+    value.good +
+    value.bad;
+
+
+    if(!total){
+      return;
+    }
+
+
+    const score =
+    Math.round(
+      (
+        value.good /
+        total
+      ) * 100
+    );
+
+
+    const row =
+    document.createElement(
+      "div"
+    );
+
+
+    row.className =
+    "skill";
+
+
+    row.innerHTML = `
+
+      <div class="skill-head">
+
+        <span>
+          ${escapeHtml(skill)}
+        </span>
+
+        <strong>
+          ${score}% Positive
+        </strong>
+
+      </div>
+
+      <div class="skill-bar">
+
+        <div
+          class="skill-fill ${
+            score >= 60
+            ? "good"
+            : "bad"
+          }"
+          style="width:${score}%"
+        ></div>
+
+      </div>
+
+    `;
+
+
+    box.appendChild(
+      row
+    );
+
+  });
+
+
+  if(!box.children.length){
+
+    box.innerHTML = `
+
+      <div class="empty">
+
+        Performance analysis will
+        appear after instructor
+        feedback is recorded.
+
+      </div>
+
+    `;
+
+  }
+
+}
+
+
+/* ==========================================
+   HISTORY
+========================================== */
+
+function renderHistory(logs){
+
+  $("historyCount")
+  .textContent =
+
+  logs.length +
+  " SESSIONS";
+
+
+  const box =
+  $("history");
+
+
+  box.innerHTML = "";
+
 
   if(!logs.length){
 
-    return "Not started";
+    box.innerHTML =
+    `<div class="empty">
+      No class history yet.
+    </div>`;
+
+    return;
+
+  }
+
+
+  [...logs]
+  .reverse()
+  .forEach(
+  (log,index) => {
+
+    const data =
+    parseLog(log);
+
+
+    const sessionNumber =
+    logs.length -
+    index;
+
+
+    const card =
+    document.createElement(
+      "div"
+    );
+
+
+    card.className =
+    "history-card";
+
+
+    let feedbackHTML = "";
+
+
+    if(data.remark){
+
+      feedbackHTML = `
+
+        <div
+          class="history-feedback ${
+            data.feedbackType
+          }"
+        >
+
+          ${
+            data.feedbackType === "good"
+            ? "👍"
+            :
+            data.feedbackType === "bad"
+            ? "⚠️"
+            : "📝"
+          }
+
+          ${escapeHtml(
+            data.remark
+          )}
+
+        </div>
+
+      `;
+
+    }
+
+
+    card.innerHTML = `
+
+      <div class="history-top">
+
+        <strong>
+          Session #${sessionNumber}
+        </strong>
+
+        <span>
+          ${escapeHtml(data.date)}
+          ${
+            data.time
+            ? " • " +
+              escapeHtml(data.time)
+            : ""
+          }
+        </span>
+
+      </div>
+
+
+      <div class="history-details">
+
+        ${
+          data.route
+          ? `
+            <div class="chip">
+              📍
+              ${escapeHtml(
+                data.route
+              )}
+            </div>
+          `
+          : ""
+        }
+
+        <div class="chip">
+          🚗
+          ${escapeHtml(
+            data.distance
+          )}
+        </div>
+
+      </div>
+
+
+      ${feedbackHTML}
+
+    `;
+
+
+    box.appendChild(
+      card
+    );
+
+  });
+
+}
+
+
+/* ==========================================
+   EXPECTED COMPLETION
+========================================== */
+
+function calculateExpectedCompletion(
+  logs,
+  total
+){
+
+  if(!logs.length){
+
+    return "Training Not Started";
 
   }
 
 
   const first =
-    parseLog(logs[0]).date;
+  parseLog(
+    logs[0]
+  );
 
 
-  if(!first){
+  if(!first.date){
 
-    return "Based on training schedule";
+    return "Based on Training Schedule";
 
   }
 
@@ -2682,74 +3158,73 @@ function calculateExpectedCompletion(logs,total){
 
 
   const match =
-    first.match(
-      /(\d{1,2})\s+([A-Za-z]{3})/
-    );
+  first.date.match(
+    /(\d{1,2})\s+([A-Za-z]{3})/
+  );
 
 
   if(!match){
 
-    return "Based on training schedule";
+    return "Based on Training Schedule";
 
   }
 
 
   const day =
-    Number(match[1]);
-
-
-  const monthName =
-    match[2];
-
-
-  if(!(monthName in months)){
-
-    return "Based on training schedule";
-
-  }
-
-
-  let year =
-    new Date().getFullYear();
-
-
-  let start =
-    new Date(
-      year,
-      months[monthName],
-      day
-    );
-
-
-  /*
-    If the parsed date appears in future,
-    it probably belongs to previous year.
-  */
-
-  if(start > new Date()){
-
-    start =
-      new Date(
-        year - 1,
-        months[monthName],
-        day
-      );
-
-  }
-
-
-  /*
-    Approximate one class per day.
-    Existing academy schedule is based on
-    total training classes.
-  */
-
-  start.setDate(
-    start.getDate() + total - 1
+  Number(
+    match[1]
   );
 
 
-  return start.toLocaleDateString(
+  const month =
+  match[2];
+
+
+  if(
+    months[month] === undefined
+  ){
+
+    return "Based on Training Schedule";
+
+  }
+
+
+  const now =
+  new Date();
+
+
+  let start =
+  new Date(
+
+    now.getFullYear(),
+
+    months[month],
+
+    day
+
+  );
+
+
+  if(start > now){
+
+    start.setFullYear(
+      start.getFullYear() - 1
+    );
+
+  }
+
+
+  start.setDate(
+
+    start.getDate() +
+    total -
+    1
+
+  );
+
+
+  return start
+  .toLocaleDateString(
     "en-IN",
     {
       day:"2-digit",
@@ -2761,250 +3236,138 @@ function calculateExpectedCompletion(logs,total){
 }
 
 
-/* TIMELINE */
+/* ==========================================
+   WHATSAPP SHARE
+========================================== */
 
-function renderTimeline(logs){
+window.shareDashboard =
+function(){
 
-  $("historyCount").textContent =
-    logs.length + " SESSIONS";
+  const message =
 
-
-  const timeline =
-    $("timeline");
-
-
-  timeline.innerHTML = "";
-
-
-  if(!logs.length){
-
-    timeline.innerHTML = `
-      <div class="route-empty">
-        No class history available yet.
-      </div>
-    `;
-
-    return;
-
-  }
-
-
-  /*
-    Newest first
-  */
-
-  [...logs]
-    .reverse()
-    .forEach((log,index) => {
-
-      const parsed =
-        parseLog(log);
-
-
-      const sessionNumber =
-        logs.length - index;
-
-
-      const remark =
-        parsed.remark;
-
-
-      const lower =
-        String(remark).toLowerCase();
-
-
-      const isBad =
-        lower.includes("bad") ||
-        lower.includes("improvement") ||
-        lower.includes("needs improvement") ||
-        lower.includes("poor");
-
-
-      const isGood =
-        lower.includes("good") ||
-        lower.includes("excellent") ||
-        lower.includes("great");
-
-
-      let remarkClass =
-        "neutral";
-
-
-      if(isBad)
-        remarkClass = "bad";
-
-      else if(isGood)
-        remarkClass = "good";
-
-
-      const session =
-        document.createElement("div");
-
-
-      session.className =
-        "session";
-
-
-      session.innerHTML = `
-
-        <div class="session-dot"></div>
-
-        <div class="session-card">
-
-          <div class="session-title">
-
-            <strong>
-              Session #${sessionNumber}
-            </strong>
-
-            <span>
-              ${escapeHtml(parsed.date)}
-              ${parsed.time ? " • " + escapeHtml(parsed.time) : ""}
-            </span>
-
-          </div>
-
-          <div class="session-data">
-
-            ${
-              parsed.route
-                ? `
-                  <div class="chip route">
-                    📍 ${escapeHtml(parsed.route)}
-                  </div>
-                `
-                : ""
-            }
-
-            <div class="chip">
-              🚗 ${escapeHtml(parsed.distance)}
-            </div>
-
-          </div>
-
-          ${
-            remark
-              ? `
-                <div class="session-remark ${remarkClass}">
-                  ${
-                    isBad
-                      ? "⚠️ "
-                      : isGood
-                        ? "👍 "
-                        : "📝 "
-                  }
-                  ${escapeHtml(remark)}
-                </div>
-              `
-              : ""
-          }
-
-        </div>
-
-      `;
-
-
-      timeline.appendChild(session);
-
-    });
-
-}
-
-
-/* SHARE */
-
-window.shareDashboard = function(){
-
-  const text =
 `🚗 A1 Driving Academy
 
 Student: ${$("studentName").textContent}
 
-Training Mode: ${$("classType").textContent}
+Training:
+${$("classType").textContent}
 
-Classes: ${$("doneClasses").textContent}/${$("totalClasses").textContent}
+Progress:
+${$("doneClasses").textContent}/${$("totalClasses").textContent} Classes
 
-Distance: ${$("distanceValue").textContent}
+Latest Route:
+${$("latestRoute").textContent}
 
-View my driving profile:
-${location.origin}${location.pathname}?phone=${currentPhone}`;
+Latest Distance:
+${$("latestDistance").textContent}
 
-
-  const url =
-    "https://wa.me/?text=" +
-    encodeURIComponent(text);
-
-
-  window.open(url,"_blank");
-
-};
-
-
-/* HELP */
-
-window.contactHelp = function(){
-
-  const message =
-`Hello A1 Driving Academy,
-
-I need help regarding my driving training.
-
-Student: ${$("studentName").textContent}
-Phone: ${currentPhone}`;
+Latest Feedback:
+${$("latestFeedbackText").textContent}`;
 
 
   window.open(
-    "https://wa.me/917008186187?text=" +
-    encodeURIComponent(message),
+
+    "https://wa.me/?text=" +
+
+    encodeURIComponent(
+      message
+    ),
+
     "_blank"
+
   );
 
 };
 
 
-/* LOGOUT */
+/* ==========================================
+   HELP
+========================================== */
 
-window.logout = function(){
+window.contactHelp =
+function(){
+
+  const message =
+
+`Hello A1 Driving Academy,
+
+I need help regarding my driving training.
+
+Student: ${$("studentName").textContent}
+
+Phone: ${currentPhone}`;
+
+
+  window.open(
+
+    "https://wa.me/917008186187?text=" +
+
+    encodeURIComponent(
+      message
+    ),
+
+    "_blank"
+
+  );
+
+};
+
+
+/* ==========================================
+   LOGOUT
+========================================== */
+
+window.logout =
+function(){
 
   if(unsubscribeProfile){
 
     unsubscribeProfile();
 
-    unsubscribeProfile = null;
+    unsubscribeProfile =
+    null;
 
   }
 
 
-  currentData = null;
-
   currentPhone = "";
+
+  currentData = null;
 
 
   $("dashboard")
-    .classList.add("hidden");
+  .classList
+  .add("hidden");
 
 
   $("loginScreen")
-    .classList.remove("hidden");
+  .classList
+  .remove("hidden");
 
 
-  $("phoneInput").value = "";
+  $("phoneInput")
+  .value = "";
 
-  $("loginError").textContent = "";
+
+  $("loginError")
+  .textContent = "";
 
 };
 
 
-/* CERTIFICATE */
+/* ==========================================
+   CERTIFICATE PDF
+========================================== */
 
-window.downloadPDF = async function(){
+window.downloadPDF =
+async function(){
 
   const certificate =
-    $("certificate");
+  $("certificate");
 
 
   certificate.style.left =
-    "0";
+  "0";
 
 
   const options = {
@@ -3012,10 +3375,7 @@ window.downloadPDF = async function(){
     margin:0,
 
     filename:
-      "A1_Driving_Certificate_" +
-      $("studentName").textContent
-        .replace(/\s+/g,"_") +
-      ".pdf",
+    "A1_Driving_Certificate.pdf",
 
     image:{
       type:"jpeg",
@@ -3024,20 +3384,13 @@ window.downloadPDF = async function(){
 
     html2canvas:{
       scale:2,
-
-      useCORS:true,
-
       backgroundColor:"#ffffff"
-
     },
 
     jsPDF:{
       unit:"px",
-
       format:[842,595],
-
       orientation:"landscape"
-
     }
 
   };
@@ -3046,46 +3399,54 @@ window.downloadPDF = async function(){
   try{
 
     await html2pdf()
-      .set(options)
-      .from(certificate)
-      .save();
+    .set(options)
+    .from(certificate)
+    .save();
 
-  }catch(error){
+  }
+
+  catch(error){
 
     console.error(error);
 
     alert(
-      "Certificate download failed. Please try again."
+      "Certificate download failed."
     );
 
   }
 
 
   certificate.style.left =
-    "-9999px";
+  "-9999px";
 
 };
 
 
-/* AUTO LOAD FROM URL */
+/* ==========================================
+   URL AUTO LOGIN
+========================================== */
 
 const params =
-  new URLSearchParams(
-    window.location.search
-  );
+new URLSearchParams(
+  window.location.search
+);
 
 
 const phoneFromURL =
-  params.get("phone");
+params.get("phone");
 
 
 if(
   phoneFromURL &&
-  /^\d{10}$/.test(phoneFromURL)
+  /^\d{10}$/.test(
+    phoneFromURL
+  )
 ){
 
-  $("phoneInput").value =
-    phoneFromURL;
+  $("phoneInput")
+  .value =
+  phoneFromURL;
+
 
   loadProfile();
 
