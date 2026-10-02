@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
   <title>Elite Dashboard | A1 Driving Academy</title>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -10,18 +11,26 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-
     :root {
       --gold: #d4af37;
-      --gold-gradient: linear-gradient(135deg, #fce08d 0%, #d4af37 50%, #aa8210 100%);
+      --gold-light: #fce08d;
+      --gold-gradient: linear-gradient(
+        135deg,
+        #fce08d 0%,
+        #d4af37 50%,
+        #aa8210 100%
+      );
+
       --bg-dark: #0b0b0e;
-      --panel-bg: rgba(18, 18, 24, 0.8);
-      --card-bg: rgba(255, 255, 255, 0.03);
+      --panel-bg: rgba(18,18,24,0.82);
+      --card-bg: rgba(255,255,255,0.035);
       --input-bg: #121217;
+
       --success: #34c759;
-      --danger: #ff5757;
-      --warning: #ffb020;
-      --card-border: rgba(255, 255, 255, 0.07);
+      --danger: #ff453a;
+      --blue: #5ac8fa;
+
+      --card-border: rgba(255,255,255,0.075);
       --text-muted: #98989d;
     }
 
@@ -34,16 +43,29 @@
 
     body {
       background: var(--bg-dark);
+
       background-image:
-        radial-gradient(circle at 50% -20%, rgba(212, 175, 55, 0.15) 0%, transparent 60%),
-        radial-gradient(circle at 0% 100%, rgba(255, 255, 255, 0.02) 0%, transparent 40%);
+        radial-gradient(
+          circle at 50% -20%,
+          rgba(212,175,55,0.15) 0%,
+          transparent 60%
+        ),
+        radial-gradient(
+          circle at 0% 100%,
+          rgba(255,255,255,0.02) 0%,
+          transparent 40%
+        );
+
       color: #fff;
       min-height: 100vh;
+
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
+
       padding: 16px;
+
       -webkit-tap-highlight-color: transparent;
       overflow-x: hidden;
     }
@@ -51,9 +73,11 @@
     .dashboard-container {
       width: 100%;
       max-width: 440px;
+
       display: flex;
       flex-direction: column;
       gap: 24px;
+
       margin: auto 0;
     }
 
@@ -68,9 +92,11 @@
       font-size: 26px;
       font-weight: 800;
       letter-spacing: 3px;
+
       background: var(--gold-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+
       line-height: 1.2;
     }
 
@@ -83,18 +109,23 @@
       text-transform: uppercase;
     }
 
-    /* MAIN PANEL */
+    /* MAIN WRAPPER */
 
     .dashboard-wrapper {
       width: 100%;
+
       background: var(--panel-bg);
+
       backdrop-filter: blur(30px);
       -webkit-backdrop-filter: blur(30px);
+
       padding: 28px 20px;
+
       border-radius: 28px;
       border: 1px solid var(--card-border);
+
       box-shadow:
-        0 30px 60px rgba(0, 0, 0, 0.6),
+        0 30px 60px rgba(0,0,0,0.6),
         inset 0 1px 0 rgba(255,255,255,0.1);
     }
 
@@ -106,47 +137,90 @@
 
     .input-label {
       display: block;
+
       font-size: 11px;
       color: var(--text-muted);
       font-weight: 600;
+
       letter-spacing: 1.5px;
+
       margin-bottom: 10px;
+
       text-transform: uppercase;
     }
 
-    input {
+    input,
+    textarea,
+    select {
       width: 100%;
-      padding: 18px;
+
       border-radius: 16px;
       border: 1px solid var(--card-border);
+
       background: var(--input-bg);
       color: #fff;
-      font-size: 18px;
-      font-weight: 500;
-      letter-spacing: 1px;
+
       outline: none;
-      text-align: center;
-      transition: all 0.3s ease;
+
+      transition: 0.3s ease;
     }
 
-    input:focus {
+    input {
+      padding: 18px;
+
+      font-size: 18px;
+      font-weight: 500;
+
+      letter-spacing: 1px;
+
+      text-align: center;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
       border-color: var(--gold);
-      box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+
+      box-shadow:
+        0 0 20px rgba(212,175,55,0.18);
+
       background: #15151f;
+    }
+
+    textarea {
+      min-height: 80px;
+      resize: vertical;
+
+      padding: 13px;
+
+      font-size: 12px;
+      line-height: 1.5;
     }
 
     .btn-primary {
       background: var(--gold-gradient);
+
       color: #0b0b0e;
+
       border: none;
+
       padding: 18px;
+
       border-radius: 16px;
+
       font-weight: 700;
+
       cursor: pointer;
+
       width: 100%;
+
       font-size: 16px;
+
       letter-spacing: 0.5px;
-      box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+
+      box-shadow:
+        0 10px 25px rgba(212,175,55,0.3);
+
       transition: all 0.2s ease;
     }
 
@@ -155,10 +229,14 @@
       opacity: 0.9;
     }
 
+    /* PROFILE */
+
     #profileContent {
       display: none;
       width: 100%;
-      animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+
+      animation:
+        slideUp 0.6s cubic-bezier(0.16,1,0.3,1);
     }
 
     @keyframes slideUp {
@@ -166,351 +244,420 @@
         opacity: 0;
         transform: translateY(30px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
 
-    /* PROFILE */
-
     .profile-meta {
       text-align: center;
-      margin-bottom: 18px;
+      margin-bottom: 14px;
     }
 
     .student-title {
-      font-size: 24px;
+      font-size: 25px;
       font-weight: 700;
+
       color: #fff;
+
       letter-spacing: -0.5px;
     }
 
     .course-badge {
       display: inline-flex;
+
       align-items: center;
-      padding: 6px 14px;
-      background: rgba(212, 175, 55, 0.08);
-      border: 1px solid rgba(212, 175, 55, 0.25);
+      justify-content: center;
+
+      padding: 7px 14px;
+
+      background:
+        rgba(212,175,55,0.08);
+
+      border:
+        1px solid rgba(212,175,55,0.25);
+
       border-radius: 100px;
+
       font-size: 11px;
-      color: #fce08d;
+
+      color: var(--gold-light);
+
       font-weight: 600;
+
       margin-top: 8px;
+
       letter-spacing: 0.5px;
     }
 
-    /* CLASS BOOSTER */
+    /* MOTIVATION */
 
-    .booster-section {
-      display: none;
-      margin-bottom: 16px;
-    }
-
-    .booster-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 9px;
-    }
-
-    .booster-title {
-      font-size: 11px;
-      font-weight: 700;
-      color: #fff;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    .booster-subtitle {
-      font-size: 8px;
-      color: var(--text-muted);
-    }
-
-    .booster-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .booster-card {
+    .motivation-card {
       position: relative;
+
       overflow: hidden;
-      padding: 13px 14px;
-      border-radius: 17px;
-      border: 1px solid rgba(212,175,55,0.25);
-      background:
-        linear-gradient(
-          110deg,
-          rgba(212,175,55,0.12),
-          rgba(212,175,55,0.025)
-        );
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
 
-    .booster-card::before {
-      content: "";
-      position: absolute;
-      width: 80px;
-      height: 80px;
-      right: -35px;
-      top: -40px;
-      border-radius: 50%;
-      background: rgba(212,175,55,0.08);
-    }
+      margin-bottom: 18px;
 
-    .booster-left {
-      position: relative;
-      z-index: 1;
-      min-width: 0;
-    }
+      padding: 15px 16px;
 
-    .booster-date {
-      font-size: 10px;
-      color: #bcbcbc;
-      font-weight: 500;
-    }
+      border-radius: 18px;
 
-    .booster-message {
-      margin-top: 3px;
-      font-size: 11px;
-      font-weight: 600;
-      color: #fff;
-    }
-
-    .booster-message span {
-      color: #fce08d;
-    }
-
-    .booster-right {
-      position: relative;
-      z-index: 1;
-      flex-shrink: 0;
-      min-width: 62px;
-      padding: 8px 9px;
-      border-radius: 11px;
       text-align: center;
-      background: rgba(212,175,55,0.11);
-      border: 1px solid rgba(212,175,55,0.18);
-    }
 
-    .booster-right strong {
-      display: block;
-      color: #fce08d;
-      font-size: 17px;
-      line-height: 1.1;
-    }
-
-    .booster-right small {
-      color: #8d8d8d;
-      font-size: 6px;
-      text-transform: uppercase;
-      letter-spacing: .5px;
-    }
-
-    /* LAST IMPROVEMENT */
-
-    .last-improvement {
-      display: none;
-      margin-bottom: 16px;
-      padding: 16px;
-      border-radius: 20px;
       background:
         linear-gradient(
           135deg,
-          rgba(255,87,87,0.10),
-          rgba(255,87,87,0.025)
+          rgba(212,175,55,0.10),
+          rgba(212,175,55,0.025)
         );
-      border: 1px solid rgba(255,87,87,0.24);
+
+      border:
+        1px solid rgba(212,175,55,0.22);
+
+      box-shadow:
+        0 8px 25px rgba(0,0,0,0.18);
     }
 
-    .improvement-header {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      margin-bottom: 11px;
+    .motivation-card::before {
+      content: "";
+
+      position: absolute;
+
+      top: 0;
+      left: -120%;
+
+      width: 70%;
+      height: 100%;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(255,255,255,0.10),
+          transparent
+        );
+
+      transform: skewX(-20deg);
+
+      animation: shine 3.5s infinite;
     }
 
-    .improvement-icon {
-      width: 34px;
-      height: 34px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 10px;
-      background: rgba(255,87,87,0.10);
-      border: 1px solid rgba(255,87,87,0.18);
-      font-size: 15px;
+    @keyframes shine {
+      0% {
+        left: -120%;
+      }
+
+      55% {
+        left: 150%;
+      }
+
+      100% {
+        left: 150%;
+      }
     }
 
-    .improvement-header-text small {
-      display: block;
-      color: #ff8585;
-      font-size: 7px;
-      font-weight: 700;
-      letter-spacing: 1px;
+    .motivation-icon {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    .motivation-title {
+      font-size: 10px;
+
+      color: var(--gold-light);
+
+      font-weight: 800;
+
+      letter-spacing: 1.5px;
+
       text-transform: uppercase;
+
+      margin-bottom: 5px;
     }
 
-    .improvement-header-text strong {
-      display: block;
-      color: #fff;
+    .motivation-text {
       font-size: 11px;
-      margin-top: 2px;
+
+      line-height: 1.5;
+
+      color: #eee;
+
+      font-weight: 500;
+
+      animation: motivationBlink 1.8s ease-in-out infinite;
     }
 
-    .improvement-main {
-      padding: 12px;
-      border-radius: 13px;
-      background: rgba(0,0,0,0.18);
-      border: 1px solid rgba(255,87,87,0.10);
-    }
+    @keyframes motivationBlink {
+      0%,100% {
+        opacity: 1;
+      }
 
-    .improvement-feedback {
-      color: #fff;
-      font-size: 11px;
-      font-weight: 600;
-      line-height: 1.55;
-    }
+      45% {
+        opacity: 0.55;
+      }
 
-    .improvement-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 9px;
-    }
-
-    .improvement-chip {
-      padding: 5px 7px;
-      border-radius: 7px;
-      background: rgba(255,255,255,0.045);
-      color: #999;
-      font-size: 7px;
-      border: 1px solid rgba(255,255,255,0.05);
-    }
-
-    .improvement-tip {
-      margin-top: 10px;
-      color: #a8a8ad;
-      font-size: 8px;
-      line-height: 1.55;
+      60% {
+        opacity: 1;
+      }
     }
 
     /* PROGRESS */
 
     .progress-widget {
       background: var(--card-bg);
+
       border: 1px solid var(--card-border);
+
       border-radius: 22px;
+
       padding: 20px;
+
       display: flex;
+
       align-items: center;
+
       justify-content: space-between;
+
       margin-bottom: 16px;
+
       gap: 12px;
     }
 
     .metrics-box {
       display: flex;
+
       flex-direction: column;
-      gap: 12px;
+
+      gap: 10px;
+
       flex: 1;
     }
 
+    .metric-row {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 10px;
+    }
+
     .metric-pill {
-      background: rgba(0, 0, 0, 0.2);
+      background: rgba(0,0,0,0.2);
+
       border: 1px solid var(--card-border);
-      padding: 10px 14px;
+
+      padding: 10px 12px;
+
       border-radius: 14px;
+
       display: flex;
+
       flex-direction: column;
     }
 
     .metric-pill span {
-      font-size: 9px;
+      font-size: 8px;
+
       color: var(--text-muted);
+
       font-weight: 700;
+
       text-transform: uppercase;
+
       letter-spacing: 1px;
     }
 
     .metric-pill b {
-      font-size: 20px;
+      font-size: 19px;
+
       color: #fff;
+
       margin-top: 2px;
+
       line-height: 1.2;
+    }
+
+    .remaining-pill {
+      border-color:
+        rgba(255,69,58,0.20);
+    }
+
+    .remaining-pill b {
+      color: #ff8179;
     }
 
     .radial-container {
       position: relative;
+
       width: 100px;
       height: 100px;
+
       display: flex;
+
       align-items: center;
       justify-content: center;
-      margin-right: 8px;
-      flex-shrink: 0;
+
+      margin-right: 5px;
     }
 
     .radial-progress-svg {
       width: 100px;
       height: 100px;
+
       transform: rotate(-90deg);
     }
 
     .radial-bg {
       fill: none;
-      stroke: rgba(255,255,255,0.03);
+
+      stroke:
+        rgba(255,255,255,0.03);
+
       stroke-width: 9;
     }
 
     .radial-fill {
       fill: none;
+
       stroke: var(--gold);
+
       stroke-width: 9;
+
       stroke-linecap: round;
+
       stroke-dasharray: 251.3;
+
       stroke-dashoffset: 251.3;
-      transition: stroke-dashoffset 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+      transition:
+        stroke-dashoffset 1.4s
+        cubic-bezier(0.16,1,0.3,1);
     }
 
     .radial-text {
       position: absolute;
+
       font-size: 16px;
+
       font-weight: 700;
+
       color: #fff;
+
       letter-spacing: -0.5px;
     }
 
-    /* HISTORY */
+    /* INFO CARD */
+
+    .info-card {
+      background: var(--card-bg);
+
+      border: 1px solid var(--card-border);
+
+      border-radius: 20px;
+
+      padding: 16px;
+
+      margin-bottom: 16px;
+    }
+
+    .info-title {
+      font-size: 10px;
+
+      color: var(--text-muted);
+
+      font-weight: 700;
+
+      letter-spacing: 1.5px;
+
+      text-transform: uppercase;
+
+      margin-bottom: 12px;
+    }
+
+    .info-grid {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 10px;
+    }
+
+    .info-item {
+      padding: 11px;
+
+      border-radius: 13px;
+
+      background: rgba(0,0,0,0.17);
+
+      border: 1px solid var(--card-border);
+    }
+
+    .info-item span {
+      display: block;
+
+      font-size: 8px;
+
+      color: var(--text-muted);
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.8px;
+    }
+
+    .info-item b {
+      display: block;
+
+      font-size: 12px;
+
+      margin-top: 3px;
+
+      color: #fff;
+    }
+
+    /* TIMELINE */
 
     .timeline-widget {
       background: var(--card-bg);
+
       border: 1px solid var(--card-border);
+
       border-radius: 22px;
+
       padding: 20px;
+
       margin-bottom: 16px;
     }
 
     .timeline-header {
       font-size: 11px;
+
       color: var(--text-muted);
+
       font-weight: 700;
+
       letter-spacing: 1.5px;
+
       text-transform: uppercase;
+
       margin-bottom: 14px;
+
       display: block;
     }
 
     #attendanceTimeline {
       display: flex;
+
       flex-direction: column;
-      gap: 12px;
-      max-height: 300px;
+
+      gap: 13px;
+
+      max-height: 600px;
+
       overflow-y: auto;
+
       padding-right: 4px;
     }
 
@@ -523,20 +670,28 @@
     }
 
     #attendanceTimeline::-webkit-scrollbar-thumb {
-      background: rgba(255,255,255,0.1);
+      background:
+        rgba(255,255,255,0.1);
+
       border-radius: 10px;
     }
 
     .log-row {
-      background: rgba(0, 0, 0, 0.15);
+      background: rgba(0,0,0,0.15);
+
       border: 1px solid var(--card-border);
+
       padding: 14px;
-      border-radius: 16px;
+
+      border-radius: 17px;
+
       display: flex;
+
       flex-direction: column;
-      gap: 7px;
+
+      gap: 9px;
+
       border-left: 4px solid var(--gold);
-      transition: transform 0.2s;
     }
 
     .log-row.good {
@@ -549,85 +704,306 @@
 
     .log-meta {
       display: flex;
+
       justify-content: space-between;
+
       align-items: center;
+
       gap: 8px;
     }
 
-    .log-meta b {
+    .session-number {
       font-size: 13px;
-      font-weight: 600;
+
+      font-weight: 700;
+
       color: #fff;
     }
 
-    .log-meta span {
-      font-size: 10px;
+    .session-date {
+      font-size: 9px;
+
       color: var(--text-muted);
+
       font-weight: 500;
+
       text-align: right;
     }
 
-    .log-info {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
+    .session-detail-grid {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 7px;
     }
 
-    .log-chip {
-      padding: 4px 7px;
-      border-radius: 7px;
-      background: rgba(255,255,255,0.04);
-      color: #999;
+    .session-detail {
+      background: rgba(255,255,255,0.025);
+
+      border:
+        1px solid rgba(255,255,255,0.055);
+
+      padding: 8px 9px;
+
+      border-radius: 10px;
+    }
+
+    .session-detail span {
+      display: block;
+
+      color: var(--text-muted);
+
       font-size: 7px;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.7px;
     }
 
-    .log-feedback {
+    .session-detail b {
+      display: block;
+
       font-size: 10px;
+
+      margin-top: 2px;
+
+      color: #fff;
+
+      font-weight: 600;
+
+      white-space: nowrap;
+
+      overflow: hidden;
+
+      text-overflow: ellipsis;
+    }
+
+    .feedback-box {
+      padding: 10px 11px;
+
+      border-radius: 12px;
+
+      background: rgba(212,175,55,0.055);
+
+      border:
+        1px solid rgba(212,175,55,0.13);
+    }
+
+    .feedback-label {
+      font-size: 8px;
+
+      color: var(--gold-light);
+
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: 1px;
+    }
+
+    .feedback-text {
+      font-size: 11px;
+
       color: #e5e5ea;
-      opacity: 0.9;
-      line-height: 1.5;
+
+      margin-top: 3px;
+
+      line-height: 1.45;
+    }
+
+    .feedback-box.good {
+      background:
+        rgba(52,199,89,0.055);
+
+      border-color:
+        rgba(52,199,89,0.15);
+    }
+
+    .feedback-box.good .feedback-label {
+      color: var(--success);
+    }
+
+    .feedback-box.bad {
+      background:
+        rgba(255,69,58,0.055);
+
+      border-color:
+        rgba(255,69,58,0.15);
+    }
+
+    .feedback-box.bad .feedback-label {
+      color: #ff8179;
+    }
+
+    /* STUDENT FEEDBACK */
+
+    .student-feedback-area {
+      margin-top: 3px;
+
+      padding-top: 10px;
+
+      border-top:
+        1px solid rgba(255,255,255,0.06);
+    }
+
+    .student-feedback-title {
+      font-size: 9px;
+
+      color: var(--text-muted);
+
+      font-weight: 700;
+
+      letter-spacing: 0.8px;
+
+      text-transform: uppercase;
+
+      margin-bottom: 8px;
+    }
+
+    .rating-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3,1fr);
+
+      gap: 6px;
+
+      margin-bottom: 8px;
+    }
+
+    .rating-btn {
+      border:
+        1px solid var(--card-border);
+
+      background:
+        rgba(255,255,255,0.025);
+
+      color: #ccc;
+
+      padding: 8px 4px;
+
+      border-radius: 9px;
+
+      font-size: 8px;
+
+      cursor: pointer;
+
+      transition: 0.2s;
+    }
+
+    .rating-btn.active {
+      border-color: var(--gold);
+
+      background:
+        rgba(212,175,55,0.12);
+
+      color: var(--gold-light);
+    }
+
+    .student-comment {
+      min-height: 65px;
+
+      font-size: 10px;
+
+      text-align: left;
+
+      margin-bottom: 7px;
+    }
+
+    .submit-feedback-btn {
+      width: 100%;
+
+      border: 1px solid
+        rgba(212,175,55,0.28);
+
+      background:
+        rgba(212,175,55,0.08);
+
+      color: var(--gold-light);
+
+      padding: 9px;
+
+      border-radius: 10px;
+
+      font-size: 9px;
+
+      font-weight: 700;
+
+      cursor: pointer;
+    }
+
+    .feedback-saved {
+      display: none;
+
+      font-size: 9px;
+
+      color: var(--success);
+
+      text-align: center;
+
+      padding-top: 5px;
     }
 
     /* WALLET */
 
     .wallet-banner {
-      background: linear-gradient(
-        90deg,
-        rgba(52,199,89,0.08) 0%,
-        rgba(52,199,89,0.01) 100%
-      );
-      border: 1px solid rgba(52,199,89,0.2);
+      background:
+        linear-gradient(
+          90deg,
+          rgba(52,199,89,0.08) 0%,
+          rgba(52,199,89,0.01) 100%
+        );
+
+      border:
+        1px solid rgba(52,199,89,0.2);
+
       padding: 16px 20px;
+
       border-radius: 20px;
+
       display: flex;
+
       justify-content: space-between;
+
       align-items: center;
+
       margin-bottom: 16px;
     }
 
     .wallet-banner div {
       display: flex;
+
       flex-direction: column;
     }
 
     .wallet-banner span {
       font-size: 10px;
+
       color: var(--success);
+
       font-weight: 700;
+
       letter-spacing: 1px;
+
       text-transform: uppercase;
     }
 
     .wallet-banner p {
       font-size: 11px;
+
       color: var(--text-muted);
+
       margin-top: 2px;
     }
 
     .wallet-banner b {
       font-size: 22px;
+
       color: #fff;
+
       font-weight: 700;
+
       letter-spacing: -0.5px;
     }
 
@@ -635,28 +1011,45 @@
 
     .actions-grid {
       display: grid;
+
       grid-template-columns: 1fr 1fr;
+
       gap: 12px;
     }
 
     .btn-secondary {
       background: var(--card-bg);
-      border: 1px solid var(--card-border);
+
+      border:
+        1px solid var(--card-border);
+
       color: #fff;
+
       padding: 16px;
+
       border-radius: 16px;
+
       font-size: 14px;
+
       font-weight: 600;
+
       cursor: pointer;
+
       transition: all 0.2s;
+
       display: flex;
+
       align-items: center;
+
       justify-content: center;
+
       gap: 8px;
     }
 
     .btn-secondary:active {
-      background: rgba(255,255,255,0.08);
+      background:
+        rgba(255,255,255,0.08);
+
       transform: scale(0.98);
     }
 
@@ -664,29 +1057,51 @@
 
     #premiumCertificate {
       display: none;
-      background: linear-gradient(
-        135deg,
-        rgba(212,175,55,0.15) 0%,
-        rgba(212,175,55,0.03) 100%
-      );
-      border: 1px solid rgba(212,175,55,0.35);
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(212,175,55,0.15) 0%,
+          rgba(212,175,55,0.03) 100%
+        );
+
+      border:
+        1px solid rgba(212,175,55,0.35);
+
       border-radius: 24px;
+
       padding: 22px 20px;
+
       text-align: center;
+
       margin-bottom: 16px;
-      box-shadow: 0 15px 35px rgba(212,175,55,0.1);
+
+      box-shadow:
+        0 15px 35px rgba(212,175,55,0.1);
     }
 
+    /* LOGOUT */
+
     .logout-btn {
-      color: rgba(255,255,255,0.3);
+      color:
+        rgba(255,255,255,0.3);
+
       font-size: 12px;
+
       font-weight: 500;
+
       margin-top: 28px;
+
       text-align: center;
+
       cursor: pointer;
+
       display: block;
+
       text-decoration: none;
+
       transition: color 0.2s;
+
       letter-spacing: 0.5px;
     }
 
@@ -694,32 +1109,59 @@
       color: var(--gold);
     }
 
+    /* LOADER */
+
     #loader {
       display: none;
+
       margin: 20px auto 0 auto;
-      border: 2.5px solid rgba(255,255,255,0.05);
-      border-top: 2.5px solid var(--gold);
+
+      border:
+        2.5px solid rgba(255,255,255,0.05);
+
+      border-top:
+        2.5px solid var(--gold);
+
       border-radius: 50%;
+
       width: 28px;
       height: 28px;
-      animation: spin 0.75s linear infinite;
+
+      animation:
+        spin 0.75s linear infinite;
     }
 
     @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
     }
+
+    /* PDF */
 
     #pdfTemplate {
       width: 842px;
+
       height: 595px;
+
       background: #000;
+
       color: #fff;
+
       padding: 50px;
+
       border: 20px solid #d4af37;
+
       display: none;
+
       position: absolute;
+
       left: -9999px;
+
       text-align: center;
     }
 
@@ -728,7 +1170,7 @@
     @media(max-width:380px) {
 
       .dashboard-wrapper {
-        padding: 24px 16px;
+        padding: 24px 15px;
       }
 
       .progress-widget {
@@ -737,236 +1179,191 @@
 
       .radial-container,
       .radial-progress-svg {
-        width: 88px;
-        height: 88px;
+        width: 86px;
+        height: 86px;
       }
 
-      .student-title {
-        font-size: 21px;
+      .metric-pill b {
+        font-size: 17px;
       }
-
     }
-
   </style>
 </head>
 
 <body>
 
-  <div class="dashboard-container">
+<div class="dashboard-container">
 
-    <div class="brand-section">
-      <h1>ABHINAASH A1</h1>
-      <p>DRIVING ACADEMY</p>
+  <!-- BRAND -->
+
+  <div class="brand-section">
+
+    <h1>ABHINAASH A1</h1>
+
+    <p>DRIVING ACADEMY</p>
+
+  </div>
+
+
+  <!-- DASHBOARD -->
+
+  <div class="dashboard-wrapper">
+
+    <!-- LOGIN -->
+
+    <div id="searchPanel">
+
+      <span class="input-label">
+        Enter Registered Number
+      </span>
+
+      <div class="input-group">
+
+        <input
+          type="tel"
+          id="userPhone"
+          placeholder="9933xxxxxx"
+          maxlength="10"
+          autocomplete="tel"
+        >
+
+      </div>
+
+      <button
+        class="btn-primary"
+        onclick="loadProfile()"
+      >
+        Access Dashboard
+      </button>
+
+      <div id="loader"></div>
+
     </div>
 
 
-    <div class="dashboard-wrapper">
+    <!-- PROFILE -->
 
-      <!-- SEARCH -->
+    <div id="profileContent">
 
-      <div id="searchPanel">
+      <!-- CERTIFICATE -->
 
-        <span class="input-label">
-          Enter Registered Number
-        </span>
+      <div id="premiumCertificate">
 
-        <div class="input-group">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/190/190411.png"
+          style="
+            width:46px;
+            filter:drop-shadow(
+              0 0 10px rgba(212,175,55,0.4)
+            );
+            margin-bottom:10px;
+          "
+          alt="Elite Graduate"
+        >
 
-          <input
-            type="tel"
-            id="userPhone"
-            placeholder="9933xxxxxx"
-            maxlength="10"
-            autocomplete="tel"
-          >
+        <h3
+          style="
+            color:#fce08d;
+            font-size:17px;
+            font-weight:700;
+            letter-spacing:0.5px;
+          "
+        >
+          ELITE COURSE GRADUATE
+        </h3>
 
-        </div>
+        <p
+          style="
+            font-size:12px;
+            color:var(--text-muted);
+            margin-bottom:16px;
+            line-height:1.4;
+          "
+        >
+          Your official driving track record is successfully parsed.
+        </p>
 
         <button
           class="btn-primary"
-          onclick="loadProfile()"
+          style="
+            padding:12px;
+            font-size:13px;
+            border-radius:12px;
+            box-shadow:
+              0 6px 15px rgba(212,175,55,0.2);
+          "
+          onclick="downloadPDF()"
         >
-          Access Dashboard
+          ⬇️ DOWNLOAD PREMIUM PDF
         </button>
-
-        <div id="loader"></div>
 
       </div>
 
 
-      <!-- PROFILE -->
+      <!-- STUDENT HEADER -->
 
-      <div id="profileContent">
-
-
-        <!-- CERTIFICATE -->
-
-        <div id="premiumCertificate">
-
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/190/190411.png"
-            style="width:46px; filter: drop-shadow(0 0 10px rgba(212,175,55,0.4)); margin-bottom:10px;"
-            alt="Elite Graduate"
-          >
-
-          <h3
-            style="
-              color:#fce08d;
-              font-size:17px;
-              font-weight:700;
-              letter-spacing:.5px;
-            "
-          >
-            ELITE COURSE GRADUATE
-          </h3>
-
-          <p
-            style="
-              font-size:12px;
-              color:var(--text-muted);
-              margin-bottom:16px;
-              line-height:1.4;
-            "
-          >
-            Your official driving track record is successfully parsed.
-          </p>
-
-          <button
-            class="btn-primary"
-            style="
-              padding:12px;
-              font-size:13px;
-              border-radius:12px;
-              box-shadow:0 6px 15px rgba(212,175,55,0.2);
-            "
-            onclick="downloadPDF()"
-          >
-            ⬇️ DOWNLOAD PREMIUM PDF
-          </button>
-
-        </div>
-
-
-        <!-- PROFILE NAME -->
-
-        <div class="profile-meta">
-
-          <div
-            class="student-title"
-            id="dispName"
-          >
-            Driver Name
-          </div>
-
-          <div
-            class="course-badge"
-            id="dispPkg"
-          >
-            Track Scheme
-          </div>
-
-        </div>
-
-
-        <!-- ============================================
-             CLASS BOOSTER
-        ============================================= -->
+      <div class="profile-meta">
 
         <div
-          id="classBoosterSection"
-          class="booster-section"
+          class="student-title"
+          id="dispName"
         >
-
-          <div class="booster-header">
-
-            <div class="booster-title">
-              🔥 Class Booster
-            </div>
-
-            <div class="booster-subtitle">
-              Multiple classes in one day
-            </div>
-
-          </div>
-
-          <div
-            id="classBoosterList"
-            class="booster-list"
-          ></div>
-
+          Driver Name
         </div>
-
-
-        <!-- ============================================
-             LAST IMPROVEMENT
-        ============================================= -->
 
         <div
-          id="lastImprovement"
-          class="last-improvement"
+          class="course-badge"
+          id="dispPkg"
         >
-
-          <div class="improvement-header">
-
-            <div class="improvement-icon">
-              ⚠️
-            </div>
-
-            <div class="improvement-header-text">
-
-              <small>
-                Last Session Improvement
-              </small>
-
-              <strong>
-                What should you improve?
-              </strong>
-
-            </div>
-
-          </div>
-
-
-          <div class="improvement-main">
-
-            <div
-              id="lastImprovementText"
-              class="improvement-feedback"
-            >
-              —
-            </div>
-
-
-            <div
-              id="lastImprovementMeta"
-              class="improvement-meta"
-            ></div>
-
-
-            <div
-              id="lastImprovementTip"
-              class="improvement-tip"
-            >
-              Keep practising this area in your next session.
-            </div>
-
-          </div>
-
+          Track Scheme
         </div>
 
+      </div>
 
-        <!-- ============================================
-             PROGRESS
-        ============================================= -->
 
-        <div class="progress-widget">
+      <!-- MOTIVATION -->
 
-          <div class="metrics-box">
+      <div
+        class="motivation-card"
+        id="motivationCard"
+      >
+
+        <div
+          class="motivation-icon"
+          id="motivationIcon"
+        >
+          🚗
+        </div>
+
+        <div
+          class="motivation-title"
+          id="motivationTitle"
+        >
+          YOUR DRIVING JOURNEY
+        </div>
+
+        <div
+          class="motivation-text"
+          id="motivationText"
+        >
+          Keep learning. Keep improving.
+        </div>
+
+      </div>
+
+
+      <!-- PROGRESS -->
+
+      <div class="progress-widget">
+
+        <div class="metrics-box">
+
+          <div class="metric-row">
 
             <div class="metric-pill">
 
               <span>
-                Done
+                Classes Done
               </span>
 
               <b id="dispDone">
@@ -975,11 +1372,27 @@
 
             </div>
 
+            <div class="metric-pill remaining-pill">
+
+              <span>
+                Remaining
+              </span>
+
+              <b id="dispRemaining">
+                0
+              </b>
+
+            </div>
+
+          </div>
+
+
+          <div class="metric-row">
 
             <div class="metric-pill">
 
               <span>
-                Target
+                Total Classes
               </span>
 
               <b id="dispTotal">
@@ -988,34 +1401,20 @@
 
             </div>
 
-
             <div
               class="metric-pill"
-              style="border-color:rgba(214,175,55,0.25);"
+              style="
+                border-color:
+                rgba(214,175,55,0.25);
+              "
             >
 
               <span>
-                Distance Tracker
+                Distance
               </span>
 
               <b id="dispKm">
-                0 / 150 km
-              </b>
-
-            </div>
-
-
-            <div
-              class="metric-pill"
-              style="border-color:rgba(52,199,89,0.2);"
-            >
-
-              <span>
-                Expected Completion
-              </span>
-
-              <b id="dispEndDate">
-                Calculating...
+                0 KM
               </b>
 
             </div>
@@ -1023,222 +1422,306 @@
           </div>
 
 
-          <div class="radial-container">
-
-            <svg class="radial-progress-svg">
-
-              <circle
-                class="radial-bg"
-                cx="50"
-                cy="50"
-                r="40"
-              ></circle>
-
-              <circle
-                class="radial-fill"
-                id="radialFillCircle"
-                cx="50"
-                cy="50"
-                r="40"
-              ></circle>
-
-            </svg>
-
-            <div
-              class="radial-text"
-              id="dispPercent"
-            >
-              0%
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <!-- ============================================
-             CLASS HISTORY
-        ============================================= -->
-
-        <div class="timeline-widget">
-
-          <span class="timeline-header">
-            Class History & Feedback
-          </span>
-
-          <div id="attendanceTimeline"></div>
-
-        </div>
-
-
-        <!-- WALLET -->
-
-        <div class="wallet-banner">
-
-          <div>
-
-            <span>
-              REFERRAL WALLET
-            </span>
-
-            <p>
-              Earned per subscription
-            </p>
-
-          </div>
-
-          <b id="dispEarn">
-            ₹0
-          </b>
-
-        </div>
-
-
-        <!-- ACTIONS -->
-
-        <div class="actions-grid">
-
-          <button
-            class="btn-secondary"
-            onclick="contactAdmin()"
-          >
-            💬 HELP
-          </button>
-
-
-          <button
-            class="btn-secondary"
-            onclick="shareReferral()"
+          <div
+            class="metric-pill"
             style="
-              color:var(--success);
-              border-color:rgba(52,199,89,0.25);
-              background:linear-gradient(
-                135deg,
-                rgba(52,199,89,0.05) 0%,
-                transparent 100%
-              );
+              border-color:
+              rgba(52,199,89,0.2);
             "
           >
-            🚀 SHARE
-          </button>
+
+            <span>
+              Expected Completion
+            </span>
+
+            <b id="dispEndDate">
+              Calculating...
+            </b>
+
+          </div>
 
         </div>
 
 
-        <a
-          class="logout-btn"
-          onclick="logoutSession()"
-        >
-          ← LOGOUT SESSION
-        </a>
+        <!-- RADIAL -->
+
+        <div class="radial-container">
+
+          <svg class="radial-progress-svg">
+
+            <circle
+              class="radial-bg"
+              cx="50"
+              cy="50"
+              r="40"
+            ></circle>
+
+            <circle
+              class="radial-fill"
+              id="radialFillCircle"
+              cx="50"
+              cy="50"
+              r="40"
+            ></circle>
+
+          </svg>
+
+          <div
+            class="radial-text"
+            id="dispPercent"
+          >
+            0%
+          </div>
+
+        </div>
 
       </div>
 
+
+      <!-- ACADEMY INFORMATION -->
+
+      <div class="info-card">
+
+        <div class="info-title">
+          Training Information
+        </div>
+
+        <div class="info-grid">
+
+          <div class="info-item">
+
+            <span>
+              Class Type
+            </span>
+
+            <b id="infoClassType">
+              Group
+            </b>
+
+          </div>
+
+          <div class="info-item">
+
+            <span>
+              Instructor
+            </span>
+
+            <b>
+              Avinash
+            </b>
+
+          </div>
+
+          <div class="info-item">
+
+            <span>
+              Training Status
+            </span>
+
+            <b id="infoStatus">
+              Active
+            </b>
+
+          </div>
+
+          <div class="info-item">
+
+            <span>
+              Student ID
+            </span>
+
+            <b id="infoPhone">
+              -
+            </b>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- CLASS HISTORY -->
+
+      <div class="timeline-widget">
+
+        <span class="timeline-header">
+          Class History & Feedback
+        </span>
+
+        <div id="attendanceTimeline"></div>
+
+      </div>
+
+
+      <!-- WALLET -->
+
+      <div class="wallet-banner">
+
+        <div>
+
+          <span>
+            REFERRAL WALLET
+          </span>
+
+          <p>
+            Earned per subscription
+          </p>
+
+        </div>
+
+        <b id="dispEarn">
+          ₹0
+        </b>
+
+      </div>
+
+
+      <!-- ACTIONS -->
+
+      <div class="actions-grid">
+
+        <button
+          class="btn-secondary"
+          onclick="contactAdmin()"
+        >
+          💬 HELP
+        </button>
+
+        <button
+          class="btn-secondary"
+          onclick="shareReferral()"
+          style="
+            color:var(--success);
+            border-color:
+            rgba(52,199,89,0.25);
+            background:
+            linear-gradient(
+              135deg,
+              rgba(52,199,89,0.05),
+              transparent
+            );
+          "
+        >
+          🚀 SHARE
+        </button>
+
+      </div>
+
+
+      <!-- LOGOUT -->
+
+      <a
+        class="logout-btn"
+        onclick="logoutSession()"
+      >
+        ← LOGOUT SESSION
+      </a>
+
     </div>
 
   </div>
 
+</div>
 
-  <!-- PDF TEMPLATE -->
 
-  <div id="pdfTemplate">
+<!-- PDF TEMPLATE -->
+
+<div id="pdfTemplate">
+
+  <div
+    style="
+      border:3px solid #d4af37;
+      height:100%;
+      padding:40px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      background:#050505;
+    "
+  >
+
+    <h1
+      style="
+        color:#d4af37;
+        font-size:42px;
+        font-weight:800;
+        margin-bottom:10px;
+      "
+    >
+      ABHINAASH A1 DRIVING ACADEMY
+    </h1>
+
+    <p
+      style="
+        font-size:16px;
+        color:#888;
+        letter-spacing:3px;
+        text-transform:uppercase;
+      "
+    >
+      Official Certificate of Excellence
+    </p>
 
     <div
       style="
-        border:3px solid #d4af37;
-        height:100%;
-        padding:40px;
-        display:flex;
-        flex-direction:column;
-        align-items:center;
-        justify-content:center;
-        background:#050505;
+        width:80px;
+        height:2px;
+        background:#d4af37;
+        margin:30px 0;
+      "
+    ></div>
+
+    <h2
+      id="pdfName"
+      style="
+        font-size:38px;
+        color:#fff;
+        font-weight:600;
+        text-transform:uppercase;
+        letter-spacing:1px;
       "
     >
+      NAME
+    </h2>
 
-      <h1
-        style="
-          color:#d4af37;
-          font-size:42px;
-          font-weight:800;
-          margin-bottom:10px;
-        "
-      >
-        ABHINAASH A1 DRIVING ACADEMY
-      </h1>
-
-      <p
-        style="
-          font-size:16px;
-          color:#888;
-          letter-spacing:3px;
-          text-transform:uppercase;
-        "
-      >
-        Official Certificate of Excellence
-      </p>
-
-      <div
-        style="
-          width:80px;
-          height:2px;
-          background:#d4af37;
-          margin:30px 0;
-        "
-      ></div>
-
-      <h2
-        id="pdfName"
-        style="
-          font-size:38px;
-          color:#fff;
-          font-weight:600;
-          text-transform:uppercase;
-          letter-spacing:1px;
-        "
-      >
-        NAME
-      </h2>
-
-      <p
-        style="
-          font-size:16px;
-          width:75%;
-          color:#aaa;
-          line-height:1.6;
-          margin-top:20px;
-        "
-      >
-        Has successfully qualified and completed the structured Advanced
-        Smart Driving & Traffic Regulation Track operations program.
-      </p>
-
-    </div>
+    <p
+      style="
+        font-size:16px;
+        width:75%;
+        color:#aaa;
+        line-height:1.6;
+        margin-top:20px;
+      "
+    >
+      Has successfully qualified and completed the structured
+      Advanced Smart Driving & Traffic Regulation Track operations program.
+    </p>
 
   </div>
+
+</div>
 
 
 <script type="module">
 
-  /* =====================================================
-     FIREBASE
-  ===================================================== */
-
   import {
     initializeApp
   }
-  from
-  "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+  from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
 
 
   import {
     getFirestore,
     doc,
-    onSnapshot
+    onSnapshot,
+    updateDoc
   }
-  from
-  "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+  from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
+
+  /* FIREBASE */
 
   const firebaseConfig = {
 
@@ -1264,10 +1747,7 @@
 
 
   const app =
-    initializeApp(
-      firebaseConfig
-    );
-
+    initializeApp(firebaseConfig);
 
   const db =
     getFirestore(app);
@@ -1278,42 +1758,135 @@
   let unsubscribeProfile = null;
 
 
-  /* =====================================================
-     BASIC HELPERS
-  ===================================================== */
+  /* ---------------------------------------
+     LOG PARSER
+  --------------------------------------- */
 
-  function escapeHTML(value) {
+  function parseLog(log) {
 
-    return String(value ?? "")
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
+    const safeLog = String(log || "");
+
+    const parts =
+      safeLog.split(" — ");
+
+    const dateInfo =
+      parts[0] ||
+      "Training Session";
+
+
+    const routeMatch =
+      safeLog.match(
+        /Route:\s*([^|]+)/i
+      );
+
+
+    const distanceMatch =
+      safeLog.match(
+        /Distance:\s*(\d+(?:\.\d+)?)\s*KM/i
+      );
+
+
+    const anyKmMatch =
+      safeLog.match(
+        /(\d+(?:\.\d+)?)\s*KM/i
+      );
+
+
+    const remarkMatch =
+      safeLog.match(
+        /Remark:\s*(.+)$/i
+      );
+
+
+    let route =
+      routeMatch
+        ? routeMatch[1].trim()
+        : "Training Route";
+
+
+    let distance =
+      distanceMatch
+        ? parseFloat(distanceMatch[1])
+        : (
+            anyKmMatch
+              ? parseFloat(anyKmMatch[1])
+              : 5
+          );
+
+
+    let remark =
+      remarkMatch
+        ? remarkMatch[1].trim()
+        : (
+            parts[1]
+              ? parts.slice(1).join(" — ").trim()
+              : "Session completed successfully."
+          );
+
+
+    let date = dateInfo;
+    let time = "Time not recorded";
+
+
+    const dateTimeMatch =
+      dateInfo.match(
+        /^(.+?)\s*\|\s*(.+)$/
+      );
+
+
+    if(dateTimeMatch) {
+
+      date =
+        dateTimeMatch[1].trim();
+
+      time =
+        dateTimeMatch[2].trim();
+
+    }
+
+
+    return {
+
+      original: safeLog,
+
+      date,
+
+      time,
+
+      route,
+
+      distance,
+
+      remark
+
+    };
 
   }
 
 
-  function getFeedbackType(remark) {
+  /* ---------------------------------------
+     FEEDBACK TYPE
+  --------------------------------------- */
 
-    const text =
-      String(remark || "")
-        .toLowerCase();
+  function getFeedbackType(text) {
+
+    const value =
+      String(text || "").toLowerCase();
 
 
     const negativeWords = [
 
-      "needs improvement",
-      "need improvement",
-      "improvement",
       "bad",
+      "needs improvement",
+      "improvement",
       "poor",
       "weak",
       "not good",
       "mistake",
       "practice more",
       "incorrect",
-      "wrong"
+      "wrong",
+      "⚠️"
 
     ];
 
@@ -1325,15 +1898,15 @@
       "great",
       "perfect",
       "well",
-      "nice"
+      "nice",
+      "👍"
 
     ];
 
 
-    if (
+    if(
       negativeWords.some(
-        word =>
-          text.includes(word)
+        word => value.includes(word)
       )
     ) {
 
@@ -1342,10 +1915,9 @@
     }
 
 
-    if (
+    if(
       positiveWords.some(
-        word =>
-          text.includes(word)
+        word => value.includes(word)
       )
     ) {
 
@@ -1359,1220 +1931,131 @@
   }
 
 
-  /* =====================================================
-     PARSE LOG
+  /* ---------------------------------------
+     MOTIVATION
+  --------------------------------------- */
 
-     Format:
+  function setMotivation(classType) {
 
-     02 Oct | 04:30 PM —
-     Route: Bhanjpur |
-     Distance: 5 KM |
-     Remark: ⚠️ Bad Turning
-  ===================================================== */
+    const icon =
+      document.getElementById(
+        "motivationIcon"
+      );
 
-  function parseLog(log) {
+    const title =
+      document.getElementById(
+        "motivationTitle"
+      );
 
     const text =
-      String(log || "");
-
-
-    const parts =
-      text.split(" — ");
-
-
-    const dateTime =
-      (parts[0] || "")
-        .split(" | ");
-
-
-    const date =
-      dateTime[0]
-        ? dateTime[0].trim()
-        : "";
-
-
-    const time =
-      dateTime[1]
-        ? dateTime[1].trim()
-        : "";
-
-
-    /* ROUTE */
-
-    let route = "";
-
-
-    const routeMatch =
-      text.match(
-        /Route:\s*([^|]+)/i
+      document.getElementById(
+        "motivationText"
       );
 
 
-    if (routeMatch) {
+    if(classType === "Personal") {
 
-      route =
-        routeMatch[1].trim();
+      icon.innerText = "👤";
+
+      title.innerText =
+        "PERSONAL DRIVING ADVANTAGE";
+
+      text.innerText =
+        "1-to-1 attention means your mistakes are noticed faster, your practice is focused, and every class is built around your driving improvement.";
+
+    }
+
+    else {
+
+      icon.innerText = "👥";
+
+      title.innerText =
+        "GROUP DRIVING ADVANTAGE";
+
+      text.innerText =
+        "Learn with real-world situations, build confidence around other learners, and improve your road awareness step by step.";
+
+    }
+
+  }
+
+
+  /* ---------------------------------------
+     EXPECTED END DATE
+  --------------------------------------- */
+
+  function calculateExpectedDate(
+    logs,
+    total
+  ) {
+
+    if(!logs.length) {
+
+      return "Not Started";
 
     }
 
 
-    /* DISTANCE */
+    try {
 
-    let distance = "";
-
-
-    const distanceMatch =
-      text.match(
-        /Distance:\s*(\d+(?:\.\d+)?)\s*KM/i
-      );
+      const first =
+        parseLog(logs[0]);
 
 
-    if (distanceMatch) {
+      const currentYear =
+        new Date().getFullYear();
 
-      distance =
-        distanceMatch[1] +
-        " KM";
 
-    } else {
-
-      const oldDistance =
-        text.match(
-          /(\d+(?:\.\d+)?)\s*KM/i
+      let startDate =
+        new Date(
+          `${first.date} ${currentYear}`
         );
 
 
-      distance =
-        oldDistance
-          ? oldDistance[1] + " KM"
-          : "5 KM";
-
-    }
-
-
-    /* REMARK */
-
-    let remark = "";
-
-
-    const remarkMatch =
-      text.match(
-        /Remark:\s*(.+)$/i
-      );
-
-
-    if (remarkMatch) {
-
-      remark =
-        remarkMatch[1].trim();
-
-    } else if (parts[1]) {
-
-      /*
-        Old log support:
-        Everything after " — "
-        will be treated as feedback.
-      */
-
-      remark =
-        parts[1].trim();
-
-      /*
-        Remove route and distance
-        from old style feedback if needed.
-      */
-
-      remark =
-        remark
-          .replace(
-            /Route:\s*[^|]+\|?/i,
-            ""
-          )
-          .replace(
-            /Distance:\s*\d+(?:\.\d+)?\s*KM\|?/i,
-            ""
-          )
-          .trim();
-
-    }
-
-
-    return {
-
-      raw: text,
-
-      date,
-
-      time,
-
-      route,
-
-      distance,
-
-      remark,
-
-      feedbackType:
-        getFeedbackType(
-          remark
+      if(
+        isNaN(
+          startDate.getTime()
         )
+      ) {
 
-    };
-
-  }
-
-
-  /* =====================================================
-     DATE KEY
-
-     Same date = same day.
-
-     Handles:
-     02 Oct
-     2 Oct
-     02 October
-     ===================================================== */
-
-  function normalizeDateKey(date) {
-
-    return String(date || "")
-      .trim()
-      .toLowerCase()
-      .replace(/\s+/g, " ");
-
-  }
-
-
-  /* =====================================================
-     CLASS BOOSTER
-
-     If same date has:
-
-     1 class  -> nothing
-
-     2 classes -> 2 Classes
-
-     3 classes -> 3 Classes
-
-     4 classes -> 4 Classes
-
-     5 classes -> 5 Classes
-
-  ===================================================== */
-
-  function renderClassBooster(logs) {
-
-    const section =
-      document.getElementById(
-        "classBoosterSection"
-      );
-
-
-    const list =
-      document.getElementById(
-        "classBoosterList"
-      );
-
-
-    list.innerHTML = "";
-
-
-    if (!logs.length) {
-
-      section.style.display =
-        "none";
-
-      return;
-
-    }
-
-
-    const grouped = {};
-
-
-    logs.forEach(
-      (log, index) => {
-
-        const parsed =
-          parseLog(log);
-
-
-        const key =
-          normalizeDateKey(
-            parsed.date
-          );
-
-
-        if (!key) return;
-
-
-        if (!grouped[key]) {
-
-          grouped[key] = {
-
-            date:
-              parsed.date,
-
-            count: 0,
-
-            sessions: []
-
-          };
-
-        }
-
-
-        grouped[key].count++;
-
-
-        grouped[key].sessions.push({
-
-          index: index,
-
-          time:
-            parsed.time,
-
-          route:
-            parsed.route
-
-        });
+        return "Calculating...";
 
       }
-    );
 
 
-    const boosterDays =
-      Object.values(grouped)
-        .filter(
-          item =>
-            item.count > 1
-        );
+      startDate.setDate(
+        startDate.getDate() + total
+      );
 
 
-    if (!boosterDays.length) {
-
-      section.style.display =
-        "none";
-
-      return;
-
-    }
-
-
-    /*
-      Newest dates first.
-    */
-
-    boosterDays.reverse();
-
-
-    boosterDays
-      .forEach(
-        day => {
-
-          const card =
-            document.createElement(
-              "div"
-            );
-
-
-          card.className =
-            "booster-card";
-
-
-          let message =
-            "";
-
-
-          if(day.count === 2){
-
-            message =
-              "Double Class Day";
-
-          }
-          else if(day.count === 3){
-
-            message =
-              "Triple Class Day";
-
-          }
-          else {
-
-            message =
-              "Class Booster Day";
-
-          }
-
-
-          card.innerHTML = `
-
-            <div class="booster-left">
-
-              <div class="booster-date">
-
-                📅
-                ${escapeHTML(
-                  day.date
-                )}
-
-              </div>
-
-              <div class="booster-message">
-
-                ${escapeHTML(
-                  message
-                )}
-
-                •
-                <span>
-                  ${day.count} Classes
-                </span>
-
-              </div>
-
-            </div>
-
-
-            <div class="booster-right">
-
-              <strong>
-                ${day.count}×
-              </strong>
-
-              <small>
-                Classes
-              </small>
-
-            </div>
-
-          `;
-
-
-          list.appendChild(
-            card
-          );
-
+      return startDate.toLocaleDateString(
+        "en-GB",
+        {
+          day: "2-digit",
+          month: "short"
         }
       );
 
+    }
 
-    section.style.display =
-      "block";
+    catch(error) {
+
+      return "Calculating...";
+
+    }
 
   }
 
 
-  /* =====================================================
-     LAST NEGATIVE FEEDBACK
-
-     Finds the latest feedback marked
-     as negative / improvement.
-  ===================================================== */
-
-  function renderLastImprovement(logs) {
-
-    const section =
-      document.getElementById(
-        "lastImprovement"
-      );
-
-
-    const textBox =
-      document.getElementById(
-        "lastImprovementText"
-      );
-
-
-    const metaBox =
-      document.getElementById(
-        "lastImprovementMeta"
-      );
-
-
-    const tipBox =
-      document.getElementById(
-        "lastImprovementTip"
-      );
-
-
-    metaBox.innerHTML = "";
-
-
-    /*
-      Search from newest log
-      towards oldest log.
-    */
-
-    let latestBad =
-      null;
-
-
-    for (
-      let i = logs.length - 1;
-      i >= 0;
-      i--
-    ) {
-
-      const parsed =
-        parseLog(
-          logs[i]
-        );
-
-
-      if (
-        parsed.remark &&
-        parsed.feedbackType === "bad"
-      ) {
-
-        latestBad = {
-
-          ...parsed,
-
-          session:
-            i + 1
-
-        };
-
-        break;
-
-      }
-
-    }
-
-
-    if (!latestBad) {
-
-      section.style.display =
-        "none";
-
-      return;
-
-    }
-
-
-    textBox.textContent =
-      latestBad.remark;
-
-
-    if (latestBad.date) {
-
-      metaBox.innerHTML += `
-
-        <div class="improvement-chip">
-
-          📅
-          ${escapeHTML(
-            latestBad.date
-          )}
-
-        </div>
-
-      `;
-
-    }
-
-
-    if (latestBad.time) {
-
-      metaBox.innerHTML += `
-
-        <div class="improvement-chip">
-
-          🕐
-          ${escapeHTML(
-            latestBad.time
-          )}
-
-        </div>
-
-      `;
-
-    }
-
-
-    if (latestBad.route) {
-
-      metaBox.innerHTML += `
-
-        <div class="improvement-chip">
-
-          📍
-          ${escapeHTML(
-            latestBad.route
-          )}
-
-        </div>
-
-      `;
-
-    }
-
-
-    if (latestBad.distance) {
-
-      metaBox.innerHTML += `
-
-        <div class="improvement-chip">
-
-          🚗
-          ${escapeHTML(
-            latestBad.distance
-          )}
-
-        </div>
-
-      `;
-
-    }
-
-
-    /*
-      Smart tip based on feedback.
-    */
-
-    const feedbackText =
-      latestBad.remark
-        .toLowerCase();
-
-
-    let tip =
-      "Keep practising this area in your next session.";
-
-
-    if (
-      feedbackText.includes("turn")
-    ) {
-
-      tip =
-        "Next session: focus on smooth steering, correct turning angle and controlled speed.";
-
-    }
-
-    else if (
-      feedbackText.includes("brak")
-    ) {
-
-      tip =
-        "Next session: practise gentle braking and maintain proper braking distance.";
-
-    }
-
-    else if (
-      feedbackText.includes("clutch")
-    ) {
-
-      tip =
-        "Next session: focus on smooth clutch release and better clutch control.";
-
-    }
-
-    else if (
-      feedbackText.includes("park")
-    ) {
-
-      tip =
-        "Next session: practise parking alignment, steering control and final positioning.";
-
-    }
-
-    else if (
-      feedbackText.includes("traffic")
-    ) {
-
-      tip =
-        "Next session: focus on traffic observation, signals and safe decision making.";
-
-    }
-
-    else if (
-      feedbackText.includes("vehicle")
-    ) {
-
-      tip =
-        "Next session: practise smoother vehicle control and better coordination.";
-
-    }
-
-
-    tipBox.textContent =
-      tip;
-
-
-    section.style.display =
-      "block";
-
-  }
-
-
-  /* =====================================================
-     LOGIN
-  ===================================================== */
-
-  document
-    .getElementById(
-      "userPhone"
-    )
-    .addEventListener(
-      "keydown",
-      event => {
-
-        if (
-          event.key === "Enter"
-        ) {
-
-          loadProfile();
-
-        }
-
-      }
-    );
-
-
-  window.loadProfile =
-    function() {
-
-      const ph =
-        document
-          .getElementById(
-            "userPhone"
-          )
-          .value
-          .trim();
-
-
-      if (
-        !/^\d{10}$/.test(ph)
-      ) {
-
-        alert(
-          "Please enter 10 digit number."
-        );
-
-        return;
-
-      }
-
-
-      document
-        .getElementById(
-          "loader"
-        )
-        .style
-        .display =
-        "block";
-
-
-      if (
-        unsubscribeProfile
-      ) {
-
-        unsubscribeProfile();
-
-        unsubscribeProfile =
-          null;
-
-      }
-
-
-      unsubscribeProfile =
-        onSnapshot(
-
-          doc(
-            db,
-            "studentData",
-            ph
-          ),
-
-          snap => {
-
-            document
-              .getElementById(
-                "loader"
-              )
-              .style
-              .display =
-              "none";
-
-
-            if (
-              !snap.exists()
-            ) {
-
-              alert(
-                "No active training record associated with this number."
-              );
-
-              return;
-
-            }
-
-
-            const data =
-              snap.data();
-
-
-            currentData = {
-
-              ...data,
-
-              phone: ph
-
-            };
-
-
-            /* LOGS */
-
-            const logs =
-              Array.isArray(
-                data.attendanceLogs
-              )
-                ? data.attendanceLogs
-                : [];
-
-
-            /*
-              Current system uses
-              'remaining' as completed
-              session count.
-            */
-
-            const done =
-              Math.max(
-
-                logs.length,
-
-                Number(
-                  data.remaining || 0
-                ),
-
-                0
-
-              );
-
-
-            const total =
-              Math.max(
-
-                Number(
-                  data.totalClasses || 15
-                ),
-
-                1
-
-              );
-
-
-            const percent =
-              Math.min(
-
-                Math.round(
-                  (
-                    done /
-                    total
-                  ) * 100
-                ),
-
-                100
-
-              );
-
-
-            /* =================================================
-               DISTANCE
-            ================================================= */
-
-            let totalDrivenKm =
-              0;
-
-
-            logs.forEach(
-              log => {
-
-                const parsed =
-                  parseLog(log);
-
-
-                const match =
-                  parsed.distance.match(
-                    /(\d+(?:\.\d+)?)/
-                  );
-
-
-                if (match) {
-
-                  totalDrivenKm +=
-                    Number(
-                      match[1]
-                    );
-
-                } else {
-
-                  totalDrivenKm +=
-                    5;
-
-                }
-
-              }
-            );
-
-
-            /*
-              If done is greater than
-              actual logs, use 5 KM
-              for extra sessions.
-            */
-
-            if (
-              done > logs.length
-            ) {
-
-              totalDrivenKm +=
-                (
-                  done -
-                  logs.length
-                ) * 5;
-
-            }
-
-
-            /*
-              Dynamic target:
-              Total classes × 5 KM
-            */
-
-            const targetKm =
-              total * 5;
-
-
-            /* =================================================
-               EXPECTED COMPLETION
-            ================================================= */
-
-            let expectedEndDateStr =
-              "No Logs Found";
-
-
-            if (
-              logs.length > 0
-            ) {
-
-              try {
-
-                const firstLog =
-                  parseLog(
-                    logs[0]
-                  );
-
-
-                const datePart =
-                  firstLog.date;
-
-
-                if (
-                  datePart
-                ) {
-
-                  const currentYear =
-                    new Date()
-                      .getFullYear();
-
-
-                  const startDate =
-                    parseTrainingDate(
-                      datePart,
-                      currentYear
-                    );
-
-
-                  if (
-                    startDate &&
-                    !isNaN(
-                      startDate.getTime()
-                    )
-                  ) {
-
-                    startDate.setDate(
-                      startDate.getDate() +
-                      total -
-                      1
-                    );
-
-
-                    expectedEndDateStr =
-                      startDate
-                        .toLocaleDateString(
-                          "en-GB",
-                          {
-                            day:"2-digit",
-                            month:"short",
-                            year:"numeric"
-                          }
-                        );
-
-                  }
-
-                }
-
-              }
-
-              catch(e) {
-
-                expectedEndDateStr =
-                  "Date Error";
-
-              }
-
-            }
-
-
-            /* =================================================
-               BASIC UI
-            ================================================= */
-
-            document
-              .getElementById(
-                "dispName"
-              )
-              .innerText =
-              data.name ||
-              "Driver";
-
-
-            const classType =
-              data.classType ===
-              "Personal"
-                ? "👤 PERSONAL CLASS"
-                : "👥 GROUP CLASS";
-
-
-            document
-              .getElementById(
-                "dispPkg"
-              )
-              .innerText =
-              classType +
-              " • " +
-              total +
-              " CLASSES";
-
-
-            document
-              .getElementById(
-                "dispDone"
-              )
-              .innerText =
-              done;
-
-
-            document
-              .getElementById(
-                "dispTotal"
-              )
-              .innerText =
-              total;
-
-
-            document
-              .getElementById(
-                "dispPercent"
-              )
-              .innerText =
-              percent +
-              "%";
-
-
-            const referralCount =
-              Number(
-                data.totalRefers || 0
-              );
-
-
-            document
-              .getElementById(
-                "dispEarn"
-              )
-              .innerText =
-              "₹" +
-              (
-                referralCount *
-                500
-              ).toLocaleString(
-                "en-IN"
-              );
-
-
-            /* DYNAMIC DISTANCE */
-
-            document
-              .getElementById(
-                "dispKm"
-              )
-              .innerText =
-              totalDrivenKm +
-              " / " +
-              targetKm +
-              " km";
-
-
-            document
-              .getElementById(
-                "dispEndDate"
-              )
-              .innerText =
-              expectedEndDateStr;
-
-
-            /* =================================================
-               RADIAL PROGRESS
-            ================================================= */
-
-            const radius =
-              40;
-
-
-            const circumference =
-              2 *
-              Math.PI *
-              radius;
-
-
-            const strokeDashoffset =
-              circumference -
-              (
-                percent /
-                100
-              ) *
-              circumference;
-
-
-            document
-              .getElementById(
-                "radialFillCircle"
-              )
-              .style
-              .strokeDashoffset =
-              strokeDashoffset;
-
-
-            /* =================================================
-               CERTIFICATE
-            ================================================= */
-
-            if (
-              done >= total
-            ) {
-
-              document
-                .getElementById(
-                  "premiumCertificate"
-                )
-                .style
-                .display =
-                "block";
-
-
-              document
-                .getElementById(
-                  "pdfName"
-                )
-                .innerText =
-                (
-                  data.name ||
-                  "STUDENT"
-                ).toUpperCase();
-
-            }
-
-
-            /* =================================================
-               CLASS BOOSTER
-            ================================================= */
-
-            renderClassBooster(
-              logs
-            );
-
-
-            /* =================================================
-               LAST IMPROVEMENT
-            ================================================= */
-
-            renderLastImprovement(
-              logs
-            );
-
-
-            /* =================================================
-               TIMELINE
-            ================================================= */
-
-            renderTimeline(
-              logs
-            );
-
-
-            /* =================================================
-               SHOW PROFILE
-            ================================================= */
-
-            document
-              .getElementById(
-                "searchPanel"
-              )
-              .style
-              .display =
-              "none";
-
-
-            document
-              .getElementById(
-                "profileContent"
-              )
-              .style
-              .display =
-              "block";
-
-          },
-
-          error => {
-
-            console.error(
-              error
-            );
-
-
-            document
-              .getElementById(
-                "loader"
-              )
-              .style
-              .display =
-              "none";
-
-
-            alert(
-              "Unable to load profile. Please try again."
-            );
-
-          }
-
-        );
-
-    };
-
-
-  /* =====================================================
-     TIMELINE
-
-     Newest first.
-
-     Each session shows:
-     Session #
-     Date + Time
-     Route
-     Distance
-     Feedback
-  ===================================================== */
-
-  function renderTimeline(logs) {
+  /* ---------------------------------------
+     RENDER CLASS HISTORY
+  --------------------------------------- */
+
+  function renderTimeline(
+    logs,
+    done,
+    studentFeedbacks
+  ) {
 
     const timeline =
       document.getElementById(
@@ -2583,19 +2066,20 @@
     timeline.innerHTML = "";
 
 
-    if (!logs.length) {
+    if(!logs.length) {
 
       timeline.innerHTML = `
 
         <div
           style="
-            padding:16px;
             text-align:center;
-            color:#777;
-            font-size:10px;
+            padding:25px 10px;
+            color:var(--text-muted);
+            font-size:11px;
           "
         >
-          No attendance records found.
+          🚗 Your first driving class record
+          will appear here.
         </div>
 
       `;
@@ -2605,507 +2089,1150 @@
     }
 
 
-    for (
-      let index =
-        logs.length - 1;
+    /*
+      Latest session first
+    */
 
-      index >= 0;
-
-      index--
+    for(
+      let i = logs.length - 1;
+      i >= 0;
+      i--
     ) {
 
-      const parsed =
-        parseLog(
-          logs[index]
+      const sessionNo =
+        i + 1;
+
+
+      const item =
+        parseLog(logs[i]);
+
+
+      const feedbackType =
+        getFeedbackType(
+          item.remark
         );
 
 
-      const session =
-        index + 1;
+      const adminClass =
+        feedbackType === "good"
+          ? "good"
+          : feedbackType === "bad"
+            ? "bad"
+            : "";
 
 
-      let rowClass =
-        "";
+      const existingStudentFeedback =
+        studentFeedbacks &&
+        studentFeedbacks[sessionNo]
+          ? studentFeedbacks[sessionNo]
+          : null;
 
 
-      if (
-        parsed.feedbackType ===
-        "good"
-      ) {
+      let studentFeedbackHtml = "";
 
-        rowClass =
-          "good";
+
+      if(existingStudentFeedback) {
+
+        const rating =
+          existingStudentFeedback.rating ||
+          "Submitted";
+
+
+        studentFeedbackHtml = `
+
+          <div
+            class="student-feedback-area"
+          >
+
+            <div
+              class="student-feedback-title"
+            >
+              YOUR FEEDBACK
+            </div>
+
+            <div
+              style="
+                font-size:10px;
+                color:var(--success);
+                line-height:1.5;
+              "
+            >
+              ✓ ${escapeHtml(rating)}
+              ${
+                existingStudentFeedback.comment
+                  ? " — " +
+                    escapeHtml(
+                      existingStudentFeedback.comment
+                    )
+                  : ""
+              }
+            </div>
+
+          </div>
+
+        `;
 
       }
 
-      else if (
-        parsed.feedbackType ===
-        "bad"
-      ) {
+      else {
 
-        rowClass =
-          "bad";
+        studentFeedbackHtml = `
 
-      }
+          <div
+            class="student-feedback-area"
+          >
 
+            <div
+              class="student-feedback-title"
+            >
+              HOW WAS THIS CLASS?
+            </div>
 
-      let feedback =
-        parsed.remark ||
-        "Session completed successfully.";
+            <div
+              class="rating-grid"
+              id="rating-${sessionNo}"
+            >
 
-
-      let feedbackIcon =
-        "📝";
-
-
-      if (
-        parsed.feedbackType ===
-        "good"
-      ) {
-
-        feedbackIcon =
-          "👍";
-
-      }
-
-      else if (
-        parsed.feedbackType ===
-        "bad"
-      ) {
-
-        feedbackIcon =
-          "⚠️";
-
-      }
-
-
-      const row =
-        document.createElement(
-          "div"
-        );
-
-
-      row.className =
-        "log-row " +
-        rowClass;
-
-
-      row.innerHTML = `
-
-        <div class="log-meta">
-
-          <b>
-            Session ${session}
-          </b>
-
-          <span>
-
-            ${escapeHTML(
-              parsed.date
-            )}
-
-            ${
-              parsed.time
-                ? " • " +
-                  escapeHTML(
-                    parsed.time
+              <button
+                class="rating-btn"
+                type="button"
+                onclick="
+                  selectRating(
+                    ${sessionNo},
+                    'Excellent 👍',
+                    this
                   )
-                : ""
-            }
+                "
+              >
+                Excellent 👍
+              </button>
 
-          </span>
+              <button
+                class="rating-btn"
+                type="button"
+                onclick="
+                  selectRating(
+                    ${sessionNo},
+                    'Good 🙂',
+                    this
+                  )
+                "
+              >
+                Good 🙂
+              </button>
 
-        </div>
+              <button
+                class="rating-btn"
+                type="button"
+                onclick="
+                  selectRating(
+                    ${sessionNo},
+                    'Needs Help',
+                    this
+                  )
+                "
+              >
+                Needs Help
+              </button>
+
+            </div>
+
+            <textarea
+              class="student-comment"
+              id="comment-${sessionNo}"
+              placeholder="Want to share something about this class?"
+            ></textarea>
+
+            <button
+              class="submit-feedback-btn"
+              type="button"
+              onclick="
+                submitStudentFeedback(
+                  ${sessionNo}
+                )
+              "
+            >
+              SEND MY FEEDBACK
+            </button>
+
+          </div>
+
+        `;
+
+      }
 
 
-        <div class="log-info">
+      timeline.innerHTML += `
 
-          ${
-            parsed.route
-              ? `
-                <div class="log-chip">
+        <div
+          class="log-row ${adminClass}"
+        >
 
-                  📍
-                  ${escapeHTML(
-                    parsed.route
-                  )}
+          <div class="log-meta">
 
-                </div>
-              `
-              : ""
-          }
+            <div class="session-number">
+              🚗 Session ${sessionNo}
+            </div>
 
-
-          <div class="log-chip">
-
-            🚗
-            ${escapeHTML(
-              parsed.distance
-            )}
+            <div class="session-date">
+              ${escapeHtml(item.date)}
+              ${
+                item.time !== "Time not recorded"
+                  ? " • " +
+                    escapeHtml(item.time)
+                  : ""
+              }
+            </div>
 
           </div>
 
 
-          ${
-            parsed.feedbackType ===
-            "good"
-              ? `
-                <div
-                  class="log-chip"
-                  style="
-                    color:#63df86;
-                    background:rgba(52,199,89,.07);
-                  "
-                >
-                  POSITIVE
-                </div>
-              `
-              : ""
-          }
+          <div class="session-detail-grid">
+
+            <div class="session-detail">
+
+              <span>
+                Date
+              </span>
+
+              <b>
+                ${escapeHtml(item.date)}
+              </b>
+
+            </div>
 
 
-          ${
-            parsed.feedbackType ===
-            "bad"
-              ? `
-                <div
-                  class="log-chip"
-                  style="
-                    color:#ff7676;
-                    background:rgba(255,87,87,.07);
-                  "
-                >
-                  IMPROVEMENT
-                </div>
-              `
-              : ""
-          }
+            <div class="session-detail">
 
-        </div>
+              <span>
+                Time
+              </span>
+
+              <b>
+                ${escapeHtml(item.time)}
+              </b>
+
+            </div>
 
 
-        <div class="log-feedback">
+            <div class="session-detail">
 
-          ${feedbackIcon}
-          ${escapeHTML(
-            feedback
-          )}
+              <span>
+                Instructor
+              </span>
+
+              <b>
+                Avinash
+              </b>
+
+            </div>
+
+
+            <div class="session-detail">
+
+              <span>
+                Distance
+              </span>
+
+              <b>
+                ${item.distance} KM
+              </b>
+
+            </div>
+
+
+            <div
+              class="session-detail"
+              style="
+                grid-column:1/-1;
+              "
+            >
+
+              <span>
+                Route
+              </span>
+
+              <b>
+                📍 ${escapeHtml(item.route)}
+              </b>
+
+            </div>
+
+          </div>
+
+
+          <div
+            class="feedback-box ${adminClass}"
+          >
+
+            <div class="feedback-label">
+
+              ${
+                feedbackType === "good"
+                  ? "POSITIVE FEEDBACK"
+                  : feedbackType === "bad"
+                    ? "IMPROVEMENT FEEDBACK"
+                    : "INSTRUCTOR FEEDBACK"
+              }
+
+            </div>
+
+            <div class="feedback-text">
+
+              ${escapeHtml(item.remark)}
+
+            </div>
+
+          </div>
+
+
+          ${studentFeedbackHtml}
 
         </div>
 
       `;
 
-
-      timeline.appendChild(
-        row
-      );
-
     }
 
   }
 
 
-  /* =====================================================
-     TRAINING DATE PARSER
-  ===================================================== */
+  /* ---------------------------------------
+     HTML ESCAPE
+  --------------------------------------- */
 
-  function parseTrainingDate(
-    dateString,
-    year
-  ) {
+  function escapeHtml(value) {
 
-    const months = {
-
-      jan:0,
-      january:0,
-
-      feb:1,
-      february:1,
-
-      mar:2,
-      march:2,
-
-      apr:3,
-      april:3,
-
-      may:4,
-
-      jun:5,
-      june:5,
-
-      jul:6,
-      july:6,
-
-      aug:7,
-      august:7,
-
-      sep:8,
-      sept:8,
-      september:8,
-
-      oct:9,
-      october:9,
-
-      nov:10,
-      november:10,
-
-      dec:11,
-      december:11
-
-    };
-
-
-    const match =
-      String(dateString)
-        .trim()
-        .match(
-          /^(\d{1,2})\s+([A-Za-z]+)/
-        );
-
-
-    if (!match) {
-
-      return null;
-
-    }
-
-
-    const day =
-      Number(
-        match[1]
+    return String(value ?? "")
+      .replace(
+        /&/g,
+        "&amp;"
+      )
+      .replace(
+        /</g,
+        "&lt;"
+      )
+      .replace(
+        />/g,
+        "&gt;"
+      )
+      .replace(
+        /"/g,
+        "&quot;"
+      )
+      .replace(
+        /'/g,
+        "&#039;"
       );
-
-
-    const monthName =
-      match[2]
-        .toLowerCase();
-
-
-    if (
-      months[monthName] ===
-      undefined
-    ) {
-
-      return null;
-
-    }
-
-
-    let date =
-      new Date(
-        year,
-        months[monthName],
-        day
-      );
-
-
-    /*
-      If the parsed date is in the future,
-      assume it belongs to previous year.
-    */
-
-    if (
-      date >
-      new Date()
-    ) {
-
-      date.setFullYear(
-        year - 1
-      );
-
-    }
-
-
-    return date;
 
   }
 
 
-  /* =====================================================
-     PDF
-  ===================================================== */
+  /* ---------------------------------------
+     LOAD PROFILE
+  --------------------------------------- */
 
-  window.downloadPDF =
-    function() {
+  window.loadProfile = () => {
 
-      const element =
-        document.getElementById(
-          "pdfTemplate"
-        );
-
-
-      element.style.display =
-        "block";
-
-
-      html2pdf()
-        .from(element)
-        .set({
-
-          margin: 0,
-
-          filename:
-            "A1_Driving_Certificate.pdf",
-
-          jsPDF: {
-
-            orientation:
-              "landscape",
-
-            format:
-              "a4"
-
-          }
-
-        })
-        .save()
-        .then(
-          () => {
-
-            element.style.display =
-              "none";
-
-          }
-        );
-
-    };
-
-
-  /* =====================================================
-     HELP
-  ===================================================== */
-
-  window.contactAdmin =
-    function() {
-
-      if (!currentData) {
-
-        return;
-
-      }
-
-
-      const msg =
-        encodeURIComponent(
-
-          `Hi Abhinaash,
-
-I am ${currentData.name || "a student"}.
-
-I need help regarding my running driving classes.
-
-My registered number is:
-${currentData.phone}`
-
-        );
-
-
-      window.location.href =
-        `https://wa.me/917008186187?text=${msg}`;
-
-    };
-
-
-  /* =====================================================
-     SHARE
-  ===================================================== */
-
-  window.shareReferral =
-    function() {
-
-      if (!currentData) {
-
-        return;
-
-      }
-
-
-      const text =
-        encodeURIComponent(
-
-          `Hey! I am learning smart car driving at A1 Driving Academy.
-
-Highly recommended!
-
-Apply via my track code:
-${currentData.phone}`
-
-        );
-
-
-      window.location.href =
-        `https://wa.me/?text=${text}`;
-
-    };
-
-
-  /* =====================================================
-     LOGOUT
-  ===================================================== */
-
-  window.logoutSession =
-    function() {
-
-      if (
-        unsubscribeProfile
-      ) {
-
-        unsubscribeProfile();
-
-        unsubscribeProfile =
-          null;
-
-      }
-
-
-      currentData =
-        null;
-
-
-      document
-        .getElementById(
-          "profileContent"
-        )
-        .style
-        .display =
-        "none";
-
-
-      document
-        .getElementById(
-          "searchPanel"
-        )
-        .style
-        .display =
-        "block";
-
-
+    const ph =
       document
         .getElementById(
           "userPhone"
         )
-        .value = "";
+        .value
+        .trim();
 
 
-      document
-        .getElementById(
-          "classBoosterSection"
-        )
-        .style
-        .display =
+    if(ph.length < 10) {
+
+      alert(
+        "Please enter 10 digit number."
+      );
+
+      return;
+
+    }
+
+
+    document
+      .getElementById(
+        "loader"
+      )
+      .style.display = "block";
+
+
+    /*
+      If previous listener exists,
+      stop it first.
+    */
+
+    if(unsubscribeProfile) {
+
+      unsubscribeProfile();
+
+      unsubscribeProfile = null;
+
+    }
+
+
+    const studentRef =
+      doc(
+        db,
+        "studentData",
+        ph
+      );
+
+
+    unsubscribeProfile =
+      onSnapshot(
+        studentRef,
+
+        (snap) => {
+
+          document
+            .getElementById(
+              "loader"
+            )
+            .style.display = "none";
+
+
+          if(!snap.exists()) {
+
+            alert(
+              "No active training record associated with this number."
+            );
+
+            return;
+
+          }
+
+
+          const data =
+            snap.data();
+
+
+          currentData = {
+            ...data,
+            phone: ph
+          };
+
+
+          const logs =
+            Array.isArray(
+              data.attendanceLogs
+            )
+              ? data.attendanceLogs
+              : [];
+
+
+          /*
+            COMPLETED CLASSES
+
+            Existing system uses
+            "remaining" as completed count,
+            so both values are respected.
+          */
+
+          const storedDone =
+            Number(
+              data.remaining || 0
+            );
+
+
+          const done =
+            Math.max(
+              logs.length,
+              storedDone,
+              0
+            );
+
+
+          const total =
+            Math.max(
+              Number(
+                data.totalClasses || 15
+              ),
+              1
+            );
+
+
+          const remaining =
+            Math.max(
+              total - done,
+              0
+            );
+
+
+          const percent =
+            Math.min(
+              Math.round(
+                (done / total) * 100
+              ),
+              100
+            );
+
+
+          /*
+            CLASS TYPE
+          */
+
+          const classType =
+            data.classType === "Personal"
+              ? "Personal"
+              : "Group";
+
+
+          /*
+            DISTANCE
+          */
+
+          let totalDrivenKm = 0;
+
+
+          logs.forEach(
+            (log) => {
+
+              const item =
+                parseLog(log);
+
+
+              totalDrivenKm +=
+                Number(
+                  item.distance || 5
+                );
+
+            }
+          );
+
+
+          /*
+            If done > logs,
+            assume 5 KM per extra class.
+          */
+
+          if(
+            done > logs.length
+          ) {
+
+            totalDrivenKm +=
+              (
+                done - logs.length
+              ) * 5;
+
+          }
+
+
+          /*
+            EXPECTED END DATE
+          */
+
+          const expectedEndDate =
+            calculateExpectedDate(
+              logs,
+              total
+            );
+
+
+          /*
+            MAIN UI
+          */
+
+          document
+            .getElementById(
+              "dispName"
+            )
+            .innerText =
+              data.name ||
+              "Driver";
+
+
+          document
+            .getElementById(
+              "dispPkg"
+            )
+            .innerText =
+              classType === "Personal"
+                ? `👤 PERSONAL CLASS • ${total} CLASSES`
+                : `👥 GROUP CLASS • ${total} CLASSES`;
+
+
+          document
+            .getElementById(
+              "dispDone"
+            )
+            .innerText =
+              done;
+
+
+          document
+            .getElementById(
+              "dispRemaining"
+            )
+            .innerText =
+              remaining;
+
+
+          document
+            .getElementById(
+              "dispTotal"
+            )
+            .innerText =
+              total;
+
+
+          document
+            .getElementById(
+              "dispPercent"
+            )
+            .innerText =
+              percent + "%";
+
+
+          document
+            .getElementById(
+              "dispKm"
+            )
+            .innerText =
+              totalDrivenKm +
+              " / " +
+              (total * 5) +
+              " KM";
+
+
+          document
+            .getElementById(
+              "dispEndDate"
+            )
+            .innerText =
+              expectedEndDate;
+
+
+          document
+            .getElementById(
+              "dispEarn"
+            )
+            .innerText =
+              "₹" +
+              (
+                Number(
+                  data.totalRefers || 0
+                ) * 500
+              );
+
+
+          /*
+            TRAINING INFORMATION
+          */
+
+          document
+            .getElementById(
+              "infoClassType"
+            )
+            .innerText =
+              classType === "Personal"
+                ? "👤 Personal"
+                : "👥 Group";
+
+
+          document
+            .getElementById(
+              "infoPhone"
+            )
+            .innerText =
+              ph;
+
+
+          document
+            .getElementById(
+              "infoStatus"
+            )
+            .innerText =
+              data.notActive
+                ? "Not Active"
+                : done >= total
+                  ? "Completed"
+                  : "Active";
+
+
+          /*
+            MOTIVATION
+          */
+
+          setMotivation(
+            classType
+          );
+
+
+          /*
+            RADIAL PROGRESS
+          */
+
+          const radius = 40;
+
+          const circumference =
+            2 *
+            Math.PI *
+            radius;
+
+
+          const strokeDashoffset =
+            circumference -
+            (
+              percent / 100
+            ) *
+            circumference;
+
+
+          document
+            .getElementById(
+              "radialFillCircle"
+            )
+            .style
+            .strokeDashoffset =
+              strokeDashoffset;
+
+
+          /*
+            CERTIFICATE
+          */
+
+          if(done >= total) {
+
+            document
+              .getElementById(
+                "premiumCertificate"
+              )
+              .style.display =
+                "block";
+
+
+            document
+              .getElementById(
+                "pdfName"
+              )
+              .innerText =
+                (
+                  data.name ||
+                  "STUDENT"
+                ).toUpperCase();
+
+          }
+
+          else {
+
+            document
+              .getElementById(
+                "premiumCertificate"
+              )
+              .style.display =
+                "none";
+
+          }
+
+
+          /*
+            STUDENT FEEDBACK STORAGE
+
+            This can be either map/object.
+          */
+
+          const studentFeedbacks =
+            data.studentFeedbacks || {};
+
+
+          /*
+            RENDER HISTORY
+          */
+
+          renderTimeline(
+            logs,
+            done,
+            studentFeedbacks
+          );
+
+
+          /*
+            SHOW PROFILE
+          */
+
+          document
+            .getElementById(
+              "searchPanel"
+            )
+            .style.display =
+              "none";
+
+
+          document
+            .getElementById(
+              "profileContent"
+            )
+            .style.display =
+              "block";
+
+        },
+
+        (error) => {
+
+          document
+            .getElementById(
+              "loader"
+            )
+            .style.display =
+              "none";
+
+
+          console.error(
+            error
+          );
+
+
+          alert(
+            "Unable to load your training record. Please try again."
+          );
+
+        }
+      );
+
+  };
+
+
+  /* ---------------------------------------
+     RATING
+  --------------------------------------- */
+
+  window.selectRating = (
+    sessionNo,
+    rating,
+    button
+  ) => {
+
+    const container =
+      document.getElementById(
+        `rating-${sessionNo}`
+      );
+
+
+    if(!container) {
+      return;
+    }
+
+
+    container
+      .querySelectorAll(
+        ".rating-btn"
+      )
+      .forEach(
+        btn => {
+          btn.classList.remove(
+            "active"
+          );
+        }
+      );
+
+
+    button.classList.add(
+      "active"
+    );
+
+
+    container.dataset.rating =
+      rating;
+
+  };
+
+
+  /* ---------------------------------------
+     STUDENT FEEDBACK
+  --------------------------------------- */
+
+  window.submitStudentFeedback = async (
+    sessionNo
+  ) => {
+
+    if(!currentData) {
+
+      alert(
+        "Please login first."
+      );
+
+      return;
+
+    }
+
+
+    const ratingContainer =
+      document.getElementById(
+        `rating-${sessionNo}`
+      );
+
+
+    const commentInput =
+      document.getElementById(
+        `comment-${sessionNo}`
+      );
+
+
+    const rating =
+      ratingContainer
+        ? ratingContainer.dataset.rating
+        : "";
+
+
+    const comment =
+      commentInput
+        ? commentInput.value.trim()
+        : "";
+
+
+    if(!rating && !comment) {
+
+      alert(
+        "Please select a rating or write your feedback."
+      );
+
+      return;
+
+    }
+
+
+    try {
+
+      const feedbackData = {
+
+        rating:
+          rating ||
+          "Student Comment",
+
+        comment:
+          comment,
+
+        instructor:
+          "Avinash",
+
+        submittedAt:
+          new Date().toISOString()
+
+      };
+
+
+      const studentRef =
+        doc(
+          db,
+          "studentData",
+          currentData.phone
+        );
+
+
+      /*
+        Store by Session Number.
+
+        Example:
+
+        studentFeedbacks: {
+          "1": {...},
+          "2": {...}
+        }
+      */
+
+      await updateDoc(
+        studentRef,
+        {
+          [`studentFeedbacks.${sessionNo}`]:
+            feedbackData
+        }
+      );
+
+
+      alert(
+        "Thank you! Your feedback has been submitted."
+      );
+
+
+    }
+
+    catch(error) {
+
+      console.error(
+        error
+      );
+
+
+      alert(
+        "Feedback could not be submitted. Please try again."
+      );
+
+    }
+
+  };
+
+
+  /* ---------------------------------------
+     PDF
+  --------------------------------------- */
+
+  window.downloadPDF = () => {
+
+    const element =
+      document.getElementById(
+        "pdfTemplate"
+      );
+
+
+    element.style.display =
+      "block";
+
+
+    html2pdf()
+      .from(element)
+      .set({
+
+        margin: 0,
+
+        filename:
+          "A1_Driving_Certificate.pdf",
+
+        jsPDF: {
+
+          orientation:
+            "landscape",
+
+          format:
+            "a4"
+
+        }
+
+      })
+      .save()
+      .then(
+        () => {
+
+          element.style.display =
+            "none";
+
+        }
+      );
+
+  };
+
+
+  /* ---------------------------------------
+     HELP
+  --------------------------------------- */
+
+  window.contactAdmin = () => {
+
+    if(!currentData) {
+      return;
+    }
+
+
+    const msg =
+      encodeURIComponent(
+
+        `Hi Abhinaash, I am ${currentData.name}. I need help regarding my driving classes.`
+
+      );
+
+
+    window.location.href =
+      `https://wa.me/917008186187?text=${msg}`;
+
+  };
+
+
+  /* ---------------------------------------
+     SHARE
+  --------------------------------------- */
+
+  window.shareReferral = () => {
+
+    if(!currentData) {
+      return;
+    }
+
+
+    const text =
+      encodeURIComponent(
+
+        `Hey! I am learning smart car driving at A1 Driving Academy. Highly recommended! Apply via my track code: ${currentData.phone}`
+
+      );
+
+
+    window.location.href =
+      `https://wa.me/?text=${text}`;
+
+  };
+
+
+  /* ---------------------------------------
+     LOGOUT
+  --------------------------------------- */
+
+  window.logoutSession = () => {
+
+    if(unsubscribeProfile) {
+
+      unsubscribeProfile();
+
+      unsubscribeProfile =
+        null;
+
+    }
+
+
+    currentData =
+      null;
+
+
+    document
+      .getElementById(
+        "userPhone"
+      )
+      .value = "";
+
+
+    document
+      .getElementById(
+        "searchPanel"
+      )
+      .style.display =
+        "block";
+
+
+    document
+      .getElementById(
+        "profileContent"
+      )
+      .style.display =
         "none";
 
+  };
 
-      document
-        .getElementById(
-          "lastImprovement"
-        )
-        .style
-        .display =
-        "none";
 
-    };
+  /* ---------------------------------------
+     ENTER KEY LOGIN
+  --------------------------------------- */
 
+  document
+    .getElementById(
+      "userPhone"
+    )
+    .addEventListener(
+      "keydown",
+      (event) => {
+
+        if(
+          event.key === "Enter"
+        ) {
+
+          loadProfile();
+
+        }
+
+      }
+    );
 
 </script>
 
