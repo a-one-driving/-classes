@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
 
@@ -10,5782 +9,2912 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link
-  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-  rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-
-/* =========================================================
-   RESET
-========================================================= */
-
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+:root{
+    --bg:#08090b;
+    --card:#111318;
+    --card2:#151820;
+    --line:rgba(255,255,255,.08);
+    --text:#f5f5f5;
+    --muted:#9298a5;
+    --gold:#d7ad55;
+    --gold2:#f0ca70;
+    --green:#34d399;
+    --red:#ff5f6d;
+    --blue:#60a5fa;
+    --orange:#fb923c;
+    --purple:#a78bfa;
+    --radius:24px;
 }
 
-:root{
-
-  --bg:#070707;
-  --surface:#101010;
-  --surface2:#141414;
-  --surface3:#181818;
-
-  --border:#242424;
-  --border2:#303030;
-
-  --gold:#d7b36a;
-  --goldLight:#f2d28e;
-  --goldSoft:rgba(215,179,106,.10);
-
-  --white:#f6f6f6;
-  --text:#e9e9e9;
-  --muted:#777;
-  --muted2:#555;
-
-  --green:#55d996;
-  --blue:#70b4ff;
-  --red:#ff7777;
-  --orange:#ffb86b;
-
-  --radius:18px;
-
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    -webkit-tap-highlight-color:transparent;
 }
 
 html{
-  scroll-behavior:smooth;
+    scroll-behavior:smooth;
 }
 
 body{
-
-  font-family:
-    Inter,
-    Arial,
-    sans-serif;
-
-  background:
-
-    radial-gradient(
-      circle at 50% -12%,
-      rgba(215,179,106,.13),
-      transparent 34%
-    ),
-
-    radial-gradient(
-      circle at 100% 40%,
-      rgba(112,180,255,.035),
-      transparent 28%
-    ),
-
-    var(--bg);
-
-  color:var(--text);
-
-  min-height:100vh;
-
-  padding-bottom:
-    calc(82px + env(safe-area-inset-bottom));
-
-  -webkit-font-smoothing:antialiased;
-
+    background:
+        radial-gradient(circle at 20% 0%,rgba(215,173,85,.08),transparent 30%),
+        radial-gradient(circle at 100% 20%,rgba(96,165,250,.05),transparent 25%),
+        var(--bg);
+    color:var(--text);
+    font-family:Inter,system-ui,sans-serif;
+    min-height:100vh;
+    padding-bottom:100px;
 }
 
 button,
 input,
-textarea,
-select{
-  font-family:inherit;
+select,
+textarea{
+    font-family:inherit;
 }
 
 button{
-  cursor:pointer;
-  -webkit-tap-highlight-color:transparent;
+    cursor:pointer;
+    border:0;
 }
 
-button:active{
-  transform:scale(.97);
+.container{
+    width:min(100%,760px);
+    margin:auto;
+    padding:16px;
 }
 
-::-webkit-scrollbar{
-  width:4px;
-}
-
-::-webkit-scrollbar-track{
-  background:#090909;
-}
-
-::-webkit-scrollbar-thumb{
-  background:#303030;
-  border-radius:10px;
-}
-
-
-/* =========================================================
-   HEADER
-========================================================= */
+/* ================= HEADER ================= */
 
 .header{
-
-  position:sticky;
-
-  top:0;
-
-  z-index:50;
-
-  background:
-    rgba(7,7,7,.88);
-
-  backdrop-filter:
-    blur(22px);
-
-  -webkit-backdrop-filter:
-    blur(22px);
-
-  border-bottom:
-    1px solid rgba(255,255,255,.055);
-
-}
-
-.headerInner{
-
-  max-width:940px;
-
-  margin:auto;
-
-  padding:
-    13px 15px;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-
-  gap:15px;
-
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:8px 2px 18px;
 }
 
 .brand{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:10px;
-
-  min-width:0;
-
+    display:flex;
+    align-items:center;
+    gap:11px;
 }
 
 .logo{
-
-  width:43px;
-  height:43px;
-
-  flex:none;
-
-  border-radius:14px;
-
-  border:
-    1px solid #665333;
-
-  background:
-
-    linear-gradient(
-      145deg,
-      #18130a,
-      #0d0d0d
-    );
-
-  color:var(--goldLight);
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  font-size:13px;
-
-  font-weight:800;
-
-  box-shadow:
-    inset 0 0 20px rgba(215,179,106,.035);
-
+    width:45px;
+    height:45px;
+    border-radius:15px;
+    display:grid;
+    place-items:center;
+    font-weight:800;
+    color:#111;
+    background:linear-gradient(135deg,var(--gold2),var(--gold));
+    box-shadow:0 8px 25px rgba(215,173,85,.18);
 }
 
-.brandText{
-  min-width:0;
+.brandText h1{
+    font-size:18px;
+    font-weight:800;
 }
 
-.brandTitle{
-
-  font-size:14px;
-
-  font-weight:800;
-
-  letter-spacing:-.2px;
-
+.brandText p{
+    color:var(--muted);
+    font-size:11px;
+    margin-top:2px;
 }
 
-.brandSub{
-
-  color:#5e5e5e;
-
-  font-size:7px;
-
-  letter-spacing:1.5px;
-
-  margin-top:4px;
-
-  white-space:nowrap;
-
+.headerActions{
+    display:flex;
+    gap:8px;
 }
 
-.headerRight{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:8px;
-
+.iconBtn{
+    width:42px;
+    height:42px;
+    border-radius:14px;
+    background:var(--card);
+    border:1px solid var(--line);
+    color:white;
+    display:grid;
+    place-items:center;
+    font-size:17px;
 }
 
-.clock{
-
-  text-align:right;
-
-}
-
-.clockTime{
-
-  color:var(--goldLight);
-
-  font-size:12px;
-
-  font-weight:800;
-
-}
-
-.clockDate{
-
-  color:#5d5d5d;
-
-  font-size:7px;
-
-  margin-top:3px;
-
-}
-
-
-/* =========================================================
-   MAIN
-========================================================= */
-
-.container{
-
-  width:100%;
-
-  max-width:940px;
-
-  margin:auto;
-
-  padding:
-    15px 14px 28px;
-
-}
-
-
-/* =========================================================
-   PAYMENT HERO
-========================================================= */
+/* ================= PAYMENT HERO ================= */
 
 .paymentHero{
-
-  position:relative;
-
-  overflow:hidden;
-
-  margin-bottom:12px;
-
-  padding:18px;
-
-  border-radius:20px;
-
-  border:
-    1px solid rgba(215,179,106,.25);
-
-  background:
-
-    radial-gradient(
-      circle at 90% 10%,
-      rgba(215,179,106,.16),
-      transparent 35%
-    ),
-
-    linear-gradient(
-      145deg,
-      #17130c,
-      #0d0d0d
-    );
-
-  box-shadow:
-    0 15px 45px rgba(0,0,0,.20);
-
+    position:relative;
+    overflow:hidden;
+    background:
+        linear-gradient(135deg,rgba(215,173,85,.20),rgba(215,173,85,.04)),
+        var(--card);
+    border:1px solid rgba(215,173,85,.24);
+    border-radius:28px;
+    padding:20px;
+    margin-bottom:15px;
+    box-shadow:0 18px 45px rgba(0,0,0,.24);
 }
 
-.paymentHero::after{
-
-  content:"";
-
-  position:absolute;
-
-  width:100px;
-  height:100px;
-
-  right:-40px;
-  bottom:-45px;
-
-  border-radius:50%;
-
-  border:
-    1px solid rgba(215,179,106,.10);
-
+.paymentHero:before{
+    content:"";
+    position:absolute;
+    width:160px;
+    height:160px;
+    border-radius:50%;
+    right:-70px;
+    top:-70px;
+    background:rgba(215,173,85,.10);
 }
 
 .paymentTop{
-
-  display:flex;
-
-  align-items:flex-start;
-
-  justify-content:space-between;
-
-  gap:15px;
-
+    position:relative;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
 }
 
 .paymentLabel{
+    color:#c8cbd1;
+    font-size:12px;
+    font-weight:600;
+}
 
-  color:#8a7450;
-
-  font-size:8px;
-
-  font-weight:800;
-
-  letter-spacing:1.5px;
-
-  text-transform:uppercase;
-
+.paymentTotal{
+    font-size:34px;
+    line-height:1.1;
+    font-weight:800;
+    margin-top:5px;
+    letter-spacing:-1px;
 }
 
 .paymentMonth{
-
-  color:#696969;
-
-  font-size:8px;
-
-  margin-top:5px;
-
-}
-
-.paymentAmount{
-
-  margin-top:8px;
-
-  color:var(--goldLight);
-
-  font-size:28px;
-
-  line-height:1;
-
-  font-weight:800;
-
-  letter-spacing:-1px;
-
+    color:var(--muted);
+    font-size:11px;
+    margin-top:5px;
 }
 
 .paymentIcon{
-
-  width:42px;
-  height:42px;
-
-  border-radius:13px;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  background:
-    rgba(215,179,106,.08);
-
-  border:
-    1px solid rgba(215,179,106,.18);
-
-  font-size:18px;
-
+    width:48px;
+    height:48px;
+    border-radius:17px;
+    display:grid;
+    place-items:center;
+    background:rgba(215,173,85,.12);
+    border:1px solid rgba(215,173,85,.22);
+    font-size:21px;
 }
 
-.paymentBottom{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:7px;
-
-  margin-top:13px;
-
+.paymentBreakdown{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:18px;
 }
 
-.paymentDot{
-
-  width:6px;
-  height:6px;
-
-  border-radius:50%;
-
-  background:var(--green);
-
-  box-shadow:
-    0 0 9px rgba(85,217,150,.5);
-
+.paymentBox{
+    background:rgba(0,0,0,.20);
+    border:1px solid rgba(255,255,255,.06);
+    border-radius:18px;
+    padding:13px;
 }
 
-.paymentStatus{
-
-  color:#777;
-
-  font-size:8px;
-
+.paymentBox .small{
+    font-size:10px;
+    color:var(--muted);
+    margin-bottom:5px;
 }
 
-
-/* =========================================================
-   SEARCH
-========================================================= */
-
-.search{
-
-  position:relative;
-
-  margin-bottom:12px;
-
+.paymentBox .amount{
+    font-size:18px;
+    font-weight:800;
 }
 
-.searchIcon{
-
-  position:absolute;
-
-  left:14px;
-
-  top:50%;
-
-  transform:translateY(-50%);
-
-  color:#666;
-
-  font-size:17px;
-
-  pointer-events:none;
-
+.paymentBox.personal .amount{
+    color:var(--blue);
 }
 
-.search input{
-
-  width:100%;
-
-  height:47px;
-
-  padding:
-    0 14px 0 42px;
-
-  border-radius:14px;
-
-  border:
-    1px solid var(--border);
-
-  background:
-    rgba(16,16,16,.88);
-
-  color:white;
-
-  outline:none;
-
-  font-size:11px;
-
-  transition:.2s;
-
+.paymentBox.group .amount{
+    color:var(--purple);
 }
 
-.search input:focus{
+/* ================= SEARCH ================= */
 
-  border-color:
-    rgba(215,179,106,.42);
-
-  box-shadow:
-    0 0 0 3px
-    rgba(215,179,106,.045);
-
+.searchBox{
+    position:relative;
+    margin-bottom:14px;
 }
 
-.search input::placeholder{
-  color:#505050;
+.searchBox input{
+    width:100%;
+    height:52px;
+    border-radius:18px;
+    border:1px solid var(--line);
+    outline:none;
+    background:var(--card);
+    color:white;
+    padding:0 16px 0 46px;
+    font-size:13px;
 }
 
+.searchBox span{
+    position:absolute;
+    left:17px;
+    top:16px;
+    color:var(--muted);
+}
 
-/* =========================================================
-   STATS
-========================================================= */
+/* ================= STATS ================= */
 
-.stats{
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(4,1fr);
-
-  gap:7px;
-
-  margin-bottom:18px;
-
+.statsGrid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:8px;
+    margin-bottom:15px;
 }
 
 .stat{
-
-  min-height:69px;
-
-  padding:11px 6px;
-
-  border-radius:14px;
-
-  border:
-    1px solid var(--border);
-
-  background:
-
-    linear-gradient(
-      145deg,
-      #141414,
-      #0d0d0d
-    );
-
-  text-align:center;
-
-  display:flex;
-
-  flex-direction:column;
-
-  justify-content:center;
-
-  transition:.2s;
-
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:12px 8px;
+    text-align:center;
 }
 
-.stat:hover{
-
-  border-color:#343434;
-
-}
-
-.statValue{
-
-  color:var(--goldLight);
-
-  font-size:19px;
-
-  line-height:1;
-
-  font-weight:800;
-
+.statNumber{
+    font-size:20px;
+    font-weight:800;
 }
 
 .statLabel{
-
-  color:#606060;
-
-  font-size:6.5px;
-
-  letter-spacing:1px;
-
-  margin-top:7px;
-
-  font-weight:700;
-
+    color:var(--muted);
+    font-size:9px;
+    margin-top:3px;
 }
 
+/* ================= SECTION ================= */
 
-/* =========================================================
-   SECTION HEADER
-========================================================= */
-
-.sectionHeader{
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-
-  margin:
-    3px 2px 10px;
-
+.sectionHead{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:20px 2px 10px;
 }
 
-.sectionTitle{
-
-  font-size:13px;
-
-  font-weight:800;
-
-  letter-spacing:-.2px;
-
+.sectionHead h2{
+    font-size:15px;
+    font-weight:800;
 }
 
-.sectionCount{
-
-  color:#5f5f5f;
-
-  font-size:8px;
-
+.sectionHead span{
+    font-size:10px;
+    color:var(--muted);
 }
 
+/* ================= STUDENT CARD ================= */
 
-/* =========================================================
-   CARDS
-========================================================= */
-
-.cards{
-
-  display:grid;
-
-  gap:9px;
-
+.students{
+    display:flex;
+    flex-direction:column;
+    gap:13px;
 }
 
 .studentCard{
-
-  position:relative;
-
-  padding:14px;
-
-  border:
-    1px solid var(--border);
-
-  border-radius:18px;
-
-  background:
-
-    linear-gradient(
-      145deg,
-      rgba(19,19,19,.98),
-      rgba(14,14,14,.98)
-    );
-
-  transition:
-    border-color .2s,
-    transform .2s,
-    box-shadow .2s;
-
-  animation:
-    cardIn .25s ease both;
-
+    position:relative;
+    background:
+        linear-gradient(145deg,rgba(255,255,255,.035),transparent),
+        var(--card);
+    border:1px solid var(--line);
+    border-radius:27px;
+    padding:18px;
+    overflow:hidden;
+    transition:.2s;
 }
 
-@keyframes cardIn{
-
-  from{
-    opacity:0;
-    transform:translateY(5px);
-  }
-
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-
+.studentCard:active{
+    transform:scale(.99);
 }
 
-.studentCard:hover{
-
-  border-color:#343434;
-
-  box-shadow:
-    0 12px 35px rgba(0,0,0,.15);
-
+.studentCard.live{
+    border-color:rgba(52,211,153,.28);
 }
 
-.studentCard.inactive{
-
-  background:#0c0c0c;
-
-  border-color:#1d1d1d;
-
-  opacity:.72;
-
+.studentCard.completed{
+    border-color:rgba(96,165,250,.22);
 }
 
 .studentHeader{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:10px;
-
+    display:flex;
+    align-items:center;
+    gap:13px;
 }
 
 .avatar{
-
-  width:43px;
-  height:43px;
-
-  flex:none;
-
-  border-radius:13px;
-
-  background:
-
-    linear-gradient(
-      145deg,
-      #1d180e,
-      #12100c
-    );
-
-  border:
-    1px solid #4e4028;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  color:var(--goldLight);
-
-  font-size:14px;
-
-  font-weight:800;
-
+    width:52px;
+    height:52px;
+    flex:none;
+    border-radius:18px;
+    display:grid;
+    place-items:center;
+    font-size:18px;
+    font-weight:800;
+    color:#111;
+    background:linear-gradient(135deg,#f1cd77,#b88c32);
 }
 
 .studentInfo{
-
-  min-width:0;
-
-  flex:1;
-
+    min-width:0;
+    flex:1;
 }
 
 .studentName{
-
-  font-size:12px;
-
-  font-weight:800;
-
-  white-space:nowrap;
-
-  overflow:hidden;
-
-  text-overflow:ellipsis;
-
+    font-size:16px;
+    font-weight:800;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
 .studentPhone{
-
-  color:#5e5e5e;
-
-  font-size:8px;
-
-  margin-top:4px;
-
+    color:var(--muted);
+    font-size:11px;
+    margin-top:4px;
 }
 
-.badges{
-
-  display:flex;
-
-  flex-wrap:wrap;
-
-  justify-content:flex-end;
-
-  gap:4px;
-
-  max-width:120px;
-
+.statusPill{
+    padding:6px 9px;
+    border-radius:999px;
+    font-size:9px;
+    font-weight:700;
+    white-space:nowrap;
 }
 
-.badge{
-
-  padding:
-    5px 7px;
-
-  border-radius:7px;
-
-  font-size:6.5px;
-
-  font-weight:800;
-
-  letter-spacing:.45px;
-
-  white-space:nowrap;
-
+.statusActive{
+    color:#7ff1c2;
+    background:rgba(52,211,153,.10);
 }
 
-.badge.active{
-
-  color:var(--green);
-
-  background:
-    rgba(85,217,150,.055);
-
-  border:
-    1px solid rgba(85,217,150,.15);
-
+.statusCompleted{
+    color:#93c5fd;
+    background:rgba(96,165,250,.10);
 }
 
-.badge.live{
-
-  color:#78c8ff;
-
-  background:
-    rgba(120,200,255,.055);
-
-  border:
-    1px solid rgba(120,200,255,.15);
-
+.statusInactive{
+    color:#ff929b;
+    background:rgba(255,95,109,.10);
 }
 
-.badge.completed{
-
-  color:var(--goldLight);
-
-  background:
-    rgba(215,179,106,.055);
-
-  border:
-    1px solid rgba(215,179,106,.16);
-
+.statusLive{
+    color:#7ff1c2;
+    background:rgba(52,211,153,.14);
+    animation:pulse 1.6s infinite;
 }
 
-.badge.inactive{
-
-  color:#888;
-
-  background:#171717;
-
-  border:
-    1px solid #292929;
-
+@keyframes pulse{
+    50%{box-shadow:0 0 0 5px rgba(52,211,153,.05)}
 }
-
-
-/* =========================================================
-   TYPE
-========================================================= */
 
 .typeRow{
-
-  margin-top:11px;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-
-  padding:
-    8px 10px;
-
-  background:#0b0b0b;
-
-  border:
-    1px solid #202020;
-
-  border-radius:10px;
-
+    display:flex;
+    gap:7px;
+    margin-top:13px;
 }
 
-.typeInfo{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:7px;
-
+.typeBadge{
+    padding:6px 10px;
+    border-radius:10px;
+    font-size:9px;
+    font-weight:700;
+    border:1px solid var(--line);
 }
 
-.typeLabel{
-
-  color:#555;
-
-  font-size:7px;
-
-  text-transform:uppercase;
-
-  letter-spacing:1px;
-
+.typePersonal{
+    color:#8ec5ff;
+    background:rgba(96,165,250,.08);
 }
 
-.typeValue{
-
-  color:var(--goldLight);
-
-  font-size:9px;
-
-  font-weight:800;
-
+.typeGroup{
+    color:#c7adff;
+    background:rgba(167,139,250,.08);
 }
 
-.editType{
+/* ================= PROGRESS ================= */
 
-  border:
-    1px solid #393124;
-
-  background:#15120e;
-
-  color:var(--goldLight);
-
-  border-radius:8px;
-
-  padding:
-    6px 8px;
-
-  font-size:7px;
-
-  font-weight:800;
-
-}
-
-
-/* =========================================================
-   LAST ATTENDANCE
-========================================================= */
-
-.lastAttendance{
-
-  margin-top:7px;
-
-  padding:
-    9px 10px;
-
-  border-radius:10px;
-
-  background:#0b0b0b;
-
-  border:
-    1px solid #1d1d1d;
-
-}
-
-.lastLabel{
-
-  color:#505050;
-
-  font-size:6.5px;
-
-  text-transform:uppercase;
-
-  letter-spacing:1px;
-
-}
-
-.lastText{
-
-  color:#bcbcbc;
-
-  font-size:8px;
-
-  line-height:1.5;
-
-  margin-top:4px;
-
-}
-
-
-/* =========================================================
-   PROGRESS
-========================================================= */
-
-.progressBox{
-
-  margin-top:10px;
-
+.progressSection{
+    margin-top:16px;
 }
 
 .progressTop{
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-
-  margin-bottom:6px;
-
+    display:flex;
+    justify-content:space-between;
+    font-size:10px;
+    margin-bottom:7px;
 }
 
-.progressLabel{
-
-  color:#555;
-
-  font-size:6.5px;
-
-  letter-spacing:1px;
-
-  font-weight:700;
-
+.progressTop span:first-child{
+    color:var(--muted);
 }
 
-.progressCount{
-
-  color:#999;
-
-  font-size:7.5px;
-
-  font-weight:800;
-
-}
-
-.progress{
-
-  height:5px;
-
-  width:100%;
-
-  border-radius:20px;
-
-  background:#222;
-
-  overflow:hidden;
-
+.progressTop span:last-child{
+    font-weight:700;
 }
 
 .progressBar{
-
-  height:100%;
-
-  border-radius:20px;
-
-  background:
-
-    linear-gradient(
-      90deg,
-      var(--gold),
-      var(--goldLight)
-    );
-
-  box-shadow:
-    0 0 8px rgba(215,179,106,.15);
-
+    height:8px;
+    border-radius:999px;
+    background:#22252d;
+    overflow:hidden;
 }
 
-
-/* =========================================================
-   ACTIONS
-========================================================= */
-
-.actions{
-
-  display:grid;
-
-  grid-template-columns:
-    1.25fr 1fr 1fr 1fr;
-
-  gap:5px;
-
-  margin-top:10px;
-
+.progressFill{
+    height:100%;
+    border-radius:999px;
+    background:linear-gradient(90deg,var(--gold),var(--gold2));
+    transition:.5s;
 }
 
-.action{
+/* ================= INFO GRID ================= */
 
-  min-height:35px;
-
-  border:
-    1px solid #272727;
-
-  border-radius:9px;
-
-  background:#141414;
-
-  color:#aaa;
-
-  font-size:7px;
-
-  font-weight:800;
-
+.infoGrid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+    margin-top:15px;
 }
 
-.action.attend{
-
-  background:
-
-    linear-gradient(
-      135deg,
-      var(--goldLight),
-      var(--gold)
-    );
-
-  color:#111;
-
-  border:0;
-
+.infoItem{
+    background:rgba(255,255,255,.025);
+    border:1px solid rgba(255,255,255,.05);
+    border-radius:15px;
+    padding:11px 9px;
 }
 
-.action.wa{
-  color:#72dfa0;
+.infoItem .label{
+    color:var(--muted);
+    font-size:9px;
 }
 
-.action.call{
-  color:#7eb9ff;
+.infoItem .value{
+    font-size:12px;
+    font-weight:700;
+    margin-top:4px;
 }
 
-.notActiveBtn{
+/* ================= ACTIONS ================= */
 
-  width:100%;
-
-  margin-top:6px;
-
-  min-height:34px;
-
-  border-radius:9px;
-
-  border:
-    1px solid rgba(255,119,119,.14);
-
-  background:
-    rgba(255,119,119,.035);
-
-  color:#dc7d7d;
-
-  font-size:7px;
-
-  font-weight:800;
-
+.actionGrid{
+    display:grid;
+    grid-template-columns:1.2fr 1fr 1fr;
+    gap:8px;
+    margin-top:15px;
 }
 
-.activateBtn{
-
-  width:100%;
-
-  min-height:35px;
-
-  margin-top:10px;
-
-  border-radius:9px;
-
-  border:
-    1px solid rgba(85,217,150,.16);
-
-  background:
-    rgba(85,217,150,.045);
-
-  color:#6ee3a0;
-
-  font-size:7px;
-
-  font-weight:800;
-
+.actionBtn{
+    min-height:43px;
+    border-radius:14px;
+    border:1px solid var(--line);
+    background:#181b21;
+    color:white;
+    font-size:10px;
+    font-weight:700;
 }
 
+.actionPrimary{
+    background:linear-gradient(135deg,#e0b85f,#b98c34);
+    color:#111;
+    border:0;
+}
 
-/* =========================================================
-   EMPTY / LOADING
-========================================================= */
+.actionGreen{
+    color:#73e8b8;
+}
+
+.actionBlue{
+    color:#86bdff;
+}
+
+.actionRed{
+    color:#ff8d97;
+}
+
+/* ================= EMPTY ================= */
 
 .empty{
-
-  border:
-    1px dashed #292929;
-
-  border-radius:16px;
-
-  padding:42px 20px;
-
-  text-align:center;
-
-  color:#666;
-
+    padding:45px 20px;
+    text-align:center;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:24px;
 }
 
 .emptyIcon{
-
-  font-size:27px;
-
-  margin-bottom:9px;
-
+    font-size:35px;
+    margin-bottom:10px;
 }
 
-.emptyText{
-
-  font-size:9px;
-
-  line-height:1.6;
-
+.empty h3{
+    font-size:14px;
 }
 
-.loading{
-
-  padding:42px;
-
-  text-align:center;
-
-  color:#666;
-
-  font-size:9px;
-
+.empty p{
+    color:var(--muted);
+    font-size:11px;
+    margin-top:5px;
 }
 
-
-/* =========================================================
-   FAB
-========================================================= */
-
-.fab{
-
-  position:fixed;
-
-  right:17px;
-
-  bottom:
-    calc(75px + env(safe-area-inset-bottom));
-
-  z-index:60;
-
-  width:53px;
-  height:53px;
-
-  border:0;
-
-  border-radius:17px;
-
-  background:
-
-    linear-gradient(
-      135deg,
-      var(--goldLight),
-      var(--gold)
-    );
-
-  color:#111;
-
-  font-size:25px;
-
-  box-shadow:
-    0 12px 35px rgba(0,0,0,.5);
-
-  transition:.2s;
-
-}
-
-.fab:hover{
-
-  transform:
-    translateY(-2px);
-
-}
-
-
-/* =========================================================
-   BOTTOM NAV
-========================================================= */
+/* ================= BOTTOM NAV ================= */
 
 .bottomNav{
-
-  position:fixed;
-
-  left:0;
-  right:0;
-
-  bottom:0;
-
-  z-index:55;
-
-  display:flex;
-
-  justify-content:center;
-
-  gap:2px;
-
-  padding:
-    7px 7px
-    calc(7px + env(safe-area-inset-bottom));
-
-  background:
-    rgba(8,8,8,.94);
-
-  backdrop-filter:
-    blur(20px);
-
-  -webkit-backdrop-filter:
-    blur(20px);
-
-  border-top:
-    1px solid #202020;
-
+    position:fixed;
+    z-index:50;
+    left:50%;
+    bottom:10px;
+    transform:translateX(-50%);
+    width:min(calc(100% - 22px),520px);
+    padding:8px;
+    border-radius:23px;
+    background:rgba(18,20,25,.94);
+    backdrop-filter:blur(18px);
+    border:1px solid rgba(255,255,255,.09);
+    box-shadow:0 20px 50px rgba(0,0,0,.45);
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
 }
 
-.navBtn{
-
-  flex:1;
-
-  max-width:120px;
-
-  border:0;
-
-  background:none;
-
-  color:#555;
-
-  padding:
-    5px 2px;
-
-  font-size:6.5px;
-
-  font-weight:800;
-
+.navItem{
+    min-height:53px;
+    border-radius:17px;
+    background:transparent;
+    color:#777d88;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    font-size:9px;
+    font-weight:700;
 }
 
-.navBtn.active{
-
-  color:var(--goldLight);
-
+.navItem .navIcon{
+    font-size:17px;
 }
 
-.navIcon{
-
-  display:block;
-
-  font-size:15px;
-
-  margin-bottom:3px;
-
+.navItem.active{
+    color:#f0ca70;
+    background:rgba(215,173,85,.09);
 }
 
-
-/* =========================================================
-   MODAL
-========================================================= */
+/* ================= MODAL ================= */
 
 .modal{
-
-  position:fixed;
-
-  inset:0;
-
-  z-index:100;
-
-  display:none;
-
-  align-items:flex-end;
-
-  justify-content:center;
-
-  padding:8px;
-
-  background:
-    rgba(0,0,0,.80);
-
-  backdrop-filter:
-    blur(7px);
-
-  -webkit-backdrop-filter:
-    blur(7px);
-
+    position:fixed;
+    inset:0;
+    z-index:100;
+    display:none;
+    align-items:flex-end;
+    justify-content:center;
+    background:rgba(0,0,0,.72);
+    backdrop-filter:blur(7px);
 }
 
 .modal.show{
-
-  display:flex;
-
+    display:flex;
 }
 
-.modalBox{
-
-  width:100%;
-
-  max-width:580px;
-
-  max-height:92vh;
-
-  overflow:auto;
-
-  padding:17px;
-
-  border:
-    1px solid #303030;
-
-  border-radius:
-    21px 21px 13px 13px;
-
-  background:
-
-    linear-gradient(
-      145deg,
-      #131313,
-      #0e0e0e
-    );
-
-  animation:
-    modalUp .22s ease;
-
+.sheet{
+    width:min(100%,650px);
+    max-height:92vh;
+    overflow:auto;
+    background:#101216;
+    border:1px solid var(--line);
+    border-radius:29px 29px 0 0;
+    padding:20px 16px calc(25px + env(safe-area-inset-bottom));
+    animation:sheetUp .25s ease;
 }
 
-@keyframes modalUp{
-
-  from{
-    transform:translateY(25px);
-    opacity:0;
-  }
-
-  to{
-    transform:translateY(0);
-    opacity:1;
-  }
-
+@keyframes sheetUp{
+    from{transform:translateY(100%)}
+    to{transform:translateY(0)}
 }
 
-.modalHeader{
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-
-  margin-bottom:16px;
-
+.sheetHead{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
 }
 
-.modalTitle{
-
-  font-size:14px;
-
-  font-weight:800;
-
-}
-
-.modalSub{
-
-  color:#5f5f5f;
-
-  font-size:8px;
-
-  margin-top:4px;
-
+.sheetHead h3{
+    font-size:17px;
 }
 
 .close{
-
-  width:32px;
-  height:32px;
-
-  border:
-    1px solid #292929;
-
-  border-radius:9px;
-
-  background:#171717;
-
-  color:#aaa;
-
-  font-size:17px;
-
+    width:38px;
+    height:38px;
+    border-radius:13px;
+    background:#1b1e24;
+    color:white;
 }
 
-
-/* =========================================================
-   FORM
-========================================================= */
-
-.formGroup{
-
-  margin-bottom:13px;
-
+.field{
+    margin-bottom:12px;
 }
 
-.formLabel{
-
-  display:block;
-
-  color:#656565;
-
-  font-size:7px;
-
-  text-transform:uppercase;
-
-  letter-spacing:1px;
-
-  margin-bottom:6px;
-
-  font-weight:700;
-
+.field label{
+    display:block;
+    color:#aeb3bd;
+    font-size:10px;
+    margin-bottom:6px;
 }
 
-.formInput,
-.formTextarea{
-
-  width:100%;
-
-  border:
-    1px solid #292929;
-
-  border-radius:10px;
-
-  background:#090909;
-
-  color:white;
-
-  outline:none;
-
-  padding:11px;
-
-  font-size:10px;
-
-  transition:.2s;
-
+.field input,
+.field select,
+.field textarea{
+    width:100%;
+    border:1px solid var(--line);
+    background:#171a20;
+    color:white;
+    outline:none;
+    border-radius:15px;
+    min-height:48px;
+    padding:0 13px;
+    font-size:12px;
 }
 
-.formInput{
-
-  height:42px;
-
+.field textarea{
+    padding-top:12px;
+    min-height:90px;
+    resize:none;
 }
 
-.formInput:focus,
-.formTextarea:focus{
-
-  border-color:#675432;
-
-  box-shadow:
-    0 0 0 3px
-    rgba(215,179,106,.035);
-
+.formGrid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
 }
 
-.formTextarea{
-
-  min-height:75px;
-
-  resize:vertical;
-
+.saveBtn{
+    width:100%;
+    min-height:51px;
+    margin-top:6px;
+    border-radius:17px;
+    background:linear-gradient(135deg,#efca72,#bd9037);
+    color:#111;
+    font-weight:800;
 }
 
+/* ================= TYPE SWITCH ================= */
 
-/* =========================================================
-   TYPE GRID
-========================================================= */
-
-.typeGrid{
-
-  display:grid;
-
-  grid-template-columns:1fr 1fr;
-
-  gap:7px;
-
+.typeSwitch{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
 }
 
-.typeOption{
-
-  border:
-    1px solid #292929;
-
-  background:#0b0b0b;
-
-  border-radius:12px;
-
-  padding:13px 8px;
-
-  color:#777;
-
-  text-align:center;
-
+.typeChoice{
+    min-height:47px;
+    border-radius:14px;
+    border:1px solid var(--line);
+    background:#171a20;
+    color:#8e949e;
+    font-size:11px;
+    font-weight:700;
 }
 
-.typeOption.selected{
-
-  border-color:#a9874d;
-
-  background:
-    rgba(215,179,106,.075);
-
-  color:var(--goldLight);
-
+.typeChoice.selected{
+    color:#111;
+    background:linear-gradient(135deg,#efca72,#bd9037);
 }
 
-.typeIcon{
+/* ================= HISTORY ================= */
 
-  display:block;
-
-  font-size:19px;
-
-  margin-bottom:5px;
-
+.historyList{
+    display:flex;
+    flex-direction:column;
+    gap:9px;
 }
-
-.typeName{
-
-  font-size:8px;
-
-  font-weight:800;
-
-}
-
-
-/* =========================================================
-   OPTION GRID
-========================================================= */
-
-.optionGrid{
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(2,1fr);
-
-  gap:6px;
-
-}
-
-.optionBtn{
-
-  min-height:37px;
-
-  border:
-    1px solid #292929;
-
-  background:#0b0b0b;
-
-  border-radius:9px;
-
-  color:#888;
-
-  font-size:8px;
-
-  padding:5px;
-
-}
-
-.optionBtn.selected{
-
-  color:#111;
-
-  background:var(--goldLight);
-
-  border-color:var(--goldLight);
-
-  font-weight:800;
-
-}
-
-
-/* =========================================================
-   CUSTOM INPUT BOXES
-========================================================= */
-
-.customRouteBox,
-.customRemarkBox{
-
-  display:none;
-
-  margin-top:7px;
-
-}
-
-.customRouteBox.show,
-.customRemarkBox.show{
-
-  display:block;
-
-}
-
-.customRouteHint,
-.customRemarkHint{
-
-  color:#505050;
-
-  font-size:6.5px;
-
-  margin-top:5px;
-
-  line-height:1.5;
-
-}
-
-
-/* =========================================================
-   GOLD BUTTON
-========================================================= */
-
-.goldBtn{
-
-  width:100%;
-
-  min-height:43px;
-
-  border:0;
-
-  border-radius:10px;
-
-  background:
-
-    linear-gradient(
-      135deg,
-      var(--goldLight),
-      var(--gold)
-    );
-
-  color:#111;
-
-  font-size:9px;
-
-  font-weight:800;
-
-  box-shadow:
-    0 7px 20px rgba(215,179,106,.07);
-
-}
-
-
-/* =========================================================
-   HISTORY
-========================================================= */
 
 .historyItem{
-
-  padding:11px;
-
-  border:
-    1px solid #242424;
-
-  border-radius:11px;
-
-  background:#0b0b0b;
-
-  margin-bottom:6px;
-
+    background:#171a20;
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:12px;
 }
 
-.historyNumber{
-
-  color:var(--goldLight);
-
-  font-size:7px;
-
-  font-weight:800;
-
-  margin-bottom:5px;
-
+.historyTop{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
 }
 
-.historyText{
-
-  color:#bdbdbd;
-
-  font-size:8px;
-
-  line-height:1.6;
-
+.historyRoute{
+    font-size:12px;
+    font-weight:800;
 }
 
+.historyDate{
+    color:var(--muted);
+    font-size:9px;
+}
 
-/* =========================================================
-   TOAST
-========================================================= */
+.historyBottom{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    margin-top:6px;
+    color:#aeb3bd;
+    font-size:10px;
+}
+
+/* ================= TOAST ================= */
 
 .toast{
-
-  position:fixed;
-
-  left:50%;
-
-  bottom:
-    calc(87px + env(safe-area-inset-bottom));
-
-  z-index:200;
-
-  transform:
-    translateX(-50%)
-    translateY(15px);
-
-  opacity:0;
-
-  pointer-events:none;
-
-  background:#191919;
-
-  border:
-    1px solid #333;
-
-  color:#eee;
-
-  border-radius:10px;
-
-  padding:
-    10px 14px;
-
-  font-size:8px;
-
-  white-space:nowrap;
-
-  transition:.22s;
-
-  box-shadow:
-    0 10px 30px rgba(0,0,0,.4);
-
+    position:fixed;
+    z-index:200;
+    left:50%;
+    bottom:85px;
+    transform:translate(-50%,20px);
+    background:#f3f3f3;
+    color:#111;
+    padding:11px 16px;
+    border-radius:14px;
+    font-size:11px;
+    font-weight:700;
+    opacity:0;
+    pointer-events:none;
+    transition:.25s;
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
 }
 
 .toast.show{
-
-  opacity:1;
-
-  transform:
-    translateX(-50%)
-    translateY(0);
-
+    opacity:1;
+    transform:translate(-50%,0);
 }
 
+/* ================= LOADING ================= */
 
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media(max-width:500px){
-
-  .container{
-
-    padding-left:12px;
-    padding-right:12px;
-
-  }
-
-  .paymentHero{
-
-    padding:16px;
-
-    border-radius:18px;
-
-  }
-
-  .paymentAmount{
-
-    font-size:25px;
-
-  }
-
-  .stats{
-
-    gap:5px;
-
-  }
-
-  .stat{
-
-    min-height:66px;
-
-  }
-
-  .statValue{
-
-    font-size:17px;
-
-  }
-
-  .studentCard{
-
-    padding:13px;
-
-  }
-
-  .badges{
-
-    max-width:95px;
-
-  }
-
-  .actions{
-
-    gap:4px;
-
-  }
-
-  .action{
-
-    font-size:6.5px;
-
-  }
-
+.loading{
+    text-align:center;
+    padding:30px;
+    color:var(--muted);
+    font-size:11px;
 }
 
+/* ================= RESPONSIVE ================= */
 
-/* =========================================================
-   SMALL PHONES
-========================================================= */
+@media(max-width:430px){
+    .container{
+        padding:13px;
+    }
 
-@media(max-width:370px){
+    .paymentTotal{
+        font-size:31px;
+    }
 
-  .brandSub,
-  .clockDate{
+    .statsGrid{
+        gap:6px;
+    }
 
-    display:none;
+    .stat{
+        padding:11px 5px;
+    }
 
-  }
+    .statNumber{
+        font-size:18px;
+    }
 
-  .stats{
+    .infoGrid{
+        grid-template-columns:repeat(3,1fr);
+    }
 
-    grid-template-columns:
-      repeat(2,1fr);
-
-  }
-
-  .actions{
-
-    grid-template-columns:
-      1fr 1fr;
-
-  }
-
-  .badges{
-
-    max-width:85px;
-
-  }
-
+    .actionGrid{
+        grid-template-columns:1.15fr 1fr 1fr;
+    }
 }
-
-
-/* =========================================================
-   TABLET / DESKTOP
-========================================================= */
-
-@media(min-width:700px){
-
-  .container{
-
-    padding-top:20px;
-
-  }
-
-  .cards{
-
-    grid-template-columns:
-      repeat(2,1fr);
-
-  }
-
-}
-
 </style>
 </head>
 
-
 <body>
 
+<div class="container">
 
-<!-- =======================================================
-     HEADER
-======================================================= -->
+    <!-- HEADER -->
+    <header class="header">
+        <div class="brand">
+            <div class="logo">A1</div>
 
-<header class="header">
-
-  <div class="headerInner">
-
-    <div class="brand">
-
-      <div class="logo">
-        A1
-      </div>
-
-      <div class="brandText">
-
-        <div class="brandTitle">
-          A1 Attendance
+            <div class="brandText">
+                <h1>A1 Driving Classes</h1>
+                <p>Attendance & Student Management</p>
+            </div>
         </div>
 
-        <div class="brandSub">
-          DRIVING TRACKING SYSTEM
+        <div class="headerActions">
+            <button class="iconBtn" onclick="loadStudents()">↻</button>
+            <button class="iconBtn" onclick="openAddStudent()">＋</button>
+        </div>
+    </header>
+
+    <!-- MONTHLY PAYMENT -->
+    <section class="paymentHero">
+
+        <div class="paymentTop">
+
+            <div>
+                <div class="paymentLabel">
+                    TOTAL PAYMENT RECEIVED THIS MONTH
+                </div>
+
+                <div class="paymentTotal" id="monthlyPayment">
+                    ₹0
+                </div>
+
+                <div class="paymentMonth" id="paymentMonth">
+                    Loading...
+                </div>
+            </div>
+
+            <div class="paymentIcon">
+                ₹
+            </div>
+
         </div>
 
-      </div>
+        <div class="paymentBreakdown">
 
-    </div>
+            <div class="paymentBox personal">
+                <div class="small">
+                    PERSONAL CLASS
+                </div>
 
+                <div class="amount" id="personalPayment">
+                    ₹0
+                </div>
+            </div>
 
-    <div class="headerRight">
+            <div class="paymentBox group">
+                <div class="small">
+                    GROUP CLASS
+                </div>
 
-      <div class="clock">
+                <div class="amount" id="groupPayment">
+                    ₹0
+                </div>
+            </div>
 
-        <div
-          class="clockTime"
-          id="clockTime">
-          --:--
         </div>
 
-        <div
-          class="clockDate"
-          id="clockDate">
-          ---
+    </section>
+
+    <!-- SEARCH -->
+    <div class="searchBox">
+        <span>⌕</span>
+
+        <input
+            id="searchInput"
+            type="search"
+            placeholder="Search student name or phone..."
+            oninput="renderStudents()"
+        >
+    </div>
+
+    <!-- STATS -->
+    <div class="statsGrid">
+
+        <div class="stat">
+            <div class="statNumber" id="activeCount">0</div>
+            <div class="statLabel">ACTIVE</div>
         </div>
 
-      </div>
-
-    </div>
-
-  </div>
-
-</header>
-
-
-<!-- =======================================================
-     MAIN
-======================================================= -->
-
-<main class="container">
-
-
-  <!-- =====================================================
-       PAYMENT THIS MONTH
-  ====================================================== -->
-
-  <section class="paymentHero">
-
-    <div class="paymentTop">
-
-      <div>
-
-        <div class="paymentLabel">
-          Total Payment Received
+        <div class="stat">
+            <div class="statNumber" id="completedCount">0</div>
+            <div class="statLabel">DONE</div>
         </div>
 
-        <div
-          class="paymentMonth"
-          id="paymentMonth">
-          This Month
+        <div class="stat">
+            <div class="statNumber" id="liveCount">0</div>
+            <div class="statLabel">LIVE</div>
         </div>
 
-        <div
-          class="paymentAmount"
-          id="monthlyPayment">
-          ₹0
+        <div class="stat">
+            <div class="statNumber" id="inactiveCount">0</div>
+            <div class="statLabel">INACTIVE</div>
         </div>
 
-      </div>
-
-
-      <div class="paymentIcon">
-        ₹
-      </div>
-
     </div>
 
-
-    <div class="paymentBottom">
-
-      <span class="paymentDot"></span>
-
-      <span class="paymentStatus">
-        Monthly collection overview
-      </span>
-
+    <!-- STUDENTS -->
+    <div class="sectionHead">
+        <h2 id="listTitle">All Students</h2>
+        <span id="studentTotal">0 students</span>
     </div>
 
-  </section>
-
-
-  <!-- =====================================================
-       SEARCH
-  ====================================================== -->
-
-  <div class="search">
-
-    <span class="searchIcon">
-      ⌕
-    </span>
-
-    <input
-      id="searchInput"
-      type="search"
-      placeholder="Search student or phone..."
-      autocomplete="off">
-
-  </div>
-
-
-  <!-- =====================================================
-       STATS
-  ====================================================== -->
-
-  <div class="stats">
-
-    <div class="stat">
-
-      <div
-        class="statValue"
-        id="activeCount">
-        0
-      </div>
-
-      <div class="statLabel">
-        ACTIVE
-      </div>
-
+    <div id="students" class="students">
+        <div class="loading">Loading students...</div>
     </div>
 
+</div>
 
-    <div class="stat">
-
-      <div
-        class="statValue"
-        id="completedCount">
-        0
-      </div>
-
-      <div class="statLabel">
-        COMPLETED
-      </div>
-
-    </div>
-
-
-    <div class="stat">
-
-      <div
-        class="statValue"
-        id="liveCount">
-        0
-      </div>
-
-      <div class="statLabel">
-        LIVE NOW
-      </div>
-
-    </div>
-
-
-    <div class="stat">
-
-      <div
-        class="statValue"
-        id="inactiveCount">
-        0
-      </div>
-
-      <div class="statLabel">
-        NOT ACTIVE
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- =====================================================
-       SECTION
-  ====================================================== -->
-
-  <div class="sectionHeader">
-
-    <div
-      class="sectionTitle"
-      id="sectionTitle">
-      Active Students
-    </div>
-
-    <div
-      class="sectionCount"
-      id="studentCount">
-      0 Students
-    </div>
-
-  </div>
-
-
-  <!-- =====================================================
-       STUDENTS
-  ====================================================== -->
-
-  <div
-    id="studentCards"
-    class="cards">
-
-    <div class="loading">
-      Loading students...
-    </div>
-
-  </div>
-
-</main>
-
-
-<!-- =======================================================
-     FAB
-======================================================= -->
-
-<button
-  class="fab"
-  onclick="openAddModal()">
-
-  +
-
-</button>
-
-
-<!-- =======================================================
-     BOTTOM NAV
-======================================================= -->
+<!-- BOTTOM NAV -->
 
 <nav class="bottomNav">
 
-  <button
-    class="navBtn active"
-    id="navActive"
-    onclick="setFilter('active')">
+    <button class="navItem active" onclick="setFilter('all',this)">
+        <span class="navIcon">⌂</span>
+        <span>All</span>
+    </button>
 
-    <span class="navIcon">
-      🚗
-    </span>
+    <button class="navItem" onclick="setFilter('active',this)">
+        <span class="navIcon">●</span>
+        <span>Active</span>
+    </button>
 
-    ACTIVE
+    <button class="navItem" onclick="setFilter('live',this)">
+        <span class="navIcon">◉</span>
+        <span>Live</span>
+    </button>
 
-  </button>
+    <button class="navItem" onclick="setFilter('completed',this)">
+        <span class="navIcon">✓</span>
+        <span>Done</span>
+    </button>
 
-
-  <button
-    class="navBtn"
-    id="navCompleted"
-    onclick="setFilter('completed')">
-
-    <span class="navIcon">
-      ✓
-    </span>
-
-    COMPLETED
-
-  </button>
-
-
-  <button
-    class="navBtn"
-    id="navLive"
-    onclick="setFilter('live')">
-
-    <span class="navIcon">
-      ●
-    </span>
-
-    LIVE
-
-  </button>
-
-
-  <button
-    class="navBtn"
-    id="navInactive"
-    onclick="setFilter('inactive')">
-
-    <span class="navIcon">
-      ⏸
-    </span>
-
-    NOT ACTIVE
-
-  </button>
+    <button class="navItem" onclick="setFilter('inactive',this)">
+        <span class="navIcon">○</span>
+        <span>Inactive</span>
+    </button>
 
 </nav>
 
+<!-- ADD / EDIT STUDENT MODAL -->
 
-<!-- =======================================================
-     ADD STUDENT MODAL
-======================================================= -->
+<div class="modal" id="studentModal">
 
-<div
-  class="modal"
-  id="addModal">
+    <div class="sheet">
 
-  <div class="modalBox">
-
-    <div class="modalHeader">
-
-      <div>
-
-        <div class="modalTitle">
-          Add Student
+        <div class="sheetHead">
+            <h3 id="studentModalTitle">Add Student</h3>
+            <button class="close" onclick="closeModal('studentModal')">✕</button>
         </div>
 
-        <div class="modalSub">
-          Create a new driving student
+        <input type="hidden" id="editStudentId">
+
+        <div class="field">
+            <label>STUDENT NAME</label>
+            <input id="studentName" placeholder="Enter student name">
         </div>
 
-      </div>
+        <div class="field">
+            <label>PHONE NUMBER</label>
+            <input id="studentPhone" type="tel" placeholder="10 digit mobile number">
+        </div>
 
-      <button
-        class="close"
-        onclick="closeModal('addModal')">
+        <div class="formGrid">
 
-        ×
+            <div class="field">
+                <label>TOTAL CLASSES</label>
+                <input id="totalClasses" type="number" value="20">
+            </div>
 
-      </button>
+            <div class="field">
+                <label>PAYMENT RECEIVED</label>
+                <input id="paymentAmount" type="number" placeholder="₹ Amount">
+            </div>
 
-    </div>
+        </div>
 
+        <div class="field">
+            <label>CLASS TYPE</label>
 
-    <div class="formGroup">
+            <div class="typeSwitch">
 
-      <label class="formLabel">
-        Phone Number
-      </label>
+                <button
+                    id="typePersonal"
+                    class="typeChoice selected"
+                    onclick="selectType('Personal')"
+                >
+                    PERSONAL
+                </button>
 
-      <input
-        id="studentPhone"
-        class="formInput"
-        type="tel"
-        maxlength="10"
-        inputmode="numeric"
-        placeholder="10 digit mobile number">
+                <button
+                    id="typeGroup"
+                    class="typeChoice"
+                    onclick="selectType('Group')"
+                >
+                    GROUP
+                </button>
 
-    </div>
+            </div>
+        </div>
 
-
-    <div class="formGroup">
-
-      <label class="formLabel">
-        Full Name
-      </label>
-
-      <input
-        id="studentName"
-        class="formInput"
-        type="text"
-        placeholder="Student full name">
-
-    </div>
-
-
-    <div class="formGroup">
-
-      <label class="formLabel">
-        Total Classes
-      </label>
-
-      <input
-        id="totalClasses"
-        class="formInput"
-        type="number"
-        min="1"
-        value="20">
-
-    </div>
-
-
-    <div class="formGroup">
-
-      <label class="formLabel">
-        Class Type
-      </label>
-
-      <div class="typeGrid">
-
-        <button
-          type="button"
-          class="typeOption"
-          id="addPersonal"
-          onclick="selectAddType('Personal')">
-
-          <span class="typeIcon">
-            👤
-          </span>
-
-          <span class="typeName">
-            PERSONAL
-          </span>
-
+        <button class="saveBtn" onclick="saveStudent()">
+            SAVE STUDENT
         </button>
 
-
-        <button
-          type="button"
-          class="typeOption selected"
-          id="addGroup"
-          onclick="selectAddType('Group')">
-
-          <span class="typeIcon">
-            👥
-          </span>
-
-          <span class="typeName">
-            GROUP
-          </span>
-
-        </button>
-
-      </div>
-
     </div>
-
-
-    <button
-      class="goldBtn"
-      onclick="saveStudent()">
-
-      SAVE STUDENT
-
-    </button>
-
-  </div>
 
 </div>
 
+<!-- ATTENDANCE MODAL -->
 
-<!-- =======================================================
-     ATTENDANCE MODAL
-======================================================= -->
+<div class="modal" id="attendanceModal">
 
-<div
-  class="modal"
-  id="attendanceModal">
+    <div class="sheet">
 
-  <div class="modalBox">
+        <div class="sheetHead">
+            <div>
+                <h3>Mark Attendance</h3>
+                <div id="attendanceStudentName"
+                     style="font-size:10px;color:#9298a5;margin-top:3px;">
+                </div>
+            </div>
 
-    <div class="modalHeader">
-
-      <div>
-
-        <div class="modalTitle">
-          Driving Track
+            <button class="close" onclick="closeModal('attendanceModal')">
+                ✕
+            </button>
         </div>
 
-        <div
-          class="modalSub"
-          id="attendanceStudentName">
+        <input type="hidden" id="attendanceStudentId">
+
+        <div class="field">
+            <label>ROUTE</label>
+
+            <select id="route">
+                <option>Bhanjpur</option>
+                <option>Baghra</option>
+                <option>Badbazar</option>
+                <option>Udala</option>
+                <option>Station Bazar</option>
+                <option>Lal Bazar</option>
+                <option>Kuchei</option>
+                <option>Other Route</option>
+            </select>
         </div>
 
-      </div>
+        <div class="field">
+            <label>DRIVING REMARK</label>
 
-      <button
-        class="close"
-        onclick="closeModal('attendanceModal')">
+            <select id="remark">
 
-        ×
+                <option>Good Driving</option>
+                <option>Needs Improvement</option>
+                <option>Good Turning</option>
+                <option>Bad Turning</option>
+                <option>Good Braking</option>
+                <option>Bad Braking</option>
+                <option>Good Clutch</option>
+                <option>Clutch Improvement</option>
+                <option>Good Traffic Control</option>
+                <option>Good Vehicle Control</option>
+                <option>Good Parking</option>
+                <option>Parking Improvement</option>
+                <option>Custom Remark</option>
 
-      </button>
+            </select>
 
-    </div>
-
-
-    <!-- ROUTE -->
-
-    <div class="formGroup">
-
-      <label class="formLabel">
-        Route
-      </label>
-
-      <div class="optionGrid">
-
-        <button
-          class="optionBtn routeOption"
-          onclick="selectRoute(this,'Bhanjpur')">
-
-          Bhanjpur
-
-        </button>
-
-
-        <button
-          class="optionBtn routeOption"
-          onclick="selectRoute(this,'Baghra')">
-
-          Baghra
-
-        </button>
-
-
-        <button
-          class="optionBtn routeOption"
-          onclick="selectRoute(this,'Badbazar')">
-
-          Badbazar
-
-        </button>
-
-
-        <button
-          class="optionBtn routeOption"
-          onclick="selectRoute(this,'Udala')">
-
-          Udala
-
-        </button>
-
-
-        <button
-          class="optionBtn routeOption"
-          onclick="selectRoute(this,'Station Bazar')">
-
-          Station Bazar
-
-        </button>
-
-
-        <button
-          class="optionBtn routeOption"
-          onclick="selectRoute(this,'Lal Bazar')">
-
-          Lal Bazar
-
-        </button>
-
-
-        <button
-          class="optionBtn routeOption"
-          onclick="selectRoute(this,'Kuchei')">
-
-          Kuchei
-
-        </button>
-
-
-        <button
-          class="optionBtn routeOption"
-          onclick="selectRoute(this,'Other Route')">
-
-          ✏️ Other Route
-
-        </button>
-
-      </div>
-
-
-      <div
-        class="customRouteBox"
-        id="customRouteBox">
-
-        <input
-          id="customRoute"
-          class="formInput"
-          type="text"
-          maxlength="80"
-          placeholder="Enter custom route name...">
-
-        <div class="customRouteHint">
-          Example: Deuli Road, Medical College Road, Baripada Bypass
         </div>
 
-      </div>
-
-    </div>
-
-
-    <!-- DISTANCE -->
-
-    <div class="formGroup">
-
-      <label class="formLabel">
-        Distance
-      </label>
-
-      <div class="optionGrid">
-
-        <button
-          type="button"
-          class="optionBtn distanceOption selected"
-          onclick="selectDistance(this,'5 KM')">
-
-          5 KM
-
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <!-- REMARK -->
-
-    <div class="formGroup">
-
-      <label class="formLabel">
-        Driving Remark
-      </label>
-
-      <div class="optionGrid">
-
-
-        <button
-          type="button"
-          class="optionBtn remarkOption"
-          onclick="selectRemark(this,'👍 Good Driving')">
-
-          👍 Good Driving
-
-        </button>
-
-
-        <button
-          type="button"
-          class="optionBtn remarkOption"
-          onclick="selectRemark(this,'⚠️ Needs Improvement')">
-
-          ⚠️ Needs Improvement
-
-        </button>
-
-
-        <button
-          type="button"
-          class="optionBtn remarkOption"
-          onclick="selectRemark(this,'🔄 Good Turning')">
-
-          🔄 Good Turning
-
-        </button>
-
-
-        <button
-          type="button"
-          class="optionBtn remarkOption"
-          onclick="selectRemark(this,'⚠️ Bad Turning')">
-
-          ⚠️ Bad Turning
-
-        </button>
-
-
-        <button
-          type="button"
-          class="optionBtn remarkOption"
-          onclick="selectRemark(this,'🛑 Good Braking')">
-
-          🛑 Good Braking
-
-        </button>
-
-
-        <button
-          type="button"
-          class="optionBtn remarkOption"
-          onclick="selectRemark(this,'⚠️ Bad Braking')">
-
-          ⚠️ Bad Braking
-
-        </button>
-
-
-        <button
-          type="button"
-          class="optionBtn remarkOption"
-          onclick="selectRemark(this,'⚙️ Good Clutch')">
-
-          ⚙️ Good Clutch
-
-        </button>
-
-
-        <button
-          type="button"
-          class="optionBtn remarkOption"
-          onclick="selectRemark(this,'⚙️ Clutch Improvement')">
-
-          ⚙️ Clutch Improvement
-
-        </button>
-
-
-        <button
-          type="button"
-          class="optionBtn remarkOption"
-          onclick="selectRemark(this,'🚦 Good Traffic Control')">
-
-          🚦 Good Traffic Control
-
-        </button>
-
-
-        <button
-          type="button"
-          class="optionBtn remarkOption"
-          onclick="selectRemark(this,'🚗 Good Vehicle Control')">
-
-          🚗 Good Vehicle Control
-
-        </button>
-
-
-        <button
-          type="button"
-          class="optionBtn remarkOption"
-          onclick="selectRemark(this,'🅿️ Good Parking')">
-
-          🅿️ Good Parking
-
-        </button>
-
-
-        <button
-          type="button"
-          class="optionBtn remarkOption"
-          onclick="selectRemark(this,'⚠️ Parking Improvement')">
-
-          ⚠️ Parking Improvement
-
-        </button>
-
-
-        <button
-          type="button"
-          class="optionBtn remarkOption"
-          onclick="selectRemark(this,'📝 Custom Remark')">
-
-          📝 Custom Remark
-
-        </button>
-
-      </div>
-
-
-      <div
-        class="customRemarkBox"
-        id="customRemarkBox">
-
-        <input
-          id="customRemark"
-          class="formInput"
-          type="text"
-          maxlength="150"
-          placeholder="Write your custom remark...">
-
-        <div class="customRemarkHint">
-          Example: Excellent control on slope / Needs more practice on reverse
+        <div class="field" id="customRemarkBox" style="display:none;">
+            <label>CUSTOM REMARK</label>
+            <textarea id="customRemark"></textarea>
         </div>
 
-      </div>
+        <button class="saveBtn" onclick="markAttendance()">
+            MARK ATTENDANCE
+        </button>
 
     </div>
-
-
-    <button
-      class="goldBtn"
-      onclick="saveAttendance()">
-
-      SAVE ATTENDANCE
-
-    </button>
-
-  </div>
 
 </div>
 
+<!-- HISTORY MODAL -->
 
-<!-- =======================================================
-     HISTORY MODAL
-======================================================= -->
+<div class="modal" id="historyModal">
 
-<div
-  class="modal"
-  id="historyModal">
+    <div class="sheet">
 
-  <div class="modalBox">
+        <div class="sheetHead">
 
-    <div class="modalHeader">
+            <div>
+                <h3>Attendance History</h3>
 
-      <div>
+                <div
+                    id="historyStudentName"
+                    style="font-size:10px;color:#9298a5;margin-top:3px;">
+                </div>
+            </div>
 
-        <div class="modalTitle">
-          Attendance History
+            <button class="close" onclick="closeModal('historyModal')">
+                ✕
+            </button>
+
         </div>
 
-        <div
-          class="modalSub"
-          id="historyStudentName">
-        </div>
-
-      </div>
-
-      <button
-        class="close"
-        onclick="closeModal('historyModal')">
-
-        ×
-
-      </button>
+        <div id="historyList" class="historyList"></div>
 
     </div>
 
-    <div id="historyList"></div>
-
-  </div>
-
 </div>
 
+<!-- TOAST -->
 
-<!-- =======================================================
-     EDIT TYPE MODAL
-======================================================= -->
+<div class="toast" id="toast"></div>
 
-<div
-  class="modal"
-  id="typeModal">
-
-  <div class="modalBox">
-
-    <div class="modalHeader">
-
-      <div>
-
-        <div class="modalTitle">
-          Edit Class Type
-        </div>
-
-        <div
-          class="modalSub"
-          id="typeStudentName">
-        </div>
-
-      </div>
-
-      <button
-        class="close"
-        onclick="closeModal('typeModal')">
-
-        ×
-
-      </button>
-
-    </div>
-
-
-    <div class="formGroup">
-
-      <label class="formLabel">
-        Select Class Type
-      </label>
-
-      <div class="typeGrid">
-
-        <button
-          type="button"
-          class="typeOption"
-          id="editPersonal"
-          onclick="selectEditType('Personal')">
-
-          <span class="typeIcon">
-            👤
-          </span>
-
-          <span class="typeName">
-            PERSONAL
-          </span>
-
-        </button>
-
-
-        <button
-          type="button"
-          class="typeOption"
-          id="editGroup"
-          onclick="selectEditType('Group')">
-
-          <span class="typeIcon">
-            👥
-          </span>
-
-          <span class="typeName">
-            GROUP
-          </span>
-
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <button
-      class="goldBtn"
-      onclick="saveClassType()">
-
-      SAVE CLASS TYPE
-
-    </button>
-
-  </div>
-
-</div>
-
-
-<!-- =======================================================
-     TOAST
-======================================================= -->
-
-<div
-  class="toast"
-  id="toast">
-</div>
-
-
-<!-- =======================================================
-     FIREBASE
-======================================================= -->
 
 <script type="module">
 
+/* ============================================================
+   FIREBASE
+============================================================ */
+
 import {
-  initializeApp
+    initializeApp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
-  getFirestore,
-  collection,
-  getDocs,
-  doc,
-  setDoc,
-  updateDoc,
-  arrayUnion
+    getFirestore,
+    collection,
+    getDocs,
+    addDoc,
+    updateDoc,
+    doc,
+    serverTimestamp,
+    onSnapshot
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
-/* =========================================================
-   FIREBASE CONFIG
-========================================================= */
-
 const firebaseConfig = {
 
-  apiKey:
-    "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
+    apiKey: "YOUR_API_KEY",
 
-  authDomain:
-    "abinash-driving.firebaseapp.com",
+    authDomain: "abinash-driving.firebaseapp.com",
 
-  projectId:
-    "abinash-driving",
+    projectId: "abinash-driving",
 
-  storageBucket:
-    "abinash-driving.appspot.com",
+    storageBucket: "abinash-driving.appspot.com",
 
-  messagingSenderId:
-    "641148830173",
+    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
 
-  appId:
-    "1:641148830173:web:b7a500e5e7e2463da0f634"
+    appId: "YOUR_APP_ID"
 
 };
 
 
-const app =
-  initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
-const db =
-  getFirestore(app);
+const db = getFirestore(app);
 
-const studentCollection =
-  collection(
-    db,
-    "studentData"
-  );
+const studentsRef = collection(db,"studentData");
 
 
-/* =========================================================
-   GLOBAL VARIABLES
-========================================================= */
+/* ============================================================
+   GLOBAL
+============================================================ */
 
 let students = [];
 
-let currentFilter =
-  "active";
+let currentFilter = "all";
 
-let currentStudentId =
-  null;
+let selectedClassType = "Personal";
 
-let selectedRoute =
-  "";
-
-let selectedDistance =
-  "5 KM";
-
-let selectedRemark =
-  "";
-
-let addClassType =
-  "Group";
-
-let editClassType =
-  "Group";
-
-let toastTimer;
+let unsubscribeStudents = null;
 
 
-/* =========================================================
-   SAFE HTML
-========================================================= */
+/* ============================================================
+   HELPERS
+============================================================ */
 
-function safe(value){
+function money(value){
 
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+    const n = Number(value || 0);
+
+    return "₹" + n.toLocaleString("en-IN");
 
 }
 
 
-/* =========================================================
-   ATTENDANCE HELPERS
-========================================================= */
+function escapeHTML(value){
 
-function getLogs(student){
-
-  return Array.isArray(
-    student.attendanceLogs
-  )
-    ? student.attendanceLogs
-    : [];
+    return String(value ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
 
 }
 
 
-function getDone(student){
+function getName(student){
 
-  const logs =
-    getLogs(student);
+    return student.name ||
+           student.studentName ||
+           student.fullName ||
+           "Unnamed Student";
 
-  const oldValue =
-    Number(
-      student.remaining || 0
+}
+
+
+function getPhone(student){
+
+    return student.phone ||
+           student.mobile ||
+           student.phoneNumber ||
+           "";
+
+}
+
+
+function getClassType(student){
+
+    return String(
+        student.classType ||
+        student.trainingType ||
+        student.sessionType ||
+        student.type ||
+        "Group"
+    ).toLowerCase() === "personal"
+        ? "Personal"
+        : "Group";
+
+}
+
+
+function getTotalClasses(student){
+
+    return Number(
+        student.totalClasses ||
+        student.totalClass ||
+        student.classes ||
+        20
     );
 
-  return Math.max(
-    logs.length,
-    oldValue,
-    0
-  );
+}
+
+
+function getAttendanceLogs(student){
+
+    if(Array.isArray(student.attendanceLogs))
+        return student.attendanceLogs;
+
+    if(Array.isArray(student.attendanceHistory))
+        return student.attendanceHistory;
+
+    if(Array.isArray(student.attendance))
+        return student.attendance;
+
+    return [];
 
 }
 
 
-function getTotal(student){
+function getCompletedClasses(student){
 
-  return Math.max(
-    Number(
-      student.totalClasses || 0
-    ),
-    1
-  );
+    const logs = getAttendanceLogs(student);
+
+    if(logs.length)
+        return logs.length;
+
+    if(student.completedClasses !== undefined)
+        return Number(student.completedClasses || 0);
+
+    if(student.attendedClasses !== undefined)
+        return Number(student.attendedClasses || 0);
+
+    const total = getTotalClasses(student);
+
+    if(student.remaining !== undefined)
+        return Math.max(0,total - Number(student.remaining));
+
+    return 0;
+
+}
+
+
+function getRemainingClasses(student){
+
+    const total = getTotalClasses(student);
+
+    return Math.max(
+        0,
+        total - getCompletedClasses(student)
+    );
+
+}
+
+
+function getLastAttendance(student){
+
+    const logs = getAttendanceLogs(student);
+
+    if(!logs.length)
+        return null;
+
+    const sorted = [...logs].sort((a,b)=>{
+
+        const ta = getTimeValue(a);
+
+        const tb = getTimeValue(b);
+
+        return tb-ta;
+
+    });
+
+    return sorted[0];
+
+}
+
+
+function getTimeValue(log){
+
+    if(!log)
+        return 0;
+
+    const raw =
+        log.timestamp ||
+        log.date ||
+        log.createdAt ||
+        log.time;
+
+    if(!raw)
+        return 0;
+
+    if(raw?.seconds)
+        return raw.seconds * 1000;
+
+    const d = new Date(raw);
+
+    return isNaN(d.getTime()) ? 0 : d.getTime();
+
+}
+
+
+function isLive(student){
+
+    const last = getLastAttendance(student);
+
+    if(!last)
+        return false;
+
+    const time = getTimeValue(last);
+
+    if(!time)
+        return false;
+
+    return Date.now() - time <= 30 * 60 * 1000;
 
 }
 
 
 function isCompleted(student){
 
-  return (
-    getDone(student) >=
-    getTotal(student)
-  );
+    return getCompletedClasses(student) >= getTotalClasses(student);
 
 }
 
 
 function isInactive(student){
 
-  return student.notActive === true;
-
-}
-
-
-/* =========================================================
-   TIME PARSER
-========================================================= */
-
-function parseAttendanceTime(log){
-
-  if(!log){
-    return null;
-  }
-
-  const match =
-    String(log).match(
-      /(\d{1,2}):(\d{2})\s*(AM|PM)/i
-    );
-
-  if(!match){
-    return null;
-  }
-
-  let hour =
-    Number(match[1]);
-
-  const minute =
-    Number(match[2]);
-
-  const ampm =
-    match[3].toUpperCase();
-
-  if(
-    ampm === "PM" &&
-    hour !== 12
-  ){
-
-    hour += 12;
-
-  }
-
-  if(
-    ampm === "AM" &&
-    hour === 12
-  ){
-
-    hour = 0;
-
-  }
-
-  return {
-    hour,
-    minute
-  };
-
-}
-
-
-/* =========================================================
-   TIME DISTANCE
-========================================================= */
-
-function timeDistance(logs){
-
-  if(!logs.length){
-    return 9999;
-  }
-
-  const parsed =
-    parseAttendanceTime(
-      logs[logs.length - 1]
-    );
-
-  if(!parsed){
-    return 9999;
-  }
-
-  const now =
-    new Date();
-
-  const currentMinutes =
-    now.getHours() * 60 +
-    now.getMinutes();
-
-  const logMinutes =
-    parsed.hour * 60 +
-    parsed.minute;
-
-  let diff =
-    Math.abs(
-      currentMinutes -
-      logMinutes
-    );
-
-  diff =
-    Math.min(
-      diff,
-      1440 - diff
-    );
-
-  return diff;
-
-}
-
-
-/* =========================================================
-   LIVE
-========================================================= */
-
-function isLive(student){
-
-  if(isInactive(student)){
-    return false;
-  }
-
-  const logs =
-    getLogs(student);
-
-  if(!logs.length){
-    return false;
-  }
-
-  return (
-    timeDistance(logs) <= 30
-  );
-
-}
-
-
-/* =========================================================
-   CLOCK
-========================================================= */
-
-function updateClock(){
-
-  const now =
-    new Date();
-
-  document.getElementById(
-    "clockTime"
-  ).textContent =
-    now.toLocaleTimeString(
-      "en-IN",
-      {
-        hour:"2-digit",
-        minute:"2-digit",
-        hour12:true
-      }
-    );
-
-
-  document.getElementById(
-    "clockDate"
-  ).textContent =
-    now.toLocaleDateString(
-      "en-IN",
-      {
-        day:"2-digit",
-        month:"short",
-        year:"numeric"
-      }
+    return Boolean(
+        student.active === false ||
+        student.status === "inactive" ||
+        student.status === "Not Active"
     );
 
 }
 
-updateClock();
 
-setInterval(
-  updateClock,
-  1000
-);
-
-
-/* =========================================================
-   PAYMENT HELPERS
-========================================================= */
+/* ============================================================
+   PAYMENT ENGINE
+============================================================ */
 
 /*
-  This section intentionally supports several common
-  payment data formats so existing Firebase documents
-  are less likely to need migration.
+   Supports common payment structures:
+
+   paymentLogs:[{amount,date,type}]
+   payments:[{amount,date,type}]
+   paymentHistory:[{amount,date,type}]
+   paymentsReceived:[{amount,date,type}]
+   transactions:[{amount,date,type}]
+   payment:number
+   amountPaid:number
+   paidAmount:number
+   paymentAmount:number
+   feePaid:number
+   feesPaid:number
 */
 
 
-function numberValue(value){
+function getPaymentArray(student){
 
-  if(
-    typeof value === "number" &&
-    Number.isFinite(value)
-  ){
+    const possible = [
 
-    return value;
+        student.paymentLogs,
 
-  }
+        student.payments,
 
-  if(
-    typeof value === "string"
-  ){
+        student.paymentHistory,
 
-    const cleaned =
-      value
-        .replace(/₹/g,"")
-        .replace(/,/g,"")
-        .trim();
+        student.paymentsReceived,
 
-    const parsed =
-      Number(cleaned);
+        student.transactions
 
-    return Number.isFinite(parsed)
-      ? parsed
-      : 0;
+    ];
 
-  }
+    for(const item of possible){
 
-  return 0;
+        if(Array.isArray(item))
+            return item;
+
+    }
+
+    return [];
 
 }
 
 
 function getPaymentDate(item){
 
-  if(!item){
-    return null;
-  }
-
-
-  const candidates = [
-
-    item.date,
-
-    item.paymentDate,
-
-    item.paidAt,
-
-    item.createdAt,
-
-    item.timestamp,
-
-    item.time,
-
-    item.datetime
-
-  ];
-
-
-  for(
-    const candidate of candidates
-  ){
-
-    if(
-      candidate instanceof Date
-    ){
-
-      return candidate;
-
-    }
-
-
-    if(
-      typeof candidate === "object" &&
-      candidate?.toDate
-    ){
-
-      try{
-
-        return candidate.toDate();
-
-      }catch(e){}
-
-    }
-
-
-    if(
-      typeof candidate === "number"
-    ){
-
-      const d =
-        new Date(candidate);
-
-      if(!isNaN(d.getTime())){
-        return d;
-      }
-
-    }
-
-
-    if(
-      typeof candidate === "string"
-    ){
-
-      const d =
-        new Date(candidate);
-
-      if(!isNaN(d.getTime())){
-        return d;
-      }
-
-
-      /*
-        Supports DD/MM/YYYY
-      */
-
-      const match =
-        candidate.match(
-          /(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/
-        );
-
-      if(match){
-
-        const day =
-          Number(match[1]);
-
-        const month =
-          Number(match[2]) - 1;
-
-        const year =
-          Number(match[3]);
-
-        const parsed =
-          new Date(
-            year,
-            month,
-            day
-          );
-
-        if(!isNaN(parsed.getTime())){
-          return parsed;
-        }
-
-      }
-
-    }
-
-  }
-
-
-  return null;
-
-}
-
-
-function isCurrentMonth(date){
-
-  if(!date){
-    return false;
-  }
-
-  const now =
-    new Date();
-
-  return (
-    date.getMonth() ===
-      now.getMonth() &&
-
-    date.getFullYear() ===
-      now.getFullYear()
-  );
+    return (
+        item?.date ||
+        item?.paymentDate ||
+        item?.timestamp ||
+        item?.createdAt ||
+        item?.time ||
+        null
+    );
 
 }
 
 
 function getPaymentAmount(item){
 
-  if(!item){
-    return 0;
-  }
-
-
-  const fields = [
-
-    "amount",
-
-    "amountPaid",
-
-    "paidAmount",
-
-    "paymentAmount",
-
-    "received",
-
-    "receivedAmount",
-
-    "paymentReceived",
-
-    "feePaid",
-
-    "feesPaid",
-
-    "value"
-
-  ];
-
-
-  for(
-    const field of fields
-  ){
-
-    if(
-      item[field] !== undefined &&
-      item[field] !== null
-    ){
-
-      const amount =
-        numberValue(
-          item[field]
-        );
-
-      if(amount > 0){
-        return amount;
-      }
-
-    }
-
-  }
-
-
-  return 0;
+    return Number(
+        item?.amount ??
+        item?.payment ??
+        item?.value ??
+        item?.paidAmount ??
+        item?.amountPaid ??
+        item?.paymentAmount ??
+        0
+    ) || 0;
 
 }
 
 
-function parsePaymentArray(array){
+function paymentType(item,student){
 
-  if(
-    !Array.isArray(array)
-  ){
+    const raw = String(
 
-    return 0;
+        item?.classType ||
+        item?.trainingType ||
+        item?.sessionType ||
+        item?.type ||
+        student.classType ||
+        "Group"
 
-  }
+    ).toLowerCase();
 
-
-  let total = 0;
-
-
-  array.forEach(item=>{
-
-    /*
-      If array contains objects
-    */
-
-    if(
-      typeof item === "object" &&
-      item !== null
-    ){
-
-      const date =
-        getPaymentDate(item);
-
-      if(
-        date &&
-        isCurrentMonth(date)
-      ){
-
-        total +=
-          getPaymentAmount(item);
-
-      }
-
-      return;
-
-    }
-
-
-    /*
-      If array contains strings such as:
-
-      "02 Oct 2026 - ₹3000"
-    */
-
-    if(
-      typeof item === "string"
-    ){
-
-      const amountMatch =
-        item.match(
-          /₹\s*([\d,]+(?:\.\d+)?)/i
-        );
-
-      if(!amountMatch){
-        return;
-      }
-
-      const amount =
-        numberValue(
-          amountMatch[1]
-        );
-
-
-      const date =
-        new Date(item);
-
-      if(
-        !isNaN(date.getTime()) &&
-        isCurrentMonth(date)
-      ){
-
-        total += amount;
-
-      }
-
-    }
-
-  });
-
-
-  return total;
+    return raw.includes("personal")
+        ? "Personal"
+        : "Group";
 
 }
 
 
-function getMonthlyPayment(student){
+function isCurrentMonth(dateValue){
 
-  let total = 0;
+    if(!dateValue)
+        return false;
 
+    let date;
 
-  /*
-    1. Structured payment arrays
-  */
+    if(dateValue?.seconds){
 
-  const arrayFields = [
+        date = new Date(dateValue.seconds * 1000);
 
-    "paymentLogs",
+    }else{
 
-    "payments",
-
-    "paymentHistory",
-
-    "paymentsReceived",
-
-    "transactions"
-
-  ];
-
-
-  arrayFields.forEach(field=>{
-
-    if(
-      Array.isArray(student[field])
-    ){
-
-      total +=
-        parsePaymentArray(
-          student[field]
-        );
+        date = new Date(dateValue);
 
     }
 
-  });
+    if(isNaN(date.getTime()))
+        return false;
 
+    const now = new Date();
 
-  /*
-    2. Direct payment object
-  */
-
-  const objectFields = [
-
-    "payment",
-
-    "lastPayment"
-
-  ];
-
-
-  objectFields.forEach(field=>{
-
-    const item =
-      student[field];
-
-    if(
-      item &&
-      typeof item === "object" &&
-      !Array.isArray(item)
-    ){
-
-      const date =
-        getPaymentDate(item);
-
-      if(
-        date &&
-        isCurrentMonth(date)
-      ){
-
-        total +=
-          getPaymentAmount(item);
-
-      }
-
-    }
-
-  });
-
-
-  /*
-    3. Direct amount + date
-  */
-
-  const directAmountFields = [
-
-    "paymentReceived",
-
-    "amountPaid",
-
-    "paidAmount",
-
-    "paymentAmount"
-
-  ];
-
-
-  directAmountFields.forEach(field=>{
-
-    if(
-      student[field] !== undefined &&
-      student[field] !== null
-    ){
-
-      const amount =
-        numberValue(
-          student[field]
-        );
-
-
-      /*
-        Only count direct amount if a
-        recognizable payment date exists.
-      */
-
-      const date =
-        getPaymentDate(student);
-
-
-      if(
-        amount > 0 &&
-        date &&
-        isCurrentMonth(date)
-      ){
-
-        total += amount;
-
-      }
-
-    }
-
-  });
-
-
-  return total;
+    return (
+        date.getMonth() === now.getMonth() &&
+        date.getFullYear() === now.getFullYear()
+    );
 
 }
 
 
-/* =========================================================
-   MONTHLY PAYMENT RENDER
-========================================================= */
+function calculateMonthlyPayments(){
+
+    let personal = 0;
+
+    let group = 0;
+
+    for(const student of students){
+
+        const payments = getPaymentArray(student);
+
+        /*
+           Preferred:
+           payment records contain their own date/type.
+        */
+
+        if(payments.length){
+
+            for(const payment of payments){
+
+                if(!isCurrentMonth(getPaymentDate(payment)))
+                    continue;
+
+                const amount = getPaymentAmount(payment);
+
+                if(paymentType(payment,student) === "Personal")
+                    personal += amount;
+                else
+                    group += amount;
+
+            }
+
+            continue;
+        }
+
+
+        /*
+           Fallback:
+           If there is no payment array, use a single payment
+           only if a payment date exists and is this month.
+        */
+
+        const singleAmount = Number(
+            student.payment ??
+            student.lastPayment ??
+            student.paymentReceived ??
+            student.amountPaid ??
+            student.paidAmount ??
+            student.paymentAmount ??
+            student.feePaid ??
+            student.feesPaid ??
+            0
+        ) || 0;
+
+
+        const singleDate =
+            student.paymentDate ||
+            student.lastPaymentDate ||
+            student.paymentReceivedDate ||
+            student.updatedAt ||
+            student.createdAt;
+
+
+        if(singleAmount > 0 && isCurrentMonth(singleDate)){
+
+            if(getClassType(student) === "Personal")
+                personal += singleAmount;
+            else
+                group += singleAmount;
+
+        }
+
+    }
+
+
+    return {
+        personal,
+        group,
+        total: personal + group
+    };
+
+}
+
 
 function renderMonthlyPayment(){
 
-  let total = 0;
+    const result = calculateMonthlyPayments();
+
+    document.getElementById("monthlyPayment").textContent =
+        money(result.total);
+
+    document.getElementById("personalPayment").textContent =
+        money(result.personal);
+
+    document.getElementById("groupPayment").textContent =
+        money(result.group);
 
 
-  students.forEach(student=>{
+    const now = new Date();
 
-    total +=
-      getMonthlyPayment(
-        student
-      );
-
-  });
-
-
-  document.getElementById(
-    "monthlyPayment"
-  ).textContent =
-    "₹" +
-    total.toLocaleString(
-      "en-IN"
-    );
-
-
-  document.getElementById(
-    "paymentMonth"
-  ).textContent =
-    new Date().toLocaleDateString(
-      "en-IN",
-      {
-        month:"long",
-        year:"numeric"
-      }
-    );
-
+    document.getElementById("paymentMonth").textContent =
+        now.toLocaleDateString("en-IN",{
+            month:"long",
+            year:"numeric"
+        }) + " • Received";
 }
 
 
-/* =========================================================
-   TOAST
-========================================================= */
-
-function showToast(message){
-
-  const toast =
-    document.getElementById(
-      "toast"
-    );
-
-  toast.textContent =
-    message;
-
-  toast.classList.add(
-    "show"
-  );
-
-  clearTimeout(
-    toastTimer
-  );
-
-  toastTimer =
-    setTimeout(
-      ()=>{
-
-        toast.classList.remove(
-          "show"
-        );
-
-      },
-      2200
-    );
-
-}
-
-
-/* =========================================================
+/* ============================================================
    LOAD STUDENTS
-========================================================= */
+============================================================ */
 
 async function loadStudents(){
 
-  try{
+    try{
 
-    const snapshot =
-      await getDocs(
-        studentCollection
-      );
+        const snapshot = await getDocs(studentsRef);
 
-    students = [];
+        students = snapshot.docs.map(d=>({
+
+            id:d.id,
+
+            ...d.data()
+
+        }));
+
+        renderAll();
+
+        toast("Data refreshed");
+
+    }catch(error){
+
+        console.error(error);
+
+        toast("Unable to load Firebase data");
+
+    }
+
+}
 
 
-    snapshot.forEach(item=>{
+/* ============================================================
+   REALTIME LISTENER
+============================================================ */
 
-      students.push({
+function startRealtime(){
 
-        id:
-          item.id,
+    if(unsubscribeStudents)
+        unsubscribeStudents();
 
-        ...item.data()
+    unsubscribeStudents = onSnapshot(
+        studentsRef,
+        snapshot=>{
 
-      });
+            students = snapshot.docs.map(d=>({
 
-    });
+                id:d.id,
 
+                ...d.data()
+
+            }));
+
+            renderAll();
+
+        },
+        error=>{
+
+            console.error(error);
+
+            toast("Firebase connection error");
+
+        }
+    );
+
+}
+
+
+/* ============================================================
+   RENDER ALL
+============================================================ */
+
+function renderAll(){
+
+    updateStats();
 
     renderMonthlyPayment();
 
-    render();
-
-  }
-  catch(error){
-
-    console.error(error);
-
-    document.getElementById(
-      "studentCards"
-    ).innerHTML = `
-
-      <div class="empty">
-
-        <div class="emptyIcon">
-          ⚠️
-        </div>
-
-        <div class="emptyText">
-
-          Unable to load students.
-          <br>
-          Check Firebase configuration.
-
-        </div>
-
-      </div>
-
-    `;
-
-  }
+    renderStudents();
 
 }
 
 
-/* =========================================================
-   RENDER
-========================================================= */
+/* ============================================================
+   STATS
+============================================================ */
 
-function render(){
+function updateStats(){
 
-  const search =
-    document
-      .getElementById(
-        "searchInput"
-      )
-      .value
-      .trim()
-      .toLowerCase();
+    const active = students.filter(
+        s => !isInactive(s) && !isCompleted(s)
+    ).length;
 
+    const completed = students.filter(
+        s => isCompleted(s)
+    ).length;
 
-  const activeStudents =
-    students.filter(
-      s=>!isInactive(s)
-    );
+    const live = students.filter(
+        s => isLive(s)
+    ).length;
 
-
-  const inactiveStudents =
-    students.filter(
-      s=>isInactive(s)
-    );
-
-
-  document.getElementById(
-    "activeCount"
-  ).textContent =
-    activeStudents.length;
-
-
-  document.getElementById(
-    "completedCount"
-  ).textContent =
-    students.filter(
-      s=>isCompleted(s)
+    const inactive = students.filter(
+        s => isInactive(s)
     ).length;
 
 
-  document.getElementById(
-    "liveCount"
-  ).textContent =
-    activeStudents.filter(
-      s=>isLive(s)
-    ).length;
+    document.getElementById("activeCount").textContent = active;
 
+    document.getElementById("completedCount").textContent = completed;
 
-  document.getElementById(
-    "inactiveCount"
-  ).textContent =
-    inactiveStudents.length;
+    document.getElementById("liveCount").textContent = live;
 
-
-  let filtered = [];
-
-
-  if(
-    currentFilter === "active"
-  ){
-
-    filtered =
-      [...activeStudents];
-
-  }
-
-  else if(
-    currentFilter === "completed"
-  ){
-
-    filtered =
-      activeStudents.filter(
-        s=>isCompleted(s)
-      );
-
-  }
-
-  else if(
-    currentFilter === "live"
-  ){
-
-    filtered =
-      activeStudents.filter(
-        s=>isLive(s)
-      );
-
-  }
-
-  else if(
-    currentFilter === "inactive"
-  ){
-
-    filtered =
-      [...inactiveStudents];
-
-  }
-
-
-  if(search){
-
-    filtered =
-      filtered.filter(
-        student=>{
-
-          const name =
-            String(
-              student.name || ""
-            ).toLowerCase();
-
-
-          const phone =
-            String(
-              student.id || ""
-            ).toLowerCase();
-
-
-          return (
-            name.includes(search) ||
-            phone.includes(search)
-          );
-
-        }
-      );
-
-  }
-
-
-  if(
-    currentFilter === "active" ||
-    currentFilter === "completed" ||
-    currentFilter === "live"
-  ){
-
-    filtered.sort(
-      (a,b)=>
-
-        timeDistance(
-          getLogs(a)
-        ) -
-
-        timeDistance(
-          getLogs(b)
-        )
-
-    );
-
-  }
-  else{
-
-    filtered.sort(
-      (a,b)=>
-
-        String(
-          a.name || ""
-        ).localeCompare(
-
-          String(
-            b.name || ""
-          )
-
-        )
-
-    );
-
-  }
-
-
-  const titles = {
-
-    active:
-      "Active Students",
-
-    completed:
-      "Completed Students",
-
-    live:
-      "Live Now",
-
-    inactive:
-      "Not Active"
-
-  };
-
-
-  document.getElementById(
-    "sectionTitle"
-  ).textContent =
-    titles[currentFilter];
-
-
-  document.getElementById(
-    "studentCount"
-  ).textContent =
-
-    `${filtered.length} Student${
-      filtered.length !== 1
-        ? "s"
-        : ""
-    }`;
-
-
-  const container =
-    document.getElementById(
-      "studentCards"
-    );
-
-
-  if(!filtered.length){
-
-    container.innerHTML = `
-
-      <div class="empty">
-
-        <div class="emptyIcon">
-          🚗
-        </div>
-
-        <div class="emptyText">
-          No students found
-        </div>
-
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  container.innerHTML =
-    filtered
-      .map(
-        studentCard
-      )
-      .join("");
+    document.getElementById("inactiveCount").textContent = inactive;
 
 }
 
 
-/* =========================================================
-   STUDENT CARD
-========================================================= */
-
-function studentCard(student){
-
-  const id =
-    student.id;
-
-  const name =
-    student.name ||
-    "Unnamed Student";
-
-
-  const logs =
-    getLogs(student);
-
-
-  const total =
-    getTotal(student);
-
-
-  const done =
-    getDone(student);
-
-
-  const percentage =
-    Math.min(
-      100,
-      Math.round(
-        (done / total) * 100
-      )
-    );
-
-
-  const inactive =
-    isInactive(student);
-
-
-  const live =
-    isLive(student);
-
-
-  const completed =
-    isCompleted(student);
-
-
-  const type =
-    student.classType === "Personal"
-      ? "Personal"
-      : "Group";
-
-
-  let lastText =
-    "No attendance yet";
-
-
-  if(logs.length){
-
-    lastText =
-      logs[logs.length - 1];
-
-  }
-
-
-  let badges = "";
-
-
-  if(inactive){
-
-    badges += `
-
-      <span class="badge inactive">
-        NOT ACTIVE
-      </span>
-
-    `;
-
-  }
-  else{
-
-    if(live){
-
-      badges += `
-
-        <span class="badge live">
-          ● LIVE
-        </span>
-
-      `;
-
-    }
-
-
-    if(completed){
-
-      badges += `
-
-        <span class="badge completed">
-          COMPLETED
-        </span>
-
-      `;
-
-    }
-    else{
-
-      badges += `
-
-        <span class="badge active">
-          ACTIVE
-        </span>
-
-      `;
-
-    }
-
-  }
-
-
-  const cardClass =
-    inactive
-      ? "studentCard inactive"
-      : "studentCard";
-
-
-  let actions = "";
-
-
-  if(!inactive){
-
-    actions = `
-
-      <div class="actions">
-
-        <button
-          class="action attend"
-          onclick="openAttendance('${safe(id)}')">
-
-          + ATTEND
-
-        </button>
-
-
-        <button
-          class="action"
-          onclick="openHistory('${safe(id)}')">
-
-          📋 LOGS
-
-        </button>
-
-
-        <button
-          class="action wa"
-          onclick="sendWhatsApp('${safe(id)}')">
-
-          💬 WA
-
-        </button>
-
-
-        <button
-          class="action call"
-          onclick="callStudent('${safe(id)}')">
-
-          📞 CALL
-
-        </button>
-
-      </div>
-
-
-      ${
-        !completed
-        ? `
-
-          <button
-            class="notActiveBtn"
-            onclick="markNotActive('${safe(id)}')">
-
-            ⏸ MARK NOT ACTIVE
-
-          </button>
-
-        `
-        : ""
-      }
-
-    `;
-
-  }
-  else{
-
-    actions = `
-
-      <button
-        class="activateBtn"
-        onclick="activateStudent('${safe(id)}')">
-
-        ✓ ACTIVE AGAIN
-
-      </button>
-
-
-      <div class="actions">
-
-        <button
-          class="action attend"
-          onclick="openAttendance('${safe(id)}')">
-
-          + ATTEND
-
-        </button>
-
-
-        <button
-          class="action"
-          onclick="openHistory('${safe(id)}')">
-
-          📋 LOGS
-
-        </button>
-
-
-        <button
-          class="action wa"
-          onclick="sendWhatsApp('${safe(id)}')">
-
-          💬 WA
-
-        </button>
-
-
-        <button
-          class="action call"
-          onclick="callStudent('${safe(id)}')">
-
-          📞 CALL
-
-        </button>
-
-      </div>
-
-    `;
-
-  }
-
-
-  return `
-
-    <div class="${cardClass}">
-
-      <div class="studentHeader">
-
-        <div class="avatar">
-
-          ${safe(
-            name
-              .charAt(0)
-              .toUpperCase()
-          )}
-
-        </div>
-
-
-        <div class="studentInfo">
-
-          <div class="studentName">
-            ${safe(name)}
-          </div>
-
-          <div class="studentPhone">
-            📱 ${safe(id)}
-          </div>
-
-        </div>
-
-
-        <div class="badges">
-          ${badges}
-        </div>
-
-      </div>
-
-
-      <div class="typeRow">
-
-        <div class="typeInfo">
-
-          <span class="typeLabel">
-            Class
-          </span>
-
-          <span class="typeValue">
-
-            ${
-              type === "Personal"
-                ? "👤 PERSONAL"
-                : "👥 GROUP"
-            }
-
-          </span>
-
-        </div>
-
-
-        <button
-          class="editType"
-          onclick="openTypeModal('${safe(id)}')">
-
-          ✏️ EDIT
-
-        </button>
-
-      </div>
-
-
-      <div class="lastAttendance">
-
-        <div class="lastLabel">
-          Last Attendance
-        </div>
-
-        <div class="lastText">
-          ${safe(lastText)}
-        </div>
-
-      </div>
-
-
-      <div class="progressBox">
-
-        <div class="progressTop">
-
-          <span class="progressLabel">
-            TRAINING PROGRESS
-          </span>
-
-          <span class="progressCount">
-            ${done} / ${total}
-          </span>
-
-        </div>
-
-
-        <div class="progress">
-
-          <div
-            class="progressBar"
-            style="width:${percentage}%">
-          </div>
-
-        </div>
-
-      </div>
-
-
-      ${actions}
-
-    </div>
-
-  `;
-
-}
-
-
-/* =========================================================
+/* ============================================================
    FILTER
-========================================================= */
+============================================================ */
 
-window.setFilter =
-function(filter){
+window.setFilter = function(filter,button){
 
-  currentFilter =
-    filter;
+    currentFilter = filter;
 
+    document.querySelectorAll(".navItem")
+        .forEach(item=>item.classList.remove("active"));
 
-  document
-    .querySelectorAll(
-      ".navBtn"
-    )
-    .forEach(btn=>{
+    button.classList.add("active");
 
-      btn.classList.remove(
-        "active"
-      );
-
-    });
-
-
-  const ids = {
-
-    active:
-      "navActive",
-
-    completed:
-      "navCompleted",
-
-    live:
-      "navLive",
-
-    inactive:
-      "navInactive"
-
-  };
-
-
-  document
-    .getElementById(
-      ids[filter]
-    )
-    .classList.add(
-      "active"
-    );
-
-
-  render();
+    renderStudents();
 
 };
 
 
-/* =========================================================
-   SEARCH
-========================================================= */
+/* ============================================================
+   STUDENT FILTER
+============================================================ */
 
-document
-  .getElementById(
-    "searchInput"
-  )
-  .addEventListener(
-    "input",
-    render
-  );
+function filterStudents(){
 
+    let result = [...students];
 
-/* =========================================================
-   ADD STUDENT
-========================================================= */
-
-window.openAddModal =
-function(){
-
-  document.getElementById(
-    "studentPhone"
-  ).value = "";
-
-
-  document.getElementById(
-    "studentName"
-  ).value = "";
-
-
-  document.getElementById(
-    "totalClasses"
-  ).value = "20";
-
-
-  selectAddType(
-    "Group"
-  );
-
-
-  document
-    .getElementById(
-      "addModal"
-    )
-    .classList.add(
-      "show"
-    );
-
-};
-
-
-window.selectAddType =
-function(type){
-
-  addClassType =
-    type;
-
-
-  document
-    .getElementById(
-      "addPersonal"
-    )
-    .classList.toggle(
-      "selected",
-      type === "Personal"
-    );
-
-
-  document
-    .getElementById(
-      "addGroup"
-    )
-    .classList.toggle(
-      "selected",
-      type === "Group"
-    );
-
-};
-
-
-window.saveStudent =
-async function(){
-
-  const phone =
-    document
-      .getElementById(
-        "studentPhone"
-      )
-      .value
-      .trim();
-
-
-  const name =
-    document
-      .getElementById(
-        "studentName"
-      )
-      .value
-      .trim();
-
-
-  const total =
-    Number(
-      document
-        .getElementById(
-          "totalClasses"
-        )
+    const search =
+        document.getElementById("searchInput")
         .value
-    );
+        .trim()
+        .toLowerCase();
 
 
-  if(
-    !/^[0-9]{10}$/.test(
-      phone
-    )
-  ){
+    if(search){
 
-    showToast(
-      "Enter valid 10 digit phone"
-    );
+        result = result.filter(student=>{
 
-    return;
+            const name = getName(student).toLowerCase();
 
-  }
+            const phone = getPhone(student).toLowerCase();
 
-
-  if(!name){
-
-    showToast(
-      "Enter student name"
-    );
-
-    return;
-
-  }
-
-
-  if(total < 1){
-
-    showToast(
-      "Enter valid total classes"
-    );
-
-    return;
-
-  }
-
-
-  try{
-
-    await setDoc(
-
-      doc(
-        db,
-        "studentData",
-        phone
-      ),
-
-      {
-
-        name:name,
-
-        totalClasses:total,
-
-        remaining:0,
-
-        attendanceLogs:[],
-
-        classType:
-          addClassType || "Group",
-
-        notActive:false
-
-      },
-
-      {
-        merge:true
-      }
-
-    );
-
-
-    closeModal(
-      "addModal"
-    );
-
-
-    showToast(
-      "Student added successfully ✓"
-    );
-
-
-    await loadStudents();
-
-
-  }
-  catch(error){
-
-    console.error(error);
-
-    showToast(
-      "Could not save student"
-    );
-
-  }
-
-};
-
-
-/* =========================================================
-   EDIT CLASS TYPE
-========================================================= */
-
-window.openTypeModal =
-function(id){
-
-  currentStudentId =
-    id;
-
-
-  const student =
-    students.find(
-      s=>s.id === id
-    );
-
-
-  if(!student){
-    return;
-  }
-
-
-  editClassType =
-    student.classType === "Personal"
-      ? "Personal"
-      : "Group";
-
-
-  document.getElementById(
-    "typeStudentName"
-  ).textContent =
-    student.name || "";
-
-
-  document
-    .getElementById(
-      "editPersonal"
-    )
-    .classList.toggle(
-      "selected",
-      editClassType === "Personal"
-    );
-
-
-  document
-    .getElementById(
-      "editGroup"
-    )
-    .classList.toggle(
-      "selected",
-      editClassType === "Group"
-    );
-
-
-  document
-    .getElementById(
-      "typeModal"
-    )
-    .classList.add(
-      "show"
-    );
-
-};
-
-
-window.selectEditType =
-function(type){
-
-  editClassType =
-    type;
-
-
-  document
-    .getElementById(
-      "editPersonal"
-    )
-    .classList.toggle(
-      "selected",
-      type === "Personal"
-    );
-
-
-  document
-    .getElementById(
-      "editGroup"
-    )
-    .classList.toggle(
-      "selected",
-      type === "Group"
-    );
-
-};
-
-
-window.saveClassType =
-async function(){
-
-  if(!currentStudentId){
-    return;
-  }
-
-
-  try{
-
-    await updateDoc(
-
-      doc(
-        db,
-        "studentData",
-        currentStudentId
-      ),
-
-      {
-        classType:
-          editClassType
-      }
-
-    );
-
-
-    closeModal(
-      "typeModal"
-    );
-
-
-    showToast(
-      `Class type changed to ${editClassType}`
-    );
-
-
-    await loadStudents();
-
-
-  }
-  catch(error){
-
-    console.error(error);
-
-    showToast(
-      "Could not update class type"
-    );
-
-  }
-
-};
-
-
-/* =========================================================
-   ATTENDANCE OPEN
-========================================================= */
-
-window.openAttendance =
-function(id){
-
-  currentStudentId =
-    id;
-
-
-  const student =
-    students.find(
-      s=>s.id === id
-    );
-
-
-  if(!student){
-    return;
-  }
-
-
-  document.getElementById(
-    "attendanceStudentName"
-  ).textContent =
-    `${student.name || ""} • ${id}`;
-
-
-  selectedRoute =
-    "";
-
-  selectedDistance =
-    "5 KM";
-
-  selectedRemark =
-    "";
-
-
-  document.getElementById(
-    "customRoute"
-  ).value = "";
-
-
-  document.getElementById(
-    "customRemark"
-  ).value = "";
-
-
-  document
-    .getElementById(
-      "customRouteBox"
-    )
-    .classList.remove(
-      "show"
-    );
-
-
-  document
-    .getElementById(
-      "customRemarkBox"
-    )
-    .classList.remove(
-      "show"
-    );
-
-
-  document
-    .querySelectorAll(
-      ".routeOption"
-    )
-    .forEach(btn=>{
-
-      btn.classList.remove(
-        "selected"
-      );
-
-    });
-
-
-  document
-    .querySelectorAll(
-      ".remarkOption"
-    )
-    .forEach(btn=>{
-
-      btn.classList.remove(
-        "selected"
-      );
-
-    });
-
-
-  document
-    .querySelectorAll(
-      ".distanceOption"
-    )
-    .forEach(btn=>{
-
-      btn.classList.add(
-        "selected"
-      );
-
-    });
-
-
-  document
-    .getElementById(
-      "attendanceModal"
-    )
-    .classList.add(
-      "show"
-    );
-
-};
-
-
-/* =========================================================
-   ROUTE
-========================================================= */
-
-window.selectRoute =
-function(btn,value){
-
-  selectedRoute =
-    value;
-
-
-  document
-    .querySelectorAll(
-      ".routeOption"
-    )
-    .forEach(x=>{
-
-      x.classList.remove(
-        "selected"
-      );
-
-    });
-
-
-  btn.classList.add(
-    "selected"
-  );
-
-
-  const customBox =
-    document.getElementById(
-      "customRouteBox"
-    );
-
-
-  const customInput =
-    document.getElementById(
-      "customRoute"
-    );
-
-
-  if(
-    value === "Other Route"
-  ){
-
-    customBox.classList.add(
-      "show"
-    );
-
-
-    setTimeout(
-      ()=>{
-        customInput.focus();
-      },
-      100
-    );
-
-  }
-  else{
-
-    customBox.classList.remove(
-      "show"
-    );
-
-    customInput.value = "";
-
-  }
-
-};
-
-
-/* =========================================================
-   DISTANCE
-========================================================= */
-
-window.selectDistance =
-function(btn,value){
-
-  selectedDistance =
-    value;
-
-
-  document
-    .querySelectorAll(
-      ".distanceOption"
-    )
-    .forEach(x=>{
-
-      x.classList.remove(
-        "selected"
-      );
-
-    });
-
-
-  btn.classList.add(
-    "selected"
-  );
-
-};
-
-
-/* =========================================================
-   REMARK
-========================================================= */
-
-window.selectRemark =
-function(btn,value){
-
-  selectedRemark =
-    value;
-
-
-  document
-    .querySelectorAll(
-      ".remarkOption"
-    )
-    .forEach(x=>{
-
-      x.classList.remove(
-        "selected"
-      );
-
-    });
-
-
-  btn.classList.add(
-    "selected"
-  );
-
-
-  const customBox =
-    document.getElementById(
-      "customRemarkBox"
-    );
-
-
-  const customInput =
-    document.getElementById(
-      "customRemark"
-    );
-
-
-  if(
-    value === "📝 Custom Remark"
-  ){
-
-    customBox.classList.add(
-      "show"
-    );
-
-
-    setTimeout(
-      ()=>{
-        customInput.focus();
-      },
-      100
-    );
-
-  }
-  else{
-
-    customBox.classList.remove(
-      "show"
-    );
-
-    customInput.value = "";
-
-  }
-
-};
-
-
-/* =========================================================
-   SAVE ATTENDANCE
-========================================================= */
-
-window.saveAttendance =
-async function(){
-
-  if(!currentStudentId){
-    return;
-  }
-
-
-  /* ROUTE */
-
-  if(!selectedRoute){
-
-    showToast(
-      "Select route"
-    );
-
-    return;
-
-  }
-
-
-  /* CUSTOM ROUTE */
-
-  if(
-    selectedRoute === "Other Route"
-  ){
-
-    const customRoute =
-      document
-        .getElementById(
-          "customRoute"
-        )
-        .value
-        .trim();
-
-
-    if(!customRoute){
-
-      showToast(
-        "Enter custom route"
-      );
-
-
-      document
-        .getElementById(
-          "customRoute"
-        )
-        .focus();
-
-
-      return;
-
-    }
-
-
-    selectedRoute =
-      customRoute;
-
-  }
-
-
-  /* DISTANCE */
-
-  if(!selectedDistance){
-
-    selectedDistance =
-      "5 KM";
-
-  }
-
-
-  /* REMARK */
-
-  let finalRemark =
-    selectedRemark;
-
-
-  if(
-    selectedRemark ===
-    "📝 Custom Remark"
-  ){
-
-    const customRemark =
-      document
-        .getElementById(
-          "customRemark"
-        )
-        .value
-        .trim();
-
-
-    if(!customRemark){
-
-      showToast(
-        "Enter custom remark"
-      );
-
-
-      document
-        .getElementById(
-          "customRemark"
-        )
-        .focus();
-
-
-      return;
-
-    }
-
-
-    finalRemark =
-      customRemark;
-
-  }
-
-
-  const now =
-    new Date();
-
-
-  const datePart =
-    now.toLocaleDateString(
-      "en-IN",
-      {
-        day:"2-digit",
-        month:"short"
-      }
-    );
-
-
-  const timePart =
-    now.toLocaleTimeString(
-      "en-IN",
-      {
-        hour:"2-digit",
-        minute:"2-digit",
-        hour12:true
-      }
-    );
-
-
-  const log =
-
-    `${datePart} | ${timePart} — Route: ${selectedRoute} | Distance: 5 KM${
-      finalRemark
-        ? ` | Remark: ${finalRemark}`
-        : ""
-    }`;
-
-
-  const student =
-    students.find(
-      s=>s.id === currentStudentId
-    );
-
-
-  const currentDone =
-    student
-      ? getDone(student)
-      : 0;
-
-
-  try{
-
-    await updateDoc(
-
-      doc(
-        db,
-        "studentData",
-        currentStudentId
-      ),
-
-      {
-
-        remaining:
-          currentDone + 1,
-
-        attendanceLogs:
-          arrayUnion(log),
-
-        notActive:false
-
-      }
-
-    );
-
-
-    closeModal(
-      "attendanceModal"
-    );
-
-
-    showToast(
-      "Attendance added ✓"
-    );
-
-
-    await loadStudents();
-
-
-  }
-  catch(error){
-
-    console.error(error);
-
-    showToast(
-      "Could not save attendance"
-    );
-
-  }
-
-};
-
-
-/* =========================================================
-   MARK NOT ACTIVE
-========================================================= */
-
-window.markNotActive =
-async function(id){
-
-  try{
-
-    await updateDoc(
-
-      doc(
-        db,
-        "studentData",
-        id
-      ),
-
-      {
-        notActive:true
-      }
-
-    );
-
-
-    showToast(
-      "Moved to Not Active"
-    );
-
-
-    await loadStudents();
-
-
-  }
-  catch(error){
-
-    console.error(error);
-
-    showToast(
-      "Could not update status"
-    );
-
-  }
-
-};
-
-
-/* =========================================================
-   ACTIVATE
-========================================================= */
-
-window.activateStudent =
-async function(id){
-
-  try{
-
-    await updateDoc(
-
-      doc(
-        db,
-        "studentData",
-        id
-      ),
-
-      {
-        notActive:false
-      }
-
-    );
-
-
-    showToast(
-      "Student active again ✓"
-    );
-
-
-    await loadStudents();
-
-
-  }
-  catch(error){
-
-    console.error(error);
-
-    showToast(
-      "Could not activate student"
-    );
-
-  }
-
-};
-
-
-/* =========================================================
-   HISTORY
-========================================================= */
-
-window.openHistory =
-function(id){
-
-  currentStudentId =
-    id;
-
-
-  const student =
-    students.find(
-      s=>s.id === id
-    );
-
-
-  if(!student){
-    return;
-  }
-
-
-  document.getElementById(
-    "historyStudentName"
-  ).textContent =
-    `${student.name || ""} • ${id}`;
-
-
-  const logs =
-    [
-      ...getLogs(student)
-    ].reverse();
-
-
-  const list =
-    document.getElementById(
-      "historyList"
-    );
-
-
-  if(!logs.length){
-
-    list.innerHTML = `
-
-      <div class="empty">
-
-        <div class="emptyIcon">
-          📋
-        </div>
-
-        <div class="emptyText">
-          No attendance history
-        </div>
-
-      </div>
-
-    `;
-
-  }
-  else{
-
-    list.innerHTML =
-      logs
-        .map(
-          (log,index)=>`
-
-            <div class="historyItem">
-
-              <div class="historyNumber">
-
-                SESSION
-                ${logs.length-index}
-
-              </div>
-
-              <div class="historyText">
-
-                ${safe(log)}
-
-              </div>
-
-            </div>
-
-          `
-        )
-        .join("");
-
-  }
-
-
-  document
-    .getElementById(
-      "historyModal"
-    )
-    .classList.add(
-      "show"
-    );
-
-};
-
-
-/* =========================================================
-   WHATSAPP
-========================================================= */
-
-window.sendWhatsApp =
-function(id){
-
-  const student =
-    students.find(
-      s=>s.id === id
-    );
-
-
-  if(!student){
-    return;
-  }
-
-
-  const total =
-    getTotal(student);
-
-
-  const done =
-    getDone(student);
-
-
-  const left =
-    Math.max(
-      total - done,
-      0
-    );
-
-
-  const classType =
-    student.classType === "Personal"
-      ? "Personal"
-      : "Group";
-
-
-  const message =
-
-`Hello *${String(student.name || "").trim()}*,
-
-*A1 Driving Classes Attendance*
-
-🚗 Completed: *${done}/${total}*
-⏳ Balance: *${left} Sessions*
-📚 Class Type: *${classType}*
-
-Keep learning and drive safely! 🚗🔥`;
-
-
-  const url =
-
-    `https://wa.me/${id}?text=${
-      encodeURIComponent(message)
-    }`;
-
-
-  window.open(
-    url,
-    "_blank"
-  );
-
-};
-
-
-/* =========================================================
-   CALL
-========================================================= */
-
-window.callStudent =
-function(id){
-
-  window.location.href =
-    `tel:${id}`;
-
-};
-
-
-/* =========================================================
-   CLOSE MODALS
-========================================================= */
-
-window.closeModal =
-function(id){
-
-  document
-    .getElementById(id)
-    .classList.remove(
-      "show"
-    );
-
-};
-
-
-/* =========================================================
-   CLICK OUTSIDE MODAL
-========================================================= */
-
-document
-  .querySelectorAll(
-    ".modal"
-  )
-  .forEach(modal=>{
-
-    modal.addEventListener(
-      "click",
-      function(e){
-
-        if(
-          e.target === modal
-        ){
-
-          modal.classList.remove(
-            "show"
-          );
-
-        }
-
-      }
-    );
-
-  });
-
-
-/* =========================================================
-   ESCAPE
-========================================================= */
-
-document.addEventListener(
-  "keydown",
-  function(e){
-
-    if(
-      e.key === "Escape"
-    ){
-
-      document
-        .querySelectorAll(
-          ".modal.show"
-        )
-        .forEach(modal=>{
-
-          modal.classList.remove(
-            "show"
-          );
+            return (
+                name.includes(search) ||
+                phone.includes(search)
+            );
 
         });
 
     }
 
-  }
-);
+
+    if(currentFilter === "active"){
+
+        result = result.filter(
+            s=>!isInactive(s) && !isCompleted(s)
+        );
+
+    }
+
+    if(currentFilter === "completed"){
+
+        result = result.filter(
+            s=>isCompleted(s)
+        );
+
+    }
+
+    if(currentFilter === "live"){
+
+        result = result.filter(
+            s=>isLive(s)
+        );
+
+    }
+
+    if(currentFilter === "inactive"){
+
+        result = result.filter(
+            s=>isInactive(s)
+        );
+
+    }
 
 
-/* =========================================================
-   AUTO REFRESH
-========================================================= */
+    return result;
 
-setInterval(
-  loadStudents,
-  30000
-);
+}
 
 
-/* =========================================================
+/* ============================================================
+   STUDENT CARDS
+============================================================ */
+
+window.renderStudents = function(){
+
+    const container =
+        document.getElementById("students");
+
+    const list = filterStudents();
+
+
+    const titleMap = {
+
+        all:"All Students",
+
+        active:"Active Students",
+
+        live:"Live Sessions",
+
+        completed:"Completed Students",
+
+        inactive:"Not Active"
+
+    };
+
+
+    document.getElementById("listTitle").textContent =
+        titleMap[currentFilter] || "Students";
+
+    document.getElementById("studentTotal").textContent =
+        list.length + (list.length === 1 ? " student" : " students");
+
+
+    if(!list.length){
+
+        container.innerHTML = `
+
+            <div class="empty">
+
+                <div class="emptyIcon">🚗</div>
+
+                <h3>No students found</h3>
+
+                <p>Try another search or filter.</p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML = list.map(student=>{
+
+        const name = getName(student);
+
+        const phone = getPhone(student);
+
+        const total = getTotalClasses(student);
+
+        const completed = getCompletedClasses(student);
+
+        const remaining = getRemainingClasses(student);
+
+        const percent = total
+            ? Math.min(100,Math.round((completed/total)*100))
+            : 0;
+
+        const type = getClassType(student);
+
+        const live = isLive(student);
+
+        const inactive = isInactive(student);
+
+        const done = isCompleted(student);
+
+
+        let statusClass = "statusActive";
+
+        let statusText = "ACTIVE";
+
+
+        if(inactive){
+
+            statusClass = "statusInactive";
+
+            statusText = "NOT ACTIVE";
+
+        }else if(done){
+
+            statusClass = "statusCompleted";
+
+            statusText = "COMPLETED";
+
+        }else if(live){
+
+            statusClass = "statusLive";
+
+            statusText = "● LIVE";
+
+        }
+
+
+        const initials = name
+            .trim()
+            .split(/\s+/)
+            .slice(0,2)
+            .map(x=>x[0])
+            .join("")
+            .toUpperCase();
+
+
+        const last = getLastAttendance(student);
+
+        let lastText = "No class yet";
+
+        if(last){
+
+            const t = getTimeValue(last);
+
+            if(t){
+
+                lastText =
+                    new Date(t).toLocaleDateString(
+                        "en-IN",
+                        {
+                            day:"2-digit",
+                            month:"short"
+                        }
+                    );
+
+            }
+
+        }
+
+
+        return `
+
+        <article class="studentCard ${live ? "live":""} ${done ? "completed":""}">
+
+            <div class="studentHeader">
+
+                <div class="avatar">
+                    ${escapeHTML(initials || "A")}
+                </div>
+
+                <div class="studentInfo">
+
+                    <div class="studentName">
+                        ${escapeHTML(name)}
+                    </div>
+
+                    <div class="studentPhone">
+                        ${escapeHTML(phone || "No phone")}
+                    </div>
+
+                </div>
+
+                <div class="statusPill ${statusClass}">
+                    ${statusText}
+                </div>
+
+            </div>
+
+
+            <div class="typeRow">
+
+                <div class="typeBadge ${
+                    type === "Personal"
+                    ? "typePersonal"
+                    : "typeGroup"
+                }">
+
+                    ${type === "Personal"
+                        ? "PERSONAL"
+                        : "GROUP"}
+
+                </div>
+
+                ${
+                    live
+                    ? `<div class="typeBadge" style="color:#73e8b8">
+                        LIVE SESSION
+                       </div>`
+                    : ""
+                }
+
+            </div>
+
+
+            <div class="progressSection">
+
+                <div class="progressTop">
+
+                    <span>Training Progress</span>
+
+                    <span>
+                        ${completed}/${total} classes
+                    </span>
+
+                </div>
+
+                <div class="progressBar">
+
+                    <div
+                        class="progressFill"
+                        style="width:${percent}%">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="infoGrid">
+
+                <div class="infoItem">
+
+                    <div class="label">COMPLETED</div>
+
+                    <div class="value">
+                        ${completed}
+                    </div>
+
+                </div>
+
+                <div class="infoItem">
+
+                    <div class="label">REMAINING</div>
+
+                    <div class="value">
+                        ${remaining}
+                    </div>
+
+                </div>
+
+                <div class="infoItem">
+
+                    <div class="label">LAST CLASS</div>
+
+                    <div class="value">
+                        ${lastText}
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="actionGrid">
+
+                ${
+                    !done && !inactive
+                    ? `
+                    <button
+                        class="actionBtn actionPrimary"
+                        onclick="openAttendance('${student.id}')">
+                        + Attendance
+                    </button>
+                    `
+                    :
+                    `
+                    <button
+                        class="actionBtn actionPrimary"
+                        onclick="openHistory('${student.id}')">
+                        History
+                    </button>
+                    `
+                }
+
+
+                <button
+                    class="actionBtn actionBlue"
+                    onclick="openHistory('${student.id}')">
+                    History
+                </button>
+
+
+                <button
+                    class="actionBtn"
+                    onclick="editStudent('${student.id}')">
+                    Edit
+                </button>
+
+            </div>
+
+
+            <div class="actionGrid" style="margin-top:8px">
+
+                <button
+                    class="actionBtn actionGreen"
+                    onclick="whatsappStudent('${student.id}')">
+                    WhatsApp
+                </button>
+
+                <button
+                    class="actionBtn"
+                    onclick="callStudent('${student.id}')">
+                    Call
+                </button>
+
+                ${
+                    inactive
+                    ?
+                    `<button
+                        class="actionBtn actionGreen"
+                        onclick="toggleActive('${student.id}',true)">
+                        Activate
+                    </button>`
+                    :
+                    `<button
+                        class="actionBtn actionRed"
+                        onclick="toggleActive('${student.id}',false)">
+                        Deactivate
+                    </button>`
+                }
+
+            </div>
+
+        </article>
+
+        `;
+
+    }).join("");
+
+};
+
+
+/* ============================================================
+   ADD STUDENT
+============================================================ */
+
+window.openAddStudent = function(){
+
+    document.getElementById("studentModalTitle").textContent =
+        "Add Student";
+
+    document.getElementById("editStudentId").value = "";
+
+    document.getElementById("studentName").value = "";
+
+    document.getElementById("studentPhone").value = "";
+
+    document.getElementById("totalClasses").value = "20";
+
+    document.getElementById("paymentAmount").value = "";
+
+    selectType("Personal");
+
+    openModal("studentModal");
+
+};
+
+
+/* ============================================================
+   CLASS TYPE
+============================================================ */
+
+window.selectType = function(type){
+
+    selectedClassType = type;
+
+    document.getElementById("typePersonal")
+        .classList.toggle(
+            "selected",
+            type === "Personal"
+        );
+
+    document.getElementById("typeGroup")
+        .classList.toggle(
+            "selected",
+            type === "Group"
+        );
+
+};
+
+
+/* ============================================================
+   SAVE STUDENT
+============================================================ */
+
+window.saveStudent = async function(){
+
+    const name =
+        document.getElementById("studentName").value.trim();
+
+    const phone =
+        document.getElementById("studentPhone").value.trim();
+
+    const totalClasses =
+        Number(document.getElementById("totalClasses").value || 20);
+
+    const payment =
+        Number(document.getElementById("paymentAmount").value || 0);
+
+    const editId =
+        document.getElementById("editStudentId").value;
+
+
+    if(!name){
+
+        toast("Enter student name");
+
+        return;
+
+    }
+
+
+    if(!phone){
+
+        toast("Enter phone number");
+
+        return;
+
+    }
+
+
+    try{
+
+        if(editId){
+
+            const student =
+                students.find(s=>s.id === editId);
+
+            const updateData = {
+
+                name,
+
+                phone,
+
+                totalClasses,
+
+                classType:selectedClassType,
+
+                updatedAt:serverTimestamp()
+
+            };
+
+
+            /*
+               If a new payment is entered while editing,
+               append it into paymentLogs.
+            */
+
+            if(payment > 0){
+
+                const oldLogs =
+                    getPaymentArray(student || {});
+
+                updateData.paymentLogs = [
+
+                    ...oldLogs,
+
+                    {
+
+                        amount:payment,
+
+                        classType:selectedClassType,
+
+                        date:new Date().toISOString()
+
+                    }
+
+                ];
+
+            }
+
+
+            await updateDoc(
+                doc(db,"studentData",editId),
+                updateData
+            );
+
+
+            toast("Student updated");
+
+        }else{
+
+            const data = {
+
+                name,
+
+                phone,
+
+                totalClasses,
+
+                classType:selectedClassType,
+
+                active:true,
+
+                attendanceLogs:[],
+
+                createdAt:serverTimestamp(),
+
+                updatedAt:serverTimestamp()
+
+            };
+
+
+            if(payment > 0){
+
+                data.paymentLogs = [
+
+                    {
+
+                        amount:payment,
+
+                        classType:selectedClassType,
+
+                        date:new Date().toISOString()
+
+                    }
+
+                ];
+
+            }
+
+
+            await addDoc(
+                studentsRef,
+                data
+            );
+
+
+            toast("Student added");
+
+        }
+
+
+        closeModal("studentModal");
+
+    }catch(error){
+
+        console.error(error);
+
+        toast("Save failed");
+
+    }
+
+};
+
+
+/* ============================================================
+   EDIT STUDENT
+============================================================ */
+
+window.editStudent = function(id){
+
+    const student =
+        students.find(s=>s.id === id);
+
+    if(!student)
+        return;
+
+
+    document.getElementById("studentModalTitle").textContent =
+        "Edit Student";
+
+    document.getElementById("editStudentId").value =
+        student.id;
+
+    document.getElementById("studentName").value =
+        getName(student);
+
+    document.getElementById("studentPhone").value =
+        getPhone(student);
+
+    document.getElementById("totalClasses").value =
+        getTotalClasses(student);
+
+    document.getElementById("paymentAmount").value = "";
+
+    selectType(getClassType(student));
+
+    openModal("studentModal");
+
+};
+
+
+/* ============================================================
+   ATTENDANCE
+============================================================ */
+
+window.openAttendance = function(id){
+
+    const student =
+        students.find(s=>s.id === id);
+
+    if(!student)
+        return;
+
+
+    document.getElementById("attendanceStudentId").value =
+        id;
+
+    document.getElementById("attendanceStudentName").textContent =
+        getName(student);
+
+
+    document.getElementById("route").value =
+        "Bhanjpur";
+
+    document.getElementById("remark").value =
+        "Good Driving";
+
+    document.getElementById("customRemark").value = "";
+
+
+    openModal("attendanceModal");
+
+};
+
+
+/* ============================================================
+   CUSTOM REMARK
+============================================================ */
+
+document.getElementById("remark")
+.addEventListener("change",function(){
+
+    document.getElementById("customRemarkBox").style.display =
+        this.value === "Custom Remark"
+        ? "block"
+        : "none";
+
+});
+
+
+/* ============================================================
+   MARK ATTENDANCE
+============================================================ */
+
+window.markAttendance = async function(){
+
+    const id =
+        document.getElementById("attendanceStudentId").value;
+
+    const student =
+        students.find(s=>s.id === id);
+
+    if(!student)
+        return;
+
+
+    const route =
+        document.getElementById("route").value;
+
+    let remark =
+        document.getElementById("remark").value;
+
+
+    if(remark === "Custom Remark"){
+
+        remark =
+            document.getElementById("customRemark")
+            .value
+            .trim();
+
+        if(!remark)
+            remark = "Driving Session";
+
+    }
+
+
+    const oldLogs =
+        getAttendanceLogs(student);
+
+
+    const newLog = {
+
+        route,
+
+        distance:5,
+
+        remark,
+
+        classType:getClassType(student),
+
+        timestamp:new Date().toISOString(),
+
+        date:new Date().toISOString()
+
+    };
+
+
+    const logs = [
+
+        ...oldLogs,
+
+        newLog
+
+    ];
+
+
+    try{
+
+        await updateDoc(
+            doc(db,"studentData",id),
+            {
+
+                attendanceLogs:logs,
+
+                remaining:Math.max(
+                    0,
+                    getTotalClasses(student) - logs.length
+                ),
+
+                completedClasses:logs.length,
+
+                updatedAt:serverTimestamp()
+
+            }
+        );
+
+
+        closeModal("attendanceModal");
+
+        toast("Attendance marked");
+
+    }catch(error){
+
+        console.error(error);
+
+        toast("Attendance failed");
+
+    }
+
+};
+
+
+/* ============================================================
+   HISTORY
+============================================================ */
+
+window.openHistory = function(id){
+
+    const student =
+        students.find(s=>s.id === id);
+
+    if(!student)
+        return;
+
+
+    const logs =
+        [...getAttendanceLogs(student)]
+        .sort((a,b)=>getTimeValue(b)-getTimeValue(a));
+
+
+    document.getElementById("historyStudentName").textContent =
+        getName(student);
+
+
+    const list =
+        document.getElementById("historyList");
+
+
+    if(!logs.length){
+
+        list.innerHTML = `
+
+            <div class="empty">
+
+                <div class="emptyIcon">📋</div>
+
+                <h3>No attendance yet</h3>
+
+                <p>No class history available.</p>
+
+            </div>
+
+        `;
+
+    }else{
+
+        list.innerHTML = logs.map((log,index)=>{
+
+            const time =
+                getTimeValue(log);
+
+            const date =
+                time
+                ? new Date(time)
+                    .toLocaleString(
+                        "en-IN",
+                        {
+                            day:"2-digit",
+                            month:"short",
+                            year:"numeric",
+                            hour:"2-digit",
+                            minute:"2-digit"
+                        }
+                    )
+                : "Date unavailable";
+
+
+            return `
+
+            <div class="historyItem">
+
+                <div class="historyTop">
+
+                    <div class="historyRoute">
+                        #${logs.length-index}
+                        ${escapeHTML(log.route || "Route")}
+                    </div>
+
+                    <div class="historyDate">
+                        ${date}
+                    </div>
+
+                </div>
+
+                <div class="historyBottom">
+
+                    <span>
+                        ${escapeHTML(log.remark || "Driving Session")}
+                    </span>
+
+                    <span>
+                        ${Number(log.distance || 5)} KM
+                    </span>
+
+                </div>
+
+            </div>
+
+            `;
+
+        }).join("");
+
+    }
+
+
+    openModal("historyModal");
+
+};
+
+
+/* ============================================================
+   ACTIVE / INACTIVE
+============================================================ */
+
+window.toggleActive = async function(id,value){
+
+    try{
+
+        await updateDoc(
+            doc(db,"studentData",id),
+            {
+
+                active:value,
+
+                status:value
+                    ? "active"
+                    : "inactive",
+
+                updatedAt:serverTimestamp()
+
+            }
+        );
+
+
+        toast(
+            value
+            ? "Student activated"
+            : "Student marked inactive"
+        );
+
+    }catch(error){
+
+        console.error(error);
+
+        toast("Update failed");
+
+    }
+
+};
+
+
+/* ============================================================
+   WHATSAPP
+============================================================ */
+
+window.whatsappStudent = function(id){
+
+    const student =
+        students.find(s=>s.id === id);
+
+    if(!student)
+        return;
+
+
+    let phone =
+        getPhone(student)
+        .replace(/\D/g,"");
+
+
+    if(phone.length === 10)
+        phone = "91" + phone;
+
+
+    if(!phone){
+
+        toast("Phone number not available");
+
+        return;
+
+    }
+
+
+    const completed =
+        getCompletedClasses(student);
+
+    const total =
+        getTotalClasses(student);
+
+    const remaining =
+        getRemainingClasses(student);
+
+
+    const message =
+`Hello ${getName(student)} 👋
+
+A1 Driving Classes
+
+Training Progress:
+Completed: ${completed}/${total}
+Remaining: ${remaining}
+
+Class Type: ${getClassType(student)}
+
+Thank you.
+A1 Driving Classes 🚗`;
+
+
+    window.open(
+        "https://wa.me/" +
+        phone +
+        "?text=" +
+        encodeURIComponent(message),
+        "_blank"
+    );
+
+};
+
+
+/* ============================================================
+   CALL
+============================================================ */
+
+window.callStudent = function(id){
+
+    const student =
+        students.find(s=>s.id === id);
+
+    if(!student)
+        return;
+
+
+    const phone =
+        getPhone(student);
+
+
+    if(!phone){
+
+        toast("Phone number not available");
+
+        return;
+
+    }
+
+
+    window.location.href =
+        "tel:" + phone;
+
+};
+
+
+/* ============================================================
+   MODALS
+============================================================ */
+
+function openModal(id){
+
+    document.getElementById(id)
+        .classList.add("show");
+
+}
+
+
+window.closeModal = function(id){
+
+    document.getElementById(id)
+        .classList.remove("show");
+
+};
+
+
+document.querySelectorAll(".modal")
+.forEach(modal=>{
+
+    modal.addEventListener("click",function(e){
+
+        if(e.target === modal)
+            modal.classList.remove("show");
+
+    });
+
+});
+
+
+/* ============================================================
+   TOAST
+============================================================ */
+
+function toast(message){
+
+    const el =
+        document.getElementById("toast");
+
+    el.textContent = message;
+
+    el.classList.add("show");
+
+
+    clearTimeout(window.__toastTimer);
+
+
+    window.__toastTimer =
+        setTimeout(()=>{
+
+            el.classList.remove("show");
+
+        },2200);
+
+}
+
+
+/* ============================================================
+   EXPOSE
+============================================================ */
+
+window.loadStudents = loadStudents;
+
+
+/* ============================================================
    START
-========================================================= */
+============================================================ */
+
+startRealtime();
 
 loadStudents();
+
+
+/* Refresh live status */
+setInterval(()=>{
+
+    updateStats();
+
+    renderStudents();
+
+},30000);
 
 </script>
 
