@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+
 <title>A1 Attendance | Driving Classes</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+  rel="stylesheet">
 
 <style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -17,17 +27,31 @@
 }
 
 :root{
-  --bg:#080808;
-  --surface:#111;
-  --surface2:#151515;
-  --border:#252525;
+
+  --bg:#070707;
+  --surface:#101010;
+  --surface2:#141414;
+  --surface3:#181818;
+
+  --border:#242424;
+  --border2:#303030;
+
   --gold:#d7b36a;
-  --gold-light:#f0d18b;
-  --text:#f5f5f5;
-  --muted:#858585;
+  --goldLight:#f2d28e;
+  --goldSoft:rgba(215,179,106,.10);
+
+  --white:#f6f6f6;
+  --text:#e9e9e9;
+  --muted:#777;
+  --muted2:#555;
+
   --green:#55d996;
   --blue:#70b4ff;
   --red:#ff7777;
+  --orange:#ffb86b;
+
+  --radius:18px;
+
 }
 
 html{
@@ -35,17 +59,37 @@ html{
 }
 
 body{
-  font-family:Inter,Arial,sans-serif;
+
+  font-family:
+    Inter,
+    Arial,
+    sans-serif;
+
   background:
+
     radial-gradient(
-      circle at 50% -15%,
-      rgba(215,179,106,.10),
-      transparent 35%
+      circle at 50% -12%,
+      rgba(215,179,106,.13),
+      transparent 34%
     ),
+
+    radial-gradient(
+      circle at 100% 40%,
+      rgba(112,180,255,.035),
+      transparent 28%
+    ),
+
     var(--bg);
+
   color:var(--text);
+
   min-height:100vh;
-  padding-bottom:88px;
+
+  padding-bottom:
+    calc(82px + env(safe-area-inset-bottom));
+
+  -webkit-font-smoothing:antialiased;
+
 }
 
 button,
@@ -60,416 +104,1039 @@ button{
   -webkit-tap-highlight-color:transparent;
 }
 
-/* ================= HEADER ================= */
+button:active{
+  transform:scale(.97);
+}
+
+::-webkit-scrollbar{
+  width:4px;
+}
+
+::-webkit-scrollbar-track{
+  background:#090909;
+}
+
+::-webkit-scrollbar-thumb{
+  background:#303030;
+  border-radius:10px;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
 
 .header{
+
   position:sticky;
+
   top:0;
+
   z-index:50;
-  background:rgba(8,8,8,.94);
-  backdrop-filter:blur(18px);
-  border-bottom:1px solid #1f1f1f;
+
+  background:
+    rgba(7,7,7,.88);
+
+  backdrop-filter:
+    blur(22px);
+
+  -webkit-backdrop-filter:
+    blur(22px);
+
+  border-bottom:
+    1px solid rgba(255,255,255,.055);
+
 }
 
 .headerInner{
-  max-width:900px;
+
+  max-width:940px;
+
   margin:auto;
-  padding:14px 16px;
+
+  padding:
+    13px 15px;
+
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
+
   gap:15px;
+
 }
 
 .brand{
+
   display:flex;
+
   align-items:center;
-  gap:11px;
+
+  gap:10px;
+
+  min-width:0;
+
 }
 
 .logo{
-  width:42px;
-  height:42px;
-  border-radius:13px;
-  border:1px solid #6b5835;
-  background:#0d0d0d;
-  color:var(--gold-light);
+
+  width:43px;
+  height:43px;
+
+  flex:none;
+
+  border-radius:14px;
+
+  border:
+    1px solid #665333;
+
+  background:
+
+    linear-gradient(
+      145deg,
+      #18130a,
+      #0d0d0d
+    );
+
+  color:var(--goldLight);
+
   display:flex;
+
   align-items:center;
+
   justify-content:center;
-  font-size:14px;
+
+  font-size:13px;
+
   font-weight:800;
+
+  box-shadow:
+    inset 0 0 20px rgba(215,179,106,.035);
+
+}
+
+.brandText{
+  min-width:0;
 }
 
 .brandTitle{
-  font-size:15px;
+
+  font-size:14px;
+
   font-weight:800;
+
+  letter-spacing:-.2px;
+
 }
 
 .brandSub{
-  color:#666;
-  font-size:8px;
+
+  color:#5e5e5e;
+
+  font-size:7px;
+
   letter-spacing:1.5px;
+
   margin-top:4px;
+
+  white-space:nowrap;
+
+}
+
+.headerRight{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:8px;
+
 }
 
 .clock{
+
   text-align:right;
+
 }
 
 .clockTime{
-  color:var(--gold-light);
-  font-size:13px;
-  font-weight:700;
+
+  color:var(--goldLight);
+
+  font-size:12px;
+
+  font-weight:800;
+
 }
 
 .clockDate{
-  color:#666;
-  font-size:8px;
-  margin-top:4px;
+
+  color:#5d5d5d;
+
+  font-size:7px;
+
+  margin-top:3px;
+
 }
 
-/* ================= MAIN ================= */
+
+/* =========================================================
+   MAIN
+========================================================= */
 
 .container{
-  max-width:900px;
+
+  width:100%;
+
+  max-width:940px;
+
   margin:auto;
-  padding:18px 16px 30px;
+
+  padding:
+    15px 14px 28px;
+
 }
 
-/* ================= SEARCH ================= */
+
+/* =========================================================
+   PAYMENT HERO
+========================================================= */
+
+.paymentHero{
+
+  position:relative;
+
+  overflow:hidden;
+
+  margin-bottom:12px;
+
+  padding:18px;
+
+  border-radius:20px;
+
+  border:
+    1px solid rgba(215,179,106,.25);
+
+  background:
+
+    radial-gradient(
+      circle at 90% 10%,
+      rgba(215,179,106,.16),
+      transparent 35%
+    ),
+
+    linear-gradient(
+      145deg,
+      #17130c,
+      #0d0d0d
+    );
+
+  box-shadow:
+    0 15px 45px rgba(0,0,0,.20);
+
+}
+
+.paymentHero::after{
+
+  content:"";
+
+  position:absolute;
+
+  width:100px;
+  height:100px;
+
+  right:-40px;
+  bottom:-45px;
+
+  border-radius:50%;
+
+  border:
+    1px solid rgba(215,179,106,.10);
+
+}
+
+.paymentTop{
+
+  display:flex;
+
+  align-items:flex-start;
+
+  justify-content:space-between;
+
+  gap:15px;
+
+}
+
+.paymentLabel{
+
+  color:#8a7450;
+
+  font-size:8px;
+
+  font-weight:800;
+
+  letter-spacing:1.5px;
+
+  text-transform:uppercase;
+
+}
+
+.paymentMonth{
+
+  color:#696969;
+
+  font-size:8px;
+
+  margin-top:5px;
+
+}
+
+.paymentAmount{
+
+  margin-top:8px;
+
+  color:var(--goldLight);
+
+  font-size:28px;
+
+  line-height:1;
+
+  font-weight:800;
+
+  letter-spacing:-1px;
+
+}
+
+.paymentIcon{
+
+  width:42px;
+  height:42px;
+
+  border-radius:13px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:
+    rgba(215,179,106,.08);
+
+  border:
+    1px solid rgba(215,179,106,.18);
+
+  font-size:18px;
+
+}
+
+.paymentBottom{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:7px;
+
+  margin-top:13px;
+
+}
+
+.paymentDot{
+
+  width:6px;
+  height:6px;
+
+  border-radius:50%;
+
+  background:var(--green);
+
+  box-shadow:
+    0 0 9px rgba(85,217,150,.5);
+
+}
+
+.paymentStatus{
+
+  color:#777;
+
+  font-size:8px;
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
 
 .search{
+
   position:relative;
-  margin-bottom:18px;
+
+  margin-bottom:12px;
+
 }
 
 .searchIcon{
+
   position:absolute;
-  left:15px;
+
+  left:14px;
+
   top:50%;
+
   transform:translateY(-50%);
+
   color:#666;
+
   font-size:17px;
+
+  pointer-events:none;
+
 }
 
 .search input{
+
   width:100%;
-  height:48px;
-  padding:0 15px 0 42px;
+
+  height:47px;
+
+  padding:
+    0 14px 0 42px;
+
   border-radius:14px;
-  border:1px solid var(--border);
-  background:#101010;
+
+  border:
+    1px solid var(--border);
+
+  background:
+    rgba(16,16,16,.88);
+
   color:white;
+
   outline:none;
-  font-size:12px;
+
+  font-size:11px;
+
+  transition:.2s;
+
 }
 
 .search input:focus{
-  border-color:#665331;
+
+  border-color:
+    rgba(215,179,106,.42);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(215,179,106,.045);
+
 }
 
 .search input::placeholder{
-  color:#555;
+  color:#505050;
 }
 
-/* ================= STATS ================= */
+
+/* =========================================================
+   STATS
+========================================================= */
 
 .stats{
+
   display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:8px;
-  margin-bottom:22px;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  gap:7px;
+
+  margin-bottom:18px;
+
 }
 
 .stat{
-  min-height:72px;
-  padding:12px 7px;
+
+  min-height:69px;
+
+  padding:11px 6px;
+
   border-radius:14px;
-  border:1px solid var(--border);
-  background:linear-gradient(145deg,#141414,#0e0e0e);
+
+  border:
+    1px solid var(--border);
+
+  background:
+
+    linear-gradient(
+      145deg,
+      #141414,
+      #0d0d0d
+    );
+
   text-align:center;
+
   display:flex;
+
   flex-direction:column;
+
   justify-content:center;
+
+  transition:.2s;
+
+}
+
+.stat:hover{
+
+  border-color:#343434;
+
 }
 
 .statValue{
-  color:var(--gold-light);
-  font-size:20px;
+
+  color:var(--goldLight);
+
+  font-size:19px;
+
   line-height:1;
+
   font-weight:800;
+
 }
 
 .statLabel{
-  color:#666;
-  font-size:7px;
+
+  color:#606060;
+
+  font-size:6.5px;
+
   letter-spacing:1px;
+
   margin-top:7px;
+
+  font-weight:700;
+
 }
 
-/* ================= SECTION ================= */
+
+/* =========================================================
+   SECTION HEADER
+========================================================= */
 
 .sectionHeader{
+
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
-  margin-bottom:11px;
-  padding:0 2px;
+
+  margin:
+    3px 2px 10px;
+
 }
 
 .sectionTitle{
+
   font-size:13px;
-  font-weight:700;
+
+  font-weight:800;
+
+  letter-spacing:-.2px;
+
 }
 
 .sectionCount{
-  color:#666;
-  font-size:9px;
+
+  color:#5f5f5f;
+
+  font-size:8px;
+
 }
 
-/* ================= CARDS ================= */
+
+/* =========================================================
+   CARDS
+========================================================= */
 
 .cards{
+
   display:grid;
-  gap:10px;
+
+  gap:9px;
+
 }
 
 .studentCard{
+
   position:relative;
-  padding:15px;
-  border:1px solid var(--border);
-  border-radius:17px;
-  background:#111;
-  transition:border-color .2s,transform .2s;
+
+  padding:14px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius:18px;
+
+  background:
+
+    linear-gradient(
+      145deg,
+      rgba(19,19,19,.98),
+      rgba(14,14,14,.98)
+    );
+
+  transition:
+    border-color .2s,
+    transform .2s,
+    box-shadow .2s;
+
+  animation:
+    cardIn .25s ease both;
+
+}
+
+@keyframes cardIn{
+
+  from{
+    opacity:0;
+    transform:translateY(5px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+
 }
 
 .studentCard:hover{
-  border-color:#353535;
+
+  border-color:#343434;
+
+  box-shadow:
+    0 12px 35px rgba(0,0,0,.15);
+
 }
 
 .studentCard.inactive{
-  background:#0d0d0d;
-  border-color:#202020;
+
+  background:#0c0c0c;
+
+  border-color:#1d1d1d;
+
   opacity:.72;
+
 }
 
 .studentHeader{
+
   display:flex;
+
   align-items:center;
-  gap:11px;
+
+  gap:10px;
+
 }
 
 .avatar{
+
   width:43px;
   height:43px;
+
   flex:none;
+
   border-radius:13px;
-  background:#17130c;
-  border:1px solid #4c3e25;
+
+  background:
+
+    linear-gradient(
+      145deg,
+      #1d180e,
+      #12100c
+    );
+
+  border:
+    1px solid #4e4028;
+
   display:flex;
+
   align-items:center;
+
   justify-content:center;
-  color:var(--gold-light);
-  font-size:15px;
+
+  color:var(--goldLight);
+
+  font-size:14px;
+
   font-weight:800;
+
 }
 
 .studentInfo{
+
   min-width:0;
+
   flex:1;
+
 }
 
 .studentName{
-  font-size:13px;
+
+  font-size:12px;
+
   font-weight:800;
+
   white-space:nowrap;
+
   overflow:hidden;
+
   text-overflow:ellipsis;
+
 }
 
 .studentPhone{
-  color:#666;
-  font-size:9px;
+
+  color:#5e5e5e;
+
+  font-size:8px;
+
   margin-top:4px;
+
 }
 
 .badges{
+
   display:flex;
+
   flex-wrap:wrap;
+
   justify-content:flex-end;
-  gap:5px;
+
+  gap:4px;
+
+  max-width:120px;
+
 }
 
 .badge{
-  padding:5px 7px;
+
+  padding:
+    5px 7px;
+
   border-radius:7px;
-  font-size:7px;
+
+  font-size:6.5px;
+
   font-weight:800;
-  letter-spacing:.5px;
+
+  letter-spacing:.45px;
+
   white-space:nowrap;
+
 }
 
 .badge.active{
+
   color:var(--green);
-  background:rgba(85,217,150,.07);
-  border:1px solid rgba(85,217,150,.18);
+
+  background:
+    rgba(85,217,150,.055);
+
+  border:
+    1px solid rgba(85,217,150,.15);
+
 }
 
 .badge.live{
+
   color:#78c8ff;
-  background:rgba(120,200,255,.07);
-  border:1px solid rgba(120,200,255,.18);
+
+  background:
+    rgba(120,200,255,.055);
+
+  border:
+    1px solid rgba(120,200,255,.15);
+
 }
 
 .badge.completed{
-  color:var(--gold-light);
-  background:rgba(215,179,106,.07);
-  border:1px solid rgba(215,179,106,.20);
+
+  color:var(--goldLight);
+
+  background:
+    rgba(215,179,106,.055);
+
+  border:
+    1px solid rgba(215,179,106,.16);
+
 }
 
 .badge.inactive{
-  color:#999;
+
+  color:#888;
+
   background:#171717;
-  border:1px solid #2c2c2c;
+
+  border:
+    1px solid #292929;
+
 }
 
-/* ================= CLASS TYPE ================= */
+
+/* =========================================================
+   TYPE
+========================================================= */
 
 .typeRow{
-  margin-top:13px;
+
+  margin-top:11px;
+
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
-  padding:9px 11px;
-  background:#0c0c0c;
-  border:1px solid #202020;
+
+  padding:
+    8px 10px;
+
+  background:#0b0b0b;
+
+  border:
+    1px solid #202020;
+
   border-radius:10px;
+
 }
 
 .typeInfo{
+
   display:flex;
+
   align-items:center;
-  gap:8px;
+
+  gap:7px;
+
 }
 
 .typeLabel{
-  color:#666;
-  font-size:8px;
+
+  color:#555;
+
+  font-size:7px;
+
   text-transform:uppercase;
+
   letter-spacing:1px;
+
 }
 
 .typeValue{
-  color:var(--gold-light);
-  font-size:10px;
+
+  color:var(--goldLight);
+
+  font-size:9px;
+
   font-weight:800;
+
 }
 
 .editType{
-  border:1px solid #3a3224;
-  background:#16130e;
-  color:var(--gold-light);
+
+  border:
+    1px solid #393124;
+
+  background:#15120e;
+
+  color:var(--goldLight);
+
   border-radius:8px;
-  padding:6px 9px;
-  font-size:8px;
-  font-weight:700;
+
+  padding:
+    6px 8px;
+
+  font-size:7px;
+
+  font-weight:800;
+
 }
 
-/* ================= LAST ATTENDANCE ================= */
+
+/* =========================================================
+   LAST ATTENDANCE
+========================================================= */
 
 .lastAttendance{
-  margin-top:9px;
-  padding:10px 11px;
+
+  margin-top:7px;
+
+  padding:
+    9px 10px;
+
   border-radius:10px;
-  background:#0c0c0c;
-  border:1px solid #1e1e1e;
+
+  background:#0b0b0b;
+
+  border:
+    1px solid #1d1d1d;
+
 }
 
 .lastLabel{
-  color:#5e5e5e;
-  font-size:7px;
+
+  color:#505050;
+
+  font-size:6.5px;
+
   text-transform:uppercase;
+
   letter-spacing:1px;
+
 }
 
 .lastText{
-  color:#c8c8c8;
-  font-size:9px;
+
+  color:#bcbcbc;
+
+  font-size:8px;
+
   line-height:1.5;
-  margin-top:5px;
+
+  margin-top:4px;
+
 }
 
-/* ================= PROGRESS ================= */
+
+/* =========================================================
+   PROGRESS
+========================================================= */
 
 .progressBox{
-  margin-top:12px;
+
+  margin-top:10px;
+
 }
 
 .progressTop{
+
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
+
   margin-bottom:6px;
+
 }
 
 .progressLabel{
-  color:#666;
-  font-size:7px;
+
+  color:#555;
+
+  font-size:6.5px;
+
   letter-spacing:1px;
+
+  font-weight:700;
+
 }
 
 .progressCount{
-  color:#aaa;
-  font-size:8px;
-  font-weight:700;
+
+  color:#999;
+
+  font-size:7.5px;
+
+  font-weight:800;
+
 }
 
 .progress{
+
   height:5px;
+
   width:100%;
-  border-radius:10px;
+
+  border-radius:20px;
+
   background:#222;
+
   overflow:hidden;
+
 }
 
 .progressBar{
+
   height:100%;
-  border-radius:10px;
-  background:linear-gradient(
-    90deg,
-    var(--gold),
-    var(--gold-light)
-  );
+
+  border-radius:20px;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      var(--gold),
+      var(--goldLight)
+    );
+
+  box-shadow:
+    0 0 8px rgba(215,179,106,.15);
+
 }
 
-/* ================= ACTIONS ================= */
+
+/* =========================================================
+   ACTIONS
+========================================================= */
 
 .actions{
+
   display:grid;
-  grid-template-columns:1.25fr 1fr 1fr 1fr;
-  gap:6px;
-  margin-top:12px;
+
+  grid-template-columns:
+    1.25fr 1fr 1fr 1fr;
+
+  gap:5px;
+
+  margin-top:10px;
+
 }
 
 .action{
-  min-height:36px;
-  border:1px solid #282828;
+
+  min-height:35px;
+
+  border:
+    1px solid #272727;
+
   border-radius:9px;
-  background:#151515;
-  color:#bdbdbd;
-  font-size:8px;
-  font-weight:700;
+
+  background:#141414;
+
+  color:#aaa;
+
+  font-size:7px;
+
+  font-weight:800;
+
 }
 
 .action.attend{
-  background:linear-gradient(
-    135deg,
-    var(--gold-light),
-    var(--gold)
-  );
+
+  background:
+
+    linear-gradient(
+      135deg,
+      var(--goldLight),
+      var(--gold)
+    );
+
   color:#111;
-  border:none;
+
+  border:0;
+
 }
 
 .action.wa{
@@ -481,457 +1148,851 @@ button{
 }
 
 .notActiveBtn{
+
   width:100%;
-  margin-top:7px;
-  min-height:35px;
+
+  margin-top:6px;
+
+  min-height:34px;
+
   border-radius:9px;
-  border:1px solid rgba(255,119,119,.15);
-  background:rgba(255,119,119,.045);
-  color:#e98282;
-  font-size:8px;
+
+  border:
+    1px solid rgba(255,119,119,.14);
+
+  background:
+    rgba(255,119,119,.035);
+
+  color:#dc7d7d;
+
+  font-size:7px;
+
   font-weight:800;
+
 }
 
 .activateBtn{
+
   width:100%;
-  min-height:36px;
-  margin-top:12px;
+
+  min-height:35px;
+
+  margin-top:10px;
+
   border-radius:9px;
-  border:1px solid rgba(85,217,150,.18);
-  background:rgba(85,217,150,.05);
+
+  border:
+    1px solid rgba(85,217,150,.16);
+
+  background:
+    rgba(85,217,150,.045);
+
   color:#6ee3a0;
-  font-size:8px;
+
+  font-size:7px;
+
   font-weight:800;
+
 }
 
-/* ================= EMPTY ================= */
+
+/* =========================================================
+   EMPTY / LOADING
+========================================================= */
 
 .empty{
-  border:1px dashed #292929;
-  border-radius:15px;
-  padding:45px 20px;
+
+  border:
+    1px dashed #292929;
+
+  border-radius:16px;
+
+  padding:42px 20px;
+
   text-align:center;
+
   color:#666;
+
 }
 
 .emptyIcon{
-  font-size:28px;
-  margin-bottom:10px;
+
+  font-size:27px;
+
+  margin-bottom:9px;
+
 }
 
 .emptyText{
-  font-size:10px;
+
+  font-size:9px;
+
+  line-height:1.6;
+
 }
 
 .loading{
-  padding:40px;
+
+  padding:42px;
+
   text-align:center;
+
   color:#666;
-  font-size:10px;
+
+  font-size:9px;
+
 }
 
-/* ================= FAB ================= */
+
+/* =========================================================
+   FAB
+========================================================= */
 
 .fab{
+
   position:fixed;
-  right:19px;
-  bottom:76px;
+
+  right:17px;
+
+  bottom:
+    calc(75px + env(safe-area-inset-bottom));
+
   z-index:60;
-  width:52px;
-  height:52px;
+
+  width:53px;
+  height:53px;
+
   border:0;
-  border-radius:16px;
-  background:linear-gradient(
-    135deg,
-    var(--gold-light),
-    var(--gold)
-  );
+
+  border-radius:17px;
+
+  background:
+
+    linear-gradient(
+      135deg,
+      var(--goldLight),
+      var(--gold)
+    );
+
   color:#111;
+
   font-size:25px;
-  box-shadow:0 12px 35px rgba(0,0,0,.5);
+
+  box-shadow:
+    0 12px 35px rgba(0,0,0,.5);
+
+  transition:.2s;
+
 }
 
-/* ================= BOTTOM NAV ================= */
+.fab:hover{
+
+  transform:
+    translateY(-2px);
+
+}
+
+
+/* =========================================================
+   BOTTOM NAV
+========================================================= */
 
 .bottomNav{
+
   position:fixed;
+
   left:0;
   right:0;
+
   bottom:0;
+
   z-index:55;
+
   display:flex;
+
   justify-content:center;
-  gap:3px;
-  padding:8px 9px calc(8px + env(safe-area-inset-bottom));
-  background:rgba(9,9,9,.96);
-  backdrop-filter:blur(18px);
-  border-top:1px solid #202020;
+
+  gap:2px;
+
+  padding:
+    7px 7px
+    calc(7px + env(safe-area-inset-bottom));
+
+  background:
+    rgba(8,8,8,.94);
+
+  backdrop-filter:
+    blur(20px);
+
+  -webkit-backdrop-filter:
+    blur(20px);
+
+  border-top:
+    1px solid #202020;
+
 }
 
 .navBtn{
+
   flex:1;
+
   max-width:120px;
+
   border:0;
+
   background:none;
-  color:#5e5e5e;
-  padding:5px 2px;
-  font-size:7px;
+
+  color:#555;
+
+  padding:
+    5px 2px;
+
+  font-size:6.5px;
+
   font-weight:800;
+
 }
 
 .navBtn.active{
-  color:var(--gold-light);
+
+  color:var(--goldLight);
+
 }
 
 .navIcon{
+
   display:block;
+
   font-size:15px;
+
   margin-bottom:3px;
+
 }
 
-/* ================= MODAL ================= */
+
+/* =========================================================
+   MODAL
+========================================================= */
 
 .modal{
+
   position:fixed;
+
   inset:0;
+
   z-index:100;
+
   display:none;
+
   align-items:flex-end;
+
   justify-content:center;
-  padding:9px;
-  background:rgba(0,0,0,.78);
-  backdrop-filter:blur(6px);
+
+  padding:8px;
+
+  background:
+    rgba(0,0,0,.80);
+
+  backdrop-filter:
+    blur(7px);
+
+  -webkit-backdrop-filter:
+    blur(7px);
+
 }
 
 .modal.show{
+
   display:flex;
+
 }
 
 .modalBox{
+
   width:100%;
-  max-width:570px;
-  max-height:91vh;
+
+  max-width:580px;
+
+  max-height:92vh;
+
   overflow:auto;
-  padding:18px;
-  border:1px solid #303030;
-  border-radius:21px 21px 13px 13px;
-  background:#111;
-  animation:modalUp .22s ease;
+
+  padding:17px;
+
+  border:
+    1px solid #303030;
+
+  border-radius:
+    21px 21px 13px 13px;
+
+  background:
+
+    linear-gradient(
+      145deg,
+      #131313,
+      #0e0e0e
+    );
+
+  animation:
+    modalUp .22s ease;
+
 }
 
 @keyframes modalUp{
+
   from{
     transform:translateY(25px);
     opacity:0;
   }
+
   to{
     transform:translateY(0);
     opacity:1;
   }
+
 }
 
 .modalHeader{
+
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
-  margin-bottom:17px;
+
+  margin-bottom:16px;
+
 }
 
 .modalTitle{
-  font-size:15px;
+
+  font-size:14px;
+
   font-weight:800;
+
 }
 
 .modalSub{
-  color:#666;
-  font-size:9px;
+
+  color:#5f5f5f;
+
+  font-size:8px;
+
   margin-top:4px;
+
 }
 
 .close{
+
   width:32px;
   height:32px;
-  border:1px solid #292929;
+
+  border:
+    1px solid #292929;
+
   border-radius:9px;
+
   background:#171717;
+
   color:#aaa;
+
   font-size:17px;
+
 }
 
-/* ================= FORM ================= */
+
+/* =========================================================
+   FORM
+========================================================= */
 
 .formGroup{
-  margin-bottom:14px;
+
+  margin-bottom:13px;
+
 }
 
 .formLabel{
+
   display:block;
-  color:#686868;
-  font-size:8px;
+
+  color:#656565;
+
+  font-size:7px;
+
   text-transform:uppercase;
+
   letter-spacing:1px;
+
   margin-bottom:6px;
+
+  font-weight:700;
+
 }
 
 .formInput,
 .formTextarea{
+
   width:100%;
-  border:1px solid #292929;
+
+  border:
+    1px solid #292929;
+
   border-radius:10px;
-  background:#0b0b0b;
+
+  background:#090909;
+
   color:white;
+
   outline:none;
-  padding:12px;
-  font-size:11px;
+
+  padding:11px;
+
+  font-size:10px;
+
+  transition:.2s;
+
 }
 
 .formInput{
-  height:43px;
+
+  height:42px;
+
 }
 
 .formInput:focus,
 .formTextarea:focus{
+
   border-color:#675432;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(215,179,106,.035);
+
 }
 
 .formTextarea{
+
   min-height:75px;
+
   resize:vertical;
+
 }
 
-/* ================= TYPE ================= */
+
+/* =========================================================
+   TYPE GRID
+========================================================= */
 
 .typeGrid{
+
   display:grid;
+
   grid-template-columns:1fr 1fr;
-  gap:8px;
+
+  gap:7px;
+
 }
 
 .typeOption{
-  border:1px solid #292929;
-  background:#0c0c0c;
+
+  border:
+    1px solid #292929;
+
+  background:#0b0b0b;
+
   border-radius:12px;
-  padding:14px 8px;
+
+  padding:13px 8px;
+
   color:#777;
+
   text-align:center;
+
 }
 
 .typeOption.selected{
+
   border-color:#a9874d;
-  background:rgba(215,179,106,.08);
-  color:var(--gold-light);
+
+  background:
+    rgba(215,179,106,.075);
+
+  color:var(--goldLight);
+
 }
 
 .typeIcon{
+
   display:block;
-  font-size:20px;
+
+  font-size:19px;
+
   margin-bottom:5px;
+
 }
 
 .typeName{
-  font-size:9px;
+
+  font-size:8px;
+
   font-weight:800;
+
 }
 
-/* ================= OPTIONS ================= */
+
+/* =========================================================
+   OPTION GRID
+========================================================= */
 
 .optionGrid{
+
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:7px;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap:6px;
+
 }
 
 .optionBtn{
-  min-height:38px;
-  border:1px solid #292929;
-  background:#0c0c0c;
+
+  min-height:37px;
+
+  border:
+    1px solid #292929;
+
+  background:#0b0b0b;
+
   border-radius:9px;
+
   color:#888;
-  font-size:9px;
+
+  font-size:8px;
+
   padding:5px;
+
 }
 
 .optionBtn.selected{
+
   color:#111;
-  background:var(--gold-light);
-  border-color:var(--gold-light);
+
+  background:var(--goldLight);
+
+  border-color:var(--goldLight);
+
   font-weight:800;
+
 }
 
-/* ================= CUSTOM ROUTE ================= */
 
-.customRouteBox{
-  display:none;
-  margin-top:8px;
-}
+/* =========================================================
+   CUSTOM INPUT BOXES
+========================================================= */
 
-.customRouteBox.show{
-  display:block;
-}
-
-.customRouteHint{
-  color:#555;
-  font-size:7px;
-  margin-top:5px;
-  line-height:1.4;
-}
-
-/* ================= CUSTOM REMARK ================= */
-
+.customRouteBox,
 .customRemarkBox{
+
   display:none;
-  margin-top:8px;
+
+  margin-top:7px;
+
 }
 
+.customRouteBox.show,
 .customRemarkBox.show{
+
   display:block;
+
 }
 
+.customRouteHint,
 .customRemarkHint{
-  color:#555;
-  font-size:7px;
+
+  color:#505050;
+
+  font-size:6.5px;
+
   margin-top:5px;
-  line-height:1.4;
+
+  line-height:1.5;
+
 }
 
-/* ================= DISTANCE DEFAULT ================= */
 
-.distanceDefault{
-  border-color:var(--gold-light);
-  background:var(--gold-light);
-  color:#111;
-  font-weight:800;
-}
-
-/* ================= GOLD BUTTON ================= */
+/* =========================================================
+   GOLD BUTTON
+========================================================= */
 
 .goldBtn{
+
   width:100%;
+
   min-height:43px;
+
   border:0;
+
   border-radius:10px;
-  background:linear-gradient(
-    135deg,
-    var(--gold-light),
-    var(--gold)
-  );
+
+  background:
+
+    linear-gradient(
+      135deg,
+      var(--goldLight),
+      var(--gold)
+    );
+
   color:#111;
-  font-size:10px;
+
+  font-size:9px;
+
   font-weight:800;
+
+  box-shadow:
+    0 7px 20px rgba(215,179,106,.07);
+
 }
 
-/* ================= HISTORY ================= */
+
+/* =========================================================
+   HISTORY
+========================================================= */
 
 .historyItem{
-  padding:12px;
-  border:1px solid #242424;
+
+  padding:11px;
+
+  border:
+    1px solid #242424;
+
   border-radius:11px;
-  background:#0c0c0c;
-  margin-bottom:7px;
+
+  background:#0b0b0b;
+
+  margin-bottom:6px;
+
 }
 
 .historyNumber{
-  color:var(--gold-light);
-  font-size:8px;
+
+  color:var(--goldLight);
+
+  font-size:7px;
+
   font-weight:800;
+
   margin-bottom:5px;
+
 }
 
 .historyText{
-  color:#c5c5c5;
-  font-size:9px;
+
+  color:#bdbdbd;
+
+  font-size:8px;
+
   line-height:1.6;
+
 }
 
-/* ================= TOAST ================= */
+
+/* =========================================================
+   TOAST
+========================================================= */
 
 .toast{
+
   position:fixed;
+
   left:50%;
-  bottom:88px;
+
+  bottom:
+    calc(87px + env(safe-area-inset-bottom));
+
   z-index:200;
-  transform:translateX(-50%) translateY(15px);
+
+  transform:
+    translateX(-50%)
+    translateY(15px);
+
   opacity:0;
+
   pointer-events:none;
+
   background:#191919;
-  border:1px solid #333;
+
+  border:
+    1px solid #333;
+
   color:#eee;
+
   border-radius:10px;
-  padding:10px 14px;
-  font-size:9px;
+
+  padding:
+    10px 14px;
+
+  font-size:8px;
+
   white-space:nowrap;
+
   transition:.22s;
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.4);
+
 }
 
 .toast.show{
+
   opacity:1;
-  transform:translateX(-50%) translateY(0);
+
+  transform:
+    translateX(-50%)
+    translateY(0);
+
 }
 
-/* ================= MOBILE ================= */
+
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media(max-width:500px){
 
   .container{
-    padding-left:13px;
-    padding-right:13px;
+
+    padding-left:12px;
+    padding-right:12px;
+
+  }
+
+  .paymentHero{
+
+    padding:16px;
+
+    border-radius:18px;
+
+  }
+
+  .paymentAmount{
+
+    font-size:25px;
+
   }
 
   .stats{
-    gap:6px;
+
+    gap:5px;
+
   }
 
   .stat{
-    min-height:68px;
+
+    min-height:66px;
+
   }
 
   .statValue{
-    font-size:18px;
+
+    font-size:17px;
+
   }
 
   .studentCard{
-    padding:14px;
+
+    padding:13px;
+
   }
 
   .badges{
-    max-width:100px;
+
+    max-width:95px;
+
   }
 
   .actions{
-    gap:5px;
+
+    gap:4px;
+
   }
 
   .action{
-    font-size:7px;
+
+    font-size:6.5px;
+
   }
 
 }
+
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
 
 @media(max-width:370px){
 
-  .brandSub{
-    display:none;
-  }
-
+  .brandSub,
   .clockDate{
+
     display:none;
+
   }
 
   .stats{
-    grid-template-columns:repeat(2,1fr);
+
+    grid-template-columns:
+      repeat(2,1fr);
+
   }
 
   .actions{
-    grid-template-columns:1fr 1fr;
+
+    grid-template-columns:
+      1fr 1fr;
+
+  }
+
+  .badges{
+
+    max-width:85px;
+
   }
 
 }
+
+
+/* =========================================================
+   TABLET / DESKTOP
+========================================================= */
+
+@media(min-width:700px){
+
+  .container{
+
+    padding-top:20px;
+
+  }
+
+  .cards{
+
+    grid-template-columns:
+      repeat(2,1fr);
+
+  }
+
+}
+
 </style>
 </head>
 
+
 <body>
 
-<!-- ================= HEADER ================= -->
+
+<!-- =======================================================
+     HEADER
+======================================================= -->
 
 <header class="header">
 
@@ -943,7 +2004,7 @@ button{
         A1
       </div>
 
-      <div>
+      <div class="brandText">
 
         <div class="brandTitle">
           A1 Attendance
@@ -957,18 +2018,23 @@ button{
 
     </div>
 
-    <div class="clock">
 
-      <div
-        class="clockTime"
-        id="clockTime">
-        --:--
-      </div>
+    <div class="headerRight">
 
-      <div
-        class="clockDate"
-        id="clockDate">
-        ---
+      <div class="clock">
+
+        <div
+          class="clockTime"
+          id="clockTime">
+          --:--
+        </div>
+
+        <div
+          class="clockDate"
+          id="clockDate">
+          ---
+        </div>
+
       </div>
 
     </div>
@@ -978,9 +2044,65 @@ button{
 </header>
 
 
-<!-- ================= MAIN ================= -->
+<!-- =======================================================
+     MAIN
+======================================================= -->
 
 <main class="container">
+
+
+  <!-- =====================================================
+       PAYMENT THIS MONTH
+  ====================================================== -->
+
+  <section class="paymentHero">
+
+    <div class="paymentTop">
+
+      <div>
+
+        <div class="paymentLabel">
+          Total Payment Received
+        </div>
+
+        <div
+          class="paymentMonth"
+          id="paymentMonth">
+          This Month
+        </div>
+
+        <div
+          class="paymentAmount"
+          id="monthlyPayment">
+          ₹0
+        </div>
+
+      </div>
+
+
+      <div class="paymentIcon">
+        ₹
+      </div>
+
+    </div>
+
+
+    <div class="paymentBottom">
+
+      <span class="paymentDot"></span>
+
+      <span class="paymentStatus">
+        Monthly collection overview
+      </span>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       SEARCH
+  ====================================================== -->
 
   <div class="search">
 
@@ -997,56 +2119,77 @@ button{
   </div>
 
 
-  <!-- ================= STATS ================= -->
+  <!-- =====================================================
+       STATS
+  ====================================================== -->
 
   <div class="stats">
 
     <div class="stat">
+
       <div
         class="statValue"
         id="activeCount">
         0
       </div>
+
       <div class="statLabel">
         ACTIVE
       </div>
+
     </div>
 
+
     <div class="stat">
+
       <div
         class="statValue"
         id="completedCount">
         0
       </div>
+
       <div class="statLabel">
         COMPLETED
       </div>
+
     </div>
 
+
     <div class="stat">
+
       <div
         class="statValue"
         id="liveCount">
         0
       </div>
+
       <div class="statLabel">
         LIVE NOW
       </div>
+
     </div>
 
+
     <div class="stat">
+
       <div
         class="statValue"
         id="inactiveCount">
         0
       </div>
+
       <div class="statLabel">
         NOT ACTIVE
       </div>
+
     </div>
 
   </div>
 
+
+  <!-- =====================================================
+       SECTION
+  ====================================================== -->
 
   <div class="sectionHeader">
 
@@ -1065,6 +2208,10 @@ button{
   </div>
 
 
+  <!-- =====================================================
+       STUDENTS
+  ====================================================== -->
+
   <div
     id="studentCards"
     class="cards">
@@ -1078,16 +2225,22 @@ button{
 </main>
 
 
-<!-- ================= FAB ================= -->
+<!-- =======================================================
+     FAB
+======================================================= -->
 
 <button
   class="fab"
   onclick="openAddModal()">
+
   +
+
 </button>
 
 
-<!-- ================= BOTTOM NAV ================= -->
+<!-- =======================================================
+     BOTTOM NAV
+======================================================= -->
 
 <nav class="bottomNav">
 
@@ -1096,37 +2249,52 @@ button{
     id="navActive"
     onclick="setFilter('active')">
 
-    <span class="navIcon">🚗</span>
+    <span class="navIcon">
+      🚗
+    </span>
+
     ACTIVE
 
   </button>
+
 
   <button
     class="navBtn"
     id="navCompleted"
     onclick="setFilter('completed')">
 
-    <span class="navIcon">✓</span>
+    <span class="navIcon">
+      ✓
+    </span>
+
     COMPLETED
 
   </button>
+
 
   <button
     class="navBtn"
     id="navLive"
     onclick="setFilter('live')">
 
-    <span class="navIcon">●</span>
+    <span class="navIcon">
+      ●
+    </span>
+
     LIVE
 
   </button>
+
 
   <button
     class="navBtn"
     id="navInactive"
     onclick="setFilter('inactive')">
 
-    <span class="navIcon">⏸</span>
+    <span class="navIcon">
+      ⏸
+    </span>
+
     NOT ACTIVE
 
   </button>
@@ -1134,7 +2302,9 @@ button{
 </nav>
 
 
-<!-- ================= ADD STUDENT ================= -->
+<!-- =======================================================
+     ADD STUDENT MODAL
+======================================================= -->
 
 <div
   class="modal"
@@ -1159,7 +2329,9 @@ button{
       <button
         class="close"
         onclick="closeModal('addModal')">
+
         ×
+
       </button>
 
     </div>
@@ -1272,7 +2444,9 @@ button{
 </div>
 
 
-<!-- ================= ATTENDANCE ================= -->
+<!-- =======================================================
+     ATTENDANCE MODAL
+======================================================= -->
 
 <div
   class="modal"
@@ -1298,7 +2472,9 @@ button{
       <button
         class="close"
         onclick="closeModal('attendanceModal')">
+
         ×
+
       </button>
 
     </div>
@@ -1317,49 +2493,72 @@ button{
         <button
           class="optionBtn routeOption"
           onclick="selectRoute(this,'Bhanjpur')">
+
           Bhanjpur
+
         </button>
+
 
         <button
           class="optionBtn routeOption"
           onclick="selectRoute(this,'Baghra')">
+
           Baghra
+
         </button>
+
 
         <button
           class="optionBtn routeOption"
           onclick="selectRoute(this,'Badbazar')">
+
           Badbazar
+
         </button>
+
 
         <button
           class="optionBtn routeOption"
           onclick="selectRoute(this,'Udala')">
+
           Udala
+
         </button>
+
 
         <button
           class="optionBtn routeOption"
           onclick="selectRoute(this,'Station Bazar')">
+
           Station Bazar
+
         </button>
+
 
         <button
           class="optionBtn routeOption"
           onclick="selectRoute(this,'Lal Bazar')">
+
           Lal Bazar
+
         </button>
+
 
         <button
           class="optionBtn routeOption"
           onclick="selectRoute(this,'Kuchei')">
+
           Kuchei
+
         </button>
+
 
         <button
           class="optionBtn routeOption"
           onclick="selectRoute(this,'Other Route')">
+
           ✏️ Other Route
+
         </button>
 
       </div>
@@ -1397,7 +2596,7 @@ button{
 
         <button
           type="button"
-          class="optionBtn distanceOption distanceDefault selected"
+          class="optionBtn distanceOption selected"
           onclick="selectDistance(this,'5 KM')">
 
           5 KM
@@ -1418,6 +2617,7 @@ button{
       </label>
 
       <div class="optionGrid">
+
 
         <button
           type="button"
@@ -1551,8 +2751,6 @@ button{
       </div>
 
 
-      <!-- CUSTOM REMARK -->
-
       <div
         class="customRemarkBox"
         id="customRemarkBox">
@@ -1586,7 +2784,9 @@ button{
 </div>
 
 
-<!-- ================= HISTORY ================= -->
+<!-- =======================================================
+     HISTORY MODAL
+======================================================= -->
 
 <div
   class="modal"
@@ -1612,7 +2812,9 @@ button{
       <button
         class="close"
         onclick="closeModal('historyModal')">
+
         ×
+
       </button>
 
     </div>
@@ -1624,7 +2826,9 @@ button{
 </div>
 
 
-<!-- ================= EDIT TYPE ================= -->
+<!-- =======================================================
+     EDIT TYPE MODAL
+======================================================= -->
 
 <div
   class="modal"
@@ -1650,7 +2854,9 @@ button{
       <button
         class="close"
         onclick="closeModal('typeModal')">
+
         ×
+
       </button>
 
     </div>
@@ -1715,7 +2921,9 @@ button{
 </div>
 
 
-<!-- ================= TOAST ================= -->
+<!-- =======================================================
+     TOAST
+======================================================= -->
 
 <div
   class="toast"
@@ -1723,7 +2931,9 @@ button{
 </div>
 
 
-<!-- ================= FIREBASE ================= -->
+<!-- =======================================================
+     FIREBASE
+======================================================= -->
 
 <script type="module">
 
@@ -1742,9 +2952,9 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
-/* ==================================================
+/* =========================================================
    FIREBASE CONFIG
-================================================== */
+========================================================= */
 
 const firebaseConfig = {
 
@@ -1782,29 +2992,39 @@ const studentCollection =
   );
 
 
-/* ==================================================
+/* =========================================================
    GLOBAL VARIABLES
-================================================== */
+========================================================= */
 
 let students = [];
 
-let currentFilter = "active";
+let currentFilter =
+  "active";
 
-let currentStudentId = null;
+let currentStudentId =
+  null;
 
-let selectedRoute = "";
-let selectedDistance = "5 KM";
-let selectedRemark = "";
+let selectedRoute =
+  "";
 
-let addClassType = "Group";
-let editClassType = "Group";
+let selectedDistance =
+  "5 KM";
+
+let selectedRemark =
+  "";
+
+let addClassType =
+  "Group";
+
+let editClassType =
+  "Group";
 
 let toastTimer;
 
 
-/* ==================================================
-   HELPERS
-================================================== */
+/* =========================================================
+   SAFE HTML
+========================================================= */
 
 function safe(value){
 
@@ -1817,6 +3037,10 @@ function safe(value){
 
 }
 
+
+/* =========================================================
+   ATTENDANCE HELPERS
+========================================================= */
 
 function getLogs(student){
 
@@ -1877,9 +3101,9 @@ function isInactive(student){
 }
 
 
-/* ==================================================
-   TIME
-================================================== */
+/* =========================================================
+   TIME PARSER
+========================================================= */
 
 function parseAttendanceTime(log){
 
@@ -1931,6 +3155,10 @@ function parseAttendanceTime(log){
 }
 
 
+/* =========================================================
+   TIME DISTANCE
+========================================================= */
+
 function timeDistance(logs){
 
   if(!logs.length){
@@ -1974,6 +3202,10 @@ function timeDistance(logs){
 }
 
 
+/* =========================================================
+   LIVE
+========================================================= */
+
 function isLive(student){
 
   if(isInactive(student)){
@@ -1994,9 +3226,9 @@ function isLive(student){
 }
 
 
-/* ==================================================
+/* =========================================================
    CLOCK
-================================================== */
+========================================================= */
 
 function updateClock(){
 
@@ -2030,7 +3262,6 @@ function updateClock(){
 
 }
 
-
 updateClock();
 
 setInterval(
@@ -2039,9 +3270,530 @@ setInterval(
 );
 
 
-/* ==================================================
+/* =========================================================
+   PAYMENT HELPERS
+========================================================= */
+
+/*
+  This section intentionally supports several common
+  payment data formats so existing Firebase documents
+  are less likely to need migration.
+*/
+
+
+function numberValue(value){
+
+  if(
+    typeof value === "number" &&
+    Number.isFinite(value)
+  ){
+
+    return value;
+
+  }
+
+  if(
+    typeof value === "string"
+  ){
+
+    const cleaned =
+      value
+        .replace(/₹/g,"")
+        .replace(/,/g,"")
+        .trim();
+
+    const parsed =
+      Number(cleaned);
+
+    return Number.isFinite(parsed)
+      ? parsed
+      : 0;
+
+  }
+
+  return 0;
+
+}
+
+
+function getPaymentDate(item){
+
+  if(!item){
+    return null;
+  }
+
+
+  const candidates = [
+
+    item.date,
+
+    item.paymentDate,
+
+    item.paidAt,
+
+    item.createdAt,
+
+    item.timestamp,
+
+    item.time,
+
+    item.datetime
+
+  ];
+
+
+  for(
+    const candidate of candidates
+  ){
+
+    if(
+      candidate instanceof Date
+    ){
+
+      return candidate;
+
+    }
+
+
+    if(
+      typeof candidate === "object" &&
+      candidate?.toDate
+    ){
+
+      try{
+
+        return candidate.toDate();
+
+      }catch(e){}
+
+    }
+
+
+    if(
+      typeof candidate === "number"
+    ){
+
+      const d =
+        new Date(candidate);
+
+      if(!isNaN(d.getTime())){
+        return d;
+      }
+
+    }
+
+
+    if(
+      typeof candidate === "string"
+    ){
+
+      const d =
+        new Date(candidate);
+
+      if(!isNaN(d.getTime())){
+        return d;
+      }
+
+
+      /*
+        Supports DD/MM/YYYY
+      */
+
+      const match =
+        candidate.match(
+          /(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/
+        );
+
+      if(match){
+
+        const day =
+          Number(match[1]);
+
+        const month =
+          Number(match[2]) - 1;
+
+        const year =
+          Number(match[3]);
+
+        const parsed =
+          new Date(
+            year,
+            month,
+            day
+          );
+
+        if(!isNaN(parsed.getTime())){
+          return parsed;
+        }
+
+      }
+
+    }
+
+  }
+
+
+  return null;
+
+}
+
+
+function isCurrentMonth(date){
+
+  if(!date){
+    return false;
+  }
+
+  const now =
+    new Date();
+
+  return (
+    date.getMonth() ===
+      now.getMonth() &&
+
+    date.getFullYear() ===
+      now.getFullYear()
+  );
+
+}
+
+
+function getPaymentAmount(item){
+
+  if(!item){
+    return 0;
+  }
+
+
+  const fields = [
+
+    "amount",
+
+    "amountPaid",
+
+    "paidAmount",
+
+    "paymentAmount",
+
+    "received",
+
+    "receivedAmount",
+
+    "paymentReceived",
+
+    "feePaid",
+
+    "feesPaid",
+
+    "value"
+
+  ];
+
+
+  for(
+    const field of fields
+  ){
+
+    if(
+      item[field] !== undefined &&
+      item[field] !== null
+    ){
+
+      const amount =
+        numberValue(
+          item[field]
+        );
+
+      if(amount > 0){
+        return amount;
+      }
+
+    }
+
+  }
+
+
+  return 0;
+
+}
+
+
+function parsePaymentArray(array){
+
+  if(
+    !Array.isArray(array)
+  ){
+
+    return 0;
+
+  }
+
+
+  let total = 0;
+
+
+  array.forEach(item=>{
+
+    /*
+      If array contains objects
+    */
+
+    if(
+      typeof item === "object" &&
+      item !== null
+    ){
+
+      const date =
+        getPaymentDate(item);
+
+      if(
+        date &&
+        isCurrentMonth(date)
+      ){
+
+        total +=
+          getPaymentAmount(item);
+
+      }
+
+      return;
+
+    }
+
+
+    /*
+      If array contains strings such as:
+
+      "02 Oct 2026 - ₹3000"
+    */
+
+    if(
+      typeof item === "string"
+    ){
+
+      const amountMatch =
+        item.match(
+          /₹\s*([\d,]+(?:\.\d+)?)/i
+        );
+
+      if(!amountMatch){
+        return;
+      }
+
+      const amount =
+        numberValue(
+          amountMatch[1]
+        );
+
+
+      const date =
+        new Date(item);
+
+      if(
+        !isNaN(date.getTime()) &&
+        isCurrentMonth(date)
+      ){
+
+        total += amount;
+
+      }
+
+    }
+
+  });
+
+
+  return total;
+
+}
+
+
+function getMonthlyPayment(student){
+
+  let total = 0;
+
+
+  /*
+    1. Structured payment arrays
+  */
+
+  const arrayFields = [
+
+    "paymentLogs",
+
+    "payments",
+
+    "paymentHistory",
+
+    "paymentsReceived",
+
+    "transactions"
+
+  ];
+
+
+  arrayFields.forEach(field=>{
+
+    if(
+      Array.isArray(student[field])
+    ){
+
+      total +=
+        parsePaymentArray(
+          student[field]
+        );
+
+    }
+
+  });
+
+
+  /*
+    2. Direct payment object
+  */
+
+  const objectFields = [
+
+    "payment",
+
+    "lastPayment"
+
+  ];
+
+
+  objectFields.forEach(field=>{
+
+    const item =
+      student[field];
+
+    if(
+      item &&
+      typeof item === "object" &&
+      !Array.isArray(item)
+    ){
+
+      const date =
+        getPaymentDate(item);
+
+      if(
+        date &&
+        isCurrentMonth(date)
+      ){
+
+        total +=
+          getPaymentAmount(item);
+
+      }
+
+    }
+
+  });
+
+
+  /*
+    3. Direct amount + date
+  */
+
+  const directAmountFields = [
+
+    "paymentReceived",
+
+    "amountPaid",
+
+    "paidAmount",
+
+    "paymentAmount"
+
+  ];
+
+
+  directAmountFields.forEach(field=>{
+
+    if(
+      student[field] !== undefined &&
+      student[field] !== null
+    ){
+
+      const amount =
+        numberValue(
+          student[field]
+        );
+
+
+      /*
+        Only count direct amount if a
+        recognizable payment date exists.
+      */
+
+      const date =
+        getPaymentDate(student);
+
+
+      if(
+        amount > 0 &&
+        date &&
+        isCurrentMonth(date)
+      ){
+
+        total += amount;
+
+      }
+
+    }
+
+  });
+
+
+  return total;
+
+}
+
+
+/* =========================================================
+   MONTHLY PAYMENT RENDER
+========================================================= */
+
+function renderMonthlyPayment(){
+
+  let total = 0;
+
+
+  students.forEach(student=>{
+
+    total +=
+      getMonthlyPayment(
+        student
+      );
+
+  });
+
+
+  document.getElementById(
+    "monthlyPayment"
+  ).textContent =
+    "₹" +
+    total.toLocaleString(
+      "en-IN"
+    );
+
+
+  document.getElementById(
+    "paymentMonth"
+  ).textContent =
+    new Date().toLocaleDateString(
+      "en-IN",
+      {
+        month:"long",
+        year:"numeric"
+      }
+    );
+
+}
+
+
+/* =========================================================
    TOAST
-================================================== */
+========================================================= */
 
 function showToast(message){
 
@@ -2064,9 +3816,11 @@ function showToast(message){
   toastTimer =
     setTimeout(
       ()=>{
+
         toast.classList.remove(
           "show"
         );
+
       },
       2200
     );
@@ -2074,9 +3828,9 @@ function showToast(message){
 }
 
 
-/* ==================================================
+/* =========================================================
    LOAD STUDENTS
-================================================== */
+========================================================= */
 
 async function loadStudents(){
 
@@ -2089,18 +3843,27 @@ async function loadStudents(){
 
     students = [];
 
+
     snapshot.forEach(item=>{
 
       students.push({
-        id:item.id,
+
+        id:
+          item.id,
+
         ...item.data()
+
       });
 
     });
 
+
+    renderMonthlyPayment();
+
     render();
 
-  }catch(error){
+  }
+  catch(error){
 
     console.error(error);
 
@@ -2115,9 +3878,11 @@ async function loadStudents(){
         </div>
 
         <div class="emptyText">
+
           Unable to load students.
           <br>
           Check Firebase configuration.
+
         </div>
 
       </div>
@@ -2129,9 +3894,9 @@ async function loadStudents(){
 }
 
 
-/* ==================================================
+/* =========================================================
    RENDER
-================================================== */
+========================================================= */
 
 function render(){
 
@@ -2240,10 +4005,12 @@ function render(){
               student.name || ""
             ).toLowerCase();
 
+
           const phone =
             String(
               student.id || ""
             ).toLowerCase();
+
 
           return (
             name.includes(search) ||
@@ -2264,25 +4031,33 @@ function render(){
 
     filtered.sort(
       (a,b)=>
+
         timeDistance(
           getLogs(a)
         ) -
+
         timeDistance(
           getLogs(b)
         )
+
     );
 
-  }else{
+  }
+  else{
 
     filtered.sort(
       (a,b)=>
+
         String(
           a.name || ""
         ).localeCompare(
+
           String(
             b.name || ""
           )
+
         )
+
     );
 
   }
@@ -2314,6 +4089,7 @@ function render(){
   document.getElementById(
     "studentCount"
   ).textContent =
+
     `${filtered.length} Student${
       filtered.length !== 1
         ? "s"
@@ -2360,9 +4136,9 @@ function render(){
 }
 
 
-/* ==================================================
+/* =========================================================
    STUDENT CARD
-================================================== */
+========================================================= */
 
 function studentCard(student){
 
@@ -2373,14 +4149,18 @@ function studentCard(student){
     student.name ||
     "Unnamed Student";
 
+
   const logs =
     getLogs(student);
+
 
   const total =
     getTotal(student);
 
+
   const done =
     getDone(student);
+
 
   const percentage =
     Math.min(
@@ -2390,14 +4170,18 @@ function studentCard(student){
       )
     );
 
+
   const inactive =
     isInactive(student);
+
 
   const live =
     isLive(student);
 
+
   const completed =
     isCompleted(student);
+
 
   const type =
     student.classType === "Personal"
@@ -2423,19 +4207,24 @@ function studentCard(student){
   if(inactive){
 
     badges += `
+
       <span class="badge inactive">
         NOT ACTIVE
       </span>
+
     `;
 
-  }else{
+  }
+  else{
 
     if(live){
 
       badges += `
+
         <span class="badge live">
           ● LIVE
         </span>
+
       `;
 
     }
@@ -2444,17 +4233,22 @@ function studentCard(student){
     if(completed){
 
       badges += `
+
         <span class="badge completed">
           COMPLETED
         </span>
+
       `;
 
-    }else{
+    }
+    else{
 
       badges += `
+
         <span class="badge active">
           ACTIVE
         </span>
+
       `;
 
     }
@@ -2480,25 +4274,36 @@ function studentCard(student){
         <button
           class="action attend"
           onclick="openAttendance('${safe(id)}')">
+
           + ATTEND
+
         </button>
+
 
         <button
           class="action"
           onclick="openHistory('${safe(id)}')">
+
           📋 LOGS
+
         </button>
+
 
         <button
           class="action wa"
           onclick="sendWhatsApp('${safe(id)}')">
+
           💬 WA
+
         </button>
+
 
         <button
           class="action call"
           onclick="callStudent('${safe(id)}')">
+
           📞 CALL
+
         </button>
 
       </div>
@@ -2522,7 +4327,8 @@ function studentCard(student){
 
     `;
 
-  }else{
+  }
+  else{
 
     actions = `
 
@@ -2540,25 +4346,36 @@ function studentCard(student){
         <button
           class="action attend"
           onclick="openAttendance('${safe(id)}')">
+
           + ATTEND
+
         </button>
+
 
         <button
           class="action"
           onclick="openHistory('${safe(id)}')">
+
           📋 LOGS
+
         </button>
+
 
         <button
           class="action wa"
           onclick="sendWhatsApp('${safe(id)}')">
+
           💬 WA
+
         </button>
+
 
         <button
           class="action call"
           onclick="callStudent('${safe(id)}')">
+
           📞 CALL
+
         </button>
 
       </div>
@@ -2575,11 +4392,13 @@ function studentCard(student){
       <div class="studentHeader">
 
         <div class="avatar">
+
           ${safe(
             name
               .charAt(0)
               .toUpperCase()
           )}
+
         </div>
 
 
@@ -2684,9 +4503,9 @@ function studentCard(student){
 }
 
 
-/* ==================================================
+/* =========================================================
    FILTER
-================================================== */
+========================================================= */
 
 window.setFilter =
 function(filter){
@@ -2739,9 +4558,9 @@ function(filter){
 };
 
 
-/* ==================================================
+/* =========================================================
    SEARCH
-================================================== */
+========================================================= */
 
 document
   .getElementById(
@@ -2753,9 +4572,9 @@ document
   );
 
 
-/* ==================================================
+/* =========================================================
    ADD STUDENT
-================================================== */
+========================================================= */
 
 window.openAddModal =
 function(){
@@ -2764,17 +4583,21 @@ function(){
     "studentPhone"
   ).value = "";
 
+
   document.getElementById(
     "studentName"
   ).value = "";
+
 
   document.getElementById(
     "totalClasses"
   ).value = "20";
 
+
   selectAddType(
     "Group"
   );
+
 
   document
     .getElementById(
@@ -2931,7 +4754,8 @@ async function(){
     await loadStudents();
 
 
-  }catch(error){
+  }
+  catch(error){
 
     console.error(error);
 
@@ -2944,9 +4768,9 @@ async function(){
 };
 
 
-/* ==================================================
+/* =========================================================
    EDIT CLASS TYPE
-================================================== */
+========================================================= */
 
 window.openTypeModal =
 function(id){
@@ -3077,7 +4901,8 @@ async function(){
     await loadStudents();
 
 
-  }catch(error){
+  }
+  catch(error){
 
     console.error(error);
 
@@ -3090,9 +4915,9 @@ async function(){
 };
 
 
-/* ==================================================
-   ATTENDANCE
-================================================== */
+/* =========================================================
+   ATTENDANCE OPEN
+========================================================= */
 
 window.openAttendance =
 function(id){
@@ -3118,16 +4943,14 @@ function(id){
     `${student.name || ""} • ${id}`;
 
 
-  selectedRoute = "";
-
-  /*
-    DISTANCE DEFAULT = 5 KM
-  */
+  selectedRoute =
+    "";
 
   selectedDistance =
     "5 KM";
 
-  selectedRemark = "";
+  selectedRemark =
+    "";
 
 
   document.getElementById(
@@ -3184,11 +5007,6 @@ function(id){
     });
 
 
-  /*
-    Always select 5 KM
-    by default.
-  */
-
   document
     .querySelectorAll(
       ".distanceOption"
@@ -3213,9 +5031,9 @@ function(id){
 };
 
 
-/* ==================================================
+/* =========================================================
    ROUTE
-================================================== */
+========================================================= */
 
 window.selectRoute =
 function(btn,value){
@@ -3247,6 +5065,7 @@ function(btn,value){
       "customRouteBox"
     );
 
+
   const customInput =
     document.getElementById(
       "customRoute"
@@ -3261,6 +5080,7 @@ function(btn,value){
       "show"
     );
 
+
     setTimeout(
       ()=>{
         customInput.focus();
@@ -3268,7 +5088,8 @@ function(btn,value){
       100
     );
 
-  }else{
+  }
+  else{
 
     customBox.classList.remove(
       "show"
@@ -3281,9 +5102,9 @@ function(btn,value){
 };
 
 
-/* ==================================================
+/* =========================================================
    DISTANCE
-================================================== */
+========================================================= */
 
 window.selectDistance =
 function(btn,value){
@@ -3312,9 +5133,9 @@ function(btn,value){
 };
 
 
-/* ==================================================
+/* =========================================================
    REMARK
-================================================== */
+========================================================= */
 
 window.selectRemark =
 function(btn,value){
@@ -3346,6 +5167,7 @@ function(btn,value){
       "customRemarkBox"
     );
 
+
   const customInput =
     document.getElementById(
       "customRemark"
@@ -3360,6 +5182,7 @@ function(btn,value){
       "show"
     );
 
+
     setTimeout(
       ()=>{
         customInput.focus();
@@ -3367,7 +5190,8 @@ function(btn,value){
       100
     );
 
-  }else{
+  }
+  else{
 
     customBox.classList.remove(
       "show"
@@ -3380,9 +5204,9 @@ function(btn,value){
 };
 
 
-/* ==================================================
+/* =========================================================
    SAVE ATTENDANCE
-================================================== */
+========================================================= */
 
 window.saveAttendance =
 async function(){
@@ -3392,7 +5216,7 @@ async function(){
   }
 
 
-  /* ================= ROUTE ================= */
+  /* ROUTE */
 
   if(!selectedRoute){
 
@@ -3405,9 +5229,7 @@ async function(){
   }
 
 
-  /*
-    CUSTOM ROUTE
-  */
+  /* CUSTOM ROUTE */
 
   if(
     selectedRoute === "Other Route"
@@ -3428,11 +5250,13 @@ async function(){
         "Enter custom route"
       );
 
+
       document
         .getElementById(
           "customRoute"
         )
         .focus();
+
 
       return;
 
@@ -3445,13 +5269,7 @@ async function(){
   }
 
 
-  /* ================= DISTANCE ================= */
-
-  /*
-    Distance is ALWAYS 5 KM.
-    Even if user doesn't touch
-    the distance option.
-  */
+  /* DISTANCE */
 
   if(!selectedDistance){
 
@@ -3461,7 +5279,7 @@ async function(){
   }
 
 
-  /* ================= REMARK ================= */
+  /* REMARK */
 
   let finalRemark =
     selectedRemark;
@@ -3487,11 +5305,13 @@ async function(){
         "Enter custom remark"
       );
 
+
       document
         .getElementById(
           "customRemark"
         )
         .focus();
+
 
       return;
 
@@ -3530,6 +5350,7 @@ async function(){
 
 
   const log =
+
     `${datePart} | ${timePart} — Route: ${selectedRoute} | Distance: 5 KM${
       finalRemark
         ? ` | Remark: ${finalRemark}`
@@ -3587,7 +5408,8 @@ async function(){
     await loadStudents();
 
 
-  }catch(error){
+  }
+  catch(error){
 
     console.error(error);
 
@@ -3600,9 +5422,9 @@ async function(){
 };
 
 
-/* ==================================================
-   NOT ACTIVE
-================================================== */
+/* =========================================================
+   MARK NOT ACTIVE
+========================================================= */
 
 window.markNotActive =
 async function(id){
@@ -3632,7 +5454,8 @@ async function(id){
     await loadStudents();
 
 
-  }catch(error){
+  }
+  catch(error){
 
     console.error(error);
 
@@ -3644,6 +5467,10 @@ async function(id){
 
 };
 
+
+/* =========================================================
+   ACTIVATE
+========================================================= */
 
 window.activateStudent =
 async function(id){
@@ -3673,7 +5500,8 @@ async function(id){
     await loadStudents();
 
 
-  }catch(error){
+  }
+  catch(error){
 
     console.error(error);
 
@@ -3686,9 +5514,9 @@ async function(id){
 };
 
 
-/* ==================================================
+/* =========================================================
    HISTORY
-================================================== */
+========================================================= */
 
 window.openHistory =
 function(id){
@@ -3744,7 +5572,8 @@ function(id){
 
     `;
 
-  }else{
+  }
+  else{
 
     list.innerHTML =
       logs
@@ -3754,11 +5583,16 @@ function(id){
             <div class="historyItem">
 
               <div class="historyNumber">
-                SESSION ${logs.length-index}
+
+                SESSION
+                ${logs.length-index}
+
               </div>
 
               <div class="historyText">
+
                 ${safe(log)}
+
               </div>
 
             </div>
@@ -3781,9 +5615,9 @@ function(id){
 };
 
 
-/* ==================================================
+/* =========================================================
    WHATSAPP
-================================================== */
+========================================================= */
 
 window.sendWhatsApp =
 function(id){
@@ -3821,6 +5655,7 @@ function(id){
 
 
   const message =
+
 `Hello *${String(student.name || "").trim()}*,
 
 *A1 Driving Classes Attendance*
@@ -3833,7 +5668,10 @@ Keep learning and drive safely! 🚗🔥`;
 
 
   const url =
-    `https://wa.me/${id}?text=${encodeURIComponent(message)}`;
+
+    `https://wa.me/${id}?text=${
+      encodeURIComponent(message)
+    }`;
 
 
   window.open(
@@ -3844,9 +5682,9 @@ Keep learning and drive safely! 🚗🔥`;
 };
 
 
-/* ==================================================
+/* =========================================================
    CALL
-================================================== */
+========================================================= */
 
 window.callStudent =
 function(id){
@@ -3857,9 +5695,9 @@ function(id){
 };
 
 
-/* ==================================================
+/* =========================================================
    CLOSE MODALS
-================================================== */
+========================================================= */
 
 window.closeModal =
 function(id){
@@ -3872,6 +5710,10 @@ function(id){
 
 };
 
+
+/* =========================================================
+   CLICK OUTSIDE MODAL
+========================================================= */
 
 document
   .querySelectorAll(
@@ -3899,6 +5741,10 @@ document
   });
 
 
+/* =========================================================
+   ESCAPE
+========================================================= */
+
 document.addEventListener(
   "keydown",
   function(e){
@@ -3925,9 +5771,9 @@ document.addEventListener(
 );
 
 
-/* ==================================================
+/* =========================================================
    AUTO REFRESH
-================================================== */
+========================================================= */
 
 setInterval(
   loadStudents,
@@ -3935,9 +5781,9 @@ setInterval(
 );
 
 
-/* ==================================================
+/* =========================================================
    START
-================================================== */
+========================================================= */
 
 loadStudents();
 
