@@ -3,13 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
 <title>A1 Attendance | Driving Classes</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link
+href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+rel="stylesheet">
 
 <style>
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -21,10 +26,13 @@
   --surface:#111;
   --surface2:#151515;
   --border:#252525;
+
   --gold:#d7b36a;
   --gold-light:#f0d18b;
+
   --text:#f5f5f5;
   --muted:#858585;
+
   --green:#55d996;
   --blue:#70b4ff;
   --red:#ff7777;
@@ -37,16 +45,27 @@ html{
 
 body{
   font-family:Inter,Arial,sans-serif;
+
   background:
     radial-gradient(
       circle at 50% -15%,
-      rgba(215,179,106,.10),
-      transparent 35%
+      rgba(215,179,106,.12),
+      transparent 36%
+    ),
+    radial-gradient(
+      circle at 100% 40%,
+      rgba(112,180,255,.035),
+      transparent 30%
     ),
     var(--bg);
+
   color:var(--text);
+
   min-height:100vh;
-  padding-bottom:88px;
+
+  padding-bottom:92px;
+
+  overflow-x:hidden;
 }
 
 button,
@@ -61,6 +80,85 @@ button{
   -webkit-tap-highlight-color:transparent;
 }
 
+button:active{
+  transform:scale(.97);
+}
+
+
+/* ==================================================
+   PAGE ANIMATION
+================================================== */
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(18px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes fadeIn{
+  from{
+    opacity:0;
+  }
+
+  to{
+    opacity:1;
+  }
+}
+
+@keyframes pulseGold{
+
+  0%,
+  100%{
+    box-shadow:0 0 0 0 rgba(215,179,106,0);
+  }
+
+  50%{
+    box-shadow:0 0 0 6px rgba(215,179,106,.045);
+  }
+
+}
+
+@keyframes shimmer{
+
+  0%{
+    background-position:-300px 0;
+  }
+
+  100%{
+    background-position:300px 0;
+  }
+
+}
+
+@keyframes progressGrow{
+
+  from{
+    width:0;
+  }
+
+}
+
+@keyframes modalUp{
+
+  from{
+    opacity:0;
+    transform:translateY(35px) scale(.98);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+
+}
+
+
 /* ==================================================
    HEADER
 ================================================== */
@@ -69,18 +167,26 @@ button{
   position:sticky;
   top:0;
   z-index:50;
+
   background:rgba(8,8,8,.94);
-  backdrop-filter:blur(18px);
+
+  backdrop-filter:blur(20px);
+
   border-bottom:1px solid #1f1f1f;
+
+  animation:fadeIn .5s ease;
 }
 
 .headerInner{
   max-width:900px;
   margin:auto;
-  padding:14px 16px;
+
+  padding:15px 16px;
+
   display:flex;
   align-items:center;
   justify-content:space-between;
+
   gap:15px;
 }
 
@@ -91,17 +197,32 @@ button{
 }
 
 .logo{
-  width:42px;
-  height:42px;
-  border-radius:13px;
+  width:44px;
+  height:44px;
+
+  border-radius:14px;
+
   border:1px solid #6b5835;
-  background:#0d0d0d;
+
+  background:
+    radial-gradient(
+      circle at 30% 20%,
+      rgba(240,209,139,.12),
+      transparent 55%
+    ),
+    #0d0d0d;
+
   color:var(--gold-light);
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   font-size:14px;
   font-weight:800;
+
+  box-shadow:
+    0 8px 30px rgba(0,0,0,.25);
 }
 
 .brandTitle{
@@ -132,6 +253,7 @@ button{
   margin-top:4px;
 }
 
+
 /* ==================================================
    MAIN
 ================================================== */
@@ -139,8 +261,10 @@ button{
 .container{
   max-width:900px;
   margin:auto;
-  padding:18px 16px 30px;
+
+  padding:20px 16px 35px;
 }
+
 
 /* ==================================================
    SEARCH
@@ -148,71 +272,116 @@ button{
 
 .search{
   position:relative;
-  margin-bottom:14px;
+  margin-bottom:16px;
+
+  animation:fadeUp .45s ease;
 }
 
 .searchIcon{
   position:absolute;
   left:15px;
   top:50%;
+
   transform:translateY(-50%);
+
   color:#666;
-  font-size:17px;
+
+  font-size:18px;
 }
 
 .search input{
   width:100%;
-  height:48px;
-  padding:0 15px 0 42px;
-  border-radius:14px;
+  height:50px;
+
+  padding:0 15px 0 43px;
+
+  border-radius:15px;
+
   border:1px solid var(--border);
-  background:#101010;
+
+  background:
+    linear-gradient(
+      145deg,
+      #121212,
+      #0d0d0d
+    );
+
   color:white;
+
   outline:none;
+
   font-size:12px;
+
+  transition:
+    border-color .25s,
+    box-shadow .25s,
+    transform .25s;
 }
 
 .search input:focus{
   border-color:#665331;
+
+  box-shadow:
+    0 0 0 4px rgba(215,179,106,.035);
 }
 
-.search input::placeholder{
-  color:#555;
-}
 
 /* ==================================================
-   MONTHLY COLLECTION
+   COLLECTION HERO
 ================================================== */
 
 .collectionHero{
   position:relative;
   overflow:hidden;
-  padding:16px;
-  margin-bottom:14px;
-  border-radius:18px;
+
+  padding:20px;
+
+  margin-bottom:16px;
+
+  border-radius:21px;
+
   border:1px solid #493c26;
+
   background:
     radial-gradient(
       circle at 100% 0%,
-      rgba(215,179,106,.13),
+      rgba(215,179,106,.15),
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 0% 100%,
+      rgba(112,180,255,.045),
       transparent 45%
     ),
     linear-gradient(
       145deg,
-      #15120d,
-      #0e0e0e
+      #17130d,
+      #0d0d0d
     );
+
+  box-shadow:
+    0 18px 50px rgba(0,0,0,.25);
+
+  animation:
+    fadeUp .55s ease,
+    pulseGold 4s ease-in-out infinite;
 }
 
 .collectionHero:after{
   content:"₹";
+
   position:absolute;
+
   right:14px;
-  top:-17px;
-  font-size:105px;
+  top:-22px;
+
+  font-size:120px;
   line-height:1;
+
   color:rgba(215,179,106,.035);
+
   font-weight:800;
+
   pointer-events:none;
 }
 
@@ -220,80 +389,126 @@ button{
   display:flex;
   justify-content:space-between;
   align-items:flex-start;
+
   gap:10px;
+
   position:relative;
   z-index:1;
 }
 
 .collectionLabel{
   color:#777;
-  font-size:7px;
-  letter-spacing:1.3px;
+
+  font-size:8px;
+
+  letter-spacing:1.5px;
+
   text-transform:uppercase;
+
   font-weight:800;
 }
 
 .collectionTitle{
   color:var(--gold-light);
-  font-size:28px;
+
+  font-size:32px;
+
   font-weight:800;
+
   margin-top:5px;
-  letter-spacing:-1px;
+
+  letter-spacing:-1.3px;
+
+  text-shadow:
+    0 5px 25px rgba(215,179,106,.12);
 }
 
 .collectionSub{
   color:#666;
+
   font-size:8px;
-  margin-top:4px;
+
+  margin-top:5px;
 }
 
 .collectionIcon{
-  width:42px;
-  height:42px;
-  border-radius:13px;
+  width:46px;
+  height:46px;
+
+  border-radius:14px;
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   border:1px solid #57472d;
+
   color:var(--gold-light);
+
   background:#17130c;
-  font-size:17px;
-  font-weight:800;
+
+  font-size:18px;
 }
 
 .collectionGrid{
   display:grid;
+
   grid-template-columns:1fr 1fr;
-  gap:7px;
-  margin-top:13px;
+
+  gap:8px;
+
+  margin-top:16px;
+
   position:relative;
   z-index:1;
 }
 
 .collectionBox{
-  padding:10px;
-  border-radius:11px;
-  background:rgba(0,0,0,.24);
+  padding:13px;
+
+  min-height:78px;
+
+  border-radius:13px;
+
+  background:rgba(0,0,0,.27);
+
   border:1px solid rgba(255,255,255,.055);
+
+  transition:
+    transform .25s,
+    border-color .25s;
+}
+
+.collectionBox:hover{
+  transform:translateY(-2px);
+
+  border-color:#3b3427;
 }
 
 .collectionBoxLabel{
   color:#666;
+
   font-size:7px;
-  letter-spacing:.6px;
+
+  letter-spacing:.7px;
 }
 
 .collectionBoxValue{
   color:#eee;
-  font-size:15px;
+
+  font-size:18px;
+
   font-weight:800;
-  margin-top:4px;
+
+  margin-top:5px;
 }
 
 .collectionBoxMeta{
   color:#555;
+
   font-size:7px;
-  margin-top:3px;
+
+  margin-top:4px;
 }
 
 .collectionBox.personal .collectionBoxValue{
@@ -304,30 +519,84 @@ button{
   color:var(--purple);
 }
 
+.monthRow{
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:8px;
+
+  margin-top:8px;
+}
+
 .previousMonth{
-  margin-top:7px;
-  padding:10px 11px;
-  border-radius:11px;
+  margin-top:8px;
+
+  padding:12px;
+
+  border-radius:12px;
+
   border:1px solid #252525;
+
   background:#0d0d0d;
+
   display:flex;
+
   justify-content:space-between;
+
   align-items:center;
+
   gap:10px;
 }
 
 .previousLabel{
   color:#666;
+
   font-size:7px;
+
   letter-spacing:.8px;
+
   text-transform:uppercase;
 }
 
 .previousValue{
   color:var(--gold-light);
-  font-size:12px;
+
+  font-size:13px;
+
   font-weight:800;
 }
+
+.monthSmall{
+  padding:12px;
+
+  border-radius:12px;
+
+  border:1px solid #252525;
+
+  background:#0d0d0d;
+}
+
+.monthSmallLabel{
+  color:#666;
+
+  font-size:7px;
+
+  text-transform:uppercase;
+
+  letter-spacing:.7px;
+}
+
+.monthSmallValue{
+  color:#ddd;
+
+  font-size:14px;
+
+  font-weight:800;
+
+  margin-top:5px;
+}
+
 
 /* ==================================================
    STATS
@@ -335,36 +604,70 @@ button{
 
 .stats{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:8px;
-  margin-bottom:22px;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  gap:9px;
+
+  margin-bottom:24px;
+
+  animation:fadeUp .65s ease;
 }
 
 .stat{
-  min-height:72px;
-  padding:12px 7px;
-  border-radius:14px;
+  min-height:78px;
+
+  padding:13px 7px;
+
+  border-radius:15px;
+
   border:1px solid var(--border);
-  background:linear-gradient(145deg,#141414,#0e0e0e);
+
+  background:
+    linear-gradient(
+      145deg,
+      #151515,
+      #0e0e0e
+    );
+
   text-align:center;
+
   display:flex;
   flex-direction:column;
   justify-content:center;
+
+  transition:
+    transform .25s,
+    border-color .25s;
+}
+
+.stat:hover{
+  transform:translateY(-3px);
+
+  border-color:#39332a;
 }
 
 .statValue{
   color:var(--gold-light);
-  font-size:20px;
+
+  font-size:21px;
+
   line-height:1;
+
   font-weight:800;
 }
 
 .statLabel{
   color:#666;
+
   font-size:7px;
+
   letter-spacing:1px;
-  margin-top:7px;
+
+  margin-top:8px;
 }
+
 
 /* ==================================================
    SECTION
@@ -372,90 +675,173 @@ button{
 
 .sectionHeader{
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
-  margin-bottom:11px;
+
+  margin-bottom:12px;
+
   padding:0 2px;
 }
 
 .sectionTitle{
-  font-size:13px;
-  font-weight:700;
+  font-size:14px;
+
+  font-weight:800;
 }
 
 .sectionCount{
   color:#666;
+
   font-size:9px;
 }
 
+
 /* ==================================================
-   CARDS
+   BIG STUDENT CARDS
 ================================================== */
 
 .cards{
   display:grid;
-  gap:10px;
+
+  gap:14px;
 }
 
 .studentCard{
   position:relative;
-  padding:15px;
+
+  padding:20px;
+
+  min-height:260px;
+
   border:1px solid var(--border);
-  border-radius:17px;
-  background:#111;
-  transition:border-color .2s,transform .2s;
+
+  border-radius:21px;
+
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(215,179,106,.035),
+      transparent 35%
+    ),
+    linear-gradient(
+      145deg,
+      #131313,
+      #0e0e0e
+    );
+
+  box-shadow:
+    0 12px 35px rgba(0,0,0,.22);
+
+  transition:
+    border-color .25s,
+    transform .25s,
+    box-shadow .25s;
+
+  animation:
+    fadeUp .45s ease both;
+}
+
+.studentCard:nth-child(2){
+  animation-delay:.04s;
+}
+
+.studentCard:nth-child(3){
+  animation-delay:.08s;
+}
+
+.studentCard:nth-child(4){
+  animation-delay:.12s;
 }
 
 .studentCard:hover{
-  border-color:#353535;
+  border-color:#3c372e;
+
+  transform:translateY(-3px);
+
+  box-shadow:
+    0 18px 45px rgba(0,0,0,.32);
 }
 
 .studentCard.inactive{
   background:#0d0d0d;
+
   border-color:#202020;
+
   opacity:.72;
 }
 
 .studentHeader{
   display:flex;
+
   align-items:center;
-  gap:11px;
+
+  gap:13px;
 }
 
 .avatar{
-  width:43px;
-  height:43px;
+  width:52px;
+  height:52px;
+
   flex:none;
-  border-radius:13px;
-  background:#17130c;
+
+  border-radius:16px;
+
+  background:
+    radial-gradient(
+      circle at 30% 20%,
+      rgba(240,209,139,.12),
+      transparent 55%
+    ),
+    #17130c;
+
   border:1px solid #4c3e25;
+
   display:flex;
+
   align-items:center;
   justify-content:center;
+
   color:var(--gold-light);
-  font-size:15px;
+
+  font-size:17px;
+
   font-weight:800;
+
+  box-shadow:
+    0 7px 22px rgba(0,0,0,.22);
 }
 
 .studentInfo{
   min-width:0;
+
   flex:1;
 }
 
 .studentName{
-  font-size:13px;
+  font-size:15px;
+
   font-weight:800;
+
   white-space:nowrap;
+
   overflow:hidden;
+
   text-overflow:ellipsis;
 }
 
 .studentPhone{
   color:#666;
+
   font-size:9px;
-  margin-top:4px;
+
+  margin-top:5px;
+
   display:flex;
+
   align-items:center;
+
   gap:5px;
 }
 
@@ -469,164 +855,236 @@ button{
 
 .badges{
   display:flex;
+
   flex-wrap:wrap;
+
   justify-content:flex-end;
+
   gap:5px;
+
+  max-width:125px;
 }
 
 .badge{
-  padding:5px 7px;
-  border-radius:7px;
+  padding:6px 8px;
+
+  border-radius:8px;
+
   font-size:7px;
+
   font-weight:800;
+
   letter-spacing:.5px;
+
   white-space:nowrap;
 }
 
 .badge.active{
   color:var(--green);
+
   background:rgba(85,217,150,.07);
+
   border:1px solid rgba(85,217,150,.18);
 }
 
 .badge.live{
   color:#78c8ff;
+
   background:rgba(120,200,255,.07);
+
   border:1px solid rgba(120,200,255,.18);
+
+  animation:pulseGold 2.2s infinite;
 }
 
 .badge.completed{
   color:var(--gold-light);
+
   background:rgba(215,179,106,.07);
+
   border:1px solid rgba(215,179,106,.20);
 }
 
 .badge.inactive{
   color:#999;
+
   background:#171717;
+
   border:1px solid #2c2c2c;
 }
+
 
 /* ==================================================
    CLASS TYPE
 ================================================== */
 
 .typeRow{
-  margin-top:13px;
+  margin-top:15px;
+
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
-  padding:9px 11px;
+
+  padding:12px;
+
   background:#0c0c0c;
+
   border:1px solid #202020;
-  border-radius:10px;
+
+  border-radius:12px;
 }
 
 .typeInfo{
   display:flex;
+
   align-items:center;
+
   gap:8px;
 }
 
 .typeLabel{
   color:#666;
+
   font-size:8px;
+
   text-transform:uppercase;
+
   letter-spacing:1px;
 }
 
 .typeValue{
   color:var(--gold-light);
+
   font-size:10px;
+
   font-weight:800;
 }
 
 .typeFee{
   color:#777;
+
   font-size:8px;
+
   margin-left:5px;
 }
 
 .editType{
   border:1px solid #3a3224;
+
   background:#16130e;
+
   color:var(--gold-light);
+
   border-radius:8px;
-  padding:6px 9px;
+
+  padding:7px 10px;
+
   font-size:8px;
+
   font-weight:700;
 }
+
 
 /* ==================================================
    LAST ATTENDANCE
 ================================================== */
 
 .lastAttendance{
-  margin-top:9px;
-  padding:10px 11px;
-  border-radius:10px;
+  margin-top:10px;
+
+  padding:12px;
+
+  border-radius:12px;
+
   background:#0c0c0c;
+
   border:1px solid #1e1e1e;
 }
 
 .lastLabel{
   color:#5e5e5e;
+
   font-size:7px;
+
   text-transform:uppercase;
+
   letter-spacing:1px;
 }
 
 .lastText{
   color:#c8c8c8;
+
   font-size:9px;
-  line-height:1.5;
+
+  line-height:1.55;
+
   margin-top:5px;
 }
+
 
 /* ==================================================
    PROGRESS
 ================================================== */
 
 .progressBox{
-  margin-top:12px;
+  margin-top:14px;
 }
 
 .progressTop{
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
-  margin-bottom:6px;
+
+  margin-bottom:7px;
 }
 
 .progressLabel{
   color:#666;
+
   font-size:7px;
+
   letter-spacing:1px;
 }
 
 .progressCount{
   color:#aaa;
+
   font-size:8px;
+
   font-weight:700;
 }
 
 .progress{
-  height:5px;
+  height:6px;
+
   width:100%;
+
   border-radius:10px;
+
   background:#222;
+
   overflow:hidden;
 }
 
 .progressBar{
   height:100%;
+
   border-radius:10px;
-  background:linear-gradient(
-    90deg,
-    var(--gold),
-    var(--gold-light)
-  );
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--gold),
+      var(--gold-light)
+    );
+
+  animation:progressGrow .8s ease;
 }
+
 
 /* ==================================================
    ACTIONS
@@ -634,28 +1092,50 @@ button{
 
 .actions{
   display:grid;
-  grid-template-columns:1.25fr 1fr 1fr 1fr;
-  gap:6px;
-  margin-top:12px;
+
+  grid-template-columns:
+    1.3fr 1fr 1fr 1fr;
+
+  gap:7px;
+
+  margin-top:14px;
 }
 
 .action{
-  min-height:36px;
+  min-height:39px;
+
   border:1px solid #282828;
-  border-radius:9px;
+
+  border-radius:10px;
+
   background:#151515;
+
   color:#bdbdbd;
+
   font-size:8px;
+
   font-weight:700;
+
+  transition:
+    background .2s,
+    border-color .2s,
+    transform .2s;
+}
+
+.action:hover{
+  border-color:#444;
 }
 
 .action.attend{
-  background:linear-gradient(
-    135deg,
-    var(--gold-light),
-    var(--gold)
-  );
+  background:
+    linear-gradient(
+      135deg,
+      var(--gold-light),
+      var(--gold)
+    );
+
   color:#111;
+
   border:none;
 }
 
@@ -669,27 +1149,44 @@ button{
 
 .notActiveBtn{
   width:100%;
-  margin-top:7px;
-  min-height:35px;
-  border-radius:9px;
+
+  margin-top:8px;
+
+  min-height:38px;
+
+  border-radius:10px;
+
   border:1px solid rgba(255,119,119,.15);
+
   background:rgba(255,119,119,.045);
+
   color:#e98282;
+
   font-size:8px;
+
   font-weight:800;
 }
 
 .activateBtn{
   width:100%;
-  min-height:36px;
-  margin-top:12px;
-  border-radius:9px;
+
+  min-height:39px;
+
+  margin-top:14px;
+
+  border-radius:10px;
+
   border:1px solid rgba(85,217,150,.18);
+
   background:rgba(85,217,150,.05);
+
   color:#6ee3a0;
+
   font-size:8px;
+
   font-weight:800;
 }
+
 
 /* ==================================================
    EMPTY
@@ -697,14 +1194,21 @@ button{
 
 .empty{
   border:1px dashed #292929;
+
   border-radius:15px;
+
   padding:45px 20px;
+
   text-align:center;
+
   color:#666;
+
+  animation:fadeUp .35s ease;
 }
 
 .emptyIcon{
   font-size:28px;
+
   margin-bottom:10px;
 }
 
@@ -714,10 +1218,26 @@ button{
 
 .loading{
   padding:40px;
+
   text-align:center;
+
   color:#666;
+
   font-size:10px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #0e0e0e,
+      #171717,
+      #0e0e0e
+    );
+
+  background-size:300px 100%;
+
+  animation:shimmer 1.4s infinite;
 }
+
 
 /* ==================================================
    FAB
@@ -725,22 +1245,46 @@ button{
 
 .fab{
   position:fixed;
+
   right:19px;
-  bottom:76px;
+
+  bottom:78px;
+
   z-index:60;
-  width:52px;
-  height:52px;
+
+  width:56px;
+  height:56px;
+
   border:0;
-  border-radius:16px;
-  background:linear-gradient(
-    135deg,
-    var(--gold-light),
-    var(--gold)
-  );
+
+  border-radius:17px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--gold-light),
+      var(--gold)
+    );
+
   color:#111;
-  font-size:25px;
-  box-shadow:0 12px 35px rgba(0,0,0,.5);
+
+  font-size:27px;
+
+  box-shadow:
+    0 12px 35px rgba(0,0,0,.5);
+
+  transition:
+    transform .25s,
+    box-shadow .25s;
 }
+
+.fab:hover{
+  transform:translateY(-3px) rotate(2deg);
+
+  box-shadow:
+    0 17px 45px rgba(0,0,0,.6);
+}
+
 
 /* ==================================================
    BOTTOM NAV
@@ -748,39 +1292,67 @@ button{
 
 .bottomNav{
   position:fixed;
+
   left:0;
   right:0;
   bottom:0;
+
   z-index:55;
+
   display:flex;
+
   justify-content:center;
+
   gap:3px;
-  padding:8px 9px calc(8px + env(safe-area-inset-bottom));
+
+  padding:
+    8px
+    9px
+    calc(8px + env(safe-area-inset-bottom));
+
   background:rgba(9,9,9,.96);
+
   backdrop-filter:blur(18px);
+
   border-top:1px solid #202020;
 }
 
 .navBtn{
   flex:1;
+
   max-width:120px;
+
   border:0;
+
   background:none;
+
   color:#5e5e5e;
+
   padding:5px 2px;
+
   font-size:7px;
+
   font-weight:800;
+
+  transition:
+    color .25s,
+    transform .25s;
 }
 
 .navBtn.active{
   color:var(--gold-light);
+
+  transform:translateY(-2px);
 }
 
 .navIcon{
   display:block;
+
   font-size:15px;
+
   margin-bottom:3px;
 }
+
 
 /* ==================================================
    MODAL
@@ -788,113 +1360,153 @@ button{
 
 .modal{
   position:fixed;
+
   inset:0;
+
   z-index:100;
+
   display:none;
+
   align-items:flex-end;
+
   justify-content:center;
+
   padding:9px;
+
   background:rgba(0,0,0,.78);
-  backdrop-filter:blur(6px);
+
+  backdrop-filter:blur(7px);
 }
 
 .modal.show{
   display:flex;
+
+  animation:fadeIn .18s ease;
 }
 
 .modalBox{
   width:100%;
-  max-width:570px;
-  max-height:91vh;
-  overflow:auto;
-  padding:18px;
-  border:1px solid #303030;
-  border-radius:21px 21px 13px 13px;
-  background:#111;
-  animation:modalUp .22s ease;
-}
 
-@keyframes modalUp{
-  from{
-    transform:translateY(25px);
-    opacity:0;
-  }
-  to{
-    transform:translateY(0);
-    opacity:1;
-  }
+  max-width:570px;
+
+  max-height:92vh;
+
+  overflow:auto;
+
+  padding:20px;
+
+  border:1px solid #303030;
+
+  border-radius:22px 22px 13px 13px;
+
+  background:#111;
+
+  animation:modalUp .25s ease;
 }
 
 .modalHeader{
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
-  margin-bottom:17px;
+
+  margin-bottom:18px;
 }
 
 .modalTitle{
   font-size:15px;
+
   font-weight:800;
 }
 
 .modalSub{
   color:#666;
+
   font-size:9px;
+
   margin-top:4px;
 }
 
 .close{
-  width:32px;
-  height:32px;
+  width:34px;
+  height:34px;
+
   border:1px solid #292929;
+
   border-radius:9px;
+
   background:#171717;
+
   color:#aaa;
+
   font-size:17px;
 }
+
 
 /* ==================================================
    FORM
 ================================================== */
 
 .formGroup{
-  margin-bottom:14px;
+  margin-bottom:15px;
 }
 
 .formLabel{
   display:block;
+
   color:#686868;
+
   font-size:8px;
+
   text-transform:uppercase;
+
   letter-spacing:1px;
-  margin-bottom:6px;
+
+  margin-bottom:7px;
 }
 
 .formInput,
 .formTextarea{
   width:100%;
+
   border:1px solid #292929;
+
   border-radius:10px;
+
   background:#0b0b0b;
+
   color:white;
+
   outline:none;
+
   padding:12px;
+
   font-size:11px;
+
+  transition:
+    border-color .2s,
+    box-shadow .2s;
 }
 
 .formInput{
-  height:43px;
+  height:44px;
 }
 
 .formInput:focus,
 .formTextarea:focus{
   border-color:#675432;
+
+  box-shadow:
+    0 0 0 3px rgba(215,179,106,.035);
 }
 
 .formTextarea{
   min-height:75px;
+
   resize:vertical;
 }
+
 
 /* ==================================================
    TYPE
@@ -902,35 +1514,53 @@ button{
 
 .typeGrid{
   display:grid;
+
   grid-template-columns:1fr 1fr;
+
   gap:8px;
 }
 
 .typeOption{
   border:1px solid #292929;
+
   background:#0c0c0c;
+
   border-radius:12px;
+
   padding:14px 8px;
+
   color:#777;
+
   text-align:center;
+
+  transition:
+    border-color .2s,
+    background .2s,
+    transform .2s;
 }
 
 .typeOption.selected{
   border-color:#a9874d;
+
   background:rgba(215,179,106,.08);
+
   color:var(--gold-light);
 }
 
 .typeIcon{
   display:block;
+
   font-size:20px;
+
   margin-bottom:5px;
 }
 
 .typeName{
   font-size:9px;
+
   font-weight:800;
 }
+
 
 /* ==================================================
    OPTIONS
@@ -938,26 +1568,44 @@ button{
 
 .optionGrid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
+
+  grid-template-columns:
+    repeat(2,1fr);
+
   gap:7px;
 }
 
 .optionBtn{
-  min-height:38px;
+  min-height:39px;
+
   border:1px solid #292929;
+
   background:#0c0c0c;
+
   border-radius:9px;
+
   color:#888;
+
   font-size:9px;
+
   padding:5px;
+
+  transition:
+    background .2s,
+    border-color .2s,
+    color .2s;
 }
 
 .optionBtn.selected{
   color:#111;
+
   background:var(--gold-light);
+
   border-color:var(--gold-light);
+
   font-weight:800;
 }
+
 
 /* ==================================================
    CUSTOM
@@ -966,28 +1614,38 @@ button{
 .customRouteBox,
 .customRemarkBox{
   display:none;
+
   margin-top:8px;
 }
 
 .customRouteBox.show,
 .customRemarkBox.show{
   display:block;
+
+  animation:fadeUp .2s ease;
 }
 
 .customRouteHint,
 .customRemarkHint{
   color:#555;
+
   font-size:7px;
+
   margin-top:5px;
+
   line-height:1.4;
 }
 
 .distanceDefault{
   border-color:var(--gold-light);
+
   background:var(--gold-light);
+
   color:#111;
+
   font-weight:800;
 }
+
 
 /* ==================================================
    GOLD BUTTON
@@ -995,85 +1653,177 @@ button{
 
 .goldBtn{
   width:100%;
-  min-height:43px;
+
+  min-height:45px;
+
   border:0;
+
   border-radius:10px;
-  background:linear-gradient(
-    135deg,
-    var(--gold-light),
-    var(--gold)
-  );
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--gold-light),
+      var(--gold)
+    );
+
   color:#111;
+
   font-size:10px;
+
   font-weight:800;
+
+  transition:
+    transform .2s,
+    box-shadow .2s;
 }
+
+.goldBtn:hover{
+  box-shadow:
+    0 8px 25px rgba(215,179,106,.13);
+}
+
+
+/* ==================================================
+   PAYMENT
+================================================== */
+
+.paymentInfo{
+  padding:11px;
+
+  border:1px solid #252525;
+
+  border-radius:11px;
+
+  background:#0c0c0c;
+
+  margin-bottom:14px;
+}
+
+.paymentInfoTitle{
+  color:#666;
+
+  font-size:7px;
+
+  letter-spacing:1px;
+
+  text-transform:uppercase;
+}
+
+.paymentInfoValue{
+  color:var(--gold-light);
+
+  font-size:13px;
+
+  font-weight:800;
+
+  margin-top:4px;
+}
+
 
 /* ==================================================
    HISTORY
 ================================================== */
 
 .historyItem{
-  padding:12px;
+  padding:13px;
+
   border:1px solid #242424;
+
   border-radius:11px;
+
   background:#0c0c0c;
-  margin-bottom:7px;
+
+  margin-bottom:8px;
+
+  animation:fadeUp .25s ease;
 }
 
 .historyNumber{
   color:var(--gold-light);
+
   font-size:8px;
+
   font-weight:800;
+
   margin-bottom:5px;
 }
 
 .historyText{
   color:#c5c5c5;
+
   font-size:9px;
+
   line-height:1.6;
 }
 
+
 /* ==================================================
-   COLLECTION DETAILS MODAL
+   COLLECTION DETAILS
 ================================================== */
 
 .monthDetailCard{
-  padding:13px;
+  padding:14px;
+
   border:1px solid #252525;
-  border-radius:12px;
+
+  border-radius:13px;
+
   background:#0c0c0c;
+
   margin-bottom:8px;
+
+  animation:fadeUp .25s ease;
 }
 
 .monthDetailTop{
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
+
   gap:8px;
 }
 
 .monthDetailName{
   font-size:10px;
+
   font-weight:800;
 }
 
 .monthDetailAmount{
   color:var(--gold-light);
+
   font-size:11px;
+
   font-weight:800;
 }
 
 .monthDetailMeta{
   color:#666;
+
   font-size:8px;
+
   margin-top:5px;
 }
 
 .monthDetailType{
   color:#aaa;
+
   font-size:8px;
+
   margin-top:5px;
 }
+
+.collectionSource{
+  color:#555;
+
+  font-size:7px;
+
+  margin-top:6px;
+}
+
 
 /* ==================================================
    TOAST
@@ -1081,26 +1831,46 @@ button{
 
 .toast{
   position:fixed;
+
   left:50%;
-  bottom:88px;
+
+  bottom:90px;
+
   z-index:200;
-  transform:translateX(-50%) translateY(15px);
+
+  transform:
+    translateX(-50%)
+    translateY(15px);
+
   opacity:0;
+
   pointer-events:none;
+
   background:#191919;
+
   border:1px solid #333;
+
   color:#eee;
+
   border-radius:10px;
+
   padding:10px 14px;
+
   font-size:9px;
+
   white-space:nowrap;
+
   transition:.22s;
 }
 
 .toast.show{
   opacity:1;
-  transform:translateX(-50%) translateY(0);
+
+  transform:
+    translateX(-50%)
+    translateY(0);
 }
+
 
 /* ==================================================
    MOBILE
@@ -1109,28 +1879,26 @@ button{
 @media(max-width:500px){
 
   .container{
-    padding-left:13px;
-    padding-right:13px;
-  }
-
-  .stats{
-    gap:6px;
-  }
-
-  .stat{
-    min-height:68px;
-  }
-
-  .statValue{
-    font-size:18px;
+    padding-left:12px;
+    padding-right:12px;
   }
 
   .studentCard{
-    padding:14px;
+    padding:18px;
+
+    min-height:270px;
+  }
+
+  .studentName{
+    font-size:14px;
+  }
+
+  .studentPhone{
+    font-size:8px;
   }
 
   .badges{
-    max-width:100px;
+    max-width:105px;
   }
 
   .actions{
@@ -1142,7 +1910,7 @@ button{
   }
 
   .collectionTitle{
-    font-size:25px;
+    font-size:28px;
   }
 
 }
@@ -1158,18 +1926,26 @@ button{
   }
 
   .stats{
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:
+      repeat(2,1fr);
   }
 
   .actions{
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:
+      1fr 1fr;
+  }
+
+  .monthRow{
+    grid-template-columns:1fr;
   }
 
 }
+
 </style>
 </head>
 
 <body>
+
 
 <!-- ==================================================
      HEADER
@@ -1199,6 +1975,7 @@ button{
 
     </div>
 
+
     <div class="clock">
 
       <div
@@ -1226,6 +2003,7 @@ button{
 
 <main class="container">
 
+
   <!-- SEARCH -->
 
   <div class="search">
@@ -1247,7 +2025,9 @@ button{
        COLLECTION
   ================================================== -->
 
-  <section class="collectionHero">
+  <section
+    class="collectionHero"
+    onclick="openCollectionDetails()">
 
     <div class="collectionHead">
 
@@ -1344,6 +2124,40 @@ button{
         class="previousValue"
         id="lastMonthCollection">
         ₹0
+      </div>
+
+    </div>
+
+
+    <div class="monthRow">
+
+      <div class="monthSmall">
+
+        <div class="monthSmallLabel">
+          2 MONTHS AGO
+        </div>
+
+        <div
+          class="monthSmallValue"
+          id="twoMonthCollection">
+          ₹0
+        </div>
+
+      </div>
+
+
+      <div class="monthSmall">
+
+        <div class="monthSmallLabel">
+          COLLECTION RECORDS
+        </div>
+
+        <div
+          class="monthSmallValue"
+          id="paymentRecordCount">
+          0
+        </div>
+
       </div>
 
     </div>
@@ -1596,6 +2410,22 @@ button{
     <div class="formGroup">
 
       <label class="formLabel">
+        Payment Received
+      </label>
+
+      <input
+        id="paymentAmount"
+        class="formInput"
+        type="number"
+        min="0"
+        placeholder="Example: 4500">
+
+    </div>
+
+
+    <div class="formGroup">
+
+      <label class="formLabel">
         Class Type
       </label>
 
@@ -1634,6 +2464,19 @@ button{
 
         </button>
 
+      </div>
+
+    </div>
+
+
+    <div class="paymentInfo">
+
+      <div class="paymentInfoTitle">
+        Payment date
+      </div>
+
+      <div class="paymentInfoValue">
+        Today • automatically saved
       </div>
 
     </div>
@@ -1685,8 +2528,6 @@ button{
 
     </div>
 
-
-    <!-- ROUTE -->
 
     <div class="formGroup">
 
@@ -1767,8 +2608,6 @@ button{
     </div>
 
 
-    <!-- DISTANCE -->
-
     <div class="formGroup">
 
       <label class="formLabel">
@@ -1790,8 +2629,6 @@ button{
 
     </div>
 
-
-    <!-- REMARK -->
 
     <div class="formGroup">
 
@@ -2177,7 +3014,6 @@ const studentCollection =
 ================================================== */
 
 const PERSONAL_FEE = 8000;
-
 const GROUP_FEE = 4500;
 
 
@@ -2202,7 +3038,7 @@ let toastTimer;
 
 
 /* ==================================================
-   HELPERS
+   SAFE HTML
 ================================================== */
 
 function safe(value){
@@ -2218,39 +3054,28 @@ function safe(value){
 
 
 /* ==================================================
-   MOBILE NUMBER
-   Firebase document ID = phone number
+   MOBILE / ALL PHONE FIELDS
 ================================================== */
 
 function getMobile(student){
 
-  /*
-    Your existing database uses the phone
-    number as the document ID.
-
-    We also check common fields so that
-    old/new records both work.
-  */
-
   const candidates = [
 
     student.phone,
-
     student.mobile,
-
     student.phoneNumber,
-
     student.mobileNumber,
-
     student.contact,
-
     student.contactNumber,
-
     student.whatsappNumber,
-
+    student.whatsapp,
     student.mobileNo,
-
     student.phoneNo,
+    student.telephone,
+
+    /*
+      Firebase document ID
+    */
 
     student.id
 
@@ -2267,9 +3092,7 @@ function getMobile(student){
       String(value).trim() !== ""
     ){
 
-      return String(
-        value
-      ).trim();
+      return String(value).trim();
 
     }
 
@@ -2287,11 +3110,6 @@ function cleanPhone(phone){
     String(phone || "")
       .replace(/\D/g,"");
 
-
-  /*
-    For Indian numbers, use last
-    10 digits.
-  */
 
   if(
     value.length > 10
@@ -2338,6 +3156,7 @@ function getName(student){
     student.name ||
     student.studentName ||
     student.fullName ||
+    student.student ||
     "Unnamed Student"
   );
 
@@ -2355,6 +3174,7 @@ function getClassType(student){
       student.classType ||
       student.trainingType ||
       student.sessionType ||
+      student.trainingClass ||
       student.type ||
       "Group"
     ).toLowerCase();
@@ -2370,65 +3190,260 @@ function getClassType(student){
 function getFee(student){
 
   return (
-    getClassType(student) ===
-    "Personal"
-  )
-    ? PERSONAL_FEE
-    : GROUP_FEE;
+    getClassType(student) === "Personal"
+      ? PERSONAL_FEE
+      : GROUP_FEE
+  );
 
 }
 
 
 /* ==================================================
-   ATTENDANCE
+   ATTENDANCE LOGS
+   Supports old strings + new objects
 ================================================== */
 
 function getLogs(student){
 
-  return Array.isArray(
-    student.attendanceLogs
-  )
-    ? student.attendanceLogs
-    : [];
+  const candidates = [
+
+    student.attendanceLogs,
+    student.attendanceHistory,
+    student.attendance,
+    student.classLogs,
+    student.trainingLogs
+
+  ];
+
+
+  for(
+    const value of candidates
+  ){
+
+    if(
+      Array.isArray(value)
+    ){
+
+      return value;
+
+    }
+
+  }
+
+
+  return [];
 
 }
 
 
+/* ==================================================
+   FORMAT ATTENDANCE OBJECT
+================================================== */
+
+function formatAttendanceLog(log){
+
+  if(
+    typeof log === "string"
+  ){
+
+    return log;
+
+  }
+
+
+  if(
+    !log ||
+    typeof log !== "object"
+  ){
+
+    return "";
+
+  }
+
+
+  const route =
+    log.route ||
+    log.track ||
+    log.drivingTrack ||
+    log.location ||
+    "Unknown Route";
+
+
+  const distance =
+    log.distance ||
+    log.km ||
+    "5 KM";
+
+
+  const remark =
+    log.remark ||
+    log.drivingRemark ||
+    "";
+
+
+  let dateText = "";
+
+
+  const date =
+    log.timestamp ||
+    log.date ||
+    log.createdAt;
+
+
+  if(date){
+
+    const parsed =
+      toDate(date);
+
+
+    if(parsed){
+
+      dateText =
+        parsed.toLocaleDateString(
+          "en-IN",
+          {
+            day:"2-digit",
+            month:"short"
+          }
+        )
+        +
+        " | "
+        +
+        parsed.toLocaleTimeString(
+          "en-IN",
+          {
+            hour:"2-digit",
+            minute:"2-digit",
+            hour12:true
+          }
+        );
+
+    }
+
+  }
+
+
+  return (
+
+    `${dateText ? dateText + " — " : ""}` +
+
+    `Route: ${route} | ` +
+
+    `Distance: ${distance}` +
+
+    (
+      remark
+        ? ` | Remark: ${remark}`
+        : ""
+    )
+
+  );
+
+}
+
+
+/* ==================================================
+   COMPLETED CLASSES
+================================================== */
+
 function getDone(student){
+
+  /*
+    1. New correct field
+  */
+
+  const completed =
+    Number(
+      student.completedClasses
+    );
+
+
+  if(
+    Number.isFinite(completed) &&
+    completed >= 0
+  ){
+
+    return completed;
+
+  }
+
+
+  /*
+    2. Attendance logs
+  */
 
   const logs =
     getLogs(student);
 
 
+  if(logs.length){
+
+    return logs.length;
+
+  }
+
+
   /*
-    Preserve your existing logic:
-    remaining is actually being used
-    as completed class count.
+    3. Legacy database
+       where remaining was used
+       as completed count.
   */
 
-  const oldValue =
+  const legacyRemaining =
     Number(
-      student.remaining || 0
+      student.remaining
     );
 
 
-  return Math.max(
-    logs.length,
-    oldValue,
-    0
-  );
+  if(
+    Number.isFinite(legacyRemaining) &&
+    legacyRemaining > 0
+  ){
+
+    return legacyRemaining;
+
+  }
+
+
+  return 0;
 
 }
 
 
 function getTotal(student){
 
-  return Math.max(
-    Number(
-      student.totalClasses || 0
-    ),
-    1
-  );
+  const values = [
+
+    student.totalClasses,
+    student.totalClass,
+    student.numberOfClasses,
+    student.classes,
+    student.totalSessions
+
+  ];
+
+
+  for(
+    const value of values
+  ){
+
+    const n =
+      Number(value);
+
+
+    if(
+      Number.isFinite(n) &&
+      n > 0
+    ){
+
+      return n;
+
+    }
+
+  }
+
+
+  return 1;
 
 }
 
@@ -2445,142 +3460,10 @@ function isCompleted(student){
 
 function isInactive(student){
 
-  return student.notActive === true;
-
-}
-
-
-/* ==================================================
-   ATTENDANCE TIME
-================================================== */
-
-function parseAttendanceTime(log){
-
-  if(!log){
-    return null;
-  }
-
-
-  const match =
-    String(log).match(
-      /(\d{1,2}):(\d{2})\s*(AM|PM)/i
-    );
-
-
-  if(!match){
-    return null;
-  }
-
-
-  let hour =
-    Number(match[1]);
-
-
-  const minute =
-    Number(match[2]);
-
-
-  const ampm =
-    match[3].toUpperCase();
-
-
-  if(
-    ampm === "PM" &&
-    hour !== 12
-  ){
-
-    hour += 12;
-
-  }
-
-
-  if(
-    ampm === "AM" &&
-    hour === 12
-  ){
-
-    hour = 0;
-
-  }
-
-
-  return {
-    hour,
-    minute
-  };
-
-}
-
-
-function timeDistance(logs){
-
-  if(!logs.length){
-    return 9999;
-  }
-
-
-  const parsed =
-    parseAttendanceTime(
-      logs[logs.length - 1]
-    );
-
-
-  if(!parsed){
-    return 9999;
-  }
-
-
-  const now =
-    new Date();
-
-
-  const currentMinutes =
-    now.getHours() * 60 +
-    now.getMinutes();
-
-
-  const logMinutes =
-    parsed.hour * 60 +
-    parsed.minute;
-
-
-  let diff =
-    Math.abs(
-      currentMinutes -
-      logMinutes
-    );
-
-
-  diff =
-    Math.min(
-      diff,
-      1440 - diff
-    );
-
-
-  return diff;
-
-}
-
-
-function isLive(student){
-
-  if(isInactive(student)){
-    return false;
-  }
-
-
-  const logs =
-    getLogs(student);
-
-
-  if(!logs.length){
-    return false;
-  }
-
-
   return (
-    timeDistance(logs) <= 30
+    student.notActive === true ||
+    student.active === false ||
+    String(student.status || "").toLowerCase() === "inactive"
   );
 
 }
@@ -2594,22 +3477,6 @@ function toDate(value){
 
   if(!value){
     return null;
-  }
-
-
-  /*
-    Firestore Timestamp
-  */
-
-  if(
-    typeof value === "object" &&
-    value.seconds !== undefined
-  ){
-
-    return new Date(
-      Number(value.seconds) * 1000
-    );
-
   }
 
 
@@ -2628,17 +3495,16 @@ function toDate(value){
 
 
   if(
-    value instanceof Date
+    typeof value === "object" &&
+    value.seconds !== undefined
   ){
 
-    return value;
+    return new Date(
+      Number(value.seconds) * 1000
+    );
 
   }
 
-
-  /*
-    Firebase timestamp-like object
-  */
 
   if(
     typeof value === "object" &&
@@ -2652,14 +3518,21 @@ function toDate(value){
   }
 
 
+  if(
+    value instanceof Date
+  ){
+
+    return value;
+
+  }
+
+
   const date =
     new Date(value);
 
 
   if(
-    isNaN(
-      date.getTime()
-    )
+    isNaN(date.getTime())
   ){
 
     return null;
@@ -2671,10 +3544,6 @@ function toDate(value){
 
 }
 
-
-/* ==================================================
-   MONTH CHECK
-================================================== */
 
 function sameMonth(
   date,
@@ -2700,7 +3569,7 @@ function sameMonth(
 
 
 /* ==================================================
-   PAYMENT RECORD HELPERS
+   PAYMENT ARRAYS
 ================================================== */
 
 function getPaymentArrays(student){
@@ -2708,16 +3577,13 @@ function getPaymentArrays(student){
   const possible = [
 
     student.paymentLogs,
-
     student.payments,
-
     student.paymentHistory,
-
     student.paymentsReceived,
-
     student.transactions,
-
-    student.collectionLogs
+    student.collectionLogs,
+    student.feePayments,
+    student.paymentHistoryLogs
 
   ];
 
@@ -2739,6 +3605,8 @@ function getPaymentAmount(payment){
     payment?.paymentAmount ??
     payment?.payment ??
     payment?.value ??
+    payment?.received ??
+    payment?.receivedAmount ??
     0
 
   ) || 0;
@@ -2789,29 +3657,20 @@ function getPaymentType(
 
 
 /* ==================================================
-   DIRECT PAYMENT FIELDS
+   DIRECT PAYMENT
 ================================================== */
 
-function getDirectPaymentAmount(
-  student
-){
+function getDirectPaymentAmount(student){
 
   const values = [
 
     student.paymentReceived,
-
     student.amountPaid,
-
     student.paidAmount,
-
     student.paymentAmount,
-
     student.feePaid,
-
     student.feesPaid,
-
     student.totalPaid,
-
     student.payment
 
   ];
@@ -2842,22 +3701,15 @@ function getDirectPaymentAmount(
 }
 
 
-function getDirectPaymentDate(
-  student
-){
+function getDirectPaymentDate(student){
 
   return (
 
     student.paymentDate ??
-
     student.paymentReceivedDate ??
-
     student.paidDate ??
-
     student.lastPaymentDate ??
-
     student.paymentCreatedAt ??
-
     null
 
   );
@@ -2866,29 +3718,21 @@ function getDirectPaymentDate(
 
 
 /* ==================================================
-   CREATED / ENROLLMENT DATE
+   ENROLLMENT DATE
 ================================================== */
 
 function getEnrollmentDate(student){
 
   return (
 
-    student.createdAt ??
-
-    student.createdDate ??
-
-    student.enrollmentDate ??
-
     student.admissionDate ??
-
+    student.enrollmentDate ??
     student.joiningDate ??
-
+    student.createdAt ??
+    student.createdDate ??
     student.registeredAt ??
-
     student.date ??
-
     student.admissionDateTime ??
-
     null
 
   );
@@ -2897,69 +3741,62 @@ function getEnrollmentDate(student){
 
 
 /* ==================================================
-   MONTHLY COLLECTION
+   MONTH DATA
 ================================================== */
 
-function calculateCollection(){
+function monthInfo(offset){
 
-  const now =
+  const date =
     new Date();
 
 
-  /*
-    Current month
-  */
+  date.setDate(1);
 
-  const currentYear =
-    now.getFullYear();
-
-  const currentMonth =
-    now.getMonth();
+  date.setMonth(
+    date.getMonth() + offset
+  );
 
 
-  /*
-    Previous month
-  */
+  return {
 
-  const previousDate =
-    new Date(
-      currentYear,
-      currentMonth - 1,
-      1
-    );
+    year:date.getFullYear(),
+    month:date.getMonth(),
 
+    label:
+      date.toLocaleDateString(
+        "en-IN",
+        {
+          month:"long",
+          year:"numeric"
+        }
+      )
 
-  const previousYear =
-    previousDate.getFullYear();
+  };
 
-  const previousMonth =
-    previousDate.getMonth();
-
-
-  let thisTotal = 0;
-  let thisPersonal = 0;
-  let thisGroup = 0;
-
-  let lastTotal = 0;
-  let lastPersonal = 0;
-  let lastGroup = 0;
+}
 
 
-  let thisPersonalCount = 0;
-  let thisGroupCount = 0;
+/* ==================================================
+   COLLECTION CALCULATION
+================================================== */
+
+function calculateMonth(offset){
+
+  const info =
+    monthInfo(offset);
 
 
-  /*
-    Used so one student's
-    direct/enrollment fallback
-    doesn't get counted twice.
-  */
+  let total = 0;
 
-  const currentCounted =
-    new Set();
+  let personal = 0;
 
-  const previousCounted =
-    new Set();
+  let group = 0;
+
+  let personalCount = 0;
+
+  let groupCount = 0;
+
+  let records = [];
 
 
   students.forEach(student=>{
@@ -2968,13 +3805,18 @@ function calculateCollection(){
       student.id;
 
 
-    const type =
-      getClassType(student);
+    let studentAmount = 0;
+
+    let studentPersonal = 0;
+
+    let studentGroup = 0;
+
+    let source = "";
 
 
     /*
       ==============================================
-      1. PAYMENT ARRAY
+      1. ACTUAL PAYMENT LOGS
       ==============================================
     */
 
@@ -2982,103 +3824,67 @@ function calculateCollection(){
       getPaymentArrays(student);
 
 
-    let hasPaymentArray =
-      arrays.length > 0;
+    let hasActualPayment =
+      false;
 
 
-    if(hasPaymentArray){
+    arrays.forEach(paymentArray=>{
 
-      arrays.forEach(paymentArray=>{
+      paymentArray.forEach(payment=>{
 
-        paymentArray.forEach(payment=>{
-
-          const amount =
-            getPaymentAmount(
-              payment
-            );
+        const amount =
+          getPaymentAmount(payment);
 
 
-          const date =
-            getPaymentDate(
-              payment
-            );
+        const date =
+          getPaymentDate(payment);
 
 
-          if(
-            !amount ||
-            !date
-          ){
+        if(
+          !amount ||
+          !date
+        ){
 
-            return;
+          return;
 
-          }
+        }
 
 
-          const paymentType =
+        if(
+          sameMonth(
+            date,
+            info.year,
+            info.month
+          )
+        ){
+
+          const type =
             getPaymentType(
               payment,
               student
             );
 
 
-          if(
-            sameMonth(
-              date,
-              currentYear,
-              currentMonth
-            )
-          ){
+          studentAmount += amount;
 
-            thisTotal += amount;
+          hasActualPayment = true;
 
-
-            if(
-              paymentType === "Personal"
-            ){
-
-              thisPersonal += amount;
-
-            }else{
-
-              thisGroup += amount;
-
-            }
-
-
-            currentCounted.add(id);
-
-          }
+          source = "Payment record";
 
 
           if(
-            sameMonth(
-              date,
-              previousYear,
-              previousMonth
-            )
+            type === "Personal"
           ){
 
-            lastTotal += amount;
+            studentPersonal += amount;
 
+          }else{
 
-            if(
-              paymentType === "Personal"
-            ){
-
-              lastPersonal += amount;
-
-            }else{
-
-              lastGroup += amount;
-
-            }
-
-
-            previousCounted.add(id);
+            studentGroup += amount;
 
           }
 
-        });
+        }
 
       });
 
@@ -3091,79 +3897,51 @@ function calculateCollection(){
       ==============================================
     */
 
-    const directAmount =
-      getDirectPaymentAmount(
-        student
-      );
+    if(!hasActualPayment){
+
+      const amount =
+        getDirectPaymentAmount(
+          student
+        );
 
 
-    const directDate =
-      getDirectPaymentDate(
-        student
-      );
-
-
-    if(
-      directAmount > 0 &&
-      directDate
-    ){
-
-      if(
-        sameMonth(
-          directDate,
-          currentYear,
-          currentMonth
-        ) &&
-        !currentCounted.has(id)
-      ){
-
-        thisTotal += directAmount;
-
-
-        if(
-          type === "Personal"
-        ){
-
-          thisPersonal += directAmount;
-
-        }else{
-
-          thisGroup += directAmount;
-
-        }
-
-
-        currentCounted.add(id);
-
-      }
+      const date =
+        getDirectPaymentDate(
+          student
+        );
 
 
       if(
+        amount > 0 &&
+        date &&
         sameMonth(
-          directDate,
-          previousYear,
-          previousMonth
-        ) &&
-        !previousCounted.has(id)
+          date,
+          info.year,
+          info.month
+        )
       ){
 
-        lastTotal += directAmount;
+        studentAmount =
+          amount;
+
+        source =
+          "Payment field";
 
 
         if(
-          type === "Personal"
+          getClassType(student) ===
+          "Personal"
         ){
 
-          lastPersonal += directAmount;
+          studentPersonal =
+            amount;
 
         }else{
 
-          lastGroup += directAmount;
+          studentGroup =
+            amount;
 
         }
-
-
-        previousCounted.add(id);
 
       }
 
@@ -3172,132 +3950,95 @@ function calculateCollection(){
 
     /*
       ==============================================
-      3. FALLBACK
+      3. LEGACY ADMISSION FALLBACK
       ==============================================
-      
-      If no payment date/record exists,
-      use enrollment/admission/created date.
-
-      This is specifically for your existing
-      database where old records may only have
-      student + classType + document ID.
     */
 
-    const enrollmentDate =
-      getEnrollmentDate(
-        student
-      );
-
-
     if(
-      enrollmentDate
+      studentAmount === 0
     ){
 
-      /*
-        Current month fallback
-      */
+      const enrollmentDate =
+        getEnrollmentDate(
+          student
+        );
+
 
       if(
+        enrollmentDate &&
         sameMonth(
           enrollmentDate,
-          currentYear,
-          currentMonth
-        ) &&
-        !currentCounted.has(id)
+          info.year,
+          info.month
+        )
       ){
 
-        const fee =
+        studentAmount =
           getFee(student);
 
-
-        thisTotal += fee;
+        source =
+          "Admission fallback";
 
 
         if(
-          type === "Personal"
+          getClassType(student) ===
+          "Personal"
         ){
 
-          thisPersonal += fee;
+          studentPersonal =
+            studentAmount;
 
         }else{
 
-          thisGroup += fee;
+          studentGroup =
+            studentAmount;
 
         }
-
-
-        currentCounted.add(id);
-
-      }
-
-
-      /*
-        Previous month fallback
-      */
-
-      if(
-        sameMonth(
-          enrollmentDate,
-          previousYear,
-          previousMonth
-        ) &&
-        !previousCounted.has(id)
-      ){
-
-        const fee =
-          getFee(student);
-
-
-        lastTotal += fee;
-
-
-        if(
-          type === "Personal"
-        ){
-
-          lastPersonal += fee;
-
-        }else{
-
-          lastGroup += fee;
-
-        }
-
-
-        previousCounted.add(id);
 
       }
 
     }
 
-  });
-
-
-  /*
-    Count students contributing
-    to current collection.
-  */
-
-  students.forEach(student=>{
 
     if(
-      currentCounted.has(
-        student.id
-      )
+      studentAmount > 0
     ){
 
+      total += studentAmount;
+
+      personal += studentPersonal;
+
+      group += studentGroup;
+
+
       if(
-        getClassType(student) ===
-        "Personal"
+        studentPersonal > 0
       ){
 
-        thisPersonalCount++;
-
-      }else{
-
-        thisGroupCount++;
+        personalCount++;
 
       }
+
+
+      if(
+        studentGroup > 0
+      ){
+
+        groupCount++;
+
+      }
+
+
+      records.push({
+
+        id,
+        student,
+        amount:studentAmount,
+        personal:studentPersonal,
+        group:studentGroup,
+        source
+
+      });
 
     }
 
@@ -3306,51 +4047,18 @@ function calculateCollection(){
 
   return {
 
-    thisTotal,
+    ...info,
 
-    thisPersonal,
+    total,
+    personal,
+    group,
 
-    thisGroup,
+    personalCount,
+    groupCount,
 
-    lastTotal,
-
-    lastPersonal,
-
-    lastGroup,
-
-    thisPersonalCount,
-
-    thisGroupCount
+    records
 
   };
-
-}
-
-
-/* ==================================================
-   MONTH NAME
-================================================== */
-
-function monthName(
-  offset=0
-){
-
-  const date =
-    new Date();
-
-
-  date.setMonth(
-    date.getMonth() + offset
-  );
-
-
-  return date.toLocaleDateString(
-    "en-IN",
-    {
-      month:"long",
-      year:"numeric"
-    }
-  );
 
 }
 
@@ -3372,69 +4080,105 @@ function money(value){
 
 
 /* ==================================================
+   PAYMENT RECORD COUNT
+================================================== */
+
+function getAllPaymentRecordCount(){
+
+  let count = 0;
+
+
+  students.forEach(student=>{
+
+    getPaymentArrays(student)
+      .forEach(arr=>{
+
+        count += arr.length;
+
+      });
+
+  });
+
+
+  return count;
+
+}
+
+
+/* ==================================================
    RENDER COLLECTION
 ================================================== */
 
 function renderCollection(){
 
-  const data =
-    calculateCollection();
+  const current =
+    calculateMonth(0);
+
+  const last =
+    calculateMonth(-1);
+
+  const two =
+    calculateMonth(-2);
 
 
   document.getElementById(
     "thisMonthCollection"
   ).textContent =
-    money(
-      data.thisTotal
-    );
+    money(current.total);
 
 
   document.getElementById(
     "thisPersonal"
   ).textContent =
-    money(
-      data.thisPersonal
-    );
+    money(current.personal);
 
 
   document.getElementById(
     "thisGroup"
   ).textContent =
-    money(
-      data.thisGroup
-    );
+    money(current.group);
 
 
   document.getElementById(
     "thisPersonalCount"
   ).textContent =
-    `${data.thisPersonalCount} Personal • ₹8,000`;
+    `${current.personalCount} Personal`;
 
 
   document.getElementById(
     "thisGroupCount"
   ).textContent =
-    `${data.thisGroupCount} Group • ₹4,500`;
+    `${current.groupCount} Group`;
 
 
   document.getElementById(
     "lastMonthCollection"
   ).textContent =
-    money(
-      data.lastTotal
-    );
+    money(last.total);
+
+
+  document.getElementById(
+    "twoMonthCollection"
+  ).textContent =
+    money(two.total);
+
+
+  document.getElementById(
+    "paymentRecordCount"
+  ).textContent =
+    getAllPaymentRecordCount();
 
 
   document.getElementById(
     "thisMonthLabel"
   ).textContent =
-    `${monthName(0)} • Till today`;
+    `${current.label} • Till today`;
 
 
   document.getElementById(
     "lastMonthLabel"
   ).textContent =
-    monthName(-1);
+    last.label;
 
 }
 
@@ -3446,14 +4190,20 @@ function renderCollection(){
 window.openCollectionDetails =
 function(){
 
-  const data =
-    calculateCollection();
+  const current =
+    calculateMonth(0);
+
+  const last =
+    calculateMonth(-1);
+
+  const two =
+    calculateMonth(-2);
 
 
   document.getElementById(
     "collectionModalSub"
   ).textContent =
-    `${monthName(0)} • Till today`;
+    "Current + previous collection records";
 
 
   const list =
@@ -3462,145 +4212,145 @@ function(){
     );
 
 
-  const contributing =
-    students.filter(
-      student=>{
+  const sections = [
 
-        const id =
-          student.id;
+    {
+      title:current.label,
+      data:current
+    },
 
+    {
+      title:last.label,
+      data:last
+    },
 
-        const enrollment =
-          getEnrollmentDate(
-            student
-          );
+    {
+      title:two.label,
+      data:two
+    }
 
-
-        const directDate =
-          getDirectPaymentDate(
-            student
-          );
-
-
-        const arrays =
-          getPaymentArrays(
-            student
-          );
+  ];
 
 
-        const hasCurrentPayment =
-          arrays.some(
-            arr=>
-              arr.some(
-                p=>
-                  sameMonth(
-                    getPaymentDate(p),
-                    new Date().getFullYear(),
-                    new Date().getMonth()
-                  )
-              )
-          );
+  let html = "";
 
 
-        const hasDirect =
-          directDate &&
-          sameMonth(
-            directDate,
-            new Date().getFullYear(),
-            new Date().getMonth()
-          );
+  sections.forEach(section=>{
 
+    html += `
 
-        const hasEnrollment =
-          enrollment &&
-          sameMonth(
-            enrollment,
-            new Date().getFullYear(),
-            new Date().getMonth()
-          );
-
-
-        return (
-          hasCurrentPayment ||
-          hasDirect ||
-          hasEnrollment
-        );
-
-      }
-    );
-
-
-  if(!contributing.length){
-
-    list.innerHTML = `
-
-      <div class="empty">
-
-        <div class="emptyIcon">
-          ₹
-        </div>
-
-        <div class="emptyText">
-          No collection record found
-          for this month.
-        </div>
-
+      <div
+        style="
+          color:#d7b36a;
+          font-size:11px;
+          font-weight:800;
+          margin:14px 0 8px;
+        "
+      >
+        ${safe(section.title)}
+        • ${money(section.data.total)}
       </div>
 
     `;
 
-  }else{
 
-    list.innerHTML =
-      contributing.map(
-        student=>{
+    if(
+      !section.data.records.length
+    ){
 
-          const type =
-            getClassType(student);
+      html += `
+
+        <div class="empty">
+
+          <div class="emptyText">
+            No collection record
+          </div>
+
+        </div>
+
+      `;
+
+      return;
+
+    }
 
 
-          return `
+    section.data.records.forEach(record=>{
 
-            <div class="monthDetailCard">
+      const student =
+        record.student;
 
-              <div class="monthDetailTop">
 
-                <div class="monthDetailName">
-                  ${safe(
-                    getName(student)
-                  )}
-                </div>
+      const type =
+        getClassType(student);
 
-                <div class="monthDetailAmount">
-                  ${money(
-                    getFee(student)
-                  )}
-                </div>
 
-              </div>
+      html += `
 
-              <div class="monthDetailMeta">
-                📱 ${safe(
-                  getMobile(student)
-                )}
-              </div>
+        <div class="monthDetailCard">
 
-              <div class="monthDetailType">
-                ${
-                  type === "Personal"
-                    ? "👤 Personal • ₹8,000"
-                    : "👥 Group • ₹4,500"
-                }
-              </div>
+          <div class="monthDetailTop">
+
+            <div class="monthDetailName">
+
+              ${safe(
+                getName(student)
+              )}
 
             </div>
 
-          `;
+            <div class="monthDetailAmount">
 
-        }
-      ).join("");
+              ${money(
+                record.amount
+              )}
 
-  }
+            </div>
+
+          </div>
+
+
+          <div class="monthDetailMeta">
+
+            📱 ${safe(
+              getMobile(student)
+            )}
+
+          </div>
+
+
+          <div class="monthDetailType">
+
+            ${
+              type === "Personal"
+                ? "👤 Personal"
+                : "👥 Group"
+            }
+
+            • ${money(record.amount)}
+
+          </div>
+
+
+          <div class="collectionSource">
+
+            ${safe(
+              record.source
+            )}
+
+          </div>
+
+        </div>
+
+      `;
+
+    });
+
+  });
+
+
+  list.innerHTML =
+    html;
 
 
   document
@@ -3654,7 +4404,6 @@ function updateClock(){
 
 updateClock();
 
-
 setInterval(
   updateClock,
   1000
@@ -3694,14 +4443,14 @@ function showToast(message){
           "show"
         );
       },
-      2200
+      2300
     );
 
 }
 
 
 /* ==================================================
-   LOAD STUDENTS
+   LOAD ALL STUDENTS
 ================================================== */
 
 async function loadStudents(){
@@ -3719,11 +4468,19 @@ async function loadStudents(){
 
     snapshot.forEach(item=>{
 
+      const data =
+        item.data();
+
+
+      /*
+        Keep ALL Firebase fields.
+      */
+
       students.push({
 
         id:item.id,
 
-        ...item.data()
+        ...data
 
       });
 
@@ -3735,7 +4492,10 @@ async function loadStudents(){
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "Firebase load error:",
+      error
+    );
 
 
     document.getElementById(
@@ -3752,9 +4512,12 @@ async function loadStudents(){
 
           Unable to load students.
 
-          <br>
+          <br><br>
 
-          Check Firebase configuration.
+          ${safe(
+            error.message ||
+            "Firebase error"
+          )}
 
         </div>
 
@@ -3838,6 +4601,7 @@ function render(){
 
   }
 
+
   else if(
     currentFilter === "completed"
   ){
@@ -3849,6 +4613,7 @@ function render(){
 
   }
 
+
   else if(
     currentFilter === "live"
   ){
@@ -3859,6 +4624,7 @@ function render(){
       );
 
   }
+
 
   else if(
     currentFilter === "inactive"
@@ -3877,15 +4643,13 @@ function render(){
         student=>{
 
           const name =
-            getName(
-              student
-            ).toLowerCase();
+            getName(student)
+              .toLowerCase();
 
 
           const phone =
-            getMobile(
-              student
-            ).toLowerCase();
+            getMobile(student)
+              .toLowerCase();
 
 
           return (
@@ -3919,9 +4683,10 @@ function render(){
 
     filtered.sort(
       (a,b)=>
-        getName(a).localeCompare(
-          getName(b)
-        )
+        getName(a)
+          .localeCompare(
+            getName(b)
+          )
     );
 
   }
@@ -3929,17 +4694,10 @@ function render(){
 
   const titles = {
 
-    active:
-      "Active Students",
-
-    completed:
-      "Completed Students",
-
-    live:
-      "Live Now",
-
-    inactive:
-      "Not Active"
+    active:"Active Students",
+    completed:"Completed Students",
+    live:"Live Now",
+    inactive:"Not Active"
 
   };
 
@@ -4031,7 +4789,10 @@ function studentCard(student){
 
 
   const done =
-    getDone(student);
+    Math.min(
+      getDone(student),
+      total
+    );
 
 
   const percentage =
@@ -4070,7 +4831,9 @@ function studentCard(student){
   if(logs.length){
 
     lastText =
-      logs[logs.length - 1];
+      formatAttendanceLog(
+        logs[logs.length - 1]
+      );
 
   }
 
@@ -4183,18 +4946,18 @@ function studentCard(student){
 
       ${
         !completed
-        ? `
+          ? `
 
-          <button
-            class="notActiveBtn"
-            onclick="markNotActive('${safe(id)}')">
+            <button
+              class="notActiveBtn"
+              onclick="markNotActive('${safe(id)}')">
 
-            ⏸ MARK NOT ACTIVE
+              ⏸ MARK NOT ACTIVE
 
-          </button>
+            </button>
 
-        `
-        : ""
+          `
+          : ""
       }
 
     `;
@@ -4419,17 +5182,10 @@ function(filter){
 
   const ids = {
 
-    active:
-      "navActive",
-
-    completed:
-      "navCompleted",
-
-    live:
-      "navLive",
-
-    inactive:
-      "navInactive"
+    active:"navActive",
+    completed:"navCompleted",
+    live:"navLive",
+    inactive:"navInactive"
 
   };
 
@@ -4463,7 +5219,7 @@ document
 
 
 /* ==================================================
-   ADD STUDENT
+   ADD MODAL
 ================================================== */
 
 window.openAddModal =
@@ -4482,6 +5238,11 @@ function(){
   document.getElementById(
     "totalClasses"
   ).value = "20";
+
+
+  document.getElementById(
+    "paymentAmount"
+  ).value = "";
 
 
   selectAddType(
@@ -4529,6 +5290,10 @@ function(type){
 };
 
 
+/* ==================================================
+   SAVE STUDENT
+================================================== */
+
 window.saveStudent =
 async function(){
 
@@ -4560,6 +5325,16 @@ async function(){
     );
 
 
+  const payment =
+    Number(
+      document
+        .getElementById(
+          "paymentAmount"
+        )
+        .value
+    ) || 0;
+
+
   if(
     !/^[0-9]{10}$/.test(
       phone
@@ -4586,7 +5361,10 @@ async function(){
   }
 
 
-  if(total < 1){
+  if(
+    !Number.isFinite(total) ||
+    total < 1
+  ){
 
     showToast(
       "Enter valid total classes"
@@ -4597,7 +5375,71 @@ async function(){
   }
 
 
+  if(
+    payment < 0
+  ){
+
+    showToast(
+      "Invalid payment amount"
+    );
+
+    return;
+
+  }
+
+
   try{
+
+    const now =
+      new Date()
+        .toISOString();
+
+
+    const existing =
+      students.find(
+        s=>cleanPhone(
+          getMobile(s)
+        ) === phone
+      );
+
+
+    const oldLogs =
+      existing
+        ? getLogs(existing)
+        : [];
+
+
+    const oldPayments =
+      existing
+        ? getPaymentArrays(existing)
+            .flat()
+        : [];
+
+
+    const newPaymentLogs =
+      payment > 0
+        ? [
+
+            ...oldPayments,
+
+            {
+              amount:payment,
+
+              classType:
+                addClassType ||
+                "Group",
+
+              paymentDate:now,
+
+              date:now,
+
+              source:"Admission"
+
+            }
+
+          ]
+        : oldPayments;
+
 
     await setDoc(
 
@@ -4613,19 +5455,56 @@ async function(){
 
         phone:phone,
 
+        mobile:phone,
+
         totalClasses:total,
 
-        remaining:0,
+        completedClasses:
+          existing
+            ? getDone(existing)
+            : 0,
 
-        attendanceLogs:[],
+        remaining:
+          existing
+            ? Math.max(
+                total -
+                getDone(existing),
+                0
+              )
+            : 0,
+
+        attendanceLogs:
+          oldLogs,
+
+        paymentLogs:
+          newPaymentLogs,
 
         classType:
-          addClassType || "Group",
+          addClassType ||
+          "Group",
 
         notActive:false,
 
+        active:true,
+
+        status:"active",
+
+        admissionDate:
+          existing
+            ? (
+                existing.admissionDate ||
+                existing.createdAt ||
+                now
+              )
+            : now,
+
         createdAt:
-          new Date().toISOString()
+          existing
+            ? (
+                existing.createdAt ||
+                now
+              )
+            : now
 
       },
 
@@ -4642,7 +5521,9 @@ async function(){
 
 
     showToast(
-      "Student added successfully ✓"
+      existing
+        ? "Student updated ✓"
+        : "Student added successfully ✓"
     );
 
 
@@ -4650,7 +5531,9 @@ async function(){
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      error
+    );
 
 
     showToast(
@@ -4694,24 +5577,20 @@ function(id){
     `${getName(student)} • ${getMobile(student)}`;
 
 
-  document
-    .getElementById(
-      "editPersonal"
-    )
-    .classList.toggle(
-      "selected",
-      editClassType === "Personal"
-    );
+  document.getElementById(
+    "editPersonal"
+  ).classList.toggle(
+    "selected",
+    editClassType === "Personal"
+  );
 
 
-  document
-    .getElementById(
-      "editGroup"
-    )
-    .classList.toggle(
-      "selected",
-      editClassType === "Group"
-    );
+  document.getElementById(
+    "editGroup"
+  ).classList.toggle(
+    "selected",
+    editClassType === "Group"
+  );
 
 
   document
@@ -4732,24 +5611,20 @@ function(type){
     type;
 
 
-  document
-    .getElementById(
-      "editPersonal"
-    )
-    .classList.toggle(
-      "selected",
-      type === "Personal"
-    );
+  document.getElementById(
+    "editPersonal"
+  ).classList.toggle(
+    "selected",
+    type === "Personal"
+  );
 
 
-  document
-    .getElementById(
-      "editGroup"
-    )
-    .classList.toggle(
-      "selected",
-      type === "Group"
-    );
+  document.getElementById(
+    "editGroup"
+  ).classList.toggle(
+    "selected",
+    type === "Group"
+  );
 
 };
 
@@ -4788,7 +5663,7 @@ async function(){
 
 
     showToast(
-      `Class type changed to ${editClassType} • ${
+      `Class type changed • ${
         editClassType === "Personal"
           ? "₹8,000"
           : "₹4,500"
@@ -4813,7 +5688,7 @@ async function(){
 
 
 /* ==================================================
-   ATTENDANCE
+   ATTENDANCE MODAL
 ================================================== */
 
 window.openAttendance =
@@ -4842,10 +5717,8 @@ function(id){
 
   selectedRoute = "";
 
-
   selectedDistance =
     "5 KM";
-
 
   selectedRemark = "";
 
@@ -4991,7 +5864,6 @@ function(btn,value){
       "show"
     );
 
-
     customInput.value = "";
 
   }
@@ -5093,7 +5965,6 @@ function(btn,value){
       "show"
     );
 
-
     customInput.value = "";
 
   }
@@ -5125,7 +5996,8 @@ async function(){
 
 
   if(
-    selectedRoute === "Other Route"
+    selectedRoute ===
+    "Other Route"
   ){
 
     const customRoute =
@@ -5143,14 +6015,6 @@ async function(){
         "Enter custom route"
       );
 
-
-      document
-        .getElementById(
-          "customRoute"
-        )
-        .focus();
-
-
       return;
 
     }
@@ -5158,14 +6022,6 @@ async function(){
 
     selectedRoute =
       customRoute;
-
-  }
-
-
-  if(!selectedDistance){
-
-    selectedDistance =
-      "5 KM";
 
   }
 
@@ -5194,14 +6050,6 @@ async function(){
         "Enter custom remark"
       );
 
-
-      document
-        .getElementById(
-          "customRemark"
-        )
-        .focus();
-
-
       return;
 
     }
@@ -5213,49 +6061,83 @@ async function(){
   }
 
 
-  const now =
-    new Date();
-
-
-  const datePart =
-    now.toLocaleDateString(
-      "en-IN",
-      {
-        day:"2-digit",
-        month:"short"
-      }
-    );
-
-
-  const timePart =
-    now.toLocaleTimeString(
-      "en-IN",
-      {
-        hour:"2-digit",
-        minute:"2-digit",
-        hour12:true
-      }
-    );
-
-
-  const log =
-    `${datePart} | ${timePart} — Route: ${selectedRoute} | Distance: 5 KM${
-      finalRemark
-        ? ` | Remark: ${finalRemark}`
-        : ""
-    }`;
-
-
   const student =
     students.find(
       s=>s.id === currentStudentId
     );
 
 
+  if(!student){
+    return;
+  }
+
+
+  const oldLogs =
+    getLogs(student);
+
+
   const currentDone =
-    student
-      ? getDone(student)
-      : 0;
+    getDone(student);
+
+
+  const total =
+    getTotal(student);
+
+
+  if(
+    currentDone >= total
+  ){
+
+    showToast(
+      "Training already completed"
+    );
+
+    return;
+
+  }
+
+
+  const now =
+    new Date();
+
+
+  /*
+    New object format.
+    Old string logs remain supported.
+  */
+
+  const attendanceObject = {
+
+    route:selectedRoute,
+
+    distance:
+      selectedDistance ||
+      "5 KM",
+
+    remark:
+      finalRemark || "",
+
+    classType:
+      getClassType(student),
+
+    timestamp:
+      now.toISOString(),
+
+    date:
+      now.toISOString()
+
+  };
+
+
+  const newDone =
+    currentDone + 1;
+
+
+  const remaining =
+    Math.max(
+      total - newDone,
+      0
+    );
 
 
   try{
@@ -5270,13 +6152,33 @@ async function(){
 
       {
 
-        remaining:
-          currentDone + 1,
+        /*
+          Keep object log.
+        */
 
         attendanceLogs:
-          arrayUnion(log),
+          arrayUnion(
+            attendanceObject
+          ),
 
-        notActive:false
+        /*
+          Correct modern fields.
+        */
+
+        completedClasses:
+          newDone,
+
+        remaining:
+          remaining,
+
+        notActive:false,
+
+        active:true,
+
+        status:
+          newDone >= total
+            ? "completed"
+            : "active"
 
       }
 
@@ -5289,7 +6191,9 @@ async function(){
 
 
     showToast(
-      "Attendance added ✓"
+      newDone >= total
+        ? "Training completed ✓"
+        : "Attendance added ✓"
     );
 
 
@@ -5297,7 +6201,9 @@ async function(){
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      error
+    );
 
 
     showToast(
@@ -5307,6 +6213,172 @@ async function(){
   }
 
 };
+
+
+/* ==================================================
+   LIVE
+================================================== */
+
+function parseAttendanceTime(log){
+
+  if(
+    typeof log === "object" &&
+    log
+  ){
+
+    const date =
+      toDate(
+        log.timestamp ||
+        log.date ||
+        log.createdAt
+      );
+
+
+    if(date){
+
+      return {
+
+        hour:
+          date.getHours(),
+
+        minute:
+          date.getMinutes()
+
+      };
+
+    }
+
+  }
+
+
+  if(!log){
+    return null;
+  }
+
+
+  const match =
+    String(log).match(
+      /(\d{1,2}):(\d{2})\s*(AM|PM)/i
+    );
+
+
+  if(!match){
+    return null;
+  }
+
+
+  let hour =
+    Number(match[1]);
+
+
+  const minute =
+    Number(match[2]);
+
+
+  const ampm =
+    match[3].toUpperCase();
+
+
+  if(
+    ampm === "PM" &&
+    hour !== 12
+  ){
+
+    hour += 12;
+
+  }
+
+
+  if(
+    ampm === "AM" &&
+    hour === 12
+  ){
+
+    hour = 0;
+
+  }
+
+
+  return {
+    hour,
+    minute
+  };
+
+}
+
+
+function timeDistance(logs){
+
+  if(!logs.length){
+    return 9999;
+  }
+
+
+  const parsed =
+    parseAttendanceTime(
+      logs[logs.length - 1]
+    );
+
+
+  if(!parsed){
+    return 9999;
+  }
+
+
+  const now =
+    new Date();
+
+
+  const currentMinutes =
+    now.getHours() * 60 +
+    now.getMinutes();
+
+
+  const logMinutes =
+    parsed.hour * 60 +
+    parsed.minute;
+
+
+  let diff =
+    Math.abs(
+      currentMinutes -
+      logMinutes
+    );
+
+
+  diff =
+    Math.min(
+      diff,
+      1440 - diff
+    );
+
+
+  return diff;
+
+}
+
+
+function isLive(student){
+
+  if(isInactive(student)){
+    return false;
+  }
+
+
+  const logs =
+    getLogs(student);
+
+
+  if(!logs.length){
+    return false;
+  }
+
+
+  return (
+    timeDistance(logs) <= 30
+  );
+
+}
 
 
 /* ==================================================
@@ -5327,7 +6399,13 @@ async function(id){
       ),
 
       {
-        notActive:true
+
+        notActive:true,
+
+        active:false,
+
+        status:"inactive"
+
       }
 
     );
@@ -5343,7 +6421,6 @@ async function(id){
   }catch(error){
 
     console.error(error);
-
 
     showToast(
       "Could not update status"
@@ -5368,7 +6445,13 @@ async function(id){
       ),
 
       {
-        notActive:false
+
+        notActive:false,
+
+        active:true,
+
+        status:"active"
+
       }
 
     );
@@ -5384,7 +6467,6 @@ async function(id){
   }catch(error){
 
     console.error(error);
-
 
     showToast(
       "Could not activate student"
@@ -5467,7 +6549,9 @@ function(id){
               </div>
 
               <div class="historyText">
-                ${safe(log)}
+                ${safe(
+                  formatAttendanceLog(log)
+                )}
               </div>
 
             </div>
@@ -5532,7 +6616,10 @@ function(id){
 
 
   const done =
-    getDone(student);
+    Math.min(
+      getDone(student),
+      total
+    );
 
 
   const left =
