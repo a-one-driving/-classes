@@ -53,6 +53,7 @@ html{
 }
 
 body{
+
   background:
     radial-gradient(
       circle at 50% -10%,
@@ -62,7 +63,9 @@ body{
     #050505;
 
   color:#fff;
+
   overflow-x:hidden;
+
   padding-bottom:40px;
 }
 
@@ -72,22 +75,37 @@ body{
 ===================================================== */
 
 #weather-container{
+
   position:fixed;
+
   inset:0;
+
   overflow:hidden;
+
   pointer-events:none;
+
   z-index:0;
 }
 
 .cloud{
+
   position:absolute;
-  background:rgba(255,255,255,.055);
+
+  background:
+    rgba(255,255,255,.055);
+
   border-radius:100px;
+
   filter:blur(35px);
-  animation:cloudMove linear infinite;
+
+  animation:
+    cloudMove
+    linear
+    infinite;
 }
 
 @keyframes cloudMove{
+
   from{
     transform:translateX(-300px);
   }
@@ -95,21 +113,34 @@ body{
   to{
     transform:translateX(110vw);
   }
+
 }
 
 .rain-drop{
+
   position:absolute;
+
   width:2px;
+
   height:30px;
-  background:rgba(255,255,255,.35);
+
+  background:
+    rgba(255,255,255,.35);
+
   top:-50px;
-  animation:rainFall linear infinite;
+
+  animation:
+    rainFall
+    linear
+    infinite;
 }
 
 @keyframes rainFall{
+
   to{
     transform:translateY(110vh);
   }
+
 }
 
 
@@ -118,15 +149,20 @@ body{
 ===================================================== */
 
 header{
+
   position:sticky;
+
   top:0;
+
   z-index:1000;
 
   padding:13px 16px;
 
-  background:rgba(5,5,5,.88);
+  background:
+    rgba(5,5,5,.88);
 
-  backdrop-filter:blur(18px);
+  backdrop-filter:
+    blur(18px);
 
   border-bottom:
     1px solid
@@ -134,27 +170,38 @@ header{
 }
 
 .nav{
+
   max-width:1100px;
+
   margin:auto;
 
   display:flex;
+
   justify-content:space-between;
+
   align-items:center;
 }
 
 .logo{
+
   font-size:18px;
+
   font-weight:900;
+
   letter-spacing:1.5px;
+
   color:var(--gold);
 }
 
 .logo span{
+
   color:#fff;
+
   font-weight:400;
 }
 
 .btn-profile-nav{
+
   text-decoration:none;
 
   color:var(--gold);
@@ -177,8 +224,11 @@ header{
 }
 
 .btn-profile-nav:active{
+
   transform:scale(.94);
+
   background:var(--gold);
+
   color:#000;
 }
 
@@ -188,11 +238,15 @@ header{
 ===================================================== */
 
 .container{
+
   max-width:1100px;
+
   margin:auto;
+
   padding:18px 14px;
 
   position:relative;
+
   z-index:1;
 }
 
@@ -202,11 +256,14 @@ header{
 ===================================================== */
 
 .showroom-section{
+
   position:relative;
+
   overflow:hidden;
 
   padding:22px 18px 12px;
-  margin-bottom:18px;
+
+  margin-bottom:25px;
 
   border-radius:25px;
 
@@ -238,12 +295,16 @@ header{
 }
 
 .showroom-top{
+
   display:flex;
+
   justify-content:space-between;
+
   align-items:flex-start;
 }
 
 .hero-small{
+
   color:var(--gold);
 
   font-size:8px;
@@ -258,22 +319,30 @@ header{
 }
 
 .showroom-section h1{
+
   font-size:23px;
+
   font-weight:900;
+
   line-height:1.1;
 }
 
 .showroom-section h1 span{
+
   color:var(--gold);
 }
 
 .showroom-description{
+
   font-size:9px;
+
   color:#777;
+
   margin-top:3px;
 }
 
 .vehicle-badge{
+
   padding:6px 9px;
 
   border-radius:10px;
@@ -300,7 +369,9 @@ header{
 ===================================================== */
 
 .car-platform{
+
   width:100%;
+
   max-width:500px;
 
   height:205px;
@@ -319,6 +390,7 @@ header{
 }
 
 .yellow-road{
+
   position:absolute;
 
   bottom:16%;
@@ -330,8 +402,12 @@ header{
   background:var(--gold);
 
   box-shadow:
-    0 0 12px rgba(212,175,55,.7),
-    0 0 30px rgba(212,175,55,.25);
+
+    0 0 12px
+    rgba(212,175,55,.7),
+
+    0 0 30px
+    rgba(212,175,55,.25);
 
   opacity:.8;
 
@@ -339,11 +415,13 @@ header{
 }
 
 .yellow-road:before{
+
   content:"";
 
   position:absolute;
 
   left:10%;
+
   right:10%;
 
   top:-15px;
@@ -361,11 +439,13 @@ header{
 }
 
 .yellow-road:after{
+
   content:"";
 
   position:absolute;
 
   left:0;
+
   right:0;
 
   top:7px;
@@ -382,9 +462,11 @@ header{
 ===================================================== */
 
 .main-car{
+
   position:absolute;
 
   width:100%;
+
   height:100%;
 
   object-fit:contain;
@@ -407,6 +489,7 @@ header{
 }
 
 .main-car.active{
+
   opacity:1;
 
   animation:
@@ -419,6 +502,7 @@ header{
 @keyframes premiumCarEnter{
 
   0%{
+
     opacity:0;
 
     filter:
@@ -431,6 +515,7 @@ header{
   }
 
   35%{
+
     opacity:.65;
 
     filter:
@@ -443,6 +528,7 @@ header{
   }
 
   70%{
+
     opacity:.95;
 
     filter:
@@ -455,6 +541,7 @@ header{
   }
 
   100%{
+
     opacity:1;
 
     filter:
@@ -465,6 +552,7 @@ header{
       translateX(0)
       scale(1);
   }
+
 }
 
 
@@ -473,14 +561,17 @@ header{
 ===================================================== */
 
 .car-platform:after{
+
   content:"";
 
   position:absolute;
 
   top:0;
+
   left:-30%;
 
   width:15%;
+
   height:100%;
 
   z-index:8;
@@ -488,6 +579,7 @@ header{
   pointer-events:none;
 
   background:
+
     linear-gradient(
       90deg,
       transparent,
@@ -502,6 +594,7 @@ header{
 }
 
 .car-platform.light-sweep:after{
+
   animation:
     lightSweep
     1.2s
@@ -511,25 +604,33 @@ header{
 @keyframes lightSweep{
 
   0%{
+
     left:-30%;
+
     opacity:0;
   }
 
   20%{
+
     opacity:.7;
   }
 
   70%{
+
     opacity:.4;
   }
 
   100%{
+
     left:120%;
+
     opacity:0;
   }
+
 }
 
 .car-platform:before{
+
   content:"";
 
   position:absolute;
@@ -537,9 +638,11 @@ header{
   bottom:15%;
 
   width:55%;
+
   height:20px;
 
   background:
+
     radial-gradient(
       ellipse,
       rgba(0,0,0,.9),
@@ -559,15 +662,18 @@ header{
 ===================================================== */
 
 .section-title{
+
   display:flex;
 
   justify-content:space-between;
+
   align-items:center;
 
   margin:25px 2px 12px;
 }
 
 .section-title h2{
+
   font-size:13px;
 
   color:var(--gold);
@@ -578,312 +684,10 @@ header{
 }
 
 .section-title span{
+
   font-size:9px;
-  color:#666;
-}
-
-
-/* =====================================================
-   ROUTES
-===================================================== */
-
-.routes-box{
-  position:relative;
-
-  padding:14px;
-
-  border-radius:20px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #151515,
-      #0b0b0b
-    );
-
-  border:
-    1px solid #242424;
-
-  box-shadow:
-    0 15px 40px
-    rgba(0,0,0,.28);
-}
-
-.routes-header{
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-
-  padding-bottom:13px;
-
-  margin-bottom:12px;
-
-  border-bottom:
-    1px solid #222;
-}
-
-.routes-header-left{
-  display:flex;
-
-  align-items:center;
-
-  gap:10px;
-}
-
-.route-main-icon{
-  width:38px;
-  height:38px;
-
-  border-radius:12px;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  background:
-    rgba(212,175,55,.1);
-
-  border:
-    1px solid
-    rgba(212,175,55,.25);
-
-  font-size:18px;
-}
-
-.routes-header h3{
-  font-size:12px;
-  font-weight:700;
-  color:#fff;
-}
-
-.routes-header p{
-  font-size:8px;
-  color:#666;
-  margin-top:2px;
-}
-
-.route-count{
-  padding:6px 9px;
-
-  border-radius:10px;
-
-  background:#191919;
-
-  color:var(--gold);
-
-  font-size:8px;
-
-  font-weight:700;
-
-  border:
-    1px solid #292929;
-}
-
-.routes-grid{
-  display:grid;
-
-  grid-template-columns:
-    repeat(2,1fr);
-
-  gap:9px;
-}
-
-.route-card{
-  position:relative;
-
-  min-height:78px;
-
-  padding:11px;
-
-  border-radius:15px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #191919,
-      #101010
-    );
-
-  border:
-    1px solid #292929;
-
-  overflow:hidden;
-
-  transition:.25s;
-}
-
-.route-card:active{
-  transform:scale(.97);
-}
-
-.route-card:before{
-  content:"";
-
-  position:absolute;
-
-  left:0;
-  top:0;
-  bottom:0;
-
-  width:3px;
-
-  background:var(--green);
-}
-
-.route-card.medium:before{
-  background:var(--yellow);
-}
-
-.route-card.hard:before{
-  background:var(--red);
-}
-
-.route-card-top{
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:flex-start;
-
-  gap:6px;
-}
-
-.route-name{
-  display:flex;
-
-  align-items:center;
-
-  gap:7px;
-
-  min-width:0;
-}
-
-.route-icon{
-  width:26px;
-  height:26px;
-
-  border-radius:8px;
-
-  background:#222;
-
-  display:flex;
-
-  justify-content:center;
-  align-items:center;
-
-  flex-shrink:0;
-
-  font-size:12px;
-}
-
-.route-name strong{
-  font-size:10px;
-
-  font-weight:700;
-
-  line-height:1.25;
-
-  color:#eee;
-}
-
-.route-level{
-  font-size:7px;
-
-  font-weight:800;
-
-  text-transform:uppercase;
-
-  letter-spacing:.4px;
-
-  padding:4px 6px;
-
-  border-radius:7px;
-
-  background:
-    rgba(46,204,113,.1);
-
-  color:var(--green);
-
-  white-space:nowrap;
-}
-
-.route-card.medium .route-level{
-  background:
-    rgba(241,196,15,.1);
-
-  color:var(--yellow);
-}
-
-.route-card.hard .route-level{
-  background:
-    rgba(255,77,77,.1);
-
-  color:var(--red);
-}
-
-.route-bottom{
-  margin-top:8px;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-}
-
-.route-status{
-  font-size:7px;
 
   color:#666;
-
-  text-transform:uppercase;
-
-  letter-spacing:.5px;
-}
-
-.route-arrow{
-  color:#555;
-  font-size:12px;
-}
-
-.route-legend{
-  display:flex;
-
-  justify-content:center;
-
-  gap:15px;
-
-  margin-top:13px;
-
-  padding-top:11px;
-
-  border-top:
-    1px solid #202020;
-}
-
-.legend-item{
-  display:flex;
-
-  align-items:center;
-
-  gap:5px;
-
-  font-size:7px;
-
-  color:#666;
-
-  text-transform:uppercase;
-
-  font-weight:700;
-}
-
-.legend-dot{
-  width:6px;
-  height:6px;
-  border-radius:50%;
 }
 
 
@@ -892,6 +696,7 @@ header{
 ===================================================== */
 
 .pricing-grid{
+
   display:grid;
 
   grid-template-columns:
@@ -904,6 +709,7 @@ header{
 }
 
 .price-card{
+
   position:relative;
 
   overflow:hidden;
@@ -913,6 +719,7 @@ header{
   border-radius:22px;
 
   background:
+
     linear-gradient(
       145deg,
       #171717,
@@ -928,10 +735,12 @@ header{
 }
 
 .price-card.featured{
+
   border:
     1px solid var(--gold);
 
   box-shadow:
+
     0 0 0 1px
     rgba(212,175,55,.08),
 
@@ -941,10 +750,11 @@ header{
 
 
 /* =====================================================
-   PACKAGE HEADER WITH DAYS
+   PACKAGE HEADER
 ===================================================== */
 
 .package-header{
+
   display:flex;
 
   justify-content:space-between;
@@ -955,13 +765,18 @@ header{
 }
 
 .package-title h3{
+
   font-size:14px;
+
   font-weight:700;
 }
 
 .price-sub{
+
   font-size:9px;
+
   color:#777;
+
   margin-top:2px;
 }
 
@@ -981,6 +796,7 @@ header{
   text-align:center;
 
   background:
+
     linear-gradient(
       145deg,
       rgba(212,175,55,.16),
@@ -992,6 +808,7 @@ header{
     rgba(212,175,55,.38);
 
   box-shadow:
+
     inset 0 0 15px
     rgba(212,175,55,.04);
 }
@@ -1032,6 +849,7 @@ header{
 ===================================================== */
 
 .price-tag{
+
   font-size:32px;
 
   font-weight:900;
@@ -1042,6 +860,7 @@ header{
 }
 
 .feature-list{
+
   list-style:none;
 
   margin:
@@ -1049,6 +868,7 @@ header{
 }
 
 .feature-list li{
+
   color:#aaa;
 
   font-size:11px;
@@ -1063,6 +883,7 @@ header{
 }
 
 .feature-list li:before{
+
   content:"✓";
 
   color:var(--gold);
@@ -1071,6 +892,7 @@ header{
 }
 
 .best-label{
+
   position:absolute;
 
   top:12px;
@@ -1097,6 +919,7 @@ header{
 ===================================================== */
 
 .btn-gold{
+
   width:100%;
 
   border:0;
@@ -1115,6 +938,7 @@ header{
   font-size:11px;
 
   background:
+
     linear-gradient(
       135deg,
       var(--gold),
@@ -1122,6 +946,7 @@ header{
     );
 
   box-shadow:
+
     0 7px 20px
     rgba(212,175,55,.15);
 
@@ -1129,6 +954,7 @@ header{
 }
 
 .btn-gold:active{
+
   transform:scale(.96);
 }
 
@@ -1183,9 +1009,11 @@ header{
   position:absolute;
 
   width:180px;
+
   height:180px;
 
   right:-100px;
+
   top:-100px;
 
   background:
@@ -1199,6 +1027,7 @@ header{
 .personal-top{
 
   position:relative;
+
   z-index:2;
 
   display:flex;
@@ -1235,6 +1064,7 @@ header{
 }
 
 .personal-title h2 span{
+
   color:var(--gold2);
 }
 
@@ -1321,9 +1151,6 @@ header{
 
   margin-top:1px;
 }
-
-
-/* Personal Days */
 
 .personal-days-box{
 
@@ -1505,6 +1332,7 @@ header{
   letter-spacing:.5px;
 
   background:
+
     linear-gradient(
       135deg,
       var(--gold),
@@ -1512,6 +1340,7 @@ header{
     );
 
   box-shadow:
+
     0 8px 25px
     rgba(212,175,55,.15);
 }
@@ -1633,14 +1462,19 @@ header{
 @keyframes modalIn{
 
   from{
+
     transform:scale(.92);
+
     opacity:0;
   }
 
   to{
+
     transform:scale(1);
+
     opacity:1;
   }
+
 }
 
 .modal-content h2{
@@ -1676,6 +1510,7 @@ header{
 }
 
 .status-input:focus{
+
   border-color:var(--gold);
 }
 
@@ -1707,11 +1542,13 @@ header{
 @media(max-width:600px){
 
   .container{
+
     padding:
       13px 11px;
   }
 
   .showroom-section{
+
     padding:
       19px 15px 8px;
 
@@ -1719,75 +1556,37 @@ header{
   }
 
   .showroom-section h1{
+
     font-size:21px;
   }
 
   .car-platform{
+
     height:185px;
   }
 
-  .routes-box{
-    padding:12px;
-
-    border-radius:18px;
-  }
-
-  .routes-grid{
-    grid-template-columns:
-      1fr 1fr;
-
-    gap:8px;
-  }
-
-  .route-card{
-    min-height:82px;
-
-    padding:9px;
-  }
-
-  .route-name strong{
-    font-size:9px;
-  }
-
-  .route-level{
-    font-size:6px;
-
-    padding:
-      3px 5px;
-  }
-
-  .route-icon{
-    width:24px;
-    height:24px;
-
-    font-size:11px;
-  }
-
-  .route-bottom{
-    margin-top:7px;
-  }
-
-  .route-status{
-    font-size:6px;
-  }
-
   .pricing-grid{
+
     grid-template-columns:1fr;
   }
 
   .price-card{
+
     padding:18px;
   }
 
   .personal-card{
+
     padding:18px;
   }
 
   .personal-title h2{
+
     font-size:20px;
   }
 
   .personal-mini-info{
+
     grid-template-columns:
       1fr 1fr;
   }
@@ -1801,12 +1600,9 @@ header{
 
 @media(max-width:360px){
 
-  .routes-grid{
-    grid-template-columns:1fr;
-  }
+  .personal-mini-info{
 
-  .route-card{
-    min-height:70px;
+    grid-template-columns:1fr;
   }
 
 }
@@ -1819,12 +1615,16 @@ header{
 <body>
 
 
-<!-- WEATHER -->
+<!-- =====================================================
+     WEATHER
+===================================================== -->
 
 <div id="weather-container"></div>
 
 
-<!-- HEADER -->
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
 <header>
 
@@ -1855,7 +1655,9 @@ header{
 </header>
 
 
-<!-- MAIN -->
+<!-- =====================================================
+     MAIN
+===================================================== -->
 
 <div class="container">
 
@@ -1941,370 +1743,7 @@ header{
 
 
 <!-- =====================================================
-     ROUTES
-===================================================== -->
-
-<div class="section-title">
-
-  <h2>
-    📍 Training Routes
-  </h2>
-
-  <span>
-    7 Routes
-  </span>
-
-</div>
-
-
-<div class="routes-box">
-
-
-  <div class="routes-header">
-
-
-    <div class="routes-header-left">
-
-
-      <div class="route-main-icon">
-        🛣️
-      </div>
-
-
-      <div>
-
-        <h3>
-          Driving Practice Areas
-        </h3>
-
-        <p>
-          Routes selected for practical training
-        </p>
-
-      </div>
-
-
-    </div>
-
-
-    <div class="route-count">
-      7 ROUTES
-    </div>
-
-
-  </div>
-
-
-  <div class="routes-grid">
-
-
-    <div class="route-card">
-
-      <div class="route-card-top">
-
-        <div class="route-name">
-
-          <div class="route-icon">
-            📍
-          </div>
-
-          <strong>
-            Bhanjpur
-          </strong>
-
-        </div>
-
-        <span class="route-level">
-          Easy
-        </span>
-
-      </div>
-
-      <div class="route-bottom">
-
-        <span class="route-status">
-          Beginner Friendly
-        </span>
-
-        <span class="route-arrow">
-          →
-        </span>
-
-      </div>
-
-    </div>
-
-
-    <div class="route-card">
-
-      <div class="route-card-top">
-
-        <div class="route-name">
-
-          <div class="route-icon">
-            📍
-          </div>
-
-          <strong>
-            Deuli Road
-          </strong>
-
-        </div>
-
-        <span class="route-level">
-          Easy
-        </span>
-
-      </div>
-
-      <div class="route-bottom">
-
-        <span class="route-status">
-          Beginner Friendly
-        </span>
-
-        <span class="route-arrow">
-          →
-        </span>
-
-      </div>
-
-    </div>
-
-
-    <div class="route-card medium">
-
-      <div class="route-card-top">
-
-        <div class="route-name">
-
-          <div class="route-icon">
-            📍
-          </div>
-
-          <strong>
-            Kuchei Road
-          </strong>
-
-        </div>
-
-        <span class="route-level">
-          Medium
-        </span>
-
-      </div>
-
-      <div class="route-bottom">
-
-        <span class="route-status">
-          Intermediate
-        </span>
-
-        <span class="route-arrow">
-          →
-        </span>
-
-      </div>
-
-    </div>
-
-
-    <div class="route-card medium">
-
-      <div class="route-card-top">
-
-        <div class="route-name">
-
-          <div class="route-icon">
-            📍
-          </div>
-
-          <strong>
-            Medical College
-          </strong>
-
-        </div>
-
-        <span class="route-level">
-          Medium
-        </span>
-
-      </div>
-
-      <div class="route-bottom">
-
-        <span class="route-status">
-          Intermediate
-        </span>
-
-        <span class="route-arrow">
-          →
-        </span>
-
-      </div>
-
-    </div>
-
-
-    <div class="route-card hard">
-
-      <div class="route-card-top">
-
-        <div class="route-name">
-
-          <div class="route-icon">
-            📍
-          </div>
-
-          <strong>
-            Lal Bazar Road
-          </strong>
-
-        </div>
-
-        <span class="route-level">
-          Hard
-        </span>
-
-      </div>
-
-      <div class="route-bottom">
-
-        <span class="route-status">
-          Advanced
-        </span>
-
-        <span class="route-arrow">
-          →
-        </span>
-
-      </div>
-
-    </div>
-
-
-    <div class="route-card hard">
-
-      <div class="route-card-top">
-
-        <div class="route-name">
-
-          <div class="route-icon">
-            📍
-          </div>
-
-          <strong>
-            Station Bazar
-          </strong>
-
-        </div>
-
-        <span class="route-level">
-          Hard
-        </span>
-
-      </div>
-
-      <div class="route-bottom">
-
-        <span class="route-status">
-          Advanced
-        </span>
-
-        <span class="route-arrow">
-          →
-        </span>
-
-      </div>
-
-    </div>
-
-
-    <div class="route-card hard">
-
-      <div class="route-card-top">
-
-        <div class="route-name">
-
-          <div class="route-icon">
-            📍
-          </div>
-
-          <strong>
-            Baleswar Route
-          </strong>
-
-        </div>
-
-        <span class="route-level">
-          Hard
-        </span>
-
-      </div>
-
-      <div class="route-bottom">
-
-        <span class="route-status">
-          Advanced
-        </span>
-
-        <span class="route-arrow">
-          →
-        </span>
-
-      </div>
-
-    </div>
-
-
-  </div>
-
-
-  <div class="route-legend">
-
-    <div class="legend-item">
-
-      <span
-        class="legend-dot"
-        style="background:var(--green)"
-      ></span>
-
-      Easy
-
-    </div>
-
-
-    <div class="legend-item">
-
-      <span
-        class="legend-dot"
-        style="background:var(--yellow)"
-      ></span>
-
-      Medium
-
-    </div>
-
-
-    <div class="legend-item">
-
-      <span
-        class="legend-dot"
-        style="background:var(--red)"
-      ></span>
-
-      Hard
-
-    </div>
-
-  </div>
-
-
-</div>
-
-
-<!-- =====================================================
-     PACKAGES
+     TRAINING PACKAGES
 ===================================================== -->
 
 <div class="section-title">
@@ -2319,7 +1758,9 @@ header{
 <div class="pricing-grid">
 
 
-  <!-- STANDARD -->
+  <!-- ===================================================
+       STANDARD
+  ==================================================== -->
 
   <div class="price-card">
 
@@ -2389,7 +1830,9 @@ header{
   </div>
 
 
-  <!-- PREMIUM -->
+  <!-- ===================================================
+       PREMIUM
+  ==================================================== -->
 
   <div class="price-card featured">
 
@@ -2472,7 +1915,7 @@ header{
 
 
 <!-- =====================================================
-     PERSONAL PREMIUM
+     PERSONAL 1-ON-1
 ===================================================== -->
 
 <section class="personal-card">
@@ -2490,6 +1933,7 @@ header{
       <h2>
 
         Personal
+
         <span>
           1-on-1
         </span>
@@ -2606,7 +2050,7 @@ header{
   </div>
 
 
-  <!-- SIMPLE BENEFITS -->
+  <!-- BENEFITS -->
 
   <div class="personal-features">
 
@@ -2638,7 +2082,7 @@ header{
   </div>
 
 
-  <!-- BUTTON -->
+  <!-- BOOK BUTTON -->
 
   <button
     class="personal-button"
@@ -2654,7 +2098,7 @@ header{
 
 
 <!-- =====================================================
-     DASHBOARD
+     STUDENT DASHBOARD
 ===================================================== -->
 
 <section class="dashboard-box">
@@ -2761,7 +2205,9 @@ window.openBooking = function(label){
 
 
   if(navigator.vibrate){
+
     navigator.vibrate(50);
+
   }
 
 
@@ -2777,6 +2223,10 @@ window.openBooking = function(label){
 };
 
 
+/* =====================================================
+   CLOSE MODAL
+===================================================== */
+
 window.closeModal = function(){
 
   document.getElementById(
@@ -2787,7 +2237,7 @@ window.closeModal = function(){
 
 
 /* =====================================================
-   WHATSAPP
+   WHATSAPP BOOKING
 ===================================================== */
 
 window.finalSubmit = function(){
@@ -2861,7 +2311,7 @@ Please contact me for further details.`;
 
 
 /* =====================================================
-   CLOSE MODAL
+   CLOSE MODAL ON BACKGROUND
 ===================================================== */
 
 document
@@ -3066,7 +2516,6 @@ async function updateWeatherUI(){
       }
 
     }
-
 
     else{
 
