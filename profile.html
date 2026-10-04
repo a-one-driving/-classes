@@ -3,384 +3,2234 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
   <title>Elite Dashboard | A1 Driving Academy</title>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
-    :root { 
-      --gold: #d4af37; 
-      --gold-gradient: linear-gradient(135deg, #fce08d 0%, #d4af37 50%, #aa8210 100%);
-      --bg-dark: #0b0b0e; 
-      --panel-bg: rgba(18, 18, 24, 0.8);
-      --card-bg: rgba(255, 255, 255, 0.03);
-      --input-bg: #121217;
+    :root {
+      --gold: #d4af37;
+      --gold-light: #fce08d;
+      --gold-dark: #aa8210;
+
+      --gold-gradient:
+        linear-gradient(
+          135deg,
+          #fce08d 0%,
+          #d4af37 50%,
+          #aa8210 100%
+        );
+
+      --bg-dark: #08080b;
+      --panel-bg: rgba(18, 18, 24, 0.82);
+      --card-bg: rgba(255, 255, 255, 0.035);
+      --input-bg: #111116;
+
       --success: #34c759;
-      --card-border: rgba(255, 255, 255, 0.07);
+      --danger: #ff453a;
+
+      --card-border: rgba(255, 255, 255, 0.075);
       --text-muted: #98989d;
+      --white-soft: #e9e9ed;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
-    
-    body { 
-      background: var(--bg-dark); 
-      background-image: 
-        radial-gradient(circle at 50% -20%, rgba(212, 175, 55, 0.15) 0%, transparent 60%),
-        radial-gradient(circle at 0% 100%, rgba(255, 255, 255, 0.02) 0%, transparent 40%);
-      color: #fff; 
-      min-height: 100vh; 
-      display: flex; 
-      flex-direction: column; 
-      align-items: center; 
-      justify-content: flex-start; 
-      padding: 16px;
-      -webkit-tap-highlight-color: transparent;
-      overflow-x: hidden;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", sans-serif;
     }
+
+    html {
+      width: 100%;
+      min-height: 100%;
+      background: var(--bg-dark);
+    }
+
+    body {
+      width: 100%;
+      min-height: 100vh;
+
+      color: #fff;
+
+      background:
+        radial-gradient(
+          circle at 50% -10%,
+          rgba(212, 175, 55, 0.17) 0%,
+          transparent 48%
+        ),
+        radial-gradient(
+          circle at 0% 100%,
+          rgba(255, 255, 255, 0.025) 0%,
+          transparent 40%
+        ),
+        var(--bg-dark);
+
+      display: flex;
+      justify-content: center;
+
+      padding:
+        max(18px, env(safe-area-inset-top))
+        max(14px, env(safe-area-inset-right))
+        max(24px, env(safe-area-inset-bottom))
+        max(14px, env(safe-area-inset-left));
+
+      overflow-x: hidden;
+
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button,
+    input {
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    /* =========================================================
+       MAIN CONTAINER
+    ========================================================= */
 
     .dashboard-container {
       width: 100%;
-      max-width: 440px;
+      max-width: 460px;
+
       display: flex;
       flex-direction: column;
-      gap: 24px;
-      margin: auto 0;
+
+      gap: 20px;
+
+      margin: 0 auto;
     }
 
-    .brand-section { text-align: center; margin-top: 10px; }
-    .brand-section h1 { font-size: 26px; font-weight: 800; letter-spacing: 3px; background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.2; }
-    .brand-section p { font-size: 10px; color: var(--text-muted); letter-spacing: 5px; font-weight: 600; margin-top: 4px; text-transform: uppercase; }
+    /* =========================================================
+       BRAND
+    ========================================================= */
 
-    .dashboard-wrapper { 
-      width: 100%; 
-      background: var(--panel-bg); 
-      backdrop-filter: blur(30px); 
+    .brand-section {
+      text-align: center;
+      padding-top: 6px;
+    }
+
+    .brand-section h1 {
+      font-size: clamp(23px, 7vw, 28px);
+      line-height: 1.1;
+
+      font-weight: 800;
+
+      letter-spacing: 2.5px;
+
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-section p {
+      margin-top: 6px;
+
+      font-size: 9px;
+      line-height: 1;
+
+      color: var(--text-muted);
+
+      font-weight: 600;
+
+      letter-spacing: 4px;
+
+      text-transform: uppercase;
+    }
+
+    /* =========================================================
+       MAIN PANEL
+    ========================================================= */
+
+    .dashboard-wrapper {
+      width: 100%;
+
+      padding: 22px 16px 20px;
+
+      border-radius: 28px;
+
+      background: var(--panel-bg);
+
+      border: 1px solid var(--card-border);
+
+      backdrop-filter: blur(30px);
       -webkit-backdrop-filter: blur(30px);
-      padding: 28px 20px; 
-      border-radius: 28px; 
-      border: 1px solid var(--card-border); 
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255,255,255,0.1); 
+
+      box-shadow:
+        0 30px 70px rgba(0, 0, 0, 0.62),
+        inset 0 1px 0 rgba(255, 255, 255, 0.09);
+
+      overflow: hidden;
     }
 
-    .input-group { margin-bottom: 24px; }
-    .input-label { display: block; font-size: 11px; color: var(--text-muted); font-weight: 600; letter-spacing: 1.5px; margin-bottom: 10px; text-transform: uppercase; }
-    
-    input { 
-      width: 100%; 
-      padding: 18px; 
-      border-radius: 16px; 
-      border: 1px solid var(--card-border); 
-      background: var(--input-bg); 
-      color: #fff; 
-      font-size: 18px; 
+    /* =========================================================
+       SEARCH
+    ========================================================= */
+
+    #searchPanel {
+      width: 100%;
+    }
+
+    .input-group {
+      margin-bottom: 16px;
+    }
+
+    .input-label {
+      display: block;
+
+      margin-bottom: 9px;
+
+      font-size: 10px;
+
+      color: var(--text-muted);
+
+      font-weight: 700;
+
+      letter-spacing: 1.5px;
+
+      text-transform: uppercase;
+
+      text-align: center;
+    }
+
+    input {
+      width: 100%;
+
+      min-height: 58px;
+
+      padding: 15px 16px;
+
+      border-radius: 17px;
+
+      border: 1px solid var(--card-border);
+
+      background: var(--input-bg);
+
+      color: #fff;
+
+      font-size: 18px;
+
       font-weight: 500;
-      letter-spacing: 1px;
-      outline: none; 
-      text-align: center; 
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
-    }
-    input:focus { border-color: var(--gold); box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); background: #15151f; }
 
-    .btn-primary { 
-      background: var(--gold-gradient); 
-      color: #0b0b0e; 
-      border: none; 
-      padding: 18px; 
-      border-radius: 16px; 
-      font-weight: 700; 
-      cursor: pointer; 
-      width: 100%; 
-      font-size: 16px; 
+      letter-spacing: 1.5px;
+
+      text-align: center;
+
+      outline: none;
+
+      transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+    }
+
+    input::placeholder {
+      color: #55555d;
+    }
+
+    input:focus {
+      border-color: rgba(212, 175, 55, 0.75);
+
+      background: #15151c;
+
+      box-shadow:
+        0 0 0 3px rgba(212, 175, 55, 0.08),
+        0 0 25px rgba(212, 175, 55, 0.15);
+    }
+
+    /* =========================================================
+       BUTTONS
+    ========================================================= */
+
+    .btn-primary {
+      width: 100%;
+
+      min-height: 57px;
+
+      padding: 15px 18px;
+
+      border: none;
+
+      border-radius: 17px;
+
+      background: var(--gold-gradient);
+
+      color: #0b0b0e;
+
+      font-size: 15px;
+
+      font-weight: 800;
+
+      letter-spacing: 0.3px;
+
+      cursor: pointer;
+
+      box-shadow:
+        0 12px 28px rgba(212, 175, 55, 0.25);
+
+      transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+    }
+
+    .btn-primary:active {
+      transform: scale(0.975);
+      opacity: 0.88;
+    }
+
+    .btn-secondary {
+      width: 100%;
+
+      min-height: 54px;
+
+      padding: 13px 12px;
+
+      border-radius: 16px;
+
+      border: 1px solid var(--card-border);
+
+      background: var(--card-bg);
+
+      color: #fff;
+
+      font-size: 13px;
+
+      font-weight: 600;
+
+      cursor: pointer;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 7px;
+
+      transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .btn-secondary:active {
+      transform: scale(0.975);
+
+      background: rgba(255, 255, 255, 0.075);
+    }
+
+    /* =========================================================
+       LOADER
+    ========================================================= */
+
+    #loader {
+      display: none;
+
+      width: 28px;
+      height: 28px;
+
+      margin: 18px auto 0;
+
+      border: 2.5px solid rgba(255, 255, 255, 0.06);
+
+      border-top-color: var(--gold);
+
+      border-radius: 50%;
+
+      animation: spin 0.75s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* =========================================================
+       PROFILE
+    ========================================================= */
+
+    #profileContent {
+      display: none;
+
+      width: 100%;
+
+      animation:
+        slideUp 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .profile-meta {
+      text-align: center;
+
+      padding: 2px 4px 18px;
+    }
+
+    .student-title {
+      font-size: clamp(21px, 6vw, 25px);
+
+      line-height: 1.2;
+
+      font-weight: 700;
+
+      color: #fff;
+
+      letter-spacing: -0.4px;
+
+      word-break: break-word;
+    }
+
+    .course-badge {
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      max-width: 100%;
+
+      margin-top: 8px;
+
+      padding: 6px 13px;
+
+      border-radius: 100px;
+
+      background: rgba(212, 175, 55, 0.08);
+
+      border: 1px solid rgba(212, 175, 55, 0.24);
+
+      color: var(--gold-light);
+
+      font-size: 10px;
+
+      font-weight: 600;
+
       letter-spacing: 0.5px;
-      box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3); 
-      transition: all 0.2s ease;
+
+      white-space: nowrap;
     }
-    .btn-primary:active { transform: scale(0.97); opacity: 0.9; }
 
-    #profileContent { display: none; width: 100%; animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-    @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    /* =========================================================
+       UNIVERSAL CARD
+    ========================================================= */
 
-    .profile-meta { text-align: center; margin-bottom: 24px; }
-    .student-title { font-size: 24px; font-weight: 700; color: #fff; letter-spacing: -0.5px; }
-    .course-badge { display: inline-flex; align-items: center; padding: 6px 14px; background: rgba(212, 175, 55, 0.08); border: 1px solid rgba(212, 175, 55, 0.25); border-radius: 100px; font-size: 11px; color: #fce08d; font-weight: 600; margin-top: 8px; letter-spacing: 0.5px; }
+    .dashboard-card {
+      width: 100%;
 
-    .progress-widget { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 22px; padding: 20px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; gap: 12px; }
-    .metrics-box { display: flex; flex-direction: column; gap: 12px; flex: 1; }
-    .metric-pill { background: rgba(0, 0, 0, 0.2); border: 1px solid var(--card-border); padding: 10px 14px; border-radius: 14px; display: flex; flex-direction: column; }
-    .metric-pill span { font-size: 9px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
-    .metric-pill b { font-size: 20px; color: #fff; margin-top: 2px; line-height: 1.2; }
+      background: var(--card-bg);
 
-    .radial-container { position: relative; width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; margin-right: 8px; }
-    .radial-progress-svg { width: 100px; height: 100px; transform: rotate(-90deg); }
-    .radial-bg { fill: none; stroke: rgba(255,255,255,0.03); stroke-width: 9; }
-    .radial-fill { fill: none; stroke: var(--gold); stroke-width: 9; stroke-linecap: round; stroke-dasharray: 251.3; stroke-dashoffset: 251.3; transition: stroke-dashoffset 1.4s cubic-bezier(0.16, 1, 0.3, 1); }
-    .radial-text { position: absolute; font-size: 16px; font-weight: 700; color: #fff; letter-spacing: -0.5px; }
+      border: 1px solid var(--card-border);
 
-    .timeline-widget { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 22px; padding: 20px; margin-bottom: 16px; }
-    .timeline-header { font-size: 11px; color: var(--text-muted); font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 14px; display: block; }
-    #attendanceTimeline { display: flex; flex-direction: column; gap: 12px; max-height: 220px; overflow-y: auto; padding-right: 4px; }
-    
-    #attendanceTimeline::-webkit-scrollbar { width: 4px; }
-    #attendanceTimeline::-webkit-scrollbar-track { background: transparent; }
-    #attendanceTimeline::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+      border-radius: 21px;
 
-    .log-row { background: rgba(0, 0, 0, 0.15); border: 1px solid var(--card-border); padding: 14px; border-radius: 16px; display: flex; flex-direction: column; gap: 6px; border-left: 4px solid var(--gold); transition: transform 0.2s; }
-    .log-meta { display: flex; justify-content: space-between; align-items: center; }
-    .log-meta b { font-size: 13px; font-weight: 600; color: #fff; }
-    .log-meta span { font-size: 10px; color: var(--text-muted); font-weight: 500; }
-    .log-feedback { font-size: 12px; color: #e5e5ea; opacity: 0.9; line-height: 1.4; }
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.025);
 
-    .wallet-banner { background: linear-gradient(90deg, rgba(52,199,89,0.08) 0%, rgba(52,199,89,0.01) 100%); border: 1px solid rgba(52,199,89,0.2); padding: 16px 20px; border-radius: 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-    .wallet-banner div { display: flex; flex-direction: column; }
-    .wallet-banner span { font-size: 10px; color: var(--success); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
-    .wallet-banner p { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
-    .wallet-banner b { font-size: 22px; color: #fff; font-weight: 700; letter-spacing: -0.5px; }
+      overflow: hidden;
+    }
 
-    .actions-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .btn-secondary { background: var(--card-bg); border: 1px solid var(--card-border); color: #fff; padding: 16px; border-radius: 16px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
-    .btn-secondary:active { background: rgba(255,255,255,0.08); transform: scale(0.98); }
+    /* =========================================================
+       PROGRESS CARD
+    ========================================================= */
 
-    #premiumCertificate { display: none; background: linear-gradient(135deg, rgba(212,175,55,0.15) 0%, rgba(212,175,55,0.03) 100%); border: 1px solid rgba(212,175,55,0.35); border-radius: 24px; padding: 22px 20px; text-align: center; margin-bottom: 16px; box-shadow: 0 15px 35px rgba(212,175,55,0.1); }
-    
-    .logout-btn { color: rgba(255,255,255,0.3); font-size: 12px; font-weight: 500; margin-top: 28px; text-align: center; cursor: pointer; display: block; text-decoration: none; transition: color 0.2s; letter-spacing: 0.5px; }
-    .logout-btn:hover { color: var(--gold); }
+    .progress-widget {
+      width: 100%;
 
-    #loader { display: none; margin: 20px auto 0 auto; border: 2.5px solid rgba(255,255,255,0.05); border-top: 2.5px solid var(--gold); border-radius: 50%; width: 28px; height: 28px; animation: spin 0.75s linear infinite; }
-    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+      padding: 15px;
 
-    #pdfTemplate { width: 842px; height: 595px; background: #000; color: #fff; padding: 50px; border: 20px solid #d4af37; display: none; position: absolute; left: -9999px; text-align: center; }
+      margin-bottom: 13px;
+
+      background: var(--card-bg);
+
+      border: 1px solid var(--card-border);
+
+      border-radius: 22px;
+
+      display: grid;
+
+      grid-template-columns: minmax(0, 1fr) 92px;
+
+      gap: 12px;
+
+      align-items: center;
+    }
+
+    .metrics-box {
+      width: 100%;
+
+      min-width: 0;
+
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 9px;
+    }
+
+    .metric-pill {
+      min-width: 0;
+
+      min-height: 68px;
+
+      padding: 10px 11px;
+
+      border-radius: 14px;
+
+      border: 1px solid var(--card-border);
+
+      background: rgba(0, 0, 0, 0.18);
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: center;
+
+      overflow: hidden;
+    }
+
+    .metric-pill span {
+      display: block;
+
+      font-size: 8px;
+
+      line-height: 1.25;
+
+      color: var(--text-muted);
+
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.8px;
+    }
+
+    .metric-pill b {
+      display: block;
+
+      margin-top: 3px;
+
+      font-size: 18px;
+
+      line-height: 1.15;
+
+      color: #fff;
+
+      font-weight: 700;
+
+      letter-spacing: -0.3px;
+
+      overflow-wrap: anywhere;
+    }
+
+    #dispKm,
+    #dispEndDate {
+      font-size: 13px;
+      letter-spacing: 0;
+    }
+
+    /* =========================================================
+       RADIAL
+    ========================================================= */
+
+    .radial-container {
+      width: 92px;
+      height: 92px;
+
+      position: relative;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      flex-shrink: 0;
+
+      margin: 0 auto;
+    }
+
+    .radial-progress-svg {
+      width: 92px;
+      height: 92px;
+
+      transform: rotate(-90deg);
+    }
+
+    .radial-bg {
+      fill: none;
+
+      stroke: rgba(255, 255, 255, 0.045);
+
+      stroke-width: 8;
+    }
+
+    .radial-fill {
+      fill: none;
+
+      stroke: var(--gold);
+
+      stroke-width: 8;
+
+      stroke-linecap: round;
+
+      stroke-dasharray: 251.3;
+
+      stroke-dashoffset: 251.3;
+
+      transition:
+        stroke-dashoffset 1.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .radial-text {
+      position: absolute;
+
+      font-size: 15px;
+
+      font-weight: 800;
+
+      color: #fff;
+
+      letter-spacing: -0.4px;
+    }
+
+    /* =========================================================
+       TIMELINE
+    ========================================================= */
+
+    .timeline-widget {
+      width: 100%;
+
+      padding: 16px;
+
+      margin-bottom: 13px;
+
+      background: var(--card-bg);
+
+      border: 1px solid var(--card-border);
+
+      border-radius: 22px;
+    }
+
+    .timeline-header {
+      display: block;
+
+      margin-bottom: 12px;
+
+      font-size: 10px;
+
+      color: var(--text-muted);
+
+      font-weight: 700;
+
+      letter-spacing: 1.4px;
+
+      text-transform: uppercase;
+    }
+
+    #attendanceTimeline {
+      width: 100%;
+
+      max-height: 245px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 9px;
+
+      overflow-y: auto;
+
+      padding-right: 3px;
+
+      overscroll-behavior: contain;
+    }
+
+    #attendanceTimeline::-webkit-scrollbar {
+      width: 3px;
+    }
+
+    #attendanceTimeline::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    #attendanceTimeline::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.13);
+
+      border-radius: 10px;
+    }
+
+    .log-row {
+      width: 100%;
+
+      padding: 12px 12px 12px 13px;
+
+      border-radius: 14px;
+
+      border: 1px solid var(--card-border);
+
+      border-left: 3px solid var(--gold);
+
+      background: rgba(0, 0, 0, 0.16);
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 6px;
+    }
+
+    .log-meta {
+      width: 100%;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 10px;
+    }
+
+    .log-meta b {
+      font-size: 12px;
+
+      font-weight: 700;
+
+      color: #fff;
+
+      white-space: nowrap;
+    }
+
+    .log-meta span {
+      min-width: 0;
+
+      font-size: 9px;
+
+      color: var(--text-muted);
+
+      font-weight: 500;
+
+      text-align: right;
+
+      overflow: hidden;
+
+      text-overflow: ellipsis;
+
+      white-space: nowrap;
+    }
+
+    .log-feedback {
+      font-size: 11px;
+
+      color: var(--white-soft);
+
+      opacity: 0.9;
+
+      line-height: 1.45;
+
+      word-break: break-word;
+    }
+
+    /* =========================================================
+       CERTIFICATE
+    ========================================================= */
+
+    #premiumCertificate {
+      display: none;
+
+      width: 100%;
+
+      padding: 19px 16px;
+
+      margin-bottom: 13px;
+
+      text-align: center;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(212, 175, 55, 0.15) 0%,
+          rgba(212, 175, 55, 0.025) 100%
+        );
+
+      border: 1px solid rgba(212, 175, 55, 0.32);
+
+      border-radius: 22px;
+
+      box-shadow:
+        0 14px 35px rgba(212, 175, 55, 0.08);
+    }
+
+    #premiumCertificate img {
+      width: 43px !important;
+
+      margin-bottom: 7px !important;
+
+      filter:
+        drop-shadow(
+          0 0 10px rgba(212, 175, 55, 0.35)
+        );
+    }
+
+    #premiumCertificate h3 {
+      font-size: 16px !important;
+
+      line-height: 1.3;
+
+      margin-bottom: 5px;
+    }
+
+    #premiumCertificate p {
+      margin-bottom: 14px !important;
+
+      font-size: 10px !important;
+
+      line-height: 1.5 !important;
+    }
+
+    #premiumCertificate .btn-primary {
+      min-height: 47px;
+
+      padding: 12px;
+
+      font-size: 12px;
+
+      border-radius: 13px;
+    }
+
+    /* =========================================================
+       WALLET
+    ========================================================= */
+
+    .wallet-banner {
+      width: 100%;
+
+      min-height: 74px;
+
+      padding: 13px 15px;
+
+      margin-bottom: 13px;
+
+      border-radius: 19px;
+
+      border: 1px solid rgba(52, 199, 89, 0.2);
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(52, 199, 89, 0.09) 0%,
+          rgba(52, 199, 89, 0.015) 100%
+        );
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 15px;
+    }
+
+    .wallet-banner div {
+      min-width: 0;
+
+      display: flex;
+
+      flex-direction: column;
+    }
+
+    .wallet-banner span {
+      font-size: 9px;
+
+      color: var(--success);
+
+      font-weight: 800;
+
+      letter-spacing: 1px;
+
+      text-transform: uppercase;
+    }
+
+    .wallet-banner p {
+      margin-top: 2px;
+
+      font-size: 9px;
+
+      color: var(--text-muted);
+    }
+
+    .wallet-banner b {
+      flex-shrink: 0;
+
+      font-size: 21px;
+
+      color: #fff;
+
+      font-weight: 700;
+
+      letter-spacing: -0.5px;
+    }
+
+    /* =========================================================
+       ACTIONS
+    ========================================================= */
+
+    .actions-grid {
+      width: 100%;
+
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 9px;
+    }
+
+    /* =========================================================
+       LOGOUT
+    ========================================================= */
+
+    .logout-btn {
+      display: block;
+
+      margin-top: 19px;
+
+      color: rgba(255, 255, 255, 0.3);
+
+      font-size: 10px;
+
+      font-weight: 500;
+
+      letter-spacing: 0.7px;
+
+      text-align: center;
+
+      text-decoration: none;
+
+      cursor: pointer;
+
+      transition: color 0.2s ease;
+    }
+
+    .logout-btn:active,
+    .logout-btn:hover {
+      color: var(--gold);
+    }
+
+    /* =========================================================
+       PDF
+    ========================================================= */
+
+    #pdfTemplate {
+      width: 842px;
+      height: 595px;
+
+      position: absolute;
+
+      left: -99999px;
+      top: 0;
+
+      display: none;
+
+      padding: 50px;
+
+      background: #000;
+
+      color: #fff;
+
+      border: 20px solid #d4af37;
+
+      text-align: center;
+    }
+
+    /* =========================================================
+       SMALL MOBILE
+    ========================================================= */
+
+    @media (max-width: 360px) {
+
+      body {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+      .dashboard-wrapper {
+        padding: 19px 12px 17px;
+        border-radius: 24px;
+      }
+
+      .progress-widget {
+        grid-template-columns: minmax(0, 1fr) 78px;
+
+        padding: 12px;
+
+        gap: 8px;
+      }
+
+      .radial-container,
+      .radial-progress-svg {
+        width: 78px;
+        height: 78px;
+      }
+
+      .metric-pill {
+        min-height: 63px;
+
+        padding: 8px;
+      }
+
+      .metric-pill b {
+        font-size: 16px;
+      }
+
+      #dispKm,
+      #dispEndDate {
+        font-size: 11px;
+      }
+
+      .radial-text {
+        font-size: 13px;
+      }
+
+      .timeline-widget {
+        padding: 13px;
+      }
+
+      .wallet-banner {
+        padding: 12px;
+      }
+    }
+
+    /* =========================================================
+       TABLET / DESKTOP
+    ========================================================= */
+
+    @media (min-width: 600px) {
+
+      body {
+        align-items: center;
+
+        padding-top: 35px;
+        padding-bottom: 35px;
+      }
+
+      .dashboard-container {
+        max-width: 460px;
+      }
+
+      .dashboard-wrapper {
+        padding: 28px 22px 24px;
+      }
+    }
   </style>
 </head>
+
 <body>
 
   <div class="dashboard-container">
+
+    <!-- BRAND -->
     <div class="brand-section">
       <h1>ABHINAASH A1</h1>
       <p>DRIVING ACADEMY</p>
     </div>
 
+
+    <!-- MAIN DASHBOARD -->
     <div class="dashboard-wrapper">
+
+      <!-- =====================================================
+           SEARCH PANEL
+      ====================================================== -->
       <div id="searchPanel">
-        <span class="input-label">Enter Registered Number</span>
+
+        <span class="input-label">
+          Enter Registered Number
+        </span>
+
         <div class="input-group">
-          <input type="tel" id="userPhone" placeholder="9933xxxxxx" maxlength="10" autocomplete="tel">
+
+          <input
+            type="tel"
+            id="userPhone"
+            placeholder="9933xxxxxx"
+            maxlength="10"
+            autocomplete="tel"
+            inputmode="numeric"
+          >
+
         </div>
-        <button class="btn-primary" onclick="loadProfile()">Access Dashboard</button>
+
+        <button
+          class="btn-primary"
+          onclick="loadProfile()"
+        >
+          Access Dashboard
+        </button>
+
         <div id="loader"></div>
+
       </div>
 
+
+      <!-- =====================================================
+           PROFILE CONTENT
+      ====================================================== -->
       <div id="profileContent">
+
+
+        <!-- PREMIUM CERTIFICATE -->
         <div id="premiumCertificate">
-          <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" style="width:46px; filter: drop-shadow(0 0 10px rgba(212,175,55,0.4)); margin-bottom:10px;" alt="Elite Graduate">
-          <h3 style="color:#fce08d; font-size:17px; font-weight:700; letter-spacing: 0.5px;">ELITE COURSE GRADUATE</h3>
-          <p style="font-size:12px; color:var(--text-muted); margin-bottom:16px; line-height: 1.4;">Your official driving track record is successfully parsed.</p>
-          <button class="btn-primary" style="padding: 12px; font-size: 13px; border-radius: 12px; box-shadow: 0 6px 15px rgba(212,175,55,0.2);" onclick="downloadPDF()">⬇️ DOWNLOAD PREMIUM PDF</button>
+
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/190/190411.png"
+            alt="Elite Graduate"
+          >
+
+          <h3
+            style="
+              color:#fce08d;
+              font-weight:700;
+              letter-spacing:.5px;
+            "
+          >
+            ELITE COURSE GRADUATE
+          </h3>
+
+          <p
+            style="
+              color:var(--text-muted);
+            "
+          >
+            Your official driving track record is successfully parsed.
+          </p>
+
+          <button
+            class="btn-primary"
+            onclick="downloadPDF()"
+          >
+            ⬇️ DOWNLOAD PREMIUM PDF
+          </button>
+
         </div>
 
+
+        <!-- PROFILE -->
         <div class="profile-meta">
-          <div class="student-title" id="dispName">Driver Name</div>
-          <div class="course-badge" id="dispPkg">Track Scheme</div>
+
+          <div
+            class="student-title"
+            id="dispName"
+          >
+            Driver Name
+          </div>
+
+          <div
+            class="course-badge"
+            id="dispPkg"
+          >
+            Track Scheme
+          </div>
+
         </div>
+
+
+        <!-- =====================================================
+             PROGRESS CARD
+        ====================================================== -->
 
         <div class="progress-widget">
+
           <div class="metrics-box">
-            <div class="metric-pill"><span>Done</span><b id="dispDone">0</b></div>
-            <div class="metric-pill"><span>Target</span><b id="dispTotal">0</b></div>
-            <div class="metric-pill" style="border-color: rgba(214, 175, 55, 0.25);">
-              <span>Distance Tracker</span><b id="dispKm">0 / 150 km</b>
+
+            <!-- DONE -->
+            <div class="metric-pill">
+
+              <span>Done</span>
+
+              <b id="dispDone">
+                0
+              </b>
+
             </div>
-            <div class="metric-pill" style="border-color: rgba(52, 199, 89, 0.2);">
-              <span>Expected Completion</span><b id="dispEndDate">Calculating...</b>
+
+
+            <!-- TARGET -->
+            <div class="metric-pill">
+
+              <span>Target</span>
+
+              <b id="dispTotal">
+                0
+              </b>
+
             </div>
+
+
+            <!-- DISTANCE -->
+            <div
+              class="metric-pill"
+              style="
+                border-color:
+                rgba(214,175,55,.25);
+              "
+            >
+
+              <span>
+                Distance Tracker
+              </span>
+
+              <b id="dispKm">
+                0 / 150 km
+              </b>
+
+            </div>
+
+
+            <!-- EXPECTED DATE -->
+            <div
+              class="metric-pill"
+              style="
+                border-color:
+                rgba(52,199,89,.2);
+              "
+            >
+
+              <span>
+                Expected Completion
+              </span>
+
+              <b id="dispEndDate">
+                Calculating...
+              </b>
+
+            </div>
+
           </div>
-          
+
+
+          <!-- RADIAL PROGRESS -->
+
           <div class="radial-container">
-            <svg class="radial-progress-svg">
-              <circle class="radial-bg" cx="50" cy="50" r="40"></circle>
-              <circle class="radial-fill" id="radialFillCircle" cx="50" cy="50" r="40"></circle>
+
+            <svg
+              class="radial-progress-svg"
+              viewBox="0 0 100 100"
+            >
+
+              <circle
+                class="radial-bg"
+                cx="50"
+                cy="50"
+                r="40"
+              ></circle>
+
+              <circle
+                class="radial-fill"
+                id="radialFillCircle"
+                cx="50"
+                cy="50"
+                r="40"
+              ></circle>
+
             </svg>
-            <div class="radial-text" id="dispPercent">0%</div>
+
+            <div
+              class="radial-text"
+              id="dispPercent"
+            >
+              0%
+            </div>
+
           </div>
+
         </div>
+
+
+        <!-- =====================================================
+             TIMELINE
+        ====================================================== -->
 
         <div class="timeline-widget">
-          <span class="timeline-header">Class History & Feedback</span>
+
+          <span class="timeline-header">
+            Class History & Feedback
+          </span>
+
           <div id="attendanceTimeline"></div>
+
         </div>
+
+
+        <!-- =====================================================
+             WALLET
+        ====================================================== -->
 
         <div class="wallet-banner">
+
           <div>
-            <span>REFERRAL WALLET</span>
-            <p>Earned per subscription</p>
+
+            <span>
+              REFERRAL WALLET
+            </span>
+
+            <p>
+              Earned per subscription
+            </p>
+
           </div>
-          <b id="dispEarn">₹0</b>
+
+          <b id="dispEarn">
+            ₹0
+          </b>
+
         </div>
+
+
+        <!-- =====================================================
+             ACTIONS
+        ====================================================== -->
 
         <div class="actions-grid">
-          <button class="btn-secondary" onclick="contactAdmin()">💬 HELP</button>
-          <button class="btn-secondary" onclick="shareReferral()" style="color:var(--success); border-color:rgba(52,199,89,0.25); background: linear-gradient(135deg, rgba(52,199,89,0.05) 0%, transparent 100%);">🚀 SHARE</button>
+
+          <button
+            class="btn-secondary"
+            onclick="contactAdmin()"
+          >
+            💬 HELP
+          </button>
+
+
+          <button
+            class="btn-secondary"
+            onclick="shareReferral()"
+            style="
+              color:var(--success);
+              border-color:
+              rgba(52,199,89,.25);
+              background:
+              linear-gradient(
+                135deg,
+                rgba(52,199,89,.05) 0%,
+                transparent 100%
+              );
+            "
+          >
+            🚀 SHARE
+          </button>
+
         </div>
 
-        <a class="logout-btn" onclick="location.reload()">← LOGOUT SESSION</a>
+
+        <!-- LOGOUT -->
+
+        <a
+          class="logout-btn"
+          onclick="location.reload()"
+        >
+          ← LOGOUT SESSION
+        </a>
+
       </div>
+
     </div>
   </div>
+
+
+  <!-- =========================================================
+       PDF TEMPLATE
+  ========================================================== -->
 
   <div id="pdfTemplate">
-    <div style="border: 3px solid #d4af37; height: 100%; padding: 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #050505;">
-      <h1 style="color:#d4af37; font-size: 42px; font-weight:800; margin-bottom: 10px;">ABHINAASH A1 DRIVING ACADEMY</h1>
-      <p style="font-size: 16px; color: #888; letter-spacing: 3px; text-transform:uppercase;">Official Certificate of Excellence</p>
-      <div style="width:80px; height:2px; background:#d4af37; margin:30px 0;"></div>
-      <h2 id="pdfName" style="font-size: 38px; color: #fff; font-weight:600; text-transform:uppercase; letter-spacing:1px;">NAME</h2>
-      <p style="font-size: 16px; width: 75%; color:#aaa; line-height:1.6; margin-top: 20px;">Has successfully qualified and completed the structured Advanced Smart Driving & Traffic Regulation Track operations program.</p>
+
+    <div
+      style="
+        border:3px solid #d4af37;
+        height:100%;
+        padding:40px;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        background:#050505;
+      "
+    >
+
+      <h1
+        style="
+          color:#d4af37;
+          font-size:42px;
+          font-weight:800;
+          margin-bottom:10px;
+        "
+      >
+        ABHINAASH A1 DRIVING ACADEMY
+      </h1>
+
+      <p
+        style="
+          font-size:16px;
+          color:#888;
+          letter-spacing:3px;
+          text-transform:uppercase;
+        "
+      >
+        Official Certificate of Excellence
+      </p>
+
+      <div
+        style="
+          width:80px;
+          height:2px;
+          background:#d4af37;
+          margin:30px 0;
+        "
+      ></div>
+
+      <h2
+        id="pdfName"
+        style="
+          font-size:38px;
+          color:#fff;
+          font-weight:600;
+          text-transform:uppercase;
+          letter-spacing:1px;
+        "
+      >
+        NAME
+      </h2>
+
+      <p
+        style="
+          font-size:16px;
+          width:75%;
+          color:#aaa;
+          line-height:1.6;
+          margin-top:20px;
+        "
+      >
+        Has successfully qualified and completed the structured
+        Advanced Smart Driving & Traffic Regulation Track
+        operations program.
+      </p>
+
     </div>
+
   </div>
 
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-  import { getFirestore, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
-    authDomain: "abinash-driving.firebaseapp.com",
-    projectId: "abinash-driving",
-    storageBucket: "abinash-driving.appspot.com",
-    messagingSenderId: "641148830173",
-    appId: "1:641148830173:web:b7a500e5e7e2463da0f634"
-  };
+  <!-- =========================================================
+       FIREBASE
+  ========================================================== -->
 
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-  let currentData = null;
+  <script type="module">
 
-  window.loadProfile = () => {
-    const ph = document.getElementById('userPhone').value.trim();
-    if(ph.length < 10) return alert("Please enter 10 digit number.");
-    document.getElementById('loader').style.display = "block";
+    import {
+      initializeApp
+    }
+    from
+    "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
 
-    onSnapshot(doc(db, "studentData", ph), (snap) => {
-      document.getElementById('loader').style.display = "none";
-      if(snap.exists()) {
-        const data = snap.data();
-        currentData = { ...data, phone: ph };
-        const logs = data.attendanceLogs || [];
-        const done = Math.max(logs.length, data.remaining || 0);
-        const total = data.totalClasses || 15;
-        const percent = Math.min(Math.round((done / total) * 100), 100);
 
-        // --- SMART CONDITIONAL KILOMETER TRACKER ---
-        let totalDrivenKm = 0;
-        
-        // Pehle hum actual array logs par check karenge
-        logs.forEach(log => {
-          const match = log.match(/(\d+)\s*KM/i);
-          if (match && match[1]) {
-            totalDrivenKm += parseInt(match[1], 10); // Bheja hua number add karega (Jaise: 2)
-          } else {
-            totalDrivenKm += 5; // Agar admin text mein KM na de, toh fallback 5 KM add hoga
+    import {
+      getFirestore,
+      doc,
+      onSnapshot
+    }
+    from
+    "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
+
+    /* =========================================================
+       FIREBASE CONFIG
+    ========================================================= */
+
+    const firebaseConfig = {
+
+      apiKey:
+        "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
+
+      authDomain:
+        "abinash-driving.firebaseapp.com",
+
+      projectId:
+        "abinash-driving",
+
+      storageBucket:
+        "abinash-driving.appspot.com",
+
+      messagingSenderId:
+        "641148830173",
+
+      appId:
+        "1:641148830173:web:b7a500e5e7e2463da0f634"
+
+    };
+
+
+    const app =
+      initializeApp(firebaseConfig);
+
+    const db =
+      getFirestore(app);
+
+
+    let currentData = null;
+
+
+    /* =========================================================
+       LOAD PROFILE
+    ========================================================== */
+
+    window.loadProfile = () => {
+
+      const input =
+        document.getElementById("userPhone");
+
+      const ph =
+        input.value.trim();
+
+
+      if (!/^\d{10}$/.test(ph)) {
+
+        alert(
+          "Please enter a valid 10 digit number."
+        );
+
+        input.focus();
+
+        return;
+      }
+
+
+      document.getElementById("loader")
+        .style.display = "block";
+
+
+      onSnapshot(
+
+        doc(
+          db,
+          "studentData",
+          ph
+        ),
+
+        (snap) => {
+
+          document.getElementById("loader")
+            .style.display = "none";
+
+
+          if (!snap.exists()) {
+
+            alert(
+              "No active training record associated with this number."
+            );
+
+            return;
           }
+
+
+          const data =
+            snap.data();
+
+
+          currentData = {
+            ...data,
+            phone: ph
+          };
+
+
+          /* =====================================================
+             ATTENDANCE LOGS
+          ====================================================== */
+
+          const logs =
+            Array.isArray(data.attendanceLogs)
+              ? data.attendanceLogs
+              : [];
+
+
+          /*
+             Existing database logic preserved.
+
+             If remaining is being used as the completed-session
+             counter in your existing database, it will continue
+             working exactly as before.
+          */
+
+          const done =
+            Math.max(
+              logs.length,
+              Number(data.remaining) || 0
+            );
+
+
+          const total =
+            Number(data.totalClasses) || 15;
+
+
+          const percent =
+            Math.min(
+              Math.round(
+                (done / total) * 100
+              ),
+              100
+            );
+
+
+          /* =====================================================
+             SMART KM TRACKER
+          ====================================================== */
+
+          let totalDrivenKm = 0;
+
+
+          logs.forEach((log) => {
+
+            const text =
+              String(log);
+
+
+            const match =
+              text.match(
+                /(\d+(?:\.\d+)?)\s*KM/i
+              );
+
+
+            if (
+              match &&
+              match[1]
+            ) {
+
+              totalDrivenKm +=
+                parseFloat(match[1]);
+
+            } else {
+
+              /*
+                Default class distance
+                = 5 KM
+              */
+
+              totalDrivenKm += 5;
+            }
+
+          });
+
+
+          /*
+            If admin manually increased done
+            without adding a log, calculate
+            those extra sessions as 5 KM each.
+          */
+
+          if (
+            done > logs.length
+          ) {
+
+            const extraSessions =
+              done - logs.length;
+
+
+            totalDrivenKm +=
+              extraSessions * 5;
+          }
+
+
+          /*
+            Maximum display target is 150 KM.
+            Actual value is not artificially
+            capped.
+          */
+
+          totalDrivenKm =
+            Math.round(
+              totalDrivenKm * 10
+            ) / 10;
+
+
+          /* =====================================================
+             EXPECTED COMPLETION DATE
+          ====================================================== */
+
+          let expectedEndDateStr =
+            "No Logs Found";
+
+
+          if (logs.length > 0) {
+
+            try {
+
+              const firstLog =
+                String(logs[0]);
+
+
+              /*
+                Supports:
+
+                04 Oct 2026 — ...
+                04/10/2026 — ...
+                04 Oct — ...
+              */
+
+              const datePart =
+                firstLog
+                  .split(" — ")[0]
+                  .trim();
+
+
+              if (datePart) {
+
+                let startDate =
+                  new Date(datePart);
+
+
+                /*
+                  If year is missing,
+                  append current year.
+                */
+
+                if (
+                  isNaN(
+                    startDate.getTime()
+                  )
+                ) {
+
+                  const currentYear =
+                    new Date().getFullYear();
+
+
+                  startDate =
+                    new Date(
+                      `${datePart} ${currentYear}`
+                    );
+                }
+
+
+                if (
+                  !isNaN(
+                    startDate.getTime()
+                  )
+                ) {
+
+                  startDate.setDate(
+                    startDate.getDate() + total
+                  );
+
+
+                  expectedEndDateStr =
+                    startDate.toLocaleDateString(
+                      "en-GB",
+                      {
+                        day: "2-digit",
+                        month: "short"
+                      }
+                    );
+                }
+
+              }
+
+            } catch (error) {
+
+              expectedEndDateStr =
+                "Date Error";
+
+            }
+
+          }
+
+
+          /* =====================================================
+             UPDATE PROFILE
+          ====================================================== */
+
+          document.getElementById(
+            "dispName"
+          ).innerText =
+            data.name || "Driver";
+
+
+          document.getElementById(
+            "dispPkg"
+          ).innerText =
+            total +
+            "-Day Driving Package";
+
+
+          document.getElementById(
+            "dispDone"
+          ).innerText =
+            done;
+
+
+          document.getElementById(
+            "dispTotal"
+          ).innerText =
+            total;
+
+
+          document.getElementById(
+            "dispPercent"
+          ).innerText =
+            percent + "%";
+
+
+          const totalRefers =
+            Number(data.totalRefers) || 0;
+
+
+          document.getElementById(
+            "dispEarn"
+          ).innerText =
+            "₹" +
+            (
+              totalRefers * 500
+            );
+
+
+          document.getElementById(
+            "dispKm"
+          ).innerText =
+            totalDrivenKm +
+            " / 150 km";
+
+
+          document.getElementById(
+            "dispEndDate"
+          ).innerText =
+            expectedEndDateStr;
+
+
+          /* =====================================================
+             RADIAL PROGRESS
+          ====================================================== */
+
+          const radius = 40;
+
+          const circumference =
+            2 *
+            Math.PI *
+            radius;
+
+
+          const strokeDashoffset =
+            circumference -
+            (
+              percent / 100
+            ) *
+            circumference;
+
+
+          const circle =
+            document.getElementById(
+              "radialFillCircle"
+            );
+
+
+          circle.style.strokeDashoffset =
+            strokeDashoffset;
+
+
+          /* =====================================================
+             PREMIUM CERTIFICATE
+          ====================================================== */
+
+          const certificate =
+            document.getElementById(
+              "premiumCertificate"
+            );
+
+
+          if (
+            done >= total
+          ) {
+
+            certificate.style.display =
+              "block";
+
+
+            document.getElementById(
+              "pdfName"
+            ).innerText =
+              String(
+                data.name || "DRIVER"
+              ).toUpperCase();
+
+          } else {
+
+            certificate.style.display =
+              "none";
+          }
+
+
+          /* =====================================================
+             TIMELINE
+          ====================================================== */
+
+          const timeline =
+            document.getElementById(
+              "attendanceTimeline"
+            );
+
+
+          timeline.innerHTML = "";
+
+
+          /*
+            Show latest session first.
+          */
+
+          for (
+            let i = done;
+            i >= 1;
+            i--
+          ) {
+
+            const logIndex =
+              i - 1;
+
+
+            let dateInfo =
+              "Track Session";
+
+
+            let message =
+              "Session auto-verified by academy administration.";
+
+
+            if (
+              logs[logIndex]
+            ) {
+
+              const rawLog =
+                String(
+                  logs[logIndex]
+                );
+
+
+              /*
+                Main separator
+              */
+
+              const parts =
+                rawLog.split(" — ");
+
+
+              dateInfo =
+                parts[0] ||
+                "Track Session";
+
+
+              message =
+                parts
+                  .slice(1)
+                  .join(" — ") ||
+                "Track Session Processed";
+
+            }
+
+
+            const row =
+              document.createElement(
+                "div"
+              );
+
+
+            row.className =
+              "log-row";
+
+
+            row.innerHTML = `
+
+              <div class="log-meta">
+
+                <b>
+                  Session ${i}
+                </b>
+
+                <span>
+                  ${escapeHtml(dateInfo)}
+                </span>
+
+              </div>
+
+              <div class="log-feedback">
+                📝 ${escapeHtml(message)}
+              </div>
+
+            `;
+
+
+            timeline.appendChild(row);
+
+          }
+
+
+          /* =====================================================
+             SHOW PROFILE
+          ====================================================== */
+
+          document.getElementById(
+            "searchPanel"
+          ).style.display =
+            "none";
+
+
+          document.getElementById(
+            "profileContent"
+          ).style.display =
+            "block";
+
+        },
+
+        (error) => {
+
+          console.error(
+            "Firebase Error:",
+            error
+          );
+
+
+          document.getElementById(
+            "loader"
+          ).style.display =
+            "none";
+
+
+          alert(
+            "Unable to load your dashboard. Please try again."
+          );
+
+        }
+
+      );
+
+    };
+
+
+    /* =========================================================
+       ESCAPE HTML
+       Prevents feedback text from injecting HTML.
+    ========================================================== */
+
+    function escapeHtml(value) {
+
+      return String(value)
+        .replace(
+          /&/g,
+          "&amp;"
+        )
+        .replace(
+          /</g,
+          "&lt;"
+        )
+        .replace(
+          />/g,
+          "&gt;"
+        )
+        .replace(
+          /"/g,
+          "&quot;"
+        )
+        .replace(
+          /'/g,
+          "&#039;"
+        );
+
+    }
+
+
+    /* =========================================================
+       ENTER KEY LOGIN
+    ========================================================== */
+
+    document
+      .getElementById("userPhone")
+      .addEventListener(
+        "keydown",
+        (event) => {
+
+          if (
+            event.key === "Enter"
+          ) {
+
+            loadProfile();
+
+          }
+
+        }
+      );
+
+
+    /* =========================================================
+       DOWNLOAD PREMIUM PDF
+    ========================================================== */
+
+    window.downloadPDF = () => {
+
+      const element =
+        document.getElementById(
+          "pdfTemplate"
+        );
+
+
+      if (!currentData) {
+
+        alert(
+          "Student profile not loaded."
+        );
+
+        return;
+      }
+
+
+      element.style.display =
+        "block";
+
+
+      const options = {
+
+        margin: 0,
+
+        filename:
+          "A1_Driving_Certificate_" +
+          (
+            currentData.name ||
+            "Driver"
+          )
+          .replace(
+            /\s+/g,
+            "_"
+          ) +
+          ".pdf",
+
+        image: {
+          type: "jpeg",
+          quality: 0.98
+        },
+
+        html2canvas: {
+
+          scale: 2,
+
+          backgroundColor:
+            "#000",
+
+          useCORS: true
+
+        },
+
+        jsPDF: {
+
+          orientation:
+            "landscape",
+
+          unit:
+            "mm",
+
+          format:
+            "a4"
+
+        }
+
+      };
+
+
+      html2pdf()
+        .set(options)
+        .from(element)
+        .save()
+        .then(() => {
+
+          element.style.display =
+            "none";
+
+        })
+        .catch((error) => {
+
+          console.error(
+            "PDF Error:",
+            error
+          );
+
+          element.style.display =
+            "none";
+
+          alert(
+            "Unable to generate certificate."
+          );
+
         });
 
-        // Agar admin ne manual direct 'done' session count badhaya hai jo logs array se bada hai, 
-        // toh baaki bache extra sessions ke liye default 5 KM multiplier automatic add ho jayega
-        if (done > logs.length) {
-          const extraSessions = done - logs.length;
-          totalDrivenKm += (extraSessions * 5);
-        }
+    };
 
 
-        // Expected Completion Date calculation
-        let expectedEndDateStr = "No Logs Found";
-        if (logs.length > 0) {
-          try {
-            const firstLog = logs[0]; 
-            const datePart = firstLog.split(' | ')[0].trim();
-            if (datePart) {
-              const currentYear = new Date().getFullYear();
-              const startDate = new Date(`${datePart} ${currentYear}`);
-              if (!isNaN(startDate.getTime())) {
-                startDate.setDate(startDate.getDate() + total); 
-                expectedEndDateStr = startDate.toLocaleDateString('en-GB', {
-                  day: '2-digit',
-                  month: 'short'
-                });
-              }
-            }
-          } catch (e) {
-            expectedEndDateStr = "Date Error";
-          }
-        }
+    /* =========================================================
+       CONTACT ADMIN
+    ========================================================== */
 
-        // Set UI labels
-        document.getElementById('dispName').innerText = data.name;
-        document.getElementById('dispPkg').innerText = total + "-Day Driving Package";
-        document.getElementById('dispDone').innerText = done;
-        document.getElementById('dispTotal').innerText = total;
-        document.getElementById('dispPercent').innerText = percent + "%";
-        document.getElementById('dispEarn').innerText = "₹" + (data.totalRefers * 500 || 0);
-        
-        // Correct Dynamic UI Tracker Update
-        document.getElementById('dispKm').innerText = totalDrivenKm + " / 150 km";
-        document.getElementById('dispEndDate').innerText = expectedEndDateStr;
+    window.contactAdmin = () => {
 
-        // Calculate Radial Progress Ring Fill
-        const radius = 40;
-        const circumference = 2 * Math.PI * radius; 
-        const strokeDashoffset = circumference - (percent / 100) * circumference;
-        document.getElementById('radialFillCircle').style.strokeDashoffset = strokeDashoffset;
+      if (!currentData) return;
 
-        if(done >= total) {
-          document.getElementById('premiumCertificate').style.display = 'block';
-          document.getElementById('pdfName').innerText = data.name.toUpperCase();
-        }
 
-        // --- DYNAMIC TIMELINE GENERATION ---
-        const timeline = document.getElementById('attendanceTimeline');
-        timeline.innerHTML = "";
+      const name =
+        currentData.name ||
+        "Student";
 
-        for (let i = done; i >= 1; i--) {
-          const logIndex = i - 1; 
-          let dateInfo = "Track Session";
-          let message = "Session auto-verified by academy administration.";
 
-          if (logs[logIndex]) {
-            const parts = logs[logIndex].split(' — ');
-            dateInfo = parts[0];
-            message = parts[1] || "Track Session Processed";
-          }
+      const msg =
+        encodeURIComponent(
+          `Hi Abhinaash, I am ${name}. I need help regarding my running slots.`
+        );
 
-          timeline.innerHTML += `
-            <div class="log-row">
-              <div class="log-meta">
-                <b>Session ${i}</b>
-                <span>${dateInfo}</span>
-              </div>
-              <div class="log-feedback">📝 ${message}</div>
-            </div>`;
-        }
 
-        document.getElementById('searchPanel').style.display = "none";
-        document.getElementById('profileContent').style.display = "block";
-      } else { 
-        alert("No active training record associated with this parameter."); 
-      }
-    });
-  }
+      window.location.href =
+        `https://wa.me/917008186187?text=${msg}`;
 
-  window.downloadPDF = () => {
-    const element = document.getElementById('pdfTemplate');
-    element.style.display = 'block';
-    html2pdf().from(element).set({ margin: 0, filename: 'A1_Driving_Certificate.pdf', jsPDF: { orientation: 'landscape', format: 'a4' } }).save().then(() => element.style.display = 'none');
-  };
+    };
 
-  window.contactAdmin = () => {
-    const msg = encodeURIComponent(`Hi Abhinaash, I am ${currentData.name}. I need help regarding my running slots.`);
-    window.location.href = `https://wa.me/917008186187?text=${msg}`;
-  };
 
-  window.shareReferral = () => {
-    const text = encodeURIComponent(`Hey! I am learning smart car driving at A1 Driving Academy. Highly recommended! Apply via my track code: ${currentData.phone}`);
-    window.location.href = `https://wa.me/?text=${text}`;
-  };
-</script>
+    /* =========================================================
+       SHARE REFERRAL
+    ========================================================== */
+
+    window.shareReferral = () => {
+
+      if (!currentData) return;
+
+
+      const text =
+        encodeURIComponent(
+          `Hey! I am learning smart car driving at A1 Driving Academy. Highly recommended! Apply via my track code: ${currentData.phone}`
+        );
+
+
+      window.location.href =
+        `https://wa.me/?text=${text}`;
+
+    };
+
+  </script>
+
 </body>
 </html>
