@@ -3,13 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
 <title>A1 Attendance | Driving Classes</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+  rel="stylesheet">
 
 <style>
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -60,7 +65,9 @@ button{
   -webkit-tap-highlight-color:transparent;
 }
 
-/* ================= HEADER ================= */
+/* ==================================================
+   HEADER
+================================================== */
 
 .header{
   position:sticky;
@@ -129,7 +136,9 @@ button{
   margin-top:4px;
 }
 
-/* ================= MAIN ================= */
+/* ==================================================
+   MAIN
+================================================== */
 
 .container{
   max-width:900px;
@@ -137,7 +146,9 @@ button{
   padding:18px 16px 30px;
 }
 
-/* ================= SEARCH ================= */
+/* ==================================================
+   SEARCH
+================================================== */
 
 .search{
   position:relative;
@@ -173,7 +184,199 @@ button{
   color:#555;
 }
 
-/* ================= STATS ================= */
+/* ==================================================
+   COLLECTION OVERVIEW
+================================================== */
+
+.collectionSection{
+  margin-bottom:22px;
+}
+
+.collectionHeader{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:10px;
+  padding:0 2px;
+}
+
+.collectionTitle{
+  font-size:13px;
+  font-weight:800;
+}
+
+.collectionHint{
+  color:#555;
+  font-size:7px;
+  letter-spacing:.8px;
+  text-transform:uppercase;
+}
+
+.collectionSlider{
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  overscroll-behavior-x:contain;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+  padding:2px 1px 5px;
+}
+
+.collectionSlider::-webkit-scrollbar{
+  display:none;
+}
+
+.collectionCard{
+  flex:0 0 100%;
+  scroll-snap-align:start;
+  position:relative;
+  min-height:166px;
+  padding:17px;
+  border:1px solid #302a20;
+  border-radius:19px;
+  overflow:hidden;
+  background:
+    radial-gradient(
+      circle at 92% 5%,
+      rgba(240,209,139,.13),
+      transparent 34%
+    ),
+    linear-gradient(
+      145deg,
+      #17140f,
+      #0e0e0e 65%
+    );
+}
+
+.collectionCard::after{
+  content:"";
+  position:absolute;
+  width:110px;
+  height:110px;
+  right:-45px;
+  bottom:-55px;
+  border-radius:50%;
+  border:1px solid rgba(215,179,106,.10);
+  pointer-events:none;
+}
+
+.collectionTop{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.collectionMonth{
+  color:#777;
+  font-size:8px;
+  text-transform:uppercase;
+  letter-spacing:1.2px;
+  font-weight:700;
+}
+
+.collectionPeriod{
+  color:var(--gold-light);
+  font-size:16px;
+  font-weight:800;
+  margin-top:4px;
+}
+
+.collectionSwipe{
+  padding:5px 8px;
+  border:1px solid #3a3224;
+  border-radius:8px;
+  background:#17130e;
+  color:#8e7650;
+  font-size:7px;
+  font-weight:800;
+  white-space:nowrap;
+}
+
+.collectionAmount{
+  margin-top:15px;
+  color:#fff;
+  font-size:28px;
+  line-height:1;
+  font-weight:800;
+  letter-spacing:-.8px;
+}
+
+.collectionAmount span{
+  color:#777;
+  font-size:11px;
+  font-weight:600;
+  margin-left:3px;
+}
+
+.collectionStats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:7px;
+  margin-top:16px;
+}
+
+.collectionStat{
+  padding:8px 7px;
+  border-radius:9px;
+  background:rgba(0,0,0,.25);
+  border:1px solid #28231c;
+}
+
+.collectionStatValue{
+  color:#ddd;
+  font-size:11px;
+  font-weight:800;
+}
+
+.collectionStatLabel{
+  color:#666;
+  font-size:6px;
+  margin-top:4px;
+  text-transform:uppercase;
+  letter-spacing:.6px;
+}
+
+.collectionBottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-top:11px;
+}
+
+.collectionFormula{
+  color:#555;
+  font-size:7px;
+}
+
+.collectionDot{
+  display:flex;
+  gap:4px;
+  align-items:center;
+}
+
+.collectionDot span{
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:#383838;
+}
+
+.collectionDot span.active{
+  background:var(--gold-light);
+  width:14px;
+  border-radius:5px;
+}
+
+.collectionEmpty{
+  color:#666;
+  font-size:9px;
+}
+
+/* ==================================================
+   STATS
+================================================== */
 
 .stats{
   display:grid;
@@ -208,7 +411,9 @@ button{
   margin-top:7px;
 }
 
-/* ================= SECTION ================= */
+/* ==================================================
+   SECTION
+================================================== */
 
 .sectionHeader{
   display:flex;
@@ -228,7 +433,9 @@ button{
   font-size:9px;
 }
 
-/* ================= CARDS ================= */
+/* ==================================================
+   CARDS
+================================================== */
 
 .cards{
   display:grid;
@@ -334,7 +541,9 @@ button{
   border:1px solid #2c2c2c;
 }
 
-/* ================= CLASS TYPE ================= */
+/* ==================================================
+   CLASS TYPE
+================================================== */
 
 .typeRow{
   margin-top:13px;
@@ -376,7 +585,9 @@ button{
   font-weight:700;
 }
 
-/* ================= LAST ATTENDANCE ================= */
+/* ==================================================
+   LAST ATTENDANCE
+================================================== */
 
 .lastAttendance{
   margin-top:9px;
@@ -400,7 +611,9 @@ button{
   margin-top:5px;
 }
 
-/* ================= PROGRESS ================= */
+/* ==================================================
+   PROGRESS
+================================================== */
 
 .progressBox{
   margin-top:12px;
@@ -443,7 +656,9 @@ button{
   );
 }
 
-/* ================= ACTIONS ================= */
+/* ==================================================
+   ACTIONS
+================================================== */
 
 .actions{
   display:grid;
@@ -504,7 +719,9 @@ button{
   font-weight:800;
 }
 
-/* ================= EMPTY ================= */
+/* ==================================================
+   EMPTY
+================================================== */
 
 .empty{
   border:1px dashed #292929;
@@ -530,7 +747,9 @@ button{
   font-size:10px;
 }
 
-/* ================= FAB ================= */
+/* ==================================================
+   FAB
+================================================== */
 
 .fab{
   position:fixed;
@@ -551,7 +770,9 @@ button{
   box-shadow:0 12px 35px rgba(0,0,0,.5);
 }
 
-/* ================= BOTTOM NAV ================= */
+/* ==================================================
+   BOTTOM NAV
+================================================== */
 
 .bottomNav{
   position:fixed;
@@ -589,7 +810,9 @@ button{
   margin-bottom:3px;
 }
 
-/* ================= MODAL ================= */
+/* ==================================================
+   MODAL
+================================================== */
 
 .modal{
   position:fixed;
@@ -658,7 +881,9 @@ button{
   font-size:17px;
 }
 
-/* ================= FORM ================= */
+/* ==================================================
+   FORM
+================================================== */
 
 .formGroup{
   margin-bottom:14px;
@@ -699,7 +924,9 @@ button{
   resize:vertical;
 }
 
-/* ================= TYPE ================= */
+/* ==================================================
+   TYPE
+================================================== */
 
 .typeGrid{
   display:grid;
@@ -733,7 +960,9 @@ button{
   font-weight:800;
 }
 
-/* ================= OPTIONS ================= */
+/* ==================================================
+   OPTIONS
+================================================== */
 
 .optionGrid{
   display:grid;
@@ -758,7 +987,9 @@ button{
   font-weight:800;
 }
 
-/* ================= CUSTOM ROUTE ================= */
+/* ==================================================
+   CUSTOM ROUTE
+================================================== */
 
 .customRouteBox{
   display:none;
@@ -776,7 +1007,9 @@ button{
   line-height:1.4;
 }
 
-/* ================= CUSTOM REMARK ================= */
+/* ==================================================
+   CUSTOM REMARK
+================================================== */
 
 .customRemarkBox{
   display:none;
@@ -794,7 +1027,9 @@ button{
   line-height:1.4;
 }
 
-/* ================= DISTANCE DEFAULT ================= */
+/* ==================================================
+   DISTANCE
+================================================== */
 
 .distanceDefault{
   border-color:var(--gold-light);
@@ -803,7 +1038,9 @@ button{
   font-weight:800;
 }
 
-/* ================= GOLD BUTTON ================= */
+/* ==================================================
+   GOLD BUTTON
+================================================== */
 
 .goldBtn{
   width:100%;
@@ -820,7 +1057,9 @@ button{
   font-weight:800;
 }
 
-/* ================= HISTORY ================= */
+/* ==================================================
+   HISTORY
+================================================== */
 
 .historyItem{
   padding:12px;
@@ -843,7 +1082,9 @@ button{
   line-height:1.6;
 }
 
-/* ================= TOAST ================= */
+/* ==================================================
+   TOAST
+================================================== */
 
 .toast{
   position:fixed;
@@ -868,7 +1109,9 @@ button{
   transform:translateX(-50%) translateY(0);
 }
 
-/* ================= MOBILE ================= */
+/* ==================================================
+   MOBILE
+================================================== */
 
 @media(max-width:500px){
 
@@ -905,6 +1148,10 @@ button{
     font-size:7px;
   }
 
+  .collectionAmount{
+    font-size:26px;
+  }
+
 }
 
 @media(max-width:370px){
@@ -925,13 +1172,20 @@ button{
     grid-template-columns:1fr 1fr;
   }
 
+  .collectionStats{
+    gap:5px;
+  }
+
 }
+
 </style>
 </head>
 
 <body>
 
-<!-- ================= HEADER ================= -->
+<!-- ==================================================
+   HEADER
+================================================== -->
 
 <header class="header">
 
@@ -977,9 +1231,13 @@ button{
 
 </header>
 
-<!-- ================= MAIN ================= -->
+<!-- ==================================================
+   MAIN
+================================================== -->
 
 <main class="container">
+
+  <!-- SEARCH -->
 
   <div class="search">
 
@@ -995,52 +1253,116 @@ button{
 
   </div>
 
-  <!-- ================= STATS ================= -->
+  <!-- ==================================================
+       COLLECTION OVERVIEW
+  ================================================== -->
+
+  <section class="collectionSection">
+
+    <div class="collectionHeader">
+
+      <div class="collectionTitle">
+        Collection Overview
+      </div>
+
+      <div class="collectionHint">
+        Swipe left
+      </div>
+
+    </div>
+
+    <div
+      class="collectionSlider"
+      id="collectionSlider">
+
+      <div class="collectionCard">
+
+        <div class="collectionTop">
+
+          <div>
+
+            <div class="collectionMonth">
+              COLLECTION
+            </div>
+
+            <div class="collectionPeriod">
+              Loading...
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="collectionAmount">
+          ₹0
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ==================================================
+       STATS
+  ================================================== -->
 
   <div class="stats">
 
     <div class="stat">
+
       <div
         class="statValue"
         id="activeCount">
         0
       </div>
+
       <div class="statLabel">
         ACTIVE
       </div>
+
     </div>
 
     <div class="stat">
+
       <div
         class="statValue"
         id="completedCount">
         0
       </div>
+
       <div class="statLabel">
         COMPLETED
       </div>
+
     </div>
 
     <div class="stat">
+
       <div
         class="statValue"
         id="liveCount">
         0
       </div>
+
       <div class="statLabel">
         LIVE NOW
       </div>
+
     </div>
 
     <div class="stat">
+
       <div
         class="statValue"
         id="inactiveCount">
         0
       </div>
+
       <div class="statLabel">
         NOT ACTIVE
       </div>
+
     </div>
 
   </div>
@@ -1073,7 +1395,9 @@ button{
 
 </main>
 
-<!-- ================= FAB ================= -->
+<!-- ==================================================
+   FAB
+================================================== -->
 
 <button
   class="fab"
@@ -1081,7 +1405,9 @@ button{
   +
 </button>
 
-<!-- ================= BOTTOM NAV ================= -->
+<!-- ==================================================
+   BOTTOM NAV
+================================================== -->
 
 <nav class="bottomNav">
 
@@ -1127,7 +1453,9 @@ button{
 
 </nav>
 
-<!-- ================= ADD STUDENT ================= -->
+<!-- ==================================================
+   ADD STUDENT
+================================================== -->
 
 <div
   class="modal"
@@ -1258,7 +1586,9 @@ button{
 
 </div>
 
-<!-- ================= ATTENDANCE ================= -->
+<!-- ==================================================
+   ATTENDANCE
+================================================== -->
 
 <div
   class="modal"
@@ -1288,8 +1618,6 @@ button{
       </button>
 
     </div>
-
-    <!-- ROUTE -->
 
     <div class="formGroup">
 
@@ -1368,8 +1696,6 @@ button{
 
     </div>
 
-    <!-- DISTANCE -->
-
     <div class="formGroup">
 
       <label class="formLabel">
@@ -1391,8 +1717,6 @@ button{
 
     </div>
 
-    <!-- REMARK -->
-
     <div class="formGroup">
 
       <label class="formLabel">
@@ -1405,122 +1729,94 @@ button{
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'👍 Good Driving')">
-
           👍 Good Driving
-
         </button>
 
         <button
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'⚠️ Needs Improvement')">
-
           ⚠️ Needs Improvement
-
         </button>
 
         <button
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'🔄 Good Turning')">
-
           🔄 Good Turning
-
         </button>
 
         <button
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'⚠️ Bad Turning')">
-
           ⚠️ Bad Turning
-
         </button>
 
         <button
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'🛑 Good Braking')">
-
           🛑 Good Braking
-
         </button>
 
         <button
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'⚠️ Bad Braking')">
-
           ⚠️ Bad Braking
-
         </button>
 
         <button
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'⚙️ Good Clutch')">
-
           ⚙️ Good Clutch
-
         </button>
 
         <button
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'⚙️ Clutch Improvement')">
-
           ⚙️ Clutch Improvement
-
         </button>
 
         <button
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'🚦 Good Traffic Control')">
-
           🚦 Good Traffic Control
-
         </button>
 
         <button
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'🚗 Good Vehicle Control')">
-
           🚗 Good Vehicle Control
-
         </button>
 
         <button
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'🅿️ Good Parking')">
-
           🅿️ Good Parking
-
         </button>
 
         <button
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'⚠️ Parking Improvement')">
-
           ⚠️ Parking Improvement
-
         </button>
 
         <button
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'📝 Custom Remark')">
-
           📝 Custom Remark
-
         </button>
 
       </div>
-
-      <!-- CUSTOM REMARK -->
 
       <div
         class="customRemarkBox"
@@ -1553,7 +1849,9 @@ button{
 
 </div>
 
-<!-- ================= HISTORY ================= -->
+<!-- ==================================================
+   HISTORY
+================================================== -->
 
 <div
   class="modal"
@@ -1590,7 +1888,9 @@ button{
 
 </div>
 
-<!-- ================= EDIT TYPE ================= -->
+<!-- ==================================================
+   EDIT TYPE
+================================================== -->
 
 <div
   class="modal"
@@ -1677,14 +1977,18 @@ button{
 
 </div>
 
-<!-- ================= TOAST ================= -->
+<!-- ==================================================
+   TOAST
+================================================== -->
 
 <div
   class="toast"
   id="toast">
 </div>
 
-<!-- ================= FIREBASE ================= -->
+<!-- ==================================================
+   FIREBASE
+================================================== -->
 
 <script type="module">
 
@@ -1709,7 +2013,7 @@ import {
 const firebaseConfig = {
 
   apiKey:
-    "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
+    "AIzaSyC3gWi8p85z-wkoJeWb3jYoQpcIar8Sww",
 
   authDomain:
     "abinash-driving.firebaseapp.com",
@@ -1758,6 +2062,13 @@ let addClassType = "Group";
 let editClassType = "Group";
 
 let toastTimer;
+
+/* ==================================================
+   FEES
+================================================== */
+
+const GROUP_FEE = 4500;
+const PERSONAL_FEE = 8000;
 
 /* ==================================================
    HELPERS
@@ -1825,6 +2136,540 @@ function isCompleted(student){
 function isInactive(student){
 
   return student.notActive === true;
+
+}
+
+/* ==================================================
+   DATE PARSER
+================================================== */
+
+function parseDateFromValue(value){
+
+  if(!value){
+    return null;
+  }
+
+  if(
+    value instanceof Date &&
+    !isNaN(value.getTime())
+  ){
+
+    return value;
+
+  }
+
+  if(
+    typeof value === "object" &&
+    value.seconds
+  ){
+
+    const date =
+      new Date(
+        Number(value.seconds) * 1000
+      );
+
+    return isNaN(date.getTime())
+      ? null
+      : date;
+
+  }
+
+  const text =
+    String(value);
+
+  /*
+    New format:
+    04 Oct 2026 | 08:35 PM
+  */
+
+  let match =
+    text.match(
+      /(\d{1,2})\s+([A-Za-z]{3,9})\s+(\d{4})\s*\|\s*(\d{1,2}):(\d{2})\s*(AM|PM)/i
+    );
+
+  if(match){
+
+    const day =
+      Number(match[1]);
+
+    const monthName =
+      match[2];
+
+    const year =
+      Number(match[3]);
+
+    let hour =
+      Number(match[4]);
+
+    const minute =
+      Number(match[5]);
+
+    const ampm =
+      match[6].toUpperCase();
+
+    if(
+      ampm === "PM" &&
+      hour !== 12
+    ){
+      hour += 12;
+    }
+
+    if(
+      ampm === "AM" &&
+      hour === 12
+    ){
+      hour = 0;
+    }
+
+    const date =
+      new Date(
+        `${monthName} ${day}, ${year} ${hour}:${String(minute).padStart(2,"0")}`
+      );
+
+    return isNaN(date.getTime())
+      ? null
+      : date;
+
+  }
+
+  /*
+    Old format:
+    04 Oct | 08:35 PM
+
+    Year is only best-effort for old records.
+  */
+
+  match =
+    text.match(
+      /(\d{1,2})\s+([A-Za-z]{3,9})\s*\|\s*(\d{1,2}):(\d{2})\s*(AM|PM)/i
+    );
+
+  if(match){
+
+    const day =
+      Number(match[1]);
+
+    const monthName =
+      match[2];
+
+    let hour =
+      Number(match[3]);
+
+    const minute =
+      Number(match[4]);
+
+    const ampm =
+      match[5].toUpperCase();
+
+    if(
+      ampm === "PM" &&
+      hour !== 12
+    ){
+      hour += 12;
+    }
+
+    if(
+      ampm === "AM" &&
+      hour === 12
+    ){
+      hour = 0;
+    }
+
+    const currentYear =
+      new Date().getFullYear();
+
+    const date =
+      new Date(
+        `${monthName} ${day}, ${currentYear} ${hour}:${String(minute).padStart(2,"0")}`
+      );
+
+    return isNaN(date.getTime())
+      ? null
+      : date;
+
+  }
+
+  /*
+    Direct ISO/date values.
+  */
+
+  const direct =
+    new Date(text);
+
+  return isNaN(direct.getTime())
+    ? null
+    : direct;
+
+}
+
+/* ==================================================
+   FIRST / LAST LOG
+================================================== */
+
+function getFirstLog(student){
+
+  const logs =
+    getLogs(student);
+
+  return logs.length
+    ? logs[0]
+    : null;
+
+}
+
+function getLastLog(student){
+
+  const logs =
+    getLogs(student);
+
+  return logs.length
+    ? logs[logs.length - 1]
+    : null;
+
+}
+
+/* ==================================================
+   ADMISSION / COLLECTION DATE
+================================================== */
+
+function getCollectionDate(student){
+
+  /*
+    Prefer explicit admission/enrollment
+    date if available.
+  */
+
+  const preferredFields = [
+    "admissionDate",
+    "enrollmentDate",
+    "createdAt"
+  ];
+
+  for(
+    const field of preferredFields
+  ){
+
+    if(student[field]){
+
+      const parsed =
+        parseDateFromValue(
+          student[field]
+        );
+
+      if(parsed){
+        return parsed;
+      }
+
+    }
+
+  }
+
+  /*
+    Fallback:
+    first actual attendance log.
+  */
+
+  return parseDateFromValue(
+    getFirstLog(student)
+  );
+
+}
+
+/* ==================================================
+   COLLECTION MONTH
+================================================== */
+
+function getMonthInfo(offset){
+
+  const now =
+    new Date();
+
+  return new Date(
+    now.getFullYear(),
+    now.getMonth() - offset,
+    1
+  );
+
+}
+
+function getMonthName(date){
+
+  return date.toLocaleDateString(
+    "en-IN",
+    {
+      month:"long",
+      year:"numeric"
+    }
+  );
+
+}
+
+function getCollectionForMonth(offset){
+
+  const target =
+    getMonthInfo(offset);
+
+  const targetYear =
+    target.getFullYear();
+
+  const targetMonth =
+    target.getMonth();
+
+  let groupCount = 0;
+  let personalCount = 0;
+
+  students.forEach(student=>{
+
+    const collectionDate =
+      getCollectionDate(student);
+
+    if(!collectionDate){
+      return;
+    }
+
+    if(
+      collectionDate.getFullYear() !==
+      targetYear
+    ){
+      return;
+    }
+
+    if(
+      collectionDate.getMonth() !==
+      targetMonth
+    ){
+      return;
+    }
+
+    const type =
+      student.classType === "Personal"
+        ? "Personal"
+        : "Group";
+
+    if(type === "Personal"){
+
+      personalCount++;
+
+    }else{
+
+      groupCount++;
+
+    }
+
+  });
+
+  const totalStudents =
+    groupCount +
+    personalCount;
+
+  const totalCollection =
+    groupCount * GROUP_FEE +
+    personalCount * PERSONAL_FEE;
+
+  return {
+    date:target,
+    groupCount,
+    personalCount,
+    totalStudents,
+    totalCollection
+  };
+
+}
+
+/* ==================================================
+   COLLECTION OVERVIEW RENDER
+================================================== */
+
+function renderCollection(){
+
+  const slider =
+    document.getElementById(
+      "collectionSlider"
+    );
+
+  if(!slider){
+    return;
+  }
+
+  let html = "";
+
+  /*
+    Current month + previous 5 months
+    = total 6 months.
+  */
+
+  for(
+    let offset = 0;
+    offset < 6;
+    offset++
+  ){
+
+    const data =
+      getCollectionForMonth(
+        offset
+      );
+
+    const isCurrent =
+      offset === 0;
+
+    const period =
+      getMonthName(
+        data.date
+      );
+
+    const amount =
+      data.totalCollection
+        .toLocaleString(
+          "en-IN"
+        );
+
+    html += `
+
+      <div class="collectionCard">
+
+        <div class="collectionTop">
+
+          <div>
+
+            <div class="collectionMonth">
+
+              ${
+                isCurrent
+                  ? "CURRENT MONTH"
+                  : offset === 1
+                    ? "LAST MONTH"
+                    : `${offset} MONTHS AGO`
+              }
+
+            </div>
+
+            <div class="collectionPeriod">
+              ${safe(period)}
+            </div>
+
+          </div>
+
+          ${
+            offset === 0
+              ? `
+                <div class="collectionSwipe">
+                  SWIPE ←
+                </div>
+              `
+              : ""
+          }
+
+        </div>
+
+        <div class="collectionAmount">
+
+          ₹${amount}
+
+          <span>
+            collected
+          </span>
+
+        </div>
+
+        ${
+          data.totalStudents
+            ? `
+
+              <div class="collectionStats">
+
+                <div class="collectionStat">
+
+                  <div class="collectionStatValue">
+                    ${data.totalStudents}
+                  </div>
+
+                  <div class="collectionStatLabel">
+                    STUDENTS
+                  </div>
+
+                </div>
+
+                <div class="collectionStat">
+
+                  <div class="collectionStatValue">
+                    ${data.groupCount}
+                  </div>
+
+                  <div class="collectionStatLabel">
+                    GROUP · ₹4,500
+                  </div>
+
+                </div>
+
+                <div class="collectionStat">
+
+                  <div class="collectionStatValue">
+                    ${data.personalCount}
+                  </div>
+
+                  <div class="collectionStatLabel">
+                    PERSONAL · ₹8,000
+                  </div>
+
+                </div>
+
+              </div>
+
+            `
+            : `
+
+              <div class="collectionStats">
+
+                <div
+                  class="collectionStat"
+                  style="grid-column:1/-1">
+
+                  <div class="collectionEmpty">
+                    No admissions / collection recorded
+                    for this month.
+                  </div>
+
+                </div>
+
+              </div>
+
+            `
+        }
+
+        <div class="collectionBottom">
+
+          <div class="collectionFormula">
+
+            Group × ₹4,500 &nbsp; • &nbsp;
+            Personal × ₹8,000
+
+          </div>
+
+          <div class="collectionDot">
+
+            ${Array.from(
+              {length:6},
+              (_,i)=>`
+
+                <span
+                  class="${i === offset ? "active" : ""}">
+                </span>
+
+              `
+            ).join("")}
+
+          </div>
+
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+  slider.innerHTML =
+    html;
 
 }
 
@@ -2042,6 +2887,8 @@ async function loadStudents(){
 
     });
 
+    renderCollection();
+
     render();
 
   }catch(error){
@@ -2059,9 +2906,13 @@ async function loadStudents(){
         </div>
 
         <div class="emptyText">
+
           Unable to load students.
+
           <br>
+
           Check Firebase configuration.
+
         </div>
 
       </div>
@@ -2345,9 +3196,11 @@ function studentCard(student){
   if(inactive){
 
     badges += `
+
       <span class="badge inactive">
         NOT ACTIVE
       </span>
+
     `;
 
   }else{
@@ -2355,9 +3208,11 @@ function studentCard(student){
     if(live){
 
       badges += `
+
         <span class="badge live">
           ● LIVE
         </span>
+
       `;
 
     }
@@ -2365,17 +3220,21 @@ function studentCard(student){
     if(completed){
 
       badges += `
+
         <span class="badge completed">
           COMPLETED
         </span>
+
       `;
 
     }else{
 
       badges += `
+
         <span class="badge active">
           ACTIVE
         </span>
+
       `;
 
     }
@@ -2398,25 +3257,33 @@ function studentCard(student){
         <button
           class="action attend"
           onclick="openAttendance('${safe(id)}')">
+
           + ATTEND
+
         </button>
 
         <button
           class="action"
           onclick="openHistory('${safe(id)}')">
+
           📋 LOGS
+
         </button>
 
         <button
           class="action wa"
           onclick="sendWhatsApp('${safe(id)}')">
+
           💬 WA
+
         </button>
 
         <button
           class="action call"
           onclick="callStudent('${safe(id)}')">
+
           📞 CALL
+
         </button>
 
       </div>
@@ -2456,25 +3323,33 @@ function studentCard(student){
         <button
           class="action attend"
           onclick="openAttendance('${safe(id)}')">
+
           + ATTEND
+
         </button>
 
         <button
           class="action"
           onclick="openHistory('${safe(id)}')">
+
           📋 LOGS
+
         </button>
 
         <button
           class="action wa"
           onclick="sendWhatsApp('${safe(id)}')">
+
           💬 WA
+
         </button>
 
         <button
           class="action call"
           onclick="callStudent('${safe(id)}')">
+
           📞 CALL
+
         </button>
 
       </div>
@@ -2490,11 +3365,13 @@ function studentCard(student){
       <div class="studentHeader">
 
         <div class="avatar">
+
           ${safe(
             name
               .charAt(0)
               .toUpperCase()
           )}
+
         </div>
 
         <div class="studentInfo">
@@ -2776,6 +3653,11 @@ async function(){
 
   try{
 
+    /*
+      Save createdAt so collection can
+      correctly identify admission month.
+    */
+
     await setDoc(
 
       doc(
@@ -2797,7 +3679,10 @@ async function(){
         classType:
           addClassType || "Group",
 
-        notActive:false
+        notActive:false,
+
+        createdAt:
+          new Date().toISOString()
 
       },
 
@@ -2984,10 +3869,6 @@ function(id){
 
   selectedRoute = "";
 
-  /*
-    DISTANCE DEFAULT = 5 KM
-  */
-
   selectedDistance =
     "5 KM";
 
@@ -3040,11 +3921,6 @@ function(id){
       );
 
     });
-
-  /*
-    Always select 5 KM
-    by default.
-  */
 
   document
     .querySelectorAll(
@@ -3233,8 +4109,6 @@ async function(){
     return;
   }
 
-  /* ================= ROUTE ================= */
-
   if(!selectedRoute){
 
     showToast(
@@ -3244,10 +4118,6 @@ async function(){
     return;
 
   }
-
-  /*
-    CUSTOM ROUTE
-  */
 
   if(
     selectedRoute === "Other Route"
@@ -3282,22 +4152,12 @@ async function(){
 
   }
 
-  /* ================= DISTANCE ================= */
-
-  /*
-    Distance is ALWAYS 5 KM.
-    Even if user doesn't touch
-    the distance option.
-  */
-
   if(!selectedDistance){
 
     selectedDistance =
       "5 KM";
 
   }
-
-  /* ================= REMARK ================= */
 
   let finalRemark =
     selectedRemark;
@@ -3339,12 +4199,18 @@ async function(){
   const now =
     new Date();
 
+  /*
+    NEW FORMAT:
+    04 Oct 2026 | 08:35 PM
+  */
+
   const datePart =
     now.toLocaleDateString(
       "en-IN",
       {
         day:"2-digit",
-        month:"short"
+        month:"short",
+        year:"numeric"
       }
     );
 
@@ -3375,6 +4241,9 @@ async function(){
       ? getDone(student)
       : 0;
 
+  const newDone =
+    currentDone + 1;
+
   try{
 
     await updateDoc(
@@ -3388,7 +4257,10 @@ async function(){
       {
 
         remaining:
-          currentDone + 1,
+          newDone,
+
+        completedClasses:
+          newDone,
 
         attendanceLogs:
           arrayUnion(log),
@@ -3719,12 +4591,20 @@ document.addEventListener(
 
 /* ==================================================
    AUTO REFRESH
+   COMPLETELY OFF
 ================================================== */
 
-setInterval(
-  loadStudents,
-  30000
-);
+/*
+  Firebase data auto-refresh intentionally
+  disabled.
+
+  Data updates when:
+  - page loads
+  - attendance is saved
+  - student is added
+  - class type changes
+  - active/inactive status changes
+*/
 
 /* ==================================================
    START
