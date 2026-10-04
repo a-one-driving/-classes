@@ -3,18 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-
 <title>A1 Attendance | Driving Classes</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link
-href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-
 *{
   box-sizing:border-box;
   margin:0;
@@ -26,17 +21,13 @@ rel="stylesheet">
   --surface:#111;
   --surface2:#151515;
   --border:#252525;
-
   --gold:#d7b36a;
   --gold-light:#f0d18b;
-
   --text:#f5f5f5;
   --muted:#858585;
-
   --green:#55d996;
   --blue:#70b4ff;
   --red:#ff7777;
-  --purple:#b494ff;
 }
 
 html{
@@ -45,27 +36,16 @@ html{
 
 body{
   font-family:Inter,Arial,sans-serif;
-
   background:
     radial-gradient(
       circle at 50% -15%,
-      rgba(215,179,106,.12),
-      transparent 36%
-    ),
-    radial-gradient(
-      circle at 100% 40%,
-      rgba(112,180,255,.035),
-      transparent 30%
+      rgba(215,179,106,.10),
+      transparent 35%
     ),
     var(--bg);
-
   color:var(--text);
-
   min-height:100vh;
-
-  padding-bottom:92px;
-
-  overflow-x:hidden;
+  padding-bottom:88px;
 }
 
 button,
@@ -80,113 +60,24 @@ button{
   -webkit-tap-highlight-color:transparent;
 }
 
-button:active{
-  transform:scale(.97);
-}
-
-
-/* ==================================================
-   PAGE ANIMATION
-================================================== */
-
-@keyframes fadeUp{
-  from{
-    opacity:0;
-    transform:translateY(18px);
-  }
-
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
-
-@keyframes fadeIn{
-  from{
-    opacity:0;
-  }
-
-  to{
-    opacity:1;
-  }
-}
-
-@keyframes pulseGold{
-
-  0%,
-  100%{
-    box-shadow:0 0 0 0 rgba(215,179,106,0);
-  }
-
-  50%{
-    box-shadow:0 0 0 6px rgba(215,179,106,.045);
-  }
-
-}
-
-@keyframes shimmer{
-
-  0%{
-    background-position:-300px 0;
-  }
-
-  100%{
-    background-position:300px 0;
-  }
-
-}
-
-@keyframes progressGrow{
-
-  from{
-    width:0;
-  }
-
-}
-
-@keyframes modalUp{
-
-  from{
-    opacity:0;
-    transform:translateY(35px) scale(.98);
-  }
-
-  to{
-    opacity:1;
-    transform:translateY(0) scale(1);
-  }
-
-}
-
-
-/* ==================================================
-   HEADER
-================================================== */
+/* ================= HEADER ================= */
 
 .header{
   position:sticky;
   top:0;
   z-index:50;
-
   background:rgba(8,8,8,.94);
-
-  backdrop-filter:blur(20px);
-
+  backdrop-filter:blur(18px);
   border-bottom:1px solid #1f1f1f;
-
-  animation:fadeIn .5s ease;
 }
 
 .headerInner{
   max-width:900px;
   margin:auto;
-
-  padding:15px 16px;
-
+  padding:14px 16px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-
   gap:15px;
 }
 
@@ -197,32 +88,17 @@ button:active{
 }
 
 .logo{
-  width:44px;
-  height:44px;
-
-  border-radius:14px;
-
+  width:42px;
+  height:42px;
+  border-radius:13px;
   border:1px solid #6b5835;
-
-  background:
-    radial-gradient(
-      circle at 30% 20%,
-      rgba(240,209,139,.12),
-      transparent 55%
-    ),
-    #0d0d0d;
-
+  background:#0d0d0d;
   color:var(--gold-light);
-
   display:flex;
   align-items:center;
   justify-content:center;
-
   font-size:14px;
   font-weight:800;
-
-  box-shadow:
-    0 8px 30px rgba(0,0,0,.25);
 }
 
 .brandTitle{
@@ -253,889 +129,346 @@ button:active{
   margin-top:4px;
 }
 
-
-/* ==================================================
-   MAIN
-================================================== */
+/* ================= MAIN ================= */
 
 .container{
   max-width:900px;
   margin:auto;
-
-  padding:20px 16px 35px;
+  padding:18px 16px 30px;
 }
 
-
-/* ==================================================
-   SEARCH
-================================================== */
+/* ================= SEARCH ================= */
 
 .search{
   position:relative;
-  margin-bottom:16px;
-
-  animation:fadeUp .45s ease;
+  margin-bottom:18px;
 }
 
 .searchIcon{
   position:absolute;
   left:15px;
   top:50%;
-
   transform:translateY(-50%);
-
   color:#666;
-
-  font-size:18px;
+  font-size:17px;
 }
 
 .search input{
   width:100%;
-  height:50px;
-
-  padding:0 15px 0 43px;
-
-  border-radius:15px;
-
+  height:48px;
+  padding:0 15px 0 42px;
+  border-radius:14px;
   border:1px solid var(--border);
-
-  background:
-    linear-gradient(
-      145deg,
-      #121212,
-      #0d0d0d
-    );
-
+  background:#101010;
   color:white;
-
   outline:none;
-
   font-size:12px;
-
-  transition:
-    border-color .25s,
-    box-shadow .25s,
-    transform .25s;
 }
 
 .search input:focus{
   border-color:#665331;
-
-  box-shadow:
-    0 0 0 4px rgba(215,179,106,.035);
 }
 
-
-/* ==================================================
-   COLLECTION HERO
-================================================== */
-
-.collectionHero{
-  position:relative;
-  overflow:hidden;
-
-  padding:20px;
-
-  margin-bottom:16px;
-
-  border-radius:21px;
-
-  border:1px solid #493c26;
-
-  background:
-    radial-gradient(
-      circle at 100% 0%,
-      rgba(215,179,106,.15),
-      transparent 45%
-    ),
-    radial-gradient(
-      circle at 0% 100%,
-      rgba(112,180,255,.045),
-      transparent 45%
-    ),
-    linear-gradient(
-      145deg,
-      #17130d,
-      #0d0d0d
-    );
-
-  box-shadow:
-    0 18px 50px rgba(0,0,0,.25);
-
-  animation:
-    fadeUp .55s ease,
-    pulseGold 4s ease-in-out infinite;
-}
-
-.collectionHero:after{
-  content:"₹";
-
-  position:absolute;
-
-  right:14px;
-  top:-22px;
-
-  font-size:120px;
-  line-height:1;
-
-  color:rgba(215,179,106,.035);
-
-  font-weight:800;
-
-  pointer-events:none;
-}
-
-.collectionHead{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-
-  gap:10px;
-
-  position:relative;
-  z-index:1;
-}
-
-.collectionLabel{
-  color:#777;
-
-  font-size:8px;
-
-  letter-spacing:1.5px;
-
-  text-transform:uppercase;
-
-  font-weight:800;
-}
-
-.collectionTitle{
-  color:var(--gold-light);
-
-  font-size:32px;
-
-  font-weight:800;
-
-  margin-top:5px;
-
-  letter-spacing:-1.3px;
-
-  text-shadow:
-    0 5px 25px rgba(215,179,106,.12);
-}
-
-.collectionSub{
-  color:#666;
-
-  font-size:8px;
-
-  margin-top:5px;
-}
-
-.collectionIcon{
-  width:46px;
-  height:46px;
-
-  border-radius:14px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  border:1px solid #57472d;
-
-  color:var(--gold-light);
-
-  background:#17130c;
-
-  font-size:18px;
-}
-
-.collectionGrid{
-  display:grid;
-
-  grid-template-columns:1fr 1fr;
-
-  gap:8px;
-
-  margin-top:16px;
-
-  position:relative;
-  z-index:1;
-}
-
-.collectionBox{
-  padding:13px;
-
-  min-height:78px;
-
-  border-radius:13px;
-
-  background:rgba(0,0,0,.27);
-
-  border:1px solid rgba(255,255,255,.055);
-
-  transition:
-    transform .25s,
-    border-color .25s;
-}
-
-.collectionBox:hover{
-  transform:translateY(-2px);
-
-  border-color:#3b3427;
-}
-
-.collectionBoxLabel{
-  color:#666;
-
-  font-size:7px;
-
-  letter-spacing:.7px;
-}
-
-.collectionBoxValue{
-  color:#eee;
-
-  font-size:18px;
-
-  font-weight:800;
-
-  margin-top:5px;
-}
-
-.collectionBoxMeta{
+.search input::placeholder{
   color:#555;
-
-  font-size:7px;
-
-  margin-top:4px;
 }
 
-.collectionBox.personal .collectionBoxValue{
-  color:var(--blue);
-}
-
-.collectionBox.group .collectionBoxValue{
-  color:var(--purple);
-}
-
-.monthRow{
-  display:grid;
-
-  grid-template-columns:1fr 1fr;
-
-  gap:8px;
-
-  margin-top:8px;
-}
-
-.previousMonth{
-  margin-top:8px;
-
-  padding:12px;
-
-  border-radius:12px;
-
-  border:1px solid #252525;
-
-  background:#0d0d0d;
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-
-  gap:10px;
-}
-
-.previousLabel{
-  color:#666;
-
-  font-size:7px;
-
-  letter-spacing:.8px;
-
-  text-transform:uppercase;
-}
-
-.previousValue{
-  color:var(--gold-light);
-
-  font-size:13px;
-
-  font-weight:800;
-}
-
-.monthSmall{
-  padding:12px;
-
-  border-radius:12px;
-
-  border:1px solid #252525;
-
-  background:#0d0d0d;
-}
-
-.monthSmallLabel{
-  color:#666;
-
-  font-size:7px;
-
-  text-transform:uppercase;
-
-  letter-spacing:.7px;
-}
-
-.monthSmallValue{
-  color:#ddd;
-
-  font-size:14px;
-
-  font-weight:800;
-
-  margin-top:5px;
-}
-
-
-/* ==================================================
-   STATS
-================================================== */
+/* ================= STATS ================= */
 
 .stats{
   display:grid;
-
-  grid-template-columns:
-    repeat(4,1fr);
-
-  gap:9px;
-
-  margin-bottom:24px;
-
-  animation:fadeUp .65s ease;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  margin-bottom:22px;
 }
 
 .stat{
-  min-height:78px;
-
-  padding:13px 7px;
-
-  border-radius:15px;
-
+  min-height:72px;
+  padding:12px 7px;
+  border-radius:14px;
   border:1px solid var(--border);
-
-  background:
-    linear-gradient(
-      145deg,
-      #151515,
-      #0e0e0e
-    );
-
+  background:linear-gradient(145deg,#141414,#0e0e0e);
   text-align:center;
-
   display:flex;
   flex-direction:column;
   justify-content:center;
-
-  transition:
-    transform .25s,
-    border-color .25s;
-}
-
-.stat:hover{
-  transform:translateY(-3px);
-
-  border-color:#39332a;
 }
 
 .statValue{
   color:var(--gold-light);
-
-  font-size:21px;
-
+  font-size:20px;
   line-height:1;
-
   font-weight:800;
 }
 
 .statLabel{
   color:#666;
-
   font-size:7px;
-
   letter-spacing:1px;
-
-  margin-top:8px;
+  margin-top:7px;
 }
 
-
-/* ==================================================
-   SECTION
-================================================== */
+/* ================= SECTION ================= */
 
 .sectionHeader{
   display:flex;
-
   align-items:center;
-
   justify-content:space-between;
-
-  margin-bottom:12px;
-
+  margin-bottom:11px;
   padding:0 2px;
 }
 
 .sectionTitle{
-  font-size:14px;
-
-  font-weight:800;
+  font-size:13px;
+  font-weight:700;
 }
 
 .sectionCount{
   color:#666;
-
   font-size:9px;
 }
 
-
-/* ==================================================
-   BIG STUDENT CARDS
-================================================== */
+/* ================= CARDS ================= */
 
 .cards{
   display:grid;
-
-  gap:14px;
+  gap:10px;
 }
 
 .studentCard{
   position:relative;
-
-  padding:20px;
-
-  min-height:260px;
-
+  padding:15px;
   border:1px solid var(--border);
-
-  border-radius:21px;
-
-  background:
-    radial-gradient(
-      circle at 100% 0%,
-      rgba(215,179,106,.035),
-      transparent 35%
-    ),
-    linear-gradient(
-      145deg,
-      #131313,
-      #0e0e0e
-    );
-
-  box-shadow:
-    0 12px 35px rgba(0,0,0,.22);
-
-  transition:
-    border-color .25s,
-    transform .25s,
-    box-shadow .25s;
-
-  animation:
-    fadeUp .45s ease both;
-}
-
-.studentCard:nth-child(2){
-  animation-delay:.04s;
-}
-
-.studentCard:nth-child(3){
-  animation-delay:.08s;
-}
-
-.studentCard:nth-child(4){
-  animation-delay:.12s;
+  border-radius:17px;
+  background:#111;
+  transition:border-color .2s,transform .2s;
 }
 
 .studentCard:hover{
-  border-color:#3c372e;
-
-  transform:translateY(-3px);
-
-  box-shadow:
-    0 18px 45px rgba(0,0,0,.32);
+  border-color:#353535;
 }
 
 .studentCard.inactive{
   background:#0d0d0d;
-
   border-color:#202020;
-
   opacity:.72;
 }
 
 .studentHeader{
   display:flex;
-
   align-items:center;
-
-  gap:13px;
+  gap:11px;
 }
 
 .avatar{
-  width:52px;
-  height:52px;
-
+  width:43px;
+  height:43px;
   flex:none;
-
-  border-radius:16px;
-
-  background:
-    radial-gradient(
-      circle at 30% 20%,
-      rgba(240,209,139,.12),
-      transparent 55%
-    ),
-    #17130c;
-
+  border-radius:13px;
+  background:#17130c;
   border:1px solid #4c3e25;
-
   display:flex;
-
   align-items:center;
   justify-content:center;
-
   color:var(--gold-light);
-
-  font-size:17px;
-
+  font-size:15px;
   font-weight:800;
-
-  box-shadow:
-    0 7px 22px rgba(0,0,0,.22);
 }
 
 .studentInfo{
   min-width:0;
-
   flex:1;
 }
 
 .studentName{
-  font-size:15px;
-
+  font-size:13px;
   font-weight:800;
-
   white-space:nowrap;
-
   overflow:hidden;
-
   text-overflow:ellipsis;
 }
 
 .studentPhone{
   color:#666;
-
   font-size:9px;
-
-  margin-top:5px;
-
-  display:flex;
-
-  align-items:center;
-
-  gap:5px;
-}
-
-.phoneNumber{
-  color:#9c9c9c;
-}
-
-.phoneMissing{
-  color:#ff8888;
+  margin-top:4px;
 }
 
 .badges{
   display:flex;
-
   flex-wrap:wrap;
-
   justify-content:flex-end;
-
   gap:5px;
-
-  max-width:125px;
 }
 
 .badge{
-  padding:6px 8px;
-
-  border-radius:8px;
-
+  padding:5px 7px;
+  border-radius:7px;
   font-size:7px;
-
   font-weight:800;
-
   letter-spacing:.5px;
-
   white-space:nowrap;
 }
 
 .badge.active{
   color:var(--green);
-
   background:rgba(85,217,150,.07);
-
   border:1px solid rgba(85,217,150,.18);
 }
 
 .badge.live{
   color:#78c8ff;
-
   background:rgba(120,200,255,.07);
-
   border:1px solid rgba(120,200,255,.18);
-
-  animation:pulseGold 2.2s infinite;
 }
 
 .badge.completed{
   color:var(--gold-light);
-
   background:rgba(215,179,106,.07);
-
   border:1px solid rgba(215,179,106,.20);
 }
 
 .badge.inactive{
   color:#999;
-
   background:#171717;
-
   border:1px solid #2c2c2c;
 }
 
-
-/* ==================================================
-   CLASS TYPE
-================================================== */
+/* ================= CLASS TYPE ================= */
 
 .typeRow{
-  margin-top:15px;
-
+  margin-top:13px;
   display:flex;
-
   align-items:center;
-
   justify-content:space-between;
-
-  padding:12px;
-
+  padding:9px 11px;
   background:#0c0c0c;
-
   border:1px solid #202020;
-
-  border-radius:12px;
+  border-radius:10px;
 }
 
 .typeInfo{
   display:flex;
-
   align-items:center;
-
   gap:8px;
 }
 
 .typeLabel{
   color:#666;
-
   font-size:8px;
-
   text-transform:uppercase;
-
   letter-spacing:1px;
 }
 
 .typeValue{
   color:var(--gold-light);
-
   font-size:10px;
-
   font-weight:800;
-}
-
-.typeFee{
-  color:#777;
-
-  font-size:8px;
-
-  margin-left:5px;
 }
 
 .editType{
   border:1px solid #3a3224;
-
   background:#16130e;
-
   color:var(--gold-light);
-
   border-radius:8px;
-
-  padding:7px 10px;
-
+  padding:6px 9px;
   font-size:8px;
-
   font-weight:700;
 }
 
-
-/* ==================================================
-   LAST ATTENDANCE
-================================================== */
+/* ================= LAST ATTENDANCE ================= */
 
 .lastAttendance{
-  margin-top:10px;
-
-  padding:12px;
-
-  border-radius:12px;
-
+  margin-top:9px;
+  padding:10px 11px;
+  border-radius:10px;
   background:#0c0c0c;
-
   border:1px solid #1e1e1e;
 }
 
 .lastLabel{
   color:#5e5e5e;
-
   font-size:7px;
-
   text-transform:uppercase;
-
   letter-spacing:1px;
 }
 
 .lastText{
   color:#c8c8c8;
-
   font-size:9px;
-
-  line-height:1.55;
-
+  line-height:1.5;
   margin-top:5px;
 }
 
-
-/* ==================================================
-   PROGRESS
-================================================== */
+/* ================= PROGRESS ================= */
 
 .progressBox{
-  margin-top:14px;
+  margin-top:12px;
 }
 
 .progressTop{
   display:flex;
-
   align-items:center;
-
   justify-content:space-between;
-
-  margin-bottom:7px;
+  margin-bottom:6px;
 }
 
 .progressLabel{
   color:#666;
-
   font-size:7px;
-
   letter-spacing:1px;
 }
 
 .progressCount{
   color:#aaa;
-
   font-size:8px;
-
   font-weight:700;
 }
 
 .progress{
-  height:6px;
-
+  height:5px;
   width:100%;
-
   border-radius:10px;
-
   background:#222;
-
   overflow:hidden;
 }
 
 .progressBar{
   height:100%;
-
   border-radius:10px;
-
-  background:
-    linear-gradient(
-      90deg,
-      var(--gold),
-      var(--gold-light)
-    );
-
-  animation:progressGrow .8s ease;
+  background:linear-gradient(
+    90deg,
+    var(--gold),
+    var(--gold-light)
+  );
 }
 
-
-/* ==================================================
-   ACTIONS
-================================================== */
+/* ================= ACTIONS ================= */
 
 .actions{
   display:grid;
-
-  grid-template-columns:
-    1.3fr 1fr 1fr 1fr;
-
-  gap:7px;
-
-  margin-top:14px;
+  grid-template-columns:1.25fr 1fr 1fr 1fr;
+  gap:6px;
+  margin-top:12px;
 }
 
 .action{
-  min-height:39px;
-
+  min-height:36px;
   border:1px solid #282828;
-
-  border-radius:10px;
-
+  border-radius:9px;
   background:#151515;
-
   color:#bdbdbd;
-
   font-size:8px;
-
   font-weight:700;
-
-  transition:
-    background .2s,
-    border-color .2s,
-    transform .2s;
-}
-
-.action:hover{
-  border-color:#444;
 }
 
 .action.attend{
-  background:
-    linear-gradient(
-      135deg,
-      var(--gold-light),
-      var(--gold)
-    );
-
+  background:linear-gradient(
+    135deg,
+    var(--gold-light),
+    var(--gold)
+  );
   color:#111;
-
   border:none;
 }
 
@@ -1149,66 +482,40 @@ button:active{
 
 .notActiveBtn{
   width:100%;
-
-  margin-top:8px;
-
-  min-height:38px;
-
-  border-radius:10px;
-
+  margin-top:7px;
+  min-height:35px;
+  border-radius:9px;
   border:1px solid rgba(255,119,119,.15);
-
   background:rgba(255,119,119,.045);
-
   color:#e98282;
-
   font-size:8px;
-
   font-weight:800;
 }
 
 .activateBtn{
   width:100%;
-
-  min-height:39px;
-
-  margin-top:14px;
-
-  border-radius:10px;
-
+  min-height:36px;
+  margin-top:12px;
+  border-radius:9px;
   border:1px solid rgba(85,217,150,.18);
-
   background:rgba(85,217,150,.05);
-
   color:#6ee3a0;
-
   font-size:8px;
-
   font-weight:800;
 }
 
-
-/* ==================================================
-   EMPTY
-================================================== */
+/* ================= EMPTY ================= */
 
 .empty{
   border:1px dashed #292929;
-
   border-radius:15px;
-
   padding:45px 20px;
-
   text-align:center;
-
   color:#666;
-
-  animation:fadeUp .35s ease;
 }
 
 .emptyIcon{
   font-size:28px;
-
   margin-bottom:10px;
 }
 
@@ -1218,687 +525,376 @@ button:active{
 
 .loading{
   padding:40px;
-
   text-align:center;
-
   color:#666;
-
   font-size:10px;
-
-  background:
-    linear-gradient(
-      90deg,
-      #0e0e0e,
-      #171717,
-      #0e0e0e
-    );
-
-  background-size:300px 100%;
-
-  animation:shimmer 1.4s infinite;
 }
 
-
-/* ==================================================
-   FAB
-================================================== */
+/* ================= FAB ================= */
 
 .fab{
   position:fixed;
-
   right:19px;
-
-  bottom:78px;
-
+  bottom:76px;
   z-index:60;
-
-  width:56px;
-  height:56px;
-
+  width:52px;
+  height:52px;
   border:0;
-
-  border-radius:17px;
-
-  background:
-    linear-gradient(
-      135deg,
-      var(--gold-light),
-      var(--gold)
-    );
-
+  border-radius:16px;
+  background:linear-gradient(
+    135deg,
+    var(--gold-light),
+    var(--gold)
+  );
   color:#111;
-
-  font-size:27px;
-
-  box-shadow:
-    0 12px 35px rgba(0,0,0,.5);
-
-  transition:
-    transform .25s,
-    box-shadow .25s;
+  font-size:25px;
+  box-shadow:0 12px 35px rgba(0,0,0,.5);
 }
 
-.fab:hover{
-  transform:translateY(-3px) rotate(2deg);
-
-  box-shadow:
-    0 17px 45px rgba(0,0,0,.6);
-}
-
-
-/* ==================================================
-   BOTTOM NAV
-================================================== */
+/* ================= BOTTOM NAV ================= */
 
 .bottomNav{
   position:fixed;
-
   left:0;
   right:0;
   bottom:0;
-
   z-index:55;
-
   display:flex;
-
   justify-content:center;
-
   gap:3px;
-
-  padding:
-    8px
-    9px
-    calc(8px + env(safe-area-inset-bottom));
-
+  padding:8px 9px calc(8px + env(safe-area-inset-bottom));
   background:rgba(9,9,9,.96);
-
   backdrop-filter:blur(18px);
-
   border-top:1px solid #202020;
 }
 
 .navBtn{
   flex:1;
-
   max-width:120px;
-
   border:0;
-
   background:none;
-
   color:#5e5e5e;
-
   padding:5px 2px;
-
   font-size:7px;
-
   font-weight:800;
-
-  transition:
-    color .25s,
-    transform .25s;
 }
 
 .navBtn.active{
   color:var(--gold-light);
-
-  transform:translateY(-2px);
 }
 
 .navIcon{
   display:block;
-
   font-size:15px;
-
   margin-bottom:3px;
 }
 
-
-/* ==================================================
-   MODAL
-================================================== */
+/* ================= MODAL ================= */
 
 .modal{
   position:fixed;
-
   inset:0;
-
   z-index:100;
-
   display:none;
-
   align-items:flex-end;
-
   justify-content:center;
-
   padding:9px;
-
   background:rgba(0,0,0,.78);
-
-  backdrop-filter:blur(7px);
+  backdrop-filter:blur(6px);
 }
 
 .modal.show{
   display:flex;
-
-  animation:fadeIn .18s ease;
 }
 
 .modalBox{
   width:100%;
-
   max-width:570px;
-
-  max-height:92vh;
-
+  max-height:91vh;
   overflow:auto;
-
-  padding:20px;
-
+  padding:18px;
   border:1px solid #303030;
-
-  border-radius:22px 22px 13px 13px;
-
+  border-radius:21px 21px 13px 13px;
   background:#111;
+  animation:modalUp .22s ease;
+}
 
-  animation:modalUp .25s ease;
+@keyframes modalUp{
+  from{
+    transform:translateY(25px);
+    opacity:0;
+  }
+  to{
+    transform:translateY(0);
+    opacity:1;
+  }
 }
 
 .modalHeader{
   display:flex;
-
   align-items:center;
-
   justify-content:space-between;
-
-  margin-bottom:18px;
+  margin-bottom:17px;
 }
 
 .modalTitle{
   font-size:15px;
-
   font-weight:800;
 }
 
 .modalSub{
   color:#666;
-
   font-size:9px;
-
   margin-top:4px;
 }
 
 .close{
-  width:34px;
-  height:34px;
-
+  width:32px;
+  height:32px;
   border:1px solid #292929;
-
   border-radius:9px;
-
   background:#171717;
-
   color:#aaa;
-
   font-size:17px;
 }
 
-
-/* ==================================================
-   FORM
-================================================== */
+/* ================= FORM ================= */
 
 .formGroup{
-  margin-bottom:15px;
+  margin-bottom:14px;
 }
 
 .formLabel{
   display:block;
-
   color:#686868;
-
   font-size:8px;
-
   text-transform:uppercase;
-
   letter-spacing:1px;
-
-  margin-bottom:7px;
+  margin-bottom:6px;
 }
 
 .formInput,
 .formTextarea{
   width:100%;
-
   border:1px solid #292929;
-
   border-radius:10px;
-
   background:#0b0b0b;
-
   color:white;
-
   outline:none;
-
   padding:12px;
-
   font-size:11px;
-
-  transition:
-    border-color .2s,
-    box-shadow .2s;
 }
 
 .formInput{
-  height:44px;
+  height:43px;
 }
 
 .formInput:focus,
 .formTextarea:focus{
   border-color:#675432;
-
-  box-shadow:
-    0 0 0 3px rgba(215,179,106,.035);
 }
 
 .formTextarea{
   min-height:75px;
-
   resize:vertical;
 }
 
-
-/* ==================================================
-   TYPE
-================================================== */
+/* ================= TYPE ================= */
 
 .typeGrid{
   display:grid;
-
   grid-template-columns:1fr 1fr;
-
   gap:8px;
 }
 
 .typeOption{
   border:1px solid #292929;
-
   background:#0c0c0c;
-
   border-radius:12px;
-
   padding:14px 8px;
-
   color:#777;
-
   text-align:center;
-
-  transition:
-    border-color .2s,
-    background .2s,
-    transform .2s;
 }
 
 .typeOption.selected{
   border-color:#a9874d;
-
   background:rgba(215,179,106,.08);
-
   color:var(--gold-light);
 }
 
 .typeIcon{
   display:block;
-
   font-size:20px;
-
   margin-bottom:5px;
 }
 
 .typeName{
   font-size:9px;
-
   font-weight:800;
 }
 
-
-/* ==================================================
-   OPTIONS
-================================================== */
+/* ================= OPTIONS ================= */
 
 .optionGrid{
   display:grid;
-
-  grid-template-columns:
-    repeat(2,1fr);
-
+  grid-template-columns:repeat(2,1fr);
   gap:7px;
 }
 
 .optionBtn{
-  min-height:39px;
-
+  min-height:38px;
   border:1px solid #292929;
-
   background:#0c0c0c;
-
   border-radius:9px;
-
   color:#888;
-
   font-size:9px;
-
   padding:5px;
-
-  transition:
-    background .2s,
-    border-color .2s,
-    color .2s;
 }
 
 .optionBtn.selected{
   color:#111;
-
   background:var(--gold-light);
-
   border-color:var(--gold-light);
-
   font-weight:800;
 }
 
+/* ================= CUSTOM ROUTE ================= */
 
-/* ==================================================
-   CUSTOM
-================================================== */
-
-.customRouteBox,
-.customRemarkBox{
+.customRouteBox{
   display:none;
-
   margin-top:8px;
 }
 
-.customRouteBox.show,
-.customRemarkBox.show{
+.customRouteBox.show{
   display:block;
-
-  animation:fadeUp .2s ease;
 }
 
-.customRouteHint,
-.customRemarkHint{
+.customRouteHint{
   color:#555;
-
   font-size:7px;
-
   margin-top:5px;
-
   line-height:1.4;
 }
 
+/* ================= CUSTOM REMARK ================= */
+
+.customRemarkBox{
+  display:none;
+  margin-top:8px;
+}
+
+.customRemarkBox.show{
+  display:block;
+}
+
+.customRemarkHint{
+  color:#555;
+  font-size:7px;
+  margin-top:5px;
+  line-height:1.4;
+}
+
+/* ================= DISTANCE DEFAULT ================= */
+
 .distanceDefault{
   border-color:var(--gold-light);
-
   background:var(--gold-light);
-
   color:#111;
-
   font-weight:800;
 }
 
-
-/* ==================================================
-   GOLD BUTTON
-================================================== */
+/* ================= GOLD BUTTON ================= */
 
 .goldBtn{
   width:100%;
-
-  min-height:45px;
-
+  min-height:43px;
   border:0;
-
   border-radius:10px;
-
-  background:
-    linear-gradient(
-      135deg,
-      var(--gold-light),
-      var(--gold)
-    );
-
+  background:linear-gradient(
+    135deg,
+    var(--gold-light),
+    var(--gold)
+  );
   color:#111;
-
   font-size:10px;
-
   font-weight:800;
-
-  transition:
-    transform .2s,
-    box-shadow .2s;
 }
 
-.goldBtn:hover{
-  box-shadow:
-    0 8px 25px rgba(215,179,106,.13);
-}
-
-
-/* ==================================================
-   PAYMENT
-================================================== */
-
-.paymentInfo{
-  padding:11px;
-
-  border:1px solid #252525;
-
-  border-radius:11px;
-
-  background:#0c0c0c;
-
-  margin-bottom:14px;
-}
-
-.paymentInfoTitle{
-  color:#666;
-
-  font-size:7px;
-
-  letter-spacing:1px;
-
-  text-transform:uppercase;
-}
-
-.paymentInfoValue{
-  color:var(--gold-light);
-
-  font-size:13px;
-
-  font-weight:800;
-
-  margin-top:4px;
-}
-
-
-/* ==================================================
-   HISTORY
-================================================== */
+/* ================= HISTORY ================= */
 
 .historyItem{
-  padding:13px;
-
+  padding:12px;
   border:1px solid #242424;
-
   border-radius:11px;
-
   background:#0c0c0c;
-
-  margin-bottom:8px;
-
-  animation:fadeUp .25s ease;
+  margin-bottom:7px;
 }
 
 .historyNumber{
   color:var(--gold-light);
-
   font-size:8px;
-
   font-weight:800;
-
   margin-bottom:5px;
 }
 
 .historyText{
   color:#c5c5c5;
-
   font-size:9px;
-
   line-height:1.6;
 }
 
-
-/* ==================================================
-   COLLECTION DETAILS
-================================================== */
-
-.monthDetailCard{
-  padding:14px;
-
-  border:1px solid #252525;
-
-  border-radius:13px;
-
-  background:#0c0c0c;
-
-  margin-bottom:8px;
-
-  animation:fadeUp .25s ease;
-}
-
-.monthDetailTop{
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-
-  gap:8px;
-}
-
-.monthDetailName{
-  font-size:10px;
-
-  font-weight:800;
-}
-
-.monthDetailAmount{
-  color:var(--gold-light);
-
-  font-size:11px;
-
-  font-weight:800;
-}
-
-.monthDetailMeta{
-  color:#666;
-
-  font-size:8px;
-
-  margin-top:5px;
-}
-
-.monthDetailType{
-  color:#aaa;
-
-  font-size:8px;
-
-  margin-top:5px;
-}
-
-.collectionSource{
-  color:#555;
-
-  font-size:7px;
-
-  margin-top:6px;
-}
-
-
-/* ==================================================
-   TOAST
-================================================== */
+/* ================= TOAST ================= */
 
 .toast{
   position:fixed;
-
   left:50%;
-
-  bottom:90px;
-
+  bottom:88px;
   z-index:200;
-
-  transform:
-    translateX(-50%)
-    translateY(15px);
-
+  transform:translateX(-50%) translateY(15px);
   opacity:0;
-
   pointer-events:none;
-
   background:#191919;
-
   border:1px solid #333;
-
   color:#eee;
-
   border-radius:10px;
-
   padding:10px 14px;
-
   font-size:9px;
-
   white-space:nowrap;
-
   transition:.22s;
 }
 
 .toast.show{
   opacity:1;
-
-  transform:
-    translateX(-50%)
-    translateY(0);
+  transform:translateX(-50%) translateY(0);
 }
 
-
-/* ==================================================
-   MOBILE
-================================================== */
+/* ================= MOBILE ================= */
 
 @media(max-width:500px){
 
   .container{
-    padding-left:12px;
-    padding-right:12px;
+    padding-left:13px;
+    padding-right:13px;
+  }
+
+  .stats{
+    gap:6px;
+  }
+
+  .stat{
+    min-height:68px;
+  }
+
+  .statValue{
+    font-size:18px;
   }
 
   .studentCard{
-    padding:18px;
-
-    min-height:270px;
-  }
-
-  .studentName{
-    font-size:14px;
-  }
-
-  .studentPhone{
-    font-size:8px;
+    padding:14px;
   }
 
   .badges{
-    max-width:105px;
+    max-width:100px;
   }
 
   .actions{
@@ -1907,10 +903,6 @@ button:active{
 
   .action{
     font-size:7px;
-  }
-
-  .collectionTitle{
-    font-size:28px;
   }
 
 }
@@ -1926,30 +918,20 @@ button:active{
   }
 
   .stats{
-    grid-template-columns:
-      repeat(2,1fr);
+    grid-template-columns:repeat(2,1fr);
   }
 
   .actions{
-    grid-template-columns:
-      1fr 1fr;
-  }
-
-  .monthRow{
-    grid-template-columns:1fr;
+    grid-template-columns:1fr 1fr;
   }
 
 }
-
 </style>
 </head>
 
 <body>
 
-
-<!-- ==================================================
-     HEADER
-================================================== -->
+<!-- ================= HEADER ================= -->
 
 <header class="header">
 
@@ -1975,7 +957,6 @@ button:active{
 
     </div>
 
-
     <div class="clock">
 
       <div
@@ -1996,15 +977,9 @@ button:active{
 
 </header>
 
-
-<!-- ==================================================
-     MAIN
-================================================== -->
+<!-- ================= MAIN ================= -->
 
 <main class="container">
-
-
-  <!-- SEARCH -->
 
   <div class="search">
 
@@ -2020,218 +995,55 @@ button:active{
 
   </div>
 
-
-  <!-- ==================================================
-       COLLECTION
-  ================================================== -->
-
-  <section
-    class="collectionHero"
-    onclick="openCollectionDetails()">
-
-    <div class="collectionHead">
-
-      <div>
-
-        <div class="collectionLabel">
-          THIS MONTH COLLECTION
-        </div>
-
-        <div
-          class="collectionTitle"
-          id="thisMonthCollection">
-          ₹0
-        </div>
-
-        <div
-          class="collectionSub"
-          id="thisMonthLabel">
-          Loading...
-        </div>
-
-      </div>
-
-      <div class="collectionIcon">
-        ₹
-      </div>
-
-    </div>
-
-
-    <div class="collectionGrid">
-
-      <div class="collectionBox personal">
-
-        <div class="collectionBoxLabel">
-          PERSONAL • ₹8,000
-        </div>
-
-        <div
-          class="collectionBoxValue"
-          id="thisPersonal">
-          ₹0
-        </div>
-
-        <div
-          class="collectionBoxMeta"
-          id="thisPersonalCount">
-          0 students
-        </div>
-
-      </div>
-
-
-      <div class="collectionBox group">
-
-        <div class="collectionBoxLabel">
-          GROUP • ₹4,500
-        </div>
-
-        <div
-          class="collectionBoxValue"
-          id="thisGroup">
-          ₹0
-        </div>
-
-        <div
-          class="collectionBoxMeta"
-          id="thisGroupCount">
-          0 students
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="previousMonth">
-
-      <div>
-
-        <div class="previousLabel">
-          LAST MONTH COLLECTION
-        </div>
-
-        <div
-          class="collectionSub"
-          id="lastMonthLabel">
-          --
-        </div>
-
-      </div>
-
-      <div
-        class="previousValue"
-        id="lastMonthCollection">
-        ₹0
-      </div>
-
-    </div>
-
-
-    <div class="monthRow">
-
-      <div class="monthSmall">
-
-        <div class="monthSmallLabel">
-          2 MONTHS AGO
-        </div>
-
-        <div
-          class="monthSmallValue"
-          id="twoMonthCollection">
-          ₹0
-        </div>
-
-      </div>
-
-
-      <div class="monthSmall">
-
-        <div class="monthSmallLabel">
-          COLLECTION RECORDS
-        </div>
-
-        <div
-          class="monthSmallValue"
-          id="paymentRecordCount">
-          0
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- ==================================================
-       STATS
-  ================================================== -->
+  <!-- ================= STATS ================= -->
 
   <div class="stats">
 
     <div class="stat">
-
       <div
         class="statValue"
         id="activeCount">
         0
       </div>
-
       <div class="statLabel">
         ACTIVE
       </div>
-
     </div>
 
-
     <div class="stat">
-
       <div
         class="statValue"
         id="completedCount">
         0
       </div>
-
       <div class="statLabel">
         COMPLETED
       </div>
-
     </div>
 
-
     <div class="stat">
-
       <div
         class="statValue"
         id="liveCount">
         0
       </div>
-
       <div class="statLabel">
         LIVE NOW
       </div>
-
     </div>
 
-
     <div class="stat">
-
       <div
         class="statValue"
         id="inactiveCount">
         0
       </div>
-
       <div class="statLabel">
         NOT ACTIVE
       </div>
-
     </div>
 
   </div>
-
 
   <div class="sectionHeader">
 
@@ -2249,7 +1061,6 @@ button:active{
 
   </div>
 
-
   <div
     id="studentCards"
     class="cards">
@@ -2262,10 +1073,7 @@ button:active{
 
 </main>
 
-
-<!-- ==================================================
-     FAB
-================================================== -->
+<!-- ================= FAB ================= -->
 
 <button
   class="fab"
@@ -2273,10 +1081,7 @@ button:active{
   +
 </button>
 
-
-<!-- ==================================================
-     BOTTOM NAV
-================================================== -->
+<!-- ================= BOTTOM NAV ================= -->
 
 <nav class="bottomNav">
 
@@ -2290,7 +1095,6 @@ button:active{
 
   </button>
 
-
   <button
     class="navBtn"
     id="navCompleted"
@@ -2301,7 +1105,6 @@ button:active{
 
   </button>
 
-
   <button
     class="navBtn"
     id="navLive"
@@ -2311,7 +1114,6 @@ button:active{
     LIVE
 
   </button>
-
 
   <button
     class="navBtn"
@@ -2325,10 +1127,7 @@ button:active{
 
 </nav>
 
-
-<!-- ==================================================
-     ADD STUDENT
-================================================== -->
+<!-- ================= ADD STUDENT ================= -->
 
 <div
   class="modal"
@@ -2358,7 +1157,6 @@ button:active{
 
     </div>
 
-
     <div class="formGroup">
 
       <label class="formLabel">
@@ -2375,7 +1173,6 @@ button:active{
 
     </div>
 
-
     <div class="formGroup">
 
       <label class="formLabel">
@@ -2389,7 +1186,6 @@ button:active{
         placeholder="Student full name">
 
     </div>
-
 
     <div class="formGroup">
 
@@ -2405,23 +1201,6 @@ button:active{
         value="20">
 
     </div>
-
-
-    <div class="formGroup">
-
-      <label class="formLabel">
-        Payment Received
-      </label>
-
-      <input
-        id="paymentAmount"
-        class="formInput"
-        type="number"
-        min="0"
-        placeholder="Example: 4500">
-
-    </div>
-
 
     <div class="formGroup">
 
@@ -2442,11 +1221,10 @@ button:active{
           </span>
 
           <span class="typeName">
-            PERSONAL ₹8,000
+            PERSONAL
           </span>
 
         </button>
-
 
         <button
           type="button"
@@ -2459,7 +1237,7 @@ button:active{
           </span>
 
           <span class="typeName">
-            GROUP ₹4,500
+            GROUP
           </span>
 
         </button>
@@ -2467,20 +1245,6 @@ button:active{
       </div>
 
     </div>
-
-
-    <div class="paymentInfo">
-
-      <div class="paymentInfoTitle">
-        Payment date
-      </div>
-
-      <div class="paymentInfoValue">
-        Today • automatically saved
-      </div>
-
-    </div>
-
 
     <button
       class="goldBtn"
@@ -2494,10 +1258,7 @@ button:active{
 
 </div>
 
-
-<!-- ==================================================
-     ATTENDANCE
-================================================== -->
+<!-- ================= ATTENDANCE ================= -->
 
 <div
   class="modal"
@@ -2528,6 +1289,7 @@ button:active{
 
     </div>
 
+    <!-- ROUTE -->
 
     <div class="formGroup">
 
@@ -2587,7 +1349,6 @@ button:active{
 
       </div>
 
-
       <div
         class="customRouteBox"
         id="customRouteBox">
@@ -2607,6 +1368,7 @@ button:active{
 
     </div>
 
+    <!-- DISTANCE -->
 
     <div class="formGroup">
 
@@ -2629,6 +1391,7 @@ button:active{
 
     </div>
 
+    <!-- REMARK -->
 
     <div class="formGroup">
 
@@ -2642,95 +1405,122 @@ button:active{
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'👍 Good Driving')">
+
           👍 Good Driving
+
         </button>
 
         <button
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'⚠️ Needs Improvement')">
+
           ⚠️ Needs Improvement
+
         </button>
 
         <button
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'🔄 Good Turning')">
+
           🔄 Good Turning
+
         </button>
 
         <button
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'⚠️ Bad Turning')">
+
           ⚠️ Bad Turning
+
         </button>
 
         <button
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'🛑 Good Braking')">
+
           🛑 Good Braking
+
         </button>
 
         <button
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'⚠️ Bad Braking')">
+
           ⚠️ Bad Braking
+
         </button>
 
         <button
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'⚙️ Good Clutch')">
+
           ⚙️ Good Clutch
+
         </button>
 
         <button
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'⚙️ Clutch Improvement')">
+
           ⚙️ Clutch Improvement
+
         </button>
 
         <button
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'🚦 Good Traffic Control')">
+
           🚦 Good Traffic Control
+
         </button>
 
         <button
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'🚗 Good Vehicle Control')">
+
           🚗 Good Vehicle Control
+
         </button>
 
         <button
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'🅿️ Good Parking')">
+
           🅿️ Good Parking
+
         </button>
 
         <button
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'⚠️ Parking Improvement')">
+
           ⚠️ Parking Improvement
+
         </button>
 
         <button
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'📝 Custom Remark')">
+
           📝 Custom Remark
+
         </button>
 
       </div>
 
+      <!-- CUSTOM REMARK -->
 
       <div
         class="customRemarkBox"
@@ -2751,7 +1541,6 @@ button:active{
 
     </div>
 
-
     <button
       class="goldBtn"
       onclick="saveAttendance()">
@@ -2764,10 +1553,7 @@ button:active{
 
 </div>
 
-
-<!-- ==================================================
-     HISTORY
-================================================== -->
+<!-- ================= HISTORY ================= -->
 
 <div
   class="modal"
@@ -2804,10 +1590,7 @@ button:active{
 
 </div>
 
-
-<!-- ==================================================
-     EDIT TYPE
-================================================== -->
+<!-- ================= EDIT TYPE ================= -->
 
 <div
   class="modal"
@@ -2838,7 +1621,6 @@ button:active{
 
     </div>
 
-
     <div class="formGroup">
 
       <label class="formLabel">
@@ -2858,11 +1640,10 @@ button:active{
           </span>
 
           <span class="typeName">
-            PERSONAL ₹8,000
+            PERSONAL
           </span>
 
         </button>
-
 
         <button
           type="button"
@@ -2875,7 +1656,7 @@ button:active{
           </span>
 
           <span class="typeName">
-            GROUP ₹4,500
+            GROUP
           </span>
 
         </button>
@@ -2883,7 +1664,6 @@ button:active{
       </div>
 
     </div>
-
 
     <button
       class="goldBtn"
@@ -2897,60 +1677,14 @@ button:active{
 
 </div>
 
-
-<!-- ==================================================
-     COLLECTION DETAILS
-================================================== -->
-
-<div
-  class="modal"
-  id="collectionModal">
-
-  <div class="modalBox">
-
-    <div class="modalHeader">
-
-      <div>
-
-        <div class="modalTitle">
-          Monthly Collection
-        </div>
-
-        <div
-          class="modalSub"
-          id="collectionModalSub">
-        </div>
-
-      </div>
-
-      <button
-        class="close"
-        onclick="closeModal('collectionModal')">
-        ×
-      </button>
-
-    </div>
-
-    <div id="collectionDetails"></div>
-
-  </div>
-
-</div>
-
-
-<!-- ==================================================
-     TOAST
-================================================== -->
+<!-- ================= TOAST ================= -->
 
 <div
   class="toast"
   id="toast">
 </div>
 
-
-<!-- ==================================================
-     FIREBASE
-================================================== -->
+<!-- ================= FIREBASE ================= -->
 
 <script type="module">
 
@@ -2967,7 +1701,6 @@ import {
   updateDoc,
   arrayUnion
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
 
 /* ==================================================
    FIREBASE CONFIG
@@ -2995,7 +1728,6 @@ const firebaseConfig = {
 
 };
 
-
 const app =
   initializeApp(firebaseConfig);
 
@@ -3008,17 +1740,8 @@ const studentCollection =
     "studentData"
   );
 
-
 /* ==================================================
-   FEES
-================================================== */
-
-const PERSONAL_FEE = 8000;
-const GROUP_FEE = 4500;
-
-
-/* ==================================================
-   GLOBAL
+   GLOBAL VARIABLES
 ================================================== */
 
 let students = [];
@@ -3036,9 +1759,8 @@ let editClassType = "Group";
 
 let toastTimer;
 
-
 /* ==================================================
-   SAFE HTML
+   HELPERS
 ================================================== */
 
 function safe(value){
@@ -3052,401 +1774,44 @@ function safe(value){
 
 }
 
-
-/* ==================================================
-   MOBILE / ALL PHONE FIELDS
-================================================== */
-
-function getMobile(student){
-
-  const candidates = [
-
-    student.phone,
-    student.mobile,
-    student.phoneNumber,
-    student.mobileNumber,
-    student.contact,
-    student.contactNumber,
-    student.whatsappNumber,
-    student.whatsapp,
-    student.mobileNo,
-    student.phoneNo,
-    student.telephone,
-
-    /*
-      Firebase document ID
-    */
-
-    student.id
-
-  ];
-
-
-  for(
-    const value of candidates
-  ){
-
-    if(
-      value !== undefined &&
-      value !== null &&
-      String(value).trim() !== ""
-    ){
-
-      return String(value).trim();
-
-    }
-
-  }
-
-
-  return "";
-
-}
-
-
-function cleanPhone(phone){
-
-  let value =
-    String(phone || "")
-      .replace(/\D/g,"");
-
-
-  if(
-    value.length > 10
-  ){
-
-    value =
-      value.slice(-10);
-
-  }
-
-
-  return value;
-
-}
-
-
-function getWhatsAppPhone(phone){
-
-  const clean =
-    cleanPhone(phone);
-
-
-  if(
-    clean.length === 10
-  ){
-
-    return "91" + clean;
-
-  }
-
-
-  return clean;
-
-}
-
-
-/* ==================================================
-   NAME
-================================================== */
-
-function getName(student){
-
-  return (
-    student.name ||
-    student.studentName ||
-    student.fullName ||
-    student.student ||
-    "Unnamed Student"
-  );
-
-}
-
-
-/* ==================================================
-   CLASS TYPE
-================================================== */
-
-function getClassType(student){
-
-  const type =
-    String(
-      student.classType ||
-      student.trainingType ||
-      student.sessionType ||
-      student.trainingClass ||
-      student.type ||
-      "Group"
-    ).toLowerCase();
-
-
-  return type.includes("personal")
-    ? "Personal"
-    : "Group";
-
-}
-
-
-function getFee(student){
-
-  return (
-    getClassType(student) === "Personal"
-      ? PERSONAL_FEE
-      : GROUP_FEE
-  );
-
-}
-
-
-/* ==================================================
-   ATTENDANCE LOGS
-   Supports old strings + new objects
-================================================== */
-
 function getLogs(student){
 
-  const candidates = [
-
-    student.attendanceLogs,
-    student.attendanceHistory,
-    student.attendance,
-    student.classLogs,
-    student.trainingLogs
-
-  ];
-
-
-  for(
-    const value of candidates
-  ){
-
-    if(
-      Array.isArray(value)
-    ){
-
-      return value;
-
-    }
-
-  }
-
-
-  return [];
+  return Array.isArray(
+    student.attendanceLogs
+  )
+    ? student.attendanceLogs
+    : [];
 
 }
-
-
-/* ==================================================
-   FORMAT ATTENDANCE OBJECT
-================================================== */
-
-function formatAttendanceLog(log){
-
-  if(
-    typeof log === "string"
-  ){
-
-    return log;
-
-  }
-
-
-  if(
-    !log ||
-    typeof log !== "object"
-  ){
-
-    return "";
-
-  }
-
-
-  const route =
-    log.route ||
-    log.track ||
-    log.drivingTrack ||
-    log.location ||
-    "Unknown Route";
-
-
-  const distance =
-    log.distance ||
-    log.km ||
-    "5 KM";
-
-
-  const remark =
-    log.remark ||
-    log.drivingRemark ||
-    "";
-
-
-  let dateText = "";
-
-
-  const date =
-    log.timestamp ||
-    log.date ||
-    log.createdAt;
-
-
-  if(date){
-
-    const parsed =
-      toDate(date);
-
-
-    if(parsed){
-
-      dateText =
-        parsed.toLocaleDateString(
-          "en-IN",
-          {
-            day:"2-digit",
-            month:"short"
-          }
-        )
-        +
-        " | "
-        +
-        parsed.toLocaleTimeString(
-          "en-IN",
-          {
-            hour:"2-digit",
-            minute:"2-digit",
-            hour12:true
-          }
-        );
-
-    }
-
-  }
-
-
-  return (
-
-    `${dateText ? dateText + " — " : ""}` +
-
-    `Route: ${route} | ` +
-
-    `Distance: ${distance}` +
-
-    (
-      remark
-        ? ` | Remark: ${remark}`
-        : ""
-    )
-
-  );
-
-}
-
-
-/* ==================================================
-   COMPLETED CLASSES
-================================================== */
 
 function getDone(student){
-
-  /*
-    1. New correct field
-  */
-
-  const completed =
-    Number(
-      student.completedClasses
-    );
-
-
-  if(
-    Number.isFinite(completed) &&
-    completed >= 0
-  ){
-
-    return completed;
-
-  }
-
-
-  /*
-    2. Attendance logs
-  */
 
   const logs =
     getLogs(student);
 
-
-  if(logs.length){
-
-    return logs.length;
-
-  }
-
-
-  /*
-    3. Legacy database
-       where remaining was used
-       as completed count.
-  */
-
-  const legacyRemaining =
+  const oldValue =
     Number(
-      student.remaining
+      student.remaining || 0
     );
 
-
-  if(
-    Number.isFinite(legacyRemaining) &&
-    legacyRemaining > 0
-  ){
-
-    return legacyRemaining;
-
-  }
-
-
-  return 0;
+  return Math.max(
+    logs.length,
+    oldValue,
+    0
+  );
 
 }
-
 
 function getTotal(student){
 
-  const values = [
-
-    student.totalClasses,
-    student.totalClass,
-    student.numberOfClasses,
-    student.classes,
-    student.totalSessions
-
-  ];
-
-
-  for(
-    const value of values
-  ){
-
-    const n =
-      Number(value);
-
-
-    if(
-      Number.isFinite(n) &&
-      n > 0
-    ){
-
-      return n;
-
-    }
-
-  }
-
-
-  return 1;
+  return Math.max(
+    Number(
+      student.totalClasses || 0
+    ),
+    1
+  );
 
 }
-
 
 function isCompleted(student){
 
@@ -3457,912 +1822,125 @@ function isCompleted(student){
 
 }
 
-
 function isInactive(student){
 
-  return (
-    student.notActive === true ||
-    student.active === false ||
-    String(student.status || "").toLowerCase() === "inactive"
-  );
+  return student.notActive === true;
 
 }
-
 
 /* ==================================================
-   DATE PARSER
+   TIME
 ================================================== */
 
-function toDate(value){
+function parseAttendanceTime(log){
 
-  if(!value){
+  if(!log){
     return null;
   }
 
-
-  if(
-    typeof value === "object" &&
-    typeof value.toDate === "function"
-  ){
-
-    try{
-
-      return value.toDate();
-
-    }catch(e){}
-
-  }
-
-
-  if(
-    typeof value === "object" &&
-    value.seconds !== undefined
-  ){
-
-    return new Date(
-      Number(value.seconds) * 1000
+  const match =
+    String(log).match(
+      /(\d{1,2}):(\d{2})\s*(AM|PM)/i
     );
 
-  }
-
-
-  if(
-    typeof value === "object" &&
-    value._seconds !== undefined
-  ){
-
-    return new Date(
-      Number(value._seconds) * 1000
-    );
-
-  }
-
-
-  if(
-    value instanceof Date
-  ){
-
-    return value;
-
-  }
-
-
-  const date =
-    new Date(value);
-
-
-  if(
-    isNaN(date.getTime())
-  ){
-
+  if(!match){
     return null;
+  }
+
+  let hour =
+    Number(match[1]);
+
+  const minute =
+    Number(match[2]);
+
+  const ampm =
+    match[3].toUpperCase();
+
+  if(
+    ampm === "PM" &&
+    hour !== 12
+  ){
+
+    hour += 12;
 
   }
 
+  if(
+    ampm === "AM" &&
+    hour === 12
+  ){
 
-  return date;
+    hour = 0;
+
+  }
+
+  return {
+    hour,
+    minute
+  };
 
 }
 
+function timeDistance(logs){
 
-function sameMonth(
-  date,
-  year,
-  month
-){
+  if(!logs.length){
+    return 9999;
+  }
 
-  const d =
-    toDate(date);
+  const parsed =
+    parseAttendanceTime(
+      logs[logs.length - 1]
+    );
 
+  if(!parsed){
+    return 9999;
+  }
 
-  if(!d){
+  const now =
+    new Date();
+
+  const currentMinutes =
+    now.getHours() * 60 +
+    now.getMinutes();
+
+  const logMinutes =
+    parsed.hour * 60 +
+    parsed.minute;
+
+  let diff =
+    Math.abs(
+      currentMinutes -
+      logMinutes
+    );
+
+  diff =
+    Math.min(
+      diff,
+      1440 - diff
+    );
+
+  return diff;
+
+}
+
+function isLive(student){
+
+  if(isInactive(student)){
     return false;
   }
 
+  const logs =
+    getLogs(student);
 
-  return (
-    d.getFullYear() === year &&
-    d.getMonth() === month
-  );
-
-}
-
-
-/* ==================================================
-   PAYMENT ARRAYS
-================================================== */
-
-function getPaymentArrays(student){
-
-  const possible = [
-
-    student.paymentLogs,
-    student.payments,
-    student.paymentHistory,
-    student.paymentsReceived,
-    student.transactions,
-    student.collectionLogs,
-    student.feePayments,
-    student.paymentHistoryLogs
-
-  ];
-
-
-  return possible.filter(
-    Array.isArray
-  );
-
-}
-
-
-function getPaymentAmount(payment){
-
-  return Number(
-
-    payment?.amount ??
-    payment?.paidAmount ??
-    payment?.amountPaid ??
-    payment?.paymentAmount ??
-    payment?.payment ??
-    payment?.value ??
-    payment?.received ??
-    payment?.receivedAmount ??
-    0
-
-  ) || 0;
-
-}
-
-
-function getPaymentDate(payment){
-
-  return (
-
-    payment?.paymentDate ??
-    payment?.paidDate ??
-    payment?.date ??
-    payment?.timestamp ??
-    payment?.createdAt ??
-    payment?.time ??
-    null
-
-  );
-
-}
-
-
-function getPaymentType(
-  payment,
-  student
-){
-
-  const type =
-    String(
-
-      payment?.classType ??
-      payment?.trainingType ??
-      payment?.sessionType ??
-      payment?.type ??
-      student.classType ??
-      "Group"
-
-    ).toLowerCase();
-
-
-  return type.includes("personal")
-    ? "Personal"
-    : "Group";
-
-}
-
-
-/* ==================================================
-   DIRECT PAYMENT
-================================================== */
-
-function getDirectPaymentAmount(student){
-
-  const values = [
-
-    student.paymentReceived,
-    student.amountPaid,
-    student.paidAmount,
-    student.paymentAmount,
-    student.feePaid,
-    student.feesPaid,
-    student.totalPaid,
-    student.payment
-
-  ];
-
-
-  for(
-    const value of values
-  ){
-
-    const amount =
-      Number(value);
-
-
-    if(
-      Number.isFinite(amount) &&
-      amount > 0
-    ){
-
-      return amount;
-
-    }
-
+  if(!logs.length){
+    return false;
   }
 
-
-  return 0;
-
-}
-
-
-function getDirectPaymentDate(student){
-
   return (
-
-    student.paymentDate ??
-    student.paymentReceivedDate ??
-    student.paidDate ??
-    student.lastPaymentDate ??
-    student.paymentCreatedAt ??
-    null
-
+    timeDistance(logs) <= 30
   );
 
 }
-
-
-/* ==================================================
-   ENROLLMENT DATE
-================================================== */
-
-function getEnrollmentDate(student){
-
-  return (
-
-    student.admissionDate ??
-    student.enrollmentDate ??
-    student.joiningDate ??
-    student.createdAt ??
-    student.createdDate ??
-    student.registeredAt ??
-    student.date ??
-    student.admissionDateTime ??
-    null
-
-  );
-
-}
-
-
-/* ==================================================
-   MONTH DATA
-================================================== */
-
-function monthInfo(offset){
-
-  const date =
-    new Date();
-
-
-  date.setDate(1);
-
-  date.setMonth(
-    date.getMonth() + offset
-  );
-
-
-  return {
-
-    year:date.getFullYear(),
-    month:date.getMonth(),
-
-    label:
-      date.toLocaleDateString(
-        "en-IN",
-        {
-          month:"long",
-          year:"numeric"
-        }
-      )
-
-  };
-
-}
-
-
-/* ==================================================
-   COLLECTION CALCULATION
-================================================== */
-
-function calculateMonth(offset){
-
-  const info =
-    monthInfo(offset);
-
-
-  let total = 0;
-
-  let personal = 0;
-
-  let group = 0;
-
-  let personalCount = 0;
-
-  let groupCount = 0;
-
-  let records = [];
-
-
-  students.forEach(student=>{
-
-    const id =
-      student.id;
-
-
-    let studentAmount = 0;
-
-    let studentPersonal = 0;
-
-    let studentGroup = 0;
-
-    let source = "";
-
-
-    /*
-      ==============================================
-      1. ACTUAL PAYMENT LOGS
-      ==============================================
-    */
-
-    const arrays =
-      getPaymentArrays(student);
-
-
-    let hasActualPayment =
-      false;
-
-
-    arrays.forEach(paymentArray=>{
-
-      paymentArray.forEach(payment=>{
-
-        const amount =
-          getPaymentAmount(payment);
-
-
-        const date =
-          getPaymentDate(payment);
-
-
-        if(
-          !amount ||
-          !date
-        ){
-
-          return;
-
-        }
-
-
-        if(
-          sameMonth(
-            date,
-            info.year,
-            info.month
-          )
-        ){
-
-          const type =
-            getPaymentType(
-              payment,
-              student
-            );
-
-
-          studentAmount += amount;
-
-          hasActualPayment = true;
-
-          source = "Payment record";
-
-
-          if(
-            type === "Personal"
-          ){
-
-            studentPersonal += amount;
-
-          }else{
-
-            studentGroup += amount;
-
-          }
-
-        }
-
-      });
-
-    }
-
-
-    /*
-      ==============================================
-      2. DIRECT PAYMENT FIELD
-      ==============================================
-    */
-
-    if(!hasActualPayment){
-
-      const amount =
-        getDirectPaymentAmount(
-          student
-        );
-
-
-      const date =
-        getDirectPaymentDate(
-          student
-        );
-
-
-      if(
-        amount > 0 &&
-        date &&
-        sameMonth(
-          date,
-          info.year,
-          info.month
-        )
-      ){
-
-        studentAmount =
-          amount;
-
-        source =
-          "Payment field";
-
-
-        if(
-          getClassType(student) ===
-          "Personal"
-        ){
-
-          studentPersonal =
-            amount;
-
-        }else{
-
-          studentGroup =
-            amount;
-
-        }
-
-      }
-
-    }
-
-
-    /*
-      ==============================================
-      3. LEGACY ADMISSION FALLBACK
-      ==============================================
-    */
-
-    if(
-      studentAmount === 0
-    ){
-
-      const enrollmentDate =
-        getEnrollmentDate(
-          student
-        );
-
-
-      if(
-        enrollmentDate &&
-        sameMonth(
-          enrollmentDate,
-          info.year,
-          info.month
-        )
-      ){
-
-        studentAmount =
-          getFee(student);
-
-        source =
-          "Admission fallback";
-
-
-        if(
-          getClassType(student) ===
-          "Personal"
-        ){
-
-          studentPersonal =
-            studentAmount;
-
-        }else{
-
-          studentGroup =
-            studentAmount;
-
-        }
-
-      }
-
-    }
-
-
-    if(
-      studentAmount > 0
-    ){
-
-      total += studentAmount;
-
-      personal += studentPersonal;
-
-      group += studentGroup;
-
-
-      if(
-        studentPersonal > 0
-      ){
-
-        personalCount++;
-
-      }
-
-
-      if(
-        studentGroup > 0
-      ){
-
-        groupCount++;
-
-      }
-
-
-      records.push({
-
-        id,
-        student,
-        amount:studentAmount,
-        personal:studentPersonal,
-        group:studentGroup,
-        source
-
-      });
-
-    }
-
-  });
-
-
-  return {
-
-    ...info,
-
-    total,
-    personal,
-    group,
-
-    personalCount,
-    groupCount,
-
-    records
-
-  };
-
-}
-
-
-/* ==================================================
-   FORMAT MONEY
-================================================== */
-
-function money(value){
-
-  return "₹" +
-    Number(
-      value || 0
-    ).toLocaleString(
-      "en-IN"
-    );
-
-}
-
-
-/* ==================================================
-   PAYMENT RECORD COUNT
-================================================== */
-
-function getAllPaymentRecordCount(){
-
-  let count = 0;
-
-
-  students.forEach(student=>{
-
-    getPaymentArrays(student)
-      .forEach(arr=>{
-
-        count += arr.length;
-
-      });
-
-  });
-
-
-  return count;
-
-}
-
-
-/* ==================================================
-   RENDER COLLECTION
-================================================== */
-
-function renderCollection(){
-
-  const current =
-    calculateMonth(0);
-
-  const last =
-    calculateMonth(-1);
-
-  const two =
-    calculateMonth(-2);
-
-
-  document.getElementById(
-    "thisMonthCollection"
-  ).textContent =
-    money(current.total);
-
-
-  document.getElementById(
-    "thisPersonal"
-  ).textContent =
-    money(current.personal);
-
-
-  document.getElementById(
-    "thisGroup"
-  ).textContent =
-    money(current.group);
-
-
-  document.getElementById(
-    "thisPersonalCount"
-  ).textContent =
-    `${current.personalCount} Personal`;
-
-
-  document.getElementById(
-    "thisGroupCount"
-  ).textContent =
-    `${current.groupCount} Group`;
-
-
-  document.getElementById(
-    "lastMonthCollection"
-  ).textContent =
-    money(last.total);
-
-
-  document.getElementById(
-    "twoMonthCollection"
-  ).textContent =
-    money(two.total);
-
-
-  document.getElementById(
-    "paymentRecordCount"
-  ).textContent =
-    getAllPaymentRecordCount();
-
-
-  document.getElementById(
-    "thisMonthLabel"
-  ).textContent =
-    `${current.label} • Till today`;
-
-
-  document.getElementById(
-    "lastMonthLabel"
-  ).textContent =
-    last.label;
-
-}
-
-
-/* ==================================================
-   COLLECTION DETAILS
-================================================== */
-
-window.openCollectionDetails =
-function(){
-
-  const current =
-    calculateMonth(0);
-
-  const last =
-    calculateMonth(-1);
-
-  const two =
-    calculateMonth(-2);
-
-
-  document.getElementById(
-    "collectionModalSub"
-  ).textContent =
-    "Current + previous collection records";
-
-
-  const list =
-    document.getElementById(
-      "collectionDetails"
-    );
-
-
-  const sections = [
-
-    {
-      title:current.label,
-      data:current
-    },
-
-    {
-      title:last.label,
-      data:last
-    },
-
-    {
-      title:two.label,
-      data:two
-    }
-
-  ];
-
-
-  let html = "";
-
-
-  sections.forEach(section=>{
-
-    html += `
-
-      <div
-        style="
-          color:#d7b36a;
-          font-size:11px;
-          font-weight:800;
-          margin:14px 0 8px;
-        "
-      >
-        ${safe(section.title)}
-        • ${money(section.data.total)}
-      </div>
-
-    `;
-
-
-    if(
-      !section.data.records.length
-    ){
-
-      html += `
-
-        <div class="empty">
-
-          <div class="emptyText">
-            No collection record
-          </div>
-
-        </div>
-
-      `;
-
-      return;
-
-    }
-
-
-    section.data.records.forEach(record=>{
-
-      const student =
-        record.student;
-
-
-      const type =
-        getClassType(student);
-
-
-      html += `
-
-        <div class="monthDetailCard">
-
-          <div class="monthDetailTop">
-
-            <div class="monthDetailName">
-
-              ${safe(
-                getName(student)
-              )}
-
-            </div>
-
-            <div class="monthDetailAmount">
-
-              ${money(
-                record.amount
-              )}
-
-            </div>
-
-          </div>
-
-
-          <div class="monthDetailMeta">
-
-            📱 ${safe(
-              getMobile(student)
-            )}
-
-          </div>
-
-
-          <div class="monthDetailType">
-
-            ${
-              type === "Personal"
-                ? "👤 Personal"
-                : "👥 Group"
-            }
-
-            • ${money(record.amount)}
-
-          </div>
-
-
-          <div class="collectionSource">
-
-            ${safe(
-              record.source
-            )}
-
-          </div>
-
-        </div>
-
-      `;
-
-    });
-
-  });
-
-
-  list.innerHTML =
-    html;
-
-
-  document
-    .getElementById(
-      "collectionModal"
-    )
-    .classList.add(
-      "show"
-    );
-
-};
-
 
 /* ==================================================
    CLOCK
@@ -4372,7 +1950,6 @@ function updateClock(){
 
   const now =
     new Date();
-
 
   document.getElementById(
     "clockTime"
@@ -4385,7 +1962,6 @@ function updateClock(){
         hour12:true
       }
     );
-
 
   document.getElementById(
     "clockDate"
@@ -4401,14 +1977,12 @@ function updateClock(){
 
 }
 
-
 updateClock();
 
 setInterval(
   updateClock,
   1000
 );
-
 
 /* ==================================================
    TOAST
@@ -4421,20 +1995,16 @@ function showToast(message){
       "toast"
     );
 
-
   toast.textContent =
     message;
-
 
   toast.classList.add(
     "show"
   );
 
-
   clearTimeout(
     toastTimer
   );
-
 
   toastTimer =
     setTimeout(
@@ -4443,14 +2013,13 @@ function showToast(message){
           "show"
         );
       },
-      2300
+      2200
     );
 
 }
 
-
 /* ==================================================
-   LOAD ALL STUDENTS
+   LOAD STUDENTS
 ================================================== */
 
 async function loadStudents(){
@@ -4462,41 +2031,22 @@ async function loadStudents(){
         studentCollection
       );
 
-
     students = [];
-
 
     snapshot.forEach(item=>{
 
-      const data =
-        item.data();
-
-
-      /*
-        Keep ALL Firebase fields.
-      */
-
       students.push({
-
         id:item.id,
-
-        ...data
-
+        ...item.data()
       });
 
     });
 
-
     render();
-
 
   }catch(error){
 
-    console.error(
-      "Firebase load error:",
-      error
-    );
-
+    console.error(error);
 
     document.getElementById(
       "studentCards"
@@ -4509,16 +2059,9 @@ async function loadStudents(){
         </div>
 
         <div class="emptyText">
-
           Unable to load students.
-
-          <br><br>
-
-          ${safe(
-            error.message ||
-            "Firebase error"
-          )}
-
+          <br>
+          Check Firebase configuration.
         </div>
 
       </div>
@@ -4528,7 +2071,6 @@ async function loadStudents(){
   }
 
 }
-
 
 /* ==================================================
    RENDER
@@ -4545,24 +2087,20 @@ function render(){
       .trim()
       .toLowerCase();
 
-
   const activeStudents =
     students.filter(
       s=>!isInactive(s)
     );
-
 
   const inactiveStudents =
     students.filter(
       s=>isInactive(s)
     );
 
-
   document.getElementById(
     "activeCount"
   ).textContent =
     activeStudents.length;
-
 
   document.getElementById(
     "completedCount"
@@ -4571,7 +2109,6 @@ function render(){
       s=>isCompleted(s)
     ).length;
 
-
   document.getElementById(
     "liveCount"
   ).textContent =
@@ -4579,18 +2116,12 @@ function render(){
       s=>isLive(s)
     ).length;
 
-
   document.getElementById(
     "inactiveCount"
   ).textContent =
     inactiveStudents.length;
 
-
-  renderCollection();
-
-
   let filtered = [];
-
 
   if(
     currentFilter === "active"
@@ -4600,7 +2131,6 @@ function render(){
       [...activeStudents];
 
   }
-
 
   else if(
     currentFilter === "completed"
@@ -4613,7 +2143,6 @@ function render(){
 
   }
 
-
   else if(
     currentFilter === "live"
   ){
@@ -4625,7 +2154,6 @@ function render(){
 
   }
 
-
   else if(
     currentFilter === "inactive"
   ){
@@ -4635,7 +2163,6 @@ function render(){
 
   }
 
-
   if(search){
 
     filtered =
@@ -4643,14 +2170,14 @@ function render(){
         student=>{
 
           const name =
-            getName(student)
-              .toLowerCase();
-
+            String(
+              student.name || ""
+            ).toLowerCase();
 
           const phone =
-            getMobile(student)
-              .toLowerCase();
-
+            String(
+              student.id || ""
+            ).toLowerCase();
 
           return (
             name.includes(search) ||
@@ -4661,7 +2188,6 @@ function render(){
       );
 
   }
-
 
   if(
     currentFilter === "active" ||
@@ -4683,30 +2209,37 @@ function render(){
 
     filtered.sort(
       (a,b)=>
-        getName(a)
-          .localeCompare(
-            getName(b)
+        String(
+          a.name || ""
+        ).localeCompare(
+          String(
+            b.name || ""
           )
+        )
     );
 
   }
 
-
   const titles = {
 
-    active:"Active Students",
-    completed:"Completed Students",
-    live:"Live Now",
-    inactive:"Not Active"
+    active:
+      "Active Students",
+
+    completed:
+      "Completed Students",
+
+    live:
+      "Live Now",
+
+    inactive:
+      "Not Active"
 
   };
-
 
   document.getElementById(
     "sectionTitle"
   ).textContent =
     titles[currentFilter];
-
 
   document.getElementById(
     "studentCount"
@@ -4717,12 +2250,10 @@ function render(){
         : ""
     }`;
 
-
   const container =
     document.getElementById(
       "studentCards"
     );
-
 
   if(!filtered.length){
 
@@ -4742,11 +2273,9 @@ function render(){
 
     `;
 
-
     return;
 
   }
-
 
   container.innerHTML =
     filtered
@@ -4757,7 +2286,6 @@ function render(){
 
 }
 
-
 /* ==================================================
    STUDENT CARD
 ================================================== */
@@ -4767,33 +2295,18 @@ function studentCard(student){
   const id =
     student.id;
 
-
   const name =
-    getName(student);
-
-
-  const phone =
-    getMobile(student);
-
-
-  const clean =
-    cleanPhone(phone);
-
+    student.name ||
+    "Unnamed Student";
 
   const logs =
     getLogs(student);
 
-
   const total =
     getTotal(student);
 
-
   const done =
-    Math.min(
-      getDone(student),
-      total
-    );
-
+    getDone(student);
 
   const percentage =
     Math.min(
@@ -4803,52 +2316,38 @@ function studentCard(student){
       )
     );
 
-
   const inactive =
     isInactive(student);
-
 
   const live =
     isLive(student);
 
-
   const completed =
     isCompleted(student);
 
-
   const type =
-    getClassType(student);
-
-
-  const fee =
-    getFee(student);
-
+    student.classType === "Personal"
+      ? "Personal"
+      : "Group";
 
   let lastText =
     "No attendance yet";
 
-
   if(logs.length){
 
     lastText =
-      formatAttendanceLog(
-        logs[logs.length - 1]
-      );
+      logs[logs.length - 1];
 
   }
 
-
   let badges = "";
-
 
   if(inactive){
 
     badges += `
-
       <span class="badge inactive">
         NOT ACTIVE
       </span>
-
     `;
 
   }else{
@@ -4856,49 +2355,39 @@ function studentCard(student){
     if(live){
 
       badges += `
-
         <span class="badge live">
           ● LIVE
         </span>
-
       `;
 
     }
 
-
     if(completed){
 
       badges += `
-
         <span class="badge completed">
           COMPLETED
         </span>
-
       `;
 
     }else{
 
       badges += `
-
         <span class="badge active">
           ACTIVE
         </span>
-
       `;
 
     }
 
   }
 
-
   const cardClass =
     inactive
       ? "studentCard inactive"
       : "studentCard";
 
-
   let actions = "";
-
 
   if(!inactive){
 
@@ -4909,55 +2398,43 @@ function studentCard(student){
         <button
           class="action attend"
           onclick="openAttendance('${safe(id)}')">
-
           + ATTEND
-
         </button>
-
 
         <button
           class="action"
           onclick="openHistory('${safe(id)}')">
-
           📋 LOGS
-
         </button>
-
 
         <button
           class="action wa"
           onclick="sendWhatsApp('${safe(id)}')">
-
           💬 WA
-
         </button>
-
 
         <button
           class="action call"
           onclick="callStudent('${safe(id)}')">
-
           📞 CALL
-
         </button>
 
       </div>
 
-
       ${
         !completed
-          ? `
+        ? `
 
-            <button
-              class="notActiveBtn"
-              onclick="markNotActive('${safe(id)}')">
+          <button
+            class="notActiveBtn"
+            onclick="markNotActive('${safe(id)}')">
 
-              ⏸ MARK NOT ACTIVE
+            ⏸ MARK NOT ACTIVE
 
-            </button>
+          </button>
 
-          `
-          : ""
+        `
+        : ""
       }
 
     `;
@@ -4974,42 +2451,30 @@ function studentCard(student){
 
       </button>
 
-
       <div class="actions">
 
         <button
           class="action attend"
           onclick="openAttendance('${safe(id)}')">
-
           + ATTEND
-
         </button>
-
 
         <button
           class="action"
           onclick="openHistory('${safe(id)}')">
-
           📋 LOGS
-
         </button>
-
 
         <button
           class="action wa"
           onclick="sendWhatsApp('${safe(id)}')">
-
           💬 WA
-
         </button>
-
 
         <button
           class="action call"
           onclick="callStudent('${safe(id)}')">
-
           📞 CALL
-
         </button>
 
       </div>
@@ -5018,7 +2483,6 @@ function studentCard(student){
 
   }
 
-
   return `
 
     <div class="${cardClass}">
@@ -5026,15 +2490,12 @@ function studentCard(student){
       <div class="studentHeader">
 
         <div class="avatar">
-
           ${safe(
             name
               .charAt(0)
               .toUpperCase()
           )}
-
         </div>
-
 
         <div class="studentInfo">
 
@@ -5042,33 +2503,17 @@ function studentCard(student){
             ${safe(name)}
           </div>
 
-
-          <div
-            class="studentPhone ${
-              clean
-                ? "phoneNumber"
-                : "phoneMissing"
-            }">
-
-            📱 ${
-              clean
-                ? safe(clean)
-                : "Mobile not found"
-            }
-
+          <div class="studentPhone">
+            📱 ${safe(id)}
           </div>
 
         </div>
 
-
         <div class="badges">
-
           ${badges}
-
         </div>
 
       </div>
-
 
       <div class="typeRow">
 
@@ -5078,7 +2523,6 @@ function studentCard(student){
             Class
           </span>
 
-
           <span class="typeValue">
 
             ${
@@ -5087,14 +2531,9 @@ function studentCard(student){
                 : "👥 GROUP"
             }
 
-            <span class="typeFee">
-              ${money(fee)}
-            </span>
-
           </span>
 
         </div>
-
 
         <button
           class="editType"
@@ -5105,7 +2544,6 @@ function studentCard(student){
         </button>
 
       </div>
-
 
       <div class="lastAttendance">
 
@@ -5118,7 +2556,6 @@ function studentCard(student){
         </div>
 
       </div>
-
 
       <div class="progressBox">
 
@@ -5134,7 +2571,6 @@ function studentCard(student){
 
         </div>
 
-
         <div class="progress">
 
           <div
@@ -5146,7 +2582,6 @@ function studentCard(student){
 
       </div>
 
-
       ${actions}
 
     </div>
@@ -5154,7 +2589,6 @@ function studentCard(student){
   `;
 
 }
-
 
 /* ==================================================
    FILTER
@@ -5165,7 +2599,6 @@ function(filter){
 
   currentFilter =
     filter;
-
 
   document
     .querySelectorAll(
@@ -5179,16 +2612,21 @@ function(filter){
 
     });
 
-
   const ids = {
 
-    active:"navActive",
-    completed:"navCompleted",
-    live:"navLive",
-    inactive:"navInactive"
+    active:
+      "navActive",
+
+    completed:
+      "navCompleted",
+
+    live:
+      "navLive",
+
+    inactive:
+      "navInactive"
 
   };
-
 
   document
     .getElementById(
@@ -5198,11 +2636,9 @@ function(filter){
       "active"
     );
 
-
   render();
 
 };
-
 
 /* ==================================================
    SEARCH
@@ -5217,9 +2653,8 @@ document
     render
   );
 
-
 /* ==================================================
-   ADD MODAL
+   ADD STUDENT
 ================================================== */
 
 window.openAddModal =
@@ -5229,26 +2664,17 @@ function(){
     "studentPhone"
   ).value = "";
 
-
   document.getElementById(
     "studentName"
   ).value = "";
-
 
   document.getElementById(
     "totalClasses"
   ).value = "20";
 
-
-  document.getElementById(
-    "paymentAmount"
-  ).value = "";
-
-
   selectAddType(
     "Group"
   );
-
 
   document
     .getElementById(
@@ -5260,13 +2686,11 @@ function(){
 
 };
 
-
 window.selectAddType =
 function(type){
 
   addClassType =
     type;
-
 
   document
     .getElementById(
@@ -5276,7 +2700,6 @@ function(type){
       "selected",
       type === "Personal"
     );
-
 
   document
     .getElementById(
@@ -5289,11 +2712,6 @@ function(type){
 
 };
 
-
-/* ==================================================
-   SAVE STUDENT
-================================================== */
-
 window.saveStudent =
 async function(){
 
@@ -5305,7 +2723,6 @@ async function(){
       .value
       .trim();
 
-
   const name =
     document
       .getElementById(
@@ -5313,7 +2730,6 @@ async function(){
       )
       .value
       .trim();
-
 
   const total =
     Number(
@@ -5323,17 +2739,6 @@ async function(){
         )
         .value
     );
-
-
-  const payment =
-    Number(
-      document
-        .getElementById(
-          "paymentAmount"
-        )
-        .value
-    ) || 0;
-
 
   if(
     !/^[0-9]{10}$/.test(
@@ -5349,7 +2754,6 @@ async function(){
 
   }
 
-
   if(!name){
 
     showToast(
@@ -5360,11 +2764,7 @@ async function(){
 
   }
 
-
-  if(
-    !Number.isFinite(total) ||
-    total < 1
-  ){
+  if(total < 1){
 
     showToast(
       "Enter valid total classes"
@@ -5374,72 +2774,7 @@ async function(){
 
   }
 
-
-  if(
-    payment < 0
-  ){
-
-    showToast(
-      "Invalid payment amount"
-    );
-
-    return;
-
-  }
-
-
   try{
-
-    const now =
-      new Date()
-        .toISOString();
-
-
-    const existing =
-      students.find(
-        s=>cleanPhone(
-          getMobile(s)
-        ) === phone
-      );
-
-
-    const oldLogs =
-      existing
-        ? getLogs(existing)
-        : [];
-
-
-    const oldPayments =
-      existing
-        ? getPaymentArrays(existing)
-            .flat()
-        : [];
-
-
-    const newPaymentLogs =
-      payment > 0
-        ? [
-
-            ...oldPayments,
-
-            {
-              amount:payment,
-
-              classType:
-                addClassType ||
-                "Group",
-
-              paymentDate:now,
-
-              date:now,
-
-              source:"Admission"
-
-            }
-
-          ]
-        : oldPayments;
-
 
     await setDoc(
 
@@ -5453,58 +2788,16 @@ async function(){
 
         name:name,
 
-        phone:phone,
-
-        mobile:phone,
-
         totalClasses:total,
 
-        completedClasses:
-          existing
-            ? getDone(existing)
-            : 0,
+        remaining:0,
 
-        remaining:
-          existing
-            ? Math.max(
-                total -
-                getDone(existing),
-                0
-              )
-            : 0,
-
-        attendanceLogs:
-          oldLogs,
-
-        paymentLogs:
-          newPaymentLogs,
+        attendanceLogs:[],
 
         classType:
-          addClassType ||
-          "Group",
+          addClassType || "Group",
 
-        notActive:false,
-
-        active:true,
-
-        status:"active",
-
-        admissionDate:
-          existing
-            ? (
-                existing.admissionDate ||
-                existing.createdAt ||
-                now
-              )
-            : now,
-
-        createdAt:
-          existing
-            ? (
-                existing.createdAt ||
-                now
-              )
-            : now
+        notActive:false
 
       },
 
@@ -5514,27 +2807,19 @@ async function(){
 
     );
 
-
     closeModal(
       "addModal"
     );
 
-
     showToast(
-      existing
-        ? "Student updated ✓"
-        : "Student added successfully ✓"
+      "Student added successfully ✓"
     );
-
 
     await loadStudents();
 
   }catch(error){
 
-    console.error(
-      error
-    );
-
+    console.error(error);
 
     showToast(
       "Could not save student"
@@ -5543,7 +2828,6 @@ async function(){
   }
 
 };
-
 
 /* ==================================================
    EDIT CLASS TYPE
@@ -5555,43 +2839,42 @@ function(id){
   currentStudentId =
     id;
 
-
   const student =
     students.find(
       s=>s.id === id
     );
 
-
   if(!student){
     return;
   }
 
-
   editClassType =
-    getClassType(student);
-
+    student.classType === "Personal"
+      ? "Personal"
+      : "Group";
 
   document.getElementById(
     "typeStudentName"
   ).textContent =
-    `${getName(student)} • ${getMobile(student)}`;
+    student.name || "";
 
+  document
+    .getElementById(
+      "editPersonal"
+    )
+    .classList.toggle(
+      "selected",
+      editClassType === "Personal"
+    );
 
-  document.getElementById(
-    "editPersonal"
-  ).classList.toggle(
-    "selected",
-    editClassType === "Personal"
-  );
-
-
-  document.getElementById(
-    "editGroup"
-  ).classList.toggle(
-    "selected",
-    editClassType === "Group"
-  );
-
+  document
+    .getElementById(
+      "editGroup"
+    )
+    .classList.toggle(
+      "selected",
+      editClassType === "Group"
+    );
 
   document
     .getElementById(
@@ -5603,31 +2886,31 @@ function(id){
 
 };
 
-
 window.selectEditType =
 function(type){
 
   editClassType =
     type;
 
+  document
+    .getElementById(
+      "editPersonal"
+    )
+    .classList.toggle(
+      "selected",
+      type === "Personal"
+    );
 
-  document.getElementById(
-    "editPersonal"
-  ).classList.toggle(
-    "selected",
-    type === "Personal"
-  );
-
-
-  document.getElementById(
-    "editGroup"
-  ).classList.toggle(
-    "selected",
-    type === "Group"
-  );
+  document
+    .getElementById(
+      "editGroup"
+    )
+    .classList.toggle(
+      "selected",
+      type === "Group"
+    );
 
 };
-
 
 window.saveClassType =
 async function(){
@@ -5635,7 +2918,6 @@ async function(){
   if(!currentStudentId){
     return;
   }
-
 
   try{
 
@@ -5648,35 +2930,25 @@ async function(){
       ),
 
       {
-
         classType:
           editClassType
-
       }
 
     );
-
 
     closeModal(
       "typeModal"
     );
 
-
     showToast(
-      `Class type changed • ${
-        editClassType === "Personal"
-          ? "₹8,000"
-          : "₹4,500"
-      }`
+      `Class type changed to ${editClassType}`
     );
-
 
     await loadStudents();
 
   }catch(error){
 
     console.error(error);
-
 
     showToast(
       "Could not update class type"
@@ -5686,9 +2958,8 @@ async function(){
 
 };
 
-
 /* ==================================================
-   ATTENDANCE MODAL
+   ATTENDANCE
 ================================================== */
 
 window.openAttendance =
@@ -5697,41 +2968,38 @@ function(id){
   currentStudentId =
     id;
 
-
   const student =
     students.find(
       s=>s.id === id
     );
 
-
   if(!student){
     return;
   }
 
-
   document.getElementById(
     "attendanceStudentName"
   ).textContent =
-    `${getName(student)} • ${getMobile(student)}`;
-
+    `${student.name || ""} • ${id}`;
 
   selectedRoute = "";
+
+  /*
+    DISTANCE DEFAULT = 5 KM
+  */
 
   selectedDistance =
     "5 KM";
 
   selectedRemark = "";
 
-
   document.getElementById(
     "customRoute"
   ).value = "";
 
-
   document.getElementById(
     "customRemark"
   ).value = "";
-
 
   document
     .getElementById(
@@ -5741,7 +3009,6 @@ function(id){
       "show"
     );
 
-
   document
     .getElementById(
       "customRemarkBox"
@@ -5749,7 +3016,6 @@ function(id){
     .classList.remove(
       "show"
     );
-
 
   document
     .querySelectorAll(
@@ -5763,7 +3029,6 @@ function(id){
 
     });
 
-
   document
     .querySelectorAll(
       ".remarkOption"
@@ -5776,6 +3041,10 @@ function(id){
 
     });
 
+  /*
+    Always select 5 KM
+    by default.
+  */
 
   document
     .querySelectorAll(
@@ -5789,7 +3058,6 @@ function(id){
 
     });
 
-
   document
     .getElementById(
       "attendanceModal"
@@ -5800,7 +3068,6 @@ function(id){
 
 };
 
-
 /* ==================================================
    ROUTE
 ================================================== */
@@ -5810,7 +3077,6 @@ function(btn,value){
 
   selectedRoute =
     value;
-
 
   document
     .querySelectorAll(
@@ -5824,23 +3090,19 @@ function(btn,value){
 
     });
 
-
   btn.classList.add(
     "selected"
   );
-
 
   const customBox =
     document.getElementById(
       "customRouteBox"
     );
 
-
   const customInput =
     document.getElementById(
       "customRoute"
     );
-
 
   if(
     value === "Other Route"
@@ -5849,7 +3111,6 @@ function(btn,value){
     customBox.classList.add(
       "show"
     );
-
 
     setTimeout(
       ()=>{
@@ -5870,7 +3131,6 @@ function(btn,value){
 
 };
 
-
 /* ==================================================
    DISTANCE
 ================================================== */
@@ -5880,7 +3140,6 @@ function(btn,value){
 
   selectedDistance =
     value;
-
 
   document
     .querySelectorAll(
@@ -5894,13 +3153,11 @@ function(btn,value){
 
     });
 
-
   btn.classList.add(
     "selected"
   );
 
 };
-
 
 /* ==================================================
    REMARK
@@ -5911,7 +3168,6 @@ function(btn,value){
 
   selectedRemark =
     value;
-
 
   document
     .querySelectorAll(
@@ -5925,23 +3181,19 @@ function(btn,value){
 
     });
 
-
   btn.classList.add(
     "selected"
   );
-
 
   const customBox =
     document.getElementById(
       "customRemarkBox"
     );
 
-
   const customInput =
     document.getElementById(
       "customRemark"
     );
-
 
   if(
     value === "📝 Custom Remark"
@@ -5950,7 +3202,6 @@ function(btn,value){
     customBox.classList.add(
       "show"
     );
-
 
     setTimeout(
       ()=>{
@@ -5971,7 +3222,6 @@ function(btn,value){
 
 };
 
-
 /* ==================================================
    SAVE ATTENDANCE
 ================================================== */
@@ -5983,6 +3233,7 @@ async function(){
     return;
   }
 
+  /* ================= ROUTE ================= */
 
   if(!selectedRoute){
 
@@ -5994,10 +3245,12 @@ async function(){
 
   }
 
+  /*
+    CUSTOM ROUTE
+  */
 
   if(
-    selectedRoute ===
-    "Other Route"
+    selectedRoute === "Other Route"
   ){
 
     const customRoute =
@@ -6008,27 +3261,46 @@ async function(){
         .value
         .trim();
 
-
     if(!customRoute){
 
       showToast(
         "Enter custom route"
       );
 
+      document
+        .getElementById(
+          "customRoute"
+        )
+        .focus();
+
       return;
 
     }
-
 
     selectedRoute =
       customRoute;
 
   }
 
+  /* ================= DISTANCE ================= */
+
+  /*
+    Distance is ALWAYS 5 KM.
+    Even if user doesn't touch
+    the distance option.
+  */
+
+  if(!selectedDistance){
+
+    selectedDistance =
+      "5 KM";
+
+  }
+
+  /* ================= REMARK ================= */
 
   let finalRemark =
     selectedRemark;
-
 
   if(
     selectedRemark ===
@@ -6043,102 +3315,65 @@ async function(){
         .value
         .trim();
 
-
     if(!customRemark){
 
       showToast(
         "Enter custom remark"
       );
 
+      document
+        .getElementById(
+          "customRemark"
+        )
+        .focus();
+
       return;
 
     }
-
 
     finalRemark =
       customRemark;
 
   }
 
+  const now =
+    new Date();
+
+  const datePart =
+    now.toLocaleDateString(
+      "en-IN",
+      {
+        day:"2-digit",
+        month:"short"
+      }
+    );
+
+  const timePart =
+    now.toLocaleTimeString(
+      "en-IN",
+      {
+        hour:"2-digit",
+        minute:"2-digit",
+        hour12:true
+      }
+    );
+
+  const log =
+    `${datePart} | ${timePart} — Route: ${selectedRoute} | Distance: 5 KM${
+      finalRemark
+        ? ` | Remark: ${finalRemark}`
+        : ""
+    }`;
 
   const student =
     students.find(
       s=>s.id === currentStudentId
     );
 
-
-  if(!student){
-    return;
-  }
-
-
-  const oldLogs =
-    getLogs(student);
-
-
   const currentDone =
-    getDone(student);
-
-
-  const total =
-    getTotal(student);
-
-
-  if(
-    currentDone >= total
-  ){
-
-    showToast(
-      "Training already completed"
-    );
-
-    return;
-
-  }
-
-
-  const now =
-    new Date();
-
-
-  /*
-    New object format.
-    Old string logs remain supported.
-  */
-
-  const attendanceObject = {
-
-    route:selectedRoute,
-
-    distance:
-      selectedDistance ||
-      "5 KM",
-
-    remark:
-      finalRemark || "",
-
-    classType:
-      getClassType(student),
-
-    timestamp:
-      now.toISOString(),
-
-    date:
-      now.toISOString()
-
-  };
-
-
-  const newDone =
-    currentDone + 1;
-
-
-  const remaining =
-    Math.max(
-      total - newDone,
-      0
-    );
-
+    student
+      ? getDone(student)
+      : 0;
 
   try{
 
@@ -6152,59 +3387,31 @@ async function(){
 
       {
 
-        /*
-          Keep object log.
-        */
+        remaining:
+          currentDone + 1,
 
         attendanceLogs:
-          arrayUnion(
-            attendanceObject
-          ),
+          arrayUnion(log),
 
-        /*
-          Correct modern fields.
-        */
-
-        completedClasses:
-          newDone,
-
-        remaining:
-          remaining,
-
-        notActive:false,
-
-        active:true,
-
-        status:
-          newDone >= total
-            ? "completed"
-            : "active"
+        notActive:false
 
       }
 
     );
 
-
     closeModal(
       "attendanceModal"
     );
 
-
     showToast(
-      newDone >= total
-        ? "Training completed ✓"
-        : "Attendance added ✓"
+      "Attendance added ✓"
     );
-
 
     await loadStudents();
 
   }catch(error){
 
-    console.error(
-      error
-    );
-
+    console.error(error);
 
     showToast(
       "Could not save attendance"
@@ -6213,173 +3420,6 @@ async function(){
   }
 
 };
-
-
-/* ==================================================
-   LIVE
-================================================== */
-
-function parseAttendanceTime(log){
-
-  if(
-    typeof log === "object" &&
-    log
-  ){
-
-    const date =
-      toDate(
-        log.timestamp ||
-        log.date ||
-        log.createdAt
-      );
-
-
-    if(date){
-
-      return {
-
-        hour:
-          date.getHours(),
-
-        minute:
-          date.getMinutes()
-
-      };
-
-    }
-
-  }
-
-
-  if(!log){
-    return null;
-  }
-
-
-  const match =
-    String(log).match(
-      /(\d{1,2}):(\d{2})\s*(AM|PM)/i
-    );
-
-
-  if(!match){
-    return null;
-  }
-
-
-  let hour =
-    Number(match[1]);
-
-
-  const minute =
-    Number(match[2]);
-
-
-  const ampm =
-    match[3].toUpperCase();
-
-
-  if(
-    ampm === "PM" &&
-    hour !== 12
-  ){
-
-    hour += 12;
-
-  }
-
-
-  if(
-    ampm === "AM" &&
-    hour === 12
-  ){
-
-    hour = 0;
-
-  }
-
-
-  return {
-    hour,
-    minute
-  };
-
-}
-
-
-function timeDistance(logs){
-
-  if(!logs.length){
-    return 9999;
-  }
-
-
-  const parsed =
-    parseAttendanceTime(
-      logs[logs.length - 1]
-    );
-
-
-  if(!parsed){
-    return 9999;
-  }
-
-
-  const now =
-    new Date();
-
-
-  const currentMinutes =
-    now.getHours() * 60 +
-    now.getMinutes();
-
-
-  const logMinutes =
-    parsed.hour * 60 +
-    parsed.minute;
-
-
-  let diff =
-    Math.abs(
-      currentMinutes -
-      logMinutes
-    );
-
-
-  diff =
-    Math.min(
-      diff,
-      1440 - diff
-    );
-
-
-  return diff;
-
-}
-
-
-function isLive(student){
-
-  if(isInactive(student)){
-    return false;
-  }
-
-
-  const logs =
-    getLogs(student);
-
-
-  if(!logs.length){
-    return false;
-  }
-
-
-  return (
-    timeDistance(logs) <= 30
-  );
-
-}
-
 
 /* ==================================================
    NOT ACTIVE
@@ -6399,22 +3439,14 @@ async function(id){
       ),
 
       {
-
-        notActive:true,
-
-        active:false,
-
-        status:"inactive"
-
+        notActive:true
       }
 
     );
 
-
     showToast(
       "Moved to Not Active"
     );
-
 
     await loadStudents();
 
@@ -6430,7 +3462,6 @@ async function(id){
 
 };
 
-
 window.activateStudent =
 async function(id){
 
@@ -6445,22 +3476,14 @@ async function(id){
       ),
 
       {
-
-        notActive:false,
-
-        active:true,
-
-        status:"active"
-
+        notActive:false
       }
 
     );
 
-
     showToast(
       "Student active again ✓"
     );
-
 
     await loadStudents();
 
@@ -6476,7 +3499,6 @@ async function(id){
 
 };
 
-
 /* ==================================================
    HISTORY
 ================================================== */
@@ -6487,35 +3509,29 @@ function(id){
   currentStudentId =
     id;
 
-
   const student =
     students.find(
       s=>s.id === id
     );
 
-
   if(!student){
     return;
   }
 
-
   document.getElementById(
     "historyStudentName"
   ).textContent =
-    `${getName(student)} • ${getMobile(student)}`;
-
+    `${student.name || ""} • ${id}`;
 
   const logs =
     [
       ...getLogs(student)
     ].reverse();
 
-
   const list =
     document.getElementById(
       "historyList"
     );
-
 
   if(!logs.length){
 
@@ -6549,9 +3565,7 @@ function(id){
               </div>
 
               <div class="historyText">
-                ${safe(
-                  formatAttendanceLog(log)
-                )}
+                ${safe(log)}
               </div>
 
             </div>
@@ -6562,7 +3576,6 @@ function(id){
 
   }
 
-
   document
     .getElementById(
       "historyModal"
@@ -6572,7 +3585,6 @@ function(id){
     );
 
 };
-
 
 /* ==================================================
    WHATSAPP
@@ -6586,41 +3598,15 @@ function(id){
       s=>s.id === id
     );
 
-
   if(!student){
     return;
   }
 
-
-  const phone =
-    getWhatsAppPhone(
-      getMobile(student)
-    );
-
-
-  if(
-    phone.length < 12
-  ){
-
-    showToast(
-      "Mobile number not found"
-    );
-
-    return;
-
-  }
-
-
   const total =
     getTotal(student);
 
-
   const done =
-    Math.min(
-      getDone(student),
-      total
-    );
-
+    getDone(student);
 
   const left =
     Math.max(
@@ -6628,33 +3614,24 @@ function(id){
       0
     );
 
-
   const classType =
-    getClassType(student);
-
-
-  const fee =
-    getFee(student);
-
+    student.classType === "Personal"
+      ? "Personal"
+      : "Group";
 
   const message =
-`Hello *${String(getName(student)).trim()}*,
+`Hello *${String(student.name || "").trim()}*,
 
 *A1 Driving Classes Attendance*
-
-📱 Mobile: *${getMobile(student)}*
 
 🚗 Completed: *${done}/${total}*
 ⏳ Balance: *${left} Sessions*
 📚 Class Type: *${classType}*
-💰 Course Value: *${money(fee)}*
 
 Keep learning and drive safely! 🚗🔥`;
 
-
   const url =
-    `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-
+    `https://wa.me/${id}?text=${encodeURIComponent(message)}`;
 
   window.open(
     url,
@@ -6663,7 +3640,6 @@ Keep learning and drive safely! 🚗🔥`;
 
 };
 
-
 /* ==================================================
    CALL
 ================================================== */
@@ -6671,47 +3647,10 @@ Keep learning and drive safely! 🚗🔥`;
 window.callStudent =
 function(id){
 
-  const student =
-    students.find(
-      s=>s.id === id
-    );
-
-
-  if(!student){
-
-    showToast(
-      "Student not found"
-    );
-
-    return;
-
-  }
-
-
-  const phone =
-    cleanPhone(
-      getMobile(student)
-    );
-
-
-  if(
-    phone.length !== 10
-  ){
-
-    showToast(
-      "Mobile number not found"
-    );
-
-    return;
-
-  }
-
-
   window.location.href =
-    `tel:${phone}`;
+    `tel:${id}`;
 
 };
-
 
 /* ==================================================
    CLOSE MODALS
@@ -6727,7 +3666,6 @@ function(id){
     );
 
 };
-
 
 document
   .querySelectorAll(
@@ -6754,7 +3692,6 @@ document
 
   });
 
-
 document.addEventListener(
   "keydown",
   function(e){
@@ -6780,7 +3717,6 @@ document.addEventListener(
   }
 );
 
-
 /* ==================================================
    AUTO REFRESH
 ================================================== */
@@ -6789,7 +3725,6 @@ setInterval(
   loadStudents,
   30000
 );
-
 
 /* ==================================================
    START
