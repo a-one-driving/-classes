@@ -1,21 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-
 <title>A1 Attendance | Driving Classes</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link
-  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-  rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-
 *{
   box-sizing:border-box;
   margin:0;
@@ -66,9 +60,7 @@ button{
   -webkit-tap-highlight-color:transparent;
 }
 
-/* ==================================================
-   HEADER
-================================================== */
+/* ================= HEADER ================= */
 
 .header{
   position:sticky;
@@ -137,9 +129,7 @@ button{
   margin-top:4px;
 }
 
-/* ==================================================
-   MAIN
-================================================== */
+/* ================= MAIN ================= */
 
 .container{
   max-width:900px;
@@ -147,9 +137,7 @@ button{
   padding:18px 16px 30px;
 }
 
-/* ==================================================
-   SEARCH
-================================================== */
+/* ================= SEARCH ================= */
 
 .search{
   position:relative;
@@ -185,199 +173,7 @@ button{
   color:#555;
 }
 
-/* ==================================================
-   COLLECTION
-================================================== */
-
-.collectionSection{
-  margin-bottom:22px;
-}
-
-.collectionHeader{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:10px;
-  padding:0 2px;
-}
-
-.collectionTitle{
-  font-size:13px;
-  font-weight:800;
-}
-
-.collectionHint{
-  color:#555;
-  font-size:7px;
-  letter-spacing:.8px;
-  text-transform:uppercase;
-}
-
-.collectionSlider{
-  display:flex;
-  gap:10px;
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
-  overscroll-behavior-x:contain;
-  -webkit-overflow-scrolling:touch;
-  scrollbar-width:none;
-  padding:2px 1px 5px;
-}
-
-.collectionSlider::-webkit-scrollbar{
-  display:none;
-}
-
-.collectionCard{
-  flex:0 0 100%;
-  scroll-snap-align:start;
-  position:relative;
-  min-height:166px;
-  padding:17px;
-  border:1px solid #302a20;
-  border-radius:19px;
-  overflow:hidden;
-  background:
-    radial-gradient(
-      circle at 92% 5%,
-      rgba(240,209,139,.13),
-      transparent 34%
-    ),
-    linear-gradient(
-      145deg,
-      #17140f,
-      #0e0e0e 65%
-    );
-}
-
-.collectionCard::after{
-  content:"";
-  position:absolute;
-  width:110px;
-  height:110px;
-  right:-45px;
-  bottom:-55px;
-  border-radius:50%;
-  border:1px solid rgba(215,179,106,.10);
-  pointer-events:none;
-}
-
-.collectionTop{
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:10px;
-}
-
-.collectionMonth{
-  color:#777;
-  font-size:8px;
-  text-transform:uppercase;
-  letter-spacing:1.2px;
-  font-weight:700;
-}
-
-.collectionPeriod{
-  color:var(--gold-light);
-  font-size:16px;
-  font-weight:800;
-  margin-top:4px;
-}
-
-.collectionSwipe{
-  padding:5px 8px;
-  border:1px solid #3a3224;
-  border-radius:8px;
-  background:#17130e;
-  color:#8e7650;
-  font-size:7px;
-  font-weight:800;
-  white-space:nowrap;
-}
-
-.collectionAmount{
-  margin-top:15px;
-  color:#fff;
-  font-size:28px;
-  line-height:1;
-  font-weight:800;
-  letter-spacing:-.8px;
-}
-
-.collectionAmount span{
-  color:#777;
-  font-size:11px;
-  font-weight:600;
-  margin-left:3px;
-}
-
-.collectionStats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:7px;
-  margin-top:16px;
-}
-
-.collectionStat{
-  padding:8px 7px;
-  border-radius:9px;
-  background:rgba(0,0,0,.25);
-  border:1px solid #28231c;
-}
-
-.collectionStatValue{
-  color:#ddd;
-  font-size:11px;
-  font-weight:800;
-}
-
-.collectionStatLabel{
-  color:#666;
-  font-size:6px;
-  margin-top:4px;
-  text-transform:uppercase;
-  letter-spacing:.6px;
-}
-
-.collectionBottom{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-top:11px;
-}
-
-.collectionFormula{
-  color:#555;
-  font-size:7px;
-}
-
-.collectionDot{
-  display:flex;
-  gap:4px;
-  align-items:center;
-}
-
-.collectionDot span{
-  width:5px;
-  height:5px;
-  border-radius:50%;
-  background:#383838;
-}
-
-.collectionDot span.active{
-  background:var(--gold-light);
-  width:14px;
-  border-radius:5px;
-}
-
-.collectionEmpty{
-  color:#666;
-  font-size:9px;
-}
-
-/* ==================================================
-   STATS
-================================================== */
+/* ================= STATS ================= */
 
 .stats{
   display:grid;
@@ -412,9 +208,7 @@ button{
   margin-top:7px;
 }
 
-/* ==================================================
-   SECTION
-================================================== */
+/* ================= SECTION ================= */
 
 .sectionHeader{
   display:flex;
@@ -434,9 +228,7 @@ button{
   font-size:9px;
 }
 
-/* ==================================================
-   STUDENT CARDS
-================================================== */
+/* ================= CARDS ================= */
 
 .cards{
   display:grid;
@@ -542,9 +334,7 @@ button{
   border:1px solid #2c2c2c;
 }
 
-/* ==================================================
-   CLASS TYPE
-================================================== */
+/* ================= CLASS TYPE ================= */
 
 .typeRow{
   margin-top:13px;
@@ -586,9 +376,7 @@ button{
   font-weight:700;
 }
 
-/* ==================================================
-   LAST ATTENDANCE
-================================================== */
+/* ================= LAST ATTENDANCE ================= */
 
 .lastAttendance{
   margin-top:9px;
@@ -612,9 +400,7 @@ button{
   margin-top:5px;
 }
 
-/* ==================================================
-   PROGRESS
-================================================== */
+/* ================= PROGRESS ================= */
 
 .progressBox{
   margin-top:12px;
@@ -657,9 +443,7 @@ button{
   );
 }
 
-/* ==================================================
-   ACTIONS
-================================================== */
+/* ================= ACTIONS ================= */
 
 .actions{
   display:grid;
@@ -720,9 +504,7 @@ button{
   font-weight:800;
 }
 
-/* ==================================================
-   EMPTY
-================================================== */
+/* ================= EMPTY ================= */
 
 .empty{
   border:1px dashed #292929;
@@ -748,9 +530,7 @@ button{
   font-size:10px;
 }
 
-/* ==================================================
-   FAB
-================================================== */
+/* ================= FAB ================= */
 
 .fab{
   position:fixed;
@@ -771,9 +551,7 @@ button{
   box-shadow:0 12px 35px rgba(0,0,0,.5);
 }
 
-/* ==================================================
-   BOTTOM NAV
-================================================== */
+/* ================= BOTTOM NAV ================= */
 
 .bottomNav{
   position:fixed;
@@ -811,9 +589,7 @@ button{
   margin-bottom:3px;
 }
 
-/* ==================================================
-   MODAL
-================================================== */
+/* ================= MODAL ================= */
 
 .modal{
   position:fixed;
@@ -882,9 +658,7 @@ button{
   font-size:17px;
 }
 
-/* ==================================================
-   FORM
-================================================== */
+/* ================= FORM ================= */
 
 .formGroup{
   margin-bottom:14px;
@@ -925,9 +699,7 @@ button{
   resize:vertical;
 }
 
-/* ==================================================
-   TYPE
-================================================== */
+/* ================= TYPE ================= */
 
 .typeGrid{
   display:grid;
@@ -961,9 +733,7 @@ button{
   font-weight:800;
 }
 
-/* ==================================================
-   OPTIONS
-================================================== */
+/* ================= OPTIONS ================= */
 
 .optionGrid{
   display:grid;
@@ -988,9 +758,7 @@ button{
   font-weight:800;
 }
 
-/* ==================================================
-   CUSTOM ROUTE
-================================================== */
+/* ================= CUSTOM ROUTE ================= */
 
 .customRouteBox{
   display:none;
@@ -1008,9 +776,7 @@ button{
   line-height:1.4;
 }
 
-/* ==================================================
-   CUSTOM REMARK
-================================================== */
+/* ================= CUSTOM REMARK ================= */
 
 .customRemarkBox{
   display:none;
@@ -1028,9 +794,16 @@ button{
   line-height:1.4;
 }
 
-/* ==================================================
-   GOLD BUTTON
-================================================== */
+/* ================= DISTANCE DEFAULT ================= */
+
+.distanceDefault{
+  border-color:var(--gold-light);
+  background:var(--gold-light);
+  color:#111;
+  font-weight:800;
+}
+
+/* ================= GOLD BUTTON ================= */
 
 .goldBtn{
   width:100%;
@@ -1047,9 +820,7 @@ button{
   font-weight:800;
 }
 
-/* ==================================================
-   HISTORY
-================================================== */
+/* ================= HISTORY ================= */
 
 .historyItem{
   padding:12px;
@@ -1072,9 +843,7 @@ button{
   line-height:1.6;
 }
 
-/* ==================================================
-   TOAST
-================================================== */
+/* ================= TOAST ================= */
 
 .toast{
   position:fixed;
@@ -1099,9 +868,7 @@ button{
   transform:translateX(-50%) translateY(0);
 }
 
-/* ==================================================
-   MOBILE
-================================================== */
+/* ================= MOBILE ================= */
 
 @media(max-width:500px){
 
@@ -1138,10 +905,6 @@ button{
     font-size:7px;
   }
 
-  .collectionAmount{
-    font-size:26px;
-  }
-
 }
 
 @media(max-width:370px){
@@ -1162,20 +925,13 @@ button{
     grid-template-columns:1fr 1fr;
   }
 
-  .collectionStats{
-    gap:5px;
-  }
-
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- ==================================================
-   HEADER
-================================================== -->
+<!-- ================= HEADER ================= -->
 
 <header class="header">
 
@@ -1221,15 +977,9 @@ button{
 
 </header>
 
-
-<!-- ==================================================
-   MAIN
-================================================== -->
+<!-- ================= MAIN ================= -->
 
 <main class="container">
-
-
-  <!-- SEARCH -->
 
   <div class="search">
 
@@ -1245,125 +995,55 @@ button{
 
   </div>
 
-
-  <!-- ==================================================
-       COLLECTION OVERVIEW
-  ================================================== -->
-
-  <section class="collectionSection">
-
-    <div class="collectionHeader">
-
-      <div class="collectionTitle">
-        Collection Overview
-      </div>
-
-      <div class="collectionHint">
-        Swipe left
-      </div>
-
-    </div>
-
-    <div
-      class="collectionSlider"
-      id="collectionSlider">
-
-      <div class="collectionCard">
-
-        <div class="collectionTop">
-
-          <div>
-
-            <div class="collectionMonth">
-              COLLECTION
-            </div>
-
-            <div class="collectionPeriod">
-              Loading...
-            </div>
-
-          </div>
-
-        </div>
-
-        <div class="collectionAmount">
-          ₹0
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- ==================================================
-       STATS
-  ================================================== -->
+  <!-- ================= STATS ================= -->
 
   <div class="stats">
 
     <div class="stat">
-
       <div
         class="statValue"
         id="activeCount">
         0
       </div>
-
       <div class="statLabel">
         ACTIVE
       </div>
-
     </div>
 
-
     <div class="stat">
-
       <div
         class="statValue"
         id="completedCount">
         0
       </div>
-
       <div class="statLabel">
         COMPLETED
       </div>
-
     </div>
 
-
     <div class="stat">
-
       <div
         class="statValue"
         id="liveCount">
         0
       </div>
-
       <div class="statLabel">
         LIVE NOW
       </div>
-
     </div>
 
-
     <div class="stat">
-
       <div
         class="statValue"
         id="inactiveCount">
         0
       </div>
-
       <div class="statLabel">
         NOT ACTIVE
       </div>
-
     </div>
 
   </div>
-
 
   <div class="sectionHeader">
 
@@ -1381,7 +1061,6 @@ button{
 
   </div>
 
-
   <div
     id="studentCards"
     class="cards">
@@ -1394,10 +1073,7 @@ button{
 
 </main>
 
-
-<!-- ==================================================
-   FAB
-================================================== -->
+<!-- ================= FAB ================= -->
 
 <button
   class="fab"
@@ -1405,10 +1081,7 @@ button{
   +
 </button>
 
-
-<!-- ==================================================
-   BOTTOM NAV
-================================================== -->
+<!-- ================= BOTTOM NAV ================= -->
 
 <nav class="bottomNav">
 
@@ -1422,7 +1095,6 @@ button{
 
   </button>
 
-
   <button
     class="navBtn"
     id="navCompleted"
@@ -1433,7 +1105,6 @@ button{
 
   </button>
 
-
   <button
     class="navBtn"
     id="navLive"
@@ -1443,7 +1114,6 @@ button{
     LIVE
 
   </button>
-
 
   <button
     class="navBtn"
@@ -1457,10 +1127,7 @@ button{
 
 </nav>
 
-
-<!-- ==================================================
-   ADD STUDENT MODAL
-================================================== -->
+<!-- ================= ADD STUDENT ================= -->
 
 <div
   class="modal"
@@ -1490,7 +1157,6 @@ button{
 
     </div>
 
-
     <div class="formGroup">
 
       <label class="formLabel">
@@ -1507,7 +1173,6 @@ button{
 
     </div>
 
-
     <div class="formGroup">
 
       <label class="formLabel">
@@ -1521,7 +1186,6 @@ button{
         placeholder="Student full name">
 
     </div>
-
 
     <div class="formGroup">
 
@@ -1537,7 +1201,6 @@ button{
         value="20">
 
     </div>
-
 
     <div class="formGroup">
 
@@ -1563,7 +1226,6 @@ button{
 
         </button>
 
-
         <button
           type="button"
           class="typeOption selected"
@@ -1584,7 +1246,6 @@ button{
 
     </div>
 
-
     <button
       class="goldBtn"
       onclick="saveStudent()">
@@ -1597,10 +1258,7 @@ button{
 
 </div>
 
-
-<!-- ==================================================
-   ATTENDANCE MODAL
-================================================== -->
+<!-- ================= ATTENDANCE ================= -->
 
 <div
   class="modal"
@@ -1631,6 +1289,7 @@ button{
 
     </div>
 
+    <!-- ROUTE -->
 
     <div class="formGroup">
 
@@ -1690,7 +1349,6 @@ button{
 
       </div>
 
-
       <div
         class="customRouteBox"
         id="customRouteBox">
@@ -1710,6 +1368,7 @@ button{
 
     </div>
 
+    <!-- DISTANCE -->
 
     <div class="formGroup">
 
@@ -1721,7 +1380,7 @@ button{
 
         <button
           type="button"
-          class="optionBtn distanceOption selected"
+          class="optionBtn distanceOption distanceDefault selected"
           onclick="selectDistance(this,'5 KM')">
 
           5 KM
@@ -1732,6 +1391,7 @@ button{
 
     </div>
 
+    <!-- REMARK -->
 
     <div class="formGroup">
 
@@ -1745,95 +1405,122 @@ button{
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'👍 Good Driving')">
+
           👍 Good Driving
+
         </button>
 
         <button
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'⚠️ Needs Improvement')">
+
           ⚠️ Needs Improvement
+
         </button>
 
         <button
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'🔄 Good Turning')">
+
           🔄 Good Turning
+
         </button>
 
         <button
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'⚠️ Bad Turning')">
+
           ⚠️ Bad Turning
+
         </button>
 
         <button
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'🛑 Good Braking')">
+
           🛑 Good Braking
+
         </button>
 
         <button
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'⚠️ Bad Braking')">
+
           ⚠️ Bad Braking
+
         </button>
 
         <button
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'⚙️ Good Clutch')">
+
           ⚙️ Good Clutch
+
         </button>
 
         <button
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'⚙️ Clutch Improvement')">
+
           ⚙️ Clutch Improvement
+
         </button>
 
         <button
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'🚦 Good Traffic Control')">
+
           🚦 Good Traffic Control
+
         </button>
 
         <button
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'🚗 Good Vehicle Control')">
+
           🚗 Good Vehicle Control
+
         </button>
 
         <button
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'🅿️ Good Parking')">
+
           🅿️ Good Parking
+
         </button>
 
         <button
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'⚠️ Parking Improvement')">
+
           ⚠️ Parking Improvement
+
         </button>
 
         <button
           type="button"
           class="optionBtn remarkOption"
           onclick="selectRemark(this,'📝 Custom Remark')">
+
           📝 Custom Remark
+
         </button>
 
       </div>
 
+      <!-- CUSTOM REMARK -->
 
       <div
         class="customRemarkBox"
@@ -1854,7 +1541,6 @@ button{
 
     </div>
 
-
     <button
       class="goldBtn"
       onclick="saveAttendance()">
@@ -1867,10 +1553,7 @@ button{
 
 </div>
 
-
-<!-- ==================================================
-   HISTORY MODAL
-================================================== -->
+<!-- ================= HISTORY ================= -->
 
 <div
   class="modal"
@@ -1901,17 +1584,13 @@ button{
 
     </div>
 
-
     <div id="historyList"></div>
 
   </div>
 
 </div>
 
-
-<!-- ==================================================
-   TYPE MODAL
-================================================== -->
+<!-- ================= EDIT TYPE ================= -->
 
 <div
   class="modal"
@@ -1942,7 +1621,6 @@ button{
 
     </div>
 
-
     <div class="formGroup">
 
       <label class="formLabel">
@@ -1967,7 +1645,6 @@ button{
 
         </button>
 
-
         <button
           type="button"
           class="typeOption"
@@ -1988,7 +1665,6 @@ button{
 
     </div>
 
-
     <button
       class="goldBtn"
       onclick="saveClassType()">
@@ -2001,20 +1677,14 @@ button{
 
 </div>
 
-
-<!-- ==================================================
-   TOAST
-================================================== -->
+<!-- ================= TOAST ================= -->
 
 <div
   class="toast"
   id="toast">
 </div>
 
-
-<!-- ==================================================
-   FIREBASE + APP
-================================================== -->
+<!-- ================= FIREBASE ================= -->
 
 <script type="module">
 
@@ -2032,7 +1702,6 @@ import {
   arrayUnion
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-
 /* ==================================================
    FIREBASE CONFIG
 ================================================== */
@@ -2040,7 +1709,7 @@ import {
 const firebaseConfig = {
 
   apiKey:
-    "AIzaSyC3gWi8p85z-wkoJeWb3jYoQpcIar8Sww",
+    "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
 
   authDomain:
     "abinash-driving.firebaseapp.com",
@@ -2059,7 +1728,6 @@ const firebaseConfig = {
 
 };
 
-
 const app =
   initializeApp(firebaseConfig);
 
@@ -2072,24 +1740,8 @@ const studentCollection =
     "studentData"
   );
 
-
 /* ==================================================
-   CACHE
-================================================== */
-
-const CACHE_KEY =
-  "A1_DRIVING_STUDENTS_CACHE_V3";
-
-const CACHE_TIME_KEY =
-  "A1_DRIVING_STUDENTS_CACHE_TIME_V3";
-
-
-const CACHE_MAX_AGE =
-  1000 * 60 * 60 * 24;
-
-
-/* ==================================================
-   GLOBAL
+   GLOBAL VARIABLES
 ================================================== */
 
 let students = [];
@@ -2099,142 +1751,16 @@ let currentFilter = "active";
 let currentStudentId = null;
 
 let selectedRoute = "";
-
 let selectedDistance = "5 KM";
-
 let selectedRemark = "";
 
 let addClassType = "Group";
-
 let editClassType = "Group";
 
 let toastTimer;
 
-
 /* ==================================================
-   FEES
-================================================== */
-
-const GROUP_FEE =
-  4500;
-
-const PERSONAL_FEE =
-  8000;
-
-
-/* ==================================================
-   CACHE SAVE
-================================================== */
-
-function saveStudentsCache(){
-
-  try{
-
-    localStorage.setItem(
-      CACHE_KEY,
-      JSON.stringify(students)
-    );
-
-    localStorage.setItem(
-      CACHE_TIME_KEY,
-      String(Date.now())
-    );
-
-  }catch(error){
-
-    console.warn(
-      "Cache save failed:",
-      error
-    );
-
-  }
-
-}
-
-
-/* ==================================================
-   CACHE LOAD
-================================================== */
-
-function loadStudentsCache(){
-
-  try{
-
-    const cached =
-      localStorage.getItem(
-        CACHE_KEY
-      );
-
-    if(!cached){
-      return false;
-    }
-
-    const parsed =
-      JSON.parse(cached);
-
-    if(
-      !Array.isArray(parsed)
-    ){
-
-      return false;
-
-    }
-
-    students =
-      parsed;
-
-    return students.length > 0;
-
-  }catch(error){
-
-    console.warn(
-      "Cache read failed:",
-      error
-    );
-
-    return false;
-
-  }
-
-}
-
-
-/* ==================================================
-   CACHE AGE
-================================================== */
-
-function isCacheFresh(){
-
-  try{
-
-    const timestamp =
-      Number(
-        localStorage.getItem(
-          CACHE_TIME_KEY
-        ) || 0
-      );
-
-    if(!timestamp){
-      return false;
-    }
-
-    return (
-      Date.now() - timestamp
-      <
-      CACHE_MAX_AGE
-    );
-
-  }catch(error){
-
-    return false;
-
-  }
-
-}
-
-
-/* ==================================================
-   SAFE HTML
+   HELPERS
 ================================================== */
 
 function safe(value){
@@ -2248,11 +1774,6 @@ function safe(value){
 
 }
 
-
-/* ==================================================
-   LOGS
-================================================== */
-
 function getLogs(student){
 
   return Array.isArray(
@@ -2262,11 +1783,6 @@ function getLogs(student){
     : [];
 
 }
-
-
-/* ==================================================
-   DONE
-================================================== */
 
 function getDone(student){
 
@@ -2286,11 +1802,6 @@ function getDone(student){
 
 }
 
-
-/* ==================================================
-   TOTAL
-================================================== */
-
 function getTotal(student){
 
   return Math.max(
@@ -2302,11 +1813,6 @@ function getTotal(student){
 
 }
 
-
-/* ==================================================
-   COMPLETED
-================================================== */
-
 function isCompleted(student){
 
   return (
@@ -2316,560 +1822,14 @@ function isCompleted(student){
 
 }
 
-
-/* ==================================================
-   INACTIVE
-================================================== */
-
 function isInactive(student){
 
   return student.notActive === true;
 
 }
 
-
 /* ==================================================
-   DATE PARSER
-================================================== */
-
-function parseDateFromValue(value){
-
-  if(!value){
-    return null;
-  }
-
-
-  if(
-    value instanceof Date &&
-    !isNaN(value.getTime())
-  ){
-
-    return value;
-
-  }
-
-
-  if(
-    typeof value === "object" &&
-    value.seconds
-  ){
-
-    const date =
-      new Date(
-        Number(value.seconds) * 1000
-      );
-
-    return isNaN(date.getTime())
-      ? null
-      : date;
-
-  }
-
-
-  const text =
-    String(value);
-
-
-  let match =
-    text.match(
-      /(\d{1,2})\s+([A-Za-z]{3,9})\s+(\d{4})\s*\|\s*(\d{1,2}):(\d{2})\s*(AM|PM)/i
-    );
-
-
-  if(match){
-
-    const day =
-      Number(match[1]);
-
-    const monthName =
-      match[2];
-
-    const year =
-      Number(match[3]);
-
-    let hour =
-      Number(match[4]);
-
-    const minute =
-      Number(match[5]);
-
-    const ampm =
-      match[6].toUpperCase();
-
-
-    if(
-      ampm === "PM" &&
-      hour !== 12
-    ){
-
-      hour += 12;
-
-    }
-
-
-    if(
-      ampm === "AM" &&
-      hour === 12
-    ){
-
-      hour = 0;
-
-    }
-
-
-    const date =
-      new Date(
-        `${monthName} ${day}, ${year} ${hour}:${String(minute).padStart(2,"0")}`
-      );
-
-
-    return isNaN(date.getTime())
-      ? null
-      : date;
-
-  }
-
-
-  match =
-    text.match(
-      /(\d{1,2})\s+([A-Za-z]{3,9})\s*\|\s*(\d{1,2}):(\d{2})\s*(AM|PM)/i
-    );
-
-
-  if(match){
-
-    const day =
-      Number(match[1]);
-
-    const monthName =
-      match[2];
-
-    let hour =
-      Number(match[3]);
-
-    const minute =
-      Number(match[4]);
-
-    const ampm =
-      match[5].toUpperCase();
-
-
-    if(
-      ampm === "PM" &&
-      hour !== 12
-    ){
-
-      hour += 12;
-
-    }
-
-
-    if(
-      ampm === "AM" &&
-      hour === 12
-    ){
-
-      hour = 0;
-
-    }
-
-
-    const year =
-      new Date().getFullYear();
-
-
-    const date =
-      new Date(
-        `${monthName} ${day}, ${year} ${hour}:${String(minute).padStart(2,"0")}`
-      );
-
-
-    return isNaN(date.getTime())
-      ? null
-      : date;
-
-  }
-
-
-  const direct =
-    new Date(text);
-
-
-  return isNaN(direct.getTime())
-    ? null
-    : direct;
-
-}
-
-
-/* ==================================================
-   COLLECTION DATE
-================================================== */
-
-function getCollectionDate(student){
-
-  const fields = [
-
-    "admissionDate",
-
-    "enrollmentDate",
-
-    "createdAt"
-
-  ];
-
-
-  for(
-    const field of fields
-  ){
-
-    if(student[field]){
-
-      const parsed =
-        parseDateFromValue(
-          student[field]
-        );
-
-      if(parsed){
-        return parsed;
-      }
-
-    }
-
-  }
-
-
-  return parseDateFromValue(
-    getLogs(student)[0]
-  );
-
-}
-
-
-/* ==================================================
-   MONTH
-================================================== */
-
-function getMonthInfo(offset){
-
-  const now =
-    new Date();
-
-  return new Date(
-    now.getFullYear(),
-    now.getMonth() - offset,
-    1
-  );
-
-}
-
-
-function getMonthName(date){
-
-  return date.toLocaleDateString(
-    "en-IN",
-    {
-      month:"long",
-      year:"numeric"
-    }
-  );
-
-}
-
-
-/* ==================================================
-   COLLECTION
-================================================== */
-
-function getCollectionForMonth(offset){
-
-  const target =
-    getMonthInfo(offset);
-
-  const targetYear =
-    target.getFullYear();
-
-  const targetMonth =
-    target.getMonth();
-
-
-  let groupCount = 0;
-
-  let personalCount = 0;
-
-
-  students.forEach(student=>{
-
-    const date =
-      getCollectionDate(student);
-
-
-    if(!date){
-      return;
-    }
-
-
-    if(
-      date.getFullYear() !==
-      targetYear
-    ){
-
-      return;
-
-    }
-
-
-    if(
-      date.getMonth() !==
-      targetMonth
-    ){
-
-      return;
-
-    }
-
-
-    if(
-      student.classType ===
-      "Personal"
-    ){
-
-      personalCount++;
-
-    }else{
-
-      groupCount++;
-
-    }
-
-  });
-
-
-  return {
-
-    date:target,
-
-    groupCount,
-
-    personalCount,
-
-    totalStudents:
-      groupCount +
-      personalCount,
-
-    totalCollection:
-      groupCount * GROUP_FEE +
-      personalCount * PERSONAL_FEE
-
-  };
-
-}
-
-
-/* ==================================================
-   COLLECTION RENDER
-================================================== */
-
-function renderCollection(){
-
-  const slider =
-    document.getElementById(
-      "collectionSlider"
-    );
-
-
-  if(!slider){
-    return;
-  }
-
-
-  let html = "";
-
-
-  for(
-    let offset=0;
-    offset<6;
-    offset++
-  ){
-
-    const data =
-      getCollectionForMonth(
-        offset
-      );
-
-
-    const period =
-      getMonthName(
-        data.date
-      );
-
-
-    const amount =
-      data.totalCollection
-        .toLocaleString(
-          "en-IN"
-        );
-
-
-    html += `
-
-      <div class="collectionCard">
-
-        <div class="collectionTop">
-
-          <div>
-
-            <div class="collectionMonth">
-
-              ${
-                offset === 0
-                  ? "CURRENT MONTH"
-                  : offset === 1
-                    ? "LAST MONTH"
-                    : `${offset} MONTHS AGO`
-              }
-
-            </div>
-
-            <div class="collectionPeriod">
-              ${safe(period)}
-            </div>
-
-          </div>
-
-          ${
-            offset === 0
-              ? `
-                <div class="collectionSwipe">
-                  SWIPE ←
-                </div>
-              `
-              : ""
-          }
-
-        </div>
-
-
-        <div class="collectionAmount">
-
-          ₹${amount}
-
-          <span>
-            collected
-          </span>
-
-        </div>
-
-
-        ${
-          data.totalStudents
-
-          ? `
-
-            <div class="collectionStats">
-
-              <div class="collectionStat">
-
-                <div class="collectionStatValue">
-                  ${data.totalStudents}
-                </div>
-
-                <div class="collectionStatLabel">
-                  STUDENTS
-                </div>
-
-              </div>
-
-
-              <div class="collectionStat">
-
-                <div class="collectionStatValue">
-                  ${data.groupCount}
-                </div>
-
-                <div class="collectionStatLabel">
-                  GROUP · ₹4,500
-                </div>
-
-              </div>
-
-
-              <div class="collectionStat">
-
-                <div class="collectionStatValue">
-                  ${data.personalCount}
-                </div>
-
-                <div class="collectionStatLabel">
-                  PERSONAL · ₹8,000
-                </div>
-
-              </div>
-
-            </div>
-
-          `
-
-          : `
-
-            <div class="collectionStats">
-
-              <div
-                class="collectionStat"
-                style="grid-column:1/-1">
-
-                <div class="collectionEmpty">
-                  No admissions / collection recorded
-                  for this month.
-                </div>
-
-              </div>
-
-            </div>
-
-          `
-        }
-
-
-        <div class="collectionBottom">
-
-          <div class="collectionFormula">
-            Group × ₹4,500 &nbsp; • &nbsp;
-            Personal × ₹8,000
-          </div>
-
-          <div class="collectionDot">
-
-            ${Array.from(
-              {length:6},
-              (_,i)=>`
-
-                <span
-                  class="${i===offset ? "active" : ""}">
-                </span>
-
-              `
-            ).join("")}
-
-          </div>
-
-        </div>
-
-      </div>
-
-    `;
-
-  }
-
-
-  slider.innerHTML =
-    html;
-
-}
-
-
-/* ==================================================
-   ATTENDANCE TIME
+   TIME
 ================================================== */
 
 function parseAttendanceTime(log){
@@ -2878,17 +1838,14 @@ function parseAttendanceTime(log){
     return null;
   }
 
-
   const match =
     String(log).match(
       /(\d{1,2}):(\d{2})\s*(AM|PM)/i
     );
 
-
   if(!match){
     return null;
   }
-
 
   let hour =
     Number(match[1]);
@@ -2899,7 +1856,6 @@ function parseAttendanceTime(log){
   const ampm =
     match[3].toUpperCase();
 
-
   if(
     ampm === "PM" &&
     hour !== 12
@@ -2908,7 +1864,6 @@ function parseAttendanceTime(log){
     hour += 12;
 
   }
-
 
   if(
     ampm === "AM" &&
@@ -2919,7 +1874,6 @@ function parseAttendanceTime(log){
 
   }
 
-
   return {
     hour,
     minute
@@ -2927,42 +1881,31 @@ function parseAttendanceTime(log){
 
 }
 
-
-/* ==================================================
-   TIME DISTANCE
-================================================== */
-
 function timeDistance(logs){
 
   if(!logs.length){
     return 9999;
   }
 
-
   const parsed =
     parseAttendanceTime(
       logs[logs.length - 1]
     );
 
-
   if(!parsed){
     return 9999;
   }
 
-
   const now =
     new Date();
-
 
   const currentMinutes =
     now.getHours() * 60 +
     now.getMinutes();
 
-
   const logMinutes =
     parsed.hour * 60 +
     parsed.minute;
-
 
   let diff =
     Math.abs(
@@ -2970,22 +1913,15 @@ function timeDistance(logs){
       logMinutes
     );
 
-
   diff =
     Math.min(
       diff,
-      1440-diff
+      1440 - diff
     );
-
 
   return diff;
 
 }
-
-
-/* ==================================================
-   LIVE
-================================================== */
 
 function isLive(student){
 
@@ -2993,22 +1929,18 @@ function isLive(student){
     return false;
   }
 
-
   const logs =
     getLogs(student);
-
 
   if(!logs.length){
     return false;
   }
-
 
   return (
     timeDistance(logs) <= 30
   );
 
 }
-
 
 /* ==================================================
    CLOCK
@@ -3019,50 +1951,31 @@ function updateClock(){
   const now =
     new Date();
 
-
-  const clock =
-    document.getElementById(
-      "clockTime"
+  document.getElementById(
+    "clockTime"
+  ).textContent =
+    now.toLocaleTimeString(
+      "en-IN",
+      {
+        hour:"2-digit",
+        minute:"2-digit",
+        hour12:true
+      }
     );
 
-
-  const date =
-    document.getElementById(
-      "clockDate"
+  document.getElementById(
+    "clockDate"
+  ).textContent =
+    now.toLocaleDateString(
+      "en-IN",
+      {
+        day:"2-digit",
+        month:"short",
+        year:"numeric"
+      }
     );
-
-
-  if(clock){
-
-    clock.textContent =
-      now.toLocaleTimeString(
-        "en-IN",
-        {
-          hour:"2-digit",
-          minute:"2-digit",
-          hour12:true
-        }
-      );
-
-  }
-
-
-  if(date){
-
-    date.textContent =
-      now.toLocaleDateString(
-        "en-IN",
-        {
-          day:"2-digit",
-          month:"short",
-          year:"numeric"
-        }
-      );
-
-  }
 
 }
-
 
 updateClock();
 
@@ -3070,7 +1983,6 @@ setInterval(
   updateClock,
   1000
 );
-
 
 /* ==================================================
    TOAST
@@ -3083,78 +1995,112 @@ function showToast(message){
       "toast"
     );
 
-
-  if(!toast){
-    return;
-  }
-
-
   toast.textContent =
     message;
-
 
   toast.classList.add(
     "show"
   );
 
-
   clearTimeout(
     toastTimer
   );
 
-
   toastTimer =
     setTimeout(
       ()=>{
-
         toast.classList.remove(
           "show"
         );
-
       },
       2200
     );
 
 }
 
+/* ==================================================
+   LOAD STUDENTS
+================================================== */
+
+async function loadStudents(){
+
+  try{
+
+    const snapshot =
+      await getDocs(
+        studentCollection
+      );
+
+    students = [];
+
+    snapshot.forEach(item=>{
+
+      students.push({
+        id:item.id,
+        ...item.data()
+      });
+
+    });
+
+    render();
+
+  }catch(error){
+
+    console.error(error);
+
+    document.getElementById(
+      "studentCards"
+    ).innerHTML = `
+
+      <div class="empty">
+
+        <div class="emptyIcon">
+          ⚠️
+        </div>
+
+        <div class="emptyText">
+          Unable to load students.
+          <br>
+          Check Firebase configuration.
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+}
 
 /* ==================================================
-   RENDER STUDENTS
+   RENDER
 ================================================== */
 
 function render(){
 
-  const input =
-    document.getElementById(
-      "searchInput"
-    );
-
-
   const search =
-    input
-      ? input.value
-          .trim()
-          .toLowerCase()
-      : "";
-
+    document
+      .getElementById(
+        "searchInput"
+      )
+      .value
+      .trim()
+      .toLowerCase();
 
   const activeStudents =
     students.filter(
       s=>!isInactive(s)
     );
 
-
   const inactiveStudents =
     students.filter(
       s=>isInactive(s)
     );
 
-
   document.getElementById(
     "activeCount"
   ).textContent =
     activeStudents.length;
-
 
   document.getElementById(
     "completedCount"
@@ -3163,7 +2109,6 @@ function render(){
       s=>isCompleted(s)
     ).length;
 
-
   document.getElementById(
     "liveCount"
   ).textContent =
@@ -3171,15 +2116,12 @@ function render(){
       s=>isLive(s)
     ).length;
 
-
   document.getElementById(
     "inactiveCount"
   ).textContent =
     inactiveStudents.length;
 
-
   let filtered = [];
-
 
   if(
     currentFilter === "active"
@@ -3212,13 +2154,14 @@ function render(){
 
   }
 
-  else{
+  else if(
+    currentFilter === "inactive"
+  ){
 
     filtered =
       [...inactiveStudents];
 
   }
-
 
   if(search){
 
@@ -3231,12 +2174,10 @@ function render(){
               student.name || ""
             ).toLowerCase();
 
-
           const phone =
             String(
               student.id || ""
             ).toLowerCase();
-
 
           return (
             name.includes(search) ||
@@ -3248,17 +2189,36 @@ function render(){
 
   }
 
+  if(
+    currentFilter === "active" ||
+    currentFilter === "completed" ||
+    currentFilter === "live"
+  ){
 
-  filtered.sort(
-    (a,b)=>
-      timeDistance(
-        getLogs(a)
-      ) -
-      timeDistance(
-        getLogs(b)
-      )
-  );
+    filtered.sort(
+      (a,b)=>
+        timeDistance(
+          getLogs(a)
+        ) -
+        timeDistance(
+          getLogs(b)
+        )
+    );
 
+  }else{
+
+    filtered.sort(
+      (a,b)=>
+        String(
+          a.name || ""
+        ).localeCompare(
+          String(
+            b.name || ""
+          )
+        )
+    );
+
+  }
 
   const titles = {
 
@@ -3276,12 +2236,10 @@ function render(){
 
   };
 
-
   document.getElementById(
     "sectionTitle"
   ).textContent =
     titles[currentFilter];
-
 
   document.getElementById(
     "studentCount"
@@ -3292,12 +2250,10 @@ function render(){
         : ""
     }`;
 
-
   const container =
     document.getElementById(
       "studentCards"
     );
-
 
   if(!filtered.length){
 
@@ -3321,7 +2277,6 @@ function render(){
 
   }
 
-
   container.innerHTML =
     filtered
       .map(
@@ -3330,7 +2285,6 @@ function render(){
       .join("");
 
 }
-
 
 /* ==================================================
    STUDENT CARD
@@ -3341,69 +2295,59 @@ function studentCard(student){
   const id =
     student.id;
 
-
   const name =
     student.name ||
     "Unnamed Student";
 
-
   const logs =
     getLogs(student);
-
 
   const total =
     getTotal(student);
 
-
   const done =
     getDone(student);
-
 
   const percentage =
     Math.min(
       100,
       Math.round(
-        done / total * 100
+        (done / total) * 100
       )
     );
-
 
   const inactive =
     isInactive(student);
 
-
   const live =
     isLive(student);
-
 
   const completed =
     isCompleted(student);
 
-
   const type =
-    student.classType ===
-    "Personal"
+    student.classType === "Personal"
       ? "Personal"
       : "Group";
 
+  let lastText =
+    "No attendance yet";
 
-  const lastText =
-    logs.length
-      ? logs[logs.length-1]
-      : "No attendance yet";
+  if(logs.length){
 
+    lastText =
+      logs[logs.length - 1];
+
+  }
 
   let badges = "";
-
 
   if(inactive){
 
     badges += `
-
       <span class="badge inactive">
         NOT ACTIVE
       </span>
-
     `;
 
   }else{
@@ -3411,39 +2355,39 @@ function studentCard(student){
     if(live){
 
       badges += `
-
         <span class="badge live">
           ● LIVE
         </span>
-
       `;
 
     }
 
+    if(completed){
 
-    badges += completed
-
-      ? `
-
+      badges += `
         <span class="badge completed">
           COMPLETED
         </span>
+      `;
 
-      `
+    }else{
 
-      : `
-
+      badges += `
         <span class="badge active">
           ACTIVE
         </span>
-
       `;
+
+    }
 
   }
 
+  const cardClass =
+    inactive
+      ? "studentCard inactive"
+      : "studentCard";
 
   let actions = "";
-
 
   if(!inactive){
 
@@ -3479,16 +2423,18 @@ function studentCard(student){
 
       ${
         !completed
-          ? `
+        ? `
 
-            <button
-              class="notActiveBtn"
-              onclick="markNotActive('${safe(id)}')">
-              ⏸ MARK NOT ACTIVE
-            </button>
+          <button
+            class="notActiveBtn"
+            onclick="markNotActive('${safe(id)}')">
 
-          `
-          : ""
+            ⏸ MARK NOT ACTIVE
+
+          </button>
+
+        `
+        : ""
       }
 
     `;
@@ -3500,9 +2446,10 @@ function studentCard(student){
       <button
         class="activateBtn"
         onclick="activateStudent('${safe(id)}')">
-        ✓ ACTIVE AGAIN
-      </button>
 
+        ✓ ACTIVE AGAIN
+
+      </button>
 
       <div class="actions">
 
@@ -3536,12 +2483,9 @@ function studentCard(student){
 
   }
 
-
   return `
 
-    <div class="studentCard ${
-      inactive ? "inactive" : ""
-    }">
+    <div class="${cardClass}">
 
       <div class="studentHeader">
 
@@ -3552,7 +2496,6 @@ function studentCard(student){
               .toUpperCase()
           )}
         </div>
-
 
         <div class="studentInfo">
 
@@ -3566,13 +2509,11 @@ function studentCard(student){
 
         </div>
 
-
         <div class="badges">
           ${badges}
         </div>
 
       </div>
-
 
       <div class="typeRow">
 
@@ -3594,15 +2535,15 @@ function studentCard(student){
 
         </div>
 
-
         <button
           class="editType"
           onclick="openTypeModal('${safe(id)}')">
+
           ✏️ EDIT
+
         </button>
 
       </div>
-
 
       <div class="lastAttendance">
 
@@ -3615,7 +2556,6 @@ function studentCard(student){
         </div>
 
       </div>
-
 
       <div class="progressBox">
 
@@ -3631,7 +2571,6 @@ function studentCard(student){
 
         </div>
 
-
         <div class="progress">
 
           <div
@@ -3643,7 +2582,6 @@ function studentCard(student){
 
       </div>
 
-
       ${actions}
 
     </div>
@@ -3651,7 +2589,6 @@ function studentCard(student){
   `;
 
 }
-
 
 /* ==================================================
    FILTER
@@ -3662,7 +2599,6 @@ function(filter){
 
   currentFilter =
     filter;
-
 
   document
     .querySelectorAll(
@@ -3675,7 +2611,6 @@ function(filter){
       );
 
     });
-
 
   const ids = {
 
@@ -3693,7 +2628,6 @@ function(filter){
 
   };
 
-
   document
     .getElementById(
       ids[filter]
@@ -3702,11 +2636,9 @@ function(filter){
       "active"
     );
 
-
   render();
 
 };
-
 
 /* ==================================================
    SEARCH
@@ -3721,9 +2653,8 @@ document
     render
   );
 
-
 /* ==================================================
-   ADD MODAL
+   ADD STUDENT
 ================================================== */
 
 window.openAddModal =
@@ -3733,21 +2664,17 @@ function(){
     "studentPhone"
   ).value = "";
 
-
   document.getElementById(
     "studentName"
   ).value = "";
-
 
   document.getElementById(
     "totalClasses"
   ).value = "20";
 
-
   selectAddType(
     "Group"
   );
-
 
   document
     .getElementById(
@@ -3759,13 +2686,11 @@ function(){
 
 };
 
-
 window.selectAddType =
 function(type){
 
   addClassType =
     type;
-
 
   document
     .getElementById(
@@ -3775,7 +2700,6 @@ function(type){
       "selected",
       type === "Personal"
     );
-
 
   document
     .getElementById(
@@ -3788,11 +2712,6 @@ function(type){
 
 };
 
-
-/* ==================================================
-   SAVE STUDENT
-================================================== */
-
 window.saveStudent =
 async function(){
 
@@ -3804,7 +2723,6 @@ async function(){
       .value
       .trim();
 
-
   const name =
     document
       .getElementById(
@@ -3812,7 +2730,6 @@ async function(){
       )
       .value
       .trim();
-
 
   const total =
     Number(
@@ -3822,7 +2739,6 @@ async function(){
         )
         .value
     );
-
 
   if(
     !/^[0-9]{10}$/.test(
@@ -3838,7 +2754,6 @@ async function(){
 
   }
 
-
   if(!name){
 
     showToast(
@@ -3849,7 +2764,6 @@ async function(){
 
   }
 
-
   if(total < 1){
 
     showToast(
@@ -3859,74 +2773,6 @@ async function(){
     return;
 
   }
-
-
-  const newStudent = {
-
-    id:phone,
-
-    name:name,
-
-    totalClasses:total,
-
-    remaining:0,
-
-    attendanceLogs:[],
-
-    classType:
-      addClassType || "Group",
-
-    notActive:false,
-
-    createdAt:
-      new Date().toISOString()
-
-  };
-
-
-  /*
-    Optimistic local update.
-  */
-
-  const existingIndex =
-    students.findIndex(
-      s=>s.id === phone
-    );
-
-
-  if(existingIndex >= 0){
-
-    students[existingIndex] =
-      {
-        ...students[existingIndex],
-        ...newStudent
-      };
-
-  }else{
-
-    students.push(
-      newStudent
-    );
-
-  }
-
-
-  saveStudentsCache();
-
-  renderCollection();
-
-  render();
-
-
-  closeModal(
-    "addModal"
-  );
-
-
-  showToast(
-    "Saving student..."
-  );
-
 
   try{
 
@@ -3940,7 +2786,7 @@ async function(){
 
       {
 
-        name,
+        name:name,
 
         totalClasses:total,
 
@@ -3951,10 +2797,7 @@ async function(){
         classType:
           addClassType || "Group",
 
-        notActive:false,
-
-        createdAt:
-          new Date().toISOString()
+        notActive:false
 
       },
 
@@ -3964,30 +2807,30 @@ async function(){
 
     );
 
-
-    saveStudentsCache();
-
-
-    showToast(
-      "Student added ✓"
+    closeModal(
+      "addModal"
     );
 
+    showToast(
+      "Student added successfully ✓"
+    );
+
+    await loadStudents();
 
   }catch(error){
 
     console.error(error);
 
     showToast(
-      "Saved locally • Firebase failed"
+      "Could not save student"
     );
 
   }
 
 };
 
-
 /* ==================================================
-   TYPE MODAL
+   EDIT CLASS TYPE
 ================================================== */
 
 window.openTypeModal =
@@ -3996,35 +2839,42 @@ function(id){
   currentStudentId =
     id;
 
-
   const student =
     students.find(
       s=>s.id === id
     );
 
-
   if(!student){
     return;
   }
 
-
   editClassType =
-    student.classType ===
-    "Personal"
+    student.classType === "Personal"
       ? "Personal"
       : "Group";
-
 
   document.getElementById(
     "typeStudentName"
   ).textContent =
     student.name || "";
 
+  document
+    .getElementById(
+      "editPersonal"
+    )
+    .classList.toggle(
+      "selected",
+      editClassType === "Personal"
+    );
 
-  selectEditType(
-    editClassType
-  );
-
+  document
+    .getElementById(
+      "editGroup"
+    )
+    .classList.toggle(
+      "selected",
+      editClassType === "Group"
+    );
 
   document
     .getElementById(
@@ -4036,13 +2886,11 @@ function(id){
 
 };
 
-
 window.selectEditType =
 function(type){
 
   editClassType =
     type;
-
 
   document
     .getElementById(
@@ -4052,7 +2900,6 @@ function(type){
       "selected",
       type === "Personal"
     );
-
 
   document
     .getElementById(
@@ -4065,44 +2912,12 @@ function(type){
 
 };
 
-
 window.saveClassType =
 async function(){
 
   if(!currentStudentId){
     return;
   }
-
-
-  const student =
-    students.find(
-      s=>s.id === currentStudentId
-    );
-
-
-  if(student){
-
-    student.classType =
-      editClassType;
-
-    saveStudentsCache();
-
-    renderCollection();
-
-    render();
-
-  }
-
-
-  closeModal(
-    "typeModal"
-  );
-
-
-  showToast(
-    "Updating..."
-  );
-
 
   try{
 
@@ -4121,27 +2936,30 @@ async function(){
 
     );
 
-
-    showToast(
-      "Class type updated ✓"
+    closeModal(
+      "typeModal"
     );
 
+    showToast(
+      `Class type changed to ${editClassType}`
+    );
+
+    await loadStudents();
 
   }catch(error){
 
     console.error(error);
 
     showToast(
-      "Saved locally • Firebase failed"
+      "Could not update class type"
     );
 
   }
 
 };
 
-
 /* ==================================================
-   ATTENDANCE MODAL
+   ATTENDANCE
 ================================================== */
 
 window.openAttendance =
@@ -4150,41 +2968,38 @@ function(id){
   currentStudentId =
     id;
 
-
   const student =
     students.find(
       s=>s.id === id
     );
 
-
   if(!student){
     return;
   }
-
 
   document.getElementById(
     "attendanceStudentName"
   ).textContent =
     `${student.name || ""} • ${id}`;
 
-
   selectedRoute = "";
+
+  /*
+    DISTANCE DEFAULT = 5 KM
+  */
 
   selectedDistance =
     "5 KM";
 
   selectedRemark = "";
 
-
   document.getElementById(
     "customRoute"
   ).value = "";
 
-
   document.getElementById(
     "customRemark"
   ).value = "";
-
 
   document
     .getElementById(
@@ -4194,7 +3009,6 @@ function(id){
       "show"
     );
 
-
   document
     .getElementById(
       "customRemarkBox"
@@ -4203,39 +3017,46 @@ function(id){
       "show"
     );
 
-
   document
     .querySelectorAll(
       ".routeOption"
     )
-    .forEach(btn=>
+    .forEach(btn=>{
+
       btn.classList.remove(
         "selected"
-      )
-    );
+      );
 
+    });
 
   document
     .querySelectorAll(
       ".remarkOption"
     )
-    .forEach(btn=>
+    .forEach(btn=>{
+
       btn.classList.remove(
         "selected"
-      )
-    );
+      );
 
+    });
+
+  /*
+    Always select 5 KM
+    by default.
+  */
 
   document
     .querySelectorAll(
       ".distanceOption"
     )
-    .forEach(btn=>
+    .forEach(btn=>{
+
       btn.classList.add(
         "selected"
-      )
-    );
+      );
 
+    });
 
   document
     .getElementById(
@@ -4247,7 +3068,6 @@ function(id){
 
 };
 
-
 /* ==================================================
    ROUTE
 ================================================== */
@@ -4258,61 +3078,58 @@ function(btn,value){
   selectedRoute =
     value;
 
-
   document
     .querySelectorAll(
       ".routeOption"
     )
-    .forEach(x=>
+    .forEach(x=>{
+
       x.classList.remove(
         "selected"
-      )
-    );
+      );
 
+    });
 
   btn.classList.add(
     "selected"
   );
 
-
-  const box =
+  const customBox =
     document.getElementById(
       "customRouteBox"
     );
 
-
-  const input =
+  const customInput =
     document.getElementById(
       "customRoute"
     );
-
 
   if(
     value === "Other Route"
   ){
 
-    box.classList.add(
+    customBox.classList.add(
       "show"
     );
 
-
     setTimeout(
-      ()=>input.focus(),
-      80
+      ()=>{
+        customInput.focus();
+      },
+      100
     );
 
   }else{
 
-    box.classList.remove(
+    customBox.classList.remove(
       "show"
     );
 
-    input.value = "";
+    customInput.value = "";
 
   }
 
 };
-
 
 /* ==================================================
    DISTANCE
@@ -4324,24 +3141,23 @@ function(btn,value){
   selectedDistance =
     value;
 
-
   document
     .querySelectorAll(
       ".distanceOption"
     )
-    .forEach(x=>
+    .forEach(x=>{
+
       x.classList.remove(
         "selected"
-      )
-    );
+      );
 
+    });
 
   btn.classList.add(
     "selected"
   );
 
 };
-
 
 /* ==================================================
    REMARK
@@ -4353,62 +3169,58 @@ function(btn,value){
   selectedRemark =
     value;
 
-
   document
     .querySelectorAll(
       ".remarkOption"
     )
-    .forEach(x=>
+    .forEach(x=>{
+
       x.classList.remove(
         "selected"
-      )
-    );
+      );
 
+    });
 
   btn.classList.add(
     "selected"
   );
 
-
-  const box =
+  const customBox =
     document.getElementById(
       "customRemarkBox"
     );
 
-
-  const input =
+  const customInput =
     document.getElementById(
       "customRemark"
     );
 
-
   if(
-    value ===
-    "📝 Custom Remark"
+    value === "📝 Custom Remark"
   ){
 
-    box.classList.add(
+    customBox.classList.add(
       "show"
     );
 
-
     setTimeout(
-      ()=>input.focus(),
-      80
+      ()=>{
+        customInput.focus();
+      },
+      100
     );
 
   }else{
 
-    box.classList.remove(
+    customBox.classList.remove(
       "show"
     );
 
-    input.value = "";
+    customInput.value = "";
 
   }
 
 };
-
 
 /* ==================================================
    SAVE ATTENDANCE
@@ -4421,6 +3233,7 @@ async function(){
     return;
   }
 
+  /* ================= ROUTE ================= */
 
   if(!selectedRoute){
 
@@ -4432,13 +3245,15 @@ async function(){
 
   }
 
+  /*
+    CUSTOM ROUTE
+  */
 
   if(
-    selectedRoute ===
-    "Other Route"
+    selectedRoute === "Other Route"
   ){
 
-    const custom =
+    const customRoute =
       document
         .getElementById(
           "customRoute"
@@ -4446,27 +3261,46 @@ async function(){
         .value
         .trim();
 
-
-    if(!custom){
+    if(!customRoute){
 
       showToast(
         "Enter custom route"
       );
 
+      document
+        .getElementById(
+          "customRoute"
+        )
+        .focus();
+
       return;
 
     }
 
-
     selectedRoute =
-      custom;
+      customRoute;
 
   }
 
+  /* ================= DISTANCE ================= */
 
-  let remark =
+  /*
+    Distance is ALWAYS 5 KM.
+    Even if user doesn't touch
+    the distance option.
+  */
+
+  if(!selectedDistance){
+
+    selectedDistance =
+      "5 KM";
+
+  }
+
+  /* ================= REMARK ================= */
+
+  let finalRemark =
     selectedRemark;
-
 
   if(
     selectedRemark ===
@@ -4481,38 +3315,38 @@ async function(){
         .value
         .trim();
 
-
     if(!customRemark){
 
       showToast(
         "Enter custom remark"
       );
 
+      document
+        .getElementById(
+          "customRemark"
+        )
+        .focus();
+
       return;
 
     }
 
-
-    remark =
+    finalRemark =
       customRemark;
 
   }
 
-
   const now =
     new Date();
-
 
   const datePart =
     now.toLocaleDateString(
       "en-IN",
       {
         day:"2-digit",
-        month:"short",
-        year:"numeric"
+        month:"short"
       }
     );
-
 
   const timePart =
     now.toLocaleTimeString(
@@ -4524,77 +3358,22 @@ async function(){
       }
     );
 
-
   const log =
     `${datePart} | ${timePart} — Route: ${selectedRoute} | Distance: 5 KM${
-      remark
-        ? ` | Remark: ${remark}`
+      finalRemark
+        ? ` | Remark: ${finalRemark}`
         : ""
     }`;
-
 
   const student =
     students.find(
       s=>s.id === currentStudentId
     );
 
-
-  if(!student){
-    return;
-  }
-
-
-  const newDone =
-    getDone(student) + 1;
-
-
-  /*
-    Optimistic update.
-  */
-
-  student.remaining =
-    newDone;
-
-  student.completedClasses =
-    newDone;
-
-  student.notActive =
-    false;
-
-
-  if(
-    !Array.isArray(
-      student.attendanceLogs
-    )
-  ){
-
-    student.attendanceLogs =
-      [];
-
-  }
-
-
-  student.attendanceLogs.push(
-    log
-  );
-
-
-  saveStudentsCache();
-
-  renderCollection();
-
-  render();
-
-
-  closeModal(
-    "attendanceModal"
-  );
-
-
-  showToast(
-    "Saving attendance..."
-  );
-
+  const currentDone =
+    student
+      ? getDone(student)
+      : 0;
 
   try{
 
@@ -4609,10 +3388,7 @@ async function(){
       {
 
         remaining:
-          newDone,
-
-        completedClasses:
-          newDone,
+          currentDone + 1,
 
         attendanceLogs:
           arrayUnion(log),
@@ -4623,54 +3399,34 @@ async function(){
 
     );
 
-
-    saveStudentsCache();
-
-
-    showToast(
-      "Attendance saved ✓"
+    closeModal(
+      "attendanceModal"
     );
 
+    showToast(
+      "Attendance added ✓"
+    );
+
+    await loadStudents();
 
   }catch(error){
 
     console.error(error);
 
     showToast(
-      "Saved locally • Firebase failed"
+      "Could not save attendance"
     );
 
   }
 
 };
 
-
 /* ==================================================
-   MARK NOT ACTIVE
+   NOT ACTIVE
 ================================================== */
 
 window.markNotActive =
 async function(id){
-
-  const student =
-    students.find(
-      s=>s.id === id
-    );
-
-
-  if(!student){
-    return;
-  }
-
-
-  student.notActive =
-    true;
-
-
-  saveStudentsCache();
-
-  render();
-
 
   try{
 
@@ -4688,61 +3444,26 @@ async function(id){
 
     );
 
-
     showToast(
       "Moved to Not Active"
     );
 
+    await loadStudents();
 
   }catch(error){
 
     console.error(error);
 
-
-    student.notActive =
-      false;
-
-
-    saveStudentsCache();
-
-    render();
-
-
     showToast(
-      "Update failed"
+      "Could not update status"
     );
 
   }
 
 };
 
-
-/* ==================================================
-   ACTIVATE
-================================================== */
-
 window.activateStudent =
 async function(id){
-
-  const student =
-    students.find(
-      s=>s.id === id
-    );
-
-
-  if(!student){
-    return;
-  }
-
-
-  student.notActive =
-    false;
-
-
-  saveStudentsCache();
-
-  render();
-
 
   try{
 
@@ -4760,34 +3481,23 @@ async function(id){
 
     );
 
-
     showToast(
       "Student active again ✓"
     );
 
+    await loadStudents();
 
   }catch(error){
 
     console.error(error);
 
-
-    student.notActive =
-      true;
-
-
-    saveStudentsCache();
-
-    render();
-
-
     showToast(
-      "Update failed"
+      "Could not activate student"
     );
 
   }
 
 };
-
 
 /* ==================================================
    HISTORY
@@ -4799,35 +3509,29 @@ function(id){
   currentStudentId =
     id;
 
-
   const student =
     students.find(
       s=>s.id === id
     );
 
-
   if(!student){
     return;
   }
-
 
   document.getElementById(
     "historyStudentName"
   ).textContent =
     `${student.name || ""} • ${id}`;
 
-
   const logs =
     [
       ...getLogs(student)
     ].reverse();
 
-
   const list =
     document.getElementById(
       "historyList"
     );
-
 
   if(!logs.length){
 
@@ -4872,7 +3576,6 @@ function(id){
 
   }
 
-
   document
     .getElementById(
       "historyModal"
@@ -4882,7 +3585,6 @@ function(id){
     );
 
 };
-
 
 /* ==================================================
    WHATSAPP
@@ -4896,33 +3598,26 @@ function(id){
       s=>s.id === id
     );
 
-
   if(!student){
     return;
   }
 
-
   const total =
     getTotal(student);
-
 
   const done =
     getDone(student);
 
-
   const left =
     Math.max(
-      total-done,
+      total - done,
       0
     );
 
-
-  const type =
-    student.classType ===
-    "Personal"
+  const classType =
+    student.classType === "Personal"
       ? "Personal"
       : "Group";
-
 
   const message =
 `Hello *${String(student.name || "").trim()}*,
@@ -4931,18 +3626,19 @@ function(id){
 
 🚗 Completed: *${done}/${total}*
 ⏳ Balance: *${left} Sessions*
-📚 Class Type: *${type}*
+📚 Class Type: *${classType}*
 
 Keep learning and drive safely! 🚗🔥`;
 
+  const url =
+    `https://wa.me/${id}?text=${encodeURIComponent(message)}`;
 
   window.open(
-    `https://wa.me/${id}?text=${encodeURIComponent(message)}`,
+    url,
     "_blank"
   );
 
 };
-
 
 /* ==================================================
    CALL
@@ -4956,7 +3652,6 @@ function(id){
 
 };
 
-
 /* ==================================================
    CLOSE MODALS
 ================================================== */
@@ -4964,22 +3659,13 @@ function(id){
 window.closeModal =
 function(id){
 
-  const modal =
-    document.getElementById(
-      id
-    );
-
-
-  if(modal){
-
-    modal.classList.remove(
+  document
+    .getElementById(id)
+    .classList.remove(
       "show"
     );
 
-  }
-
 };
-
 
 document
   .querySelectorAll(
@@ -5006,7 +3692,6 @@ document
 
   });
 
-
 document.addEventListener(
   "keydown",
   function(e){
@@ -5019,183 +3704,33 @@ document.addEventListener(
         .querySelectorAll(
           ".modal.show"
         )
-        .forEach(modal=>
+        .forEach(modal=>{
+
           modal.classList.remove(
             "show"
-          )
-        );
+          );
+
+        });
 
     }
 
   }
 );
 
-
 /* ==================================================
-   START — CACHE FIRST
+   AUTO REFRESH
 ================================================== */
 
-const hasCache =
-  loadStudentsCache();
+setInterval(
+  loadStudents,
+  30000
+);
 
-
-/*
-  IMPORTANT:
-
-  Cached students render
-  immediately before Firebase.
-*/
-
-if(hasCache){
-
-  renderCollection();
-
-  render();
-
-}
-
-
-/*
-  Firebase runs in background.
-*/
+/* ==================================================
+   START
+================================================== */
 
 loadStudents();
-
-
-/* ==================================================
-   FIREBASE LOAD
-================================================== */
-
-async function loadStudents(){
-
-  /*
-    Only show loader when there is
-    absolutely no cached data.
-  */
-
-  if(!students.length){
-
-    document.getElementById(
-      "studentCards"
-    ).innerHTML = `
-
-      <div class="loading">
-        Loading students...
-      </div>
-
-    `;
-
-  }
-
-
-  try{
-
-    const snapshot =
-      await getDocs(
-        studentCollection
-      );
-
-
-    const freshStudents = [];
-
-
-    snapshot.forEach(item=>{
-
-      freshStudents.push({
-
-        id:item.id,
-
-        ...item.data()
-
-      });
-
-    });
-
-
-    /*
-      Replace cache with latest
-      Firebase data.
-    */
-
-    students =
-      freshStudents;
-
-
-    saveStudentsCache();
-
-
-    /*
-      Render fresh data.
-    */
-
-    renderCollection();
-
-    render();
-
-
-    if(hasCache){
-
-      showToast(
-        "Latest data loaded ✓"
-      );
-
-    }
-
-
-  }catch(error){
-
-    console.error(
-      "Firebase load error:",
-      error
-    );
-
-
-    /*
-      Cache remains visible.
-    */
-
-    if(students.length){
-
-      renderCollection();
-
-      render();
-
-      showToast(
-        "Offline • Saved data shown"
-      );
-
-    }else{
-
-      document.getElementById(
-        "studentCards"
-      ).innerHTML = `
-
-        <div class="empty">
-
-          <div class="emptyIcon">
-            ⚠️
-          </div>
-
-          <div class="emptyText">
-
-            Unable to load students.
-
-            <br><br>
-
-            Check internet connection
-            or Firebase configuration.
-
-          </div>
-
-        </div>
-
-      `;
-
-    }
-
-  }
-
-}
 
 </script>
 
