@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +13,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 <style>
-:root{
+:root {
   --bg:#08090d;
   --panel:#111219;
   --card:#171820;
@@ -25,67 +24,123 @@
   --red:#ff7777;
   --border:rgba(255,255,255,.08);
 }
+
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
   min-height:100vh;
   padding:16px 13px 35px;
   background:radial-gradient(ellipse at 50% -10%,#d4af3719,transparent 42%),var(--bg);
-  color:#f7f7fa;font-family:Poppins,sans-serif;
-  -webkit-tap-highlight-color:transparent
+  color:#f7f7fa;
+  font-family:Poppins,sans-serif;
+  -webkit-tap-highlight-color:transparent;
 }
 button,input{font:inherit}
 button{cursor:pointer}
 button:disabled{opacity:.5;cursor:wait}
 .app{width:100%;max-width:490px;margin:auto}
+
 .topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:24px}
 .brand{display:flex;align-items:center;gap:10px}
-.brandLogo{height:44px;width:44px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#ffe8a3,#d4af37);color:#18130a;font-size:20px}
+.brandLogo{
+  height:44px;width:44px;border-radius:14px;
+  display:grid;place-items:center;
+  background:linear-gradient(135deg,#ffe8a3,#d4af37);
+  color:#18130a;font-size:20px
+}
 .brandName{font-size:15px;font-weight:800;letter-spacing:.5px}
 .brandSub{font-size:8px;color:var(--muted);letter-spacing:2px;margin-top:4px}
-.topActions{display:flex;gap:7px}
-.iconBtn{height:37px;width:37px;border:1px solid var(--border);border-radius:12px;background:#15161d;color:var(--gold-light)}
-.panel{padding:21px;border:1px solid var(--border);border-radius:24px;background:#111219;box-shadow:0 20px 55px #0004}
+.iconBtn{
+  height:37px;width:37px;border:1px solid var(--border);
+  border-radius:12px;background:#15161d;color:var(--gold-light)
+}
+.panel{
+  padding:21px;border:1px solid var(--border);border-radius:24px;
+  background:var(--panel);box-shadow:0 20px 55px #0004
+}
 .eyebrow{font-size:9px;letter-spacing:2px;font-weight:700;color:var(--gold)}
 .loginTitle{font-size:23px;margin-top:8px}
 .subtext{font-size:11px;color:var(--muted);line-height:1.9;margin:8px 0 22px}
 .label{display:block;font-size:9px;letter-spacing:1.2px;color:var(--muted);margin-bottom:9px}
 .field{position:relative;margin-bottom:14px}
 .field i{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--gold)}
-input{width:100%;height:49px;padding:0 13px 0 42px;border:1px solid var(--border);border-radius:13px;background:#090a0f;color:white;outline:none;font-size:14px}
+input{
+  width:100%;height:49px;padding:0 13px 0 42px;
+  border:1px solid var(--border);border-radius:13px;
+  background:#090a0f;color:white;outline:none;font-size:14px
+}
 input:focus{border-color:#b59543}
-.btn{min-height:43px;width:100%;padding:12px 14px;border:0;border-radius:12px;display:flex;justify-content:center;align-items:center;gap:9px;font-size:10px;font-weight:800}
+.btn{
+  min-height:43px;width:100%;padding:12px 14px;border:0;
+  border-radius:12px;display:flex;justify-content:center;
+  align-items:center;gap:9px;font-size:10px;font-weight:800
+}
 .goldBtn{background:linear-gradient(120deg,#ffe8a3,#d4af37);color:#151109}
 .darkBtn{background:#191a22;color:#eee;border:1px solid var(--border)}
 .greenBtn{background:#43d99a12;color:var(--green);border:1px solid #43d99a30}
 .message{font-size:10px;line-height:1.8;margin-top:12px;overflow-wrap:anywhere}
-.loader{text-align:center;color:var(--muted);font-size:10px;padding:20px;display:none}
-.spinner{display:block;width:23px;height:23px;margin:0 auto 10px;border:2px solid #333;border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite}
+.loader{display:none;text-align:center;color:var(--muted);font-size:10px;padding:20px}
+.spinner{
+  display:block;width:23px;height:23px;margin:0 auto 10px;
+  border:2px solid #333;border-top-color:var(--gold);
+  border-radius:50%;animation:spin .8s linear infinite
+}
 @keyframes spin{to{transform:rotate(360deg)}}
 #dashboard{display:none;animation:appear .3s ease}
 @keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.hero{position:relative;overflow:hidden;padding:21px;border:1px solid #d4af3738;border-radius:23px;background:linear-gradient(145deg,#d4af371c,#15161d 68%);margin-bottom:19px}
-.hero:after{content:"";position:absolute;right:-28px;top:-38px;width:140px;height:140px;border:1px solid #d4af371b;border-radius:50%;box-shadow:0 0 0 20px #d4af3706,0 0 0 40px #d4af3704;pointer-events:none}
+
+.hero{
+  position:relative;overflow:hidden;padding:21px;
+  border:1px solid #d4af3738;border-radius:23px;
+  background:linear-gradient(145deg,#d4af371c,#15161d 68%);
+  margin-bottom:19px
+}
+.hero:after{
+  content:"";position:absolute;right:-28px;top:-38px;
+  width:140px;height:140px;border:1px solid #d4af371b;
+  border-radius:50%;box-shadow:0 0 0 20px #d4af3706,0 0 0 40px #d4af3704;
+  pointer-events:none
+}
 .heroRow{position:relative;z-index:1;display:flex;align-items:center;gap:12px}
-.avatar{height:57px;width:57px;flex:none;display:grid;place-items:center;border-radius:18px;background:linear-gradient(135deg,#ffe8a3,#c69c27);color:#171208;font-size:24px}
+.avatar{
+  height:57px;width:57px;flex:none;display:grid;place-items:center;
+  border-radius:18px;background:linear-gradient(135deg,#ffe8a3,#c69c27);
+  color:#171208;font-size:24px
+}
 .heroCopy{min-width:0;flex:1}
 .heroLabel{font-size:8px;letter-spacing:1.7px;color:var(--gold);font-weight:700}
 .studentName{font-size:20px;line-height:1.5;margin-top:4px;overflow-wrap:anywhere}
-.statusPill{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;margin-top:7px;border:1px solid #43d99a35;border-radius:20px;background:#43d99a0b;color:var(--green);font-size:8px;font-weight:700}
+.statusPill{
+  display:inline-flex;align-items:center;gap:6px;padding:6px 9px;
+  margin-top:7px;border:1px solid #43d99a35;border-radius:20px;
+  background:#43d99a0b;color:var(--green);font-size:8px;font-weight:700
+}
 .statusPill.inactive{border-color:#ff777735;color:var(--red);background:#ff77770b}
 .heroMeta{display:flex;flex-wrap:wrap;gap:8px;margin-top:17px;padding-top:13px;border-top:1px solid #ffffff10}
-.metaPill{padding:7px 10px;border-radius:10px;background:#ffffff06;border:1px solid #ffffff0b;color:#c5c5cf;font-size:9px}
+.metaPill{
+  padding:7px 10px;border-radius:10px;background:#ffffff06;
+  border:1px solid #ffffff0b;color:#c5c5cf;font-size:9px;overflow-wrap:anywhere
+}
 .metaPill i{color:var(--gold);margin-right:5px}
-.sectionHeading{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:25px 2px 12px}
+.sectionHeading{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:8px;margin:25px 2px 12px
+}
 .sectionHeading h3{font-size:10px;letter-spacing:1.5px}
 .sectionHeading span{font-size:8px;color:var(--muted)}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.stat{min-width:0;padding:15px;border:1px solid var(--border);border-radius:17px;background:linear-gradient(145deg,#181921,#101116)}
-.statTop{display:flex;justify-content:space-between;align-items:center;gap:7px}
-.statIcon{width:33px;height:33px;display:grid;place-items:center;border-radius:11px;background:#d4af3717;color:var(--gold);font-size:13px}
+.stat{
+  min-width:0;padding:15px;border:1px solid var(--border);
+  border-radius:17px;background:linear-gradient(145deg,#181921,#101116)
+}
+.statIcon{
+  width:33px;height:33px;display:grid;place-items:center;
+  border-radius:11px;background:#d4af3717;color:var(--gold);font-size:13px
+}
 .statLabel{font-size:9px;color:var(--muted);margin-top:13px}
 .statValue{font-size:22px;font-weight:800;margin-top:3px;line-height:1.4;overflow-wrap:anywhere}
 .statFoot{font-size:8px;color:#6f707d;margin-top:3px}
+
 .progressCard{padding:17px;border:1px solid var(--border);border-radius:20px;background:var(--card)}
 .progressLayout{display:flex;align-items:center;gap:15px}
 .ring{position:relative;width:98px;height:98px;flex:none}
@@ -104,23 +159,37 @@ input:focus{border-color:#b59543}
 .progressMeta b{color:var(--gold-light)}
 .note{display:flex;gap:7px;align-items:flex-start;font-size:8px;line-height:1.8;color:var(--muted);margin-top:12px}
 .note i{color:var(--gold);margin-top:3px}
-.classCard{padding:17px;border:1px solid #d4af3730;border-radius:18px;background:linear-gradient(130deg,#d4af3711,#171820)}
+
+.classCard{
+  padding:17px;border:1px solid #d4af3730;border-radius:18px;
+  background:linear-gradient(130deg,#d4af3711,#171820)
+}
 .classRow{display:flex;align-items:center;gap:12px}
-.classIcon{width:44px;height:44px;flex:none;border-radius:14px;background:#d4af371a;color:var(--gold);display:grid;place-items:center;font-size:18px}
+.classIcon{
+  width:44px;height:44px;flex:none;border-radius:14px;
+  background:#d4af371a;color:var(--gold);display:grid;place-items:center;font-size:18px
+}
 .classLabel{font-size:8px;color:var(--muted);letter-spacing:1.5px}
 .classValue{font-size:15px;font-weight:800;margin-top:4px}
 .classDescription{font-size:9px;color:var(--muted);line-height:1.8;margin-top:12px}
-.walletCard{padding:18px;border:1px solid #43d99a29;border-radius:19px;background:linear-gradient(140deg,#43d99a0d,#15161d)}
+
+.walletCard{
+  padding:18px;border:1px solid #43d99a29;border-radius:19px;
+  background:linear-gradient(140deg,#43d99a0d,#15161d)
+}
 .walletRow{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .walletLeft{display:flex;align-items:center;gap:10px;min-width:0}
-.walletIcon{width:39px;height:39px;flex:none;display:grid;place-items:center;border-radius:13px;background:#43d99a14;color:var(--green)}
+.walletIcon{
+  width:39px;height:39px;flex:none;display:grid;place-items:center;
+  border-radius:13px;background:#43d99a14;color:var(--green)
+}
 .walletLabel{font-size:9px;font-weight:700;color:var(--green)}
 .walletSub{font-size:8px;color:var(--muted);margin-top:5px}
 .walletAmount{font-size:21px;font-weight:800;overflow-wrap:anywhere}
 .walletFoot{border-top:1px solid #ffffff10;padding-top:12px;margin-top:14px;display:flex;justify-content:space-between;gap:10px}
 .walletFoot span,.walletFoot b{font-size:9px}
 .walletFoot span{color:var(--muted)}
-.walletFoot b{color:#eee}
+
 .historyCard{padding:12px;border:1px solid var(--border);border-radius:19px;background:var(--card)}
 .historyList{display:flex;flex-direction:column;gap:9px;max-height:400px;overflow:auto}
 .log{padding:13px;border:1px solid #ffffff0b;border-left:3px solid var(--gold);border-radius:12px;background:#101116}
@@ -131,35 +200,42 @@ input:focus{border-color:#b59543}
 .logChip{display:inline-block;padding:5px 7px;margin:6px 5px 0 0;border:1px solid #ffffff12;border-radius:7px;background:#ffffff05;color:#d8d8e0;font-size:8px}
 .empty{padding:24px 10px;text-align:center;color:var(--muted);font-size:10px;line-height:1.9}
 .empty i{display:block;font-size:22px;color:#666;margin-bottom:9px}
+
 .achievementGrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.achievement{padding:14px 9px;text-align:center;border:1px solid var(--border);border-radius:15px;background:#14151b;opacity:.55;filter:grayscale(.8)}
+.achievement{
+  padding:14px 9px;text-align:center;border:1px solid var(--border);
+  border-radius:15px;background:#14151b;opacity:.55;filter:grayscale(.8)
+}
 .achievement.unlocked{opacity:1;filter:none;border-color:#d4af3740;background:#d4af370b}
-.achievementIcon{width:37px;height:37px;display:grid;place-items:center;margin:0 auto 8px;border-radius:12px;background:#d4af3719;color:var(--gold);font-size:16px}
+.achievementIcon{
+  width:37px;height:37px;display:grid;place-items:center;
+  margin:0 auto 8px;border-radius:12px;background:#d4af3719;color:var(--gold);font-size:16px
+}
 .achievement b{display:block;font-size:9px}
 .achievement small{display:block;margin-top:5px;color:var(--muted);font-size:8px;line-height:1.7}
-.certificateCard{display:none;padding:19px;border:1px solid #d4af3740;border-radius:20px;text-align:center;background:linear-gradient(140deg,#d4af3717,#15161d)}
+.certificateCard{
+  display:none;padding:19px;border:1px solid #d4af3740;border-radius:20px;
+  text-align:center;background:linear-gradient(140deg,#d4af3717,#15161d)
+}
 .certificateCard>i{font-size:33px;color:var(--gold);margin-bottom:10px}
 .certificateCard h3{font-size:14px}
 .certificateCard p{font-size:9px;color:var(--muted);line-height:1.9;margin:9px 0 15px}
 .actionGrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:20px}
 .footer{text-align:center;margin-top:25px;color:#5f606b;font-size:8px;line-height:2;letter-spacing:1px}
 .footer i{color:var(--gold)}
-.hidden{display:none!important}
 
-/* A4 LANDSCAPE CERTIFICATE */
+/* CERTIFICATE PDF */
 #certificate{
-  display:none;
-  width:1123px;
-  height:794px;
-  padding:14px;
-  overflow:hidden;
-  box-sizing:border-box;
-  background:#07172d;
-  color:#10213d;
+  display:none;width:1123px;height:794px;padding:14px;overflow:hidden;
+  box-sizing:border-box;background:#07172d;color:#10213d;
   font-family:Georgia,"Times New Roman",serif
 }
 .certPaper{height:100%;width:100%;padding:9px;background:#fffdf6;border:2px solid #d9b84e;box-sizing:border-box}
-.certInner{height:100%;width:100%;position:relative;overflow:hidden;text-align:center;padding:20px 40px 12px;box-sizing:border-box;border:1px solid #b58b27;background:radial-gradient(ellipse at center,#fff 0%,#fffdf6 85%)}
+.certInner{
+  height:100%;width:100%;position:relative;overflow:hidden;text-align:center;
+  padding:20px 40px 12px;box-sizing:border-box;border:1px solid #b58b27;
+  background:radial-gradient(ellipse at center,#fff 0%,#fffdf6 85%)
+}
 .corner{position:absolute;width:42px;height:42px;border-color:#c6a13a;border-style:solid}
 .corner.tl{top:7px;left:7px;border-width:2px 0 0 2px}
 .corner.tr{top:7px;right:7px;border-width:2px 2px 0 0}
@@ -172,7 +248,10 @@ input:focus{border-color:#b59543}
 .certHeading{font-size:38px;line-height:1.15;letter-spacing:2px;color:#0a2242}
 .certCaption{font-family:Arial,sans-serif;color:#9c7820;font-size:10px;letter-spacing:5px;margin-top:7px}
 .certRecipient{font-family:Arial,sans-serif;color:#6b6e78;font-size:11px;letter-spacing:2px;margin-top:12px}
-#certStudentName{display:table;max-width:88%;margin:7px auto 0;padding:0 20px 5px;border-bottom:2px solid #d4af37;color:#0a2242;font-size:34px;line-height:1.2;overflow-wrap:anywhere}
+#certStudentName{
+  display:table;max-width:88%;margin:7px auto 0;padding:0 20px 5px;
+  border-bottom:2px solid #d4af37;color:#0a2242;font-size:34px;line-height:1.2;overflow-wrap:anywhere
+}
 .certMessage{font-family:Arial,sans-serif;color:#444d59;font-size:13px;line-height:1.6;max-width:830px;margin:10px auto}
 .certMessage strong{color:#122b4b}
 .certInfo{display:inline-block;min-width:310px;margin-top:7px;padding:8px 22px;border:1px solid #d4af37;border-radius:7px;background:#fffaf0}
@@ -181,11 +260,38 @@ input:focus{border-color:#b59543}
 .certBottom{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;margin-top:12px;font-family:Arial,sans-serif}
 .certSignature{width:240px;text-align:center;font-size:10px;color:#18304f}
 .certLine{border-top:1px solid #b58b27;padding-top:6px;margin-bottom:5px;font-size:9px;letter-spacing:1px}
-.certSeal{width:67px;height:67px;flex:none;border:3px double #c6a13a;outline:1px solid #d4af37;outline-offset:3px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#9c7820;background:#fffaf0}
+.certSeal{
+  width:67px;height:67px;flex:none;border:3px double #c6a13a;
+  outline:1px solid #d4af37;outline-offset:3px;border-radius:50%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  color:#9c7820;background:#fffaf0
+}
 .certSeal i{font-size:19px}
 .certSeal b{font-size:11px;margin-top:3px;letter-spacing:2px}
 .certSeal span{font-size:7px;margin-top:2px;letter-spacing:1px}
 .certFooter{font-family:Arial,sans-serif;color:#8b846f;font-size:8px;letter-spacing:3px;margin-top:9px}
+
+/* FLOATING BT MOMENTS GIF */
+.bt-float{
+  position:fixed;right:14px;
+  bottom:calc(18px + env(safe-area-inset-bottom,0px));
+  z-index:9998;width:82px;
+  display:flex;flex-direction:column;align-items:center;gap:5px;
+  text-decoration:none;-webkit-tap-highlight-color:transparent;
+  animation:btFloat 3s ease-in-out infinite
+}
+.bt-float img{
+  display:block;width:76px;height:76px;object-fit:contain;
+  border-radius:20px;filter:drop-shadow(0 5px 12px #0009)
+}
+.bt-float-label{
+  display:block;padding:5px 8px;border:1px solid #d4af3755;
+  border-radius:20px;background:#111219ed;color:#ffe8a3;
+  font-size:9px;font-weight:800;letter-spacing:.4px;white-space:nowrap;
+  box-shadow:0 5px 18px #0005
+}
+.bt-float:focus-visible{outline:2px solid #ffe8a3;outline-offset:4px;border-radius:15px}
+@keyframes btFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
 
 @media(max-width:360px){
   body{padding:12px 9px}
@@ -195,6 +301,9 @@ input:focus{border-color:#b59543}
   .ring{width:84px;height:84px}
   .progressLayout{gap:10px}
   .walletAmount{font-size:17px}
+  .bt-float{right:9px;bottom:calc(12px + env(safe-area-inset-bottom,0px));width:70px}
+  .bt-float img{width:65px;height:65px}
+  .bt-float-label{font-size:8px;padding:4px 6px}
 }
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
@@ -213,9 +322,9 @@ input:focus{border-color:#b59543}
       <div class="brandSub">DRIVING ACADEMY</div>
     </div>
   </div>
-  <div class="topActions">
-    <button class="iconBtn" id="refreshBtn" aria-label="Refresh"><i class="fa-solid fa-rotate"></i></button>
-  </div>
+  <button class="iconBtn" id="refreshBtn" aria-label="Refresh">
+    <i class="fa-solid fa-rotate"></i>
+  </button>
 </header>
 
 <!-- LOGIN -->
@@ -228,12 +337,14 @@ input:focus{border-color:#b59543}
     <i class="fa-solid fa-mobile-screen-button"></i>
     <input id="phoneInput" type="tel" inputmode="numeric" maxlength="10" autocomplete="tel" placeholder="Enter 10-digit mobile number">
   </div>
-  <button class="btn goldBtn" id="loginBtn"><i class="fa-solid fa-arrow-right-to-bracket"></i> OPEN MY DASHBOARD</button>
+  <button class="btn goldBtn" id="loginBtn">
+    <i class="fa-solid fa-arrow-right-to-bracket"></i> OPEN MY DASHBOARD
+  </button>
   <div class="loader" id="loader"><span class="spinner"></span>Loading your student record...</div>
   <div class="message" id="loginMessage" role="status" aria-live="polite"></div>
 </section>
 
-<!-- DASHBOARD -->
+<!-- STUDENT DASHBOARD -->
 <section id="dashboard">
 
   <div class="hero">
@@ -242,7 +353,9 @@ input:focus{border-color:#b59543}
       <div class="heroCopy">
         <div class="heroLabel">WELCOME TO YOUR DASHBOARD</div>
         <h1 class="studentName" id="studentName">Student</h1>
-        <div class="statusPill" id="studentStatus"><i class="fa-solid fa-circle-check"></i><span>ACTIVE STUDENT</span></div>
+        <div class="statusPill" id="studentStatus">
+          <i class="fa-solid fa-circle-check"></i><span>ACTIVE STUDENT</span>
+        </div>
       </div>
     </div>
     <div class="heroMeta">
@@ -252,28 +365,27 @@ input:focus{border-color:#b59543}
   </div>
 
   <div class="sectionHeading"><h3>TRAINING OVERVIEW</h3><span>LIVE RECORD</span></div>
-
   <div class="stats">
     <div class="stat">
-      <div class="statTop"><div class="statIcon"><i class="fa-solid fa-circle-check"></i></div></div>
+      <div class="statIcon"><i class="fa-solid fa-circle-check"></i></div>
       <div class="statLabel">SESSIONS COMPLETED</div>
       <div class="statValue" id="completedValue">0</div>
       <div class="statFoot">Recorded training sessions</div>
     </div>
     <div class="stat">
-      <div class="statTop"><div class="statIcon"><i class="fa-solid fa-calendar-days"></i></div></div>
+      <div class="statIcon"><i class="fa-solid fa-calendar-days"></i></div>
       <div class="statLabel">TOTAL SESSIONS</div>
       <div class="statValue" id="totalValue">0</div>
       <div class="statFoot">Package target</div>
     </div>
     <div class="stat">
-      <div class="statTop"><div class="statIcon"><i class="fa-solid fa-road"></i></div></div>
+      <div class="statIcon"><i class="fa-solid fa-road"></i></div>
       <div class="statLabel">ESTIMATED DISTANCE</div>
       <div class="statValue" id="distanceValue">0 km</div>
       <div class="statFoot">Based on recorded logs</div>
     </div>
     <div class="stat">
-      <div class="statTop"><div class="statIcon"><i class="fa-solid fa-flag-checkered"></i></div></div>
+      <div class="statIcon"><i class="fa-solid fa-flag-checkered"></i></div>
       <div class="statLabel">SESSIONS REMAINING</div>
       <div class="statValue" id="remainingValue">0</div>
       <div class="statFoot">Until package target</div>
@@ -281,7 +393,6 @@ input:focus{border-color:#b59543}
   </div>
 
   <div class="sectionHeading"><h3>MY CLASS TYPE</h3><span>FROM FIREBASE</span></div>
-
   <div class="classCard">
     <div class="classRow">
       <div class="classIcon" id="classIcon"><i class="fa-solid fa-users"></i></div>
@@ -294,7 +405,6 @@ input:focus{border-color:#b59543}
   </div>
 
   <div class="sectionHeading"><h3>COURSE PROGRESS</h3><span id="progressStatus">IN PROGRESS</span></div>
-
   <div class="progressCard">
     <div class="progressLayout">
       <div class="ring">
@@ -314,11 +424,13 @@ input:focus{border-color:#b59543}
       <span id="progressCount">0 of 0 sessions</span>
       <span><b id="progressPercent">0%</b> completed</span>
     </div>
-    <div class="note"><i class="fa-solid fa-circle-info"></i><span>Distance is estimated from recorded attendance. The actual distance may differ if the log does not include kilometres.</span></div>
+    <div class="note">
+      <i class="fa-solid fa-circle-info"></i>
+      <span>Distance is estimated from recorded attendance. Actual distance may differ if logs do not include kilometres.</span>
+    </div>
   </div>
 
   <div class="sectionHeading"><h3>ACHIEVEMENTS</h3><span>YOUR MILESTONES</span></div>
-
   <div class="achievementGrid">
     <div class="achievement" id="badgeFirst">
       <div class="achievementIcon"><i class="fa-solid fa-key"></i></div>
@@ -339,7 +451,6 @@ input:focus{border-color:#b59543}
   </div>
 
   <div class="sectionHeading"><h3>REFERRAL WALLET</h3><span>ACCOUNT RECORD</span></div>
-
   <div class="walletCard">
     <div class="walletRow">
       <div class="walletLeft">
@@ -358,28 +469,30 @@ input:focus{border-color:#b59543}
   </div>
 
   <div class="sectionHeading"><h3>ATTENDANCE HISTORY</h3><span id="historyCount">0 RECORDS</span></div>
-
-  <div class="historyCard">
-    <div class="historyList" id="historyList"></div>
-  </div>
+  <div class="historyCard"><div class="historyList" id="historyList"></div></div>
 
   <div class="certificateCard" id="certificateCard">
     <i class="fa-solid fa-award"></i>
     <h3>Training completion certificate</h3>
     <p>Your recorded completed sessions have reached the package target. You can generate your certificate below.</p>
-    <button class="btn goldBtn" id="certificateBtn"><i class="fa-solid fa-file-pdf"></i> DOWNLOAD CERTIFICATE PDF</button>
+    <button class="btn goldBtn" id="certificateBtn">
+      <i class="fa-solid fa-file-pdf"></i> DOWNLOAD CERTIFICATE PDF
+    </button>
   </div>
 
   <div class="actionGrid">
     <button class="btn darkBtn" id="contactBtn"><i class="fa-brands fa-whatsapp"></i> CONTACT ACADEMY</button>
     <button class="btn greenBtn" id="shareBtn"><i class="fa-solid fa-share-nodes"></i> SHARE ACADEMY</button>
   </div>
-
-  <button class="btn darkBtn" id="logoutBtn" style="margin-top:10px"><i class="fa-solid fa-arrow-right-from-bracket"></i> LOG OUT</button>
-
+  <button class="btn darkBtn" id="logoutBtn" style="margin-top:10px">
+    <i class="fa-solid fa-arrow-right-from-bracket"></i> LOG OUT
+  </button>
 </section>
 
-<footer class="footer"><i class="fa-solid fa-car-side"></i><br>ABHINAASH A1 DRIVING ACADEMY<br>DRIVE SMART. DRIVE SAFE.</footer>
+<footer class="footer">
+  <i class="fa-solid fa-car-side"></i><br>
+  ABHINAASH A1 DRIVING ACADEMY<br>DRIVE SMART. DRIVE SAFE.
+</footer>
 </main>
 
 <!-- CERTIFICATE TEMPLATE -->
@@ -388,32 +501,26 @@ input:focus{border-color:#b59543}
     <div class="certInner">
       <div class="corner tl"></div><div class="corner tr"></div>
       <div class="corner bl"></div><div class="corner br"></div>
-
       <div class="certTop">EXCELLENCE • SKILL • RESPONSIBILITY</div>
       <div class="certBrand">ABHINAASH A1</div>
       <div class="certSub">DRIVING ACADEMY</div>
       <div class="certRule">✦ ━━━━━━━━━ ✦</div>
-
       <h1 class="certHeading">TRAINING COMPLETION</h1>
       <div class="certCaption">CERTIFICATE OF ACHIEVEMENT</div>
       <div class="certRecipient">THIS CERTIFICATE IS PRESENTED TO</div>
       <h2 id="certStudentName">STUDENT NAME</h2>
-
       <p class="certMessage">
         In recognition of reaching the recorded completion target of the driving training programme at
         <strong>ABHINAASH A1 DRIVING ACADEMY</strong>, acknowledging dedication, practical learning and commitment to responsible driving.
       </p>
-
       <div class="certInfo">
         <div class="certInfoLabel">REGISTERED CLASS TYPE</div>
         <div id="certType">NOT SPECIFIED</div>
-      </div>
-      <br>
+      </div><br>
       <div class="certInfo">
         <div class="certInfoLabel">TRAINING COMPLETION DATE</div>
         <div id="certDate">Date not recorded</div>
       </div>
-
       <div class="certBottom">
         <div class="certSignature">
           <div class="certLine">ACADEMY REPRESENTATIVE</div>
@@ -421,9 +528,7 @@ input:focus{border-color:#b59543}
           <div style="margin-top:4px">Driving Academy</div>
         </div>
         <div class="certSeal">
-          <i class="fa-solid fa-award"></i>
-          <b>A1</b>
-          <span>ACHIEVEMENT</span>
+          <i class="fa-solid fa-award"></i><b>A1</b><span>ACHIEVEMENT</span>
         </div>
         <div class="certSignature">
           <div class="certLine">TRAINING RECORD</div>
@@ -431,33 +536,40 @@ input:focus{border-color:#b59543}
           <div style="margin-top:4px">Completion record</div>
         </div>
       </div>
-
       <div class="certFooter">DRIVE SMART • DRIVE SAFE • DRIVE RESPONSIBLY</div>
     </div>
   </div>
 </div>
 
+<!-- FLOATING GIF: CLICK TO OPEN BLACKTERMINAL COURSES -->
+<a class="bt-float"
+   href="https://blackterminal.online/courses.html"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Open BlackTerminal Computer Institute courses"
+   title="Explore BlackTerminal Courses">
+  <img
+    src="https://i.ibb.co/jk5TkfgY/B438-BAA1-368-A-4-BD1-9598-CBAA04373-C22.gif"
+    alt="BlackTerminal animated character"
+    loading="eager">
+  <span class="bt-float-label">BT Moments</span>
+</a>
+
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-import {
-  getFirestore,
-  doc,
-  onSnapshot
-} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+import {getFirestore,doc,onSnapshot} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
-/* Keep this configuration consistent with your Attendance page. */
 const firebaseConfig = {
-  apiKey: "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
-  authDomain: "abinash-driving.firebaseapp.com",
-  projectId: "abinash-driving",
-  storageBucket: "abinash-driving.appspot.com",
-  messagingSenderId: "641148830173",
-  appId: "1:641148830173:web:b7a500e5e7e2463da0f634"
+  apiKey:"AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
+  authDomain:"abinash-driving.firebaseapp.com",
+  projectId:"abinash-driving",
+  storageBucket:"abinash-driving.appspot.com",
+  messagingSenderId:"641148830173",
+  appId:"1:641148830173:web:b7a500e5e7e2463da0f634"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-
 const $ = id => document.getElementById(id);
 
 let currentData = null;
@@ -472,7 +584,7 @@ function stopListening(){
   }
 }
 
-function setMessage(message, success = false){
+function setMessage(message,success=false){
   $("loginMessage").textContent = message;
   $("loginMessage").style.color = success ? "#43d99a" : "#ff7777";
 }
@@ -483,35 +595,21 @@ function showLoading(show){
 }
 
 function money(value){
-  const number = Number(value);
-  if(!Number.isFinite(number)) return "—";
-  return "₹" + number.toLocaleString("en-IN", {maximumFractionDigits:2});
+  const n = Number(value);
+  return Number.isFinite(n)
+    ? "₹" + n.toLocaleString("en-IN",{maximumFractionDigits:2})
+    : "—";
 }
 
-/*
-  IMPORTANT:
-  The Attendance page saves classType as exactly:
-  "Personal" or "Group".
-  Do not substitute package names or guess missing values.
-*/
 function readClassType(data){
   const value = String(data.classType ?? "").trim().toLowerCase();
-
   if(value === "personal") return "Personal";
   if(value === "group") return "Group";
-
   return "Not specified";
 }
 
-/*
-  Attendance page semantics:
-  remaining = completed-session counter.
-  attendanceLogs = session-by-session history.
-*/
 function getLogs(data){
-  return Array.isArray(data.attendanceLogs)
-    ? data.attendanceLogs
-    : [];
+  return Array.isArray(data.attendanceLogs) ? data.attendanceLogs : [];
 }
 
 function getTotal(data){
@@ -522,32 +620,25 @@ function getTotal(data){
 function getCompleted(data){
   const logs = getLogs(data);
   const counter = Number(data.remaining);
-  const recordedCounter = Number.isFinite(counter) && counter >= 0
-    ? Math.floor(counter)
-    : 0;
-
-  return Math.max(logs.length, recordedCounter);
+  const count = Number.isFinite(counter) && counter >= 0 ? Math.floor(counter) : 0;
+  return Math.max(logs.length,count);
 }
 
 function getProgress(data){
   const total = getTotal(data);
   const done = getCompleted(data);
-  const percent = Math.min(100, Math.round(done / total * 100));
-
+  const percent = Math.min(100,Math.round(done/total*100));
   return {
-    total,
-    done,
-    remaining: Math.max(0, total - done),
+    total,done,
+    remaining:Math.max(0,total-done),
     percent,
-    completed: done >= total
+    completed:done>=total
   };
 }
 
-/* Extract KM values when present; otherwise use the dashboard estimate. */
 function getDistance(data){
   const logs = getLogs(data);
-  let distance = 0;
-  let known = 0;
+  let distance = 0, known = 0;
 
   for(const entry of logs){
     if(typeof entry !== "string") continue;
@@ -558,71 +649,58 @@ function getDistance(data){
     }
   }
 
-  if(known === logs.length && logs.length > 0){
-    return {value: distance, estimated: false};
+  if(known===logs.length && logs.length>0){
+    return {value:distance,estimated:false};
   }
 
-  /*
-    Your current Attendance page always records 5 KM per session.
-    For older entries without distance, use 5 KM as an estimate.
-  */
-  return {value: distance + Math.max(0, logs.length - known) * 5, estimated: true};
+  return {
+    value:distance+Math.max(0,logs.length-known)*5,
+    estimated:true
+  };
 }
 
 function safeDate(value){
-  if(value == null || value === "") return null;
-
+  if(value==null || value==="") return null;
   let date = null;
 
-  if(value && typeof value.toDate === "function"){
-    date = value.toDate();
-  }else if(value && typeof value === "object" && Number.isFinite(value.seconds)){
-    date = new Date(value.seconds * 1000);
+  if(value && typeof value.toDate==="function"){
+    date=value.toDate();
+  }else if(value && typeof value==="object" && Number.isFinite(value.seconds)){
+    date=new Date(value.seconds*1000);
   }else if(value instanceof Date){
-    date = value;
-  }else if(typeof value === "string" || typeof value === "number"){
-    const text = String(value).trim();
-
-    let match = text.match(/^(\d{1,2})\s+([A-Za-z]{3,9})(?:\s+(\d{4}))?$/);
+    date=value;
+  }else if(typeof value==="string" || typeof value==="number"){
+    const text=String(value).trim();
+    const match=text.match(/^(\d{1,2})\s+([A-Za-z]{3,9})(?:\s+(\d{4}))?$/);
 
     if(match){
-      const months = [
+      const months=[
         "january","february","march","april","may","june",
         "july","august","september","october","november","december"
       ];
-      const month = months.findIndex(m => m.startsWith(match[2].toLowerCase()));
-
-      if(month >= 0){
-        date = new Date(
-          Number(match[3]) || new Date().getFullYear(),
-          month,
-          Number(match[1])
-        );
+      const month=months.findIndex(m=>m.startsWith(match[2].toLowerCase()));
+      if(month>=0){
+        date=new Date(Number(match[3])||new Date().getFullYear(),month,Number(match[1]));
       }
     }else{
-      const parsed = new Date(text);
-      if(!isNaN(parsed.getTime())) date = parsed;
+      const parsed=new Date(text);
+      if(!isNaN(parsed.getTime())) date=parsed;
     }
   }
 
-  if(!date || isNaN(date.getTime())) return null;
-
-  return date;
+  return date && !isNaN(date.getTime()) ? date : null;
 }
 
 function formatDate(value){
-  const date = safeDate(value);
+  const date=safeDate(value);
   if(!date) return null;
-
-  return date.toLocaleDateString("en-IN", {
-    day:"2-digit",
-    month:"long",
-    year:"numeric"
+  return date.toLocaleDateString("en-IN",{
+    day:"2-digit",month:"long",year:"numeric"
   });
 }
 
 function getCompletionDate(data){
-  const explicitFields = [
+  const fields=[
     data.trainingCompletedDate,
     data.completionDate,
     data.courseCompletionDate,
@@ -630,274 +708,249 @@ function getCompletionDate(data){
     data.trainingEndDate
   ];
 
-  for(const value of explicitFields){
-    const formatted = formatDate(value);
+  for(const value of fields){
+    const formatted=formatDate(value);
     if(formatted) return formatted;
   }
 
-  const logs = getLogs(data);
-
+  const logs=getLogs(data);
   if(!logs.length) return "Date not recorded";
 
-  /*
-    The current Attendance page writes dates as "07 Oct" without a year.
-    Do not invent a historical year for this format.
-  */
-  const last = logs[logs.length - 1];
-
-  if(typeof last === "string"){
-    const dateText = last.split("|")[0].trim();
+  const last=logs[logs.length-1];
+  if(typeof last==="string"){
+    const dateText=last.split("|")[0].trim();
 
     if(/^\d{1,2}\s+[A-Za-z]{3,9}$/.test(dateText)){
-      return dateText + " (year not recorded)";
+      return dateText+" (year not recorded)";
     }
 
-    const match = dateText.match(/\d{4}-\d{2}-\d{2}/);
-    if(match) return formatDate(match[0]) || "Date not recorded";
-
-    const parsed = formatDate(dateText);
-    if(parsed) return parsed;
+    const match=dateText.match(/\d{4}-\d{2}-\d{2}/);
+    if(match) return formatDate(match[0])||"Date not recorded";
+    return formatDate(dateText)||"Date not recorded";
   }
 
   return "Date not recorded";
 }
 
 function getWalletBalance(data){
-  const keys = [
-    "referralWallet",
-    "walletBalance",
-    "referralEarnings",
-    "totalEarnings",
-    "referralBalance",
-    "earnedAmount"
+  const keys=[
+    "referralWallet","walletBalance","referralEarnings",
+    "totalEarnings","referralBalance","earnedAmount"
   ];
 
   for(const key of keys){
-    if(data[key] !== undefined && data[key] !== null && data[key] !== ""){
-      const number = Number(data[key]);
-      if(Number.isFinite(number)) return number;
+    if(data[key]!==undefined && data[key]!==null && data[key]!==""){
+      const value=Number(data[key]);
+      if(Number.isFinite(value)) return value;
     }
   }
-
   return null;
 }
 
 function getReferralCount(data){
-  const count = Number(data.totalRefers);
-  return Number.isFinite(count) && count >= 0 ? Math.floor(count) : 0;
+  const count=Number(data.totalRefers);
+  return Number.isFinite(count)&&count>=0 ? Math.floor(count) : 0;
 }
 
-function unlockBadge(id, unlocked){
-  $(id).classList.toggle("unlocked", Boolean(unlocked));
+function unlockBadge(id,unlocked){
+  $(id).classList.toggle("unlocked",Boolean(unlocked));
 }
 
 function renderHistory(data){
-  const logs = getLogs(data);
-  const list = $("historyList");
-
+  const logs=getLogs(data);
+  const list=$("historyList");
   list.replaceChildren();
-  $("historyCount").textContent = logs.length + " RECORDS";
+  $("historyCount").textContent=logs.length+" RECORDS";
 
   if(!logs.length){
-    const empty = document.createElement("div");
-    empty.className = "empty";
-
-    const icon = document.createElement("i");
-    icon.className = "fa-regular fa-calendar";
-
-    const text = document.createElement("span");
-    text.textContent = "No attendance records have been added yet.";
-
-    empty.append(icon, text);
+    const empty=document.createElement("div");
+    empty.className="empty";
+    const icon=document.createElement("i");
+    icon.className="fa-regular fa-calendar";
+    const text=document.createElement("span");
+    text.textContent="No attendance records have been added yet.";
+    empty.append(icon,text);
     list.appendChild(empty);
     return;
   }
 
-  [...logs].reverse().forEach((entry, index) => {
-    const item = document.createElement("article");
-    item.className = "log";
+  [...logs].reverse().forEach((entry,index)=>{
+    const item=document.createElement("article");
+    item.className="log";
 
-    const header = document.createElement("div");
-    header.className = "logHead";
+    const header=document.createElement("div");
+    header.className="logHead";
 
-    const title = document.createElement("div");
-    title.className = "logTitle";
-    title.textContent = "Session " + (logs.length - index);
+    const title=document.createElement("div");
+    title.className="logTitle";
+    title.textContent="Session "+(logs.length-index);
 
-    const date = document.createElement("div");
-    date.className = "logDate";
+    const date=document.createElement("div");
+    date.className="logDate";
 
-    const text = typeof entry === "string" ? entry : "";
-    const parts = text.split(/\s+[—|]\s+/);
+    const text=typeof entry==="string" ? entry : "";
+    const parts=text.split(/\s+[—|]\s+/);
+    date.textContent=parts[0]||"Recorded session";
+    header.append(title,date);
 
-    date.textContent = parts[0] || "Recorded session";
-    header.append(title, date);
+    const details=document.createElement("div");
+    details.className="logDetails";
+    details.textContent=parts.slice(1).join(" | ")||text||"Session recorded.";
+    item.append(header,details);
 
-    const details = document.createElement("div");
-    details.className = "logDetails";
+    const route=text.match(/Route:\s*([^|]+)/i);
+    const distance=text.match(/Distance:\s*([^|]+)/i);
+    const remark=text.match(/Remark:\s*(.+)$/i);
+    const chips=document.createElement("div");
 
-    const detailsText = parts.slice(1).join(" | ") || text || "Session recorded.";
-    details.textContent = detailsText;
-
-    item.append(header, details);
-
-    /*
-      Highlight route and distance information without changing stored data.
-    */
-    const routeMatch = text.match(/Route:\s*([^|]+)/i);
-    const distanceMatch = text.match(/Distance:\s*([^|]+)/i);
-    const remarkMatch = text.match(/Remark:\s*(.+)$/i);
-
-    const chips = document.createElement("div");
-
-    if(routeMatch){
-      const chip = document.createElement("span");
-      chip.className = "logChip";
-      chip.textContent = "📍 " + routeMatch[1].trim();
+    if(route){
+      const chip=document.createElement("span");
+      chip.className="logChip";
+      chip.textContent="📍 "+route[1].trim();
       chips.appendChild(chip);
     }
-
-    if(distanceMatch){
-      const chip = document.createElement("span");
-      chip.className = "logChip";
-      chip.textContent = "🛣 " + distanceMatch[1].trim();
+    if(distance){
+      const chip=document.createElement("span");
+      chip.className="logChip";
+      chip.textContent="🛣 "+distance[1].trim();
       chips.appendChild(chip);
     }
-
-    if(remarkMatch){
-      const chip = document.createElement("span");
-      chip.className = "logChip";
-      chip.textContent = remarkMatch[1].trim();
+    if(remark){
+      const chip=document.createElement("span");
+      chip.className="logChip";
+      chip.textContent=remark[1].trim();
       chips.appendChild(chip);
     }
 
     if(chips.childNodes.length) item.appendChild(chips);
-
     list.appendChild(item);
   });
 }
 
 function renderProfile(data){
-  currentData = data;
+  currentData=data;
 
-  const progress = getProgress(data);
-  const classType = readClassType(data);
-  const distance = getDistance(data);
-  const inactive = data.notActive === true;
+  const progress=getProgress(data);
+  const classType=readClassType(data);
+  const distance=getDistance(data);
+  const inactive=data.notActive===true;
 
-  $("studentName").textContent = data.name || "Student";
-  $("studentPhone").textContent = currentPhone;
-  $("packageName").textContent = progress.total + "-Session Package";
+  $("studentName").textContent=data.name||"Student";
+  $("studentPhone").textContent=currentPhone;
+  $("packageName").textContent=progress.total+"-Session Package";
 
-  $("studentStatus").classList.toggle("inactive", inactive);
-  $("studentStatus").innerHTML = inactive
-    ? '<i class="fa-solid fa-circle-pause"></i><span>NOT ACTIVE</span>'
-    : '<i class="fa-solid fa-circle-check"></i><span>ACTIVE STUDENT</span>';
+  $("studentStatus").classList.toggle("inactive",inactive);
+  $("studentStatus").replaceChildren();
 
-  $("completedValue").textContent = progress.done;
-  $("totalValue").textContent = progress.total;
-  $("remainingValue").textContent = progress.remaining;
-  $("distanceValue").textContent =
-    distance.value.toLocaleString("en-IN", {maximumFractionDigits:1}) + " km";
+  const statusIcon=document.createElement("i");
+  statusIcon.className=inactive
+    ? "fa-solid fa-circle-pause"
+    : "fa-solid fa-circle-check";
 
-  $("classType").textContent = classType;
+  const statusText=document.createElement("span");
+  statusText.textContent=inactive ? "NOT ACTIVE" : "ACTIVE STUDENT";
+  $("studentStatus").append(statusIcon,statusText);
 
-  $("classIcon").innerHTML = classType === "Personal"
-    ? '<i class="fa-solid fa-user"></i>'
-    : classType === "Group"
-      ? '<i class="fa-solid fa-users"></i>'
-      : '<i class="fa-solid fa-circle-question"></i>';
+  $("completedValue").textContent=progress.done;
+  $("totalValue").textContent=progress.total;
+  $("remainingValue").textContent=progress.remaining;
+  $("distanceValue").textContent=
+    distance.value.toLocaleString("en-IN",{maximumFractionDigits:1})+" km";
 
-  $("classDescription").textContent =
-    classType === "Personal"
-      ? "Your registered class type is Personal Training — individual driving instruction."
-      : classType === "Group"
-        ? "Your registered class type is Group Training — group or batch driving instruction."
-        : "The classType field is missing or has an unrecognised value in this student record. Please contact the academy.";
+  $("classType").textContent=classType;
+  $("classIcon").replaceChildren();
 
-  $("percentValue").textContent = progress.percent + "%";
-  $("progressPercent").textContent = progress.percent + "%";
-  $("progressCount").textContent = progress.done + " of " + progress.total + " sessions";
+  const classIcon=document.createElement("i");
+  classIcon.className=classType==="Personal"
+    ? "fa-solid fa-user"
+    : classType==="Group"
+      ? "fa-solid fa-users"
+      : "fa-solid fa-circle-question";
 
-  const circumference = 2 * Math.PI * 42;
-  $("ringFill").style.strokeDasharray = circumference;
-  $("ringFill").style.strokeDashoffset = circumference * (1 - progress.percent / 100);
-  $("progressBar").style.width = progress.percent + "%";
+  $("classIcon").appendChild(classIcon);
 
-  $("progressStatus").textContent = progress.completed ? "COMPLETED" : "IN PROGRESS";
-  $("progressTitle").textContent = progress.completed
+  $("classDescription").textContent=classType==="Personal"
+    ? "Your registered class type is Personal Training — individual driving instruction."
+    : classType==="Group"
+      ? "Your registered class type is Group Training — group or batch driving instruction."
+      : "The classType field is missing or has an unrecognised value in this student record. Please contact the academy.";
+
+  $("percentValue").textContent=progress.percent+"%";
+  $("progressPercent").textContent=progress.percent+"%";
+  $("progressCount").textContent=progress.done+" of "+progress.total+" sessions";
+
+  const circumference=2*Math.PI*42;
+  $("ringFill").style.strokeDasharray=circumference;
+  $("ringFill").style.strokeDashoffset=circumference*(1-progress.percent/100);
+  $("progressBar").style.width=progress.percent+"%";
+
+  $("progressStatus").textContent=progress.completed ? "COMPLETED" : "IN PROGRESS";
+  $("progressTitle").textContent=progress.completed
     ? "Training target reached!"
-    : progress.percent >= 75
+    : progress.percent>=75
       ? "Almost at the finish line!"
-      : progress.percent >= 40
+      : progress.percent>=40
         ? "Great progress!"
         : "Your driving journey";
 
-  $("progressDescription").textContent = progress.completed
+  $("progressDescription").textContent=progress.completed
     ? "Your recorded attendance has reached the package target."
-    : progress.remaining + " session" + (progress.remaining === 1 ? "" : "s") + " remaining to reach your target.";
+    : progress.remaining+" session"+(progress.remaining===1?"":"s")+" remaining to reach your target.";
 
-  unlockBadge("badgeFirst", progress.done >= 1);
-  unlockBadge("badgeSafety", progress.done >= 5);
-  unlockBadge("badgePro", progress.percent >= 75);
-  unlockBadge("badgeElite", progress.completed);
+  unlockBadge("badgeFirst",progress.done>=1);
+  unlockBadge("badgeSafety",progress.done>=5);
+  unlockBadge("badgePro",progress.percent>=75);
+  unlockBadge("badgeElite",progress.completed);
 
-  const referrals = getReferralCount(data);
-  const balance = getWalletBalance(data);
+  const referrals=getReferralCount(data);
+  const balance=getWalletBalance(data);
 
-  $("referralCount").textContent = referrals + " referrals recorded";
-  $("walletAmount").textContent = balance === null ? "—" : money(balance);
-  $("walletStatus").textContent = balance === null ? "No balance field found" : "Recorded balance";
+  $("referralCount").textContent=referrals+" referrals recorded";
+  $("walletAmount").textContent=balance===null ? "—" : money(balance);
+  $("walletStatus").textContent=balance===null ? "No balance field found" : "Recorded balance";
 
-  $("certificateCard").style.display = progress.completed ? "block" : "none";
-
-  $("certStudentName").textContent = String(data.name || "STUDENT").trim().toUpperCase();
-  $("certType").textContent = classType.toUpperCase();
-  $("certDate").textContent = getCompletionDate(data);
+  $("certificateCard").style.display=progress.completed ? "block" : "none";
+  $("certStudentName").textContent=String(data.name||"STUDENT").trim().toUpperCase();
+  $("certType").textContent=classType.toUpperCase();
+  $("certDate").textContent=getCompletionDate(data);
 
   renderHistory(data);
 }
 
-/* Load a student's existing studentData/{phone} record. */
 function loadStudent(phone){
   stopListening();
-
-  currentData = null;
-  currentPhone = phone;
-
-  const token = ++requestToken;
+  currentData=null;
+  currentPhone=phone;
+  const token=++requestToken;
 
   showLoading(true);
   setMessage("");
 
-  unsubscribe = onSnapshot(
-    doc(db, "studentData", phone),
-    snapshot => {
-      if(token !== requestToken) return;
-
+  unsubscribe=onSnapshot(
+    doc(db,"studentData",phone),
+    snapshot=>{
+      if(token!==requestToken) return;
       showLoading(false);
 
       if(!snapshot.exists()){
-        $("dashboard").style.display = "none";
-        $("loginPanel").style.display = "block";
+        $("dashboard").style.display="none";
+        $("loginPanel").style.display="block";
         setMessage("No student record found for this mobile number.");
         stopListening();
         return;
       }
 
       renderProfile(snapshot.data());
-      $("loginPanel").style.display = "none";
-      $("dashboard").style.display = "block";
-      setMessage("", true);
+      $("loginPanel").style.display="none";
+      $("dashboard").style.display="block";
+      setMessage("",true);
     },
-    error => {
-      if(token !== requestToken) return;
-
+    error=>{
+      if(token!==requestToken) return;
       showLoading(false);
-      console.error("Student profile listener error:", error);
-
-      $("dashboard").style.display = "none";
-      $("loginPanel").style.display = "block";
+      console.error("Student profile listener error:",error);
+      $("dashboard").style.display="none";
+      $("loginPanel").style.display="block";
       setMessage("Unable to read your record. Please check your connection or contact the academy.");
       stopListening();
     }
@@ -905,7 +958,7 @@ function loadStudent(phone){
 }
 
 function login(){
-  const phone = $("phoneInput").value.trim();
+  const phone=$("phoneInput").value.trim();
 
   if(!/^\d{10}$/.test(phone)){
     setMessage("Please enter a valid 10-digit registered mobile number.");
@@ -918,135 +971,106 @@ function login(){
 function logout(){
   stopListening();
   requestToken++;
-  currentData = null;
-  currentPhone = "";
+  currentData=null;
+  currentPhone="";
 
-  $("dashboard").style.display = "none";
-  $("loginPanel").style.display = "block";
-  $("phoneInput").value = "";
+  $("dashboard").style.display="none";
+  $("loginPanel").style.display="block";
+  $("phoneInput").value="";
   showLoading(false);
   setMessage("");
-
-  window.scrollTo({top:0, behavior:"smooth"});
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 
 async function downloadCertificate(){
   if(!currentData) return;
 
-  const progress = getProgress(currentData);
-
+  const progress=getProgress(currentData);
   if(!progress.completed){
     alert("Your package completion target has not yet been reached.");
     return;
   }
 
-  if(typeof window.html2pdf !== "function"){
+  if(typeof window.html2pdf!=="function"){
     alert("The PDF library could not load. Check your internet connection and refresh the page.");
     return;
   }
 
-  const btn = $("certificateBtn");
-  const element = $("certificate");
+  const btn=$("certificateBtn");
+  const element=$("certificate");
 
-  const oldStyle = {
-    display: element.style.display,
-    position: element.style.position,
-    left: element.style.left,
-    top: element.style.top,
-    zIndex: element.style.zIndex
+  const oldStyle={
+    display:element.style.display,
+    position:element.style.position,
+    left:element.style.left,
+    top:element.style.top,
+    zIndex:element.style.zIndex
   };
 
-  btn.disabled = true;
-  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> PREPARING CERTIFICATE';
+  btn.disabled=true;
+  btn.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> PREPARING CERTIFICATE';
 
   try{
-    $("certStudentName").textContent =
-      String(currentData.name || "STUDENT").trim().toUpperCase();
+    $("certStudentName").textContent=String(currentData.name||"STUDENT").trim().toUpperCase();
+    $("certType").textContent=readClassType(currentData).toUpperCase();
+    $("certDate").textContent=getCompletionDate(currentData);
 
-    $("certType").textContent = readClassType(currentData).toUpperCase();
-    $("certDate").textContent = getCompletionDate(currentData);
+    element.style.display="block";
+    element.style.position="fixed";
+    element.style.left="0";
+    element.style.top="0";
+    element.style.zIndex="99999";
 
-    /*
-      Render at the certificate's fixed dimensions, not at the mobile viewport width.
-      Keep the element measurable during capture to avoid blank PDF pages.
-    */
-    element.style.display = "block";
-    element.style.position = "fixed";
-    element.style.left = "0";
-    element.style.top = "0";
-    element.style.zIndex = "99999";
+    if(document.fonts&&document.fonts.ready) await document.fonts.ready;
+    await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
 
-    if(document.fonts && document.fonts.ready){
-      await document.fonts.ready;
-    }
-
-    await new Promise(resolve => {
-      requestAnimationFrame(() => requestAnimationFrame(resolve));
-    });
-
-    const filename = "A1_Certificate_" +
-      (String(currentData.name || "Student")
-        .trim()
-        .replace(/[^a-z0-9_-]/gi, "_") || "Student") +
+    const filename="A1_Certificate_"+
+      (String(currentData.name||"Student").trim().replace(/[^a-z0-9_-]/gi,"_")||"Student")+
       ".pdf";
 
-    await window.html2pdf()
-      .set({
-        filename,
-        margin: 0,
-        image: {type:"jpeg", quality:0.95},
-        html2canvas: {
-          scale: 1,
-          useCORS: true,
-          backgroundColor: "#07172d",
-          logging: true,
-          width: 1123,
-          height: 794,
-          windowWidth: 1123,
-          windowHeight: 794,
-          scrollX: 0,
-          scrollY: 0
-        },
-        jsPDF: {
-          unit: "mm",
-          format: "a4",
-          orientation: "landscape",
-          compress: true
-        },
-        pagebreak: {mode:["avoid-all"]}
-      })
-      .from(element)
-      .save();
+    await window.html2pdf().set({
+      filename,
+      margin:0,
+      image:{type:"jpeg",quality:0.95},
+      html2canvas:{
+        scale:1,
+        useCORS:true,
+        backgroundColor:"#07172d",
+        logging:false,
+        width:1123,
+        height:794,
+        windowWidth:1123,
+        windowHeight:794,
+        scrollX:0,
+        scrollY:0
+      },
+      jsPDF:{unit:"mm",format:"a4",orientation:"landscape",compress:true},
+      pagebreak:{mode:["avoid-all"]}
+    }).from(element).save();
 
   }catch(error){
-    console.error("Certificate generation failed:", error);
-    alert("Certificate could not be generated.\n\n" +
-      (error?.message || String(error)) +
+    console.error("Certificate generation failed:",error);
+    alert("Certificate could not be generated.\n\n"+
+      (error?.message||String(error))+
       "\n\nPlease refresh the page and try again.");
   }finally{
-    element.style.display = oldStyle.display;
-    element.style.position = oldStyle.position;
-    element.style.left = oldStyle.left;
-    element.style.top = oldStyle.top;
-    element.style.zIndex = oldStyle.zIndex;
-
-    btn.disabled = false;
-    btn.innerHTML = '<i class="fa-solid fa-file-pdf"></i> DOWNLOAD CERTIFICATE PDF';
+    Object.assign(element.style,oldStyle);
+    btn.disabled=false;
+    btn.innerHTML='<i class="fa-solid fa-file-pdf"></i> DOWNLOAD CERTIFICATE PDF';
   }
 }
 
 function contactAcademy(){
-  const name = currentData?.name || "Student";
-  const text = encodeURIComponent(
-    "Hello ABHINAASH A1 Driving Academy, I am " +
-    name + ". I need help with my driving classes."
+  const name=currentData?.name||"Student";
+  const text=encodeURIComponent(
+    "Hello ABHINAASH A1 Driving Academy, I am "+name+
+    ". I need help with my driving classes."
   );
-
-  window.location.href = "https://wa.me/917008186187?text=" + text;
+  window.location.href="https://wa.me/917008186187?text="+text;
 }
 
 async function shareAcademy(){
-  const details = {
+  const details={
     title:"ABHINAASH A1 Driving Academy",
     text:"Learn driving with ABHINAASH A1 Driving Academy."
   };
@@ -1056,21 +1080,24 @@ async function shareAcademy(){
       await navigator.share(details);
       return;
     }catch(error){
-      if(error.name === "AbortError") return;
+      if(error.name==="AbortError") return;
     }
   }
 
-  window.location.href =
-    "https://wa.me/?text=" + encodeURIComponent(details.text);
+  window.location.href="https://wa.me/?text="+encodeURIComponent(details.text);
 }
 
-$("loginBtn").addEventListener("click", login);
+$("loginBtn").addEventListener("click",login);
 
-$("phoneInput").addEventListener("keydown", event => {
-  if(event.key === "Enter") login();
+$("phoneInput").addEventListener("input",()=>{
+  $("phoneInput").value=$("phoneInput").value.replace(/\D/g,"").slice(0,10);
 });
 
-$("refreshBtn").addEventListener("click", () => {
+$("phoneInput").addEventListener("keydown",event=>{
+  if(event.key==="Enter") login();
+});
+
+$("refreshBtn").addEventListener("click",()=>{
   if(currentPhone){
     loadStudent(currentPhone);
   }else{
@@ -1079,10 +1106,12 @@ $("refreshBtn").addEventListener("click", () => {
   }
 });
 
-$("logoutBtn").addEventListener("click", logout);
-$("certificateBtn").addEventListener("click", downloadCertificate);
-$("contactBtn").addEventListener("click", contactAcademy);
-$("shareBtn").addEventListener("click", shareAcademy);
+$("logoutBtn").addEventListener("click",logout);
+$("certificateBtn").addEventListener("click",downloadCertificate);
+$("contactBtn").addEventListener("click",contactAcademy);
+$("shareBtn").addEventListener("click",shareAcademy);
+
+window.addEventListener("pagehide",stopListening);
 </script>
 </body>
 </html>
