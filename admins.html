@@ -1,8 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#080808">
 <title>A1 Attendance | Driving Classes</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -10,3729 +12,865 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+:root {
+  --bg:#080808; --surface:#111; --surface2:#171717;
+  --border:#292929; --gold:#d7b36a; --light:#f0d18b;
+  --text:#f5f5f5; --muted:#858585; --green:#55d996;
+  --blue:#70b4ff; --red:#ff7777;
 }
-
-:root{
-  --bg:#080808;
-  --surface:#111;
-  --surface2:#151515;
-  --border:#252525;
-  --gold:#d7b36a;
-  --gold-light:#f0d18b;
-  --text:#f5f5f5;
-  --muted:#858585;
-  --green:#55d996;
-  --blue:#70b4ff;
-  --red:#ff7777;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
+*{box-sizing:border-box;margin:0;padding:0}
 body{
-  font-family:Inter,Arial,sans-serif;
-  background:
-    radial-gradient(
-      circle at 50% -15%,
-      rgba(215,179,106,.10),
-      transparent 35%
-    ),
-    var(--bg);
-  color:var(--text);
-  min-height:100vh;
-  padding-bottom:88px;
+  font-family:Inter,Arial,sans-serif;color:var(--text);
+  background:radial-gradient(circle at 50% -10%,#30251655,transparent 38%),var(--bg);
+  min-height:100vh;padding-bottom:100px
 }
-
-button,
-input,
-textarea,
-select{
-  font-family:inherit;
-}
-
-button{
-  cursor:pointer;
-  -webkit-tap-highlight-color:transparent;
-}
-
-/* ================= HEADER ================= */
-
+button,input{font:inherit}
+button{cursor:pointer;-webkit-tap-highlight-color:transparent}
 .header{
-  position:sticky;
-  top:0;
-  z-index:50;
-  background:rgba(8,8,8,.94);
-  backdrop-filter:blur(18px);
-  border-bottom:1px solid #1f1f1f;
+  position:sticky;top:0;z-index:20;background:#080808ed;
+  backdrop-filter:blur(18px);border-bottom:1px solid #242424
 }
-
 .headerInner{
-  max-width:900px;
-  margin:auto;
-  padding:14px 16px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
+  max-width:950px;margin:auto;padding:13px 16px;
+  display:flex;align-items:center;justify-content:space-between;gap:10px
 }
-
-.brand{
-  display:flex;
-  align-items:center;
-  gap:11px;
-}
-
+.brand{display:flex;align-items:center;gap:11px}
 .logo{
-  width:42px;
-  height:42px;
-  border-radius:13px;
-  border:1px solid #6b5835;
-  background:#0d0d0d;
-  color:var(--gold-light);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:14px;
-  font-weight:800;
+  width:44px;height:44px;border:1px solid #76603a;border-radius:14px;
+  display:grid;place-items:center;background:#15120c;color:var(--light);
+  font-size:15px;font-weight:800
 }
-
-.brandTitle{
-  font-size:15px;
-  font-weight:800;
-}
-
-.brandSub{
-  color:#666;
-  font-size:8px;
-  letter-spacing:1.5px;
-  margin-top:4px;
-}
-
-.clock{
-  text-align:right;
-}
-
-.clockTime{
-  color:var(--gold-light);
-  font-size:13px;
-  font-weight:700;
-}
-
-.clockDate{
-  color:#666;
-  font-size:8px;
-  margin-top:4px;
-}
-
-/* ================= MAIN ================= */
-
-.container{
-  max-width:900px;
-  margin:auto;
-  padding:18px 16px 30px;
-}
-
-/* ================= SEARCH ================= */
-
-.search{
-  position:relative;
-  margin-bottom:18px;
-}
-
-.searchIcon{
-  position:absolute;
-  left:15px;
-  top:50%;
-  transform:translateY(-50%);
-  color:#666;
-  font-size:17px;
-}
-
+.brandTitle{font-size:15px;font-weight:800}
+.brandSub{font-size:8px;color:#777;letter-spacing:1.5px;margin-top:4px}
+.clock{text-align:right}.clockTime{font-size:13px;color:var(--light);font-weight:800}
+.clockDate{font-size:9px;color:#777;margin-top:4px}
+.container{max-width:950px;margin:auto;padding:18px 14px 28px}
+.search{position:relative;margin-bottom:16px}
+.search span{position:absolute;left:15px;top:13px;color:#777;font-size:18px}
 .search input{
-  width:100%;
-  height:48px;
-  padding:0 15px 0 42px;
-  border-radius:14px;
-  border:1px solid var(--border);
-  background:#101010;
-  color:white;
-  outline:none;
-  font-size:12px;
+  width:100%;height:48px;border-radius:14px;border:1px solid var(--border);
+  background:#111;color:white;padding:0 15px 0 43px;outline:none;font-size:12px
 }
-
-.search input:focus{
-  border-color:#665331;
-}
-
-.search input::placeholder{
-  color:#555;
-}
-
-/* ================= STATS ================= */
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:8px;
-  margin-bottom:22px;
-}
-
+.search input:focus,.field:focus{border-color:#907443}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-bottom:23px}
 .stat{
-  min-height:72px;
-  padding:12px 7px;
-  border-radius:14px;
-  border:1px solid var(--border);
-  background:linear-gradient(145deg,#141414,#0e0e0e);
-  text-align:center;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
+  min-height:91px;padding:14px;border:1px solid var(--border);
+  border-radius:17px;background:linear-gradient(145deg,#171717,#0d0d0d);
+  position:relative;overflow:hidden
 }
-
-.statValue{
-  color:var(--gold-light);
-  font-size:20px;
-  line-height:1;
-  font-weight:800;
+.stat.month{
+  border-color:#6f5934;
+  background:radial-gradient(circle at 100% 0%,#d7b36a25,transparent 65%),linear-gradient(145deg,#211b10,#101010)
 }
-
-.statLabel{
-  color:#666;
-  font-size:7px;
-  letter-spacing:1px;
-  margin-top:7px;
-}
-
-/* ================= SECTION ================= */
-
-.sectionHeader{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:11px;
-  padding:0 2px;
-}
-
-.sectionTitle{
-  font-size:13px;
-  font-weight:700;
-}
-
-.sectionCount{
-  color:#666;
-  font-size:9px;
-}
-
-/* ================= CARDS ================= */
-
-.cards{
-  display:grid;
-  gap:10px;
-}
-
+.statLabel{font-size:8px;letter-spacing:1.1px;color:#888;font-weight:800}
+.statValue{font-size:27px;line-height:1.1;font-weight:800;color:var(--light);margin-top:10px}
+.statHint{font-size:9px;color:#777;margin-top:5px}
+.sectionHeader{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.sectionTitle{font-size:14px;font-weight:800}
+.sectionCount{font-size:10px;color:#777}
+.cards{display:grid;grid-template-columns:1fr;gap:13px}
 .studentCard{
-  position:relative;
-  padding:15px;
-  border:1px solid var(--border);
-  border-radius:17px;
-  background:#111;
-  transition:border-color .2s,transform .2s;
+  padding:16px;border:1px solid #302a20;border-radius:21px;
+  background:radial-gradient(circle at 100% 0%,#d7b36a10,transparent 45%),linear-gradient(145deg,#171717,#0d0d0d);
+  box-shadow:0 8px 25px #0003;min-width:0
 }
-
-.studentCard:hover{
-  border-color:#353535;
-}
-
-.studentCard.inactive{
-  background:#0d0d0d;
-  border-color:#202020;
-  opacity:.72;
-}
-
-.studentHeader{
-  display:flex;
-  align-items:center;
-  gap:11px;
-}
-
+.studentCard.inactive{opacity:.72;background:#101010}
+.studentHeader{display:grid;grid-template-columns:47px minmax(0,1fr) auto;align-items:center;gap:11px}
 .avatar{
-  width:43px;
-  height:43px;
-  flex:none;
-  border-radius:13px;
-  background:#17130c;
-  border:1px solid #4c3e25;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:var(--gold-light);
-  font-size:15px;
-  font-weight:800;
+  width:47px;height:47px;display:grid;place-items:center;border-radius:15px;
+  border:1px solid #6a5431;background:#251d10;color:var(--light);font-weight:800
 }
-
-.studentInfo{
-  min-width:0;
-  flex:1;
+.studentInfo{min-width:0}.studentName{font-size:13px;font-weight:800;overflow-wrap:anywhere}
+.studentPhone{font-size:10px;color:#888;margin-top:5px}
+.badges{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:5px;max-width:110px}
+.badge{padding:6px 7px;border-radius:8px;font-size:8px;font-weight:800;border:1px solid #333;white-space:nowrap}
+.badge.active{color:var(--green);border-color:#24543c;background:#112219}
+.badge.live{color:var(--blue);border-color:#244459;background:#101c24}
+.badge.completed{color:var(--light);border-color:#6a5431;background:#211a10}
+.badge.inactive{color:#aaa;background:#191919}
+.typeRow,.lastAttendance{
+  margin-top:13px;padding:12px;border:1px solid #28251f;
+  border-radius:13px;background:#0c0c0c
 }
-
-.studentName{
-  font-size:13px;
-  font-weight:800;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-
-.studentPhone{
-  color:#666;
-  font-size:9px;
-  margin-top:4px;
-}
-
-.badges{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:flex-end;
-  gap:5px;
-}
-
-.badge{
-  padding:5px 7px;
-  border-radius:7px;
-  font-size:7px;
-  font-weight:800;
-  letter-spacing:.5px;
-  white-space:nowrap;
-}
-
-.badge.active{
-  color:var(--green);
-  background:rgba(85,217,150,.07);
-  border:1px solid rgba(85,217,150,.18);
-}
-
-.badge.live{
-  color:#78c8ff;
-  background:rgba(120,200,255,.07);
-  border:1px solid rgba(120,200,255,.18);
-}
-
-.badge.completed{
-  color:var(--gold-light);
-  background:rgba(215,179,106,.07);
-  border:1px solid rgba(215,179,106,.20);
-}
-
-.badge.inactive{
-  color:#999;
-  background:#171717;
-  border:1px solid #2c2c2c;
-}
-
-/* ================= CLASS TYPE ================= */
-
-.typeRow{
-  margin-top:13px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:9px 11px;
-  background:#0c0c0c;
-  border:1px solid #202020;
-  border-radius:10px;
-}
-
-.typeInfo{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-
-.typeLabel{
-  color:#666;
-  font-size:8px;
-  text-transform:uppercase;
-  letter-spacing:1px;
-}
-
-.typeValue{
-  color:var(--gold-light);
-  font-size:10px;
-  font-weight:800;
-}
-
-.editType{
-  border:1px solid #3a3224;
-  background:#16130e;
-  color:var(--gold-light);
-  border-radius:8px;
-  padding:6px 9px;
-  font-size:8px;
-  font-weight:700;
-}
-
-/* ================= LAST ATTENDANCE ================= */
-
-.lastAttendance{
-  margin-top:9px;
-  padding:10px 11px;
-  border-radius:10px;
-  background:#0c0c0c;
-  border:1px solid #1e1e1e;
-}
-
-.lastLabel{
-  color:#5e5e5e;
-  font-size:7px;
-  text-transform:uppercase;
-  letter-spacing:1px;
-}
-
-.lastText{
-  color:#c8c8c8;
-  font-size:9px;
-  line-height:1.5;
-  margin-top:5px;
-}
-
-/* ================= PROGRESS ================= */
-
-.progressBox{
-  margin-top:12px;
-}
-
-.progressTop{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:6px;
-}
-
-.progressLabel{
-  color:#666;
-  font-size:7px;
-  letter-spacing:1px;
-}
-
-.progressCount{
-  color:#aaa;
-  font-size:8px;
-  font-weight:700;
-}
-
-.progress{
-  height:5px;
-  width:100%;
-  border-radius:10px;
-  background:#222;
-  overflow:hidden;
-}
-
-.progressBar{
-  height:100%;
-  border-radius:10px;
-  background:linear-gradient(
-    90deg,
-    var(--gold),
-    var(--gold-light)
-  );
-}
-
-/* ================= ACTIONS ================= */
-
-.actions{
-  display:grid;
-  grid-template-columns:1.25fr 1fr 1fr 1fr;
-  gap:6px;
-  margin-top:12px;
-}
-
+.typeRow{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.typeInfo{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.typeLabel,.lastLabel{font-size:8px;color:#777;letter-spacing:1px}
+.typeValue{font-size:10px;font-weight:800;color:var(--light)}
+.editType{padding:8px 10px;border:1px solid #4d3d25;border-radius:9px;background:#1a160f;color:var(--light);font-size:9px}
+.lastText{font-size:10px;color:#ccc;line-height:1.6;margin-top:6px;overflow-wrap:anywhere}
+.progressBox{margin-top:16px}
+.progressTop{display:flex;justify-content:space-between;gap:8px;margin-bottom:8px}
+.progressLabel{font-size:8px;color:#888;letter-spacing:1px}
+.progressCount{font-size:10px;color:var(--light);font-weight:800}
+.progress{height:6px;border-radius:20px;background:#292929;overflow:hidden}
+.progressBar{height:100%;border-radius:20px;background:linear-gradient(90deg,#a77a32,#f0d18b)}
+.actions{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:6px;margin-top:15px}
 .action{
-  min-height:36px;
-  border:1px solid #282828;
-  border-radius:9px;
-  background:#151515;
-  color:#bdbdbd;
-  font-size:8px;
-  font-weight:700;
+  min-width:0;min-height:41px;border:1px solid #303030;border-radius:10px;
+  background:#191919;color:#ccc;font-size:9px;font-weight:800;padding:5px 2px
 }
-
-.action.attend{
-  background:linear-gradient(
-    135deg,
-    var(--gold-light),
-    var(--gold)
-  );
-  color:#111;
-  border:none;
+.action.attend{background:linear-gradient(135deg,var(--light),var(--gold));color:#111;border:0}
+.action.wa{color:#72dfa0}.action.call{color:#7eb9ff}
+.notActiveBtn,.activateBtn{
+  width:100%;min-height:40px;margin-top:9px;border-radius:10px;
+  font-size:9px;font-weight:800;background:#171212;color:#ff9999;border:1px solid #482626
 }
-
-.action.wa{
-  color:#72dfa0;
-}
-
-.action.call{
-  color:#7eb9ff;
-}
-
-.notActiveBtn{
-  width:100%;
-  margin-top:7px;
-  min-height:35px;
-  border-radius:9px;
-  border:1px solid rgba(255,119,119,.15);
-  background:rgba(255,119,119,.045);
-  color:#e98282;
-  font-size:8px;
-  font-weight:800;
-}
-
-.activateBtn{
-  width:100%;
-  min-height:36px;
-  margin-top:12px;
-  border-radius:9px;
-  border:1px solid rgba(85,217,150,.18);
-  background:rgba(85,217,150,.05);
-  color:#6ee3a0;
-  font-size:8px;
-  font-weight:800;
-}
-
-/* ================= EMPTY ================= */
-
-.empty{
-  border:1px dashed #292929;
-  border-radius:15px;
-  padding:45px 20px;
-  text-align:center;
-  color:#666;
-}
-
-.emptyIcon{
-  font-size:28px;
-  margin-bottom:10px;
-}
-
-.emptyText{
-  font-size:10px;
-}
-
-.loading{
-  padding:40px;
-  text-align:center;
-  color:#666;
-  font-size:10px;
-}
-
-/* ================= FAB ================= */
-
+.activateBtn{background:#101d15;color:var(--green);border-color:#234832}
+.empty{padding:45px 20px;text-align:center;border:1px dashed #333;border-radius:16px;color:#888;font-size:11px}
+.loading{text-align:center;padding:35px;color:#888;font-size:11px}
 .fab{
-  position:fixed;
-  right:19px;
-  bottom:76px;
-  z-index:60;
-  width:52px;
-  height:52px;
-  border:0;
-  border-radius:16px;
-  background:linear-gradient(
-    135deg,
-    var(--gold-light),
-    var(--gold)
-  );
-  color:#111;
-  font-size:25px;
-  box-shadow:0 12px 35px rgba(0,0,0,.5);
+  position:fixed;right:18px;bottom:82px;z-index:30;width:53px;height:53px;
+  border:0;border-radius:17px;background:linear-gradient(135deg,var(--light),var(--gold));
+  color:#111;font-size:27px;box-shadow:0 8px 28px #0009
 }
-
-/* ================= BOTTOM NAV ================= */
-
 .bottomNav{
-  position:fixed;
-  left:0;
-  right:0;
-  bottom:0;
-  z-index:55;
-  display:flex;
-  justify-content:center;
-  gap:3px;
-  padding:8px 9px calc(8px + env(safe-area-inset-bottom));
-  background:rgba(9,9,9,.96);
-  backdrop-filter:blur(18px);
-  border-top:1px solid #202020;
+  position:fixed;bottom:0;left:0;right:0;z-index:25;display:flex;justify-content:center;
+  gap:3px;padding:8px 6px calc(8px + env(safe-area-inset-bottom));
+  background:#090909f5;backdrop-filter:blur(18px);border-top:1px solid #292929
 }
-
-.navBtn{
-  flex:1;
-  max-width:120px;
-  border:0;
-  background:none;
-  color:#5e5e5e;
-  padding:5px 2px;
-  font-size:7px;
-  font-weight:800;
-}
-
-.navBtn.active{
-  color:var(--gold-light);
-}
-
-.navIcon{
-  display:block;
-  font-size:15px;
-  margin-bottom:3px;
-}
-
-/* ================= MODAL ================= */
-
+.navBtn{flex:1;max-width:125px;border:0;background:none;color:#777;font-size:8px;font-weight:800;padding:5px 1px}
+.navBtn.active{color:var(--light)}
+.navIcon{display:block;font-size:16px;margin-bottom:4px}
 .modal{
-  position:fixed;
-  inset:0;
-  z-index:100;
-  display:none;
-  align-items:flex-end;
-  justify-content:center;
-  padding:9px;
-  background:rgba(0,0,0,.78);
-  backdrop-filter:blur(6px);
+  position:fixed;inset:0;z-index:60;display:none;align-items:flex-end;justify-content:center;
+  padding:8px;background:#000c;backdrop-filter:blur(5px)
 }
-
-.modal.show{
-  display:flex;
-}
-
+.modal.show{display:flex}
 .modalBox{
-  width:100%;
-  max-width:570px;
-  max-height:91vh;
-  overflow:auto;
-  padding:18px;
-  border:1px solid #303030;
-  border-radius:21px 21px 13px 13px;
-  background:#111;
-  animation:modalUp .22s ease;
+  width:100%;max-width:570px;max-height:90dvh;overflow:auto;
+  padding:18px;border:1px solid #333;border-radius:22px 22px 13px 13px;background:#121212
 }
-
-@keyframes modalUp{
-  from{
-    transform:translateY(25px);
-    opacity:0;
-  }
-  to{
-    transform:translateY(0);
-    opacity:1;
-  }
+.modalHeader{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.modalTitle{font-size:15px;font-weight:800}
+.modalSub{font-size:10px;color:#888;margin-top:5px}
+.close{width:34px;height:34px;border:1px solid #333;border-radius:10px;background:#1b1b1b;color:#ddd;font-size:19px}
+.formGroup{margin-bottom:15px}
+.formLabel{display:block;color:#999;font-size:9px;letter-spacing:1px;margin-bottom:7px}
+.field{
+  width:100%;height:44px;border:1px solid #303030;border-radius:11px;
+  background:#090909;color:white;padding:0 12px;outline:none;font-size:12px
 }
-
-.modalHeader{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:17px;
+.optionGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.optionBtn,.typeOption{
+  min-height:40px;padding:8px;border:1px solid #303030;border-radius:10px;
+  background:#0d0d0d;color:#aaa;font-size:10px
 }
-
-.modalTitle{
-  font-size:15px;
-  font-weight:800;
-}
-
-.modalSub{
-  color:#666;
-  font-size:9px;
-  margin-top:4px;
-}
-
-.close{
-  width:32px;
-  height:32px;
-  border:1px solid #292929;
-  border-radius:9px;
-  background:#171717;
-  color:#aaa;
-  font-size:17px;
-}
-
-/* ================= FORM ================= */
-
-.formGroup{
-  margin-bottom:14px;
-}
-
-.formLabel{
-  display:block;
-  color:#686868;
-  font-size:8px;
-  text-transform:uppercase;
-  letter-spacing:1px;
-  margin-bottom:6px;
-}
-
-.formInput,
-.formTextarea{
-  width:100%;
-  border:1px solid #292929;
-  border-radius:10px;
-  background:#0b0b0b;
-  color:white;
-  outline:none;
-  padding:12px;
-  font-size:11px;
-}
-
-.formInput{
-  height:43px;
-}
-
-.formInput:focus,
-.formTextarea:focus{
-  border-color:#675432;
-}
-
-.formTextarea{
-  min-height:75px;
-  resize:vertical;
-}
-
-/* ================= TYPE ================= */
-
-.typeGrid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-}
-
-.typeOption{
-  border:1px solid #292929;
-  background:#0c0c0c;
-  border-radius:12px;
-  padding:14px 8px;
-  color:#777;
-  text-align:center;
-}
-
-.typeOption.selected{
-  border-color:#a9874d;
-  background:rgba(215,179,106,.08);
-  color:var(--gold-light);
-}
-
-.typeIcon{
-  display:block;
-  font-size:20px;
-  margin-bottom:5px;
-}
-
-.typeName{
-  font-size:9px;
-  font-weight:800;
-}
-
-/* ================= OPTIONS ================= */
-
-.optionGrid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:7px;
-}
-
-.optionBtn{
-  min-height:38px;
-  border:1px solid #292929;
-  background:#0c0c0c;
-  border-radius:9px;
-  color:#888;
-  font-size:9px;
-  padding:5px;
-}
-
-.optionBtn.selected{
-  color:#111;
-  background:var(--gold-light);
-  border-color:var(--gold-light);
-  font-weight:800;
-}
-
-/* ================= CUSTOM ROUTE ================= */
-
-.customRouteBox{
-  display:none;
-  margin-top:8px;
-}
-
-.customRouteBox.show{
-  display:block;
-}
-
-.customRouteHint{
-  color:#555;
-  font-size:7px;
-  margin-top:5px;
-  line-height:1.4;
-}
-
-/* ================= CUSTOM REMARK ================= */
-
-.customRemarkBox{
-  display:none;
-  margin-top:8px;
-}
-
-.customRemarkBox.show{
-  display:block;
-}
-
-.customRemarkHint{
-  color:#555;
-  font-size:7px;
-  margin-top:5px;
-  line-height:1.4;
-}
-
-/* ================= DISTANCE DEFAULT ================= */
-
-.distanceDefault{
-  border-color:var(--gold-light);
-  background:var(--gold-light);
-  color:#111;
-  font-weight:800;
-}
-
-/* ================= GOLD BUTTON ================= */
-
+.optionBtn.selected,.typeOption.selected{border-color:#b99554;background:#282012;color:var(--light)}
+.typeGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.typeOption{min-height:76px;font-weight:800}
+.typeIcon{display:block;font-size:20px;margin-bottom:7px}
 .goldBtn{
-  width:100%;
-  min-height:43px;
-  border:0;
-  border-radius:10px;
-  background:linear-gradient(
-    135deg,
-    var(--gold-light),
-    var(--gold)
-  );
-  color:#111;
-  font-size:10px;
-  font-weight:800;
+  width:100%;min-height:45px;border:0;border-radius:11px;
+  background:linear-gradient(135deg,var(--light),var(--gold));color:#111;font-size:10px;font-weight:800
 }
-
-/* ================= HISTORY ================= */
-
-.historyItem{
-  padding:12px;
-  border:1px solid #242424;
-  border-radius:11px;
-  background:#0c0c0c;
-  margin-bottom:7px;
-}
-
-.historyNumber{
-  color:var(--gold-light);
-  font-size:8px;
-  font-weight:800;
-  margin-bottom:5px;
-}
-
-.historyText{
-  color:#c5c5c5;
-  font-size:9px;
-  line-height:1.6;
-}
-
-/* ================= TOAST ================= */
-
+.customBox{display:none;margin-top:8px}.customBox.show{display:block}
+.hint{font-size:9px;color:#777;margin-top:6px;line-height:1.5}
+.historyItem{padding:12px;margin-bottom:8px;border:1px solid #2c2c2c;border-radius:12px;background:#0d0d0d}
+.historyNumber{font-size:9px;color:var(--light);font-weight:800;margin-bottom:6px}
+.historyText{font-size:10px;line-height:1.7;color:#ccc;overflow-wrap:anywhere}
 .toast{
-  position:fixed;
-  left:50%;
-  bottom:88px;
-  z-index:200;
-  transform:translateX(-50%) translateY(15px);
-  opacity:0;
-  pointer-events:none;
-  background:#191919;
-  border:1px solid #333;
-  color:#eee;
-  border-radius:10px;
-  padding:10px 14px;
-  font-size:9px;
-  white-space:nowrap;
-  transition:.22s;
+  position:fixed;bottom:95px;left:50%;z-index:100;transform:translate(-50%,12px);
+  opacity:0;pointer-events:none;background:#202020;border:1px solid #444;color:#fff;
+  padding:11px 15px;border-radius:11px;font-size:10px;transition:.2s;max-width:90%;text-align:center
 }
-
-.toast.show{
-  opacity:1;
-  transform:translateX(-50%) translateY(0);
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(min-width:650px){
+  .stats{grid-template-columns:repeat(5,minmax(0,1fr))}
+  .cards{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}
+  .studentHeader{grid-template-columns:44px minmax(0,1fr)}
+  .avatar{width:44px;height:44px}
+  .badges{grid-column:1/-1;max-width:none;justify-content:flex-start}
+  .actions{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
-
-/* ================= MOBILE ================= */
-
-@media(max-width:500px){
-
-  .container{
-    padding-left:13px;
-    padding-right:13px;
-  }
-
-  .stats{
-    gap:6px;
-  }
-
-  .stat{
-    min-height:68px;
-  }
-
-  .statValue{
-    font-size:18px;
-  }
-
-  .studentCard{
-    padding:14px;
-  }
-
-  .badges{
-    max-width:100px;
-  }
-
-  .actions{
-    gap:5px;
-  }
-
-  .action{
-    font-size:7px;
-  }
-
-}
-
-@media(max-width:370px){
-
-  .brandSub{
-    display:none;
-  }
-
-  .clockDate{
-    display:none;
-  }
-
-  .stats{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .actions{
-    grid-template-columns:1fr 1fr;
-  }
-
+@media(max-width:380px){
+  .brandSub,.clockDate{display:none}
+  .studentHeader{grid-template-columns:40px minmax(0,1fr)}
+  .avatar{width:40px;height:40px}
+  .badges{grid-column:1/-1;max-width:none;justify-content:flex-start}
+  .actions{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stat{padding:12px}
 }
 </style>
 </head>
 
 <body>
-
-<!-- ================= HEADER ================= -->
-
 <header class="header">
-
   <div class="headerInner">
-
     <div class="brand">
-
-      <div class="logo">
-        A1
-      </div>
-
+      <div class="logo">A1</div>
       <div>
-
-        <div class="brandTitle">
-          A1 Attendance
-        </div>
-
-        <div class="brandSub">
-          DRIVING TRACKING SYSTEM
-        </div>
-
+        <div class="brandTitle">A1 Attendance</div>
+        <div class="brandSub">DRIVING TRACKING SYSTEM</div>
       </div>
-
     </div>
-
     <div class="clock">
-
-      <div
-        class="clockTime"
-        id="clockTime">
-        --:--
-      </div>
-
-      <div
-        class="clockDate"
-        id="clockDate">
-        ---
-      </div>
-
+      <div class="clockTime" id="clockTime">--:--</div>
+      <div class="clockDate" id="clockDate">---</div>
     </div>
-
   </div>
-
 </header>
 
-<!-- ================= MAIN ================= -->
-
 <main class="container">
-
   <div class="search">
-
-    <span class="searchIcon">
-      ⌕
-    </span>
-
-    <input
-      id="searchInput"
-      type="search"
-      placeholder="Search student or phone..."
-      autocomplete="off">
-
+    <span>⌕</span>
+    <input id="searchInput" type="search" placeholder="Search student or phone..." autocomplete="off">
   </div>
 
-  <!-- ================= STATS ================= -->
-
   <div class="stats">
-
-    <div class="stat">
-      <div
-        class="statValue"
-        id="activeCount">
-        0
-      </div>
-      <div class="statLabel">
-        ACTIVE
-      </div>
+    <div class="stat month">
+      <div class="statLabel" id="monthLabel">THIS MONTH ADMISSIONS</div>
+      <div class="statValue" id="monthAdmissionCount">—</div>
+      <div class="statHint" id="monthHint">Loading admission data...</div>
     </div>
-
     <div class="stat">
-      <div
-        class="statValue"
-        id="completedCount">
-        0
-      </div>
-      <div class="statLabel">
-        COMPLETED
-      </div>
+      <div class="statLabel">ACTIVE</div>
+      <div class="statValue" id="activeCount">0</div>
+      <div class="statHint">Current active students</div>
     </div>
-
     <div class="stat">
-      <div
-        class="statValue"
-        id="liveCount">
-        0
-      </div>
-      <div class="statLabel">
-        LIVE NOW
-      </div>
+      <div class="statLabel">COMPLETED</div>
+      <div class="statValue" id="completedCount">0</div>
+      <div class="statHint">Training completed</div>
     </div>
-
     <div class="stat">
-      <div
-        class="statValue"
-        id="inactiveCount">
-        0
-      </div>
-      <div class="statLabel">
-        NOT ACTIVE
-      </div>
+      <div class="statLabel">LIVE NOW</div>
+      <div class="statValue" id="liveCount">0</div>
+      <div class="statHint">Recent attendance activity</div>
     </div>
-
+    <div class="stat">
+      <div class="statLabel">NOT ACTIVE</div>
+      <div class="statValue" id="inactiveCount">0</div>
+      <div class="statHint">Inactive students</div>
+    </div>
   </div>
 
   <div class="sectionHeader">
-
-    <div
-      class="sectionTitle"
-      id="sectionTitle">
-      Active Students
-    </div>
-
-    <div
-      class="sectionCount"
-      id="studentCount">
-      0 Students
-    </div>
-
+    <div class="sectionTitle" id="sectionTitle">Active Students</div>
+    <div class="sectionCount" id="studentCount">0 Students</div>
   </div>
 
-  <div
-    id="studentCards"
-    class="cards">
-
-    <div class="loading">
-      Loading students...
-    </div>
-
+  <div id="studentCards" class="cards">
+    <div class="loading">Loading students...</div>
   </div>
-
 </main>
 
-<!-- ================= FAB ================= -->
-
-<button
-  class="fab"
-  onclick="openAddModal()">
-  +
-</button>
-
-<!-- ================= BOTTOM NAV ================= -->
+<button class="fab" onclick="openAddModal()" aria-label="Add student">+</button>
 
 <nav class="bottomNav">
-
-  <button
-    class="navBtn active"
-    id="navActive"
-    onclick="setFilter('active')">
-
-    <span class="navIcon">🚗</span>
-    ACTIVE
-
-  </button>
-
-  <button
-    class="navBtn"
-    id="navCompleted"
-    onclick="setFilter('completed')">
-
-    <span class="navIcon">✓</span>
-    COMPLETED
-
-  </button>
-
-  <button
-    class="navBtn"
-    id="navLive"
-    onclick="setFilter('live')">
-
-    <span class="navIcon">●</span>
-    LIVE
-
-  </button>
-
-  <button
-    class="navBtn"
-    id="navInactive"
-    onclick="setFilter('inactive')">
-
-    <span class="navIcon">⏸</span>
-    NOT ACTIVE
-
-  </button>
-
+  <button class="navBtn active" id="navActive" onclick="setFilter('active')"><span class="navIcon">🚗</span>ACTIVE</button>
+  <button class="navBtn" id="navCompleted" onclick="setFilter('completed')"><span class="navIcon">✓</span>COMPLETED</button>
+  <button class="navBtn" id="navLive" onclick="setFilter('live')"><span class="navIcon">●</span>LIVE</button>
+  <button class="navBtn" id="navInactive" onclick="setFilter('inactive')"><span class="navIcon">⏸</span>NOT ACTIVE</button>
 </nav>
 
-<!-- ================= ADD STUDENT ================= -->
-
-<div
-  class="modal"
-  id="addModal">
-
+<!-- ADD STUDENT -->
+<div class="modal" id="addModal">
   <div class="modalBox">
-
     <div class="modalHeader">
-
-      <div>
-
-        <div class="modalTitle">
-          Add Student
-        </div>
-
-        <div class="modalSub">
-          Create a new driving student
-        </div>
-
-      </div>
-
-      <button
-        class="close"
-        onclick="closeModal('addModal')">
-        ×
-      </button>
-
+      <div><div class="modalTitle">Add Student</div><div class="modalSub">Create a new driving student</div></div>
+      <button class="close" onclick="closeModal('addModal')">×</button>
     </div>
-
+    <div class="formGroup"><label class="formLabel">PHONE NUMBER</label><input id="studentPhone" class="field" type="tel" maxlength="10" inputmode="numeric" placeholder="10 digit mobile number"></div>
+    <div class="formGroup"><label class="formLabel">FULL NAME</label><input id="studentName" class="field" placeholder="Student full name"></div>
+    <div class="formGroup"><label class="formLabel">TOTAL CLASSES</label><input id="totalClasses" class="field" type="number" min="1" value="20"></div>
     <div class="formGroup">
-
-      <label class="formLabel">
-        Phone Number
-      </label>
-
-      <input
-        id="studentPhone"
-        class="formInput"
-        type="tel"
-        maxlength="10"
-        inputmode="numeric"
-        placeholder="10 digit mobile number">
-
-    </div>
-
-    <div class="formGroup">
-
-      <label class="formLabel">
-        Full Name
-      </label>
-
-      <input
-        id="studentName"
-        class="formInput"
-        type="text"
-        placeholder="Student full name">
-
-    </div>
-
-    <div class="formGroup">
-
-      <label class="formLabel">
-        Total Classes
-      </label>
-
-      <input
-        id="totalClasses"
-        class="formInput"
-        type="number"
-        min="1"
-        value="20">
-
-    </div>
-
-    <div class="formGroup">
-
-      <label class="formLabel">
-        Class Type
-      </label>
-
+      <label class="formLabel">CLASS TYPE</label>
       <div class="typeGrid">
-
-        <button
-          type="button"
-          class="typeOption"
-          id="addPersonal"
-          onclick="selectAddType('Personal')">
-
-          <span class="typeIcon">
-            👤
-          </span>
-
-          <span class="typeName">
-            PERSONAL
-          </span>
-
-        </button>
-
-        <button
-          type="button"
-          class="typeOption selected"
-          id="addGroup"
-          onclick="selectAddType('Group')">
-
-          <span class="typeIcon">
-            👥
-          </span>
-
-          <span class="typeName">
-            GROUP
-          </span>
-
-        </button>
-
+        <button class="typeOption" id="addPersonal" onclick="selectAddType('Personal')"><span class="typeIcon">👤</span>PERSONAL</button>
+        <button class="typeOption selected" id="addGroup" onclick="selectAddType('Group')"><span class="typeIcon">👥</span>GROUP</button>
       </div>
-
     </div>
-
-    <button
-      class="goldBtn"
-      onclick="saveStudent()">
-
-      SAVE STUDENT
-
-    </button>
-
+    <button class="goldBtn" id="saveStudentBtn" onclick="saveStudent()">SAVE STUDENT</button>
   </div>
-
 </div>
 
-<!-- ================= ATTENDANCE ================= -->
-
-<div
-  class="modal"
-  id="attendanceModal">
-
+<!-- ATTENDANCE -->
+<div class="modal" id="attendanceModal">
   <div class="modalBox">
-
     <div class="modalHeader">
-
-      <div>
-
-        <div class="modalTitle">
-          Driving Track
-        </div>
-
-        <div
-          class="modalSub"
-          id="attendanceStudentName">
-        </div>
-
-      </div>
-
-      <button
-        class="close"
-        onclick="closeModal('attendanceModal')">
-        ×
-      </button>
-
+      <div><div class="modalTitle">Driving Track</div><div class="modalSub" id="attendanceStudentName"></div></div>
+      <button class="close" onclick="closeModal('attendanceModal')">×</button>
     </div>
-
-    <!-- ROUTE -->
-
     <div class="formGroup">
-
-      <label class="formLabel">
-        Route
-      </label>
-
+      <label class="formLabel">ROUTE</label>
       <div class="optionGrid">
-
-        <button
-          class="optionBtn routeOption"
-          onclick="selectRoute(this,'Bhanjpur')">
-          Bhanjpur
-        </button>
-
-        <button
-          class="optionBtn routeOption"
-          onclick="selectRoute(this,'Baghra')">
-          Baghra
-        </button>
-
-        <button
-          class="optionBtn routeOption"
-          onclick="selectRoute(this,'Badbazar')">
-          Badbazar
-        </button>
-
-        <button
-          class="optionBtn routeOption"
-          onclick="selectRoute(this,'Udala')">
-          Udala
-        </button>
-
-        <button
-          class="optionBtn routeOption"
-          onclick="selectRoute(this,'Station Bazar')">
-          Station Bazar
-        </button>
-
-        <button
-          class="optionBtn routeOption"
-          onclick="selectRoute(this,'Lal Bazar')">
-          Lal Bazar
-        </button>
-
-        <button
-          class="optionBtn routeOption"
-          onclick="selectRoute(this,'Kuchei')">
-          Kuchei
-        </button>
-
-        <button
-          class="optionBtn routeOption"
-          onclick="selectRoute(this,'Other Route')">
-          ✏️ Other Route
-        </button>
-
+        <button class="optionBtn routeOption" onclick="selectRoute(this,'Bhanjpur')">Bhanjpur</button>
+        <button class="optionBtn routeOption" onclick="selectRoute(this,'Baghra')">Baghra</button>
+        <button class="optionBtn routeOption" onclick="selectRoute(this,'Badbazar')">Badbazar</button>
+        <button class="optionBtn routeOption" onclick="selectRoute(this,'Udala')">Udala</button>
+        <button class="optionBtn routeOption" onclick="selectRoute(this,'Station Bazar')">Station Bazar</button>
+        <button class="optionBtn routeOption" onclick="selectRoute(this,'Lal Bazar')">Lal Bazar</button>
+        <button class="optionBtn routeOption" onclick="selectRoute(this,'Kuchei')">Kuchei</button>
+        <button class="optionBtn routeOption" onclick="selectRoute(this,'Other Route')">✏️ Other Route</button>
       </div>
-
-      <div
-        class="customRouteBox"
-        id="customRouteBox">
-
-        <input
-          id="customRoute"
-          class="formInput"
-          type="text"
-          maxlength="80"
-          placeholder="Enter custom route name...">
-
-        <div class="customRouteHint">
-          Example: Deuli Road, Medical College Road, Baripada Bypass
-        </div>
-
-      </div>
-
+      <div class="customBox" id="customRouteBox"><input id="customRoute" class="field" maxlength="80" placeholder="Enter custom route"><div class="hint">Enter the actual route name.</div></div>
     </div>
-
-    <!-- DISTANCE -->
-
     <div class="formGroup">
-
-      <label class="formLabel">
-        Distance
-      </label>
-
-      <div class="optionGrid">
-
-        <button
-          type="button"
-          class="optionBtn distanceOption distanceDefault selected"
-          onclick="selectDistance(this,'5 KM')">
-
-          5 KM
-
-        </button>
-
-      </div>
-
+      <label class="formLabel">DISTANCE</label>
+      <div class="optionGrid"><button class="optionBtn selected" type="button">5 KM</button></div>
     </div>
-
-    <!-- REMARK -->
-
     <div class="formGroup">
-
-      <label class="formLabel">
-        Driving Remark
-      </label>
-
+      <label class="formLabel">DRIVING REMARK</label>
       <div class="optionGrid">
-
-        <button
-          type="button"
-          class="optionBtn remarkOption"
-          onclick="selectRemark(this,'👍 Good Driving')">
-
-          👍 Good Driving
-
-        </button>
-
-        <button
-          type="button"
-          class="optionBtn remarkOption"
-          onclick="selectRemark(this,'⚠️ Needs Improvement')">
-
-          ⚠️ Needs Improvement
-
-        </button>
-
-        <button
-          type="button"
-          class="optionBtn remarkOption"
-          onclick="selectRemark(this,'🔄 Good Turning')">
-
-          🔄 Good Turning
-
-        </button>
-
-        <button
-          type="button"
-          class="optionBtn remarkOption"
-          onclick="selectRemark(this,'⚠️ Bad Turning')">
-
-          ⚠️ Bad Turning
-
-        </button>
-
-        <button
-          type="button"
-          class="optionBtn remarkOption"
-          onclick="selectRemark(this,'🛑 Good Braking')">
-
-          🛑 Good Braking
-
-        </button>
-
-        <button
-          type="button"
-          class="optionBtn remarkOption"
-          onclick="selectRemark(this,'⚠️ Bad Braking')">
-
-          ⚠️ Bad Braking
-
-        </button>
-
-        <button
-          type="button"
-          class="optionBtn remarkOption"
-          onclick="selectRemark(this,'⚙️ Good Clutch')">
-
-          ⚙️ Good Clutch
-
-        </button>
-
-        <button
-          type="button"
-          class="optionBtn remarkOption"
-          onclick="selectRemark(this,'⚙️ Clutch Improvement')">
-
-          ⚙️ Clutch Improvement
-
-        </button>
-
-        <button
-          type="button"
-          class="optionBtn remarkOption"
-          onclick="selectRemark(this,'🚦 Good Traffic Control')">
-
-          🚦 Good Traffic Control
-
-        </button>
-
-        <button
-          type="button"
-          class="optionBtn remarkOption"
-          onclick="selectRemark(this,'🚗 Good Vehicle Control')">
-
-          🚗 Good Vehicle Control
-
-        </button>
-
-        <button
-          type="button"
-          class="optionBtn remarkOption"
-          onclick="selectRemark(this,'🅿️ Good Parking')">
-
-          🅿️ Good Parking
-
-        </button>
-
-        <button
-          type="button"
-          class="optionBtn remarkOption"
-          onclick="selectRemark(this,'⚠️ Parking Improvement')">
-
-          ⚠️ Parking Improvement
-
-        </button>
-
-        <button
-          type="button"
-          class="optionBtn remarkOption"
-          onclick="selectRemark(this,'📝 Custom Remark')">
-
-          📝 Custom Remark
-
-        </button>
-
+        <button class="optionBtn remarkOption" onclick="selectRemark(this,'👍 Good Driving')">👍 Good Driving</button>
+        <button class="optionBtn remarkOption" onclick="selectRemark(this,'⚠️ Needs Improvement')">⚠️ Needs Improvement</button>
+        <button class="optionBtn remarkOption" onclick="selectRemark(this,'🔄 Good Turning')">🔄 Good Turning</button>
+        <button class="optionBtn remarkOption" onclick="selectRemark(this,'⚠️ Bad Turning')">⚠️ Bad Turning</button>
+        <button class="optionBtn remarkOption" onclick="selectRemark(this,'🛑 Good Braking')">🛑 Good Braking</button>
+        <button class="optionBtn remarkOption" onclick="selectRemark(this,'⚠️ Bad Braking')">⚠️ Bad Braking</button>
+        <button class="optionBtn remarkOption" onclick="selectRemark(this,'⚙️ Good Clutch')">⚙️ Good Clutch</button>
+        <button class="optionBtn remarkOption" onclick="selectRemark(this,'⚙️ Clutch Improvement')">⚙️ Clutch Improvement</button>
+        <button class="optionBtn remarkOption" onclick="selectRemark(this,'🚦 Good Traffic Control')">🚦 Good Traffic Control</button>
+        <button class="optionBtn remarkOption" onclick="selectRemark(this,'🚗 Good Vehicle Control')">🚗 Good Vehicle Control</button>
+        <button class="optionBtn remarkOption" onclick="selectRemark(this,'🅿️ Good Parking')">🅿️ Good Parking</button>
+        <button class="optionBtn remarkOption" onclick="selectRemark(this,'⚠️ Parking Improvement')">⚠️ Parking Improvement</button>
+        <button class="optionBtn remarkOption" onclick="selectRemark(this,'📝 Custom Remark')">📝 Custom Remark</button>
       </div>
-
-      <!-- CUSTOM REMARK -->
-
-      <div
-        class="customRemarkBox"
-        id="customRemarkBox">
-
-        <input
-          id="customRemark"
-          class="formInput"
-          type="text"
-          maxlength="150"
-          placeholder="Write your custom remark...">
-
-        <div class="customRemarkHint">
-          Example: Excellent control on slope / Needs more practice on reverse
-        </div>
-
-      </div>
-
+      <div class="customBox" id="customRemarkBox"><input id="customRemark" class="field" maxlength="150" placeholder="Write custom remark"></div>
     </div>
-
-    <button
-      class="goldBtn"
-      onclick="saveAttendance()">
-
-      SAVE ATTENDANCE
-
-    </button>
-
+    <button class="goldBtn" id="saveAttendanceBtn" onclick="saveAttendance()">SAVE ATTENDANCE</button>
   </div>
-
 </div>
 
-<!-- ================= HISTORY ================= -->
-
-<div
-  class="modal"
-  id="historyModal">
-
+<!-- HISTORY -->
+<div class="modal" id="historyModal">
   <div class="modalBox">
-
-    <div class="modalHeader">
-
-      <div>
-
-        <div class="modalTitle">
-          Attendance History
-        </div>
-
-        <div
-          class="modalSub"
-          id="historyStudentName">
-        </div>
-
-      </div>
-
-      <button
-        class="close"
-        onclick="closeModal('historyModal')">
-        ×
-      </button>
-
-    </div>
-
+    <div class="modalHeader"><div><div class="modalTitle">Attendance History</div><div class="modalSub" id="historyStudentName"></div></div><button class="close" onclick="closeModal('historyModal')">×</button></div>
     <div id="historyList"></div>
-
   </div>
-
 </div>
 
-<!-- ================= EDIT TYPE ================= -->
-
-<div
-  class="modal"
-  id="typeModal">
-
+<!-- EDIT TYPE -->
+<div class="modal" id="typeModal">
   <div class="modalBox">
-
-    <div class="modalHeader">
-
-      <div>
-
-        <div class="modalTitle">
-          Edit Class Type
-        </div>
-
-        <div
-          class="modalSub"
-          id="typeStudentName">
-        </div>
-
-      </div>
-
-      <button
-        class="close"
-        onclick="closeModal('typeModal')">
-        ×
-      </button>
-
-    </div>
-
-    <div class="formGroup">
-
-      <label class="formLabel">
-        Select Class Type
-      </label>
-
-      <div class="typeGrid">
-
-        <button
-          type="button"
-          class="typeOption"
-          id="editPersonal"
-          onclick="selectEditType('Personal')">
-
-          <span class="typeIcon">
-            👤
-          </span>
-
-          <span class="typeName">
-            PERSONAL
-          </span>
-
-        </button>
-
-        <button
-          type="button"
-          class="typeOption"
-          id="editGroup"
-          onclick="selectEditType('Group')">
-
-          <span class="typeIcon">
-            👥
-          </span>
-
-          <span class="typeName">
-            GROUP
-          </span>
-
-        </button>
-
-      </div>
-
-    </div>
-
-    <button
-      class="goldBtn"
-      onclick="saveClassType()">
-
-      SAVE CLASS TYPE
-
-    </button>
-
+    <div class="modalHeader"><div><div class="modalTitle">Edit Class Type</div><div class="modalSub" id="typeStudentName"></div></div><button class="close" onclick="closeModal('typeModal')">×</button></div>
+    <div class="formGroup"><label class="formLabel">SELECT CLASS TYPE</label><div class="typeGrid">
+      <button class="typeOption" id="editPersonal" onclick="selectEditType('Personal')"><span class="typeIcon">👤</span>PERSONAL</button>
+      <button class="typeOption" id="editGroup" onclick="selectEditType('Group')"><span class="typeIcon">👥</span>GROUP</button>
+    </div></div>
+    <button class="goldBtn" onclick="saveClassType()">SAVE CLASS TYPE</button>
   </div>
-
 </div>
 
-<!-- ================= TOAST ================= -->
-
-<div
-  class="toast"
-  id="toast">
-</div>
-
-<!-- ================= FIREBASE ================= -->
+<div class="toast" id="toast" role="status"></div>
 
 <script type="module">
-
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {
-  initializeApp
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
-import {
-  getFirestore,
-  collection,
-  getDocs,
-  doc,
-  setDoc,
-  updateDoc,
-  arrayUnion
+  getFirestore, collection, getDocs, doc, setDoc, updateDoc, arrayUnion
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-/* ==================================================
-   FIREBASE CONFIG
-================================================== */
-
+/* KEEP YOUR EXISTING FIREBASE PROJECT CONFIG */
 const firebaseConfig = {
-
-  apiKey:
-    "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
-
-  authDomain:
-    "abinash-driving.firebaseapp.com",
-
-  projectId:
-    "abinash-driving",
-
-  storageBucket:
-    "abinash-driving.appspot.com",
-
-  messagingSenderId:
-    "641148830173",
-
-  appId:
-    "1:641148830173:web:b7a500e5e7e2463da0f634"
-
+  apiKey: "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
+  authDomain: "abinash-driving.firebaseapp.com",
+  projectId: "abinash-driving",
+  storageBucket: "abinash-driving.appspot.com",
+  messagingSenderId: "641148830173",
+  appId: "1:641148830173:web:b7a500e5e7e2463da0f634"
 };
 
-const app =
-  initializeApp(firebaseConfig);
-
-const db =
-  getFirestore(app);
-
-const studentCollection =
-  collection(
-    db,
-    "studentData"
-  );
-
-/* ==================================================
-   GLOBAL VARIABLES
-================================================== */
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const studentCollection = collection(db, "studentData");
 
 let students = [];
-
 let currentFilter = "active";
-
 let currentStudentId = null;
-
 let selectedRoute = "";
-let selectedDistance = "5 KM";
 let selectedRemark = "";
-
 let addClassType = "Group";
 let editClassType = "Group";
-
 let toastTimer;
+let loadingStudents = false;
 
-/* ==================================================
-   HELPERS
-================================================== */
+const $ = id => document.getElementById(id);
 
-function safe(value){
-
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-
+function safe(value) {
+  return String(value ?? "").replace(/[&<>"']/g, ch => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#039;"
+  })[ch]);
 }
 
-function getLogs(student){
-
-  return Array.isArray(
-    student.attendanceLogs
-  )
-    ? student.attendanceLogs
-    : [];
-
+function getLogs(student) {
+  return Array.isArray(student.attendanceLogs) ? student.attendanceLogs : [];
 }
 
-function getDone(student){
-
-  const logs =
-    getLogs(student);
-
-  const oldValue =
-    Number(
-      student.remaining || 0
-    );
-
-  return Math.max(
-    logs.length,
-    oldValue,
-    0
-  );
-
+function getDone(student) {
+  return Math.max(getLogs(student).length, Number(student.remaining || 0), 0);
 }
 
-function getTotal(student){
-
-  return Math.max(
-    Number(
-      student.totalClasses || 0
-    ),
-    1
-  );
-
+function getTotal(student) {
+  return Math.max(Number(student.totalClasses || 1), 1);
 }
 
-function isCompleted(student){
-
-  return (
-    getDone(student) >=
-    getTotal(student)
-  );
-
+function isCompleted(student) {
+  return getDone(student) >= getTotal(student);
 }
 
-function isInactive(student){
-
+function isInactive(student) {
   return student.notActive === true;
-
 }
 
-/* ==================================================
-   TIME
-================================================== */
+/* Admission date supports Firestore Timestamp, Date, ISO string and YYYY-MM-DD. */
+function getAdmissionDate(student) {
+  const value = student.admissionDate;
+  if (!value) return null;
 
-function parseAttendanceTime(log){
-
-  if(!log){
+  let date;
+  if (typeof value.toDate === "function") date = value.toDate();
+  else if (value instanceof Date) date = value;
+  else if (typeof value === "string") {
+    // Date-only values are parsed as local calendar dates.
+    const m = value.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    date = m
+      ? new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]))
+      : new Date(value);
+  } else if (typeof value === "number") {
+    date = new Date(value);
+  } else {
     return null;
   }
 
-  const match =
-    String(log).match(
-      /(\d{1,2}):(\d{2})\s*(AM|PM)/i
-    );
-
-  if(!match){
-    return null;
-  }
-
-  let hour =
-    Number(match[1]);
-
-  const minute =
-    Number(match[2]);
-
-  const ampm =
-    match[3].toUpperCase();
-
-  if(
-    ampm === "PM" &&
-    hour !== 12
-  ){
-
-    hour += 12;
-
-  }
-
-  if(
-    ampm === "AM" &&
-    hour === 12
-  ){
-
-    hour = 0;
-
-  }
-
-  return {
-    hour,
-    minute
-  };
-
+  return Number.isNaN(date.getTime()) ? null : date;
 }
 
-function timeDistance(logs){
+function updateMonthAdmissions() {
+  const now = new Date();
+  const monthName = now.toLocaleDateString("en-IN", {month:"long",year:"numeric"});
+  $("monthLabel").textContent = monthName.toUpperCase() + " ADMISSIONS";
 
-  if(!logs.length){
-    return 9999;
-  }
+  const count = students.filter(student => {
+    const date = getAdmissionDate(student);
+    return date &&
+      date.getFullYear() === now.getFullYear() &&
+      date.getMonth() === now.getMonth();
+  }).length;
 
-  const parsed =
-    parseAttendanceTime(
-      logs[logs.length - 1]
-    );
-
-  if(!parsed){
-    return 9999;
-  }
-
-  const now =
-    new Date();
-
-  const currentMinutes =
-    now.getHours() * 60 +
-    now.getMinutes();
-
-  const logMinutes =
-    parsed.hour * 60 +
-    parsed.minute;
-
-  let diff =
-    Math.abs(
-      currentMinutes -
-      logMinutes
-    );
-
-  diff =
-    Math.min(
-      diff,
-      1440 - diff
-    );
-
-  return diff;
-
+  $("monthAdmissionCount").textContent = count;
+  $("monthHint").textContent = "New admissions recorded this month";
 }
 
-function isLive(student){
-
-  if(isInactive(student)){
-    return false;
-  }
-
-  const logs =
-    getLogs(student);
-
-  if(!logs.length){
-    return false;
-  }
-
-  return (
-    timeDistance(logs) <= 30
-  );
-
+function parseAttendanceTime(log) {
+  const match = String(log || "").match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
+  if (!match) return null;
+  let hour = Number(match[1]);
+  const minute = Number(match[2]);
+  const ampm = match[3].toUpperCase();
+  if (ampm === "PM" && hour !== 12) hour += 12;
+  if (ampm === "AM" && hour === 12) hour = 0;
+  return {hour, minute};
 }
 
-/* ==================================================
-   CLOCK
-================================================== */
-
-function updateClock(){
-
-  const now =
-    new Date();
-
-  document.getElementById(
-    "clockTime"
-  ).textContent =
-    now.toLocaleTimeString(
-      "en-IN",
-      {
-        hour:"2-digit",
-        minute:"2-digit",
-        hour12:true
-      }
-    );
-
-  document.getElementById(
-    "clockDate"
-  ).textContent =
-    now.toLocaleDateString(
-      "en-IN",
-      {
-        day:"2-digit",
-        month:"short",
-        year:"numeric"
-      }
-    );
-
+function timeDistance(logs) {
+  if (!logs.length) return 9999;
+  const parsed = parseAttendanceTime(logs[logs.length - 1]);
+  if (!parsed) return 9999;
+  const now = new Date();
+  const current = now.getHours() * 60 + now.getMinutes();
+  const logged = parsed.hour * 60 + parsed.minute;
+  const diff = Math.abs(current - logged);
+  return Math.min(diff, 1440 - diff);
 }
 
+/* "LIVE" means recent attendance activity, not verified real-time driving. */
+function isLive(student) {
+  return !isInactive(student) && getLogs(student).length > 0 &&
+    timeDistance(getLogs(student)) <= 30;
+}
+
+function updateClock() {
+  const now = new Date();
+  $("clockTime").textContent = now.toLocaleTimeString("en-IN", {
+    hour:"2-digit", minute:"2-digit", hour12:true
+  });
+  $("clockDate").textContent = now.toLocaleDateString("en-IN", {
+    day:"2-digit", month:"short", year:"numeric"
+  });
+}
 updateClock();
+setInterval(updateClock, 1000);
 
-setInterval(
-  updateClock,
-  1000
-);
-
-/* ==================================================
-   TOAST
-================================================== */
-
-function showToast(message){
-
-  const toast =
-    document.getElementById(
-      "toast"
-    );
-
-  toast.textContent =
-    message;
-
-  toast.classList.add(
-    "show"
-  );
-
-  clearTimeout(
-    toastTimer
-  );
-
-  toastTimer =
-    setTimeout(
-      ()=>{
-        toast.classList.remove(
-          "show"
-        );
-      },
-      2200
-    );
-
+function showToast(message) {
+  $("toast").textContent = message;
+  $("toast").classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => $("toast").classList.remove("show"), 2400);
 }
 
-/* ==================================================
-   LOAD STUDENTS
-================================================== */
+async function loadStudents() {
+  if (loadingStudents) return;
+  loadingStudents = true;
 
-async function loadStudents(){
-
-  try{
-
-    const snapshot =
-      await getDocs(
-        studentCollection
-      );
-
-    students = [];
-
-    snapshot.forEach(item=>{
-
-      students.push({
-        id:item.id,
-        ...item.data()
-      });
-
-    });
-
+  try {
+    const snapshot = await getDocs(studentCollection);
+    students = snapshot.docs.map(item => ({id:item.id, ...item.data()}));
+    updateMonthAdmissions();
     render();
-
-  }catch(error){
-
-    console.error(error);
-
-    document.getElementById(
-      "studentCards"
-    ).innerHTML = `
-
-      <div class="empty">
-
-        <div class="emptyIcon">
-          ⚠️
-        </div>
-
-        <div class="emptyText">
-          Unable to load students.
-          <br>
-          Check Firebase configuration.
-        </div>
-
-      </div>
-
-    `;
-
+  } catch (error) {
+    console.error("Firebase load error:", error);
+    $("studentCards").innerHTML =
+      '<div class="empty">Unable to load students. Check your Firebase configuration and Firestore Rules.</div>';
+    $("monthAdmissionCount").textContent = "—";
+    $("monthHint").textContent = "Unable to load admission data";
+  } finally {
+    loadingStudents = false;
   }
-
 }
 
-/* ==================================================
-   RENDER
-================================================== */
+function render() {
+  const search = $("searchInput").value.trim().toLowerCase();
+  const active = students.filter(s => !isInactive(s));
+  const inactive = students.filter(isInactive);
 
-function render(){
+  $("activeCount").textContent = active.length;
+  $("completedCount").textContent = active.filter(isCompleted).length;
+  $("liveCount").textContent = active.filter(isLive).length;
+  $("inactiveCount").textContent = inactive.length;
 
-  const search =
-    document
-      .getElementById(
-        "searchInput"
-      )
-      .value
-      .trim()
-      .toLowerCase();
+  let filtered;
+  if (currentFilter === "active") filtered = active.filter(s => !isCompleted(s));
+  else if (currentFilter === "completed") filtered = active.filter(isCompleted);
+  else if (currentFilter === "live") filtered = active.filter(isLive);
+  else filtered = inactive;
 
-  const activeStudents =
-    students.filter(
-      s=>!isInactive(s)
+  if (search) {
+    filtered = filtered.filter(s =>
+      String(s.name || "").toLowerCase().includes(search) ||
+      String(s.id || "").toLowerCase().includes(search)
     );
-
-  const inactiveStudents =
-    students.filter(
-      s=>isInactive(s)
-    );
-
-  document.getElementById(
-    "activeCount"
-  ).textContent =
-    activeStudents.length;
-
-  document.getElementById(
-    "completedCount"
-  ).textContent =
-    students.filter(
-      s=>isCompleted(s)
-    ).length;
-
-  document.getElementById(
-    "liveCount"
-  ).textContent =
-    activeStudents.filter(
-      s=>isLive(s)
-    ).length;
-
-  document.getElementById(
-    "inactiveCount"
-  ).textContent =
-    inactiveStudents.length;
-
-  let filtered = [];
-
-  if(
-    currentFilter === "active"
-  ){
-
-    filtered =
-      [...activeStudents];
-
   }
 
-  else if(
-    currentFilter === "completed"
-  ){
-
-    filtered =
-      activeStudents.filter(
-        s=>isCompleted(s)
-      );
-
+  if (["active","completed","live"].includes(currentFilter)) {
+    filtered.sort((a,b) => timeDistance(getLogs(a)) - timeDistance(getLogs(b)));
+  } else {
+    filtered.sort((a,b) => String(a.name || "").localeCompare(String(b.name || "")));
   }
 
-  else if(
-    currentFilter === "live"
-  ){
+  const titles = {active:"Active Students",completed:"Completed Students",live:"Recent Attendance Activity",inactive:"Not Active"};
+  $("sectionTitle").textContent = titles[currentFilter];
+  $("studentCount").textContent = `${filtered.length} Student${filtered.length === 1 ? "" : "s"}`;
 
-    filtered =
-      activeStudents.filter(
-        s=>isLive(s)
-      );
+  document.querySelectorAll(".navBtn").forEach(btn => btn.classList.remove("active"));
+  const navIds = {active:"navActive",completed:"navCompleted",live:"navLive",inactive:"navInactive"};
+  $(navIds[currentFilter]).classList.add("active");
 
-  }
-
-  else if(
-    currentFilter === "inactive"
-  ){
-
-    filtered =
-      [...inactiveStudents];
-
-  }
-
-  if(search){
-
-    filtered =
-      filtered.filter(
-        student=>{
-
-          const name =
-            String(
-              student.name || ""
-            ).toLowerCase();
-
-          const phone =
-            String(
-              student.id || ""
-            ).toLowerCase();
-
-          return (
-            name.includes(search) ||
-            phone.includes(search)
-          );
-
-        }
-      );
-
-  }
-
-  if(
-    currentFilter === "active" ||
-    currentFilter === "completed" ||
-    currentFilter === "live"
-  ){
-
-    filtered.sort(
-      (a,b)=>
-        timeDistance(
-          getLogs(a)
-        ) -
-        timeDistance(
-          getLogs(b)
-        )
-    );
-
-  }else{
-
-    filtered.sort(
-      (a,b)=>
-        String(
-          a.name || ""
-        ).localeCompare(
-          String(
-            b.name || ""
-          )
-        )
-    );
-
-  }
-
-  const titles = {
-
-    active:
-      "Active Students",
-
-    completed:
-      "Completed Students",
-
-    live:
-      "Live Now",
-
-    inactive:
-      "Not Active"
-
-  };
-
-  document.getElementById(
-    "sectionTitle"
-  ).textContent =
-    titles[currentFilter];
-
-  document.getElementById(
-    "studentCount"
-  ).textContent =
-    `${filtered.length} Student${
-      filtered.length !== 1
-        ? "s"
-        : ""
-    }`;
-
-  const container =
-    document.getElementById(
-      "studentCards"
-    );
-
-  if(!filtered.length){
-
-    container.innerHTML = `
-
-      <div class="empty">
-
-        <div class="emptyIcon">
-          🚗
-        </div>
-
-        <div class="emptyText">
-          No students found
-        </div>
-
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-  container.innerHTML =
-    filtered
-      .map(
-        studentCard
-      )
-      .join("");
-
+  $("studentCards").innerHTML = filtered.length
+    ? filtered.map(studentCard).join("")
+    : '<div class="empty">🚗<br><br>No students found in this section.</div>';
 }
 
-/* ==================================================
-   STUDENT CARD
-================================================== */
-
-function studentCard(student){
-
-  const id =
-    student.id;
-
-  const name =
-    student.name ||
-    "Unnamed Student";
-
-  const logs =
-    getLogs(student);
-
-  const total =
-    getTotal(student);
-
-  const done =
-    getDone(student);
-
-  const percentage =
-    Math.min(
-      100,
-      Math.round(
-        (done / total) * 100
-      )
-    );
-
-  const inactive =
-    isInactive(student);
-
-  const live =
-    isLive(student);
-
-  const completed =
-    isCompleted(student);
-
-  const type =
-    student.classType === "Personal"
-      ? "Personal"
-      : "Group";
-
-  let lastText =
-    "No attendance yet";
-
-  if(logs.length){
-
-    lastText =
-      logs[logs.length - 1];
-
-  }
+function studentCard(student) {
+  const id = student.id;
+  const name = student.name || "Unnamed Student";
+  const total = getTotal(student);
+  const done = getDone(student);
+  const percent = Math.min(100, Math.round(done / total * 100));
+  const inactive = isInactive(student);
+  const completed = isCompleted(student);
+  const live = isLive(student);
+  const type = student.classType === "Personal" ? "Personal" : "Group";
+  const logs = getLogs(student);
+  const lastText = logs.length ? logs[logs.length - 1] : "No attendance yet";
 
   let badges = "";
-
-  if(inactive){
-
-    badges += `
-      <span class="badge inactive">
-        NOT ACTIVE
-      </span>
-    `;
-
-  }else{
-
-    if(live){
-
-      badges += `
-        <span class="badge live">
-          ● LIVE
-        </span>
-      `;
-
-    }
-
-    if(completed){
-
-      badges += `
-        <span class="badge completed">
-          COMPLETED
-        </span>
-      `;
-
-    }else{
-
-      badges += `
-        <span class="badge active">
-          ACTIVE
-        </span>
-      `;
-
-    }
-
-  }
-
-  const cardClass =
-    inactive
-      ? "studentCard inactive"
-      : "studentCard";
-
-  let actions = "";
-
-  if(!inactive){
-
-    actions = `
-
-      <div class="actions">
-
-        <button
-          class="action attend"
-          onclick="openAttendance('${safe(id)}')">
-          + ATTEND
-        </button>
-
-        <button
-          class="action"
-          onclick="openHistory('${safe(id)}')">
-          📋 LOGS
-        </button>
-
-        <button
-          class="action wa"
-          onclick="sendWhatsApp('${safe(id)}')">
-          💬 WA
-        </button>
-
-        <button
-          class="action call"
-          onclick="callStudent('${safe(id)}')">
-          📞 CALL
-        </button>
-
-      </div>
-
-      ${
-        !completed
-        ? `
-
-          <button
-            class="notActiveBtn"
-            onclick="markNotActive('${safe(id)}')">
-
-            ⏸ MARK NOT ACTIVE
-
-          </button>
-
-        `
-        : ""
-      }
-
-    `;
-
-  }else{
-
-    actions = `
-
-      <button
-        class="activateBtn"
-        onclick="activateStudent('${safe(id)}')">
-
-        ✓ ACTIVE AGAIN
-
-      </button>
-
-      <div class="actions">
-
-        <button
-          class="action attend"
-          onclick="openAttendance('${safe(id)}')">
-          + ATTEND
-        </button>
-
-        <button
-          class="action"
-          onclick="openHistory('${safe(id)}')">
-          📋 LOGS
-        </button>
-
-        <button
-          class="action wa"
-          onclick="sendWhatsApp('${safe(id)}')">
-          💬 WA
-        </button>
-
-        <button
-          class="action call"
-          onclick="callStudent('${safe(id)}')">
-          📞 CALL
-        </button>
-
-      </div>
-
-    `;
-
+  if (inactive) badges = '<span class="badge inactive">NOT ACTIVE</span>';
+  else {
+    if (live) badges += '<span class="badge live">● RECENT</span>';
+    badges += completed
+      ? '<span class="badge completed">COMPLETED</span>'
+      : '<span class="badge active">ACTIVE</span>';
   }
 
   return `
-
-    <div class="${cardClass}">
-
-      <div class="studentHeader">
-
-        <div class="avatar">
-          ${safe(
-            name
-              .charAt(0)
-              .toUpperCase()
-          )}
-        </div>
-
-        <div class="studentInfo">
-
-          <div class="studentName">
-            ${safe(name)}
-          </div>
-
-          <div class="studentPhone">
-            📱 ${safe(id)}
-          </div>
-
-        </div>
-
-        <div class="badges">
-          ${badges}
-        </div>
-
+  <article class="studentCard ${inactive ? "inactive" : ""}">
+    <div class="studentHeader">
+      <div class="avatar">${safe(name.charAt(0).toUpperCase())}</div>
+      <div class="studentInfo">
+        <div class="studentName">${safe(name)}</div>
+        <div class="studentPhone">📱 ${safe(id)}</div>
       </div>
-
-      <div class="typeRow">
-
-        <div class="typeInfo">
-
-          <span class="typeLabel">
-            Class
-          </span>
-
-          <span class="typeValue">
-
-            ${
-              type === "Personal"
-                ? "👤 PERSONAL"
-                : "👥 GROUP"
-            }
-
-          </span>
-
-        </div>
-
-        <button
-          class="editType"
-          onclick="openTypeModal('${safe(id)}')">
-
-          ✏️ EDIT
-
-        </button>
-
-      </div>
-
-      <div class="lastAttendance">
-
-        <div class="lastLabel">
-          Last Attendance
-        </div>
-
-        <div class="lastText">
-          ${safe(lastText)}
-        </div>
-
-      </div>
-
-      <div class="progressBox">
-
-        <div class="progressTop">
-
-          <span class="progressLabel">
-            TRAINING PROGRESS
-          </span>
-
-          <span class="progressCount">
-            ${done} / ${total}
-          </span>
-
-        </div>
-
-        <div class="progress">
-
-          <div
-            class="progressBar"
-            style="width:${percentage}%">
-          </div>
-
-        </div>
-
-      </div>
-
-      ${actions}
-
+      <div class="badges">${badges}</div>
     </div>
 
-  `;
+    <div class="typeRow">
+      <div class="typeInfo">
+        <span class="typeLabel">CLASS TYPE</span>
+        <span class="typeValue">${type === "Personal" ? "👤 PERSONAL" : "👥 GROUP"}</span>
+      </div>
+      <button class="editType" onclick="openTypeModal('${safe(id)}')">✏️ EDIT</button>
+    </div>
 
+    <div class="lastAttendance">
+      <div class="lastLabel">LAST ATTENDANCE</div>
+      <div class="lastText">${safe(lastText)}</div>
+    </div>
+
+    <div class="progressBox">
+      <div class="progressTop">
+        <span class="progressLabel">TRAINING PROGRESS</span>
+        <span class="progressCount">${done} / ${total} sessions</span>
+      </div>
+      <div class="progress"><div class="progressBar" style="width:${percent}%"></div></div>
+    </div>
+
+    ${inactive ? `<button class="activateBtn" onclick="activateStudent('${safe(id)}')">✓ ACTIVE AGAIN</button>` : ""}
+    <div class="actions">
+      ${!inactive && !completed ? `<button class="action attend" onclick="openAttendance('${safe(id)}')">+ ATTEND</button>` : `<button class="action" onclick="openAttendance('${safe(id)}')">+ ATTEND</button>`}
+      <button class="action" onclick="openHistory('${safe(id)}')">📋 LOGS</button>
+      <button class="action wa" onclick="sendWhatsApp('${safe(id)}')">💬 WA</button>
+      <button class="action call" onclick="callStudent('${safe(id)}')">📞 CALL</button>
+    </div>
+    ${!inactive && !completed ? `<button class="notActiveBtn" onclick="markNotActive('${safe(id)}')">⏸ MARK NOT ACTIVE</button>` : ""}
+  </article>`;
 }
 
-/* ==================================================
-   FILTER
-================================================== */
-
-window.setFilter =
-function(filter){
-
-  currentFilter =
-    filter;
-
-  document
-    .querySelectorAll(
-      ".navBtn"
-    )
-    .forEach(btn=>{
-
-      btn.classList.remove(
-        "active"
-      );
-
-    });
-
-  const ids = {
-
-    active:
-      "navActive",
-
-    completed:
-      "navCompleted",
-
-    live:
-      "navLive",
-
-    inactive:
-      "navInactive"
-
-  };
-
-  document
-    .getElementById(
-      ids[filter]
-    )
-    .classList.add(
-      "active"
-    );
-
+window.setFilter = function(filter) {
+  currentFilter = filter;
   render();
-
 };
 
-/* ==================================================
-   SEARCH
-================================================== */
+$("searchInput").addEventListener("input", render);
 
-document
-  .getElementById(
-    "searchInput"
-  )
-  .addEventListener(
-    "input",
-    render
-  );
-
-/* ==================================================
-   ADD STUDENT
-================================================== */
-
-window.openAddModal =
-function(){
-
-  document.getElementById(
-    "studentPhone"
-  ).value = "";
-
-  document.getElementById(
-    "studentName"
-  ).value = "";
-
-  document.getElementById(
-    "totalClasses"
-  ).value = "20";
-
-  selectAddType(
-    "Group"
-  );
-
-  document
-    .getElementById(
-      "addModal"
-    )
-    .classList.add(
-      "show"
-    );
-
+window.openAddModal = function() {
+  $("studentPhone").value = "";
+  $("studentName").value = "";
+  $("totalClasses").value = "20";
+  selectAddType("Group");
+  $("addModal").classList.add("show");
 };
 
-window.selectAddType =
-function(type){
-
-  addClassType =
-    type;
-
-  document
-    .getElementById(
-      "addPersonal"
-    )
-    .classList.toggle(
-      "selected",
-      type === "Personal"
-    );
-
-  document
-    .getElementById(
-      "addGroup"
-    )
-    .classList.toggle(
-      "selected",
-      type === "Group"
-    );
-
+window.selectAddType = function(type) {
+  addClassType = type;
+  $("addPersonal").classList.toggle("selected", type === "Personal");
+  $("addGroup").classList.toggle("selected", type === "Group");
 };
 
-window.saveStudent =
-async function(){
+window.saveStudent = async function() {
+  const phone = $("studentPhone").value.trim();
+  const name = $("studentName").value.trim();
+  const total = Number($("totalClasses").value);
 
-  const phone =
-    document
-      .getElementById(
-        "studentPhone"
-      )
-      .value
-      .trim();
+  if (!/^[0-9]{10}$/.test(phone)) return showToast("Enter valid 10 digit phone");
+  if (!name) return showToast("Enter student name");
+  if (!Number.isInteger(total) || total < 1) return showToast("Enter valid total classes");
+  if (students.some(s => s.id === phone)) return showToast("This phone number already exists");
 
-  const name =
-    document
-      .getElementById(
-        "studentName"
-      )
-      .value
-      .trim();
+  const btn = $("saveStudentBtn");
+  btn.disabled = true;
+  btn.textContent = "SAVING...";
 
-  const total =
-    Number(
-      document
-        .getElementById(
-          "totalClasses"
-        )
-        .value
-    );
+  try {
+    const now = new Date();
+    // Date-only local calendar value avoids timezone month-boundary errors.
+    const admissionDate = [
+      now.getFullYear(),
+      String(now.getMonth() + 1).padStart(2,"0"),
+      String(now.getDate()).padStart(2,"0")
+    ].join("-");
 
-  if(
-    !/^[0-9]{10}$/.test(
-      phone
-    )
-  ){
+    await setDoc(doc(db,"studentData",phone), {
+      name,
+      totalClasses:total,
+      remaining:0,
+      attendanceLogs:[],
+      classType:addClassType,
+      notActive:false,
+      admissionDate
+    });
 
-    showToast(
-      "Enter valid 10 digit phone"
-    );
-
-    return;
-
-  }
-
-  if(!name){
-
-    showToast(
-      "Enter student name"
-    );
-
-    return;
-
-  }
-
-  if(total < 1){
-
-    showToast(
-      "Enter valid total classes"
-    );
-
-    return;
-
-  }
-
-  try{
-
-    await setDoc(
-
-      doc(
-        db,
-        "studentData",
-        phone
-      ),
-
-      {
-
-        name:name,
-
-        totalClasses:total,
-
-        remaining:0,
-
-        attendanceLogs:[],
-
-        classType:
-          addClassType || "Group",
-
-        notActive:false
-
-      },
-
-      {
-        merge:true
-      }
-
-    );
-
-    closeModal(
-      "addModal"
-    );
-
-    showToast(
-      "Student added successfully ✓"
-    );
-
+    closeModal("addModal");
+    showToast("Admission saved to Firebase ✓");
     await loadStudents();
-
-  }catch(error){
-
-    console.error(error);
-
-    showToast(
-      "Could not save student"
-    );
-
+  } catch (error) {
+    console.error("Save student error:", error);
+    showToast("Could not save student. Check Firebase permissions.");
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "SAVE STUDENT";
   }
-
 };
 
-/* ==================================================
-   EDIT CLASS TYPE
-================================================== */
-
-window.openTypeModal =
-function(id){
-
-  currentStudentId =
-    id;
-
-  const student =
-    students.find(
-      s=>s.id === id
-    );
-
-  if(!student){
-    return;
-  }
-
-  editClassType =
-    student.classType === "Personal"
-      ? "Personal"
-      : "Group";
-
-  document.getElementById(
-    "typeStudentName"
-  ).textContent =
-    student.name || "";
-
-  document
-    .getElementById(
-      "editPersonal"
-    )
-    .classList.toggle(
-      "selected",
-      editClassType === "Personal"
-    );
-
-  document
-    .getElementById(
-      "editGroup"
-    )
-    .classList.toggle(
-      "selected",
-      editClassType === "Group"
-    );
-
-  document
-    .getElementById(
-      "typeModal"
-    )
-    .classList.add(
-      "show"
-    );
-
+window.openTypeModal = function(id) {
+  const student = students.find(s => s.id === id);
+  if (!student) return;
+  currentStudentId = id;
+  editClassType = student.classType === "Personal" ? "Personal" : "Group";
+  $("typeStudentName").textContent = student.name || "";
+  selectEditType(editClassType);
+  $("typeModal").classList.add("show");
 };
 
-window.selectEditType =
-function(type){
-
-  editClassType =
-    type;
-
-  document
-    .getElementById(
-      "editPersonal"
-    )
-    .classList.toggle(
-      "selected",
-      type === "Personal"
-    );
-
-  document
-    .getElementById(
-      "editGroup"
-    )
-    .classList.toggle(
-      "selected",
-      type === "Group"
-    );
-
+window.selectEditType = function(type) {
+  editClassType = type;
+  $("editPersonal").classList.toggle("selected", type === "Personal");
+  $("editGroup").classList.toggle("selected", type === "Group");
 };
 
-window.saveClassType =
-async function(){
-
-  if(!currentStudentId){
-    return;
-  }
-
-  try{
-
-    await updateDoc(
-
-      doc(
-        db,
-        "studentData",
-        currentStudentId
-      ),
-
-      {
-        classType:
-          editClassType
-      }
-
-    );
-
-    closeModal(
-      "typeModal"
-    );
-
-    showToast(
-      `Class type changed to ${editClassType}`
-    );
-
+window.saveClassType = async function() {
+  if (!currentStudentId) return;
+  try {
+    await updateDoc(doc(db,"studentData",currentStudentId), {classType:editClassType});
+    closeModal("typeModal");
+    showToast("Class type saved to Firebase ✓");
     await loadStudents();
-
-  }catch(error){
-
+  } catch (error) {
     console.error(error);
-
-    showToast(
-      "Could not update class type"
-    );
-
+    showToast("Could not update class type");
   }
-
 };
 
-/* ==================================================
-   ATTENDANCE
-================================================== */
+window.openAttendance = function(id) {
+  const student = students.find(s => s.id === id);
+  if (!student) return;
+  if (isCompleted(student)) return showToast("Training already completed");
 
-window.openAttendance =
-function(id){
-
-  currentStudentId =
-    id;
-
-  const student =
-    students.find(
-      s=>s.id === id
-    );
-
-  if(!student){
-    return;
-  }
-
-  document.getElementById(
-    "attendanceStudentName"
-  ).textContent =
-    `${student.name || ""} • ${id}`;
-
+  currentStudentId = id;
   selectedRoute = "";
-
-  /*
-    DISTANCE DEFAULT = 5 KM
-  */
-
-  selectedDistance =
-    "5 KM";
-
   selectedRemark = "";
-
-  document.getElementById(
-    "customRoute"
-  ).value = "";
-
-  document.getElementById(
-    "customRemark"
-  ).value = "";
-
-  document
-    .getElementById(
-      "customRouteBox"
-    )
-    .classList.remove(
-      "show"
-    );
-
-  document
-    .getElementById(
-      "customRemarkBox"
-    )
-    .classList.remove(
-      "show"
-    );
-
-  document
-    .querySelectorAll(
-      ".routeOption"
-    )
-    .forEach(btn=>{
-
-      btn.classList.remove(
-        "selected"
-      );
-
-    });
-
-  document
-    .querySelectorAll(
-      ".remarkOption"
-    )
-    .forEach(btn=>{
-
-      btn.classList.remove(
-        "selected"
-      );
-
-    });
-
-  /*
-    Always select 5 KM
-    by default.
-  */
-
-  document
-    .querySelectorAll(
-      ".distanceOption"
-    )
-    .forEach(btn=>{
-
-      btn.classList.add(
-        "selected"
-      );
-
-    });
-
-  document
-    .getElementById(
-      "attendanceModal"
-    )
-    .classList.add(
-      "show"
-    );
-
+  $("attendanceStudentName").textContent = `${student.name || ""} • ${id}`;
+  $("customRoute").value = "";
+  $("customRemark").value = "";
+  $("customRouteBox").classList.remove("show");
+  $("customRemarkBox").classList.remove("show");
+  document.querySelectorAll(".routeOption,.remarkOption").forEach(b => b.classList.remove("selected"));
+  $("attendanceModal").classList.add("show");
 };
 
-/* ==================================================
-   ROUTE
-================================================== */
-
-window.selectRoute =
-function(btn,value){
-
-  selectedRoute =
-    value;
-
-  document
-    .querySelectorAll(
-      ".routeOption"
-    )
-    .forEach(x=>{
-
-      x.classList.remove(
-        "selected"
-      );
-
-    });
-
-  btn.classList.add(
-    "selected"
-  );
-
-  const customBox =
-    document.getElementById(
-      "customRouteBox"
-    );
-
-  const customInput =
-    document.getElementById(
-      "customRoute"
-    );
-
-  if(
-    value === "Other Route"
-  ){
-
-    customBox.classList.add(
-      "show"
-    );
-
-    setTimeout(
-      ()=>{
-        customInput.focus();
-      },
-      100
-    );
-
-  }else{
-
-    customBox.classList.remove(
-      "show"
-    );
-
-    customInput.value = "";
-
-  }
-
+window.selectRoute = function(btn,value) {
+  selectedRoute = value;
+  document.querySelectorAll(".routeOption").forEach(b => b.classList.remove("selected"));
+  btn.classList.add("selected");
+  $("customRouteBox").classList.toggle("show",value === "Other Route");
+  if (value !== "Other Route") $("customRoute").value = "";
 };
 
-/* ==================================================
-   DISTANCE
-================================================== */
-
-window.selectDistance =
-function(btn,value){
-
-  selectedDistance =
-    value;
-
-  document
-    .querySelectorAll(
-      ".distanceOption"
-    )
-    .forEach(x=>{
-
-      x.classList.remove(
-        "selected"
-      );
-
-    });
-
-  btn.classList.add(
-    "selected"
-  );
-
+window.selectRemark = function(btn,value) {
+  selectedRemark = value;
+  document.querySelectorAll(".remarkOption").forEach(b => b.classList.remove("selected"));
+  btn.classList.add("selected");
+  $("customRemarkBox").classList.toggle("show",value === "📝 Custom Remark");
+  if (value !== "📝 Custom Remark") $("customRemark").value = "";
 };
 
-/* ==================================================
-   REMARK
-================================================== */
+window.saveAttendance = async function() {
+  if (!currentStudentId) return;
+  const student = students.find(s => s.id === currentStudentId);
+  if (!student) return showToast("Student not found");
+  if (isCompleted(student)) return showToast("Training already completed");
+  if (!selectedRoute) return showToast("Select route");
 
-window.selectRemark =
-function(btn,value){
+  let route = selectedRoute;
+  if (route === "Other Route") {
+    route = $("customRoute").value.trim();
+    if (!route) return showToast("Enter custom route");
+  }
 
-  selectedRemark =
-    value;
+  let remark = selectedRemark;
+  if (remark === "📝 Custom Remark") {
+    remark = $("customRemark").value.trim();
+    if (!remark) return showToast("Enter custom remark");
+  }
 
-  document
-    .querySelectorAll(
-      ".remarkOption"
-    )
-    .forEach(x=>{
+  const btn = $("saveAttendanceBtn");
+  btn.disabled = true;
+  btn.textContent = "SAVING...";
 
-      x.classList.remove(
-        "selected"
-      );
+  try {
+    const now = new Date();
+    const datePart = now.toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"});
+    const timePart = now.toLocaleTimeString("en-IN",{hour:"2-digit",minute:"2-digit",hour12:true});
+    const log = `${datePart} | ${timePart} — Route: ${route} | Distance: 5 KM${remark ? " | Remark: " + remark : ""}`;
 
+    await updateDoc(doc(db,"studentData",currentStudentId), {
+      remaining:getDone(student) + 1,
+      attendanceLogs:arrayUnion(log),
+      notActive:false
     });
 
-  btn.classList.add(
-    "selected"
-  );
-
-  const customBox =
-    document.getElementById(
-      "customRemarkBox"
-    );
-
-  const customInput =
-    document.getElementById(
-      "customRemark"
-    );
-
-  if(
-    value === "📝 Custom Remark"
-  ){
-
-    customBox.classList.add(
-      "show"
-    );
-
-    setTimeout(
-      ()=>{
-        customInput.focus();
-      },
-      100
-    );
-
-  }else{
-
-    customBox.classList.remove(
-      "show"
-    );
-
-    customInput.value = "";
-
-  }
-
-};
-
-/* ==================================================
-   SAVE ATTENDANCE
-================================================== */
-
-window.saveAttendance =
-async function(){
-
-  if(!currentStudentId){
-    return;
-  }
-
-  /* ================= ROUTE ================= */
-
-  if(!selectedRoute){
-
-    showToast(
-      "Select route"
-    );
-
-    return;
-
-  }
-
-  /*
-    CUSTOM ROUTE
-  */
-
-  if(
-    selectedRoute === "Other Route"
-  ){
-
-    const customRoute =
-      document
-        .getElementById(
-          "customRoute"
-        )
-        .value
-        .trim();
-
-    if(!customRoute){
-
-      showToast(
-        "Enter custom route"
-      );
-
-      document
-        .getElementById(
-          "customRoute"
-        )
-        .focus();
-
-      return;
-
-    }
-
-    selectedRoute =
-      customRoute;
-
-  }
-
-  /* ================= DISTANCE ================= */
-
-  /*
-    Distance is ALWAYS 5 KM.
-    Even if user doesn't touch
-    the distance option.
-  */
-
-  if(!selectedDistance){
-
-    selectedDistance =
-      "5 KM";
-
-  }
-
-  /* ================= REMARK ================= */
-
-  let finalRemark =
-    selectedRemark;
-
-  if(
-    selectedRemark ===
-    "📝 Custom Remark"
-  ){
-
-    const customRemark =
-      document
-        .getElementById(
-          "customRemark"
-        )
-        .value
-        .trim();
-
-    if(!customRemark){
-
-      showToast(
-        "Enter custom remark"
-      );
-
-      document
-        .getElementById(
-          "customRemark"
-        )
-        .focus();
-
-      return;
-
-    }
-
-    finalRemark =
-      customRemark;
-
-  }
-
-  const now =
-    new Date();
-
-  const datePart =
-    now.toLocaleDateString(
-      "en-IN",
-      {
-        day:"2-digit",
-        month:"short"
-      }
-    );
-
-  const timePart =
-    now.toLocaleTimeString(
-      "en-IN",
-      {
-        hour:"2-digit",
-        minute:"2-digit",
-        hour12:true
-      }
-    );
-
-  const log =
-    `${datePart} | ${timePart} — Route: ${selectedRoute} | Distance: 5 KM${
-      finalRemark
-        ? ` | Remark: ${finalRemark}`
-        : ""
-    }`;
-
-  const student =
-    students.find(
-      s=>s.id === currentStudentId
-    );
-
-  const currentDone =
-    student
-      ? getDone(student)
-      : 0;
-
-  try{
-
-    await updateDoc(
-
-      doc(
-        db,
-        "studentData",
-        currentStudentId
-      ),
-
-      {
-
-        remaining:
-          currentDone + 1,
-
-        attendanceLogs:
-          arrayUnion(log),
-
-        notActive:false
-
-      }
-
-    );
-
-    closeModal(
-      "attendanceModal"
-    );
-
-    showToast(
-      "Attendance added ✓"
-    );
-
+    closeModal("attendanceModal");
+    showToast("Attendance saved ✓");
     await loadStudents();
-
-  }catch(error){
-
+  } catch (error) {
     console.error(error);
-
-    showToast(
-      "Could not save attendance"
-    );
-
+    showToast("Could not save attendance");
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "SAVE ATTENDANCE";
   }
-
 };
 
-/* ==================================================
-   NOT ACTIVE
-================================================== */
-
-window.markNotActive =
-async function(id){
-
-  try{
-
-    await updateDoc(
-
-      doc(
-        db,
-        "studentData",
-        id
-      ),
-
-      {
-        notActive:true
-      }
-
-    );
-
-    showToast(
-      "Moved to Not Active"
-    );
-
+window.markNotActive = async function(id) {
+  try {
+    await updateDoc(doc(db,"studentData",id),{notActive:true});
+    showToast("Moved to Not Active");
     await loadStudents();
-
-  }catch(error){
-
+  } catch (error) {
     console.error(error);
-
-    showToast(
-      "Could not update status"
-    );
-
+    showToast("Could not update status");
   }
-
 };
 
-window.activateStudent =
-async function(id){
-
-  try{
-
-    await updateDoc(
-
-      doc(
-        db,
-        "studentData",
-        id
-      ),
-
-      {
-        notActive:false
-      }
-
-    );
-
-    showToast(
-      "Student active again ✓"
-    );
-
+window.activateStudent = async function(id) {
+  try {
+    await updateDoc(doc(db,"studentData",id),{notActive:false});
+    showToast("Student activated ✓");
     await loadStudents();
-
-  }catch(error){
-
+  } catch (error) {
     console.error(error);
-
-    showToast(
-      "Could not activate student"
-    );
-
+    showToast("Could not activate student");
   }
-
 };
 
-/* ==================================================
-   HISTORY
-================================================== */
+window.openHistory = function(id) {
+  const student = students.find(s => s.id === id);
+  if (!student) return;
+  $("historyStudentName").textContent = `${student.name || ""} • ${id}`;
+  const logs = [...getLogs(student)].reverse();
 
-window.openHistory =
-function(id){
+  $("historyList").innerHTML = logs.length
+    ? logs.map((log,index) => `<div class="historyItem"><div class="historyNumber">SESSION ${logs.length-index}</div><div class="historyText">${safe(log)}</div></div>`).join("")
+    : '<div class="empty">📋<br><br>No attendance history</div>';
 
-  currentStudentId =
-    id;
-
-  const student =
-    students.find(
-      s=>s.id === id
-    );
-
-  if(!student){
-    return;
-  }
-
-  document.getElementById(
-    "historyStudentName"
-  ).textContent =
-    `${student.name || ""} • ${id}`;
-
-  const logs =
-    [
-      ...getLogs(student)
-    ].reverse();
-
-  const list =
-    document.getElementById(
-      "historyList"
-    );
-
-  if(!logs.length){
-
-    list.innerHTML = `
-
-      <div class="empty">
-
-        <div class="emptyIcon">
-          📋
-        </div>
-
-        <div class="emptyText">
-          No attendance history
-        </div>
-
-      </div>
-
-    `;
-
-  }else{
-
-    list.innerHTML =
-      logs
-        .map(
-          (log,index)=>`
-
-            <div class="historyItem">
-
-              <div class="historyNumber">
-                SESSION ${logs.length-index}
-              </div>
-
-              <div class="historyText">
-                ${safe(log)}
-              </div>
-
-            </div>
-
-          `
-        )
-        .join("");
-
-  }
-
-  document
-    .getElementById(
-      "historyModal"
-    )
-    .classList.add(
-      "show"
-    );
-
+  $("historyModal").classList.add("show");
 };
 
-/* ==================================================
-   WHATSAPP
-================================================== */
+window.sendWhatsApp = function(id) {
+  const student = students.find(s => s.id === id);
+  if (!student) return;
 
-window.sendWhatsApp =
-function(id){
+  const done = getDone(student);
+  const total = getTotal(student);
+  const left = Math.max(total - done,0);
+  const type = student.classType === "Personal" ? "Personal" : "Group";
 
-  const student =
-    students.find(
-      s=>s.id === id
-    );
+  const message = `Hello *${String(student.name || "").trim()}*,\n\n*A1 Driving Classes Attendance*\n\n🚗 Completed: *${done}/${total}*\n⏳ Balance: *${left} Sessions*\n📚 Class Type: *${type}*\n\nKeep learning and drive safely! 🚗`;
 
-  if(!student){
-    return;
-  }
-
-  const total =
-    getTotal(student);
-
-  const done =
-    getDone(student);
-
-  const left =
-    Math.max(
-      total - done,
-      0
-    );
-
-  const classType =
-    student.classType === "Personal"
-      ? "Personal"
-      : "Group";
-
-  const message =
-`Hello *${String(student.name || "").trim()}*,
-
-*A1 Driving Classes Attendance*
-
-🚗 Completed: *${done}/${total}*
-⏳ Balance: *${left} Sessions*
-📚 Class Type: *${classType}*
-
-Keep learning and drive safely! 🚗🔥`;
-
-  const url =
-    `https://wa.me/${id}?text=${encodeURIComponent(message)}`;
-
-  window.open(
-    url,
-    "_blank"
-  );
-
+  window.open(`https://wa.me/91${id}?text=${encodeURIComponent(message)}`,"_blank","noopener");
 };
 
-/* ==================================================
-   CALL
-================================================== */
-
-window.callStudent =
-function(id){
-
-  window.location.href =
-    `tel:${id}`;
-
+window.callStudent = function(id) {
+  window.location.href = `tel:${id}`;
 };
 
-/* ==================================================
-   CLOSE MODALS
-================================================== */
-
-window.closeModal =
-function(id){
-
-  document
-    .getElementById(id)
-    .classList.remove(
-      "show"
-    );
-
+window.closeModal = function(id) {
+  $(id).classList.remove("show");
 };
 
-document
-  .querySelectorAll(
-    ".modal"
-  )
-  .forEach(modal=>{
-
-    modal.addEventListener(
-      "click",
-      function(e){
-
-        if(
-          e.target === modal
-        ){
-
-          modal.classList.remove(
-            "show"
-          );
-
-        }
-
-      }
-    );
-
+document.querySelectorAll(".modal").forEach(modal => {
+  modal.addEventListener("click",event => {
+    if (event.target === modal) modal.classList.remove("show");
   });
+});
 
-document.addEventListener(
-  "keydown",
-  function(e){
-
-    if(
-      e.key === "Escape"
-    ){
-
-      document
-        .querySelectorAll(
-          ".modal.show"
-        )
-        .forEach(modal=>{
-
-          modal.classList.remove(
-            "show"
-          );
-
-        });
-
-    }
-
+document.addEventListener("keydown",event => {
+  if (event.key === "Escape") {
+    document.querySelectorAll(".modal.show").forEach(modal => modal.classList.remove("show"));
   }
-);
-
-/* ==================================================
-   AUTO REFRESH
-================================================== */
-
-setInterval(
-  loadStudents,
-  30000
-);
-
-/* ==================================================
-   START
-================================================== */
+});
 
 loadStudents();
-
+setInterval(loadStudents,30000);
 </script>
-
 </body>
 </html>
