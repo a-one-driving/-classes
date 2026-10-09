@@ -197,6 +197,38 @@ input:focus{border-color:rgba(212,175,55,.65)}
 @media(prefers-reduced-motion:reduce){
  *,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
 }
+
+
+#certificateDateBox {
+  display: inline-block !important;
+  min-width: 350px;
+  min-height: 75px;
+  padding: 12px 25px;
+  text-align: center;
+  background: #fffdf6;
+  border: 1px solid #d4af37;
+  border-radius: 9px;
+  color: #102b50;
+}
+
+#certificateDateBox .certificate-date-label {
+  display: block !important;
+  color: #a27b20 !important;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+#certificateDateBox #pdfDate {
+  display: block !important;
+  color: #102b50 !important;
+  font-family: Georgia, serif;
+  font-size: 21px;
+  font-weight: bold;
+  margin-top: 8px;
+  min-height: 25px;
+}
+
 </style>
 </head>
 
@@ -345,10 +377,12 @@ input:focus{border-color:rgba(212,175,55,.65)}
         <br>In recognition of dedication, practical learning and commitment to responsible driving.
       </p>
 
-      <div class="certificate-date-box">
-        <div class="certificate-date-label">TRAINING COMPLETION DATE</div>
-        <div id="pdfDate">Date unavailable</div>
-      </div>
+     
+<div class="certificate-date-box" id="certificateDateBox">
+  <div class="certificate-date-label">TRAINING COMPLETION DATE</div>
+  <div id="pdfDate">Date unavailable</div>
+</div>
+
 
       <div class="certificate-bottom">
         <div class="certificate-signature">
@@ -714,6 +748,28 @@ async function downloadPDF() {
         requestAnimationFrame(resolve)
       )
     );
+    
+    
+const certificateDate = getTrainingCompletionDate(currentData);
+
+document.getElementById("pdfDate").textContent = certificateDate;
+document.getElementById("pdfName").textContent =
+  String(currentData.name || "STUDENT").trim().toUpperCase();
+
+element.style.display = "block";
+element.style.position = "fixed";
+element.style.left = "0";
+element.style.top = "0";
+element.style.zIndex = "99999";
+
+await document.fonts.ready;
+
+await new Promise(resolve => {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(resolve);
+  });
+});
+
 
     await html2pdf()
       .set({
