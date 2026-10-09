@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta name="theme-color" content="#090c18">
-<title>A1 Driving | Student Dashboard</title>
+<title>A1 Driving | Achievement Dashboard</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -12,214 +12,233 @@
 <style>
 :root{
   --bg:#090c18;
-  --panel:#171b2a;
+  --panel:#111829;
   --gold:#ffc653;
-  --muted:#9199ae;
   --green:#47d7a0;
-  --border:rgba(255,255,255,.09);
+  --muted:#929db4;
+  --border:#ffffff14;
 }
 *{box-sizing:border-box;margin:0;padding:0;font-family:Poppins,sans-serif}
 body{
-  background:radial-gradient(ellipse at 50% 0%,#1c2034,var(--bg) 60%);
-  color:#fff;min-height:100vh;padding:18px 12px 35px
+  background:radial-gradient(ellipse at top,#1c263d,var(--bg) 60%);
+  color:white;min-height:100vh;padding:15px 10px 35px;
 }
-.container{width:100%;max-width:470px;margin:auto}
-.brand{text-align:center;margin:8px 0 25px}
-.brand h1{font-size:24px;font-weight:800;letter-spacing:2px;color:var(--gold)}
-.brand p{font-size:10px;letter-spacing:4px;color:var(--muted);margin-top:4px}
+.container{max-width:470px;margin:auto}
+.brand{text-align:center;margin:12px 0 23px}
+.brand h1{font-size:25px;color:var(--gold);font-weight:800;letter-spacing:2px}
+.brand p{font-size:10px;letter-spacing:4px;color:var(--muted)}
 .panel{
-  background:rgba(18,22,37,.94);border:1px solid var(--border);
-  border-radius:25px;padding:20px 15px;box-shadow:0 20px 60px #0005
+  padding:17px 13px;border-radius:24px;
+  background:rgba(12,18,33,.94);
+  border:1px solid var(--border);
+  box-shadow:0 20px 60px #0006;
 }
-.label{font-size:11px;color:var(--muted);display:block;margin-bottom:9px}
+.label{display:block;color:var(--muted);font-size:11px;margin-bottom:8px}
 input{
-  width:100%;background:#0c1020;border:1px solid var(--border);
-  border-radius:13px;padding:15px;color:white;font-size:17px;
-  text-align:center;outline:none;margin-bottom:13px
+  width:100%;padding:15px;background:#090f1e;
+  border:1px solid #394661;border-radius:12px;
+  color:white;text-align:center;font-size:17px;outline:none;margin-bottom:12px
 }
-button{cursor:pointer;font-family:inherit}
+button{font-family:inherit;cursor:pointer}
 .primary{
-  width:100%;padding:14px;border:0;border-radius:13px;
-  background:linear-gradient(135deg,#ffe28a,#ffad38);
-  color:#17101a;font-weight:800;font-size:14px
+  width:100%;padding:14px;border:0;border-radius:12px;
+  background:linear-gradient(135deg,#ffe89b,#ffad35);
+  color:#19131a;font-weight:800;font-size:14px
 }
-#loader{display:none;text-align:center;padding:12px;color:var(--gold)}
+#loader{display:none;text-align:center;color:var(--gold);padding:12px}
 #profileContent{display:none}
-.student{text-align:center;margin:5px 0 18px}
+.student{text-align:center;margin:6px 0 15px}
 .student h2{font-size:22px;overflow-wrap:anywhere}
 .student span{
-  display:inline-block;margin-top:8px;padding:5px 12px;
-  color:var(--gold);background:#ffc65312;border:1px solid #ffc65335;
-  border-radius:20px;font-size:10px
+  display:inline-block;margin-top:8px;padding:5px 12px;border-radius:20px;
+  color:var(--gold);background:#ffc65312;border:1px solid #ffc65340;font-size:10px
 }
-.hero{text-align:center;padding:10px 0 22px}
-.trophy{font-size:65px;filter:drop-shadow(0 0 18px #ffba4d99)}
+.hero{text-align:center;padding:8px 0 19px}
+.trophy{font-size:61px;filter:drop-shadow(0 0 16px #ffc653)}
 .hero h2{
   font-size:29px;font-weight:800;letter-spacing:2px;
   background:linear-gradient(#ffe49a,#ffad35);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent
 }
-.hero p{font-size:11px;color:#b5bdce;line-height:1.8;margin-top:8px}
-.filters{
-  display:flex;gap:8px;overflow-x:auto;padding:3px 1px 13px;
-  margin-bottom:11px;scrollbar-width:none
-}
+.hero p{font-size:11px;color:#b7c1d6;margin-top:6px;line-height:1.8}
+
+.filters{display:flex;gap:7px;overflow-x:auto;padding:3px 1px 14px;scrollbar-width:none}
 .filters::-webkit-scrollbar{display:none}
 .filter{
-  flex-shrink:0;padding:10px 13px;border:1px solid transparent;
-  background:#151a2b;color:#aeb6ca;border-radius:30px;
+  flex-shrink:0;padding:9px 12px;border:1px solid transparent;
+  background:#192136;color:#bdc8dd;border-radius:30px;
   font-size:10px;font-weight:700;white-space:nowrap
 }
 .filter.active{
-  color:#191323;background:linear-gradient(135deg,#ffe38b,#ffa92f);
-  box-shadow:0 0 20px #ffba4d40
+  background:linear-gradient(135deg,#ffe38b,#ffa92f);color:#191323;
+  box-shadow:0 0 17px #ffc65340
 }
 .stats{
-  display:grid;grid-template-columns:1fr 1fr 1fr;
-  align-items:center;background:linear-gradient(135deg,#252939,#1b2030);
-  border:1px solid #ffffff0c;border-radius:22px;padding:18px 4px;
-  margin-bottom:24px
+  display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;
+  padding:17px 3px;margin-bottom:24px;border-radius:20px;
+  background:linear-gradient(135deg,#252c3c,#191f30);border:1px solid var(--border)
 }
 .stat{text-align:center;min-width:0}
-.stat+.stat{border-left:1px solid #ffffff13}
-.stat strong{display:block;font-size:27px;font-weight:800}
-.stat small{display:block;color:#aab2c4;font-size:10px;margin-top:5px}
-#earnedCount{color:#ffb83f}
+.stat+.stat{border-left:1px solid #ffffff16}
+.stat strong{font-size:27px;display:block;font-weight:800}
+.stat small{display:block;font-size:10px;color:#b3bfd2;margin-top:5px}
+#earnedCount{color:var(--gold)}
 .ring{
-  width:64px;height:64px;border-radius:50%;margin:0 auto 5px;
+  width:62px;height:62px;border-radius:50%;margin:0 auto 5px;
   position:relative;display:grid;place-items:center;
-  background:conic-gradient(var(--green) var(--progress,0%),#343b50 0)
+  background:conic-gradient(var(--green) var(--progress,0%),#394259 0)
 }
-.ring:before{content:"";position:absolute;inset:7px;background:#202536;border-radius:50%}
-.ring span{position:relative;font-size:11px;font-weight:800;color:var(--green)}
-.section-head{
-  display:flex;align-items:center;justify-content:space-between;
-  gap:8px;margin:22px 0 14px
-}
-.section-head h3{font-size:12px;letter-spacing:1.5px;color:#e0e6f5}
-.pill-count{
-  padding:6px 9px;border-radius:20px;background:#47d7a018;
-  color:var(--green);font-size:9px;font-weight:700;white-space:nowrap
-}
-.badge-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.ring:before{content:"";position:absolute;inset:7px;background:#202638;border-radius:50%}
+.ring span{position:relative;color:var(--green);font-size:11px;font-weight:800}
+
+.section-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:21px 0 13px}
+.section-head h3{font-size:12px;letter-spacing:1.4px;color:#e2e9f8}
+.pill{padding:6px 9px;border-radius:20px;background:#47d7a015;color:var(--green);font-size:9px;white-space:nowrap}
+.badge-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+
+/* 3D MEDAL BADGES */
 .badge-card{
-  min-width:0;min-height:155px;padding:12px 4px 10px;
-  border:1px solid #3b4357;border-radius:18px;
-  background:linear-gradient(155deg,#202638,#111625);
+  min-width:0;min-height:158px;padding:12px 4px 10px;
+  border:1px solid #3b4861;border-radius:18px;
+  background:linear-gradient(150deg,#222b40,#101625 75%);
   display:flex;flex-direction:column;align-items:center;text-align:center;
-  transition:.2s
+  position:relative;overflow:hidden;isolation:isolate;
+  transition:transform .25s,border-color .25s;
 }
-.badge-card.earned{border-color:#d5a64c99}
-.badge-card.earned.rarity-epic{border-color:#648dff99;box-shadow:inset 0 0 20px #436dff12}
-.badge-card.earned.rarity-legendary{border-color:#ffca5799;box-shadow:inset 0 0 22px #ffbc3615}
+.badge-card:before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(115deg,transparent 25%,#ffffff0a 43%,#ffffff20 50%,#ffffff05 56%,transparent 72%);
+  transform:translateX(-120%);
+  animation:shine 5s ease-in-out infinite;
+}
+.badge-card.earned{border-color:#ffc65388}
+.badge-card.earned.rarity-epic{border-color:#668bff;box-shadow:inset 0 0 24px #507bff18}
+.badge-card.earned.rarity-legendary{border-color:#ffc653;box-shadow:inset 0 0 24px #ffc65320}
 .badge-card.locked{filter:saturate(.35);opacity:.65}
-.badge-icon{
-  width:62px;height:62px;flex-shrink:0;border-radius:50%;
-  border:2px solid #747e95;background:radial-gradient(circle,#39435c,#151a2a);
-  display:grid;place-items:center;font-size:29px;margin-bottom:9px
+@keyframes shine{
+  0%,65%{transform:translateX(-120%)}
+  85%,100%{transform:translateX(120%)}
 }
-.earned .badge-icon{border-color:#f8c85f;box-shadow:0 0 17px #ffc65326}
-.rarity-epic .badge-icon{border-color:#7597ff}
-.rarity-legendary .badge-icon{border-color:#ffc653;box-shadow:0 0 18px #ffc65335}
+.medal{
+  --metal:#dba83e;
+  width:67px;height:67px;flex-shrink:0;
+  border-radius:50%;margin-bottom:9px;
+  display:grid;place-items:center;position:relative;
+  background:
+    radial-gradient(circle at 30% 22%,#fff9 0 3%,transparent 20%),
+    radial-gradient(circle at 35% 25%,#fff5,#fff0 35%),
+    linear-gradient(135deg,#fff1a3 0%,var(--metal) 25%,#80521b 50%,var(--metal) 72%,#fff0a0 100%);
+  border:2px solid #fff6;
+  box-shadow:inset 0 0 0 3px #4a351e,inset 0 0 0 5px #ffe29b,
+    0 0 16px color-mix(in srgb,var(--metal) 38%,transparent);
+  animation:medalFloat 3s ease-in-out infinite;
+}
+.medal:before{
+  content:"";position:absolute;inset:8px;border-radius:50%;
+  border:1px solid #ffffffb0;box-shadow:inset 0 0 9px #0005
+}
+.medal:after{
+  content:"";position:absolute;inset:0;border-radius:50%;
+  background:linear-gradient(130deg,#fff7,transparent 38%,transparent 62%,#0003);
+  pointer-events:none
+}
+.medal span{font-size:29px;filter:drop-shadow(0 2px 2px #0008);z-index:1}
+.rarity-rare .medal{
+  --metal:#83b9ff;
+  background:linear-gradient(135deg,#e7f6ff,#6595d4 35%,#243d70 65%,#d9f3ff)
+}
+.rarity-epic .medal{
+  --metal:#9879ff;
+  background:linear-gradient(135deg,#f4deff,#9363e6 35%,#3e287d 68%,#d7c6ff)
+}
+.rarity-legendary .medal{
+  --metal:#ffc653;
+  background:linear-gradient(135deg,#fff5ba,#ffbf39 35%,#9e4e0b 66%,#fff0a0);
+  animation:medalFloat 2.5s ease-in-out infinite,legendGlow 2.2s ease-in-out infinite alternate
+}
+@keyframes medalFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-3px) rotate(2deg)}}
+@keyframes legendGlow{from{filter:drop-shadow(0 0 2px #ffc65330)}to{filter:drop-shadow(0 0 9px #ffc653aa)}}
+.badge-card.locked .medal{animation:none;filter:grayscale(.8)}
 .badge-name{font-size:10px;font-weight:700;line-height:1.5;overflow-wrap:anywhere}
 .rarity{
   margin-top:7px;padding:4px 7px;border-radius:20px;
-  font-size:8px;letter-spacing:.5px;font-weight:800;background:#ffffff12;color:#b6bfd1
+  font-size:8px;font-weight:800;letter-spacing:.5px;background:#ffffff12;color:#bac5d8
 }
-.rarity.common{color:#abb3c6}
-.rarity.rare{background:#3888ff20;color:#82b6ff}
-.rarity.epic{background:#8159ff22;color:#b7a0ff}
+.rarity.common{color:#bdc7d9}
+.rarity.rare{background:#347fff20;color:#83b5ff}
+.rarity.epic{background:#8159ff22;color:#c0a9ff}
 .rarity.legendary{background:#ffbc3620;color:#ffd06e}
-.lock-label{font-size:8px;color:#9da7bb;margin-top:7px;line-height:1.5}
-.earned .lock-label{color:var(--green)}
+.badge-status{font-size:8px;color:#98a6bc;line-height:1.5;margin-top:7px}
+.earned .badge-status{color:var(--green)}
 .empty{grid-column:1/-1;text-align:center;padding:25px;color:var(--muted);font-size:11px}
-.footer-note{font-size:9px;color:#737e95;line-height:1.8;margin-top:16px;text-align:center}
 
-/* DRIVING JOURNEY TIMELINE */
+/* DRIVING JOURNEY */
 .journey{
-  margin-top:28px;padding:18px 13px 20px;
-  border:1px solid #ffc65325;border-radius:22px;
-  background:linear-gradient(155deg,#1b2030,#111625)
+  margin-top:27px;padding:17px 12px 20px;border:1px solid #ffc65330;
+  border-radius:21px;background:linear-gradient(150deg,#1c2538,#101625)
 }
 .journey-head{display:flex;justify-content:space-between;align-items:center;gap:8px}
-.journey-head h3{font-size:13px;color:#fce08d;font-weight:800}
+.journey-head h3{font-size:13px;color:#ffe08b}
 .journey-head span{font-size:9px;color:var(--muted)}
-.journey-intro{font-size:10px;color:var(--muted);line-height:1.8;margin:8px 0 20px}
-.journey-line{position:relative;padding-left:35px}
+.journey-intro{font-size:10px;color:#aebbd0;line-height:1.8;margin:8px 0 21px}
+.journey-line{position:relative;padding-left:36px}
 .journey-line:before{
-  content:"";position:absolute;left:13px;top:15px;bottom:18px;
-  width:2px;background:linear-gradient(#ffc653,#48516a 75%,#30384b)
+  content:"";position:absolute;left:13px;top:14px;bottom:18px;width:2px;
+  background:linear-gradient(#ffc653,#53617b 70%,#313b50)
 }
-.journey-step{position:relative;padding-bottom:23px}
+.journey-step{position:relative;padding-bottom:22px}
 .journey-step:last-child{padding-bottom:0}
 .journey-dot{
-  position:absolute;left:-35px;top:0;width:28px;height:28px;
-  display:grid;place-items:center;border-radius:50%;
-  border:2px solid #48516a;background:#171c2b;font-size:12px;z-index:1
+  position:absolute;left:-36px;top:0;width:28px;height:28px;
+  border-radius:50%;display:grid;place-items:center;
+  border:2px solid #4b5871;background:#171e30;font-size:12px;z-index:1
 }
-.journey-step.completed .journey-dot{
-  background:#ffc65319;border-color:#ffc653;color:#ffd879;
-  box-shadow:0 0 13px #ffc65320
-}
-.journey-step.current .journey-dot{
-  border-color:var(--green);background:#47d7a01c;
-  box-shadow:0 0 14px #47d7a025
-}
-.journey-card{
-  padding:12px;background:#ffffff04;border:1px solid #ffffff0c;
-  border-radius:13px
-}
+.journey-step.completed .journey-dot{border-color:#ffc653;color:#ffd879;background:#ffc65317}
+.journey-step.current .journey-dot{border-color:var(--green);box-shadow:0 0 12px #47d7a040}
+.journey-card{padding:11px;background:#ffffff04;border:1px solid #ffffff10;border-radius:12px}
 .journey-step.completed .journey-card{border-color:#ffc65325}
 .journey-step.current .journey-card{border-color:#47d7a055}
 .journey-top{display:flex;justify-content:space-between;gap:7px;align-items:center}
-.journey-top h4{font-size:11px;font-weight:700}
-.journey-status{
-  font-size:8px;font-weight:800;color:#9aa5ba;
-  background:#ffffff0b;padding:4px 7px;border-radius:20px;white-space:nowrap
-}
+.journey-top h4{font-size:10px}
+.journey-status{font-size:8px;font-weight:800;color:#a0aec3;background:#ffffff0c;padding:4px 6px;border-radius:20px;white-space:nowrap}
 .completed .journey-status{color:#ffd879;background:#ffc65312}
 .current .journey-status{color:var(--green);background:#47d7a015}
-.journey-card p{font-size:9px;line-height:1.8;color:#9da7bc;margin-top:6px}
-.journey-date{font-size:8px;color:#737f97;margin-top:5px}
-.journey-progress{height:4px;background:#ffffff0d;border-radius:10px;overflow:hidden;margin-top:9px}
+.journey-card p{font-size:9px;line-height:1.8;color:#aab6cc;margin-top:5px}
+.journey-date{font-size:8px;color:#7e8ba3;margin-top:5px}
+.journey-progress{height:4px;background:#ffffff0e;border-radius:10px;overflow:hidden;margin-top:8px}
 .journey-progress div{height:100%;background:linear-gradient(90deg,#ff9e38,#ffe18c);border-radius:10px}
 
-.progress-box{
-  border:1px solid var(--border);background:#ffffff04;
-  border-radius:18px;padding:16px;margin-top:20px
-}
-.progress-row{display:flex;justify-content:space-between;gap:10px;font-size:10px;color:var(--muted);margin-bottom:10px}
-.bar{height:6px;border-radius:10px;background:#ffffff12;overflow:hidden}
-.bar div{height:100%;width:0;background:linear-gradient(90deg,#ff9e38,#ffe18c);border-radius:10px}
-.details{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}
-.detail{background:#ffffff05;border:1px solid var(--border);padding:12px;border-radius:12px;min-width:0}
+.progress-box{border:1px solid var(--border);background:#ffffff04;border-radius:17px;padding:15px;margin-top:20px}
+.progress-row{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-bottom:10px}
+.bar{height:6px;background:#ffffff12;border-radius:10px;overflow:hidden}
+.bar div{height:100%;background:linear-gradient(90deg,#ff9e38,#ffe18c);transition:width .5s}
+.details{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.detail{padding:11px;background:#ffffff05;border:1px solid var(--border);border-radius:11px;min-width:0}
 .detail small{font-size:9px;color:var(--muted);display:block}
-.detail b{font-size:14px;display:block;margin-top:4px;overflow-wrap:anywhere}
-.history{margin-top:24px}
+.detail b{font-size:13px;display:block;margin-top:4px;overflow-wrap:anywhere}
+.history{margin-top:23px}
 .history h3{font-size:12px;letter-spacing:1px;margin-bottom:12px;color:#c6cede}
 .log{padding:12px;background:#ffffff05;border-left:3px solid var(--gold);border-radius:10px;margin-bottom:9px}
-.log-top{display:flex;justify-content:space-between;gap:7px;font-size:11px;font-weight:600}
-.log-top span{font-size:9px;color:var(--muted);font-weight:400}
-.log p{font-size:10px;line-height:1.7;color:#bbc2d2;margin-top:6px;overflow-wrap:anywhere}
-.wallet{
-  display:flex;justify-content:space-between;align-items:center;margin-top:18px;
-  padding:15px;background:#47d7a010;border:1px solid #47d7a02b;border-radius:15px
-}
+.log-top{display:flex;justify-content:space-between;gap:7px;font-size:11px}
+.log-top span{font-size:9px;color:var(--muted)}
+.log p{font-size:10px;color:#bbc2d2;line-height:1.7;margin-top:6px;overflow-wrap:anywhere}
+.wallet{display:flex;justify-content:space-between;align-items:center;margin-top:18px;padding:15px;background:#47d7a010;border:1px solid #47d7a035;border-radius:15px}
 .wallet small{font-size:10px;color:var(--green)}
 .wallet b{font-size:20px}
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:13px}
-.secondary{background:#ffffff07;border:1px solid var(--border);color:white;border-radius:12px;padding:13px;font-size:12px;font-weight:700}
-.logout{display:block;text-align:center;margin-top:24px;color:#737b90;font-size:11px;cursor:pointer}
-#certificate{display:none;background:#ffc65310;border:1px solid #ffc65355;padding:17px;border-radius:16px;text-align:center;margin-top:18px}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:13px}
+.secondary{background:#ffffff07;border:1px solid var(--border);color:white;border-radius:12px;padding:13px 6px;font-size:11px;font-weight:700}
+.logout{display:block;text-align:center;margin-top:23px;color:#8290aa;font-size:11px;cursor:pointer}
+#certificate{display:none;margin-top:18px;padding:16px;border:1px solid #ffc65355;background:#ffc65310;border-radius:15px;text-align:center}
 #certificate h3{font-size:14px;color:var(--gold)}
 #certificate p{font-size:10px;color:var(--muted);margin:8px 0 12px}
 #pdfTemplate{width:842px;height:595px;position:fixed;left:-10000px;top:0;background:#080b15;color:white;padding:35px;border:12px solid #d4af37}
 #pdfTemplate .inner{height:100%;border:2px solid #d4af37;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px}
 @media(max-width:350px){
-  body{padding:12px 8px}.panel{padding:15px 10px}
-  .badge-grid{gap:6px}.badge-card{min-height:145px;padding:10px 3px}
-  .badge-icon{width:53px;height:53px;font-size:25px}
-  .badge-name{font-size:9px}.hero h2{font-size:26px}
+  .panel{padding:14px 9px}.badge-grid{gap:6px}.badge-card{min-height:145px;padding:10px 2px}
+  .medal{width:54px;height:54px}.medal span{font-size:24px}.badge-name{font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation:none!important;transition:none!important}
 }
 </style>
 </head>
@@ -233,10 +252,10 @@ button{cursor:pointer;font-family:inherit}
 
 <main class="panel">
 <section id="searchPanel">
-  <label class="label" for="userPhone">REGISTERED MOBILE NUMBER</label>
-  <input id="userPhone" type="tel" maxlength="10" inputmode="numeric" placeholder="Enter 10 digit number">
-  <button class="primary" id="loginBtn" onclick="loadProfile()">ACCESS DASHBOARD</button>
-  <div id="loader">Loading your profile...</div>
+  <label class="label" for="userPhone">ENTER REGISTERED NUMBER</label>
+  <input id="userPhone" type="tel" maxlength="10" inputmode="numeric" placeholder="9933xxxxxx">
+  <button class="primary" id="loginBtn" onclick="loadProfile()">ACCESS DASHBOARD →</button>
+  <div id="loader">Loading profile...</div>
 </section>
 
 <section id="profileContent">
@@ -247,7 +266,7 @@ button{cursor:pointer;font-family:inherit}
 
   <section class="hero">
     <div class="trophy">🏆</div>
-    <h2>BADGES</h2>
+    <h2>ACHIEVEMENT BADGES</h2>
     <p>Collect achievements and show off your driving progress</p>
   </section>
 
@@ -256,33 +275,27 @@ button{cursor:pointer;font-family:inherit}
     <button class="filter" data-category="Milestone" onclick="setCategory('Milestone',this)">⚑ Milestone</button>
     <button class="filter" data-category="Streak" onclick="setCategory('Streak',this)">🔥 Streak</button>
     <button class="filter" data-category="Skills" onclick="setCategory('Skills',this)">🚘 Skills</button>
-    <button class="filter" data-category="Special" onclick="setCategory('Special',this)">🏆 Special</button>
+    <button class="filter" data-category="Special" onclick="setCategory('Special',this)">★ Special</button>
   </nav>
 
   <section class="stats">
     <div class="stat"><strong id="earnedCount">0</strong><small>Earned</small></div>
-    <div class="stat">
-      <div class="ring" id="completionRing"><span id="completionText">0%</span></div>
-      <small>Complete</small>
-    </div>
+    <div class="stat"><div class="ring" id="completionRing"><span id="completionText">0%</span></div><small>Complete</small></div>
     <div class="stat"><strong id="totalCount">24</strong><small>Total</small></div>
   </section>
 
   <div class="section-head">
     <h3 id="galleryTitle">✦ ALL BADGES</h3>
-    <span class="pill-count" id="galleryCount">0 EARNED</span>
+    <span class="pill" id="galleryCount">0 EARNED</span>
   </div>
   <section class="badge-grid" id="badgeGrid"></section>
 
-  <p class="footer-note">Unlock badges as you progress through your training. Skill achievements require instructor confirmation.</p>
-
-  <!-- DRIVING JOURNEY TIMELINE -->
   <section class="journey">
     <div class="journey-head">
       <h3>🚘 DRIVING JOURNEY</h3>
       <span id="journeySummary">0% completed</span>
     </div>
-    <p class="journey-intro">Your complete training journey, from your first drive to becoming a driving champion.</p>
+    <p class="journey-intro">Follow your training journey, celebrate every milestone and see what comes next.</p>
     <div class="journey-line" id="journeyTimeline"></div>
   </section>
 
@@ -309,12 +322,13 @@ button{cursor:pointer;font-family:inherit}
   </section>
 
   <div class="wallet">
-    <div><small>REFERRAL WALLET</small><br><span style="font-size:9px;color:#9199ae">Estimated referral rewards</span></div>
+    <div><small>REFERRAL WALLET</small><br><span style="font-size:9px;color:#929db4">Estimated referral rewards</span></div>
     <b id="dispEarn">₹0</b>
   </div>
+
   <div class="actions">
-    <button class="secondary" onclick="contactAdmin()">💬 HELP</button>
-    <button class="secondary" onclick="shareReferral()">↗ SHARE</button>
+    <button class="secondary" onclick="contactAdmin()">💬 GET HELP</button>
+    <button class="secondary" onclick="shareReferral()">↗ SHARE REFERRAL</button>
   </div>
   <a class="logout" onclick="logoutSession()">← LOGOUT SESSION</a>
 </section>
@@ -327,9 +341,7 @@ button{cursor:pointer;font-family:inherit}
     <p style="letter-spacing:3px;color:#aaa;margin-top:12px">CERTIFICATE OF COMPLETION</p>
     <div style="height:2px;width:80px;background:#d4af37;margin:30px"></div>
     <h2 id="pdfName" style="font-size:38px;text-transform:uppercase">STUDENT</h2>
-    <p style="font-size:15px;color:#ddd;max-width:570px;line-height:2;margin-top:20px">
-      Has completed the assigned driving training class target at Abhinaash A1 Driving Academy.
-    </p>
+    <p style="font-size:15px;color:#ddd;max-width:570px;line-height:2;margin-top:20px">Has completed the assigned driving training class target at Abhinaash A1 Driving Academy.</p>
     <p style="color:#d4af37;margin-top:30px">DRIVING CHAMPION</p>
   </div>
 </div>
@@ -356,31 +368,36 @@ let unsubscribeProfile=null;
 let requestId=0;
 let earnedIds=new Set();
 
+/*
+Optional GIF support:
+Add a real GIF URL to any badge's gif property.
+Leave it empty to use the animated 3D medal design.
+*/
 const badges=[
-{id:"start",name:"First Drive",icon:"🚘",category:"Milestone",rarity:"common",desc:"Complete your first class",check:s=>s.done>=1},
-{id:"p25",name:"Bronze Star",icon:"🥉",category:"Milestone",rarity:"common",desc:"Reach 25% progress",check:s=>s.percent>=25},
-{id:"p50",name:"Silver Star",icon:"🥈",category:"Milestone",rarity:"rare",desc:"Reach 50% progress",check:s=>s.percent>=50},
-{id:"p75",name:"Gold Star",icon:"🥇",category:"Milestone",rarity:"epic",desc:"Reach 75% progress",check:s=>s.percent>=75},
-{id:"complete",name:"Driving Champion",icon:"🏆",category:"Milestone",rarity:"legendary",desc:"Complete all target classes",check:s=>s.done>=s.total},
-{id:"five",name:"Five Sessions",icon:"🖐️",category:"Milestone",rarity:"common",desc:"Complete 5 classes",check:s=>s.done>=5},
-{id:"ten",name:"Ten Sessions",icon:"🔟",category:"Milestone",rarity:"rare",desc:"Complete 10 classes",check:s=>s.done>=10},
-{id:"fifteen",name:"15 Sessions",icon:"🎯",category:"Milestone",rarity:"epic",desc:"Complete 15 classes",check:s=>s.done>=15},
-{id:"twenty",name:"20 Sessions",icon:"🌟",category:"Milestone",rarity:"epic",desc:"Complete 20 classes",check:s=>s.done>=20},
-{id:"distance5",name:"5 KM Club",icon:"🛣️",category:"Milestone",rarity:"common",desc:"Record 5 km",check:s=>s.km>=5},
-{id:"distance25",name:"25 KM Club",icon:"🚗",category:"Milestone",rarity:"rare",desc:"Record 25 km",check:s=>s.km>=25},
-{id:"distance50",name:"50 KM Club",icon:"🏁",category:"Milestone",rarity:"epic",desc:"Record 50 km",check:s=>s.km>=50},
-{id:"streak2",name:"Getting Started",icon:"🔥",category:"Streak",rarity:"common",desc:"Log 2 sessions",check:s=>s.logs.length>=2},
-{id:"streak5",name:"Regular Learner",icon:"📅",category:"Streak",rarity:"rare",desc:"Log 5 sessions",check:s=>s.logs.length>=5},
-{id:"streak10",name:"Dedicated Driver",icon:"💪",category:"Streak",rarity:"epic",desc:"Log 10 sessions",check:s=>s.logs.length>=10},
-{id:"parking",name:"Parking Pro",icon:"🅿️",category:"Skills",rarity:"rare",desc:"Instructor-confirmed parking",check:s=>s.skills.parking===true},
-{id:"reverse",name:"Reverse Master",icon:"↩️",category:"Skills",rarity:"rare",desc:"Instructor-confirmed reverse skill",check:s=>s.skills.reverse===true},
-{id:"traffic",name:"Traffic Expert",icon:"🚦",category:"Skills",rarity:"epic",desc:"Instructor-confirmed traffic knowledge",check:s=>s.skills.traffic===true},
-{id:"safety",name:"Road Safety",icon:"🛡️",category:"Skills",rarity:"rare",desc:"Instructor-confirmed safety",check:s=>s.skills.safety===true},
-{id:"control",name:"Smooth Control",icon:"🎮",category:"Skills",rarity:"epic",desc:"Instructor-confirmed vehicle control",check:s=>s.skills.control===true},
-{id:"test",name:"Test Ready",icon:"📋",category:"Skills",rarity:"epic",desc:"Instructor-confirmed test readiness",check:s=>s.skills.test===true},
-{id:"referral1",name:"First Referral",icon:"🤝",category:"Special",rarity:"common",desc:"Refer one student",check:s=>s.referrals>=1},
-{id:"referral5",name:"Community Star",icon:"🌟",category:"Special",rarity:"rare",desc:"Refer 5 students",check:s=>s.referrals>=5},
-{id:"allrounder",name:"A1 All-Rounder",icon:"👑",category:"Special",rarity:"legendary",desc:"Complete training and reach 50 km",check:s=>s.done>=s.total&&s.km>=50}
+{id:"start",name:"First Drive",icon:"🚘",category:"Milestone",rarity:"common",desc:"Complete your first class",check:s=>s.done>=1,gif:""},
+{id:"p25",name:"Bronze Star",icon:"🥉",category:"Milestone",rarity:"common",desc:"Reach 25% progress",check:s=>s.percent>=25,gif:""},
+{id:"p50",name:"Silver Star",icon:"🥈",category:"Milestone",rarity:"rare",desc:"Reach 50% progress",check:s=>s.percent>=50,gif:""},
+{id:"p75",name:"Gold Star",icon:"🥇",category:"Milestone",rarity:"epic",desc:"Reach 75% progress",check:s=>s.percent>=75,gif:""},
+{id:"complete",name:"Driving Champion",icon:"🏆",category:"Milestone",rarity:"legendary",desc:"Complete all target classes",check:s=>s.done>=s.total,gif:""},
+{id:"five",name:"Five Sessions",icon:"🖐️",category:"Milestone",rarity:"common",desc:"Complete 5 classes",check:s=>s.done>=5,gif:""},
+{id:"ten",name:"Ten Sessions",icon:"🔟",category:"Milestone",rarity:"rare",desc:"Complete 10 classes",check:s=>s.done>=10,gif:""},
+{id:"fifteen",name:"15 Sessions",icon:"🎯",category:"Milestone",rarity:"epic",desc:"Complete 15 classes",check:s=>s.done>=15,gif:""},
+{id:"twenty",name:"20 Sessions",icon:"🌟",category:"Milestone",rarity:"epic",desc:"Complete 20 classes",check:s=>s.done>=20,gif:""},
+{id:"distance5",name:"5 KM Club",icon:"🛣️",category:"Milestone",rarity:"common",desc:"Record 5 km",check:s=>s.km>=5,gif:""},
+{id:"distance25",name:"25 KM Club",icon:"🚗",category:"Milestone",rarity:"rare",desc:"Record 25 km",check:s=>s.km>=25,gif:""},
+{id:"distance50",name:"50 KM Club",icon:"🏁",category:"Milestone",rarity:"epic",desc:"Record 50 km",check:s=>s.km>=50,gif:""},
+{id:"streak2",name:"Getting Started",icon:"🔥",category:"Streak",rarity:"common",desc:"Log 2 sessions",check:s=>s.logs.length>=2,gif:""},
+{id:"streak5",name:"Regular Learner",icon:"📅",category:"Streak",rarity:"rare",desc:"Log 5 sessions",check:s=>s.logs.length>=5,gif:""},
+{id:"streak10",name:"Dedicated Driver",icon:"💪",category:"Streak",rarity:"epic",desc:"Log 10 sessions",check:s=>s.logs.length>=10,gif:""},
+{id:"parking",name:"Parking Pro",icon:"🅿️",category:"Skills",rarity:"rare",desc:"Instructor-confirmed parking",check:s=>s.skills.parking===true,gif:""},
+{id:"reverse",name:"Reverse Master",icon:"↩️",category:"Skills",rarity:"rare",desc:"Instructor-confirmed reverse skill",check:s=>s.skills.reverse===true,gif:""},
+{id:"traffic",name:"Traffic Expert",icon:"🚦",category:"Skills",rarity:"epic",desc:"Instructor-confirmed traffic knowledge",check:s=>s.skills.traffic===true,gif:""},
+{id:"safety",name:"Road Safety",icon:"🛡️",category:"Skills",rarity:"rare",desc:"Instructor-confirmed safety",check:s=>s.skills.safety===true,gif:""},
+{id:"control",name:"Smooth Control",icon:"🎮",category:"Skills",rarity:"epic",desc:"Instructor-confirmed vehicle control",check:s=>s.skills.control===true,gif:""},
+{id:"test",name:"Test Ready",icon:"📋",category:"Skills",rarity:"epic",desc:"Instructor-confirmed test readiness",check:s=>s.skills.test===true,gif:""},
+{id:"referral1",name:"First Referral",icon:"🤝",category:"Special",rarity:"common",desc:"Refer one student",check:s=>s.referrals>=1,gif:""},
+{id:"referral5",name:"Community Star",icon:"🌟",category:"Special",rarity:"rare",desc:"Refer 5 students",check:s=>s.referrals>=5,gif:""},
+{id:"allrounder",name:"A1 All-Rounder",icon:"👑",category:"Special",rarity:"legendary",desc:"Complete training and reach 50 km",check:s=>s.done>=s.total&&s.km>=50,gif:""}
 ];
 
 function statsFrom(data){
@@ -395,22 +412,20 @@ function statsFrom(data){
   });
   if(done>logs.length)km+=(done-logs.length)*5;
 
-  const skillData=(data.achievementBadges&&data.achievementBadges.skills)||{};
-  return {
+  return{
     logs,total,done,km,
     percent:Math.min(100,Math.round(done/total*100)),
     referrals:Math.max(0,Number(data.totalRefers)||0),
-    skills:skillData
+    skills:(data.achievementBadges&&data.achievementBadges.skills)||{}
   };
 }
 
 function renderBadges(){
   const earned=earnedIds.size;
-  const total=badges.length;
-  const percent=Math.round(earned/total*100);
+  const percent=Math.round(earned/badges.length*100);
 
   $("earnedCount").textContent=earned;
-  $("totalCount").textContent=total;
+  $("totalCount").textContent=badges.length;
   $("completionText").textContent=percent+"%";
   $("completionRing").style.setProperty("--progress",percent+"%");
 
@@ -426,19 +441,36 @@ function renderBadges(){
     const card=document.createElement("article");
     card.className="badge-card "+(unlocked?"earned ":"locked ")+"rarity-"+b.rarity;
 
-    const icon=document.createElement("div");
-    icon.className="badge-icon";icon.textContent=b.icon;
+    const medal=document.createElement("div");
+    medal.className="medal";
+
+    if(b.gif){
+      const img=document.createElement("img");
+      img.src=b.gif;
+      img.alt=b.name;
+      img.loading="lazy";
+      img.style.cssText="width:100%;height:100%;object-fit:contain;border-radius:50%;z-index:2";
+      img.onerror=()=>{img.remove();const fallback=document.createElement("span");fallback.textContent=b.icon;medal.appendChild(fallback)};
+      medal.appendChild(img);
+    }else{
+      const icon=document.createElement("span");
+      icon.textContent=b.icon;
+      medal.appendChild(icon);
+    }
 
     const name=document.createElement("div");
-    name.className="badge-name";name.textContent=b.name;
+    name.className="badge-name";
+    name.textContent=b.name;
 
     const rarity=document.createElement("div");
-    rarity.className="rarity "+b.rarity;rarity.textContent=b.rarity.toUpperCase();
+    rarity.className="rarity "+b.rarity;
+    rarity.textContent=b.rarity.toUpperCase();
 
     const status=document.createElement("div");
-    status.className="lock-label";status.textContent=unlocked?"✓ EARNED":"🔒 "+b.desc;
+    status.className="badge-status";
+    status.textContent=unlocked?"✓ EARNED":"🔒 "+b.desc;
 
-    card.append(icon,name,rarity,status);
+    card.append(medal,name,rarity,status);
     grid.appendChild(card);
   });
 }
@@ -450,22 +482,19 @@ window.setCategory=(category,button)=>{
   renderBadges();
 };
 
-/* BUILD LIVE DRIVING JOURNEY */
 function renderJourney(s){
   const milestones=[
     {at:0,title:"Journey Started",icon:"🚦",desc:"Your driving training profile is ready."},
     {at:1,title:"First Drive",icon:"🚘",desc:"Your first training session is recorded."},
-    {at:25,title:"Bronze Star",icon:"🥉",desc:"Reach 25% of your class target."},
-    {at:50,title:"Silver Star",icon:"🥈",desc:"You are halfway through your training."},
-    {at:75,title:"Gold Star",icon:"🥇",desc:"Reach 75% of your class target."},
-    {at:100,title:"Driving Champion",icon:"🏆",desc:"Complete your full training class target."}
+    {at:25,title:"Bronze Star",icon:"🥉",desc:"Complete 25% of your class target."},
+    {at:50,title:"Silver Star",icon:"🥈",desc:"Reach halfway through your training."},
+    {at:75,title:"Gold Star",icon:"🥇",desc:"Complete 75% of your class target."},
+    {at:100,title:"Driving Champion",icon:"🏆",desc:"Complete all your target classes."}
   ];
 
-  let reachedIndex=0;
+  let latest=-1;
   milestones.forEach((m,i)=>{
-    if((m.at===0)||(m.at===1&&s.done>=1)||(m.at>1&&s.percent>=m.at)){
-      reachedIndex=i;
-    }
+    if(m.at===0||(m.at===1&&s.done>=1)||(m.at>1&&s.percent>=m.at))latest=i;
   });
 
   $("journeySummary").textContent=s.percent+"% completed";
@@ -473,11 +502,11 @@ function renderJourney(s){
   root.replaceChildren();
 
   milestones.forEach((m,i)=>{
-    let completed=(m.at===0)||(m.at===1&&s.done>=1)||(m.at>1&&s.percent>=m.at);
-    let isCurrent=!completed&&i===reachedIndex+1;
+    const completed=m.at===0||(m.at===1&&s.done>=1)||(m.at>1&&s.percent>=m.at);
+    const current=!completed&&i===latest+1;
 
     const step=document.createElement("div");
-    step.className="journey-step"+(completed?" completed":"")+(isCurrent?" current":"");
+    step.className="journey-step"+(completed?" completed":"")+(current?" current":"");
 
     const dot=document.createElement("div");
     dot.className="journey-dot";
@@ -494,28 +523,26 @@ function renderJourney(s){
 
     const status=document.createElement("span");
     status.className="journey-status";
-    status.textContent=completed?"COMPLETED":isCurrent?"UP NEXT":"LOCKED";
+    status.textContent=completed?"COMPLETED":current?"UP NEXT":"LOCKED";
 
     top.append(title,status);
 
     const desc=document.createElement("p");
     desc.textContent=m.desc;
-
     card.append(top,desc);
 
     if(m.at>0){
       const date=document.createElement("div");
       date.className="journey-date";
-      date.textContent=completed?"Milestone achieved":isCurrent?"Your next milestone":"Upcoming milestone";
+      date.textContent=completed?"Milestone achieved":current?"Your next milestone":"Upcoming milestone";
       card.appendChild(date);
 
       const track=document.createElement("div");
       track.className="journey-progress";
+
       const fill=document.createElement("div");
-      let localProgress=0;
-      if(m.at===1)localProgress=s.done>=1?100:0;
-      else localProgress=Math.max(0,Math.min(100,(s.percent/(m.at))*100));
-      fill.style.width=(completed?100:localProgress)+"%";
+      const progress=m.at===1?(s.done>=1?100:0):Math.min(100,s.percent/m.at*100);
+      fill.style.width=(completed?100:progress)+"%";
       track.appendChild(fill);
       card.appendChild(track);
     }
@@ -557,7 +584,7 @@ function renderProfile(data,phone){
 
   if(!s.logs.length){
     const empty=document.createElement("p");
-    empty.className="footer-note";
+    empty.style.cssText="font-size:10px;color:#929db4";
     empty.textContent="No class history available yet.";
     history.appendChild(empty);
   }
@@ -596,7 +623,6 @@ window.loadProfile=()=>{
 
   if(unsubscribeProfile)unsubscribeProfile();
   const thisRequest=++requestId;
-
   $("loader").style.display="block";
   $("loginBtn").disabled=true;
 
@@ -606,8 +632,6 @@ window.loadProfile=()=>{
     $("loginBtn").disabled=false;
 
     if(!snap.exists()){
-      $("profileContent").style.display="none";
-      $("searchPanel").style.display="block";
       alert("No student record found for this mobile number.");
       return;
     }
@@ -617,7 +641,7 @@ window.loadProfile=()=>{
     $("loader").style.display="none";
     $("loginBtn").disabled=false;
     console.error(error);
-    alert("Unable to load profile. Check your connection or database permissions.");
+    alert("Unable to load profile. Check connection or database permissions.");
   });
 };
 
@@ -631,9 +655,7 @@ window.logoutSession=()=>{
   $("userPhone").value="";
   $("profileContent").style.display="none";
   $("searchPanel").style.display="block";
-  document.querySelectorAll(".filter").forEach(b=>{
-    b.classList.toggle("active",b.dataset.category==="All");
-  });
+  document.querySelectorAll(".filter").forEach(b=>b.classList.toggle("active",b.dataset.category==="All"));
 };
 
 window.contactAdmin=()=>{
@@ -644,7 +666,7 @@ window.contactAdmin=()=>{
 
 window.shareReferral=()=>{
   if(!currentData)return;
-  const msg=encodeURIComponent("I am learning car driving at A1 Driving Academy. Contact the academy and mention my referral code: "+currentData.phone);
+  const msg=encodeURIComponent("I am learning car driving at A1 Driving Academy. My referral code is: "+currentData.phone);
   location.href="https://wa.me/?text="+msg;
 };
 
