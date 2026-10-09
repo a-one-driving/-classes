@@ -4,391 +4,448 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#09090d">
-<title>ABHINAASH A1 | Student Dashboard</title>
+<meta name="theme-color" content="#08090d">
+<title>Student Dashboard | ABHINAASH A1</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 <style>
-:root {
+:root{
+  --bg:#08090d;
+  --panel:#111219;
+  --card:#171820;
   --gold:#d4af37;
-  --light:#ffe8a3;
-  --bg:#09090d;
-  --panel:#111117;
-  --card:#17171e;
+  --gold-light:#ffe8a3;
+  --muted:#9293a0;
+  --green:#43d99a;
+  --red:#ff7777;
   --border:rgba(255,255,255,.08);
-  --muted:#92929f;
-  --green:#39d98a;
-  --gradient:linear-gradient(125deg,#fff0b9,#d4af37 48%,#a67e13);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
-  font-family:Poppins,sans-serif;color:#f8f8fb;min-height:100vh;
-  background:radial-gradient(ellipse at 50% -12%,rgba(212,175,55,.14),transparent 45%),var(--bg);
-  padding:18px 14px 38px;overflow-x:hidden;-webkit-tap-highlight-color:transparent
+  min-height:100vh;
+  padding:16px 13px 35px;
+  background:radial-gradient(ellipse at 50% -10%,#d4af3719,transparent 42%),var(--bg);
+  color:#f7f7fa;font-family:Poppins,sans-serif;
+  -webkit-tap-highlight-color:transparent
 }
 button,input{font:inherit}
 button{cursor:pointer}
-button:focus-visible,input:focus-visible{outline:2px solid var(--light);outline-offset:3px}
-.app{max-width:490px;width:100%;margin:auto}
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:3px 0 25px}
-.brand{display:flex;align-items:center;gap:11px;min-width:0}
-.brand-logo{width:45px;height:45px;flex-shrink:0;border-radius:15px;background:var(--gradient);color:#141109;display:grid;place-items:center;font-size:21px}
-.brand-name{font-size:17px;font-weight:800;letter-spacing:.6px}
-.brand-sub{color:var(--muted);font-size:9px;letter-spacing:2.5px;margin-top:4px;font-weight:600}
-.live-pill{display:flex;align-items:center;gap:6px;border:1px solid rgba(57,217,138,.2);border-radius:30px;padding:7px 9px;color:var(--green);font-size:9px;font-weight:600;white-space:nowrap}
-.live-dot{width:6px;height:6px;background:var(--green);border-radius:50%}
-.panel{background:rgba(17,17,23,.96);border:1px solid var(--border);border-radius:25px;padding:22px;box-shadow:0 18px 45px #0004}
-.eyebrow{color:var(--gold);font-size:10px;font-weight:700;letter-spacing:2px}
-.login-title{font-size:24px;font-weight:700;margin-top:8px}
-.login-desc{font-size:12px;color:var(--muted);line-height:1.8;margin:7px 0 24px}
-.label{display:block;font-size:10px;font-weight:600;letter-spacing:1.4px;color:var(--muted);margin-bottom:10px}
-.field{position:relative;margin-bottom:16px}
-.field i{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--gold)}
-input{width:100%;padding:16px 15px 16px 45px;border-radius:14px;border:1px solid var(--border);background:#0b0b10;color:#fff;font-size:17px;letter-spacing:1px;outline:none}
-input:focus{border-color:rgba(212,175,55,.65)}
-.btn{border:0;border-radius:14px;padding:14px 16px;width:100%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:9px;transition:transform .18s,opacity .18s}
-.btn:active{transform:scale(.985)}
-.btn:disabled{opacity:.5;cursor:wait}
-.btn-gold{background:var(--gradient);color:#171208}
-.btn-dark{background:#1c1c24;border:1px solid var(--border);color:#f7f7fa}
-.btn-green{background:#39d98a0e;border:1px solid #39d98a40;color:var(--green)}
-#loader{display:none;text-align:center;margin-top:20px;color:var(--muted);font-size:11px}
-.spinner{width:24px;height:24px;border-radius:50%;border:2px solid #33333c;border-top-color:var(--gold);display:inline-block;animation:spin .8s linear infinite;margin-bottom:8px}
+button:disabled{opacity:.5;cursor:wait}
+.app{width:100%;max-width:490px;margin:auto}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:24px}
+.brand{display:flex;align-items:center;gap:10px}
+.brandLogo{height:44px;width:44px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#ffe8a3,#d4af37);color:#18130a;font-size:20px}
+.brandName{font-size:15px;font-weight:800;letter-spacing:.5px}
+.brandSub{font-size:8px;color:var(--muted);letter-spacing:2px;margin-top:4px}
+.topActions{display:flex;gap:7px}
+.iconBtn{height:37px;width:37px;border:1px solid var(--border);border-radius:12px;background:#15161d;color:var(--gold-light)}
+.panel{padding:21px;border:1px solid var(--border);border-radius:24px;background:#111219;box-shadow:0 20px 55px #0004}
+.eyebrow{font-size:9px;letter-spacing:2px;font-weight:700;color:var(--gold)}
+.loginTitle{font-size:23px;margin-top:8px}
+.subtext{font-size:11px;color:var(--muted);line-height:1.9;margin:8px 0 22px}
+.label{display:block;font-size:9px;letter-spacing:1.2px;color:var(--muted);margin-bottom:9px}
+.field{position:relative;margin-bottom:14px}
+.field i{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--gold)}
+input{width:100%;height:49px;padding:0 13px 0 42px;border:1px solid var(--border);border-radius:13px;background:#090a0f;color:white;outline:none;font-size:14px}
+input:focus{border-color:#b59543}
+.btn{min-height:43px;width:100%;padding:12px 14px;border:0;border-radius:12px;display:flex;justify-content:center;align-items:center;gap:9px;font-size:10px;font-weight:800}
+.goldBtn{background:linear-gradient(120deg,#ffe8a3,#d4af37);color:#151109}
+.darkBtn{background:#191a22;color:#eee;border:1px solid var(--border)}
+.greenBtn{background:#43d99a12;color:var(--green);border:1px solid #43d99a30}
+.message{font-size:10px;line-height:1.8;margin-top:12px;overflow-wrap:anywhere}
+.loader{text-align:center;color:var(--muted);font-size:10px;padding:20px;display:none}
+.spinner{display:block;width:23px;height:23px;margin:0 auto 10px;border:2px solid #333;border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-#loginMessage{font-size:11px;line-height:1.7;margin-top:12px;color:#ff7474}
-#profileContent{display:none;animation:fadeUp .4s ease both}
-@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.welcome{padding:22px 18px;border-radius:25px;border:1px solid #d4af3733;background:linear-gradient(140deg,#d4af371b,#17171ecc 65%);margin-bottom:19px}
-.welcome-top{display:flex;align-items:center;gap:13px}
-.avatar{width:57px;height:57px;flex-shrink:0;border-radius:19px;display:grid;place-items:center;font-size:24px;color:#171208;background:var(--gradient)}
-.welcome-copy{min-width:0;flex:1}
-.welcome-label{font-size:9px;color:var(--gold);font-weight:700;letter-spacing:1.5px}
-.student-title{font-size:21px;line-height:1.4;font-weight:700;margin-top:4px;overflow-wrap:anywhere}
-.course-badge{display:inline-flex;align-items:center;gap:7px;margin-top:9px;border:1px solid #d4af3740;background:#d4af3712;padding:6px 11px;border-radius:30px;font-size:10px;color:var(--light)}
-.welcome-bottom{display:flex;justify-content:space-between;gap:8px;margin-top:19px;padding-top:14px;border-top:1px solid #ffffff10}
-.welcome-bottom span{font-size:10px;color:var(--muted)}
-.welcome-bottom b{font-size:10px;color:var(--green)}
-.section-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:25px 2px 12px}
-.section-heading h3{font-size:11px;font-weight:700;letter-spacing:1.3px}
-.section-heading span{font-size:9px;color:var(--muted)}
-.stats-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
-.stat-card{min-width:0;padding:16px;border:1px solid var(--border);background:linear-gradient(145deg,#ffffff08,#ffffff02);border-radius:19px}
-.stat-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.stat-icon{width:33px;height:33px;border-radius:11px;display:grid;place-items:center;color:var(--gold);background:#d4af3717;font-size:13px}
-.stat-tag{font-size:8px;color:var(--muted);text-align:right}
-.stat-label{font-size:9px;color:var(--muted);margin-top:15px}
-.stat-value{font-size:21px;font-weight:700;margin-top:3px;overflow-wrap:anywhere;line-height:1.4}
-.stat-foot{font-size:9px;color:#70707e;margin-top:4px}
-.progress-card,.history-card,.wallet-card{background:var(--card);border:1px solid var(--border);border-radius:21px;padding:17px}
-.progress-layout{display:flex;align-items:center;gap:16px}
-.ring{position:relative;width:100px;height:100px;flex-shrink:0}
+#dashboard{display:none;animation:appear .3s ease}
+@keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.hero{position:relative;overflow:hidden;padding:21px;border:1px solid #d4af3738;border-radius:23px;background:linear-gradient(145deg,#d4af371c,#15161d 68%);margin-bottom:19px}
+.hero:after{content:"";position:absolute;right:-28px;top:-38px;width:140px;height:140px;border:1px solid #d4af371b;border-radius:50%;box-shadow:0 0 0 20px #d4af3706,0 0 0 40px #d4af3704;pointer-events:none}
+.heroRow{position:relative;z-index:1;display:flex;align-items:center;gap:12px}
+.avatar{height:57px;width:57px;flex:none;display:grid;place-items:center;border-radius:18px;background:linear-gradient(135deg,#ffe8a3,#c69c27);color:#171208;font-size:24px}
+.heroCopy{min-width:0;flex:1}
+.heroLabel{font-size:8px;letter-spacing:1.7px;color:var(--gold);font-weight:700}
+.studentName{font-size:20px;line-height:1.5;margin-top:4px;overflow-wrap:anywhere}
+.statusPill{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;margin-top:7px;border:1px solid #43d99a35;border-radius:20px;background:#43d99a0b;color:var(--green);font-size:8px;font-weight:700}
+.statusPill.inactive{border-color:#ff777735;color:var(--red);background:#ff77770b}
+.heroMeta{display:flex;flex-wrap:wrap;gap:8px;margin-top:17px;padding-top:13px;border-top:1px solid #ffffff10}
+.metaPill{padding:7px 10px;border-radius:10px;background:#ffffff06;border:1px solid #ffffff0b;color:#c5c5cf;font-size:9px}
+.metaPill i{color:var(--gold);margin-right:5px}
+.sectionHeading{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:25px 2px 12px}
+.sectionHeading h3{font-size:10px;letter-spacing:1.5px}
+.sectionHeading span{font-size:8px;color:var(--muted)}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{min-width:0;padding:15px;border:1px solid var(--border);border-radius:17px;background:linear-gradient(145deg,#181921,#101116)}
+.statTop{display:flex;justify-content:space-between;align-items:center;gap:7px}
+.statIcon{width:33px;height:33px;display:grid;place-items:center;border-radius:11px;background:#d4af3717;color:var(--gold);font-size:13px}
+.statLabel{font-size:9px;color:var(--muted);margin-top:13px}
+.statValue{font-size:22px;font-weight:800;margin-top:3px;line-height:1.4;overflow-wrap:anywhere}
+.statFoot{font-size:8px;color:#6f707d;margin-top:3px}
+.progressCard{padding:17px;border:1px solid var(--border);border-radius:20px;background:var(--card)}
+.progressLayout{display:flex;align-items:center;gap:15px}
+.ring{position:relative;width:98px;height:98px;flex:none}
 .ring svg{width:100%;height:100%;transform:rotate(-90deg)}
 .ring circle{fill:none;stroke-width:8}
-.ring-bg{stroke:#303039}
-.ring-fill{stroke:var(--gold);stroke-linecap:round;transition:stroke-dashoffset .8s}
-.ring-text{position:absolute;inset:0;display:grid;place-items:center;font-size:20px;font-weight:700}
-.progress-copy{flex:1;min-width:0}
-.progress-copy h4{font-size:14px;font-weight:600}
-.progress-copy p{font-size:10px;color:var(--muted);line-height:1.8;margin-top:7px}
-.progress-track{height:5px;border-radius:20px;background:#303039;overflow:hidden;margin-top:19px}
-.progress-track-fill{width:0;height:100%;border-radius:20px;background:var(--gradient);transition:width .8s}
-.progress-meta{display:flex;justify-content:space-between;gap:8px;margin-top:10px}
-.progress-meta span{font-size:9px;color:var(--muted)}
-.progress-meta b{color:var(--light)}
-.distance-note{display:flex;align-items:flex-start;gap:8px;margin-top:12px;font-size:9px;line-height:1.7;color:var(--muted)}
-.distance-note i{color:var(--gold);margin-top:2px}
-.achievement-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.achievement{padding:15px 10px;border-radius:17px;text-align:center;background:#121218;border:1px solid var(--border);opacity:.52;filter:grayscale(.8)}
-.achievement.unlocked{opacity:1;filter:none;border-color:#d4af3747;background:linear-gradient(145deg,#d4af3714,#ffffff03)}
-.achievement-icon{width:39px;height:39px;border-radius:13px;margin:0 auto 10px;display:grid;place-items:center;background:#d4af371a;color:var(--gold);font-size:17px}
-.achievement b{display:block;font-size:10px}
-.achievement small{display:block;color:var(--muted);font-size:8px;line-height:1.7;margin-top:5px}
-.wallet-card{background:linear-gradient(130deg,#39d98a11,#17171ef5);border-color:#39d98a2b}
-.wallet-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
-.wallet-icon{width:40px;height:40px;border-radius:13px;background:#39d98a17;color:var(--green);display:grid;place-items:center;font-size:17px}
-.wallet-title{font-size:10px;font-weight:700;color:var(--green);letter-spacing:1px}
-.wallet-subtitle{font-size:9px;color:var(--muted);margin-top:5px}
-.wallet-amount{font-size:25px;font-weight:700;white-space:nowrap}
-.wallet-divider{height:1px;background:#ffffff10;margin:15px 0}
-.wallet-foot{display:flex;justify-content:space-between;gap:8px}
-.wallet-foot span{font-size:9px;color:var(--muted)}
-.wallet-foot b{font-size:10px;color:#f0f0f4}
-.history-card{padding:13px}
-.history-list{display:flex;flex-direction:column;gap:9px;max-height:320px;overflow-y:auto}
-.log{border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:13px;padding:13px;background:#0002}
-.log-head{display:flex;justify-content:space-between;gap:10px}
-.log-head b{font-size:11px;font-weight:600}
-.log-date{font-size:9px;color:var(--muted);text-align:right;overflow-wrap:anywhere}
-.log-feedback{font-size:10px;color:#c4c4ce;line-height:1.8;margin-top:8px;overflow-wrap:anywhere}
-.empty{padding:24px 10px;text-align:center;color:var(--muted);font-size:11px;line-height:1.8}
-.empty i{font-size:22px;display:block;margin-bottom:9px;color:#555560}
-.certificate-card{display:none;border:1px solid #d4af3740;background:linear-gradient(135deg,#d4af3717,#d4af3705);padding:20px;border-radius:21px;text-align:center;margin-top:20px}
-.certificate-card>i{font-size:33px;color:var(--gold);margin-bottom:11px}
-.certificate-card h3{font-size:15px}
-.certificate-card p{font-size:10px;color:var(--muted);line-height:1.8;margin:8px 0 15px}
-.action-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
-.action-grid .btn{font-size:10px;padding:14px 8px}
-.logout-btn{margin-top:10px}
-.footer{text-align:center;font-size:9px;color:#5d5d68;margin-top:25px;line-height:1.9}
-.footer i{color:var(--gold);margin-right:4px}
+.ring .track{stroke:#30313b}
+.ring .fill{stroke:var(--gold);stroke-linecap:round;transition:stroke-dashoffset .7s}
+.ringValue{position:absolute;inset:0;display:grid;place-items:center;font-size:21px;font-weight:800}
+.progressCopy{min-width:0;flex:1}
+.progressCopy h4{font-size:13px}
+.progressCopy p{font-size:9px;color:var(--muted);line-height:1.9;margin-top:6px}
+.progressTrack{height:5px;margin-top:17px;border-radius:20px;background:#30313b;overflow:hidden}
+.progressBar{height:100%;width:0;background:linear-gradient(90deg,#d4af37,#ffe8a3);border-radius:20px;transition:width .7s}
+.progressMeta{display:flex;justify-content:space-between;gap:8px;margin-top:9px}
+.progressMeta span{font-size:8px;color:var(--muted)}
+.progressMeta b{color:var(--gold-light)}
+.note{display:flex;gap:7px;align-items:flex-start;font-size:8px;line-height:1.8;color:var(--muted);margin-top:12px}
+.note i{color:var(--gold);margin-top:3px}
+.classCard{padding:17px;border:1px solid #d4af3730;border-radius:18px;background:linear-gradient(130deg,#d4af3711,#171820)}
+.classRow{display:flex;align-items:center;gap:12px}
+.classIcon{width:44px;height:44px;flex:none;border-radius:14px;background:#d4af371a;color:var(--gold);display:grid;place-items:center;font-size:18px}
+.classLabel{font-size:8px;color:var(--muted);letter-spacing:1.5px}
+.classValue{font-size:15px;font-weight:800;margin-top:4px}
+.classDescription{font-size:9px;color:var(--muted);line-height:1.8;margin-top:12px}
+.walletCard{padding:18px;border:1px solid #43d99a29;border-radius:19px;background:linear-gradient(140deg,#43d99a0d,#15161d)}
+.walletRow{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.walletLeft{display:flex;align-items:center;gap:10px;min-width:0}
+.walletIcon{width:39px;height:39px;flex:none;display:grid;place-items:center;border-radius:13px;background:#43d99a14;color:var(--green)}
+.walletLabel{font-size:9px;font-weight:700;color:var(--green)}
+.walletSub{font-size:8px;color:var(--muted);margin-top:5px}
+.walletAmount{font-size:21px;font-weight:800;overflow-wrap:anywhere}
+.walletFoot{border-top:1px solid #ffffff10;padding-top:12px;margin-top:14px;display:flex;justify-content:space-between;gap:10px}
+.walletFoot span,.walletFoot b{font-size:9px}
+.walletFoot span{color:var(--muted)}
+.walletFoot b{color:#eee}
+.historyCard{padding:12px;border:1px solid var(--border);border-radius:19px;background:var(--card)}
+.historyList{display:flex;flex-direction:column;gap:9px;max-height:400px;overflow:auto}
+.log{padding:13px;border:1px solid #ffffff0b;border-left:3px solid var(--gold);border-radius:12px;background:#101116}
+.logHead{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.logTitle{font-size:10px;font-weight:700}
+.logDate{font-size:8px;color:var(--gold-light);text-align:right;line-height:1.7}
+.logDetails{font-size:9px;color:#c5c5ce;line-height:1.9;margin-top:8px;overflow-wrap:anywhere}
+.logChip{display:inline-block;padding:5px 7px;margin:6px 5px 0 0;border:1px solid #ffffff12;border-radius:7px;background:#ffffff05;color:#d8d8e0;font-size:8px}
+.empty{padding:24px 10px;text-align:center;color:var(--muted);font-size:10px;line-height:1.9}
+.empty i{display:block;font-size:22px;color:#666;margin-bottom:9px}
+.achievementGrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.achievement{padding:14px 9px;text-align:center;border:1px solid var(--border);border-radius:15px;background:#14151b;opacity:.55;filter:grayscale(.8)}
+.achievement.unlocked{opacity:1;filter:none;border-color:#d4af3740;background:#d4af370b}
+.achievementIcon{width:37px;height:37px;display:grid;place-items:center;margin:0 auto 8px;border-radius:12px;background:#d4af3719;color:var(--gold);font-size:16px}
+.achievement b{display:block;font-size:9px}
+.achievement small{display:block;margin-top:5px;color:var(--muted);font-size:8px;line-height:1.7}
+.certificateCard{display:none;padding:19px;border:1px solid #d4af3740;border-radius:20px;text-align:center;background:linear-gradient(140deg,#d4af3717,#15161d)}
+.certificateCard>i{font-size:33px;color:var(--gold);margin-bottom:10px}
+.certificateCard h3{font-size:14px}
+.certificateCard p{font-size:9px;color:var(--muted);line-height:1.9;margin:9px 0 15px}
+.actionGrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:20px}
+.footer{text-align:center;margin-top:25px;color:#5f606b;font-size:8px;line-height:2;letter-spacing:1px}
+.footer i{color:var(--gold)}
+.hidden{display:none!important}
 
-/* Certificate is fixed-size A4 landscape for PDF capture. */
-#pdfTemplate{
+/* A4 LANDSCAPE CERTIFICATE */
+#certificate{
   display:none;
   width:1123px;
   height:794px;
-  padding:15px;
+  padding:14px;
   overflow:hidden;
   box-sizing:border-box;
   background:#07172d;
   color:#10213d;
-  font-family:Georgia,"Times New Roman",serif;
+  font-family:Georgia,"Times New Roman",serif
 }
-.cert-paper{width:100%;height:100%;padding:9px;box-sizing:border-box;background:#fffdf6;border:2px solid #e0bd52}
-.cert-inner{position:relative;width:100%;height:100%;overflow:hidden;text-align:center;box-sizing:border-box;padding:22px 42px 12px;border:1px solid #b58b27;background:radial-gradient(ellipse at center,#fff 0%,#fffdf5 80%)}
-.cert-corner{position:absolute;width:42px;height:42px;border-color:#c6a13a;border-style:solid}
-.cert-corner.tl{top:7px;left:7px;border-width:2px 0 0 2px}
-.cert-corner.tr{top:7px;right:7px;border-width:2px 2px 0 0}
-.cert-corner.bl{bottom:7px;left:7px;border-width:0 0 2px 2px}
-.cert-corner.br{bottom:7px;right:7px;border-width:0 2px 2px 0}
-.cert-topline{font-family:Arial,sans-serif;color:#a17a1c;font-size:10px;font-weight:bold;letter-spacing:5px}
-.cert-brand{font-family:Arial,sans-serif;color:#0a2242;font-size:29px;font-weight:800;letter-spacing:3px;margin-top:7px}
-.cert-subbrand{font-family:Arial,sans-serif;color:#a17a1c;font-size:10px;letter-spacing:6px;margin-top:4px}
-.cert-rule{display:flex;align-items:center;justify-content:center;gap:13px;margin:10px auto;color:#b58b27}
-.cert-rule:before,.cert-rule:after{content:"";height:1px;width:100px;background:linear-gradient(90deg,transparent,#b58b27)}
-.cert-heading{font-size:38px;font-weight:bold;line-height:1.1;letter-spacing:2px;color:#0a2242}
-.cert-caption{font-family:Arial,sans-serif;color:#a17a1c;font-size:10px;letter-spacing:5px;margin-top:7px}
-.cert-recipient{font-family:Arial,sans-serif;color:#686d76;font-size:11px;letter-spacing:1.5px;margin-top:12px}
-#pdfName{display:table;max-width:85%;overflow-wrap:anywhere;margin:6px auto 0;padding:0 20px 6px;border-bottom:2px solid #d4af37;color:#0a2242;font-size:34px;line-height:1.15;font-weight:bold;letter-spacing:1px}
-.cert-message{font-family:Arial,sans-serif;color:#454d59;font-size:13px;line-height:1.55;max-width:800px;margin:9px auto 0}
-.cert-message strong{color:#142d4c}
-.cert-class-box{display:inline-flex;align-items:center;justify-content:center;gap:12px;margin-top:10px;padding:9px 22px;min-width:310px;border:1px solid #d4af37;border-radius:8px;background:linear-gradient(130deg,#fffdf6,#fff7df,#fffdf6)}
-.cert-class-icon{font-size:22px;color:#a17a1c}
-.cert-class-label{font-family:Arial,sans-serif;font-size:9px;color:#9b7620;letter-spacing:2px;text-align:left}
-#pdfClassType{font-family:Arial,sans-serif;font-size:15px;font-weight:bold;color:#0a2242;text-align:left;margin-top:4px}
-.cert-date-box{display:inline-block;min-width:310px;margin-top:9px;padding:8px 23px;border:1px solid #d4af37;border-radius:7px;background:#fffdf6}
-.cert-date-label{font-family:Arial,sans-serif;color:#a17a1c;font-size:9px;letter-spacing:3px;font-weight:bold}
-#pdfDate{color:#0a2242;font-size:18px;font-weight:bold;margin-top:5px;min-height:21px}
-.cert-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-top:12px;font-family:Arial,sans-serif}
-.cert-signature{text-align:center;width:235px;color:#18304f;font-size:10px}
-.cert-signature-line{border-top:1px solid #b58b27;padding-top:6px;margin-bottom:5px;font-size:9px;letter-spacing:1px}
-.cert-signature strong{font-size:11px}
-.cert-seal{width:70px;height:70px;flex-shrink:0;display:flex;align-items:center;justify-content:center;flex-direction:column;border:3px double #c6a13a;border-radius:50%;outline:1px solid #d4af37;outline-offset:3px;color:#a17a1c;background:radial-gradient(circle,#fffdf4,#f8e7ae)}
-.cert-seal i{font-size:21px;margin-bottom:3px}
-.cert-seal b{font-size:10px;letter-spacing:2px}
-.cert-seal span{font-size:7px;letter-spacing:1px;margin-top:2px}
-.cert-footer{font-family:Arial,sans-serif;font-size:8px;color:#8b846f;letter-spacing:3px;margin-top:9px}
+.certPaper{height:100%;width:100%;padding:9px;background:#fffdf6;border:2px solid #d9b84e;box-sizing:border-box}
+.certInner{height:100%;width:100%;position:relative;overflow:hidden;text-align:center;padding:20px 40px 12px;box-sizing:border-box;border:1px solid #b58b27;background:radial-gradient(ellipse at center,#fff 0%,#fffdf6 85%)}
+.corner{position:absolute;width:42px;height:42px;border-color:#c6a13a;border-style:solid}
+.corner.tl{top:7px;left:7px;border-width:2px 0 0 2px}
+.corner.tr{top:7px;right:7px;border-width:2px 2px 0 0}
+.corner.bl{bottom:7px;left:7px;border-width:0 0 2px 2px}
+.corner.br{bottom:7px;right:7px;border-width:0 2px 2px 0}
+.certTop{font-family:Arial,sans-serif;color:#9c7820;font-size:10px;letter-spacing:5px;font-weight:bold}
+.certBrand{font-family:Arial,sans-serif;color:#0a2242;font-size:28px;font-weight:800;letter-spacing:4px;margin-top:6px}
+.certSub{font-family:Arial,sans-serif;color:#9c7820;font-size:10px;letter-spacing:6px;margin-top:4px}
+.certRule{margin:10px auto;color:#b58b27}
+.certHeading{font-size:38px;line-height:1.15;letter-spacing:2px;color:#0a2242}
+.certCaption{font-family:Arial,sans-serif;color:#9c7820;font-size:10px;letter-spacing:5px;margin-top:7px}
+.certRecipient{font-family:Arial,sans-serif;color:#6b6e78;font-size:11px;letter-spacing:2px;margin-top:12px}
+#certStudentName{display:table;max-width:88%;margin:7px auto 0;padding:0 20px 5px;border-bottom:2px solid #d4af37;color:#0a2242;font-size:34px;line-height:1.2;overflow-wrap:anywhere}
+.certMessage{font-family:Arial,sans-serif;color:#444d59;font-size:13px;line-height:1.6;max-width:830px;margin:10px auto}
+.certMessage strong{color:#122b4b}
+.certInfo{display:inline-block;min-width:310px;margin-top:7px;padding:8px 22px;border:1px solid #d4af37;border-radius:7px;background:#fffaf0}
+.certInfoLabel{font-family:Arial,sans-serif;color:#9c7820;font-size:9px;letter-spacing:3px;font-weight:bold}
+#certType,#certDate{font-size:17px;color:#0a2242;font-weight:bold;margin-top:5px;min-height:20px}
+.certBottom{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;margin-top:12px;font-family:Arial,sans-serif}
+.certSignature{width:240px;text-align:center;font-size:10px;color:#18304f}
+.certLine{border-top:1px solid #b58b27;padding-top:6px;margin-bottom:5px;font-size:9px;letter-spacing:1px}
+.certSeal{width:67px;height:67px;flex:none;border:3px double #c6a13a;outline:1px solid #d4af37;outline-offset:3px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#9c7820;background:#fffaf0}
+.certSeal i{font-size:19px}
+.certSeal b{font-size:11px;margin-top:3px;letter-spacing:2px}
+.certSeal span{font-size:7px;margin-top:2px;letter-spacing:1px}
+.certFooter{font-family:Arial,sans-serif;color:#8b846f;font-size:8px;letter-spacing:3px;margin-top:9px}
 
 @media(max-width:360px){
-  body{padding:14px 10px 30px}
-  .panel{padding:17px}
-  .brand-name{font-size:14px}
-  .live-pill{font-size:8px}
-  .welcome{padding:18px 14px}
-  .student-title{font-size:18px}
+  body{padding:12px 9px}
+  .hero{padding:16px}
+  .studentName{font-size:17px}
+  .statValue{font-size:20px}
   .ring{width:84px;height:84px}
-  .progress-layout{gap:11px}
-  .stat-value{font-size:19px}
-  .wallet-amount{font-size:21px}
+  .progressLayout{gap:10px}
+  .walletAmount{font-size:17px}
 }
 @media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
+  *,*::before,*::after{animation:none!important;transition:none!important}
 }
 </style>
 </head>
 
 <body>
 <main class="app">
-  <header class="topbar">
-    <div class="brand">
-      <div class="brand-logo"><i class="fa-solid fa-car-side"></i></div>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="brandLogo"><i class="fa-solid fa-car-side"></i></div>
+    <div>
+      <div class="brandName">ABHINAASH A1</div>
+      <div class="brandSub">DRIVING ACADEMY</div>
+    </div>
+  </div>
+  <div class="topActions">
+    <button class="iconBtn" id="refreshBtn" aria-label="Refresh"><i class="fa-solid fa-rotate"></i></button>
+  </div>
+</header>
+
+<!-- LOGIN -->
+<section class="panel" id="loginPanel">
+  <div class="eyebrow">STUDENT PORTAL</div>
+  <h1 class="loginTitle">Your driving journey.</h1>
+  <p class="subtext">Check your training mode, attendance records, course progress and certificate in one place.</p>
+  <label class="label" for="phoneInput">REGISTERED MOBILE NUMBER</label>
+  <div class="field">
+    <i class="fa-solid fa-mobile-screen-button"></i>
+    <input id="phoneInput" type="tel" inputmode="numeric" maxlength="10" autocomplete="tel" placeholder="Enter 10-digit mobile number">
+  </div>
+  <button class="btn goldBtn" id="loginBtn"><i class="fa-solid fa-arrow-right-to-bracket"></i> OPEN MY DASHBOARD</button>
+  <div class="loader" id="loader"><span class="spinner"></span>Loading your student record...</div>
+  <div class="message" id="loginMessage" role="status" aria-live="polite"></div>
+</section>
+
+<!-- DASHBOARD -->
+<section id="dashboard">
+
+  <div class="hero">
+    <div class="heroRow">
+      <div class="avatar"><i class="fa-solid fa-user-astronaut"></i></div>
+      <div class="heroCopy">
+        <div class="heroLabel">WELCOME TO YOUR DASHBOARD</div>
+        <h1 class="studentName" id="studentName">Student</h1>
+        <div class="statusPill" id="studentStatus"><i class="fa-solid fa-circle-check"></i><span>ACTIVE STUDENT</span></div>
+      </div>
+    </div>
+    <div class="heroMeta">
+      <span class="metaPill"><i class="fa-solid fa-phone"></i><span id="studentPhone"></span></span>
+      <span class="metaPill"><i class="fa-solid fa-car-side"></i><span id="packageName">Driving Training</span></span>
+    </div>
+  </div>
+
+  <div class="sectionHeading"><h3>TRAINING OVERVIEW</h3><span>LIVE RECORD</span></div>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="statTop"><div class="statIcon"><i class="fa-solid fa-circle-check"></i></div></div>
+      <div class="statLabel">SESSIONS COMPLETED</div>
+      <div class="statValue" id="completedValue">0</div>
+      <div class="statFoot">Recorded training sessions</div>
+    </div>
+    <div class="stat">
+      <div class="statTop"><div class="statIcon"><i class="fa-solid fa-calendar-days"></i></div></div>
+      <div class="statLabel">TOTAL SESSIONS</div>
+      <div class="statValue" id="totalValue">0</div>
+      <div class="statFoot">Package target</div>
+    </div>
+    <div class="stat">
+      <div class="statTop"><div class="statIcon"><i class="fa-solid fa-road"></i></div></div>
+      <div class="statLabel">ESTIMATED DISTANCE</div>
+      <div class="statValue" id="distanceValue">0 km</div>
+      <div class="statFoot">Based on recorded logs</div>
+    </div>
+    <div class="stat">
+      <div class="statTop"><div class="statIcon"><i class="fa-solid fa-flag-checkered"></i></div></div>
+      <div class="statLabel">SESSIONS REMAINING</div>
+      <div class="statValue" id="remainingValue">0</div>
+      <div class="statFoot">Until package target</div>
+    </div>
+  </div>
+
+  <div class="sectionHeading"><h3>MY CLASS TYPE</h3><span>FROM FIREBASE</span></div>
+
+  <div class="classCard">
+    <div class="classRow">
+      <div class="classIcon" id="classIcon"><i class="fa-solid fa-users"></i></div>
       <div>
-        <div class="brand-name">ABHINAASH A1</div>
-        <div class="brand-sub">DRIVING ACADEMY</div>
+        <div class="classLabel">REGISTERED TRAINING MODE</div>
+        <div class="classValue" id="classType">Not specified</div>
       </div>
     </div>
-    <div class="live-pill"><span class="live-dot"></span> STUDENT PORTAL</div>
-  </header>
+    <p class="classDescription" id="classDescription">Your class type is read directly from your registered training record.</p>
+  </div>
 
-  <section class="panel" id="searchPanel">
-    <div class="eyebrow">WELCOME BACK</div>
-    <h2 class="login-title">Your journey awaits.</h2>
-    <p class="login-desc">Access your driving dashboard, track sessions and view your training progress.</p>
-    <label class="label" for="userPhone">REGISTERED MOBILE NUMBER</label>
-    <div class="field">
-      <i class="fa-solid fa-mobile-screen-button"></i>
-      <input type="tel" id="userPhone" maxlength="10" inputmode="numeric" autocomplete="tel" placeholder="10-digit number">
+  <div class="sectionHeading"><h3>COURSE PROGRESS</h3><span id="progressStatus">IN PROGRESS</span></div>
+
+  <div class="progressCard">
+    <div class="progressLayout">
+      <div class="ring">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <circle class="track" cx="50" cy="50" r="42"></circle>
+          <circle class="fill" id="ringFill" cx="50" cy="50" r="42"></circle>
+        </svg>
+        <div class="ringValue" id="percentValue">0%</div>
+      </div>
+      <div class="progressCopy">
+        <h4 id="progressTitle">Your driving journey</h4>
+        <p id="progressDescription">Every completed session brings you closer to your target.</p>
+      </div>
     </div>
-    <button class="btn btn-gold" id="accessBtn" type="button">ACCESS DASHBOARD <i class="fa-solid fa-arrow-right"></i></button>
-    <div id="loader"><span class="spinner"></span><br>Loading your training record...</div>
-    <p id="loginMessage" role="status" aria-live="polite"></p>
-  </section>
+    <div class="progressTrack"><div class="progressBar" id="progressBar"></div></div>
+    <div class="progressMeta">
+      <span id="progressCount">0 of 0 sessions</span>
+      <span><b id="progressPercent">0%</b> completed</span>
+    </div>
+    <div class="note"><i class="fa-solid fa-circle-info"></i><span>Distance is estimated from recorded attendance. The actual distance may differ if the log does not include kilometres.</span></div>
+  </div>
 
-  <section id="profileContent">
-    <div class="welcome">
-      <div class="welcome-top">
-        <div class="avatar"><i class="fa-solid fa-user-astronaut"></i></div>
-        <div class="welcome-copy">
-          <div class="welcome-label">YOUR PERSONAL DASHBOARD</div>
-          <h1 class="student-title" id="dispName">Driver Name</h1>
-          <div class="course-badge"><i class="fa-solid fa-crown"></i><span id="dispPkg">Driving Package</span></div>
+  <div class="sectionHeading"><h3>ACHIEVEMENTS</h3><span>YOUR MILESTONES</span></div>
+
+  <div class="achievementGrid">
+    <div class="achievement" id="badgeFirst">
+      <div class="achievementIcon"><i class="fa-solid fa-key"></i></div>
+      <b>First Gear</b><small>Complete your first session</small>
+    </div>
+    <div class="achievement" id="badgeSafety">
+      <div class="achievementIcon"><i class="fa-solid fa-shield-halved"></i></div>
+      <b>Safety Star</b><small>Complete 5 sessions</small>
+    </div>
+    <div class="achievement" id="badgePro">
+      <div class="achievementIcon"><i class="fa-solid fa-medal"></i></div>
+      <b>Driving Pro</b><small>Reach 75% progress</small>
+    </div>
+    <div class="achievement" id="badgeElite">
+      <div class="achievementIcon"><i class="fa-solid fa-trophy"></i></div>
+      <b>Elite Graduate</b><small>Reach your package target</small>
+    </div>
+  </div>
+
+  <div class="sectionHeading"><h3>REFERRAL WALLET</h3><span>ACCOUNT RECORD</span></div>
+
+  <div class="walletCard">
+    <div class="walletRow">
+      <div class="walletLeft">
+        <div class="walletIcon"><i class="fa-solid fa-wallet"></i></div>
+        <div>
+          <div class="walletLabel">MY REFERRAL WALLET</div>
+          <div class="walletSub" id="referralCount">0 referrals recorded</div>
         </div>
       </div>
-      <div class="welcome-bottom">
-        <span><i class="fa-regular fa-calendar-check"></i> Training overview</span>
-        <b><i class="fa-solid fa-circle-check"></i> Live record</b>
-      </div>
+      <div class="walletAmount" id="walletAmount">—</div>
     </div>
-
-    <div class="section-heading"><h3>TRAINING OVERVIEW</h3><span>YOUR STATISTICS</span></div>
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-top"><div class="stat-icon"><i class="fa-solid fa-check-double"></i></div><span class="stat-tag">COMPLETED</span></div>
-        <div class="stat-label">Sessions Done</div><div class="stat-value" id="dispDone">0</div><div class="stat-foot">Recorded sessions</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-top"><div class="stat-icon"><i class="fa-solid fa-calendar-days"></i></div><span class="stat-tag">PACKAGE</span></div>
-        <div class="stat-label">Total Sessions</div><div class="stat-value" id="dispTotal">0</div><div class="stat-foot">Training target</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-top"><div class="stat-icon"><i class="fa-solid fa-road"></i></div><span class="stat-tag">ESTIMATED</span></div>
-        <div class="stat-label">Distance Tracker</div><div class="stat-value" id="dispKm">0 km</div><div class="stat-foot">Estimated distance</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-top"><div class="stat-icon"><i class="fa-solid fa-flag-checkered"></i></div><span class="stat-tag">TO COMPLETE</span></div>
-        <div class="stat-label">Sessions Remaining</div><div class="stat-value" id="dispRemaining">0</div><div class="stat-foot">Until target is reached</div>
-      </div>
-      <div class="stat-card" style="grid-column:1/-1">
-        <div class="stat-top"><div class="stat-icon"><i class="fa-solid fa-users"></i></div><span class="stat-tag">TRAINING MODE</span></div>
-        <div class="stat-label">Class Type</div><div class="stat-value" id="dispClassType">Not specified</div><div class="stat-foot" id="classTypeDescription">Registered training mode</div>
-      </div>
+    <div class="walletFoot">
+      <span>Wallet balance from student record</span>
+      <b id="walletStatus">Not available</b>
     </div>
+  </div>
 
-    <div class="section-heading"><h3>COURSE PROGRESS</h3><span id="progressStatus">IN PROGRESS</span></div>
-    <div class="progress-card">
-      <div class="progress-layout">
-        <div class="ring">
-          <svg viewBox="0 0 100 100" aria-hidden="true">
-            <circle class="ring-bg" cx="50" cy="50" r="42"></circle>
-            <circle class="ring-fill" id="radialFillCircle" cx="50" cy="50" r="42"></circle>
-          </svg>
-          <div class="ring-text" id="dispPercent">0%</div>
-        </div>
-        <div class="progress-copy">
-          <h4 id="progressTitle">Your driving journey</h4>
-          <p id="progressDescription">Every class takes you closer to confident driving.</p>
-        </div>
-      </div>
-      <div class="progress-track"><div class="progress-track-fill" id="progressBar"></div></div>
-      <div class="progress-meta"><span id="progressDoneText">0 sessions completed</span><span><b id="progressPercentText">0%</b> completed</span></div>
-      <div class="distance-note"><i class="fa-solid fa-circle-info"></i><span id="distanceNote">Distance is an estimate based on attendance logs.</span></div>
-    </div>
+  <div class="sectionHeading"><h3>ATTENDANCE HISTORY</h3><span id="historyCount">0 RECORDS</span></div>
 
-    <div class="section-heading"><h3>ACHIEVEMENTS</h3><span>YOUR MILESTONES</span></div>
-    <div class="achievement-grid">
-      <div class="achievement" id="badgeStarter"><div class="achievement-icon"><i class="fa-solid fa-key"></i></div><b>First Gear</b><small>Complete your first session</small></div>
-      <div class="achievement" id="badgeSafety"><div class="achievement-icon"><i class="fa-solid fa-shield-halved"></i></div><b>Road Safety Star</b><small>Complete 5 sessions</small></div>
-      <div class="achievement" id="badgePro"><div class="achievement-icon"><i class="fa-solid fa-medal"></i></div><b>Driving Pro</b><small>Reach 75% progress</small></div>
-      <div class="achievement" id="badgeElite"><div class="achievement-icon"><i class="fa-solid fa-trophy"></i></div><b>Elite Graduate</b><small>Complete your package</small></div>
-    </div>
+  <div class="historyCard">
+    <div class="historyList" id="historyList"></div>
+  </div>
 
-    <div id="premiumCertificate" class="certificate-card">
-      <i class="fa-solid fa-award"></i>
-      <h3>Congratulations, Graduate!</h3>
-      <p>Your recorded training sessions have reached the package completion target.</p>
-      <button class="btn btn-gold" id="downloadPdfBtn" type="button"><i class="fa-solid fa-file-pdf"></i> DOWNLOAD PREMIUM CERTIFICATE</button>
-    </div>
+  <div class="certificateCard" id="certificateCard">
+    <i class="fa-solid fa-award"></i>
+    <h3>Training completion certificate</h3>
+    <p>Your recorded completed sessions have reached the package target. You can generate your certificate below.</p>
+    <button class="btn goldBtn" id="certificateBtn"><i class="fa-solid fa-file-pdf"></i> DOWNLOAD CERTIFICATE PDF</button>
+  </div>
 
-    <div class="section-heading"><h3>REFERRAL WALLET</h3><span>YOUR REWARDS</span></div>
-    <div class="wallet-card">
-      <div class="wallet-top">
-        <div style="display:flex;align-items:center;gap:11px;min-width:0">
-          <div class="wallet-icon"><i class="fa-solid fa-wallet"></i></div>
-          <div><div class="wallet-title">MY REFERRAL EARNINGS</div><div class="wallet-subtitle" id="referralCount">0 referrals recorded</div></div>
-        </div>
-        <div class="wallet-amount" id="dispEarn">₹0</div>
-      </div>
-      <div class="wallet-divider"></div>
-      <div class="wallet-foot"><span><i class="fa-solid fa-gift"></i> Recorded referrals</span><b id="referralSummary">Reward summary</b></div>
-    </div>
+  <div class="actionGrid">
+    <button class="btn darkBtn" id="contactBtn"><i class="fa-brands fa-whatsapp"></i> CONTACT ACADEMY</button>
+    <button class="btn greenBtn" id="shareBtn"><i class="fa-solid fa-share-nodes"></i> SHARE ACADEMY</button>
+  </div>
 
-    <div class="section-heading"><h3>ATTENDANCE HISTORY</h3><span id="historyCount">0 RECORDS</span></div>
-    <div class="history-card"><div id="attendanceTimeline" class="history-list"></div></div>
+  <button class="btn darkBtn" id="logoutBtn" style="margin-top:10px"><i class="fa-solid fa-arrow-right-from-bracket"></i> LOG OUT</button>
 
-    <div class="action-grid">
-      <button class="btn btn-dark" id="helpBtn" type="button"><i class="fa-brands fa-whatsapp"></i> CONTACT ADMIN</button>
-      <button class="btn btn-green" id="shareBtn" type="button"><i class="fa-solid fa-share-nodes"></i> SHARE ACADEMY</button>
-    </div>
-    <button class="btn btn-dark logout-btn" id="logoutBtn" type="button" style="margin-top:10px"><i class="fa-solid fa-arrow-right-from-bracket"></i> LOG OUT</button>
-  </section>
+</section>
 
-  <footer class="footer"><i class="fa-solid fa-car-side"></i> ABHINAASH A1 DRIVING ACADEMY<br>DRIVE SMART. DRIVE SAFE.</footer>
+<footer class="footer"><i class="fa-solid fa-car-side"></i><br>ABHINAASH A1 DRIVING ACADEMY<br>DRIVE SMART. DRIVE SAFE.</footer>
 </main>
 
-<div id="pdfTemplate" aria-hidden="true">
-  <div class="cert-paper">
-    <div class="cert-inner">
-      <div class="cert-corner tl"></div><div class="cert-corner tr"></div>
-      <div class="cert-corner bl"></div><div class="cert-corner br"></div>
+<!-- CERTIFICATE TEMPLATE -->
+<div id="certificate" aria-hidden="true">
+  <div class="certPaper">
+    <div class="certInner">
+      <div class="corner tl"></div><div class="corner tr"></div>
+      <div class="corner bl"></div><div class="corner br"></div>
 
-      <div class="cert-topline">EXCELLENCE • SKILL • RESPONSIBILITY</div>
-      <div class="cert-brand">ABHINAASH A1</div>
-      <div class="cert-subbrand">DRIVING ACADEMY</div>
-      <div class="cert-rule"><i class="fa-solid fa-star"></i></div>
+      <div class="certTop">EXCELLENCE • SKILL • RESPONSIBILITY</div>
+      <div class="certBrand">ABHINAASH A1</div>
+      <div class="certSub">DRIVING ACADEMY</div>
+      <div class="certRule">✦ ━━━━━━━━━ ✦</div>
 
-      <h1 class="cert-heading">TRAINING COMPLETION</h1>
-      <div class="cert-caption">CERTIFICATE OF ACHIEVEMENT</div>
-      <p class="cert-recipient">THIS CERTIFICATE IS PROUDLY PRESENTED TO</p>
-      <h2 id="pdfName">STUDENT NAME</h2>
+      <h1 class="certHeading">TRAINING COMPLETION</h1>
+      <div class="certCaption">CERTIFICATE OF ACHIEVEMENT</div>
+      <div class="certRecipient">THIS CERTIFICATE IS PRESENTED TO</div>
+      <h2 id="certStudentName">STUDENT NAME</h2>
 
-      <p class="cert-message">
-        For successfully reaching the recorded completion target of the structured
-        driving training programme at <strong>ABHINAASH A1 DRIVING ACADEMY</strong>.<br>
-        In recognition of dedication, practical learning and commitment to responsible driving.
+      <p class="certMessage">
+        In recognition of reaching the recorded completion target of the driving training programme at
+        <strong>ABHINAASH A1 DRIVING ACADEMY</strong>, acknowledging dedication, practical learning and commitment to responsible driving.
       </p>
 
-      <div class="cert-class-box">
-        <i class="fa-solid fa-car-side cert-class-icon"></i>
-        <div>
-          <div class="cert-class-label">CLASS TYPE</div>
-          <div id="pdfClassType">NOT SPECIFIED</div>
-        </div>
+      <div class="certInfo">
+        <div class="certInfoLabel">REGISTERED CLASS TYPE</div>
+        <div id="certType">NOT SPECIFIED</div>
       </div>
       <br>
-      <div class="cert-date-box">
-        <div class="cert-date-label">TRAINING COMPLETION DATE</div>
-        <div id="pdfDate">Date not recorded</div>
+      <div class="certInfo">
+        <div class="certInfoLabel">TRAINING COMPLETION DATE</div>
+        <div id="certDate">Date not recorded</div>
       </div>
 
-      <div class="cert-bottom">
-        <div class="cert-signature">
-          <div class="cert-signature-line">ACADEMY REPRESENTATIVE</div>
+      <div class="certBottom">
+        <div class="certSignature">
+          <div class="certLine">ACADEMY REPRESENTATIVE</div>
           <strong>ABHINAASH A1</strong>
-          <div style="font-size:10px;margin-top:4px">Driving Academy</div>
+          <div style="margin-top:4px">Driving Academy</div>
         </div>
-        <div class="cert-seal">
-          <i class="fa-solid fa-award"></i><b>A1</b><span>ACHIEVEMENT</span>
+        <div class="certSeal">
+          <i class="fa-solid fa-award"></i>
+          <b>A1</b>
+          <span>ACHIEVEMENT</span>
         </div>
-        <div class="cert-signature">
-          <div class="cert-signature-line">TRAINING RECORD</div>
+        <div class="certSignature">
+          <div class="certLine">TRAINING RECORD</div>
           <strong>STUDENT ACHIEVEMENT</strong>
-          <div style="font-size:10px;margin-top:4px">Completion record</div>
+          <div style="margin-top:4px">Completion record</div>
         </div>
       </div>
-      <div class="cert-footer">DRIVE SMART • DRIVE SAFE • DRIVE RESPONSIBLY</div>
+
+      <div class="certFooter">DRIVE SMART • DRIVE SAFE • DRIVE RESPONSIBLY</div>
     </div>
   </div>
 </div>
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-import { getFirestore, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+import {initializeApp} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+import {
+  getFirestore,
+  doc,
+  onSnapshot
+} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
+/* Keep this configuration consistent with your Attendance page. */
 const firebaseConfig = {
   apiKey: "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
   authDomain: "abinash-driving.firebaseapp.com",
@@ -401,369 +458,495 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-let currentData = null;
-let unsubscribe = null;
-let requestId = 0;
 const $ = id => document.getElementById(id);
 
-function setMessage(message, error = true) {
-  $("loginMessage").textContent = message;
-  $("loginMessage").style.color = error ? "#ff7474" : "#39d98a";
-}
+let currentData = null;
+let currentPhone = "";
+let unsubscribe = null;
+let requestToken = 0;
 
-function stopListening() {
-  if (typeof unsubscribe === "function") {
+function stopListening(){
+  if(typeof unsubscribe === "function"){
     unsubscribe();
     unsubscribe = null;
   }
 }
 
-function formatMoney(value) {
-  return "₹" + value.toLocaleString("en-IN", {maximumFractionDigits:2});
+function setMessage(message, success = false){
+  $("loginMessage").textContent = message;
+  $("loginMessage").style.color = success ? "#43d99a" : "#ff7777";
 }
 
-function unlockBadge(id, condition) {
-  $(id).classList.toggle("unlocked", Boolean(condition));
+function showLoading(show){
+  $("loader").style.display = show ? "block" : "none";
+  $("loginBtn").disabled = show;
+}
+
+function money(value){
+  const number = Number(value);
+  if(!Number.isFinite(number)) return "—";
+  return "₹" + number.toLocaleString("en-IN", {maximumFractionDigits:2});
 }
 
 /*
-  Looks through common class-mode field names and values.
-  If the field is missing, do not guess the student's actual class type.
+  IMPORTANT:
+  The Attendance page saves classType as exactly:
+  "Personal" or "Group".
+  Do not substitute package names or guess missing values.
 */
-function getClassType(data) {
-  const keys = [
-    "classType", "trainingType", "batchType", "sessionType",
-    "learningMode", "trainingMode", "classMode", "lessonType",
-    "packageType", "courseType", "mode", "type", "batch",
-    "trainingCategory", "classCategory", "training_mode",
-    "class_type", "batch_type", "learning_mode", "package",
-    "packageName", "courseName", "planName"
-  ];
+function readClassType(data){
+  const value = String(data.classType ?? "").trim().toLowerCase();
 
-  for (const key of keys) {
-    const raw = data[key];
-
-    if (typeof raw !== "string" || !raw.trim()) continue;
-
-    const value = raw.trim().toLowerCase().replace(/[_-]+/g, " ");
-
-    if (/personal|private|one\s*to\s*one|1\s*on\s*1|individual/.test(value)) {
-      return "Personal Training";
-    }
-
-    if (/\bgroup\b|\bbatch\b|shared/.test(value)) {
-      return "Group Training";
-    }
-  }
-
-  // Check nested objects if a training mode is stored inside one.
-  for (const value of Object.values(data)) {
-    if (value && typeof value === "object" && !Array.isArray(value) &&
-        typeof value.toDate !== "function" && typeof value.seconds !== "number") {
-      const nested = getClassType(value);
-      if (nested !== "Not specified") return nested;
-    }
-  }
+  if(value === "personal") return "Personal";
+  if(value === "group") return "Group";
 
   return "Not specified";
 }
 
-function getCompletedCount(data, logs, total) {
-  return Math.min(total, Math.max(logs.length, Number(data.remaining) || 0));
+/*
+  Attendance page semantics:
+  remaining = completed-session counter.
+  attendanceLogs = session-by-session history.
+*/
+function getLogs(data){
+  return Array.isArray(data.attendanceLogs)
+    ? data.attendanceLogs
+    : [];
 }
 
-function calculateKilometres(logs, done) {
-  let km = 0;
-
-  logs.forEach(log => {
-    const text = typeof log === "string" ? log : "";
-    const match = text.match(/(\d+(?:\.\d+)?)\s*KM\b/i);
-    km += match ? Number(match[1]) : 5;
-  });
-
-  if (done > logs.length) km += (done - logs.length) * 5;
-  return km;
+function getTotal(data){
+  const total = Number(data.totalClasses);
+  return Number.isFinite(total) && total > 0 ? Math.floor(total) : 20;
 }
 
-function formatDate(value) {
-  if (value === null || value === undefined || value === "") return null;
+function getCompleted(data){
+  const logs = getLogs(data);
+  const counter = Number(data.remaining);
+  const recordedCounter = Number.isFinite(counter) && counter >= 0
+    ? Math.floor(counter)
+    : 0;
+
+  return Math.max(logs.length, recordedCounter);
+}
+
+function getProgress(data){
+  const total = getTotal(data);
+  const done = getCompleted(data);
+  const percent = Math.min(100, Math.round(done / total * 100));
+
+  return {
+    total,
+    done,
+    remaining: Math.max(0, total - done),
+    percent,
+    completed: done >= total
+  };
+}
+
+/* Extract KM values when present; otherwise use the dashboard estimate. */
+function getDistance(data){
+  const logs = getLogs(data);
+  let distance = 0;
+  let known = 0;
+
+  for(const entry of logs){
+    if(typeof entry !== "string") continue;
+    const match = entry.match(/Distance:\s*(\d+(?:\.\d+)?)\s*KM\b/i);
+    if(match){
+      distance += Number(match[1]);
+      known++;
+    }
+  }
+
+  if(known === logs.length && logs.length > 0){
+    return {value: distance, estimated: false};
+  }
+
+  /*
+    Your current Attendance page always records 5 KM per session.
+    For older entries without distance, use 5 KM as an estimate.
+  */
+  return {value: distance + Math.max(0, logs.length - known) * 5, estimated: true};
+}
+
+function safeDate(value){
+  if(value == null || value === "") return null;
 
   let date = null;
 
-  if (value && typeof value.toDate === "function") {
+  if(value && typeof value.toDate === "function"){
     date = value.toDate();
-  } else if (value && typeof value === "object" && typeof value.seconds === "number") {
+  }else if(value && typeof value === "object" && Number.isFinite(value.seconds)){
     date = new Date(value.seconds * 1000);
-  } else if (value instanceof Date) {
+  }else if(value instanceof Date){
     date = value;
-  } else if (typeof value === "string" || typeof value === "number") {
+  }else if(typeof value === "string" || typeof value === "number"){
     const text = String(value).trim();
-    let match = text.match(/^(\d{1,2})[/-](\d{1,2})[/-](\d{4})$/);
 
-    if (match) {
-      const day = Number(match[1]);
-      const month = Number(match[2]);
-      const year = Number(match[3]);
-      date = new Date(year, month - 1, day);
+    let match = text.match(/^(\d{1,2})\s+([A-Za-z]{3,9})(?:\s+(\d{4}))?$/);
 
-      if (date.getFullYear() !== year ||
-          date.getMonth() !== month - 1 ||
-          date.getDate() !== day) return null;
-    } else {
-      match = text.match(/^(\d{1,2})\s+([A-Za-z]{3,9})(?:\s+(\d{4}))?$/);
+    if(match){
+      const months = [
+        "january","february","march","april","may","june",
+        "july","august","september","october","november","december"
+      ];
+      const month = months.findIndex(m => m.startsWith(match[2].toLowerCase()));
 
-      if (match) {
-        const months = [
-          "january","february","march","april","may","june",
-          "july","august","september","october","november","december"
-        ];
-        const month = months.findIndex(m => m.startsWith(match[2].toLowerCase()));
-        if (month >= 0) {
-          date = new Date(Number(match[3]) || new Date().getFullYear(), month, Number(match[1]));
-        }
-      } else {
-        const parsed = new Date(text);
-        if (!isNaN(parsed.getTime())) date = parsed;
+      if(month >= 0){
+        date = new Date(
+          Number(match[3]) || new Date().getFullYear(),
+          month,
+          Number(match[1])
+        );
       }
+    }else{
+      const parsed = new Date(text);
+      if(!isNaN(parsed.getTime())) date = parsed;
     }
   }
 
-  if (!date || isNaN(date.getTime())) return null;
+  if(!date || isNaN(date.getTime())) return null;
 
-  return date.toLocaleDateString("en-GB", {
-    day:"2-digit", month:"long", year:"numeric"
+  return date;
+}
+
+function formatDate(value){
+  const date = safeDate(value);
+  if(!date) return null;
+
+  return date.toLocaleDateString("en-IN", {
+    day:"2-digit",
+    month:"long",
+    year:"numeric"
   });
 }
 
-function getTrainingCompletionDate(data) {
-  const fields = [
-    data.trainingCompletedDate, data.completionDate, data.completedAt,
-    data.trainingEndDate, data.courseCompletionDate
+function getCompletionDate(data){
+  const explicitFields = [
+    data.trainingCompletedDate,
+    data.completionDate,
+    data.courseCompletionDate,
+    data.completedAt,
+    data.trainingEndDate
   ];
 
-  for (const value of fields) {
+  for(const value of explicitFields){
     const formatted = formatDate(value);
-    if (formatted) return formatted;
+    if(formatted) return formatted;
   }
 
-  const logs = Array.isArray(data.attendanceLogs) ? data.attendanceLogs : [];
+  const logs = getLogs(data);
 
-  for (let i = logs.length - 1; i >= 0; i--) {
-    if (typeof logs[i] !== "string") continue;
+  if(!logs.length) return "Date not recorded";
 
-    const dateText = logs[i].split(/\s+[—|]\s+/)[0].trim();
-    const direct = formatDate(dateText);
-    if (direct) return direct;
+  /*
+    The current Attendance page writes dates as "07 Oct" without a year.
+    Do not invent a historical year for this format.
+  */
+  const last = logs[logs.length - 1];
 
-    const match = dateText.match(
-      /\b\d{1,2}[/-]\d{1,2}[/-]\d{4}\b|\b\d{1,2}\s+[A-Za-z]{3,9}(?:\s+\d{4})?\b|\b\d{4}-\d{2}-\d{2}\b/
-    );
+  if(typeof last === "string"){
+    const dateText = last.split("|")[0].trim();
 
-    if (match) {
-      const parsed = formatDate(match[0]);
-      if (parsed) return parsed;
+    if(/^\d{1,2}\s+[A-Za-z]{3,9}$/.test(dateText)){
+      return dateText + " (year not recorded)";
     }
+
+    const match = dateText.match(/\d{4}-\d{2}-\d{2}/);
+    if(match) return formatDate(match[0]) || "Date not recorded";
+
+    const parsed = formatDate(dateText);
+    if(parsed) return parsed;
   }
 
   return "Date not recorded";
 }
 
-function renderHistory(logs, done) {
-  const timeline = $("attendanceTimeline");
-  timeline.replaceChildren();
+function getWalletBalance(data){
+  const keys = [
+    "referralWallet",
+    "walletBalance",
+    "referralEarnings",
+    "totalEarnings",
+    "referralBalance",
+    "earnedAmount"
+  ];
+
+  for(const key of keys){
+    if(data[key] !== undefined && data[key] !== null && data[key] !== ""){
+      const number = Number(data[key]);
+      if(Number.isFinite(number)) return number;
+    }
+  }
+
+  return null;
+}
+
+function getReferralCount(data){
+  const count = Number(data.totalRefers);
+  return Number.isFinite(count) && count >= 0 ? Math.floor(count) : 0;
+}
+
+function unlockBadge(id, unlocked){
+  $(id).classList.toggle("unlocked", Boolean(unlocked));
+}
+
+function renderHistory(data){
+  const logs = getLogs(data);
+  const list = $("historyList");
+
+  list.replaceChildren();
   $("historyCount").textContent = logs.length + " RECORDS";
 
-  if (!logs.length && !done) {
+  if(!logs.length){
     const empty = document.createElement("div");
     empty.className = "empty";
+
     const icon = document.createElement("i");
     icon.className = "fa-regular fa-calendar";
-    const message = document.createElement("span");
-    message.textContent = "No training sessions recorded yet.";
-    empty.append(icon, message);
-    timeline.appendChild(empty);
+
+    const text = document.createElement("span");
+    text.textContent = "No attendance records have been added yet.";
+
+    empty.append(icon, text);
+    list.appendChild(empty);
     return;
   }
 
-  for (let i = done; i >= 1; i--) {
-    const entry = logs[i - 1];
-    const text = typeof entry === "string" ? entry : "";
-    let dateInfo = "Training session";
-    let feedback = "Session recorded by academy administration.";
-
-    if (text) {
-      const parts = text.split(/\s+[—|]\s+/);
-      dateInfo = parts[0] || dateInfo;
-      feedback = parts.slice(1).join(" — ") || "Training session recorded.";
-    }
-
-    const row = document.createElement("article");
-    row.className = "log";
+  [...logs].reverse().forEach((entry, index) => {
+    const item = document.createElement("article");
+    item.className = "log";
 
     const header = document.createElement("div");
-    header.className = "log-head";
+    header.className = "logHead";
 
-    const title = document.createElement("b");
-    title.textContent = "Session " + i;
+    const title = document.createElement("div");
+    title.className = "logTitle";
+    title.textContent = "Session " + (logs.length - index);
 
-    const date = document.createElement("span");
-    date.className = "log-date";
-    date.textContent = dateInfo;
+    const date = document.createElement("div");
+    date.className = "logDate";
 
+    const text = typeof entry === "string" ? entry : "";
+    const parts = text.split(/\s+[—|]\s+/);
+
+    date.textContent = parts[0] || "Recorded session";
     header.append(title, date);
 
-    const message = document.createElement("p");
-    message.className = "log-feedback";
-    message.textContent = feedback;
+    const details = document.createElement("div");
+    details.className = "logDetails";
 
-    row.append(header, message);
-    timeline.appendChild(row);
-  }
+    const detailsText = parts.slice(1).join(" | ") || text || "Session recorded.";
+    details.textContent = detailsText;
+
+    item.append(header, details);
+
+    /*
+      Highlight route and distance information without changing stored data.
+    */
+    const routeMatch = text.match(/Route:\s*([^|]+)/i);
+    const distanceMatch = text.match(/Distance:\s*([^|]+)/i);
+    const remarkMatch = text.match(/Remark:\s*(.+)$/i);
+
+    const chips = document.createElement("div");
+
+    if(routeMatch){
+      const chip = document.createElement("span");
+      chip.className = "logChip";
+      chip.textContent = "📍 " + routeMatch[1].trim();
+      chips.appendChild(chip);
+    }
+
+    if(distanceMatch){
+      const chip = document.createElement("span");
+      chip.className = "logChip";
+      chip.textContent = "🛣 " + distanceMatch[1].trim();
+      chips.appendChild(chip);
+    }
+
+    if(remarkMatch){
+      const chip = document.createElement("span");
+      chip.className = "logChip";
+      chip.textContent = remarkMatch[1].trim();
+      chips.appendChild(chip);
+    }
+
+    if(chips.childNodes.length) item.appendChild(chips);
+
+    list.appendChild(item);
+  });
 }
 
-function renderProfile(data) {
+function renderProfile(data){
   currentData = data;
 
-  const logs = Array.isArray(data.attendanceLogs) ? data.attendanceLogs : [];
-  const total = Math.max(1, Number(data.totalClasses) || 15);
-  const done = getCompletedCount(data, logs, total);
-  const remaining = Math.max(0, total - done);
-  const percent = Math.min(100, Math.round(done / total * 100));
-  const km = calculateKilometres(logs, done);
-  const referrals = Math.max(0, Number(data.totalRefers) || 0);
-  const rewardPerReferral = 500;
-  const classType = getClassType(data);
-  const completionDate = getTrainingCompletionDate(data);
+  const progress = getProgress(data);
+  const classType = readClassType(data);
+  const distance = getDistance(data);
+  const inactive = data.notActive === true;
 
-  $("dispName").textContent = data.name || "Student";
-  $("dispPkg").textContent = total + "-Session Driving Package";
-  $("dispDone").textContent = done;
-  $("dispTotal").textContent = total;
-  $("dispRemaining").textContent = remaining;
-  $("dispKm").textContent = km.toLocaleString("en-IN") + " km";
+  $("studentName").textContent = data.name || "Student";
+  $("studentPhone").textContent = currentPhone;
+  $("packageName").textContent = progress.total + "-Session Package";
 
-  $("dispClassType").textContent = classType;
-  $("classTypeDescription").textContent =
-    classType === "Personal Training" ? "Individual driving instruction" :
-    classType === "Group Training" ? "Group or batch driving instruction" :
-    "Class type not found in the student record";
+  $("studentStatus").classList.toggle("inactive", inactive);
+  $("studentStatus").innerHTML = inactive
+    ? '<i class="fa-solid fa-circle-pause"></i><span>NOT ACTIVE</span>'
+    : '<i class="fa-solid fa-circle-check"></i><span>ACTIVE STUDENT</span>';
 
-  $("dispPercent").textContent = percent + "%";
-  $("progressPercentText").textContent = percent + "%";
-  $("progressDoneText").textContent = done + " of " + total + " sessions completed";
+  $("completedValue").textContent = progress.done;
+  $("totalValue").textContent = progress.total;
+  $("remainingValue").textContent = progress.remaining;
+  $("distanceValue").textContent =
+    distance.value.toLocaleString("en-IN", {maximumFractionDigits:1}) + " km";
+
+  $("classType").textContent = classType;
+
+  $("classIcon").innerHTML = classType === "Personal"
+    ? '<i class="fa-solid fa-user"></i>'
+    : classType === "Group"
+      ? '<i class="fa-solid fa-users"></i>'
+      : '<i class="fa-solid fa-circle-question"></i>';
+
+  $("classDescription").textContent =
+    classType === "Personal"
+      ? "Your registered class type is Personal Training — individual driving instruction."
+      : classType === "Group"
+        ? "Your registered class type is Group Training — group or batch driving instruction."
+        : "The classType field is missing or has an unrecognised value in this student record. Please contact the academy.";
+
+  $("percentValue").textContent = progress.percent + "%";
+  $("progressPercent").textContent = progress.percent + "%";
+  $("progressCount").textContent = progress.done + " of " + progress.total + " sessions";
 
   const circumference = 2 * Math.PI * 42;
-  $("radialFillCircle").style.strokeDasharray = circumference;
-  $("radialFillCircle").style.strokeDashoffset = circumference * (1 - percent / 100);
-  $("progressBar").style.width = percent + "%";
+  $("ringFill").style.strokeDasharray = circumference;
+  $("ringFill").style.strokeDashoffset = circumference * (1 - progress.percent / 100);
+  $("progressBar").style.width = progress.percent + "%";
 
-  $("progressTitle").textContent =
-    done >= total ? "Training target achieved!" :
-    percent >= 75 ? "Almost at the finish line!" :
-    percent >= 40 ? "Excellent progress!" : "Your driving journey";
+  $("progressStatus").textContent = progress.completed ? "COMPLETED" : "IN PROGRESS";
+  $("progressTitle").textContent = progress.completed
+    ? "Training target reached!"
+    : progress.percent >= 75
+      ? "Almost at the finish line!"
+      : progress.percent >= 40
+        ? "Great progress!"
+        : "Your driving journey";
 
-  $("progressDescription").textContent = done >= total
-    ? "You have reached your recorded package completion target."
-    : remaining + " session" + (remaining === 1 ? "" : "s") + " remaining to reach your target.";
+  $("progressDescription").textContent = progress.completed
+    ? "Your recorded attendance has reached the package target."
+    : progress.remaining + " session" + (progress.remaining === 1 ? "" : "s") + " remaining to reach your target.";
 
-  $("progressStatus").textContent = done >= total ? "COMPLETED" : "IN PROGRESS";
+  unlockBadge("badgeFirst", progress.done >= 1);
+  unlockBadge("badgeSafety", progress.done >= 5);
+  unlockBadge("badgePro", progress.percent >= 75);
+  unlockBadge("badgeElite", progress.completed);
 
-  unlockBadge("badgeStarter", done >= 1);
-  unlockBadge("badgeSafety", done >= 5);
-  unlockBadge("badgePro", percent >= 75);
-  unlockBadge("badgeElite", done >= total);
+  const referrals = getReferralCount(data);
+  const balance = getWalletBalance(data);
 
-  $("dispEarn").textContent = formatMoney(referrals * rewardPerReferral);
-  $("referralCount").textContent = referrals + " referral" + (referrals === 1 ? "" : "s") + " recorded";
-  $("referralSummary").textContent = formatMoney(rewardPerReferral) + " per referral";
+  $("referralCount").textContent = referrals + " referrals recorded";
+  $("walletAmount").textContent = balance === null ? "—" : money(balance);
+  $("walletStatus").textContent = balance === null ? "No balance field found" : "Recorded balance";
 
-  $("distanceNote").textContent =
-    "Estimated distance only. Completion date: " + completionDate +
-    ". Sessions without a KM value use a 5 km estimate.";
+  $("certificateCard").style.display = progress.completed ? "block" : "none";
 
-  $("premiumCertificate").style.display = done >= total ? "block" : "none";
-  $("pdfName").textContent = String(data.name || "STUDENT").trim().toUpperCase();
-  $("pdfDate").textContent = completionDate;
-  $("pdfClassType").textContent = classType.toUpperCase();
+  $("certStudentName").textContent = String(data.name || "STUDENT").trim().toUpperCase();
+  $("certType").textContent = classType.toUpperCase();
+  $("certDate").textContent = getCompletionDate(data);
 
-  renderHistory(logs, done);
+  renderHistory(data);
 }
 
-function loadProfile() {
-  const phone = $("userPhone").value.trim();
-
-  if (!/^\d{10}$/.test(phone)) {
-    setMessage("Please enter a valid 10-digit mobile number.");
-    return;
-  }
-
+/* Load a student's existing studentData/{phone} record. */
+function loadStudent(phone){
   stopListening();
-  currentData = null;
-  const thisRequest = ++requestId;
 
-  $("loader").style.display = "block";
-  $("accessBtn").disabled = true;
+  currentData = null;
+  currentPhone = phone;
+
+  const token = ++requestToken;
+
+  showLoading(true);
   setMessage("");
 
   unsubscribe = onSnapshot(
     doc(db, "studentData", phone),
     snapshot => {
-      if (thisRequest !== requestId) return;
+      if(token !== requestToken) return;
 
-      $("loader").style.display = "none";
-      $("accessBtn").disabled = false;
+      showLoading(false);
 
-      if (!snapshot.exists()) {
-        $("profileContent").style.display = "none";
-        $("searchPanel").style.display = "block";
-        setMessage("No active training record was found for this number.");
+      if(!snapshot.exists()){
+        $("dashboard").style.display = "none";
+        $("loginPanel").style.display = "block";
+        setMessage("No student record found for this mobile number.");
         stopListening();
         return;
       }
 
       renderProfile(snapshot.data());
-      $("searchPanel").style.display = "none";
-      $("profileContent").style.display = "block";
-      setMessage("", false);
+      $("loginPanel").style.display = "none";
+      $("dashboard").style.display = "block";
+      setMessage("", true);
     },
     error => {
-      if (thisRequest !== requestId) return;
+      if(token !== requestToken) return;
 
-      $("loader").style.display = "none";
-      $("accessBtn").disabled = false;
-      console.error("Firestore listener error:", error);
-      setMessage("Unable to load your record. Check your connection or database permissions.");
+      showLoading(false);
+      console.error("Student profile listener error:", error);
+
+      $("dashboard").style.display = "none";
+      $("loginPanel").style.display = "block";
+      setMessage("Unable to read your record. Please check your connection or contact the academy.");
       stopListening();
     }
   );
 }
 
-async function downloadPDF() {
-  if (!currentData || !currentData.name) {
-    alert("Student information is not available.");
+function login(){
+  const phone = $("phoneInput").value.trim();
+
+  if(!/^\d{10}$/.test(phone)){
+    setMessage("Please enter a valid 10-digit registered mobile number.");
     return;
   }
 
-  const logs = Array.isArray(currentData.attendanceLogs) ? currentData.attendanceLogs : [];
-  const total = Math.max(1, Number(currentData.totalClasses) || 15);
-  const done = getCompletedCount(currentData, logs, total);
+  loadStudent(phone);
+}
 
-  if (done < total) {
-    alert("The certificate is available after completing the package.");
+function logout(){
+  stopListening();
+  requestToken++;
+  currentData = null;
+  currentPhone = "";
+
+  $("dashboard").style.display = "none";
+  $("loginPanel").style.display = "block";
+  $("phoneInput").value = "";
+  showLoading(false);
+  setMessage("");
+
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+async function downloadCertificate(){
+  if(!currentData) return;
+
+  const progress = getProgress(currentData);
+
+  if(!progress.completed){
+    alert("Your package completion target has not yet been reached.");
     return;
   }
 
-  if (typeof window.html2pdf !== "function") {
-    alert("PDF library failed to load. Check your internet and refresh the page.");
+  if(typeof window.html2pdf !== "function"){
+    alert("The PDF library could not load. Check your internet connection and refresh the page.");
     return;
   }
 
-  const element = $("pdfTemplate");
-  const button = $("downloadPdfBtn");
-
-  $("pdfName").textContent = String(currentData.name).trim().toUpperCase();
-  $("pdfDate").textContent = getTrainingCompletionDate(currentData);
-  $("pdfClassType").textContent = getClassType(currentData).toUpperCase();
+  const btn = $("certificateBtn");
+  const element = $("certificate");
 
   const oldStyle = {
     display: element.style.display,
@@ -773,12 +956,19 @@ async function downloadPDF() {
     zIndex: element.style.zIndex
   };
 
-  if (button) button.disabled = true;
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> PREPARING CERTIFICATE';
 
-  try {
+  try{
+    $("certStudentName").textContent =
+      String(currentData.name || "STUDENT").trim().toUpperCase();
+
+    $("certType").textContent = readClassType(currentData).toUpperCase();
+    $("certDate").textContent = getCompletionDate(currentData);
+
     /*
-      Keep the fixed-size certificate rendered and measurable.
-      Scale 1 reduces canvas memory use on mobile browsers.
+      Render at the certificate's fixed dimensions, not at the mobile viewport width.
+      Keep the element measurable during capture to avoid blank PDF pages.
     */
     element.style.display = "block";
     element.style.position = "fixed";
@@ -786,20 +976,25 @@ async function downloadPDF() {
     element.style.top = "0";
     element.style.zIndex = "99999";
 
-    await document.fonts.ready;
+    if(document.fonts && document.fonts.ready){
+      await document.fonts.ready;
+    }
+
     await new Promise(resolve => {
       requestAnimationFrame(() => requestAnimationFrame(resolve));
     });
 
-    const safeName = String(currentData.name)
-      .trim()
-      .replace(/[^a-z0-9_-]/gi, "_") || "Student";
+    const filename = "A1_Certificate_" +
+      (String(currentData.name || "Student")
+        .trim()
+        .replace(/[^a-z0-9_-]/gi, "_") || "Student") +
+      ".pdf";
 
     await window.html2pdf()
       .set({
-        filename: "A1_Training_Certificate_" + safeName + ".pdf",
+        filename,
         margin: 0,
-        image: {type:"jpeg",quality:0.92},
+        image: {type:"jpeg", quality:0.95},
         html2canvas: {
           scale: 1,
           useCORS: true,
@@ -823,75 +1018,71 @@ async function downloadPDF() {
       .from(element)
       .save();
 
-  } catch (error) {
-    console.error("Certificate PDF error:", error);
-    alert(
-      "Certificate PDF error: " +
-      (error?.message || String(error) || "Unknown rendering error") +
-      "\n\nPlease refresh and try again."
-    );
-  } finally {
+  }catch(error){
+    console.error("Certificate generation failed:", error);
+    alert("Certificate could not be generated.\n\n" +
+      (error?.message || String(error)) +
+      "\n\nPlease refresh the page and try again.");
+  }finally{
     element.style.display = oldStyle.display;
     element.style.position = oldStyle.position;
     element.style.left = oldStyle.left;
     element.style.top = oldStyle.top;
     element.style.zIndex = oldStyle.zIndex;
 
-    if (button) button.disabled = false;
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fa-solid fa-file-pdf"></i> DOWNLOAD CERTIFICATE PDF';
   }
 }
 
-function contactAdmin() {
+function contactAcademy(){
   const name = currentData?.name || "Student";
-  const message = encodeURIComponent(
-    "Hi Abhinaash, I am " + name +
-    ". I need help regarding my driving training and slots."
+  const text = encodeURIComponent(
+    "Hello ABHINAASH A1 Driving Academy, I am " +
+    name + ". I need help with my driving classes."
   );
-  window.location.href = "https://wa.me/917008186187?text=" + message;
+
+  window.location.href = "https://wa.me/917008186187?text=" + text;
 }
 
-async function shareReferral() {
-  const message =
-    "I am learning smart car driving at ABHINAASH A1 Driving Academy. Contact the academy to learn more.";
+async function shareAcademy(){
+  const details = {
+    title:"ABHINAASH A1 Driving Academy",
+    text:"Learn driving with ABHINAASH A1 Driving Academy."
+  };
 
-  if (navigator.share) {
-    try {
-      await navigator.share({
-        title: "ABHINAASH A1 Driving Academy",
-        text: message
-      });
+  if(navigator.share){
+    try{
+      await navigator.share(details);
       return;
-    } catch (error) {
-      if (error.name === "AbortError") return;
+    }catch(error){
+      if(error.name === "AbortError") return;
     }
   }
 
-  window.location.href = "https://wa.me/?text=" + encodeURIComponent(message);
+  window.location.href =
+    "https://wa.me/?text=" + encodeURIComponent(details.text);
 }
 
-function logout() {
-  stopListening();
-  requestId++;
-  currentData = null;
+$("loginBtn").addEventListener("click", login);
 
-  $("profileContent").style.display = "none";
-  $("searchPanel").style.display = "block";
-  $("userPhone").value = "";
-  $("loader").style.display = "none";
-  $("accessBtn").disabled = false;
-
-  setMessage("");
-  window.scrollTo({top:0,behavior:"smooth"});
-}
-
-$("accessBtn").addEventListener("click", loadProfile);
-$("userPhone").addEventListener("keydown", event => {
-  if (event.key === "Enter") loadProfile();
+$("phoneInput").addEventListener("keydown", event => {
+  if(event.key === "Enter") login();
 });
-$("downloadPdfBtn").addEventListener("click", downloadPDF);
-$("helpBtn").addEventListener("click", contactAdmin);
-$("shareBtn").addEventListener("click", shareReferral);
+
+$("refreshBtn").addEventListener("click", () => {
+  if(currentPhone){
+    loadStudent(currentPhone);
+  }else{
+    showLoading(false);
+    setMessage("Enter your registered mobile number first.");
+  }
+});
+
 $("logoutBtn").addEventListener("click", logout);
+$("certificateBtn").addEventListener("click", downloadCertificate);
+$("contactBtn").addEventListener("click", contactAcademy);
+$("shareBtn").addEventListener("click", shareAcademy);
 </script>
 </body>
 </html>
