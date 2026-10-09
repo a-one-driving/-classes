@@ -13,36 +13,36 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 <style>
-:root{
+:root {
   --gold:#d4af37;
-  --gold-light:#ffe8a3;
+  --light:#ffe8a3;
   --bg:#09090d;
   --panel:#111117;
   --card:#17171e;
-  --border:rgba(255,255,255,.075);
+  --border:rgba(255,255,255,.08);
   --muted:#92929f;
   --green:#39d98a;
-  --gold-gradient:linear-gradient(125deg,#fff0b9,#d4af37 48%,#a67e13);
+  --gradient:linear-gradient(125deg,#fff0b9,#d4af37 48%,#a67e13);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
   font-family:Poppins,sans-serif;color:#f8f8fb;min-height:100vh;
-  background:radial-gradient(ellipse at 50% -12%,rgba(212,175,55,.14),transparent 45%),#09090d;
-  padding:18px 14px 38px;overflow-x:hidden;-webkit-tap-highlight-color:transparent;
+  background:radial-gradient(ellipse at 50% -12%,rgba(212,175,55,.14),transparent 45%),var(--bg);
+  padding:18px 14px 38px;overflow-x:hidden;-webkit-tap-highlight-color:transparent
 }
 button,input{font:inherit}
 button{cursor:pointer}
-button:focus-visible,input:focus-visible{outline:2px solid var(--gold-light);outline-offset:3px}
+button:focus-visible,input:focus-visible{outline:2px solid var(--light);outline-offset:3px}
 .app{max-width:490px;width:100%;margin:auto}
 .topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:3px 0 25px}
 .brand{display:flex;align-items:center;gap:11px;min-width:0}
-.brand-logo{width:45px;height:45px;flex-shrink:0;border-radius:15px;background:var(--gold-gradient);color:#141109;display:grid;place-items:center;font-size:21px}
+.brand-logo{width:45px;height:45px;flex-shrink:0;border-radius:15px;background:var(--gradient);color:#141109;display:grid;place-items:center;font-size:21px}
 .brand-name{font-size:17px;font-weight:800;letter-spacing:.6px}
 .brand-sub{color:var(--muted);font-size:9px;letter-spacing:2.5px;margin-top:4px;font-weight:600}
 .live-pill{display:flex;align-items:center;gap:6px;border:1px solid rgba(57,217,138,.2);border-radius:30px;padding:7px 9px;color:var(--green);font-size:9px;font-weight:600;white-space:nowrap}
 .live-dot{width:6px;height:6px;background:var(--green);border-radius:50%}
-.panel{background:rgba(17,17,23,.95);border:1px solid var(--border);border-radius:25px;padding:22px;box-shadow:0 18px 45px rgba(0,0,0,.22)}
+.panel{background:rgba(17,17,23,.96);border:1px solid var(--border);border-radius:25px;padding:22px;box-shadow:0 18px 45px #0004}
 .eyebrow{color:var(--gold);font-size:10px;font-weight:700;letter-spacing:2px}
 .login-title{font-size:24px;font-weight:700;margin-top:8px}
 .login-desc{font-size:12px;color:var(--muted);line-height:1.8;margin:7px 0 24px}
@@ -54,35 +54,35 @@ input:focus{border-color:rgba(212,175,55,.65)}
 .btn{border:0;border-radius:14px;padding:14px 16px;width:100%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:9px;transition:transform .18s,opacity .18s}
 .btn:active{transform:scale(.985)}
 .btn:disabled{opacity:.5;cursor:wait}
-.btn-gold{background:var(--gold-gradient);color:#171208}
+.btn-gold{background:var(--gradient);color:#171208}
 .btn-dark{background:#1c1c24;border:1px solid var(--border);color:#f7f7fa}
-.btn-green{background:rgba(57,217,138,.055);border:1px solid rgba(57,217,138,.22);color:var(--green)}
+.btn-green{background:#39d98a0e;border:1px solid #39d98a40;color:var(--green)}
 #loader{display:none;text-align:center;margin-top:20px;color:var(--muted);font-size:11px}
 .spinner{width:24px;height:24px;border-radius:50%;border:2px solid #33333c;border-top-color:var(--gold);display:inline-block;animation:spin .8s linear infinite;margin-bottom:8px}
 @keyframes spin{to{transform:rotate(360deg)}}
 #loginMessage{font-size:11px;line-height:1.7;margin-top:12px;color:#ff7474}
 #profileContent{display:none;animation:fadeUp .4s ease both}
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.welcome{padding:22px 18px;border-radius:25px;border:1px solid rgba(212,175,55,.2);background:linear-gradient(140deg,rgba(212,175,55,.105),rgba(23,23,30,.8) 65%);margin-bottom:19px}
+.welcome{padding:22px 18px;border-radius:25px;border:1px solid #d4af3733;background:linear-gradient(140deg,#d4af371b,#17171ecc 65%);margin-bottom:19px}
 .welcome-top{display:flex;align-items:center;gap:13px}
-.avatar{width:57px;height:57px;flex-shrink:0;border-radius:19px;display:grid;place-items:center;font-size:24px;color:#171208;background:var(--gold-gradient)}
+.avatar{width:57px;height:57px;flex-shrink:0;border-radius:19px;display:grid;place-items:center;font-size:24px;color:#171208;background:var(--gradient)}
 .welcome-copy{min-width:0;flex:1}
 .welcome-label{font-size:9px;color:var(--gold);font-weight:700;letter-spacing:1.5px}
 .student-title{font-size:21px;line-height:1.4;font-weight:700;margin-top:4px;overflow-wrap:anywhere}
-.course-badge{display:inline-flex;align-items:center;gap:7px;margin-top:9px;border:1px solid rgba(212,175,55,.24);background:rgba(212,175,55,.07);padding:6px 11px;border-radius:30px;font-size:10px;color:var(--gold-light)}
-.welcome-bottom{display:flex;justify-content:space-between;gap:8px;margin-top:19px;padding-top:14px;border-top:1px solid rgba(255,255,255,.065)}
+.course-badge{display:inline-flex;align-items:center;gap:7px;margin-top:9px;border:1px solid #d4af3740;background:#d4af3712;padding:6px 11px;border-radius:30px;font-size:10px;color:var(--light)}
+.welcome-bottom{display:flex;justify-content:space-between;gap:8px;margin-top:19px;padding-top:14px;border-top:1px solid #ffffff10}
 .welcome-bottom span{font-size:10px;color:var(--muted)}
 .welcome-bottom b{font-size:10px;color:var(--green)}
 .section-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:25px 2px 12px}
 .section-heading h3{font-size:11px;font-weight:700;letter-spacing:1.3px}
 .section-heading span{font-size:9px;color:var(--muted)}
 .stats-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
-.stat-card{min-width:0;padding:16px;border:1px solid var(--border);background:linear-gradient(145deg,rgba(255,255,255,.025),rgba(255,255,255,.008));border-radius:19px}
+.stat-card{min-width:0;padding:16px;border:1px solid var(--border);background:linear-gradient(145deg,#ffffff08,#ffffff02);border-radius:19px}
 .stat-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.stat-icon{width:33px;height:33px;border-radius:11px;display:grid;place-items:center;color:var(--gold);background:rgba(212,175,55,.09);font-size:13px}
+.stat-icon{width:33px;height:33px;border-radius:11px;display:grid;place-items:center;color:var(--gold);background:#d4af3717;font-size:13px}
 .stat-tag{font-size:8px;color:var(--muted);text-align:right}
 .stat-label{font-size:9px;color:var(--muted);margin-top:15px}
-.stat-value{font-size:20px;font-weight:700;margin-top:3px;overflow-wrap:anywhere;line-height:1.4}
+.stat-value{font-size:21px;font-weight:700;margin-top:3px;overflow-wrap:anywhere;line-height:1.4}
 .stat-foot{font-size:9px;color:#70707e;margin-top:4px}
 .progress-card,.history-card,.wallet-card{background:var(--card);border:1px solid var(--border);border-radius:21px;padding:17px}
 .progress-layout{display:flex;align-items:center;gap:16px}
@@ -96,38 +96,38 @@ input:focus{border-color:rgba(212,175,55,.65)}
 .progress-copy h4{font-size:14px;font-weight:600}
 .progress-copy p{font-size:10px;color:var(--muted);line-height:1.8;margin-top:7px}
 .progress-track{height:5px;border-radius:20px;background:#303039;overflow:hidden;margin-top:19px}
-.progress-track-fill{width:0;height:100%;border-radius:20px;background:var(--gold-gradient);transition:width .8s}
+.progress-track-fill{width:0;height:100%;border-radius:20px;background:var(--gradient);transition:width .8s}
 .progress-meta{display:flex;justify-content:space-between;gap:8px;margin-top:10px}
 .progress-meta span{font-size:9px;color:var(--muted)}
-.progress-meta b{color:var(--gold-light)}
+.progress-meta b{color:var(--light)}
 .distance-note{display:flex;align-items:flex-start;gap:8px;margin-top:12px;font-size:9px;line-height:1.7;color:var(--muted)}
 .distance-note i{color:var(--gold);margin-top:2px}
 .achievement-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .achievement{padding:15px 10px;border-radius:17px;text-align:center;background:#121218;border:1px solid var(--border);opacity:.52;filter:grayscale(.8)}
-.achievement.unlocked{opacity:1;filter:none;border-color:rgba(212,175,55,.28);background:linear-gradient(145deg,rgba(212,175,55,.08),rgba(255,255,255,.01))}
-.achievement-icon{width:39px;height:39px;border-radius:13px;margin:0 auto 10px;display:grid;place-items:center;background:rgba(212,175,55,.1);color:var(--gold);font-size:17px}
+.achievement.unlocked{opacity:1;filter:none;border-color:#d4af3747;background:linear-gradient(145deg,#d4af3714,#ffffff03)}
+.achievement-icon{width:39px;height:39px;border-radius:13px;margin:0 auto 10px;display:grid;place-items:center;background:#d4af371a;color:var(--gold);font-size:17px}
 .achievement b{display:block;font-size:10px}
 .achievement small{display:block;color:var(--muted);font-size:8px;line-height:1.7;margin-top:5px}
-.wallet-card{background:linear-gradient(130deg,rgba(57,217,138,.065),rgba(23,23,30,.96));border-color:rgba(57,217,138,.17)}
+.wallet-card{background:linear-gradient(130deg,#39d98a11,#17171ef5);border-color:#39d98a2b}
 .wallet-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
-.wallet-icon{width:40px;height:40px;border-radius:13px;background:rgba(57,217,138,.09);color:var(--green);display:grid;place-items:center;font-size:17px}
+.wallet-icon{width:40px;height:40px;border-radius:13px;background:#39d98a17;color:var(--green);display:grid;place-items:center;font-size:17px}
 .wallet-title{font-size:10px;font-weight:700;color:var(--green);letter-spacing:1px}
 .wallet-subtitle{font-size:9px;color:var(--muted);margin-top:5px}
 .wallet-amount{font-size:25px;font-weight:700;white-space:nowrap}
-.wallet-divider{height:1px;background:rgba(255,255,255,.06);margin:15px 0}
+.wallet-divider{height:1px;background:#ffffff10;margin:15px 0}
 .wallet-foot{display:flex;justify-content:space-between;gap:8px}
 .wallet-foot span{font-size:9px;color:var(--muted)}
 .wallet-foot b{font-size:10px;color:#f0f0f4}
 .history-card{padding:13px}
 .history-list{display:flex;flex-direction:column;gap:9px;max-height:320px;overflow-y:auto}
-.log{border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:13px;padding:13px;background:rgba(0,0,0,.12)}
+.log{border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:13px;padding:13px;background:#0002}
 .log-head{display:flex;justify-content:space-between;gap:10px}
 .log-head b{font-size:11px;font-weight:600}
 .log-date{font-size:9px;color:var(--muted);text-align:right;overflow-wrap:anywhere}
 .log-feedback{font-size:10px;color:#c4c4ce;line-height:1.8;margin-top:8px;overflow-wrap:anywhere}
 .empty{padding:24px 10px;text-align:center;color:var(--muted);font-size:11px;line-height:1.8}
 .empty i{font-size:22px;display:block;margin-bottom:9px;color:#555560}
-.certificate-card{display:none;border:1px solid rgba(212,175,55,.25);background:linear-gradient(135deg,rgba(212,175,55,.09),rgba(212,175,55,.02));padding:20px;border-radius:21px;text-align:center;margin-top:20px}
+.certificate-card{display:none;border:1px solid #d4af3740;background:linear-gradient(135deg,#d4af3717,#d4af3705);padding:20px;border-radius:21px;text-align:center;margin-top:20px}
 .certificate-card>i{font-size:33px;color:var(--gold);margin-bottom:11px}
 .certificate-card h3{font-size:15px}
 .certificate-card p{font-size:10px;color:var(--muted);line-height:1.8;margin:8px 0 15px}
@@ -137,7 +137,7 @@ input:focus{border-color:rgba(212,175,55,.65)}
 .footer{text-align:center;font-size:9px;color:#5d5d68;margin-top:25px;line-height:1.9}
 .footer i{color:var(--gold);margin-right:4px}
 
-/* PREMIUM CERTIFICATE */
+/* Certificate is fixed-size A4 landscape for PDF capture. */
 #pdfTemplate{
   display:none;
   width:1123px;
@@ -150,11 +150,7 @@ input:focus{border-color:rgba(212,175,55,.65)}
   font-family:Georgia,"Times New Roman",serif;
 }
 .cert-paper{width:100%;height:100%;padding:9px;box-sizing:border-box;background:#fffdf6;border:2px solid #e0bd52}
-.cert-inner{
-  position:relative;width:100%;height:100%;overflow:hidden;text-align:center;
-  box-sizing:border-box;padding:22px 42px 12px;border:1px solid #b58b27;
-  background:radial-gradient(ellipse at center,#fff 0%,#fffdf5 80%);
-}
+.cert-inner{position:relative;width:100%;height:100%;overflow:hidden;text-align:center;box-sizing:border-box;padding:22px 42px 12px;border:1px solid #b58b27;background:radial-gradient(ellipse at center,#fff 0%,#fffdf5 80%)}
 .cert-corner{position:absolute;width:42px;height:42px;border-color:#c6a13a;border-style:solid}
 .cert-corner.tl{top:7px;left:7px;border-width:2px 0 0 2px}
 .cert-corner.tr{top:7px;right:7px;border-width:2px 2px 0 0}
@@ -165,20 +161,13 @@ input:focus{border-color:rgba(212,175,55,.65)}
 .cert-subbrand{font-family:Arial,sans-serif;color:#a17a1c;font-size:10px;letter-spacing:6px;margin-top:4px}
 .cert-rule{display:flex;align-items:center;justify-content:center;gap:13px;margin:10px auto;color:#b58b27}
 .cert-rule:before,.cert-rule:after{content:"";height:1px;width:100px;background:linear-gradient(90deg,transparent,#b58b27)}
-.cert-rule:after{transform:scaleX(-1)}
-.cert-rule i{font-size:14px}
 .cert-heading{font-size:38px;font-weight:bold;line-height:1.1;letter-spacing:2px;color:#0a2242}
 .cert-caption{font-family:Arial,sans-serif;color:#a17a1c;font-size:10px;letter-spacing:5px;margin-top:7px}
 .cert-recipient{font-family:Arial,sans-serif;color:#686d76;font-size:11px;letter-spacing:1.5px;margin-top:12px}
 #pdfName{display:table;max-width:85%;overflow-wrap:anywhere;margin:6px auto 0;padding:0 20px 6px;border-bottom:2px solid #d4af37;color:#0a2242;font-size:34px;line-height:1.15;font-weight:bold;letter-spacing:1px}
 .cert-message{font-family:Arial,sans-serif;color:#454d59;font-size:13px;line-height:1.55;max-width:800px;margin:9px auto 0}
 .cert-message strong{color:#142d4c}
-.cert-class-box{
-  display:inline-flex;align-items:center;justify-content:center;gap:12px;
-  margin-top:10px;padding:9px 22px;min-width:310px;
-  border:1px solid #d4af37;border-radius:8px;
-  background:linear-gradient(130deg,#fffdf6,#fff7df,#fffdf6);
-}
+.cert-class-box{display:inline-flex;align-items:center;justify-content:center;gap:12px;margin-top:10px;padding:9px 22px;min-width:310px;border:1px solid #d4af37;border-radius:8px;background:linear-gradient(130deg,#fffdf6,#fff7df,#fffdf6)}
 .cert-class-icon{font-size:22px;color:#a17a1c}
 .cert-class-label{font-family:Arial,sans-serif;font-size:9px;color:#9b7620;letter-spacing:2px;text-align:left}
 #pdfClassType{font-family:Arial,sans-serif;font-size:15px;font-weight:bold;color:#0a2242;text-align:left;margin-top:4px}
@@ -189,11 +178,7 @@ input:focus{border-color:rgba(212,175,55,.65)}
 .cert-signature{text-align:center;width:235px;color:#18304f;font-size:10px}
 .cert-signature-line{border-top:1px solid #b58b27;padding-top:6px;margin-bottom:5px;font-size:9px;letter-spacing:1px}
 .cert-signature strong{font-size:11px}
-.cert-seal{
-  width:70px;height:70px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
-  flex-direction:column;border:3px double #c6a13a;border-radius:50%;outline:1px solid #d4af37;
-  outline-offset:3px;color:#a17a1c;background:radial-gradient(circle,#fffdf4,#f8e7ae);
-}
+.cert-seal{width:70px;height:70px;flex-shrink:0;display:flex;align-items:center;justify-content:center;flex-direction:column;border:3px double #c6a13a;border-radius:50%;outline:1px solid #d4af37;outline-offset:3px;color:#a17a1c;background:radial-gradient(circle,#fffdf4,#f8e7ae)}
 .cert-seal i{font-size:21px;margin-bottom:3px}
 .cert-seal b{font-size:10px;letter-spacing:2px}
 .cert-seal span{font-size:7px;letter-spacing:1px;margin-top:2px}
@@ -233,7 +218,7 @@ input:focus{border-color:rgba(212,175,55,.65)}
   <section class="panel" id="searchPanel">
     <div class="eyebrow">WELCOME BACK</div>
     <h2 class="login-title">Your journey awaits.</h2>
-    <p class="login-desc">Access your personal driving dashboard, track your sessions and view your training progress.</p>
+    <p class="login-desc">Access your driving dashboard, track sessions and view your training progress.</p>
     <label class="label" for="userPhone">REGISTERED MOBILE NUMBER</label>
     <div class="field">
       <i class="fa-solid fa-mobile-screen-button"></i>
@@ -280,7 +265,7 @@ input:focus{border-color:rgba(212,175,55,.65)}
       </div>
       <div class="stat-card" style="grid-column:1/-1">
         <div class="stat-top"><div class="stat-icon"><i class="fa-solid fa-users"></i></div><span class="stat-tag">TRAINING MODE</span></div>
-        <div class="stat-label">Class Type</div><div class="stat-value" id="dispClassType">Not specified</div><div class="stat-foot" id="classTypeDescription">Personal or group training</div>
+        <div class="stat-label">Class Type</div><div class="stat-value" id="dispClassType">Not specified</div><div class="stat-foot" id="classTypeDescription">Registered training mode</div>
       </div>
     </div>
 
@@ -339,20 +324,17 @@ input:focus{border-color:rgba(212,175,55,.65)}
       <button class="btn btn-dark" id="helpBtn" type="button"><i class="fa-brands fa-whatsapp"></i> CONTACT ADMIN</button>
       <button class="btn btn-green" id="shareBtn" type="button"><i class="fa-solid fa-share-nodes"></i> SHARE ACADEMY</button>
     </div>
-    <button class="btn btn-dark" id="logoutBtn" type="button" style="margin-top:10px"><i class="fa-solid fa-arrow-right-from-bracket"></i> LOG OUT</button>
+    <button class="btn btn-dark logout-btn" id="logoutBtn" type="button" style="margin-top:10px"><i class="fa-solid fa-arrow-right-from-bracket"></i> LOG OUT</button>
   </section>
 
   <footer class="footer"><i class="fa-solid fa-car-side"></i> ABHINAASH A1 DRIVING ACADEMY<br>DRIVE SMART. DRIVE SAFE.</footer>
 </main>
 
-<!-- PREMIUM A4 LANDSCAPE CERTIFICATE -->
 <div id="pdfTemplate" aria-hidden="true">
   <div class="cert-paper">
     <div class="cert-inner">
-      <div class="cert-corner tl"></div>
-      <div class="cert-corner tr"></div>
-      <div class="cert-corner bl"></div>
-      <div class="cert-corner br"></div>
+      <div class="cert-corner tl"></div><div class="cert-corner tr"></div>
+      <div class="cert-corner bl"></div><div class="cert-corner br"></div>
 
       <div class="cert-topline">EXCELLENCE • SKILL • RESPONSIBILITY</div>
       <div class="cert-brand">ABHINAASH A1</div>
@@ -377,9 +359,7 @@ input:focus{border-color:rgba(212,175,55,.65)}
           <div id="pdfClassType">NOT SPECIFIED</div>
         </div>
       </div>
-
       <br>
-
       <div class="cert-date-box">
         <div class="cert-date-label">TRAINING COMPLETION DATE</div>
         <div id="pdfDate">Date not recorded</div>
@@ -391,20 +371,15 @@ input:focus{border-color:rgba(212,175,55,.65)}
           <strong>ABHINAASH A1</strong>
           <div style="font-size:10px;margin-top:4px">Driving Academy</div>
         </div>
-
         <div class="cert-seal">
-          <i class="fa-solid fa-award"></i>
-          <b>A1</b>
-          <span>ACHIEVEMENT</span>
+          <i class="fa-solid fa-award"></i><b>A1</b><span>ACHIEVEMENT</span>
         </div>
-
         <div class="cert-signature">
           <div class="cert-signature-line">TRAINING RECORD</div>
           <strong>STUDENT ACHIEVEMENT</strong>
           <div style="font-size:10px;margin-top:4px">Completion record</div>
         </div>
       </div>
-
       <div class="cert-footer">DRIVE SMART • DRIVE SAFE • DRIVE RESPONSIBLY</div>
     </div>
   </div>
@@ -429,7 +404,6 @@ const db = getFirestore(app);
 let currentData = null;
 let unsubscribe = null;
 let requestId = 0;
-
 const $ = id => document.getElementById(id);
 
 function setMessage(message, error = true) {
@@ -452,7 +426,48 @@ function unlockBadge(id, condition) {
   $(id).classList.toggle("unlocked", Boolean(condition));
 }
 
-/* Preserve the existing session calculation. */
+/*
+  Looks through common class-mode field names and values.
+  If the field is missing, do not guess the student's actual class type.
+*/
+function getClassType(data) {
+  const keys = [
+    "classType", "trainingType", "batchType", "sessionType",
+    "learningMode", "trainingMode", "classMode", "lessonType",
+    "packageType", "courseType", "mode", "type", "batch",
+    "trainingCategory", "classCategory", "training_mode",
+    "class_type", "batch_type", "learning_mode", "package",
+    "packageName", "courseName", "planName"
+  ];
+
+  for (const key of keys) {
+    const raw = data[key];
+
+    if (typeof raw !== "string" || !raw.trim()) continue;
+
+    const value = raw.trim().toLowerCase().replace(/[_-]+/g, " ");
+
+    if (/personal|private|one\s*to\s*one|1\s*on\s*1|individual/.test(value)) {
+      return "Personal Training";
+    }
+
+    if (/\bgroup\b|\bbatch\b|shared/.test(value)) {
+      return "Group Training";
+    }
+  }
+
+  // Check nested objects if a training mode is stored inside one.
+  for (const value of Object.values(data)) {
+    if (value && typeof value === "object" && !Array.isArray(value) &&
+        typeof value.toDate !== "function" && typeof value.seconds !== "number") {
+      const nested = getClassType(value);
+      if (nested !== "Not specified") return nested;
+    }
+  }
+
+  return "Not specified";
+}
+
 function getCompletedCount(data, logs, total) {
   return Math.min(total, Math.max(logs.length, Number(data.remaining) || 0));
 }
@@ -468,57 +483,6 @@ function calculateKilometres(logs, done) {
 
   if (done > logs.length) km += (done - logs.length) * 5;
   return km;
-}
-
-/*
-  Read class type from common Firebase field names.
-  Add your actual field name to this list if needed.
-*/
-function getClassType(data) {
-  const possibleFields = [
-    data.classType,
-    data.trainingType,
-    data.batchType,
-    data.sessionType,
-    data.learningMode,
-    data.trainingMode,
-    data.classMode,
-    data.lessonType,
-    data.packageType
-  ];
-
-  let value = "";
-
-  for (const field of possibleFields) {
-    if (typeof field === "string" && field.trim()) {
-      value = field.trim();
-      break;
-    }
-  }
-
-  if (!value) return "Not specified";
-
-  const normalized = value.toLowerCase().replace(/[_-]+/g, " ").trim();
-
-  if (
-    normalized.includes("personal") ||
-    normalized.includes("private") ||
-    normalized.includes("one to one") ||
-    normalized.includes("1 on 1") ||
-    normalized.includes("individual")
-  ) {
-    return "Personal Training";
-  }
-
-  if (
-    normalized.includes("group") ||
-    normalized.includes("batch") ||
-    normalized.includes("shared")
-  ) {
-    return "Group Training";
-  }
-
-  return value.replace(/\b\w/g, character => character.toUpperCase());
 }
 
 function formatDate(value) {
@@ -554,13 +518,8 @@ function formatDate(value) {
           "july","august","september","october","november","december"
         ];
         const month = months.findIndex(m => m.startsWith(match[2].toLowerCase()));
-
         if (month >= 0) {
-          date = new Date(
-            Number(match[3]) || new Date().getFullYear(),
-            month,
-            Number(match[1])
-          );
+          date = new Date(Number(match[3]) || new Date().getFullYear(), month, Number(match[1]));
         }
       } else {
         const parsed = new Date(text);
@@ -572,22 +531,17 @@ function formatDate(value) {
   if (!date || isNaN(date.getTime())) return null;
 
   return date.toLocaleDateString("en-GB", {
-    day:"2-digit",
-    month:"long",
-    year:"numeric"
+    day:"2-digit", month:"long", year:"numeric"
   });
 }
 
 function getTrainingCompletionDate(data) {
-  const dateFields = [
-    data.trainingCompletedDate,
-    data.completionDate,
-    data.completedAt,
-    data.trainingEndDate,
-    data.courseCompletionDate
+  const fields = [
+    data.trainingCompletedDate, data.completionDate, data.completedAt,
+    data.trainingEndDate, data.courseCompletionDate
   ];
 
-  for (const value of dateFields) {
+  for (const value of fields) {
     const formatted = formatDate(value);
     if (formatted) return formatted;
   }
@@ -597,18 +551,16 @@ function getTrainingCompletionDate(data) {
   for (let i = logs.length - 1; i >= 0; i--) {
     if (typeof logs[i] !== "string") continue;
 
-    const entry = logs[i];
-    const dateText = entry.split(/\s+[—|]\s+/)[0].trim();
+    const dateText = logs[i].split(/\s+[—|]\s+/)[0].trim();
+    const direct = formatDate(dateText);
+    if (direct) return direct;
 
-    const directDate = formatDate(dateText);
-    if (directDate) return directDate;
-
-    const dateMatch = dateText.match(
+    const match = dateText.match(
       /\b\d{1,2}[/-]\d{1,2}[/-]\d{4}\b|\b\d{1,2}\s+[A-Za-z]{3,9}(?:\s+\d{4})?\b|\b\d{4}-\d{2}-\d{2}\b/
     );
 
-    if (dateMatch) {
-      const parsed = formatDate(dateMatch[0]);
+    if (match) {
+      const parsed = formatDate(match[0]);
       if (parsed) return parsed;
     }
   }
@@ -624,13 +576,10 @@ function renderHistory(logs, done) {
   if (!logs.length && !done) {
     const empty = document.createElement("div");
     empty.className = "empty";
-
     const icon = document.createElement("i");
     icon.className = "fa-regular fa-calendar";
-
     const message = document.createElement("span");
     message.textContent = "No training sessions recorded yet.";
-
     empty.append(icon, message);
     timeline.appendChild(empty);
     return;
@@ -697,7 +646,7 @@ function renderProfile(data) {
   $("classTypeDescription").textContent =
     classType === "Personal Training" ? "Individual driving instruction" :
     classType === "Group Training" ? "Group or batch driving instruction" :
-    "Check the registered training mode";
+    "Class type not found in the student record";
 
   $("dispPercent").textContent = percent + "%";
   $("progressPercentText").textContent = percent + "%";
@@ -725,8 +674,7 @@ function renderProfile(data) {
   unlockBadge("badgeElite", done >= total);
 
   $("dispEarn").textContent = formatMoney(referrals * rewardPerReferral);
-  $("referralCount").textContent =
-    referrals + " referral" + (referrals === 1 ? "" : "s") + " recorded";
+  $("referralCount").textContent = referrals + " referral" + (referrals === 1 ? "" : "s") + " recorded";
   $("referralSummary").textContent = formatMoney(rewardPerReferral) + " per referral";
 
   $("distanceNote").textContent =
@@ -734,7 +682,6 @@ function renderProfile(data) {
     ". Sessions without a KM value use a 5 km estimate.";
 
   $("premiumCertificate").style.display = done >= total ? "block" : "none";
-
   $("pdfName").textContent = String(data.name || "STUDENT").trim().toUpperCase();
   $("pdfDate").textContent = completionDate;
   $("pdfClassType").textContent = classType.toUpperCase();
@@ -791,7 +738,6 @@ function loadProfile() {
   );
 }
 
-/* Mobile-friendly PDF export with class type, student name and completion date. */
 async function downloadPDF() {
   if (!currentData || !currentData.name) {
     alert("Student information is not available.");
@@ -808,7 +754,7 @@ async function downloadPDF() {
   }
 
   if (typeof window.html2pdf !== "function") {
-    alert("PDF library not loaded. Check your internet connection and refresh.");
+    alert("PDF library failed to load. Check your internet and refresh the page.");
     return;
   }
 
@@ -830,15 +776,17 @@ async function downloadPDF() {
   if (button) button.disabled = true;
 
   try {
-    // Render off-screen so the wide certificate does not disrupt mobile layout.
+    /*
+      Keep the fixed-size certificate rendered and measurable.
+      Scale 1 reduces canvas memory use on mobile browsers.
+    */
     element.style.display = "block";
-    element.style.position = "absolute";
-    element.style.left = "-1200px";
+    element.style.position = "fixed";
+    element.style.left = "0";
     element.style.top = "0";
-    element.style.zIndex = "1";
+    element.style.zIndex = "99999";
 
     await document.fonts.ready;
-
     await new Promise(resolve => {
       requestAnimationFrame(() => requestAnimationFrame(resolve));
     });
@@ -851,12 +799,16 @@ async function downloadPDF() {
       .set({
         filename: "A1_Training_Certificate_" + safeName + ".pdf",
         margin: 0,
-        image: {type:"jpeg",quality:0.95},
+        image: {type:"jpeg",quality:0.92},
         html2canvas: {
           scale: 1,
           useCORS: true,
           backgroundColor: "#07172d",
-          logging: false,
+          logging: true,
+          width: 1123,
+          height: 794,
+          windowWidth: 1123,
+          windowHeight: 794,
           scrollX: 0,
           scrollY: 0
         },
@@ -875,7 +827,7 @@ async function downloadPDF() {
     console.error("Certificate PDF error:", error);
     alert(
       "Certificate PDF error: " +
-      (error?.message || "Unknown rendering error") +
+      (error?.message || String(error) || "Unknown rendering error") +
       "\n\nPlease refresh and try again."
     );
   } finally {
@@ -895,7 +847,6 @@ function contactAdmin() {
     "Hi Abhinaash, I am " + name +
     ". I need help regarding my driving training and slots."
   );
-
   window.location.href = "https://wa.me/917008186187?text=" + message;
 }
 
