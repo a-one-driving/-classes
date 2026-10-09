@@ -3,239 +3,235 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#090c18">
-<title>A1 Driving | Achievement Dashboard</title>
+<meta name="theme-color" content="#090d1b">
+<title>A1 Driving | Student Dashboard</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --bg:#090c18;
-  --panel:#111829;
-  --gold:#ffc653;
-  --green:#47d7a0;
-  --muted:#929db4;
-  --border:#ffffff14;
+  --bg:#090d1b;--panel:#111a2c;--gold:#ffc653;
+  --green:#42e5a0;--muted:#96a5bf;--border:#ffffff16;
 }
 *{box-sizing:border-box;margin:0;padding:0;font-family:Poppins,sans-serif}
 body{
-  background:radial-gradient(ellipse at top,#1c263d,var(--bg) 60%);
-  color:white;min-height:100vh;padding:15px 10px 35px;
+  min-height:100vh;padding:16px 10px 35px;color:white;
+  background:radial-gradient(ellipse at top,#24314a 0%,#090d1b 65%);
 }
 .container{max-width:470px;margin:auto}
-.brand{text-align:center;margin:12px 0 23px}
-.brand h1{font-size:25px;color:var(--gold);font-weight:800;letter-spacing:2px}
-.brand p{font-size:10px;letter-spacing:4px;color:var(--muted)}
+.brand{text-align:center;margin:10px 0 24px}
+.brand h1{font-size:25px;font-weight:800;color:var(--gold);letter-spacing:2px}
+.brand p{font-size:10px;color:var(--muted);letter-spacing:4px}
 .panel{
-  padding:17px 13px;border-radius:24px;
-  background:rgba(12,18,33,.94);
-  border:1px solid var(--border);
+  padding:16px 12px;border-radius:23px;
+  background:#0d1526ed;border:1px solid var(--border);
   box-shadow:0 20px 60px #0006;
 }
-.label{display:block;color:var(--muted);font-size:11px;margin-bottom:8px}
+.label{display:block;font-size:11px;color:var(--muted);margin-bottom:8px}
 input{
-  width:100%;padding:15px;background:#090f1e;
-  border:1px solid #394661;border-radius:12px;
-  color:white;text-align:center;font-size:17px;outline:none;margin-bottom:12px
+  width:100%;padding:15px;border-radius:12px;
+  background:#080e1b;border:1px solid #354762;
+  color:white;font-size:17px;text-align:center;outline:none;margin-bottom:12px
 }
 button{font-family:inherit;cursor:pointer}
 .primary{
   width:100%;padding:14px;border:0;border-radius:12px;
-  background:linear-gradient(135deg,#ffe89b,#ffad35);
+  background:linear-gradient(135deg,#ffe99b,#ffad35);
   color:#19131a;font-weight:800;font-size:14px
 }
-#loader{display:none;text-align:center;color:var(--gold);padding:12px}
+#loader{display:none;padding:12px;text-align:center;color:var(--gold)}
 #profileContent{display:none}
-.student{text-align:center;margin:6px 0 15px}
+.student{text-align:center;margin:6px 0 16px}
 .student h2{font-size:22px;overflow-wrap:anywhere}
 .student span{
-  display:inline-block;margin-top:8px;padding:5px 12px;border-radius:20px;
-  color:var(--gold);background:#ffc65312;border:1px solid #ffc65340;font-size:10px
+  display:inline-block;margin-top:8px;padding:5px 12px;
+  border-radius:20px;color:var(--gold);background:#ffc65312;
+  border:1px solid #ffc65345;font-size:10px
 }
-.hero{text-align:center;padding:8px 0 19px}
-.trophy{font-size:61px;filter:drop-shadow(0 0 16px #ffc653)}
+.hero{text-align:center;padding:8px 0 18px}
+.hero-icon{font-size:54px;filter:drop-shadow(0 0 14px #ffc653)}
 .hero h2{
-  font-size:29px;font-weight:800;letter-spacing:2px;
-  background:linear-gradient(#ffe49a,#ffad35);
+  font-size:27px;font-weight:800;letter-spacing:1px;
+  background:linear-gradient(#ffe99c,#ffae36);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent
 }
-.hero p{font-size:11px;color:#b7c1d6;margin-top:6px;line-height:1.8}
+.hero p{font-size:10px;color:#b9c8df;margin-top:6px;line-height:1.8}
 
 .filters{display:flex;gap:7px;overflow-x:auto;padding:3px 1px 14px;scrollbar-width:none}
 .filters::-webkit-scrollbar{display:none}
 .filter{
   flex-shrink:0;padding:9px 12px;border:1px solid transparent;
-  background:#192136;color:#bdc8dd;border-radius:30px;
+  background:#19243a;color:#c2cde0;border-radius:25px;
   font-size:10px;font-weight:700;white-space:nowrap
 }
 .filter.active{
-  background:linear-gradient(135deg,#ffe38b,#ffa92f);color:#191323;
-  box-shadow:0 0 17px #ffc65340
+  color:#1b1520;background:linear-gradient(135deg,#ffe38b,#ffa72d);
+  box-shadow:0 0 18px #ffc65340
 }
 .stats{
   display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;
-  padding:17px 3px;margin-bottom:24px;border-radius:20px;
-  background:linear-gradient(135deg,#252c3c,#191f30);border:1px solid var(--border)
+  padding:16px 3px;margin-bottom:22px;border-radius:19px;
+  background:linear-gradient(140deg,#242f44,#171e30);border:1px solid var(--border)
 }
 .stat{text-align:center;min-width:0}
-.stat+.stat{border-left:1px solid #ffffff16}
-.stat strong{font-size:27px;display:block;font-weight:800}
-.stat small{display:block;font-size:10px;color:#b3bfd2;margin-top:5px}
+.stat+.stat{border-left:1px solid #ffffff17}
+.stat strong{display:block;font-size:27px;font-weight:800}
+.stat small{display:block;color:#b9c5d9;font-size:10px;margin-top:4px}
 #earnedCount{color:var(--gold)}
 .ring{
-  width:62px;height:62px;border-radius:50%;margin:0 auto 5px;
-  position:relative;display:grid;place-items:center;
-  background:conic-gradient(var(--green) var(--progress,0%),#394259 0)
+  width:61px;height:61px;border-radius:50%;margin:0 auto 5px;
+  display:grid;place-items:center;position:relative;
+  background:conic-gradient(var(--green) var(--progress,0%),#354159 0)
 }
-.ring:before{content:"";position:absolute;inset:7px;background:#202638;border-radius:50%}
-.ring span{position:relative;color:var(--green);font-size:11px;font-weight:800}
+.ring:before{content:"";position:absolute;inset:7px;background:#202b40;border-radius:50%}
+.ring span{position:relative;font-size:11px;font-weight:800;color:var(--green)}
 
-.section-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:21px 0 13px}
-.section-head h3{font-size:12px;letter-spacing:1.4px;color:#e2e9f8}
-.pill{padding:6px 9px;border-radius:20px;background:#47d7a015;color:var(--green);font-size:9px;white-space:nowrap}
+.section-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:20px 0 13px}
+.section-head h3{font-size:12px;letter-spacing:1px;color:#e4ecfb}
+.pill{padding:6px 8px;border-radius:20px;background:#42e5a015;color:var(--green);font-size:9px;white-space:nowrap}
 .badge-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 
-/* 3D MEDAL BADGES */
+/* Cartoon character badge cards */
 .badge-card{
-  min-width:0;min-height:158px;padding:12px 4px 10px;
-  border:1px solid #3b4861;border-radius:18px;
-  background:linear-gradient(150deg,#222b40,#101625 75%);
+  min-width:0;min-height:158px;padding:10px 4px;
   display:flex;flex-direction:column;align-items:center;text-align:center;
   position:relative;overflow:hidden;isolation:isolate;
-  transition:transform .25s,border-color .25s;
+  border:1px solid #40516b;border-radius:17px;
+  background:linear-gradient(150deg,#202e45,#101827 75%);
+  transition:transform .2s,border-color .2s;
 }
 .badge-card:before{
   content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
-  background:linear-gradient(115deg,transparent 25%,#ffffff0a 43%,#ffffff20 50%,#ffffff05 56%,transparent 72%);
-  transform:translateX(-120%);
-  animation:shine 5s ease-in-out infinite;
+  background:linear-gradient(115deg,transparent 25%,#ffffff08 45%,#ffffff20 50%,transparent 65%);
+  transform:translateX(-130%);animation:shine 5s ease-in-out infinite
 }
-.badge-card.earned{border-color:#ffc65388}
-.badge-card.earned.rarity-epic{border-color:#668bff;box-shadow:inset 0 0 24px #507bff18}
-.badge-card.earned.rarity-legendary{border-color:#ffc653;box-shadow:inset 0 0 24px #ffc65320}
-.badge-card.locked{filter:saturate(.35);opacity:.65}
 @keyframes shine{
-  0%,65%{transform:translateX(-120%)}
-  85%,100%{transform:translateX(120%)}
+  0%,65%{transform:translateX(-130%)}
+  85%,100%{transform:translateX(130%)}
 }
-.medal{
-  --metal:#dba83e;
-  width:67px;height:67px;flex-shrink:0;
-  border-radius:50%;margin-bottom:9px;
-  display:grid;place-items:center;position:relative;
-  background:
-    radial-gradient(circle at 30% 22%,#fff9 0 3%,transparent 20%),
-    radial-gradient(circle at 35% 25%,#fff5,#fff0 35%),
-    linear-gradient(135deg,#fff1a3 0%,var(--metal) 25%,#80521b 50%,var(--metal) 72%,#fff0a0 100%);
-  border:2px solid #fff6;
-  box-shadow:inset 0 0 0 3px #4a351e,inset 0 0 0 5px #ffe29b,
-    0 0 16px color-mix(in srgb,var(--metal) 38%,transparent);
-  animation:medalFloat 3s ease-in-out infinite;
+.badge-card.earned{border-color:#40e9a080}
+.badge-card.earned.rarity-rare{border-color:#559dff}
+.badge-card.earned.rarity-epic{border-color:#a17bff}
+.badge-card.earned.rarity-legendary{border-color:#ffc653;box-shadow:inset 0 0 20px #ffc65318}
+.badge-card.locked{filter:saturate(.5);opacity:.68}
+
+.car-frame{
+  width:76px;height:76px;position:relative;flex-shrink:0;
+  display:grid;place-items:center;margin-bottom:8px;
+  border-radius:50%;border:2px solid #4e6486;
+  background:radial-gradient(circle,#344966,#111827 75%);
+  box-shadow:inset 0 0 12px #ffffff13;
 }
-.medal:before{
-  content:"";position:absolute;inset:8px;border-radius:50%;
-  border:1px solid #ffffffb0;box-shadow:inset 0 0 9px #0005
+.earned .car-frame{
+  border-color:#ffd46d;
+  box-shadow:0 0 18px #ffc65330,inset 0 0 12px #ffc65314;
 }
-.medal:after{
-  content:"";position:absolute;inset:0;border-radius:50%;
-  background:linear-gradient(130deg,#fff7,transparent 38%,transparent 62%,#0003);
-  pointer-events:none
+.rarity-rare .car-frame{border-color:#64a9ff}
+.rarity-epic .car-frame{border-color:#a28aff}
+.rarity-legendary .car-frame{border-color:#ffc653;box-shadow:0 0 23px #ffc6534a}
+.car-frame img{
+  width:100%;height:100%;object-fit:contain;border-radius:50%;
+  padding:2px;position:relative;z-index:2
 }
-.medal span{font-size:29px;filter:drop-shadow(0 2px 2px #0008);z-index:1}
-.rarity-rare .medal{
-  --metal:#83b9ff;
-  background:linear-gradient(135deg,#e7f6ff,#6595d4 35%,#243d70 65%,#d9f3ff)
+/* Fallback character when no GIF URL has been supplied */
+.car-emoji{
+  font-size:39px;line-height:1;display:block;
+  filter:drop-shadow(0 4px 3px #0008);
+  animation:carBounce 2s ease-in-out infinite
 }
-.rarity-epic .medal{
-  --metal:#9879ff;
-  background:linear-gradient(135deg,#f4deff,#9363e6 35%,#3e287d 68%,#d7c6ff)
+@keyframes carBounce{
+  0%,100%{transform:translateY(0) rotate(-2deg)}
+  50%{transform:translateY(-4px) rotate(2deg)}
 }
-.rarity-legendary .medal{
-  --metal:#ffc653;
-  background:linear-gradient(135deg,#fff5ba,#ffbf39 35%,#9e4e0b 66%,#fff0a0);
-  animation:medalFloat 2.5s ease-in-out infinite,legendGlow 2.2s ease-in-out infinite alternate
-}
-@keyframes medalFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-3px) rotate(2deg)}}
-@keyframes legendGlow{from{filter:drop-shadow(0 0 2px #ffc65330)}to{filter:drop-shadow(0 0 9px #ffc653aa)}}
-.badge-card.locked .medal{animation:none;filter:grayscale(.8)}
+.badge-card.locked .car-emoji{animation:none;filter:grayscale(.7)}
+.earned .car-emoji{filter:drop-shadow(0 0 7px #ffc65365)}
 .badge-name{font-size:10px;font-weight:700;line-height:1.5;overflow-wrap:anywhere}
 .rarity{
   margin-top:7px;padding:4px 7px;border-radius:20px;
-  font-size:8px;font-weight:800;letter-spacing:.5px;background:#ffffff12;color:#bac5d8
+  font-size:8px;font-weight:800;letter-spacing:.5px;
+  background:#ffffff12;color:#c0cadb
 }
-.rarity.common{color:#bdc7d9}
-.rarity.rare{background:#347fff20;color:#83b5ff}
-.rarity.epic{background:#8159ff22;color:#c0a9ff}
-.rarity.legendary{background:#ffbc3620;color:#ffd06e}
-.badge-status{font-size:8px;color:#98a6bc;line-height:1.5;margin-top:7px}
+.rarity.common{color:#c0cadb}
+.rarity.rare{background:#267aff24;color:#8abaff}
+.rarity.epic{background:#8255ff25;color:#c3a8ff}
+.rarity.legendary{background:#ffc65320;color:#ffd36d}
+.badge-status{font-size:8px;color:#9aabc4;line-height:1.5;margin-top:6px}
 .earned .badge-status{color:var(--green)}
+.unlock-check{
+  position:absolute;right:6px;top:6px;width:20px;height:20px;
+  border-radius:50%;background:#37e99c;color:#062719;
+  display:grid;place-items:center;font-size:12px;font-weight:800
+}
+.lock-icon{position:absolute;right:6px;top:6px;font-size:13px;color:#b2c0d7}
 .empty{grid-column:1/-1;text-align:center;padding:25px;color:var(--muted);font-size:11px}
 
-/* DRIVING JOURNEY */
+/* Driving journey */
 .journey{
-  margin-top:27px;padding:17px 12px 20px;border:1px solid #ffc65330;
-  border-radius:21px;background:linear-gradient(150deg,#1c2538,#101625)
+  margin-top:26px;padding:16px 12px 20px;border:1px solid #ffc65330;
+  border-radius:20px;background:linear-gradient(150deg,#1c293d,#101827)
 }
 .journey-head{display:flex;justify-content:space-between;align-items:center;gap:8px}
-.journey-head h3{font-size:13px;color:#ffe08b}
+.journey-head h3{font-size:13px;color:#ffe18c}
 .journey-head span{font-size:9px;color:var(--muted)}
-.journey-intro{font-size:10px;color:#aebbd0;line-height:1.8;margin:8px 0 21px}
+.journey-intro{font-size:10px;color:#b5c4db;line-height:1.8;margin:8px 0 20px}
 .journey-line{position:relative;padding-left:36px}
 .journey-line:before{
   content:"";position:absolute;left:13px;top:14px;bottom:18px;width:2px;
-  background:linear-gradient(#ffc653,#53617b 70%,#313b50)
+  background:linear-gradient(#ffc653,#536985 70%,#303b50)
 }
-.journey-step{position:relative;padding-bottom:22px}
+.journey-step{position:relative;padding-bottom:21px}
 .journey-step:last-child{padding-bottom:0}
 .journey-dot{
   position:absolute;left:-36px;top:0;width:28px;height:28px;
-  border-radius:50%;display:grid;place-items:center;
-  border:2px solid #4b5871;background:#171e30;font-size:12px;z-index:1
+  display:grid;place-items:center;border-radius:50%;
+  border:2px solid #53617b;background:#151e30;font-size:12px;z-index:1
 }
-.journey-step.completed .journey-dot{border-color:#ffc653;color:#ffd879;background:#ffc65317}
-.journey-step.current .journey-dot{border-color:var(--green);box-shadow:0 0 12px #47d7a040}
-.journey-card{padding:11px;background:#ffffff04;border:1px solid #ffffff10;border-radius:12px}
-.journey-step.completed .journey-card{border-color:#ffc65325}
-.journey-step.current .journey-card{border-color:#47d7a055}
-.journey-top{display:flex;justify-content:space-between;gap:7px;align-items:center}
+.journey-step.completed .journey-dot{border-color:#ffc653;background:#ffc65316}
+.journey-step.current .journey-dot{border-color:var(--green);box-shadow:0 0 12px #42e5a040}
+.journey-card{padding:10px;background:#ffffff04;border:1px solid #ffffff10;border-radius:12px}
+.journey-step.completed .journey-card{border-color:#ffc65326}
+.journey-step.current .journey-card{border-color:#42e5a055}
+.journey-top{display:flex;justify-content:space-between;gap:6px;align-items:center}
 .journey-top h4{font-size:10px}
-.journey-status{font-size:8px;font-weight:800;color:#a0aec3;background:#ffffff0c;padding:4px 6px;border-radius:20px;white-space:nowrap}
+.journey-status{font-size:8px;font-weight:800;color:#a0aec4;background:#ffffff0c;padding:4px 6px;border-radius:20px;white-space:nowrap}
 .completed .journey-status{color:#ffd879;background:#ffc65312}
-.current .journey-status{color:var(--green);background:#47d7a015}
-.journey-card p{font-size:9px;line-height:1.8;color:#aab6cc;margin-top:5px}
-.journey-date{font-size:8px;color:#7e8ba3;margin-top:5px}
+.current .journey-status{color:var(--green);background:#42e5a015}
+.journey-card p{font-size:9px;color:#b1bfd5;line-height:1.8;margin-top:5px}
+.journey-date{font-size:8px;color:#8190aa;margin-top:5px}
 .journey-progress{height:4px;background:#ffffff0e;border-radius:10px;overflow:hidden;margin-top:8px}
-.journey-progress div{height:100%;background:linear-gradient(90deg,#ff9e38,#ffe18c);border-radius:10px}
+.journey-progress div{height:100%;background:linear-gradient(90deg,#ff9e38,#ffe18c)}
 
-.progress-box{border:1px solid var(--border);background:#ffffff04;border-radius:17px;padding:15px;margin-top:20px}
-.progress-row{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-bottom:10px}
+.progress-box{margin-top:20px;padding:14px;border:1px solid var(--border);background:#ffffff04;border-radius:17px}
+.progress-row{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-bottom:9px}
 .bar{height:6px;background:#ffffff12;border-radius:10px;overflow:hidden}
-.bar div{height:100%;background:linear-gradient(90deg,#ff9e38,#ffe18c);transition:width .5s}
+.bar div{height:100%;width:0;background:linear-gradient(90deg,#ff9e38,#ffe18c);transition:width .5s}
 .details{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
 .detail{padding:11px;background:#ffffff05;border:1px solid var(--border);border-radius:11px;min-width:0}
 .detail small{font-size:9px;color:var(--muted);display:block}
 .detail b{font-size:13px;display:block;margin-top:4px;overflow-wrap:anywhere}
-.history{margin-top:23px}
-.history h3{font-size:12px;letter-spacing:1px;margin-bottom:12px;color:#c6cede}
-.log{padding:12px;background:#ffffff05;border-left:3px solid var(--gold);border-radius:10px;margin-bottom:9px}
+.history{margin-top:22px}
+.history h3{font-size:12px;letter-spacing:1px;margin-bottom:12px;color:#d2dff3}
+.log{padding:11px;background:#ffffff05;border-left:3px solid var(--gold);border-radius:10px;margin-bottom:9px}
 .log-top{display:flex;justify-content:space-between;gap:7px;font-size:11px}
 .log-top span{font-size:9px;color:var(--muted)}
-.log p{font-size:10px;color:#bbc2d2;line-height:1.7;margin-top:6px;overflow-wrap:anywhere}
-.wallet{display:flex;justify-content:space-between;align-items:center;margin-top:18px;padding:15px;background:#47d7a010;border:1px solid #47d7a035;border-radius:15px}
+.log p{font-size:10px;color:#bbc9dc;line-height:1.7;margin-top:6px;overflow-wrap:anywhere}
+.wallet{display:flex;justify-content:space-between;align-items:center;margin-top:18px;padding:14px;background:#42e5a010;border:1px solid #42e5a038;border-radius:14px}
 .wallet small{font-size:10px;color:var(--green)}
 .wallet b{font-size:20px}
 .actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:13px}
-.secondary{background:#ffffff07;border:1px solid var(--border);color:white;border-radius:12px;padding:13px 6px;font-size:11px;font-weight:700}
-.logout{display:block;text-align:center;margin-top:23px;color:#8290aa;font-size:11px;cursor:pointer}
-#certificate{display:none;margin-top:18px;padding:16px;border:1px solid #ffc65355;background:#ffc65310;border-radius:15px;text-align:center}
+.secondary{padding:12px 5px;border:1px solid var(--border);border-radius:12px;background:#ffffff07;color:white;font-size:11px;font-weight:700}
+.logout{display:block;text-align:center;margin-top:22px;color:#8b9bb5;font-size:11px;cursor:pointer}
+#certificate{display:none;margin-top:18px;padding:15px;border:1px solid #ffc65355;background:#ffc65310;border-radius:15px;text-align:center}
 #certificate h3{font-size:14px;color:var(--gold)}
 #certificate p{font-size:10px;color:var(--muted);margin:8px 0 12px}
 #pdfTemplate{width:842px;height:595px;position:fixed;left:-10000px;top:0;background:#080b15;color:white;padding:35px;border:12px solid #d4af37}
 #pdfTemplate .inner{height:100%;border:2px solid #d4af37;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px}
 @media(max-width:350px){
-  .panel{padding:14px 9px}.badge-grid{gap:6px}.badge-card{min-height:145px;padding:10px 2px}
-  .medal{width:54px;height:54px}.medal span{font-size:24px}.badge-name{font-size:9px}
+  .panel{padding:13px 8px}.badge-grid{gap:5px}
+  .badge-card{min-height:145px;padding:9px 2px}
+  .car-frame{width:59px;height:59px}.car-emoji{font-size:31px}
+  .badge-name{font-size:9px}
 }
 @media(prefers-reduced-motion:reduce){
   *,*:before,*:after{animation:none!important;transition:none!important}
@@ -255,7 +251,7 @@ button{font-family:inherit;cursor:pointer}
   <label class="label" for="userPhone">ENTER REGISTERED NUMBER</label>
   <input id="userPhone" type="tel" maxlength="10" inputmode="numeric" placeholder="9933xxxxxx">
   <button class="primary" id="loginBtn" onclick="loadProfile()">ACCESS DASHBOARD →</button>
-  <div id="loader">Loading profile...</div>
+  <div id="loader">Loading your profile...</div>
 </section>
 
 <section id="profileContent">
@@ -265,9 +261,9 @@ button{font-family:inherit;cursor:pointer}
   </div>
 
   <section class="hero">
-    <div class="trophy">🏆</div>
-    <h2>ACHIEVEMENT BADGES</h2>
-    <p>Collect achievements and show off your driving progress</p>
+    <div class="hero-icon">🏆</div>
+    <h2>CAR ACHIEVEMENTS</h2>
+    <p>Collect cute car badges and celebrate every driving milestone!</p>
   </section>
 
   <nav class="filters">
@@ -285,7 +281,7 @@ button{font-family:inherit;cursor:pointer}
   </section>
 
   <div class="section-head">
-    <h3 id="galleryTitle">✦ ALL BADGES</h3>
+    <h3 id="galleryTitle">🚗 ALL CAR BADGES</h3>
     <span class="pill" id="galleryCount">0 EARNED</span>
   </div>
   <section class="badge-grid" id="badgeGrid"></section>
@@ -295,7 +291,7 @@ button{font-family:inherit;cursor:pointer}
       <h3>🚘 DRIVING JOURNEY</h3>
       <span id="journeySummary">0% completed</span>
     </div>
-    <p class="journey-intro">Follow your training journey, celebrate every milestone and see what comes next.</p>
+    <p class="journey-intro">Your little car's journey from the first drive to becoming a driving champion.</p>
     <div class="journey-line" id="journeyTimeline"></div>
   </section>
 
@@ -317,12 +313,12 @@ button{font-family:inherit;cursor:pointer}
   </section>
 
   <section class="history">
-    <h3>CLASS HISTORY & FEEDBACK</h3>
+    <h3>📝 CLASS HISTORY & FEEDBACK</h3>
     <div id="attendanceTimeline"></div>
   </section>
 
   <div class="wallet">
-    <div><small>REFERRAL WALLET</small><br><span style="font-size:9px;color:#929db4">Estimated referral rewards</span></div>
+    <div><small>REFERRAL WALLET</small><br><span style="font-size:9px;color:#96a5bf">Estimated referral rewards</span></div>
     <b id="dispEarn">₹0</b>
   </div>
 
@@ -369,25 +365,26 @@ let requestId=0;
 let earnedIds=new Set();
 
 /*
-Optional GIF support:
-Add a real GIF URL to any badge's gif property.
-Leave it empty to use the animated 3D medal design.
+GIF INTEGRATION:
+Put a real hosted animated GIF URL in the gif field.
+Leave gif:"" to use the animated cartoon-car emoji fallback.
+Use transparent-background GIFs for the best appearance.
 */
 const badges=[
-{id:"start",name:"First Drive",icon:"🚘",category:"Milestone",rarity:"common",desc:"Complete your first class",check:s=>s.done>=1,gif:""},
-{id:"p25",name:"Bronze Star",icon:"🥉",category:"Milestone",rarity:"common",desc:"Reach 25% progress",check:s=>s.percent>=25,gif:""},
-{id:"p50",name:"Silver Star",icon:"🥈",category:"Milestone",rarity:"rare",desc:"Reach 50% progress",check:s=>s.percent>=50,gif:""},
-{id:"p75",name:"Gold Star",icon:"🥇",category:"Milestone",rarity:"epic",desc:"Reach 75% progress",check:s=>s.percent>=75,gif:""},
-{id:"complete",name:"Driving Champion",icon:"🏆",category:"Milestone",rarity:"legendary",desc:"Complete all target classes",check:s=>s.done>=s.total,gif:""},
-{id:"five",name:"Five Sessions",icon:"🖐️",category:"Milestone",rarity:"common",desc:"Complete 5 classes",check:s=>s.done>=5,gif:""},
-{id:"ten",name:"Ten Sessions",icon:"🔟",category:"Milestone",rarity:"rare",desc:"Complete 10 classes",check:s=>s.done>=10,gif:""},
-{id:"fifteen",name:"15 Sessions",icon:"🎯",category:"Milestone",rarity:"epic",desc:"Complete 15 classes",check:s=>s.done>=15,gif:""},
-{id:"twenty",name:"20 Sessions",icon:"🌟",category:"Milestone",rarity:"epic",desc:"Complete 20 classes",check:s=>s.done>=20,gif:""},
+{id:"start",name:"First Drive",icon:"🏎️",category:"Milestone",rarity:"common",desc:"Complete your first class",check:s=>s.done>=1,gif:""},
+{id:"p25",name:"Bronze Star",icon:"🚗",category:"Milestone",rarity:"common",desc:"Reach 25% progress",check:s=>s.percent>=25,gif:""},
+{id:"p50",name:"Silver Star",icon:"🚙",category:"Milestone",rarity:"rare",desc:"Reach 50% progress",check:s=>s.percent>=50,gif:""},
+{id:"p75",name:"Gold Star",icon:"🏆",category:"Milestone",rarity:"epic",desc:"Reach 75% progress",check:s=>s.percent>=75,gif:""},
+{id:"complete",name:"Driving Champion",icon:"👑",category:"Milestone",rarity:"legendary",desc:"Complete all target classes",check:s=>s.done>=s.total,gif:""},
+{id:"five",name:"Five Sessions",icon:"🚕",category:"Milestone",rarity:"common",desc:"Complete 5 classes",check:s=>s.done>=5,gif:""},
+{id:"ten",name:"Ten Sessions",icon:"🚙",category:"Milestone",rarity:"rare",desc:"Complete 10 classes",check:s=>s.done>=10,gif:""},
+{id:"fifteen",name:"15 Sessions",icon:"🚘",category:"Milestone",rarity:"epic",desc:"Complete 15 classes",check:s=>s.done>=15,gif:""},
+{id:"twenty",name:"20 Sessions",icon:"🏎️",category:"Milestone",rarity:"epic",desc:"Complete 20 classes",check:s=>s.done>=20,gif:""},
 {id:"distance5",name:"5 KM Club",icon:"🛣️",category:"Milestone",rarity:"common",desc:"Record 5 km",check:s=>s.km>=5,gif:""},
-{id:"distance25",name:"25 KM Club",icon:"🚗",category:"Milestone",rarity:"rare",desc:"Record 25 km",check:s=>s.km>=25,gif:""},
+{id:"distance25",name:"25 KM Club",icon:"🚙",category:"Milestone",rarity:"rare",desc:"Record 25 km",check:s=>s.km>=25,gif:""},
 {id:"distance50",name:"50 KM Club",icon:"🏁",category:"Milestone",rarity:"epic",desc:"Record 50 km",check:s=>s.km>=50,gif:""},
 {id:"streak2",name:"Getting Started",icon:"🔥",category:"Streak",rarity:"common",desc:"Log 2 sessions",check:s=>s.logs.length>=2,gif:""},
-{id:"streak5",name:"Regular Learner",icon:"📅",category:"Streak",rarity:"rare",desc:"Log 5 sessions",check:s=>s.logs.length>=5,gif:""},
+{id:"streak5",name:"Regular Learner",icon:"🚗",category:"Streak",rarity:"rare",desc:"Log 5 sessions",check:s=>s.logs.length>=5,gif:""},
 {id:"streak10",name:"Dedicated Driver",icon:"💪",category:"Streak",rarity:"epic",desc:"Log 10 sessions",check:s=>s.logs.length>=10,gif:""},
 {id:"parking",name:"Parking Pro",icon:"🅿️",category:"Skills",rarity:"rare",desc:"Instructor-confirmed parking",check:s=>s.skills.parking===true,gif:""},
 {id:"reverse",name:"Reverse Master",icon:"↩️",category:"Skills",rarity:"rare",desc:"Instructor-confirmed reverse skill",check:s=>s.skills.reverse===true,gif:""},
@@ -421,16 +418,14 @@ function statsFrom(data){
 }
 
 function renderBadges(){
-  const earned=earnedIds.size;
-  const percent=Math.round(earned/badges.length*100);
-
-  $("earnedCount").textContent=earned;
+  const percent=Math.round(earnedIds.size/badges.length*100);
+  $("earnedCount").textContent=earnedIds.size;
   $("totalCount").textContent=badges.length;
   $("completionText").textContent=percent+"%";
   $("completionRing").style.setProperty("--progress",percent+"%");
 
   const visible=badges.filter(b=>currentCategory==="All"||b.category===currentCategory);
-  $("galleryTitle").textContent="✦ "+(currentCategory==="All"?"ALL BADGES":currentCategory.toUpperCase());
+  $("galleryTitle").textContent="🚗 "+(currentCategory==="All"?"ALL CAR BADGES":currentCategory.toUpperCase());
   $("galleryCount").textContent=visible.filter(b=>earnedIds.has(b.id)).length+" / "+visible.length+" EARNED";
 
   const grid=$("badgeGrid");
@@ -441,21 +436,28 @@ function renderBadges(){
     const card=document.createElement("article");
     card.className="badge-card "+(unlocked?"earned ":"locked ")+"rarity-"+b.rarity;
 
-    const medal=document.createElement("div");
-    medal.className="medal";
+    const frame=document.createElement("div");
+    frame.className="car-frame";
 
     if(b.gif){
       const img=document.createElement("img");
       img.src=b.gif;
-      img.alt=b.name;
+      img.alt=b.name+" animated car badge";
       img.loading="lazy";
-      img.style.cssText="width:100%;height:100%;object-fit:contain;border-radius:50%;z-index:2";
-      img.onerror=()=>{img.remove();const fallback=document.createElement("span");fallback.textContent=b.icon;medal.appendChild(fallback)};
-      medal.appendChild(img);
+
+      img.onerror=()=>{
+        img.remove();
+        const fallback=document.createElement("span");
+        fallback.className="car-emoji";
+        fallback.textContent=b.icon;
+        frame.appendChild(fallback);
+      };
+      frame.appendChild(img);
     }else{
-      const icon=document.createElement("span");
-      icon.textContent=b.icon;
-      medal.appendChild(icon);
+      const fallback=document.createElement("span");
+      fallback.className="car-emoji";
+      fallback.textContent=b.icon;
+      frame.appendChild(fallback);
     }
 
     const name=document.createElement("div");
@@ -470,7 +472,11 @@ function renderBadges(){
     status.className="badge-status";
     status.textContent=unlocked?"✓ EARNED":"🔒 "+b.desc;
 
-    card.append(medal,name,rarity,status);
+    const mark=document.createElement("span");
+    mark.className=unlocked?"unlock-check":"lock-icon";
+    mark.textContent=unlocked?"✓":"🔒";
+
+    card.append(frame,name,rarity,status,mark);
     grid.appendChild(card);
   });
 }
@@ -485,10 +491,10 @@ window.setCategory=(category,button)=>{
 function renderJourney(s){
   const milestones=[
     {at:0,title:"Journey Started",icon:"🚦",desc:"Your driving training profile is ready."},
-    {at:1,title:"First Drive",icon:"🚘",desc:"Your first training session is recorded."},
-    {at:25,title:"Bronze Star",icon:"🥉",desc:"Complete 25% of your class target."},
-    {at:50,title:"Silver Star",icon:"🥈",desc:"Reach halfway through your training."},
-    {at:75,title:"Gold Star",icon:"🥇",desc:"Complete 75% of your class target."},
+    {at:1,title:"First Drive",icon:"🚗",desc:"Your first training session is recorded."},
+    {at:25,title:"Bronze Star",icon:"🚙",desc:"Complete 25% of your class target."},
+    {at:50,title:"Silver Star",icon:"🚘",desc:"Reach halfway through your training."},
+    {at:75,title:"Gold Star",icon:"🏎️",desc:"Complete 75% of your class target."},
     {at:100,title:"Driving Champion",icon:"🏆",desc:"Complete all your target classes."}
   ];
 
@@ -524,7 +530,6 @@ function renderJourney(s){
     const status=document.createElement("span");
     status.className="journey-status";
     status.textContent=completed?"COMPLETED":current?"UP NEXT":"LOCKED";
-
     top.append(title,status);
 
     const desc=document.createElement("p");
@@ -539,7 +544,6 @@ function renderJourney(s){
 
       const track=document.createElement("div");
       track.className="journey-progress";
-
       const fill=document.createElement("div");
       const progress=m.at===1?(s.done>=1?100:0):Math.min(100,s.percent/m.at*100);
       fill.style.width=(completed?100:progress)+"%";
@@ -584,7 +588,7 @@ function renderProfile(data,phone){
 
   if(!s.logs.length){
     const empty=document.createElement("p");
-    empty.style.cssText="font-size:10px;color:#929db4";
+    empty.style.cssText="font-size:10px;color:#96a5bf";
     empty.textContent="No class history available yet.";
     history.appendChild(empty);
   }
@@ -596,10 +600,13 @@ function renderProfile(data,phone){
 
     const top=document.createElement("div");
     top.className="log-top";
+
     const title=document.createElement("b");
     title.textContent="Session "+(i+1);
+
     const date=document.createElement("span");
     date.textContent=parts[0]||"Training Session";
+
     const feedback=document.createElement("p");
     feedback.textContent=parts.slice(1).join(" — ")||"Training session recorded.";
 
