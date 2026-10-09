@@ -4,8 +4,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#09090c">
-<title>Elite Dashboard | ABHINAASH A1 Driving Academy</title>
+<meta name="theme-color" content="#09090d">
+<title>ABHINAASH A1 | Student Dashboard</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -25,7 +25,7 @@
   --gold-gradient:linear-gradient(125deg,#fff0b9,#d4af37 48%,#a67e13);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:20px}
+html{scroll-behavior:smooth}
 body{
   font-family:Poppins,sans-serif;color:#f8f8fb;min-height:100vh;
   background:radial-gradient(ellipse at 50% -12%,rgba(212,175,55,.14),transparent 45%),#09090d;
@@ -38,7 +38,7 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--gold-light);out
 .topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:3px 0 25px}
 .brand{display:flex;align-items:center;gap:11px;min-width:0}
 .brand-logo{width:45px;height:45px;flex-shrink:0;border-radius:15px;background:var(--gold-gradient);color:#141109;display:grid;place-items:center;font-size:21px}
-.brand-name{font-size:17px;line-height:1.3;font-weight:800;letter-spacing:.6px}
+.brand-name{font-size:17px;font-weight:800;letter-spacing:.6px}
 .brand-sub{color:var(--muted);font-size:9px;letter-spacing:2.5px;margin-top:4px;font-weight:600}
 .live-pill{display:flex;align-items:center;gap:6px;border:1px solid rgba(57,217,138,.2);border-radius:30px;padding:7px 9px;color:var(--green);font-size:9px;font-weight:600;white-space:nowrap}
 .live-dot{width:6px;height:6px;background:var(--green);border-radius:50%}
@@ -63,8 +63,8 @@ input:focus{border-color:rgba(212,175,55,.65)}
 #loginMessage{font-size:11px;line-height:1.7;margin-top:12px;color:#ff7474}
 #profileContent{display:none;animation:fadeUp .4s ease both}
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.welcome{position:relative;overflow:hidden;padding:22px 18px;border-radius:25px;border:1px solid rgba(212,175,55,.2);background:linear-gradient(140deg,rgba(212,175,55,.105),rgba(23,23,30,.8) 65%);margin-bottom:19px}
-.welcome-top{display:flex;align-items:center;gap:13px;position:relative}
+.welcome{padding:22px 18px;border-radius:25px;border:1px solid rgba(212,175,55,.2);background:linear-gradient(140deg,rgba(212,175,55,.105),rgba(23,23,30,.8) 65%);margin-bottom:19px}
+.welcome-top{display:flex;align-items:center;gap:13px}
 .avatar{width:57px;height:57px;flex-shrink:0;border-radius:19px;display:grid;place-items:center;font-size:24px;color:#171208;background:var(--gold-gradient)}
 .welcome-copy{min-width:0;flex:1}
 .welcome-label{font-size:9px;color:var(--gold);font-weight:700;letter-spacing:1.5px}
@@ -82,7 +82,7 @@ input:focus{border-color:rgba(212,175,55,.65)}
 .stat-icon{width:33px;height:33px;border-radius:11px;display:grid;place-items:center;color:var(--gold);background:rgba(212,175,55,.09);font-size:13px}
 .stat-tag{font-size:8px;color:var(--muted);text-align:right}
 .stat-label{font-size:9px;color:var(--muted);margin-top:15px}
-.stat-value{font-size:23px;font-weight:700;margin-top:3px;overflow-wrap:anywhere;line-height:1.4}
+.stat-value{font-size:20px;font-weight:700;margin-top:3px;overflow-wrap:anywhere;line-height:1.4}
 .stat-foot{font-size:9px;color:#70707e;margin-top:4px}
 .progress-card,.history-card,.wallet-card{background:var(--card);border:1px solid var(--border);border-radius:21px;padding:17px}
 .progress-layout{display:flex;align-items:center;gap:16px}
@@ -90,7 +90,7 @@ input:focus{border-color:rgba(212,175,55,.65)}
 .ring svg{width:100%;height:100%;transform:rotate(-90deg)}
 .ring circle{fill:none;stroke-width:8}
 .ring-bg{stroke:#303039}
-.ring-fill{stroke:var(--gold);stroke-linecap:round;stroke-dasharray:264;stroke-dashoffset:264;transition:stroke-dashoffset .8s}
+.ring-fill{stroke:var(--gold);stroke-linecap:round;transition:stroke-dashoffset .8s}
 .ring-text{position:absolute;inset:0;display:grid;place-items:center;font-size:20px;font-weight:700}
 .progress-copy{flex:1;min-width:0}
 .progress-copy h4{font-size:14px;font-weight:600}
@@ -137,7 +137,7 @@ input:focus{border-color:rgba(212,175,55,.65)}
 .footer{text-align:center;font-size:9px;color:#5d5d68;margin-top:25px;line-height:1.9}
 .footer i{color:var(--gold);margin-right:4px}
 
-/* ROYAL LUXURY CERTIFICATE */
+/* PREMIUM CERTIFICATE */
 #pdfTemplate{
   display:none;
   width:1123px;
@@ -149,192 +149,55 @@ input:focus{border-color:rgba(212,175,55,.65)}
   color:#10213d;
   font-family:Georgia,"Times New Roman",serif;
 }
-.cert-paper{
-  width:100%;height:100%;
-  padding:9px;
-  box-sizing:border-box;
-  background:#fffdf6;
-  border:2px solid #e0bd52;
-}
+.cert-paper{width:100%;height:100%;padding:9px;box-sizing:border-box;background:#fffdf6;border:2px solid #e0bd52}
 .cert-inner{
-  position:relative;
-  width:100%;height:100%;
-  overflow:hidden;
-  text-align:center;
-  box-sizing:border-box;
-  padding:24px 45px 15px;
-  border:1px solid #b58b27;
-  background:
-    radial-gradient(ellipse at 50% 35%,rgba(255,255,255,1),rgba(255,252,239,.97)),
-    #fffdf6;
+  position:relative;width:100%;height:100%;overflow:hidden;text-align:center;
+  box-sizing:border-box;padding:22px 42px 12px;border:1px solid #b58b27;
+  background:radial-gradient(ellipse at center,#fff 0%,#fffdf5 80%);
 }
-.cert-inner:before,.cert-inner:after{
-  content:"✦";
-  position:absolute;
-  color:#d4af37;
-  font-size:28px;
-  line-height:1;
-}
-.cert-inner:before{top:13px;left:17px}
-.cert-inner:after{top:13px;right:17px}
-.cert-topline{
-  font-family:Arial,sans-serif;
-  color:#a17a1c;
-  font-size:10px;
-  font-weight:bold;
-  letter-spacing:5px;
-}
-.cert-brand{
-  font-family:Arial,sans-serif;
-  color:#0a2242;
-  font-size:29px;
-  font-weight:800;
-  letter-spacing:3px;
-  margin-top:8px;
-}
-.cert-subbrand{
-  font-family:Arial,sans-serif;
-  color:#a17a1c;
-  font-size:10px;
-  letter-spacing:6px;
-  margin-top:4px;
-}
-.cert-rule{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:13px;
-  margin:12px auto;
-  color:#b58b27;
-}
-.cert-rule:before,.cert-rule:after{
-  content:"";
-  height:1px;width:110px;
-  background:linear-gradient(90deg,transparent,#b58b27);
-}
-.cert-rule:after{transform:scaleX(-1)}
-.cert-rule i{font-size:15px}
-.cert-heading{
-  font-size:39px;
-  font-weight:bold;
-  line-height:1.1;
-  letter-spacing:2px;
-  color:#0a2242;
-}
-.cert-caption{
-  font-family:Arial,sans-serif;
-  color:#a17a1c;
-  font-size:10px;
-  letter-spacing:5px;
-  margin-top:8px;
-}
-.cert-recipient{
-  font-family:Arial,sans-serif;
-  color:#686d76;
-  font-size:11px;
-  letter-spacing:1.6px;
-  margin-top:15px;
-}
-#pdfName{
-  display:table;
-  max-width:85%;
-  overflow-wrap:anywhere;
-  margin:7px auto 0;
-  padding:0 20px 7px;
-  border-bottom:2px solid #d4af37;
-  color:#0a2242;
-  font-size:35px;
-  line-height:1.15;
-  font-weight:bold;
-  letter-spacing:1px;
-}
-.cert-message{
-  font-family:Arial,sans-serif;
-  color:#454d59;
-  font-size:14px;
-  line-height:1.6;
-  max-width:800px;
-  margin:11px auto 0;
-}
-.cert-message strong{color:#142d4c}
-.cert-date-box{
-  display:inline-block;
-  min-width:340px;
-  margin-top:13px;
-  padding:10px 25px;
-  border:1px solid #d4af37;
-  border-radius:7px;
-  background:linear-gradient(130deg,#fffdf6,#fff8e4,#fffdf6);
-  box-shadow:0 3px 8px rgba(128,95,20,.08);
-}
-.cert-date-label{
-  font-family:Arial,sans-serif;
-  color:#a17a1c;
-  font-size:9px;
-  letter-spacing:3px;
-  font-weight:bold;
-}
-#pdfDate{
-  color:#0a2242;
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:19px;
-  font-weight:bold;
-  margin-top:6px;
-  min-height:23px;
-}
-.cert-bottom{
-  display:flex;
-  align-items:flex-end;
-  justify-content:space-between;
-  gap:18px;
-  margin-top:15px;
-  font-family:Arial,sans-serif;
-}
-.cert-signature{
-  text-align:center;
-  width:235px;
-  color:#18304f;
-  font-size:10px;
-}
-.cert-signature-line{
-  border-top:1px solid #b58b27;
-  padding-top:6px;
-  margin-bottom:5px;
-  font-size:9px;
-  letter-spacing:1px;
-}
-.cert-signature strong{font-size:11px}
-.cert-seal{
-  width:77px;height:77px;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;flex-direction:column;
-  border:3px double #c6a13a;
-  border-radius:50%;
-  outline:1px solid #d4af37;
-  outline-offset:4px;
-  color:#a17a1c;
-  background:radial-gradient(circle,#fffdf4,#f8e7ae);
-  box-shadow:inset 0 0 0 3px #fffdf6;
-}
-.cert-seal i{font-size:23px;margin-bottom:3px}
-.cert-seal b{font-size:11px;letter-spacing:2px}
-.cert-seal span{font-size:7px;letter-spacing:1px;margin-top:2px}
-.cert-footer{
-  font-family:Arial,sans-serif;
-  font-size:8px;
-  color:#8b846f;
-  letter-spacing:3px;
-  margin-top:11px;
-}
-.cert-corner{
-  position:absolute;
-  width:42px;height:42px;
-  border-color:#c6a13a;
-  border-style:solid;
-}
+.cert-corner{position:absolute;width:42px;height:42px;border-color:#c6a13a;border-style:solid}
 .cert-corner.tl{top:7px;left:7px;border-width:2px 0 0 2px}
 .cert-corner.tr{top:7px;right:7px;border-width:2px 2px 0 0}
 .cert-corner.bl{bottom:7px;left:7px;border-width:0 0 2px 2px}
 .cert-corner.br{bottom:7px;right:7px;border-width:0 2px 2px 0}
+.cert-topline{font-family:Arial,sans-serif;color:#a17a1c;font-size:10px;font-weight:bold;letter-spacing:5px}
+.cert-brand{font-family:Arial,sans-serif;color:#0a2242;font-size:29px;font-weight:800;letter-spacing:3px;margin-top:7px}
+.cert-subbrand{font-family:Arial,sans-serif;color:#a17a1c;font-size:10px;letter-spacing:6px;margin-top:4px}
+.cert-rule{display:flex;align-items:center;justify-content:center;gap:13px;margin:10px auto;color:#b58b27}
+.cert-rule:before,.cert-rule:after{content:"";height:1px;width:100px;background:linear-gradient(90deg,transparent,#b58b27)}
+.cert-rule:after{transform:scaleX(-1)}
+.cert-rule i{font-size:14px}
+.cert-heading{font-size:38px;font-weight:bold;line-height:1.1;letter-spacing:2px;color:#0a2242}
+.cert-caption{font-family:Arial,sans-serif;color:#a17a1c;font-size:10px;letter-spacing:5px;margin-top:7px}
+.cert-recipient{font-family:Arial,sans-serif;color:#686d76;font-size:11px;letter-spacing:1.5px;margin-top:12px}
+#pdfName{display:table;max-width:85%;overflow-wrap:anywhere;margin:6px auto 0;padding:0 20px 6px;border-bottom:2px solid #d4af37;color:#0a2242;font-size:34px;line-height:1.15;font-weight:bold;letter-spacing:1px}
+.cert-message{font-family:Arial,sans-serif;color:#454d59;font-size:13px;line-height:1.55;max-width:800px;margin:9px auto 0}
+.cert-message strong{color:#142d4c}
+.cert-class-box{
+  display:inline-flex;align-items:center;justify-content:center;gap:12px;
+  margin-top:10px;padding:9px 22px;min-width:310px;
+  border:1px solid #d4af37;border-radius:8px;
+  background:linear-gradient(130deg,#fffdf6,#fff7df,#fffdf6);
+}
+.cert-class-icon{font-size:22px;color:#a17a1c}
+.cert-class-label{font-family:Arial,sans-serif;font-size:9px;color:#9b7620;letter-spacing:2px;text-align:left}
+#pdfClassType{font-family:Arial,sans-serif;font-size:15px;font-weight:bold;color:#0a2242;text-align:left;margin-top:4px}
+.cert-date-box{display:inline-block;min-width:310px;margin-top:9px;padding:8px 23px;border:1px solid #d4af37;border-radius:7px;background:#fffdf6}
+.cert-date-label{font-family:Arial,sans-serif;color:#a17a1c;font-size:9px;letter-spacing:3px;font-weight:bold}
+#pdfDate{color:#0a2242;font-size:18px;font-weight:bold;margin-top:5px;min-height:21px}
+.cert-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-top:12px;font-family:Arial,sans-serif}
+.cert-signature{text-align:center;width:235px;color:#18304f;font-size:10px}
+.cert-signature-line{border-top:1px solid #b58b27;padding-top:6px;margin-bottom:5px;font-size:9px;letter-spacing:1px}
+.cert-signature strong{font-size:11px}
+.cert-seal{
+  width:70px;height:70px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  flex-direction:column;border:3px double #c6a13a;border-radius:50%;outline:1px solid #d4af37;
+  outline-offset:3px;color:#a17a1c;background:radial-gradient(circle,#fffdf4,#f8e7ae);
+}
+.cert-seal i{font-size:21px;margin-bottom:3px}
+.cert-seal b{font-size:10px;letter-spacing:2px}
+.cert-seal span{font-size:7px;letter-spacing:1px;margin-top:2px}
+.cert-footer{font-family:Arial,sans-serif;font-size:8px;color:#8b846f;letter-spacing:3px;margin-top:9px}
 
 @media(max-width:360px){
   body{padding:14px 10px 30px}
@@ -345,7 +208,7 @@ input:focus{border-color:rgba(212,175,55,.65)}
   .student-title{font-size:18px}
   .ring{width:84px;height:84px}
   .progress-layout{gap:11px}
-  .stat-value{font-size:21px}
+  .stat-value{font-size:19px}
   .wallet-amount{font-size:21px}
 }
 @media(prefers-reduced-motion:reduce){
@@ -415,6 +278,10 @@ input:focus{border-color:rgba(212,175,55,.65)}
         <div class="stat-top"><div class="stat-icon"><i class="fa-solid fa-flag-checkered"></i></div><span class="stat-tag">TO COMPLETE</span></div>
         <div class="stat-label">Sessions Remaining</div><div class="stat-value" id="dispRemaining">0</div><div class="stat-foot">Until target is reached</div>
       </div>
+      <div class="stat-card" style="grid-column:1/-1">
+        <div class="stat-top"><div class="stat-icon"><i class="fa-solid fa-users"></i></div><span class="stat-tag">TRAINING MODE</span></div>
+        <div class="stat-label">Class Type</div><div class="stat-value" id="dispClassType">Not specified</div><div class="stat-foot" id="classTypeDescription">Personal or group training</div>
+      </div>
     </div>
 
     <div class="section-heading"><h3>COURSE PROGRESS</h3><span id="progressStatus">IN PROGRESS</span></div>
@@ -472,13 +339,13 @@ input:focus{border-color:rgba(212,175,55,.65)}
       <button class="btn btn-dark" id="helpBtn" type="button"><i class="fa-brands fa-whatsapp"></i> CONTACT ADMIN</button>
       <button class="btn btn-green" id="shareBtn" type="button"><i class="fa-solid fa-share-nodes"></i> SHARE ACADEMY</button>
     </div>
-    <button class="btn btn-dark logout-btn" id="logoutBtn" type="button"><i class="fa-solid fa-arrow-right-from-bracket"></i> LOG OUT</button>
+    <button class="btn btn-dark" id="logoutBtn" type="button" style="margin-top:10px"><i class="fa-solid fa-arrow-right-from-bracket"></i> LOG OUT</button>
   </section>
 
   <footer class="footer"><i class="fa-solid fa-car-side"></i> ABHINAASH A1 DRIVING ACADEMY<br>DRIVE SMART. DRIVE SAFE.</footer>
 </main>
 
-<!-- LUXURY A4 LANDSCAPE CERTIFICATE -->
+<!-- PREMIUM A4 LANDSCAPE CERTIFICATE -->
 <div id="pdfTemplate" aria-hidden="true">
   <div class="cert-paper">
     <div class="cert-inner">
@@ -490,12 +357,10 @@ input:focus{border-color:rgba(212,175,55,.65)}
       <div class="cert-topline">EXCELLENCE • SKILL • RESPONSIBILITY</div>
       <div class="cert-brand">ABHINAASH A1</div>
       <div class="cert-subbrand">DRIVING ACADEMY</div>
-
       <div class="cert-rule"><i class="fa-solid fa-star"></i></div>
 
       <h1 class="cert-heading">TRAINING COMPLETION</h1>
       <div class="cert-caption">CERTIFICATE OF ACHIEVEMENT</div>
-
       <p class="cert-recipient">THIS CERTIFICATE IS PROUDLY PRESENTED TO</p>
       <h2 id="pdfName">STUDENT NAME</h2>
 
@@ -504,6 +369,16 @@ input:focus{border-color:rgba(212,175,55,.65)}
         driving training programme at <strong>ABHINAASH A1 DRIVING ACADEMY</strong>.<br>
         In recognition of dedication, practical learning and commitment to responsible driving.
       </p>
+
+      <div class="cert-class-box">
+        <i class="fa-solid fa-car-side cert-class-icon"></i>
+        <div>
+          <div class="cert-class-label">CLASS TYPE</div>
+          <div id="pdfClassType">NOT SPECIFIED</div>
+        </div>
+      </div>
+
+      <br>
 
       <div class="cert-date-box">
         <div class="cert-date-label">TRAINING COMPLETION DATE</div>
@@ -577,7 +452,7 @@ function unlockBadge(id, condition) {
   $(id).classList.toggle("unlocked", Boolean(condition));
 }
 
-/* Preserves the existing completion-count calculation. */
+/* Preserve the existing session calculation. */
 function getCompletedCount(data, logs, total) {
   return Math.min(total, Math.max(logs.length, Number(data.remaining) || 0));
 }
@@ -595,7 +470,57 @@ function calculateKilometres(logs, done) {
   return km;
 }
 
-/* Supports Firestore timestamps, ISO dates, DD/MM/YYYY and common log dates. */
+/*
+  Read class type from common Firebase field names.
+  Add your actual field name to this list if needed.
+*/
+function getClassType(data) {
+  const possibleFields = [
+    data.classType,
+    data.trainingType,
+    data.batchType,
+    data.sessionType,
+    data.learningMode,
+    data.trainingMode,
+    data.classMode,
+    data.lessonType,
+    data.packageType
+  ];
+
+  let value = "";
+
+  for (const field of possibleFields) {
+    if (typeof field === "string" && field.trim()) {
+      value = field.trim();
+      break;
+    }
+  }
+
+  if (!value) return "Not specified";
+
+  const normalized = value.toLowerCase().replace(/[_-]+/g, " ").trim();
+
+  if (
+    normalized.includes("personal") ||
+    normalized.includes("private") ||
+    normalized.includes("one to one") ||
+    normalized.includes("1 on 1") ||
+    normalized.includes("individual")
+  ) {
+    return "Personal Training";
+  }
+
+  if (
+    normalized.includes("group") ||
+    normalized.includes("batch") ||
+    normalized.includes("shared")
+  ) {
+    return "Group Training";
+  }
+
+  return value.replace(/\b\w/g, character => character.toUpperCase());
+}
+
 function formatDate(value) {
   if (value === null || value === undefined || value === "") return null;
 
@@ -609,8 +534,8 @@ function formatDate(value) {
     date = value;
   } else if (typeof value === "string" || typeof value === "number") {
     const text = String(value).trim();
-
     let match = text.match(/^(\d{1,2})[/-](\d{1,2})[/-](\d{4})$/);
+
     if (match) {
       const day = Number(match[1]);
       const month = Number(match[2]);
@@ -621,7 +546,6 @@ function formatDate(value) {
           date.getMonth() !== month - 1 ||
           date.getDate() !== day) return null;
     } else {
-      // Handles strings such as "08 Oct 2026" or "2026-10-08".
       match = text.match(/^(\d{1,2})\s+([A-Za-z]{3,9})(?:\s+(\d{4}))?$/);
 
       if (match) {
@@ -630,9 +554,13 @@ function formatDate(value) {
           "july","august","september","october","november","december"
         ];
         const month = months.findIndex(m => m.startsWith(match[2].toLowerCase()));
+
         if (month >= 0) {
-          const year = Number(match[3]) || new Date().getFullYear();
-          date = new Date(year, month, Number(match[1]));
+          date = new Date(
+            Number(match[3]) || new Date().getFullYear(),
+            month,
+            Number(match[1])
+          );
         }
       } else {
         const parsed = new Date(text);
@@ -651,7 +579,6 @@ function formatDate(value) {
 }
 
 function getTrainingCompletionDate(data) {
-  // Prefer an explicitly saved completion date.
   const dateFields = [
     data.trainingCompletedDate,
     data.completionDate,
@@ -665,31 +592,27 @@ function getTrainingCompletionDate(data) {
     if (formatted) return formatted;
   }
 
-  // Otherwise try the final attendance entry.
   const logs = Array.isArray(data.attendanceLogs) ? data.attendanceLogs : [];
 
   for (let i = logs.length - 1; i >= 0; i--) {
+    if (typeof logs[i] !== "string") continue;
+
     const entry = logs[i];
-
-    if (typeof entry !== "string") continue;
-
-    // Take the date portion before the feedback separator.
     const dateText = entry.split(/\s+[—|]\s+/)[0].trim();
-    const formatted = formatDate(dateText);
-    if (formatted) return formatted;
 
-    // Also find a date embedded in a longer log string.
+    const directDate = formatDate(dateText);
+    if (directDate) return directDate;
+
     const dateMatch = dateText.match(
       /\b\d{1,2}[/-]\d{1,2}[/-]\d{4}\b|\b\d{1,2}\s+[A-Za-z]{3,9}(?:\s+\d{4})?\b|\b\d{4}-\d{2}-\d{2}\b/
     );
 
     if (dateMatch) {
-      const embeddedDate = formatDate(dateMatch[0]);
-      if (embeddedDate) return embeddedDate;
+      const parsed = formatDate(dateMatch[0]);
+      if (parsed) return parsed;
     }
   }
 
-  // Do not falsely represent today's date as the completion date.
   return "Date not recorded";
 }
 
@@ -760,6 +683,8 @@ function renderProfile(data) {
   const km = calculateKilometres(logs, done);
   const referrals = Math.max(0, Number(data.totalRefers) || 0);
   const rewardPerReferral = 500;
+  const classType = getClassType(data);
+  const completionDate = getTrainingCompletionDate(data);
 
   $("dispName").textContent = data.name || "Student";
   $("dispPkg").textContent = total + "-Session Driving Package";
@@ -767,6 +692,12 @@ function renderProfile(data) {
   $("dispTotal").textContent = total;
   $("dispRemaining").textContent = remaining;
   $("dispKm").textContent = km.toLocaleString("en-IN") + " km";
+
+  $("dispClassType").textContent = classType;
+  $("classTypeDescription").textContent =
+    classType === "Personal Training" ? "Individual driving instruction" :
+    classType === "Group Training" ? "Group or batch driving instruction" :
+    "Check the registered training mode";
 
   $("dispPercent").textContent = percent + "%";
   $("progressPercentText").textContent = percent + "%";
@@ -794,19 +725,19 @@ function renderProfile(data) {
   unlockBadge("badgeElite", done >= total);
 
   $("dispEarn").textContent = formatMoney(referrals * rewardPerReferral);
-  $("referralCount").textContent = referrals + " referral" + (referrals === 1 ? "" : "s") + " recorded";
+  $("referralCount").textContent =
+    referrals + " referral" + (referrals === 1 ? "" : "s") + " recorded";
   $("referralSummary").textContent = formatMoney(rewardPerReferral) + " per referral";
 
-  const completionDate = getTrainingCompletionDate(data);
-
   $("distanceNote").textContent =
-    "Estimated distance only. Recorded completion date: " + completionDate +
+    "Estimated distance only. Completion date: " + completionDate +
     ". Sessions without a KM value use a 5 km estimate.";
 
   $("premiumCertificate").style.display = done >= total ? "block" : "none";
 
   $("pdfName").textContent = String(data.name || "STUDENT").trim().toUpperCase();
   $("pdfDate").textContent = completionDate;
+  $("pdfClassType").textContent = classType.toUpperCase();
 
   renderHistory(logs, done);
 }
@@ -860,7 +791,7 @@ function loadProfile() {
   );
 }
 
-/* PREMIUM PDF EXPORT: one clean render, one populated date and name. */
+/* Mobile-friendly PDF export with class type, student name and completion date. */
 async function downloadPDF() {
   if (!currentData || !currentData.name) {
     alert("Student information is not available.");
@@ -877,37 +808,34 @@ async function downloadPDF() {
   }
 
   if (typeof window.html2pdf !== "function") {
-    alert("The PDF library did not load. Check your internet connection and refresh the page.");
+    alert("PDF library not loaded. Check your internet connection and refresh.");
     return;
   }
 
   const element = $("pdfTemplate");
   const button = $("downloadPdfBtn");
 
-  // Refresh the latest values before capturing the certificate.
   $("pdfName").textContent = String(currentData.name).trim().toUpperCase();
   $("pdfDate").textContent = getTrainingCompletionDate(currentData);
+  $("pdfClassType").textContent = getClassType(currentData).toUpperCase();
 
-  const original = {
+  const oldStyle = {
     display: element.style.display,
     position: element.style.position,
     left: element.style.left,
     top: element.style.top,
-    zIndex: element.style.zIndex,
-    pointerEvents: element.style.pointerEvents
+    zIndex: element.style.zIndex
   };
 
   if (button) button.disabled = true;
 
   try {
-    // Make the certificate renderable for html2canvas.
-    // It is restored to its original hidden state after export.
+    // Render off-screen so the wide certificate does not disrupt mobile layout.
     element.style.display = "block";
-    element.style.position = "fixed";
-    element.style.left = "0";
+    element.style.position = "absolute";
+    element.style.left = "-1200px";
     element.style.top = "0";
-    element.style.zIndex = "99999";
-    element.style.pointerEvents = "none";
+    element.style.zIndex = "1";
 
     await document.fonts.ready;
 
@@ -921,25 +849,22 @@ async function downloadPDF() {
 
     await window.html2pdf()
       .set({
-        margin: 0,
         filename: "A1_Training_Certificate_" + safeName + ".pdf",
-        image: {type:"jpeg",quality:0.98},
+        margin: 0,
+        image: {type:"jpeg",quality:0.95},
         html2canvas: {
-          scale: 2,
+          scale: 1,
           useCORS: true,
           backgroundColor: "#07172d",
-          width: 1123,
-          height: 794,
-          windowWidth: 1200,
+          logging: false,
           scrollX: 0,
-          scrollY: 0,
-          logging: false
+          scrollY: 0
         },
         jsPDF: {
-          unit:"mm",
-          format:"a4",
-          orientation:"landscape",
-          compress:true
+          unit: "mm",
+          format: "a4",
+          orientation: "landscape",
+          compress: true
         },
         pagebreak: {mode:["avoid-all"]}
       })
@@ -948,14 +873,17 @@ async function downloadPDF() {
 
   } catch (error) {
     console.error("Certificate PDF error:", error);
-    alert("Certificate could not be generated. Please refresh the page and try again.");
+    alert(
+      "Certificate PDF error: " +
+      (error?.message || "Unknown rendering error") +
+      "\n\nPlease refresh and try again."
+    );
   } finally {
-    element.style.display = original.display;
-    element.style.position = original.position;
-    element.style.left = original.left;
-    element.style.top = original.top;
-    element.style.zIndex = original.zIndex;
-    element.style.pointerEvents = original.pointerEvents;
+    element.style.display = oldStyle.display;
+    element.style.position = oldStyle.position;
+    element.style.left = oldStyle.left;
+    element.style.top = oldStyle.top;
+    element.style.zIndex = oldStyle.zIndex;
 
     if (button) button.disabled = false;
   }
@@ -967,6 +895,7 @@ function contactAdmin() {
     "Hi Abhinaash, I am " + name +
     ". I need help regarding my driving training and slots."
   );
+
   window.location.href = "https://wa.me/917008186187?text=" + message;
 }
 
@@ -977,8 +906,8 @@ async function shareReferral() {
   if (navigator.share) {
     try {
       await navigator.share({
-        title:"ABHINAASH A1 Driving Academy",
-        text:message
+        title: "ABHINAASH A1 Driving Academy",
+        text: message
       });
       return;
     } catch (error) {
@@ -1005,11 +934,9 @@ function logout() {
 }
 
 $("accessBtn").addEventListener("click", loadProfile);
-
 $("userPhone").addEventListener("keydown", event => {
   if (event.key === "Enter") loadProfile();
 });
-
 $("downloadPdfBtn").addEventListener("click", downloadPDF);
 $("helpBtn").addEventListener("click", contactAdmin);
 $("shareBtn").addEventListener("click", shareReferral);
