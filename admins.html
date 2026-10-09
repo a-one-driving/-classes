@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,80 +6,133 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#080808">
 <title>A1 Attendance | Driving Classes</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
-:root{--bg:#080808;--panel:#121212;--border:#303030;--gold:#d7b36a;--light:#f0d18b;--text:#f5f5f5;--muted:#999;--green:#55d996;--blue:#70b4ff;--red:#ff7777}
-*{box-sizing:border-box}
-body{margin:0;padding:0 0 95px;background:radial-gradient(circle at 50% 0,#332514 0,transparent 35%),var(--bg);color:var(--text);font:14px Arial,sans-serif}
-button,input{font:inherit}button{cursor:pointer}
-.header{position:sticky;top:0;z-index:10;background:#090909f5;border-bottom:1px solid #333;padding:14px}
-.headerInner{max-width:950px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:10px}
-.brand{display:flex;align-items:center;gap:11px}.logo{width:43px;height:43px;border:1px solid #806638;border-radius:13px;display:grid;place-items:center;background:#21190d;color:var(--light);font-weight:800;font-size:18px}
-.brandTitle{font-weight:800;font-size:15px}.brandSub{font-size:9px;color:#999;margin-top:4px;letter-spacing:1px}
-.clock{text-align:right}.clockTime{font-weight:800;color:var(--light)}.clockDate{font-size:10px;color:#999;margin-top:4px}
-.container{max-width:950px;margin:auto;padding:15px 12px}
-.search{margin-bottom:14px}.search input{width:100%;height:45px;border:1px solid var(--border);border-radius:12px;background:#121212;color:white;padding:0 13px;outline:none}
+:root{
+  --bg:#080808;--surface:#121212;--border:#2b2b2b;
+  --gold:#d7b36a;--light:#f0d18b;--text:#f5f5f5;
+  --muted:#858585;--green:#55d996;--blue:#70b4ff;
+  --red:#ff7777;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:Inter,Arial,sans-serif;color:var(--text);
+  background:radial-gradient(circle at 50% -10%,#45341b35,transparent 40%),var(--bg);
+  min-height:100vh;padding-bottom:100px
+}
+button,input{font:inherit}
+button{cursor:pointer;-webkit-tap-highlight-color:transparent}
+button:disabled{opacity:.5;cursor:not-allowed}
+.header{position:sticky;top:0;z-index:20;background:#080808ed;backdrop-filter:blur(18px);border-bottom:1px solid #252525}
+.headerInner{max-width:950px;margin:auto;padding:13px 15px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.brand{display:flex;align-items:center;gap:11px}
+.logo{width:44px;height:44px;display:grid;place-items:center;border:1px solid #77603a;border-radius:14px;background:#171209;color:var(--light);font-weight:800}
+.brandTitle{font-size:15px;font-weight:800}
+.brandSub{font-size:8px;letter-spacing:1.4px;color:#777;margin-top:4px}
+.clock{text-align:right}.clockTime{font-size:13px;font-weight:800;color:var(--light)}.clockDate{font-size:9px;color:#777;margin-top:4px}
+.container{max-width:950px;margin:auto;padding:17px 13px 30px}
+.search{position:relative;margin-bottom:15px}
+.search span{position:absolute;left:14px;top:13px;color:#777;font-size:18px}
+.search input{width:100%;height:47px;padding:0 14px 0 42px;border:1px solid var(--border);border-radius:14px;background:#111;color:#fff;outline:none;font-size:12px}
+.search input:focus,.field:focus{border-color:#9b7c47}
 .stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:23px}
-.stat{padding:13px;border:1px solid var(--border);border-radius:14px;background:#121212;min-height:82px}
-.stat.month{border-color:#71582f;background:#1a150d}
-.statLabel{font-size:9px;color:#aaa;font-weight:800;letter-spacing:.6px}
-.statValue{font-size:25px;color:var(--light);font-weight:800;margin-top:9px}
-.statHint{font-size:9px;color:#888;margin-top:4px}
-.sectionHeader{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:10px}
-.sectionTitle{font-size:15px;font-weight:800}.sectionCount{font-size:10px;color:#999}
+.stat{min-height:87px;padding:13px;border:1px solid var(--border);border-radius:16px;background:linear-gradient(145deg,#181818,#0e0e0e)}
+.stat.month{border-color:#66512e;background:radial-gradient(circle at 100% 0%,#d7b36a22,transparent 65%),#15120d}
+.statLabel{font-size:8px;letter-spacing:1px;color:#999;font-weight:800}
+.statValue{font-size:26px;font-weight:800;color:var(--light);margin-top:9px}
+.statHint{font-size:9px;color:#777;margin-top:4px}
+.sectionHeader{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}
+.sectionTitle{font-size:14px;font-weight:800}.sectionCount{font-size:10px;color:#888}
 .cards{display:grid;grid-template-columns:1fr;gap:13px}
-.studentCard{padding:14px;border:1px solid #3a3020;border-radius:18px;background:linear-gradient(145deg,#191919,#0e0e0e);min-width:0}
-.studentCard.inactive{opacity:.75}
-.studentHeader{display:grid;grid-template-columns:43px minmax(0,1fr);gap:10px;align-items:center}
-.avatar{width:43px;height:43px;border:1px solid #806638;border-radius:13px;display:grid;place-items:center;background:#241c0f;color:var(--light);font-weight:800;font-size:16px}
-.studentName{font-size:14px;font-weight:800;overflow-wrap:anywhere}.studentPhone{font-size:10px;color:#aaa;margin-top:5px}
-.badges{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
-.badge{font-size:9px;font-weight:800;padding:6px 8px;border:1px solid #333;border-radius:7px}
-.activeBadge{color:var(--green);background:#102017;border-color:#24543c}.completedBadge{color:var(--light);background:#241c10;border-color:#6b5430}
-.liveBadge{color:var(--blue);background:#101c24;border-color:#244459}.inactiveBadge{color:#aaa}.overdueBadge{color:#ff9999;background:#291010;border-color:#773030}
-.typeRow{margin-top:12px;padding:11px;border:1px solid #30291e;border-radius:11px;background:#0b0b0b;display:flex;justify-content:space-between;align-items:center;gap:8px}
-.typeLabel,.infoLabel{font-size:9px;color:#999;letter-spacing:.4px}
-.typeValue{font-size:11px;color:var(--light);font-weight:800;margin-top:5px}
-.smallBtn{padding:8px 10px;border:1px solid #5a4728;border-radius:8px;background:#21190d;color:var(--light);font-size:10px;font-weight:800}
-.infoGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:9px}
-.infoBox{padding:11px;border:1px solid #2b2b2b;border-radius:11px;background:#0b0b0b;min-width:0}
-.infoValue{font-size:11px;font-weight:700;line-height:1.5;margin-top:7px;overflow-wrap:anywhere}
-.gold{color:var(--light)}.green{color:var(--green)}.red{color:var(--red)}
-.lastAttendance{margin-top:9px;padding:11px;border:1px solid #2b2b2b;border-radius:11px;background:#0b0b0b}
-.lastLabel{font-size:9px;color:#999}.lastText{font-size:11px;color:#ccc;line-height:1.7;margin-top:6px;overflow-wrap:anywhere}
-.progressBox{margin-top:14px}.progressTop{display:flex;justify-content:space-between;gap:8px;margin-bottom:7px}
-.progressLabel{font-size:9px;color:#999}.progressCount{font-size:10px;color:var(--light);font-weight:800}
-.progress{height:6px;border-radius:10px;background:#303030;overflow:hidden}.progressBar{height:100%;background:linear-gradient(90deg,#a77a32,#f0d18b)}
-.actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-top:13px}
-.action{min-height:40px;border:1px solid #343434;border-radius:9px;background:#191919;color:#ddd;font-size:10px;font-weight:800}
-.action.attend{background:linear-gradient(135deg,var(--light),var(--gold));color:#111;border:0}.action.wa{color:#72dfa0}.action.call{color:var(--blue)}
-.statusBtn,.deleteBtn{width:100%;min-height:40px;margin-top:9px;border-radius:9px;font-size:10px;font-weight:800;background:#211010;color:#ff9999;border:1px solid #633030}
-.statusBtn.activate{background:#101d15;color:var(--green);border-color:#234832}.deleteBtn{background:#321010}
-.fab{position:fixed;right:17px;bottom:82px;z-index:20;width:53px;height:53px;border:0;border-radius:17px;background:linear-gradient(135deg,var(--light),var(--gold));color:#111;font-size:28px;box-shadow:0 8px 28px #0009}
-.bottomNav{position:fixed;bottom:0;left:0;right:0;z-index:15;display:flex;justify-content:center;gap:2px;padding:8px 5px calc(8px + env(safe-area-inset-bottom));background:#090909f5;border-top:1px solid #292929}
-.navBtn{flex:1;max-width:130px;border:0;background:none;color:#777;font-size:9px;font-weight:800;padding:5px 1px}.navBtn.active{color:var(--light)}.navIcon{display:block;font-size:17px;margin-bottom:4px}
-.modal{position:fixed;inset:0;z-index:50;display:none;align-items:flex-end;justify-content:center;padding:8px;background:#000c}
-.modal.show{display:flex}.modalBox{width:100%;max-width:560px;max-height:90dvh;overflow:auto;padding:17px;border:1px solid #333;border-radius:20px;background:#121212}
-.modalHeader{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:17px}
-.modalTitle{font-size:15px;font-weight:800}.modalSub{font-size:10px;color:#999;margin-top:5px}
-.close{width:35px;height:35px;border:1px solid #333;border-radius:9px;background:#222;color:#ddd;font-size:20px}
-.formGroup{margin-bottom:15px}.formLabel{display:block;color:#aaa;font-size:9px;letter-spacing:.8px;margin-bottom:7px}
-.field{width:100%;height:44px;border:1px solid #333;border-radius:10px;background:#080808;color:white;padding:0 12px;outline:none}
+.studentCard{padding:15px;border:1px solid #30291e;border-radius:21px;background:radial-gradient(circle at 100% 0%,#d7b36a10,transparent 45%),linear-gradient(145deg,#171717,#0d0d0d);box-shadow:0 8px 25px #0003;min-width:0}
+.studentCard.inactive{opacity:.76}
+.studentHeader{display:grid;grid-template-columns:46px minmax(0,1fr) auto;align-items:center;gap:10px}
+.avatar{width:46px;height:46px;display:grid;place-items:center;border:1px solid #6b5430;border-radius:15px;background:#251d10;color:var(--light);font-size:16px;font-weight:800}
+.studentInfo{min-width:0}.studentName{font-size:13px;font-weight:800;overflow-wrap:anywhere;line-height:1.4}
+.studentPhone{font-size:10px;color:#999;margin-top:5px;overflow-wrap:anywhere}
+.badges{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:5px;max-width:112px}
+.badge{padding:6px 7px;border-radius:8px;font-size:8px;font-weight:800;border:1px solid #333;white-space:nowrap}
+.badge.active{color:var(--green);border-color:#24543c;background:#112219}
+.badge.completed{color:var(--light);border-color:#6b5430;background:#241c10}
+.badge.live{color:var(--blue);border-color:#244459;background:#101c24}
+.badge.inactive{color:#aaa;background:#191919}
+.typeRow,.infoBox{margin-top:11px;padding:12px;border:1px solid #29251e;border-radius:13px;background:#0c0c0c}
+.typeRow{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.typeInfo{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.typeLabel,.infoLabel{font-size:8px;color:#888;letter-spacing:.8px}
+.typeValue{font-size:10px;color:var(--light);font-weight:800}
+.editType{min-height:32px;padding:7px 10px;border:1px solid #4d3d25;border-radius:9px;background:#1a160f;color:var(--light);font-size:9px}
+.infoGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.infoBox{margin-top:0;min-width:0}
+.infoValue{font-size:10px;font-weight:700;color:#eee;margin-top:7px;line-height:1.5;overflow-wrap:anywhere}
+.infoValue.gold{color:var(--light)}
+.infoValue.green{color:var(--green)}
+.infoValue.red{color:var(--red)}
+.lastAttendance{margin-top:10px;padding:12px;border:1px solid #292929;border-radius:13px;background:#0c0c0c}
+.lastLabel{font-size:8px;color:#777;letter-spacing:1px}
+.lastText{font-size:10px;color:#ccc;line-height:1.7;margin-top:6px;overflow-wrap:anywhere}
+.progressBox{margin-top:16px}
+.progressTop{display:flex;justify-content:space-between;gap:8px;margin-bottom:8px}
+.progressLabel{font-size:8px;color:#888;letter-spacing:1px}
+.progressCount{font-size:10px;color:var(--light);font-weight:800}
+.progress{height:6px;border-radius:20px;background:#292929;overflow:hidden}
+.progressBar{height:100%;border-radius:20px;background:linear-gradient(90deg,#a77a32,#f0d18b)}
+.actions{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:6px;margin-top:15px}
+.action{min-width:0;min-height:41px;padding:5px 2px;border:1px solid #303030;border-radius:10px;background:#191919;color:#ccc;font-size:9px;font-weight:800}
+.action.attend{background:linear-gradient(135deg,var(--light),var(--gold));color:#111;border:0}
+.action.wa{color:#72dfa0}.action.call{color:var(--blue)}
+.statusBtn,.deleteBtn{width:100%;min-height:40px;margin-top:9px;border-radius:10px;font-size:9px;font-weight:800}
+.statusBtn{background:#171212;color:#ff9999;border:1px solid #482626}
+.statusBtn.activate{background:#101d15;color:var(--green);border-color:#234832}
+.deleteBtn{background:#211010;color:#ff9292;border:1px solid #6b2929}
+.fab{position:fixed;right:17px;bottom:82px;z-index:30;width:53px;height:53px;border:0;border-radius:17px;background:linear-gradient(135deg,var(--light),var(--gold));color:#111;font-size:27px;box-shadow:0 8px 28px #0009}
+.bottomNav{position:fixed;bottom:0;left:0;right:0;z-index:25;display:flex;justify-content:center;gap:3px;padding:8px 5px calc(8px + env(safe-area-inset-bottom));background:#090909f5;backdrop-filter:blur(18px);border-top:1px solid #292929}
+.navBtn{flex:1;max-width:125px;border:0;background:none;color:#777;font-size:8px;font-weight:800;padding:5px 1px}
+.navBtn.active{color:var(--light)}.navIcon{display:block;font-size:16px;margin-bottom:4px}
+.modal{position:fixed;inset:0;z-index:60;display:none;align-items:flex-end;justify-content:center;padding:8px;background:#000c;backdrop-filter:blur(5px)}
+.modal.show{display:flex}
+.modalBox{width:100%;max-width:570px;max-height:90dvh;overflow:auto;padding:18px;border:1px solid #333;border-radius:22px 22px 13px 13px;background:#121212}
+.modalHeader{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:18px}
+.modalTitle{font-size:15px;font-weight:800}.modalSub{font-size:10px;color:#888;margin-top:5px}
+.close{width:34px;height:34px;border:1px solid #333;border-radius:10px;background:#1b1b1b;color:#ddd;font-size:19px}
+.formGroup{margin-bottom:15px}.formLabel{display:block;color:#999;font-size:9px;letter-spacing:1px;margin-bottom:7px}
+.field{width:100%;height:44px;border:1px solid #303030;border-radius:11px;background:#090909;color:#fff;padding:0 12px;outline:none;font-size:12px}
 .optionGrid,.typeGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
-.optionBtn,.typeOption{min-height:40px;padding:8px;border:1px solid #333;border-radius:9px;background:#0d0d0d;color:#bbb;font-size:10px}
+.optionBtn,.typeOption{min-height:40px;padding:8px;border:1px solid #303030;border-radius:10px;background:#0d0d0d;color:#aaa;font-size:10px}
 .optionBtn.selected,.typeOption.selected{border-color:#b99554;background:#282012;color:var(--light)}
-.typeOption{min-height:70px;font-weight:800}.typeIcon{display:block;font-size:20px;margin-bottom:7px}
+.typeOption{min-height:75px;font-weight:800}.typeIcon{display:block;font-size:20px;margin-bottom:7px}
 .customBox{display:none;margin-top:8px}.customBox.show{display:block}
-.goldBtn{width:100%;min-height:45px;border:0;border-radius:10px;background:linear-gradient(135deg,var(--light),var(--gold));color:#111;font-size:10px;font-weight:800}
-.historyItem{padding:12px;margin-bottom:8px;border:1px solid #2c2c2c;border-radius:11px;background:#0d0d0d}
-.historyNumber{font-size:9px;color:var(--light);font-weight:800;margin-bottom:6px}.historyText{font-size:11px;line-height:1.7;color:#ccc;overflow-wrap:anywhere}
-.confirmText{font-size:11px;color:#ccc;line-height:1.8;margin-bottom:15px}
-.confirmWarn{padding:12px;border:1px solid #6b2929;border-radius:10px;background:#211010;color:#ffaaaa;font-size:10px;line-height:1.7;margin-bottom:15px}
+.goldBtn{width:100%;min-height:45px;border:0;border-radius:11px;background:linear-gradient(135deg,var(--light),var(--gold));color:#111;font-size:10px;font-weight:800}
+.historyItem{padding:12px;margin-bottom:8px;border:1px solid #2c2c2c;border-radius:12px;background:#0d0d0d}
+.historyNumber{font-size:9px;color:var(--light);font-weight:800;margin-bottom:6px}
+.historyText{font-size:10px;line-height:1.7;color:#ccc;overflow-wrap:anywhere}
+.confirmText{font-size:11px;color:#ccc;line-height:1.8;margin-bottom:16px}
+.confirmWarn{padding:12px;border:1px solid #6b2929;border-radius:11px;background:#211010;color:#ffaaaa;font-size:10px;line-height:1.7;margin-bottom:16px}
 .confirmActions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.cancelBtn,.dangerBtn{min-height:44px;border-radius:9px;font-size:10px;font-weight:800}
-.cancelBtn{border:1px solid #333;background:#202020;color:#ddd}.dangerBtn{border:1px solid #853737;background:#721f1f;color:white}
-.toast{position:fixed;bottom:100px;left:50%;z-index:100;transform:translateX(-50%);display:none;background:#222;border:1px solid #444;color:white;padding:12px 15px;border-radius:10px;font-size:11px;max-width:90%;text-align:center}
-.toast.show{display:block}.loading,.empty{padding:35px 18px;text-align:center;border:1px dashed #333;border-radius:14px;color:#aaa;font-size:12px;line-height:1.8}
-@media(min-width:650px){.stats{grid-template-columns:repeat(5,minmax(0,1fr))}.cards{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}}
+.cancelBtn{min-height:44px;border:1px solid #333;border-radius:10px;background:#202020;color:#ddd;font-size:10px;font-weight:800}
+.dangerBtn{min-height:44px;border:1px solid #853737;border-radius:10px;background:#721f1f;color:white;font-size:10px;font-weight:800}
+.toast{position:fixed;bottom:95px;left:50%;z-index:100;transform:translate(-50%,12px);opacity:0;pointer-events:none;background:#202020;border:1px solid #444;color:#fff;padding:11px 15px;border-radius:11px;font-size:10px;transition:.2s;max-width:90%;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.loading,.empty{padding:40px 20px;text-align:center;border:1px dashed #333;border-radius:16px;color:#888;font-size:11px;line-height:1.8}
+@media(min-width:650px){
+ .stats{grid-template-columns:repeat(5,minmax(0,1fr))}
+ .cards{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}
+ .studentHeader{grid-template-columns:44px minmax(0,1fr)}
+ .avatar{width:44px;height:44px}
+ .badges{grid-column:1/-1;max-width:none;justify-content:flex-start}
+ .actions{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:380px){
+ .brandSub,.clockDate{display:none}
+ .studentHeader{grid-template-columns:40px minmax(0,1fr)}
+ .avatar{width:40px;height:40px}
+ .badges{grid-column:1/-1;max-width:none;justify-content:flex-start}
+ .actions{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
 </style>
 </head>
 <body>
@@ -91,19 +145,22 @@ button,input{font:inherit}button{cursor:pointer}
 </header>
 
 <main class="container">
- <div class="search"><input id="searchInput" type="search" placeholder="Search student or phone..." autocomplete="off"></div>
+ <div class="search"><span>⌕</span><input id="searchInput" type="search" placeholder="Search student or phone..." autocomplete="off"></div>
+
  <div class="stats">
-  <div class="stat month"><div class="statLabel" id="monthLabel">THIS MONTH ADMISSIONS</div><div class="statValue" id="monthAdmissionCount">—</div><div class="statHint">Based on first attendance</div></div>
+  <div class="stat month"><div class="statLabel" id="monthLabel">THIS MONTH ADMISSIONS</div><div class="statValue" id="monthAdmissionCount">—</div><div class="statHint">Admissions recorded this month</div></div>
   <div class="stat"><div class="statLabel">ACTIVE</div><div class="statValue" id="activeCount">0</div><div class="statHint">Active training</div></div>
   <div class="stat"><div class="statLabel">COMPLETED</div><div class="statValue" id="completedCount">0</div><div class="statHint">Training completed</div></div>
   <div class="stat"><div class="statLabel">RECENT</div><div class="statValue" id="liveCount">0</div><div class="statHint">Recent attendance activity</div></div>
   <div class="stat"><div class="statLabel">NOT ACTIVE</div><div class="statValue" id="inactiveCount">0</div><div class="statHint">Inactive students</div></div>
  </div>
+
  <div class="sectionHeader"><div class="sectionTitle" id="sectionTitle">Active Students</div><div class="sectionCount" id="studentCount">0 Students</div></div>
- <div id="studentCards" class="cards"><div class="loading">Connecting to Firebase...</div></div>
+ <div id="studentCards" class="cards"><div class="loading">Loading students...</div></div>
 </main>
 
 <button class="fab" onclick="openAddModal()" aria-label="Add student">+</button>
+
 <nav class="bottomNav">
  <button class="navBtn active" id="navActive" onclick="setFilter('active')"><span class="navIcon">🚗</span>ACTIVE</button>
  <button class="navBtn" id="navCompleted" onclick="setFilter('completed')"><span class="navIcon">✓</span>COMPLETED</button>
@@ -111,8 +168,9 @@ button,input{font:inherit}button{cursor:pointer}
  <button class="navBtn" id="navInactive" onclick="setFilter('inactive')"><span class="navIcon">⏸</span>NOT ACTIVE</button>
 </nav>
 
+<!-- ADD STUDENT -->
 <div class="modal" id="addModal"><div class="modalBox">
- <div class="modalHeader"><div><div class="modalTitle">Add Student</div><div class="modalSub">Create a new student record</div></div><button class="close" onclick="closeModal('addModal')">×</button></div>
+ <div class="modalHeader"><div><div class="modalTitle">Add Student</div><div class="modalSub">Create a new admission</div></div><button class="close" onclick="closeModal('addModal')">×</button></div>
  <div class="formGroup"><label class="formLabel">PHONE NUMBER</label><input id="studentPhone" class="field" type="tel" maxlength="10" inputmode="numeric" placeholder="10 digit mobile number"></div>
  <div class="formGroup"><label class="formLabel">FULL NAME</label><input id="studentName" class="field" placeholder="Student full name"></div>
  <div class="formGroup"><label class="formLabel">TOTAL CLASSES</label><input id="totalClasses" class="field" type="number" min="1" value="20"></div>
@@ -123,6 +181,7 @@ button,input{font:inherit}button{cursor:pointer}
  <button class="goldBtn" id="saveStudentBtn" onclick="saveStudent()">SAVE STUDENT</button>
 </div></div>
 
+<!-- ATTENDANCE -->
 <div class="modal" id="attendanceModal"><div class="modalBox">
  <div class="modalHeader"><div><div class="modalTitle">Driving Track</div><div class="modalSub" id="attendanceStudentName"></div></div><button class="close" onclick="closeModal('attendanceModal')">×</button></div>
  <div class="formGroup"><label class="formLabel">ROUTE</label><div class="optionGrid">
@@ -154,10 +213,13 @@ button,input{font:inherit}button{cursor:pointer}
  <button class="goldBtn" id="saveAttendanceBtn" onclick="saveAttendance()">SAVE ATTENDANCE</button>
 </div></div>
 
+<!-- HISTORY -->
 <div class="modal" id="historyModal"><div class="modalBox">
- <div class="modalHeader"><div><div class="modalTitle">Attendance History</div><div class="modalSub" id="historyStudentName"></div></div><button class="close" onclick="closeModal('historyModal')">×</button></div><div id="historyList"></div>
+ <div class="modalHeader"><div><div class="modalTitle">Attendance History</div><div class="modalSub" id="historyStudentName"></div></div><button class="close" onclick="closeModal('historyModal')">×</button></div>
+ <div id="historyList"></div>
 </div></div>
 
+<!-- EDIT CLASS TYPE -->
 <div class="modal" id="typeModal"><div class="modalBox">
  <div class="modalHeader"><div><div class="modalTitle">Edit Class Type</div><div class="modalSub" id="typeStudentName"></div></div><button class="close" onclick="closeModal('typeModal')">×</button></div>
  <div class="formGroup"><label class="formLabel">SELECT CLASS TYPE</label><div class="typeGrid">
@@ -167,10 +229,11 @@ button,input{font:inherit}button{cursor:pointer}
  <button class="goldBtn" onclick="saveClassType()">SAVE CLASS TYPE</button>
 </div></div>
 
+<!-- DELETE CONFIRMATION -->
 <div class="modal" id="deleteModal"><div class="modalBox">
  <div class="modalHeader"><div><div class="modalTitle">Delete Completed Student?</div><div class="modalSub" id="deleteStudentName"></div></div><button class="close" onclick="closeModal('deleteModal')">×</button></div>
- <div class="confirmText">Permanently remove this student's Firebase document.</div>
- <div class="confirmWarn">⚠ This cannot be undone. Attendance history inside this document will also be deleted.</div>
+ <div class="confirmText">You are about to permanently remove this student's Firestore document.</div>
+ <div class="confirmWarn">⚠ This action cannot be undone. The student's attendance history stored inside this document will also be deleted.</div>
  <div class="confirmActions"><button class="cancelBtn" onclick="closeModal('deleteModal')">CANCEL</button><button class="dangerBtn" id="confirmDeleteBtn" onclick="confirmDeleteStudent()">DELETE PERMANENTLY</button></div>
 </div></div>
 
@@ -178,8 +241,11 @@ button,input{font:inherit}button{cursor:pointer}
 
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import {getFirestore,collection,getDocs,doc,setDoc,updateDoc,deleteDoc,arrayUnion} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import {
+ getFirestore,collection,getDocs,doc,setDoc,updateDoc,deleteDoc,arrayUnion
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+/* Existing Firebase project */
 const firebaseConfig={
  apiKey:"AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
  authDomain:"abinash-driving.firebaseapp.com",
@@ -189,301 +255,424 @@ const firebaseConfig={
  appId:"1:641148830173:web:b7a500e5e7e2463da0f634"
 };
 
-const $=id=>document.getElementById(id);
-let db,students=[],currentFilter="active",currentStudentId=null,deleteStudentId=null;
-let selectedRoute="",selectedRemark="",addClassType="Group",editClassType="Group";
-let busy=false,toastTimer;
+const app=initializeApp(firebaseConfig);
+const db=getFirestore(app);
+const studentCollection=collection(db,"studentData");
 
-function safe(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
+/* Finish-date assumptions: one session per working day; Sunday off.
+   Adjust this function if your real timetable differs. */
+const CLASS_DAYS_PER_WEEK=6;
+
+let students=[];
+let currentFilter="active";
+let currentStudentId=null;
+let deleteStudentId=null;
+let selectedRoute="";
+let selectedRemark="";
+let addClassType="Group";
+let editClassType="Group";
+let toastTimer;
+let busy=false;
+
+const $=id=>document.getElementById(id);
+
+function safe(v){
+ return String(v??"").replace(/[&<>"']/g,c=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+ }[c]));
+}
 function getLogs(s){return Array.isArray(s.attendanceLogs)?s.attendanceLogs:[]}
 function getDone(s){return Math.max(getLogs(s).length,Number(s.remaining||0),0)}
 function getTotal(s){return Math.max(Number(s.totalClasses||1),1)}
 function isCompleted(s){return getDone(s)>=getTotal(s)}
 function isInactive(s){return s.notActive===true}
 
-function parseAttendanceDate(log){
- if(!log)return null;
- const text=String(log).trim();
- let m=text.match(/^(\d{4})-(\d{2})-(\d{2})/);
- if(m){
-  const y=+m[1],mo=+m[2],d=+m[3],date=new Date(y,mo-1,d);
-  return date.getFullYear()===y&&date.getMonth()===mo-1&&date.getDate()===d?date:null;
- }
- m=text.match(/^(\d{1,2})[/-](\d{1,2})[/-](\d{4})/);
- if(m){
-  const d=+m[1],mo=+m[2],y=+m[3],date=new Date(y,mo-1,d);
-  return date.getFullYear()===y&&date.getMonth()===mo-1&&date.getDate()===d?date:null;
- }
- m=text.match(/^(\d{1,2})\s+([A-Za-z]{3,})\s+(\d{4})/);
- if(m){
-  const months={jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,dec:11};
-  const d=+m[1],mo=months[m[2].slice(0,3).toLowerCase()],y=+m[3];
-  if(mo===undefined)return null;
-  const date=new Date(y,mo,d);
-  return date.getFullYear()===y&&date.getMonth()===mo&&date.getDate()===d?date:null;
- }
- return null;
+function parseDate(value){
+ if(!value)return null;
+ let d;
+ if(typeof value.toDate==="function")d=value.toDate();
+ else if(value instanceof Date)d=value;
+ else if(typeof value==="string"){
+  const m=value.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  d=m?new Date(+m[1],+m[2]-1,+m[3]):new Date(value);
+ }else if(typeof value==="number")d=new Date(value);
+ else return null;
+ return Number.isNaN(d.getTime())?null:d;
 }
-
-function getAdmissionDate(s){
- const dates=getLogs(s).map(parseAttendanceDate).filter(Boolean).sort((a,b)=>a-b);
- if(!dates.length)return null;
- const date=new Date(dates[0]);date.setHours(12,0,0,0);return date;
+function formatDate(date){
+ if(!date)return "Not available";
+ return date.toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"});
 }
-function formatDate(d){return d?d.toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"}):"Not available"}
-function dateToISO(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`}
+function getAdmissionDate(s){return parseDate(s.admissionDate)}
 
-function estimateFinishDate(s){
- const admission=getAdmissionDate(s);
- if(!admission||isCompleted(s))return null;
- const remaining=Math.max(getTotal(s)-getDone(s),0);
- if(!remaining)return null;
- const date=new Date(admission);date.setHours(12,0,0,0);
- let sessions=1,guard=0;
- while(sessions<getTotal(s)&&guard<10000){
-  date.setDate(date.getDate()+1);guard++;
-  if(date.getDay()!==0)sessions++;
+/* Count future class days, excluding Sunday. Start tomorrow. */
+function estimateFinishDate(student){
+ const remaining=Math.max(getTotal(student)-getDone(student),0);
+ if(remaining===0)return new Date();
+
+ const date=new Date();
+ date.setHours(12,0,0,0);
+ let scheduled=0;
+ let safety=0;
+
+ while(scheduled<remaining && safety<10000){
+  date.setDate(date.getDate()+1);
+  safety++;
+  if(date.getDay()!==0)scheduled++;
  }
  return date;
 }
-function isOverdue(s){
- const finish=estimateFinishDate(s);if(!finish)return false;
- const today=new Date();today.setHours(0,0,0,0);
- finish.setHours(0,0,0,0);
- return finish<today;
-}
+
 function updateMonthAdmissions(){
  const now=new Date();
- $("monthLabel").textContent=(now.toLocaleDateString("en-IN",{month:"long",year:"numeric"})+" ADMISSIONS").toUpperCase();
- $("monthAdmissionCount").textContent=students.filter(s=>{
+ $("monthLabel").textContent=
+  (now.toLocaleDateString("en-IN",{month:"long",year:"numeric"})+" ADMISSIONS").toUpperCase();
+
+ const count=students.filter(s=>{
   const d=getAdmissionDate(s);
   return d&&d.getFullYear()===now.getFullYear()&&d.getMonth()===now.getMonth();
  }).length;
+
+ $("monthAdmissionCount").textContent=count;
 }
-function parseTime(log){
- const m=String(log||"").match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);if(!m)return null;
- let h=+m[1];if(m[3].toUpperCase()==="PM"&&h!==12)h+=12;if(m[3].toUpperCase()==="AM"&&h===12)h=0;
- return {hour:h,minute:+m[2]};
+
+function parseAttendanceTime(log){
+ const m=String(log||"").match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
+ if(!m)return null;
+ let h=+m[1];const minute=+m[2];const ap=m[3].toUpperCase();
+ if(ap==="PM"&&h!==12)h+=12;
+ if(ap==="AM"&&h===12)h=0;
+ return {hour:h,minute};
 }
 function timeDistance(logs){
  if(!logs.length)return 9999;
- const p=parseTime(logs[logs.length-1]);if(!p)return 9999;
- const now=new Date(),a=now.getHours()*60+now.getMinutes(),b=p.hour*60+p.minute,diff=Math.abs(a-b);
+ const p=parseAttendanceTime(logs[logs.length-1]);
+ if(!p)return 9999;
+ const now=new Date();
+ const a=now.getHours()*60+now.getMinutes();
+ const b=p.hour*60+p.minute;
+ const diff=Math.abs(a-b);
  return Math.min(diff,1440-diff);
 }
-function isLive(s){return !isInactive(s)&&getLogs(s).length>0&&timeDistance(getLogs(s))<=30}
+function isLive(s){
+ return !isInactive(s)&&getLogs(s).length>0&&timeDistance(getLogs(s))<=30;
+}
+
 function updateClock(){
  const n=new Date();
  $("clockTime").textContent=n.toLocaleTimeString("en-IN",{hour:"2-digit",minute:"2-digit",hour12:true});
  $("clockDate").textContent=n.toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"});
 }
-updateClock();setInterval(updateClock,1000);
+updateClock();
+setInterval(updateClock,1000);
+
 function showToast(message){
- $("toast").textContent=message;$("toast").classList.add("show");
- clearTimeout(toastTimer);toastTimer=setTimeout(()=>$("toast").classList.remove("show"),2600);
+ $("toast").textContent=message;
+ $("toast").classList.add("show");
+ clearTimeout(toastTimer);
+ toastTimer=setTimeout(()=>$("toast").classList.remove("show"),2400);
 }
 
 async function loadStudents(){
- if(busy||!db)return;busy=true;
+ if(busy)return;
+ busy=true;
  try{
-  const snap=await getDocs(collection(db,"studentData"));
+  const snap=await getDocs(studentCollection);
   students=snap.docs.map(d=>({id:d.id,...d.data()}));
-  updateMonthAdmissions();render();
+  updateMonthAdmissions();
+  render();
  }catch(e){
   console.error("Firebase load error:",e);
-  $("studentCards").innerHTML='<div class="empty">Unable to load students.<br>Check internet, Firebase configuration and Firestore Rules.</div>';
+  $("studentCards").innerHTML='<div class="empty">Unable to load students.<br>Check Firebase configuration and Firestore Rules.</div>';
   $("monthAdmissionCount").textContent="—";
  }finally{busy=false}
 }
 
 function render(){
  const search=$("searchInput").value.trim().toLowerCase();
- const active=students.filter(s=>!isInactive(s)),inactive=students.filter(isInactive);
+ const active=students.filter(s=>!isInactive(s));
+ const inactive=students.filter(isInactive);
+
  $("activeCount").textContent=active.length;
  $("completedCount").textContent=active.filter(isCompleted).length;
  $("liveCount").textContent=active.filter(isLive).length;
  $("inactiveCount").textContent=inactive.length;
- let list=currentFilter==="active"?active.filter(s=>!isCompleted(s)):currentFilter==="completed"?active.filter(isCompleted):currentFilter==="live"?active.filter(isLive):inactive;
- if(search)list=list.filter(s=>String(s.name||"").toLowerCase().includes(search)||String(s.id||"").includes(search));
- list.sort((a,b)=>currentFilter==="inactive"?String(a.name||"").localeCompare(String(b.name||"")):timeDistance(getLogs(a))-timeDistance(getLogs(b)));
+
+ let list;
+ if(currentFilter==="active")list=active.filter(s=>!isCompleted(s));
+ else if(currentFilter==="completed")list=active.filter(isCompleted);
+ else if(currentFilter==="live")list=active.filter(isLive);
+ else list=inactive;
+
+ if(search)list=list.filter(s=>
+  String(s.name||"").toLowerCase().includes(search)||
+  String(s.id||"").toLowerCase().includes(search)
+ );
+
+ if(currentFilter==="inactive")list.sort((a,b)=>String(a.name||"").localeCompare(String(b.name||"")));
+ else list.sort((a,b)=>timeDistance(getLogs(a))-timeDistance(getLogs(b)));
+
  const titles={active:"Active Students",completed:"Completed Students",live:"Recent Attendance Activity",inactive:"Not Active"};
- $("sectionTitle").textContent=titles[currentFilter];$("studentCount").textContent=`${list.length} Student${list.length===1?"":"s"}`;
+ $("sectionTitle").textContent=titles[currentFilter];
+ $("studentCount").textContent=`${list.length} Student${list.length===1?"":"s"}`;
+
  document.querySelectorAll(".navBtn").forEach(b=>b.classList.remove("active"));
- const nav={active:"navActive",completed:"navCompleted",live:"navLive",inactive:"navInactive"};$(nav[currentFilter]).classList.add("active");
+ const nav={active:"navActive",completed:"navCompleted",live:"navLive",inactive:"navInactive"};
+ $(nav[currentFilter]).classList.add("active");
+
  $("studentCards").innerHTML=list.length?list.map(studentCard).join(""):'<div class="empty">🚗<br><br>No students found in this section.</div>';
 }
 
 function studentCard(s){
- const id=s.id,name=s.name||"Unnamed Student",total=getTotal(s),done=getDone(s),left=Math.max(total-done,0);
- const pct=Math.min(100,Math.round(done/total*100)),inactive=isInactive(s),completed=isCompleted(s),recent=isLive(s),overdue=isOverdue(s);
- const type=s.classType==="Personal"?"Personal":"Group",logs=getLogs(s),last=logs.length?logs[logs.length-1]:"No attendance yet";
- const admission=getAdmissionDate(s),finish=estimateFinishDate(s);
+ const id=s.id;
+ const name=s.name||"Unnamed Student";
+ const total=getTotal(s);
+ const done=getDone(s);
+ const left=Math.max(total-done,0);
+ const pct=Math.min(100,Math.round(done/total*100));
+ const inactive=isInactive(s);
+ const completed=isCompleted(s);
+ const recent=isLive(s);
+ const type=s.classType==="Personal"?"Personal":"Group";
+ const logs=getLogs(s);
+ const last=logs.length?logs[logs.length-1]:"No attendance yet";
+ const admission=getAdmissionDate(s);
+ const finish=estimateFinishDate(s);
+
  let badges="";
- if(inactive)badges='<span class="badge inactiveBadge">NOT ACTIVE</span>';
+ if(inactive)badges='<span class="badge inactive">NOT ACTIVE</span>';
  else{
-  if(recent)badges+='<span class="badge liveBadge">● RECENT</span>';
-  if(overdue)badges+='<span class="badge overdueBadge">⚠ OVERDUE</span>';
-  badges+=completed?'<span class="badge completedBadge">COMPLETED</span>':'<span class="badge activeBadge">ACTIVE</span>';
+  if(recent)badges+='<span class="badge live">● RECENT</span>';
+  badges+=completed?'<span class="badge completed">COMPLETED</span>':'<span class="badge active">ACTIVE</span>';
  }
- const finishLabel=completed?"Training completed":finish?(overdue?"⚠ OVERDUE · ":"")+formatDate(finish):"Not available";
- const finishClass=completed?"green":overdue?"red":"gold";
- return `<article class="studentCard ${inactive?"inactive":""}">
- <div class="studentHeader"><div class="avatar">${safe(name.charAt(0).toUpperCase())}</div><div><div class="studentName">${safe(name)}</div><div class="studentPhone">📱 ${safe(id)}</div></div></div>
- <div class="badges">${badges}</div>
- <div class="typeRow"><div><div class="typeLabel">CLASS TYPE</div><div class="typeValue">${type==="Personal"?"👤 PERSONAL":"👥 GROUP"}</div></div><button class="smallBtn" onclick="openTypeModal('${safe(id)}')">✏️ EDIT</button></div>
- <div class="infoGrid">
-  <div class="infoBox"><div class="infoLabel">FIRST ATTENDANCE / ADMISSION</div><div class="infoValue">${formatDate(admission)}</div></div>
-  <div class="infoBox"><div class="infoLabel">EXPECTED FINISH</div><div class="infoValue ${finishClass}">${safe(finishLabel)}</div></div>
-  <div class="infoBox"><div class="infoLabel">CLASSES LEFT</div><div class="infoValue ${left===0?"green":"gold"}">${left} session${left===1?"":"s"}</div></div>
-  <div class="infoBox"><div class="infoLabel">CLASS PLAN</div><div class="infoValue">1 session/day · Sunday off</div></div>
- </div>
- <div class="lastAttendance"><div class="lastLabel">LAST ATTENDANCE</div><div class="lastText">${safe(last)}</div></div>
- <div class="progressBox"><div class="progressTop"><span class="progressLabel">TRAINING PROGRESS</span><span class="progressCount">${done} / ${total} · ${pct}%</span></div><div class="progress"><div class="progressBar" style="width:${pct}%"></div></div></div>
- ${inactive?`<button class="statusBtn activate" onclick="activateStudent('${safe(id)}')">✓ ACTIVE AGAIN</button>`:""}
- <div class="actions">
-  <button class="action attend" onclick="openAttendance('${safe(id)}')">+ ATTEND</button>
-  <button class="action" onclick="openHistory('${safe(id)}')">📋 LOGS</button>
-  <button class="action wa" onclick="sendWhatsApp('${safe(id)}')">💬 WA</button>
-  <button class="action call" onclick="callStudent('${safe(id)}')">📞 CALL</button>
- </div>
- ${!inactive&&!completed?`<button class="statusBtn" onclick="markNotActive('${safe(id)}')">⏸ MARK NOT ACTIVE</button>`:""}
- ${completed?`<button class="deleteBtn" onclick="requestDelete('${safe(id)}')">🗑 DELETE COMPLETED STUDENT</button>`:""}
+
+ const finishLabel=completed?"Training completed":formatDate(finish);
+ const finishClass=completed?"green":"gold";
+
+ return `
+ <article class="studentCard ${inactive?"inactive":""}">
+  <div class="studentHeader">
+   <div class="avatar">${safe(name.charAt(0).toUpperCase())}</div>
+   <div class="studentInfo"><div class="studentName">${safe(name)}</div><div class="studentPhone">📱 ${safe(id)}</div></div>
+   <div class="badges">${badges}</div>
+  </div>
+
+  <div class="typeRow">
+   <div class="typeInfo"><span class="typeLabel">CLASS TYPE</span><span class="typeValue">${type==="Personal"?"👤 PERSONAL":"👥 GROUP"}</span></div>
+   <button class="editType" onclick="openTypeModal('${safe(id)}')">✏️ EDIT</button>
+  </div>
+
+  <div class="infoGrid">
+   <div class="infoBox"><div class="infoLabel">ADMISSION DATE</div><div class="infoValue">${formatDate(admission)}</div></div>
+   <div class="infoBox"><div class="infoLabel">EXPECTED FINISH</div><div class="infoValue ${finishClass}">${finishLabel}</div></div>
+   <div class="infoBox"><div class="infoLabel">CLASSES LEFT</div><div class="infoValue ${left===0?"green":"gold"}">${left} session${left===1?"":"s"}</div></div>
+   <div class="infoBox"><div class="infoLabel">CLASS PLAN</div><div class="infoValue">1 session/day · Sunday off</div></div>
+  </div>
+
+  <div class="lastAttendance"><div class="lastLabel">LAST ATTENDANCE</div><div class="lastText">${safe(last)}</div></div>
+
+  <div class="progressBox">
+   <div class="progressTop"><span class="progressLabel">TRAINING PROGRESS</span><span class="progressCount">${done} / ${total} · ${pct}%</span></div>
+   <div class="progress"><div class="progressBar" style="width:${pct}%"></div></div>
+  </div>
+
+  ${inactive?`<button class="statusBtn activate" onclick="activateStudent('${safe(id)}')">✓ ACTIVE AGAIN</button>`:""}
+
+  <div class="actions">
+   ${!completed&&!inactive?`<button class="action attend" onclick="openAttendance('${safe(id)}')">+ ATTEND</button>`:`<button class="action" onclick="openAttendance('${safe(id)}')">+ ATTEND</button>`}
+   <button class="action" onclick="openHistory('${safe(id)}')">📋 LOGS</button>
+   <button class="action wa" onclick="sendWhatsApp('${safe(id)}')">💬 WA</button>
+   <button class="action call" onclick="callStudent('${safe(id)}')">📞 CALL</button>
+  </div>
+
+  ${!inactive&&!completed?`<button class="statusBtn" onclick="markNotActive('${safe(id)}')">⏸ MARK NOT ACTIVE</button>`:""}
+  ${completed?`<button class="deleteBtn" onclick="requestDelete('${safe(id)}')">🗑 DELETE COMPLETED STUDENT</button>`:""}
  </article>`;
 }
 
-window.setFilter=f=>{currentFilter=f;render()};
+window.setFilter=function(filter){currentFilter=filter;render()};
 $("searchInput").addEventListener("input",render);
-window.openAddModal=()=>{$("studentPhone").value="";$("studentName").value="";$("totalClasses").value="20";selectAddType("Group");$("addModal").classList.add("show")};
-window.selectAddType=t=>{addClassType=t;$("addPersonal").classList.toggle("selected",t==="Personal");$("addGroup").classList.toggle("selected",t==="Group")};
 
-window.saveStudent=async()=>{
- const phone=$("studentPhone").value.trim(),name=$("studentName").value.trim(),total=Number($("totalClasses").value);
+window.openAddModal=function(){
+ $("studentPhone").value="";$("studentName").value="";$("totalClasses").value="20";
+ selectAddType("Group");$("addModal").classList.add("show");
+};
+window.selectAddType=function(type){
+ addClassType=type;
+ $("addPersonal").classList.toggle("selected",type==="Personal");
+ $("addGroup").classList.toggle("selected",type==="Group");
+};
+
+window.saveStudent=async function(){
+ const phone=$("studentPhone").value.trim();
+ const name=$("studentName").value.trim();
+ const total=Number($("totalClasses").value);
+
  if(!/^[0-9]{10}$/.test(phone))return showToast("Enter valid 10 digit phone");
  if(!name)return showToast("Enter student name");
  if(!Number.isInteger(total)||total<1)return showToast("Enter valid total classes");
  if(students.some(s=>s.id===phone))return showToast("Phone number already exists");
+
  const btn=$("saveStudentBtn");btn.disabled=true;btn.textContent="SAVING...";
  try{
-  await setDoc(doc(db,"studentData",phone),{name,totalClasses:total,remaining:0,attendanceLogs:[],classType:addClassType,notActive:false});
-  closeModal("addModal");showToast("Student saved. First attendance sets admission date.");await loadStudents();
+  const n=new Date();
+  const admissionDate=`${n.getFullYear()}-${String(n.getMonth()+1).padStart(2,"0")}-${String(n.getDate()).padStart(2,"0")}`;
+
+  await setDoc(doc(db,"studentData",phone),{
+   name,totalClasses:total,remaining:0,attendanceLogs:[],
+   classType:addClassType,notActive:false,admissionDate
+  });
+
+  closeModal("addModal");showToast("Student admission saved ✓");await loadStudents();
  }catch(e){console.error(e);showToast("Could not save student. Check Firebase permissions")}
  finally{btn.disabled=false;btn.textContent="SAVE STUDENT"}
 };
 
-window.openTypeModal=id=>{
+window.openTypeModal=function(id){
  const s=students.find(x=>x.id===id);if(!s)return;
  currentStudentId=id;editClassType=s.classType==="Personal"?"Personal":"Group";
- $("typeStudentName").textContent=s.name||"";selectEditType(editClassType);$("typeModal").classList.add("show");
+ $("typeStudentName").textContent=s.name||"";
+ selectEditType(editClassType);$("typeModal").classList.add("show");
 };
-window.selectEditType=t=>{editClassType=t;$("editPersonal").classList.toggle("selected",t==="Personal");$("editGroup").classList.toggle("selected",t==="Group")};
-window.saveClassType=async()=>{
+window.selectEditType=function(type){
+ editClassType=type;
+ $("editPersonal").classList.toggle("selected",type==="Personal");
+ $("editGroup").classList.toggle("selected",type==="Group");
+};
+window.saveClassType=async function(){
  if(!currentStudentId)return;
- try{await updateDoc(doc(db,"studentData",currentStudentId),{classType:editClassType});closeModal("typeModal");showToast("Class type saved ✓");await loadStudents()}
- catch(e){console.error(e);showToast("Could not update class type")}
+ try{
+  await updateDoc(doc(db,"studentData",currentStudentId),{classType:editClassType});
+  closeModal("typeModal");showToast("Class type saved to Firebase ✓");await loadStudents();
+ }catch(e){console.error(e);showToast("Could not update class type")}
 };
 
-window.openAttendance=id=>{
+window.openAttendance=function(id){
  const s=students.find(x=>x.id===id);if(!s)return;
  if(isCompleted(s))return showToast("Training already completed");
  currentStudentId=id;selectedRoute="";selectedRemark="";
  $("attendanceStudentName").textContent=`${s.name||""} • ${id}`;
  $("customRoute").value="";$("customRemark").value="";
- $("customRouteBox").classList.remove("show");$("customRemarkBox").classList.remove("show");
+ $("customRouteBox").classList.remove("show");
+ $("customRemarkBox").classList.remove("show");
  document.querySelectorAll(".routeOption,.remarkOption").forEach(b=>b.classList.remove("selected"));
  $("attendanceModal").classList.add("show");
 };
-window.selectRoute=(btn,v)=>{
- selectedRoute=v;document.querySelectorAll(".routeOption").forEach(b=>b.classList.remove("selected"));
- btn.classList.add("selected");$("customRouteBox").classList.toggle("show",v==="Other Route");
- if(v!=="Other Route")$("customRoute").value="";
+window.selectRoute=function(btn,value){
+ selectedRoute=value;
+ document.querySelectorAll(".routeOption").forEach(b=>b.classList.remove("selected"));
+ btn.classList.add("selected");
+ $("customRouteBox").classList.toggle("show",value==="Other Route");
+ if(value!=="Other Route")$("customRoute").value="";
 };
-window.selectRemark=(btn,v)=>{
- selectedRemark=v;document.querySelectorAll(".remarkOption").forEach(b=>b.classList.remove("selected"));
- btn.classList.add("selected");$("customRemarkBox").classList.toggle("show",v==="📝 Custom Remark");
- if(v!=="📝 Custom Remark")$("customRemark").value="";
+window.selectRemark=function(btn,value){
+ selectedRemark=value;
+ document.querySelectorAll(".remarkOption").forEach(b=>b.classList.remove("selected"));
+ btn.classList.add("selected");
+ $("customRemarkBox").classList.toggle("show",value==="📝 Custom Remark");
+ if(value!=="📝 Custom Remark")$("customRemark").value="";
 };
 
-window.saveAttendance=async()=>{
+window.saveAttendance=async function(){
  if(!currentStudentId)return;
- const s=students.find(x=>x.id===currentStudentId);if(!s)return showToast("Student not found");
+ const s=students.find(x=>x.id===currentStudentId);
+ if(!s)return showToast("Student not found");
  if(isCompleted(s))return showToast("Training already completed");
  if(!selectedRoute)return showToast("Select route");
+
  let route=selectedRoute;
  if(route==="Other Route"){route=$("customRoute").value.trim();if(!route)return showToast("Enter custom route")}
+
  let remark=selectedRemark;
  if(remark==="📝 Custom Remark"){remark=$("customRemark").value.trim();if(!remark)return showToast("Enter custom remark")}
+
  const btn=$("saveAttendanceBtn");btn.disabled=true;btn.textContent="SAVING...";
  try{
   const now=new Date();
-  const date=now.toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"});
+  const date=now.toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"});
   const time=now.toLocaleTimeString("en-IN",{hour:"2-digit",minute:"2-digit",hour12:true});
   const log=`${date} | ${time} — Route: ${route} | Distance: 5 KM${remark?" | Remark: "+remark:""}`;
-  const update={remaining:getDone(s)+1,attendanceLogs:arrayUnion(log),notActive:false};
-  if(!getAdmissionDate(s))update.admissionDate=dateToISO(now);
-  await updateDoc(doc(db,"studentData",currentStudentId),update);
+
+  await updateDoc(doc(db,"studentData",currentStudentId),{
+   remaining:getDone(s)+1,attendanceLogs:arrayUnion(log),notActive:false
+  });
   closeModal("attendanceModal");showToast("Attendance saved ✓");await loadStudents();
  }catch(e){console.error(e);showToast("Could not save attendance")}
  finally{btn.disabled=false;btn.textContent="SAVE ATTENDANCE"}
 };
 
-window.markNotActive=async id=>{
+window.markNotActive=async function(id){
  try{await updateDoc(doc(db,"studentData",id),{notActive:true});showToast("Moved to Not Active");await loadStudents()}
  catch(e){console.error(e);showToast("Could not update status")}
 };
-window.activateStudent=async id=>{
+window.activateStudent=async function(id){
  try{await updateDoc(doc(db,"studentData",id),{notActive:false});showToast("Student activated ✓");await loadStudents()}
  catch(e){console.error(e);showToast("Could not activate student")}
 };
 
-window.openHistory=id=>{
+window.openHistory=function(id){
  const s=students.find(x=>x.id===id);if(!s)return;
  $("historyStudentName").textContent=`${s.name||""} • ${id}`;
  const logs=[...getLogs(s)].reverse();
- $("historyList").innerHTML=logs.length?logs.map((log,i)=>`<div class="historyItem"><div class="historyNumber">SESSION ${logs.length-i}</div><div class="historyText">${safe(log)}</div></div>`).join(""):'<div class="empty">📋<br><br>No attendance history</div>';
+ $("historyList").innerHTML=logs.length
+  ?logs.map((log,i)=>`<div class="historyItem"><div class="historyNumber">SESSION ${logs.length-i}</div><div class="historyText">${safe(log)}</div></div>`).join("")
+  :'<div class="empty">📋<br><br>No attendance history</div>';
  $("historyModal").classList.add("show");
 };
 
-window.sendWhatsApp=id=>{
+window.sendWhatsApp=function(id){
  const s=students.find(x=>x.id===id);if(!s)return;
- const done=getDone(s),total=getTotal(s),left=Math.max(total-done,0),type=s.classType==="Personal"?"Personal":"Group";
- const admission=getAdmissionDate(s),finish=estimateFinishDate(s);
- const finishText=isCompleted(s)?"Training completed":finish?formatDate(finish):"Not available yet";
- const message=`Hello *${String(s.name||"").trim()}*,\n\n*A1 Driving Classes Attendance*\n\n🚗 Completed: *${done}/${total}*\n⏳ Balance: *${left} Sessions*\n📚 Class Type: *${type}*\n📅 Admission (First Attendance): *${admission?formatDate(admission):"Not available yet"}*\n🏁 Expected Finish: *${finishText}*\n\nWebsite: https://aonedriving.online\n\nKeep learning and drive safely! 🚗`;
- window.open(`https://wa.me/91${id}?text=${encodeURIComponent(message)}`,"_blank");
+ const done=getDone(s),total=getTotal(s),left=Math.max(total-done,0);
+ const type=s.classType==="Personal"?"Personal":"Group";
+ const message=`Hello *${String(s.name||"").trim()}*,\n\n*A1 Driving Classes Attendance*\n\n🚗 Completed: *${done}/${total}*\n⏳ Balance: *${left} Sessions*\n📚 Class Type: *${type}*\n\nKeep learning and drive safely! 🚗`;
+ window.open(`https://wa.me/91${id}?text=${encodeURIComponent(message)}`,"_blank","noopener");
 };
-window.callStudent=id=>{window.location.href=`tel:${id}`};
+window.callStudent=function(id){window.location.href=`tel:${id}`};
 
-window.requestDelete=id=>{
- const s=students.find(x=>x.id===id);if(!s)return;
+/* Deletion is only offered for completed students. */
+window.requestDelete=function(id){
+ const s=students.find(x=>x.id===id);
+ if(!s)return;
  if(!isCompleted(s))return showToast("Only completed students can be deleted");
- deleteStudentId=id;$("deleteStudentName").textContent=`${s.name||"Student"} • ${id}`;$("deleteModal").classList.add("show");
+ deleteStudentId=id;
+ $("deleteStudentName").textContent=`${s.name||"Student"} • ${id}`;
+ $("deleteModal").classList.add("show");
 };
-window.confirmDeleteStudent=async()=>{
+
+window.confirmDeleteStudent=async function(){
  if(!deleteStudentId)return;
- const id=deleteStudentId,s=students.find(x=>x.id===id);
- if(!s||!isCompleted(s)){closeModal("deleteModal");deleteStudentId=null;return showToast("Only completed students can be deleted")}
+ const id=deleteStudentId;
+ const s=students.find(x=>x.id===id);
+ if(!s||!isCompleted(s)){
+  closeModal("deleteModal");deleteStudentId=null;
+  return showToast("Only completed students can be deleted");
+ }
+
  const btn=$("confirmDeleteBtn");btn.disabled=true;btn.textContent="DELETING...";
  try{
-  await deleteDoc(doc(db,"studentData",id));deleteStudentId=null;closeModal("deleteModal");showToast("Completed student deleted");await loadStudents();
- }catch(e){console.error(e);showToast("Delete failed. Check Firebase Rules")}
- finally{btn.disabled=false;btn.textContent="DELETE PERMANENTLY"}
+  await deleteDoc(doc(db,"studentData",id));
+  deleteStudentId=null;
+  closeModal("deleteModal");
+  showToast("Completed student deleted from Firebase");
+  await loadStudents();
+ }catch(e){
+  console.error("Delete error:",e);
+  showToast("Delete failed. Check Firebase Rules.");
+ }finally{
+  btn.disabled=false;btn.textContent="DELETE PERMANENTLY";
+ }
 };
 
-window.closeModal=id=>$(id).classList.remove("show");
-document.querySelectorAll(".modal").forEach(m=>m.addEventListener("click",e=>{if(e.target===m)m.classList.remove("show")}));
-document.addEventListener("keydown",e=>{if(e.key==="Escape")document.querySelectorAll(".modal.show").forEach(m=>m.classList.remove("show"))});
+window.closeModal=function(id){$(id).classList.remove("show")};
+document.querySelectorAll(".modal").forEach(modal=>{
+ modal.addEventListener("click",e=>{if(e.target===modal)modal.classList.remove("show")});
+});
+document.addEventListener("keydown",e=>{
+ if(e.key==="Escape")document.querySelectorAll(".modal.show").forEach(m=>m.classList.remove("show"));
+});
 
-/* Initialise Firebase safely so configuration/import errors show a message
-   rather than leaving the screen silently blank. */
-try{
- const firebaseApp=initializeApp(firebaseConfig);
- db=getFirestore(firebaseApp);
- loadStudents();
- setInterval(loadStudents,30000);
-}catch(e){
- console.error("Firebase initialisation error:",e);
- $("studentCards").innerHTML='<div class="empty">Firebase could not initialise.<br>Check the browser Console for the exact error.</div>';
-}
+loadStudents();
+setInterval(loadStudents,30000);
 </script>
 </body>
 </html>
