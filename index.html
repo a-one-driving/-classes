@@ -616,5 +616,24 @@ setTimeout(function() {
 /* FOOTER YEAR */
 document.getElementById("currentYear").textContent = new Date().getFullYear();
 </script>
+
+
+
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker
+      .register("/sw.js")
+      .then(function () {
+        console.log("A One Driving PWA ready");
+      })
+      .catch(function (error) {
+        console.error("PWA registration failed:", error);
+      });
+  });
+}
+</script>
+
 </body>
 </html>
