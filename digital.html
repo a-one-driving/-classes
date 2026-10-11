@@ -1,0 +1,341 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Fee Receipt</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  padding:20px;
+  font-family:Arial,sans-serif;
+  background:#eef2f7;
+  color:#172033;
+}
+.container{max-width:850px;margin:auto}
+h1{text-align:center;font-size:25px;color:#14213d}
+.subtitle{text-align:center;color:#64748b;margin-bottom:22px}
+.panel{
+  background:white;padding:22px;border-radius:14px;
+  box-shadow:0 5px 22px #17203312;margin-bottom:20px;
+}
+h2{font-size:18px;margin-top:0}
+.form-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:14px;
+}
+label{display:block;font-size:13px;font-weight:bold;margin-bottom:6px}
+input,select,textarea{
+  width:100%;padding:12px;border:1px solid #d5dce7;
+  border-radius:8px;font-size:15px;background:#fff;
+}
+textarea{resize:vertical}
+.full{grid-column:1/-1}
+.buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+button{
+  border:0;border-radius:8px;padding:13px 18px;
+  font-weight:bold;font-size:14px;cursor:pointer;
+}
+.primary{background:#176b45;color:white}
+.secondary{background:#172033;color:white}
+.light{background:#e8edf5;color:#172033}
+#message{font-size:13px;color:#176b45;margin-top:10px}
+
+/* RECEIPT */
+.receipt{
+  border:2px solid #176b45;
+  border-radius:12px;overflow:hidden;background:white;
+}
+.receipt-header{
+  padding:24px 20px;text-align:center;
+  background:#176b45;color:white;
+}
+.receipt-header h2{font-size:25px;margin:0 0 8px}
+.receipt-header p{margin:4px 0;font-size:13px}
+.receipt-label{
+  background:#e7f5ec;color:#176b45;text-align:center;
+  padding:11px;font-weight:bold;letter-spacing:2px;
+}
+.receipt-body{padding:22px}
+.receipt-top{
+  display:flex;justify-content:space-between;
+  gap:12px;flex-wrap:wrap;font-size:13px;margin-bottom:20px;
+}
+.receipt-table{width:100%;border-collapse:collapse;margin:15px 0}
+.receipt-table td{
+  border:1px solid #dce4df;padding:12px;
+  font-size:14px;
+}
+.receipt-table td:last-child{text-align:right;font-weight:bold}
+.amount-box{
+  background:#f0f8f2;border:1px solid #cce5d3;
+  padding:16px;border-radius:8px;margin-top:15px;
+}
+.amount-row{
+  display:flex;justify-content:space-between;
+  gap:12px;padding:7px 0;font-size:14px;
+}
+.amount-row.balance{border-top:1px solid #cce5d3;padding-top:13px}
+.amount-row strong{font-size:17px}
+.thankyou{text-align:center;margin:24px 0 8px;font-weight:bold;color:#176b45}
+.terms{text-align:center;font-size:11px;color:#64748b;margin-top:15px}
+.signature{
+  display:flex;justify-content:space-between;gap:15px;
+  margin-top:35px;font-size:12px;
+}
+.signature span{border-top:1px solid #64748b;padding-top:8px}
+@media(max-width:520px){
+  body{padding:10px}
+  .form-grid{grid-template-columns:1fr}
+  .full{grid-column:auto}
+  .panel{padding:15px}
+  .receipt-body{padding:13px}
+  .receipt-header h2{font-size:21px}
+}
+@media print{
+  @page{size:A4;margin:12mm}
+  body{padding:0;background:white}
+  body *{visibility:hidden}
+  #receipt,#receipt *{visibility:visible}
+  #receipt{
+    position:absolute;left:0;top:0;width:100%;
+    border:1.5px solid #176b45;
+    print-color-adjust:exact;
+    -webkit-print-color-adjust:exact;
+  }
+  .no-print{display:none!important}
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<div class="no-print">
+  <h1>Digital Fee Receipt Maker</h1>
+  <p class="subtitle">Create, print or save a student fee receipt as PDF.</p>
+
+  <div class="panel">
+    <h2>Institute Details</h2>
+    <div class="form-grid">
+      <div class="full">
+        <label>Institute / Business Name</label>
+        <input id="institute" value="BLACKTERMINAL COMPUTER INSTITUTE">
+      </div>
+      <div>
+        <label>Mobile Number</label>
+        <input id="businessPhone" placeholder="Institute contact number">
+      </div>
+      <div>
+        <label>Address</label>
+        <input id="address" value="Baripada, Odisha">
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Student & Payment Details</h2>
+    <div class="form-grid">
+      <div>
+        <label>Student / Customer Name *</label>
+        <input id="student" placeholder="Enter full name" required>
+      </div>
+      <div>
+        <label>Mobile Number</label>
+        <input id="phone" type="tel" placeholder="Student mobile">
+      </div>
+      <div>
+        <label>Course / Service *</label>
+        <input id="course" placeholder="e.g. PGDCA / Driving Classes" required>
+      </div>
+      <div>
+        <label>Receipt Date</label>
+        <input id="date" type="date">
+      </div>
+      <div>
+        <label>Total Fees (₹)</label>
+        <input id="total" type="number" min="0" step="0.01" value="5000">
+      </div>
+      <div>
+        <label>Amount Received (₹)</label>
+        <input id="paid" type="number" min="0" step="0.01" value="2000">
+      </div>
+      <div>
+        <label>Payment Method</label>
+        <select id="mode">
+          <option>Cash</option>
+          <option>UPI</option>
+          <option>Bank Transfer</option>
+          <option>Debit/Credit Card</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div>
+        <label>Transaction ID (Optional)</label>
+        <input id="transaction" placeholder="UPI reference / transaction ID">
+      </div>
+      <div class="full">
+        <label>Remarks (Optional)</label>
+        <textarea id="remarks" rows="2" placeholder="Installment details or other remarks"></textarea>
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button class="primary" onclick="updateReceipt()">Update Receipt</button>
+      <button class="secondary" onclick="printReceipt()">Print / Save PDF</button>
+      <button class="light" onclick="resetForm()">New Receipt</button>
+    </div>
+    <p id="message"></p>
+  </div>
+</div>
+
+<!-- PRINTABLE RECEIPT -->
+<div class="receipt" id="receipt">
+  <div class="receipt-header">
+    <h2 id="rInstitute">BLACKTERMINAL COMPUTER INSTITUTE</h2>
+    <p id="rAddress">Baripada, Odisha</p>
+    <p id="rBusinessPhone"></p>
+  </div>
+
+  <div class="receipt-label">PAYMENT RECEIPT</div>
+
+  <div class="receipt-body">
+    <div class="receipt-top">
+      <div><b>Receipt No:</b> <span id="rNumber"></span></div>
+      <div><b>Date:</b> <span id="rDate"></span></div>
+    </div>
+
+    <table class="receipt-table">
+      <tr><td>Student / Customer</td><td id="rStudent"></td></tr>
+      <tr><td>Mobile Number</td><td id="rPhone"></td></tr>
+      <tr><td>Course / Service</td><td id="rCourse"></td></tr>
+      <tr><td>Payment Method</td><td id="rMode"></td></tr>
+      <tr id="transactionRow"><td>Transaction ID</td><td id="rTransaction"></td></tr>
+    </table>
+
+    <div class="amount-box">
+      <div class="amount-row">
+        <span>Total Fees</span><b id="rTotal"></b>
+      </div>
+      <div class="amount-row">
+        <span>Amount Received</span><b id="rPaid"></b>
+      </div>
+      <div class="amount-row balance">
+        <span><b>Balance Due</b></span><strong id="rBalance"></strong>
+      </div>
+    </div>
+
+    <p><b>Remarks:</b> <span id="rRemarks">—</span></p>
+    <p class="thankyou">Thank you for your payment!</p>
+    <p class="terms">This receipt acknowledges the amount received as stated above.</p>
+
+    <div class="signature">
+      <span>Student / Customer Signature</span>
+      <span>Authorized Signature</span>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+
+function money(value){
+  return "₹" + Number(value || 0).toLocaleString("en-IN", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
+}
+
+function getReceiptNumber(){
+  let number = localStorage.getItem("digitalReceiptCounter");
+  if(number === null){
+    number = "1000";
+  }
+  return "BT-" + number;
+}
+
+function updateReceipt(){
+  const student = $("student").value.trim();
+  const course = $("course").value.trim();
+  const total = Number($("total").value);
+  const paid = Number($("paid").value);
+
+  if(!student || !course){
+    $("message").textContent =
+      "Please enter the student name and course/service.";
+    return false;
+  }
+
+  if($("total").value === "" || $("paid").value === "" ||
+     !Number.isFinite(total) || !Number.isFinite(paid) ||
+     total < 0 || paid < 0 || paid > total){
+    $("message").textContent =
+      "Enter valid amounts. Received amount cannot exceed total fees.";
+    return false;
+  }
+
+  $("rInstitute").textContent =
+    $("institute").value.trim() || "Business Name";
+  $("rAddress").textContent = $("address").value.trim();
+  $("rBusinessPhone").textContent =
+    $("businessPhone").value.trim()
+      ? "Contact: " + $("businessPhone").value.trim() : "";
+
+  $("rNumber").textContent = getReceiptNumber();
+  $("rDate").textContent = $("date").value
+    ? new Date($("date").value + "T12:00:00").toLocaleDateString("en-IN")
+    : "—";
+
+  $("rStudent").textContent = student;
+  $("rPhone").textContent = $("phone").value.trim() || "—";
+  $("rCourse").textContent = course;
+  $("rMode").textContent = $("mode").value;
+  $("rTransaction").textContent = $("transaction").value.trim() || "—";
+  $("transactionRow").style.display =
+    $("transaction").value.trim() ? "" : "none";
+
+  $("rTotal").textContent = money(total);
+  $("rPaid").textContent = money(paid);
+  $("rBalance").textContent = money(total - paid);
+  $("rRemarks").textContent = $("remarks").value.trim() || "—";
+
+  $("message").textContent = "Receipt updated successfully.";
+  return true;
+}
+
+function printReceipt(){
+  if(updateReceipt()){
+    window.print();
+    // Advance only after the print dialog closes.
+    // The receipt number stays unchanged if printing is cancelled.
+    localStorage.setItem(
+      "digitalReceiptCounter",
+      String(Number(localStorage.getItem("digitalReceiptCounter") || 1000) + 1)
+    );
+  }
+}
+
+function resetForm(){
+  if(!confirm("Start a new receipt? Unsaved details will be cleared.")) return;
+
+  ["student","phone","course","transaction","remarks"].forEach(id => {
+    $(id).value = "";
+  });
+
+  $("total").value = "0";
+  $("paid").value = "0";
+  $("mode").value = "Cash";
+  $("date").value = new Date().toLocaleDateString("en-CA");
+  updateReceipt();
+}
+
+$("date").value = new Date().toLocaleDateString("en-CA");
+
+updateReceipt();
+</script>
+</body>
+</html>
