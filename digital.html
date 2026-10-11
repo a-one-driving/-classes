@@ -3,338 +3,585 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Digital Fee Receipt</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101a2c">
+<title>BlackTerminal | Digital Fee Receipt</title>
 
 <style>
+:root{
+  --navy:#101a2c;
+  --green:#087f5b;
+  --gold:#c6a66b;
+  --ink:#1b2638;
+  --muted:#687589;
+  --line:#e1e7ee;
+}
 *{box-sizing:border-box}
 body{
-  margin:0;
-  padding:20px;
-  font-family:Arial,sans-serif;
-  background:#eef2f7;
-  color:#172033;
+  margin:0;background:#edf1f6;color:var(--ink);
+  font-family:Arial,Helvetica,sans-serif;font-size:14px;
 }
-.container{max-width:850px;margin:auto}
-h1{text-align:center;font-size:25px;color:#14213d}
-.subtitle{text-align:center;color:#64748b;margin-bottom:22px}
-.panel{
-  background:white;padding:22px;border-radius:14px;
-  box-shadow:0 5px 22px #17203312;margin-bottom:20px;
+button,input,select,textarea{font:inherit}
+.shell{max-width:1000px;margin:auto;padding:24px 16px 45px}
+.intro{text-align:center;margin-bottom:24px}
+.intro h1{font-size:26px;margin:0;color:var(--navy)}
+.intro p{color:var(--muted)}
+.editor{
+  background:#fff;border:1px solid #e4e9f0;border-radius:14px;
+  padding:24px;margin-bottom:25px;box-shadow:0 8px 28px #10213a08;
 }
-h2{font-size:18px;margin-top:0}
-.form-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:14px;
+.editor h2{font-size:18px;margin:0 0 18px}
+.section-tag{
+  font-size:10px;color:var(--green);font-weight:800;
+  letter-spacing:1.4px;text-transform:uppercase;margin:21px 0 12px;
 }
-label{display:block;font-size:13px;font-weight:bold;margin-bottom:6px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.full{grid-column:1/-1}
+label{display:block;font-size:12px;font-weight:bold;margin-bottom:7px}
 input,select,textarea{
-  width:100%;padding:12px;border:1px solid #d5dce7;
-  border-radius:8px;font-size:15px;background:#fff;
+  width:100%;padding:12px;border:1px solid #dbe2eb;
+  border-radius:8px;background:white;color:var(--ink);
 }
 textarea{resize:vertical}
-.full{grid-column:1/-1}
-.buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-button{
-  border:0;border-radius:8px;padding:13px 18px;
-  font-weight:bold;font-size:14px;cursor:pointer;
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.btn{
+  border:0;border-radius:8px;padding:13px 16px;
+  font-weight:bold;cursor:pointer;
 }
-.primary{background:#176b45;color:white}
-.secondary{background:#172033;color:white}
-.light{background:#e8edf5;color:#172033}
-#message{font-size:13px;color:#176b45;margin-top:10px}
+.btn-green{background:var(--green);color:white}
+.btn-dark{background:var(--navy);color:white}
+.btn-light{background:#eaf0f5;color:var(--navy)}
+#notice{font-size:12px;color:var(--green);line-height:1.6}
 
 /* RECEIPT */
 .receipt{
-  border:2px solid #176b45;
-  border-radius:12px;overflow:hidden;background:white;
+  max-width:800px;margin:auto;background:white;
+  border:1px solid #dfe5ed;box-shadow:0 15px 50px #15253d12;
 }
 .receipt-header{
-  padding:24px 20px;text-align:center;
-  background:#176b45;color:white;
+  background:var(--navy);color:white;padding:28px 30px 24px;
+  border-bottom:4px solid var(--gold);
 }
-.receipt-header h2{font-size:25px;margin:0 0 8px}
-.receipt-header p{margin:4px 0;font-size:13px}
-.receipt-label{
-  background:#e7f5ec;color:#176b45;text-align:center;
-  padding:11px;font-weight:bold;letter-spacing:2px;
+.header-top{
+  display:flex;justify-content:space-between;align-items:flex-start;gap:15px;
 }
-.receipt-body{padding:22px}
-.receipt-top{
-  display:flex;justify-content:space-between;
-  gap:12px;flex-wrap:wrap;font-size:13px;margin-bottom:20px;
+.brand-name{font-size:27px;font-weight:900;letter-spacing:-.8px;overflow-wrap:anywhere}
+.brand-name .terminal{color:#d9bb7f}
+.brand-sub{color:#c7d2e2;font-size:10px;letter-spacing:2px;font-weight:bold;margin-top:7px}
+.contact{text-align:right;font-size:11px;color:#dce5f0;line-height:1.8;overflow-wrap:anywhere}
+.doc-title{
+  margin-top:25px;display:flex;align-items:flex-end;
+  justify-content:space-between;gap:12px;
 }
-.receipt-table{width:100%;border-collapse:collapse;margin:15px 0}
-.receipt-table td{
-  border:1px solid #dce4df;padding:12px;
-  font-size:14px;
+.doc-title h2{font-size:22px;letter-spacing:2px;margin:0 0 6px}
+.doc-title p{font-size:11px;color:#c7d2e2;margin:0}
+.gold-line{height:3px;width:45px;background:var(--gold);margin-top:12px}
+.header-badges{display:flex;align-items:center;gap:12px}
+.doc-chip{
+  border:1px solid #ffffff50;border-radius:4px;padding:8px;
+  font-size:9px;font-weight:bold;letter-spacing:1px;
 }
-.receipt-table td:last-child{text-align:right;font-weight:bold}
-.amount-box{
-  background:#f0f8f2;border:1px solid #cce5d3;
-  padding:16px;border-radius:8px;margin-top:15px;
+.paid-stamp{
+  width:94px;height:94px;border:3px solid #25bd78;border-radius:50%;
+  box-shadow:inset 0 0 0 2px #25bd78;
+  color:#25bd78;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;text-align:center;transform:rotate(-12deg);
+  flex-shrink:0;line-height:1.2;
 }
-.amount-row{
-  display:flex;justify-content:space-between;
-  gap:12px;padding:7px 0;font-size:14px;
+.paid-stamp strong{font-size:22px;letter-spacing:1px}
+.paid-stamp span{font-size:7px;font-weight:900;letter-spacing:.7px;margin-top:4px}
+.paid-stamp small{font-size:7px;font-weight:bold;margin-top:4px}
+.paid-stamp.hidden{display:none}
+
+.receipt-content{padding:28px 30px}
+.summary-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:11px;margin-bottom:26px}
+.summary-card{padding:14px 12px;border:1px solid var(--line);border-radius:7px;min-width:0}
+.summary-card.highlight{background:#eff8f4;border-color:#d0e9dc}
+.summary-label{color:var(--muted);font-size:9px;font-weight:800;letter-spacing:.8px;margin-bottom:8px}
+.summary-value{font-size:16px;font-weight:800;overflow-wrap:anywhere}
+.highlight .summary-value{color:var(--green)}
+.summary-sub{font-size:10px;color:var(--muted);margin-top:5px}
+.status-pill{display:inline-block;padding:5px 7px;border-radius:4px;font-size:9px;font-weight:900}
+.status-paid{background:#e5f6ec;color:#087443}
+.status-partial{background:#fff2d9;color:#875600}
+.status-unpaid{background:#ffebeb;color:#ad2525}
+.party-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:25px}
+.block-label{font-size:9px;color:var(--green);letter-spacing:1.4px;font-weight:900;margin-bottom:11px}
+.customer-name{font-size:18px;font-weight:800;margin-bottom:7px;overflow-wrap:anywhere}
+.detail{font-size:12px;color:#56647a;line-height:1.9;overflow-wrap:anywhere}
+.detail strong{color:var(--ink)}
+.receipt-table{width:100%;border-collapse:collapse;margin-bottom:20px}
+.receipt-table thead th{
+  background:#f3f6f9;color:#58667a;text-align:left;font-size:9px;
+  letter-spacing:.7px;padding:12px 9px;border-bottom:1px solid var(--line);
 }
-.amount-row.balance{border-top:1px solid #cce5d3;padding-top:13px}
-.amount-row strong{font-size:17px}
-.thankyou{text-align:center;margin:24px 0 8px;font-weight:bold;color:#176b45}
-.terms{text-align:center;font-size:11px;color:#64748b;margin-top:15px}
+.receipt-table td{padding:14px 9px;border-bottom:1px solid var(--line);font-size:12px;vertical-align:top}
+.receipt-table th:last-child,.receipt-table td:last-child{text-align:right}
+.item-name{font-weight:800;font-size:13px;overflow-wrap:anywhere}
+.item-desc{font-size:10px;color:var(--muted);margin-top:5px}
+.totals-wrap{display:flex;justify-content:flex-end}
+.totals{width:300px;max-width:100%}
+.total-line{display:flex;justify-content:space-between;gap:12px;padding:9px 0;font-size:12px}
+.total-line strong{font-size:13px}
+.total-line.balance{border-top:1px solid var(--line);margin-top:4px;padding-top:14px}
+.total-line.balance strong{font-size:16px;color:var(--green)}
+.amount-words{
+  margin-top:20px;background:#f6f8fb;border:1px solid var(--line);
+  padding:12px;border-radius:5px;font-size:11px;line-height:1.7;
+}
+.policy{
+  margin-top:22px;border:1px solid #e8b8b8;border-left:4px solid #b42318;
+  background:#fff7f6;padding:13px 15px;border-radius:5px;color:#922018;
+}
+.policy-title{font-size:10px;letter-spacing:1px;font-weight:900;margin-bottom:5px}
+.policy-text{font-size:12px;font-weight:900;line-height:1.6}
+.policy-note{font-size:10px;margin-top:5px;line-height:1.5;color:#8e4a43}
+.bottom-grid{display:grid;grid-template-columns:1fr 1fr;gap:25px;align-items:end;margin-top:34px}
+.note-title{font-size:11px;font-weight:800;margin-bottom:7px}
+.note-text{font-size:10px;line-height:1.7;color:var(--muted)}
+.signature-box{text-align:center;min-width:0}
 .signature{
-  display:flex;justify-content:space-between;gap:15px;
-  margin-top:35px;font-size:12px;
+  font-family:"Brush Script MT","Segoe Script","URW Chancery L",cursive;
+  font-size:31px;font-style:italic;line-height:1.25;color:#163b77;
+  white-space:nowrap;margin-bottom:6px;
 }
-.signature span{border-top:1px solid #64748b;padding-top:8px}
-@media(max-width:520px){
-  body{padding:10px}
-  .form-grid{grid-template-columns:1fr}
+.signature-rule{border-top:1px solid #8a96a6;padding-top:8px;font-size:10px;font-weight:bold}
+.signature-caption{font-size:9px;color:var(--muted);margin-top:4px}
+.footer{
+  margin-top:27px;background:#f5f7fa;border-top:1px solid var(--line);
+  padding:15px 24px;display:flex;justify-content:space-between;gap:12px;
+  font-size:9px;color:var(--muted);line-height:1.7;
+}
+.footer strong{color:var(--navy)}
+
+@media(max-width:580px){
+  .shell{padding:14px 8px 25px}
+  .editor{padding:15px}
+  .grid{grid-template-columns:1fr}
   .full{grid-column:auto}
-  .panel{padding:15px}
-  .receipt-body{padding:13px}
-  .receipt-header h2{font-size:21px}
+  .receipt-header{padding:22px 15px}
+  .header-top{flex-direction:column}
+  .contact{text-align:left}
+  .brand-name{font-size:23px}
+  .doc-title h2{font-size:18px}
+  .header-badges{gap:7px}
+  .paid-stamp{width:75px;height:75px;border-width:2px}
+  .paid-stamp strong{font-size:17px}
+  .paid-stamp span,.paid-stamp small{font-size:6px}
+  .receipt-content{padding:18px 12px}
+  .summary-grid{gap:6px}
+  .summary-card{padding:10px 7px}
+  .summary-label{font-size:8px;letter-spacing:0}
+  .summary-value{font-size:12px}
+  .summary-sub{font-size:9px}
+  .party-grid{gap:12px}
+  .customer-name{font-size:14px}
+  .detail{font-size:10px}
+  .receipt-table th,.receipt-table td{padding:10px 5px}
+  .receipt-table thead th{font-size:8px;letter-spacing:0}
+  .receipt-table td{font-size:10px}
+  .item-name{font-size:11px}
+  .bottom-grid{gap:12px}
+  .signature{font-size:23px}
+  .footer{padding:13px;flex-direction:column}
 }
+@page{size:A4;margin:12mm}
 @media print{
-  @page{size:A4;margin:12mm}
-  body{padding:0;background:white}
-  body *{visibility:hidden}
-  #receipt,#receipt *{visibility:visible}
-  #receipt{
-    position:absolute;left:0;top:0;width:100%;
-    border:1.5px solid #176b45;
-    print-color-adjust:exact;
-    -webkit-print-color-adjust:exact;
-  }
+  body{margin:0;background:white}
   .no-print{display:none!important}
+  .shell{width:100%;max-width:none;margin:0;padding:0}
+  .receipt{width:100%;max-width:none;margin:0;border:1px solid #dfe5ed;box-shadow:none}
+  .receipt-header,.receipt-content,.footer{
+    -webkit-print-color-adjust:exact;print-color-adjust:exact
+  }
 }
 </style>
 </head>
 
 <body>
-<div class="container">
+<div class="shell">
 
-<div class="no-print">
-  <h1>Digital Fee Receipt Maker</h1>
-  <p class="subtitle">Create, print or save a student fee receipt as PDF.</p>
-
-  <div class="panel">
-    <h2>Institute Details</h2>
-    <div class="form-grid">
-      <div class="full">
-        <label>Institute / Business Name</label>
-        <input id="institute" value="BLACKTERMINAL COMPUTER INSTITUTE">
-      </div>
-      <div>
-        <label>Mobile Number</label>
-        <input id="businessPhone" placeholder="Institute contact number">
-      </div>
-      <div>
-        <label>Address</label>
-        <input id="address" value="Baripada, Odisha">
-      </div>
-    </div>
-  </div>
-
-  <div class="panel">
-    <h2>Student & Payment Details</h2>
-    <div class="form-grid">
-      <div>
-        <label>Student / Customer Name *</label>
-        <input id="student" placeholder="Enter full name" required>
-      </div>
-      <div>
-        <label>Mobile Number</label>
-        <input id="phone" type="tel" placeholder="Student mobile">
-      </div>
-      <div>
-        <label>Course / Service *</label>
-        <input id="course" placeholder="e.g. PGDCA / Driving Classes" required>
-      </div>
-      <div>
-        <label>Receipt Date</label>
-        <input id="date" type="date">
-      </div>
-      <div>
-        <label>Total Fees (₹)</label>
-        <input id="total" type="number" min="0" step="0.01" value="5000">
-      </div>
-      <div>
-        <label>Amount Received (₹)</label>
-        <input id="paid" type="number" min="0" step="0.01" value="2000">
-      </div>
-      <div>
-        <label>Payment Method</label>
-        <select id="mode">
-          <option>Cash</option>
-          <option>UPI</option>
-          <option>Bank Transfer</option>
-          <option>Debit/Credit Card</option>
-          <option>Other</option>
-        </select>
-      </div>
-      <div>
-        <label>Transaction ID (Optional)</label>
-        <input id="transaction" placeholder="UPI reference / transaction ID">
-      </div>
-      <div class="full">
-        <label>Remarks (Optional)</label>
-        <textarea id="remarks" rows="2" placeholder="Installment details or other remarks"></textarea>
-      </div>
-    </div>
-
-    <div class="buttons">
-      <button class="primary" onclick="updateReceipt()">Update Receipt</button>
-      <button class="secondary" onclick="printReceipt()">Print / Save PDF</button>
-      <button class="light" onclick="resetForm()">New Receipt</button>
-    </div>
-    <p id="message"></p>
-  </div>
+<div class="intro no-print">
+  <h1>Professional Digital Receipt</h1>
+  <p>BlackTerminal Computer Institute · Receipt Management</p>
 </div>
 
-<!-- PRINTABLE RECEIPT -->
-<div class="receipt" id="receipt">
-  <div class="receipt-header">
-    <h2 id="rInstitute">BLACKTERMINAL COMPUTER INSTITUTE</h2>
-    <p id="rAddress">Baripada, Odisha</p>
-    <p id="rBusinessPhone"></p>
+<section class="editor no-print">
+  <h2>Create Receipt</h2>
+
+  <div class="section-tag">01 — Business information</div>
+  <div class="grid">
+    <div class="field full">
+      <label>Institute / Business Name</label>
+      <input id="institute" value="BLACKTERMINAL COMPUTER INSTITUTE">
+    </div>
+    <div class="field">
+      <label>Address</label>
+      <input id="address" value="Baripada, Odisha">
+    </div>
+    <div class="field">
+      <label>Contact Number</label>
+      <input id="businessPhone" placeholder="Business contact">
+    </div>
   </div>
 
-  <div class="receipt-label">PAYMENT RECEIPT</div>
+  <div class="section-tag">02 — Student information</div>
+  <div class="grid">
+    <div class="field">
+      <label>Student / Customer Name *</label>
+      <input id="student" placeholder="Full name">
+    </div>
+    <div class="field">
+      <label>WhatsApp Mobile Number *</label>
+      <input id="phone" type="tel" inputmode="tel" placeholder="10-digit Indian mobile">
+    </div>
+    <div class="field">
+      <label>Course / Service *</label>
+      <input id="course" placeholder="e.g. PGDCA">
+    </div>
+    <div class="field">
+      <label>Receipt Date</label>
+      <input id="date" type="date">
+    </div>
+  </div>
 
-  <div class="receipt-body">
-    <div class="receipt-top">
-      <div><b>Receipt No:</b> <span id="rNumber"></span></div>
-      <div><b>Date:</b> <span id="rDate"></span></div>
+  <div class="section-tag">03 — Payment information</div>
+  <div class="grid">
+    <div class="field">
+      <label>Total Fees (₹)</label>
+      <input id="total" type="number" min="0" step="0.01" value="5000">
+    </div>
+    <div class="field">
+      <label>Amount Received (₹)</label>
+      <input id="paid" type="number" min="0" step="0.01" value="5000">
+    </div>
+    <div class="field">
+      <label>Payment Method</label>
+      <select id="mode">
+        <option>Cash</option>
+        <option>UPI</option>
+        <option>Bank Transfer</option>
+        <option>Debit/Credit Card</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Transaction Reference (Optional)</label>
+      <input id="transaction" placeholder="UPI reference number">
+    </div>
+    <div class="field full">
+      <label>Remarks (Optional)</label>
+      <textarea id="remarks" rows="2" placeholder="Batch, installment or additional details"></textarea>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-green" type="button" onclick="updateReceipt()">Update Preview</button>
+    <button class="btn btn-dark" type="button" onclick="printReceipt()">Print / Save PDF</button>
+    <button class="btn btn-green" type="button" onclick="sendReceiptWhatsApp()">Send on WhatsApp</button>
+    <button class="btn btn-light" type="button" onclick="newReceipt()">New Receipt</button>
+  </div>
+  <p id="notice" role="status"></p>
+  <p style="font-size:11px;color:#687589;line-height:1.6">
+    WhatsApp opens with a prepared text message. To send the actual PDF,
+    save it first and attach it in WhatsApp manually.
+  </p>
+</section>
+
+<article class="receipt" id="receipt">
+  <header class="receipt-header">
+    <div class="header-top">
+      <div>
+        <div class="brand-name" id="rInstitute">BLACK<span class="terminal">TERMINAL</span></div>
+        <div class="brand-sub">COMPUTER INSTITUTE</div>
+      </div>
+      <div class="contact">
+        <div id="rAddress">Baripada, Odisha</div>
+        <div id="rBusinessPhone"></div>
+      </div>
+    </div>
+    <div class="doc-title">
+      <div>
+        <h2>PAYMENT RECEIPT</h2>
+        <p>Official record of payment received</p>
+        <div class="gold-line"></div>
+      </div>
+      <div class="header-badges">
+        <div class="doc-chip">ORIGINAL</div>
+        <div class="paid-stamp hidden" id="paidStamp">
+          <strong>PAID</strong>
+          <span>PAYMENT RECEIVED</span>
+          <small id="stampDate"></small>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="receipt-content">
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="summary-label">Receipt Number</div>
+        <div class="summary-value" id="rNumber">BT-01000</div>
+        <div class="summary-sub">Document reference</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-label">Receipt Date</div>
+        <div class="summary-value" id="rDate">—</div>
+        <div class="summary-sub">Date of issue</div>
+      </div>
+      <div class="summary-card highlight">
+        <div class="summary-label">Payment Status</div>
+        <div><span class="status-pill status-paid" id="rStatus">PAID</span></div>
+        <div class="summary-sub" id="rStatusSub">Payment received</div>
+      </div>
+    </div>
+
+    <div class="party-grid">
+      <div>
+        <div class="block-label">Received From</div>
+        <div class="customer-name" id="rStudent">Customer Name</div>
+        <div class="detail">Mobile: <strong id="rPhone">—</strong></div>
+      </div>
+      <div>
+        <div class="block-label">Payment Details</div>
+        <div class="detail">Method: <strong id="rMode">Cash</strong></div>
+        <div class="detail" id="rTxnLine" style="display:none">
+          Reference: <strong id="rTransaction"></strong>
+        </div>
+        <div class="detail">Remarks: <strong id="rRemarks">—</strong></div>
+      </div>
     </div>
 
     <table class="receipt-table">
-      <tr><td>Student / Customer</td><td id="rStudent"></td></tr>
-      <tr><td>Mobile Number</td><td id="rPhone"></td></tr>
-      <tr><td>Course / Service</td><td id="rCourse"></td></tr>
-      <tr><td>Payment Method</td><td id="rMode"></td></tr>
-      <tr id="transactionRow"><td>Transaction ID</td><td id="rTransaction"></td></tr>
+      <thead>
+        <tr><th style="width:12%">S.No.</th><th>Description</th><th style="width:30%">Amount (INR)</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>01</td>
+          <td>
+            <div class="item-name" id="rCourse">Course / Service</div>
+            <div class="item-desc">Course fee / service payment</div>
+          </td>
+          <td id="rTotal">₹5,000.00</td>
+        </tr>
+      </tbody>
     </table>
 
-    <div class="amount-box">
-      <div class="amount-row">
-        <span>Total Fees</span><b id="rTotal"></b>
-      </div>
-      <div class="amount-row">
-        <span>Amount Received</span><b id="rPaid"></b>
-      </div>
-      <div class="amount-row balance">
-        <span><b>Balance Due</b></span><strong id="rBalance"></strong>
+    <div class="totals-wrap">
+      <div class="totals">
+        <div class="total-line"><span>Total Fees</span><strong id="rTotal2">₹5,000.00</strong></div>
+        <div class="total-line"><span>Amount Received</span><strong id="rPaid">₹5,000.00</strong></div>
+        <div class="total-line balance"><span>Outstanding Balance</span><strong id="rBalance">₹0.00</strong></div>
       </div>
     </div>
 
-    <p><b>Remarks:</b> <span id="rRemarks">—</span></p>
-    <p class="thankyou">Thank you for your payment!</p>
-    <p class="terms">This receipt acknowledges the amount received as stated above.</p>
+    <div class="amount-words">
+      <strong>Amount received in words:</strong> <span id="rWords">Rupees Five Thousand Only.</span>
+    </div>
 
-    <div class="signature">
-      <span>Student / Customer Signature</span>
-      <span>Authorized Signature</span>
+    <div class="policy">
+      <div class="policy-title">IMPORTANT — PAYMENT & REFUND POLICY</div>
+      <div class="policy-text">ONCE PAID, MONEY IS NOT REFUNDED.</div>
+      <div class="policy-note">Subject to applicable law and any mandatory consumer rights.</div>
+    </div>
+
+    <div class="bottom-grid">
+      <div>
+        <div class="note-title">Thank you for choosing us.</div>
+        <div class="note-text">
+          Please retain this receipt as proof of the payment recorded above.
+          Contact the institute if you notice any discrepancy.
+        </div>
+      </div>
+      <div class="signature-box">
+        <div class="signature">Abinash Barik</div>
+        <div class="signature-rule">Authorized Signature</div>
+        <div class="signature-caption">For the issuing institute</div>
+      </div>
     </div>
   </div>
-</div>
 
+  <footer class="footer">
+    <div><strong id="rFooterName">BLACKTERMINAL COMPUTER INSTITUTE</strong><br><span id="rFooterAddress">Baripada, Odisha</span></div>
+    <div style="text-align:right">SYSTEM-GENERATED RECEIPT<br>Ref: <span id="rFooterNo">BT-01000</span></div>
+  </footer>
+</article>
 </div>
 
 <script>
 const $ = id => document.getElementById(id);
+const COUNTER_KEY = "btReceiptCounterFinal";
 
-function money(value){
-  return "₹" + Number(value || 0).toLocaleString("en-IN", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
+function rupees(n){
+  return "₹" + n.toLocaleString("en-IN",{
+    minimumFractionDigits:2,maximumFractionDigits:2
   });
 }
 
-function getReceiptNumber(){
-  let number = localStorage.getItem("digitalReceiptCounter");
-  if(number === null){
-    number = "1000";
+function getCounter(){
+  try{return Math.max(1000,Number(localStorage.getItem(COUNTER_KEY))||1000)}
+  catch(e){return 1000}
+}
+function receiptId(n){return "BT-"+String(n).padStart(5,"0")}
+
+function amountWords(n){
+  if(n===0)return "Zero Rupees Only.";
+  if(n>999999999999)return rupees(n);
+  const ones=["","One","Two","Three","Four","Five","Six","Seven","Eight","Nine",
+    "Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen",
+    "Seventeen","Eighteen","Nineteen"];
+  const tens=["","","Twenty","Thirty","Forty","Fifty","Sixty","Seventy","Eighty","Ninety"];
+  function under1000(x){
+    let s="";
+    if(x>=100){s+=ones[Math.floor(x/100)]+" Hundred ";x%=100}
+    if(x>=20){s+=tens[Math.floor(x/10)]+" ";x%=10}
+    if(x>0)s+=ones[x]+" ";
+    return s.trim();
   }
-  return "BT-" + number;
+  let whole=Math.floor(n),paise=Math.round((n-whole)*100),out="";
+  [[10000000,"Crore"],[100000,"Lakh"],[1000,"Thousand"],[1,""]].forEach(([unit,label])=>{
+    if(whole>=unit){
+      const part=Math.floor(whole/unit);
+      out+=under1000(part)+(label?" "+label:"")+" ";
+      whole%=unit;
+    }
+  });
+  out=out.trim()+" Rupees";
+  if(paise)out+=" and "+under1000(paise)+" Paise";
+  return out+" Only.";
 }
 
 function updateReceipt(){
-  const student = $("student").value.trim();
-  const course = $("course").value.trim();
-  const total = Number($("total").value);
-  const paid = Number($("paid").value);
+  const name=$("student").value.trim();
+  const course=$("course").value.trim();
+  const t=$("total").value,p=$("paid").value;
+  const total=Number(t),paid=Number(p);
 
-  if(!student || !course){
-    $("message").textContent =
-      "Please enter the student name and course/service.";
+  if(!name||!course){
+    $("notice").textContent="Please enter the student name and course/service.";
+    return false;
+  }
+  if(t===""||p===""||!Number.isFinite(total)||!Number.isFinite(paid)||
+     total<0||paid<0||paid>total){
+    $("notice").textContent="Enter valid amounts. Received payment cannot exceed total fees.";
     return false;
   }
 
-  if($("total").value === "" || $("paid").value === "" ||
-     !Number.isFinite(total) || !Number.isFinite(paid) ||
-     total < 0 || paid < 0 || paid > total){
-    $("message").textContent =
-      "Enter valid amounts. Received amount cannot exceed total fees.";
-    return false;
+  // Use textContent to safely display user-entered details.
+  $("rInstitute").textContent=$("institute").value.trim()||"Business Name";
+  $("rAddress").textContent=$("address").value.trim();
+  $("rFooterAddress").textContent=$("address").value.trim();
+  $("rBusinessPhone").textContent=$("businessPhone").value.trim()
+    ?"Contact: "+$("businessPhone").value.trim():"";
+  $("rFooterName").textContent=$("institute").value.trim();
+
+  const id=receiptId(getCounter());
+  $("rNumber").textContent=id;
+  $("rFooterNo").textContent=id;
+  $("rDate").textContent=$("date").value
+    ?new Date($("date").value+"T12:00:00").toLocaleDateString("en-IN"):"—";
+
+  $("rStudent").textContent=name;
+  $("rPhone").textContent=$("phone").value.trim()||"—";
+  $("rCourse").textContent=course;
+  $("rMode").textContent=$("mode").value;
+  $("rRemarks").textContent=$("remarks").value.trim()||"—";
+
+  const txn=$("transaction").value.trim();
+  $("rTxnLine").style.display=txn?"":"none";
+  $("rTransaction").textContent=txn;
+
+  $("rTotal").textContent=rupees(total);
+  $("rTotal2").textContent=rupees(total);
+  $("rPaid").textContent=rupees(paid);
+  $("rBalance").textContent=rupees(total-paid);
+  $("rWords").textContent=amountWords(paid);
+
+  let status,cls,sub;
+  if(paid===total){
+    status="PAID";cls="status-paid";sub="Payment received in full";
+  }else if(paid>0){
+    status="PARTIALLY PAID";cls="status-partial";sub="Balance payment pending";
+  }else{
+    status="UNPAID";cls="status-unpaid";sub="Payment not yet received";
   }
+  $("rStatus").textContent=status;
+  $("rStatus").className="status-pill "+cls;
+  $("rStatusSub").textContent=sub;
 
-  $("rInstitute").textContent =
-    $("institute").value.trim() || "Business Name";
-  $("rAddress").textContent = $("address").value.trim();
-  $("rBusinessPhone").textContent =
-    $("businessPhone").value.trim()
-      ? "Contact: " + $("businessPhone").value.trim() : "";
+  const stamp=$("paidStamp");
+  stamp.classList.toggle("hidden",!(total>0&&paid===total));
+  $("stampDate").textContent=$("date").value
+    ?new Date($("date").value+"T12:00:00").toLocaleDateString("en-IN"):"";
 
-  $("rNumber").textContent = getReceiptNumber();
-  $("rDate").textContent = $("date").value
-    ? new Date($("date").value + "T12:00:00").toLocaleDateString("en-IN")
-    : "—";
-
-  $("rStudent").textContent = student;
-  $("rPhone").textContent = $("phone").value.trim() || "—";
-  $("rCourse").textContent = course;
-  $("rMode").textContent = $("mode").value;
-  $("rTransaction").textContent = $("transaction").value.trim() || "—";
-  $("transactionRow").style.display =
-    $("transaction").value.trim() ? "" : "none";
-
-  $("rTotal").textContent = money(total);
-  $("rPaid").textContent = money(paid);
-  $("rBalance").textContent = money(total - paid);
-  $("rRemarks").textContent = $("remarks").value.trim() || "—";
-
-  $("message").textContent = "Receipt updated successfully.";
+  $("notice").textContent="Receipt preview updated. Verify details before issuing.";
   return true;
 }
 
 function printReceipt(){
-  if(updateReceipt()){
-    window.print();
-    // Advance only after the print dialog closes.
-    // The receipt number stays unchanged if printing is cancelled.
-    localStorage.setItem(
-      "digitalReceiptCounter",
-      String(Number(localStorage.getItem("digitalReceiptCounter") || 1000) + 1)
-    );
+  if(!updateReceipt())return;
+  const current=getCounter();
+  try{localStorage.setItem(COUNTER_KEY,String(current+1))}
+  catch(e){}
+  window.print();
+}
+
+function sendReceiptWhatsApp(){
+  if(!updateReceipt())return;
+
+  let phone=$("phone").value.replace(/\D/g,"");
+  if(phone.length===10){
+    phone="91"+phone;
+  }else if(!(phone.length===12&&phone.startsWith("91"))){
+    alert("Enter a valid 10-digit Indian mobile number, with no country code, or a 12-digit number starting with 91.");
+    $("phone").focus();
+    return;
+  }
+
+  const msg=
+`*${$("rInstitute").textContent}*
+*PAYMENT RECEIPT*
+
+Receipt No: ${$("rNumber").textContent}
+Date: ${$("rDate").textContent}
+
+Student: ${$("rStudent").textContent}
+Course/Service: ${$("rCourse").textContent}
+
+Total Fees: ${$("rTotal2").textContent}
+Amount Received: ${$("rPaid").textContent}
+Balance Due: ${$("rBalance").textContent}
+Payment Status: ${$("rStatus").textContent}
+Payment Method: ${$("rMode").textContent}
+${$("rTxnLine").style.display==="none"?"":"Transaction Reference: "+$("rTransaction").textContent+"\n"}Remarks: ${$("rRemarks").textContent}
+
+*REFUND POLICY*
+Once paid, money is not refunded, subject to applicable law and mandatory consumer rights.
+
+Authorized Signatory: Abinash Barik
+Thank you for choosing us.`;
+
+  const url="https://wa.me/"+phone+"?text="+encodeURIComponent(msg);
+  const opened=window.open(url,"_blank");
+  if(!opened){
+    $("notice").textContent="WhatsApp pop-up was blocked. Open this link: "+url;
+  }else{
+    $("notice").textContent="WhatsApp opened with the receipt message. Review and tap Send.";
   }
 }
 
-function resetForm(){
-  if(!confirm("Start a new receipt? Unsaved details will be cleared.")) return;
-
-  ["student","phone","course","transaction","remarks"].forEach(id => {
-    $(id).value = "";
-  });
-
-  $("total").value = "0";
-  $("paid").value = "0";
-  $("mode").value = "Cash";
-  $("date").value = new Date().toLocaleDateString("en-CA");
+function newReceipt(){
+  if(!confirm("Clear current details and create a new receipt?"))return;
+  ["student","phone","course","transaction","remarks"].forEach(id=>$(id).value="");
+  $("total").value="0";
+  $("paid").value="0";
+  $("mode").value="Cash";
+  $("date").value=new Date().toLocaleDateString("en-CA");
   updateReceipt();
 }
 
-$("date").value = new Date().toLocaleDateString("en-CA");
-
+$("date").value=new Date().toLocaleDateString("en-CA");
 updateReceipt();
 </script>
 </body>
