@@ -17,38 +17,45 @@
 :root{
   --bg:#08090d;
   --panel:#111219;
-  --card:#171820;
+  --card:#14151c;
   --gold:#d4af37;
   --gold-light:#ffe8a3;
   --muted:#9293a0;
   --green:#43d99a;
   --red:#ff7777;
   --border:rgba(255,255,255,.09);
-  --goldGlow:0 0 28px #d4af371c;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
-  min-height:100vh;padding:16px 13px 38px;
-  background:radial-gradient(ellipse at 50% -10%,#d4af371a,transparent 43%),var(--bg);
-  color:#f7f7fa;font-family:Poppins,sans-serif;
+  min-height:100vh;
+  padding:16px 13px 35px;
+  background:radial-gradient(ellipse at 50% -10%,#d4af3714,transparent 42%),var(--bg);
+  color:#f7f7fa;
+  font-family:Poppins,sans-serif;
   -webkit-tap-highlight-color:transparent;
 }
 button,input{font:inherit}
 button{cursor:pointer}
 button:disabled{opacity:.5;cursor:wait}
 .app{width:100%;max-width:490px;margin:auto}
+
 .topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:24px}
 .brand{display:flex;align-items:center;gap:10px}
 .brandLogo{
-  height:46px;width:46px;border-radius:15px;display:grid;place-items:center;
-  background:linear-gradient(145deg,#fff0b8,#d4af37 55%,#8c6915);
-  color:#18130a;font-size:21px;box-shadow:0 6px 0 #806019,0 12px 24px #0008;
+  height:44px;width:44px;border-radius:13px;
+  display:grid;place-items:center;
+  border:1px solid #d4af3755;
+  background:#d4af3710;color:var(--gold);font-size:20px
 }
 .brandName{font-size:15px;font-weight:800;letter-spacing:.5px}
 .brandSub{font-size:8px;color:var(--muted);letter-spacing:2px;margin-top:4px}
-.iconBtn{height:39px;width:39px;border:1px solid var(--border);border-radius:13px;background:#15161d;color:var(--gold-light);box-shadow:0 5px 15px #0004}
-.panel{padding:21px;border:1px solid var(--border);border-radius:24px;background:linear-gradient(145deg,#171820,#0f1016);box-shadow:0 20px 55px #0005}
+.iconBtn{height:38px;width:38px;border:1px solid var(--border);border-radius:12px;background:#15161d;color:var(--gold-light)}
+
+.panel{
+  padding:21px;border:1px solid var(--border);border-radius:22px;
+  background:var(--panel);box-shadow:0 15px 40px #0003
+}
 .eyebrow{font-size:9px;letter-spacing:2px;font-weight:700;color:var(--gold)}
 .loginTitle{font-size:23px;margin-top:8px}
 .subtext{font-size:11px;color:var(--muted);line-height:1.9;margin:8px 0 22px}
@@ -56,168 +63,164 @@ button:disabled{opacity:.5;cursor:wait}
 .field{position:relative;margin-bottom:14px}
 .field i{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--gold)}
 input{
-  width:100%;height:49px;padding:0 13px 0 42px;border:1px solid var(--border);
-  border-radius:13px;background:#090a0f;color:white;outline:none;font-size:16px;
+  width:100%;height:49px;padding:0 13px 0 42px;
+  border:1px solid var(--border);border-radius:12px;
+  background:#090a0f;color:white;outline:none;font-size:16px
 }
-input:focus{border-color:#b59543;box-shadow:0 0 0 3px #d4af3710}
+input:focus{border-color:#b59543;box-shadow:0 0 0 2px #d4af3715}
 .btn{
-  min-height:44px;width:100%;padding:12px 14px;border:0;border-radius:13px;
-  display:flex;justify-content:center;align-items:center;gap:9px;font-size:10px;font-weight:800;
-  transition:transform .2s,box-shadow .2s;
+  min-height:43px;width:100%;padding:12px 14px;border:1px solid transparent;
+  border-radius:11px;display:flex;justify-content:center;align-items:center;
+  gap:9px;font-size:10px;font-weight:800
 }
-.btn:active{transform:scale(.98)}
-.goldBtn{background:linear-gradient(120deg,#fff0b8,#d4af37 60%,#b38b20);color:#151109;box-shadow:0 5px 0 #795b16,0 10px 22px #d4af3717}
-.darkBtn{background:linear-gradient(145deg,#20212b,#13141b);color:#eee;border:1px solid var(--border)}
-.greenBtn{background:#43d99a12;color:var(--green);border:1px solid #43d99a30}
+.goldBtn{background:var(--gold);color:#151109}
+.darkBtn{background:#191a22;color:#eee;border-color:var(--border)}
+.greenBtn{background:#43d99a12;color:var(--green);border-color:#43d99a30}
 .message{font-size:10px;line-height:1.8;margin-top:12px;overflow-wrap:anywhere}
 .loader{display:none;text-align:center;color:var(--muted);font-size:10px;padding:20px}
 .spinner{display:block;width:23px;height:23px;margin:0 auto 10px;border:2px solid #333;border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-#dashboard{display:none;animation:appear .35s ease}
-@keyframes appear{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
-.floatArt{animation:floatArt 4s ease-in-out infinite;transform-origin:center}
-@keyframes floatArt{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-6px) rotate(1deg)}}
+#dashboard{display:none;animation:appear .25s ease}
+@keyframes appear{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
 
 /* HERO */
 .hero{
-  position:relative;overflow:hidden;padding:21px;border:1px solid #d4af3750;border-radius:25px;
-  background:linear-gradient(145deg,#292111 0%,#19171a 48%,#111219 100%);
-  box-shadow:0 12px 0 #090a0f,0 19px 35px #0005,var(--goldGlow);margin-bottom:19px;
-}
-.hero:before{
-  content:"";position:absolute;width:220px;height:220px;right:-95px;top:-115px;
-  border:1px solid #d4af3730;border-radius:50%;box-shadow:0 0 0 20px #d4af3708,0 0 0 42px #d4af3705;
+  position:relative;overflow:hidden;padding:21px;
+  border:1px solid #d4af3735;border-radius:22px;
+  background:linear-gradient(145deg,#19170f,#12131a 70%);
+  margin-bottom:19px
 }
 .heroRow{position:relative;z-index:1;display:flex;align-items:center;gap:12px}
 .avatar{
-  height:57px;width:57px;flex:none;display:grid;place-items:center;border-radius:18px;
-  background:linear-gradient(145deg,#fff0b8,#d4af37 60%,#987019);color:#171208;font-size:24px;
-  box-shadow:0 5px 0 #765a17,0 9px 20px #0005;
+  height:57px;width:57px;flex:none;display:grid;place-items:center;
+  border:1px solid #d4af3755;border-radius:16px;background:#d4af3710;
+  color:var(--gold-light);font-size:23px
 }
 .heroCopy{min-width:0;flex:1}
 .heroLabel{font-size:8px;letter-spacing:1.5px;color:var(--gold);font-weight:700}
 .studentName{font-size:20px;line-height:1.5;margin-top:4px;overflow-wrap:anywhere}
-.statusPill{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;margin-top:7px;border:1px solid #43d99a35;border-radius:20px;background:#43d99a0b;color:var(--green);font-size:8px;font-weight:700}
+.statusPill{
+  display:inline-flex;align-items:center;gap:6px;padding:6px 9px;
+  margin-top:7px;border:1px solid #43d99a35;border-radius:20px;
+  background:#43d99a0b;color:var(--green);font-size:8px;font-weight:700
+}
 .statusPill.inactive{border-color:#ff777735;color:var(--red);background:#ff77770b}
-.heroMeta{display:flex;flex-wrap:wrap;gap:8px;margin-top:17px;padding-top:13px;border-top:1px solid #ffffff10;position:relative;z-index:1}
-.metaPill{padding:7px 10px;border-radius:10px;background:#ffffff07;border:1px solid #ffffff0e;color:#c5c5cf;font-size:9px;overflow-wrap:anywhere}
+.heroMeta{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;padding-top:13px;border-top:1px solid #ffffff10}
+.metaPill{padding:7px 10px;border-radius:9px;background:#ffffff05;border:1px solid #ffffff0b;color:#c5c5cf;font-size:9px;overflow-wrap:anywhere}
 .metaPill i{color:var(--gold);margin-right:5px}
 
-/* 3D HERO ILLUSTRATION */
-.heroIllustration{
-  position:relative;z-index:1;margin-top:17px;padding:13px 12px 9px;
-  border-radius:17px;border:1px solid #d4af3729;
-  background:linear-gradient(130deg,#d4af370c,#07080c99);
-  display:flex;align-items:center;gap:12px;overflow:hidden;
+/* STATIC LINE ART */
+.illustration{
+  display:flex;align-items:center;gap:13px;
+  padding:13px;margin-top:15px;border:1px solid #d4af3725;
+  border-radius:14px;background:#090a0d55
 }
-.heroIllustration:after{
-  content:"";position:absolute;inset:auto -20px -42px auto;width:120px;height:90px;
-  border-radius:50%;background:#d4af3710;filter:blur(20px);pointer-events:none;
-}
-.steeringArt{width:95px;flex:none;filter:drop-shadow(0 8px 9px #0008)}
-.illustrationCopy{min-width:0;position:relative;z-index:1}
-.illustrationCopy b{display:block;color:var(--gold-light);font-size:11px}
-.illustrationCopy span{display:block;color:var(--muted);font-size:8px;line-height:1.8;margin-top:5px}
-.artTag{display:inline-flex!important;width:max-content;align-items:center;gap:5px;margin-top:8px!important;padding:5px 8px;border:1px solid #d4af3735;border-radius:20px;color:var(--gold-light)!important;background:#d4af370c}
+.lineArt{width:76px;height:76px;flex:none;color:var(--gold-light)}
+.lineArt svg{display:block;width:100%;height:100%}
+.illustrationText{min-width:0}
+.illustrationText strong{display:block;color:var(--gold-light);font-size:10px;font-weight:700}
+.illustrationText p{font-size:9px;line-height:1.8;color:var(--muted);margin-top:5px}
+.artCaption{display:inline-block;margin-top:7px;color:var(--gold);font-size:7px;letter-spacing:1.2px}
 
-/* HEADINGS & STAT CARDS */
-.sectionHeading{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:26px 2px 13px}
+/* SECTION HEADINGS */
+.sectionHeading{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:8px;margin:25px 2px 12px
+}
 .sectionHeading h3{font-size:10px;letter-spacing:1.5px}
 .sectionHeading span{font-size:8px;color:var(--muted)}
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:11px;perspective:900px}
+
+/* STAT CARDS */
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .stat{
-  position:relative;overflow:hidden;min-width:0;padding:16px;border:1px solid #ffffff10;border-radius:18px;
-  background:linear-gradient(145deg,#20212a,#14151b 72%);box-shadow:0 6px 0 #090a0f,0 12px 20px #0003;
-  transition:transform .25s,border-color .25s,box-shadow .25s;
+  position:relative;min-width:0;padding:15px;
+  border:1px solid var(--border);border-radius:15px;
+  background:linear-gradient(145deg,#181921,#101116);
 }
-.stat:before{content:"";position:absolute;inset:0 0 auto;height:2px;background:linear-gradient(90deg,transparent,#d4af37,transparent);opacity:.65}
-.stat:after{content:"";position:absolute;right:-35px;top:-35px;width:85px;height:85px;border:1px solid #d4af3712;border-radius:50%;box-shadow:0 0 0 12px #d4af3704;pointer-events:none}
-.stat:hover{transform:translateY(-3px);border-color:#d4af3740;box-shadow:0 9px 0 #090a0f,0 18px 28px #0005}
-.statIcon{width:36px;height:36px;display:grid;place-items:center;border-radius:12px;background:linear-gradient(145deg,#3a3016,#17150e);border:1px solid #d4af3735;color:var(--gold-light);font-size:14px;box-shadow:0 4px 0 #0b0b0e}
-.statLabel{font-size:9px;color:var(--muted);margin-top:14px}
+.statTop{display:flex;align-items:center;justify-content:space-between;gap:5px}
+.statIcon{
+  width:34px;height:34px;display:grid;place-items:center;
+  border-radius:10px;border:1px solid #d4af372a;background:#d4af370b;
+  color:var(--gold);font-size:13px
+}
+.statArt{width:33px;height:33px;color:#bda45b;opacity:.9}
+.statArt svg{width:100%;height:100%}
+.statLabel{font-size:9px;color:var(--muted);margin-top:13px}
 .statValue{font-size:22px;font-weight:800;margin-top:3px;line-height:1.4;overflow-wrap:anywhere}
-.statFoot{font-size:8px;color:#777885;margin-top:3px}
+.statFoot{font-size:8px;color:#6f707d;margin-top:3px}
 
 /* CLASS TYPE */
-.classCard{padding:18px;border:1px solid #d4af3733;border-radius:19px;background:linear-gradient(130deg,#d4af3713,#171820);box-shadow:0 6px 0 #090a0f,0 12px 24px #0003}
+.classCard{padding:17px;border:1px solid #d4af3728;border-radius:17px;background:#15161d}
 .classRow{display:flex;align-items:center;gap:12px}
-.classIcon{width:46px;height:46px;flex:none;border-radius:15px;background:linear-gradient(145deg,#40351a,#17140d);border:1px solid #d4af3740;color:var(--gold-light);display:grid;place-items:center;font-size:18px;box-shadow:0 5px 0 #0a0b0e}
+.classIcon{
+  width:44px;height:44px;flex:none;border-radius:13px;
+  background:#d4af3710;border:1px solid #d4af3735;color:var(--gold);
+  display:grid;place-items:center;font-size:18px
+}
 .classLabel{font-size:8px;color:var(--muted);letter-spacing:1.5px}
 .classValue{font-size:15px;font-weight:800;margin-top:4px}
 .classDescription{font-size:9px;color:var(--muted);line-height:1.8;margin-top:12px}
 
 /* PROGRESS */
-.progressCard{
-  padding:17px;border:1px solid #d4af373b;border-radius:21px;
-  background:linear-gradient(145deg,#201c13,#171820 60%,#101116);
-  box-shadow:0 7px 0 #090a0f,0 15px 28px #0004;
-}
+.progressCard{padding:17px;border:1px solid var(--border);border-radius:18px;background:#14151c}
 .progressLayout{display:flex;align-items:center;gap:15px}
-.ring{position:relative;width:98px;height:98px;flex:none;filter:drop-shadow(0 4px 8px #d4af3714)}
+.ring{position:relative;width:98px;height:98px;flex:none}
 .ring svg{width:100%;height:100%;transform:rotate(-90deg)}
 .ring circle{fill:none;stroke-width:8}
 .ring .track{stroke:#30313b}
-.ring .fill{stroke:var(--gold);stroke-linecap:round;transition:stroke-dashoffset .7s;filter:drop-shadow(0 0 4px #d4af3766)}
+.ring .fill{stroke:var(--gold);stroke-linecap:round;transition:stroke-dashoffset .7s}
 .ringValue{position:absolute;inset:0;display:grid;place-items:center;font-size:21px;font-weight:800}
 .progressCopy{min-width:0;flex:1}
 .progressCopy h4{font-size:13px}
 .progressCopy p{font-size:9px;color:var(--muted);line-height:1.9;margin-top:6px}
-.progressTrack{height:6px;margin-top:17px;border-radius:20px;background:#30313b;overflow:hidden;box-shadow:inset 0 2px 4px #0007}
-.progressBar{height:100%;width:0;background:linear-gradient(90deg,#987019,#d4af37,#fff0b8);border-radius:20px;transition:width .7s;box-shadow:0 0 10px #d4af3750}
+.progressTrack{height:5px;margin-top:17px;border-radius:20px;background:#30313b;overflow:hidden}
+.progressBar{height:100%;width:0;background:linear-gradient(90deg,#b38b20,#ffe8a3);border-radius:20px;transition:width .7s}
 .progressMeta{display:flex;justify-content:space-between;gap:8px;margin-top:9px}
 .progressMeta span{font-size:8px;color:var(--muted)}
 .progressMeta b{color:var(--gold-light)}
+.roadIllustration{
+  margin-top:15px;padding:9px 10px;border:1px solid #d4af3720;
+  border-radius:12px;background:#0d0e13
+}
+.roadIllustration svg{display:block;width:100%;height:54px}
+.roadCaption{font-size:7px;letter-spacing:1.5px;color:var(--muted);margin-bottom:4px}
 .note{display:flex;gap:7px;align-items:flex-start;font-size:8px;line-height:1.8;color:var(--muted);margin-top:12px}
 .note i{color:var(--gold);margin-top:3px}
 
-/* MINI ROAD ILLUSTRATION */
-.roadArt{
-  position:relative;height:68px;margin-top:16px;overflow:hidden;border-radius:13px;
-  border:1px solid #d4af3722;background:linear-gradient(90deg,#0d0e13,#191811);
-}
-.roadArt svg{display:block;width:100%;height:100%}
-.roadCaption{position:absolute;left:10px;top:8px;font-size:7px;letter-spacing:1.5px;color:#c8b77d;text-transform:uppercase}
-
 /* ACHIEVEMENTS */
-.achievementGrid{display:grid;grid-template-columns:1fr 1fr;gap:11px;perspective:900px}
+.achievementGrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
 .achievement{
-  position:relative;overflow:hidden;min-width:0;padding:16px 10px 14px;text-align:center;
-  border:1px solid #ffffff10;border-radius:18px;
-  background:linear-gradient(145deg,#21222b,#13141a);
-  box-shadow:0 6px 0 #090a0f,0 12px 22px #0004;
-  opacity:.63;filter:grayscale(.7);
-  transition:transform .25s,border-color .25s,filter .25s,opacity .25s;
+  padding:14px 9px;text-align:center;border:1px solid var(--border);
+  border-radius:14px;background:#14151b;opacity:.58;filter:grayscale(.65)
 }
-.achievement:before{content:"";position:absolute;top:0;left:18%;right:18%;height:2px;background:linear-gradient(90deg,transparent,#d4af37,transparent);opacity:.6}
-.achievement.unlocked{opacity:1;filter:none;border-color:#d4af3760;background:linear-gradient(145deg,#302716,#171820 75%);box-shadow:0 6px 0 #090a0f,0 14px 25px #d4af370b}
-.achievement:hover{transform:translateY(-4px) rotateX(2deg)}
+.achievement.unlocked{opacity:1;filter:none;border-color:#d4af3745;background:#d4af3709}
 .achievementIcon{
-  width:51px;height:51px;display:grid;place-items:center;margin:0 auto 12px;
-  border-radius:16px;background:linear-gradient(145deg,#4b3b17,#1a170e);
-  border:1px solid #d4af3750;color:#ffe8a3;font-size:21px;
-  box-shadow:inset 0 1px 1px #fff2,0 5px 0 #0b0b0d,0 9px 15px #0005;
-  text-shadow:0 2px 8px #d4af3760;
+  width:45px;height:45px;display:grid;place-items:center;margin:0 auto 10px;
+  border-radius:13px;border:1px solid #d4af3738;background:#d4af370b;
+  color:var(--gold-light);font-size:19px
 }
-.achievement.unlocked .achievementIcon{background:linear-gradient(145deg,#ffe8a3,#d4af37 58%,#8b6614);color:#1a1408;border-color:#ffe8a3;box-shadow:inset 0 1px 2px #fff8,0 5px 0 #765815,0 10px 17px #0005}
+.achievement.unlocked .achievementIcon{background:#d4af3719;border-color:#d4af3770;color:#ffe8a3}
 .achievement b{display:block;font-size:9px}
 .achievement small{display:block;margin-top:5px;color:var(--muted);font-size:8px;line-height:1.7}
-.achievement .unlockLabel{display:block;margin-top:9px;font-size:7px;letter-spacing:1px;color:#7f808c}
+.unlockLabel{display:block;margin-top:8px;color:var(--muted);font-size:7px;letter-spacing:1px}
 .achievement.unlocked .unlockLabel{color:var(--gold-light)}
 
-/* WALLET AND HISTORY */
-.walletCard{padding:18px;border:1px solid #43d99a29;border-radius:20px;background:linear-gradient(140deg,#14251f,#15161d 75%);box-shadow:0 6px 0 #090a0f,0 12px 22px #0003}
+/* WALLET */
+.walletCard{padding:18px;border:1px solid #43d99a29;border-radius:18px;background:linear-gradient(140deg,#132019,#15161d)}
 .walletRow{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .walletLeft{display:flex;align-items:center;gap:10px;min-width:0}
-.walletIcon{width:41px;height:41px;flex:none;display:grid;place-items:center;border-radius:14px;background:linear-gradient(145deg,#244c3a,#14251f);border:1px solid #43d99a2b;color:var(--green);box-shadow:0 4px 0 #0b1110}
+.walletIcon{width:39px;height:39px;flex:none;display:grid;place-items:center;border-radius:12px;background:#43d99a12;border:1px solid #43d99a25;color:var(--green)}
 .walletLabel{font-size:9px;font-weight:700;color:var(--green)}
 .walletSub{font-size:8px;color:var(--muted);margin-top:5px}
 .walletAmount{font-size:21px;font-weight:800;overflow-wrap:anywhere}
 .walletFoot{border-top:1px solid #ffffff10;padding-top:12px;margin-top:14px;display:flex;justify-content:space-between;gap:10px}
 .walletFoot span,.walletFoot b{font-size:9px}
 .walletFoot span{color:var(--muted)}
-.historyCard{padding:12px;border:1px solid var(--border);border-radius:19px;background:linear-gradient(145deg,#191a22,#111219);box-shadow:0 6px 0 #090a0f}
+
+/* ATTENDANCE */
+.historyCard{padding:12px;border:1px solid var(--border);border-radius:17px;background:var(--card)}
 .historyList{display:flex;flex-direction:column;gap:9px;max-height:400px;overflow:auto}
-.log{padding:13px;border:1px solid #ffffff0b;border-left:3px solid var(--gold);border-radius:12px;background:#101116}
+.log{padding:13px;border:1px solid #ffffff0b;border-left:3px solid var(--gold);border-radius:11px;background:#101116}
 .logHead{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
 .logTitle{font-size:10px;font-weight:700}
 .logDate{font-size:8px;color:var(--gold-light);text-align:right;line-height:1.7}
@@ -226,16 +229,16 @@ input:focus{border-color:#b59543;box-shadow:0 0 0 3px #d4af3710}
 .empty{padding:24px 10px;text-align:center;color:var(--muted);font-size:10px;line-height:1.9}
 .empty i{display:block;font-size:22px;color:#666;margin-bottom:9px}
 
-/* CERTIFICATE AND ACTIONS */
-.certificateCard{display:none;padding:19px;border:1px solid #d4af3740;border-radius:20px;text-align:center;background:linear-gradient(140deg,#d4af3717,#15161d);box-shadow:0 6px 0 #090a0f,0 12px 22px #0003}
+/* CERTIFICATE */
+.certificateCard{display:none;padding:19px;border:1px solid #d4af3740;border-radius:18px;text-align:center;background:#17160f}
 .certificateCard>i{font-size:33px;color:var(--gold);margin-bottom:10px}
 .certificateCard h3{font-size:14px}
 .certificateCard p{font-size:9px;color:var(--muted);line-height:1.9;margin:9px 0 15px}
 .actionGrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:20px}
-.footer{text-align:center;margin-top:27px;color:#5f606b;font-size:8px;line-height:2;letter-spacing:1px}
+.footer{text-align:center;margin-top:25px;color:#5f606b;font-size:8px;line-height:2;letter-spacing:1px}
 .footer i{color:var(--gold)}
 
-/* CERTIFICATE PDF — KEEP PRINT LAYOUT */
+/* CERTIFICATE PDF TEMPLATE */
 #certificate{
   display:none;width:1123px;height:794px;padding:14px;overflow:hidden;
   box-sizing:border-box;background:#07172d;color:#10213d;
@@ -274,26 +277,23 @@ input:focus{border-color:#b59543;box-shadow:0 0 0 3px #d4af3710}
 .bt-float{
   position:fixed;right:14px;bottom:calc(18px + env(safe-area-inset-bottom,0px));
   z-index:9998;width:82px;display:flex;flex-direction:column;align-items:center;gap:5px;
-  text-decoration:none;-webkit-tap-highlight-color:transparent;animation:btFloat 3s ease-in-out infinite;
+  text-decoration:none;-webkit-tap-highlight-color:transparent
 }
 .bt-float img{display:block;width:76px;height:76px;object-fit:contain;border-radius:20px;filter:drop-shadow(0 5px 12px #0009)}
 .bt-float-label{display:block;padding:5px 8px;border:1px solid #d4af3755;border-radius:20px;background:#111219ed;color:#ffe8a3;font-size:9px;font-weight:800;letter-spacing:.4px;white-space:nowrap;box-shadow:0 5px 18px #0005}
 .bt-float:focus-visible{outline:2px solid #ffe8a3;outline-offset:4px;border-radius:15px}
-@keyframes btFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
 
 @media(max-width:360px){
   body{padding:12px 9px}
-  .panel{padding:17px}
   .hero{padding:16px}
   .studentName{font-size:17px}
-  .heroLabel{font-size:7px}
-  .steeringArt{width:78px}
-  .heroIllustration{gap:8px;padding:10px 8px}
-  .stat{padding:13px}
+  .stat{padding:12px}
   .statValue{font-size:20px}
   .ring{width:84px;height:84px}
   .progressLayout{gap:10px}
   .walletAmount{font-size:17px}
+  .lineArt{width:64px;height:64px}
+  .illustration{gap:9px;padding:10px}
   .bt-float{right:9px;bottom:calc(12px + env(safe-area-inset-bottom,0px));width:70px}
   .bt-float img{width:65px;height:65px}
   .bt-float-label{font-size:8px;padding:4px 6px}
@@ -315,9 +315,7 @@ input:focus{border-color:#b59543;box-shadow:0 0 0 3px #d4af3710}
       <div class="brandSub">DRIVING ACADEMY</div>
     </div>
   </div>
-  <button class="iconBtn" id="refreshBtn" aria-label="Refresh">
-    <i class="fa-solid fa-rotate"></i>
-  </button>
+  <button class="iconBtn" id="refreshBtn" aria-label="Refresh"><i class="fa-solid fa-rotate"></i></button>
 </header>
 
 <!-- LOGIN -->
@@ -347,44 +345,28 @@ input:focus{border-color:#b59543;box-shadow:0 0 0 3px #d4af3710}
         <div class="statusPill" id="studentStatus"><i class="fa-solid fa-circle-check"></i><span>ACTIVE STUDENT</span></div>
       </div>
     </div>
-
     <div class="heroMeta">
       <span class="metaPill"><i class="fa-solid fa-phone"></i><span id="studentPhone"></span></span>
       <span class="metaPill"><i class="fa-solid fa-car-side"></i><span id="packageName">Driving Training</span></span>
     </div>
 
-    <!-- Custom SVG illustration; no external car background -->
-    <div class="heroIllustration">
-      <svg class="steeringArt floatArt" viewBox="0 0 120 110" role="img" aria-label="Decorative golden steering wheel illustration">
-        <defs>
-          <linearGradient id="wheelGold" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#fff0b8"/>
-            <stop offset=".48" stop-color="#d4af37"/>
-            <stop offset="1" stop-color="#75500e"/>
-          </linearGradient>
-          <linearGradient id="wheelFace" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#34302a"/>
-            <stop offset="1" stop-color="#0a0b0e"/>
-          </linearGradient>
-          <filter id="wheelShadow"><feGaussianBlur stdDeviation="3"/></filter>
-        </defs>
-        <ellipse cx="60" cy="98" rx="35" ry="6" fill="#000" opacity=".55" filter="url(#wheelShadow)"/>
-        <circle cx="60" cy="48" r="38" fill="none" stroke="#6c4d13" stroke-width="13"/>
-        <circle cx="60" cy="46" r="38" fill="none" stroke="url(#wheelGold)" stroke-width="9"/>
-        <circle cx="60" cy="46" r="29" fill="none" stroke="#fff0b8" stroke-width="1.5" opacity=".6"/>
-        <path d="M60 47 L60 68 L35 79 M60 68 L85 79" fill="none" stroke="url(#wheelGold)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M60 47 L60 68 L35 79 M60 68 L85 79" fill="none" stroke="#fff0b8" stroke-width="1.2" opacity=".65" stroke-linecap="round"/>
-        <circle cx="60" cy="46" r="15" fill="#1b1b1b" stroke="url(#wheelGold)" stroke-width="3"/>
-        <path d="M52 47 L60 40 L68 47 L60 54Z" fill="url(#wheelGold)"/>
-        <circle cx="60" cy="46" r="4" fill="#fff0b8"/>
-        <path d="M31 21 Q60 2 89 21" fill="none" stroke="#fff0b8" stroke-width="1.5" opacity=".5"/>
-        <circle cx="21" cy="49" r="2" fill="#ffe8a3"/>
-        <circle cx="99" cy="49" r="2" fill="#ffe8a3"/>
-      </svg>
-      <div class="illustrationCopy">
-        <b>YOUR JOURNEY. YOUR PROGRESS.</b>
-        <span>Build confidence one session at a time. Learn safely, drive responsibly.</span>
-        <span class="artTag"><i class="fa-solid fa-shield-halved"></i> SAFETY FIRST</span>
+    <div class="illustration">
+      <div class="lineArt">
+        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Steering wheel line illustration">
+          <circle cx="50" cy="46" r="36"/>
+          <circle cx="50" cy="46" r="25"/>
+          <circle cx="50" cy="46" r="9"/>
+          <path d="M50 37V20M42 51L26 65M58 51L74 65"/>
+          <path d="M31 22Q50 10 69 22" stroke="#d4af37"/>
+          <path d="M50 55V76"/>
+          <path d="M18 46H25M75 46H82" stroke="#d4af37"/>
+          <path d="M38 87H62" stroke="#d4af37"/>
+        </svg>
+      </div>
+      <div class="illustrationText">
+        <strong>YOUR JOURNEY STARTS HERE</strong>
+        <p>Build confidence, master the basics and learn responsible driving.</p>
+        <span class="artCaption">01 — LEARN • PRACTISE • PROGRESS</span>
       </div>
     </div>
   </div>
@@ -392,25 +374,53 @@ input:focus{border-color:#b59543;box-shadow:0 0 0 3px #d4af3710}
   <div class="sectionHeading"><h3>TRAINING OVERVIEW</h3><span>LIVE RECORD</span></div>
   <div class="stats">
     <div class="stat">
-      <div class="statIcon"><i class="fa-solid fa-circle-check"></i></div>
+      <div class="statTop">
+        <div class="statIcon"><i class="fa-solid fa-circle-check"></i></div>
+        <div class="statArt">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="20" cy="20" r="15"/><path d="M12 20l5 5 11-12"/>
+          </svg>
+        </div>
+      </div>
       <div class="statLabel">SESSIONS COMPLETED</div>
       <div class="statValue" id="completedValue">0</div>
       <div class="statFoot">Recorded training sessions</div>
     </div>
     <div class="stat">
-      <div class="statIcon"><i class="fa-solid fa-calendar-days"></i></div>
+      <div class="statTop">
+        <div class="statIcon"><i class="fa-solid fa-calendar-days"></i></div>
+        <div class="statArt">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true">
+            <rect x="6" y="10" width="28" height="24" rx="3"/><path d="M6 17h28M13 6v8M27 6v8M13 23h5M23 23h5M13 28h5"/>
+          </svg>
+        </div>
+      </div>
       <div class="statLabel">TOTAL SESSIONS</div>
       <div class="statValue" id="totalValue">0</div>
       <div class="statFoot">Package target</div>
     </div>
     <div class="stat">
-      <div class="statIcon"><i class="fa-solid fa-road"></i></div>
+      <div class="statTop">
+        <div class="statIcon"><i class="fa-solid fa-road"></i></div>
+        <div class="statArt">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true">
+            <path d="M11 35L16 5M29 35L24 5"/><path d="M20 7v5M20 18v5M20 29v5"/>
+          </svg>
+        </div>
+      </div>
       <div class="statLabel">ESTIMATED DISTANCE</div>
       <div class="statValue" id="distanceValue">0 km</div>
       <div class="statFoot">Based on recorded logs</div>
     </div>
     <div class="stat">
-      <div class="statIcon"><i class="fa-solid fa-flag-checkered"></i></div>
+      <div class="statTop">
+        <div class="statIcon"><i class="fa-solid fa-flag-checkered"></i></div>
+        <div class="statArt">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M10 35V5M11 7h20l-4 6 4 6H11"/><path d="M15 9h5v5h-5zM25 14h4M15 15h5"/>
+          </svg>
+        </div>
+      </div>
       <div class="statLabel">SESSIONS REMAINING</div>
       <div class="statValue" id="remainingValue">0</div>
       <div class="statFoot">Until package target</div>
@@ -427,6 +437,24 @@ input:focus{border-color:#b59543;box-shadow:0 0 0 3px #d4af3710}
       </div>
     </div>
     <p class="classDescription" id="classDescription">Your class type is read directly from your registered training record.</p>
+
+    <div class="illustration">
+      <div class="lineArt">
+        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Driving lesson line illustration">
+          <path d="M12 65L19 43Q21 38 28 38H69Q76 38 80 45L88 65V77H12Z"/>
+          <path d="M22 45H75L81 60H17Z"/>
+          <path d="M12 65H88M27 77v7M73 77v7"/>
+          <circle cx="28" cy="68" r="5"/><circle cx="72" cy="68" r="5"/>
+          <path d="M39 26Q50 14 61 26M50 26V37"/>
+          <circle cx="50" cy="20" r="6"/>
+          <path d="M43 32H57"/>
+        </svg>
+      </div>
+      <div class="illustrationText">
+        <strong>TRAIN WITH CONFIDENCE</strong>
+        <p>Your registered training mode is displayed directly from your student record.</p>
+      </div>
+    </div>
   </div>
 
   <div class="sectionHeading"><h3>COURSE PROGRESS</h3><span id="progressStatus">IN PROGRESS</span></div>
@@ -444,31 +472,21 @@ input:focus{border-color:#b59543;box-shadow:0 0 0 3px #d4af3710}
         <p id="progressDescription">Every completed session brings you closer to your target.</p>
       </div>
     </div>
+
     <div class="progressTrack"><div class="progressBar" id="progressBar"></div></div>
     <div class="progressMeta">
       <span id="progressCount">0 of 0 sessions</span>
       <span><b id="progressPercent">0%</b> completed</span>
     </div>
 
-    <!-- Decorative golden road with moving destination marker -->
-    <div class="roadArt">
-      <span class="roadCaption">Your road to driving confidence</span>
-      <svg viewBox="0 0 400 70" preserveAspectRatio="none" aria-hidden="true">
-        <defs>
-          <linearGradient id="roadGoldLine" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0" stop-color="#795b18"/>
-            <stop offset=".5" stop-color="#d4af37"/>
-            <stop offset="1" stop-color="#ffe8a3"/>
-          </linearGradient>
-        </defs>
-        <path d="M-10 72 C70 10 125 84 200 47 S320 10 410 35" fill="none" stroke="#383022" stroke-width="21" stroke-linecap="round"/>
-        <path d="M-10 72 C70 10 125 84 200 47 S320 10 410 35" fill="none" stroke="url(#roadGoldLine)" stroke-width="2" stroke-dasharray="8 7" stroke-linecap="round"/>
-        <path d="M-10 72 C70 10 125 84 200 47 S320 10 410 35" fill="none" stroke="#fff0b8" stroke-width=".8" opacity=".45"/>
-        <g class="floatArt">
-          <circle cx="354" cy="24" r="13" fill="#d4af37" opacity=".16"/>
-          <circle cx="354" cy="24" r="8" fill="#17140d" stroke="#ffe8a3" stroke-width="1.5"/>
-          <path d="M350 24 L353 27 L359 20" fill="none" stroke="#ffe8a3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </g>
+    <div class="roadIllustration">
+      <div class="roadCaption">YOUR ROAD TO DRIVING CONFIDENCE</div>
+      <svg viewBox="0 0 360 60" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M-5 48C48 48 55 14 115 17S180 50 235 36 300 8 365 12" stroke="#343037" stroke-width="17"/>
+        <path d="M-5 48C48 48 55 14 115 17S180 50 235 36 300 8 365 12" stroke="#d4af37" stroke-width="1.4" stroke-dasharray="5 7"/>
+        <circle cx="326" cy="12" r="9" stroke="#ffe8a3" stroke-width="1.4"/>
+        <path d="M322 12l3 3 5-6" stroke="#ffe8a3" stroke-width="1.6"/>
+        <path d="M18 44l4 4 8-9" stroke="#d4af37" stroke-width="1.4"/>
       </svg>
     </div>
 
@@ -481,22 +499,39 @@ input:focus{border-color:#b59543;box-shadow:0 0 0 3px #d4af3710}
   <div class="sectionHeading"><h3>ACHIEVEMENTS</h3><span>YOUR MILESTONES</span></div>
   <div class="achievementGrid">
     <div class="achievement" id="badgeFirst">
-      <div class="achievementIcon"><i class="fa-solid fa-key"></i></div>
+      <div class="achievementIcon">
+        <svg viewBox="0 0 48 48" width="29" height="29" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="17" cy="15" r="7"/><path d="M22 20l15 15-5 5-15-15"/><path d="M28 29l5-5M32 33l5-5"/>
+        </svg>
+      </div>
       <b>First Gear</b><small>Complete your first session</small>
       <span class="unlockLabel">LOCKED</span>
     </div>
     <div class="achievement" id="badgeSafety">
-      <div class="achievementIcon"><i class="fa-solid fa-shield-halved"></i></div>
+      <div class="achievementIcon">
+        <svg viewBox="0 0 48 48" width="29" height="29" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M24 5l16 6v11c0 10-7 17-16 21C15 39 8 32 8 22V11Z"/><path d="M16 24l5 5 11-12"/>
+        </svg>
+      </div>
       <b>Safety Star</b><small>Complete 5 sessions</small>
       <span class="unlockLabel">LOCKED</span>
     </div>
     <div class="achievement" id="badgePro">
-      <div class="achievementIcon"><i class="fa-solid fa-medal"></i></div>
+      <div class="achievementIcon">
+        <svg viewBox="0 0 48 48" width="29" height="29" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M15 8h18v9c0 8-4 13-9 13s-9-5-9-13Z"/><path d="M15 12H7v5c0 6 4 9 10 9M33 12h8v5c0 6-4 9-10 9M24 30v8M16 41h16M18 18l4 4 8-9"/>
+        </svg>
+      </div>
       <b>Driving Pro</b><small>Reach 75% progress</small>
       <span class="unlockLabel">LOCKED</span>
     </div>
     <div class="achievement" id="badgeElite">
-      <div class="achievementIcon"><i class="fa-solid fa-trophy"></i></div>
+      <div class="achievementIcon">
+        <svg viewBox="0 0 48 48" width="29" height="29" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M24 5l5 11 12 1-9 8 3 12-11-6-11 6 3-12-9-8 12-1Z"/>
+          <path d="M19 44h10M21 38v6M27 38v6"/>
+        </svg>
+      </div>
       <b>Elite Graduate</b><small>Reach your package target</small>
       <span class="unlockLabel">LOCKED</span>
     </div>
@@ -557,7 +592,10 @@ input:focus{border-color:#b59543;box-shadow:0 0 0 3px #d4af3710}
       <div class="certCaption">CERTIFICATE OF ACHIEVEMENT</div>
       <div class="certRecipient">THIS CERTIFICATE IS PRESENTED TO</div>
       <h2 id="certStudentName">STUDENT NAME</h2>
-      <p class="certMessage">In recognition of reaching the recorded completion target of the driving training programme at <strong>ABHINAASH A1 DRIVING ACADEMY</strong>, acknowledging dedication, practical learning and commitment to responsible driving.</p>
+      <p class="certMessage">
+        In recognition of reaching the recorded completion target of the driving training programme at
+        <strong>ABHINAASH A1 DRIVING ACADEMY</strong>, acknowledging dedication, practical learning and commitment to responsible driving.
+      </p>
       <div class="certInfo">
         <div class="certInfoLabel">REGISTERED CLASS TYPE</div>
         <div id="certType">NOT SPECIFIED</div>
@@ -584,7 +622,7 @@ input:focus{border-color:#b59543;box-shadow:0 0 0 3px #d4af3710}
   </div>
 </div>
 
-<!-- FLOATING BLACKTERMINAL COURSES LINK -->
+<!-- BLACKTERMINAL COURSES -->
 <a class="bt-float" href="https://blackterminal.online/courses.html" target="_blank" rel="noopener noreferrer" aria-label="Open BlackTerminal Computer Institute courses" title="Explore BlackTerminal Courses">
   <img src="https://i.ibb.co/jk5TkfgY/B438-BAA1-368-A-4-BD1-9598-CBAA04373-C22.gif" alt="BlackTerminal animated character" loading="eager">
   <span class="bt-float-label">BT Moments</span>
@@ -603,14 +641,14 @@ const firebaseConfig = {
   appId:"1:641148830173:web:b7a500e5e7e2463da0f634"
 };
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const $ = id => document.getElementById(id);
+const app=initializeApp(firebaseConfig);
+const db=getFirestore(app);
+const $=id=>document.getElementById(id);
 
-let currentData = null;
-let currentPhone = "";
-let unsubscribe = null;
-let requestToken = 0;
+let currentData=null;
+let currentPhone="";
+let unsubscribe=null;
+let requestToken=0;
 
 function stopListening(){
   if(typeof unsubscribe==="function"){
@@ -790,10 +828,12 @@ function renderHistory(data){
     details.className="logDetails";
     details.textContent=parts.slice(1).join(" | ")||text||"Session recorded.";
     item.append(header,details);
+
     const route=text.match(/Route:\s*([^|]+)/i);
     const distance=text.match(/Distance:\s*([^|]+)/i);
     const remark=text.match(/Remark:\s*(.+)$/i);
     const chips=document.createElement("div");
+
     if(route){
       const chip=document.createElement("span");
       chip.className="logChip";
