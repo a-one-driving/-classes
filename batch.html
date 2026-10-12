@@ -3,368 +3,337 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#08090d">
-<meta name="description" content="ABHINAASH A1 Driving Academy Student Dashboard">
-<title>Student Dashboard | ABHINAASH A1</title>
+<meta name="description" content="ABHINAASH A1 Driving Academy student portal">
+<title>Student Portal | ABHINAASH A1</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 <style>
-:root {
+:root{
   --bg:#08090d;
-  --panel:#12131b;
-  --card:#191a24;
-  --gold:#d4af37;
-  --gold-light:#ffe8a3;
-  --muted:#9293a0;
-  --green:#43d99a;
-  --red:#ff7777;
-  --border:rgba(255,255,255,.09);
-  --shadow:0 18px 38px rgba(0,0,0,.38);
+  --surface:#111219;
+  --surface2:#171922;
+  --surface3:#20212b;
+  --gold:#d9b75a;
+  --gold2:#ffe9a5;
+  --muted:#9295a4;
+  --green:#50e0a0;
+  --red:#ff8181;
+  --line:rgba(255,255,255,.085);
+  --shadow:0 18px 42px rgba(0,0,0,.38);
 }
-
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
   min-height:100vh;
-  padding:16px 13px 35px;
-  background:
-    radial-gradient(ellipse at 50% -10%,#d4af3722,transparent 42%),
-    radial-gradient(ellipse at 100% 50%,#28314a16,transparent 40%),
-    var(--bg);
   color:#f7f7fa;
-  font-family:Poppins,sans-serif;
+  background:
+    radial-gradient(ellipse at 50% -15%,#d9b75a15,transparent 48%),
+    var(--bg);
+  font-family:Manrope,Arial,sans-serif;
   -webkit-tap-highlight-color:transparent;
 }
 button,input{font:inherit}
 button{cursor:pointer}
-button:disabled{opacity:.5;cursor:wait}
-.app{width:100%;max-width:490px;margin:auto}
+button:disabled{opacity:.55;cursor:wait}
+button:focus-visible,input:focus-visible{
+  outline:2px solid var(--gold2);outline-offset:3px
+}
+button:active{transform:scale(.985)}
+.app{width:min(100%,520px);margin:auto;padding:17px 14px 36px}
 
+/* Header */
 .topbar{
-  display:flex;justify-content:space-between;align-items:center;
-  gap:10px;margin-bottom:24px
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;margin-bottom:24px
 }
-.brand{display:flex;align-items:center;gap:10px}
+.brand{display:flex;align-items:center;gap:12px}
 .brandLogo{
-  height:44px;width:44px;border-radius:14px;
-  display:grid;place-items:center;
-  background:linear-gradient(145deg,#fff0bd,#d4af37 65%,#98701a);
-  color:#18130a;font-size:20px;
-  box-shadow:0 7px 18px #d4af372b,inset 0 1px 0 #ffffffa8;
+  width:46px;height:46px;display:grid;place-items:center;
+  border-radius:15px;color:#19150b;font-size:20px;
+  background:linear-gradient(145deg,#fff1bd,#d9b75a 65%,#96731e);
+  box-shadow:0 7px 22px #d9b75a20,inset 0 1px 0 #ffffffc9;
 }
-.brandName{font-size:15px;font-weight:800;letter-spacing:.5px}
-.brandSub{font-size:8px;color:var(--muted);letter-spacing:2px;margin-top:4px}
+.brandName{font-size:15px;font-weight:800;letter-spacing:1px}
+.brandSub{font-size:8px;letter-spacing:2.3px;color:var(--muted);margin-top:4px}
+.topActions{display:flex;gap:8px}
 .iconBtn{
-  height:39px;width:39px;border:1px solid var(--border);
-  border-radius:13px;background:linear-gradient(145deg,#20212b,#111218);
-  color:var(--gold-light);
-  box-shadow:0 5px 14px #0005,inset 0 1px 0 #ffffff0c;
+  width:40px;height:40px;border:1px solid var(--line);border-radius:13px;
+  background:linear-gradient(145deg,#20212b,#101116);color:var(--gold2);
+  box-shadow:0 5px 14px #0004,inset 0 1px 0 #ffffff09
 }
 
-.panel{
-  padding:21px;border:1px solid #ffffff12;border-radius:24px;
-  background:linear-gradient(145deg,#191a24,#101116 75%);
-  box-shadow:var(--shadow),inset 0 1px 0 #ffffff0c;
+/* Shared surfaces */
+.surface{
+  position:relative;isolation:isolate;overflow:hidden;
+  border:1px solid var(--line);border-radius:21px;
+  background:linear-gradient(145deg,#1b1c26,#111218 72%);
+  box-shadow:0 13px 30px #0004,inset 0 1px 0 #ffffff0b;
 }
-.eyebrow{font-size:9px;letter-spacing:2px;font-weight:700;color:var(--gold)}
-.loginTitle{font-size:23px;margin-top:8px}
-.subtext{font-size:11px;color:var(--muted);line-height:1.9;margin:8px 0 22px}
-.label{display:block;font-size:9px;letter-spacing:1.2px;color:var(--muted);margin-bottom:9px}
-.field{position:relative;margin-bottom:14px}
-.field i{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--gold)}
-input{
-  width:100%;height:49px;padding:0 13px 0 42px;
-  border:1px solid var(--border);border-radius:13px;
-  background:#090a0f;color:white;outline:none;font-size:14px;
-  box-shadow:inset 0 3px 9px #0005;
+.surface:before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(135deg,#ffffff07,transparent 35%,transparent 76%,#d9b75a06)
 }
-input:focus{border-color:#b59543;box-shadow:0 0 0 3px #d4af3715}
+.eyebrow{
+  color:var(--gold);font-size:9px;letter-spacing:2.3px;font-weight:800
+}
+.muted{color:var(--muted)}
 .btn{
-  min-height:43px;width:100%;padding:12px 14px;border:0;
-  border-radius:12px;display:flex;justify-content:center;
-  align-items:center;gap:9px;font-size:10px;font-weight:800;
-  transition:transform .22s,filter .22s,box-shadow .22s;
+  min-height:45px;padding:12px 15px;border-radius:13px;border:1px solid transparent;
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  font-size:10px;font-weight:800;letter-spacing:.35px;
+  transition:transform .22s,filter .22s,box-shadow .22s
 }
-.goldBtn{
-  background:linear-gradient(120deg,#fff0bd,#d4af37 65%,#b38b27);
-  color:#151109;
-  box-shadow:0 6px 17px #d4af3724,inset 0 1px 0 #ffffffc0;
+.btnGold{
+  color:#171309;background:linear-gradient(120deg,#fff0b9,#d9b75a 70%,#a47c21);
+  box-shadow:0 7px 18px #d9b75a21,inset 0 1px 0 #ffffffb5
 }
-.darkBtn{
-  background:linear-gradient(145deg,#20212b,#13141b);
-  color:#eee;border:1px solid #ffffff13;
-  box-shadow:0 5px 13px #0003,inset 0 1px 0 #ffffff0c;
+.btnDark{
+  color:#f2f2f6;background:linear-gradient(145deg,#242530,#15161d);
+  border-color:#ffffff12;box-shadow:0 6px 15px #0003,inset 0 1px 0 #ffffff08
 }
-.greenBtn{
-  background:linear-gradient(145deg,#16352c,#101b18);
-  color:var(--green);border:1px solid #43d99a35;
-  box-shadow:0 5px 13px #0003,inset 0 1px 0 #43d99a0b;
+.btnGreen{
+  color:var(--green);background:linear-gradient(145deg,#17372b,#111b17);
+  border-color:#50e0a033
 }
-.message{font-size:10px;line-height:1.8;margin-top:12px;overflow-wrap:anywhere}
-.loader{display:none;text-align:center;color:var(--muted);font-size:10px;padding:20px}
+.full{width:100%}
+.message{font-size:11px;line-height:1.8;margin-top:12px;overflow-wrap:anywhere}
+.loader{display:none;text-align:center;color:var(--muted);font-size:11px;padding:22px}
 .spinner{
-  display:block;width:23px;height:23px;margin:0 auto 10px;
-  border:2px solid #333;border-top-color:var(--gold);
-  border-radius:50%;animation:spin .8s linear infinite;
+  width:25px;height:25px;border:2px solid #383944;border-top-color:var(--gold);
+  border-radius:50%;display:block;margin:0 auto 10px;animation:spin .8s linear infinite
 }
 @keyframes spin{to{transform:rotate(360deg)}}
-#dashboard{display:none;animation:appear .3s ease}
+#dashboard{display:none;animation:appear .35s ease}
 @keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-/* PREMIUM HERO */
+/* Login */
+.loginPanel{padding:25px 21px}
+.loginTitle{
+  font-family:"Playfair Display",Georgia,serif;
+  font-size:clamp(29px,7vw,36px);font-weight:700;line-height:1.22;margin-top:11px
+}
+.loginDescription{font-size:12px;line-height:1.9;color:var(--muted);margin:11px 0 24px}
+.fieldLabel{display:block;font-size:9px;letter-spacing:1.5px;color:#b9bbc7;margin-bottom:10px;font-weight:800}
+.field{position:relative;margin-bottom:15px}
+.field i{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--gold)}
+.field input{
+  width:100%;height:52px;border-radius:13px;border:1px solid #ffffff14;
+  padding:0 13px 0 43px;background:#090a0f;color:white;font-size:14px;
+  box-shadow:inset 0 3px 10px #0005
+}
+.field input:focus{border-color:#d9b75a80;outline:none;box-shadow:0 0 0 3px #d9b75a12}
+.loginFoot{display:flex;align-items:center;gap:7px;margin-top:18px;color:#8b8d9b;font-size:9px}
+.loginFoot i{color:var(--green)}
+
+/* Student hero */
 .hero{
   position:relative;isolation:isolate;overflow:hidden;
-  padding:21px;border:1px solid #d4af3745;border-radius:24px;
+  padding:22px;border-radius:25px;border:1px solid #d9b75a3d;
   background:
-    radial-gradient(ellipse at 100% 70%,#d4af371b,transparent 53%),
-    linear-gradient(145deg,#25221a,#171820 57%,#111218);
-  margin-bottom:19px;
-  box-shadow:0 18px 42px #0006,inset 0 1px 0 #ffe8a322;
+    radial-gradient(ellipse at 100% 0%,#d9b75a18,transparent 54%),
+    linear-gradient(145deg,#262319,#171820 65%,#111218);
+  box-shadow:0 20px 45px #0006,inset 0 1px 0 #ffe9a51c;
+  margin-bottom:23px
 }
 .hero:after{
-  content:"";position:absolute;right:-28px;top:-38px;z-index:0;
-  width:140px;height:140px;border:1px solid #d4af3720;
-  border-radius:50%;
-  box-shadow:0 0 0 20px #d4af3708,0 0 0 40px #d4af3704;
-  pointer-events:none;
+  content:"";position:absolute;right:-38px;top:-55px;
+  width:175px;height:175px;border:1px solid #d9b75a19;border-radius:50%;
+  box-shadow:0 0 0 22px #d9b75a06,0 0 0 44px #d9b75a04;
+  pointer-events:none
 }
-.heroRow{position:relative;z-index:2;display:flex;align-items:center;gap:12px}
+.heroTop{display:flex;align-items:center;gap:13px;position:relative;z-index:1}
 .avatar{
-  height:57px;width:57px;flex:none;display:grid;place-items:center;
-  border-radius:18px;
-  background:linear-gradient(145deg,#fff0bd,#d4af37 65%,#98701a);
-  color:#171208;font-size:24px;
-  box-shadow:0 9px 20px #0004,inset 0 1px 0 #ffffffaa;
+  flex:none;width:59px;height:59px;display:grid;place-items:center;
+  border-radius:19px;color:#181309;font-size:24px;
+  background:linear-gradient(145deg,#fff1bd,#d9b75a 70%,#a37a20);
+  box-shadow:0 9px 21px #0005,inset 0 1px 0 #ffffffbb
 }
 .heroCopy{min-width:0;flex:1}
-.heroLabel{font-size:8px;letter-spacing:1.7px;color:var(--gold);font-weight:700}
-.studentName{font-size:20px;line-height:1.5;margin-top:4px;overflow-wrap:anywhere}
+.heroLabel{font-size:8px;letter-spacing:1.5px;color:var(--gold);font-weight:800}
+.studentName{font-size:clamp(18px,5vw,23px);font-weight:800;line-height:1.5;margin-top:5px;overflow-wrap:anywhere}
 .statusPill{
-  display:inline-flex;align-items:center;gap:6px;padding:6px 9px;
-  margin-top:7px;border:1px solid #43d99a35;border-radius:20px;
-  background:#43d99a0d;color:var(--green);font-size:8px;font-weight:700;
+  display:inline-flex;align-items:center;gap:6px;margin-top:7px;
+  padding:6px 9px;border-radius:20px;border:1px solid #50e0a038;
+  background:#50e0a00b;color:var(--green);font-size:8px;font-weight:800
 }
-.statusPill.inactive{border-color:#ff777735;color:var(--red);background:#ff77770b}
-.heroMeta{
-  position:relative;z-index:2;display:flex;flex-wrap:wrap;
-  gap:8px;margin-top:17px;padding-top:13px;border-top:1px solid #ffffff12;
-}
+.statusPill.inactive{color:var(--red);border-color:#ff81813b;background:#ff81810a}
+.heroMeta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;padding-top:14px;border-top:1px solid #ffffff10;position:relative;z-index:1}
 .metaPill{
-  padding:7px 10px;border-radius:10px;background:#ffffff08;
-  border:1px solid #ffffff10;color:#d0d0d8;
-  font-size:9px;overflow-wrap:anywhere;backdrop-filter:blur(8px);
+  display:inline-flex;align-items:center;gap:6px;min-width:0;
+  padding:8px 10px;border:1px solid #ffffff10;border-radius:10px;
+  background:#ffffff06;color:#d0d0da;font-size:9px;overflow-wrap:anywhere
 }
-.metaPill i{color:var(--gold);margin-right:5px}
+.metaPill i{color:var(--gold)}
 
-/* Decorative transparent car */
-.heroCarArtwork{
-  position:absolute;z-index:1;right:-8px;bottom:32px;
-  width:73%;height:118px;pointer-events:none;
-  display:flex;align-items:center;justify-content:flex-end;
-}
-.heroCarArtwork img{
-  display:block;width:100%;height:100%;
-  object-fit:contain;object-position:right center;
-  opacity:.24;
-  filter:drop-shadow(0 12px 12px #000b) saturate(.75);
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 28%,#000 88%,transparent);
-  mask-image:linear-gradient(90deg,transparent,#000 28%,#000 88%,transparent);
-}
-.heroCarGlow{
-  position:absolute;right:8%;bottom:5px;
-  width:125px;height:35px;border-radius:50%;
-  background:#d4af37;opacity:.16;filter:blur(27px);
-}
-
-/* HEADINGS AND CARDS */
+/* Section headings */
 .sectionHeading{
   display:flex;align-items:center;justify-content:space-between;
-  gap:8px;margin:25px 2px 12px;
+  gap:9px;margin:26px 2px 12px
 }
-.sectionHeading h3{font-size:10px;letter-spacing:1.5px}
-.sectionHeading span{font-size:8px;color:var(--muted)}
+.sectionHeading h2{font-size:10px;letter-spacing:1.6px;font-weight:800}
+.sectionHeading span{font-size:8px;letter-spacing:.6px;color:var(--muted);text-align:right}
 
+/* Stats */
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:11px}
 .stat{
-  position:relative;isolation:isolate;overflow:hidden;min-width:0;
-  padding:15px;border:1px solid #ffffff12;border-radius:18px;
+  padding:16px 14px;min-width:0;position:relative;overflow:hidden;
+  border:1px solid #ffffff11;border-radius:19px;
   background:
-    radial-gradient(ellipse at 0% 0%,#d4af3712,transparent 70%),
-    linear-gradient(145deg,#22232e,#15161e 68%,#101116);
-  box-shadow:0 12px 25px #0005,inset 0 1px 0 #ffffff0b,inset 0 -1px 0 #0005;
-  transition:transform .25s,border-color .25s,box-shadow .25s;
+    radial-gradient(ellipse at 0% 0%,#d9b75a10,transparent 67%),
+    linear-gradient(145deg,#21222d,#14151d 70%);
+  box-shadow:0 12px 27px #0004,inset 0 1px 0 #ffffff0b;
+  transition:transform .25s,border-color .25s,box-shadow .25s
 }
-.stat:after,.progressCard:after,.classCard:after,.walletCard:after,
-.historyCard:after,.achievement:after,.panel:after{
-  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
-  background:linear-gradient(135deg,#ffffff09,transparent 33%,transparent 77%,#d4af3706);
+.stat:after{
+  content:"";position:absolute;right:-24px;bottom:-30px;
+  width:75px;height:75px;border:1px solid #d9b75a0b;border-radius:50%;
+  box-shadow:0 0 0 12px #d9b75a04;pointer-events:none
 }
 .statIcon{
-  width:35px;height:35px;display:grid;place-items:center;
-  border-radius:12px;
-  background:linear-gradient(145deg,#40351b,#201b11);
-  border:1px solid #d4af3728;color:var(--gold);font-size:13px;
-  box-shadow:0 5px 12px #0004,inset 0 1px 0 #ffe8a322;
+  width:36px;height:36px;display:grid;place-items:center;
+  border-radius:12px;color:var(--gold);
+  border:1px solid #d9b75a28;background:linear-gradient(145deg,#39301b,#1b1913);
+  box-shadow:0 5px 13px #0004,inset 0 1px 0 #ffe9a51a
 }
-.statLabel{font-size:9px;color:var(--muted);margin-top:13px}
-.statValue{font-size:22px;font-weight:800;margin-top:3px;line-height:1.4;overflow-wrap:anywhere}
-.statFoot{font-size:8px;color:#858592;margin-top:3px}
+.statLabel{font-size:9px;line-height:1.6;color:var(--muted);margin-top:14px}
+.statValue{font-size:clamp(21px,6vw,27px);font-weight:800;line-height:1.45;margin-top:4px;overflow-wrap:anywhere}
+.statFoot{font-size:8px;line-height:1.6;color:#777a89;margin-top:4px}
 
-.progressCard{
-  position:relative;isolation:isolate;overflow:hidden;
-  padding:17px;border:1px solid #ffffff12;border-radius:21px;
-  background:
-    radial-gradient(ellipse at 0% 0%,#d4af3713,transparent 62%),
-    linear-gradient(145deg,#20212b,#121319);
-  box-shadow:0 15px 32px #0005,inset 0 1px 0 #ffffff0c;
-}
-.progressLayout{display:flex;align-items:center;gap:15px}
-.ring{position:relative;width:98px;height:98px;flex:none}
-.ring svg{width:100%;height:100%;transform:rotate(-90deg);overflow:visible}
-.ring circle{fill:none;stroke-width:8}
-.ring .track{stroke:#343540}
-.ring .fill{
-  stroke:var(--gold);stroke-linecap:round;
-  transition:stroke-dashoffset .7s;
-  filter:drop-shadow(0 0 4px #d4af3760);
-}
-.ringValue{position:absolute;inset:0;display:grid;place-items:center;font-size:21px;font-weight:800}
-.progressCopy{min-width:0;flex:1}
-.progressCopy h4{font-size:13px}
-.progressCopy p{font-size:9px;color:var(--muted);line-height:1.9;margin-top:6px}
-.progressTrack{height:6px;margin-top:17px;border-radius:20px;background:#343540;overflow:hidden}
-.progressBar{
-  height:100%;width:0;
-  background:linear-gradient(90deg,#9e7b20,#d4af37,#ffe8a3);
-  border-radius:20px;box-shadow:0 0 12px #d4af3740;
-  transition:width .7s;
-}
-.progressMeta{display:flex;justify-content:space-between;gap:8px;margin-top:9px}
-.progressMeta span{font-size:8px;color:var(--muted)}
-.progressMeta b{color:var(--gold-light)}
-.note{display:flex;gap:7px;align-items:flex-start;font-size:8px;line-height:1.8;color:var(--muted);margin-top:12px}
-.note i{color:var(--gold);margin-top:3px}
-
+/* Training type */
 .classCard{
-  position:relative;isolation:isolate;overflow:hidden;
-  padding:17px;border:1px solid #d4af3740;border-radius:19px;
-  background:
-    radial-gradient(ellipse at 100% 0%,#d4af3718,transparent 60%),
-    linear-gradient(135deg,#222016,#171820 70%);
-  box-shadow:0 13px 28px #0005,inset 0 1px 0 #ffe8a318;
+  padding:18px;border:1px solid #d9b75a32;border-radius:20px;
+  background:radial-gradient(ellipse at 100% 0%,#d9b75a14,transparent 65%),linear-gradient(140deg,#222016,#16171f 70%);
+  box-shadow:0 14px 28px #0004,inset 0 1px 0 #ffe9a515
 }
 .classRow{display:flex;align-items:center;gap:12px}
 .classIcon{
-  width:44px;height:44px;flex:none;border-radius:14px;
-  background:linear-gradient(145deg,#40351b,#211b10);
-  border:1px solid #d4af3730;color:var(--gold);
-  display:grid;place-items:center;font-size:18px;
-  box-shadow:0 6px 13px #0004,inset 0 1px 0 #ffe8a31a;
+  width:46px;height:46px;flex:none;display:grid;place-items:center;
+  border-radius:15px;color:var(--gold);font-size:18px;
+  border:1px solid #d9b75a28;background:linear-gradient(145deg,#40351c,#211c12);
+  box-shadow:0 7px 15px #0004
 }
-.classLabel{font-size:8px;color:var(--muted);letter-spacing:1.5px}
-.classValue{font-size:15px;font-weight:800;margin-top:4px}
-.classDescription{font-size:9px;color:var(--muted);line-height:1.8;margin-top:12px}
+.classLabel{font-size:8px;letter-spacing:1.3px;color:var(--muted)}
+.classValue{font-size:16px;font-weight:800;margin-top:5px}
+.classDescription{font-size:10px;line-height:1.9;color:var(--muted);margin-top:13px}
 
-.walletCard{
-  position:relative;isolation:isolate;overflow:hidden;
-  padding:18px;border:1px solid #43d99a38;border-radius:20px;
-  background:
-    radial-gradient(ellipse at 100% 0%,#43d99a13,transparent 60%),
-    linear-gradient(140deg,#192c25,#15161d 65%);
-  box-shadow:0 14px 30px #0005,inset 0 1px 0 #43d99a12;
+/* Progress */
+.progressCard{
+  padding:18px;border:1px solid #ffffff12;border-radius:22px;
+  background:radial-gradient(ellipse at 0% 0%,#d9b75a11,transparent 65%),linear-gradient(145deg,#20212b,#121319);
+  box-shadow:0 15px 32px #0005,inset 0 1px 0 #ffffff09
 }
-.walletRow{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.walletLeft{display:flex;align-items:center;gap:10px;min-width:0}
-.walletIcon{
-  width:39px;height:39px;flex:none;display:grid;place-items:center;
-  border-radius:13px;background:linear-gradient(145deg,#204b3b,#13271f);
-  border:1px solid #43d99a25;color:var(--green);
-  box-shadow:0 6px 12px #0004;
-}
-.walletLabel{font-size:9px;font-weight:700;color:var(--green)}
-.walletSub{font-size:8px;color:var(--muted);margin-top:5px}
-.walletAmount{font-size:21px;font-weight:800;overflow-wrap:anywhere}
-.walletFoot{border-top:1px solid #ffffff12;padding-top:12px;margin-top:14px;display:flex;justify-content:space-between;gap:10px}
-.walletFoot span,.walletFoot b{font-size:9px}
-.walletFoot span{color:var(--muted)}
+.progressLayout{display:flex;align-items:center;gap:17px}
+.ring{width:102px;height:102px;flex:none;position:relative}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg);overflow:visible}
+.ring circle{fill:none;stroke-width:8}
+.ring .track{stroke:#353641}
+.ring .fill{stroke:var(--gold);stroke-linecap:round;filter:drop-shadow(0 0 4px #d9b75a50);transition:stroke-dashoffset .7s}
+.ringValue{position:absolute;inset:0;display:grid;place-items:center;font-size:22px;font-weight:800}
+.progressCopy{min-width:0;flex:1}
+.progressCopy h3{font-size:13px;line-height:1.6}
+.progressCopy p{font-size:10px;color:var(--muted);line-height:1.9;margin-top:6px}
+.progressTrack{height:6px;border-radius:20px;background:#343540;overflow:hidden;margin-top:19px}
+.progressBar{height:100%;width:0;border-radius:20px;background:linear-gradient(90deg,#9e791c,#d9b75a,#ffe9a5);box-shadow:0 0 12px #d9b75a3a;transition:width .7s}
+.progressMeta{display:flex;justify-content:space-between;gap:8px;margin-top:10px}
+.progressMeta span{font-size:9px;color:var(--muted)}
+.progressMeta b{color:var(--gold2)}
+.note{display:flex;gap:8px;align-items:flex-start;margin-top:13px;color:var(--muted);font-size:9px;line-height:1.8}
+.note i{color:var(--gold);margin-top:3px}
 
-.historyCard{
-  position:relative;isolation:isolate;overflow:hidden;
-  padding:12px;border:1px solid #ffffff12;border-radius:20px;
-  background:linear-gradient(145deg,#1d1e27,#121319);
-  box-shadow:0 13px 28px #0004,inset 0 1px 0 #ffffff08;
-}
-.historyList{display:flex;flex-direction:column;gap:9px;max-height:400px;overflow:auto}
-.log{
-  padding:13px;border:1px solid #ffffff0d;border-left:3px solid var(--gold);
-  border-radius:12px;
-  background:linear-gradient(145deg,#1b1c25,#111218);
-  box-shadow:0 5px 13px #0003,inset 0 1px 0 #ffffff08;
-}
-.logHead{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
-.logTitle{font-size:10px;font-weight:700}
-.logDate{font-size:8px;color:var(--gold-light);text-align:right;line-height:1.7}
-.logDetails{font-size:9px;color:#c5c5ce;line-height:1.9;margin-top:8px;overflow-wrap:anywhere}
-.logChip{display:inline-block;padding:5px 7px;margin:6px 5px 0 0;border:1px solid #ffffff12;border-radius:7px;background:#ffffff05;color:#d8d8e0;font-size:8px}
-.empty{padding:24px 10px;text-align:center;color:var(--muted);font-size:10px;line-height:1.9}
-.empty i{display:block;font-size:22px;color:#666;margin-bottom:9px}
-
+/* Achievements */
 .achievementGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .achievement{
-  position:relative;isolation:isolate;overflow:hidden;
-  padding:14px 9px;text-align:center;border:1px solid #ffffff10;
-  border-radius:17px;
-  background:linear-gradient(145deg,#20212a,#14151b);
-  box-shadow:0 9px 20px #0004,inset 0 1px 0 #ffffff08;
-  opacity:.58;filter:grayscale(.8);
-  transition:transform .25s,border-color .25s,box-shadow .25s,opacity .25s;
+  text-align:center;padding:16px 9px;border:1px solid #ffffff10;border-radius:18px;
+  background:linear-gradient(145deg,#20212b,#14151b);
+  box-shadow:0 9px 21px #0004,inset 0 1px 0 #ffffff08;
+  opacity:.56;filter:grayscale(.8);
+  transition:transform .25s,border-color .25s,opacity .25s
 }
 .achievement.unlocked{
-  opacity:1;filter:none;border-color:#d4af3755;
-  background:linear-gradient(145deg,#2b2618,#171820);
-  box-shadow:0 12px 24px #0005,inset 0 1px 0 #ffe8a31a;
+  opacity:1;filter:none;border-color:#d9b75a48;
+  background:radial-gradient(ellipse at top,#d9b75a14,transparent 80%),linear-gradient(145deg,#272319,#171820)
 }
 .achievementIcon{
-  width:37px;height:37px;display:grid;place-items:center;
-  margin:0 auto 8px;border-radius:12px;
-  background:linear-gradient(145deg,#40351b,#211b10);
-  border:1px solid #d4af3728;color:var(--gold);font-size:16px;
-  box-shadow:0 5px 12px #0004;
+  width:39px;height:39px;display:grid;place-items:center;
+  margin:0 auto 10px;border:1px solid #d9b75a27;border-radius:13px;
+  color:var(--gold);background:linear-gradient(145deg,#3c321c,#211b11);
+  box-shadow:0 5px 12px #0004
 }
-.achievement b{display:block;font-size:9px}
-.achievement small{display:block;margin-top:5px;color:var(--muted);font-size:8px;line-height:1.7}
+.achievement strong{display:block;font-size:10px}
+.achievement small{display:block;font-size:8px;line-height:1.8;color:var(--muted);margin-top:5px}
 
-.certificateCard{
-  position:relative;isolation:isolate;overflow:hidden;
-  display:none;padding:19px;border:1px solid #d4af3748;border-radius:21px;
-  text-align:center;
-  background:radial-gradient(ellipse at top,#d4af371a,transparent 70%),linear-gradient(145deg,#242116,#15161d);
-  box-shadow:0 15px 30px #0005,inset 0 1px 0 #ffe8a322;
+/* Wallet */
+.walletCard{
+  padding:19px;border:1px solid #50e0a034;border-radius:21px;
+  background:radial-gradient(ellipse at 100% 0%,#50e0a013,transparent 65%),linear-gradient(140deg,#193127,#15171c 68%);
+  box-shadow:0 14px 30px #0005,inset 0 1px 0 #50e0a010
 }
-.certificateCard>i{font-size:33px;color:var(--gold);margin-bottom:10px;filter:drop-shadow(0 5px 8px #d4af3730)}
-.certificateCard h3{font-size:14px}
-.certificateCard p{font-size:9px;color:var(--muted);line-height:1.9;margin:9px 0 15px}
-.actionGrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:20px}
-.footer{text-align:center;margin-top:25px;color:#5f606b;font-size:8px;line-height:2;letter-spacing:1px}
+.walletRow{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.walletLeft{display:flex;align-items:center;gap:11px;min-width:0}
+.walletIcon{
+  width:43px;height:43px;flex:none;display:grid;place-items:center;border-radius:14px;
+  color:var(--green);background:linear-gradient(145deg,#23503e,#13271f);
+  border:1px solid #50e0a029;box-shadow:0 6px 14px #0004
+}
+.walletLabel{font-size:9px;font-weight:800;color:var(--green)}
+.walletSub{font-size:9px;color:var(--muted);margin-top:5px}
+.walletAmount{font-size:clamp(17px,5vw,23px);font-weight:800;overflow-wrap:anywhere}
+.walletFoot{display:flex;justify-content:space-between;gap:10px;margin-top:15px;padding-top:13px;border-top:1px solid #ffffff10}
+.walletFoot span,.walletFoot b{font-size:9px;line-height:1.7}
+.walletFoot span{color:var(--muted)}
+
+/* Attendance */
+.historyCard{
+  padding:12px;border:1px solid #ffffff12;border-radius:20px;
+  background:linear-gradient(145deg,#1c1d27,#111218);
+  box-shadow:0 13px 28px #0004,inset 0 1px 0 #ffffff08
+}
+.historyList{display:flex;flex-direction:column;gap:9px;max-height:440px;overflow:auto}
+.log{
+  padding:14px;border:1px solid #ffffff0b;border-left:3px solid var(--gold);
+  border-radius:13px;background:linear-gradient(145deg,#20212a,#121319);
+  box-shadow:0 5px 12px #0003
+}
+.logHead{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.logTitle{font-size:10px;font-weight:800}
+.logDate{font-size:9px;color:var(--gold2);text-align:right;line-height:1.7}
+.logDetails{font-size:10px;color:#c5c6d0;line-height:1.9;margin-top:9px;overflow-wrap:anywhere}
+.logChip{display:inline-block;padding:5px 8px;margin:7px 5px 0 0;border:1px solid #ffffff12;border-radius:8px;background:#ffffff05;color:#d8d8e0;font-size:8px}
+.empty{padding:25px 10px;text-align:center;color:var(--muted);font-size:10px;line-height:1.9}
+.empty i{display:block;font-size:24px;color:#707280;margin-bottom:10px}
+
+/* Certificate */
+.certificateCard{
+  display:none;padding:21px;border:1px solid #d9b75a48;border-radius:22px;
+  text-align:center;background:radial-gradient(ellipse at top,#d9b75a18,transparent 72%),linear-gradient(145deg,#252116,#15161d);
+  box-shadow:0 15px 32px #0005,inset 0 1px 0 #ffe9a51a
+}
+.certificateCard>i{font-size:35px;color:var(--gold);margin-bottom:12px;filter:drop-shadow(0 5px 9px #d9b75a25)}
+.certificateCard h3{font-size:15px}
+.certificateCard p{font-size:10px;line-height:1.9;color:var(--muted);margin:10px 0 17px}
+.actionGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
+.logoutBtn{margin-top:10px}
+.footer{text-align:center;margin-top:29px;color:#777988;font-size:8px;line-height:2.2;letter-spacing:1.4px}
 .footer i{color:var(--gold)}
 
-/* CERTIFICATE PDF TEMPLATE */
+/* Certificate PDF - A4 landscape */
 #certificate{
   display:none;width:1123px;height:794px;padding:14px;overflow:hidden;
   box-sizing:border-box;background:#07172d;color:#10213d;
-  font-family:Georgia,"Times New Roman",serif;
+  font-family:Georgia,"Times New Roman",serif
 }
 .certPaper{height:100%;width:100%;padding:9px;background:#fffdf6;border:2px solid #d9b84e;box-sizing:border-box}
 .certInner{
   height:100%;width:100%;position:relative;overflow:hidden;text-align:center;
   padding:20px 40px 12px;box-sizing:border-box;border:1px solid #b58b27;
-  background:radial-gradient(ellipse at center,#fff 0%,#fffdf6 85%);
+  background:radial-gradient(ellipse at center,#fff 0%,#fffdf6 85%)
 }
 .corner{position:absolute;width:42px;height:42px;border-color:#c6a13a;border-style:solid}
 .corner.tl{top:7px;left:7px;border-width:2px 0 0 2px}
@@ -380,7 +349,7 @@ input:focus{border-color:#b59543;box-shadow:0 0 0 3px #d4af3715}
 .certRecipient{font-family:Arial,sans-serif;color:#6b6e78;font-size:11px;letter-spacing:2px;margin-top:12px}
 #certStudentName{
   display:table;max-width:88%;margin:7px auto 0;padding:0 20px 5px;
-  border-bottom:2px solid #d4af37;color:#0a2242;font-size:34px;line-height:1.2;overflow-wrap:anywhere;
+  border-bottom:2px solid #d4af37;color:#0a2242;font-size:34px;line-height:1.2;overflow-wrap:anywhere
 }
 .certMessage{font-family:Arial,sans-serif;color:#444d59;font-size:13px;line-height:1.6;max-width:830px;margin:10px auto}
 .certMessage strong{color:#122b4b}
@@ -393,64 +362,36 @@ input:focus{border-color:#b59543;box-shadow:0 0 0 3px #d4af3715}
 .certSeal{
   width:67px;height:67px;flex:none;border:3px double #c6a13a;
   outline:1px solid #d4af37;outline-offset:3px;border-radius:50%;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  color:#9c7820;background:#fffaf0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;color:#9c7820;background:#fffaf0
 }
 .certSeal i{font-size:19px}
 .certSeal b{font-size:11px;margin-top:3px;letter-spacing:2px}
 .certSeal span{font-size:7px;margin-top:2px;letter-spacing:1px}
 .certFooter{font-family:Arial,sans-serif;color:#8b846f;font-size:8px;letter-spacing:3px;margin-top:9px}
 
-/* FLOATING BLACKTERMINAL LINK */
-.bt-float{
-  position:fixed;right:14px;
-  bottom:calc(18px + env(safe-area-inset-bottom,0px));
-  z-index:9998;width:82px;
-  display:flex;flex-direction:column;align-items:center;gap:5px;
-  text-decoration:none;-webkit-tap-highlight-color:transparent;
-  animation:btFloat 3s ease-in-out infinite;
-}
-.bt-float img{
-  display:block;width:76px;height:76px;object-fit:contain;
-  border-radius:20px;filter:drop-shadow(0 5px 12px #0009);
-}
-.bt-float-label{
-  display:block;padding:5px 8px;border:1px solid #d4af3755;
-  border-radius:20px;background:#111219ed;color:#ffe8a3;
-  font-size:9px;font-weight:800;letter-spacing:.4px;white-space:nowrap;
-  box-shadow:0 5px 18px #0005;
-}
-.bt-float:focus-visible{outline:2px solid #ffe8a3;outline-offset:4px;border-radius:15px}
-@keyframes btFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
-
-/* INTERACTIONS */
 @media(hover:hover) and (pointer:fine){
-  .stat:hover,.progressCard:hover,.classCard:hover,
-  .walletCard:hover,.historyCard:hover,.achievement:hover{
-    transform:translateY(-3px);
-    border-color:#d4af3760;
-    box-shadow:0 19px 36px #0007,inset 0 1px 0 #ffffff13;
+  .stat:hover,.achievement:hover{
+    transform:translateY(-3px);border-color:#d9b75a55;
+    box-shadow:0 19px 35px #0006,inset 0 1px 0 #ffffff12
   }
-  .btn:hover{transform:translateY(-1px);filter:brightness(1.07)}
-  .iconBtn:hover{border-color:#d4af3755}
+  .btn:hover{filter:brightness(1.07);box-shadow:0 9px 22px #0004}
 }
-
-@media(max-width:360px){
-  body{padding:12px 9px}
-  .hero{padding:16px}
+@media(max-width:370px){
+  .app{padding:12px 9px 28px}
+  .hero{padding:17px}
+  .avatar{width:49px;height:49px;font-size:20px;border-radius:16px}
+  .heroLabel{font-size:7px;letter-spacing:1px}
   .studentName{font-size:17px}
+  .stat{padding:13px 11px}
   .statValue{font-size:20px}
+  .progressLayout{gap:11px}
   .ring{width:84px;height:84px}
-  .progressLayout{gap:10px}
-  .walletAmount{font-size:17px}
-  .heroCarArtwork{width:72%;height:95px;right:-7px;bottom:35px}
-  .heroCarArtwork img{max-height:100px}
-  .bt-float{right:9px;bottom:calc(12px + env(safe-area-inset-bottom,0px));width:70px}
-  .bt-float img{width:65px;height:65px}
-  .bt-float-label{font-size:8px;padding:4px 6px}
+  .progressCopy h3{font-size:12px}
+  .walletCard{padding:15px}
+  .walletAmount{font-size:16px}
 }
 @media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation:none!important;transition:none!important}
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 }
 </style>
 </head>
@@ -466,45 +407,52 @@ input:focus{border-color:#b59543;box-shadow:0 0 0 3px #d4af3715}
       <div class="brandSub">DRIVING ACADEMY</div>
     </div>
   </div>
-  <button class="iconBtn" id="refreshBtn" aria-label="Refresh">
-    <i class="fa-solid fa-rotate"></i>
-  </button>
+  <div class="topActions">
+    <button class="iconBtn" id="refreshBtn" aria-label="Refresh student record" title="Refresh">
+      <i class="fa-solid fa-rotate"></i>
+    </button>
+  </div>
 </header>
 
 <!-- LOGIN -->
-<section class="panel" id="loginPanel">
-  <div class="eyebrow">STUDENT PORTAL</div>
-  <h1 class="loginTitle">Your driving journey.</h1>
-  <p class="subtext">Check your training mode, attendance records, course progress and certificate in one place.</p>
-  <label class="label" for="phoneInput">REGISTERED MOBILE NUMBER</label>
+<section class="surface loginPanel" id="loginPanel">
+  <div class="eyebrow">MEMBER ACCESS / 001</div>
+  <h1 class="loginTitle">Your journey.<br>Your achievement.</h1>
+  <p class="loginDescription">
+    Welcome to your personal driving portal. Track every session,
+    follow your progress and access your training records.
+  </p>
+
+  <label class="fieldLabel" for="phoneInput">REGISTERED MOBILE NUMBER</label>
   <div class="field">
     <i class="fa-solid fa-mobile-screen-button"></i>
-    <input id="phoneInput" type="tel" inputmode="numeric" maxlength="10" autocomplete="tel" placeholder="Enter 10-digit mobile number">
+    <input id="phoneInput" type="tel" inputmode="numeric" maxlength="10"
+      autocomplete="tel" placeholder="Enter 10-digit mobile number">
   </div>
-  <button class="btn goldBtn" id="loginBtn">
-    <i class="fa-solid fa-arrow-right-to-bracket"></i> OPEN MY DASHBOARD
+
+  <button class="btn btnGold full" id="loginBtn">
+    ACCESS MY DASHBOARD <i class="fa-solid fa-arrow-right"></i>
   </button>
-  <div class="loader" id="loader"><span class="spinner"></span>Loading your student record...</div>
+
+  <div class="loader" id="loader" role="status">
+    <span class="spinner"></span>Connecting to your student record...
+  </div>
   <div class="message" id="loginMessage" role="status" aria-live="polite"></div>
+
+  <div class="loginFoot">
+    <i class="fa-solid fa-shield-halved"></i>
+    Your registered student record
+  </div>
 </section>
 
-<!-- STUDENT DASHBOARD -->
+<!-- DASHBOARD -->
 <section id="dashboard">
 
   <div class="hero">
-    <div class="heroCarArtwork" aria-hidden="true">
-      <img
-        src="https://image.pngaaa.com/42/6037042-middle.png"
-        alt=""
-        loading="lazy"
-        onerror="this.style.display='none'">
-      <div class="heroCarGlow"></div>
-    </div>
-
-    <div class="heroRow">
+    <div class="heroTop">
       <div class="avatar"><i class="fa-solid fa-user-astronaut"></i></div>
       <div class="heroCopy">
-        <div class="heroLabel">WELCOME TO YOUR DASHBOARD</div>
+        <div class="heroLabel">YOUR PERSONAL DASHBOARD</div>
         <h1 class="studentName" id="studentName">Student</h1>
         <div class="statusPill" id="studentStatus">
           <i class="fa-solid fa-circle-check"></i><span>ACTIVE STUDENT</span>
@@ -513,51 +461,62 @@ input:focus{border-color:#b59543;box-shadow:0 0 0 3px #d4af3715}
     </div>
     <div class="heroMeta">
       <span class="metaPill"><i class="fa-solid fa-phone"></i><span id="studentPhone"></span></span>
-      <span class="metaPill"><i class="fa-solid fa-car-side"></i><span id="packageName">Driving Training</span></span>
+      <span class="metaPill"><i class="fa-solid fa-crown"></i><span id="packageName">Driving Training</span></span>
     </div>
   </div>
 
-  <div class="sectionHeading"><h3>TRAINING OVERVIEW</h3><span>LIVE RECORD</span></div>
+  <div class="sectionHeading">
+    <h2>TRAINING OVERVIEW</h2><span>LIVE RECORD</span>
+  </div>
+
   <div class="stats">
-    <div class="stat">
+    <article class="stat">
       <div class="statIcon"><i class="fa-solid fa-circle-check"></i></div>
       <div class="statLabel">SESSIONS COMPLETED</div>
       <div class="statValue" id="completedValue">0</div>
       <div class="statFoot">Recorded training sessions</div>
-    </div>
-    <div class="stat">
+    </article>
+    <article class="stat">
       <div class="statIcon"><i class="fa-solid fa-calendar-days"></i></div>
       <div class="statLabel">TOTAL SESSIONS</div>
       <div class="statValue" id="totalValue">0</div>
       <div class="statFoot">Package target</div>
-    </div>
-    <div class="stat">
+    </article>
+    <article class="stat">
       <div class="statIcon"><i class="fa-solid fa-road"></i></div>
       <div class="statLabel">ESTIMATED DISTANCE</div>
       <div class="statValue" id="distanceValue">0 km</div>
       <div class="statFoot">Based on recorded logs</div>
-    </div>
-    <div class="stat">
+    </article>
+    <article class="stat">
       <div class="statIcon"><i class="fa-solid fa-flag-checkered"></i></div>
       <div class="statLabel">SESSIONS REMAINING</div>
       <div class="statValue" id="remainingValue">0</div>
       <div class="statFoot">Until package target</div>
-    </div>
+    </article>
   </div>
 
-  <div class="sectionHeading"><h3>MY CLASS TYPE</h3><span>FROM FIREBASE</span></div>
+  <div class="sectionHeading">
+    <h2>MY TRAINING MODE</h2><span>REGISTERED DETAILS</span>
+  </div>
+
   <div class="classCard">
     <div class="classRow">
       <div class="classIcon" id="classIcon"><i class="fa-solid fa-users"></i></div>
       <div>
-        <div class="classLabel">REGISTERED TRAINING MODE</div>
+        <div class="classLabel">REGISTERED CLASS TYPE</div>
         <div class="classValue" id="classType">Not specified</div>
       </div>
     </div>
-    <p class="classDescription" id="classDescription">Your class type is read directly from your registered training record.</p>
+    <p class="classDescription" id="classDescription">
+      Your registered training mode is displayed here.
+    </p>
   </div>
 
-  <div class="sectionHeading"><h3>COURSE PROGRESS</h3><span id="progressStatus">IN PROGRESS</span></div>
+  <div class="sectionHeading">
+    <h2>YOUR PROGRESS</h2><span id="progressStatus">IN PROGRESS</span>
+  </div>
+
   <div class="progressCard">
     <div class="progressLayout">
       <div class="ring">
@@ -568,42 +527,52 @@ input:focus{border-color:#b59543;box-shadow:0 0 0 3px #d4af3715}
         <div class="ringValue" id="percentValue">0%</div>
       </div>
       <div class="progressCopy">
-        <h4 id="progressTitle">Your driving journey</h4>
+        <h3 id="progressTitle">Your driving journey</h3>
         <p id="progressDescription">Every completed session brings you closer to your target.</p>
       </div>
     </div>
     <div class="progressTrack"><div class="progressBar" id="progressBar"></div></div>
     <div class="progressMeta">
       <span id="progressCount">0 of 0 sessions</span>
-      <span><b id="progressPercent">0%</b> completed</span>
+      <span><b id="progressPercent">0%</b> complete</span>
     </div>
     <div class="note">
       <i class="fa-solid fa-circle-info"></i>
-      <span>Distance is estimated from recorded attendance. Actual distance may differ if logs do not include kilometres.</span>
+      <span>Distance is estimated from attendance records. Actual distance may differ if kilometre details are not recorded.</span>
     </div>
   </div>
 
-  <div class="sectionHeading"><h3>ACHIEVEMENTS</h3><span>YOUR MILESTONES</span></div>
+  <div class="sectionHeading">
+    <h2>ACHIEVEMENTS</h2><span>YOUR MILESTONES</span>
+  </div>
+
   <div class="achievementGrid">
     <div class="achievement" id="badgeFirst">
       <div class="achievementIcon"><i class="fa-solid fa-key"></i></div>
-      <b>First Gear</b><small>Complete your first session</small>
+      <strong>First Gear</strong>
+      <small>Complete your first session</small>
     </div>
     <div class="achievement" id="badgeSafety">
       <div class="achievementIcon"><i class="fa-solid fa-shield-halved"></i></div>
-      <b>Safety Star</b><small>Complete 5 sessions</small>
+      <strong>Safety Star</strong>
+      <small>Complete 5 sessions</small>
     </div>
     <div class="achievement" id="badgePro">
       <div class="achievementIcon"><i class="fa-solid fa-medal"></i></div>
-      <b>Driving Pro</b><small>Reach 75% progress</small>
+      <strong>Driving Pro</strong>
+      <small>Reach 75% progress</small>
     </div>
     <div class="achievement" id="badgeElite">
       <div class="achievementIcon"><i class="fa-solid fa-trophy"></i></div>
-      <b>Elite Graduate</b><small>Reach your package target</small>
+      <strong>Elite Graduate</strong>
+      <small>Reach your package target</small>
     </div>
   </div>
 
-  <div class="sectionHeading"><h3>REFERRAL WALLET</h3><span>ACCOUNT RECORD</span></div>
+  <div class="sectionHeading">
+    <h2>REFERRAL WALLET</h2><span>ACCOUNT RECORD</span>
+  </div>
+
   <div class="walletCard">
     <div class="walletRow">
       <div class="walletLeft">
@@ -616,39 +585,50 @@ input:focus{border-color:#b59543;box-shadow:0 0 0 3px #d4af3715}
       <div class="walletAmount" id="walletAmount">—</div>
     </div>
     <div class="walletFoot">
-      <span>Wallet balance from student record</span>
+      <span>Balance from student record</span>
       <b id="walletStatus">Not available</b>
     </div>
   </div>
 
-  <div class="sectionHeading"><h3>ATTENDANCE HISTORY</h3><span id="historyCount">0 RECORDS</span></div>
-  <div class="historyCard"><div class="historyList" id="historyList"></div></div>
+  <div class="sectionHeading">
+    <h2>ATTENDANCE HISTORY</h2><span id="historyCount">0 RECORDS</span>
+  </div>
+
+  <div class="historyCard">
+    <div class="historyList" id="historyList"></div>
+  </div>
 
   <div class="certificateCard" id="certificateCard">
     <i class="fa-solid fa-award"></i>
     <h3>Training completion certificate</h3>
     <p>Your recorded completed sessions have reached the package target. You can generate your certificate below.</p>
-    <button class="btn goldBtn" id="certificateBtn">
+    <button class="btn btnGold full" id="certificateBtn">
       <i class="fa-solid fa-file-pdf"></i> DOWNLOAD CERTIFICATE PDF
     </button>
   </div>
 
   <div class="actionGrid">
-    <button class="btn darkBtn" id="contactBtn"><i class="fa-brands fa-whatsapp"></i> CONTACT ACADEMY</button>
-    <button class="btn greenBtn" id="shareBtn"><i class="fa-solid fa-share-nodes"></i> SHARE ACADEMY</button>
+    <button class="btn btnDark" id="contactBtn">
+      <i class="fa-brands fa-whatsapp"></i> CONTACT ACADEMY
+    </button>
+    <button class="btn btnGreen" id="shareBtn">
+      <i class="fa-solid fa-share-nodes"></i> SHARE ACADEMY
+    </button>
   </div>
-  <button class="btn darkBtn" id="logoutBtn" style="margin-top:10px">
+
+  <button class="btn btnDark full logoutBtn" id="logoutBtn">
     <i class="fa-solid fa-arrow-right-from-bracket"></i> LOG OUT
   </button>
 </section>
 
 <footer class="footer">
   <i class="fa-solid fa-car-side"></i><br>
-  ABHINAASH A1 DRIVING ACADEMY<br>DRIVE SMART. DRIVE SAFE.
+  ABHINAASH A1 DRIVING ACADEMY<br>
+  DRIVE SMART. DRIVE SAFE.
 </footer>
 </main>
 
-<!-- CERTIFICATE TEMPLATE -->
+<!-- PDF CERTIFICATE -->
 <div id="certificate" aria-hidden="true">
   <div class="certPaper">
     <div class="certInner">
@@ -694,20 +674,6 @@ input:focus{border-color:#b59543;box-shadow:0 0 0 3px #d4af3715}
   </div>
 </div>
 
-<!-- FLOATING BLACKTERMINAL LINK -->
-<a class="bt-float"
-   href="https://blackterminal.online/courses.html"
-   target="_blank"
-   rel="noopener noreferrer"
-   aria-label="Open BlackTerminal Computer Institute courses"
-   title="Explore BlackTerminal Courses">
-  <img
-    src="https://i.ibb.co/jk5TkfgY/B438-BAA1-368-A-4-BD1-9598-CBAA04373-C22.gif"
-    alt="BlackTerminal animated character"
-    loading="eager">
-  <span class="bt-float-label">BT Moments</span>
-</a>
-
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
 import {getFirestore,doc,onSnapshot} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
@@ -721,66 +687,66 @@ const firebaseConfig = {
   appId:"1:641148830173:web:b7a500e5e7e2463da0f634"
 };
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const $ = id => document.getElementById(id);
+const app=initializeApp(firebaseConfig);
+const db=getFirestore(app);
+const $=id=>document.getElementById(id);
 
-let currentData = null;
-let currentPhone = "";
-let unsubscribe = null;
-let requestToken = 0;
+let currentData=null;
+let currentPhone="";
+let unsubscribe=null;
+let requestToken=0;
 
 function stopListening(){
-  if(typeof unsubscribe === "function"){
+  if(typeof unsubscribe==="function"){
     unsubscribe();
-    unsubscribe = null;
+    unsubscribe=null;
   }
 }
 
 function setMessage(message,success=false){
-  $("loginMessage").textContent = message;
-  $("loginMessage").style.color = success ? "#43d99a" : "#ff7777";
+  $("loginMessage").textContent=message;
+  $("loginMessage").style.color=success?"#50e0a0":"#ff8181";
 }
 
 function showLoading(show){
-  $("loader").style.display = show ? "block" : "none";
-  $("loginBtn").disabled = show;
+  $("loader").style.display=show?"block":"none";
+  $("loginBtn").disabled=show;
 }
 
 function money(value){
-  const n = Number(value);
+  const n=Number(value);
   return Number.isFinite(n)
-    ? "₹" + n.toLocaleString("en-IN",{maximumFractionDigits:2})
-    : "—";
+    ?"₹"+n.toLocaleString("en-IN",{maximumFractionDigits:2})
+    :"—";
 }
 
 function readClassType(data){
-  const value = String(data.classType ?? "").trim().toLowerCase();
-  if(value === "personal") return "Personal";
-  if(value === "group") return "Group";
+  const value=String(data.classType??"").trim().toLowerCase();
+  if(value==="personal")return "Personal";
+  if(value==="group")return "Group";
   return "Not specified";
 }
 
 function getLogs(data){
-  return Array.isArray(data.attendanceLogs) ? data.attendanceLogs : [];
+  return Array.isArray(data.attendanceLogs)?data.attendanceLogs:[];
 }
 
 function getTotal(data){
-  const total = Number(data.totalClasses);
-  return Number.isFinite(total) && total > 0 ? Math.floor(total) : 20;
+  const total=Number(data.totalClasses);
+  return Number.isFinite(total)&&total>0?Math.floor(total):20;
 }
 
 function getCompleted(data){
-  const logs = getLogs(data);
-  const counter = Number(data.remaining);
-  const count = Number.isFinite(counter) && counter >= 0 ? Math.floor(counter) : 0;
+  const logs=getLogs(data);
+  const counter=Number(data.remaining);
+  const count=Number.isFinite(counter)&&counter>=0?Math.floor(counter):0;
   return Math.max(logs.length,count);
 }
 
 function getProgress(data){
-  const total = getTotal(data);
-  const done = getCompleted(data);
-  const percent = Math.min(100,Math.round(done/total*100));
+  const total=getTotal(data);
+  const done=getCompleted(data);
+  const percent=Math.min(100,Math.round(done/total*100));
   return {
     total,done,
     remaining:Math.max(0,total-done),
@@ -790,19 +756,19 @@ function getProgress(data){
 }
 
 function getDistance(data){
-  const logs = getLogs(data);
-  let distance = 0, known = 0;
+  const logs=getLogs(data);
+  let distance=0,known=0;
 
   for(const entry of logs){
-    if(typeof entry !== "string") continue;
-    const match = entry.match(/Distance:\s*(\d+(?:\.\d+)?)\s*KM\b/i);
+    if(typeof entry!=="string")continue;
+    const match=entry.match(/Distance:\s*(\d+(?:\.\d+)?)\s*KM\b/i);
     if(match){
-      distance += Number(match[1]);
+      distance+=Number(match[1]);
       known++;
     }
   }
 
-  if(known===logs.length && logs.length>0){
+  if(known===logs.length&&logs.length>0){
     return {value:distance,estimated:false};
   }
 
@@ -813,16 +779,16 @@ function getDistance(data){
 }
 
 function safeDate(value){
-  if(value==null || value==="") return null;
-  let date = null;
+  if(value==null||value==="")return null;
+  let date=null;
 
-  if(value && typeof value.toDate==="function"){
+  if(value&&typeof value.toDate==="function"){
     date=value.toDate();
-  }else if(value && typeof value==="object" && Number.isFinite(value.seconds)){
+  }else if(value&&typeof value==="object"&&Number.isFinite(value.seconds)){
     date=new Date(value.seconds*1000);
   }else if(value instanceof Date){
     date=value;
-  }else if(typeof value==="string" || typeof value==="number"){
+  }else if(typeof value==="string"||typeof value==="number"){
     const text=String(value).trim();
     const match=text.match(/^(\d{1,2})\s+([A-Za-z]{3,9})(?:\s+(\d{4}))?$/);
 
@@ -833,20 +799,24 @@ function safeDate(value){
       ];
       const month=months.findIndex(m=>m.startsWith(match[2].toLowerCase()));
       if(month>=0){
-        date=new Date(Number(match[3])||new Date().getFullYear(),month,Number(match[1]));
+        date=new Date(
+          Number(match[3])||new Date().getFullYear(),
+          month,
+          Number(match[1])
+        );
       }
     }else{
       const parsed=new Date(text);
-      if(!isNaN(parsed.getTime())) date=parsed;
+      if(!isNaN(parsed.getTime()))date=parsed;
     }
   }
 
-  return date && !isNaN(date.getTime()) ? date : null;
+  return date&&!isNaN(date.getTime())?date:null;
 }
 
 function formatDate(value){
   const date=safeDate(value);
-  if(!date) return null;
+  if(!date)return null;
   return date.toLocaleDateString("en-IN",{
     day:"2-digit",month:"long",year:"numeric"
   });
@@ -863,11 +833,11 @@ function getCompletionDate(data){
 
   for(const value of fields){
     const formatted=formatDate(value);
-    if(formatted) return formatted;
+    if(formatted)return formatted;
   }
 
   const logs=getLogs(data);
-  if(!logs.length) return "Date not recorded";
+  if(!logs.length)return "Date not recorded";
 
   const last=logs[logs.length-1];
   if(typeof last==="string"){
@@ -878,7 +848,7 @@ function getCompletionDate(data){
     }
 
     const match=dateText.match(/\d{4}-\d{2}-\d{2}/);
-    if(match) return formatDate(match[0])||"Date not recorded";
+    if(match)return formatDate(match[0])||"Date not recorded";
     return formatDate(dateText)||"Date not recorded";
   }
 
@@ -892,9 +862,9 @@ function getWalletBalance(data){
   ];
 
   for(const key of keys){
-    if(data[key]!==undefined && data[key]!==null && data[key]!==""){
+    if(data[key]!==undefined&&data[key]!==null&&data[key]!==""){
       const value=Number(data[key]);
-      if(Number.isFinite(value)) return value;
+      if(Number.isFinite(value))return value;
     }
   }
   return null;
@@ -902,7 +872,7 @@ function getWalletBalance(data){
 
 function getReferralCount(data){
   const count=Number(data.totalRefers);
-  return Number.isFinite(count)&&count>=0 ? Math.floor(count) : 0;
+  return Number.isFinite(count)&&count>=0?Math.floor(count):0;
 }
 
 function unlockBadge(id,unlocked){
@@ -918,10 +888,13 @@ function renderHistory(data){
   if(!logs.length){
     const empty=document.createElement("div");
     empty.className="empty";
+
     const icon=document.createElement("i");
     icon.className="fa-regular fa-calendar";
+
     const text=document.createElement("span");
     text.textContent="No attendance records have been added yet.";
+
     empty.append(icon,text);
     list.appendChild(empty);
     return;
@@ -941,7 +914,7 @@ function renderHistory(data){
     const date=document.createElement("div");
     date.className="logDate";
 
-    const text=typeof entry==="string" ? entry : "";
+    const text=typeof entry==="string"?entry:"";
     const parts=text.split(/\s+[—|]\s+/);
     date.textContent=parts[0]||"Recorded session";
     header.append(title,date);
@@ -975,7 +948,7 @@ function renderHistory(data){
       chips.appendChild(chip);
     }
 
-    if(chips.childNodes.length) item.appendChild(chips);
+    if(chips.childNodes.length)item.appendChild(chips);
     list.appendChild(item);
   });
 }
@@ -997,11 +970,11 @@ function renderProfile(data){
 
   const statusIcon=document.createElement("i");
   statusIcon.className=inactive
-    ? "fa-solid fa-circle-pause"
-    : "fa-solid fa-circle-check";
+    ?"fa-solid fa-circle-pause"
+    :"fa-solid fa-circle-check";
 
   const statusText=document.createElement("span");
-  statusText.textContent=inactive ? "NOT ACTIVE" : "ACTIVE STUDENT";
+  statusText.textContent=inactive?"NOT ACTIVE":"ACTIVE STUDENT";
   $("studentStatus").append(statusIcon,statusText);
 
   $("completedValue").textContent=progress.done;
@@ -1015,18 +988,18 @@ function renderProfile(data){
 
   const classIcon=document.createElement("i");
   classIcon.className=classType==="Personal"
-    ? "fa-solid fa-user"
-    : classType==="Group"
-      ? "fa-solid fa-users"
-      : "fa-solid fa-circle-question";
+    ?"fa-solid fa-user"
+    :classType==="Group"
+      ?"fa-solid fa-users"
+      :"fa-solid fa-circle-question";
 
   $("classIcon").appendChild(classIcon);
 
   $("classDescription").textContent=classType==="Personal"
-    ? "Your registered class type is Personal Training — individual driving instruction."
-    : classType==="Group"
-      ? "Your registered class type is Group Training — group or batch driving instruction."
-      : "The classType field is missing or has an unrecognised value in this student record. Please contact the academy.";
+    ?"Your registered class type is Personal Training — individual driving instruction."
+    :classType==="Group"
+      ?"Your registered class type is Group Training — group or batch driving instruction."
+      :"The classType field is missing or has an unrecognised value in this student record. Please contact the academy.";
 
   $("percentValue").textContent=progress.percent+"%";
   $("progressPercent").textContent=progress.percent+"%";
@@ -1037,18 +1010,18 @@ function renderProfile(data){
   $("ringFill").style.strokeDashoffset=circumference*(1-progress.percent/100);
   $("progressBar").style.width=progress.percent+"%";
 
-  $("progressStatus").textContent=progress.completed ? "COMPLETED" : "IN PROGRESS";
+  $("progressStatus").textContent=progress.completed?"COMPLETED":"IN PROGRESS";
   $("progressTitle").textContent=progress.completed
-    ? "Training target reached!"
-    : progress.percent>=75
-      ? "Almost at the finish line!"
-      : progress.percent>=40
-        ? "Great progress!"
-        : "Your driving journey";
+    ?"Training target reached!"
+    :progress.percent>=75
+      ?"Almost at the finish line!"
+      :progress.percent>=40
+        ?"Great progress!"
+        :"Your driving journey";
 
   $("progressDescription").textContent=progress.completed
-    ? "Your recorded attendance has reached the package target."
-    : progress.remaining+" session"+(progress.remaining===1?"":"s")+" remaining to reach your target.";
+    ?"Your recorded attendance has reached the package target."
+    :progress.remaining+" session"+(progress.remaining===1?"":"s")+" remaining to reach your target.";
 
   unlockBadge("badgeFirst",progress.done>=1);
   unlockBadge("badgeSafety",progress.done>=5);
@@ -1059,10 +1032,10 @@ function renderProfile(data){
   const balance=getWalletBalance(data);
 
   $("referralCount").textContent=referrals+" referrals recorded";
-  $("walletAmount").textContent=balance===null ? "—" : money(balance);
-  $("walletStatus").textContent=balance===null ? "No balance field found" : "Recorded balance";
+  $("walletAmount").textContent=balance===null?"—":money(balance);
+  $("walletStatus").textContent=balance===null?"No balance field found":"Recorded balance";
 
-  $("certificateCard").style.display=progress.completed ? "block" : "none";
+  $("certificateCard").style.display=progress.completed?"block":"none";
   $("certStudentName").textContent=String(data.name||"STUDENT").trim().toUpperCase();
   $("certType").textContent=classType.toUpperCase();
   $("certDate").textContent=getCompletionDate(data);
@@ -1082,7 +1055,7 @@ function loadStudent(phone){
   unsubscribe=onSnapshot(
     doc(db,"studentData",phone),
     snapshot=>{
-      if(token!==requestToken) return;
+      if(token!==requestToken)return;
       showLoading(false);
 
       if(!snapshot.exists()){
@@ -1099,12 +1072,12 @@ function loadStudent(phone){
       setMessage("",true);
     },
     error=>{
-      if(token!==requestToken) return;
+      if(token!==requestToken)return;
       showLoading(false);
       console.error("Student profile listener error:",error);
       $("dashboard").style.display="none";
       $("loginPanel").style.display="block";
-      setMessage("Unable to read your record. Please check your connection or contact the academy.");
+      setMessage("Unable to read your record. Check your connection or contact the academy.");
       stopListening();
     }
   );
@@ -1136,7 +1109,7 @@ function logout(){
 }
 
 async function downloadCertificate(){
-  if(!currentData) return;
+  if(!currentData)return;
 
   const progress=getProgress(currentData);
   if(!progress.completed){
@@ -1174,7 +1147,7 @@ async function downloadCertificate(){
     element.style.top="0";
     element.style.zIndex="99999";
 
-    if(document.fonts&&document.fonts.ready) await document.fonts.ready;
+    if(document.fonts&&document.fonts.ready)await document.fonts.ready;
     await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
 
     const filename="A1_Certificate_"+
@@ -1184,18 +1157,10 @@ async function downloadCertificate(){
     await window.html2pdf().set({
       filename,
       margin:0,
-      image:{type:"jpeg",quality:0.95},
+      image:{type:"jpeg",quality:.95},
       html2canvas:{
-        scale:1,
-        useCORS:true,
-        backgroundColor:"#07172d",
-        logging:false,
-        width:1123,
-        height:794,
-        windowWidth:1123,
-        windowHeight:794,
-        scrollX:0,
-        scrollY:0
+        scale:1,useCORS:true,backgroundColor:"#07172d",logging:false,
+        width:1123,height:794,windowWidth:1123,windowHeight:794,scrollX:0,scrollY:0
       },
       jsPDF:{unit:"mm",format:"a4",orientation:"landscape",compress:true},
       pagebreak:{mode:["avoid-all"]}
@@ -1205,7 +1170,7 @@ async function downloadCertificate(){
     console.error("Certificate generation failed:",error);
     alert("Certificate could not be generated.\n\n"+
       (error?.message||String(error))+
-      "\n\nPlease refresh the page and try again.");
+      "\n\nRefresh the page and try again.");
   }finally{
     Object.assign(element.style,oldStyle);
     btn.disabled=false;
@@ -1233,7 +1198,7 @@ async function shareAcademy(){
       await navigator.share(details);
       return;
     }catch(error){
-      if(error.name==="AbortError") return;
+      if(error.name==="AbortError")return;
     }
   }
 
@@ -1247,7 +1212,7 @@ $("phoneInput").addEventListener("input",()=>{
 });
 
 $("phoneInput").addEventListener("keydown",event=>{
-  if(event.key==="Enter") login();
+  if(event.key==="Enter")login();
 });
 
 $("refreshBtn").addEventListener("click",()=>{
