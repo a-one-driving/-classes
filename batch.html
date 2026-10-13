@@ -15,47 +15,34 @@
 
 <style>
 :root{
-  --bg:#08090d;
-  --panel:#111219;
-  --card:#14151c;
-  --gold:#d4af37;
-  --gold-light:#ffe8a3;
-  --muted:#9293a0;
-  --green:#43d99a;
-  --red:#ff7777;
-  --border:rgba(255,255,255,.09);
+  --bg:#08090d;--panel:#111219;--card:#171820;
+  --gold:#d4af37;--goldLight:#ffe8a3;--muted:#9293a0;
+  --green:#43d99a;--red:#ff7777;--border:rgba(255,255,255,.08)
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
-  min-height:100vh;
-  padding:16px 13px 35px;
-  background:radial-gradient(ellipse at 50% -10%,#d4af3714,transparent 42%),var(--bg);
-  color:#f7f7fa;
-  font-family:Poppins,sans-serif;
-  -webkit-tap-highlight-color:transparent;
+  min-height:100vh;padding:16px 13px 35px;
+  background:radial-gradient(ellipse at 50% -10%,#d4af3719,transparent 42%),var(--bg);
+  color:#f7f7fa;font-family:Poppins,sans-serif;
+  -webkit-tap-highlight-color:transparent
 }
-button,input{font:inherit}
-button{cursor:pointer}
+button,input{font:inherit}button{cursor:pointer}
 button:disabled{opacity:.5;cursor:wait}
 .app{width:100%;max-width:490px;margin:auto}
-
 .topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:24px}
 .brand{display:flex;align-items:center;gap:10px}
 .brandLogo{
-  height:44px;width:44px;border-radius:13px;
-  display:grid;place-items:center;
-  border:1px solid #d4af3755;
-  background:#d4af3710;color:var(--gold);font-size:20px
+  height:44px;width:44px;border-radius:14px;display:grid;place-items:center;
+  background:linear-gradient(135deg,#ffe8a3,#d4af37);color:#18130a;font-size:20px
 }
 .brandName{font-size:15px;font-weight:800;letter-spacing:.5px}
 .brandSub{font-size:8px;color:var(--muted);letter-spacing:2px;margin-top:4px}
-.iconBtn{height:38px;width:38px;border:1px solid var(--border);border-radius:12px;background:#15161d;color:var(--gold-light)}
-
-.panel{
-  padding:21px;border:1px solid var(--border);border-radius:22px;
-  background:var(--panel);box-shadow:0 15px 40px #0003
+.iconBtn{
+  height:37px;width:37px;border:1px solid var(--border);
+  border-radius:12px;background:#15161d;color:var(--goldLight)
 }
+.panel{padding:21px;border:1px solid var(--border);border-radius:24px;background:var(--panel);box-shadow:0 20px 55px #0004}
 .eyebrow{font-size:9px;letter-spacing:2px;font-weight:700;color:var(--gold)}
 .loginTitle{font-size:23px;margin-top:8px}
 .subtext{font-size:11px;color:var(--muted);line-height:1.9;margin:8px 0 22px}
@@ -63,106 +50,67 @@ button:disabled{opacity:.5;cursor:wait}
 .field{position:relative;margin-bottom:14px}
 .field i{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--gold)}
 input{
-  width:100%;height:49px;padding:0 13px 0 42px;
-  border:1px solid var(--border);border-radius:12px;
-  background:#090a0f;color:white;outline:none;font-size:16px
+  width:100%;height:49px;padding:0 13px 0 42px;border:1px solid var(--border);
+  border-radius:13px;background:#090a0f;color:white;outline:none;font-size:14px
 }
-input:focus{border-color:#b59543;box-shadow:0 0 0 2px #d4af3715}
+input:focus{border-color:#b59543}
 .btn{
-  min-height:43px;width:100%;padding:12px 14px;border:1px solid transparent;
-  border-radius:11px;display:flex;justify-content:center;align-items:center;
-  gap:9px;font-size:10px;font-weight:800
+  min-height:43px;width:100%;padding:12px 14px;border:0;border-radius:12px;
+  display:flex;justify-content:center;align-items:center;gap:9px;font-size:10px;font-weight:800
 }
-.goldBtn{background:var(--gold);color:#151109}
-.darkBtn{background:#191a22;color:#eee;border-color:var(--border)}
-.greenBtn{background:#43d99a12;color:var(--green);border-color:#43d99a30}
+.goldBtn{background:linear-gradient(120deg,#ffe8a3,#d4af37);color:#151109}
+.darkBtn{background:#191a22;color:#eee;border:1px solid var(--border)}
+.greenBtn{background:#43d99a12;color:var(--green);border:1px solid #43d99a30}
 .message{font-size:10px;line-height:1.8;margin-top:12px;overflow-wrap:anywhere}
 .loader{display:none;text-align:center;color:var(--muted);font-size:10px;padding:20px}
-.spinner{display:block;width:23px;height:23px;margin:0 auto 10px;border:2px solid #333;border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite}
+.spinner{
+  display:block;width:23px;height:23px;margin:0 auto 10px;
+  border:2px solid #333;border-top-color:var(--gold);border-radius:50%;
+  animation:spin .8s linear infinite
+}
 @keyframes spin{to{transform:rotate(360deg)}}
-#dashboard{display:none;animation:appear .25s ease}
-@keyframes appear{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+#dashboard{display:none;animation:appear .3s ease}
+@keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-/* HERO */
 .hero{
-  position:relative;overflow:hidden;padding:21px;
-  border:1px solid #d4af3735;border-radius:22px;
-  background:linear-gradient(145deg,#19170f,#12131a 70%);
-  margin-bottom:19px
+  position:relative;overflow:hidden;padding:21px;border:1px solid #d4af3738;
+  border-radius:23px;background:linear-gradient(145deg,#d4af371c,#15161d 68%);margin-bottom:19px
+}
+.hero:after{
+  content:"";position:absolute;right:-28px;top:-38px;width:140px;height:140px;
+  border:1px solid #d4af371b;border-radius:50%;
+  box-shadow:0 0 0 20px #d4af3706,0 0 0 40px #d4af3704;pointer-events:none
 }
 .heroRow{position:relative;z-index:1;display:flex;align-items:center;gap:12px}
 .avatar{
-  height:57px;width:57px;flex:none;display:grid;place-items:center;
-  border:1px solid #d4af3755;border-radius:16px;background:#d4af3710;
-  color:var(--gold-light);font-size:23px
+  height:57px;width:57px;flex:none;display:grid;place-items:center;overflow:hidden;
+  border-radius:18px;background:linear-gradient(135deg,#ffe8a3,#c69c27);
+  border:2px solid var(--gold);box-shadow:0 5px 20px #d4af3730
 }
+.avatar img{display:block;width:100%;height:100%;object-fit:cover;border-radius:15px}
 .heroCopy{min-width:0;flex:1}
-.heroLabel{font-size:8px;letter-spacing:1.5px;color:var(--gold);font-weight:700}
+.heroLabel{font-size:8px;letter-spacing:1.7px;color:var(--gold);font-weight:700}
 .studentName{font-size:20px;line-height:1.5;margin-top:4px;overflow-wrap:anywhere}
 .statusPill{
-  display:inline-flex;align-items:center;gap:6px;padding:6px 9px;
-  margin-top:7px;border:1px solid #43d99a35;border-radius:20px;
-  background:#43d99a0b;color:var(--green);font-size:8px;font-weight:700
+  display:inline-flex;align-items:center;gap:6px;padding:6px 9px;margin-top:7px;
+  border:1px solid #43d99a35;border-radius:20px;background:#43d99a0b;
+  color:var(--green);font-size:8px;font-weight:700
 }
 .statusPill.inactive{border-color:#ff777735;color:var(--red);background:#ff77770b}
-.heroMeta{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;padding-top:13px;border-top:1px solid #ffffff10}
-.metaPill{padding:7px 10px;border-radius:9px;background:#ffffff05;border:1px solid #ffffff0b;color:#c5c5cf;font-size:9px;overflow-wrap:anywhere}
+.heroMeta{display:flex;flex-wrap:wrap;gap:8px;margin-top:17px;padding-top:13px;border-top:1px solid #ffffff10}
+.metaPill{padding:7px 10px;border-radius:10px;background:#ffffff06;border:1px solid #ffffff0b;color:#c5c5cf;font-size:9px;overflow-wrap:anywhere}
 .metaPill i{color:var(--gold);margin-right:5px}
-
-/* STATIC LINE ART */
-.illustration{
-  display:flex;align-items:center;gap:13px;
-  padding:13px;margin-top:15px;border:1px solid #d4af3725;
-  border-radius:14px;background:#090a0d55
-}
-.lineArt{width:76px;height:76px;flex:none;color:var(--gold-light)}
-.lineArt svg{display:block;width:100%;height:100%}
-.illustrationText{min-width:0}
-.illustrationText strong{display:block;color:var(--gold-light);font-size:10px;font-weight:700}
-.illustrationText p{font-size:9px;line-height:1.8;color:var(--muted);margin-top:5px}
-.artCaption{display:inline-block;margin-top:7px;color:var(--gold);font-size:7px;letter-spacing:1.2px}
-
-/* SECTION HEADINGS */
-.sectionHeading{
-  display:flex;align-items:center;justify-content:space-between;
-  gap:8px;margin:25px 2px 12px
-}
+.sectionHeading{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:25px 2px 12px}
 .sectionHeading h3{font-size:10px;letter-spacing:1.5px}
 .sectionHeading span{font-size:8px;color:var(--muted)}
-
-/* STAT CARDS */
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.stat{
-  position:relative;min-width:0;padding:15px;
-  border:1px solid var(--border);border-radius:15px;
-  background:linear-gradient(145deg,#181921,#101116);
-}
-.statTop{display:flex;align-items:center;justify-content:space-between;gap:5px}
-.statIcon{
-  width:34px;height:34px;display:grid;place-items:center;
-  border-radius:10px;border:1px solid #d4af372a;background:#d4af370b;
-  color:var(--gold);font-size:13px
-}
-.statArt{width:33px;height:33px;color:#bda45b;opacity:.9}
-.statArt svg{width:100%;height:100%}
+.stat{min-width:0;padding:15px;border:1px solid var(--border);border-radius:17px;background:linear-gradient(145deg,#181921,#101116)}
+.statIcon{width:33px;height:33px;display:grid;place-items:center;border-radius:11px;background:#d4af3717;color:var(--gold);font-size:13px}
 .statLabel{font-size:9px;color:var(--muted);margin-top:13px}
 .statValue{font-size:22px;font-weight:800;margin-top:3px;line-height:1.4;overflow-wrap:anywhere}
 .statFoot{font-size:8px;color:#6f707d;margin-top:3px}
 
-/* CLASS TYPE */
-.classCard{padding:17px;border:1px solid #d4af3728;border-radius:17px;background:#15161d}
-.classRow{display:flex;align-items:center;gap:12px}
-.classIcon{
-  width:44px;height:44px;flex:none;border-radius:13px;
-  background:#d4af3710;border:1px solid #d4af3735;color:var(--gold);
-  display:grid;place-items:center;font-size:18px
-}
-.classLabel{font-size:8px;color:var(--muted);letter-spacing:1.5px}
-.classValue{font-size:15px;font-weight:800;margin-top:4px}
-.classDescription{font-size:9px;color:var(--muted);line-height:1.8;margin-top:12px}
-
-/* PROGRESS */
-.progressCard{padding:17px;border:1px solid var(--border);border-radius:18px;background:#14151c}
+.progressCard{padding:17px;border:1px solid var(--border);border-radius:20px;background:var(--card)}
 .progressLayout{display:flex;align-items:center;gap:15px}
 .ring{position:relative;width:98px;height:98px;flex:none}
 .ring svg{width:100%;height:100%;transform:rotate(-90deg)}
@@ -174,42 +122,31 @@ input:focus{border-color:#b59543;box-shadow:0 0 0 2px #d4af3715}
 .progressCopy h4{font-size:13px}
 .progressCopy p{font-size:9px;color:var(--muted);line-height:1.9;margin-top:6px}
 .progressTrack{height:5px;margin-top:17px;border-radius:20px;background:#30313b;overflow:hidden}
-.progressBar{height:100%;width:0;background:linear-gradient(90deg,#b38b20,#ffe8a3);border-radius:20px;transition:width .7s}
+.progressBar{height:100%;width:0;background:linear-gradient(90deg,#d4af37,#ffe8a3);border-radius:20px;transition:width .7s}
 .progressMeta{display:flex;justify-content:space-between;gap:8px;margin-top:9px}
 .progressMeta span{font-size:8px;color:var(--muted)}
-.progressMeta b{color:var(--gold-light)}
-.roadIllustration{
-  margin-top:15px;padding:9px 10px;border:1px solid #d4af3720;
-  border-radius:12px;background:#0d0e13
-}
-.roadIllustration svg{display:block;width:100%;height:54px}
-.roadCaption{font-size:7px;letter-spacing:1.5px;color:var(--muted);margin-bottom:4px}
+.progressMeta b{color:var(--goldLight)}
 .note{display:flex;gap:7px;align-items:flex-start;font-size:8px;line-height:1.8;color:var(--muted);margin-top:12px}
 .note i{color:var(--gold);margin-top:3px}
 
-/* ACHIEVEMENTS */
+.classCard{padding:17px;border:1px solid #d4af3730;border-radius:18px;background:linear-gradient(130deg,#d4af3711,#171820)}
+.classRow{display:flex;align-items:center;gap:12px}
+.classIcon{width:44px;height:44px;flex:none;border-radius:14px;background:#d4af371a;color:var(--gold);display:grid;place-items:center;font-size:18px}
+.classLabel{font-size:8px;color:var(--muted);letter-spacing:1.5px}
+.classValue{font-size:15px;font-weight:800;margin-top:4px}
+.classDescription{font-size:9px;color:var(--muted);line-height:1.8;margin-top:12px}
+
 .achievementGrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.achievement{
-  padding:14px 9px;text-align:center;border:1px solid var(--border);
-  border-radius:14px;background:#14151b;opacity:.58;filter:grayscale(.65)
-}
-.achievement.unlocked{opacity:1;filter:none;border-color:#d4af3745;background:#d4af3709}
-.achievementIcon{
-  width:45px;height:45px;display:grid;place-items:center;margin:0 auto 10px;
-  border-radius:13px;border:1px solid #d4af3738;background:#d4af370b;
-  color:var(--gold-light);font-size:19px
-}
-.achievement.unlocked .achievementIcon{background:#d4af3719;border-color:#d4af3770;color:#ffe8a3}
+.achievement{padding:14px 9px;text-align:center;border:1px solid var(--border);border-radius:15px;background:#14151b;opacity:.55;filter:grayscale(.8)}
+.achievement.unlocked{opacity:1;filter:none;border-color:#d4af3740;background:#d4af370b}
+.achievementIcon{width:37px;height:37px;display:grid;place-items:center;margin:0 auto 8px;border-radius:12px;background:#d4af3719;color:var(--gold);font-size:16px}
 .achievement b{display:block;font-size:9px}
 .achievement small{display:block;margin-top:5px;color:var(--muted);font-size:8px;line-height:1.7}
-.unlockLabel{display:block;margin-top:8px;color:var(--muted);font-size:7px;letter-spacing:1px}
-.achievement.unlocked .unlockLabel{color:var(--gold-light)}
 
-/* WALLET */
-.walletCard{padding:18px;border:1px solid #43d99a29;border-radius:18px;background:linear-gradient(140deg,#132019,#15161d)}
+.walletCard{padding:18px;border:1px solid #43d99a29;border-radius:19px;background:linear-gradient(140deg,#43d99a0d,#15161d)}
 .walletRow{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .walletLeft{display:flex;align-items:center;gap:10px;min-width:0}
-.walletIcon{width:39px;height:39px;flex:none;display:grid;place-items:center;border-radius:12px;background:#43d99a12;border:1px solid #43d99a25;color:var(--green)}
+.walletIcon{width:39px;height:39px;flex:none;display:grid;place-items:center;border-radius:13px;background:#43d99a14;color:var(--green)}
 .walletLabel{font-size:9px;font-weight:700;color:var(--green)}
 .walletSub{font-size:8px;color:var(--muted);margin-top:5px}
 .walletAmount{font-size:21px;font-weight:800;overflow-wrap:anywhere}
@@ -217,20 +154,18 @@ input:focus{border-color:#b59543;box-shadow:0 0 0 2px #d4af3715}
 .walletFoot span,.walletFoot b{font-size:9px}
 .walletFoot span{color:var(--muted)}
 
-/* ATTENDANCE */
-.historyCard{padding:12px;border:1px solid var(--border);border-radius:17px;background:var(--card)}
+.historyCard{padding:12px;border:1px solid var(--border);border-radius:19px;background:var(--card)}
 .historyList{display:flex;flex-direction:column;gap:9px;max-height:400px;overflow:auto}
-.log{padding:13px;border:1px solid #ffffff0b;border-left:3px solid var(--gold);border-radius:11px;background:#101116}
+.log{padding:13px;border:1px solid #ffffff0b;border-left:3px solid var(--gold);border-radius:12px;background:#101116}
 .logHead{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
 .logTitle{font-size:10px;font-weight:700}
-.logDate{font-size:8px;color:var(--gold-light);text-align:right;line-height:1.7}
+.logDate{font-size:8px;color:var(--goldLight);text-align:right;line-height:1.7}
 .logDetails{font-size:9px;color:#c5c5ce;line-height:1.9;margin-top:8px;overflow-wrap:anywhere}
 .logChip{display:inline-block;padding:5px 7px;margin:6px 5px 0 0;border:1px solid #ffffff12;border-radius:7px;background:#ffffff05;color:#d8d8e0;font-size:8px}
 .empty{padding:24px 10px;text-align:center;color:var(--muted);font-size:10px;line-height:1.9}
 .empty i{display:block;font-size:22px;color:#666;margin-bottom:9px}
 
-/* CERTIFICATE */
-.certificateCard{display:none;padding:19px;border:1px solid #d4af3740;border-radius:18px;text-align:center;background:#17160f}
+.certificateCard{display:none;padding:19px;border:1px solid #d4af3740;border-radius:20px;text-align:center;background:linear-gradient(140deg,#d4af3717,#15161d)}
 .certificateCard>i{font-size:33px;color:var(--gold);margin-bottom:10px}
 .certificateCard h3{font-size:14px}
 .certificateCard p{font-size:9px;color:var(--muted);line-height:1.9;margin:9px 0 15px}
@@ -238,7 +173,7 @@ input:focus{border-color:#b59543;box-shadow:0 0 0 2px #d4af3715}
 .footer{text-align:center;margin-top:25px;color:#5f606b;font-size:8px;line-height:2;letter-spacing:1px}
 .footer i{color:var(--gold)}
 
-/* CERTIFICATE PDF TEMPLATE */
+/* CERTIFICATE PDF */
 #certificate{
   display:none;width:1123px;height:794px;padding:14px;overflow:hidden;
   box-sizing:border-box;background:#07172d;color:#10213d;
@@ -273,40 +208,31 @@ input:focus{border-color:#b59543;box-shadow:0 0 0 2px #d4af3715}
 .certSeal span{font-size:7px;margin-top:2px;letter-spacing:1px}
 .certFooter{font-family:Arial,sans-serif;color:#8b846f;font-size:8px;letter-spacing:3px;margin-top:9px}
 
-/* FLOATING BLACKTERMINAL MOMENTS */
+/* FLOATING BLACKTERMINAL BUTTON */
 .bt-float{
   position:fixed;right:14px;bottom:calc(18px + env(safe-area-inset-bottom,0px));
   z-index:9998;width:82px;display:flex;flex-direction:column;align-items:center;gap:5px;
-  text-decoration:none;-webkit-tap-highlight-color:transparent
+  text-decoration:none;-webkit-tap-highlight-color:transparent;animation:btFloat 3s ease-in-out infinite
 }
 .bt-float img{display:block;width:76px;height:76px;object-fit:contain;border-radius:20px;filter:drop-shadow(0 5px 12px #0009)}
 .bt-float-label{display:block;padding:5px 8px;border:1px solid #d4af3755;border-radius:20px;background:#111219ed;color:#ffe8a3;font-size:9px;font-weight:800;letter-spacing:.4px;white-space:nowrap;box-shadow:0 5px 18px #0005}
-.bt-float:focus-visible{outline:2px solid #ffe8a3;outline-offset:4px;border-radius:15px}
+@keyframes btFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
 
 @media(max-width:360px){
-  body{padding:12px 9px}
-  .hero{padding:16px}
-  .studentName{font-size:17px}
-  .stat{padding:12px}
-  .statValue{font-size:20px}
-  .ring{width:84px;height:84px}
-  .progressLayout{gap:10px}
-  .walletAmount{font-size:17px}
-  .lineArt{width:64px;height:64px}
-  .illustration{gap:9px;padding:10px}
+  body{padding:12px 9px}.hero{padding:16px}.studentName{font-size:17px}
+  .statValue{font-size:20px}.ring{width:84px;height:84px}
+  .progressLayout{gap:10px}.walletAmount{font-size:17px}
   .bt-float{right:9px;bottom:calc(12px + env(safe-area-inset-bottom,0px));width:70px}
-  .bt-float img{width:65px;height:65px}
-  .bt-float-label{font-size:8px;padding:4px 6px}
+  .bt-float img{width:65px;height:65px}.bt-float-label{font-size:8px;padding:4px 6px}
 }
 @media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  *,*::before,*::after{animation:none!important;transition:none!important}
 }
 </style>
 </head>
 
 <body>
 <main class="app">
-
 <header class="topbar">
   <div class="brand">
     <div class="brandLogo"><i class="fa-solid fa-car-side"></i></div>
@@ -315,10 +241,11 @@ input:focus{border-color:#b59543;box-shadow:0 0 0 2px #d4af3715}
       <div class="brandSub">DRIVING ACADEMY</div>
     </div>
   </div>
-  <button class="iconBtn" id="refreshBtn" aria-label="Refresh"><i class="fa-solid fa-rotate"></i></button>
+  <button class="iconBtn" id="refreshBtn" aria-label="Refresh">
+    <i class="fa-solid fa-rotate"></i>
+  </button>
 </header>
 
-<!-- LOGIN -->
 <section class="panel" id="loginPanel">
   <div class="eyebrow">STUDENT PORTAL</div>
   <h1 class="loginTitle">Your driving journey.</h1>
@@ -333,128 +260,45 @@ input:focus{border-color:#b59543;box-shadow:0 0 0 2px #d4af3715}
   <div class="message" id="loginMessage" role="status" aria-live="polite"></div>
 </section>
 
-<!-- DASHBOARD -->
 <section id="dashboard">
-
   <div class="hero">
     <div class="heroRow">
-      <div class="avatar"><i class="fa-solid fa-user-astronaut"></i></div>
+      <div class="avatar" id="studentAvatar">
+        <img id="avatarImage"
+          src="https://api.dicebear.com/9.x/adventurer/svg?seed=Student1"
+          alt="Student cartoon profile"
+          loading="eager"
+          referrerpolicy="no-referrer">
+      </div>
       <div class="heroCopy">
         <div class="heroLabel">WELCOME TO YOUR DASHBOARD</div>
         <h1 class="studentName" id="studentName">Student</h1>
-        <div class="statusPill" id="studentStatus"><i class="fa-solid fa-circle-check"></i><span>ACTIVE STUDENT</span></div>
+        <div class="statusPill" id="studentStatus">
+          <i class="fa-solid fa-circle-check"></i><span>ACTIVE STUDENT</span>
+        </div>
       </div>
     </div>
     <div class="heroMeta">
       <span class="metaPill"><i class="fa-solid fa-phone"></i><span id="studentPhone"></span></span>
       <span class="metaPill"><i class="fa-solid fa-car-side"></i><span id="packageName">Driving Training</span></span>
     </div>
-
-    <div class="illustration">
-      <div class="lineArt">
-        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Steering wheel line illustration">
-          <circle cx="50" cy="46" r="36"/>
-          <circle cx="50" cy="46" r="25"/>
-          <circle cx="50" cy="46" r="9"/>
-          <path d="M50 37V20M42 51L26 65M58 51L74 65"/>
-          <path d="M31 22Q50 10 69 22" stroke="#d4af37"/>
-          <path d="M50 55V76"/>
-          <path d="M18 46H25M75 46H82" stroke="#d4af37"/>
-          <path d="M38 87H62" stroke="#d4af37"/>
-        </svg>
-      </div>
-      <div class="illustrationText">
-        <strong>YOUR JOURNEY STARTS HERE</strong>
-        <p>Build confidence, master the basics and learn responsible driving.</p>
-        <span class="artCaption">01 — LEARN • PRACTISE • PROGRESS</span>
-      </div>
-    </div>
   </div>
 
   <div class="sectionHeading"><h3>TRAINING OVERVIEW</h3><span>LIVE RECORD</span></div>
   <div class="stats">
-    <div class="stat">
-      <div class="statTop">
-        <div class="statIcon"><i class="fa-solid fa-circle-check"></i></div>
-        <div class="statArt">
-          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="20" cy="20" r="15"/><path d="M12 20l5 5 11-12"/>
-          </svg>
-        </div>
-      </div>
-      <div class="statLabel">SESSIONS COMPLETED</div>
-      <div class="statValue" id="completedValue">0</div>
-      <div class="statFoot">Recorded training sessions</div>
-    </div>
-    <div class="stat">
-      <div class="statTop">
-        <div class="statIcon"><i class="fa-solid fa-calendar-days"></i></div>
-        <div class="statArt">
-          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true">
-            <rect x="6" y="10" width="28" height="24" rx="3"/><path d="M6 17h28M13 6v8M27 6v8M13 23h5M23 23h5M13 28h5"/>
-          </svg>
-        </div>
-      </div>
-      <div class="statLabel">TOTAL SESSIONS</div>
-      <div class="statValue" id="totalValue">0</div>
-      <div class="statFoot">Package target</div>
-    </div>
-    <div class="stat">
-      <div class="statTop">
-        <div class="statIcon"><i class="fa-solid fa-road"></i></div>
-        <div class="statArt">
-          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true">
-            <path d="M11 35L16 5M29 35L24 5"/><path d="M20 7v5M20 18v5M20 29v5"/>
-          </svg>
-        </div>
-      </div>
-      <div class="statLabel">ESTIMATED DISTANCE</div>
-      <div class="statValue" id="distanceValue">0 km</div>
-      <div class="statFoot">Based on recorded logs</div>
-    </div>
-    <div class="stat">
-      <div class="statTop">
-        <div class="statIcon"><i class="fa-solid fa-flag-checkered"></i></div>
-        <div class="statArt">
-          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M10 35V5M11 7h20l-4 6 4 6H11"/><path d="M15 9h5v5h-5zM25 14h4M15 15h5"/>
-          </svg>
-        </div>
-      </div>
-      <div class="statLabel">SESSIONS REMAINING</div>
-      <div class="statValue" id="remainingValue">0</div>
-      <div class="statFoot">Until package target</div>
-    </div>
+    <div class="stat"><div class="statIcon"><i class="fa-solid fa-circle-check"></i></div><div class="statLabel">SESSIONS COMPLETED</div><div class="statValue" id="completedValue">0</div><div class="statFoot">Recorded training sessions</div></div>
+    <div class="stat"><div class="statIcon"><i class="fa-solid fa-calendar-days"></i></div><div class="statLabel">TOTAL SESSIONS</div><div class="statValue" id="totalValue">0</div><div class="statFoot">Package target</div></div>
+    <div class="stat"><div class="statIcon"><i class="fa-solid fa-road"></i></div><div class="statLabel">ESTIMATED DISTANCE</div><div class="statValue" id="distanceValue">0 km</div><div class="statFoot">Based on recorded logs</div></div>
+    <div class="stat"><div class="statIcon"><i class="fa-solid fa-flag-checkered"></i></div><div class="statLabel">SESSIONS REMAINING</div><div class="statValue" id="remainingValue">0</div><div class="statFoot">Until package target</div></div>
   </div>
 
   <div class="sectionHeading"><h3>MY CLASS TYPE</h3><span>FROM FIREBASE</span></div>
   <div class="classCard">
     <div class="classRow">
       <div class="classIcon" id="classIcon"><i class="fa-solid fa-users"></i></div>
-      <div>
-        <div class="classLabel">REGISTERED TRAINING MODE</div>
-        <div class="classValue" id="classType">Not specified</div>
-      </div>
+      <div><div class="classLabel">REGISTERED TRAINING MODE</div><div class="classValue" id="classType">Not specified</div></div>
     </div>
     <p class="classDescription" id="classDescription">Your class type is read directly from your registered training record.</p>
-
-    <div class="illustration">
-      <div class="lineArt">
-        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Driving lesson line illustration">
-          <path d="M12 65L19 43Q21 38 28 38H69Q76 38 80 45L88 65V77H12Z"/>
-          <path d="M22 45H75L81 60H17Z"/>
-          <path d="M12 65H88M27 77v7M73 77v7"/>
-          <circle cx="28" cy="68" r="5"/><circle cx="72" cy="68" r="5"/>
-          <path d="M39 26Q50 14 61 26M50 26V37"/>
-          <circle cx="50" cy="20" r="6"/>
-          <path d="M43 32H57"/>
-        </svg>
-      </div>
-      <div class="illustrationText">
-        <strong>TRAIN WITH CONFIDENCE</strong>
-        <p>Your registered training mode is displayed directly from your student record.</p>
-      </div>
-    </div>
   </div>
 
   <div class="sectionHeading"><h3>COURSE PROGRESS</h3><span id="progressStatus">IN PROGRESS</span></div>
@@ -467,92 +311,28 @@ input:focus{border-color:#b59543;box-shadow:0 0 0 2px #d4af3715}
         </svg>
         <div class="ringValue" id="percentValue">0%</div>
       </div>
-      <div class="progressCopy">
-        <h4 id="progressTitle">Your driving journey</h4>
-        <p id="progressDescription">Every completed session brings you closer to your target.</p>
-      </div>
+      <div class="progressCopy"><h4 id="progressTitle">Your driving journey</h4><p id="progressDescription">Every completed session brings you closer to your target.</p></div>
     </div>
-
     <div class="progressTrack"><div class="progressBar" id="progressBar"></div></div>
-    <div class="progressMeta">
-      <span id="progressCount">0 of 0 sessions</span>
-      <span><b id="progressPercent">0%</b> completed</span>
-    </div>
-
-    <div class="roadIllustration">
-      <div class="roadCaption">YOUR ROAD TO DRIVING CONFIDENCE</div>
-      <svg viewBox="0 0 360 60" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M-5 48C48 48 55 14 115 17S180 50 235 36 300 8 365 12" stroke="#343037" stroke-width="17"/>
-        <path d="M-5 48C48 48 55 14 115 17S180 50 235 36 300 8 365 12" stroke="#d4af37" stroke-width="1.4" stroke-dasharray="5 7"/>
-        <circle cx="326" cy="12" r="9" stroke="#ffe8a3" stroke-width="1.4"/>
-        <path d="M322 12l3 3 5-6" stroke="#ffe8a3" stroke-width="1.6"/>
-        <path d="M18 44l4 4 8-9" stroke="#d4af37" stroke-width="1.4"/>
-      </svg>
-    </div>
-
-    <div class="note">
-      <i class="fa-solid fa-circle-info"></i>
-      <span>Distance is estimated from recorded attendance. Actual distance may differ if logs do not include kilometres.</span>
-    </div>
+    <div class="progressMeta"><span id="progressCount">0 of 0 sessions</span><span><b id="progressPercent">0%</b> completed</span></div>
+    <div class="note"><i class="fa-solid fa-circle-info"></i><span>Distance is estimated from recorded attendance. Actual distance may differ if logs do not include kilometres.</span></div>
   </div>
 
   <div class="sectionHeading"><h3>ACHIEVEMENTS</h3><span>YOUR MILESTONES</span></div>
   <div class="achievementGrid">
-    <div class="achievement" id="badgeFirst">
-      <div class="achievementIcon">
-        <svg viewBox="0 0 48 48" width="29" height="29" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="17" cy="15" r="7"/><path d="M22 20l15 15-5 5-15-15"/><path d="M28 29l5-5M32 33l5-5"/>
-        </svg>
-      </div>
-      <b>First Gear</b><small>Complete your first session</small>
-      <span class="unlockLabel">LOCKED</span>
-    </div>
-    <div class="achievement" id="badgeSafety">
-      <div class="achievementIcon">
-        <svg viewBox="0 0 48 48" width="29" height="29" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M24 5l16 6v11c0 10-7 17-16 21C15 39 8 32 8 22V11Z"/><path d="M16 24l5 5 11-12"/>
-        </svg>
-      </div>
-      <b>Safety Star</b><small>Complete 5 sessions</small>
-      <span class="unlockLabel">LOCKED</span>
-    </div>
-    <div class="achievement" id="badgePro">
-      <div class="achievementIcon">
-        <svg viewBox="0 0 48 48" width="29" height="29" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M15 8h18v9c0 8-4 13-9 13s-9-5-9-13Z"/><path d="M15 12H7v5c0 6 4 9 10 9M33 12h8v5c0 6-4 9-10 9M24 30v8M16 41h16M18 18l4 4 8-9"/>
-        </svg>
-      </div>
-      <b>Driving Pro</b><small>Reach 75% progress</small>
-      <span class="unlockLabel">LOCKED</span>
-    </div>
-    <div class="achievement" id="badgeElite">
-      <div class="achievementIcon">
-        <svg viewBox="0 0 48 48" width="29" height="29" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M24 5l5 11 12 1-9 8 3 12-11-6-11 6 3-12-9-8 12-1Z"/>
-          <path d="M19 44h10M21 38v6M27 38v6"/>
-        </svg>
-      </div>
-      <b>Elite Graduate</b><small>Reach your package target</small>
-      <span class="unlockLabel">LOCKED</span>
-    </div>
+    <div class="achievement" id="badgeFirst"><div class="achievementIcon"><i class="fa-solid fa-key"></i></div><b>First Gear</b><small>Complete your first session</small></div>
+    <div class="achievement" id="badgeSafety"><div class="achievementIcon"><i class="fa-solid fa-shield-halved"></i></div><b>Safety Star</b><small>Complete 5 sessions</small></div>
+    <div class="achievement" id="badgePro"><div class="achievementIcon"><i class="fa-solid fa-medal"></i></div><b>Driving Pro</b><small>Reach 75% progress</small></div>
+    <div class="achievement" id="badgeElite"><div class="achievementIcon"><i class="fa-solid fa-trophy"></i></div><b>Elite Graduate</b><small>Reach your package target</small></div>
   </div>
 
   <div class="sectionHeading"><h3>REFERRAL WALLET</h3><span>ACCOUNT RECORD</span></div>
   <div class="walletCard">
     <div class="walletRow">
-      <div class="walletLeft">
-        <div class="walletIcon"><i class="fa-solid fa-wallet"></i></div>
-        <div>
-          <div class="walletLabel">MY REFERRAL WALLET</div>
-          <div class="walletSub" id="referralCount">0 referrals recorded</div>
-        </div>
-      </div>
+      <div class="walletLeft"><div class="walletIcon"><i class="fa-solid fa-wallet"></i></div><div><div class="walletLabel">MY REFERRAL WALLET</div><div class="walletSub" id="referralCount">0 referrals recorded</div></div></div>
       <div class="walletAmount" id="walletAmount">—</div>
     </div>
-    <div class="walletFoot">
-      <span>Wallet balance from student record</span>
-      <b id="walletStatus">Not available</b>
-    </div>
+    <div class="walletFoot"><span>Wallet balance from student record</span><b id="walletStatus">Not available</b></div>
   </div>
 
   <div class="sectionHeading"><h3>ATTENDANCE HISTORY</h3><span id="historyCount">0 RECORDS</span></div>
@@ -572,57 +352,32 @@ input:focus{border-color:#b59543;box-shadow:0 0 0 2px #d4af3715}
   <button class="btn darkBtn" id="logoutBtn" style="margin-top:10px"><i class="fa-solid fa-arrow-right-from-bracket"></i> LOG OUT</button>
 </section>
 
-<footer class="footer">
-  <i class="fa-solid fa-car-side"></i><br>
-  ABHINAASH A1 DRIVING ACADEMY<br>DRIVE SMART. DRIVE SAFE.
-</footer>
+<footer class="footer"><i class="fa-solid fa-car-side"></i><br>ABHINAASH A1 DRIVING ACADEMY<br>DRIVE SMART. DRIVE SAFE.</footer>
 </main>
 
-<!-- CERTIFICATE TEMPLATE -->
 <div id="certificate" aria-hidden="true">
-  <div class="certPaper">
-    <div class="certInner">
-      <div class="corner tl"></div><div class="corner tr"></div>
-      <div class="corner bl"></div><div class="corner br"></div>
-      <div class="certTop">EXCELLENCE • SKILL • RESPONSIBILITY</div>
-      <div class="certBrand">ABHINAASH A1</div>
-      <div class="certSub">DRIVING ACADEMY</div>
-      <div class="certRule">✦ ━━━━━━━━━ ✦</div>
-      <h1 class="certHeading">TRAINING COMPLETION</h1>
-      <div class="certCaption">CERTIFICATE OF ACHIEVEMENT</div>
-      <div class="certRecipient">THIS CERTIFICATE IS PRESENTED TO</div>
-      <h2 id="certStudentName">STUDENT NAME</h2>
-      <p class="certMessage">
-        In recognition of reaching the recorded completion target of the driving training programme at
-        <strong>ABHINAASH A1 DRIVING ACADEMY</strong>, acknowledging dedication, practical learning and commitment to responsible driving.
-      </p>
-      <div class="certInfo">
-        <div class="certInfoLabel">REGISTERED CLASS TYPE</div>
-        <div id="certType">NOT SPECIFIED</div>
-      </div><br>
-      <div class="certInfo">
-        <div class="certInfoLabel">TRAINING COMPLETION DATE</div>
-        <div id="certDate">Date not recorded</div>
-      </div>
-      <div class="certBottom">
-        <div class="certSignature">
-          <div class="certLine">ACADEMY REPRESENTATIVE</div>
-          <strong>ABHINAASH A1</strong>
-          <div style="margin-top:4px">Driving Academy</div>
-        </div>
-        <div class="certSeal"><i class="fa-solid fa-award"></i><b>A1</b><span>ACHIEVEMENT</span></div>
-        <div class="certSignature">
-          <div class="certLine">TRAINING RECORD</div>
-          <strong>STUDENT ACHIEVEMENT</strong>
-          <div style="margin-top:4px">Completion record</div>
-        </div>
-      </div>
-      <div class="certFooter">DRIVE SMART • DRIVE SAFE • DRIVE RESPONSIBLY</div>
+  <div class="certPaper"><div class="certInner">
+    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="certTop">EXCELLENCE • SKILL • RESPONSIBILITY</div>
+    <div class="certBrand">ABHINAASH A1</div>
+    <div class="certSub">DRIVING ACADEMY</div>
+    <div class="certRule">✦ ━━━━━━━━━ ✦</div>
+    <h1 class="certHeading">TRAINING COMPLETION</h1>
+    <div class="certCaption">CERTIFICATE OF ACHIEVEMENT</div>
+    <div class="certRecipient">THIS CERTIFICATE IS PRESENTED TO</div>
+    <h2 id="certStudentName">STUDENT NAME</h2>
+    <p class="certMessage">In recognition of reaching the recorded completion target of the driving training programme at <strong>ABHINAASH A1 DRIVING ACADEMY</strong>, acknowledging dedication, practical learning and commitment to responsible driving.</p>
+    <div class="certInfo"><div class="certInfoLabel">REGISTERED CLASS TYPE</div><div id="certType">NOT SPECIFIED</div></div><br>
+    <div class="certInfo"><div class="certInfoLabel">TRAINING COMPLETION DATE</div><div id="certDate">Date not recorded</div></div>
+    <div class="certBottom">
+      <div class="certSignature"><div class="certLine">ACADEMY REPRESENTATIVE</div><strong>ABHINAASH A1</strong><div style="margin-top:4px">Driving Academy</div></div>
+      <div class="certSeal"><i class="fa-solid fa-award"></i><b>A1</b><span>ACHIEVEMENT</span></div>
+      <div class="certSignature"><div class="certLine">TRAINING RECORD</div><strong>STUDENT ACHIEVEMENT</strong><div style="margin-top:4px">Completion record</div></div>
     </div>
-  </div>
+    <div class="certFooter">DRIVE SMART • DRIVE SAFE • DRIVE RESPONSIBLY</div>
+  </div></div>
 </div>
 
-<!-- BLACKTERMINAL COURSES -->
 <a class="bt-float" href="https://blackterminal.online/courses.html" target="_blank" rel="noopener noreferrer" aria-label="Open BlackTerminal Computer Institute courses" title="Explore BlackTerminal Courses">
   <img src="https://i.ibb.co/jk5TkfgY/B438-BAA1-368-A-4-BD1-9598-CBAA04373-C22.gif" alt="BlackTerminal animated character" loading="eager">
   <span class="bt-float-label">BT Moments</span>
@@ -632,7 +387,7 @@ input:focus{border-color:#b59543;box-shadow:0 0 0 2px #d4af3715}
 import {initializeApp} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
 import {getFirestore,doc,onSnapshot} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
-const firebaseConfig = {
+const firebaseConfig={
   apiKey:"AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
   authDomain:"abinash-driving.firebaseapp.com",
   projectId:"abinash-driving",
@@ -645,85 +400,62 @@ const app=initializeApp(firebaseConfig);
 const db=getFirestore(app);
 const $=id=>document.getElementById(id);
 
-let currentData=null;
-let currentPhone="";
-let unsubscribe=null;
-let requestToken=0;
+let currentData=null,currentPhone="",unsubscribe=null,requestToken=0;
 
 function stopListening(){
-  if(typeof unsubscribe==="function"){
-    unsubscribe();
-    unsubscribe=null;
-  }
+  if(typeof unsubscribe==="function"){unsubscribe();unsubscribe=null;}
 }
-
 function setMessage(message,success=false){
   $("loginMessage").textContent=message;
   $("loginMessage").style.color=success?"#43d99a":"#ff7777";
 }
-
 function showLoading(show){
   $("loader").style.display=show?"block":"none";
   $("loginBtn").disabled=show;
 }
-
 function money(value){
   const n=Number(value);
   return Number.isFinite(n)?"₹"+n.toLocaleString("en-IN",{maximumFractionDigits:2}):"—";
 }
-
 function readClassType(data){
   const value=String(data.classType??"").trim().toLowerCase();
   if(value==="personal")return "Personal";
   if(value==="group")return "Group";
   return "Not specified";
 }
-
 function getLogs(data){
   return Array.isArray(data.attendanceLogs)?data.attendanceLogs:[];
 }
-
 function getTotal(data){
   const total=Number(data.totalClasses);
   return Number.isFinite(total)&&total>0?Math.floor(total):20;
 }
-
 function getCompleted(data){
   const logs=getLogs(data);
   const counter=Number(data.remaining);
   const count=Number.isFinite(counter)&&counter>=0?Math.floor(counter):0;
   return Math.max(logs.length,count);
 }
-
 function getProgress(data){
-  const total=getTotal(data);
-  const done=getCompleted(data);
-  const percent=Math.min(100,Math.round(done/total*100));
-  return {total,done,remaining:Math.max(0,total-done),percent,completed:done>=total};
+  const total=getTotal(data),done=getCompleted(data);
+  return {total,done,remaining:Math.max(0,total-done),percent:Math.min(100,Math.round(done/total*100)),completed:done>=total};
 }
-
 function getDistance(data){
-  const logs=getLogs(data);
-  let distance=0,known=0;
+  const logs=getLogs(data);let distance=0,known=0;
   for(const entry of logs){
     if(typeof entry!=="string")continue;
     const match=entry.match(/Distance:\s*(\d+(?:\.\d+)?)\s*KM\b/i);
     if(match){distance+=Number(match[1]);known++;}
   }
-  if(known===logs.length&&logs.length>0)return {value:distance,estimated:false};
-  return {value:distance+Math.max(0,logs.length-known)*5,estimated:true};
+  return {value:distance+Math.max(0,logs.length-known)*5,estimated:known!==logs.length};
 }
-
 function safeDate(value){
   if(value==null||value==="")return null;
   let date=null;
-  if(value&&typeof value.toDate==="function"){
-    date=value.toDate();
-  }else if(value&&typeof value==="object"&&Number.isFinite(value.seconds)){
-    date=new Date(value.seconds*1000);
-  }else if(value instanceof Date){
-    date=value;
-  }else if(typeof value==="string"||typeof value==="number"){
+  if(value&&typeof value.toDate==="function")date=value.toDate();
+  else if(value&&typeof value==="object"&&Number.isFinite(value.seconds))date=new Date(value.seconds*1000);
+  else if(value instanceof Date)date=value;
+  else if(typeof value==="string"||typeof value==="number"){
     const text=String(value).trim();
     const match=text.match(/^(\d{1,2})\s+([A-Za-z]{3,9})(?:\s+(\d{4}))?$/);
     if(match){
@@ -737,22 +469,12 @@ function safeDate(value){
   }
   return date&&!isNaN(date.getTime())?date:null;
 }
-
 function formatDate(value){
   const date=safeDate(value);
-  if(!date)return null;
-  return date.toLocaleDateString("en-IN",{day:"2-digit",month:"long",year:"numeric"});
+  return date?date.toLocaleDateString("en-IN",{day:"2-digit",month:"long",year:"numeric"}):null;
 }
-
 function getCompletionDate(data){
-  const fields=[
-    data.trainingCompletedDate,
-    data.completionDate,
-    data.courseCompletionDate,
-    data.completedAt,
-    data.trainingEndDate
-  ];
-  for(const value of fields){
+  for(const value of [data.trainingCompletedDate,data.completionDate,data.courseCompletionDate,data.completedAt,data.trainingEndDate]){
     const formatted=formatDate(value);
     if(formatted)return formatted;
   }
@@ -768,10 +490,8 @@ function getCompletionDate(data){
   }
   return "Date not recorded";
 }
-
 function getWalletBalance(data){
-  const keys=["referralWallet","walletBalance","referralEarnings","totalEarnings","referralBalance","earnedAmount"];
-  for(const key of keys){
+  for(const key of ["referralWallet","walletBalance","referralEarnings","totalEarnings","referralBalance","earnedAmount"]){
     if(data[key]!==undefined&&data[key]!==null&&data[key]!==""){
       const value=Number(data[key]);
       if(Number.isFinite(value))return value;
@@ -779,79 +499,43 @@ function getWalletBalance(data){
   }
   return null;
 }
-
 function getReferralCount(data){
   const count=Number(data.totalRefers);
   return Number.isFinite(count)&&count>=0?Math.floor(count):0;
 }
-
 function unlockBadge(id,unlocked){
-  const card=$(id);
-  card.classList.toggle("unlocked",Boolean(unlocked));
-  const label=card.querySelector(".unlockLabel");
-  if(label)label.textContent=unlocked?"✦ UNLOCKED":"LOCKED";
+  $(id).classList.toggle("unlocked",Boolean(unlocked));
 }
 
 function renderHistory(data){
-  const logs=getLogs(data);
-  const list=$("historyList");
+  const logs=getLogs(data),list=$("historyList");
   list.replaceChildren();
   $("historyCount").textContent=logs.length+" RECORDS";
-
   if(!logs.length){
-    const empty=document.createElement("div");
-    empty.className="empty";
-    const icon=document.createElement("i");
-    icon.className="fa-regular fa-calendar";
-    const text=document.createElement("span");
-    text.textContent="No attendance records have been added yet.";
-    empty.append(icon,text);
-    list.appendChild(empty);
-    return;
+    const empty=document.createElement("div");empty.className="empty";
+    const icon=document.createElement("i");icon.className="fa-regular fa-calendar";
+    const text=document.createElement("span");text.textContent="No attendance records have been added yet.";
+    empty.append(icon,text);list.appendChild(empty);return;
   }
-
   [...logs].reverse().forEach((entry,index)=>{
-    const item=document.createElement("article");
-    item.className="log";
-    const header=document.createElement("div");
-    header.className="logHead";
-    const title=document.createElement("div");
-    title.className="logTitle";
-    title.textContent="Session "+(logs.length-index);
-    const date=document.createElement("div");
-    date.className="logDate";
+    const item=document.createElement("article");item.className="log";
+    const header=document.createElement("div");header.className="logHead";
+    const title=document.createElement("div");title.className="logTitle";title.textContent="Session "+(logs.length-index);
+    const date=document.createElement("div");date.className="logDate";
     const text=typeof entry==="string"?entry:"";
     const parts=text.split(/\s+[—|]\s+/);
     date.textContent=parts[0]||"Recorded session";
     header.append(title,date);
-    const details=document.createElement("div");
-    details.className="logDetails";
+    const details=document.createElement("div");details.className="logDetails";
     details.textContent=parts.slice(1).join(" | ")||text||"Session recorded.";
     item.append(header,details);
-
     const route=text.match(/Route:\s*([^|]+)/i);
     const distance=text.match(/Distance:\s*([^|]+)/i);
     const remark=text.match(/Remark:\s*(.+)$/i);
     const chips=document.createElement("div");
-
-    if(route){
-      const chip=document.createElement("span");
-      chip.className="logChip";
-      chip.textContent="📍 "+route[1].trim();
-      chips.appendChild(chip);
-    }
-    if(distance){
-      const chip=document.createElement("span");
-      chip.className="logChip";
-      chip.textContent="🛣 "+distance[1].trim();
-      chips.appendChild(chip);
-    }
-    if(remark){
-      const chip=document.createElement("span");
-      chip.className="logChip";
-      chip.textContent=remark[1].trim();
-      chips.appendChild(chip);
-    }
+    if(route){const chip=document.createElement("span");chip.className="logChip";chip.textContent="📍 "+route[1].trim();chips.appendChild(chip);}
+    if(distance){const chip=document.createElement("span");chip.className="logChip";chip.textContent="🛣 "+distance[1].trim();chips.appendChild(chip);}
+    if(remark){const chip=document.createElement("span");chip.className="logChip";chip.textContent=remark[1].trim();chips.appendChild(chip);}
     if(chips.childNodes.length)item.appendChild(chips);
     list.appendChild(item);
   });
@@ -867,6 +551,15 @@ function renderProfile(data){
   $("studentName").textContent=data.name||"Student";
   $("studentPhone").textContent=currentPhone;
   $("packageName").textContent=progress.total+"-Session Package";
+
+  // Automatic, consistent cartoon avatar for each student.
+  const avatarSeed=String(data.phone||currentPhone||data.name||"Student").trim();
+  const avatarUrl="https://api.dicebear.com/9.x/adventurer/svg?seed="+encodeURIComponent(avatarSeed);
+  $("avatarImage").onerror=()=>{
+    $("avatarImage").onerror=null;
+    $("avatarImage").src="https://api.dicebear.com/9.x/bottts/svg?seed="+encodeURIComponent(avatarSeed);
+  };
+  $("avatarImage").src=avatarUrl;
 
   $("studentStatus").classList.toggle("inactive",inactive);
   $("studentStatus").replaceChildren();
@@ -886,7 +579,6 @@ function renderProfile(data){
   const classIcon=document.createElement("i");
   classIcon.className=classType==="Personal"?"fa-solid fa-user":classType==="Group"?"fa-solid fa-users":"fa-solid fa-circle-question";
   $("classIcon").appendChild(classIcon);
-
   $("classDescription").textContent=classType==="Personal"
     ?"Your registered class type is Personal Training — individual driving instruction."
     :classType==="Group"
@@ -896,21 +588,13 @@ function renderProfile(data){
   $("percentValue").textContent=progress.percent+"%";
   $("progressPercent").textContent=progress.percent+"%";
   $("progressCount").textContent=progress.done+" of "+progress.total+" sessions";
-
   const circumference=2*Math.PI*42;
   $("ringFill").style.strokeDasharray=circumference;
   $("ringFill").style.strokeDashoffset=circumference*(1-progress.percent/100);
   $("progressBar").style.width=progress.percent+"%";
 
   $("progressStatus").textContent=progress.completed?"COMPLETED":"IN PROGRESS";
-  $("progressTitle").textContent=progress.completed
-    ?"Training target reached!"
-    :progress.percent>=75
-      ?"Almost at the finish line!"
-      :progress.percent>=40
-        ?"Great progress!"
-        :"Your driving journey";
-
+  $("progressTitle").textContent=progress.completed?"Training target reached!":progress.percent>=75?"Almost at the finish line!":progress.percent>=40?"Great progress!":"Your driving journey";
   $("progressDescription").textContent=progress.completed
     ?"Your recorded attendance has reached the package target."
     :progress.remaining+" session"+(progress.remaining===1?"":"s")+" remaining to reach your target.";
@@ -920,8 +604,7 @@ function renderProfile(data){
   unlockBadge("badgePro",progress.percent>=75);
   unlockBadge("badgeElite",progress.completed);
 
-  const referrals=getReferralCount(data);
-  const balance=getWalletBalance(data);
+  const referrals=getReferralCount(data),balance=getWalletBalance(data);
   $("referralCount").textContent=referrals+" referrals recorded";
   $("walletAmount").textContent=balance===null?"—":money(balance);
   $("walletStatus").textContent=balance===null?"No balance field found":"Recorded balance";
@@ -935,117 +618,82 @@ function renderProfile(data){
 
 function loadStudent(phone){
   stopListening();
-  currentData=null;
-  currentPhone=phone;
+  currentData=null;currentPhone=phone;
   const token=++requestToken;
-  showLoading(true);
-  setMessage("");
+  showLoading(true);setMessage("");
 
-  unsubscribe=onSnapshot(
-    doc(db,"studentData",phone),
-    snapshot=>{
-      if(token!==requestToken)return;
-      showLoading(false);
-      if(!snapshot.exists()){
-        $("dashboard").style.display="none";
-        $("loginPanel").style.display="block";
-        setMessage("No student record found for this mobile number.");
-        stopListening();
-        return;
-      }
-      renderProfile(snapshot.data());
-      $("loginPanel").style.display="none";
-      $("dashboard").style.display="block";
-      setMessage("",true);
-    },
-    error=>{
-      if(token!==requestToken)return;
-      showLoading(false);
-      console.error("Student profile listener error:",error);
+  unsubscribe=onSnapshot(doc(db,"studentData",phone),snapshot=>{
+    if(token!==requestToken)return;
+    showLoading(false);
+    if(!snapshot.exists()){
       $("dashboard").style.display="none";
       $("loginPanel").style.display="block";
-      setMessage("Unable to read your record. Please check your connection or contact the academy.");
-      stopListening();
+      setMessage("No student record found for this mobile number.");
+      stopListening();return;
     }
-  );
+    renderProfile(snapshot.data());
+    $("loginPanel").style.display="none";
+    $("dashboard").style.display="block";
+    setMessage("",true);
+  },error=>{
+    if(token!==requestToken)return;
+    showLoading(false);
+    console.error("Student profile listener error:",error);
+    $("dashboard").style.display="none";
+    $("loginPanel").style.display="block";
+    setMessage("Unable to read your record. Please check your connection or contact the academy.");
+    stopListening();
+  });
 }
 
 function login(){
   const phone=$("phoneInput").value.trim();
   if(!/^\d{10}$/.test(phone)){
-    setMessage("Please enter a valid 10-digit registered mobile number.");
-    return;
+    setMessage("Please enter a valid 10-digit registered mobile number.");return;
   }
   loadStudent(phone);
 }
-
 function logout(){
-  stopListening();
-  requestToken++;
-  currentData=null;
-  currentPhone="";
+  stopListening();requestToken++;
+  currentData=null;currentPhone="";
   $("dashboard").style.display="none";
   $("loginPanel").style.display="block";
   $("phoneInput").value="";
-  showLoading(false);
-  setMessage("");
+  showLoading(false);setMessage("");
   window.scrollTo({top:0,behavior:"smooth"});
 }
 
 async function downloadCertificate(){
   if(!currentData)return;
-  const progress=getProgress(currentData);
-  if(!progress.completed){
-    alert("Your package completion target has not yet been reached.");
-    return;
+  if(!getProgress(currentData).completed){
+    alert("Your package completion target has not yet been reached.");return;
   }
   if(typeof window.html2pdf!=="function"){
-    alert("The PDF library could not load. Check your internet connection and refresh the page.");
-    return;
+    alert("The PDF library could not load. Check your internet connection and refresh the page.");return;
   }
-
-  const btn=$("certificateBtn");
-  const element=$("certificate");
+  const btn=$("certificateBtn"),element=$("certificate");
   const oldStyle={
-    display:element.style.display,
-    position:element.style.position,
-    left:element.style.left,
-    top:element.style.top,
-    zIndex:element.style.zIndex
+    display:element.style.display,position:element.style.position,
+    left:element.style.left,top:element.style.top,zIndex:element.style.zIndex
   };
-
   btn.disabled=true;
   btn.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> PREPARING CERTIFICATE';
-
   try{
     $("certStudentName").textContent=String(currentData.name||"STUDENT").trim().toUpperCase();
     $("certType").textContent=readClassType(currentData).toUpperCase();
     $("certDate").textContent=getCompletionDate(currentData);
-
     element.style.display="block";
     element.style.position="fixed";
-    element.style.left="0";
-    element.style.top="0";
-    element.style.zIndex="99999";
-
+    element.style.left="0";element.style.top="0";element.style.zIndex="99999";
     if(document.fonts&&document.fonts.ready)await document.fonts.ready;
     await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
-
-    const filename="A1_Certificate_"+
-      (String(currentData.name||"Student").trim().replace(/[^a-z0-9_-]/gi,"_")||"Student")+".pdf";
-
+    const filename="A1_Certificate_"+(String(currentData.name||"Student").trim().replace(/[^a-z0-9_-]/gi,"_")||"Student")+".pdf";
     await window.html2pdf().set({
-      filename,
-      margin:0,
-      image:{type:"jpeg",quality:.95},
-      html2canvas:{
-        scale:1,useCORS:true,backgroundColor:"#07172d",logging:false,
-        width:1123,height:794,windowWidth:1123,windowHeight:794,scrollX:0,scrollY:0
-      },
+      filename,margin:0,image:{type:"jpeg",quality:.95},
+      html2canvas:{scale:1,useCORS:true,backgroundColor:"#07172d",logging:false,width:1123,height:794,windowWidth:1123,windowHeight:794,scrollX:0,scrollY:0},
       jsPDF:{unit:"mm",format:"a4",orientation:"landscape",compress:true},
       pagebreak:{mode:["avoid-all"]}
     }).from(element).save();
-
   }catch(error){
     console.error("Certificate generation failed:",error);
     alert("Certificate could not be generated.\n\n"+(error?.message||String(error))+"\n\nPlease refresh the page and try again.");
@@ -1061,19 +709,11 @@ function contactAcademy(){
   const text=encodeURIComponent("Hello ABHINAASH A1 Driving Academy, I am "+name+". I need help with my driving classes.");
   window.location.href="https://wa.me/917008186187?text="+text;
 }
-
 async function shareAcademy(){
-  const details={
-    title:"ABHINAASH A1 Driving Academy",
-    text:"Learn driving with ABHINAASH A1 Driving Academy."
-  };
+  const details={title:"ABHINAASH A1 Driving Academy",text:"Learn driving with ABHINAASH A1 Driving Academy."};
   if(navigator.share){
-    try{
-      await navigator.share(details);
-      return;
-    }catch(error){
-      if(error.name==="AbortError")return;
-    }
+    try{await navigator.share(details);return;}
+    catch(error){if(error.name==="AbortError")return;}
   }
   window.location.href="https://wa.me/?text="+encodeURIComponent(details.text);
 }
@@ -1087,10 +727,7 @@ $("phoneInput").addEventListener("keydown",event=>{
 });
 $("refreshBtn").addEventListener("click",()=>{
   if(currentPhone)loadStudent(currentPhone);
-  else{
-    showLoading(false);
-    setMessage("Enter your registered mobile number first.");
-  }
+  else{showLoading(false);setMessage("Enter your registered mobile number first.");}
 });
 $("logoutBtn").addEventListener("click",logout);
 $("certificateBtn").addEventListener("click",downloadCertificate);
