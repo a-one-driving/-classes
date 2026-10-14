@@ -1,615 +1,614 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Instructor Portal | A1 Driving Academy</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght=300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root { 
-      --gold: #d4af37; 
-      --gold-gradient: linear-gradient(135deg, #fce08d 0%, #d4af37 50%, #aa8210 100%);
-      --bg-dark: #0b0b0e; 
-      --panel-bg: rgba(18, 18, 24, 0.8);
-      --card-bg: rgba(255, 255, 255, 0.03);
-      --input-bg: #121217;
-      --success: #34c759;
-      --error: #ff3b30;
-      --card-border: rgba(255, 255, 255, 0.07);
-      --text-muted: #98989d;
-      --instructor-blue: #00b4d8;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#080808">
+<title>A1 Attendance | Driving Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
-    
-    body { 
-      background: var(--bg-dark); 
-      background-image: 
-        radial-gradient(circle at 50% -20%, rgba(212, 175, 55, 0.12) 0%, transparent 60%),
-        radial-gradient(circle at 100% 100%, rgba(0, 180, 216, 0.03) 0%, transparent 40%);
-      color: #fff; 
-      min-height: 100vh; 
-      display: flex; 
-      flex-direction: column; 
-      align-items: center; 
-      justify-content: flex-start; 
-      padding: 16px;
-      overflow-x: hidden;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .portal-container { width: 100%; max-width: 440px; display: flex; flex-direction: column; gap: 20px; }
-    
-    .brand-section { text-align: center; margin-top: 10px; }
-    .brand-section h1 { font-size: 24px; font-weight: 800; letter-spacing: 2px; background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.2; }
-    .brand-section p { font-size: 9px; color: var(--text-muted); letter-spacing: 4px; font-weight: 600; margin-top: 4px; text-transform: uppercase; }
-
-    .wrapper-panel { 
-      width: 100%; 
-      background: var(--panel-bg); 
-      backdrop-filter: blur(30px); 
-      -webkit-backdrop-filter: blur(30px);
-      padding: 24px 20px; 
-      border-radius: 24px; 
-      border: 1px solid var(--card-border); 
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6); 
-    }
-
-    .form-title { font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 16px; text-align: center; letter-spacing: 0.5px; }
-    .input-block { margin-bottom: 16px; }
-    .field-label { display: block; font-size: 11px; color: var(--text-muted); font-weight: 600; letter-spacing: 1px; margin-bottom: 8px; text-transform: uppercase; }
-    
-    input, select { 
-      width: 100%; 
-      padding: 14px; 
-      border-radius: 12px; 
-      border: 1px solid var(--card-border); 
-      background: var(--input-bg); 
-      color: #fff; 
-      font-size: 15px; 
-      outline: none; 
-      transition: all 0.2s ease; 
-    }
-    input:focus, select:focus { border-color: var(--gold); box-shadow: 0 0 12px rgba(212, 175, 55, 0.15); }
-
-    .file-upload-wrapper { position: relative; width: 100%; }
-    .file-label-btn { display: block; text-align: center; background: rgba(255,255,255,0.02); border: 1px dashed var(--card-border); padding: 12px; border-radius: 12px; font-size: 13px; color: var(--gold); cursor: pointer; transition: all 0.2s; }
-    .file-label-btn:hover { background: rgba(212, 175, 55, 0.05); border-color: var(--gold); }
-    #instPhoto { display: none; }
-    .upload-status { display: block; text-align: center; font-size: 11px; color: var(--success); margin-top: 4px; display: none; }
-
-    .btn-action { 
-      background: var(--gold-gradient); color: #0b0b0e; border: none; padding: 16px; border-radius: 12px; 
-      font-weight: 700; cursor: pointer; width: 100%; font-size: 15px; letter-spacing: 0.5px;
-      box-shadow: 0 8px 20px rgba(212, 175, 55, 0.2); transition: all 0.2s ease;
-    }
-    .btn-action:active { transform: scale(0.98); }
-
-    .toggle-auth-link { font-size: 12px; color: var(--text-muted); text-align: center; display: block; margin-top: 16px; cursor: pointer; text-decoration: underline; }
-    .toggle-auth-link:hover { color: var(--gold); }
-
-    #dashboardContent { display: none; width: 100%; animation: fadeIn 0.5s ease-out; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-
-    /* FACEBOOK STYLE PROFILE DESIGN WITH PUNCH IN SYSTEM */
-    .fb-profile-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 24px;
-      position: relative;
-    }
-    .fb-avatar-wrapper {
-      position: relative;
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      background: #1c1e21;
-      padding: 3px; 
-      border: 3px solid var(--gold); 
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 15px rgba(212, 175, 55, 0.2);
-      margin-bottom: 12px;
-    }
-    .instructor-avatar { 
-      width: 100%; 
-      height: 100%; 
-      border-radius: 50%; 
-      object-fit: cover; 
-    }
-    .fb-active-badge {
-      position: absolute;
-      bottom: 4px;
-      right: 4px;
-      width: 16px;
-      height: 16px;
-      background: var(--text-muted);
-      border: 3px solid #121217;
-      border-radius: 50%;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.4);
-      transition: background 0.3s;
-    }
-    .fb-active-badge.active { background: var(--success); }
-    
-    .instructor-name { font-size: 22px; font-weight: 700; color: #fff; letter-spacing: 0.3px; text-transform: capitalize; }
-    .badge-status { display: inline-flex; padding: 4px 14px; background: rgba(0, 180, 216, 0.08); border: 1px solid rgba(0, 180, 216, 0.25); border-radius: 100px; font-size: 11px; color: var(--instructor-blue); font-weight: 600; margin-top: 4px; letter-spacing: 0.5px; }
-
-    /* LIVE PUNCH IN PANEL */
-    .punch-panel {
-      background: rgba(255,255,255,0.02);
-      border: 1px solid var(--card-border);
-      padding: 14px;
-      border-radius: 16px;
-      margin-bottom: 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .punch-info { display: flex; flex-direction: column; gap: 2px; }
-    .punch-info span { font-size: 9px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
-    .punch-info b { font-size: 13px; color: #fff; }
-    .btn-punch {
-      border: none;
-      font-size: 12px;
-      font-weight: 700;
-      padding: 10px 18px;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      letter-spacing: 0.5px;
-    }
-    .btn-punch.in { background: rgba(52, 199, 89, 0.15); border: 1px solid var(--success); color: var(--success); }
-    .btn-punch.out { background: rgba(255, 63, 48, 0.15); border: 1px solid var(--error); color: var(--error); }
-    .btn-punch:active { transform: scale(0.96); }
-
-    .metrics-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
-    .metric-card { background: var(--card-bg); border: 1px solid var(--card-border); padding: 14px; border-radius: 16px; display: flex; flex-direction: column; }
-    .metric-card span { font-size: 9px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
-    .metric-card b { font-size: 20px; color: #fff; margin-top: 4px; }
-    .card-full { grid-column: span 2; border-color: rgba(52, 199, 89, 0.2); background: linear-gradient(90deg, rgba(52,199,89,0.05) 0%, transparent 100%); }
-    .card-full b { color: var(--success); }
-
-    .section-title { font-size: 11px; color: var(--text-muted); font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; display: block; }
-    .student-roster { display: flex; flex-direction: column; gap: 10px; max-height: 280px; overflow-y: auto; margin-bottom: 16px; padding-right: 2px; }
-    .student-roster::-webkit-scrollbar { width: 3px; }
-    .student-roster::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
-    
-    .roster-card { background: rgba(0,0,0,0.2); border: 1px solid var(--card-border); padding: 14px; border-radius: 16px; display: flex; flex-direction: column; gap: 10px; }
-    .roster-flex-header { display: flex; justify-content: space-between; align-items: center; }
-    .roster-info-block b { font-size: 14px; color: #fff; text-transform: capitalize; display: block; }
-    .roster-info-block span { font-size: 11px; color: var(--text-muted); display: block; margin-top: 2px; }
-    
-    .btn-update-class { background: rgba(212, 175, 55, 0.12); border: 1px solid rgba(212, 175, 55, 0.3); color: #fce08d; font-size: 11px; font-weight: 600; padding: 6px 12px; border-radius: 8px; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
-    .btn-update-class:active { transform: scale(0.95); background: var(--gold-gradient); color: #000; }
-    .btn-update-class:disabled { opacity: 0.2; cursor: not-allowed; border-color: transparent; }
-
-    .progress-bar-container { width: 100%; height: 5px; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden; position: relative; }
-    .progress-bar-fill { height: 100%; background: var(--gold-gradient); width: 0%; transition: width 0.5s ease; }
-
-    .preference-panel { background: var(--card-bg); border: 1px solid var(--card-border); padding: 14px; border-radius: 16px; margin-bottom: 20px; }
-
-    .logout-session { color: rgba(255,255,255,0.25); font-size: 12px; text-align: center; display: block; cursor: pointer; margin-top: 20px; transition: color 0.2s; }
-    .logout-session:hover { color: var(--gold); }
-    
-    #loader { display: none; margin: 15px auto 0 auto; border: 2px solid rgba(255,255,255,0.05); border-top: 2px solid var(--gold); border-radius: 50%; width: 24px; height: 24px; animation: spin 0.8s linear infinite; }
-    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-  </style>
+<style>
+:root{--bg:#080808;--surface:#121212;--border:#2b2b2b;--gold:#d7b36a;--light:#f0d18b;--text:#f5f5f5;--muted:#858585;--green:#55d996;--blue:#70b4ff;--red:#ff7777}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,Arial,sans-serif;color:var(--text);background:radial-gradient(circle at 50% -10%,#45341b35,transparent 40%),var(--bg);min-height:100vh;padding-bottom:100px}
+button,input{font:inherit}button{cursor:pointer;-webkit-tap-highlight-color:transparent}button:disabled{opacity:.5;cursor:not-allowed}
+.header{position:sticky;top:0;z-index:20;background:#080808ed;backdrop-filter:blur(18px);border-bottom:1px solid #252525}
+.headerInner{max-width:1100px;margin:auto;padding:13px 15px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.brand{display:flex;align-items:center;gap:11px}.logo{width:44px;height:44px;display:grid;place-items:center;border:1px solid #77603a;border-radius:14px;background:#171209;color:var(--light);font-weight:800}
+.brandTitle{font-size:15px;font-weight:800}.brandSub{font-size:8px;letter-spacing:1.4px;color:#777;margin-top:4px}
+.clock{text-align:right}.clockTime{font-size:13px;font-weight:800;color:var(--light)}.clockDate{font-size:9px;color:#777;margin-top:4px}
+.container{max-width:1100px;margin:auto;padding:17px 13px 30px}
+.toolbar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;margin-bottom:15px}
+.search{position:relative;min-width:0}.search span{position:absolute;left:14px;top:13px;color:#777;font-size:18px}
+.search input{width:100%;height:45px;padding:0 12px 0 40px;border:1px solid var(--border);border-radius:12px;background:#111;color:#fff;outline:none;font-size:12px}
+.search input:focus,.field:focus{border-color:#9b7c47}
+.goldBtn,.holidayBtn{border:0;border-radius:11px;background:linear-gradient(135deg,var(--light),var(--gold));color:#111;font-size:10px;font-weight:800;padding:0 13px;min-height:43px}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:23px}
+.stat{min-width:0;min-height:87px;padding:13px;border:1px solid var(--border);border-radius:16px;background:linear-gradient(145deg,#181818,#0e0e0e)}
+.stat.month{border-color:#66512e;background:radial-gradient(circle at 100% 0%,#d7b36a22,transparent 65%),#15120d}
+.statLabel{font-size:8px;letter-spacing:1px;color:#999;font-weight:800}.statValue{font-size:26px;font-weight:800;color:var(--light);margin-top:9px}.statHint{font-size:9px;color:#777;margin-top:4px}
+.sectionHeader{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}
+.sectionTitle{font-size:14px;font-weight:800}.sectionCount{font-size:10px;color:#888}
+.cards{display:grid;grid-template-columns:1fr;gap:13px}
+.studentCard{min-width:0;padding:15px;border:1px solid #30291e;border-radius:21px;background:radial-gradient(circle at 100% 0%,#d7b36a10,transparent 45%),linear-gradient(145deg,#171717,#0d0d0d);box-shadow:0 8px 25px #0003}
+.studentCard.inactive{opacity:.82}
+.studentHeader{display:grid;grid-template-columns:44px minmax(0,1fr) auto;align-items:center;gap:10px}
+.avatar{width:44px;height:44px;display:grid;place-items:center;border:1px solid #6b5430;border-radius:14px;background:#251d10;color:var(--light);font-size:16px;font-weight:800}
+.studentInfo{min-width:0}.studentName{font-size:13px;font-weight:800;overflow-wrap:anywhere;line-height:1.4}.studentPhone{font-size:10px;color:#999;margin-top:5px;overflow-wrap:anywhere}
+.badges{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:5px;max-width:130px}
+.badge{padding:6px 7px;border-radius:8px;font-size:8px;font-weight:800;border:1px solid #333;white-space:nowrap}
+.badge.active{color:var(--green);border-color:#24543c;background:#112219}.badge.completed{color:var(--light);border-color:#6b5430;background:#241c10}.badge.live{color:var(--blue);border-color:#244459;background:#101c24}.badge.inactive{color:#aaa;background:#191919}
+.typeRow,.infoBox,.lastAttendance{padding:12px;border:1px solid #29251e;border-radius:13px;background:#0c0c0c}
+.typeRow{margin-top:11px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.typeInfo{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.typeLabel,.infoLabel{font-size:8px;color:#888;letter-spacing:.8px}.typeValue{font-size:10px;color:var(--light);font-weight:800}
+.editType{min-height:32px;padding:7px 10px;border:1px solid #4d3d25;border-radius:9px;background:#1a160f;color:var(--light);font-size:9px}
+.infoGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.infoBox{min-width:0}
+.infoValue{font-size:10px;font-weight:700;color:#eee;margin-top:7px;line-height:1.5;overflow-wrap:anywhere}.infoValue.gold{color:var(--light)}.infoValue.green{color:var(--green)}
+.lastAttendance{margin-top:10px;border-color:#292929}.lastLabel{font-size:8px;color:#777;letter-spacing:1px}.lastText{font-size:10px;color:#ccc;line-height:1.7;margin-top:6px;overflow-wrap:anywhere}
+.progressBox{margin-top:16px}.progressTop{display:flex;justify-content:space-between;gap:8px;margin-bottom:8px}.progressLabel{font-size:8px;color:#888;letter-spacing:1px}.progressCount{font-size:10px;color:var(--light);font-weight:800}
+.progress{height:6px;border-radius:20px;background:#292929;overflow:hidden}.progressBar{height:100%;border-radius:20px;background:linear-gradient(90deg,#a77a32,#f0d18b)}
+.actions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-top:15px}
+.action{min-width:0;min-height:41px;padding:5px 2px;border:1px solid #303030;border-radius:10px;background:#191919;color:#ccc;font-size:9px;font-weight:800}
+.action.attend{background:linear-gradient(135deg,var(--light),var(--gold));color:#111;border:0}.action.wa{color:#72dfa0}.action.call{color:var(--blue)}
+.statusBtn,.deleteBtn{width:100%;min-height:40px;margin-top:9px;border-radius:10px;font-size:9px;font-weight:800}
+.statusBtn{background:#171212;color:#ff9999;border:1px solid #482626}.statusBtn.activate{background:#101d15;color:var(--green);border-color:#234832}
+.deleteBtn{background:#211010;color:#ff9292;border:1px solid #6b2929}
+.fab{position:fixed;right:17px;bottom:82px;z-index:30;width:53px;height:53px;border:0;border-radius:17px;background:linear-gradient(135deg,var(--light),var(--gold));color:#111;font-size:27px;box-shadow:0 8px 28px #0009}
+.bottomNav{position:fixed;bottom:0;left:0;right:0;z-index:25;display:flex;justify-content:center;gap:3px;padding:8px 5px calc(8px + env(safe-area-inset-bottom));background:#090909f5;backdrop-filter:blur(18px);border-top:1px solid #292929}
+.navBtn{flex:1;max-width:150px;border:0;background:none;color:#777;font-size:8px;font-weight:800;padding:5px 1px}.navBtn.active{color:var(--light)}.navIcon{display:block;font-size:16px;margin-bottom:4px}
+.modal{position:fixed;inset:0;z-index:60;display:none;align-items:flex-end;justify-content:center;padding:8px;background:#000c;backdrop-filter:blur(5px)}.modal.show{display:flex}
+.modalBox{width:100%;max-width:570px;max-height:90dvh;overflow:auto;padding:18px;border:1px solid #333;border-radius:22px 22px 13px 13px;background:#121212}
+.modalHeader{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:18px}.modalTitle{font-size:15px;font-weight:800}.modalSub{font-size:10px;color:#888;margin-top:5px}
+.close{width:34px;height:34px;flex-shrink:0;border:1px solid #333;border-radius:10px;background:#1b1b1b;color:#ddd;font-size:19px}
+.formGroup{margin-bottom:15px}.formLabel{display:block;color:#999;font-size:9px;letter-spacing:1px;margin-bottom:7px}
+.field{width:100%;height:44px;border:1px solid #303030;border-radius:11px;background:#090909;color:#fff;padding:0 12px;outline:none;font-size:12px}
+.optionGrid,.typeGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.optionBtn,.typeOption{min-height:40px;padding:8px;border:1px solid #303030;border-radius:10px;background:#0d0d0d;color:#aaa;font-size:10px}
+.optionBtn.selected,.typeOption.selected{border-color:#b99554;background:#282012;color:var(--light)}
+.typeOption{min-height:75px;font-weight:800}.typeIcon{display:block;font-size:20px;margin-bottom:7px}
+.customBox{display:none;margin-top:8px}.customBox.show{display:block}
+.goldBtn.full{width:100%;min-height:45px}
+.historyItem,.holidayItem{padding:12px;margin-bottom:8px;border:1px solid #2c2c2c;border-radius:12px;background:#0d0d0d}
+.historyNumber{font-size:9px;color:var(--light);font-weight:800;margin-bottom:6px}.historyText{font-size:10px;line-height:1.7;color:#ccc;overflow-wrap:anywhere}
+.holidayItem{border-color:#42351e}.holidayDate{font-size:10px;color:var(--light);font-weight:800}.holidayName{font-size:12px;color:#eee;margin-top:6px;overflow-wrap:anywhere}
+.holidayDelete{margin-top:10px;padding:8px 10px;background:#211010;color:#ff9999;border:1px solid #6b2929;border-radius:8px;font-size:9px;font-weight:800}
+.confirmText{font-size:11px;color:#ccc;line-height:1.8;margin-bottom:16px}.confirmWarn{padding:12px;border:1px solid #6b2929;border-radius:11px;background:#211010;color:#ffaaaa;font-size:10px;line-height:1.7;margin-bottom:16px}
+.confirmActions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.cancelBtn,.dangerBtn{min-height:44px;border-radius:10px;font-size:10px;font-weight:800}
+.cancelBtn{border:1px solid #333;background:#202020;color:#ddd}.dangerBtn{border:1px solid #853737;background:#721f1f;color:white}
+.toast{position:fixed;bottom:95px;left:50%;z-index:100;transform:translate(-50%,12px);opacity:0;pointer-events:none;background:#202020;border:1px solid #444;color:#fff;padding:11px 15px;border-radius:11px;font-size:10px;transition:.2s;max-width:90%;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.loading,.empty{padding:30px 15px;text-align:center;border:1px dashed #333;border-radius:16px;color:#888;font-size:11px;line-height:1.8}
+@media(min-width:650px){.stats{grid-template-columns:repeat(5,minmax(0,1fr))}.cards{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}.studentHeader{grid-template-columns:44px minmax(0,1fr)}.badges{grid-column:1/-1;max-width:none;justify-content:flex-start}.modal{align-items:center}.modalBox{border-radius:20px}}
+@media(max-width:430px){.toolbar{grid-template-columns:1fr}.holidayBtn{width:100%}.studentHeader{grid-template-columns:40px minmax(0,1fr)}.avatar{width:40px;height:40px}.badges{grid-column:1/-1;max-width:none;justify-content:flex-start}.actions{grid-template-columns:repeat(2,minmax(0,1fr))}.brandSub,.clockDate{display:none}.statValue{font-size:23px}}
+</style>
 </head>
+
 <body>
+<header class="header">
+ <div class="headerInner">
+  <div class="brand"><div class="logo">A1</div><div><div class="brandTitle">A1 Attendance</div><div class="brandSub">DRIVING TRACKING SYSTEM</div></div></div>
+  <div class="clock"><div class="clockTime" id="clockTime">--:--</div><div class="clockDate" id="clockDate">---</div></div>
+ </div>
+</header>
 
-  <div class="portal-container">
-    <div class="brand-section">
-      <h1>ABHINAASH A1</h1>
-      <p>INSTRUCTOR PORTAL</p>
-    </div>
+<main class="container">
+ <div class="toolbar">
+  <div class="search"><span>⌕</span><input id="searchInput" type="search" placeholder="Search student or phone..." autocomplete="off"></div>
+  <button class="holidayBtn" id="openHolidayModal">📅 MANAGE HOLIDAYS</button>
+ </div>
 
-    <div class="wrapper-panel">
-      <!-- Auth Screen -->
-      <div id="authPanel">
-        <h2 id="authTitle" class="form-title">Instructor Login</h2>
-        
-        <div class="input-block">
-          <span class="field-label">Mobile Number</span>
-          <input type="tel" id="instPhone" placeholder="Enter 10 Digit Number" maxlength="10">
-        </div>
-        
-        <div class="input-block" id="registerFields" style="display: none;">
-          <div class="input-block">
-            <span class="field-label">Full Name</span>
-            <input type="text" id="instName" placeholder="Enter Full Name">
-          </div>
-          <div class="input-block">
-            <span class="field-label">Vehicle Expertise</span>
-            <select id="instVehicle">
-              <option value="Manual Car (LMV)">Manual Car (LMV)</option>
-              <option value="Automatic Car (LMV)">Automatic Car (LMV)</option>
-              <option value="Heavy Vehicle (HMV)">Heavy Vehicle (HMV)</option>
-              <option value="Both Manual & Auto">Both Manual & Auto</option>
-            </select>
-          </div>
-          <div class="input-block">
-            <span class="field-label">Profile Photo</span>
-            <div class="file-upload-wrapper">
-              <label for="instPhoto" class="file-label-btn" id="fileLabelText">📷 Choose Photo</label>
-              <input type="file" id="instPhoto" accept="image/*" onchange="processAndCompressImage(event)">
-              <span class="upload-status" id="uploadStatusText">⚡ Live Compressed for Firebase Upload!</span>
-            </div>
-          </div>
-        </div>
+ <div class="stats">
+  <div class="stat month"><div class="statLabel" id="monthLabel">THIS MONTH ADMISSIONS</div><div class="statValue" id="monthAdmissionCount">—</div><div class="statHint">Admissions this month</div></div>
+  <div class="stat"><div class="statLabel">ACTIVE</div><div class="statValue" id="activeCount">0</div><div class="statHint">Active training</div></div>
+  <div class="stat"><div class="statLabel">COMPLETED</div><div class="statValue" id="completedCount">0</div><div class="statHint">Training completed</div></div>
+  <div class="stat"><div class="statLabel">RECENT</div><div class="statValue" id="liveCount">0</div><div class="statHint">Attendance within 30 minutes</div></div>
+  <div class="stat"><div class="statLabel">NOT ACTIVE</div><div class="statValue" id="inactiveCount">0</div><div class="statHint">Inactive students</div></div>
+ </div>
 
-        <button class="btn-action" id="authBtn" onclick="handleAuth()">Access Portal</button>
-        <span class="toggle-auth-link" id="authToggle" onclick="toggleAuthMode()">New Instructor? Register Here</span>
-        <div id="loader"></div>
-      </div>
+ <div class="sectionHeader"><div class="sectionTitle" id="sectionTitle">Active Students</div><div class="sectionCount" id="studentCount">0 Students</div></div>
+ <div id="studentCards" class="cards"><div class="loading">Loading students...</div></div>
+</main>
 
-      <!-- Dashboard Screen -->
-      <div id="dashboardContent">
-        <!-- Facebook Style Profile Meta -->
-        <div class="fb-profile-container">
-          <div class="fb-avatar-wrapper" id="avatarWrapperFrame" style="display: none;">
-            <img src="" alt="Coach Pic" class="instructor-avatar" id="dispInstAvatar">
-            <div class="fb-active-badge" id="liveDotStatus"></div>
-          </div>
-          <div class="instructor-name" id="dispInstName">Instructor Name</div>
-          <div class="badge-status" id="dispInstExp">Expertise Scheme</div>
-        </div>
+<button class="fab" id="addStudentFab" aria-label="Add student">+</button>
+<nav class="bottomNav" aria-label="Student filters">
+ <button class="navBtn active" data-filter="active"><span class="navIcon">🚗</span>ACTIVE</button>
+ <button class="navBtn" data-filter="completed"><span class="navIcon">✓</span>COMPLETED</button>
+ <button class="navBtn" data-filter="live"><span class="navIcon">●</span>RECENT</button>
+ <button class="navBtn" data-filter="inactive"><span class="navIcon">⏸</span>NOT ACTIVE</button>
+</nav>
 
-        <!-- NEW: LIVE PUNCH SYSTEM TRIGGER PANEL -->
-        <div class="punch-panel">
-          <div class="punch-info">
-            <span>Duty Status</span>
-            <b id="txtPunchStatus">Offline / Not Punched In</b>
-          </div>
-          <button class="btn-punch in" id="btnPunchAction" onclick="togglePunchState()">PUNCH IN</button>
-        </div>
+<!-- ADD STUDENT -->
+<div class="modal" id="addModal"><div class="modalBox">
+ <div class="modalHeader"><div><div class="modalTitle">Add Student</div><div class="modalSub">Create a new admission</div></div><button class="close" data-close="addModal">×</button></div>
+ <form id="addStudentForm">
+  <div class="formGroup"><label class="formLabel" for="studentPhone">PHONE NUMBER</label><input id="studentPhone" class="field" type="tel" maxlength="10" inputmode="numeric" pattern="[0-9]{10}" placeholder="10 digit mobile number" required></div>
+  <div class="formGroup"><label class="formLabel" for="studentName">FULL NAME</label><input id="studentName" class="field" maxlength="100" placeholder="Student full name" required></div>
+  <div class="formGroup"><label class="formLabel" for="totalClasses">TOTAL CLASSES</label><input id="totalClasses" class="field" type="number" min="1" max="500" value="20" required></div>
+  <div class="formGroup"><div class="formLabel">CLASS TYPE</div><div class="typeGrid">
+   <button type="button" class="typeOption" data-add-type="Personal"><span class="typeIcon">👤</span>PERSONAL</button>
+   <button type="button" class="typeOption selected" data-add-type="Group"><span class="typeIcon">👥</span>GROUP</button>
+  </div></div>
+  <button class="goldBtn full" id="saveStudentBtn" type="submit">SAVE STUDENT</button>
+ </form>
+</div></div>
 
-        <div class="metrics-row">
-          <div class="metric-card card-full">
-            <span>Total Pay Earnings</span>
-            <b id="dispEarnings">₹0</b>
-          </div>
-          <div class="metric-card">
-            <span>Assigned Drivers</span>
-            <b id="dispActiveStudents">0</b>
-          </div>
-          <div class="metric-card">
-            <span>Classes Delivered</span>
-            <b id="dispTotalSessions">0</b>
-          </div>
-        </div>
+<!-- ATTENDANCE -->
+<div class="modal" id="attendanceModal"><div class="modalBox">
+ <div class="modalHeader"><div><div class="modalTitle">Driving Track</div><div class="modalSub" id="attendanceStudentName"></div></div><button class="close" data-close="attendanceModal">×</button></div>
+ <div class="formGroup"><div class="formLabel">ROUTE</div><div class="optionGrid" id="routeGrid">
+  <button class="optionBtn routeOption" data-route="Bhanjpur">Bhanjpur</button><button class="optionBtn routeOption" data-route="Baghra">Baghra</button><button class="optionBtn routeOption" data-route="Badbazar">Badbazar</button><button class="optionBtn routeOption" data-route="Udala">Udala</button><button class="optionBtn routeOption" data-route="Station Bazar">Station Bazar</button><button class="optionBtn routeOption" data-route="Lal Bazar">Lal Bazar</button><button class="optionBtn routeOption" data-route="Kuchei">Kuchei</button><button class="optionBtn routeOption" data-route="Other Route">✏️ Other Route</button>
+ </div><div class="customBox" id="customRouteBox"><input id="customRoute" class="field" maxlength="80" placeholder="Enter custom route"></div></div>
+ <div class="formGroup"><div class="formLabel">DISTANCE</div><div class="optionGrid"><button class="optionBtn selected" disabled>5 KM</button></div></div>
+ <div class="formGroup"><div class="formLabel">DRIVING REMARK</div><div class="optionGrid" id="remarkGrid">
+  <button class="optionBtn remarkOption" data-remark="👍 Good Driving">👍 Good Driving</button><button class="optionBtn remarkOption" data-remark="⚠️ Needs Improvement">⚠️ Needs Improvement</button><button class="optionBtn remarkOption" data-remark="🔄 Good Turning">🔄 Good Turning</button><button class="optionBtn remarkOption" data-remark="⚠️ Bad Turning">⚠️ Bad Turning</button><button class="optionBtn remarkOption" data-remark="🛑 Good Braking">🛑 Good Braking</button><button class="optionBtn remarkOption" data-remark="⚠️ Bad Braking">⚠️ Bad Braking</button><button class="optionBtn remarkOption" data-remark="⚙️ Good Clutch">⚙️ Good Clutch</button><button class="optionBtn remarkOption" data-remark="⚙️ Clutch Improvement">⚙️ Clutch Improvement</button><button class="optionBtn remarkOption" data-remark="🚦 Good Traffic Control">🚦 Good Traffic Control</button><button class="optionBtn remarkOption" data-remark="🚗 Good Vehicle Control">🚗 Good Vehicle Control</button><button class="optionBtn remarkOption" data-remark="🅿️ Good Parking">🅿️ Good Parking</button><button class="optionBtn remarkOption" data-remark="⚠️ Parking Improvement">⚠️ Parking Improvement</button><button class="optionBtn remarkOption" data-remark="📝 Custom Remark">📝 Custom Remark</button>
+ </div><div class="customBox" id="customRemarkBox"><input id="customRemark" class="field" maxlength="150" placeholder="Write custom remark"></div></div>
+ <button class="goldBtn full" id="saveAttendanceBtn">SAVE ATTENDANCE</button>
+</div></div>
 
-        <span class="section-title">Assigned Students Roster</span>
-        <div class="student-roster" id="studentRosterContainer"></div>
+<!-- HISTORY -->
+<div class="modal" id="historyModal"><div class="modalBox">
+ <div class="modalHeader"><div><div class="modalTitle">Attendance History</div><div class="modalSub" id="historyStudentName"></div></div><button class="close" data-close="historyModal">×</button></div>
+ <div id="historyList"></div>
+</div></div>
 
-        <div class="preference-panel">
-          <span class="section-title" style="margin-bottom: 8px;">Duty Preference Setup</span>
-          <div class="input-block" style="margin-bottom: 0;">
-            <select id="instShift" onchange="updateShiftPreference()">
-              <option value="Morning Shift (6 AM - 12 PM)">Morning Shift (6 AM - 12 PM)</option>
-              <option value="Evening Shift (1 PM - 7 PM)">Evening Shift (1 PM - 7 PM)</option>
-              <option value="Full Day Availability">Full Day Availability</option>
-            </select>
-          </div>
-        </div>
+<!-- EDIT CLASS TYPE -->
+<div class="modal" id="typeModal"><div class="modalBox">
+ <div class="modalHeader"><div><div class="modalTitle">Edit Class Type</div><div class="modalSub" id="typeStudentName"></div></div><button class="close" data-close="typeModal">×</button></div>
+ <div class="formGroup"><div class="formLabel">SELECT CLASS TYPE</div><div class="typeGrid">
+  <button class="typeOption" data-edit-type="Personal"><span class="typeIcon">👤</span>PERSONAL</button><button class="typeOption" data-edit-type="Group"><span class="typeIcon">👥</span>GROUP</button>
+ </div></div>
+ <button class="goldBtn full" id="saveClassTypeBtn">SAVE CLASS TYPE</button>
+</div></div>
 
-        <a class="logout-session" onclick="location.reload()">← SECURE LOGOUT</a>
-      </div>
-    </div>
-  </div>
+<!-- HOLIDAY MANAGER -->
+<div class="modal" id="holidayModal"><div class="modalBox">
+ <div class="modalHeader"><div><div class="modalTitle">📅 Manage Holidays</div><div class="modalSub">Shared with all student profiles</div></div><button class="close" data-close="holidayModal">×</button></div>
+ <form id="holidayForm">
+  <div class="formGroup"><label class="formLabel" for="holidayDate">HOLIDAY DATE</label><input class="field" id="holidayDate" type="date" required></div>
+  <div class="formGroup"><label class="formLabel" for="holidayTitle">HOLIDAY NAME</label><input class="field" id="holidayTitle" maxlength="100" placeholder="Example: Durga Puja Holiday" required></div>
+  <button class="goldBtn full" id="saveHolidayBtn" type="submit">SAVE HOLIDAY</button>
+ </form>
+ <div class="sectionHeader" style="margin-top:22px"><div class="sectionTitle">Saved Holidays</div></div>
+ <div id="holidayAdminList"><div class="loading">Loading holidays...</div></div>
+</div></div>
+
+<!-- DELETE CONFIRMATION -->
+<div class="modal" id="deleteModal"><div class="modalBox">
+ <div class="modalHeader"><div><div class="modalTitle">Delete Completed Student?</div><div class="modalSub" id="deleteStudentName"></div></div><button class="close" data-close="deleteModal">×</button></div>
+ <div class="confirmText">Permanently remove this student's Firestore document.</div>
+ <div class="confirmWarn">⚠ This cannot be undone. Attendance history stored in this document will also be deleted.</div>
+ <div class="confirmActions"><button class="cancelBtn" data-close="deleteModal">CANCEL</button><button class="dangerBtn" id="confirmDeleteBtn">DELETE PERMANENTLY</button></div>
+</div></div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-  import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, onSnapshot, increment, arrayUnion } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+ getFirestore,collection,getDocs,doc,getDoc,setDoc,updateDoc,deleteDoc,arrayUnion
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
-    authDomain: "abinash-driving.firebaseapp.com",
-    projectId: "abinash-driving",
-    storageBucket: "abinash-driving.appspot.com",
-    messagingSenderId: "641148830173",
-    appId: "1:641148830173:web:b7a500e5e7e2463da0f634"
-  };
+/* Existing Firebase project */
+const firebaseConfig={
+ apiKey:"AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
+ authDomain:"abinash-driving.firebaseapp.com",
+ projectId:"abinash-driving",
+ storageBucket:"abinash-driving.appspot.com",
+ messagingSenderId:"641148830173",
+ appId:"1:641148830173:web:b7a500e5e7e2463da0f634"
+};
+const app=initializeApp(firebaseConfig);
+const db=getFirestore(app);
+const studentCollection=collection(db,"studentData");
+const holidayCollection=collection(db,"holidays");
+const $=id=>document.getElementById(id);
 
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+let students=[];
+let currentFilter="active";
+let currentStudentId=null;
+let deleteStudentId=null;
+let selectedRoute="";
+let selectedRemark="";
+let addClassType="Group";
+let editClassType="Group";
+let toastTimer;
+let loading=false;
 
-  let isRegisterMode = false;
-  let loggedInstructorPhone = null;
-  let base64CompressedPhoto = ""; 
-  let currentInstructorName = "";
-  let currentPunchTimeISO = null;
-  let hasActivePunch = false;
-  const INCENTIVE_PER_CLASS = 200; 
+function safe(value){
+ return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
+}
+function getLogs(s){return Array.isArray(s.attendanceLogs)?s.attendanceLogs:[]}
+function getDone(s){return Math.max(getLogs(s).length,Number(s.remaining||0),0)}
+function getTotal(s){return Math.max(Number(s.totalClasses||1),1)}
+function isCompleted(s){return getDone(s)>=getTotal(s)}
+function isInactive(s){return s.notActive===true}
 
-  window.processAndCompressImage = (event) => {
-    const file = event.target.files[0];
-    if (!file) return;
+function parseDate(value){
+ if(!value)return null;
+ let d;
+ if(typeof value.toDate==="function")d=value.toDate();
+ else if(value instanceof Date)d=value;
+ else if(typeof value==="string"){
+  const m=value.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  d=m?new Date(+m[1],+m[2]-1,+m[3]):new Date(value);
+ }else if(typeof value==="number")d=new Date(value);
+ else return null;
+ return Number.isNaN(d.getTime())?null:d;
+}
+function formatDate(date){
+ return date?date.toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"}):"Not available";
+}
+function getAdmissionDate(s){return parseDate(s.admissionDate)}
 
-    document.getElementById('fileLabelText').innerText = "🔄 Compressing...";
-    const reader = new FileReader();
-    
-    reader.onload = (e) => {
-      const img = new Image();
-      img.src = e.target.result;
-      
-      img.onload = () => {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        const MAX_WIDTH = 400;
-        const MAX_HEIGHT = 400;
-        let width = img.width;
-        let height = img.height;
+function estimateFinishDate(student){
+ const remaining=Math.max(getTotal(student)-getDone(student),0);
+ const date=new Date();
+ date.setHours(12,0,0,0);
+ let scheduled=0,safety=0;
+ while(scheduled<remaining&&safety<4000){
+  date.setDate(date.getDate()+1);
+  safety++;
+  if(date.getDay()!==0)scheduled++;
+ }
+ return date;
+}
 
-        if (width > height) {
-          if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
-        } else {
-          if (height > MAX_HEIGHT) { width *= MAX_HEIGHT / height; height = MAX_HEIGHT; }
-        }
+function updateMonthAdmissions(){
+ const now=new Date();
+ $("monthLabel").textContent=(now.toLocaleDateString("en-IN",{month:"long",year:"numeric"})+" ADMISSIONS").toUpperCase();
+ $("monthAdmissionCount").textContent=students.filter(s=>{
+  const d=getAdmissionDate(s);
+  return d&&d.getFullYear()===now.getFullYear()&&d.getMonth()===now.getMonth();
+ }).length;
+}
 
-        canvas.width = width; canvas.height = height;
-        ctx.drawImage(img, 0, 0, width, height);
-        base64CompressedPhoto = canvas.toDataURL('image/jpeg', 0.6);
-        
-        document.getElementById('fileLabelText').innerText = "✅ Ready for Firebase Sync";
-        document.getElementById('uploadStatusText').style.display = "block";
-      };
-    };
-    reader.readAsDataURL(file);
-  };
+function parseAttendanceDateTime(log){
+ const m=String(log||"").match(/^(\d{1,2})\s+([A-Za-z]{3})\s+(\d{4})\s*\|\s*(\d{1,2}):(\d{2})\s*(AM|PM)/i);
+ if(!m)return null;
+ const months={jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,dec:11};
+ const day=+m[1],month=months[m[2].toLowerCase()],year=+m[3];
+ let hour=+m[4];
+ const minute=+m[5],period=m[6].toUpperCase();
+ if(month===undefined||hour<1||hour>12||minute>59)return null;
+ if(period==="PM"&&hour!==12)hour+=12;
+ if(period==="AM"&&hour===12)hour=0;
+ const d=new Date(year,month,day,hour,minute);
+ return d.getFullYear()===year&&d.getMonth()===month&&d.getDate()===day?d:null;
+}
+function timeDistance(logs){
+ if(!logs.length)return Infinity;
+ const d=parseAttendanceDateTime(logs[logs.length-1]);
+ return d?Math.abs(Date.now()-d.getTime())/60000:Infinity;
+}
+function isLive(s){return !isInactive(s)&&getLogs(s).length>0&&timeDistance(getLogs(s))<=30}
 
-  window.toggleAuthMode = () => {
-    isRegisterMode = !isRegisterMode;
-    base64CompressedPhoto = "";
-    document.getElementById('uploadStatusText').style.display = "none";
-    document.getElementById('fileLabelText').innerText = "📷 Choose Photo";
-    document.getElementById('registerFields').style.display = isRegisterMode ? 'block' : 'none';
-    document.getElementById('authTitle').innerText = isRegisterMode ? 'Instructor Registration' : 'Instructor Login';
-    document.getElementById('authBtn').innerText = isRegisterMode ? 'Create Profile & Onboard' : 'Access Portal';
-    document.getElementById('authToggle').innerText = isRegisterMode ? 'Already Registered? Login Here' : 'New Instructor? Register Here';
-  };
+function updateClock(){
+ const d=new Date();
+ $("clockTime").textContent=d.toLocaleTimeString("en-IN",{hour:"2-digit",minute:"2-digit",hour12:true});
+ $("clockDate").textContent=d.toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"});
+}
+updateClock();
+setInterval(updateClock,1000);
 
-  window.handleAuth = async () => {
-    const phone = document.getElementById('instPhone').value.trim();
-    if(phone.length < 10) return alert("Please enter a valid 10-digit mobile number.");
+function showToast(message){
+ $("toast").textContent=message;
+ $("toast").classList.add("show");
+ clearTimeout(toastTimer);
+ toastTimer=setTimeout(()=>$("toast").classList.remove("show"),2600);
+}
+function openModal(id){$(id).classList.add("show")}
+function closeModal(id){$(id).classList.remove("show")}
 
-    document.getElementById('loader').style.display = "block";
+async function loadStudents(){
+ if(loading)return;
+ loading=true;
+ try{
+  const snap=await getDocs(studentCollection);
+  students=snap.docs.map(d=>({id:d.id,...d.data()}));
+  updateMonthAdmissions();
+  render();
+ }catch(e){
+  console.error(e);
+  $("studentCards").innerHTML='<div class="empty">Unable to load students. Check internet and Firestore Rules.</div>';
+  $("monthAdmissionCount").textContent="—";
+ }finally{loading=false}
+}
 
-    try {
-      const instDocRef = doc(db, "instructorData", phone);
-      const snap = await getDoc(instDocRef);
+function render(){
+ const search=$("searchInput").value.trim().toLowerCase();
+ const active=students.filter(s=>!isInactive(s));
+ const inactive=students.filter(isInactive);
+ $("activeCount").textContent=active.filter(s=>!isCompleted(s)).length;
+ $("completedCount").textContent=active.filter(isCompleted).length;
+ $("liveCount").textContent=active.filter(isLive).length;
+ $("inactiveCount").textContent=inactive.length;
 
-      if (isRegisterMode) {
-        if (snap.exists()) {
-          document.getElementById('loader').style.display = "none";
-          return alert("This instructor number is already registered. Please login directly.");
-        }
-        const name = document.getElementById('instName').value.trim();
-        const expertise = document.getElementById('instVehicle').value;
-        if(!name) {
-          document.getElementById('loader').style.display = "none";
-          return alert("Please enter your full name.");
-        }
+ let list=currentFilter==="active"?active.filter(s=>!isCompleted(s)):
+ currentFilter==="completed"?active.filter(isCompleted):
+ currentFilter==="live"?active.filter(isLive):inactive;
 
-        await setDoc(instDocRef, {
-          name: name,
-          expertise: expertise,
-          profilePic: base64CompressedPhoto || "", 
-          shiftPreference: "Morning Shift (6 AM - 12 PM)",
-          punchedInTime: "",
-          isPunchedIn: false,
-          registeredAt: new Date().toISOString()
-        });
-      } else {
-        if (!snap.exists()) {
-          document.getElementById('loader').style.display = "none";
-          return alert("No instructor record found with this number. Please register first.");
-        }
-      }
+ if(search)list=list.filter(s=>String(s.name||"").toLowerCase().includes(search)||String(s.id||"").includes(search));
+ list.sort(currentFilter==="inactive"?(a,b)=>String(a.name||"").localeCompare(String(b.name||"")):(a,b)=>timeDistance(getLogs(a))-timeDistance(getLogs(b)));
 
-      loggedInstructorPhone = phone;
-      document.getElementById('authPanel').style.display = "none";
-      document.getElementById('dashboardContent').style.display = "block";
-      
-      initInstructorDashboard(phone);
+ const titles={active:"Active Students",completed:"Completed Students",live:"Recent Attendance Activity",inactive:"Not Active"};
+ $("sectionTitle").textContent=titles[currentFilter];
+ $("studentCount").textContent=`${list.length} Student${list.length===1?"":"s"}`;
+ document.querySelectorAll("[data-filter]").forEach(b=>b.classList.toggle("active",b.dataset.filter===currentFilter));
+ $("studentCards").innerHTML=list.length?list.map(studentCard).join(""):'<div class="empty">🚗<br><br>No students found in this section.</div>';
+}
 
-    } catch (error) {
-      console.error("Auth Error: ", error);
-      alert("Database Connection Failed.");
-    } finally {
-      document.getElementById('loader').style.display = "none";
-    }
-  };
+function studentCard(s){
+ const id=s.id,name=s.name||"Unnamed Student",total=getTotal(s),done=getDone(s);
+ const left=Math.max(total-done,0),pct=Math.min(100,Math.round(done/total*100));
+ const inactive=isInactive(s),completed=isCompleted(s),recent=isLive(s),logs=getLogs(s);
+ const personal=s.classType==="Personal";
+ const badges=inactive?'<span class="badge inactive">NOT ACTIVE</span>':
+  (recent?'<span class="badge live">● RECENT</span>':'')+
+  (completed?'<span class="badge completed">COMPLETED</span>':'<span class="badge active">ACTIVE</span>');
+ const finish=completed?"Training completed":formatDate(estimateFinishDate(s));
 
-  function initInstructorDashboard(phone) {
-    onSnapshot(doc(db, "instructorData", phone), (snap) => {
-      if(snap.exists()) {
-        const data = snap.data();
-        currentInstructorName = data.name;
-        hasActivePunch = data.isPunchedIn || false;
-        currentPunchTimeISO = data.punchedInTime || "";
+ return `<article class="studentCard ${inactive?"inactive":""}">
+ <div class="studentHeader"><div class="avatar">${safe(name.charAt(0).toUpperCase())}</div><div class="studentInfo"><div class="studentName">${safe(name)}</div><div class="studentPhone">📱 ${safe(id)}</div></div><div class="badges">${badges}</div></div>
+ <div class="typeRow"><div class="typeInfo"><span class="typeLabel">CLASS TYPE</span><span class="typeValue">${personal?"👤 PERSONAL":"👥 GROUP"}</span></div><button class="editType" data-action="type" data-id="${safe(id)}">✏️ EDIT</button></div>
+ <div class="infoGrid">
+ <div class="infoBox"><div class="infoLabel">ADMISSION DATE</div><div class="infoValue">${formatDate(getAdmissionDate(s))}</div></div>
+ <div class="infoBox"><div class="infoLabel">EXPECTED FINISH</div><div class="infoValue ${completed?"green":"gold"}">${finish}</div></div>
+ <div class="infoBox"><div class="infoLabel">CLASSES LEFT</div><div class="infoValue ${left===0?"green":"gold"}">${left} session${left===1?"":"s"}</div></div>
+ <div class="infoBox"><div class="infoLabel">CLASS PLAN</div><div class="infoValue">1 session/day · Sunday off</div></div></div>
+ <div class="lastAttendance"><div class="lastLabel">LAST ATTENDANCE</div><div class="lastText">${safe(logs.length?logs[logs.length-1]:"No attendance yet")}</div></div>
+ <div class="progressBox"><div class="progressTop"><span class="progressLabel">TRAINING PROGRESS</span><span class="progressCount">${done} / ${total} · ${pct}%</span></div><div class="progress"><div class="progressBar" style="width:${pct}%"></div></div></div>
+ ${inactive?`<button class="statusBtn activate" data-action="activate" data-id="${safe(id)}">✓ ACTIVE AGAIN</button>`:""}
+ <div class="actions">
+ ${!completed&&!inactive?`<button class="action attend" data-action="attend" data-id="${safe(id)}">+ ATTEND</button>`:`<button class="action" disabled>${completed?"✓ COMPLETED":"⏸ INACTIVE"}</button>`}
+ <button class="action" data-action="history" data-id="${safe(id)}">📋 LOGS</button><button class="action wa" data-action="wa" data-id="${safe(id)}">💬 WA</button><button class="action call" data-action="call" data-id="${safe(id)}">📞 CALL</button></div>
+ ${!inactive&&!completed?`<button class="statusBtn" data-action="inactive" data-id="${safe(id)}">⏸ MARK NOT ACTIVE</button>`:""}
+ ${completed?`<button class="deleteBtn" data-action="delete" data-id="${safe(id)}">🗑 DELETE COMPLETED STUDENT</button>`:""}
+ </article>`;
+}
 
-        document.getElementById('dispInstName').innerText = data.name;
-        document.getElementById('dispInstExp').innerText = data.expertise;
-        document.getElementById('instShift').value = data.shiftPreference || "Morning Shift (6 AM - 12 PM)";
-        
-        // Facebook Avatar Setup
-        const frame = document.getElementById('avatarWrapperFrame');
-        const avatarImg = document.getElementById('dispInstAvatar');
-        const dot = document.getElementById('liveDotStatus');
-        
-        if(data.profilePic && data.profilePic.trim() !== "") {
-          avatarImg.src = data.profilePic;
-          frame.style.display = "block";
-        } else {
-          frame.style.display = "none";
-        }
+/* STUDENT ADMISSION */
+function selectAddType(type){
+ addClassType=type;
+ document.querySelectorAll("[data-add-type]").forEach(b=>b.classList.toggle("selected",b.dataset.addType===type));
+}
+$("addStudentFab").addEventListener("click",()=>{
+ $("addStudentForm").reset();
+ $("totalClasses").value=20;
+ selectAddType("Group");
+ openModal("addModal");
+});
 
-        // Live UI Update according to Punch status
-        const punchBtn = document.getElementById('btnPunchAction');
-        const punchTxt = document.getElementById('txtPunchStatus');
+document.querySelectorAll("[data-add-type]").forEach(b=>b.addEventListener("click",()=>selectAddType(b.dataset.addType)));
 
-        if(hasActivePunch) {
-          dot.classList.add('active');
-          punchBtn.innerText = "PUNCH OUT";
-          punchBtn.className = "btn-punch out";
-          const formattedTime = new Date(currentPunchTimeISO).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-          punchTxt.innerText = `Active Since ${formattedTime}`;
-        } else {
-          dot.classList.remove('active');
-          punchBtn.innerText = "PUNCH IN";
-          punchBtn.className = "btn-punch in";
-          punchTxt.innerText = "Offline / Not Punched In";
-        }
-      }
-    });
+$("addStudentForm").addEventListener("submit",async event=>{
+ event.preventDefault();
+ const phone=$("studentPhone").value.trim(),name=$("studentName").value.trim(),total=Number($("totalClasses").value);
+ if(!/^[0-9]{10}$/.test(phone))return showToast("Enter valid 10 digit phone");
+ if(!name||!Number.isInteger(total)||total<1||total>500)return showToast("Check student details");
+ const btn=$("saveStudentBtn");
+ if(btn.disabled)return;
+ btn.disabled=true;btn.textContent="SAVING...";
+ try{
+  const ref=doc(db,"studentData",phone);
+  if((await getDoc(ref)).exists())return showToast("Phone number already exists");
+  const d=new Date();
+  const admissionDate=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+  await setDoc(ref,{name,totalClasses:total,remaining:0,attendanceLogs:[],classType:addClassType,notActive:false,admissionDate});
+  closeModal("addModal");showToast("Admission saved ✓");await loadStudents();
+ }catch(e){console.error(e);showToast("Could not save student. Check Firebase Rules");}
+ finally{btn.disabled=false;btn.textContent="SAVE STUDENT";}
+});
 
-    onSnapshot(collection(db, "studentData"), (snapshot) => {
-      let totalAssignedStudents = 0;
-      let aggregateClassesDelivered = 0;
-      const rosterContainer = document.getElementById('studentRosterContainer');
-      rosterContainer.innerHTML = "";
+/* CLASS TYPE */
+let editClassType="Group";
+function selectEditType(type){
+ editClassType=type;
+ document.querySelectorAll("[data-edit-type]").forEach(b=>b.classList.toggle("selected",b.dataset.editType===type));
+}
+document.querySelectorAll("[data-edit-type]").forEach(b=>b.addEventListener("click",()=>selectEditType(b.dataset.editType)));
 
-      snapshot.forEach((studentDoc) => {
-        const studentData = studentDoc.data();
-        const studentId = studentDoc.id;
-        
-        if (studentData.assignedInstructor === phone) {
-          totalAssignedStudents++;
-          
-          const logs = studentData.attendanceLogs || [];
-          const doneClasses = Math.max(logs.length, studentData.remaining || 0);
-          const totalTarget = studentData.totalClasses || 15;
-          const classPercent = Math.min(Math.round((doneClasses / totalTarget) * 100), 100);
-          const isFinished = doneClasses >= totalTarget;
-          
-          aggregateClassesDelivered += doneClasses;
+function openTypeModal(id){
+ const s=students.find(x=>x.id===id);if(!s)return;
+ currentStudentId=id;selectEditType(s.classType==="Personal"?"Personal":"Group");
+ $("typeStudentName").textContent=`${s.name||""} • ${id}`;openModal("typeModal");
+}
+$("saveClassTypeBtn").addEventListener("click",async()=>{
+ if(!currentStudentId)return;
+ const btn=$("saveClassTypeBtn");if(btn.disabled)return;
+ btn.disabled=true;
+ try{
+  await updateDoc(doc(db,"studentData",currentStudentId),{classType:editClassType});
+  closeModal("typeModal");showToast("Class type updated ✓");await loadStudents();
+ }catch(e){console.error(e);showToast("Could not update class type");}
+ finally{btn.disabled=false;}
+});
 
-          const rosterCard = document.createElement('div');
-          rosterCard.className = "roster-card";
-          rosterCard.innerHTML = `
-            <div class="roster-flex-header">
-              <div class="roster-info-block">
-                <b>${studentData.name}</b>
-                <span>Sessions: ${doneClasses}/${totalTarget}</span>
-              </div>
-              <button class="btn-update-class" data-sid="${studentId}" ${isFinished ? 'disabled' : ''}>
-                ${isFinished ? '🏁 DONE' : '⚡ MARK CLASS'}
-              </button>
-            </div>
-            <div class="progress-bar-container">
-              <div class="progress-bar-fill" style="width: ${classPercent}%"></div>
-            </div>
-          `;
-          rosterContainer.appendChild(rosterCard);
-        }
-      });
+/* ATTENDANCE */
+function resetAttendance(){
+ selectedRoute="";selectedRemark="";
+ $("customRoute").value="";$("customRemark").value="";
+ $("customRouteBox").classList.remove("show");$("customRemarkBox").classList.remove("show");
+ document.querySelectorAll(".routeOption,.remarkOption").forEach(b=>b.classList.remove("selected"));
+}
+function openAttendance(id){
+ const s=students.find(x=>x.id===id);if(!s)return;
+ if(isInactive(s))return showToast("Activate student before attendance");
+ if(isCompleted(s))return showToast("Training already completed");
+ currentStudentId=id;resetAttendance();
+ $("attendanceStudentName").textContent=`${s.name||""} • ${id}`;openModal("attendanceModal");
+}
+document.querySelectorAll(".routeOption").forEach(b=>b.addEventListener("click",()=>{
+ selectedRoute=b.dataset.route;
+ document.querySelectorAll(".routeOption").forEach(x=>x.classList.toggle("selected",x===b));
+ const custom=selectedRoute==="Other Route";
+ $("customRouteBox").classList.toggle("show",custom);
+ if(!custom)$("customRoute").value="";
+}));
+document.querySelectorAll(".remarkOption").forEach(b=>b.addEventListener("click",()=>{
+ selectedRemark=b.dataset.remark;
+ document.querySelectorAll(".remarkOption").forEach(x=>x.classList.toggle("selected",x===b));
+ const custom=selectedRemark==="📝 Custom Remark";
+ $("customRemarkBox").classList.toggle("show",custom);
+ if(!custom)$("customRemark").value="";
+}));
 
-      document.querySelectorAll('.btn-update-class').forEach(btn => {
-        if(!btn.disabled) {
-          btn.onclick = () => window.triggerClassIncrement(btn.getAttribute('data-sid'));
-        }
-      });
+$("saveAttendanceBtn").addEventListener("click",async()=>{
+ if(!currentStudentId)return;
+ const s=students.find(x=>x.id===currentStudentId);
+ if(!s)return showToast("Student not found");
+ if(isInactive(s)||isCompleted(s))return showToast("Student cannot receive attendance");
+ if(!selectedRoute)return showToast("Select route");
+ let route=selectedRoute,remark=selectedRemark;
+ if(route==="Other Route"){route=$("customRoute").value.trim();if(!route)return showToast("Enter custom route");}
+ if(remark==="📝 Custom Remark"){remark=$("customRemark").value.trim();if(!remark)return showToast("Enter custom remark");}
+ const btn=$("saveAttendanceBtn");if(btn.disabled)return;
+ btn.disabled=true;btn.textContent="SAVING...";
+ try{
+  const now=new Date();
+  const date=now.toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"});
+  const time=now.toLocaleTimeString("en-IN",{hour:"2-digit",minute:"2-digit",hour12:true});
+  const log=`${date} | ${time} — Route: ${route} | Distance: 5 KM${remark?" | Remark: "+remark:""}`;
+  await updateDoc(doc(db,"studentData",currentStudentId),{remaining:getDone(s)+1,attendanceLogs:arrayUnion(log),notActive:false});
+  closeModal("attendanceModal");showToast("Attendance saved ✓");await loadStudents();
+ }catch(e){console.error(e);showToast("Could not save attendance");}
+ finally{btn.disabled=false;btn.textContent="SAVE ATTENDANCE";}
+});
 
-      document.getElementById('dispActiveStudents').innerText = totalAssignedStudents;
-      document.getElementById('dispTotalSessions').innerText = aggregateClassesDelivered;
-      document.getElementById('dispEarnings').innerText = "₹" + (aggregateClassesDelivered * INCENTIVE_PER_CLASS);
-      
-      if(totalAssignedStudents === 0) {
-        rosterContainer.innerHTML = `<div style="text-align:center; font-size:12px; color:var(--text-muted); padding:20px;">No students assigned to your profile yet.</div>`;
-      }
-    });
-  }
+/* HISTORY, STATUS AND ACTIONS */
+function openHistory(id){
+ const s=students.find(x=>x.id===id);if(!s)return;
+ $("historyStudentName").textContent=`${s.name||""} • ${id}`;
+ const logs=[...getLogs(s)].reverse();
+ $("historyList").innerHTML=logs.length?logs.map((log,i)=>`<div class="historyItem"><div class="historyNumber">SESSION ${logs.length-i}</div><div class="historyText">${safe(log)}</div></div>`).join(""):'<div class="empty">No attendance history</div>';
+ openModal("historyModal");
+}
+async function setInactive(id,value){
+ try{await updateDoc(doc(db,"studentData",id),{notActive:value});showToast(value?"Student marked inactive":"Student activated");await loadStudents();}
+ catch(e){console.error(e);showToast("Could not update student status");}
+}
+function sendWhatsApp(id){
+ const s=students.find(x=>x.id===id);if(!s)return;
+ const done=getDone(s),total=getTotal(s);
+ const message=`Hello ${s.name||""},\n\nA1 Driving Classes Attendance\n\nCompleted: ${done}/${total}\nBalance: ${Math.max(total-done,0)} sessions\nClass Type: ${s.classType==="Personal"?"Personal":"Group"}\n\nDrive safely!`;
+ window.open(`https://wa.me/91${encodeURIComponent(id)}?text=${encodeURIComponent(message)}`,"_blank","noopener,noreferrer");
+}
+function requestDelete(id){
+ const s=students.find(x=>x.id===id);if(!s)return;
+ if(!isCompleted(s))return showToast("Only completed students can be deleted");
+ deleteStudentId=id;$("deleteStudentName").textContent=`${s.name||"Student"} • ${id}`;openModal("deleteModal");
+}
+$("confirmDeleteBtn").addEventListener("click",async()=>{
+ const id=deleteStudentId;if(!id)return;
+ const s=students.find(x=>x.id===id);
+ if(!s||!isCompleted(s)){closeModal("deleteModal");deleteStudentId=null;return showToast("Only completed students can be deleted");}
+ const btn=$("confirmDeleteBtn");if(btn.disabled)return;
+ btn.disabled=true;btn.textContent="DELETING...";
+ try{
+  await deleteDoc(doc(db,"studentData",id));deleteStudentId=null;closeModal("deleteModal");showToast("Student deleted");await loadStudents();
+ }catch(e){console.error(e);showToast("Delete failed. Check Firebase Rules");}
+ finally{btn.disabled=false;btn.textContent="DELETE PERMANENTLY";}
+});
 
-  // Live Core Punch Engine (3-Hour Request System)
-  window.togglePunchState = async () => {
-    if(!loggedInstructorPhone) return;
-    const now = new Date();
+$("studentCards").addEventListener("click",event=>{
+ const b=event.target.closest("[data-action]");if(!b)return;
+ const id=b.dataset.id;
+ switch(b.dataset.action){
+  case "type":openTypeModal(id);break;
+  case "attend":openAttendance(id);break;
+  case "history":openHistory(id);break;
+  case "wa":sendWhatsApp(id);break;
+  case "call":if(/^[0-9]{10}$/.test(id))location.href=`tel:${id}`;break;
+  case "inactive":setInactive(id,true);break;
+  case "activate":setInactive(id,false);break;
+  case "delete":requestDelete(id);break;
+ }
+});
+document.querySelectorAll("[data-filter]").forEach(b=>b.addEventListener("click",()=>{currentFilter=b.dataset.filter;render()}));
+$("searchInput").addEventListener("input",render);
 
-    if(!hasActivePunch) {
-      // Step 1: PUNCHING IN
-      if(!confirm("Start your duty shift now?")) return;
-      try {
-        await updateDoc(doc(db, "instructorData", loggedInstructorPhone), {
-          isPunchedIn: true,
-          punchedInTime: now.toISOString()
-        });
-        alert("Punched In Successfully! Your active shift track has started.");
-      } catch (e) {
-        alert("Failed to update punch-in track.");
-      }
-    } else {
-      // Step 2: PUNCHING OUT & CALCULATION ENGINE
-      if(!confirm("Do you want to punch out and close today's shift?")) return;
-      
-      const punchInTime = new Date(currentPunchTimeISO);
-      const timeDifferenceMS = now - punchInTime;
-      const hoursPassed = timeDifferenceMS / (1000 * 60 * 60); // Hours conversion formula
+/* HOLIDAY MANAGEMENT
+   Document ID is the ISO date YYYY-MM-DD.
+   Saving the same date updates that holiday instead of duplicating it.
+*/
+function validISODate(value){
+ const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(value||"");
+ if(!m)return false;
+ const d=new Date(+m[1],+m[2]-1,+m[3]);
+ return d.getFullYear()===+m[1]&&d.getMonth()===+m[2]-1&&d.getDate()===+m[3];
+}
+function formatHolidayDate(value){
+ if(!validISODate(value))return "Invalid date";
+ const m=value.split("-").map(Number);
+ return new Date(m[0],m[1]-1,m[2]).toLocaleDateString("en-IN",{weekday:"short",day:"2-digit",month:"short",year:"numeric"});
+}
+function renderHolidayAdmin(snapshot){
+ const list=$("holidayAdminList");
+ const holidays=snapshot.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>String(a.date||a.id).localeCompare(String(b.date||b.id)));
+ if(!holidays.length){list.innerHTML='<div class="empty">No holidays added yet.</div>';return;}
+ list.innerHTML=holidays.map(h=>`
+  <article class="holidayItem">
+   <div class="holidayDate">${safe(formatHolidayDate(h.date||h.id))}</div>
+   <div class="holidayName">${safe(h.title||"Academy Holiday")}</div>
+   <button class="holidayDelete" data-delete-holiday="${safe(h.id)}">DELETE HOLIDAY</button>
+  </article>`).join("");
+}
+async function loadHolidayAdmin(){
+ $("holidayAdminList").innerHTML='<div class="loading">Loading holidays...</div>';
+ try{
+  const snap=await getDocs(holidayCollection);
+  renderHolidayAdmin(snap);
+ }catch(e){
+  console.error("Holiday read error:",e);
+  $("holidayAdminList").innerHTML='<div class="empty">Could not load holidays. Check Firestore permissions.</div>';
+ }
+}
+$("openHolidayModal").addEventListener("click",()=>{
+ $("holidayForm").reset();
+ openModal("holidayModal");
+ loadHolidayAdmin();
+});
+$("holidayForm").addEventListener("submit",async event=>{
+ event.preventDefault();
+ const date=$("holidayDate").value,title=$("holidayTitle").value.trim();
+ if(!validISODate(date)||!title)return showToast("Enter a valid date and holiday name");
+ const btn=$("saveHolidayBtn");if(btn.disabled)return;
+ btn.disabled=true;btn.textContent="SAVING...";
+ try{
+  await setDoc(doc(db,"holidays",date),{date,title,updatedAt:new Date().toISOString()});
+  showToast("Holiday saved ✓");
+  $("holidayForm").reset();
+  await loadHolidayAdmin();
+ }catch(e){
+  console.error("Holiday save error:",e);
+  showToast("Could not save holiday. Check Firestore Rules.");
+ }finally{btn.disabled=false;btn.textContent="SAVE HOLIDAY";}
+});
+$("holidayAdminList").addEventListener("click",async event=>{
+ const btn=event.target.closest("[data-delete-holiday]");if(!btn)return;
+ const id=btn.dataset.deleteHoliday;
+ if(!confirm("Delete this holiday for all student profiles?"))return;
+ btn.disabled=true;
+ try{
+  await deleteDoc(doc(db,"holidays",id));
+  showToast("Holiday deleted");
+  await loadHolidayAdmin();
+ }catch(e){
+  console.error(e);showToast("Could not delete holiday");btn.disabled=false;
+ }
+});
 
-      try {
-        // Condition: If Duty Hours are 3 hours or above
-        if (hoursPassed >= 3) {
-          const uniqueRequestId = "REQ-" + Math.floor(100000 + Math.random() * 900000);
-          
-          // Inject Request payload straight into Central Admin Collection
-          await setDoc(doc(db, "adminDutyRequests", uniqueRequestId), {
-            requestId: uniqueRequestId,
-            instructorName: currentInstructorName,
-            instructorPhone: loggedInstructorPhone,
-            punchInTime: currentPunchTimeISO,
-            punchOutTime: now.toISOString(),
-            totalHoursClaimed: hoursPassed.toFixed(2),
-            incentiveAmount: 200,
-            status: "Pending",
-            submittedAt: now.toISOString()
-          });
-          
-          alert(`🎉 3 Hours Shift Completed!\nApproval request sent to Admin. ₹200 incentive will add up after approval.`);
-        } else {
-          alert(`Punched Out! Shift was less than 3 hours (${hoursPassed.toFixed(2)} hrs), no admin bonus requested.`);
-        }
+/* Modal controls */
+document.querySelectorAll("[data-close]").forEach(b=>b.addEventListener("click",()=>closeModal(b.dataset.close)));
+document.querySelectorAll(".modal").forEach(m=>m.addEventListener("click",e=>{if(e.target===m)closeModal(m.id)}));
+document.addEventListener("keydown",e=>{if(e.key==="Escape")document.querySelectorAll(".modal.show").forEach(m=>m.classList.remove("show"))});
 
-        // Reset local instructor punch status safely
-        await updateDoc(doc(db, "instructorData", loggedInstructorPhone), {
-          isPunchedIn: false,
-          punchedInTime: ""
-        });
+/* Initial load and periodic refresh */
+loadStudents();
+setInterval(()=>{if(!document.hidden)loadStudents()},30000);
+document.addEventListener("visibilitychange",()=>{if(!document.hidden){loadStudents();}});
 
-      } catch (err) {
-        console.error(err);
-        alert("Cloud database sync error while processing punch out.");
-      }
-    }
-  };
-
-  window.triggerClassIncrement = async (studentId) => {
-    if(!confirm("Are you sure you want to mark today's track session as complete for this student?")) return;
-    
-    const now = new Date();
-    const stamp = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }) + " | " + 
-                  now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    
-    const entryLogText = `${stamp} — Track Session Processed by Instructor`;
-
-    try {
-      await updateDoc(doc(db, "studentData", studentId), {
-        remaining: increment(1),
-        attendanceLogs: arrayUnion(entryLogText)
-      });
-    } catch (e) {
-      alert("Failed to update track log on cloud database.");
-    }
-  };
-
-  window.updateShiftPreference = async () => {
-    if(!loggedInstructorPhone) return;
-    const selectedShift = document.getElementById('instShift').value;
-    try {
-      await updateDoc(doc(db, "instructorData", loggedInstructorPhone), {
-        shiftPreference: selectedShift
-      });
-    } catch (e) {
-      alert("Error updating shift preference.");
-    }
-  };
 </script>
 </body>
 </html>
