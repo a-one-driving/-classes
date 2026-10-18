@@ -1,1 +1,595 @@
-gxgx
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101b35">
+<title>Tripjan Admin | Management Console</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<style>
+:root{--navy:#101b35;--blue:#246bfe;--bg:#f4f6fa;--ink:#1b2940;--muted:#8590a2;--line:#e6eaf1;--green:#087d55;--red:#d9485f;--orange:#b9770e;--white:#fff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:13px "DM Sans",sans-serif}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+.icon{width:18px;height:18px;stroke-width:1.8;flex-shrink:0}
+.layout{min-height:100vh;display:grid;grid-template-columns:245px minmax(0,1fr)}
+.sidebar{background:var(--navy);color:#d8e2f2;padding:22px 15px;display:flex;flex-direction:column;gap:25px}
+.brand{display:flex;align-items:center;gap:11px;padding:5px 8px}
+.brand-mark{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#246bfe,#78b8ff);display:grid;place-items:center;color:white}
+.brand-name{font:800 23px Manrope,sans-serif;letter-spacing:-1px;color:white}
+.brand-name span{color:#78b8ff}
+.brand-sub{font-size:8px;letter-spacing:1.5px;color:#9aabc5;display:block;margin-top:2px}
+.side-label{font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:#8293b0;padding:0 10px;margin-bottom:9px}
+.nav{display:grid;gap:5px}
+.nav button{width:100%;display:flex;align-items:center;gap:12px;border:0;border-radius:10px;background:transparent;color:#b6c3d8;padding:12px 11px;text-align:left;font-size:12px;font-weight:700}
+.nav button:hover,.nav button.active{background:#253957;color:white}
+.nav button.active .icon{color:#83b7ff}
+.nav .count{margin-left:auto;font-size:9px;background:#34496a;border-radius:20px;padding:4px 7px}
+.sidebar-bottom{margin-top:auto;border-top:1px solid #ffffff20;padding:15px 5px 0}
+.admin-ident{font-size:11px;font-weight:800;color:white}
+.admin-email{font-size:10px;color:#9aabc5;margin-top:5px;overflow-wrap:anywhere}
+.main{min-width:0}
+.topbar{height:72px;background:#ffffffed;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 28px;gap:15px;position:sticky;top:0;z-index:20;backdrop-filter:blur(12px)}
+.top-title{font:800 17px Manrope,sans-serif}
+.top-sub{font-size:10px;color:var(--muted);margin-top:4px}
+.top-right{display:flex;align-items:center;gap:10px}
+.avatar{height:36px;width:36px;border-radius:11px;background:#e8f0ff;color:var(--blue);display:grid;place-items:center;font-weight:800}
+.btn{border:0;border-radius:9px;padding:10px 13px;display:inline-flex;align-items:center;justify-content:center;gap:7px;font-size:10px;font-weight:800;transition:.15s}
+.btn:hover{filter:brightness(.97);transform:translateY(-1px)}
+.primary{background:var(--blue);color:white}
+.secondary{background:white;color:var(--ink);border:1px solid var(--line)}
+.soft{background:#edf3ff;color:var(--blue)}
+.danger{background:#fff0f2;color:var(--red)}
+.small-btn{padding:7px 9px;font-size:9px}
+.content{padding:25px 28px 45px;max-width:1600px;margin:auto}
+.demo-banner{display:flex;gap:11px;align-items:flex-start;padding:13px 15px;border:1px solid #f2dfb3;background:#fffaf0;border-radius:12px;color:#77551b;margin-bottom:23px;font-size:10px;line-height:1.8}
+.demo-banner .icon{flex:none}
+.page{display:none}
+.page.active{display:block}
+.page-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:15px;margin-bottom:22px}
+.page-heading h1{font:800 25px Manrope,sans-serif;letter-spacing:-.8px;margin:0 0 7px;color:var(--navy)}
+.page-heading p{margin:0;font-size:11px;color:var(--muted);line-height:1.7}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:20px}
+.stat{background:white;border:1px solid var(--line);border-radius:14px;padding:18px;min-width:0}
+.stat-top{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.stat-label{font-size:10px;color:#7c899d;font-weight:700}
+.stat-icon{width:35px;height:35px;border-radius:10px;background:#edf3ff;color:var(--blue);display:grid;place-items:center}
+.stat-value{font:800 27px Manrope,sans-serif;letter-spacing:-1px;margin:16px 0 5px;color:var(--navy);overflow-wrap:anywhere}
+.stat-note{font-size:9px;color:var(--muted)}
+.grid-2{display:grid;grid-template-columns:1.4fr 1fr;gap:16px;margin-bottom:20px}
+.panel{background:white;border:1px solid var(--line);border-radius:14px;min-width:0;overflow:hidden}
+.panel-head{padding:17px 18px;border-bottom:1px solid #edf0f5;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.panel-head h3{font:800 13px Manrope,sans-serif;margin:0}
+.panel-head p{font-size:9px;color:var(--muted);margin:5px 0 0}
+.panel-body{padding:17px 18px}
+.quick-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.quick{padding:14px;border:1px solid var(--line);border-radius:11px;background:#fff;text-align:left;display:flex;align-items:center;gap:11px}
+.quick:hover{background:#f7f9ff;border-color:#bdd1ff}
+.quick .iconbox{width:35px;height:35px;display:grid;place-items:center;border-radius:10px;background:#edf3ff;color:var(--blue)}
+.quick strong{font-size:11px;display:block}
+.quick small{display:block;color:var(--muted);font-size:9px;margin-top:4px}
+.bar-row{display:grid;grid-template-columns:75px 1fr 30px;align-items:center;gap:9px;margin:16px 0;font-size:10px}
+.bar{height:8px;border-radius:10px;background:#edf0f6;overflow:hidden}
+.bar span{display:block;height:100%;border-radius:10px;background:linear-gradient(90deg,#246bfe,#83b4ff);width:0}
+.bar-num{text-align:right;color:var(--muted)}
+.toolbar{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.toolbar-left,.toolbar-right{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.input{height:39px;border:1px solid #dfe5ef;background:white;border-radius:9px;padding:0 11px;font-size:10px;min-width:0;outline:none}
+.input:focus{border-color:#80a8ff;box-shadow:0 0 0 3px #246bfe12}
+.search-input{width:min(300px,100%)}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;white-space:nowrap}
+th{text-align:left;background:#f8f9fc;color:#7d899c;font-size:9px;letter-spacing:.5px;text-transform:uppercase;font-weight:800;padding:13px 15px;border-bottom:1px solid var(--line)}
+td{padding:13px 15px;border-bottom:1px solid #edf0f5;font-size:10px;vertical-align:middle}
+tbody tr:hover{background:#fbfcff}
+tbody tr:last-child td{border-bottom:0}
+.primary-cell{font-weight:800;color:#1c2b43}
+.secondary-cell{display:block;font-size:9px;color:var(--muted);margin-top:4px}
+.status{display:inline-flex;align-items:center;gap:5px;border-radius:30px;padding:6px 9px;font-size:9px;font-weight:800}
+.status:before{content:"";height:5px;width:5px;border-radius:50%;background:currentColor}
+.st-pending{background:#fff5df;color:#a36b0b}
+.st-confirmed{background:#e2f8ed;color:#087d55}
+.st-cancelled{background:#ffedf0;color:#c93650}
+.st-completed{background:#e8efff;color:#285fca}
+.st-refunded{background:#f1eaff;color:#7652b7}
+.st-requested{background:#eaf2ff;color:#246bfe}
+.st-approved{background:#e2f8ed;color:#087d55}
+.st-rejected{background:#ffedf0;color:#c93650}
+.row-actions{display:flex;align-items:center;gap:6px}
+.icon-btn{width:30px;height:30px;border:1px solid var(--line);background:white;border-radius:8px;display:grid;place-items:center;color:#607089}
+.icon-btn:hover{color:var(--blue);background:#f3f7ff}
+.icon-btn .icon{width:15px;height:15px}
+.empty{text-align:center;padding:40px 18px;color:var(--muted)}
+.empty .icon{width:31px;height:31px;margin-bottom:9px}
+.empty strong{display:block;font-size:12px;color:var(--ink);margin-bottom:6px}
+.empty p{font-size:10px;line-height:1.7}
+.customer-cell{display:flex;align-items:center;gap:9px}
+.customer-avatar{width:32px;height:32px;display:grid;place-items:center;border-radius:10px;background:#eaf1ff;color:#245fd4;font-weight:800}
+.table-foot{padding:12px 15px;border-top:1px solid var(--line);font-size:9px;color:var(--muted);display:flex;justify-content:space-between;gap:10px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.field label{display:block;font-size:10px;font-weight:800;margin-bottom:7px}
+.field input,.field select,.field textarea{width:100%;border:1px solid #dfe5ef;border-radius:9px;padding:11px;background:white;font-size:11px;outline:none}
+.field textarea{min-height:90px;resize:vertical}
+.field.wide{grid-column:1/-1}
+.modal{position:fixed;inset:0;background:#0b1834b8;backdrop-filter:blur(5px);z-index:100;display:none;align-items:center;justify-content:center;padding:15px}
+.modal.show{display:flex}
+.modal-box{width:min(560px,100%);max-height:90vh;overflow:auto;background:white;border-radius:17px;padding:23px;box-shadow:0 25px 90px #07142d45}
+.modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}
+.modal-head h2{font:800 20px Manrope,sans-serif;margin:0}
+.close{width:32px;height:32px;border:0;border-radius:9px;background:#eef2f8;display:grid;place-items:center}
+.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}
+.detail-list{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.detail-item{border:1px solid var(--line);border-radius:10px;padding:12px;min-width:0}
+.detail-item small{display:block;color:var(--muted);font-size:9px;margin-bottom:6px}
+.detail-item strong{font-size:11px;overflow-wrap:anywhere}
+.notice{font-size:10px;line-height:1.8;color:var(--muted);padding:13px;background:#f6f8fc;border-radius:10px;margin-top:15px}
+.toast{position:fixed;z-index:200;bottom:20px;left:50%;transform:translate(-50%,15px);opacity:0;pointer-events:none;background:#102442;color:white;padding:12px 17px;border-radius:10px;font-size:11px;font-weight:700;transition:.2s;max-width:92%;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.login-screen{min-height:100vh;display:grid;grid-template-columns:1.1fr .9fr;background:white}
+.login-visual{background:linear-gradient(145deg,#101b35,#183b72);padding:9%;color:white;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.login-visual:after{content:"";position:absolute;width:440px;height:440px;border-radius:50%;border:1px solid #ffffff18;right:-150px;bottom:-150px;box-shadow:0 0 0 65px #ffffff06,0 0 0 130px #ffffff04}
+.login-visual h1{font:800 clamp(35px,4.5vw,60px)/1.1 Manrope,sans-serif;letter-spacing:-2px;max-width:490px;position:relative;z-index:1}
+.login-visual p{font-size:12px;line-height:2;color:#b9cbe4;max-width:390px;position:relative;z-index:1}
+.login-side{display:flex;align-items:center;justify-content:center;padding:28px}
+.login-card{width:min(370px,100%)}
+.login-card h2{font:800 28px Manrope,sans-serif;letter-spacing:-1px;margin:0 0 8px}
+.login-card>p{font-size:11px;color:var(--muted);line-height:1.8;margin-bottom:24px}
+.login-logo{display:flex;align-items:center;gap:10px;margin-bottom:35px}
+.login-logo .brand-name{color:var(--navy)}
+.login-card .field{margin-bottom:15px}
+.login-card .field input{height:45px}
+.login-error{font-size:10px;color:#c93650;line-height:1.8;margin:10px 0}
+.demo-creds{font-size:10px;background:#f4f7fc;padding:12px;border-radius:10px;line-height:1.9;margin-top:16px;color:#62718a}
+.mobile-head{display:none}
+@media(max-width:1100px){.layout{grid-template-columns:205px minmax(0,1fr)}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.content{padding:20px}.topbar{padding:0 20px}.grid-2{grid-template-columns:1fr}}
+@media(max-width:700px){
+ .layout{grid-template-columns:1fr}.sidebar{position:sticky;top:0;z-index:40;padding:9px 12px;gap:8px}.brand{padding:0 3px}.brand-mark{width:34px;height:34px}.brand-name{font-size:20px}.brand-sub{display:none}
+ .side-label,.sidebar-bottom{display:none}.nav{display:flex;gap:5px;overflow:auto;scrollbar-width:none}.nav button{width:auto;flex:none;gap:6px;padding:9px 10px;font-size:10px}.nav button .icon{width:15px;height:15px}.nav .count{display:none}
+ .topbar{position:static;height:63px;padding:0 15px}.top-title{font-size:15px}.top-sub{font-size:9px}.top-right .btn{padding:8px;font-size:9px}.avatar{width:31px;height:31px}
+ .content{padding:16px 12px 35px}.page-heading{align-items:flex-start;flex-direction:column}.page-heading h1{font-size:23px}.stats{gap:9px}.stat{padding:13px}.stat-value{font-size:23px;margin:12px 0 4px}.stat-label{font-size:9px}.stat-icon{width:30px;height:30px}.quick-grid{gap:7px}.quick{padding:10px;gap:7px}.quick .iconbox{width:30px;height:30px}.quick strong{font-size:10px}.quick small{font-size:8px}
+ .toolbar{align-items:stretch}.toolbar-left,.toolbar-right{width:100%}.toolbar-left .search-input{width:100%;flex:1}.toolbar-right .input{flex:1;min-width:0}.toolbar-right .btn{flex:1}
+ .form-grid{grid-template-columns:1fr}.field.wide{grid-column:auto}.detail-list{grid-template-columns:1fr 1fr}
+ .login-screen{grid-template-columns:1fr}.login-visual{display:none}.login-side{min-height:100vh;padding:22px}.login-logo{margin-bottom:30px}.mobile-head{display:block}
+}
+@media(max-width:390px){.stats{grid-template-columns:1fr 1fr}.stat-value{font-size:21px}.nav button{padding:8px;font-size:9px}.quick-grid{grid-template-columns:1fr}.detail-list{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<section id="loginScreen" class="login-screen">
+ <div class="login-visual">
+  <div class="brand"><span class="brand-mark"><i class="icon" data-lucide="plane"></i></span><span><span class="brand-name">trip<span>jan</span></span><span class="brand-sub">ADMIN CONSOLE</span></span></div>
+  <div><span style="font-size:10px;letter-spacing:2px;color:#8abaff;font-weight:800">TRAVEL MANAGEMENT</span><h1>Every journey.<br>One command centre.</h1><p>Manage demo bookings, customer records, hotel requests and reports from one clean workspace.</p></div>
+  <p>Local demonstration environment · Not a live booking platform</p>
+ </div>
+ <div class="login-side">
+  <form id="loginForm" class="login-card">
+   <div class="login-logo"><span class="brand-mark"><i class="icon" data-lucide="shield-check"></i></span><span><span class="brand-name">trip<span>jan</span></span><span class="brand-sub">MANAGEMENT CONSOLE</span></span></div>
+   <span style="font-size:9px;color:#246bfe;font-weight:800;letter-spacing:1.5px">ADMIN ACCESS</span>
+   <h2>Welcome back</h2><p>Sign in to open the Tripjan local demo dashboard.</p>
+   <div class="field"><label for="loginEmail">Admin email</label><input id="loginEmail" type="email" autocomplete="username" required placeholder="admin@tripjan.demo"></div>
+   <div class="field"><label for="loginPassword">Password</label><input id="loginPassword" type="password" autocomplete="current-password" required placeholder="Enter admin password"></div>
+   <p id="loginError" class="login-error"></p>
+   <button class="btn primary" style="width:100%;height:44px" type="submit">Open dashboard <i class="icon" data-lucide="arrow-right"></i></button>
+   <div class="demo-creds"><strong>Demo login</strong><br>Email: admin@tripjan.demo<br>Password: TripjanDemo@123<br><span style="color:#a36b0b">Demo credentials only — not secure production authentication.</span></div>
+  </form>
+ </div>
+</section>
+
+<div id="app" class="layout hidden">
+ <aside class="sidebar">
+  <div class="brand"><span class="brand-mark"><i class="icon" data-lucide="plane"></i></span><span><span class="brand-name">trip<span>jan</span></span><span class="brand-sub">ADMIN CONSOLE</span></span></div>
+  <div><div class="side-label">Workspace</div><nav class="nav">
+   <button class="active" data-page="dashboard"><i class="icon" data-lucide="layout-dashboard"></i> Overview</button>
+   <button data-page="bookings"><i class="icon" data-lucide="calendar-check"></i> Bookings <span class="count" id="bookingCount">0</span></button>
+   <button data-page="hotels"><i class="icon" data-lucide="hotel"></i> Hotel requests <span class="count" id="hotelCount">0</span></button>
+   <button data-page="customers"><i class="icon" data-lucide="users"></i> Customers</button>
+   <button data-page="reports"><i class="icon" data-lucide="chart-no-axes-combined"></i> Reports & export</button>
+  </nav></div>
+  <div><div class="side-label">Tools</div><nav class="nav">
+   <button id="seedDemo"><i class="icon" data-lucide="flask-conical"></i> Load sample data</button>
+   <button id="refreshData"><i class="icon" data-lucide="refresh-cw"></i> Refresh records</button>
+   <button id="openWebsite"><i class="icon" data-lucide="external-link"></i> Open website</button>
+  </nav></div>
+  <div class="sidebar-bottom"><div class="admin-ident">Tripjan Administrator</div><div class="admin-email">admin@tripjan.demo</div><button class="btn secondary" style="width:100%;margin-top:14px" id="logoutBtn"><i class="icon" data-lucide="log-out"></i> Sign out</button></div>
+ </aside>
+
+ <main class="main">
+  <header class="topbar"><div><div class="top-title" id="topTitle">Overview</div><div class="top-sub" id="topSubtitle">Your travel business at a glance</div></div><div class="top-right"><button class="btn secondary" id="exportTop"><i class="icon" data-lucide="download"></i> Export CSV</button><div class="avatar">TA</div></div></header>
+  <div class="content">
+   <div class="demo-banner"><i class="icon" data-lucide="info"></i><div><strong>Local demo mode.</strong> Data is stored in this browser only. Customer bookings from another device are not automatically synced. Payment, ticketing, and real reservations are not connected.</div></div>
+
+   <section class="page active" id="page-dashboard">
+    <div class="page-heading"><div><h1>Overview</h1><p>Welcome to your Tripjan management workspace.</p></div><button class="btn primary" id="newSample"><i class="icon" data-lucide="plus"></i> Add sample booking</button></div>
+    <div class="stats">
+     <article class="stat"><div class="stat-top"><span class="stat-label">Total bookings</span><span class="stat-icon"><i class="icon" data-lucide="calendar-days"></i></span></div><div class="stat-value" id="statBookings">0</div><div class="stat-note">All stored demo booking records</div></article>
+     <article class="stat"><div class="stat-top"><span class="stat-label">Pending requests</span><span class="stat-icon" style="background:#fff5df;color:#a36b0b"><i class="icon" data-lucide="clock-3"></i></span></div><div class="stat-value" id="statPending">0</div><div class="stat-note">Bookings awaiting review</div></article>
+     <article class="stat"><div class="stat-top"><span class="stat-label">Confirmed</span><span class="stat-icon" style="background:#e2f8ed;color:#087d55"><i class="icon" data-lucide="check-circle-2"></i></span></div><div class="stat-value" id="statConfirmed">0</div><div class="stat-note">Marked confirmed in this demo</div></article>
+     <article class="stat"><div class="stat-top"><span class="stat-label">Estimated value</span><span class="stat-icon" style="background:#f0eaff;color:#7652b7"><i class="icon" data-lucide="indian-rupee"></i></span></div><div class="stat-value" id="statRevenue">₹0</div><div class="stat-note">Record value, not collected revenue</div></article>
+    </div>
+    <div class="grid-2">
+     <section class="panel"><div class="panel-head"><div><h3>Recent bookings</h3><p>Latest records in this browser</p></div><button class="btn soft small-btn" data-goto="bookings">View all</button></div><div id="recentBookings"></div></section>
+     <section class="panel"><div class="panel-head"><div><h3>Booking distribution</h3><p>By travel category</p></div></div><div class="panel-body" id="categoryChart"></div></section>
+    </div>
+    <section class="panel"><div class="panel-head"><div><h3>Quick actions</h3><p>Frequently used management tools</p></div></div><div class="panel-body"><div class="quick-grid">
+     <button class="quick" data-goto="bookings"><span class="iconbox"><i class="icon" data-lucide="calendar-check"></i></span><span><strong>Manage bookings</strong><small>Review and update status</small></span></button>
+     <button class="quick" data-goto="hotels"><span class="iconbox"><i class="icon" data-lucide="hotel"></i></span><span><strong>Hotel requests</strong><small>Review saved hotel enquiries</small></span></button>
+     <button class="quick" data-goto="customers"><span class="iconbox"><i class="icon" data-lucide="users"></i></span><span><strong>Customer records</strong><small>View available customer data</small></span></button>
+     <button class="quick" data-goto="reports"><span class="iconbox"><i class="icon" data-lucide="file-spreadsheet"></i></span><span><strong>Export reports</strong><small>Download CSV files</small></span></button>
+    </div></div></section>
+   </section>
+
+   <section class="page" id="page-bookings">
+    <div class="page-heading"><div><h1>Booking management</h1><p>Search records, inspect trip details and update demo booking status.</p></div><button class="btn primary" id="addBooking"><i class="icon" data-lucide="plus"></i> Add booking</button></div>
+    <div class="toolbar"><div class="toolbar-left"><input class="input search-input" id="bookingSearch" placeholder="Search reference, name, route or email..."></div><div class="toolbar-right"><select class="input" id="bookingStatusFilter"><option value="">All statuses</option><option>Pending</option><option>Confirmed</option><option>Cancelled</option><option>Completed</option><option>Refunded</option></select><select class="input" id="bookingModeFilter"><option value="">All categories</option><option>Flight</option><option>Train</option><option>Bus</option><option>Cab</option><option>Hotel</option><option>Holiday</option></select><button class="btn secondary" id="exportBookings"><i class="icon" data-lucide="download"></i> CSV</button></div></div>
+    <section class="panel"><div class="table-wrap"><table><thead><tr><th>Booking / customer</th><th>Journey</th><th>Date</th><th>Amount</th><th>Status</th><th>Actions</th></tr></thead><tbody id="bookingRows"></tbody></table></div><div class="table-foot"><span id="bookingTableCount">0 records</span><span>Changes save in this browser</span></div></section>
+   </section>
+
+   <section class="page" id="page-hotels">
+    <div class="page-heading"><div><h1>Hotel requests</h1><p>Review hotel enquiries stored by the Tripjan demo website.</p></div><button class="btn secondary" id="exportHotels"><i class="icon" data-lucide="download"></i> Export CSV</button></div>
+    <div class="toolbar"><div class="toolbar-left"><input class="input search-input" id="hotelSearch" placeholder="Search hotel, date or request ID..."></div><div class="toolbar-right"><select class="input" id="hotelStatusFilter"><option value="">All statuses</option><option>Requested</option><option>Approved</option><option>Rejected</option><option>Cancelled</option></select></div></div>
+    <section class="panel"><div class="table-wrap"><table><thead><tr><th>Request / hotel</th><th>Check-in → Check-out</th><th>Rooms</th><th>Nights</th><th>Estimate</th><th>Status</th><th>Actions</th></tr></thead><tbody id="hotelRows"></tbody></table></div><div class="table-foot"><span id="hotelTableCount">0 requests</span><span>Hotel availability is not verified</span></div></section>
+   </section>
+
+   <section class="page" id="page-customers">
+    <div class="page-heading"><div><h1>Customers</h1><p>Unique customers derived from locally stored booking records.</p></div><button class="btn secondary" id="exportCustomers"><i class="icon" data-lucide="download"></i> Export CSV</button></div>
+    <div class="toolbar"><div class="toolbar-left"><input class="input search-input" id="customerSearch" placeholder="Search customer, email or phone..."></div></div>
+    <section class="panel"><div class="table-wrap"><table><thead><tr><th>Customer</th><th>Contact</th><th>Total bookings</th><th>Record value</th><th>Last activity</th><th>Actions</th></tr></thead><tbody id="customerRows"></tbody></table></div><div class="table-foot"><span id="customerTableCount">0 customers</span><span>Only data available in local records is shown</span></div></section>
+   </section>
+
+   <section class="page" id="page-reports">
+    <div class="page-heading"><div><h1>Reports & export</h1><p>Download a copy of locally stored records for spreadsheet review.</p></div></div>
+    <div class="stats">
+     <article class="stat"><div class="stat-label">Bookings</div><div class="stat-value" id="reportBookings">0</div><div class="stat-note">Records stored</div></article>
+     <article class="stat"><div class="stat-label">Hotel requests</div><div class="stat-value" id="reportHotels">0</div><div class="stat-note">Enquiries stored</div></article>
+     <article class="stat"><div class="stat-label">Customers</div><div class="stat-value" id="reportCustomers">0</div><div class="stat-note">Unique email or name</div></article>
+     <article class="stat"><div class="stat-label">Confirmed value</div><div class="stat-value" id="reportConfirmedValue">₹0</div><div class="stat-note">Not verified payments</div></article>
+    </div>
+    <div class="grid-2">
+     <section class="panel"><div class="panel-head"><h3>Export bookings</h3></div><div class="panel-body"><p class="notice">Download booking references, customer contact fields, routes, dates, estimated totals and status. Review personal data before sharing exports.</p><button class="btn primary" id="reportExportBookings"><i class="icon" data-lucide="download"></i> Download bookings.csv</button></div></section>
+     <section class="panel"><div class="panel-head"><h3>Export hotel requests</h3></div><div class="panel-body"><p class="notice">Export hotel names, dates, room counts, estimated values and request status.</p><button class="btn primary" id="reportExportHotels"><i class="icon" data-lucide="download"></i> Download hotels.csv</button></div></section>
+     <section class="panel"><div class="panel-head"><h3>Export customers</h3></div><div class="panel-body"><p class="notice">Export the customer records derived from the available local booking data.</p><button class="btn primary" id="reportExportCustomers"><i class="icon" data-lucide="download"></i> Download customers.csv</button></div></section>
+     <section class="panel"><div class="panel-head"><h3>Backup local data</h3></div><div class="panel-body"><p class="notice">Save a JSON backup of this browser's Tripjan demo booking, hotel request and status records.</p><button class="btn secondary" id="backupData"><i class="icon" data-lucide="archive"></i> Download JSON backup</button><p style="margin-top:12px"><label class="btn secondary" for="restoreFile"><i class="icon" data-lucide="upload"></i> Restore JSON backup</label><input id="restoreFile" type="file" accept=".json,application/json" class="hidden"></p></div></section>
+    </div>
+   </section>
+  </div>
+ </main>
+</div>
+
+<div class="modal" id="recordModal" role="dialog" aria-modal="true">
+ <div class="modal-box"><div class="modal-head"><h2 id="recordModalTitle">Booking details</h2><button class="close" data-close="recordModal" aria-label="Close"><i class="icon" data-lucide="x"></i></button></div><div id="recordModalBody"></div><div class="modal-actions"><button class="btn secondary" data-close="recordModal">Close</button></div></div>
+</div>
+
+<div class="modal" id="editModal" role="dialog" aria-modal="true">
+ <div class="modal-box"><div class="modal-head"><h2 id="editTitle">Update record</h2><button class="close" data-close="editModal" aria-label="Close"><i class="icon" data-lucide="x"></i></button></div>
+ <form id="editForm"><input type="hidden" id="editId"><input type="hidden" id="editKind">
+  <div class="form-grid">
+   <div class="field"><label for="editName">Customer / guest name</label><input id="editName" maxlength="100"></div>
+   <div class="field"><label for="editEmail">Email</label><input id="editEmail" type="email" maxlength="140"></div>
+   <div class="field"><label for="editPhone">Phone</label><input id="editPhone" maxlength="25"></div>
+   <div class="field"><label for="editStatus">Status</label><select id="editStatus"><option>Pending</option><option>Confirmed</option><option>Cancelled</option><option>Completed</option><option>Refunded</option><option>Requested</option><option>Approved</option><option>Rejected</option></select></div>
+   <div class="field"><label for="editAmount">Estimated amount (INR)</label><input id="editAmount" type="number" min="0" max="100000000" step="1"></div>
+   <div class="field"><label for="editService">Service / category</label><select id="editService"><option>Flight</option><option>Train</option><option>Bus</option><option>Cab</option><option>Hotel</option><option>Holiday</option></select></div>
+   <div class="field wide"><label for="editNote">Admin note</label><textarea id="editNote" maxlength="1000" placeholder="Internal demo note"></textarea></div>
+  </div>
+  <p class="notice">Status and amount changes are local admin records only. They do not contact providers, issue tickets, charge payments or perform refunds.</p>
+  <div class="modal-actions"><button type="button" class="btn secondary" data-close="editModal">Cancel</button><button class="btn primary" type="submit">Save changes</button></div>
+ </form></div>
+</div>
+
+<div class="modal" id="sampleModal" role="dialog" aria-modal="true">
+ <div class="modal-box"><div class="modal-head"><h2>Add a sample booking</h2><button class="close" data-close="sampleModal"><i class="icon" data-lucide="x"></i></button></div>
+ <form id="sampleForm"><div class="form-grid">
+  <div class="field"><label for="sampleName">Customer name</label><input id="sampleName" required maxlength="100" placeholder="Demo Customer"></div>
+  <div class="field"><label for="sampleEmail">Email</label><input id="sampleEmail" type="email" required maxlength="140" placeholder="customer@example.com"></div>
+  <div class="field"><label for="samplePhone">Phone (optional)</label><input id="samplePhone" maxlength="25" placeholder="+91 ..."></div>
+  <div class="field"><label for="sampleMode">Category</label><select id="sampleMode"><option>Flight</option><option>Train</option><option>Bus</option><option>Cab</option><option>Hotel</option><option>Holiday</option></select></div>
+  <div class="field"><label for="sampleFrom">From / location</label><input id="sampleFrom" required maxlength="100" value="Bhubaneswar"></div>
+  <div class="field"><label for="sampleTo">To / property</label><input id="sampleTo" required maxlength="100" value="Delhi"></div>
+  <div class="field"><label for="sampleDate">Travel date</label><input id="sampleDate" type="date" required></div>
+  <div class="field"><label for="sampleAmount">Estimated total (₹)</label><input id="sampleAmount" type="number" min="0" max="100000000" value="2499" required></div>
+  <div class="field"><label for="sampleStatus">Initial status</label><select id="sampleStatus"><option>Pending</option><option>Confirmed</option><option>Cancelled</option><option>Completed</option></select></div>
+ </div><p class="notice">Creates an illustrative record for testing. It does not create a real reservation.</p><div class="modal-actions"><button type="button" class="btn secondary" data-close="sampleModal">Cancel</button><button class="btn primary">Create sample record</button></div></form></div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(()=>{
+"use strict";
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const K={
+ bookings:"tripjan_admin_bookings_v1",
+ hotels:"tripjan_admin_hotels_v1",
+ bookingLegacy:"tripjan_last_demo_booking",
+ hotelLegacy:"tripjan_demo_hotel_request",
+ session:"tripjan_admin_demo_session_v1"
+};
+const ADMIN_EMAIL="admin@tripjan.demo",ADMIN_PASSWORD="TripjanDemo@123";
+const pageTitles={
+ dashboard:["Overview","Your travel business at a glance"],
+ bookings:["Bookings","Review and manage booking records"],
+ hotels:["Hotel requests","Review stored hotel enquiries"],
+ customers:["Customers","Customer records derived from bookings"],
+ reports:["Reports & export","Download locally stored reports"]
+};
+let bookings=[],hotels=[],toastTimer=null,editingId=null;
+const uid=prefix=>prefix+"-"+Date.now().toString(36).toUpperCase()+"-"+Math.random().toString(36).slice(2,6).toUpperCase();
+const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const money=n=>new Intl.NumberFormat("en-IN",{style:"currency",currency:"INR",maximumFractionDigits:0}).format(Number(n)||0);
+const safeRead=(key,fallback)=>{try{const v=JSON.parse(localStorage.getItem(key));return v??fallback}catch{return fallback}};
+function save(){localStorage.setItem(K.bookings,JSON.stringify(bookings));localStorage.setItem(K.hotels,JSON.stringify(hotels));}
+function toast(msg){const t=$("#toast");t.textContent=msg;t.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove("show"),2700);}
+function icons(){if(window.lucide?.createIcons)lucide.createIcons({attrs:{"stroke-width":1.8}});}
+function normalizeMode(v){
+ const s=String(v||"").toLowerCase();
+ if(s.includes("flight"))return"Flight";if(s.includes("train")||s.includes("rail"))return"Train";
+ if(s.includes("bus"))return"Bus";if(s.includes("cab")||s.includes("car"))return"Cab";
+ if(s.includes("hotel")||s.includes("stay"))return"Hotel";return"Holiday";
+}
+function normalizeBooking(raw){
+ const mode=normalizeMode(raw.mode||raw.category||raw.service);
+ const from=raw.from||raw.location||"Not provided",to=raw.to||raw.hotel||raw.property||"Not provided";
+ const amount=Number(raw.total??raw.price??raw.amount??0);
+ const ref=raw.reference||raw.bookingReference||raw.id||uid("TJ");
+ const name=raw.name||raw.customerName||raw.passengerName||"Guest";
+ return{
+  id:String(ref),reference:String(ref),name:String(name),email:String(raw.email||""),
+  phone:String(raw.phone||""),mode,from:String(from),to:String(to),
+  date:String(raw.date||raw.travelDate||raw.checkin||""),
+  amount:Number.isFinite(amount)?Math.max(0,amount):0,
+  status:validBookingStatus(raw.status)?raw.status:"Pending",
+  note:String(raw.note||raw.adminNote||""),
+  service:String(raw.service||raw.selectedService||raw.name||mode),
+  createdAt:raw.createdAt||raw.created||new Date().toISOString(),
+  source:raw.source||"website"
+ };
+}
+function validBookingStatus(s){return["Pending","Confirmed","Cancelled","Completed","Refunded"].includes(s);}
+function normalizeHotel(raw){
+ const ci=String(raw.checkin||raw.checkIn||""),co=String(raw.checkout||raw.checkOut||"");
+ const nights=Math.max(0,Number(raw.nights)||calcNights(ci,co));
+ return{
+  id:String(raw.id||raw.reference||uid("HT")),hotel:String(raw.hotel||raw.name||"Hotel enquiry"),
+  location:String(raw.location||""),checkin:ci,checkout:co,
+  rooms:Math.max(1,Number(raw.rooms)||1),nights,
+  amount:Math.max(0,Number(raw.total??raw.amount??raw.price??0)||0),
+  status:["Requested","Approved","Rejected","Cancelled"].includes(raw.status)?raw.status:"Requested",
+  name:String(raw.name||raw.customerName||""),email:String(raw.email||""),phone:String(raw.phone||""),
+  note:String(raw.note||""),createdAt:raw.createdAt||new Date().toISOString(),source:raw.source||"website"
+ };
+}
+function calcNights(a,b){if(!a||!b)return 0;const n=(Date.parse(b+"T12:00:00")-Date.parse(a+"T12:00:00"))/86400000;return Number.isFinite(n)?Math.max(0,Math.round(n)):0;}
+function mergeById(list,items){const map=new Map(list.map(x=>[x.id,x]));items.forEach(x=>map.set(x.id,x));return [...map.values()];}
+function importLegacy(){
+ let stored=safeRead(K.bookings,[]);
+ if(!Array.isArray(stored))stored=[];
+ bookings=stored.map(normalizeBooking);
+ const legacy=safeRead(K.bookingLegacy,null);
+ if(legacy&&typeof legacy==="object"){
+  const normalized=normalizeBooking(legacy);
+  if(!bookings.some(b=>b.id===normalized.id))bookings.push(normalized);
+ }
+ let hstored=safeRead(K.hotels,[]);
+ if(!Array.isArray(hstored))hstored=[];
+ hotels=hstored.map(normalizeHotel);
+ const hlegacy=safeRead(K.hotelLegacy,null);
+ if(hlegacy&&typeof hlegacy==="object"){
+  const h=normalizeHotel(hlegacy);
+  if(!hotels.some(x=>x.id===h.id))hotels.push(h);
+ }
+ // Merge old website records into persistent admin collections.
+ save();
+}
+function statusClass(s){
+ return({"Pending":"st-pending","Confirmed":"st-confirmed","Cancelled":"st-cancelled","Completed":"st-completed","Refunded":"st-refunded","Requested":"st-requested","Approved":"st-approved","Rejected":"st-rejected"})[s]||"st-pending";
+}
+function statusPill(s){return `<span class="status ${statusClass(s)}">${esc(s)}</span>`;}
+function dateText(s){if(!s)return"—";const d=new Date(s);return Number.isNaN(d.getTime())?esc(s):d.toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"});}
+function timestamp(v){const d=new Date(v||"");return Number.isNaN(d.getTime())?0:d.getTime();}
+function customerList(){
+ const map=new Map();
+ bookings.forEach(b=>{
+  const key=(b.email||b.name||b.id).toLowerCase();
+  const old=map.get(key)||{key,name:b.name,email:b.email,phone:b.phone,count:0,value:0,lastActivity:"",records:[]};
+  old.count++;old.value+=Number(b.amount)||0;old.records.push(b);
+  if(!old.name&&b.name)old.name=b.name;if(!old.email&&b.email)old.email=b.email;if(!old.phone&&b.phone)old.phone=b.phone;
+  if(timestamp(b.createdAt)>timestamp(old.lastActivity))old.lastActivity=b.createdAt;
+  map.set(key,old);
+ });
+ return [...map.values()].sort((a,b)=>timestamp(b.lastActivity)-timestamp(a.lastActivity));
+}
+function renderAll(){renderDashboard();renderBookings();renderHotels();renderCustomers();renderReports();updateCounts();icons();}
+function updateCounts(){$("#bookingCount").textContent=bookings.length;$("#hotelCount").textContent=hotels.length;}
+function emptyRow(cols,title,sub){return `<tr><td colspan="${cols}"><div class="empty"><i class="icon" data-lucide="inbox"></i><strong>${esc(title)}</strong><p>${esc(sub)}</p></div></td></tr>`;}
+function actionButtons(id,kind){return `<div class="row-actions"><button class="icon-btn" title="View details" data-view="${esc(id)}" data-kind="${kind}"><i class="icon" data-lucide="eye"></i></button><button class="icon-btn" title="Edit record" data-edit="${esc(id)}" data-kind="${kind}"><i class="icon" data-lucide="pencil"></i></button></div>`;}
+
+function renderDashboard(){
+ const pending=bookings.filter(b=>b.status==="Pending").length,confirmed=bookings.filter(b=>b.status==="Confirmed").length;
+ const confirmedValue=bookings.filter(b=>b.status==="Confirmed"||b.status==="Completed").reduce((s,b)=>s+b.amount,0);
+ $("#statBookings").textContent=bookings.length;$("#statPending").textContent=pending;$("#statConfirmed").textContent=confirmed;$("#statRevenue").textContent=money(confirmedValue);
+ const recent=[...bookings].sort((a,b)=>timestamp(b.createdAt)-timestamp(a.createdAt)).slice(0,6);
+ $("#recentBookings").innerHTML=recent.length?`<div class="table-wrap"><table><thead><tr><th>Booking</th><th>Journey</th><th>Amount</th><th>Status</th></tr></thead><tbody>${recent.map(b=>`<tr><td><span class="primary-cell">${esc(b.reference)}</span><span class="secondary-cell">${esc(b.name)}</span></td><td>${esc(b.from)} → ${esc(b.to)}<span class="secondary-cell">${esc(b.mode)}</span></td><td>${money(b.amount)}</td><td>${statusPill(b.status)}</td></tr>`).join("")}</tbody></table></div>`:`<div class="empty"><i class="icon" data-lucide="calendar-check"></i><strong>No booking records yet</strong><p>Add sample data or complete a Tripjan demo checkout in this browser.</p></div>`;
+ const cats=["Flight","Hotel","Train","Bus","Cab","Holiday"];
+ $("#categoryChart").innerHTML=cats.map(c=>{const n=bookings.filter(b=>b.mode===c).length,percent=bookings.length?Math.round(n/bookings.length*100):0;return `<div class="bar-row"><span>${c}</span><div class="bar"><span style="width:${percent}%"></span></div><span class="bar-num">${n}</span></div>`}).join("");
+}
+function renderBookings(){
+ const q=$("#bookingSearch").value.trim().toLowerCase(),st=$("#bookingStatusFilter").value,mode=$("#bookingModeFilter").value;
+ const list=[...bookings].filter(b=>(!q||[b.reference,b.name,b.email,b.phone,b.from,b.to,b.mode].join(" ").toLowerCase().includes(q))&&(!st||b.status===st)&&(!mode||b.mode===mode)).sort((a,b)=>timestamp(b.createdAt)-timestamp(a.createdAt));
+ $("#bookingRows").innerHTML=list.length?list.map(b=>`<tr><td><span class="primary-cell">${esc(b.reference)}</span><span class="secondary-cell">${esc(b.name)}${b.email?" · "+esc(b.email):""}</span></td><td><span class="primary-cell">${esc(b.from)} → ${esc(b.to)}</span><span class="secondary-cell">${esc(b.mode)} · ${esc(b.service)}</span></td><td>${dateText(b.date)}</td><td class="primary-cell">${money(b.amount)}</td><td>${statusPill(b.status)}</td><td>${actionButtons(b.id,"booking")}</td></tr>`).join(""):emptyRow(6,"No matching bookings","Try another search or add a sample booking.");
+ $("#bookingTableCount").textContent=`${list.length} of ${bookings.length} records`;
+}
+function renderHotels(){
+ const q=$("#hotelSearch").value.trim().toLowerCase(),st=$("#hotelStatusFilter").value;
+ const list=[...hotels].filter(h=>(!q||[h.id,h.hotel,h.location,h.checkin,h.checkout,h.email].join(" ").toLowerCase().includes(q))&&(!st||h.status===st)).sort((a,b)=>timestamp(b.createdAt)-timestamp(a.createdAt));
+ $("#hotelRows").innerHTML=list.length?list.map(h=>`<tr><td><span class="primary-cell">${esc(h.hotel)}</span><span class="secondary-cell">${esc(h.id)}${h.location?" · "+esc(h.location):""}</span></td><td>${dateText(h.checkin)}<span class="secondary-cell">to ${dateText(h.checkout)}</span></td><td>${h.rooms}</td><td>${h.nights||"—"}</td><td class="primary-cell">${money(h.amount)}</td><td>${statusPill(h.status)}</td><td>${actionButtons(h.id,"hotel")}</td></tr>`).join(""):emptyRow(7,"No hotel requests","Complete a hotel demo request or load sample data.");
+ $("#hotelTableCount").textContent=`${list.length} of ${hotels.length} requests`;
+}
+function renderCustomers(){
+ const q=$("#customerSearch").value.trim().toLowerCase();
+ const list=customerList().filter(c=>[c.name,c.email,c.phone].join(" ").toLowerCase().includes(q));
+ $("#customerRows").innerHTML=list.length?list.map(c=>`<tr><td><div class="customer-cell"><span class="customer-avatar">${esc((c.name||"?").trim().charAt(0).toUpperCase())}</span><span><span class="primary-cell">${esc(c.name||"Guest")}</span><span class="secondary-cell">${esc(c.email||"No email")}</span></span></div></td><td>${esc(c.phone||"—")}<span class="secondary-cell">${esc(c.email||"")}</span></td><td>${c.count}</td><td class="primary-cell">${money(c.value)}</td><td>${dateText(c.lastActivity)}</td><td><button class="btn soft small-btn" data-customer="${esc(c.key)}">View history</button></td></tr>`).join(""):emptyRow(6,"No customers found","Customers are generated from booking records.");
+ $("#customerTableCount").textContent=`${list.length} customers`;
+}
+function renderReports(){
+ $("#reportBookings").textContent=bookings.length;$("#reportHotels").textContent=hotels.length;$("#reportCustomers").textContent=customerList().length;
+ $("#reportConfirmedValue").textContent=money(bookings.filter(b=>["Confirmed","Completed"].includes(b.status)).reduce((s,b)=>s+b.amount,0));
+}
+function gotoPage(name){
+ if(!pageTitles[name])return;
+ $$(".page").forEach(p=>p.classList.toggle("active",p.id==="page-"+name));
+ $$(".nav button[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===name));
+ $("#topTitle").textContent=pageTitles[name][0];$("#topSubtitle").textContent=pageTitles[name][1];
+ renderAll();window.scrollTo({top:0,behavior:"smooth"});
+}
+$$(".nav button[data-page]").forEach(b=>b.addEventListener("click",()=>gotoPage(b.dataset.page)));
+$$("[data-goto]").forEach(b=>b.addEventListener("click",()=>gotoPage(b.dataset.goto)));
+$("#bookingSearch").addEventListener("input",renderBookings);$("#bookingStatusFilter").addEventListener("change",renderBookings);$("#bookingModeFilter").addEventListener("change",renderBookings);
+$("#hotelSearch").addEventListener("input",renderHotels);$("#hotelStatusFilter").addEventListener("change",renderHotels);$("#customerSearch").addEventListener("input",renderCustomers);
+
+function showModal(id){$("#"+id).classList.add("show");}
+function closeModal(id){$("#"+id).classList.remove("show");}
+$$("[data-close]").forEach(b=>b.addEventListener("click",()=>closeModal(b.dataset.close)));
+$$(".modal").forEach(m=>m.addEventListener("click",e=>{if(e.target===m)closeModal(m.id);}));
+document.addEventListener("keydown",e=>{if(e.key==="Escape")$$(".modal.show").forEach(m=>closeModal(m.id));});
+
+function detailItem(label,value){return `<div class="detail-item"><small>${esc(label)}</small><strong>${esc(value||"—")}</strong></div>`;}
+function viewRecord(id,kind){
+ if(kind==="hotel"){
+  const h=hotels.find(x=>x.id===id);if(!h)return;
+  $("#recordModalTitle").textContent="Hotel request details";
+  $("#recordModalBody").innerHTML=`<div class="detail-list">${detailItem("Request ID",h.id)}${detailItem("Hotel",h.hotel)}${detailItem("Location",h.location)}${detailItem("Status",h.status)}${detailItem("Check-in",h.checkin)}${detailItem("Check-out",h.checkout)}${detailItem("Rooms",h.rooms)}${detailItem("Nights",h.nights)}${detailItem("Estimated total",money(h.amount))}${detailItem("Customer",h.name)}${detailItem("Email",h.email)}${detailItem("Phone",h.phone)}</div><div class="notice">This is a local request record. It does not indicate actual hotel availability or a confirmed reservation.</div>`;
+ }else{
+  const b=bookings.find(x=>x.id===id);if(!b)return;
+  $("#recordModalTitle").textContent="Booking details";
+  $("#recordModalBody").innerHTML=`<div class="detail-list">${detailItem("Reference",b.reference)}${detailItem("Status",b.status)}${detailItem("Customer",b.name)}${detailItem("Email",b.email)}${detailItem("Phone",b.phone)}${detailItem("Category",b.mode)}${detailItem("From",b.from)}${detailItem("To",b.to)}${detailItem("Date",b.date)}${detailItem("Service",b.service)}${detailItem("Estimated total",money(b.amount))}${detailItem("Created",b.createdAt)}${detailItem("Source",b.source)}${detailItem("Admin note",b.note)}</div><div class="notice">Status updates are administrative demo labels only. They do not issue tickets, notify travel providers or process payments/refunds.</div>`;
+ }
+ showModal("recordModal");icons();
+}
+function openEdit(id,kind){
+ const isHotel=kind==="hotel",rec=(isHotel?hotels:bookings).find(x=>x.id===id);if(!rec)return;
+ editingId=id;$("#editId").value=id;$("#editKind").value=kind;
+ $("#editTitle").textContent=isHotel?"Edit hotel request":"Edit booking";
+ $("#editName").value=isHotel?(rec.name||""):(rec.name||"");
+ $("#editEmail").value=rec.email||"";$("#editPhone").value=rec.phone||"";
+ $("#editAmount").value=Number(rec.amount)||0;$("#editNote").value=rec.note||"";
+ $("#editService").value=isHotel?"Hotel":rec.mode;
+ const opts=isHotel?["Requested","Approved","Rejected","Cancelled"]:["Pending","Confirmed","Cancelled","Completed","Refunded"];
+ $("#editStatus").innerHTML=opts.map(s=>`<option>${s}</option>`).join("");$("#editStatus").value=opts.includes(rec.status)?rec.status:opts[0];
+ $("#editService").disabled=isHotel;showModal("editModal");icons();
+}
+$("#editForm").addEventListener("submit",e=>{
+ e.preventDefault();const kind=$("#editKind").value,id=$("#editId").value;
+ const name=$("#editName").value.trim(),email=$("#editEmail").value.trim(),phone=$("#editPhone").value.trim(),amount=Number($("#editAmount").value);
+ if(!Number.isFinite(amount)||amount<0||amount>100000000){toast("Enter a valid amount.");return;}
+ if(kind==="hotel"){
+  const h=hotels.find(x=>x.id===id);if(!h)return;
+  Object.assign(h,{name,email,phone,amount,status:$("#editStatus").value,note:$("#editNote").value.trim()});
+ }else{
+  const b=bookings.find(x=>x.id===id);if(!b)return;
+  Object.assign(b,{name,email,phone,amount,status:$("#editStatus").value,note:$("#editNote").value.trim(),mode:$("#editService").value});
+ }
+ save();closeModal("editModal");renderAll();toast("Record updated in this browser.");
+});
+document.addEventListener("click",e=>{
+ const v=e.target.closest("[data-view]");if(v){viewRecord(v.dataset.view,v.dataset.kind);return;}
+ const ed=e.target.closest("[data-edit]");if(ed){openEdit(ed.dataset.edit,ed.dataset.kind);return;}
+ const c=e.target.closest("[data-customer]");if(c){
+  const customer=customerList().find(x=>x.key===c.dataset.customer);if(!customer)return;
+  $("#recordModalTitle").textContent="Customer booking history";
+  $("#recordModalBody").innerHTML=`<div class="detail-list">${detailItem("Customer",customer.name)}${detailItem("Email",customer.email)}${detailItem("Phone",customer.phone)}${detailItem("Total records",customer.count)}${detailItem("Record value",money(customer.value))}</div><h3 style="font-size:12px;margin-top:20px">Bookings</h3><div class="table-wrap"><table><thead><tr><th>Reference</th><th>Route</th><th>Status</th><th>Value</th></tr></thead><tbody>${customer.records.map(b=>`<tr><td>${esc(b.reference)}</td><td>${esc(b.from)} → ${esc(b.to)}</td><td>${esc(b.status)}</td><td>${money(b.amount)}</td></tr>`).join("")}</tbody></table></div>`;
+  showModal("recordModal");icons();
+ }
+});
+
+/* Add demo records */
+function openSample(){const d=new Date();$("#sampleDate").value=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;showModal("sampleModal");}
+$("#newSample").addEventListener("click",openSample);$("#addBooking").addEventListener("click",openSample);
+$("#sampleForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ const ref=uid("TJ-DEMO");
+ const b=normalizeBooking({id:ref,reference:ref,name:$("#sampleName").value.trim(),email:$("#sampleEmail").value.trim(),phone:$("#samplePhone").value.trim(),mode:$("#sampleMode").value,from:$("#sampleFrom").value.trim(),to:$("#sampleTo").value.trim(),date:$("#sampleDate").value,amount:Number($("#sampleAmount").value),status:$("#sampleStatus").value,createdAt:new Date().toISOString(),source:"admin-demo"});
+ bookings.unshift(b);save();closeModal("sampleModal");$("#sampleForm").reset();renderAll();gotoPage("bookings");toast("Sample booking record created.");
+});
+function seedSamples(){
+ if(bookings.length||hotels.length){
+  if(!confirm("Sample data will be added to your existing local records. Continue?"))return;
+ }
+ const now=Date.now(),dt=n=>new Date(now+n*86400000).toISOString().slice(0,10);
+ const demoBookings=[
+  {reference:"TJ-DEMO-F1001",name:"Aarav Sharma",email:"aarav@example.com",phone:"+91 98765 10001",mode:"Flight",from:"Bhubaneswar",to:"Delhi",date:dt(3),amount:3299,status:"Pending",service:"IndiGo example flight"},
+  {reference:"TJ-DEMO-T1002",name:"Priya Das",email:"priya@example.com",phone:"+91 98765 10002",mode:"Train",from:"Bhubaneswar",to:"Kolkata",date:dt(5),amount:680,status:"Confirmed",service:"Superfast Express example"},
+  {reference:"TJ-DEMO-B1003",name:"Rahul Patel",email:"rahul@example.com",phone:"+91 98765 10003",mode:"Bus",from:"Delhi",to:"Jaipur",date:dt(7),amount:999,status:"Pending",service:"AC bus example"},
+  {reference:"TJ-DEMO-H1004",name:"Sneha Singh",email:"sneha@example.com",phone:"+91 98765 10004",mode:"Hotel",from:"Goa",to:"Coastal Paradise Resort",date:dt(10),amount:10998,status:"Confirmed",service:"Sample hotel stay"},
+  {reference:"TJ-DEMO-C1005",name:"Aarav Sharma",email:"aarav@example.com",phone:"+91 98765 10001",mode:"Cab",from:"Airport",to:"City centre",date:dt(3),amount:1499,status:"Completed",service:"Sample airport transfer"}
+ ].map(x=>normalizeBooking({...x,createdAt:new Date(now-Math.random()*5*86400000).toISOString(),source:"seed-demo"}));
+ const demoHotels=[
+  normalizeHotel({id:"HT-DEMO-2001",hotel:"Coastal Paradise Resort",location:"Goa",checkin:dt(10),checkout:dt(13),rooms:2,nights:3,amount:32994,status:"Requested",name:"Sneha Singh",email:"sneha@example.com",phone:"+91 98765 10004",createdAt:new Date(now-3600000).toISOString(),source:"seed-demo"}),
+  normalizeHotel({id:"HT-DEMO-2002",hotel:"Himalayan View Lodge",location:"Manali",checkin:dt(15),checkout:dt(18),rooms:1,nights:3,amount:11397,status:"Approved",name:"Priya Das",email:"priya@example.com",createdAt:new Date(now-7200000).toISOString(),source:"seed-demo"})
+ ];
+ bookings=mergeById(bookings,demoBookings);hotels=mergeById(hotels,demoHotels);save();renderAll();toast("Sample records added. They are clearly marked as demo.");
+}
+$("#seedDemo").addEventListener("click",seedSamples);
+$("#refreshData").addEventListener("click",()=>{importLegacy();renderAll();toast("Local records refreshed.");});
+$("#openWebsite").addEventListener("click",()=>window.open("./index.html","_blank","noopener"));
+$("#logoutBtn").addEventListener("click",logout);
+
+function csvCell(v){let s=String(v??"");if(/^[=+\-@\t\r]/.test(s))s="'"+s;return '"'+s.replace(/"/g,'""')+'"';}
+function downloadCSV(filename,rows){
+ if(!rows.length){toast("No records to export.");return;}
+ const headers=Object.keys(rows[0]),csv=[headers.map(csvCell).join(","),...rows.map(r=>headers.map(h=>csvCell(r[h])).join(","))].join("\r\n");
+ const blob=new Blob(["\uFEFF"+csv],{type:"text/csv;charset=utf-8;"}),url=URL.createObjectURL(blob),a=document.createElement("a");
+ a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);toast("CSV file downloaded.");
+}
+function exportBookingData(){
+ downloadCSV("tripjan-bookings.csv",bookings.map(b=>({reference:b.reference,name:b.name,email:b.email,phone:b.phone,category:b.mode,from:b.from,to:b.to,date:b.date,service:b.service,amount:b.amount,status:b.status,note:b.note,createdAt:b.createdAt,source:b.source})));
+}
+function exportHotelData(){
+ downloadCSV("tripjan-hotel-requests.csv",hotels.map(h=>({requestId:h.id,hotel:h.hotel,location:h.location,checkin:h.checkin,checkout:h.checkout,rooms:h.rooms,nights:h.nights,amount:h.amount,status:h.status,customer:h.name,email:h.email,phone:h.phone,note:h.note,createdAt:h.createdAt,source:h.source})));
+}
+function exportCustomerData(){
+ downloadCSV("tripjan-customers.csv",customerList().map(c=>({name:c.name,email:c.email,phone:c.phone,totalBookings:c.count,recordValue:c.value,lastActivity:c.lastActivity})));
+}
+$("#exportTop").addEventListener("click",exportBookingData);$("#exportBookings").addEventListener("click",exportBookingData);$("#reportExportBookings").addEventListener("click",exportBookingData);
+$("#exportHotels").addEventListener("click",exportHotelData);$("#reportExportHotels").addEventListener("click",exportHotelData);
+$("#exportCustomers").addEventListener("click",exportCustomerData);$("#reportExportCustomers").addEventListener("click",exportCustomerData);
+
+$("#backupData").addEventListener("click",()=>{
+ const blob=new Blob([JSON.stringify({format:"tripjan-local-demo-v1",exportedAt:new Date().toISOString(),bookings,hotels},null,2)],{type:"application/json"});
+ const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="tripjan-demo-backup.json";a.click();URL.revokeObjectURL(url);toast("JSON backup downloaded.");
+});
+$("#restoreFile").addEventListener("change",async e=>{
+ const file=e.target.files?.[0];if(!file)return;
+ try{
+  const data=JSON.parse(await file.text());
+  if(!data||!Array.isArray(data.bookings)||!Array.isArray(data.hotels))throw new Error("Invalid backup format.");
+  if(!confirm("Restore will replace the current local booking and hotel records. Continue?"))return;
+  bookings=data.bookings.map(normalizeBooking);hotels=data.hotels.map(normalizeHotel);save();renderAll();toast("Local backup restored.");
+ }catch(err){toast(err.message||"Unable to restore file.");}
+ finally{e.target.value="";}
+});
+
+function login(){
+ $("#loginScreen").classList.add("hidden");$("#app").classList.remove("hidden");importLegacy();renderAll();gotoPage("dashboard");icons();
+}
+function logout(){sessionStorage.removeItem(K.session);$("#app").classList.add("hidden");$("#loginScreen").classList.remove("hidden");$("#loginPassword").value="";$("#loginError").textContent="";window.scrollTo(0,0);}
+$("#loginForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ const email=$("#loginEmail").value.trim().toLowerCase(),pass=$("#loginPassword").value;
+ if(email!==ADMIN_EMAIL||pass!==ADMIN_PASSWORD){$("#loginError").textContent="Incorrect demo admin email or password.";return;}
+ sessionStorage.setItem(K.session,"signed-in");$("#loginError").textContent="";login();
+});
+/* Same-tab refresh and cross-tab changes are reflected on reload. */
+window.addEventListener("storage",e=>{
+ if([K.bookings,K.hotels,K.bookingLegacy,K.hotelLegacy].includes(e.key)&&!$("#app").classList.contains("hidden")){importLegacy();renderAll();}
+});
+if(sessionStorage.getItem(K.session)==="signed-in")login();
+else icons();
+})();
+</script>
+</body>
+</html>
