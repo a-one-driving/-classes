@@ -3,750 +3,1144 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#101b4b">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07152e">
+<meta name="description" content="Tripjan — discover flights, trains, travel deals and destinations.">
 <title>Tripjan | Flights, Trains & Travel Deals</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
-:root{--navy:#101b4b;--blue:#2457ff;--orange:#ff873c;--bg:#f5f7fc;--muted:#77829a;--line:#e6eaf2}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Inter,Arial,sans-serif;background:var(--bg);color:#17213d}
-button,input,select{font:inherit}button{cursor:pointer}
-.container{width:min(1160px,93%);margin:auto}
-header{background:white;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
-.nav{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.logo{font-size:27px;font-weight:800;letter-spacing:-1.5px;color:var(--navy);text-decoration:none}
-.logo span{color:var(--blue)}
-.logo small{display:block;font-size:9px;letter-spacing:2px;color:var(--muted)}
-.navlinks{display:flex;gap:22px;font-size:12px;font-weight:700}
-.navlinks a{color:inherit;text-decoration:none}
-.navlinks a:hover{color:var(--blue)}
-.auth-actions{display:flex;gap:8px;align-items:center}
-.login,.signup-btn{padding:10px 13px;border-radius:10px;font-size:11px;font-weight:800}
-.login{background:white;border:1px solid var(--line)}
-.signup-btn{background:var(--blue);border:1px solid var(--blue);color:white}
-.user-pill{display:none;align-items:center;gap:8px;font-size:11px;font-weight:700}
-.avatar{width:32px;height:32px;border-radius:50%;background:#eaf0ff;color:var(--blue);display:grid;place-items:center;font-weight:800}
-.hero{background:linear-gradient(110deg,#101b4b,#234cb4);color:white;padding:35px 0 90px}
-.hero h1{font-size:clamp(30px,5vw,48px);line-height:1.12;letter-spacing:-1.5px}
-.hero h1 span{color:#ffb878}
-.hero p{font-size:13px;color:#d9e3ff;margin-top:12px}
-.hero-tag{display:inline-block;background:#ffffff18;border:1px solid #ffffff35;border-radius:30px;padding:7px 12px;font-size:10px;font-weight:700;margin-bottom:17px}
-.carousel-wrap{margin-top:-67px;position:relative;z-index:2}
-.carousel{position:relative;overflow:hidden;border-radius:20px;background:#132653;box-shadow:0 14px 35px #17265020}
-.slide{display:none;min-height:240px;color:white;padding:30px 35px;align-items:center;background-size:cover;background-position:center;position:relative}
-.slide.active{display:flex;animation:appear .3s ease}
-.slide:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#09152de8,#101b4b9c 55%,#101b4b10)}
-.slide-content{position:relative;z-index:1;max-width:420px}
-.pill{display:inline-block;border-radius:30px;background:#ffb877;color:#33200d;padding:6px 10px;font-size:10px;font-weight:800}
-.slide h2{font-size:clamp(24px,4vw,37px);line-height:1.15;margin:13px 0 9px}
-.slide p{font-size:12px;color:#edf1ff}
-.slide .deal{margin-top:17px;font-size:13px;font-weight:700}
-.slide .deal strong{font-size:23px;color:#ffd29c}
-.slide button{display:block;margin-top:15px;background:white;color:var(--navy);border:0;border-radius:9px;padding:11px 16px;font-size:11px;font-weight:800}
-.carousel-arrow{position:absolute;z-index:3;top:50%;transform:translateY(-50%);width:36px;height:36px;border:0;border-radius:50%;background:#ffffffed;color:var(--navy);font-size:22px}
-.prev{left:12px}.next{right:12px}
-.dots{position:absolute;bottom:12px;left:0;right:0;display:flex;justify-content:center;gap:6px;z-index:4}
-.dot{height:7px;width:7px;border:0;border-radius:20px;background:#ffffff85}
-.dot.active{width:22px;background:white}
-.search-wrap{margin-top:24px}
-.search-card{background:white;padding:23px;border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 30px #1c31540b}
-.tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
-.tab{background:white;border:1px solid var(--line);border-radius:10px;padding:11px 18px;font-size:12px;font-weight:800;color:#68738c}
-.tab.active{background:var(--navy);border-color:var(--navy);color:white}
-.fields{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
-.field{border:1px solid var(--line);border-radius:12px;padding:11px 13px;min-width:0}
-.field label{display:block;font-size:10px;color:var(--muted);font-weight:800;margin-bottom:6px;text-transform:uppercase}
-.field input,.field select{border:0;outline:0;width:100%;background:white;color:var(--navy);font-weight:700;font-size:13px;min-width:0}
-.actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px;flex-wrap:wrap}
-.check{font-size:12px;color:#5d6880;display:flex;gap:8px;align-items:center}
-.check input{accent-color:var(--blue)}
-.primary{border:0;border-radius:10px;padding:13px 24px;background:var(--blue);color:white;font-weight:800;font-size:12px}
-.primary:hover{filter:brightness(1.1)}
-.section{padding-top:39px}
-.section-title{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:19px}
-.section-title h2{font-size:22px;letter-spacing:-.7px}
-.section-title p{font-size:12px;color:var(--muted);margin-top:5px}
-.link{color:var(--blue);font-size:12px;font-weight:800}
-.offers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
-.offer{background:white;border:1px solid var(--line);border-radius:15px;overflow:hidden}
-.offer img{width:100%;height:145px;object-fit:cover;display:block}
-.offer-body{padding:15px}
-.offer-body small{font-size:10px;color:var(--blue);font-weight:800}
-.offer-body h3{font-size:14px;margin:7px 0}
-.offer-body p{font-size:11px;color:var(--muted)}
-.offer-body button{margin-top:12px;padding:9px 12px;border:0;border-radius:8px;background:#edf2ff;color:var(--blue);font-weight:800;font-size:11px}
-.results{display:none}
-.results.show{display:block}
-.result-list{display:grid;gap:12px}
-.result-card{background:white;border:1px solid var(--line);border-radius:15px;padding:17px;display:grid;grid-template-columns:1.1fr 1fr 1fr .8fr;align-items:center;gap:14px}
-.provider{display:flex;align-items:center;gap:11px;min-width:0}
-.provider img{width:44px;height:44px;object-fit:contain;border:1px solid var(--line);border-radius:10px;padding:5px;background:white}
-.provider-fallback{width:44px;height:44px;border:1px solid var(--line);border-radius:10px;display:grid;place-items:center;font-size:12px;font-weight:800;color:var(--blue);flex-shrink:0}
-.provider h3{font-size:13px}
-.provider p,.sub{font-size:10px;color:var(--muted);margin-top:4px}
-.time strong{font-size:18px}
-.time p{font-size:10px;color:var(--muted)}
-.route{text-align:center;font-size:10px;color:var(--muted)}
-.route span{display:block;margin:6px 0;color:var(--blue)}
-.price strong{font-size:19px;display:block}
-.price button{margin-top:7px;padding:9px 12px;border:0;background:var(--blue);color:white;border-radius:8px;font-size:10px;font-weight:800}
-.note{font-size:10px;color:var(--muted);margin-top:12px}
-footer{background:var(--navy);color:white;margin-top:50px;padding:30px 0}
-footer p{color:#c4cce1;font-size:11px;margin-top:10px}
-.modal{display:none;position:fixed;inset:0;z-index:50;background:#09122bc9;align-items:center;justify-content:center;padding:18px;overflow:auto}
-.modal.open{display:flex}
-.modal-box{background:white;border-radius:18px;padding:25px;width:min(420px,100%);position:relative;max-height:90vh;overflow:auto}
-.modal-box h2{font-size:22px;color:var(--navy)}
-.modal-box p{font-size:12px;color:var(--muted);margin:10px 0}
-.modal-box label{display:block;font-size:11px;font-weight:700;margin-top:15px}
-.modal-box input{width:100%;padding:12px;border:1px solid var(--line);border-radius:9px;margin-top:6px;outline-color:var(--blue)}
-.modal-box .primary{width:100%;margin-top:18px}
-.close{position:absolute;right:14px;top:12px;border:0;background:#edf1f8;border-radius:50%;width:30px;height:30px;font-size:20px}
-.auth-switch{display:flex;gap:8px;background:#f1f4fa;border-radius:10px;padding:5px;margin:18px 0}
-.auth-switch button{width:50%;border:0;border-radius:8px;padding:10px;background:transparent;font-weight:800;font-size:12px;color:#69758d}
-.auth-switch button.active{background:white;color:var(--blue);box-shadow:0 2px 8px #14224b12}
-.auth-error{color:#c0392b!important;font-size:11px!important;min-height:16px}
-.auth-success{color:#16804a!important;font-size:11px!important}
-.toast{position:fixed;z-index:70;bottom:20px;left:50%;transform:translate(-50%,15px);opacity:0;transition:.2s;background:#101b4b;color:white;border-radius:10px;padding:12px 16px;font-size:12px;max-width:90%;text-align:center;pointer-events:none}
-.toast.show{opacity:1;transform:translate(-50%,0)}
-@keyframes appear{from{opacity:.5}to{opacity:1}}
-@media(max-width:760px){
- .navlinks{display:none}
- .hero{padding:30px 0 85px}
- .slide{min-height:235px;padding:25px 32px}
- .fields{grid-template-columns:repeat(2,minmax(0,1fr))}
- .offers{grid-template-columns:repeat(2,minmax(0,1fr))}
- .result-card{grid-template-columns:1fr 1fr}
- .route{text-align:left}
+:root {
+  --navy:#07152e;
+  --navy2:#0c2346;
+  --blue:#1769ff;
+  --blue2:#4388ff;
+  --cyan:#55d9f5;
+  --ink:#18243a;
+  --muted:#728097;
+  --line:#e6ebf3;
+  --surface:#f5f8fd;
+  --white:#fff;
+  --shadow:0 18px 55px rgba(15,37,75,.10);
+  --radius:22px;
 }
-@media(max-width:460px){
- .nav{min-height:65px}
- .logo{font-size:24px}
- .login,.signup-btn{font-size:10px;padding:9px}
- .user-pill{font-size:10px}
- .avatar{width:28px;height:28px}
- .slide{min-height:220px;padding:22px}
- .slide h2{font-size:25px}
- .carousel-arrow{width:29px;height:29px;font-size:18px}
- .search-card{padding:15px}
- .tab{padding:9px 12px;font-size:11px}
- .fields{gap:8px}
- .field{padding:10px}
- .field input,.field select{font-size:11px}
- .actions .primary{width:100%}
- .offers{grid-template-columns:1fr 1fr;gap:9px}
- .offer img{height:100px}
- .offer-body{padding:10px}
- .offer-body h3{font-size:12px}
- .offer-body p{font-size:10px}
- .offer-body button{padding:8px;font-size:10px}
- .result-card{padding:12px;gap:12px}
- .provider img,.provider-fallback{width:35px;height:35px}
- .provider h3{font-size:11px}
- .time strong{font-size:15px}
- .price strong{font-size:16px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,Arial,sans-serif;background:#f6f8fc;color:var(--ink)}
+button,input,select{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+.container{width:min(1160px,92%);margin:auto}
+.hidden{display:none!important}
+
+/* Header */
+header{
+  position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);
+  backdrop-filter:blur(16px);border-bottom:1px solid rgba(220,228,241,.8)
+}
+.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:10px;font-size:25px;font-weight:900;letter-spacing:-1px;color:var(--navy)}
+.brand-mark{
+  display:grid;place-items:center;width:40px;height:40px;border-radius:14px;
+  color:#fff;background:linear-gradient(135deg,#1769ff,#54caff);
+  box-shadow:0 8px 20px #1769ff35;font-size:21px
+}
+.brand span span{color:var(--blue)}
+.nav-links{display:flex;align-items:center;gap:28px;color:#536078;font-size:13px;font-weight:700}
+.nav-links a:hover{color:var(--blue)}
+.nav-actions{display:flex;align-items:center;gap:9px}
+.btn{border:0;border-radius:12px;padding:12px 17px;font-size:13px;font-weight:800;transition:.2s}
+.btn:hover{transform:translateY(-2px)}
+.btn-outline{background:#fff;color:var(--navy);border:1px solid #dce4f1}
+.btn-primary{background:linear-gradient(135deg,var(--blue),#3988ff);color:#fff;box-shadow:0 8px 20px #1769ff30}
+.user-pill{font-size:12px;font-weight:800;color:var(--navy);background:#eef4ff;border-radius:30px;padding:10px 13px}
+.menu-btn{display:none;background:#eef3fb;border:0;border-radius:10px;padding:10px;font-size:20px}
+
+/* Hero */
+.hero{padding:24px 0 0}
+.hero-top{display:flex;justify-content:space-between;align-items:end;gap:20px;margin:18px 0 22px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--blue);font-size:11px;font-weight:900;letter-spacing:1.8px;text-transform:uppercase}
+.eyebrow:before{content:"";width:22px;height:2px;background:var(--blue);border-radius:5px}
+h1{font-size:clamp(27px,4vw,43px);line-height:1.13;letter-spacing:-1.8px;margin:10px 0 0;color:var(--navy)}
+.hero-top p{max-width:360px;color:var(--muted);font-size:13px;line-height:1.8;margin:0}
+
+/* Premium carousel */
+.carousel{
+  position:relative;height:clamp(360px,47vw,510px);min-height:360px;
+  overflow:hidden;border-radius:28px;background:#0a1d3a;box-shadow:0 25px 70px #102e5b24
+}
+.slide{
+  position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .75s ease,visibility .75s;
+  background-size:cover;background-position:center
+}
+.slide.active{opacity:1;visibility:visible}
+.slide:before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(4,15,35,.88) 0%,rgba(4,15,35,.65) 43%,rgba(4,15,35,.05) 100%),
+  linear-gradient(0deg,rgba(3,13,30,.38),transparent 60%)
+}
+.slide:after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(circle at 75% 20%,rgba(86,184,255,.2),transparent 35%)
+}
+.slide-content{
+  position:absolute;z-index:2;left:clamp(24px,6vw,72px);top:50%;
+  transform:translateY(-50%);width:min(510px,78%);color:white
+}
+.pill{
+  display:inline-flex;align-items:center;gap:8px;padding:9px 13px;border-radius:30px;
+  background:#ffffff18;border:1px solid #ffffff3b;backdrop-filter:blur(12px);
+  font-size:10px;font-weight:900;letter-spacing:1.3px;text-transform:uppercase
+}
+.pill-dot{width:7px;height:7px;border-radius:50%;background:#62e8bd;box-shadow:0 0 10px #62e8bd}
+.slide h2{font-size:clamp(34px,5.4vw,62px);line-height:1.04;letter-spacing:-2.5px;margin:22px 0 15px;font-weight:900}
+.slide h2 span{color:#74d9ff}
+.slide p{font-size:14px;line-height:1.85;color:#e1e9f8;max-width:410px;margin:0}
+.slide-bottom{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:25px}
+.deal{display:flex;flex-direction:column;gap:4px}
+.deal small{font-size:10px;text-transform:uppercase;letter-spacing:1.4px;color:#c5d4ed;font-weight:800}
+.deal strong{font-size:24px;letter-spacing:-.6px}
+.deal strong em{font-size:11px;font-style:normal;color:#c5d4ed;font-weight:600}
+.slide-btn{display:inline-flex;align-items:center;gap:12px;border:0;border-radius:12px;background:white;color:#0c2450;padding:14px 18px;font-size:12px;font-weight:900;box-shadow:0 10px 28px #0002}
+.slide-btn span{font-size:17px}
+.carousel-controls{position:absolute;z-index:5;bottom:25px;right:27px;display:flex;align-items:center;gap:10px}
+.carousel-arrow{width:42px;height:42px;border-radius:50%;border:1px solid #ffffff5c;background:#ffffff18;color:white;font-size:20px;backdrop-filter:blur(10px);transition:.2s}
+.carousel-arrow:hover{background:white;color:var(--navy)}
+.dots{display:flex;gap:7px;margin:0 8px}
+.dot{width:7px;height:7px;border:0;border-radius:20px;background:#ffffff70;padding:0;transition:.3s}
+.dot.active{width:25px;background:white}
+.slide-count{font-size:11px;color:#ffffffce;font-weight:800;min-width:32px}
+
+/* Search */
+.search-wrap{position:relative;z-index:8;margin-top:-35px}
+.search-card{background:white;border:1px solid #e6ecf5;border-radius:23px;box-shadow:var(--shadow);padding:24px}
+.search-head{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;margin-bottom:20px}
+.tabs{display:flex;gap:7px;background:#f1f5fb;padding:5px;border-radius:13px}
+.tab{border:0;border-radius:9px;background:transparent;color:#68758a;padding:11px 17px;font-size:12px;font-weight:900}
+.tab.active{background:white;color:var(--blue);box-shadow:0 3px 12px #0c234612}
+.search-note{font-size:11px;color:#8994a7;font-weight:600}
+.search-grid{display:grid;grid-template-columns:1.2fr 1.2fr 1fr .8fr auto;gap:12px;align-items:end}
+.field{position:relative;min-width:0}
+.field label{display:block;margin:0 0 9px 2px;color:#78849a;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:1.1px}
+.field input,.field select{width:100%;height:49px;border:1px solid #e1e8f2;border-radius:12px;background:#fbfcff;padding:0 12px;color:#23314a;outline:none;font-size:12px;font-weight:700}
+.field input:focus,.field select:focus{border-color:#76a5ff;box-shadow:0 0 0 3px #1769ff12}
+.search-submit{height:49px;white-space:nowrap;padding:0 22px}
+.search-foot{display:flex;align-items:center;gap:8px;color:#7b879b;font-size:10px;margin-top:16px}
+.search-foot b{color:#1a9c70}
+
+/* General sections */
+.section{padding:74px 0 0}
+.section-heading{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:25px}
+.section-heading h2{font-size:27px;letter-spacing:-1px;margin:9px 0 0;color:var(--navy)}
+.section-heading p{font-size:12px;line-height:1.7;color:var(--muted);margin:9px 0 0}
+.text-link{font-size:12px;font-weight:900;color:var(--blue);white-space:nowrap}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.feature-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:23px;display:flex;gap:15px;align-items:start}
+.feature-icon{flex:0 0 46px;height:46px;display:grid;place-items:center;border-radius:14px;background:#eef4ff;color:var(--blue);font-size:22px}
+.feature-card h3{font-size:13px;margin:3px 0 8px}
+.feature-card p{font-size:11px;color:var(--muted);line-height:1.8;margin:0}
+
+/* Offers */
+.offer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:19px}
+.offer-card{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:.25s}
+.offer-card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.offer-img{height:205px;position:relative;overflow:hidden;background:#e7edf7}
+.offer-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.offer-card:hover .offer-img img{transform:scale(1.06)}
+.offer-tag{position:absolute;top:14px;left:14px;padding:8px 10px;border-radius:8px;background:#fff;color:var(--navy);font-size:9px;font-weight:900;letter-spacing:.6px}
+.offer-body{padding:19px}
+.offer-body h3{font-size:16px;margin:0 0 8px;letter-spacing:-.4px}
+.offer-body p{font-size:11px;line-height:1.7;color:var(--muted);margin:0 0 18px}
+.offer-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.price small{display:block;font-size:9px;color:#8893a5;margin-bottom:4px}
+.price strong{font-size:18px;color:var(--navy)}
+.price em{font-size:10px;font-style:normal;color:#8993a5;font-weight:600}
+.small-btn{border:0;border-radius:10px;background:#eef4ff;color:var(--blue);font-size:11px;font-weight:900;padding:11px 13px}
+.small-btn:hover{background:var(--blue);color:white}
+
+/* Popular routes */
+.routes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.route-card{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px;background:#fff;border:1px solid var(--line);border-radius:16px;transition:.2s}
+.route-card:hover{border-color:#a9c6ff;box-shadow:0 8px 25px #173f7a0d;transform:translateY(-2px)}
+.route-main{display:flex;align-items:center;gap:12px}
+.route-icon{width:40px;height:40px;display:grid;place-items:center;background:#eef4ff;color:var(--blue);border-radius:12px;font-size:19px}
+.route-name{font-size:12px;font-weight:900}
+.route-sub{font-size:10px;color:var(--muted);margin-top:5px}
+.route-arrow{font-size:18px;color:#8ca0be}
+
+/* Results */
+.results-panel{margin-top:30px}
+.results-title{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-bottom:15px}
+.results-title h3{margin:0;font-size:19px}
+.results-title p{font-size:11px;color:var(--muted);margin:6px 0 0}
+.result-list{display:grid;gap:12px}
+.result-card{display:grid;grid-template-columns:1.2fr 1fr .8fr auto;align-items:center;gap:15px;padding:18px;background:white;border:1px solid var(--line);border-radius:16px}
+.result-company{display:flex;align-items:center;gap:12px}
+.airline-logo{width:46px;height:42px;object-fit:contain;background:#f5f7fb;border-radius:10px;padding:5px}
+.company-name{font-size:12px;font-weight:900}
+.company-sub{font-size:10px;color:var(--muted);margin-top:5px}
+.result-time{font-size:13px;font-weight:900}
+.result-time small{display:block;color:var(--muted);font-size:10px;font-weight:600;margin-top:5px}
+.result-price strong{font-size:18px}
+.result-price small{display:block;font-size:10px;color:var(--muted);margin-top:5px}
+.result-book{padding:11px 14px}
+
+/* Footer */
+footer{margin-top:80px;background:var(--navy);color:#fff;padding:45px 0 22px}
+.footer-top{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;padding-bottom:32px}
+.footer-brand{font-size:23px;font-weight:900;letter-spacing:-.8px}
+.footer-brand span{color:#69cfff}
+.footer-description{max-width:300px;color:#a9b9d3;font-size:11px;line-height:1.9;margin-top:12px}
+.footer-links h4{font-size:12px;margin:0 0 14px}
+.footer-links a{display:block;color:#a9b9d3;font-size:11px;margin:11px 0}
+.footer-links a:hover{color:white}
+.footer-bottom{border-top:1px solid #ffffff1b;padding-top:20px;color:#91a2bf;font-size:10px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* Modal */
+.modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:18px;background:#07152ebd;backdrop-filter:blur(8px)}
+.modal.show{display:flex}
+.modal-card{width:min(430px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:24px;padding:27px;box-shadow:0 30px 100px #0003;animation:modalIn .25s ease}
+@keyframes modalIn{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.modal-head{display:flex;align-items:start;justify-content:space-between;gap:15px;margin-bottom:22px}
+.modal-head h2{font-size:23px;letter-spacing:-.8px;margin:0;color:var(--navy)}
+.modal-head p{font-size:11px;color:var(--muted);line-height:1.7;margin:8px 0 0}
+.close-btn{width:34px;height:34px;flex:0 0 34px;border:0;border-radius:10px;background:#f0f4fa;color:#526079;font-size:20px}
+.modal-field{margin-bottom:15px}
+.modal-field label{display:block;font-size:10px;font-weight:900;color:#637087;margin:0 0 8px;text-transform:uppercase;letter-spacing:.8px}
+.modal-field input{width:100%;height:47px;border:1px solid #e0e7f1;border-radius:11px;padding:0 13px;outline:none;font-size:12px}
+.modal-field input:focus{border-color:#70a0ff}
+.modal-submit{width:100%;height:48px;margin-top:5px}
+.modal-switch{text-align:center;font-size:11px;color:var(--muted);margin:18px 0 0}
+.modal-switch button{border:0;background:none;color:var(--blue);font-size:11px;font-weight:900}
+.message{font-size:11px;line-height:1.7;margin:10px 0;color:#d33}
+.demo-note{font-size:10px;line-height:1.7;color:#8a95a7;margin-top:14px;padding:11px;background:#f5f7fb;border-radius:10px}
+.booking-info{background:#f4f7fc;border-radius:13px;padding:15px;font-size:12px;line-height:1.9;color:#59667c;margin-bottom:18px}
+.booking-info strong{color:var(--navy)}
+.toast{position:fixed;z-index:150;bottom:24px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#102442;color:#fff;border-radius:12px;padding:13px 18px;font-size:12px;font-weight:700;box-shadow:0 12px 35px #06142d38;transition:.25s;max-width:90%;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* Responsive */
+@media(max-width:900px){
+ .nav-links{gap:15px}
+ .search-grid{grid-template-columns:repeat(2,1fr)}
+ .search-submit{width:100%}
+ .offer-grid{grid-template-columns:repeat(2,1fr)}
+ .routes-grid{grid-template-columns:repeat(2,1fr)}
+ .result-card{grid-template-columns:1fr 1fr}
+ .result-book{justify-self:start}
+ .features{grid-template-columns:1fr}
+}
+@media(max-width:650px){
+ .nav{height:67px}
+ .brand{font-size:22px}
+ .brand-mark{width:36px;height:36px}
+ .nav-links{display:none;position:absolute;top:67px;left:0;right:0;padding:20px 5%;background:white;border-bottom:1px solid var(--line);flex-direction:column;align-items:flex-start;gap:20px}
+ .nav-links.open{display:flex}
+ .nav-actions{gap:6px}
+ .nav-actions .btn{padding:10px 11px;font-size:11px}
+ .menu-btn{display:block}
+ .user-pill{max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+ .hero{padding-top:12px}
+ .hero-top{display:block;margin:17px 0}
+ .hero-top p{margin-top:12px}
+ .carousel{height:430px;min-height:430px;border-radius:22px}
+ .slide{background-position:60% center}
+ .slide:before{background:linear-gradient(90deg,#041126e8 0%,#041126b8 72%,#04112648 100%)}
+ .slide-content{left:23px;width:calc(100% - 46px)}
+ .slide h2{font-size:39px;letter-spacing:-1.8px;margin:20px 0 13px}
+ .slide p{font-size:12px}
+ .slide-bottom{gap:14px;margin-top:23px}
+ .deal strong{font-size:21px}
+ .slide-btn{padding:12px 13px;font-size:11px}
+ .carousel-controls{bottom:16px;right:13px;gap:5px}
+ .carousel-arrow{width:35px;height:35px}
+ .dots{margin:0 4px}
+ .search-wrap{margin-top:18px}
+ .search-card{padding:18px;border-radius:19px}
+ .search-head{margin-bottom:17px}
+ .search-note{display:none}
+ .tab{padding:10px 13px}
+ .search-grid{grid-template-columns:1fr 1fr;gap:13px}
+ .field input,.field select{font-size:11px;padding:0 9px}
+ .search-submit{grid-column:1/-1}
+ .section{padding-top:52px}
+ .section-heading{align-items:start}
+ .section-heading h2{font-size:23px}
+ .section-heading p{max-width:250px}
+ .offer-grid{grid-template-columns:1fr}
+ .offer-img{height:220px}
+ .routes-grid{grid-template-columns:1fr}
+ .result-card{grid-template-columns:1fr 1fr;padding:14px}
+ .result-company{gap:8px}
+ .airline-logo{width:38px;height:38px}
+ .result-price strong{font-size:16px}
+ .footer-top{gap:25px}
+ .footer-links{min-width:40%}
+ footer{margin-top:55px}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}
 }
 </style>
 </head>
+
 <body>
 
 <header>
- <div class="container nav">
-  <a class="logo" href="#">trip<span>jan</span><small>YOUR JOURNEY, YOUR WAY</small></a>
-  <nav class="navlinks">
-   <a href="#booking">Book Travel</a><a href="#results">Search Results</a><a href="#deals">Offers</a>
-  </nav>
-  <div class="auth-actions" id="authActions">
-   <button class="login" id="loginBtn">Login</button>
-   <button class="signup-btn" id="signupBtn">Sign up</button>
+  <div class="container nav">
+    <a href="#" class="brand" aria-label="Tripjan home">
+      <span class="brand-mark">✈</span>
+      <span>trip<span>jan</span></span>
+    </a>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#search">Flights & Trains</a>
+      <a href="#offers">Travel Deals</a>
+      <a href="#routes">Popular Routes</a>
+    </nav>
+
+    <div class="nav-actions">
+      <span class="user-pill hidden" id="userPill"></span>
+      <button class="btn btn-outline" id="loginBtn">Log in</button>
+      <button class="btn btn-primary" id="signupBtn">Sign up</button>
+      <button class="btn btn-outline hidden" id="logoutBtn">Logout</button>
+      <button class="menu-btn" id="menuBtn" aria-label="Open navigation">☰</button>
+    </div>
   </div>
-  <div class="user-pill" id="userPill">
-   <div class="avatar" id="userAvatar">U</div>
-   <span id="userName">User</span>
-   <button class="login" id="logoutBtn">Logout</button>
-  </div>
- </div>
 </header>
 
-<section class="hero">
- <div class="container">
-  <div class="hero-tag">✈ FLIGHTS · 🚆 TRAINS · GREAT JOURNEYS</div>
-  <h1>Travel more.<br><span>Discover more.</span></h1>
-  <p>Find your next flight, explore train journeys and discover India.</p>
- </div>
-</section>
+<main id="home">
+  <section class="hero">
+    <div class="container">
+      <div class="hero-top">
+        <div>
+          <span class="eyebrow">Your journey starts here</span>
+          <h1>Travel more. Worry less.</h1>
+        </div>
+        <p>Discover exciting destinations, compare travel options and plan your next adventure with Tripjan.</p>
+      </div>
 
-<div class="container carousel-wrap">
- <div class="carousel" id="carousel">
-  <article class="slide active" style="background-image:url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1400&q=85')">
-   <div class="slide-content">
-    <span class="pill">FLIGHT DISCOVERY</span>
-    <h2>Your next destination is waiting.</h2>
-    <p>Explore routes across India's biggest cities.</p>
-    <div class="deal">Sample fares from <strong>₹2,499*</strong></div>
-    <button data-mode="flight">Search Flights →</button>
-   </div>
-  </article>
-  <article class="slide" style="background-image:url('https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=1400&q=85')">
-   <div class="slide-content">
-    <span class="pill">TRAIN JOURNEYS</span>
-    <h2>See India, one station at a time.</h2>
-    <p>Plan your next rail journey with Tripjan.</p>
-    <div class="deal">Explore train journeys</div>
-    <button data-mode="train">Explore Trains →</button>
-   </div>
-  </article>
-  <article class="slide" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=85')">
-   <div class="slide-content">
-    <span class="pill">TRAVEL INSPIRATION</span>
-    <h2>Make your next trip memorable.</h2>
-    <p>From city breaks to unforgettable holidays.</p>
-    <div class="deal">Your journey. Your way.</div>
-    <button data-mode="flight">Plan a Trip →</button>
-   </div>
-  </article>
-  <button class="carousel-arrow prev" id="prev" aria-label="Previous slide">‹</button>
-  <button class="carousel-arrow next" id="next" aria-label="Next slide">›</button>
-  <div class="dots">
-   <button class="dot active" aria-label="Slide 1"></button>
-   <button class="dot" aria-label="Slide 2"></button>
-   <button class="dot" aria-label="Slide 3"></button>
+      <div class="carousel" id="carousel" aria-label="Featured travel offers">
+        <div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1800&q=85')">
+          <div class="slide-content">
+            <span class="pill"><span class="pill-dot"></span> Flight deals · Made for explorers</span>
+            <h2>Take off to<br><span>somewhere new.</span></h2>
+            <p>Find your next escape. Explore routes, compare sample fares and make your travel plans with confidence.</p>
+            <div class="slide-bottom">
+              <div class="deal"><small>Sample fares from</small><strong>₹2,499 <em>/ person</em></strong></div>
+              <button class="slide-btn" data-mode="flight">Explore flights <span>↗</span></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=1800&q=85')">
+          <div class="slide-content">
+            <span class="pill"><span class="pill-dot"></span> Train journeys · Travel your way</span>
+            <h2>Every journey<br>has a <span>story.</span></h2>
+            <p>Plan a scenic rail journey, explore popular connections and get ready for the places waiting ahead.</p>
+            <div class="slide-bottom">
+              <div class="deal"><small>Sample fares from</small><strong>₹399 <em>/ person</em></strong></div>
+              <button class="slide-btn" data-mode="train">Explore trains <span>↗</span></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1800&q=85')">
+          <div class="slide-content">
+            <span class="pill"><span class="pill-dot"></span> Weekend escapes · Your next memory</span>
+            <h2>Leave routine.<br><span>Find wonder.</span></h2>
+            <p>From peaceful mountain views to vibrant city breaks, discover inspiration for your next holiday.</p>
+            <div class="slide-bottom">
+              <div class="deal"><small>Holiday inspiration</small><strong>Made for you</strong></div>
+              <button class="slide-btn" data-scroll="#offers">Explore getaways <span>↗</span></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-controls">
+          <span class="slide-count" id="slideCount">01 / 03</span>
+          <div class="dots" id="carouselDots">
+            <button class="dot active" data-slide="0" aria-label="Show slide 1"></button>
+            <button class="dot" data-slide="1" aria-label="Show slide 2"></button>
+            <button class="dot" data-slide="2" aria-label="Show slide 3"></button>
+          </div>
+          <button class="carousel-arrow" id="prev" aria-label="Previous slide">‹</button>
+          <button class="carousel-arrow" id="next" aria-label="Next slide">›</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container search-wrap" id="search">
+    <div class="search-card">
+      <div class="search-head">
+        <div class="tabs">
+          <button class="tab active" data-mode="flight">✈ Flights</button>
+          <button class="tab" data-mode="train">🚆 Trains</button>
+        </div>
+        <span class="search-note">Simple planning. More possibilities.</span>
+      </div>
+
+      <form id="searchForm">
+        <div class="search-grid">
+          <div class="field">
+            <label for="from">From city</label>
+            <input id="from" name="from" list="cityList" placeholder="e.g. Bhubaneswar" value="Bhubaneswar" required>
+          </div>
+          <div class="field">
+            <label for="to">To city</label>
+            <input id="to" name="to" list="cityList" placeholder="e.g. Delhi" value="Delhi" required>
+          </div>
+          <div class="field">
+            <label for="date">Departure date</label>
+            <input id="date" name="date" type="date" required>
+          </div>
+          <div class="field">
+            <label for="people">Travellers</label>
+            <select id="people" name="people">
+              <option value="1">1 traveller</option>
+              <option value="2">2 travellers</option>
+              <option value="3">3 travellers</option>
+              <option value="4">4 travellers</option>
+              <option value="5">5 travellers</option>
+              <option value="6">6 travellers</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary search-submit" id="searchBtn">Search trips →</button>
+        </div>
+        <datalist id="cityList">
+          <option value="Bhubaneswar"></option>
+          <option value="Delhi"></option>
+          <option value="Mumbai"></option>
+          <option value="Kolkata"></option>
+          <option value="Bengaluru"></option>
+          <option value="Chennai"></option>
+          <option value="Hyderabad"></option>
+          <option value="Pune"></option>
+          <option value="Jaipur"></option>
+          <option value="Patna"></option>
+          <option value="Baripada"></option>
+          <option value="Puri"></option>
+          <option value="Visakhapatnam"></option>
+          <option value="Goa"></option>
+        </datalist>
+        <div class="search-foot"><b>✓</b> Compare example options before planning your trip. Prices and schedules below are demonstrations only.</div>
+      </form>
+
+      <div class="results-panel hidden" id="results">
+        <div class="results-title">
+          <div>
+            <h3 id="resultTitle">Available options</h3>
+            <p id="resultSubtitle"></p>
+          </div>
+          <button class="btn btn-outline" id="hideResults" type="button">Hide results</button>
+        </div>
+        <div class="result-list" id="resultList"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="section-heading">
+      <div>
+        <span class="eyebrow">Travel with confidence</span>
+        <h2>Good trips start with good plans.</h2>
+        <p>A smoother way to organise your next adventure.</p>
+      </div>
+    </div>
+    <div class="features">
+      <article class="feature-card">
+        <div class="feature-icon">⌕</div>
+        <div><h3>Explore your options</h3><p>Browse example flight and train choices in one simple place while planning your journey.</p></div>
+      </article>
+      <article class="feature-card">
+        <div class="feature-icon">♧</div>
+        <div><h3>Discover new destinations</h3><p>Find inspiration for weekend breaks, family holidays and memorable escapes.</p></div>
+      </article>
+      <article class="feature-card">
+        <div class="feature-icon">♡</div>
+        <div><h3>Plan at your pace</h3><p>Choose your dates, traveller count and route before moving to a real booking provider.</p></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="container section" id="offers">
+    <div class="section-heading">
+      <div>
+        <span class="eyebrow">Handpicked inspiration</span>
+        <h2>Places worth travelling for.</h2>
+        <p>Start dreaming about your next escape.</p>
+      </div>
+      <a href="#search" class="text-link">Plan a trip ↗</a>
+    </div>
+
+    <div class="offer-grid">
+      <article class="offer-card">
+        <div class="offer-img">
+          <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=900&q=80" alt="Tropical beach destination" loading="lazy">
+          <span class="offer-tag">BEACH ESCAPE</span>
+        </div>
+        <div class="offer-body">
+          <h3>Goa Getaway</h3>
+          <p>Sunny beaches, coastal cafés and relaxed holiday vibes.</p>
+          <div class="offer-bottom">
+            <div class="price"><small>Sample trip budget from</small><strong>₹4,999 <em>/ person</em></strong></div>
+            <button class="small-btn" data-destination="Goa">Explore</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="offer-card">
+        <div class="offer-img">
+          <img src="https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=900&q=80" alt="Jaipur heritage architecture" loading="lazy">
+          <span class="offer-tag">CULTURE & HERITAGE</span>
+        </div>
+        <div class="offer-body">
+          <h3>Royal Jaipur</h3>
+          <p>Discover colourful markets, historic forts and local food.</p>
+          <div class="offer-bottom">
+            <div class="price"><small>Sample trip budget from</small><strong>₹3,499 <em>/ person</em></strong></div>
+            <button class="small-btn" data-destination="Jaipur">Explore</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="offer-card">
+        <div class="offer-img">
+          <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=900&q=80" alt="Himalayan mountain landscape" loading="lazy">
+          <span class="offer-tag">MOUNTAIN RETREAT</span>
+        </div>
+        <div class="offer-body">
+          <h3>Himalayan Escape</h3>
+          <p>Mountain air, spectacular landscapes and quiet moments.</p>
+          <div class="offer-bottom">
+            <div class="price"><small>Sample trip budget from</small><strong>₹6,999 <em>/ person</em></strong></div>
+            <button class="small-btn" data-destination="Manali">Explore</button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="container section" id="routes">
+    <div class="section-heading">
+      <div>
+        <span class="eyebrow">Popular connections</span>
+        <h2>Where will you go next?</h2>
+        <p>Choose a route to fill the search form.</p>
+      </div>
+    </div>
+
+    <div class="routes-grid">
+      <button class="route-card" data-from="Bhubaneswar" data-to="Delhi" data-mode="flight">
+        <div class="route-main"><div class="route-icon">✈</div><div><div class="route-name">Bhubaneswar → Delhi</div><div class="route-sub">Flight · Popular route</div></div></div><span class="route-arrow">↗</span>
+      </button>
+      <button class="route-card" data-from="Bhubaneswar" data-to="Kolkata" data-mode="train">
+        <div class="route-main"><div class="route-icon">🚆</div><div><div class="route-name">Bhubaneswar → Kolkata</div><div class="route-sub">Train · Rail journey</div></div></div><span class="route-arrow">↗</span>
+      </button>
+      <button class="route-card" data-from="Delhi" data-to="Mumbai" data-mode="flight">
+        <div class="route-main"><div class="route-icon">✈</div><div><div class="route-name">Delhi → Mumbai</div><div class="route-sub">Flight · City connection</div></div></div><span class="route-arrow">↗</span>
+      </button>
+      <button class="route-card" data-from="Bhubaneswar" data-to="Puri" data-mode="train">
+        <div class="route-main"><div class="route-icon">🚆</div><div><div class="route-name">Bhubaneswar → Puri</div><div class="route-sub">Train · Coastal Odisha</div></div></div><span class="route-arrow">↗</span>
+      </button>
+      <button class="route-card" data-from="Mumbai" data-to="Goa" data-mode="flight">
+        <div class="route-main"><div class="route-icon">✈</div><div><div class="route-name">Mumbai → Goa</div><div class="route-sub">Flight · Beach escape</div></div></div><span class="route-arrow">↗</span>
+      </button>
+      <button class="route-card" data-from="Delhi" data-to="Jaipur" data-mode="train">
+        <div class="route-main"><div class="route-icon">🚆</div><div><div class="route-name">Delhi → Jaipur</div><div class="route-sub">Train · Heritage trip</div></div></div><span class="route-arrow">↗</span>
+      </button>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">✈ trip<span>jan</span></div>
+        <p class="footer-description">A simple starting point for your next journey. Discover destinations, explore travel options and plan a trip that feels like you.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Explore</h4>
+        <a href="#search">Flights</a>
+        <a href="#search" data-footer-mode="train">Trains</a>
+        <a href="#offers">Travel deals</a>
+      </div>
+      <div class="footer-links">
+        <h4>Tripjan</h4>
+        <a href="#home">About the experience</a>
+        <a href="#routes">Popular routes</a>
+        <a href="#" id="footerLogin">Your account</a>
+      </div>
+      <div class="footer-links">
+        <h4>Important</h4>
+        <a href="#" id="privacyLink">Privacy note</a>
+        <a href="#" id="termsLink">Demo terms</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Tripjan. All rights reserved.</span>
+      <span>Demo travel interface · No real bookings are processed.</span>
+    </div>
   </div>
- </div>
-</div>
+</footer>
 
-<section class="container search-wrap" id="booking">
- <form class="search-card" id="searchForm">
-  <div class="tabs">
-   <button class="tab active" type="button" data-mode="flight">✈ Flights</button>
-   <button class="tab" type="button" data-mode="train">🚆 Trains</button>
-  </div>
-  <div class="fields">
-   <div class="field">
-    <label for="from">From</label>
-    <select id="from">
-     <option value="Mumbai">Mumbai (BOM)</option>
-     <option value="Delhi">Delhi (DEL)</option>
-     <option value="Hyderabad">Hyderabad (HYD)</option>
-     <option value="Bengaluru">Bengaluru (BLR)</option>
-     <option value="Chennai">Chennai (MAA)</option>
-     <option value="Bhubaneswar">Bhubaneswar (BBI)</option>
-     <option value="Pune">Pune (PNQ)</option>
-     <option value="Kolkata">Kolkata (CCU)</option>
-     <option value="Jaipur">Jaipur (JAI)</option>
-     <option value="Ahmedabad">Ahmedabad (AMD)</option>
-    </select>
-   </div>
-   <div class="field">
-    <label for="to">To</label>
-    <select id="to">
-     <option value="Kolkata">Kolkata (CCU)</option>
-     <option value="Mumbai">Mumbai (BOM)</option>
-     <option value="Delhi">Delhi (DEL)</option>
-     <option value="Hyderabad">Hyderabad (HYD)</option>
-     <option value="Bengaluru">Bengaluru (BLR)</option>
-     <option value="Chennai">Chennai (MAA)</option>
-     <option value="Bhubaneswar">Bhubaneswar (BBI)</option>
-     <option value="Pune">Pune (PNQ)</option>
-     <option value="Jaipur">Jaipur (JAI)</option>
-     <option value="Ahmedabad">Ahmedabad (AMD)</option>
-    </select>
-   </div>
-   <div class="field">
-    <label for="date">Departure date</label>
-    <input id="date" type="date" required>
-   </div>
-   <div class="field">
-    <label for="people" id="peopleLabel">Travellers</label>
-    <select id="people">
-     <option value="1">1 Adult</option><option value="2">2 Adults</option>
-     <option value="3">3 Adults</option><option value="4">4 Adults</option>
-     <option value="5">5 Adults</option><option value="6">6 Adults</option>
-    </select>
-   </div>
-  </div>
-  <div class="actions">
-   <label class="check"><input id="direct" type="checkbox"> Non-stop flights only</label>
-   <button class="primary" type="submit" id="searchBtn">Search Flights →</button>
-  </div>
- </form>
-</section>
-
-<section class="container section results" id="results">
- <div class="section-title">
-  <div><h2 id="resultTitle">Travel options</h2><p id="resultSubtitle"></p></div>
-  <a class="link" href="#booking">Edit search ↑</a>
- </div>
- <div class="result-list" id="resultList"></div>
- <p class="note">Demo results only. Prices, schedules and availability are illustrative, not live booking data.</p>
-</section>
-
-<section class="container section" id="deals">
- <div class="section-title"><div><h2>Explore travel deals</h2><p>Get inspired for your next journey.</p></div></div>
- <div class="offers">
-  <article class="offer">
-   <img loading="lazy" src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=600&q=75" alt="Airplane above clouds">
-   <div class="offer-body"><small>✈ FLIGHTS</small><h3>Fly to your favourite city</h3><p>Explore routes and compare sample fares.</p><button data-mode="flight">Search flights →</button></div>
-  </article>
-  <article class="offer">
-   <img loading="lazy" src="https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=600&q=75" alt="Train in a landscape">
-   <div class="offer-body"><small>🚆 TRAINS</small><h3>Enjoy the rail journey</h3><p>Discover train routes around India.</p><button data-mode="train">Find trains →</button></div>
-  </article>
-  <article class="offer">
-   <img loading="lazy" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=75" alt="Scenic travel destination">
-   <div class="offer-body"><small>🌍 EXPLORE</small><h3>Find your next escape</h3><p>Choose a destination and start planning.</p><button data-mode="flight">Plan a trip →</button></div>
-  </article>
- </div>
- <p class="note">Promotional design examples only. No discount or special fare is guaranteed.</p>
-</section>
-
-<section class="container section">
- <div class="section-title"><div><h2>Popular routes</h2><p>Choose a route to start your search.</p></div></div>
- <div class="offers">
-  <article class="offer"><div class="offer-body"><small>POPULAR FLIGHT</small><h3>Mumbai → Kolkata</h3><p>Explore flights from Mumbai to Kolkata.</p><button data-from="Mumbai" data-to="Kolkata">Choose route →</button></div></article>
-  <article class="offer"><div class="offer-body"><small>POPULAR FLIGHT</small><h3>Hyderabad → Kolkata</h3><p>Explore Hyderabad to Kolkata flights.</p><button data-from="Hyderabad" data-to="Kolkata">Choose route →</button></div></article>
-  <article class="offer"><div class="offer-body"><small>RAIL JOURNEY</small><h3>Delhi → Kolkata</h3><p>Discover rail journey options.</p><button data-mode="train" data-from="Delhi" data-to="Kolkata">Choose route →</button></div></article>
- </div>
-</section>
-
-<footer><div class="container">
- <a class="logo" href="#" style="color:white">trip<span>jan</span></a>
- <p>Flights, trains and travel inspiration — all in one place.</p>
- <p>© <span id="year"></span> Tripjan. All rights reserved.</p>
-</div></footer>
-
-<!-- Signup/Login modal -->
+<!-- Login / Signup modal -->
 <div class="modal" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
- <div class="modal-box">
-  <button class="close" id="authClose" aria-label="Close">×</button>
-  <h2 id="authTitle">Welcome to Tripjan</h2>
-  <p id="authSubtitle">Create your account to get started.</p>
-  <div class="auth-switch">
-   <button id="showLogin" type="button">Login</button>
-   <button id="showSignup" type="button" class="active">Sign up</button>
+  <div class="modal-card">
+    <div class="modal-head">
+      <div>
+        <div class="brand" style="font-size:20px;margin-bottom:17px"><span class="brand-mark" style="width:32px;height:32px;font-size:16px;border-radius:10px">✈</span><span>trip<span>jan</span></span></div>
+        <h2 id="authTitle">Welcome back</h2>
+        <p id="authSubtitle">Log in to continue planning your journey.</p>
+      </div>
+      <button class="close-btn" id="authClose" aria-label="Close">×</button>
+    </div>
+
+    <form id="authForm">
+      <div class="modal-field hidden" id="nameField">
+        <label for="authName">Your name</label>
+        <input id="authName" type="text" autocomplete="name" placeholder="Enter your name">
+      </div>
+      <div class="modal-field">
+        <label for="authEmail">Email address</label>
+        <input id="authEmail" type="email" autocomplete="email" placeholder="you@example.com" required>
+      </div>
+      <div class="modal-field">
+        <label for="authPassword">Password</label>
+        <input id="authPassword" type="password" autocomplete="current-password" minlength="6" placeholder="At least 6 characters" required>
+      </div>
+      <p class="message" id="authMessage" aria-live="polite"></p>
+      <button class="btn btn-primary modal-submit" id="authSubmit" type="submit">Log in</button>
+    </form>
+
+    <p class="modal-switch"><span id="authSwitchText">New to Tripjan?</span> <button id="showSignup" type="button">Create an account</button></p>
+    <div class="demo-note">Demo account only. This page stores demo account data in this browser and is not secure enough for real customer authentication. Do not use a real or reused password.</div>
   </div>
-  <form id="authForm">
-   <div id="nameGroup">
-    <label for="authName">Full name</label>
-    <input id="authName" type="text" autocomplete="name" placeholder="Enter your full name" maxlength="80">
-   </div>
-   <label for="authEmail">Email address</label>
-   <input id="authEmail" type="email" autocomplete="email" placeholder="you@example.com" maxlength="254" required>
-   <label for="authPassword">Password</label>
-   <input id="authPassword" type="password" autocomplete="new-password" placeholder="At least 8 characters" minlength="8" maxlength="128" required>
-   <p id="authMessage" class="auth-error" aria-live="polite"></p>
-   <button class="primary" type="submit" id="authSubmit">Create account</button>
-  </form>
-  <p>Demo account data is stored only in this browser. Do not use a real or reused password.</p>
- </div>
 </div>
 
-<!-- Demo booking modal -->
+<!-- Booking demo modal -->
 <div class="modal" id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="bookingTitle">
- <div class="modal-box">
-  <button class="close" id="bookingClose" aria-label="Close">×</button>
-  <h2 id="bookingTitle">Continue your journey</h2>
-  <p id="bookingInfo"></p>
-  <label for="customer">Full name</label>
-  <input id="customer" autocomplete="name" placeholder="Enter your name">
-  <label for="customerEmail">Email address</label>
-  <input id="customerEmail" type="email" autocomplete="email" placeholder="you@example.com">
-  <button class="primary" id="continueBooking">Continue</button>
-  <p>This demo does not confirm tickets or process payments.</p>
- </div>
+  <div class="modal-card">
+    <div class="modal-head">
+      <div><h2 id="bookingTitle">Trip details</h2><p>Review your example trip request.</p></div>
+      <button class="close-btn" id="bookingClose" aria-label="Close">×</button>
+    </div>
+    <div class="booking-info" id="bookingInfo"></div>
+    <form id="bookingForm">
+      <div class="modal-field">
+        <label for="customer">Full name</label>
+        <input id="customer" type="text" autocomplete="name" placeholder="Your full name" required>
+      </div>
+      <div class="modal-field">
+        <label for="customerEmail">Email address</label>
+        <input id="customerEmail" type="email" autocomplete="email" placeholder="you@example.com" required>
+      </div>
+      <button class="btn btn-primary modal-submit" id="continueBooking" type="submit">Continue demo</button>
+      <div class="demo-note">This is a demonstration only. It will not reserve a seat, issue a ticket or charge money.</div>
+    </form>
+  </div>
 </div>
-<div class="toast" id="toast" role="status"></div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
-(()=>{
-'use strict';
+(() => {
+  "use strict";
 
-const $=id=>document.getElementById(id);
-const from=$('from'),to=$('to'),date=$('date');
-const results=$('results'),list=$('resultList');
-const authModal=$('authModal'),bookingModal=$('bookingModal');
+  const $ = (selector, root = document) => root.querySelector(selector);
+  const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 
-let mode='flight',selected=null,authMode='signup',slideIndex=0,slideTimer=null;
+  const USERS_KEY = "tripjan_demo_users_v1";
+  const SESSION_KEY = "tripjan_demo_session_v1";
 
-const USERS_KEY='tripjan_demo_users_v1';
-const SESSION_KEY='tripjan_demo_session_v1';
+  let mode = "flight";
+  let currentSlide = 0;
+  let carouselTimer = null;
+  let authMode = "login";
+  let currentUser = null;
+  let bookingData = null;
+  let toastTimer = null;
 
-const today=new Date();
-const localDate=d=>{
- const x=new Date(d);
- x.setMinutes(x.getMinutes()-x.getTimezoneOffset());
- return x.toISOString().slice(0,10);
-};
-date.min=localDate(today);
-date.value=localDate(today);
-$('year').textContent=today.getFullYear();
+  const slides = $$(".slide");
+  const dots = $$(".dot");
+  const authModal = $("#authModal");
+  const bookingModal = $("#bookingModal");
 
-const airlineData=[
- {name:'IndiGo',code:'6E',extra:0},
- {name:'Air India',code:'AI',extra:850},
- {name:'SpiceJet',code:'SG',extra:400},
- {name:'Akasa Air',code:'QP',extra:650}
-];
+  $("#year").textContent = new Date().getFullYear();
 
-const airports={
- Mumbai:'BOM',Delhi:'DEL',Hyderabad:'HYD',Bengaluru:'BLR',
- Chennai:'MAA',Bhubaneswar:'BBI',Pune:'PNQ',Kolkata:'CCU',
- Jaipur:'JAI',Ahmedabad:'AMD'
-};
+  // Set today's date as the earliest selectable date.
+  const today = new Date();
+  const localDate = [
+    today.getFullYear(),
+    String(today.getMonth() + 1).padStart(2, "0"),
+    String(today.getDate()).padStart(2, "0")
+  ].join("-");
+  $("#date").min = localDate;
+  $("#date").value = localDate;
 
-function toast(message){
- const el=$('toast');
- el.textContent=message;
- el.classList.add('show');
- clearTimeout(el._timer);
- el._timer=setTimeout(()=>el.classList.remove('show'),3000);
-}
-
-function getUsers(){
- try{
-  const data=JSON.parse(localStorage.getItem(USERS_KEY)||'[]');
-  return Array.isArray(data)?data:[];
- }catch(e){return []}
-}
-
-function getSession(){
- try{
-  const session=JSON.parse(localStorage.getItem(SESSION_KEY)||'null');
-  if(!session||typeof session.email!=='string')return null;
-  const user=getUsers().find(u=>u.email===session.email);
-  return user?{email:user.email}:null;
- }catch(e){return null}
-}
-
-function currentUser(){
- const session=getSession();
- return session?getUsers().find(u=>u.email===session.email)||null:null;
-}
-
-function renderAuth(){
- const user=currentUser();
- $('authActions').style.display=user?'none':'flex';
- $('userPill').style.display=user?'flex':'none';
- if(user){
-  $('userName').textContent=user.name;
-  $('userAvatar').textContent=(user.name.trim()[0]||'U').toUpperCase();
- }
-}
-
-function openAuth(type){
- authMode=type;
- $('authMessage').textContent='';
- $('authMessage').className='auth-error';
- $('authForm').reset();
- updateAuthForm();
- authModal.classList.add('open');
-}
-
-function updateAuthForm(){
- const signup=authMode==='signup';
- $('authTitle').textContent=signup?'Create your Tripjan account':'Welcome back!';
- $('authSubtitle').textContent=signup?'Sign up to start planning your journeys.':'Log in to your Tripjan account.';
- $('nameGroup').style.display=signup?'block':'none';
- $('authName').required=signup;
- $('authPassword').autocomplete=signup?'new-password':'current-password';
- $('authPassword').placeholder=signup?'At least 8 characters':'Enter your password';
- $('authSubmit').textContent=signup?'Create account':'Login';
- $('showLogin').classList.toggle('active',!signup);
- $('showSignup').classList.toggle('active',signup);
- $('authMessage').textContent='';
-}
-
-$('loginBtn').addEventListener('click',()=>openAuth('login'));
-$('signupBtn').addEventListener('click',()=>openAuth('signup'));
-$('showLogin').addEventListener('click',()=>{authMode='login';updateAuthForm()});
-$('showSignup').addEventListener('click',()=>{authMode='signup';updateAuthForm()});
-$('authClose').addEventListener('click',()=>authModal.classList.remove('open'));
-
-$('logoutBtn').addEventListener('click',()=>{
- localStorage.removeItem(SESSION_KEY);
- renderAuth();
- toast('You have logged out.');
-});
-
-function showAuthMessage(message,success=false){
- const el=$('authMessage');
- el.textContent=message;
- el.className=success?'auth-success':'auth-error';
-}
-
-/*
- Password hashing is a browser-side demo feature, not production
- authentication. Web Crypto generally requires HTTPS or localhost.
-*/
-async function hashPassword(password){
- if(!window.crypto||!crypto.subtle){
-  throw new Error('Password hashing needs HTTPS or localhost. Open this site on a secure origin.');
- }
- const bytes=new TextEncoder().encode(password);
- const digest=await crypto.subtle.digest('SHA-256',bytes);
- return Array.from(new Uint8Array(digest))
-  .map(b=>b.toString(16).padStart(2,'0')).join('');
-}
-
-$('authForm').addEventListener('submit',async e=>{
- e.preventDefault();
- const name=$('authName').value.trim();
- const email=$('authEmail').value.trim().toLowerCase();
- const password=$('authPassword').value;
-
- if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
-  showAuthMessage('Please enter a valid email address.');return;
- }
- if(password.length<8){
-  showAuthMessage('Password must contain at least 8 characters.');return;
- }
- if(authMode==='signup'&&name.length<2){
-  showAuthMessage('Please enter your full name.');return;
- }
-
- const submit=$('authSubmit');
- submit.disabled=true;
- submit.textContent='Please wait...';
-
- try{
-  const users=getUsers();
-  const existing=users.find(u=>u.email===email);
-
-  if(authMode==='signup'){
-   if(existing){
-    showAuthMessage('This email already has an account. Please log in.');
-    return;
-   }
-
-   const passwordHash=await hashPassword(password);
-   const newUser={
-    id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),
-    name:name,
-    email:email,
-    passwordHash:passwordHash,
-    createdAt:new Date().toISOString()
-   };
-
-   users.push(newUser);
-   localStorage.setItem(USERS_KEY,JSON.stringify(users));
-   localStorage.setItem(SESSION_KEY,JSON.stringify({email:email}));
-   authModal.classList.remove('open');
-   renderAuth();
-   toast('Account created successfully!');
-  }else{
-   if(!existing){
-    showAuthMessage('Account not found. Please sign up first.');return;
-   }
-   const passwordHash=await hashPassword(password);
-   if(passwordHash!==existing.passwordHash){
-    showAuthMessage('Incorrect email or password.');return;
-   }
-   localStorage.setItem(SESSION_KEY,JSON.stringify({email:email}));
-   authModal.classList.remove('open');
-   renderAuth();
-   toast('Login successful. Welcome back!');
+  function showToast(message) {
+    const toast = $("#toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove("show"), 3000);
   }
- }catch(error){
-  showAuthMessage(error.message||'Unable to save account in this browser.');
- }finally{
-  submit.disabled=false;
-  submit.textContent=authMode==='signup'?'Create account':'Login';
- }
-});
 
-function setMode(next){
- mode=next;
- document.querySelectorAll('.tab').forEach(b=>{
-  b.classList.toggle('active',b.dataset.mode===mode);
- });
- $('searchBtn').textContent=mode==='flight'?'Search Flights →':'Search Trains →';
- $('peopleLabel').textContent=mode==='flight'?'Travellers':'Passengers';
- $('direct').disabled=mode==='train';
- if(mode==='train')$('direct').checked=false;
- results.classList.remove('show');
-}
+  function openModal(modal) {
+    modal.classList.add("show");
+    document.body.style.overflow = "hidden";
+    const focusable = $("input:not([type=hidden])", modal);
+    if (focusable) setTimeout(() => focusable.focus(), 80);
+  }
 
-document.querySelectorAll('.tab').forEach(b=>{
- b.addEventListener('click',()=>setMode(b.dataset.mode));
-});
+  function closeModal(modal) {
+    modal.classList.remove("show");
+    if (!$(".modal.show")) document.body.style.overflow = "";
+  }
 
-function baseFare(a,b){
- const routes={
-  'Mumbai-Kolkata':4299,'Hyderabad-Kolkata':3899,
-  'Delhi-Mumbai':3499,'Bengaluru-Kolkata':4099,
-  'Chennai-Hyderabad':2899,'Bhubaneswar-Delhi':3799,
-  'Delhi-Kolkata':4599,'Mumbai-Delhi':3299
- };
- return routes[a+'-'+b]||2800+((a.length*193+b.length*277)%1800);
-}
+  [authModal, bookingModal].forEach(modal => {
+    modal.addEventListener("click", event => {
+      if (event.target === modal) closeModal(modal);
+    });
+  });
 
-function make(tag,cls,text){
- const el=document.createElement(tag);
- if(cls)el.className=cls;
- if(text!==undefined)el.textContent=text;
- return el;
-}
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") {
+      closeModal(authModal);
+      closeModal(bookingModal);
+    }
+  });
 
-function search(){
- if(from.value===to.value){toast('Choose two different cities.');return}
- if(!date.value||date.value<localDate(today)){toast('Choose a valid travel date.');return}
+  // Mobile navigation
+  $("#menuBtn").addEventListener("click", () => {
+    $("#navLinks").classList.toggle("open");
+  });
 
- const base=baseFare(from.value,to.value);
- const count=Number($('people').value);
- $('resultTitle').textContent=from.value+' → '+to.value;
- $('resultSubtitle').textContent=
-  new Date(date.value+'T12:00:00').toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})+
-  ' · '+count+' passenger(s) · '+(mode==='flight'?'Flights':'Train discovery');
+  $$("#navLinks a").forEach(link => {
+    link.addEventListener("click", () => $("#navLinks").classList.remove("open"));
+  });
 
- list.replaceChildren();
- let items=[];
+  // Carousel
+  function showSlide(index) {
+    currentSlide = (index + slides.length) % slides.length;
+    slides.forEach((slide, i) => slide.classList.toggle("active", i === currentSlide));
+    dots.forEach((dot, i) => dot.classList.toggle("active", i === currentSlide));
+    $("#slideCount").textContent = `0${currentSlide + 1} / 0${slides.length}`;
+  }
 
- if(mode==='flight'){
-  items=airlineData.map((a,i)=>({
-   name:a.name,code:a.code,fare:base+a.extra,
-   depart:['06:25','11:40','17:15','20:10'][i],
-   duration:'2h 30m',stops:i===1?'1 stop':'Non-stop'
-  }));
-  if($('direct').checked)items=items.filter(x=>x.stops==='Non-stop');
- }else{
-  items=[
-   {name:'Express Train',code:'EXP',fare:base*.38,depart:'06:00',duration:'12h 30m',stops:'Illustrative schedule'},
-   {name:'Superfast Train',code:'SF',fare:base*.48,depart:'14:20',duration:'12h 20m',stops:'Illustrative schedule'},
-   {name:'Mail Train',code:'MAIL',fare:base*.29,depart:'20:15',duration:'16h 30m',stops:'Illustrative schedule'}
+  function stopCarousel() {
+    if (carouselTimer) clearInterval(carouselTimer);
+    carouselTimer = null;
+  }
+
+  function startCarousel() {
+    stopCarousel();
+    carouselTimer = setInterval(() => showSlide(currentSlide + 1), 5500);
+  }
+
+  $("#prev").addEventListener("click", () => {
+    showSlide(currentSlide - 1);
+    startCarousel();
+  });
+
+  $("#next").addEventListener("click", () => {
+    showSlide(currentSlide + 1);
+    startCarousel();
+  });
+
+  dots.forEach(dot => {
+    dot.addEventListener("click", () => {
+      showSlide(Number(dot.dataset.slide));
+      startCarousel();
+    });
+  });
+
+  $("#carousel").addEventListener("mouseenter", stopCarousel);
+  $("#carousel").addEventListener("mouseleave", startCarousel);
+  $("#carousel").addEventListener("focusin", stopCarousel);
+  $("#carousel").addEventListener("focusout", startCarousel);
+  startCarousel();
+
+  // Switch flight / train mode
+  function setMode(nextMode) {
+    mode = nextMode === "train" ? "train" : "flight";
+    $$(".tab").forEach(tab => tab.classList.toggle("active", tab.dataset.mode === mode));
+    $("#searchBtn").textContent = mode === "flight" ? "Search flights →" : "Search trains →";
+    $("#direct").checked = false;
+  }
+
+  $$(".tab").forEach(tab => tab.addEventListener("click", () => setMode(tab.dataset.mode)));
+
+  $$("[data-mode]").forEach(button => {
+    button.addEventListener("click", () => {
+      setMode(button.dataset.mode);
+      if (button.matches(".slide-btn")) {
+        $("#search").scrollIntoView({behavior:"smooth", block:"center"});
+      }
+    });
+  });
+
+  $$("[data-scroll]").forEach(button => {
+    button.addEventListener("click", () => {
+      const target = $(button.dataset.scroll);
+      if (target) target.scrollIntoView({behavior:"smooth"});
+    });
+  });
+
+  // Demo search data. These are illustrative, not live schedules or prices.
+  const flightOptions = [
+    {name:"IndiGo", code:"6E", depart:"06:15", arrive:"08:35", duration:"2h 20m", price:2499, stops:"Non-stop"},
+    {name:"Air India", code:"AI", depart:"10:40", arrive:"13:05", duration:"2h 25m", price:3199, stops:"Non-stop"},
+    {name:"SpiceJet", code:"SG", depart:"17:20", arrive:"20:00", duration:"2h 40m", price:2899, stops:"Non-stop"}
   ];
- }
 
- if(!items.length){
-  list.append(make('div','empty','No demo results match this filter. Try changing your search.'));
- }else{
-  items.forEach(item=>{
-   const card=make('article','result-card');
-   const provider=make('div','provider');
-   let logo;
+  const trainOptions = [
+    {name:"Express Rail", code:"ER", depart:"06:30", arrive:"13:45", duration:"7h 15m", price:495, stops:"Sleeper / AC options"},
+    {name:"Superfast Express", code:"SF", depart:"09:15", arrive:"16:20", duration:"7h 05m", price:680, stops:"Reserved seating"},
+    {name:"Intercity Express", code:"IC", depart:"15:40", arrive:"22:10", duration:"6h 30m", price:560, stops:"Day journey"}
+  ];
 
-   if(mode==='flight'){
-    logo=make('img');
-    logo.alt=item.name+' logo';
-    logo.loading='lazy';
-    logo.src='https://www.gstatic.com/flights/airline_logos/70px/'+item.code+'.png';
-    logo.onerror=()=>{
-     const fallback=make('div','provider-fallback',item.code);
-     logo.replaceWith(fallback);
+  function formatCurrency(amount) {
+    return new Intl.NumberFormat("en-IN", {
+      style:"currency", currency:"INR", maximumFractionDigits:0
+    }).format(amount);
+  }
+
+  function safeText(value) {
+    return String(value).replace(/[&<>"']/g, char => ({
+      "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+    }[char]));
+  }
+
+  function airlineImage(code) {
+    if (code === "ER" || code === "SF" || code === "IC") return "🚆";
+    return `<img class="airline-logo" src="https://www.gstatic.com/flights/airline_logos/70px/${encodeURIComponent(code)}.png" alt="" loading="lazy" onerror="this.style.display='none'">`;
+  }
+
+  function renderResults(from, to, date, travellers) {
+    const options = mode === "flight" ? flightOptions : trainOptions;
+    const results = $("#results");
+    $("#resultTitle").textContent = `${mode === "flight" ? "Flight" : "Train"} options`;
+    $("#resultSubtitle").textContent =
+      `${from} → ${to} · ${date} · ${travellers} traveller${travellers === 1 ? "" : "s"} · Demonstration data`;
+
+    $("#resultList").innerHTML = options.map((option, index) => `
+      <article class="result-card">
+        <div class="result-company">
+          ${mode === "flight"
+            ? airlineImage(option.code)
+            : `<div class="airline-logo" style="display:grid;place-items:center;font-size:21px">🚆</div>`}
+          <div>
+            <div class="company-name">${safeText(option.name)}</div>
+            <div class="company-sub">${mode === "flight" ? "Example airline" : "Example train service"}</div>
+          </div>
+        </div>
+        <div class="result-time">
+          ${safeText(option.depart)} → ${safeText(option.arrive)}
+          <small>${safeText(option.duration)} · ${safeText(option.stops)}</small>
+        </div>
+        <div class="result-price">
+          <strong>${formatCurrency(option.price * travellers)}</strong>
+          <small>Example total for ${travellers}</small>
+        </div>
+        <button class="btn btn-primary result-book"
+          data-book-index="${index}"
+          type="button">Select</button>
+      </article>
+    `).join("");
+
+    results.classList.remove("hidden");
+    results.scrollIntoView({behavior:"smooth", block:"nearest"});
+  }
+
+  $("#searchForm").addEventListener("submit", event => {
+    event.preventDefault();
+    const from = $("#from").value.trim();
+    const to = $("#to").value.trim();
+    const date = $("#date").value;
+    const travellers = Number($("#people").value);
+
+    if (!from || !to) {
+      showToast("Please enter both departure and destination cities.");
+      return;
+    }
+    if (from.toLowerCase() === to.toLowerCase()) {
+      showToast("Departure and destination must be different.");
+      return;
+    }
+    if (!date || date < localDate) {
+      showToast("Please choose a valid future date.");
+      return;
+    }
+
+    renderResults(from, to, date, travellers);
+  });
+
+  $("#hideResults").addEventListener("click", () => $("#results").classList.add("hidden"));
+
+  $("#resultList").addEventListener("click", event => {
+    const button = event.target.closest("[data-book-index]");
+    if (!button) return;
+
+    const options = mode === "flight" ? flightOptions : trainOptions;
+    const option = options[Number(button.dataset.bookIndex)];
+
+    bookingData = {
+      mode,
+      from: $("#from").value.trim(),
+      to: $("#to").value.trim(),
+      date: $("#date").value,
+      travellers: Number($("#people").value),
+      option
     };
-   }else{
-    logo=make('div','provider-fallback','🚆');
-   }
 
-   provider.append(logo);
-   const info=make('div');
-   info.append(make('h3','',item.name),
-    make('p','',mode==='flight'?'Sample airline listing':'Live rail data not connected'));
-   provider.append(info);
-
-   const dep=make('div','time');
-   dep.append(make('strong','',item.depart),
-    make('p','',from.value+' · '+(airports[from.value]||'')));
-
-   const route=make('div','route');
-   route.append(document.createTextNode(item.duration),
-    make('span','',mode==='flight'?'────── ✈ ──────':'────── 🚆 ──────'),
-    document.createTextNode(item.stops));
-
-   const price=make('div','price');
-   price.append(make('strong','', '₹'+Math.round(item.fare*count).toLocaleString('en-IN')),
-    make('p','sub',count+' passenger(s), demo total'));
-
-   const btn=make('button','','Select');
-   btn.addEventListener('click',()=>openBooking(item,count));
-   price.append(btn);
-   card.append(provider,dep,route,price);
-   list.append(card);
+    $("#bookingTitle").textContent = mode === "flight" ? "Review flight selection" : "Review train selection";
+    $("#bookingInfo").innerHTML = `
+      <strong>${safeText(bookingData.from)} → ${safeText(bookingData.to)}</strong><br>
+      Travel date: ${safeText(bookingData.date)}<br>
+      Service: ${safeText(option.name)}<br>
+      Time: ${safeText(option.depart)} – ${safeText(option.arrive)}<br>
+      Travellers: ${bookingData.travellers}<br>
+      Example total: <strong>${formatCurrency(option.price * bookingData.travellers)}</strong><br>
+      <span style="font-size:10px;color:#8793a6">Illustrative information only. Not a live fare.</span>
+    `;
+    openModal(bookingModal);
   });
- }
 
- results.classList.add('show');
- results.scrollIntoView({behavior:'smooth',block:'start'});
-}
+  $("#bookingClose").addEventListener("click", () => closeModal(bookingModal));
 
-$('searchForm').addEventListener('submit',e=>{
- e.preventDefault();search();
-});
-
-function openBooking(item,count){
- selected={...item,count};
- $('bookingTitle').textContent=mode==='flight'?'Flight selection':'Train journey selection';
- $('bookingInfo').textContent=from.value+' → '+to.value+' · '+item.name+
-  ' · '+count+' passenger(s) · Demo fare ₹'+Math.round(item.fare*count).toLocaleString('en-IN');
- const user=currentUser();
- $('customer').value=user?user.name:'';
- $('customerEmail').value=user?user.email:'';
- bookingModal.classList.add('open');
-}
-
-$('bookingClose').addEventListener('click',()=>bookingModal.classList.remove('open'));
-$('continueBooking').addEventListener('click',()=>{
- if(!selected){toast('Select a travel option first.');return}
- if(!$('customer').value.trim()){toast('Enter your full name.');return}
- if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($('customerEmail').value.trim())){
-  toast('Enter a valid email address.');return;
- }
- bookingModal.classList.remove('open');
- toast('Demo only: ticket booking is not connected.');
-});
-
-[authModal,bookingModal].forEach(m=>{
- m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open')});
-});
-document.addEventListener('keydown',e=>{
- if(e.key==='Escape'){
-  authModal.classList.remove('open');
-  bookingModal.classList.remove('open');
- }
-});
-
-document.querySelectorAll('[data-mode]').forEach(b=>{
- if(!b.classList.contains('tab')){
-  b.addEventListener('click',()=>{
-   setMode(b.dataset.mode);
-   $('booking').scrollIntoView({behavior:'smooth'});
+  $("#bookingForm").addEventListener("submit", event => {
+    event.preventDefault();
+    if (!bookingData) {
+      showToast("Please select an example trip first.");
+      return;
+    }
+    const name = $("#customer").value.trim();
+    const email = $("#customerEmail").value.trim();
+    closeModal(bookingModal);
+    showToast(`Demo selection complete, ${name}. No ticket was booked.`);
+    console.info("Tripjan demo selection", {
+      ...bookingData,
+      customerName:name,
+      customerEmail:email
+    });
+    bookingData = null;
   });
- }
-});
 
-document.querySelectorAll('[data-from][data-to]').forEach(b=>{
- b.addEventListener('click',()=>{
-  from.value=b.dataset.from;
-  to.value=b.dataset.to;
-  if(b.dataset.mode)setMode(b.dataset.mode);
-  $('booking').scrollIntoView({behavior:'smooth'});
-  toast('Route selected. Choose your date and search.');
- });
-});
+  // Popular route cards
+  $$(".route-card").forEach(card => {
+    card.addEventListener("click", () => {
+      $("#from").value = card.dataset.from;
+      $("#to").value = card.dataset.to;
+      setMode(card.dataset.mode || "flight");
+      $("#search").scrollIntoView({behavior:"smooth", block:"center"});
+      showToast("Route selected. Choose a date and search.");
+    });
+  });
 
-/* Auto-playing offer carousel */
-const slides=[...document.querySelectorAll('.slide')];
-const dots=[...document.querySelectorAll('.dot')];
+  // Destination cards
+  $$("[data-destination]").forEach(button => {
+    button.addEventListener("click", () => {
+      const destination = button.dataset.destination;
+      $("#from").value = "Bhubaneswar";
+      $("#to").value = destination;
+      setMode("flight");
+      $("#search").scrollIntoView({behavior:"smooth", block:"center"});
+      showToast(`${destination} selected. Choose your date to continue.`);
+    });
+  });
 
-function showSlide(i){
- slideIndex=(i+slides.length)%slides.length;
- slides.forEach((s,n)=>s.classList.toggle('active',n===slideIndex));
- dots.forEach((d,n)=>d.classList.toggle('active',n===slideIndex));
-}
-function restartTimer(){
- clearInterval(slideTimer);
- slideTimer=setInterval(()=>showSlide(slideIndex+1),5000);
-}
-$('prev').addEventListener('click',()=>{showSlide(slideIndex-1);restartTimer()});
-$('next').addEventListener('click',()=>{showSlide(slideIndex+1);restartTimer()});
-dots.forEach((d,i)=>d.addEventListener('click',()=>{showSlide(i);restartTimer()}));
-$('carousel').addEventListener('mouseenter',()=>clearInterval(slideTimer));
-$('carousel').addEventListener('mouseleave',restartTimer);
+  $$("[data-footer-mode]").forEach(link => {
+    link.addEventListener("click", () => setMode(link.dataset.footerMode));
+  });
 
-renderAuth();
-restartTimer();
+  // Demo account handling
+  function getUsers() {
+    try {
+      const users = JSON.parse(localStorage.getItem(USERS_KEY) || "[]");
+      return Array.isArray(users) ? users : [];
+    } catch {
+      return [];
+    }
+  }
+
+  function getSession() {
+    try {
+      return JSON.parse(localStorage.getItem(SESSION_KEY) || "null");
+    } catch {
+      return null;
+    }
+  }
+
+  function saveSession(user) {
+    const session = {name:user.name, email:user.email};
+    localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+    currentUser = session;
+    renderUser();
+  }
+
+  function renderUser() {
+    const pill = $("#userPill");
+    const login = $("#loginBtn");
+    const signup = $("#signupBtn");
+    const logout = $("#logoutBtn");
+
+    if (currentUser) {
+      pill.textContent = `Hi, ${currentUser.name}`;
+      pill.classList.remove("hidden");
+      login.classList.add("hidden");
+      signup.classList.add("hidden");
+      logout.classList.remove("hidden");
+    } else {
+      pill.classList.add("hidden");
+      login.classList.remove("hidden");
+      signup.classList.remove("hidden");
+      logout.classList.add("hidden");
+    }
+  }
+
+  function openAuth(nextMode) {
+    authMode = nextMode;
+    $("#authMessage").textContent = "";
+    $("#authForm").reset();
+    updateAuthUI();
+    openModal(authModal);
+  }
+
+  function updateAuthUI() {
+    const signup = authMode === "signup";
+    $("#authTitle").textContent = signup ? "Create your account" : "Welcome back";
+    $("#authSubtitle").textContent = signup
+      ? "Set up your demo Tripjan account."
+      : "Log in to continue planning your journey.";
+    $("#nameField").classList.toggle("hidden", !signup);
+    $("#authName").required = signup;
+    $("#authPassword").autocomplete = signup ? "new-password" : "current-password";
+    $("#authSubmit").textContent = signup ? "Create account" : "Log in";
+    $("#authSwitchText").textContent = signup ? "Already have an account?" : "New to Tripjan?";
+    $("#showSignup").textContent = signup ? "Log in" : "Create an account";
+  }
+
+  $("#loginBtn").addEventListener("click", () => openAuth("login"));
+  $("#signupBtn").addEventListener("click", () => openAuth("signup"));
+  $("#authClose").addEventListener("click", () => closeModal(authModal));
+  $("#footerLogin").addEventListener("click", event => {
+    event.preventDefault();
+    openAuth(currentUser ? "login" : "login");
+  });
+
+  $("#showSignup").addEventListener("click", () => {
+    authMode = authMode === "signup" ? "login" : "signup";
+    $("#authMessage").textContent = "";
+    updateAuthUI();
+  });
+
+  // Hash passwords where Web Crypto is available. This remains demo-only:
+  // production authentication must be handled by a secure server/auth provider.
+  async function hashPassword(password) {
+    if (!window.crypto || !crypto.subtle) {
+      throw new Error("Secure password hashing is unavailable in this context. Open the page on HTTPS or localhost.");
+    }
+    const bytes = new TextEncoder().encode(password);
+    const digest = await crypto.subtle.digest("SHA-256", bytes);
+    return Array.from(new Uint8Array(digest))
+      .map(byte => byte.toString(16).padStart(2, "0"))
+      .join("");
+  }
+
+  $("#authForm").addEventListener("submit", async event => {
+    event.preventDefault();
+    const message = $("#authMessage");
+    message.style.color = "#d33";
+    message.textContent = "";
+
+    const email = $("#authEmail").value.trim().toLowerCase();
+    const password = $("#authPassword").value;
+    const name = $("#authName").value.trim();
+
+    if (!email || password.length < 6) {
+      message.textContent = "Enter a valid email and a password with at least 6 characters.";
+      return;
+    }
+
+    const submit = $("#authSubmit");
+    submit.disabled = true;
+    submit.textContent = "Please wait…";
+
+    try {
+      const users = getUsers();
+      const existing = users.find(user => user.email === email);
+      const passwordHash = await hashPassword(password);
+
+      if (authMode === "signup") {
+        if (!name) {
+          message.textContent = "Please enter your name.";
+          return;
+        }
+        if (existing) {
+          message.textContent = "An account with this email already exists. Please log in.";
+          return;
+        }
+
+        const newUser = {
+          name,
+          email,
+          passwordHash,
+          createdAt: new Date().toISOString()
+        };
+        users.push(newUser);
+        localStorage.setItem(USERS_KEY, JSON.stringify(users));
+        saveSession(newUser);
+        closeModal(authModal);
+        showToast("Demo account created successfully.");
+      } else {
+        if (!existing || existing.passwordHash !== passwordHash) {
+          message.textContent = "Email or password is incorrect.";
+          return;
+        }
+        saveSession(existing);
+        closeModal(authModal);
+        showToast(`Welcome back, ${existing.name}!`);
+      }
+    } catch (error) {
+      message.textContent = error.message || "Something went wrong. Please try again.";
+    } finally {
+      submit.disabled = false;
+      submit.textContent = authMode === "signup" ? "Create account" : "Log in";
+    }
+  });
+
+  $("#logoutBtn").addEventListener("click", () => {
+    localStorage.removeItem(SESSION_KEY);
+    currentUser = null;
+    renderUser();
+    showToast("You have logged out.");
+  });
+
+  // Footer information
+  $("#privacyLink").addEventListener("click", event => {
+    event.preventDefault();
+    showToast("Demo data stays in this browser. Do not enter sensitive personal information.");
+  });
+
+  $("#termsLink").addEventListener("click", event => {
+    event.preventDefault();
+    showToast("Demo prices and schedules are illustrative. No real booking is made.");
+  });
+
+  // Restore a local demo session.
+  currentUser = getSession();
+  if (currentUser && (!currentUser.email || !currentUser.name)) currentUser = null;
+  renderUser();
 })();
 </script>
+
 </body>
 </html>
