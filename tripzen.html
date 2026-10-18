@@ -3,1144 +3,872 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#07152e">
-<meta name="description" content="Tripjan — discover flights, trains, travel deals and destinations.">
-<title>Tripjan | Flights, Trains & Travel Deals</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101b35">
+<meta name="description" content="Tripjan premium travel discovery and booking demo">
+<title>Tripjan — Discover More</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
 <style>
-:root {
-  --navy:#07152e;
-  --navy2:#0c2346;
-  --blue:#1769ff;
-  --blue2:#4388ff;
-  --cyan:#55d9f5;
-  --ink:#18243a;
-  --muted:#728097;
-  --line:#e6ebf3;
-  --surface:#f5f8fd;
-  --white:#fff;
-  --shadow:0 18px 55px rgba(15,37,75,.10);
-  --radius:22px;
+:root{
+ --navy:#101b35;--ink:#17243b;--blue:#246bfe;--blue2:#eaf2ff;
+ --muted:#7c899d;--line:#e5eaf2;--paper:#f5f7fb;--white:#fff;
+ --green:#087d55;--gold:#c9a66b;--shadow:0 15px 45px #122b500d;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:Inter,Arial,sans-serif;background:#f6f8fc;color:var(--ink)}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:var(--paper);font-family:"DM Sans",sans-serif;color:var(--ink)}
 button,input,select{font:inherit}
 button{cursor:pointer}
+img{display:block;width:100%;object-fit:cover}
 a{text-decoration:none;color:inherit}
-img{max-width:100%;display:block}
-.container{width:min(1160px,92%);margin:auto}
+.container{width:min(1200px,92%);margin:auto}
 .hidden{display:none!important}
-
-/* Header */
-header{
-  position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);
-  backdrop-filter:blur(16px);border-bottom:1px solid rgba(220,228,241,.8)
-}
-.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-.brand{display:flex;align-items:center;gap:10px;font-size:25px;font-weight:900;letter-spacing:-1px;color:var(--navy)}
-.brand-mark{
-  display:grid;place-items:center;width:40px;height:40px;border-radius:14px;
-  color:#fff;background:linear-gradient(135deg,#1769ff,#54caff);
-  box-shadow:0 8px 20px #1769ff35;font-size:21px
-}
-.brand span span{color:var(--blue)}
-.nav-links{display:flex;align-items:center;gap:28px;color:#536078;font-size:13px;font-weight:700}
-.nav-links a:hover{color:var(--blue)}
-.nav-actions{display:flex;align-items:center;gap:9px}
-.btn{border:0;border-radius:12px;padding:12px 17px;font-size:13px;font-weight:800;transition:.2s}
+.muted{color:var(--muted)}
+.icon{width:19px;height:19px;stroke-width:1.8;flex:none}
+.btn{border:0;border-radius:11px;padding:12px 16px;font-size:11px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.2s}
 .btn:hover{transform:translateY(-2px)}
-.btn-outline{background:#fff;color:var(--navy);border:1px solid #dce4f1}
-.btn-primary{background:linear-gradient(135deg,var(--blue),#3988ff);color:#fff;box-shadow:0 8px 20px #1769ff30}
-.user-pill{font-size:12px;font-weight:800;color:var(--navy);background:#eef4ff;border-radius:30px;padding:10px 13px}
-.menu-btn{display:none;background:#eef3fb;border:0;border-radius:10px;padding:10px;font-size:20px}
+.primary{background:var(--blue);color:#fff;box-shadow:0 6px 18px #246bfe26}
+.secondary{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.soft{background:var(--blue2);color:var(--blue)}
+.full{width:100%}
+.eyebrow{font-size:9px;letter-spacing:1.8px;text-transform:uppercase;color:var(--blue);font-weight:800}
+.topbar{background:var(--navy);color:#d5dfef;font-size:10px}
+.topbar .container{height:34px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.topbar-right{display:flex;gap:18px}
+header{position:sticky;top:0;z-index:40;background:#ffffffed;backdrop-filter:blur(16px);border-bottom:1px solid #e9edf4}
+.nav{height:73px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-mark{height:41px;width:41px;border-radius:13px;background:linear-gradient(145deg,#246bfe,#79baff);display:grid;place-items:center;color:#fff}
+.brand-mark .icon{width:23px;height:23px}
+.brand-name{font:800 25px Manrope,sans-serif;letter-spacing:-1.2px;color:var(--navy)}
+.brand-name span{color:var(--blue)}
+.brand-sub{display:block;font-size:8px;letter-spacing:1.7px;color:#8a96a9}
+.navlinks{display:flex;gap:24px;font-size:11px;font-weight:700;color:#637086}
+.navlinks a:hover{color:var(--blue)}
+.nav-actions{display:flex;gap:8px;align-items:center}
+.nav-actions .btn{padding:10px 13px}
+.user-chip{font-size:10px;font-weight:800;background:var(--blue2);color:var(--blue);border-radius:20px;padding:10px;max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.menu-btn{display:none;border:0;border-radius:10px;padding:9px;background:#edf2fa}
 
 /* Hero */
-.hero{padding:24px 0 0}
-.hero-top{display:flex;justify-content:space-between;align-items:end;gap:20px;margin:18px 0 22px}
-.eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--blue);font-size:11px;font-weight:900;letter-spacing:1.8px;text-transform:uppercase}
-.eyebrow:before{content:"";width:22px;height:2px;background:var(--blue);border-radius:5px}
-h1{font-size:clamp(27px,4vw,43px);line-height:1.13;letter-spacing:-1.8px;margin:10px 0 0;color:var(--navy)}
-.hero-top p{max-width:360px;color:var(--muted);font-size:13px;line-height:1.8;margin:0}
-
-/* Premium carousel */
-.carousel{
-  position:relative;height:clamp(360px,47vw,510px);min-height:360px;
-  overflow:hidden;border-radius:28px;background:#0a1d3a;box-shadow:0 25px 70px #102e5b24
-}
-.slide{
-  position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .75s ease,visibility .75s;
-  background-size:cover;background-position:center
-}
-.slide.active{opacity:1;visibility:visible}
-.slide:before{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(90deg,rgba(4,15,35,.88) 0%,rgba(4,15,35,.65) 43%,rgba(4,15,35,.05) 100%),
-  linear-gradient(0deg,rgba(3,13,30,.38),transparent 60%)
-}
-.slide:after{
-  content:"";position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(circle at 75% 20%,rgba(86,184,255,.2),transparent 35%)
-}
-.slide-content{
-  position:absolute;z-index:2;left:clamp(24px,6vw,72px);top:50%;
-  transform:translateY(-50%);width:min(510px,78%);color:white
-}
-.pill{
-  display:inline-flex;align-items:center;gap:8px;padding:9px 13px;border-radius:30px;
-  background:#ffffff18;border:1px solid #ffffff3b;backdrop-filter:blur(12px);
-  font-size:10px;font-weight:900;letter-spacing:1.3px;text-transform:uppercase
-}
-.pill-dot{width:7px;height:7px;border-radius:50%;background:#62e8bd;box-shadow:0 0 10px #62e8bd}
-.slide h2{font-size:clamp(34px,5.4vw,62px);line-height:1.04;letter-spacing:-2.5px;margin:22px 0 15px;font-weight:900}
-.slide h2 span{color:#74d9ff}
-.slide p{font-size:14px;line-height:1.85;color:#e1e9f8;max-width:410px;margin:0}
-.slide-bottom{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:25px}
-.deal{display:flex;flex-direction:column;gap:4px}
-.deal small{font-size:10px;text-transform:uppercase;letter-spacing:1.4px;color:#c5d4ed;font-weight:800}
-.deal strong{font-size:24px;letter-spacing:-.6px}
-.deal strong em{font-size:11px;font-style:normal;color:#c5d4ed;font-weight:600}
-.slide-btn{display:inline-flex;align-items:center;gap:12px;border:0;border-radius:12px;background:white;color:#0c2450;padding:14px 18px;font-size:12px;font-weight:900;box-shadow:0 10px 28px #0002}
-.slide-btn span{font-size:17px}
-.carousel-controls{position:absolute;z-index:5;bottom:25px;right:27px;display:flex;align-items:center;gap:10px}
-.carousel-arrow{width:42px;height:42px;border-radius:50%;border:1px solid #ffffff5c;background:#ffffff18;color:white;font-size:20px;backdrop-filter:blur(10px);transition:.2s}
-.carousel-arrow:hover{background:white;color:var(--navy)}
-.dots{display:flex;gap:7px;margin:0 8px}
-.dot{width:7px;height:7px;border:0;border-radius:20px;background:#ffffff70;padding:0;transition:.3s}
-.dot.active{width:25px;background:white}
-.slide-count{font-size:11px;color:#ffffffce;font-weight:800;min-width:32px}
+.hero{padding-top:26px}
+.hero-title{display:flex;align-items:end;justify-content:space-between;gap:25px;margin:10px 0 22px}
+.hero-title h1{font:800 clamp(31px,4.5vw,48px)/1.12 Manrope,sans-serif;letter-spacing:-2px;color:var(--navy);margin:9px 0}
+.hero-title p{max-width:360px;color:var(--muted);font-size:12px;line-height:1.9}
+.hero-carousel{height:445px;position:relative;overflow:hidden;border-radius:25px;background:#10213c;box-shadow:0 25px 60px #122b5018}
+.hero-slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;visibility:hidden;transition:opacity .7s}
+.hero-slide.active{opacity:1;visibility:visible}
+.hero-slide:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#09162ff2 0%,#09162fb9 48%,#09162f12 100%)}
+.hero-copy{position:absolute;left:6%;top:50%;transform:translateY(-50%);width:min(510px,83%);color:#fff}
+.hero-pill{display:inline-flex;align-items:center;gap:8px;border:1px solid #ffffff4a;background:#ffffff16;border-radius:30px;padding:9px 12px;font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+.hero-pill .icon{width:15px;height:15px;color:#9be8c8}
+.hero-copy h2{font:800 clamp(38px,5.5vw,64px)/1.03 Manrope,sans-serif;letter-spacing:-2.6px;margin:20px 0 12px}
+.hero-copy h2 span{color:#92e2ee}
+.hero-copy p{max-width:400px;color:#e0e8f6;font-size:12px;line-height:1.9}
+.hero-actions{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-top:23px}
+.hero-actions .btn{background:white;color:var(--navy);padding:14px 17px}
+.hero-price small{display:block;color:#c6d3e6;font-size:9px}
+.hero-price strong{font-size:22px;display:block;margin-top:5px}
+.hero-controls{position:absolute;bottom:17px;right:19px;z-index:3;display:flex;align-items:center;gap:9px;color:#fff}
+.hero-arrow{width:35px;height:35px;border-radius:50%;border:1px solid #ffffff70;background:#ffffff19;color:white;font-size:21px}
+.hero-arrow .icon{width:17px;height:17px}
+.hero-dot{width:7px;height:7px;border:0;padding:0;border-radius:10px;background:#ffffff80}
+.hero-dot.active{width:23px;background:white}
+.hero-count{font-size:10px}
 
 /* Search */
-.search-wrap{position:relative;z-index:8;margin-top:-35px}
-.search-card{background:white;border:1px solid #e6ecf5;border-radius:23px;box-shadow:var(--shadow);padding:24px}
-.search-head{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;margin-bottom:20px}
-.tabs{display:flex;gap:7px;background:#f1f5fb;padding:5px;border-radius:13px}
-.tab{border:0;border-radius:9px;background:transparent;color:#68758a;padding:11px 17px;font-size:12px;font-weight:900}
-.tab.active{background:white;color:var(--blue);box-shadow:0 3px 12px #0c234612}
-.search-note{font-size:11px;color:#8994a7;font-weight:600}
-.search-grid{display:grid;grid-template-columns:1.2fr 1.2fr 1fr .8fr auto;gap:12px;align-items:end}
-.field{position:relative;min-width:0}
-.field label{display:block;margin:0 0 9px 2px;color:#78849a;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:1.1px}
-.field input,.field select{width:100%;height:49px;border:1px solid #e1e8f2;border-radius:12px;background:#fbfcff;padding:0 12px;color:#23314a;outline:none;font-size:12px;font-weight:700}
-.field input:focus,.field select:focus{border-color:#76a5ff;box-shadow:0 0 0 3px #1769ff12}
-.search-submit{height:49px;white-space:nowrap;padding:0 22px}
-.search-foot{display:flex;align-items:center;gap:8px;color:#7b879b;font-size:10px;margin-top:16px}
-.search-foot b{color:#1a9c70}
+.search-panel{position:relative;z-index:5;margin-top:-28px;background:white;border:1px solid var(--line);border-radius:19px;padding:22px;box-shadow:var(--shadow)}
+.search-tabs{display:flex;gap:5px;overflow-x:auto;background:#f1f4f9;padding:4px;border-radius:11px;width:max-content;max-width:100%;margin-bottom:18px}
+.search-tab{border:0;background:transparent;color:#718097;border-radius:8px;padding:10px 13px;display:flex;align-items:center;gap:7px;font-size:10px;font-weight:800;white-space:nowrap}
+.search-tab .icon{width:17px;height:17px}
+.search-tab.active{background:white;color:var(--blue);box-shadow:0 3px 12px #0e25470b}
+.search-grid{display:grid;grid-template-columns:1fr 1fr 1fr .7fr auto;gap:11px;align-items:end}
+.field label{display:block;font-size:9px;font-weight:800;letter-spacing:.8px;color:#77849a;text-transform:uppercase;margin:0 0 7px 2px}
+.field input,.field select{width:100%;height:45px;border:1px solid #dfe6f0;background:#fbfcff;border-radius:10px;padding:0 10px;font-size:11px;color:var(--ink);outline:none}
+.field input:focus,.field select:focus{border-color:#7eabff;box-shadow:0 0 0 3px #246bfe12}
+.search-submit{height:45px;white-space:nowrap}
+.note{font-size:10px;line-height:1.8;color:#8793a6;margin:13px 0 0}
 
-/* General sections */
-.section{padding:74px 0 0}
-.section-heading{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:25px}
-.section-heading h2{font-size:27px;letter-spacing:-1px;margin:9px 0 0;color:var(--navy)}
-.section-heading p{font-size:12px;line-height:1.7;color:var(--muted);margin:9px 0 0}
-.text-link{font-size:12px;font-weight:900;color:var(--blue);white-space:nowrap}
-.features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.feature-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:23px;display:flex;gap:15px;align-items:start}
-.feature-icon{flex:0 0 46px;height:46px;display:grid;place-items:center;border-radius:14px;background:#eef4ff;color:var(--blue);font-size:22px}
-.feature-card h3{font-size:13px;margin:3px 0 8px}
-.feature-card p{font-size:11px;color:var(--muted);line-height:1.8;margin:0}
+/* Section heading */
+.section{padding:55px 0 0}
+.section-heading{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:23px}
+.section-heading h2{font:800 26px Manrope,sans-serif;letter-spacing:-.8px;color:var(--navy);margin:8px 0}
+.section-heading p{font-size:11px;color:var(--muted);line-height:1.8;margin:0}
+.text-link{border:0;background:none;color:var(--blue);font-size:11px;font-weight:800}
 
-/* Offers */
-.offer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:19px}
-.offer-card{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:.25s}
-.offer-card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
-.offer-img{height:205px;position:relative;overflow:hidden;background:#e7edf7}
-.offer-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
-.offer-card:hover .offer-img img{transform:scale(1.06)}
-.offer-tag{position:absolute;top:14px;left:14px;padding:8px 10px;border-radius:8px;background:#fff;color:var(--navy);font-size:9px;font-weight:900;letter-spacing:.6px}
-.offer-body{padding:19px}
-.offer-body h3{font-size:16px;margin:0 0 8px;letter-spacing:-.4px}
-.offer-body p{font-size:11px;line-height:1.7;color:var(--muted);margin:0 0 18px}
-.offer-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.price small{display:block;font-size:9px;color:#8893a5;margin-bottom:4px}
-.price strong{font-size:18px;color:var(--navy)}
-.price em{font-size:10px;font-style:normal;color:#8993a5;font-weight:600}
-.small-btn{border:0;border-radius:10px;background:#eef4ff;color:var(--blue);font-size:11px;font-weight:900;padding:11px 13px}
-.small-btn:hover{background:var(--blue);color:white}
+/* Offer cards */
+.offers-section{background:white;margin-top:27px;padding:35px 0 43px}
+.offers-inner{width:min(1200px,92%);margin:auto}
+.heading-row{display:flex;align-items:end;justify-content:space-between;gap:15px;margin-bottom:20px}
+.heading-row h2{font:800 26px Manrope,sans-serif;letter-spacing:-.8px;margin:8px 0;color:var(--navy)}
+.heading-row p{font-size:11px;color:var(--muted);margin:0;line-height:1.7}
+.view-all{border:0;background:none;color:#0877df;font-size:11px;font-weight:800;display:flex;align-items:center;gap:8px;white-space:nowrap}
+.view-all .icon{width:24px;height:24px;border-radius:50%;background:#edf4ff;padding:4px}
+.category-row{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:3px 0 13px;margin-bottom:12px}
+.category-row::-webkit-scrollbar{display:none}
+.category{flex:0 0 auto;display:flex;align-items:center;gap:7px;border:1px solid #dfe5ee;background:white;color:#69768b;border-radius:10px;padding:10px 14px;font-size:10px;font-weight:700;transition:.2s}
+.category .icon{width:16px;height:16px}
+.category.active{background:#edf4ff;border-color:#75a4fa;color:#1769dc;box-shadow:0 0 0 1px #5790ed13}
+.offer-track{display:grid;grid-auto-columns:minmax(260px,31.7%);grid-auto-flow:column;gap:15px;overflow-x:auto;scroll-snap-type:x mandatory;padding:3px 1px 14px;scrollbar-width:thin;scrollbar-color:#cbd6e6 transparent}
+.offer-card{min-width:0;border:1px solid #e3e8f0;border-radius:16px;overflow:hidden;background:white;scroll-snap-align:start;transition:transform .22s,box-shadow .22s}
+.offer-card:hover,.hotel-card:hover{transform:translateY(-4px);box-shadow:0 15px 36px #122b5014}
+.offer-image{height:157px;position:relative;overflow:hidden;background:#e7edf6}
+.offer-image img{height:100%;transition:transform .4s}
+.offer-card:hover .offer-image img{transform:scale(1.05)}
+.offer-badge{position:absolute;left:11px;top:11px;border-radius:6px;padding:7px 9px;background:#fff;color:#1a2a44;font-size:8px;font-weight:800;letter-spacing:.7px}
+.heart{position:absolute;right:10px;top:10px;width:32px;height:32px;border:1px solid #ffffffa8;border-radius:50%;background:#ffffffee;color:#263650;display:grid;place-items:center}
+.heart .icon{width:17px;height:17px}
+.heart.saved{color:#e44268;background:#fff0f3}
+.offer-body{padding:16px}
+.offer-type{font-size:10px;color:#8994a5}
+.offer-body h3{font:800 14px/1.5 Manrope,sans-serif;margin:7px 0;color:#17243b}
+.offer-body p{font-size:10px;line-height:1.8;color:#7b8798;margin:0 0 12px;min-height:36px}
+.offer-valid{display:flex;gap:6px;align-items:center;color:#8793a5;font-size:9px;margin-bottom:13px}
+.offer-valid .icon{width:14px;height:14px}
+.offer-action{width:100%;padding:10px;border:1px solid #dce7fa;border-radius:9px;background:#f1f6ff;color:#1769d9;font-size:10px;font-weight:800}
+.offer-action:hover{background:var(--blue);color:white}
+.offer-controls{display:flex;align-items:center;gap:10px;max-width:340px;margin:10px auto 0;color:#8793a5;font-size:10px}
+.offer-controls button{width:30px;height:30px;border:1px solid var(--line);border-radius:50%;background:white;color:#344967;display:grid;place-items:center}
+.offer-controls .icon{width:16px;height:16px}
+.progress{height:4px;background:#e8edf4;flex:1;border-radius:5px;overflow:hidden}
+.progress span{height:100%;width:10%;display:block;background:#ff784f;transition:width .2s}
+.section-divider{height:7px;background:#f1f4f9;margin:30px 0}
 
-/* Popular routes */
-.routes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.route-card{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px;background:#fff;border:1px solid var(--line);border-radius:16px;transition:.2s}
-.route-card:hover{border-color:#a9c6ff;box-shadow:0 8px 25px #173f7a0d;transform:translateY(-2px)}
-.route-main{display:flex;align-items:center;gap:12px}
-.route-icon{width:40px;height:40px;display:grid;place-items:center;background:#eef4ff;color:var(--blue);border-radius:12px;font-size:19px}
-.route-name{font-size:12px;font-weight:900}
-.route-sub{font-size:10px;color:var(--muted);margin-top:5px}
-.route-arrow{font-size:18px;color:#8ca0be}
+/* Hotel cards */
+.hotel-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}
+.hotel-card{min-width:0;background:white;border:1px solid #e2e7ef;border-radius:16px;overflow:hidden;transition:.2s}
+.hotel-image{height:170px;position:relative;overflow:hidden;background:#e7edf6}
+.hotel-image img{height:100%;transition:transform .4s}
+.hotel-card:hover .hotel-image img{transform:scale(1.05)}
+.hotel-label{position:absolute;left:9px;top:9px;background:#fff;padding:6px 8px;border-radius:6px;font-size:7px;font-weight:800;letter-spacing:.7px}
+.hotel-body{padding:13px}
+.hotel-brand{font-size:8px;color:var(--blue);letter-spacing:1px;font-weight:800}
+.hotel-body h3{font:800 13px/1.5 Manrope,sans-serif;margin:7px 0}
+.hotel-location{font-size:9px;color:#7c899c;display:flex;gap:5px;align-items:center;margin:0 0 10px}
+.hotel-location .icon{width:13px;height:13px}
+.hotel-rating{display:flex;align-items:center;gap:7px;margin-bottom:11px}
+.rating-score{display:flex;align-items:center;gap:4px;border-radius:5px;background:#087d55;color:white;padding:5px 6px;font-size:8px;font-weight:800}
+.rating-score .icon{width:11px;height:11px}
+.hotel-rating small{font-size:8px;color:#8994a5}
+.amenities{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:13px}
+.amenities span{display:flex;align-items:center;gap:4px;border:1px solid #e4e9f0;border-radius:6px;padding:5px 6px;color:#69768a;font-size:8px}
+.amenities .icon{width:12px;height:12px}
+.hotel-bottom{display:flex;justify-content:space-between;align-items:center;gap:7px;border-top:1px solid #edf0f5;padding-top:11px}
+.hotel-price strong{font-size:15px;color:var(--navy)}
+.hotel-price small{display:block;font-size:8px;color:#8793a5;margin-top:3px}
+.hotel-book{border:0;border-radius:8px;background:var(--navy);color:white;padding:10px;font-size:9px;font-weight:800;white-space:nowrap}
+.hotel-book:hover{background:var(--blue)}
+.disclaimer{display:flex;gap:10px;background:#f5f8fd;border:1px solid #e4ebf4;border-radius:11px;padding:13px;margin-top:22px}
+.disclaimer .icon{color:var(--blue);width:17px;height:17px}
+.disclaimer p{font-size:9px;line-height:1.8;color:#718097;margin:0}
+
+/* Destination cards */
+.destination-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.destination-card{position:relative;min-height:220px;border:0;padding:0;border-radius:16px;overflow:hidden;background:#dbe4ef;color:white;text-align:left}
+.destination-card img{position:absolute;inset:0;height:100%;transition:transform .4s}
+.destination-card:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#09172fe5,transparent 75%)}
+.destination-card:hover img{transform:scale(1.06)}
+.destination-copy{position:absolute;z-index:1;left:15px;right:15px;bottom:15px}
+.destination-copy small{font-size:8px;letter-spacing:1px;text-transform:uppercase;color:#d4e0f1}
+.destination-copy h3{font:800 19px Manrope,sans-serif;margin:6px 0}
+.destination-copy span{display:flex;align-items:center;gap:6px;font-size:9px;color:#dce6f4}
+.destination-copy .icon{width:13px;height:13px}
 
 /* Results */
-.results-panel{margin-top:30px}
-.results-title{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-bottom:15px}
-.results-title h3{margin:0;font-size:19px}
-.results-title p{font-size:11px;color:var(--muted);margin:6px 0 0}
-.result-list{display:grid;gap:12px}
-.result-card{display:grid;grid-template-columns:1.2fr 1fr .8fr auto;align-items:center;gap:15px;padding:18px;background:white;border:1px solid var(--line);border-radius:16px}
-.result-company{display:flex;align-items:center;gap:12px}
-.airline-logo{width:46px;height:42px;object-fit:contain;background:#f5f7fb;border-radius:10px;padding:5px}
-.company-name{font-size:12px;font-weight:900}
-.company-sub{font-size:10px;color:var(--muted);margin-top:5px}
-.result-time{font-size:13px;font-weight:900}
-.result-time small{display:block;color:var(--muted);font-size:10px;font-weight:600;margin-top:5px}
-.result-price strong{font-size:18px}
-.result-price small{display:block;font-size:10px;color:var(--muted);margin-top:5px}
-.result-book{padding:11px 14px}
+.page{display:none;min-height:60vh}
+.page.active{display:block}
+.breadcrumb{display:flex;gap:8px;align-items:center;padding:22px 0;color:#8793a7;font-size:10px}
+.breadcrumb button{border:0;background:none;padding:0;color:var(--blue);font-weight:800}
+.page-title{font:800 29px Manrope,sans-serif;letter-spacing:-1px;color:var(--navy);margin:0 0 8px}
+.page-subtitle{font-size:11px;color:var(--muted);line-height:1.8;margin:0 0 23px}
+.results-top{display:flex;justify-content:space-between;align-items:center;gap:15px;margin:10px 0 16px}
+.results-top h2{font-size:20px;margin:0 0 6px}
+.results-top p{font-size:10px;color:var(--muted);margin:0}
+.result-tools{display:flex;gap:8px;align-items:center}
+.result-tools select{border:1px solid var(--line);border-radius:9px;padding:10px;background:white;font-size:10px}
+.results-layout{display:grid;grid-template-columns:200px 1fr;gap:15px}
+.filters,.panel,.result-card{background:white;border:1px solid var(--line);border-radius:15px}
+.filters{padding:17px;height:max-content}
+.filters h3,.panel h3{font-size:13px;margin:0 0 14px}
+.filter-group{border-top:1px solid #edf0f5;padding:12px 0}
+.filter-group strong{display:block;font-size:10px;margin-bottom:10px}
+.filter-group label{display:flex;align-items:center;gap:7px;font-size:10px;color:#68758a;margin:10px 0}
+.filter-group input{accent-color:var(--blue)}
+.result-list{display:grid;gap:11px}
+.result-card{padding:15px;display:grid;grid-template-columns:1.1fr 1fr .8fr auto;gap:10px;align-items:center}
+.company{display:flex;align-items:center;gap:10px}
+.company-icon{width:39px;height:39px;display:grid;place-items:center;flex:none;background:#edf4ff;border-radius:11px;color:var(--blue)}
+.company-icon .icon{width:20px;height:20px}
+.company strong,.times strong{font-size:10px}
+.company small,.times small,.fare small{display:block;font-size:9px;color:var(--muted);margin-top:5px}
+.fare strong{font-size:15px;color:var(--navy)}
+.result-actions{display:grid;gap:5px}
+.result-actions .btn{font-size:9px;padding:9px}
+.no-results{text-align:center;background:white;border:1px dashed #cbd7e9;border-radius:15px;padding:30px}
+.no-results p{font-size:10px;color:var(--muted)}
 
-/* Footer */
-footer{margin-top:80px;background:var(--navy);color:#fff;padding:45px 0 22px}
-.footer-top{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;padding-bottom:32px}
-.footer-brand{font-size:23px;font-weight:900;letter-spacing:-.8px}
-.footer-brand span{color:#69cfff}
-.footer-description{max-width:300px;color:#a9b9d3;font-size:11px;line-height:1.9;margin-top:12px}
-.footer-links h4{font-size:12px;margin:0 0 14px}
-.footer-links a{display:block;color:#a9b9d3;font-size:11px;margin:11px 0}
-.footer-links a:hover{color:white}
-.footer-bottom{border-top:1px solid #ffffff1b;padding-top:20px;color:#91a2bf;font-size:10px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+/* Details and checkout */
+.details-layout{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:17px;align-items:start}
+.panel{padding:20px;margin-bottom:14px}
+.detail-image{height:260px;border-radius:15px;overflow:hidden;background:#e6edf7}
+.detail-image img{height:100%}
+.detail-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:16px 0}
+.meta{padding:12px;border:1px solid var(--line);border-radius:10px;min-width:0}
+.meta small{display:block;font-size:8px;color:var(--muted);margin-bottom:6px}
+.meta strong{font-size:10px;overflow-wrap:anywhere}
+.summary-line{display:flex;justify-content:space-between;gap:10px;font-size:10px;color:#69768a;margin:12px 0}
+.summary-line strong{color:var(--navy);text-align:right}
+.summary-total{border-top:1px solid var(--line);padding-top:14px;font-size:13px;font-weight:800}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-grid .wide{grid-column:1/-1}
+.check-line{display:flex;gap:8px;align-items:flex-start;font-size:10px;line-height:1.8;color:#68758a;margin:15px 0}
+.check-line input{accent-color:var(--blue);margin-top:3px}
+.message{font-size:10px;color:#bd3e3e;line-height:1.7}
+.steps{display:flex;align-items:center;gap:8px;margin:15px 0 24px}
+.step{display:flex;align-items:center;gap:6px;flex:1;color:#929daf;font-size:9px;font-weight:800}
+.step-number{height:25px;width:25px;border-radius:50%;background:#e9eef6;display:grid;place-items:center}
+.step.active{color:var(--blue)}
+.step.active .step-number{background:var(--blue);color:white}
+.step.done .step-number{background:#def6ea;color:#07865b}
+.step-line{height:1px;background:#e2e8f1;flex:1}
+.coupon-row{display:flex;gap:7px;margin-top:12px}
+.coupon-row input{width:100%;min-width:0;border:1px solid var(--line);border-radius:9px;padding:10px;font-size:10px}
+.success-wrap{max-width:750px;margin:45px auto 65px;text-align:center}
+.success-icon{height:72px;width:72px;border-radius:50%;display:grid;place-items:center;background:#e1f8ed;color:#0b9968;margin:0 auto 20px}
+.success-icon .icon{width:35px;height:35px;stroke-width:2.3}
+.success-wrap h1{font:800 30px Manrope,sans-serif;letter-spacing:-1px;color:var(--navy)}
+.success-wrap>p{font-size:11px;line-height:1.9;color:var(--muted)}
+.confirm-card{text-align:left;background:white;border:1px solid var(--line);border-radius:17px;padding:22px;margin:24px 0;box-shadow:var(--shadow)}
+.confirm-top{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding-bottom:16px}
+.confirm-ref{font-size:9px;text-transform:uppercase;color:var(--muted)}
+.confirm-ref strong{display:block;font-size:16px;color:var(--navy);margin-top:7px}
+.status{background:#e4f9ef;color:#087d55;border-radius:20px;padding:8px 10px;font-size:9px;font-weight:800;height:max-content}
+.confirm-route{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;padding:22px 0}
+.confirm-route strong{display:block;font-size:17px;overflow-wrap:anywhere}
+.confirm-route small{display:block;font-size:9px;color:var(--muted);margin-top:5px}
+.confirm-middle{text-align:center;color:var(--blue)}
+.confirm-middle .icon{width:23px;height:23px}
+.confirm-details{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;border-top:1px solid var(--line);padding-top:17px}
+.confirm-details small{display:block;font-size:8px;color:var(--muted);margin-bottom:5px}
+.confirm-details strong{font-size:10px;overflow-wrap:anywhere}
+.confirm-actions{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin-top:20px}
 
-/* Modal */
-.modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:18px;background:#07152ebd;backdrop-filter:blur(8px)}
+/* Modals */
+.modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:15px;background:#08172fc9;backdrop-filter:blur(7px)}
 .modal.show{display:flex}
-.modal-card{width:min(430px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:24px;padding:27px;box-shadow:0 30px 100px #0003;animation:modalIn .25s ease}
-@keyframes modalIn{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
-.modal-head{display:flex;align-items:start;justify-content:space-between;gap:15px;margin-bottom:22px}
-.modal-head h2{font-size:23px;letter-spacing:-.8px;margin:0;color:var(--navy)}
-.modal-head p{font-size:11px;color:var(--muted);line-height:1.7;margin:8px 0 0}
-.close-btn{width:34px;height:34px;flex:0 0 34px;border:0;border-radius:10px;background:#f0f4fa;color:#526079;font-size:20px}
-.modal-field{margin-bottom:15px}
-.modal-field label{display:block;font-size:10px;font-weight:900;color:#637087;margin:0 0 8px;text-transform:uppercase;letter-spacing:.8px}
-.modal-field input{width:100%;height:47px;border:1px solid #e0e7f1;border-radius:11px;padding:0 13px;outline:none;font-size:12px}
-.modal-field input:focus{border-color:#70a0ff}
-.modal-submit{width:100%;height:48px;margin-top:5px}
-.modal-switch{text-align:center;font-size:11px;color:var(--muted);margin:18px 0 0}
-.modal-switch button{border:0;background:none;color:var(--blue);font-size:11px;font-weight:900}
-.message{font-size:11px;line-height:1.7;margin:10px 0;color:#d33}
-.demo-note{font-size:10px;line-height:1.7;color:#8a95a7;margin-top:14px;padding:11px;background:#f5f7fb;border-radius:10px}
-.booking-info{background:#f4f7fc;border-radius:13px;padding:15px;font-size:12px;line-height:1.9;color:#59667c;margin-bottom:18px}
-.booking-info strong{color:var(--navy)}
-.toast{position:fixed;z-index:150;bottom:24px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#102442;color:#fff;border-radius:12px;padding:13px 18px;font-size:12px;font-weight:700;box-shadow:0 12px 35px #06142d38;transition:.25s;max-width:90%;text-align:center}
+.modal-box{position:relative;width:min(450px,100%);max-height:92vh;overflow:auto;padding:25px;border-radius:20px;background:white;box-shadow:0 25px 80px #0003}
+.modal-close{position:absolute;top:12px;right:12px;width:33px;height:33px;border:0;border-radius:9px;background:#eef2f8;display:grid;place-items:center}
+.modal-box h2{font:800 23px Manrope,sans-serif;color:var(--navy);margin:12px 30px 8px 0}
+.modal-box>p{font-size:10px;line-height:1.8;color:var(--muted)}
+.modal-summary{padding:13px;background:#f3f7fd;border-radius:11px;font-size:10px;line-height:1.9;margin:14px 0}
+.modal-field{margin:12px 0}
+.modal-field label{display:block;font-size:10px;font-weight:800;margin-bottom:7px}
+.modal-field input,.modal-field select{width:100%;height:43px;border:1px solid var(--line);border-radius:9px;padding:0 10px;background:white}
+.modal-note{font-size:9px;line-height:1.8;color:#8793a5}
+.toast{position:fixed;z-index:150;left:50%;bottom:22px;transform:translate(-50%,15px);opacity:0;pointer-events:none;transition:.25s;background:#102442;color:white;padding:13px 17px;border-radius:11px;font-size:11px;font-weight:700;max-width:92%;text-align:center;box-shadow:0 12px 35px #06142d38}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 
-/* Responsive */
-@media(max-width:900px){
- .nav-links{gap:15px}
+/* Footer */
+footer{margin-top:65px;background:var(--navy);color:white;padding:40px 0 20px}
+.footer-top{display:flex;justify-content:space-between;gap:25px;flex-wrap:wrap;padding-bottom:26px}
+.footer-description{max-width:280px;color:#adbad0;font-size:10px;line-height:1.9;margin-top:12px}
+.footer-links h4{font-size:11px;margin:0 0 14px}
+.footer-links a{display:block;color:#adbad0;font-size:10px;margin:11px 0}
+.footer-links a:hover{color:white}
+.footer-bottom{border-top:1px solid #ffffff20;padding-top:17px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:#9aaac3;font-size:9px}
+@media(max-width:1000px){
  .search-grid{grid-template-columns:repeat(2,1fr)}
  .search-submit{width:100%}
- .offer-grid{grid-template-columns:repeat(2,1fr)}
- .routes-grid{grid-template-columns:repeat(2,1fr)}
+ .hotel-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .offer-track{grid-auto-columns:minmax(260px,43%)}
+ .results-layout{grid-template-columns:180px 1fr}
  .result-card{grid-template-columns:1fr 1fr}
- .result-book{justify-self:start}
- .features{grid-template-columns:1fr}
+ .details-layout{grid-template-columns:1fr}
+ .destination-grid{grid-template-columns:repeat(2,1fr)}
+ .navlinks{gap:13px}
 }
 @media(max-width:650px){
- .nav{height:67px}
- .brand{font-size:22px}
- .brand-mark{width:36px;height:36px}
- .nav-links{display:none;position:absolute;top:67px;left:0;right:0;padding:20px 5%;background:white;border-bottom:1px solid var(--line);flex-direction:column;align-items:flex-start;gap:20px}
- .nav-links.open{display:flex}
- .nav-actions{gap:6px}
- .nav-actions .btn{padding:10px 11px;font-size:11px}
- .menu-btn{display:block}
- .user-pill{max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
- .hero{padding-top:12px}
- .hero-top{display:block;margin:17px 0}
- .hero-top p{margin-top:12px}
- .carousel{height:430px;min-height:430px;border-radius:22px}
- .slide{background-position:60% center}
- .slide:before{background:linear-gradient(90deg,#041126e8 0%,#041126b8 72%,#04112648 100%)}
- .slide-content{left:23px;width:calc(100% - 46px)}
- .slide h2{font-size:39px;letter-spacing:-1.8px;margin:20px 0 13px}
- .slide p{font-size:12px}
- .slide-bottom{gap:14px;margin-top:23px}
- .deal strong{font-size:21px}
- .slide-btn{padding:12px 13px;font-size:11px}
- .carousel-controls{bottom:16px;right:13px;gap:5px}
- .carousel-arrow{width:35px;height:35px}
- .dots{margin:0 4px}
- .search-wrap{margin-top:18px}
- .search-card{padding:18px;border-radius:19px}
- .search-head{margin-bottom:17px}
- .search-note{display:none}
- .tab{padding:10px 13px}
- .search-grid{grid-template-columns:1fr 1fr;gap:13px}
- .field input,.field select{font-size:11px;padding:0 9px}
+ .topbar .container{height:31px;font-size:9px}
+ .topbar-right{display:none}
+ .nav{height:64px;gap:8px}
+ .brand-mark{width:35px;height:35px}
+ .brand-name{font-size:22px}
+ .brand-sub{display:none}
+ .navlinks{display:none;position:absolute;top:64px;left:0;right:0;background:white;border-bottom:1px solid var(--line);padding:20px 5%;flex-direction:column;align-items:flex-start;gap:19px}
+ .navlinks.open{display:flex}
+ .nav-actions{gap:4px}
+ .nav-actions .btn{padding:9px 10px;font-size:9px}
+ .user-chip{max-width:74px;font-size:8px}
+ .menu-btn{display:grid;place-items:center}
+ .hero{padding-top:14px}
+ .hero-title{display:block;margin:14px 0}
+ .hero-title h1{font-size:31px}
+ .hero-title p{font-size:11px}
+ .hero-carousel{height:390px;border-radius:19px}
+ .hero-slide:before{background:linear-gradient(90deg,#09162ff2,#09162f9d 85%,#09162f50)}
+ .hero-copy{left:21px;width:calc(100% - 42px)}
+ .hero-copy h2{font-size:39px;letter-spacing:-1.8px}
+ .hero-copy p{font-size:11px}
+ .hero-actions{gap:13px}
+ .hero-actions .btn{padding:12px;font-size:10px}
+ .hero-price strong{font-size:19px}
+ .search-panel{margin-top:14px;padding:15px;border-radius:16px}
+ .search-grid{gap:11px}
  .search-submit{grid-column:1/-1}
- .section{padding-top:52px}
- .section-heading{align-items:start}
- .section-heading h2{font-size:23px}
- .section-heading p{max-width:250px}
- .offer-grid{grid-template-columns:1fr}
- .offer-img{height:220px}
- .routes-grid{grid-template-columns:1fr}
- .result-card{grid-template-columns:1fr 1fr;padding:14px}
- .result-company{gap:8px}
- .airline-logo{width:38px;height:38px}
- .result-price strong{font-size:16px}
- .footer-top{gap:25px}
+ .search-tab{padding:10px;font-size:9px}
+ .section{padding-top:43px}
+ .section-heading h2,.heading-row h2{font-size:22px}
+ .offers-section{padding:26px 0 32px;margin-top:20px}
+ .offer-track{grid-auto-columns:minmax(255px,82%)}
+ .offer-image{height:155px}
+ .hotel-grid{gap:10px}
+ .hotel-image{height:125px}
+ .hotel-body{padding:10px}
+ .hotel-body h3{font-size:11px}
+ .hotel-brand{font-size:7px;letter-spacing:.6px}
+ .hotel-location{font-size:8px;line-height:1.5}
+ .hotel-rating{gap:4px;flex-wrap:wrap}
+ .hotel-rating small{font-size:7px}
+ .amenities{gap:4px}
+ .amenities span{font-size:7px;padding:4px}
+ .amenities .icon{width:10px;height:10px}
+ .hotel-bottom{align-items:flex-start;flex-direction:column}
+ .hotel-price strong{font-size:14px}
+ .hotel-book{width:100%;padding:9px 4px;font-size:9px}
+ .hotel-label{font-size:6px;left:6px;top:6px;padding:5px}
+ .destination-grid{gap:9px}
+ .destination-card{min-height:165px}
+ .destination-copy{left:11px;bottom:11px}
+ .destination-copy h3{font-size:16px}
+ .results-top{align-items:flex-start;flex-direction:column}
+ .result-tools{width:100%;flex-wrap:wrap}
+ .results-layout{grid-template-columns:1fr}
+ .filters{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+ .filters h3{grid-column:1/-1}
+ .result-card{grid-template-columns:1fr 1fr;padding:12px}
+ .result-actions{display:flex;flex-wrap:wrap}
+ .result-actions .btn{flex:1}
+ .page-title{font-size:25px}
+ .detail-image{height:195px}
+ .detail-meta{grid-template-columns:1fr 1fr}
+ .form-grid{grid-template-columns:1fr}
+ .form-grid .wide{grid-column:auto}
+ .steps{gap:4px}
+ .step{flex-direction:column;gap:4px;text-align:center;font-size:8px}
+ .confirm-card{padding:14px}
+ .confirm-route{gap:6px}
+ .confirm-route strong{font-size:14px}
+ .confirm-details{grid-template-columns:1fr 1fr}
  .footer-links{min-width:40%}
- footer{margin-top:55px}
+ footer{margin-top:45px}
 }
-@media(prefers-reduced-motion:reduce){
- *,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}
-}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+@media print{header,footer,.breadcrumb,.confirm-actions,.toast{display:none!important}body{background:white}.confirm-card{box-shadow:none}}
 </style>
 </head>
 
 <body>
+<div class="topbar">
+ <div class="container">
+  <span>✦ Curated journeys, made simpler</span>
+  <div class="topbar-right"><a href="#offers">Explore offers</a><a href="#hotels">Discover stays</a><span>India · INR ₹</span></div>
+ </div>
+</div>
 
 <header>
-  <div class="container nav">
-    <a href="#" class="brand" aria-label="Tripjan home">
-      <span class="brand-mark">✈</span>
-      <span>trip<span>jan</span></span>
-    </a>
-
-    <nav class="nav-links" id="navLinks">
-      <a href="#home">Home</a>
-      <a href="#search">Flights & Trains</a>
-      <a href="#offers">Travel Deals</a>
-      <a href="#routes">Popular Routes</a>
-    </nav>
-
-    <div class="nav-actions">
-      <span class="user-pill hidden" id="userPill"></span>
-      <button class="btn btn-outline" id="loginBtn">Log in</button>
-      <button class="btn btn-primary" id="signupBtn">Sign up</button>
-      <button class="btn btn-outline hidden" id="logoutBtn">Logout</button>
-      <button class="menu-btn" id="menuBtn" aria-label="Open navigation">☰</button>
-    </div>
+ <div class="container nav">
+  <a href="#" class="brand" id="homeLogo">
+   <span class="brand-mark"><i class="icon" data-lucide="plane"></i></span>
+   <span><span class="brand-name">trip<span>jan</span></span><span class="brand-sub">THE ART OF TRAVELLING</span></span>
+  </a>
+  <nav class="navlinks" id="navLinks">
+   <a href="#home" data-anchor>Home</a><a href="#search" data-anchor>Book a trip</a><a href="#offers" data-anchor>Offers</a><a href="#hotels" data-anchor>Hotels</a><a href="#destinations" data-anchor>Destinations</a>
+  </nav>
+  <div class="nav-actions">
+   <span class="user-chip hidden" id="userChip"></span>
+   <button class="btn secondary" id="loginBtn">Log in</button>
+   <button class="btn primary" id="signupBtn">Join Tripjan</button>
+   <button class="btn secondary hidden" id="logoutBtn">Log out</button>
+   <button class="menu-btn" id="menuBtn" aria-label="Menu"><i class="icon" data-lucide="menu"></i></button>
   </div>
+ </div>
 </header>
 
-<main id="home">
-  <section class="hero">
-    <div class="container">
-      <div class="hero-top">
-        <div>
-          <span class="eyebrow">Your journey starts here</span>
-          <h1>Travel more. Worry less.</h1>
-        </div>
-        <p>Discover exciting destinations, compare travel options and plan your next adventure with Tripjan.</p>
-      </div>
+<main id="homePage" class="page active">
+<section class="hero container" id="home">
+ <div class="hero-title">
+  <div><span class="eyebrow">A world of possibilities</span><h1>Your next story starts here.</h1></div>
+  <p>Beautiful stays, thoughtful journeys and new experiences — all starting with one simple search.</p>
+ </div>
+ <div class="hero-carousel" id="heroCarousel">
+  <article class="hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1800&q=85')">
+   <div class="hero-copy"><span class="hero-pill"><i class="icon" data-lucide="sparkles"></i> Explore the extraordinary</span><h2>Go beyond<br><span>the ordinary.</span></h2><p>Discover new places, sample travel options and journeys worth remembering.</p><div class="hero-actions"><div class="hero-price"><small>Sample fares from</small><strong>₹2,499</strong></div><button class="btn" data-scroll="#search">Explore journeys <i class="icon" data-lucide="arrow-up-right"></i></button></div></div>
+  </article>
+  <article class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1800&q=85')">
+   <div class="hero-copy"><span class="hero-pill"><i class="icon" data-lucide="gem"></i> Exceptional stays</span><h2>Find your<br><span>kind of escape.</span></h2><p>Explore boutique hotels, city stays, beach resorts and mountain retreats.</p><div class="hero-actions"><div class="hero-price"><small>Discover</small><strong>Beautiful stays</strong></div><button class="btn" data-scroll="#hotels">Explore hotels <i class="icon" data-lucide="arrow-up-right"></i></button></div></div>
+  </article>
+  <article class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1800&q=85')">
+   <div class="hero-copy"><span class="hero-pill"><i class="icon" data-lucide="compass"></i> Make room for wonder</span><h2>Less routine.<br><span>More memories.</span></h2><p>Find inspiration for family holidays, weekend escapes and new adventures.</p><div class="hero-actions"><div class="hero-price"><small>Your next chapter</small><strong>Starts here</strong></div><button class="btn" data-scroll="#destinations">Find inspiration <i class="icon" data-lucide="arrow-up-right"></i></button></div></div>
+  </article>
+  <div class="hero-controls"><span class="hero-count" id="heroCount">01 / 03</span><button class="hero-dot active" data-slide="0" aria-label="Slide 1"></button><button class="hero-dot" data-slide="1" aria-label="Slide 2"></button><button class="hero-dot" data-slide="2" aria-label="Slide 3"></button><button class="hero-arrow" id="heroPrev" aria-label="Previous"><i class="icon" data-lucide="chevron-left"></i></button><button class="hero-arrow" id="heroNext" aria-label="Next"><i class="icon" data-lucide="chevron-right"></i></button></div>
+ </div>
+</section>
 
-      <div class="carousel" id="carousel" aria-label="Featured travel offers">
-        <div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1800&q=85')">
-          <div class="slide-content">
-            <span class="pill"><span class="pill-dot"></span> Flight deals · Made for explorers</span>
-            <h2>Take off to<br><span>somewhere new.</span></h2>
-            <p>Find your next escape. Explore routes, compare sample fares and make your travel plans with confidence.</p>
-            <div class="slide-bottom">
-              <div class="deal"><small>Sample fares from</small><strong>₹2,499 <em>/ person</em></strong></div>
-              <button class="slide-btn" data-mode="flight">Explore flights <span>↗</span></button>
-            </div>
-          </div>
-        </div>
+<section class="container" id="search">
+ <div class="search-panel">
+  <div class="search-tabs">
+   <button class="search-tab active" data-mode="flight"><i class="icon" data-lucide="plane"></i> Flights</button>
+   <button class="search-tab" data-mode="hotel"><i class="icon" data-lucide="hotel"></i> Hotels</button>
+   <button class="search-tab" data-mode="train"><i class="icon" data-lucide="train-front"></i> Trains</button>
+   <button class="search-tab" data-mode="bus"><i class="icon" data-lucide="bus-front"></i> Bus</button>
+   <button class="search-tab" data-mode="cab"><i class="icon" data-lucide="car-front"></i> Cabs</button>
+  </div>
+  <form id="searchForm">
+   <div class="search-grid">
+    <div class="field"><label id="fromLabel" for="from">From</label><input id="from" list="cityList" value="Bhubaneswar" placeholder="Departure city" required></div>
+    <div class="field"><label id="toLabel" for="to">To</label><input id="to" list="cityList" value="Delhi" placeholder="Destination city" required></div>
+    <div class="field"><label id="dateLabel" for="travelDate">Departure date</label><input type="date" id="travelDate" required></div>
+    <div class="field"><label id="travellerLabel" for="travellers">Travellers</label><select id="travellers"><option value="1">1 traveller</option><option value="2">2 travellers</option><option value="3">3 travellers</option><option value="4">4 travellers</option><option value="5">5 travellers</option><option value="6">6 travellers</option></select></div>
+    <button class="btn primary search-submit" id="searchButton" type="submit">Search flights <i class="icon" data-lucide="arrow-right"></i></button>
+   </div>
+   <datalist id="cityList"><option>Bhubaneswar</option><option>Delhi</option><option>Mumbai</option><option>Kolkata</option><option>Bengaluru</option><option>Chennai</option><option>Hyderabad</option><option>Pune</option><option>Jaipur</option><option>Patna</option><option>Baripada</option><option>Puri</option><option>Goa</option><option>Manali</option><option>Visakhapatnam</option></datalist>
+   <p class="note">Sample travel options only. Real-time inventory, schedules and ticket prices are not connected.</p>
+  </form>
+ </div>
+</section>
 
-        <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=1800&q=85')">
-          <div class="slide-content">
-            <span class="pill"><span class="pill-dot"></span> Train journeys · Travel your way</span>
-            <h2>Every journey<br>has a <span>story.</span></h2>
-            <p>Plan a scenic rail journey, explore popular connections and get ready for the places waiting ahead.</p>
-            <div class="slide-bottom">
-              <div class="deal"><small>Sample fares from</small><strong>₹399 <em>/ person</em></strong></div>
-              <button class="slide-btn" data-mode="train">Explore trains <span>↗</span></button>
-            </div>
-          </div>
-        </div>
+<section class="container section">
+ <div class="section-heading"><div><span class="eyebrow">The Tripjan difference</span><h2>A better way to explore.</h2><p>Thoughtful details to make planning your next trip feel simpler.</p></div></div>
+ <div class="trust-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:13px">
+  <article class="panel"><i class="icon" data-lucide="compass" style="color:var(--blue);width:25px;height:25px"></i><h3>Discover more</h3><p class="muted" style="font-size:10px;line-height:1.8">Explore sample flights, hotels, rail journeys and holiday ideas.</p></article>
+  <article class="panel"><i class="icon" data-lucide="shield-check" style="color:var(--blue);width:25px;height:25px"></i><h3>Clear trip details</h3><p class="muted" style="font-size:10px;line-height:1.8">Review your selection, route, date and estimated total.</p></article>
+  <article class="panel"><i class="icon" data-lucide="heart-handshake" style="color:var(--blue);width:25px;height:25px"></i><h3>Made for your journey</h3><p class="muted" style="font-size:10px;line-height:1.8">Save favourites and move through a guided demo booking flow.</p></article>
+ </div>
+</section>
 
-        <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1800&q=85')">
-          <div class="slide-content">
-            <span class="pill"><span class="pill-dot"></span> Weekend escapes · Your next memory</span>
-            <h2>Leave routine.<br><span>Find wonder.</span></h2>
-            <p>From peaceful mountain views to vibrant city breaks, discover inspiration for your next holiday.</p>
-            <div class="slide-bottom">
-              <div class="deal"><small>Holiday inspiration</small><strong>Made for you</strong></div>
-              <button class="slide-btn" data-scroll="#offers">Explore getaways <span>↗</span></button>
-            </div>
-          </div>
-        </div>
+<section class="offers-section" id="offers">
+ <div class="offers-inner">
+  <div class="heading-row"><div><span class="eyebrow">Handpicked for you</span><h2>Offers For You</h2><p>Explore more categories and sample travel deals.</p></div><button class="view-all" id="viewAllOffers">View all <i class="icon" data-lucide="arrow-up-right"></i></button></div>
+  <div class="category-row" id="offerCategories">
+   <button class="category active" data-category="All"><i class="icon" data-lucide="layers"></i> All</button>
+   <button class="category" data-category="Flights"><i class="icon" data-lucide="plane"></i> Flights</button>
+   <button class="category" data-category="Hotels"><i class="icon" data-lucide="hotel"></i> Hotels</button>
+   <button class="category" data-category="Cabs"><i class="icon" data-lucide="car-front"></i> Cabs</button>
+   <button class="category" data-category="Bus"><i class="icon" data-lucide="bus-front"></i> Bus</button>
+   <button class="category" data-category="Trains"><i class="icon" data-lucide="train-front"></i> Trains</button>
+   <button class="category" data-category="Holidays"><i class="icon" data-lucide="palmtree"></i> Holidays</button>
+  </div>
 
-        <div class="carousel-controls">
-          <span class="slide-count" id="slideCount">01 / 03</span>
-          <div class="dots" id="carouselDots">
-            <button class="dot active" data-slide="0" aria-label="Show slide 1"></button>
-            <button class="dot" data-slide="1" aria-label="Show slide 2"></button>
-            <button class="dot" data-slide="2" aria-label="Show slide 3"></button>
-          </div>
-          <button class="carousel-arrow" id="prev" aria-label="Previous slide">‹</button>
-          <button class="carousel-arrow" id="next" aria-label="Next slide">›</button>
-        </div>
-      </div>
-    </div>
-  </section>
+  <div class="offer-track" id="offerTrack">
+   <article class="offer-card" data-type="Hotels"><div class="offer-image"><img loading="lazy" src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80" alt="Luxury resort"><span class="offer-badge">STAY COLLECTION</span><button class="heart" aria-label="Save offer"><i class="icon" data-lucide="heart"></i></button></div><div class="offer-body"><span class="offer-type">Hotels</span><h3>Make every stay special</h3><p>Explore elegant retreats and beautiful places to stay.</p><div class="offer-valid"><i class="icon" data-lucide="calendar"></i> Illustrative offer · Terms apply</div><button class="offer-action" data-offer="Hotels">Explore hotel stays ↗</button></div></article>
+   <article class="offer-card" data-type="Flights"><div class="offer-image"><img loading="lazy" src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=80" alt="Passenger aircraft"><span class="offer-badge">FLIGHT COLLECTION</span><button class="heart" aria-label="Save offer"><i class="icon" data-lucide="heart"></i></button></div><div class="offer-body"><span class="offer-type">Flights</span><h3>Take off to somewhere new</h3><p>Explore example fares for popular domestic routes.</p><div class="offer-valid"><i class="icon" data-lucide="plane"></i> Sample fares only</div><button class="offer-action" data-offer="Flights">Explore flights ↗</button></div></article>
+   <article class="offer-card" data-type="Bus"><div class="offer-image"><img loading="lazy" src="https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=800&q=80" alt="Passenger bus"><span class="offer-badge">ROAD COLLECTION</span><button class="heart" aria-label="Save offer"><i class="icon" data-lucide="heart"></i></button></div><div class="offer-body"><span class="offer-type">Bus</span><h3>Enjoy the journey</h3><p>Discover sample intercity bus routes and road trips.</p><div class="offer-valid"><i class="icon" data-lucide="bus-front"></i> Demo offer</div><button class="offer-action" data-offer="Bus">Explore bus trips ↗</button></div></article>
+   <article class="offer-card" data-type="Trains"><div class="offer-image"><img loading="lazy" src="https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=800&q=80" alt="Railway journey"><span class="offer-badge">RAIL COLLECTION</span><button class="heart" aria-label="Save offer"><i class="icon" data-lucide="heart"></i></button></div><div class="offer-body"><span class="offer-type">Trains</span><h3>Let the scenery surprise you</h3><p>Explore sample rail connections and long-distance trips.</p><div class="offer-valid"><i class="icon" data-lucide="train-front"></i> Illustrative schedule</div><button class="offer-action" data-offer="Trains">Explore trains ↗</button></div></article>
+   <article class="offer-card" data-type="Cabs"><div class="offer-image"><img loading="lazy" src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=800&q=80" alt="Car on road"><span class="offer-badge">RIDE COLLECTION</span><button class="heart" aria-label="Save offer"><i class="icon" data-lucide="heart"></i></button></div><div class="offer-body"><span class="offer-type">Cabs</span><h3>From doorstep to destination</h3><p>Explore sample airport transfers and outstation rides.</p><div class="offer-valid"><i class="icon" data-lucide="car-front"></i> Provider connection needed</div><button class="offer-action" data-offer="Cabs">Explore cabs ↗</button></div></article>
+   <article class="offer-card" data-type="Holidays"><div class="offer-image"><img loading="lazy" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80" alt="Holiday destination"><span class="offer-badge">HOLIDAY COLLECTION</span><button class="heart" aria-label="Save offer"><i class="icon" data-lucide="heart"></i></button></div><div class="offer-body"><span class="offer-type">Holidays</span><h3>Make memories together</h3><p>Find inspiration for family breaks and weekend escapes.</p><div class="offer-valid"><i class="icon" data-lucide="palmtree"></i> Sample package</div><button class="offer-action" data-offer="Holidays">Explore holidays ↗</button></div></article>
+   <article class="offer-card" data-type="Hotels"><div class="offer-image"><img loading="lazy" src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80" alt="Luxury city hotel"><span class="offer-badge">CITY STAYS</span><button class="heart" aria-label="Save offer"><i class="icon" data-lucide="heart"></i></button></div><div class="offer-body"><span class="offer-type">Hotels</span><h3>Your city, your way</h3><p>Find sample stays for business trips and city breaks.</p><div class="offer-valid"><i class="icon" data-lucide="building-2"></i> Sample listing</div><button class="offer-action" data-offer="Hotels">Explore city stays ↗</button></div></article>
+   <article class="offer-card" data-type="Flights"><div class="offer-image"><img loading="lazy" src="https://images.unsplash.com/photo-1504109586057-7a2ae83d1338?auto=format&fit=crop&w=800&q=80" alt="Airport and travel"><span class="offer-badge">WEEKEND ESCAPES</span><button class="heart" aria-label="Save offer"><i class="icon" data-lucide="heart"></i></button></div><div class="offer-body"><span class="offer-type">Flights</span><h3>Turn a weekend into a getaway</h3><p>Find inspiration for quick domestic trips.</p><div class="offer-valid"><i class="icon" data-lucide="calendar-days"></i> Example travel idea</div><button class="offer-action" data-offer="Flights">Find flights ↗</button></div></article>
+   <article class="offer-card" data-type="Bus"><div class="offer-image"><img loading="lazy" src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80" alt="Coach travel"><span class="offer-badge">INTERCITY RIDES</span><button class="heart" aria-label="Save offer"><i class="icon" data-lucide="heart"></i></button></div><div class="offer-body"><span class="offer-type">Bus</span><h3>Discover a new road</h3><p>Plan an example intercity trip with flexible travel ideas.</p><div class="offer-valid"><i class="icon" data-lucide="route"></i> Sample route</div><button class="offer-action" data-offer="Bus">Find bus trips ↗</button></div></article>
+   <article class="offer-card" data-type="Trains"><div class="offer-image"><img loading="lazy" src="https://images.unsplash.com/photo-1515169067868-5387ec356754?auto=format&fit=crop&w=800&q=80" alt="Train travel"><span class="offer-badge">SCENIC JOURNEYS</span><button class="heart" aria-label="Save offer"><i class="icon" data-lucide="heart"></i></button></div><div class="offer-body"><span class="offer-type">Trains</span><h3>Take the scenic route</h3><p>Get inspired by rail journeys through changing landscapes.</p><div class="offer-valid"><i class="icon" data-lucide="train-front"></i> Demo schedule</div><button class="offer-action" data-offer="Trains">Find train options ↗</button></div></article>
+   <article class="offer-card" data-type="Cabs"><div class="offer-image"><img loading="lazy" src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80" alt="Premium car"><span class="offer-badge">PREMIUM RIDES</span><button class="heart" aria-label="Save offer"><i class="icon" data-lucide="heart"></i></button></div><div class="offer-body"><span class="offer-type">Cabs</span><h3>Travel with extra comfort</h3><p>Explore premium ride ideas for special journeys.</p><div class="offer-valid"><i class="icon" data-lucide="car-front"></i> Sample ride</div><button class="offer-action" data-offer="Cabs">Explore rides ↗</button></div></article>
+   <article class="offer-card" data-type="Holidays"><div class="offer-image"><img loading="lazy" src="https://images.unsplash.com/photo-1530789253388-582c481c54b0?auto=format&fit=crop&w=800&q=80" alt="Holiday experience"><span class="offer-badge">EXPERIENCE COLLECTION</span><button class="heart" aria-label="Save offer"><i class="icon" data-lucide="heart"></i></button></div><div class="offer-body"><span class="offer-type">Holidays</span><h3>Discover beyond the itinerary</h3><p>Build inspiration around culture, nature and local experiences.</p><div class="offer-valid"><i class="icon" data-lucide="map"></i> Travel inspiration</div><button class="offer-action" data-offer="Holidays">Explore experiences ↗</button></div></article>
+   <article class="offer-card" data-type="Hotels"><div class="offer-image"><img loading="lazy" src="https://images.unsplash.com/photo-1518732714860-b62714ce0c59?auto=format&fit=crop&w=800&q=80" alt="Mountain lodge"><span class="offer-badge">MOUNTAIN STAYS</span><button class="heart" aria-label="Save offer"><i class="icon" data-lucide="heart"></i></button></div><div class="offer-body"><span class="offer-type">Hotels</span><h3>Wake up to mountain views</h3><p>Discover sample lodges and peaceful mountain retreats.</p><div class="offer-valid"><i class="icon" data-lucide="mountain"></i> Sample stay</div><button class="offer-action" data-offer="Hotels">Explore retreats ↗</button></div></article>
+   <article class="offer-card" data-type="Flights"><div class="offer-image"><img loading="lazy" src="https://images.unsplash.com/photo-1542296332-2e4473faf563?auto=format&fit=crop&w=800&q=80" alt="Aircraft at airport"><span class="offer-badge">CITY CONNECTIONS</span><button class="heart" aria-label="Save offer"><i class="icon" data-lucide="heart"></i></button></div><div class="offer-body"><span class="offer-type">Flights</span><h3>Connect to more places</h3><p>Discover sample routes between major Indian cities.</p><div class="offer-valid"><i class="icon" data-lucide="plane-takeoff"></i> Example routes</div><button class="offer-action" data-offer="Flights">Browse routes ↗</button></div></article>
+   <article class="offer-card" data-type="Bus"><div class="offer-image"><img loading="lazy" src="https://images.unsplash.com/photo-1557223562-6c77ef16210f?auto=format&fit=crop&w=800&q=80" alt="Bus journey"><span class="offer-badge">LONG DISTANCE</span><button class="heart" aria-label="Save offer"><i class="icon" data-lucide="heart"></i></button></div><div class="offer-body"><span class="offer-type">Bus</span><h3>Connect cities by road</h3><p>Explore example routes for your next intercity journey.</p><div class="offer-valid"><i class="icon" data-lucide="map-pin"></i> Illustrative itinerary</div><button class="offer-action" data-offer="Bus">Browse bus routes ↗</button></div></article>
+   <article class="offer-card" data-type="Trains"><div class="offer-image"><img loading="lazy" src="https://images.unsplash.com/photo-1532102235608-dc8fc689c9ab?auto=format&fit=crop&w=800&q=80" alt="Railway station"><span class="offer-badge">RAIL ESCAPES</span><button class="heart" aria-label="Save offer"><i class="icon" data-lucide="heart"></i></button></div><div class="offer-body"><span class="offer-type">Trains</span><h3>Every station, a new story</h3><p>Explore sample rail trips and destination ideas.</p><div class="offer-valid"><i class="icon" data-lucide="train-front"></i> Sample only</div><button class="offer-action" data-offer="Trains">Explore rail trips ↗</button></div></article>
+   <article class="offer-card" data-type="Cabs"><div class="offer-image"><img loading="lazy" src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=800&q=80" alt="Car on a road"><span class="offer-badge">OUTSTATION TRIPS</span><button class="heart" aria-label="Save offer"><i class="icon" data-lucide="heart"></i></button></div><div class="offer-body"><span class="offer-type">Cabs</span><h3>Make the journey your own</h3><p>Plan a sample private ride or an outstation escape.</p><div class="offer-valid"><i class="icon" data-lucide="navigation"></i> Provider connection needed</div><button class="offer-action" data-offer="Cabs">Plan a ride ↗</button></div></article>
+   <article class="offer-card" data-type="Holidays"><div class="offer-image"><img loading="lazy" src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=800&q=80" alt="Lake and mountains"><span class="offer-badge">NATURE ESCAPES</span><button class="heart" aria-label="Save offer"><i class="icon" data-lucide="trees"></i></button></div><div class="offer-body"><span class="offer-type">Holidays</span><h3>Find your quiet place</h3><p>Discover lakes, mountains and nature-inspired breaks.</p><div class="offer-valid"><i class="icon" data-lucide="leaf"></i> Sample holiday idea</div><button class="offer-action" data-offer="Holidays">Explore escapes ↗</button></div></article>
+   <article class="offer-card" data-type="Hotels"><div class="offer-image"><img loading="lazy" src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=800&q=80" alt="Premium hotel"><span class="offer-badge">SIGNATURE STAYS</span><button class="heart" aria-label="Save offer"><i class="icon" data-lucide="heart"></i></button></div><div class="offer-body"><span class="offer-type">Hotels</span><h3>Little luxuries, lovely stays</h3><p>Browse sample premium properties and getaway inspiration.</p><div class="offer-valid"><i class="icon" data-lucide="gem"></i> Sample listing</div><button class="offer-action" data-offer="Hotels">Discover stays ↗</button></div></article>
+  </div>
+  <div class="offer-controls"><span id="offerCount">01 / 18</span><div class="progress"><span id="offerProgress"></span></div><button id="offerPrev" aria-label="Previous"><i class="icon" data-lucide="chevron-left"></i></button><button id="offerNext" aria-label="Next"><i class="icon" data-lucide="chevron-right"></i></button></div>
 
-  <section class="container search-wrap" id="search">
-    <div class="search-card">
-      <div class="search-head">
-        <div class="tabs">
-          <button class="tab active" data-mode="flight">✈ Flights</button>
-          <button class="tab" data-mode="train">🚆 Trains</button>
-        </div>
-        <span class="search-note">Simple planning. More possibilities.</span>
-      </div>
+  <div class="section-divider"></div>
+  <div class="heading-row" id="hotels"><div><span class="eyebrow">Stays worth discovering</span><h2>Flagship Hotel Stores</h2><p>From elegant city hotels to peaceful mountain escapes.</p></div><button class="view-all" id="viewAllHotels">Explore stays <i class="icon" data-lucide="arrow-up-right"></i></button></div>
+  <div class="hotel-grid" id="hotelGrid">
+   <article class="hotel-card"><div class="hotel-image"><img loading="lazy" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=700&q=80" alt="Resort"><span class="hotel-label">LUXURY COLLECTION</span><button class="heart" aria-label="Save hotel"><i class="icon" data-lucide="heart"></i></button></div><div class="hotel-body"><div class="hotel-brand">TRIPJAN SELECT · DEMO</div><h3>Royal Heritage Retreat</h3><p class="hotel-location"><i class="icon" data-lucide="map-pin"></i> Jaipur, Rajasthan</p><div class="hotel-rating"><span class="rating-score"><i class="icon" data-lucide="star"></i> 4.7</span><small>Illustrative rating</small></div><div class="amenities"><span><i class="icon" data-lucide="waves"></i> Pool</span><span><i class="icon" data-lucide="wifi"></i> Wi-Fi</span></div><div class="hotel-bottom"><div class="hotel-price"><strong>₹4,299</strong><small>per night · sample</small></div><button class="hotel-book" data-hotel="Royal Heritage Retreat">View stay ↗</button></div></div></article>
+   <article class="hotel-card"><div class="hotel-image"><img loading="lazy" src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=700&q=80" alt="Beach resort"><span class="hotel-label">RESORT COLLECTION</span><button class="heart" aria-label="Save hotel"><i class="icon" data-lucide="heart"></i></button></div><div class="hotel-body"><div class="hotel-brand">TRIPJAN SELECT · DEMO</div><h3>Coastal Paradise Resort</h3><p class="hotel-location"><i class="icon" data-lucide="map-pin"></i> Goa, India</p><div class="hotel-rating"><span class="rating-score"><i class="icon" data-lucide="star"></i> 4.5</span><small>Illustrative rating</small></div><div class="amenities"><span><i class="icon" data-lucide="waves"></i> Pool</span><span><i class="icon" data-lucide="coffee"></i> Breakfast</span></div><div class="hotel-bottom"><div class="hotel-price"><strong>₹5,499</strong><small>per night · sample</small></div><button class="hotel-book" data-hotel="Coastal Paradise Resort">View stay ↗</button></div></div></article>
+   <article class="hotel-card"><div class="hotel-image"><img loading="lazy" src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=700&q=80" alt="City hotel"><span class="hotel-label">CITY COLLECTION</span><button class="heart" aria-label="Save hotel"><i class="icon" data-lucide="heart"></i></button></div><div class="hotel-body"><div class="hotel-brand">TRIPJAN SELECT · DEMO</div><h3>Urban Comfort Suites</h3><p class="hotel-location"><i class="icon" data-lucide="map-pin"></i> Bhubaneswar, Odisha</p><div class="hotel-rating"><span class="rating-score"><i class="icon" data-lucide="star"></i> 4.4</span><small>Illustrative rating</small></div><div class="amenities"><span><i class="icon" data-lucide="wifi"></i> Wi-Fi</span><span><i class="icon" data-lucide="car-front"></i> Parking</span></div><div class="hotel-bottom"><div class="hotel-price"><strong>₹2,199</strong><small>per night · sample</small></div><button class="hotel-book" data-hotel="Urban Comfort Suites">View stay ↗</button></div></div></article>
+   <article class="hotel-card"><div class="hotel-image"><img loading="lazy" src="https://images.unsplash.com/photo-1518732714860-b62714ce0c59?auto=format&fit=crop&w=700&q=80" alt="Mountain lodge"><span class="hotel-label">NATURE COLLECTION</span><button class="heart" aria-label="Save hotel"><i class="icon" data-lucide="heart"></i></button></div><div class="hotel-body"><div class="hotel-brand">TRIPJAN SELECT · DEMO</div><h3>Himalayan View Lodge</h3><p class="hotel-location"><i class="icon" data-lucide="map-pin"></i> Manali, Himachal</p><div class="hotel-rating"><span class="rating-score"><i class="icon" data-lucide="star"></i> 4.6</span><small>Illustrative rating</small></div><div class="amenities"><span><i class="icon" data-lucide="mountain"></i> Mountain view</span><span><i class="icon" data-lucide="coffee"></i> Café</span></div><div class="hotel-bottom"><div class="hotel-price"><strong>₹3,799</strong><small>per night · sample</small></div><button class="hotel-book" data-hotel="Himalayan View Lodge">View stay ↗</button></div></div></article>
+   <article class="hotel-card"><div class="hotel-image"><img loading="lazy" src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=700&q=80" alt="Premium hotel"><span class="hotel-label">SIGNATURE STAYS</span><button class="heart" aria-label="Save hotel"><i class="icon" data-lucide="heart"></i></button></div><div class="hotel-body"><div class="hotel-brand">TRIPJAN SELECT · DEMO</div><h3>Signature Grand Hotel</h3><p class="hotel-location"><i class="icon" data-lucide="map-pin"></i> Mumbai, Maharashtra</p><div class="hotel-rating"><span class="rating-score"><i class="icon" data-lucide="star"></i> 4.8</span><small>Illustrative rating</small></div><div class="amenities"><span><i class="icon" data-lucide="utensils"></i> Dining</span><span><i class="icon" data-lucide="wifi"></i> Wi-Fi</span></div><div class="hotel-bottom"><div class="hotel-price"><strong>₹6,299</strong><small>per night · sample</small></div><button class="hotel-book" data-hotel="Signature Grand Hotel">View stay ↗</button></div></div></article>
+   <article class="hotel-card"><div class="hotel-image"><img loading="lazy" src="https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=700&q=80" alt="Boutique hotel"><span class="hotel-label">BOUTIQUE COLLECTION</span><button class="heart" aria-label="Save hotel"><i class="icon" data-lucide="heart"></i></button></div><div class="hotel-body"><div class="hotel-brand">TRIPJAN SELECT · DEMO</div><h3>Blue Door Boutique Stay</h3><p class="hotel-location"><i class="icon" data-lucide="map-pin"></i> Udaipur, Rajasthan</p><div class="hotel-rating"><span class="rating-score"><i class="icon" data-lucide="star"></i> 4.5</span><small>Illustrative rating</small></div><div class="amenities"><span><i class="icon" data-lucide="coffee"></i> Café</span><span><i class="icon" data-lucide="wifi"></i> Wi-Fi</span></div><div class="hotel-bottom"><div class="hotel-price"><strong>₹3,299</strong><small>per night · sample</small></div><button class="hotel-book" data-hotel="Blue Door Boutique Stay">View stay ↗</button></div></div></article>
+   <article class="hotel-card"><div class="hotel-image"><img loading="lazy" src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=700&q=80" alt="Modern hotel"><span class="hotel-label">BUSINESS STAYS</span><button class="heart" aria-label="Save hotel"><i class="icon" data-lucide="heart"></i></button></div><div class="hotel-body"><div class="hotel-brand">TRIPJAN SELECT · DEMO</div><h3>Executive Park Hotel</h3><p class="hotel-location"><i class="icon" data-lucide="map-pin"></i> Bengaluru, Karnataka</p><div class="hotel-rating"><span class="rating-score"><i class="icon" data-lucide="star"></i> 4.3</span><small>Illustrative rating</small></div><div class="amenities"><span><i class="icon" data-lucide="briefcase-business"></i> Business</span><span><i class="icon" data-lucide="car-front"></i> Parking</span></div><div class="hotel-bottom"><div class="hotel-price"><strong>₹2,899</strong><small>per night · sample</small></div><button class="hotel-book" data-hotel="Executive Park Hotel">View stay ↗</button></div></div></article>
+   <article class="hotel-card"><div class="hotel-image"><img loading="lazy" src="https://images.unsplash.com/photo-1535827841776-24afc1e255ac?auto=format&fit=crop&w=700&q=80" alt="Tropical resort"><span class="hotel-label">ESCAPE COLLECTION</span><button class="heart" aria-label="Save hotel"><i class="icon" data-lucide="heart"></i></button></div><div class="hotel-body"><div class="hotel-brand">TRIPJAN SELECT · DEMO</div><h3>Green Valley Escape</h3><p class="hotel-location"><i class="icon" data-lucide="map-pin"></i> Puri, Odisha</p><div class="hotel-rating"><span class="rating-score"><i class="icon" data-lucide="star"></i> 4.4</span><small>Illustrative rating</small></div><div class="amenities"><span><i class="icon" data-lucide="trees"></i> Garden</span><span><i class="icon" data-lucide="coffee"></i> Café</span></div><div class="hotel-bottom"><div class="hotel-price"><strong>₹2,599</strong><small>per night · sample</small></div><button class="hotel-book" data-hotel="Green Valley Escape">View stay ↗</button></div></div></article>
+  </div>
+  <div class="disclaimer"><i class="icon" data-lucide="info"></i><p><strong>About these listings:</strong> These hotel names, prices, ratings and images are illustrative demo content, not verified properties, guest reviews or live availability. Connect a real hotel provider before accepting reservations.</p></div>
+ </div>
+</section>
 
-      <form id="searchForm">
-        <div class="search-grid">
-          <div class="field">
-            <label for="from">From city</label>
-            <input id="from" name="from" list="cityList" placeholder="e.g. Bhubaneswar" value="Bhubaneswar" required>
-          </div>
-          <div class="field">
-            <label for="to">To city</label>
-            <input id="to" name="to" list="cityList" placeholder="e.g. Delhi" value="Delhi" required>
-          </div>
-          <div class="field">
-            <label for="date">Departure date</label>
-            <input id="date" name="date" type="date" required>
-          </div>
-          <div class="field">
-            <label for="people">Travellers</label>
-            <select id="people" name="people">
-              <option value="1">1 traveller</option>
-              <option value="2">2 travellers</option>
-              <option value="3">3 travellers</option>
-              <option value="4">4 travellers</option>
-              <option value="5">5 travellers</option>
-              <option value="6">6 travellers</option>
-            </select>
-          </div>
-          <button type="submit" class="btn btn-primary search-submit" id="searchBtn">Search trips →</button>
-        </div>
-        <datalist id="cityList">
-          <option value="Bhubaneswar"></option>
-          <option value="Delhi"></option>
-          <option value="Mumbai"></option>
-          <option value="Kolkata"></option>
-          <option value="Bengaluru"></option>
-          <option value="Chennai"></option>
-          <option value="Hyderabad"></option>
-          <option value="Pune"></option>
-          <option value="Jaipur"></option>
-          <option value="Patna"></option>
-          <option value="Baripada"></option>
-          <option value="Puri"></option>
-          <option value="Visakhapatnam"></option>
-          <option value="Goa"></option>
-        </datalist>
-        <div class="search-foot"><b>✓</b> Compare example options before planning your trip. Prices and schedules below are demonstrations only.</div>
-      </form>
-
-      <div class="results-panel hidden" id="results">
-        <div class="results-title">
-          <div>
-            <h3 id="resultTitle">Available options</h3>
-            <p id="resultSubtitle"></p>
-          </div>
-          <button class="btn btn-outline" id="hideResults" type="button">Hide results</button>
-        </div>
-        <div class="result-list" id="resultList"></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="container section">
-    <div class="section-heading">
-      <div>
-        <span class="eyebrow">Travel with confidence</span>
-        <h2>Good trips start with good plans.</h2>
-        <p>A smoother way to organise your next adventure.</p>
-      </div>
-    </div>
-    <div class="features">
-      <article class="feature-card">
-        <div class="feature-icon">⌕</div>
-        <div><h3>Explore your options</h3><p>Browse example flight and train choices in one simple place while planning your journey.</p></div>
-      </article>
-      <article class="feature-card">
-        <div class="feature-icon">♧</div>
-        <div><h3>Discover new destinations</h3><p>Find inspiration for weekend breaks, family holidays and memorable escapes.</p></div>
-      </article>
-      <article class="feature-card">
-        <div class="feature-icon">♡</div>
-        <div><h3>Plan at your pace</h3><p>Choose your dates, traveller count and route before moving to a real booking provider.</p></div>
-      </article>
-    </div>
-  </section>
-
-  <section class="container section" id="offers">
-    <div class="section-heading">
-      <div>
-        <span class="eyebrow">Handpicked inspiration</span>
-        <h2>Places worth travelling for.</h2>
-        <p>Start dreaming about your next escape.</p>
-      </div>
-      <a href="#search" class="text-link">Plan a trip ↗</a>
-    </div>
-
-    <div class="offer-grid">
-      <article class="offer-card">
-        <div class="offer-img">
-          <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=900&q=80" alt="Tropical beach destination" loading="lazy">
-          <span class="offer-tag">BEACH ESCAPE</span>
-        </div>
-        <div class="offer-body">
-          <h3>Goa Getaway</h3>
-          <p>Sunny beaches, coastal cafés and relaxed holiday vibes.</p>
-          <div class="offer-bottom">
-            <div class="price"><small>Sample trip budget from</small><strong>₹4,999 <em>/ person</em></strong></div>
-            <button class="small-btn" data-destination="Goa">Explore</button>
-          </div>
-        </div>
-      </article>
-
-      <article class="offer-card">
-        <div class="offer-img">
-          <img src="https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=900&q=80" alt="Jaipur heritage architecture" loading="lazy">
-          <span class="offer-tag">CULTURE & HERITAGE</span>
-        </div>
-        <div class="offer-body">
-          <h3>Royal Jaipur</h3>
-          <p>Discover colourful markets, historic forts and local food.</p>
-          <div class="offer-bottom">
-            <div class="price"><small>Sample trip budget from</small><strong>₹3,499 <em>/ person</em></strong></div>
-            <button class="small-btn" data-destination="Jaipur">Explore</button>
-          </div>
-        </div>
-      </article>
-
-      <article class="offer-card">
-        <div class="offer-img">
-          <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=900&q=80" alt="Himalayan mountain landscape" loading="lazy">
-          <span class="offer-tag">MOUNTAIN RETREAT</span>
-        </div>
-        <div class="offer-body">
-          <h3>Himalayan Escape</h3>
-          <p>Mountain air, spectacular landscapes and quiet moments.</p>
-          <div class="offer-bottom">
-            <div class="price"><small>Sample trip budget from</small><strong>₹6,999 <em>/ person</em></strong></div>
-            <button class="small-btn" data-destination="Manali">Explore</button>
-          </div>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <section class="container section" id="routes">
-    <div class="section-heading">
-      <div>
-        <span class="eyebrow">Popular connections</span>
-        <h2>Where will you go next?</h2>
-        <p>Choose a route to fill the search form.</p>
-      </div>
-    </div>
-
-    <div class="routes-grid">
-      <button class="route-card" data-from="Bhubaneswar" data-to="Delhi" data-mode="flight">
-        <div class="route-main"><div class="route-icon">✈</div><div><div class="route-name">Bhubaneswar → Delhi</div><div class="route-sub">Flight · Popular route</div></div></div><span class="route-arrow">↗</span>
-      </button>
-      <button class="route-card" data-from="Bhubaneswar" data-to="Kolkata" data-mode="train">
-        <div class="route-main"><div class="route-icon">🚆</div><div><div class="route-name">Bhubaneswar → Kolkata</div><div class="route-sub">Train · Rail journey</div></div></div><span class="route-arrow">↗</span>
-      </button>
-      <button class="route-card" data-from="Delhi" data-to="Mumbai" data-mode="flight">
-        <div class="route-main"><div class="route-icon">✈</div><div><div class="route-name">Delhi → Mumbai</div><div class="route-sub">Flight · City connection</div></div></div><span class="route-arrow">↗</span>
-      </button>
-      <button class="route-card" data-from="Bhubaneswar" data-to="Puri" data-mode="train">
-        <div class="route-main"><div class="route-icon">🚆</div><div><div class="route-name">Bhubaneswar → Puri</div><div class="route-sub">Train · Coastal Odisha</div></div></div><span class="route-arrow">↗</span>
-      </button>
-      <button class="route-card" data-from="Mumbai" data-to="Goa" data-mode="flight">
-        <div class="route-main"><div class="route-icon">✈</div><div><div class="route-name">Mumbai → Goa</div><div class="route-sub">Flight · Beach escape</div></div></div><span class="route-arrow">↗</span>
-      </button>
-      <button class="route-card" data-from="Delhi" data-to="Jaipur" data-mode="train">
-        <div class="route-main"><div class="route-icon">🚆</div><div><div class="route-name">Delhi → Jaipur</div><div class="route-sub">Train · Heritage trip</div></div></div><span class="route-arrow">↗</span>
-      </button>
-    </div>
-  </section>
+<section class="container section" id="destinations">
+ <div class="section-heading"><div><span class="eyebrow">Where will you go?</span><h2>Find your next favourite place.</h2><p>Ideas for coastal escapes, heritage cities and mountain breaks.</p></div></div>
+ <div class="destination-grid">
+  <button class="destination-card" data-destination="Goa"><img loading="lazy" src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=700&q=80" alt="Goa"><span class="destination-copy"><small>Coastal escape</small><h3>Goa</h3><span>Explore destination <i class="icon" data-lucide="arrow-up-right"></i></span></span></button>
+  <button class="destination-card" data-destination="Jaipur"><img loading="lazy" src="https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=700&q=80" alt="Jaipur"><span class="destination-copy"><small>Culture & heritage</small><h3>Jaipur</h3><span>Explore destination <i class="icon" data-lucide="arrow-up-right"></i></span></span></button>
+  <button class="destination-card" data-destination="Manali"><img loading="lazy" src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=700&q=80" alt="Manali"><span class="destination-copy"><small>Mountain retreat</small><h3>Manali</h3><span>Explore destination <i class="icon" data-lucide="arrow-up-right"></i></span></span></button>
+  <button class="destination-card" data-destination="Puri"><img loading="lazy" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=700&q=80" alt="Puri"><span class="destination-copy"><small>Coastal Odisha</small><h3>Puri</h3><span>Explore destination <i class="icon" data-lucide="arrow-up-right"></i></span></span></button>
+ </div>
+</section>
 </main>
 
-<footer>
-  <div class="container">
-    <div class="footer-top">
-      <div>
-        <div class="footer-brand">✈ trip<span>jan</span></div>
-        <p class="footer-description">A simple starting point for your next journey. Discover destinations, explore travel options and plan a trip that feels like you.</p>
-      </div>
-      <div class="footer-links">
-        <h4>Explore</h4>
-        <a href="#search">Flights</a>
-        <a href="#search" data-footer-mode="train">Trains</a>
-        <a href="#offers">Travel deals</a>
-      </div>
-      <div class="footer-links">
-        <h4>Tripjan</h4>
-        <a href="#home">About the experience</a>
-        <a href="#routes">Popular routes</a>
-        <a href="#" id="footerLogin">Your account</a>
-      </div>
-      <div class="footer-links">
-        <h4>Important</h4>
-        <a href="#" id="privacyLink">Privacy note</a>
-        <a href="#" id="termsLink">Demo terms</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© <span id="year"></span> Tripjan. All rights reserved.</span>
-      <span>Demo travel interface · No real bookings are processed.</span>
-    </div>
+<main id="resultsPage" class="page">
+ <div class="container">
+  <div class="breadcrumb"><button data-home>Home</button> / Search results</div>
+  <div class="results-top"><div><h2 id="resultsHeading">Travel options</h2><p id="resultsCaption"></p></div><div class="result-tools"><button class="btn secondary" id="editSearch">Edit search</button><select id="sortBy" aria-label="Sort"><option value="recommended">Recommended</option><option value="price">Lowest price</option><option value="duration">Shortest journey</option><option value="departure">Earliest departure</option></select></div></div>
+  <div class="results-layout">
+   <aside class="filters"><h3>Refine your search</h3><div class="filter-group"><strong>Price</strong><label><input type="radio" name="priceFilter" value="all" checked> All prices</label><label><input type="radio" name="priceFilter" value="3000"> Under ₹3,000</label><label><input type="radio" name="priceFilter" value="5000"> Under ₹5,000</label></div><div class="filter-group"><strong>Departure</strong><label><input type="checkbox" id="morningFilter"> Before 12 PM</label><label><input type="checkbox" id="eveningFilter"> After 5 PM</label></div><div class="filter-group"><strong>Service</strong><label><input type="checkbox" id="directFilter"> Direct only</label></div><button class="btn soft full" id="clearFilters">Clear filters</button></aside>
+   <div><div class="result-list" id="resultList"></div><div class="no-results hidden" id="noResults"><h3>No matching options</h3><p>Try clearing filters or changing the route.</p><button class="btn primary" id="resetResults">Show all options</button></div><p class="note">Illustrative schedules and fares only. Live availability is not connected.</p></div>
   </div>
-</footer>
+ </div>
+</main>
 
-<!-- Login / Signup modal -->
-<div class="modal" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
-  <div class="modal-card">
-    <div class="modal-head">
-      <div>
-        <div class="brand" style="font-size:20px;margin-bottom:17px"><span class="brand-mark" style="width:32px;height:32px;font-size:16px;border-radius:10px">✈</span><span>trip<span>jan</span></span></div>
-        <h2 id="authTitle">Welcome back</h2>
-        <p id="authSubtitle">Log in to continue planning your journey.</p>
-      </div>
-      <button class="close-btn" id="authClose" aria-label="Close">×</button>
-    </div>
+<main id="detailsPage" class="page">
+ <div class="container"><div class="breadcrumb"><button data-home>Home</button> / <button id="backResults">Results</button> / Details</div><h1 class="page-title" id="detailsHeading">Your journey</h1><p class="page-subtitle" id="detailsSubtitle"></p>
+  <div class="details-layout"><div><div class="detail-image"><img id="detailsImage" alt="Journey image"></div><div class="panel" style="margin-top:14px"><h3>Journey overview</h3><div id="journeyOverview"></div><p class="note">This demonstration does not connect to airline, railway, bus or hotel inventory.</p></div></div><aside><div class="panel"><h3>Price summary</h3><div id="detailSummary"></div><button class="btn primary full" id="continuePassenger">Continue <i class="icon" data-lucide="arrow-right"></i></button><p class="note">No payment is taken at this stage.</p></div></aside></div>
+ </div>
+</main>
 
-    <form id="authForm">
-      <div class="modal-field hidden" id="nameField">
-        <label for="authName">Your name</label>
-        <input id="authName" type="text" autocomplete="name" placeholder="Enter your name">
-      </div>
-      <div class="modal-field">
-        <label for="authEmail">Email address</label>
-        <input id="authEmail" type="email" autocomplete="email" placeholder="you@example.com" required>
-      </div>
-      <div class="modal-field">
-        <label for="authPassword">Password</label>
-        <input id="authPassword" type="password" autocomplete="current-password" minlength="6" placeholder="At least 6 characters" required>
-      </div>
-      <p class="message" id="authMessage" aria-live="polite"></p>
-      <button class="btn btn-primary modal-submit" id="authSubmit" type="submit">Log in</button>
-    </form>
+<main id="checkoutPage" class="page">
+ <div class="container"><div class="breadcrumb"><button data-home>Home</button> / Checkout</div><h1 class="page-title">Complete your trip details</h1><p class="page-subtitle">Review your details and estimated price.</p>
+  <div class="steps"><div class="step done" id="stepTrip"><span class="step-number">✓</span>Trip</div><div class="step-line"></div><div class="step active" id="stepPassenger"><span class="step-number">2</span>Details</div><div class="step-line"></div><div class="step" id="stepReview"><span class="step-number">3</span>Review</div><div class="step-line"></div><div class="step" id="stepPayment"><span class="step-number">4</span>Complete</div></div>
+  <div class="details-layout"><div>
+   <section class="panel" id="passengerSection"><h3>Lead traveller details</h3><p class="note">Enter demo details only. Do not enter sensitive identity or payment information.</p><form id="passengerForm"><div class="form-grid"><div class="field"><label for="pName">Full name</label><input id="pName" required maxlength="80" autocomplete="name" placeholder="Full name"></div><div class="field"><label for="pPhone">Mobile number</label><input id="pPhone" type="tel" required maxlength="18" pattern="[0-9 +()-]{8,18}" placeholder="+91 98765 43210"></div><div class="field wide"><label for="pEmail">Email address</label><input id="pEmail" type="email" required maxlength="120" autocomplete="email" placeholder="you@example.com"></div><div class="field"><label for="pAge">Age group</label><select id="pAge" required><option value="">Select</option><option>Adult</option><option>Child</option><option>Senior</option></select></div><div class="field"><label for="pPreference">Preference</label><select id="pPreference"><option>No preference</option><option>Window seat preference</option><option>Aisle seat preference</option><option>Lower berth preference</option></select></div></div><label class="check-line"><input id="termsAgree" type="checkbox" required><span>I understand this is a demo checkout, not a live reservation.</span></label><button class="btn primary" type="submit">Continue to review <i class="icon" data-lucide="arrow-right"></i></button><p id="passengerError" class="message"></p></form></section>
+   <section class="panel hidden" id="reviewSection"><h3>Review your information</h3><div id="reviewInfo"></div><label class="check-line"><input id="reviewAgree" type="checkbox"><span>I confirm the information is correct.</span></label><button class="btn secondary" id="editPassenger">Edit details</button> <button class="btn primary" id="goPayment">Continue</button></section>
+   <section class="panel hidden" id="paymentSection"><h3>Demo completion</h3><p class="note">No payment is processed. Never enter a real card number, UPI PIN or banking password.</p><div class="summary-line"><span>Demo total</span><strong id="paymentTotal"></strong></div><label class="check-line"><input type="checkbox" id="paymentAgree"><span>I understand no money will be charged.</span></label><button class="btn primary full" id="payDemo">Complete demo checkout</button><p id="paymentMessage" class="message"></p></section>
+  </div><aside><div class="panel"><h3>Trip summary</h3><div id="checkoutSummary"></div><div class="summary-line"><span>Illustrative service fee</span><strong id="serviceFee"></strong></div><div class="summary-line summary-total"><span>Total</span><strong id="checkoutTotal"></strong></div><div class="coupon-row"><input id="couponCode" placeholder="Demo code TRY5"><button class="btn soft" id="applyCoupon">Apply</button></div><p id="couponMessage" class="note">Sample coupon, not a real promotion.</p></div></aside></div>
+ </div>
+</main>
 
-    <p class="modal-switch"><span id="authSwitchText">New to Tripjan?</span> <button id="showSignup" type="button">Create an account</button></p>
-    <div class="demo-note">Demo account only. This page stores demo account data in this browser and is not secure enough for real customer authentication. Do not use a real or reused password.</div>
-  </div>
-</div>
+<main id="confirmationPage" class="page">
+ <div class="container"><div class="success-wrap"><div class="success-icon"><i class="icon" data-lucide="check-circle-2"></i></div><span class="eyebrow">DEMO CHECKOUT COMPLETED</span><h1>Your trip summary is ready.</h1><p>The demo flow is complete. This is not an actual ticket, hotel reservation or confirmed booking.</p>
+ <div class="confirm-card"><div class="confirm-top"><div><span class="confirm-ref">Demo reference</span><strong id="bookingReference">TJ-DEMO-000000</strong></div><span class="status">✓ DEMO COMPLETED</span></div><div class="confirm-route"><div><strong id="confirmFrom">Origin</strong><small id="confirmDate">Date</small></div><div class="confirm-middle"><i class="icon" data-lucide="arrow-right"></i></div><div style="text-align:right"><strong id="confirmTo">Destination</strong><small id="confirmMode">Journey</small></div></div><div class="confirm-details"><div><small>Passenger</small><strong id="confirmPassenger"></strong></div><div><small>Selected service</small><strong id="confirmService"></strong></div><div><small>Demo total</small><strong id="confirmTotal"></strong></div><div><small>Email</small><strong id="confirmEmail"></strong></div><div><small>Payment</small><strong>Simulated only</strong></div><div><small>Ticket / PNR</small><strong>Not issued</strong></div></div></div>
+ <p><strong>Important:</strong> No reservation was made, no payment was collected and this reference is not a real PNR or ticket.</p><div class="confirm-actions"><button class="btn primary" id="printSummary">Print summary</button><button class="btn secondary" id="copyReference">Copy reference</button><button class="btn soft" id="newTrip">Plan another trip</button></div></div></div>
+</main>
 
-<!-- Booking demo modal -->
-<div class="modal" id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="bookingTitle">
-  <div class="modal-card">
-    <div class="modal-head">
-      <div><h2 id="bookingTitle">Trip details</h2><p>Review your example trip request.</p></div>
-      <button class="close-btn" id="bookingClose" aria-label="Close">×</button>
-    </div>
-    <div class="booking-info" id="bookingInfo"></div>
-    <form id="bookingForm">
-      <div class="modal-field">
-        <label for="customer">Full name</label>
-        <input id="customer" type="text" autocomplete="name" placeholder="Your full name" required>
-      </div>
-      <div class="modal-field">
-        <label for="customerEmail">Email address</label>
-        <input id="customerEmail" type="email" autocomplete="email" placeholder="you@example.com" required>
-      </div>
-      <button class="btn btn-primary modal-submit" id="continueBooking" type="submit">Continue demo</button>
-      <div class="demo-note">This is a demonstration only. It will not reserve a seat, issue a ticket or charge money.</div>
-    </form>
-  </div>
-</div>
+<footer><div class="container"><div class="footer-top"><div><div class="brand"><span class="brand-mark"><i class="icon" data-lucide="plane"></i></span><span class="brand-name" style="color:white">trip<span>jan</span></span></div><p class="footer-description">A thoughtful starting point for your next journey. Explore sample travel options, beautiful stays and destination inspiration.</p></div><div class="footer-links"><h4>Explore</h4><a href="#search" data-footer-mode="flight">Flights</a><a href="#search" data-footer-mode="train">Trains</a><a href="#search" data-footer-mode="bus">Bus</a><a href="#offers">Offers</a></div><div class="footer-links"><h4>Discover</h4><a href="#hotels">Hotels</a><a href="#destinations">Destinations</a><a href="#home">Home</a></div><div class="footer-links"><h4>Your Tripjan</h4><a href="#" id="footerLogin">Account</a><a href="#" id="privacyLink">Privacy note</a><a href="#" id="termsLink">Demo terms</a></div></div><div class="footer-bottom"><span>© <span id="year"></span> Tripjan</span><span>Travel interface demo · No live booking inventory</span></div></div></footer>
 
+<div class="modal" id="hotelModal" role="dialog" aria-modal="true" aria-labelledby="hotelModalTitle"><div class="modal-box"><button class="modal-close" id="hotelModalClose" aria-label="Close"><i class="icon" data-lucide="x"></i></button><span class="eyebrow">TRIPJAN SELECT · DEMO</span><h2 id="hotelModalTitle">Hotel details</h2><p id="hotelModalDescription"></p><div class="modal-summary" id="hotelModalSummary"></div><div class="modal-field"><label for="hotelCheckin">Check-in date</label><input type="date" id="hotelCheckin"></div><div class="modal-field"><label for="hotelCheckout">Check-out date</label><input type="date" id="hotelCheckout"></div><div class="modal-field"><label for="hotelRooms">Rooms</label><select id="hotelRooms"><option value="1">1 room</option><option value="2">2 rooms</option><option value="3">3 rooms</option><option value="4">4 rooms</option></select></div><button class="btn primary full" id="hotelContinue">Prepare demo request <i class="icon" data-lucide="arrow-right"></i></button><p class="modal-note">No room is reserved. Live hotel availability is not connected.</p><p class="message" id="hotelMessage"></p></div></div>
+
+<div class="modal" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle"><div class="modal-box"><button class="modal-close" id="authClose" aria-label="Close"><i class="icon" data-lucide="x"></i></button><span class="eyebrow">YOUR TRIPJAN</span><h2 id="authTitle">Welcome back</h2><p id="authSubtitle">Use your local demo account.</p><form id="authForm"><div class="modal-field hidden" id="authNameWrap"><label for="authName">Your name</label><input id="authName" maxlength="80" autocomplete="name"></div><div class="modal-field"><label for="authEmail">Email</label><input id="authEmail" type="email" required autocomplete="email"></div><div class="modal-field"><label for="authPassword">Password</label><input id="authPassword" type="password" required minlength="6" autocomplete="current-password"></div><p class="message" id="authMessage"></p><button class="btn primary full" id="authSubmit">Log in</button></form><button class="btn soft full" id="authSwitch" style="margin-top:10px">Create an account</button><p class="modal-note">Demo account data stays in this browser. Do not use a real or reused password. Production requires secure authentication.</p></div></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
-(() => {
-  "use strict";
+(()=>{
+"use strict";
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const pages=["homePage","resultsPage","detailsPage","checkoutPage","confirmationPage"];
+const USERS="tripjan_demo_users_v4",SESSION="tripjan_demo_session_v4",WISH="tripjan_wishlist_v4";
+let mode="flight",heroIndex=0,heroTimer,toastTimer,selected=null,searchState=null,passenger=null,baseTotal=0,discount=0,authMode="login",currentUser=null,wishlist=[];
+const flights=[
+{id:"f1",name:"IndiGo",time:"06:15",arrive:"08:35",duration:140,price:2499,direct:true},
+{id:"f2",name:"Air India",time:"10:40",arrive:"13:05",duration:145,price:3199,direct:true},
+{id:"f3",name:"SpiceJet",time:"17:20",arrive:"20:00",duration:160,price:2899,direct:true},
+{id:"f4",name:"Connecting Airways",time:"20:15",arrive:"01:10",duration:295,price:2199,direct:false}
+];
+const trains=[
+{id:"t1",name:"Express Rail",time:"06:30",arrive:"13:45",duration:435,price:495,direct:true},
+{id:"t2",name:"Superfast Express",time:"09:15",arrive:"16:20",duration:425,price:680,direct:true},
+{id:"t3",name:"Intercity Express",time:"15:40",arrive:"22:10",duration:390,price:560,direct:true},
+{id:"t4",name:"Connecting Rail",time:"19:30",arrive:"04:25",duration:535,price:399,direct:false}
+];
+const buses=[
+{id:"b1",name:"Premium AC Sleeper",time:"07:00",arrive:"13:30",duration:390,price:799,direct:true},
+{id:"b2",name:"Volvo Multi-Axle",time:"10:15",arrive:"17:00",duration:405,price:999,direct:true},
+{id:"b3",name:"Comfort AC Seater",time:"16:30",arrive:"23:15",duration:405,price:649,direct:true},
+{id:"b4",name:"Night Sleeper Coach",time:"21:00",arrive:"05:30",duration:510,price:899,direct:true}
+];
+const cabs=[
+{id:"c1",name:"Compact AC Cab",time:"Flexible",arrive:"Flexible",duration:180,price:1499,direct:true},
+{id:"c2",name:"Sedan Comfort",time:"Flexible",arrive:"Flexible",duration:170,price:1999,direct:true},
+{id:"c3",name:"Premium SUV",time:"Flexible",arrive:"Flexible",duration:165,price:2999,direct:true},
+{id:"c4",name:"Family MUV",time:"Flexible",arrive:"Flexible",duration:190,price:2699,direct:true}
+];
+const hotelData={
+"Royal Heritage Retreat":{location:"Jaipur, Rajasthan",price:4299,description:"A sample heritage-style hotel listing for a premium stay."},
+"Coastal Paradise Resort":{location:"Goa, India",price:5499,description:"A sample coastal resort listing for a relaxed getaway."},
+"Urban Comfort Suites":{location:"Bhubaneswar, Odisha",price:2199,description:"A sample city hotel listing for a comfortable stay."},
+"Himalayan View Lodge":{location:"Manali, Himachal Pradesh",price:3799,description:"A sample mountain lodge listing."},
+"Signature Grand Hotel":{location:"Mumbai, Maharashtra",price:6299,description:"A sample premium city hotel."},
+"Blue Door Boutique Stay":{location:"Udaipur, Rajasthan",price:3299,description:"A sample boutique hotel."},
+"Executive Park Hotel":{location:"Bengaluru, Karnataka",price:2899,description:"A sample business hotel."},
+"Green Valley Escape":{location:"Puri, Odisha",price:2599,description:"A sample nature-inspired stay."}
+};
+const destinationData={
+Goa:{price:4999,image:"https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=1200&q=80",description:"Coastal getaway inspiration."},
+Jaipur:{price:3499,image:"https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=1200&q=80",description:"Heritage and culture inspiration."},
+Manali:{price:6999,image:"https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80",description:"Mountain retreat inspiration."},
+Puri:{price:2999,image:"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80",description:"Coastal Odisha getaway inspiration."}
+};
+function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function money(n){return new Intl.NumberFormat("en-IN",{style:"currency",currency:"INR",maximumFractionDigits:0}).format(n);}
+function icons(){if(window.lucide?.createIcons)lucide.createIcons({attrs:{"stroke-width":1.8}});}
+function toast(s){const el=$("#toast");el.textContent=s;el.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove("show"),2800);}
+function showPage(id,scroll=true){pages.forEach(p=>$("#"+p).classList.toggle("active",p===id));$("#navLinks").classList.remove("open");if(scroll)window.scrollTo({top:0,behavior:"smooth"});}
+function homeAnchor(sel){showPage("homePage",false);setTimeout(()=>$(sel)?.scrollIntoView({behavior:"smooth",block:"start"}),30);}
+function localDate(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;}
+const today=new Date(),todayStr=localDate(today);
+$("#year").textContent=today.getFullYear();$("#travelDate").min=todayStr;$("#travelDate").value=todayStr;
+$("#homeLogo").addEventListener("click",e=>{e.preventDefault();showPage("homePage");});
+$("#menuBtn").addEventListener("click",()=>$("#navLinks").classList.toggle("open"));
+$$("[data-anchor]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();homeAnchor(a.getAttribute("href"));}));
+$$("[data-home]").forEach(b=>b.addEventListener("click",()=>showPage("homePage")));
 
-  const $ = (selector, root = document) => root.querySelector(selector);
-  const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+/* Carousel */
+const slides=$$(".hero-slide"),dots=$$(".hero-dot");
+function showHero(n){heroIndex=(n+slides.length)%slides.length;slides.forEach((s,i)=>s.classList.toggle("active",i===heroIndex));dots.forEach((d,i)=>d.classList.toggle("active",i===heroIndex));$("#heroCount").textContent=`0${heroIndex+1} / 0${slides.length}`;}
+function startHero(){clearInterval(heroTimer);heroTimer=setInterval(()=>showHero(heroIndex+1),5500);}
+$("#heroPrev").addEventListener("click",()=>{showHero(heroIndex-1);startHero();});
+$("#heroNext").addEventListener("click",()=>{showHero(heroIndex+1);startHero();});
+dots.forEach(d=>d.addEventListener("click",()=>{showHero(+d.dataset.slide);startHero();}));
+$("#heroCarousel").addEventListener("mouseenter",()=>clearInterval(heroTimer));
+$("#heroCarousel").addEventListener("mouseleave",startHero);startHero();
+$$("[data-scroll]").forEach(b=>b.addEventListener("click",()=>homeAnchor(b.dataset.scroll)));
 
-  const USERS_KEY = "tripjan_demo_users_v1";
-  const SESSION_KEY = "tripjan_demo_session_v1";
+/* Mode selector */
+const modeNames={flight:"Flights",hotel:"Hotels",train:"Trains",bus:"Bus",cab:"Cabs"};
+function setMode(m){
+ mode=m;$$(".search-tab").forEach(b=>b.classList.toggle("active",b.dataset.mode===m));
+ const hotel=m==="hotel",cab=m==="cab";
+ $("#fromLabel").textContent=hotel?"Destination":cab?"Pickup location":"From";
+ $("#toLabel").textContent=hotel?"Hotel area":cab?"Drop location":"To";
+ $("#dateLabel").textContent=hotel?"Check-in / travel date":"Departure date";
+ $("#travellerLabel").textContent=hotel?"Guests":cab?"Passengers":"Travellers";
+ $("#searchButton").innerHTML=`Search ${esc(modeNames[m].toLowerCase())} <i class="icon" data-lucide="arrow-right"></i>`;
+ icons();
+}
+$$(".search-tab").forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.mode)));
+function minutes(t){if(!/^\d{2}:\d{2}$/.test(t))return 720;const [h,m]=t.split(":").map(Number);return h*60+m;}
+function durationText(n){const h=Math.floor(n/60),m=n%60;return h?`${h}h ${m?m+"m":""}`:`${m}m`;}
+function sourceList(){return mode==="flight"?flights:mode==="train"?trains:mode==="bus"?buses:cabs;}
+function search(){
+ const from=$("#from").value.trim(),to=$("#to").value.trim(),date=$("#travelDate").value,travellers=Number($("#travellers").value);
+ if(!from||!to){toast("Enter both locations.");return;}
+ if(from.toLowerCase()===to.toLowerCase()){toast("Choose two different locations.");return;}
+ if(!date||date<todayStr){toast("Choose a valid date.");return;}
+ searchState={from,to,date,travellers,mode};
+ if(mode==="hotel"){toast("Explore the sample hotel collection below.");homeAnchor("#hotels");return;}
+ if(mode==="cab"&&from.toLowerCase().includes(to.toLowerCase())){toast("Choose different pickup and drop locations.");return;}
+ renderResults();showPage("resultsPage");
+}
+$("#searchForm").addEventListener("submit",e=>{e.preventDefault();search();});
+function filteredOptions(){
+ let list=sourceList().map(x=>({...x}));
+ const price=$('input[name="priceFilter"]:checked')?.value||"all";
+ if(price!=="all")list=list.filter(x=>x.price<=Number(price));
+ if($("#morningFilter").checked)list=list.filter(x=>minutes(x.time)<720);
+ if($("#eveningFilter").checked)list=list.filter(x=>minutes(x.time)>=1020);
+ if($("#directFilter").checked)list=list.filter(x=>x.direct);
+ const sort=$("#sortBy").value;
+ if(sort==="price")list.sort((a,b)=>a.price-b.price);
+ if(sort==="duration")list.sort((a,b)=>a.duration-b.duration);
+ if(sort==="departure")list.sort((a,b)=>minutes(a.time)-minutes(b.time));
+ return list;
+}
+function renderResults(){
+ $("#resultsHeading").textContent=`${modeNames[mode]} · ${searchState.from} → ${searchState.to}`;
+ $("#resultsCaption").textContent=`${searchState.date} · ${searchState.travellers} traveller(s) · Sample options`;
+ const list=filteredOptions();
+ $("#resultList").innerHTML=list.map(x=>`<article class="result-card"><div class="company"><div class="company-icon"><i class="icon" data-lucide="${mode==="flight"?"plane":mode==="train"?"train-front":mode==="bus"?"bus-front":"car-front"}"></i></div><div><strong>${esc(x.name)}</strong><small>Example ${esc(modeNames[mode].toLowerCase())} service</small></div></div><div class="times"><strong>${esc(x.time)} → ${esc(x.arrive)}</strong><small>${durationText(x.duration)} · ${x.direct?"Direct":"Connecting"}</small></div><div class="fare"><strong>${money(x.price*searchState.travellers)}</strong><small>Example total</small></div><div class="result-actions"><button class="btn soft" data-detail="${x.id}">Explore</button><button class="btn primary" data-select="${x.id}">Select <i class="icon" data-lucide="arrow-right"></i></button></div></article>`).join("");
+ $("#noResults").classList.toggle("hidden",list.length>0);$("#resultList").classList.toggle("hidden",!list.length);icons();
+}
+["sortBy","morningFilter","eveningFilter","directFilter"].forEach(id=>$("#"+id).addEventListener("change",renderResults));
+$$('input[name="priceFilter"]').forEach(el=>el.addEventListener("change",renderResults));
+function clearFilters(){$('input[name="priceFilter"][value="all"]').checked=true;$("#morningFilter").checked=false;$("#eveningFilter").checked=false;$("#directFilter").checked=false;$("#sortBy").value="recommended";renderResults();}
+$("#clearFilters").addEventListener("click",clearFilters);$("#resetResults").addEventListener("click",clearFilters);
+$("#editSearch").addEventListener("click",()=>homeAnchor("#search"));
+$("#resultList").addEventListener("click",e=>{
+ const b=e.target.closest("[data-select],[data-detail]");if(!b)return;
+ const x=sourceList().find(x=>x.id===(b.dataset.select||b.dataset.detail));if(!x)return;
+ selected={...x,mode,from:searchState.from,to:searchState.to,date:searchState.date,travellers:searchState.travellers,name:x.name};openDetails();
+});
 
-  let mode = "flight";
-  let currentSlide = 0;
-  let carouselTimer = null;
-  let authMode = "login";
-  let currentUser = null;
-  let bookingData = null;
-  let toastTimer = null;
+/* Offer carousel and category filters */
+const offerTrack=$("#offerTrack");
+function visibleOffers(){return $$(".offer-card",offerTrack).filter(c=>!c.classList.contains("hidden"));}
+function updateOfferProgress(){
+ const cards=visibleOffers(),max=offerTrack.scrollWidth-offerTrack.clientWidth,ratio=max>0?offerTrack.scrollLeft/max:0;
+ $("#offerCount").textContent=cards.length?`${String(Math.min(cards.length,Math.floor(ratio*(cards.length-1))+1)).padStart(2,"0")} / ${String(cards.length).padStart(2,"0")}`:"00 / 00";
+ $("#offerProgress").style.width=`${Math.max(cards.length?12:0,ratio*100)}%`;
+}
+function filterOffers(category){
+ $$(".category").forEach(b=>b.classList.toggle("active",b.dataset.category===category));
+ $$(".offer-card",offerTrack).forEach(c=>c.classList.toggle("hidden",category!=="All"&&c.dataset.type!==category));
+ offerTrack.scrollLeft=0;requestAnimationFrame(updateOfferProgress);
+}
+$$(".category").forEach(b=>b.addEventListener("click",()=>filterOffers(b.dataset.category)));
+$("#viewAllOffers").addEventListener("click",()=>filterOffers("All"));
+$("#offerPrev").addEventListener("click",()=>offerTrack.scrollBy({left:-offerTrack.clientWidth*.8,behavior:"smooth"}));
+$("#offerNext").addEventListener("click",()=>offerTrack.scrollBy({left:offerTrack.clientWidth*.8,behavior:"smooth"}));
+offerTrack.addEventListener("scroll",updateOfferProgress,{passive:true});
+window.addEventListener("resize",updateOfferProgress);
+$("#viewAllHotels").addEventListener("click",()=>$("#hotelGrid").scrollIntoView({behavior:"smooth"}));
 
-  const slides = $$(".slide");
-  const dots = $$(".dot");
-  const authModal = $("#authModal");
-  const bookingModal = $("#bookingModal");
+/* Wishlist */
+try{wishlist=JSON.parse(localStorage.getItem(WISH)||"[]");if(!Array.isArray(wishlist))wishlist=[];}catch{wishlist=[];}
+function saveWishlist(){try{localStorage.setItem(WISH,JSON.stringify(wishlist));}catch{}}
+$$(".heart").forEach(b=>{
+ const card=b.closest(".hotel-card,.offer-card"),name=card?.querySelector("h3")?.textContent.trim();
+ if(name&&wishlist.includes(name)){b.classList.add("saved");b.innerHTML='<i class="icon" data-lucide="heart" fill="currentColor"></i>';}
+ b.addEventListener("click",()=>{
+  const saved=b.classList.toggle("saved");
+  if(name){wishlist=saved?[...new Set([...wishlist,name])]:wishlist.filter(n=>n!==name);saveWishlist();}
+  b.innerHTML=`<i class="icon" data-lucide="heart" ${saved?'fill="currentColor"':""}></i>`;icons();
+  toast(saved?"Added to your demo wishlist.":"Removed from wishlist.");
+ });
+});
 
-  $("#year").textContent = new Date().getFullYear();
+/* Offers */
+$$("[data-offer]").forEach(b=>b.addEventListener("click",()=>{
+ const t=b.dataset.offer;
+ if(t==="Flights"||t==="Trains"||t==="Bus"||t==="Cabs"){setMode(({Flights:"flight",Trains:"train",Bus:"bus",Cabs:"cab"})[t]);homeAnchor("#search");}
+ else if(t==="Hotels")$("#hotelGrid").scrollIntoView({behavior:"smooth"});
+ else toast("Holiday package enquiries need a connected travel provider.");
+}));
 
-  // Set today's date as the earliest selectable date.
-  const today = new Date();
-  const localDate = [
-    today.getFullYear(),
-    String(today.getMonth() + 1).padStart(2, "0"),
-    String(today.getDate()).padStart(2, "0")
-  ].join("-");
-  $("#date").min = localDate;
-  $("#date").value = localDate;
+/* Destination exploration */
+$$("[data-destination]").forEach(b=>b.addEventListener("click",()=>{
+ const name=b.dataset.destination,d=destinationData[name];if(!d)return;
+ selected={id:"dest-"+name,name:name+" travel inspiration",mode:"flight",from:$("#from").value.trim()||"Bhubaneswar",to:name,date:$("#travelDate").value||todayStr,travellers:Number($("#travellers").value||1),price:d.price,time:"Flexible",arrive:"Flexible",duration:0,direct:false,destination:d};
+ openDetails();
+}));
 
-  function showToast(message) {
-    const toast = $("#toast");
-    toast.textContent = message;
-    toast.classList.add("show");
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => toast.classList.remove("show"), 3000);
+/* Details */
+function tripPrice(){return selected.price*selected.travellers;}
+function openDetails(){
+ $("#detailsHeading").textContent=`${selected.from} → ${selected.to}`;
+ $("#detailsSubtitle").textContent=`${modeNames[selected.mode]||"Journey"} · ${selected.date} · ${selected.travellers} traveller(s)`;
+ $("#detailsImage").src=selected.destination?.image||"https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80";
+ $("#journeyOverview").innerHTML=`<div class="detail-meta"><div class="meta"><small>Route</small><strong>${esc(selected.from)} → ${esc(selected.to)}</strong></div><div class="meta"><small>Date</small><strong>${esc(selected.date)}</strong></div><div class="meta"><small>Sample schedule</small><strong>${esc(selected.time)} → ${esc(selected.arrive)}</strong></div></div><p class="note">${selected.destination?esc(selected.destination.description):"Selected example option: "+esc(selected.name)+". All schedules and fares are illustrative."}</p>`;
+ $("#detailSummary").innerHTML=`<div class="summary-line"><span>Selected service</span><strong>${esc(selected.name)}</strong></div><div class="summary-line"><span>Route</span><strong>${esc(selected.from)} → ${esc(selected.to)}</strong></div><div class="summary-line"><span>Date</span><strong>${esc(selected.date)}</strong></div><div class="summary-line summary-total"><span>Estimate</span><strong>${money(tripPrice())}</strong></div>`;
+ discount=0;showPage("detailsPage");icons();
+}
+$("#backResults").addEventListener("click",()=>showPage("resultsPage"));
+$("#continuePassenger").addEventListener("click",()=>{
+ if(!selected){toast("Select a trip first.");return;}
+ $("#passengerForm").reset();if(currentUser)$("#pEmail").value=currentUser.email||"";
+ passenger=null;discount=0;updateCheckout();$("#couponCode").value="";$("#couponMessage").textContent="Sample coupon, not a real promotion.";
+ $("#passengerSection").classList.remove("hidden");$("#reviewSection").classList.add("hidden");$("#paymentSection").classList.add("hidden");updateSteps(2);showPage("checkoutPage");
+});
+function updateSteps(n){
+ ["stepPassenger","stepReview","stepPayment"].forEach((id,i)=>{const el=$("#"+id);el.classList.toggle("active",i+2===n);el.classList.toggle("done",i+2<n);$(".step-number",el).textContent=i+2<n?"✓":String(i+2);});
+}
+function updateCheckout(){
+ const sub=tripPrice(),fee=Math.round(sub*.02);baseTotal=sub+fee;
+ $("#checkoutSummary").innerHTML=`<div class="summary-line"><span>Trip estimate</span><strong>${money(sub)}</strong></div><div class="summary-line"><span>Travellers</span><strong>${selected.travellers}</strong></div><div class="summary-line"><span>Route</span><strong>${esc(selected.from)} → ${esc(selected.to)}</strong></div><div class="summary-line"><span>Date</span><strong>${esc(selected.date)}</strong></div>`;
+ $("#serviceFee").textContent=money(fee);$("#checkoutTotal").textContent=money(Math.max(0,baseTotal-discount));$("#paymentTotal").textContent=money(Math.max(0,baseTotal-discount));
+}
+$("#passengerForm").addEventListener("submit",e=>{
+ e.preventDefault();const name=$("#pName").value.trim(),phone=$("#pPhone").value.trim(),email=$("#pEmail").value.trim();
+ if(!name||!phone||!email||!$("#termsAgree").checked){$("#passengerError").textContent="Complete all required fields and accept the demo terms.";return;}
+ passenger={name,phone,email,age:$("#pAge").value,preference:$("#pPreference").value};
+ $("#passengerError").textContent="";
+ $("#reviewInfo").innerHTML=`<div class="summary-line"><span>Name</span><strong>${esc(passenger.name)}</strong></div><div class="summary-line"><span>Phone</span><strong>${esc(passenger.phone)}</strong></div><div class="summary-line"><span>Email</span><strong>${esc(passenger.email)}</strong></div><div class="summary-line"><span>Age group</span><strong>${esc(passenger.age)}</strong></div><div class="summary-line"><span>Preference</span><strong>${esc(passenger.preference)}</strong></div><hr style="border:0;border-top:1px solid var(--line);margin:15px 0"><div class="summary-line"><span>Route</span><strong>${esc(selected.from)} → ${esc(selected.to)}</strong></div><div class="summary-line"><span>Date</span><strong>${esc(selected.date)}</strong></div><div class="summary-line"><span>Demo total</span><strong>${money(Math.max(0,baseTotal-discount))}</strong></div>`;
+ $("#passengerSection").classList.add("hidden");$("#reviewSection").classList.remove("hidden");$("#paymentSection").classList.add("hidden");updateSteps(3);window.scrollTo({top:0,behavior:"smooth"});
+});
+$("#editPassenger").addEventListener("click",()=>{$("#passengerSection").classList.remove("hidden");$("#reviewSection").classList.add("hidden");updateSteps(2);});
+$("#goPayment").addEventListener("click",()=>{
+ if(!$("#reviewAgree").checked){toast("Confirm your details first.");return;}
+ $("#reviewSection").classList.add("hidden");$("#paymentSection").classList.remove("hidden");updateSteps(4);updateCheckout();
+});
+$("#applyCoupon").addEventListener("click",()=>{
+ if($("#couponCode").value.trim().toUpperCase()==="TRY5"){discount=Math.min(500,Math.round(baseTotal*.05));$("#couponMessage").textContent="Demo discount applied: "+money(discount);$("#couponMessage").style.color="#087d55";}
+ else{discount=0;$("#couponMessage").textContent="Invalid demo code. Try TRY5." ;$("#couponMessage").style.color="#b83d3d";}
+ updateCheckout();
+});
+function makeReference(){const chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";let s="TJ-DEMO-";for(let i=0;i<8;i++)s+=chars[Math.floor(Math.random()*chars.length)];return s;}
+$("#payDemo").addEventListener("click",()=>{
+ if(!$("#paymentAgree").checked){$("#paymentMessage").textContent="Confirm this is a simulated checkout only.";return;}
+ const btn=$("#payDemo");btn.disabled=true;btn.textContent="Completing demo…";
+ setTimeout(()=>{
+  const ref=makeReference();$("#bookingReference").textContent=ref;$("#confirmFrom").textContent=selected.from;$("#confirmTo").textContent=selected.to;$("#confirmDate").textContent=selected.date;$("#confirmMode").textContent=modeNames[selected.mode]||"Journey";$("#confirmPassenger").textContent=passenger.name;$("#confirmService").textContent=selected.name;$("#confirmTotal").textContent=money(Math.max(0,baseTotal-discount));$("#confirmEmail").textContent=passenger.email;
+  try{localStorage.setItem("tripjan_last_demo_booking",JSON.stringify({reference:ref,from:selected.from,to:selected.to,date:selected.date,mode:selected.mode,name:passenger.name,email:passenger.email,total:Math.max(0,baseTotal-discount),createdAt:new Date().toISOString()}));}catch{}
+  showPage("confirmationPage");icons();btn.disabled=false;btn.innerHTML='Complete demo checkout';
+ },450);
+});
+$("#printSummary").addEventListener("click",()=>window.print());
+$("#newTrip").addEventListener("click",()=>{selected=null;passenger=null;showPage("homePage");homeAnchor("#search");});
+$("#copyReference").addEventListener("click",async()=>{
+ const ref=$("#bookingReference").textContent;
+ try{await navigator.clipboard.writeText(ref);toast("Demo reference copied.");}catch{toast("Reference: "+ref);}
+});
+
+/* Hotel popup */
+const hotelModal=$("#hotelModal");let activeHotel=null;
+function openHotel(name){
+ const h=hotelData[name];if(!h)return;activeHotel=name;
+ $("#hotelModalTitle").textContent=name;$("#hotelModalDescription").textContent=h.description;
+ $("#hotelModalSummary").innerHTML=`<strong>Location:</strong> ${esc(h.location)}<br><strong>Sample price:</strong> ${money(h.price)} per night<br><strong>Availability:</strong> Not connected`;
+ $("#hotelMessage").textContent="";hotelModal.classList.add("show");document.body.style.overflow="hidden";
+}
+$$("[data-hotel]").forEach(b=>b.addEventListener("click",()=>openHotel(b.dataset.hotel)));
+function closeHotel(){hotelModal.classList.remove("show");if(!$(".modal.show"))document.body.style.overflow="";}
+$("#hotelModalClose").addEventListener("click",closeHotel);
+hotelModal.addEventListener("click",e=>{if(e.target===hotelModal)closeHotel();});
+$("#hotelCheckin").min=todayStr;$("#hotelCheckin").value=todayStr;
+const tomorrow=new Date(today);tomorrow.setDate(tomorrow.getDate()+1);$("#hotelCheckout").min=localDate(tomorrow);$("#hotelCheckout").value=localDate(tomorrow);
+$("#hotelCheckin").addEventListener("change",()=>{
+ const d=new Date($("#hotelCheckin").value+"T12:00:00");d.setDate(d.getDate()+1);const min=localDate(d);
+ $("#hotelCheckout").min=min;if(!$("#hotelCheckout").value||$("#hotelCheckout").value<min)$("#hotelCheckout").value=min;
+});
+$("#hotelContinue").addEventListener("click",()=>{
+ const h=hotelData[activeHotel],ci=$("#hotelCheckin").value,co=$("#hotelCheckout").value,rooms=Number($("#hotelRooms").value);
+ if(!h||!ci||!co||co<=ci){$("#hotelMessage").textContent="Please choose valid check-in and check-out dates.";return;}
+ const nights=Math.round((new Date(co+"T12:00:00")-new Date(ci+"T12:00:00"))/86400000),total=h.price*nights*rooms;
+ $("#hotelMessage").textContent=`Demo request prepared: ${activeHotel}, ${nights} night(s), ${rooms} room(s), sample total ${money(total)}. No room is reserved.`;
+ try{localStorage.setItem("tripjan_demo_hotel_request",JSON.stringify({hotel:activeHotel,checkin:ci,checkout:co,nights,rooms,total}));}catch{}
+});
+
+/* Local demo account */
+function getUsers(){try{const x=JSON.parse(localStorage.getItem(USERS)||"[]");return Array.isArray(x)?x:[];}catch{return[];}}
+async function hashPassword(p){
+ if(!window.crypto?.subtle)throw new Error("Open this demo on HTTPS or localhost to use account features.");
+ const hash=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(p));
+ return [...new Uint8Array(hash)].map(b=>b.toString(16).padStart(2,"0")).join("");
+}
+function renderUser(){
+ if(currentUser){$("#userChip").textContent="Hi, "+currentUser.name;$("#userChip").classList.remove("hidden");$("#loginBtn").classList.add("hidden");$("#signupBtn").classList.add("hidden");$("#logoutBtn").classList.remove("hidden");}
+ else{$("#userChip").classList.add("hidden");$("#loginBtn").classList.remove("hidden");$("#signupBtn").classList.remove("hidden");$("#logoutBtn").classList.add("hidden");}
+}
+function openAuth(next){
+ authMode=next;$("#authForm").reset();$("#authMessage").textContent="";$("#authNameWrap").classList.toggle("hidden",next!=="signup");$("#authName").required=next==="signup";
+ $("#authTitle").textContent=next==="signup"?"Create your Tripjan account":"Welcome back";$("#authSubtitle").textContent=next==="signup"?"Create a local demo account.":"Log in to your local demo account.";
+ $("#authSubmit").textContent=next==="signup"?"Create account":"Log in";$("#authSwitch").textContent=next==="signup"?"Already registered? Log in":"New to Tripjan? Create an account";$("#authPassword").autocomplete=next==="signup"?"new-password":"current-password";
+ $("#authModal").classList.add("show");document.body.style.overflow="hidden";
+}
+function closeAuth(){$("#authModal").classList.remove("show");if(!$(".modal.show"))document.body.style.overflow="";}
+$("#loginBtn").addEventListener("click",()=>openAuth("login"));$("#signupBtn").addEventListener("click",()=>openAuth("signup"));
+$("#footerLogin").addEventListener("click",e=>{e.preventDefault();openAuth("login");});
+$("#authClose").addEventListener("click",closeAuth);
+$("#authModal").addEventListener("click",e=>{if(e.target===$("#authModal"))closeAuth();});
+$("#authSwitch").addEventListener("click",()=>openAuth(authMode==="signup"?"login":"signup"));
+$("#logoutBtn").addEventListener("click",()=>{localStorage.removeItem(SESSION);currentUser=null;renderUser();toast("Logged out of demo account.");});
+$("#authForm").addEventListener("submit",async e=>{
+ e.preventDefault();const btn=$("#authSubmit"),msg=$("#authMessage");msg.textContent="";btn.disabled=true;
+ const email=$("#authEmail").value.trim().toLowerCase(),password=$("#authPassword").value,name=$("#authName").value.trim();
+ try{
+  const users=getUsers(),existing=users.find(u=>u.email===email),hash=await hashPassword(password);
+  if(authMode==="signup"){
+   if(!name){msg.textContent="Please enter your name.";return;}
+   if(existing){msg.textContent="This email already has a demo account. Log in instead.";return;}
+   users.push({name,email,passwordHash:hash});localStorage.setItem(USERS,JSON.stringify(users));currentUser={name,email};localStorage.setItem(SESSION,JSON.stringify(currentUser));
+  }else{
+   if(!existing||existing.passwordHash!==hash){msg.textContent="Email or password is incorrect.";return;}
+   currentUser={name:existing.name,email:existing.email};localStorage.setItem(SESSION,JSON.stringify(currentUser));
   }
-
-  function openModal(modal) {
-    modal.classList.add("show");
-    document.body.style.overflow = "hidden";
-    const focusable = $("input:not([type=hidden])", modal);
-    if (focusable) setTimeout(() => focusable.focus(), 80);
-  }
-
-  function closeModal(modal) {
-    modal.classList.remove("show");
-    if (!$(".modal.show")) document.body.style.overflow = "";
-  }
-
-  [authModal, bookingModal].forEach(modal => {
-    modal.addEventListener("click", event => {
-      if (event.target === modal) closeModal(modal);
-    });
-  });
-
-  document.addEventListener("keydown", event => {
-    if (event.key === "Escape") {
-      closeModal(authModal);
-      closeModal(bookingModal);
-    }
-  });
-
-  // Mobile navigation
-  $("#menuBtn").addEventListener("click", () => {
-    $("#navLinks").classList.toggle("open");
-  });
-
-  $$("#navLinks a").forEach(link => {
-    link.addEventListener("click", () => $("#navLinks").classList.remove("open"));
-  });
-
-  // Carousel
-  function showSlide(index) {
-    currentSlide = (index + slides.length) % slides.length;
-    slides.forEach((slide, i) => slide.classList.toggle("active", i === currentSlide));
-    dots.forEach((dot, i) => dot.classList.toggle("active", i === currentSlide));
-    $("#slideCount").textContent = `0${currentSlide + 1} / 0${slides.length}`;
-  }
-
-  function stopCarousel() {
-    if (carouselTimer) clearInterval(carouselTimer);
-    carouselTimer = null;
-  }
-
-  function startCarousel() {
-    stopCarousel();
-    carouselTimer = setInterval(() => showSlide(currentSlide + 1), 5500);
-  }
-
-  $("#prev").addEventListener("click", () => {
-    showSlide(currentSlide - 1);
-    startCarousel();
-  });
-
-  $("#next").addEventListener("click", () => {
-    showSlide(currentSlide + 1);
-    startCarousel();
-  });
-
-  dots.forEach(dot => {
-    dot.addEventListener("click", () => {
-      showSlide(Number(dot.dataset.slide));
-      startCarousel();
-    });
-  });
-
-  $("#carousel").addEventListener("mouseenter", stopCarousel);
-  $("#carousel").addEventListener("mouseleave", startCarousel);
-  $("#carousel").addEventListener("focusin", stopCarousel);
-  $("#carousel").addEventListener("focusout", startCarousel);
-  startCarousel();
-
-  // Switch flight / train mode
-  function setMode(nextMode) {
-    mode = nextMode === "train" ? "train" : "flight";
-    $$(".tab").forEach(tab => tab.classList.toggle("active", tab.dataset.mode === mode));
-    $("#searchBtn").textContent = mode === "flight" ? "Search flights →" : "Search trains →";
-    $("#direct").checked = false;
-  }
-
-  $$(".tab").forEach(tab => tab.addEventListener("click", () => setMode(tab.dataset.mode)));
-
-  $$("[data-mode]").forEach(button => {
-    button.addEventListener("click", () => {
-      setMode(button.dataset.mode);
-      if (button.matches(".slide-btn")) {
-        $("#search").scrollIntoView({behavior:"smooth", block:"center"});
-      }
-    });
-  });
-
-  $$("[data-scroll]").forEach(button => {
-    button.addEventListener("click", () => {
-      const target = $(button.dataset.scroll);
-      if (target) target.scrollIntoView({behavior:"smooth"});
-    });
-  });
-
-  // Demo search data. These are illustrative, not live schedules or prices.
-  const flightOptions = [
-    {name:"IndiGo", code:"6E", depart:"06:15", arrive:"08:35", duration:"2h 20m", price:2499, stops:"Non-stop"},
-    {name:"Air India", code:"AI", depart:"10:40", arrive:"13:05", duration:"2h 25m", price:3199, stops:"Non-stop"},
-    {name:"SpiceJet", code:"SG", depart:"17:20", arrive:"20:00", duration:"2h 40m", price:2899, stops:"Non-stop"}
-  ];
-
-  const trainOptions = [
-    {name:"Express Rail", code:"ER", depart:"06:30", arrive:"13:45", duration:"7h 15m", price:495, stops:"Sleeper / AC options"},
-    {name:"Superfast Express", code:"SF", depart:"09:15", arrive:"16:20", duration:"7h 05m", price:680, stops:"Reserved seating"},
-    {name:"Intercity Express", code:"IC", depart:"15:40", arrive:"22:10", duration:"6h 30m", price:560, stops:"Day journey"}
-  ];
-
-  function formatCurrency(amount) {
-    return new Intl.NumberFormat("en-IN", {
-      style:"currency", currency:"INR", maximumFractionDigits:0
-    }).format(amount);
-  }
-
-  function safeText(value) {
-    return String(value).replace(/[&<>"']/g, char => ({
-      "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
-    }[char]));
-  }
-
-  function airlineImage(code) {
-    if (code === "ER" || code === "SF" || code === "IC") return "🚆";
-    return `<img class="airline-logo" src="https://www.gstatic.com/flights/airline_logos/70px/${encodeURIComponent(code)}.png" alt="" loading="lazy" onerror="this.style.display='none'">`;
-  }
-
-  function renderResults(from, to, date, travellers) {
-    const options = mode === "flight" ? flightOptions : trainOptions;
-    const results = $("#results");
-    $("#resultTitle").textContent = `${mode === "flight" ? "Flight" : "Train"} options`;
-    $("#resultSubtitle").textContent =
-      `${from} → ${to} · ${date} · ${travellers} traveller${travellers === 1 ? "" : "s"} · Demonstration data`;
-
-    $("#resultList").innerHTML = options.map((option, index) => `
-      <article class="result-card">
-        <div class="result-company">
-          ${mode === "flight"
-            ? airlineImage(option.code)
-            : `<div class="airline-logo" style="display:grid;place-items:center;font-size:21px">🚆</div>`}
-          <div>
-            <div class="company-name">${safeText(option.name)}</div>
-            <div class="company-sub">${mode === "flight" ? "Example airline" : "Example train service"}</div>
-          </div>
-        </div>
-        <div class="result-time">
-          ${safeText(option.depart)} → ${safeText(option.arrive)}
-          <small>${safeText(option.duration)} · ${safeText(option.stops)}</small>
-        </div>
-        <div class="result-price">
-          <strong>${formatCurrency(option.price * travellers)}</strong>
-          <small>Example total for ${travellers}</small>
-        </div>
-        <button class="btn btn-primary result-book"
-          data-book-index="${index}"
-          type="button">Select</button>
-      </article>
-    `).join("");
-
-    results.classList.remove("hidden");
-    results.scrollIntoView({behavior:"smooth", block:"nearest"});
-  }
-
-  $("#searchForm").addEventListener("submit", event => {
-    event.preventDefault();
-    const from = $("#from").value.trim();
-    const to = $("#to").value.trim();
-    const date = $("#date").value;
-    const travellers = Number($("#people").value);
-
-    if (!from || !to) {
-      showToast("Please enter both departure and destination cities.");
-      return;
-    }
-    if (from.toLowerCase() === to.toLowerCase()) {
-      showToast("Departure and destination must be different.");
-      return;
-    }
-    if (!date || date < localDate) {
-      showToast("Please choose a valid future date.");
-      return;
-    }
-
-    renderResults(from, to, date, travellers);
-  });
-
-  $("#hideResults").addEventListener("click", () => $("#results").classList.add("hidden"));
-
-  $("#resultList").addEventListener("click", event => {
-    const button = event.target.closest("[data-book-index]");
-    if (!button) return;
-
-    const options = mode === "flight" ? flightOptions : trainOptions;
-    const option = options[Number(button.dataset.bookIndex)];
-
-    bookingData = {
-      mode,
-      from: $("#from").value.trim(),
-      to: $("#to").value.trim(),
-      date: $("#date").value,
-      travellers: Number($("#people").value),
-      option
-    };
-
-    $("#bookingTitle").textContent = mode === "flight" ? "Review flight selection" : "Review train selection";
-    $("#bookingInfo").innerHTML = `
-      <strong>${safeText(bookingData.from)} → ${safeText(bookingData.to)}</strong><br>
-      Travel date: ${safeText(bookingData.date)}<br>
-      Service: ${safeText(option.name)}<br>
-      Time: ${safeText(option.depart)} – ${safeText(option.arrive)}<br>
-      Travellers: ${bookingData.travellers}<br>
-      Example total: <strong>${formatCurrency(option.price * bookingData.travellers)}</strong><br>
-      <span style="font-size:10px;color:#8793a6">Illustrative information only. Not a live fare.</span>
-    `;
-    openModal(bookingModal);
-  });
-
-  $("#bookingClose").addEventListener("click", () => closeModal(bookingModal));
-
-  $("#bookingForm").addEventListener("submit", event => {
-    event.preventDefault();
-    if (!bookingData) {
-      showToast("Please select an example trip first.");
-      return;
-    }
-    const name = $("#customer").value.trim();
-    const email = $("#customerEmail").value.trim();
-    closeModal(bookingModal);
-    showToast(`Demo selection complete, ${name}. No ticket was booked.`);
-    console.info("Tripjan demo selection", {
-      ...bookingData,
-      customerName:name,
-      customerEmail:email
-    });
-    bookingData = null;
-  });
-
-  // Popular route cards
-  $$(".route-card").forEach(card => {
-    card.addEventListener("click", () => {
-      $("#from").value = card.dataset.from;
-      $("#to").value = card.dataset.to;
-      setMode(card.dataset.mode || "flight");
-      $("#search").scrollIntoView({behavior:"smooth", block:"center"});
-      showToast("Route selected. Choose a date and search.");
-    });
-  });
-
-  // Destination cards
-  $$("[data-destination]").forEach(button => {
-    button.addEventListener("click", () => {
-      const destination = button.dataset.destination;
-      $("#from").value = "Bhubaneswar";
-      $("#to").value = destination;
-      setMode("flight");
-      $("#search").scrollIntoView({behavior:"smooth", block:"center"});
-      showToast(`${destination} selected. Choose your date to continue.`);
-    });
-  });
-
-  $$("[data-footer-mode]").forEach(link => {
-    link.addEventListener("click", () => setMode(link.dataset.footerMode));
-  });
-
-  // Demo account handling
-  function getUsers() {
-    try {
-      const users = JSON.parse(localStorage.getItem(USERS_KEY) || "[]");
-      return Array.isArray(users) ? users : [];
-    } catch {
-      return [];
-    }
-  }
-
-  function getSession() {
-    try {
-      return JSON.parse(localStorage.getItem(SESSION_KEY) || "null");
-    } catch {
-      return null;
-    }
-  }
-
-  function saveSession(user) {
-    const session = {name:user.name, email:user.email};
-    localStorage.setItem(SESSION_KEY, JSON.stringify(session));
-    currentUser = session;
-    renderUser();
-  }
-
-  function renderUser() {
-    const pill = $("#userPill");
-    const login = $("#loginBtn");
-    const signup = $("#signupBtn");
-    const logout = $("#logoutBtn");
-
-    if (currentUser) {
-      pill.textContent = `Hi, ${currentUser.name}`;
-      pill.classList.remove("hidden");
-      login.classList.add("hidden");
-      signup.classList.add("hidden");
-      logout.classList.remove("hidden");
-    } else {
-      pill.classList.add("hidden");
-      login.classList.remove("hidden");
-      signup.classList.remove("hidden");
-      logout.classList.add("hidden");
-    }
-  }
-
-  function openAuth(nextMode) {
-    authMode = nextMode;
-    $("#authMessage").textContent = "";
-    $("#authForm").reset();
-    updateAuthUI();
-    openModal(authModal);
-  }
-
-  function updateAuthUI() {
-    const signup = authMode === "signup";
-    $("#authTitle").textContent = signup ? "Create your account" : "Welcome back";
-    $("#authSubtitle").textContent = signup
-      ? "Set up your demo Tripjan account."
-      : "Log in to continue planning your journey.";
-    $("#nameField").classList.toggle("hidden", !signup);
-    $("#authName").required = signup;
-    $("#authPassword").autocomplete = signup ? "new-password" : "current-password";
-    $("#authSubmit").textContent = signup ? "Create account" : "Log in";
-    $("#authSwitchText").textContent = signup ? "Already have an account?" : "New to Tripjan?";
-    $("#showSignup").textContent = signup ? "Log in" : "Create an account";
-  }
-
-  $("#loginBtn").addEventListener("click", () => openAuth("login"));
-  $("#signupBtn").addEventListener("click", () => openAuth("signup"));
-  $("#authClose").addEventListener("click", () => closeModal(authModal));
-  $("#footerLogin").addEventListener("click", event => {
-    event.preventDefault();
-    openAuth(currentUser ? "login" : "login");
-  });
-
-  $("#showSignup").addEventListener("click", () => {
-    authMode = authMode === "signup" ? "login" : "signup";
-    $("#authMessage").textContent = "";
-    updateAuthUI();
-  });
-
-  // Hash passwords where Web Crypto is available. This remains demo-only:
-  // production authentication must be handled by a secure server/auth provider.
-  async function hashPassword(password) {
-    if (!window.crypto || !crypto.subtle) {
-      throw new Error("Secure password hashing is unavailable in this context. Open the page on HTTPS or localhost.");
-    }
-    const bytes = new TextEncoder().encode(password);
-    const digest = await crypto.subtle.digest("SHA-256", bytes);
-    return Array.from(new Uint8Array(digest))
-      .map(byte => byte.toString(16).padStart(2, "0"))
-      .join("");
-  }
-
-  $("#authForm").addEventListener("submit", async event => {
-    event.preventDefault();
-    const message = $("#authMessage");
-    message.style.color = "#d33";
-    message.textContent = "";
-
-    const email = $("#authEmail").value.trim().toLowerCase();
-    const password = $("#authPassword").value;
-    const name = $("#authName").value.trim();
-
-    if (!email || password.length < 6) {
-      message.textContent = "Enter a valid email and a password with at least 6 characters.";
-      return;
-    }
-
-    const submit = $("#authSubmit");
-    submit.disabled = true;
-    submit.textContent = "Please wait…";
-
-    try {
-      const users = getUsers();
-      const existing = users.find(user => user.email === email);
-      const passwordHash = await hashPassword(password);
-
-      if (authMode === "signup") {
-        if (!name) {
-          message.textContent = "Please enter your name.";
-          return;
-        }
-        if (existing) {
-          message.textContent = "An account with this email already exists. Please log in.";
-          return;
-        }
-
-        const newUser = {
-          name,
-          email,
-          passwordHash,
-          createdAt: new Date().toISOString()
-        };
-        users.push(newUser);
-        localStorage.setItem(USERS_KEY, JSON.stringify(users));
-        saveSession(newUser);
-        closeModal(authModal);
-        showToast("Demo account created successfully.");
-      } else {
-        if (!existing || existing.passwordHash !== passwordHash) {
-          message.textContent = "Email or password is incorrect.";
-          return;
-        }
-        saveSession(existing);
-        closeModal(authModal);
-        showToast(`Welcome back, ${existing.name}!`);
-      }
-    } catch (error) {
-      message.textContent = error.message || "Something went wrong. Please try again.";
-    } finally {
-      submit.disabled = false;
-      submit.textContent = authMode === "signup" ? "Create account" : "Log in";
-    }
-  });
-
-  $("#logoutBtn").addEventListener("click", () => {
-    localStorage.removeItem(SESSION_KEY);
-    currentUser = null;
-    renderUser();
-    showToast("You have logged out.");
-  });
-
-  // Footer information
-  $("#privacyLink").addEventListener("click", event => {
-    event.preventDefault();
-    showToast("Demo data stays in this browser. Do not enter sensitive personal information.");
-  });
-
-  $("#termsLink").addEventListener("click", event => {
-    event.preventDefault();
-    showToast("Demo prices and schedules are illustrative. No real booking is made.");
-  });
-
-  // Restore a local demo session.
-  currentUser = getSession();
-  if (currentUser && (!currentUser.email || !currentUser.name)) currentUser = null;
-  renderUser();
+  renderUser();closeAuth();toast(authMode==="signup"?"Demo account created.":"Welcome back!");
+ }catch(err){msg.textContent=err.message||"Unable to complete demo login.";}
+ finally{btn.disabled=false;btn.textContent=authMode==="signup"?"Create account":"Log in";}
+});
+$("#privacyLink").addEventListener("click",e=>{e.preventDefault();toast("Demo account data stays in this browser. Avoid sensitive information.");});
+$("#termsLink").addEventListener("click",e=>{e.preventDefault();toast("Sample prices and schedules only. No live bookings or payments.");});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeHotel();closeAuth();}});
+$$("[data-footer-mode]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();setMode(a.dataset.footerMode);homeAnchor("#search");}));
+try{currentUser=JSON.parse(localStorage.getItem(SESSION)||"null");if(currentUser&&(!currentUser.name||!currentUser.email))currentUser=null;}catch{currentUser=null;}
+renderUser();updateOfferProgress();icons();
 })();
 </script>
-
 </body>
 </html>
