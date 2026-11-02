@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <meta name="theme-color" content="#080D18">
 <title>Management Centre | ABHINAASH A1 Driving</title>
 
@@ -48,6 +48,7 @@ a{text-decoration:none;color:inherit}
 .btn-green{background:rgba(53,201,138,.13);color:var(--green);border:1px solid rgba(53,201,138,.2)}
 .notice{background:rgba(242,189,69,.08);border:1px solid rgba(242,189,69,.2);border-radius:13px;padding:12px 15px;color:#EACB83;font-size:11px;line-height:1.6;margin-bottom:22px}
 .notice svg{width:15px;vertical-align:middle;margin-right:6px}
+.error{display:none;background:rgba(255,107,117,.1);border:1px solid rgba(255,107,117,.3);color:#ffb9bf;border-radius:12px;padding:13px;font-size:11px;line-height:1.6;margin-bottom:15px}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:25px}
 .stat{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:18px}
 .stat-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:11px}
@@ -70,7 +71,7 @@ input,select{background:#0B1321;border:1px solid var(--line);color:white;border-
 input:focus,select:focus{border-color:var(--gold)}
 select option{background:#111A29}
 .table-wrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;min-width:720px}
+table{width:100%;border-collapse:collapse;min-width:680px}
 th{text-align:left;color:var(--muted);font-size:10px;font-weight:600;padding:13px 12px;border-bottom:1px solid var(--line)}
 td{padding:14px 12px;border-bottom:1px solid var(--line);font-size:11px;vertical-align:middle}
 tr:last-child td{border-bottom:0}
@@ -81,7 +82,7 @@ tr:last-child td{border-bottom:0}
 .status{display:inline-flex;padding:6px 9px;border-radius:20px;font-size:9px;font-weight:700}
 .active-status{color:var(--green);background:rgba(53,201,138,.12)}
 .pending-status{color:var(--gold);background:rgba(242,189,69,.12)}
-.inactive-status,.rejected-status{color:var(--red);background:rgba(255,107,117,.12)}
+.inactive-status{color:var(--red);background:rgba(255,107,117,.12)}
 .action-group{display:flex;gap:6px}
 .mini-btn{height:30px;width:31px;border-radius:8px;border:1px solid var(--line);background:var(--card2);color:white;display:grid;place-items:center;cursor:pointer}
 .mini-btn svg{width:14px}
@@ -106,7 +107,7 @@ tr:last-child td{border-bottom:0}
 .field.full{grid-column:1/-1}
 .modal-actions{display:flex;gap:9px;margin-top:10px}
 .modal-actions button{flex:1}
-.toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:#1C2B40;border:1px solid var(--line);padding:12px 18px;border-radius:12px;font-size:12px;display:none;z-index:30;box-shadow:0 10px 35px #0008}
+.toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:#1C2B40;border:1px solid var(--line);padding:12px 18px;border-radius:12px;font-size:12px;display:none;z-index:30;box-shadow:0 10px 35px #0008;max-width:90%;text-align:center}
 .toast.show{display:block}
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#0D1523;border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:10px 5px calc(10px + env(safe-area-inset-bottom));z-index:10}
 .bottom-nav a{display:flex;flex-direction:column;align-items:center;gap:5px;color:var(--muted);font-size:9px}
@@ -120,13 +121,14 @@ tr:last-child td{border-bottom:0}
 
 <body>
 <div class="app">
+
 <header class="topbar">
  <a class="brand" href="admin-dashboard.html">
   <div class="brand-icon"><i data-lucide="car-front"></i></div>
   <div><h2>ABHINAASH A1</h2><small>DRIVING SCHOOL · ADMIN</small></div>
  </a>
  <div class="top-actions">
-  <button class="icon-btn" onclick="showToast('No new notifications')" aria-label="Notifications"><i data-lucide="bell"></i></button>
+  <button class="icon-btn" onclick="location.reload()" aria-label="Refresh"><i data-lucide="refresh-cw"></i></button>
   <div class="admin-profile"><div class="avatar">A</div><div class="profile-text"><strong style="font-size:11px">Administrator</strong><small>Owner account</small></div></div>
  </div>
 </header>
@@ -135,16 +137,22 @@ tr:last-child td{border-bottom:0}
 
 <section class="heading">
  <div><h1>Management Centre</h1><p>Manage students, instructors and admission requests.</p></div>
- <button class="btn btn-gold" onclick="openAddModal()"><i data-lucide="plus"></i> Add New Record</button>
+ <button class="btn btn-gold" onclick="openAddStudent()"><i data-lucide="plus"></i> Add Student</button>
 </section>
 
-<div class="notice"><i data-lucide="info"></i><strong>Demo mode:</strong> This page currently uses sample data. Changes are temporary and will reset after refreshing. Firebase is not connected.</div>
+<div class="notice">
+ <i data-lucide="database"></i>
+ Student records are live from Firebase <b>studentData</b>. Instructor records use <b>instructorData</b>.
+ Admission booking integration is pending confirmation of your existing booking database.
+</div>
+
+<div id="errorBox" class="error"></div>
 
 <section class="stats">
- <div class="stat"><div class="stat-top">Total Students <span class="stat-icon"><i data-lucide="users"></i></span></div><h2 id="studentCount">156</h2><small>Student records</small></div>
- <div class="stat"><div class="stat-top">Active Instructors <span class="stat-icon"><i data-lucide="user-check"></i></span></div><h2 id="instructorCount">3</h2><small>Instructor records</small></div>
- <div class="stat"><div class="stat-top">Pending Bookings <span class="stat-icon"><i data-lucide="calendar-clock"></i></span></div><h2 id="bookingCount">3</h2><small>Awaiting review</small></div>
- <div class="stat"><div class="stat-top">Active Students <span class="stat-icon"><i data-lucide="graduation-cap"></i></span></div><h2 id="activeCount">2</h2><small>In current demo list</small></div>
+ <div class="stat"><div class="stat-top">Total Students <span class="stat-icon"><i data-lucide="users"></i></span></div><h2 id="studentCount">—</h2><small>Firebase student records</small></div>
+ <div class="stat"><div class="stat-top">Active Instructors <span class="stat-icon"><i data-lucide="user-check"></i></span></div><h2 id="instructorCount">—</h2><small>Instructor records</small></div>
+ <div class="stat"><div class="stat-top">Pending Bookings <span class="stat-icon"><i data-lucide="calendar-clock"></i></span></div><h2>—</h2><small>Booking collection not connected</small></div>
+ <div class="stat"><div class="stat-top">Active Students <span class="stat-icon"><i data-lucide="graduation-cap"></i></span></div><h2 id="activeCount">—</h2><small>Not marked inactive</small></div>
 </section>
 
 <div class="tabs">
@@ -153,37 +161,41 @@ tr:last-child td{border-bottom:0}
  <button class="tab" data-tab="bookings" onclick="switchTab('bookings')"><i data-lucide="calendar-check"></i> Admission Bookings</button>
 </div>
 
-<!-- STUDENTS -->
 <section class="panel" id="students">
- <div class="panel-head"><div><h2>Student Management</h2><p>View and manage student records</p></div><button class="btn btn-gold" onclick="openAddModal('student')"><i data-lucide="user-plus"></i> Add Student</button></div>
+ <div class="panel-head">
+  <div><h2>Student Management</h2><p>Live records from studentData</p></div>
+  <button class="btn btn-gold" onclick="openAddStudent()"><i data-lucide="user-plus"></i> Add Student</button>
+ </div>
  <div class="tools">
-  <div class="search"><i data-lucide="search"></i><input id="studentSearch" placeholder="Search name or student ID..." oninput="renderStudents()"></div>
-  <select id="studentFilter" onchange="renderStudents()"><option value="all">All Status</option><option value="Active">Active</option><option value="Inactive">Inactive</option></select>
+  <div class="search"><i data-lucide="search"></i><input id="studentSearch" placeholder="Search name or mobile..." oninput="renderStudents()"></div>
+  <select id="studentFilter" onchange="renderStudents()">
+   <option value="all">All Status</option>
+   <option value="Active">Active</option>
+   <option value="Inactive">Inactive</option>
+  </select>
  </div>
  <div class="table-wrap"><table>
- <thead><tr><th>STUDENT</th><th>PACKAGE</th><th>FEE STATUS</th><th>STATUS</th><th>ACTIONS</th></tr></thead>
- <tbody id="studentRows"></tbody>
+ <thead><tr><th>STUDENT</th><th>CLASS TYPE</th><th>COMPLETED</th><th>TOTAL CLASSES</th><th>STATUS</th><th>ACTIONS</th></tr></thead>
+ <tbody id="studentRows"><tr><td colspan="6" class="empty">Loading Firebase records...</td></tr></tbody>
  </table></div>
 </section>
 
-<!-- INSTRUCTORS -->
 <section class="panel section-hidden" id="instructors">
- <div class="panel-head"><div><h2>Instructor Management</h2><p>Manage your driving instructors</p></div><button class="btn btn-gold" onclick="openAddModal('instructor')"><i data-lucide="user-plus"></i> Add Instructor</button></div>
+ <div class="panel-head">
+  <div><h2>Instructor Management</h2><p>Manage instructor records</p></div>
+  <button class="btn btn-gold" onclick="openAddInstructor()"><i data-lucide="user-plus"></i> Add Instructor</button>
+ </div>
  <div class="tools"><div class="search"><i data-lucide="search"></i><input id="instructorSearch" placeholder="Search instructor..." oninput="renderInstructors()"></div></div>
- <div class="instructor-grid" id="instructorGrid"></div>
+ <div class="instructor-grid" id="instructorGrid"><div class="empty">Loading instructors...</div></div>
 </section>
 
-<!-- BOOKINGS -->
 <section class="panel section-hidden" id="bookings">
- <div class="panel-head"><div><h2>Admission Bookings</h2><p>Review and process new admission requests</p></div></div>
- <div class="tools">
-  <div class="search"><i data-lucide="search"></i><input id="bookingSearch" placeholder="Search applicant..." oninput="renderBookings()"></div>
-  <select id="bookingFilter" onchange="renderBookings()"><option value="all">All Requests</option><option value="Pending">Pending</option><option value="Approved">Approved</option><option value="Rejected">Rejected</option></select>
+ <div class="panel-head"><div><h2>Admission Bookings</h2><p>Existing booking database needs confirmation</p></div></div>
+ <div class="empty">
+  <i data-lucide="database" style="width:25px;height:25px;margin-bottom:10px"></i>
+  <div>Booking records are not connected yet.</div>
+  <small style="display:block;margin-top:8px">Share your existing booking page or Firestore booking collection code to connect this section without changing your current booking system.</small>
  </div>
- <div class="table-wrap"><table>
- <thead><tr><th>APPLICANT</th><th>PACKAGE</th><th>REQUEST DATE</th><th>STATUS</th><th>ACTIONS</th></tr></thead>
- <tbody id="bookingRows"></tbody>
- </table></div>
 </section>
 
 <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;color:var(--muted);font-size:10px;margin-top:25px">
@@ -198,178 +210,360 @@ tr:last-child td{border-bottom:0}
  <a href="index.html"><i data-lucide="house"></i>Website</a>
 </nav>
 
-<!-- ADD / EDIT MODAL -->
 <div class="modal-backdrop" id="recordModal">
  <div class="modal">
   <div class="modal-head"><h2 id="modalTitle">Add Student</h2><button class="icon-btn" onclick="closeModal()"><i data-lucide="x"></i></button></div>
   <form id="recordForm">
    <div class="form-grid">
     <div class="field full"><label>Full Name</label><input id="recordName" required placeholder="Enter full name"></div>
-    <div class="field full"><label>Phone Number</label><input id="recordPhone" inputmode="tel" placeholder="Enter phone number"></div>
-    <div class="field"><label>Record Type</label><select id="recordType" onchange="updateFormFields()"><option value="student">Student</option><option value="instructor">Instructor</option></select></div>
-    <div class="field" id="packageField"><label>Package</label><select id="recordPackage"><option>Standard</option><option>Premium</option><option>Personal</option></select></div>
-    <div class="field" id="feeField"><label>Fee Status</label><select id="recordFee"><option>Paid</option><option>Pending</option><option>Partial</option></select></div>
-    <div class="field"><label>Status</label><select id="recordStatus"><option>Active</option><option>Inactive</option></select></div>
+    <div class="field full"><label>Mobile Number (10 digits)</label><input id="recordPhone" required inputmode="numeric" maxlength="10" placeholder="Enter 10 digit mobile"></div>
+    <div class="field" id="classTypeField"><label>Class Type</label><select id="recordClassType"><option value="Group">Group</option><option value="Personal">Personal</option></select></div>
+    <div class="field" id="totalClassesField"><label>Total Classes</label><input id="recordTotalClasses" type="number" min="1" value="20" required></div>
+    <div class="field" id="admissionDateField"><label>Admission Date</label><input id="recordAdmissionDate" type="date" required></div>
+    <div class="field" id="instructorStatusField" style="display:none"><label>Instructor Status</label><select id="recordInstructorStatus"><option value="Active">Active</option><option value="Inactive">Inactive</option></select></div>
    </div>
-   <div class="modal-actions"><button type="button" class="btn btn-dark" onclick="closeModal()">Cancel</button><button type="submit" class="btn btn-gold">Save Record</button></div>
+   <div class="modal-actions">
+    <button type="button" class="btn btn-dark" onclick="closeModal()">Cancel</button>
+    <button type="submit" class="btn btn-gold" id="saveButton">Save Record</button>
+   </div>
   </form>
  </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
-<script>
-const students = [
- {id:"A1-1001",name:"Rahul Kumar",phone:"Not provided",package:"Premium",fee:"Paid",status:"Active"},
- {id:"A1-1002",name:"Priya Das",phone:"Not provided",package:"Standard",fee:"Pending",status:"Active"},
- {id:"A1-1003",name:"Amit Mohanty",phone:"Not provided",package:"Personal",fee:"Partial",status:"Inactive"},
- {id:"A1-1004",name:"Sneha Sahu",phone:"Not provided",package:"Premium",fee:"Paid",status:"Active"}
-];
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+import {
+ getFirestore,collection,onSnapshot,doc,setDoc,updateDoc,
+ serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
-const instructors = [
- {id:"INS-01",name:"Instructor One",phone:"Not provided",students:6,status:"Active",role:"Driving Instructor"},
- {id:"INS-02",name:"Instructor Two",phone:"Not provided",students:4,status:"Active",role:"Driving Instructor"},
- {id:"INS-03",name:"Instructor Three",phone:"Not provided",students:2,status:"Inactive",role:"Driving Instructor"}
-];
+const firebaseConfig={
+ apiKey:"AIzaSyC3gWi8p85z-wkoJeWb3N3jYoQpcIar8Sww",
+ authDomain:"abinash-driving.firebaseapp.com",
+ projectId:"abinash-driving",
+ storageBucket:"abinash-driving.appspot.com",
+ messagingSenderId:"641148830173",
+ appId:"1:641148830173:web:b7a500e5e7e2463da0f634"
+};
 
-const bookings = [
- {id:"BK-101",name:"Demo Applicant One",phone:"Not provided",package:"Premium",date:"02 Nov 2026",status:"Pending"},
- {id:"BK-102",name:"Demo Applicant Two",phone:"Not provided",package:"Standard",date:"01 Nov 2026",status:"Pending"},
- {id:"BK-103",name:"Demo Applicant Three",phone:"Not provided",package:"Personal",date:"31 Oct 2026",status:"Approved"},
- {id:"BK-104",name:"Demo Applicant Four",phone:"Not provided",package:"Premium",date:"30 Oct 2026",status:"Rejected"}
-];
+const app=initializeApp(firebaseConfig);
+const db=getFirestore(app);
 
-let editing = null;
+const studentRef=collection(db,"studentData");
+const instructorRef=collection(db,"instructorData");
 
-function icon(name){return `<i data-lucide="${name}"></i>`}
-function statusClass(s){
- if(s==="Active"||s==="Approved"||s==="Paid")return "active-status";
- if(s==="Pending"||s==="Partial")return "pending-status";
- return "inactive-status";
+let students=[];
+let instructors=[];
+let editingStudent=null;
+let editingInstructor=null;
+let currentRecordType="student";
+let busy=false;
+
+const $=id=>document.getElementById(id);
+
+function toast(message){
+ const el=$("toast");
+ el.textContent=message;
+ el.classList.add("show");
+ setTimeout(()=>el.classList.remove("show"),2800);
 }
-function refreshIcons(){if(window.lucide)lucide.createIcons()}
-function showToast(message){
- const el=document.getElementById("toast");
- el.textContent=message;el.classList.add("show");
- setTimeout(()=>el.classList.remove("show"),2400);
+
+function showError(message){
+ $("errorBox").style.display="block";
+ $("errorBox").textContent=message;
 }
-function switchTab(tab){
- document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));
- ["students","instructors","bookings"].forEach(id=>document.getElementById(id).classList.toggle("section-hidden",id!==tab));
+function clearError(){
+ $("errorBox").style.display="none";
 }
-function renderStudents(){
- const q=document.getElementById("studentSearch").value.toLowerCase();
- const filter=document.getElementById("studentFilter").value;
- const rows=students.filter(s=>(s.name+" "+s.id).toLowerCase().includes(q)&&(filter==="all"||s.status===filter));
- document.getElementById("studentRows").innerHTML=rows.length?rows.map(s=>`
- <tr>
-  <td><div class="person"><div class="person-avatar">${s.name.charAt(0)}</div><div><strong>${s.name}</strong><small>${s.id}</small></div></div></td>
-  <td>${s.package}</td><td><span class="status ${statusClass(s.fee)}">${s.fee}</span></td>
-  <td><span class="status ${statusClass(s.status)}">${s.status}</span></td>
-  <td><div class="action-group">
-   <button class="mini-btn" title="Edit" onclick="editStudent('${s.id}')">${icon("pencil")}</button>
-   <button class="mini-btn" title="Toggle status" onclick="toggleStudent('${s.id}')">${icon("power")}</button>
-  </div></td>
- </tr>`).join(""):`<tr><td colspan="5" class="empty">No students found.</td></tr>`;
- updateStats();refreshIcons();
+function refreshIcons(){
+ if(window.lucide)lucide.createIcons();
 }
-function renderInstructors(){
- const q=document.getElementById("instructorSearch").value.toLowerCase();
- const list=instructors.filter(i=>i.name.toLowerCase().includes(q)||i.id.toLowerCase().includes(q));
- document.getElementById("instructorGrid").innerHTML=list.length?list.map(i=>`
- <div class="instructor-card">
-  <div class="instructor-top"><div class="person-avatar">${i.name.charAt(0)}</div><div><h3>${i.name}</h3><small>${i.id} · ${i.role}</small></div></div>
-  <span class="status ${statusClass(i.status)}">${i.status}</span>
-  <div class="instructor-meta"><span>Assigned students</span><strong>${i.students}</strong></div>
-  <div class="instructor-meta"><span>Contact</span><strong>${i.phone}</strong></div>
-  <div class="action-group" style="margin-top:14px">
-   <button class="btn btn-dark" style="flex:1" onclick="toggleInstructor('${i.id}')">${i.status==="Active"?"Deactivate":"Activate"}</button>
-  </div>
- </div>`).join(""):`<div class="empty">No instructors found.</div>`;
- updateStats();refreshIcons();
+function escapeHTML(value){
+ return String(value??"").replace(/[&<>"']/g,c=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+ })[c]);
 }
-function renderBookings(){
- const q=document.getElementById("bookingSearch").value.toLowerCase();
- const f=document.getElementById("bookingFilter").value;
- const list=bookings.filter(b=>(b.name+" "+b.id).toLowerCase().includes(q)&&(f==="all"||b.status===f));
- document.getElementById("bookingRows").innerHTML=list.length?list.map(b=>`
- <tr>
-  <td><div class="person"><div class="person-avatar">${b.name.charAt(0)}</div><div><strong>${b.name}</strong><small>${b.id}</small></div></div></td>
-  <td>${b.package}</td><td>${b.date}</td>
-  <td><span class="status ${statusClass(b.status)}">${b.status}</span></td>
-  <td><div class="action-group">
-   ${b.status==="Pending"?`<button class="mini-btn" title="Approve" onclick="bookingAction('${b.id}','Approved')">${icon("check")}</button><button class="mini-btn" title="Reject" onclick="bookingAction('${b.id}','Rejected')">${icon("x")}</button>`:`<button class="mini-btn" title="Reset to pending" onclick="bookingAction('${b.id}','Pending')">${icon("rotate-ccw")}</button>`}
-  </div></td>
- </tr>`).join(""):`<tr><td colspan="5" class="empty">No booking requests found.</td></tr>`;
- updateStats();refreshIcons();
+function completedCount(s){
+ const logs=Array.isArray(s.attendanceLogs)?s.attendanceLogs.length:0;
+ return Math.max(logs,Number(s.remaining||0));
 }
+function statusClass(status){
+ return status==="Active"?"active-status":"inactive-status";
+}
+
+window.switchTab=function(tab){
+ document.querySelectorAll(".tab").forEach(b=>{
+  b.classList.toggle("active",b.dataset.tab===tab);
+ });
+ ["students","instructors","bookings"].forEach(id=>{
+  $(id).classList.toggle("section-hidden",id!==tab);
+ });
+};
+
 function updateStats(){
- document.getElementById("studentCount").textContent=156+students.length-4;
- document.getElementById("activeCount").textContent=students.filter(s=>s.status==="Active").length;
- document.getElementById("instructorCount").textContent=instructors.filter(i=>i.status==="Active").length;
- document.getElementById("bookingCount").textContent=bookings.filter(b=>b.status==="Pending").length;
+ $("studentCount").textContent=students.length;
+ $("activeCount").textContent=students.filter(s=>s.notActive!==true).length;
+ $("instructorCount").textContent=instructors.filter(i=>i.status==="Active").length;
 }
-function toggleStudent(id){
- const s=students.find(x=>x.id===id);s.status=s.status==="Active"?"Inactive":"Active";
- renderStudents();showToast("Student status updated");
+
+window.renderStudents=function(){
+ const q=$("studentSearch").value.trim().toLowerCase();
+ const filter=$("studentFilter").value;
+
+ const list=students.filter(s=>{
+  const text=(s.name||"")+" "+s.id;
+  const active=s.notActive!==true;
+  return text.toLowerCase().includes(q)&&
+   (filter==="all"||(filter==="Active"&&active)||(filter==="Inactive"&&!active));
+ });
+
+ $("studentRows").innerHTML=list.length?list.map(s=>{
+  const active=s.notActive!==true;
+  return `
+   <tr>
+    <td>
+     <div class="person">
+      <div class="person-avatar">${escapeHTML((s.name||"S").charAt(0).toUpperCase())}</div>
+      <div><strong>${escapeHTML(s.name||"Unnamed Student")}</strong><small>${escapeHTML(s.id)}</small></div>
+     </div>
+    </td>
+    <td>${escapeHTML(s.classType||"—")}</td>
+    <td>${completedCount(s)}</td>
+    <td>${Number(s.totalClasses||0)||"—"}</td>
+    <td><span class="status ${active?"active-status":"inactive-status"}">${active?"Active":"Inactive"}</span></td>
+    <td>
+     <div class="action-group">
+      <button class="mini-btn" title="Edit student" onclick="editStudent('${escapeHTML(s.id)}')"><i data-lucide="pencil"></i></button>
+      <button class="mini-btn" title="${active?"Deactivate":"Activate"}" onclick="toggleStudent('${escapeHTML(s.id)}')"><i data-lucide="power"></i></button>
+     </div>
+    </td>
+   </tr>`;
+ }).join(""):`<tr><td colspan="6" class="empty">No student records found.</td></tr>`;
+
+ updateStats();
+ refreshIcons();
+};
+
+window.renderInstructors=function(){
+ const q=$("instructorSearch").value.trim().toLowerCase();
+ const list=instructors.filter(i=>
+  ((i.name||"")+" "+i.id).toLowerCase().includes(q)
+ );
+
+ $("instructorGrid").innerHTML=list.length?list.map(i=>`
+  <div class="instructor-card">
+   <div class="instructor-top">
+    <div class="person-avatar">${escapeHTML((i.name||"I").charAt(0).toUpperCase())}</div>
+    <div><h3>${escapeHTML(i.name||"Instructor")}</h3><small>${escapeHTML(i.id)}</small></div>
+   </div>
+   <span class="status ${statusClass(i.status)}">${escapeHTML(i.status||"Inactive")}</span>
+   <div class="instructor-meta"><span>Contact</span><strong>${escapeHTML(i.phone||"—")}</strong></div>
+   <div class="action-group" style="margin-top:14px">
+    <button class="btn btn-dark" style="flex:1" onclick="toggleInstructor('${escapeHTML(i.id)}')">
+     ${i.status==="Active"?"Deactivate":"Activate"}
+    </button>
+    <button class="mini-btn" title="Edit" onclick="editInstructor('${escapeHTML(i.id)}')"><i data-lucide="pencil"></i></button>
+   </div>
+  </div>
+ `).join(""):`<div class="empty">No instructors found.</div>`;
+
+ updateStats();
+ refreshIcons();
+};
+
+function openModal(type){
+ currentRecordType=type;
+ editingStudent=null;
+ editingInstructor=null;
+ $("recordForm").reset();
+ $("recordAdmissionDate").value=new Date().toLocaleDateString("en-CA");
+ $("recordType");
+ $("classTypeField").style.display=type==="student"?"flex":"none";
+ $("totalClassesField").style.display=type==="student"?"flex":"none";
+ $("admissionDateField").style.display=type==="student"?"flex":"none";
+ $("instructorStatusField").style.display=type==="instructor"?"flex":"none";
+ $("modalTitle").textContent=type==="student"?"Add Student":"Add Instructor";
+ $("saveButton").textContent="Save Record";
+ $("recordModal").classList.add("show");
+ refreshIcons();
 }
-function toggleInstructor(id){
- const i=instructors.find(x=>x.id===id);i.status=i.status==="Active"?"Inactive":"Active";
- renderInstructors();showToast("Instructor status updated");
-}
-function bookingAction(id,status){
- const b=bookings.find(x=>x.id===id);b.status=status;
- renderBookings();showToast("Booking marked "+status);
-}
-function openAddModal(type="student"){
- editing=null;
- document.getElementById("recordForm").reset();
- document.getElementById("recordType").value=type;
- document.getElementById("modalTitle").textContent=type==="student"?"Add Student":"Add Instructor";
- updateFormFields();
- document.getElementById("recordModal").classList.add("show");
-}
-function updateFormFields(){
- const type=document.getElementById("recordType").value;
- document.getElementById("packageField").style.display=type==="student"?"flex":"none";
- document.getElementById("feeField").style.display=type==="student"?"flex":"none";
-}
-function closeModal(){document.getElementById("recordModal").classList.remove("show")}
-function editStudent(id){
- const s=students.find(x=>x.id===id);editing=id;
- document.getElementById("recordType").value="student";
- document.getElementById("recordName").value=s.name;
- document.getElementById("recordPhone").value=s.phone==="Not provided"?"":s.phone;
- document.getElementById("recordPackage").value=s.package;
- document.getElementById("recordFee").value=s.fee;
- document.getElementById("recordStatus").value=s.status;
- document.getElementById("modalTitle").textContent="Edit Student";
- updateFormFields();document.getElementById("recordModal").classList.add("show");
-}
-document.getElementById("recordForm").addEventListener("submit",e=>{
+
+window.openAddStudent=()=>openModal("student");
+window.openAddInstructor=()=>openModal("instructor");
+window.closeModal=()=>$("recordModal").classList.remove("show");
+
+window.editStudent=function(id){
+ const s=students.find(x=>x.id===id);
+ if(!s)return;
+ openModal("student");
+ editingStudent=id;
+ $("modalTitle").textContent="Edit Student";
+ $("saveButton").textContent="Update Student";
+ $("recordName").value=s.name||"";
+ $("recordPhone").value=s.id;
+ $("recordClassType").value=s.classType||"Group";
+ $("recordTotalClasses").value=Number(s.totalClasses||20);
+ $("recordAdmissionDate").value=s.admissionDate||"";
+};
+
+window.editInstructor=function(id){
+ const i=instructors.find(x=>x.id===id);
+ if(!i)return;
+ openModal("instructor");
+ editingInstructor=id;
+ $("modalTitle").textContent="Edit Instructor";
+ $("saveButton").textContent="Update Instructor";
+ $("recordName").value=i.name||"";
+ $("recordPhone").value=i.phone||"";
+ $("recordInstructorStatus").value=i.status||"Active";
+};
+
+$("recordForm").addEventListener("submit",async e=>{
  e.preventDefault();
- const type=document.getElementById("recordType").value;
- const name=document.getElementById("recordName").value.trim();
- const phone=document.getElementById("recordPhone").value.trim()||"Not provided";
- const status=document.getElementById("recordStatus").value;
- if(editing){
-  const s=students.find(x=>x.id===editing);
-  s.name=name;s.phone=phone;s.package=document.getElementById("recordPackage").value;
-  s.fee=document.getElementById("recordFee").value;s.status=status;
-  showToast("Student updated");
- }else if(type==="student"){
-  students.push({id:"A1-"+(1001+students.length),name,phone,package:document.getElementById("recordPackage").value,fee:document.getElementById("recordFee").value,status});
-  showToast("Student added");
- }else{
-  instructors.push({id:"INS-"+String(instructors.length+1).padStart(2,"0"),name,phone,students:0,status,role:"Driving Instructor"});
-  showToast("Instructor added");
+ if(busy)return;
+
+ const name=$("recordName").value.trim();
+ const phone=$("recordPhone").value.trim();
+
+ if(!name){toast("Please enter a name.");return;}
+
+ busy=true;
+ $("saveButton").disabled=true;
+
+ try{
+  if(currentRecordType==="student"){
+   if(!/^\d{10}$/.test(phone)){
+    toast("Student mobile number must be 10 digits.");
+    return;
+   }
+
+   const totalClasses=Number($("recordTotalClasses").value);
+   const admissionDate=$("recordAdmissionDate").value;
+
+   if(!Number.isInteger(totalClasses)||totalClasses<1||!admissionDate){
+    toast("Please enter valid class count and admission date.");
+    return;
+   }
+
+   if(editingStudent){
+    await updateDoc(doc(db,"studentData",editingStudent),{
+     name,
+     classType:$("recordClassType").value,
+     totalClasses,
+     admissionDate
+    });
+    toast("Student updated successfully.");
+   }else{
+    const existing=students.find(s=>s.id===phone);
+    if(existing){
+     toast("This mobile number already exists.");
+     return;
+    }
+
+    await setDoc(doc(db,"studentData",phone),{
+     name,
+     totalClasses,
+     remaining:0,
+     attendanceLogs:[],
+     classType:$("recordClassType").value,
+     notActive:false,
+     admissionDate
+    });
+    toast("Student added to Firebase.");
+   }
+  }else{
+   if(!/^\d{10}$/.test(phone)){
+    toast("Enter a valid 10-digit instructor mobile number.");
+    return;
+   }
+
+   const status=$("recordInstructorStatus").value;
+   const instructorDoc=doc(db,"instructorData",phone);
+
+   if(editingInstructor){
+    await updateDoc(doc(db,"instructorData",editingInstructor),{
+     name,phone,status,updatedAt:serverTimestamp()
+    });
+    toast("Instructor updated successfully.");
+   }else{
+    if(instructors.some(i=>i.id===phone)){
+     toast("This instructor mobile number already exists.");
+     return;
+    }
+    await setDoc(instructorDoc,{
+     name,phone,status,createdAt:serverTimestamp()
+    });
+    toast("Instructor added to Firebase.");
+   }
+  }
+
+  closeModal();
+ }catch(error){
+  console.error(error);
+  showError("Save failed: "+error.message);
+ }finally{
+  busy=false;
+  $("saveButton").disabled=false;
  }
- closeModal();renderStudents();renderInstructors();renderBookings();
 });
-document.getElementById("recordModal").addEventListener("click",e=>{
+
+window.toggleStudent=async function(id){
+ const s=students.find(x=>x.id===id);
+ if(!s)return;
+ const newValue=s.notActive!==true;
+ if(!confirm(newValue?"Deactivate this student?":"Activate this student?"))return;
+
+ try{
+  await updateDoc(doc(db,"studentData",id),{notActive:newValue});
+  toast(newValue?"Student deactivated.":"Student activated.");
+ }catch(error){
+  showError("Student status update failed: "+error.message);
+ }
+};
+
+window.toggleInstructor=async function(id){
+ const i=instructors.find(x=>x.id===id);
+ if(!i)return;
+ const status=i.status==="Active"?"Inactive":"Active";
+
+ try{
+  await updateDoc(doc(db,"instructorData",id),{
+   status,updatedAt:serverTimestamp()
+  });
+  toast("Instructor status updated.");
+ }catch(error){
+  showError("Instructor update failed: "+error.message);
+ }
+};
+
+$("recordModal").addEventListener("click",e=>{
  if(e.target.id==="recordModal")closeModal();
 });
-renderStudents();renderInstructors();renderBookings();refreshIcons();
+
+// Real-time student data
+onSnapshot(studentRef,snapshot=>{
+ clearError();
+ students=snapshot.docs.map(d=>({id:d.id,...d.data()}));
+ renderStudents();
+},error=>{
+ console.error(error);
+ showError("Student Firebase error: "+error.message);
+ $("studentRows").innerHTML=`<tr><td colspan="6" class="empty">Could not load students.</td></tr>`;
+});
+
+// Real-time instructor data
+onSnapshot(instructorRef,snapshot=>{
+ instructors=snapshot.docs.map(d=>({id:d.id,...d.data()}));
+ renderInstructors();
+},error=>{
+ console.error(error);
+ showError("Instructor Firebase error: "+error.message);
+ $("instructorGrid").innerHTML=`<div class="empty">Could not load instructors. Check Firestore rules.</div>`;
+});
+
+refreshIcons();
 </script>
 </body>
 </html>
