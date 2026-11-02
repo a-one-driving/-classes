@@ -22,7 +22,10 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:Inter,sans-serif;background:var(--bg);color:var(--white);line-height:1.5}
 a{text-decoration:none;color:inherit}
+button,input{font:inherit}
+button{cursor:pointer}
 .container{width:min(1160px,93%);margin:auto}
+
 header{position:sticky;top:0;z-index:100;background:rgba(8,13,24,.95);backdrop-filter:blur(15px);border-bottom:1px solid var(--border)}
 .topbar{height:68px;display:flex;justify-content:space-between;align-items:center}
 .logo{font-size:17px;font-weight:800}
@@ -30,6 +33,7 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,13,24,.95);backdrop-f
 .top-right{display:flex;align-items:center;gap:16px}
 .top-right a{font-size:12px;color:var(--muted)}
 .avatar{width:38px;height:38px;display:grid;place-items:center;border-radius:12px;background:rgba(242,189,69,.13);color:var(--gold);font-weight:800}
+
 main{padding:30px 0 100px}
 .page-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:15px;margin-bottom:24px}
 .eyebrow{font-size:10px;color:var(--gold);font-weight:800;letter-spacing:1.7px;text-transform:uppercase}
@@ -37,14 +41,24 @@ h1{font-size:clamp(25px,4vw,34px);margin:7px 0}
 .page-heading p{font-size:12px;color:var(--muted)}
 .back-link{font-size:11px;color:var(--gold);font-weight:700;white-space:nowrap}
 
-/* STATS */
+.login-panel{margin-bottom:20px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:19px}
+.login-head{display:flex;justify-content:space-between;gap:10px;margin-bottom:12px}
+.login-head h2{font-size:14px}
+.login-head span{font-size:10px;color:var(--gold)}
+.login-panel p{font-size:11px;color:var(--muted);margin-bottom:12px}
+.login-controls{display:flex;gap:10px;flex-wrap:wrap}
+.login-controls input{flex:1;min-width:190px;padding:12px;border-radius:10px;border:1px solid var(--border);background:var(--card2);color:white;outline:none}
+.login-controls input:focus{border-color:var(--gold)}
+.login-btn{padding:12px 16px;border:0;border-radius:10px;background:var(--gold);color:#171717;font-size:11px;font-weight:800}
+.login-btn:disabled{opacity:.6}
+.login-message{font-size:11px;margin-top:10px;color:var(--muted)}
+
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:20px}
 .stat{background:var(--card);border:1px solid var(--border);border-radius:15px;padding:17px}
 .stat-icon{width:36px;height:36px;display:grid;place-items:center;border-radius:11px;background:var(--card2);color:var(--gold)}
 .stat strong{display:block;font-size:24px;margin-top:13px}
 .stat span{font-size:10px;color:var(--muted)}
 
-/* PANELS */
 .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:17px;margin-bottom:18px}
 .panel{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:21px}
 .panel-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:18px}
@@ -54,7 +68,7 @@ h1{font-size:clamp(25px,4vw,34px);margin:7px 0}
 .progress-top span{font-size:11px;color:var(--muted)}
 .progress-top strong{font-size:13px;color:var(--gold)}
 .track{height:9px;background:#273449;border-radius:20px;overflow:hidden}
-.fill{height:100%;width:40%;background:linear-gradient(90deg,#D99A25,var(--gold));border-radius:20px}
+.fill{height:100%;width:0;background:linear-gradient(90deg,#D99A25,var(--gold));border-radius:20px;transition:width .3s}
 .progress-foot{display:flex;justify-content:space-between;margin-top:9px;font-size:10px;color:var(--muted)}
 .lesson-list{display:grid;gap:10px;margin-top:22px}
 .lesson{display:flex;align-items:center;gap:12px;padding:12px;background:var(--card2);border-radius:12px}
@@ -65,7 +79,6 @@ h1{font-size:clamp(25px,4vw,34px);margin:7px 0}
 .lesson-status{font-size:9px;font-weight:800;color:var(--green)}
 .lesson-status.pending{color:var(--gold)}
 
-/* NEXT CLASS */
 .next-class{background:linear-gradient(135deg,#1B2B42,#111A29);border:1px solid rgba(242,189,69,.18);border-radius:15px;padding:17px}
 .class-label{display:inline-block;padding:6px 9px;border-radius:7px;background:rgba(242,189,69,.12);color:var(--gold);font-size:9px;font-weight:800}
 .next-class h3{font-size:16px;margin:13px 0 5px}
@@ -76,7 +89,6 @@ h1{font-size:clamp(25px,4vw,34px);margin:7px 0}
 .class-footer{margin-top:16px;padding-top:13px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:10px}
 .class-footer strong{color:var(--gold)}
 
-/* ATTENDANCE */
 .attendance-panel{margin-bottom:18px}
 .table-wrap{overflow-x:auto}
 table{width:100%;border-collapse:collapse;min-width:520px}
@@ -89,7 +101,6 @@ tbody tr:last-child td{border-bottom:0}
 .pending{background:rgba(242,189,69,.12);color:var(--gold)}
 .empty{padding:25px;text-align:center;color:var(--muted);font-size:11px}
 
-/* SKILLS */
 .skill-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .skill{background:var(--card2);border-radius:13px;padding:14px}
 .skill-head{display:flex;align-items:center;gap:8px;margin-bottom:11px}
@@ -99,13 +110,11 @@ tbody tr:last-child td{border-bottom:0}
 .skill-line div{height:100%;background:var(--gold);border-radius:20px}
 .skill small{display:block;color:var(--muted);font-size:9px;margin-top:7px}
 
-/* NOTE */
 .notice{display:flex;gap:11px;padding:14px;border-radius:12px;background:rgba(101,169,255,.07);border:1px solid rgba(101,169,255,.15);margin-top:17px}
 .notice i{color:var(--blue);width:17px;flex-shrink:0}
 .notice strong{font-size:10px}
 .notice p{font-size:10px;color:var(--muted);margin-top:3px}
 
-/* NAV */
 footer{border-top:1px solid var(--border);padding:22px 0 100px}
 .footer-inner{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
 .footer-inner p{font-size:10px;color:var(--muted)}
@@ -115,20 +124,20 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
 .bottom-nav i{width:19px;height:19px}
 
 @media(max-width:850px){
-  .grid{grid-template-columns:1fr}
-  .stats{grid-template-columns:repeat(2,1fr)}
+.grid{grid-template-columns:1fr}
+.stats{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:600px){
-  .topbar{height:62px}
-  main{padding-top:23px}
-  .page-heading{align-items:flex-start;flex-direction:column}
-  .stats{gap:9px}
-  .stat{padding:14px}
-  .stat strong{font-size:21px}
-  .panel{padding:16px}
-  .skill-grid{grid-template-columns:1fr 1fr}
-  .bottom-nav{display:flex}
-  .footer-inner{flex-direction:column}
+.topbar{height:62px}
+main{padding-top:23px}
+.page-heading{align-items:flex-start;flex-direction:column}
+.stats{gap:9px}
+.stat{padding:14px}
+.stat strong{font-size:21px}
+.panel{padding:16px}
+.skill-grid{grid-template-columns:1fr 1fr}
+.bottom-nav{display:flex}
+.footer-inner{flex-direction:column}
 }
 </style>
 </head>
@@ -156,26 +165,40 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
     <a href="student-dashboard.html" class="back-link">← Dashboard</a>
   </section>
 
+  <!-- STUDENT LOGIN -->
+  <section class="login-panel" id="loginPanel">
+    <div class="login-head">
+      <h2>Student Login</h2>
+      <span>Firebase Student Portal</span>
+    </div>
+    <p>Enter your registered 10-digit mobile number to view your training records.</p>
+    <div class="login-controls">
+      <input id="studentMobile" type="tel" maxlength="10" inputmode="numeric" placeholder="Registered mobile number">
+      <button class="login-btn" id="loginButton" type="button">Connect Account</button>
+    </div>
+    <div class="login-message" id="loginMessage">Please enter your registered mobile number.</div>
+  </section>
+
   <!-- TRAINING STATS -->
   <section class="stats">
     <div class="stat">
       <div class="stat-icon"><i data-lucide="calendar-check"></i></div>
-      <strong id="totalPresent">12</strong>
+      <strong id="totalPresent">--</strong>
       <span>Days Present</span>
     </div>
     <div class="stat">
       <div class="stat-icon"><i data-lucide="calendar-x"></i></div>
-      <strong id="totalAbsent">0</strong>
+      <strong id="totalAbsent">--</strong>
       <span>Days Absent</span>
     </div>
     <div class="stat">
       <div class="stat-icon"><i data-lucide="car-front"></i></div>
-      <strong id="totalLessons">8</strong>
+      <strong id="totalLessons">--</strong>
       <span>Practice Sessions</span>
     </div>
     <div class="stat">
       <div class="stat-icon"><i data-lucide="trending-up"></i></div>
-      <strong id="completion">40%</strong>
+      <strong id="completion">--</strong>
       <span>Course Progress</span>
     </div>
   </section>
@@ -186,19 +209,19 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
     <div class="panel">
       <div class="panel-head">
         <h2>Course Progress</h2>
-        <span id="courseName">Premium · 30 Days</span>
+        <span id="courseName">Package not assigned</span>
       </div>
 
       <div class="progress-top">
         <span>Training completion</span>
-        <strong id="progressText">40%</strong>
+        <strong id="progressText">0%</strong>
       </div>
       <div class="track">
         <div class="fill" id="progressFill"></div>
       </div>
       <div class="progress-foot">
-        <span id="completedText">12 days completed</span>
-        <span id="remainingText">18 days remaining</span>
+        <span id="completedText">0 sessions completed</span>
+        <span id="remainingText">-- days remaining</span>
       </div>
 
       <div class="lesson-list">
@@ -208,7 +231,7 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
             <strong>Vehicle Introduction & Controls</strong>
             <span>Vehicle basics and safety controls</span>
           </div>
-          <span class="lesson-status">Completed</span>
+          <span class="lesson-status">Basics</span>
         </div>
 
         <div class="lesson">
@@ -217,7 +240,7 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
             <strong>Steering & Clutch Practice</strong>
             <span>Basic vehicle handling</span>
           </div>
-          <span class="lesson-status">Completed</span>
+          <span class="lesson-status">Practice</span>
         </div>
 
         <div class="lesson">
@@ -226,7 +249,7 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
             <strong>Road Driving Practice</strong>
             <span>Road awareness and driving practice</span>
           </div>
-          <span class="lesson-status pending">In Progress</span>
+          <span class="lesson-status pending">Training</span>
         </div>
 
         <div class="lesson">
@@ -263,7 +286,7 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
         <div class="class-detail">
           <div><i data-lucide="clock"></i><span id="nextTime">Time to be confirmed</span></div>
           <div><i data-lucide="car-front"></i><span>TATA TIGOR XZ+</span></div>
-          <div><i data-lucide="map-pin"></i><span>Training location to be confirmed</span></div>
+          <div><i data-lucide="map-pin"></i><span id="nextLocation">Training location to be confirmed</span></div>
         </div>
 
         <div class="class-footer">
@@ -287,7 +310,7 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
   <section class="panel attendance-panel" id="attendance">
     <div class="panel-head">
       <h2>Attendance History</h2>
-      <span id="attendanceCount">Recent records</span>
+      <span id="attendanceCount">No records</span>
     </div>
 
     <div class="table-wrap">
@@ -301,18 +324,7 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
           </tr>
         </thead>
         <tbody id="attendanceBody">
-          <tr>
-            <td>Sample date</td>
-            <td>Driving Practice</td>
-            <td>45 min</td>
-            <td><span class="badge present">Present</span></td>
-          </tr>
-          <tr>
-            <td>Sample date</td>
-            <td>Vehicle Basics</td>
-            <td>45 min</td>
-            <td><span class="badge present">Present</span></td>
-          </tr>
+          <tr><td colspan="4" class="empty">Connect your student account to view attendance.</td></tr>
         </tbody>
       </table>
     </div>
@@ -331,31 +343,26 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
         <div class="skill-line"><div style="width:65%"></div></div>
         <small>Learning</small>
       </div>
-
       <div class="skill">
         <div class="skill-head"><i data-lucide="gauge"></i><strong>Speed Control</strong></div>
         <div class="skill-line"><div style="width:45%"></div></div>
         <small>Learning</small>
       </div>
-
       <div class="skill">
         <div class="skill-head"><i data-lucide="parking-square"></i><strong>Parking</strong></div>
         <div class="skill-line"><div style="width:20%"></div></div>
         <small>Upcoming</small>
       </div>
-
       <div class="skill">
         <div class="skill-head"><i data-lucide="route"></i><strong>Road Awareness</strong></div>
         <div class="skill-line"><div style="width:55%"></div></div>
         <small>Learning</small>
       </div>
-
       <div class="skill">
         <div class="skill-head"><i data-lucide="shield-check"></i><strong>Safety Rules</strong></div>
         <div class="skill-line"><div style="width:75%"></div></div>
         <small>Learning</small>
       </div>
-
       <div class="skill">
         <div class="skill-head"><i data-lucide="car-front"></i><strong>Vehicle Handling</strong></div>
         <div class="skill-line"><div style="width:60%"></div></div>
@@ -366,8 +373,8 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
     <div class="notice">
       <i data-lucide="info"></i>
       <div>
-        <strong>Demo information</strong>
-        <p>Attendance, lesson progress and skill percentages shown here are sample UI values. They are not official training records until connected to your Firebase student data.</p>
+        <strong>Skills Assessment</strong>
+        <p>Skill percentages above are illustrative indicators, not Firebase assessment records. They should not be treated as official instructor evaluations.</p>
       </div>
     </div>
   </section>
@@ -382,99 +389,180 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
 </footer>
 
 <nav class="bottom-nav">
-  <a href="student-dashboard.html">
-    <i data-lucide="layout-dashboard"></i>Dashboard
-  </a>
-  <a href="student-training.html" class="active">
-    <i data-lucide="car-front"></i>Training
-  </a>
-  <a href="student-training.html#attendance">
-    <i data-lucide="clipboard-check"></i>Attendance
-  </a>
-  <a href="student-account.html">
-    <i data-lucide="user-round"></i>Account
-  </a>
+  <a href="student-dashboard.html"><i data-lucide="layout-dashboard"></i>Dashboard</a>
+  <a href="student-training.html" class="active"><i data-lucide="car-front"></i>Training</a>
+  <a href="student-training.html#attendance"><i data-lucide="clipboard-check"></i>Attendance</a>
+  <a href="student-account.html"><i data-lucide="user-round"></i>Account</a>
 </nav>
 
-<script>
-/*
-  DEMO TRAINING DATA
-  Replace with authenticated Firebase student data later.
-  No Firebase records are read or changed by this page.
-*/
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+import { getFirestore, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
-const TRAINING_DATA = {
-  packageName:"Premium",
-  duration:30,
-  completedDays:12,
-  absentDays:0,
-  practiceSessions:8,
-
-  nextClass:{
-    date:"",
-    time:"",
-    title:"Your next driving lesson",
-    status:"Awaiting Schedule"
-  },
-
-  attendance:[
-    {
-      date:"Sample date",
-      session:"Driving Practice",
-      duration:"45 min",
-      status:"Present"
-    },
-    {
-      date:"Sample date",
-      session:"Vehicle Basics",
-      duration:"45 min",
-      status:"Present"
-    }
-  ]
+/* EXISTING FIREBASE PROJECT */
+const firebaseConfig = {
+  apiKey: "AIzaSyC3gWi8p85z-wkoJeWb3N3jYoQpcIar8Sww",
+  authDomain: "abinash-driving.firebaseapp.com",
+  projectId: "abinash-driving",
+  storageBucket: "abinash-driving.appspot.com",
+  messagingSenderId: "641148830173",
+  appId: "1:641148830173:web:b7a500e5e7e2463da0f634"
 };
 
-function renderTraining(data){
-  const total = Number(data.duration) || 30;
-  const completed = Number(data.completedDays) || 0;
-  const remaining = Math.max(total-completed,0);
-  const percent = total ? Math.min(Math.round(completed/total*100),100) : 0;
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-  document.getElementById("courseName").textContent =
-    `${data.packageName || "Driving"} · ${total} Days`;
+let unsubscribeStudent = null;
+const $ = id => document.getElementById(id);
 
-  document.getElementById("totalPresent").textContent = completed;
-  document.getElementById("totalAbsent").textContent = data.absentDays || 0;
-  document.getElementById("totalLessons").textContent = data.practiceSessions || 0;
-  document.getElementById("completion").textContent = percent + "%";
+function showMessage(message,color="var(--muted)"){
+  $("loginMessage").textContent = message;
+  $("loginMessage").style.color = color;
+}
 
-  document.getElementById("progressText").textContent = percent + "%";
-  document.getElementById("progressFill").style.width = percent + "%";
-  document.getElementById("completedText").textContent = completed + " days completed";
-  document.getElementById("remainingText").textContent = remaining + " days remaining";
+function getValue(data,keys,fallback=""){
+  for(const key of keys){
+    if(data[key] !== undefined && data[key] !== null && data[key] !== ""){
+      return data[key];
+    }
+  }
+  return fallback;
+}
 
-  const next = data.nextClass || {};
-  document.getElementById("nextDate").textContent = next.date || "Schedule Pending";
-  document.getElementById("nextTime").textContent = next.time || "Time to be confirmed";
-  document.getElementById("nextTitle").textContent = next.title || "Your next driving lesson";
-  document.getElementById("nextStatus").textContent = next.status || "Awaiting Schedule";
+function parseDate(value){
+  if(!value) return "—";
 
-  const body = document.getElementById("attendanceBody");
-  body.innerHTML = "";
+  try{
+    let date;
 
-  if(!data.attendance || data.attendance.length === 0){
-    body.innerHTML = `<tr><td colspan="4" class="empty">No attendance records available yet.</td></tr>`;
-    document.getElementById("attendanceCount").textContent = "0 records";
+    if(value && typeof value.toDate === "function"){
+      date = value.toDate();
+    }else if(value instanceof Date){
+      date = value;
+    }else{
+      date = new Date(value);
+    }
+
+    if(!Number.isNaN(date.getTime())){
+      return date.toLocaleDateString("en-IN",{
+        day:"2-digit",month:"short",year:"numeric"
+      });
+    }
+  }catch(error){
+    console.warn("Date parsing:",error);
+  }
+
+  return String(value);
+}
+
+/* READ ATTENDANCE LOGS */
+function normalizeLogs(logs){
+  if(Array.isArray(logs)){
+    return logs.map((item,index)=>normalizeRecord(item,index));
+  }
+
+  if(logs && typeof logs === "object"){
+    return Object.entries(logs).map(([key,item],index)=>{
+      const record = normalizeRecord(item,index);
+      if(record.date === "—") record.date = parseDate(key);
+      return record;
+    });
+  }
+
+  return [];
+}
+
+function normalizeRecord(item,index){
+  if(typeof item === "string"){
+    const distance = item.match(/Distance:\s*([\d.]+)\s*KM/i);
+
+    return {
+      date:extractDate(item),
+      session:"Driving Practice",
+      duration:distance ? distance[1] + " KM" : "Not recorded",
+      status:extractStatus(item)
+    };
+  }
+
+  if(!item || typeof item !== "object"){
+    return {
+      date:"—",
+      session:"Driving Practice",
+      duration:"Not recorded",
+      status:"Pending"
+    };
+  }
+
+  const date = getValue(
+    item,["date","attendanceDate","createdAt","timestamp","time"],"—"
+  );
+
+  const session = getValue(
+    item,["session","lesson","title","description","activity","topic"],
+    "Driving Practice"
+  );
+
+  const duration = getValue(
+    item,["duration","distance","timeTaken","km"],"Not recorded"
+  );
+
+  const status = getValue(
+    item,["status","attendance","attendanceStatus"],"Pending"
+  );
+
+  return {
+    date:parseDate(date),
+    session:String(session),
+    duration:String(duration),
+    status:String(status)
+  };
+}
+
+function extractDate(text){
+  const match = text.match(/\d{1,2}[/-]\d{1,2}[/-]\d{2,4}/);
+  return match ? match[0] : "—";
+}
+
+function extractStatus(text){
+  const lower = text.toLowerCase();
+
+  if(lower.includes("absent")) return "Absent";
+  if(lower.includes("present")) return "Present";
+
+  return "Present";
+}
+
+function isPresent(status){
+  return ["present","approved","completed","done"].includes(
+    String(status).toLowerCase()
+  );
+}
+
+function isAbsent(status){
+  return ["absent","rejected"].includes(
+    String(status).toLowerCase()
+  );
+}
+
+/* RENDER ATTENDANCE */
+function renderAttendance(records){
+  const body = $("attendanceBody");
+  body.replaceChildren();
+
+  $("attendanceCount").textContent = records.length + " records";
+
+  if(!records.length){
+    const row = document.createElement("tr");
+    const cell = document.createElement("td");
+    cell.colSpan = 4;
+    cell.className = "empty";
+    cell.textContent = "No attendance records available yet.";
+    row.appendChild(cell);
+    body.appendChild(row);
     return;
   }
 
-  document.getElementById("attendanceCount").textContent =
-    data.attendance.length + " records";
-
-  data.attendance.forEach(record=>{
-    const status = (record.status || "Pending").toLowerCase();
-    const badgeClass = status === "present" ? "present" :
-                       status === "absent" ? "absent" : "pending";
-
+  records.slice().reverse().forEach(record=>{
     const row = document.createElement("tr");
 
     [record.date,record.session,record.duration].forEach(value=>{
@@ -485,18 +573,167 @@ function renderTraining(data){
 
     const statusCell = document.createElement("td");
     const badge = document.createElement("span");
-    badge.className = "badge " + badgeClass;
-    badge.textContent = record.status || "Pending";
+
+    const status = record.status || "Pending";
+
+    badge.className = "badge " +
+      (isPresent(status) ? "present" :
+       isAbsent(status) ? "absent" : "pending");
+
+    badge.textContent = status;
     statusCell.appendChild(badge);
     row.appendChild(statusCell);
-
     body.appendChild(row);
   });
 }
 
-renderTraining(TRAINING_DATA);
+/* RENDER STUDENT TRAINING */
+function renderTraining(student,mobile){
 
-if(window.lucide) lucide.createIcons();
+  const records = normalizeLogs(student.attendanceLogs);
+
+  const presentCount = records.filter(
+    record=>isPresent(record.status)
+  ).length;
+
+  const absentCount = records.filter(
+    record=>isAbsent(record.status)
+  ).length;
+
+  const pendingCount = records.filter(
+    record=>!isPresent(record.status) && !isAbsent(record.status)
+  ).length;
+
+  /*
+   * Preserve compatibility with the existing student record:
+   * if attendance logs are present, count their actual statuses.
+   * If the older record has no attendance logs, use its legacy
+   * remaining field as completed count, as used by the earlier profile page.
+   */
+  let completed = records.length ? presentCount : 0;
+
+  if(records.length === 0){
+    completed = Number(student.remaining || 0);
+  }
+
+  const duration = Number(getValue(
+    student,["duration","totalDays","packageDays"],30
+  )) || 30;
+
+  const remaining = Math.max(duration-completed,0);
+  const percent = Math.min(Math.round(completed/duration*100),100);
+
+  const packageName = getValue(
+    student,["packageName","package","courseName","planName"],"Driving Package"
+  );
+
+  $("avatar").textContent = String(
+    getValue(student,["name","studentName"],"Student")
+  ).trim().split(/\s+/).map(part=>part[0]).join("").slice(0,2).toUpperCase();
+
+  $("courseName").textContent = packageName + " · " + duration + " Days";
+
+  $("totalPresent").textContent = presentCount || (records.length ? 0 : completed);
+  $("totalAbsent").textContent = absentCount;
+  $("totalLessons").textContent = records.length || completed;
+  $("completion").textContent = percent + "%";
+
+  $("progressText").textContent = percent + "%";
+  $("progressFill").style.width = percent + "%";
+  $("completedText").textContent = completed + " days completed";
+  $("remainingText").textContent = remaining + " days remaining";
+
+  const nextDate = getValue(
+    student,["nextClassDate","classDate","scheduledDate"],""
+  );
+
+  const nextTime = getValue(
+    student,["nextClassTime","classTime","scheduledTime"],""
+  );
+
+  const nextTitle = getValue(
+    student,["nextClassTitle","classTitle"],"Your next driving lesson"
+  );
+
+  const nextStatus = getValue(
+    student,["nextClassStatus","classStatus"],"Awaiting Schedule"
+  );
+
+  const nextLocation = getValue(
+    student,["nextClassLocation","classLocation","trainingLocation"],
+    "Training location to be confirmed"
+  );
+
+  $("nextDate").textContent = nextDate ? parseDate(nextDate) : "Schedule Pending";
+  $("nextTime").textContent = nextTime || "Time to be confirmed";
+  $("nextTitle").textContent = nextTitle;
+  $("nextStatus").textContent = nextStatus;
+  $("nextLocation").textContent = nextLocation;
+
+  renderAttendance(records);
+
+  $("loginPanel").style.display = "none";
+
+  if(window.lucide) window.lucide.createIcons();
+}
+
+/* CONNECT FIREBASE */
+function connectStudent(){
+  const mobile = $("studentMobile").value.trim();
+  const button = $("loginButton");
+
+  if(!/^[6-9]\d{9}$/.test(mobile)){
+    showMessage("Please enter a valid 10-digit mobile number.","var(--red)");
+    return;
+  }
+
+  if(unsubscribeStudent){
+    unsubscribeStudent();
+    unsubscribeStudent = null;
+  }
+
+  button.disabled = true;
+  button.textContent = "Connecting...";
+  showMessage("Connecting to your student records...");
+
+  const studentRef = doc(db,"studentData",mobile);
+
+  unsubscribeStudent = onSnapshot(studentRef,snapshot=>{
+
+    button.disabled = false;
+    button.textContent = "Connect Account";
+
+    if(!snapshot.exists()){
+      showMessage(
+        "Student record not found. Please check your registered mobile number.",
+        "var(--red)"
+      );
+      return;
+    }
+
+    renderTraining(snapshot.data(),mobile);
+    showMessage("Training records connected successfully.","var(--green)");
+
+  },error=>{
+    console.error("Firebase error:",error);
+
+    button.disabled = false;
+    button.textContent = "Connect Account";
+
+    showMessage(
+      "Unable to load records. Please check Firebase permissions.",
+      "var(--red)"
+    );
+  });
+}
+
+$("loginButton").addEventListener("click",connectStudent);
+
+$("studentMobile").addEventListener("keydown",event=>{
+  if(event.key === "Enter") connectStudent();
+});
+
+if(window.lucide) window.lucide.createIcons();
 </script>
 
 </body>
