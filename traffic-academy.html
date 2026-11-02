@@ -1,1 +1,381 @@
-hhh
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#080D18">
+<title>A1 Traffic Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{--bg:#080d18;--panel:#111b2b;--panel2:#182438;--line:#29384e;--text:#f4f7fb;--muted:#91a0b5;--gold:#e5ad48;--green:#23c483;--red:#ff626b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif}
+button{font-family:inherit;cursor:pointer}
+.top{position:sticky;top:0;z-index:10;background:#080d18ee;backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:13px 16px}
+.topin{max-width:1050px;margin:auto;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;gap:10px;align-items:center}
+.logo{height:40px;width:40px;border-radius:12px;background:var(--gold);color:#17120a;display:grid;place-items:center;font-size:19px}
+.brand b{font-size:14px}.brand small{display:block;color:var(--muted);font-size:10px;margin-top:3px}
+.back{background:var(--panel);color:white;border:1px solid var(--line);padding:10px 13px;border-radius:10px;font-weight:700}
+main{max-width:1050px;margin:auto;padding:20px 14px 55px}
+.hero{padding:24px;border:1px solid #34445c;border-radius:22px;background:linear-gradient(120deg,#1b3049,#111b2b 65%,#392b18)}
+.eyebrow{font-size:10px;letter-spacing:2px;color:var(--gold);font-weight:900}
+.hero h1{font-size:clamp(27px,5vw,38px);margin:10px 0}
+.hero p{font-size:12px;color:#c2ccda;line-height:1.7;max-width:550px}
+.primary{background:linear-gradient(135deg,#f2c46b,#d99a30);color:#17120a;border:0;border-radius:11px;padding:13px 17px;font-weight:900}
+.secondary{background:var(--panel2);color:white;border:1px solid var(--line);border-radius:11px;padding:12px 15px;font-weight:800}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0}
+.stat,.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:15px}
+.stat i{color:var(--gold)}.stat strong{display:block;font-size:23px;margin:9px 0 3px}.stat span{font-size:10px;color:var(--muted)}
+.tabs{display:flex;gap:8px;overflow:auto;margin:20px 0}
+.tab{white-space:nowrap;padding:11px 14px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:#c4cfdd;font-weight:800;font-size:12px}
+.tab.active{background:var(--gold);color:#17120a;border-color:var(--gold)}
+.heading{display:flex;justify-content:space-between;align-items:center;margin:24px 0 13px}
+.heading h2{font-size:18px;margin:0}
+.heading small{font-size:10px;color:var(--muted)}
+.filters{display:flex;gap:7px;overflow:auto;margin:12px 0}
+.filter{border:1px solid var(--line);border-radius:20px;padding:8px 12px;background:var(--panel);color:#bdc8d8;font-size:10px;font-weight:800;white-space:nowrap}
+.filter.active{background:#3c301d;color:#f5cf80;border-color:var(--gold)}
+.signs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.sign{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:13px;text-align:center}
+.sign img{width:100%;height:115px;object-fit:contain;background:#fff;border-radius:10px;padding:8px}
+.sign h3{font-size:12px;margin:10px 0 6px}
+.sign p{font-size:10px;color:var(--muted);line-height:1.6;margin:0}
+.tag{display:inline-block;margin-top:8px;padding:5px 8px;background:#26364b;color:#d5e1f0;border-radius:20px;font-size:9px;font-weight:800}
+.note{padding:12px;border-radius:11px;background:#30291d;border:1px solid #69532d;color:#f3d28d;font-size:11px;line-height:1.6;margin:14px 0}
+.hidden{display:none!important}
+.progress{height:7px;background:#29384e;border-radius:20px;overflow:hidden;margin:16px 0}
+.progress div{height:100%;background:var(--gold);width:0}
+.quiztop{display:flex;justify-content:space-between;font-size:11px;color:var(--gold);font-weight:900}
+.question{font-size:18px;line-height:1.5;margin:18px 0}
+.options{display:grid;gap:10px}
+.option{width:100%;text-align:left;background:var(--panel2);border:1px solid var(--line);color:white;padding:14px;border-radius:12px;font-size:12px;font-weight:700}
+.option.selected{border-color:var(--gold);background:#382e1d}
+.option:disabled{opacity:1}
+.actions{display:flex;justify-content:space-between;gap:10px;margin-top:18px}
+.result{text-align:center}
+.circle{height:120px;width:120px;border:8px solid var(--gold);border-radius:50%;display:grid;place-items:center;margin:15px auto;font-size:28px;font-weight:900}
+.review{padding:12px;background:var(--panel2);border:1px solid var(--line);border-radius:11px;margin:9px 0;text-align:left}
+.review h4{font-size:11px;margin:0 0 8px}
+.review p{font-size:10px;color:var(--muted);line-height:1.6}
+.good{color:var(--green)!important}.bad{color:var(--red)!important}
+.history{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid var(--line)}
+.history:last-child{border:0}
+.history b{font-size:12px}.history small{display:block;color:var(--muted);font-size:10px;margin-top:5px}
+.score{background:#173b30;color:#62e5b0;padding:8px 10px;border-radius:9px;font-size:12px;font-weight:900}
+.empty{text-align:center;padding:25px;color:var(--muted);font-size:12px}
+.footer{text-align:center;color:#64748b;font-size:10px;margin-top:30px}
+@media(max-width:650px){.stats{grid-template-columns:repeat(2,1fr)}.signs{grid-template-columns:repeat(2,1fr)}main{padding:15px 11px 45px}.hero{padding:20px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="topin">
+ <div class="brand"><div class="logo"><i class="fa-solid fa-car-side"></i></div><div><b>ABHINAASH A1</b><small>DRIVING CLASSES · BARIPADA</small></div></div>
+ <button class="back" onclick="goDashboard()"><i class="fa-solid fa-arrow-left"></i> Dashboard</button>
+</div></header>
+
+<main>
+<div id="loading" class="panel" style="text-align:center;padding:40px">
+ <i class="fa-solid fa-spinner fa-spin" style="font-size:25px;color:var(--gold)"></i>
+ <p style="font-size:12px;color:var(--muted)">Verifying your student account...</p>
+</div>
+<div id="error" class="panel hidden" style="text-align:center">
+ <i class="fa-solid fa-lock" style="font-size:30px;color:var(--red)"></i>
+ <h3>Student verification required</h3>
+ <p id="errorText" style="color:var(--muted);font-size:12px"></p>
+ <button class="primary" onclick="location.href='index.html'">Go to Website Login</button>
+</div>
+
+<div id="appContent" class="hidden">
+<section class="hero">
+ <div class="eyebrow">A1 LEARNING ZONE</div>
+ <h1>Traffic Academy 🚦</h1>
+ <div style="font-size:12px;color:#c5d0df">Welcome, <b id="studentName">Student</b></div>
+ <p>Learn Indian road signs, understand road safety rules and improve your driving knowledge with daily MCQ practice.</p>
+ <button class="primary" onclick="startTest()"><i class="fa-solid fa-play"></i> Start Daily Test</button>
+</section>
+
+<section class="stats">
+ <div class="stat"><i class="fa-solid fa-book-open"></i><strong id="totalTests">0</strong><span>Tests Completed</span></div>
+ <div class="stat"><i class="fa-solid fa-trophy"></i><strong id="bestScore">0/10</strong><span>Best Score</span></div>
+ <div class="stat"><i class="fa-solid fa-chart-line"></i><strong id="average">0%</strong><span>Average Score</span></div>
+ <div class="stat"><i class="fa-solid fa-calendar-check"></i><strong id="today">New</strong><span>Today's Test</span></div>
+</section>
+
+<div class="tabs">
+ <button class="tab active" onclick="showTab('learn',this)"> <i class="fa-solid fa-road"></i> Learn Signs</button>
+ <button class="tab" onclick="showTab('quiz',this)"><i class="fa-solid fa-clipboard-question"></i> Daily Test</button>
+ <button class="tab" onclick="showTab('history',this)"><i class="fa-solid fa-clock-rotate-left"></i> Test History</button>
+</div>
+
+<section id="learnSection">
+ <div class="heading"><h2>Indian Traffic Signs</h2><small id="signCount">Signs library</small></div>
+ <div class="note">Official road-sign reference images from Delhi Traffic Police. Images require an internet connection. Sign meanings are simplified for learner practice.</div>
+ <div class="filters">
+  <button class="filter active" onclick="filterSigns('All',this)">All Signs</button>
+  <button class="filter" onclick="filterSigns('Mandatory',this)">Mandatory</button>
+  <button class="filter" onclick="filterSigns('Warning',this)">Warning</button>
+  <button class="filter" onclick="filterSigns('Informatory',this)">Informatory</button>
+ </div>
+ <div class="signs" id="signGrid"></div>
+ <p style="font-size:10px;color:var(--muted);margin-top:15px">Reference: <a href="https://traffic.delhipolice.gov.in/en/learn-road-signages-and-markings-0" target="_blank" style="color:var(--gold)">Delhi Traffic Police – Learn Road Signages</a></p>
+</section>
+
+<section id="quizSection" class="hidden">
+ <div class="heading"><h2>Daily 10 Question Test</h2><small>10 marks</small></div>
+ <div id="quizStart" class="panel">
+  <div style="text-align:center;font-size:35px;color:var(--gold)"><i class="fa-solid fa-clipboard-check"></i></div>
+  <h3 style="text-align:center">Ready for the test?</h3>
+  <p style="text-align:center;font-size:12px;color:var(--muted);line-height:1.8">10 questions · 4 options · 10 marks<br>10-minute time limit</p>
+  <div class="note" id="dailyMessage">One official test per day.</div>
+  <button class="primary" style="width:100%" onclick="beginQuiz()">Start Test Now</button>
+  <button class="secondary" style="width:100%;margin-top:9px" onclick="beginQuiz(true)">Practice Test (Unlimited)</button>
+ </div>
+ <div id="quizBox" class="panel hidden">
+  <div class="quiztop"><span id="qCount">QUESTION 1/10</span><span>⏱ <span id="timer">10:00</span></span></div>
+  <div class="progress"><div id="bar"></div></div>
+  <div class="question" id="question"></div>
+  <div class="options" id="options"></div>
+  <div class="actions"><button class="secondary" id="prev" onclick="previous()">Previous</button><button class="primary" id="next" onclick="next()">Next →</button></div>
+ </div>
+ <div id="resultBox" class="panel hidden">
+  <div class="result">
+   <div style="font-size:32px;color:var(--gold)"><i class="fa-solid fa-award"></i></div>
+   <h2>Test Completed!</h2><div class="circle" id="resultScore">0/10</div>
+   <h3 id="resultTitle">Keep Practicing</h3>
+   <p id="resultText" style="font-size:12px;color:var(--muted)"></p>
+   <button class="secondary" onclick="toggleReview()">Review Answers</button>
+   <button class="primary" onclick="showTab('history',document.querySelectorAll('.tab')[2])">Test History</button>
+  </div>
+  <div id="reviewBox" class="hidden" style="margin-top:18px"><h3 style="font-size:14px">Answer Review</h3><div id="reviewList"></div></div>
+ </div>
+</section>
+
+<section id="historySection" class="hidden">
+ <div class="heading"><h2>My Test History</h2><small>Previous attempts</small></div>
+ <div class="panel" id="historyList"><div class="empty">Loading...</div></div>
+</section>
+</div>
+<div class="footer">© ABHINAASH A1 Driving Classes · Drive Safe, Stay Safe</div>
+</main>
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+import {getFirestore,doc,getDoc,collection,addDoc,getDocs,query,where,orderBy,limit,serverTimestamp} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
+const firebaseConfig={
+ apiKey:"AIzaSyC3gWi8p85z-wkoJeWb3N3jYoQpcIar8Sww",
+ authDomain:"abinash-driving.firebaseapp.com",
+ projectId:"abinash-driving",
+ storageBucket:"abinash-driving.appspot.com",
+ messagingSenderId:"641148830173",
+ appId:"1:641148830173:web:b7a500e5e7e2463da0f634"
+};
+const app=initializeApp(firebaseConfig);
+const db=getFirestore(app);
+
+let mobile="",student={},history=[],questions=[],answers={},current=0,seconds=600,timer=null,practice=false,submitting=false;
+
+const imageBase="https://staging.parivahan.gov.in/delhitrafficpolice/sites/all/themes/delhitrafficpolice/icons/road-signs/";
+const signs=[
+["No Entry","Mandatory","Vehicles are not allowed to enter from this direction.","1.jpg"],
+["Vehicles prohibited in both directions","Mandatory","Traffic is prohibited in both directions.","2.jpg"],
+["Right turn prohibited","Mandatory","Turning right is not allowed.","13.jpg"],
+["No Parking","Mandatory","Parking is prohibited in the signed area.","18.jpg"],
+["Stop","Mandatory","Stop before proceeding and move only when safe.","31.jpg"],
+["Give Way","Mandatory","Give priority to traffic that has the right of way.","32.jpg"],
+["Right hand curve","Warning","A right-hand curve is ahead. Reduce speed.","1%281%29.jpg"],
+["School ahead","Warning","A school or children crossing area is ahead. Drive slowly.","15%281%29.jpg"],
+["Men at work","Warning","Road work is in progress ahead. Slow down.","16%281%29.jpg"],
+["Public Telephone","Informatory","A public telephone facility is available nearby.","1%282%29.jpg"],
+["Petrol Pump","Informatory","A petrol pump is available ahead.","2%282%29.jpg"]
+];
+
+const bank=[
+{q:"Which sign means vehicles must stop?",o:["No Entry","Stop","No Parking","One Way"],a:1,e:"The red octagonal sign means STOP."},
+{q:"What does a No Entry sign indicate?",o:["Entry is prohibited","Parking is prohibited","Hospital ahead","Speed limit"],a:0,e:"No Entry prohibits vehicles from entering from that direction."},
+{q:"What should you do at a Give Way sign?",o:["Accelerate","Give priority to traffic with right of way","Park","Sound horn"],a:1,e:"Give way means yield to traffic that has priority."},
+{q:"A No Parking sign means:",o:["Parking is compulsory","Parking is prohibited","Only cars can park","Parking is free"],a:1,e:"No Parking prohibits parking in the signed area."},
+{q:"A warning sign showing a school means:",o:["School or children crossing ahead","Hospital ahead","Petrol pump","Parking area"],a:0,e:"The sign warns drivers about a school or children near the road."},
+{q:"When you see road work signs, you should:",o:["Speed up","Slow down and follow instructions","Overtake quickly","Ignore workers"],a:1,e:"Road work signs warn of workers or changes to road conditions."},
+{q:"A petrol pump sign is generally:",o:["A warning sign","An informatory sign","A prohibition sign","A compulsory sign"],a:1,e:"Petrol pump signs provide information about roadside facilities."},
+{q:"A right-hand curve warning means:",o:["Road curves to the right ahead","Road ends","No right turn","One-way road"],a:0,e:"It warns of a right-hand bend ahead."},
+{q:"At a red traffic signal, you must:",o:["Proceed carefully","Stop before the stop line","Turn without checking","Sound horn"],a:1,e:"Red traffic signal means stop."},
+{q:"A blue information sign generally provides:",o:["A warning of danger","Information or facility guidance","A speed restriction","A stop instruction"],a:1,e:"Informatory signs guide drivers to facilities and destinations."},
+{q:"What should you do before changing lanes?",o:["Signal and check mirrors and blind spots","Turn suddenly","Only sound horn","Close your mirrors"],a:0,e:"Signal and check mirrors and blind spots before changing lanes."},
+{q:"A pedestrian crossing sign warns about:",o:["A railway station","A pedestrian crossing ahead","A petrol pump","A no parking zone"],a:1,e:"It warns that pedestrians may cross ahead."},
+{q:"What does a speed limit sign indicate?",o:["Minimum speed always","Maximum permitted speed","Road length","Vehicle weight"],a:1,e:"A speed limit indicates the maximum permitted speed."},
+{q:"What should you do when an emergency vehicle approaches with a siren?",o:["Block its path","Give way safely","Race with it","Stop in the junction"],a:1,e:"Allow emergency vehicles to pass by moving aside safely."},
+{q:"A hospital sign indicates:",o:["Hospital or medical facility nearby","No entry","School ahead","Bus stop"],a:0,e:"The sign indicates a nearby hospital or medical facility."},
+{q:"In heavy rain, you should:",o:["Increase speed","Reduce speed and increase following distance","Brake suddenly","Use a mobile phone"],a:1,e:"Wet roads reduce grip and increase stopping distance."},
+{q:"A one-way sign indicates:",o:["Traffic in one direction","Two-way traffic","No vehicles","Pedestrian-only road"],a:0,e:"One-way signs indicate the permitted direction of traffic."},
+{q:"What does a No Horn sign indicate?",o:["Horn is compulsory","Horn use is prohibited in the signed area","Only buses can use horns","Use horn continuously"],a:1,e:"No Horn indicates a silence zone or restriction on horn use."},
+{q:"A railway crossing warning means:",o:["Railway crossing ahead","Bridge ahead","Airport ahead","Road closed"],a:0,e:"It warns drivers that a railway crossing is ahead."},
+{q:"At a pedestrian crossing, drivers should:",o:["Speed up","Give way to pedestrians crossing","Park on the crossing","Ignore pedestrians"],a:1,e:"Drivers should slow down and give way to pedestrians."}
+];
+
+function todayKey(){let d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+window.goDashboard=()=>location.href="student-dashboard.html?mobile="+encodeURIComponent(mobile);
+
+async function init(){
+ const saved=localStorage.getItem("a1_student_mobile");
+ const params=new URLSearchParams(location.search);
+ const fromURL=params.get("mobile");
+ // Only use the saved verified number; URL number is accepted only if it matches it.
+ if(!saved || !/^[6-9]\d{9}$/.test(saved)){
+  showError("Please login from the main website first. Your registered mobile number was not found.");
+  return;
+ }
+ if(fromURL && fromURL!==saved){
+  showError("Student mobile verification mismatch. Please return to the main website.");
+  return;
+ }
+ mobile=saved;
+ try{
+  const snap=await getDoc(doc(db,"studentData",mobile));
+  if(!snap.exists())throw Error("Student record not found. Please contact the institute.");
+  student=snap.data();
+  if(student.notActive===true)throw Error("Your student account is inactive. Please contact the institute.");
+  document.getElementById("studentName").textContent=student.name||"Student";
+  document.getElementById("loading").classList.add("hidden");
+  document.getElementById("appContent").classList.remove("hidden");
+  renderSigns();
+  await loadHistory();
+ }catch(e){
+  localStorage.removeItem("a1_student_mobile");
+  showError(e.message||"Verification failed. Please login again.");
+ }
+}
+function showError(msg){
+ document.getElementById("loading").classList.add("hidden");
+ document.getElementById("error").classList.remove("hidden");
+ document.getElementById("errorText").textContent=msg;
+}
+function renderSigns(category="All"){
+ let list=signs.filter(s=>category==="All"||s[1]===category);
+ document.getElementById("signCount").textContent=list.length+" signs shown";
+ document.getElementById("signGrid").innerHTML=list.map(s=>`
+ <article class="sign">
+  <img src="${imageBase+s[3]}" alt="${esc(s[0])} traffic sign" loading="lazy" onerror="this.onerror=null;this.src='https://traffic.delhipolice.gov.in/en/learn-road-signages-and-markings-0'">
+  <h3>${esc(s[0])}</h3><p>${esc(s[2])}</p><span class="tag">${esc(s[1])}</span>
+ </article>`).join("");
+}
+window.filterSigns=(category,btn)=>{
+ document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));
+ btn.classList.add("active");renderSigns(category);
+};
+window.showTab=(tab,btn)=>{
+ document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+ btn.classList.add("active");
+ ["learn","quiz","history"].forEach(s=>document.getElementById(s+"Section").classList.toggle("hidden",s!==tab));
+ if(tab==="history")renderHistory();
+};
+window.startTest=()=>showTab("quiz",document.querySelectorAll(".tab")[1]);
+
+function dailyDone(){return history.some(x=>x.dateKey===todayKey()&&x.mode==="daily")}
+function updateDaily(){
+ document.getElementById("dailyMessage").textContent=dailyDone()?"Today's official test is completed. Use Practice Test for more learning.":"Your official daily test is available.";
+}
+window.beginQuiz=(isPractice=false)=>{
+ practice=isPractice;
+ if(!practice&&dailyDone()){alert("Today's official test is already completed. Try Practice Test.");return}
+ questions=[...bank].sort(()=>Math.random()-.5).slice(0,10);
+ answers={};current=0;seconds=600;submitting=false;
+ document.getElementById("quizStart").classList.add("hidden");
+ document.getElementById("resultBox").classList.add("hidden");
+ document.getElementById("quizBox").classList.remove("hidden");
+ renderQuestion();startTimer();
+};
+function startTimer(){
+ clearInterval(timer);
+ updateTimer();
+ timer=setInterval(()=>{seconds--;updateTimer();if(seconds<=0){clearInterval(timer);submit()}},1000);
+}
+function updateTimer(){document.getElementById("timer").textContent=String(Math.floor(seconds/60)).padStart(2,"0")+":"+String(seconds%60).padStart(2,"0")}
+function renderQuestion(){
+ const q=questions[current];
+ document.getElementById("qCount").textContent=`QUESTION ${current+1}/10`;
+ document.getElementById("bar").style.width=((current+1)*10)+"%";
+ document.getElementById("question").textContent=q.q;
+ document.getElementById("options").innerHTML=q.o.map((v,i)=>`<button class="option ${answers[current]===i?"selected":""}" onclick="select(${i})">${String.fromCharCode(65+i)}. ${esc(v)}</button>`).join("");
+ document.getElementById("prev").disabled=current===0;
+ document.getElementById("prev").style.opacity=current===0?".4":"1";
+ document.getElementById("next").textContent=current===9?"Submit Test":"Next →";
+}
+window.select=i=>{answers[current]=i;renderQuestion()};
+window.previous=()=>{if(current>0){current--;renderQuestion()}};
+window.next=()=>{
+ if(answers[current]===undefined){alert("Please select an answer.");return}
+ if(current<9){current++;renderQuestion()}
+ else if(Object.keys(answers).length===10)submit();
+ else alert("Please answer all questions.");
+};
+async function submit(){
+ if(submitting)return;submitting=true;clearInterval(timer);
+ let score=questions.reduce((s,q,i)=>s+(answers[i]===q.a?1:0),0);
+ const result={
+  studentMobile:mobile,studentName:student.name||"Student",
+  dateKey:todayKey(),mode:practice?"practice":"daily",
+  score,total:10,percentage:score*10,
+  answers:questions.map((q,i)=>({question:q.q,selected:answers[i]??-1,correct:q.a,options:q.o,explanation:q.e})),
+  durationSeconds:600-seconds,createdAt:serverTimestamp()
+ };
+ try{
+  if(!practice){
+   const existing=await getDocs(query(collection(db,"trafficTestResults"),where("studentMobile","==",mobile),where("dateKey","==",todayKey()),where("mode","==","daily"),limit(1)));
+   if(!existing.empty){alert("Today's test has already been submitted.");submitting=false;await loadHistory();return}
+  }
+  await addDoc(collection(db,"trafficTestResults"),result);
+  showResult(result);await loadHistory();
+ }catch(e){
+  console.error(e);alert("Result could not be saved. Check internet connection and Firestore rules.");submitting=false;
+ }
+}
+function showResult(r){
+ document.getElementById("quizBox").classList.add("hidden");
+ document.getElementById("quizStart").classList.add("hidden");
+ document.getElementById("resultBox").classList.remove("hidden");
+ document.getElementById("resultScore").textContent=r.score+"/10";
+ document.getElementById("resultTitle").textContent=r.score>=9?"Excellent!":r.score>=7?"Very Good!":r.score>=5?"Good Effort!":"Keep Practicing!";
+ document.getElementById("resultText").textContent=`You scored ${r.score} out of 10 (${r.percentage}%).`;
+ document.getElementById("reviewList").innerHTML=r.answers.map((a,i)=>`
+ <div class="review"><h4>${i+1}. ${esc(a.question)}</h4>
+ <p class="${a.selected===a.correct?"good":"bad"}">Your answer: ${a.selected<0?"Not answered":esc(a.options[a.selected])}</p>
+ <p class="good">Correct answer: ${esc(a.options[a.correct])}</p><p>${esc(a.explanation)}</p></div>`).join("");
+}
+window.toggleReview=()=>document.getElementById("reviewBox").classList.toggle("hidden");
+
+async function loadHistory(){
+ try{
+  const q=query(collection(db,"trafficTestResults"),where("studentMobile","==",mobile),orderBy("createdAt","desc"),limit(50));
+  const snap=await getDocs(q);
+  history=snap.docs.map(d=>({id:d.id,...d.data()}));
+ }catch(e){
+  console.warn("Trying history fallback",e);
+  try{
+   const snap=await getDocs(query(collection(db,"trafficTestResults"),where("studentMobile","==",mobile),limit(50)));
+   history=snap.docs.map(d=>({id:d.id,...d.data()}));
+   history.sort((a,b)=>(b.dateKey||"").localeCompare(a.dateKey||""));
+  }catch(err){console.error(err);history=[]}
+ }
+ updateStats();renderHistory();updateDaily();
+}
+function updateStats(){
+ let n=history.length,best=n?Math.max(...history.map(x=>Number(x.score)||0)):0;
+ let avg=n?Math.round(history.reduce((s,x)=>s+(Number(x.percentage)||0),0)/n):0;
+ document.getElementById("totalTests").textContent=n;
+ document.getElementById("bestScore").textContent=best+"/10";
+ document.getElementById("average").textContent=avg+"%";
+ document.getElementById("today").textContent=dailyDone()?"Done":"New";
+}
+function renderHistory(){
+ document.getElementById("historyList").innerHTML=history.length?history.map(r=>`
+ <div class="history"><div><b>${r.mode==="practice"?"Practice Test":"Daily Test"}</b><small>${esc(r.dateKey||"Date unavailable")}</small></div><span class="score">${Number(r.score)||0}/10</span></div>`).join(""):'<div class="empty">No test history yet. Complete your first test.</div>';
+}
+init();
+</script>
+</body>
+</html>
