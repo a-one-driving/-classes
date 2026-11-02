@@ -5,196 +5,133 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <meta name="theme-color" content="#080d18">
-<title>Traffic Academy | ABHINAASH A1 Driving Classes</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<title>Traffic Academy | ABHINAASH A1</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
 <style>
-:root{
- --bg:#080d18;--panel:#111a2b;--panel2:#172238;
- --gold:#f5b942;--text:#f4f7fc;--muted:#9aa8bd;
- --green:#22c58b;--red:#ff626d;--line:#26344c;
-}
+:root{--bg:#080d18;--panel:#111a2b;--panel2:#19263b;--gold:#f5b942;--text:#f4f7fc;--muted:#9aa8bd;--line:#293850;--green:#22c58b}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif}
-button,input,select{font:inherit}
-button{cursor:pointer}
-.wrap{max-width:1100px;margin:auto;padding:16px 15px 90px}
-header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0 20px}
-.brand{font-size:17px;font-weight:800}
-.brand span{color:var(--gold)}
-.small{font-size:12px;color:var(--muted)}
+button,input{font:inherit}
+.wrap{max-width:1100px;margin:auto;padding:15px 15px 80px}
+header{display:flex;justify-content:space-between;align-items:center;padding:12px 0 20px}
+.brand{font-size:17px;font-weight:800}.brand span{color:var(--gold)}
+.small,.muted{font-size:12px;color:var(--muted)}
 .back{color:var(--gold);text-decoration:none;font-size:13px;font-weight:700}
-.hero{background:linear-gradient(130deg,#182944,#263958);padding:24px;border-radius:22px;border:1px solid #354765}
-.hero h1{font-size:26px;margin:0 0 9px}
-.hero p{color:#c1ccdc;font-size:13px;line-height:1.6;margin:0}
-.hero-tag{display:inline-block;background:#f5b94220;color:var(--gold);padding:7px 10px;border-radius:30px;font-size:11px;margin-bottom:13px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0 22px}
-.stat{background:var(--panel);border:1px solid var(--line);padding:14px;border-radius:15px}
-.stat strong{display:block;font-size:21px;color:var(--gold)}
-.stat span{font-size:11px;color:var(--muted)}
-.section{margin-top:24px}
-.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:13px}
+.hero{background:linear-gradient(130deg,#182944,#263958);padding:23px;border-radius:20px;border:1px solid #354765}
+.hero h1{font-size:27px;margin:0 0 9px}.hero p{font-size:13px;line-height:1.6;color:#c3ccda;margin:0}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:15px 0 24px}
+.stat,.panel{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:14px}
+.stat strong{display:block;color:var(--gold);font-size:21px}.stat span{font-size:10px;color:var(--muted)}
+.section{margin-top:25px}.head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:13px}
 h2{font-size:18px;margin:0}
-.muted{color:var(--muted);font-size:12px}
 .tabs{display:flex;gap:8px;overflow:auto;padding-bottom:8px}
 .tab{border:1px solid var(--line);background:var(--panel);color:var(--muted);padding:10px 14px;border-radius:30px;white-space:nowrap;font-size:12px}
-.tab.active{background:var(--gold);color:#171717;border-color:var(--gold);font-weight:800}
-.searchbar{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px;color:white;outline:none;margin:8px 0 12px}
-.searchbar:focus{border-color:var(--gold)}
-.sign-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
-.sign-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:12px;min-width:0}
-.sign-art{height:112px;background:#f4f6fa;border-radius:11px;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
-.sign-art svg{width:100px;height:100px}
-.sign-card strong{font-size:12px;display:block;line-height:1.4}
-.sign-card p{font-size:10px;color:var(--muted);line-height:1.5;margin:6px 0 0}
-.pill{font-size:9px;padding:5px 7px;border-radius:20px;background:#24344e;color:#c7d6ed;display:inline-block;margin-top:8px}
+.tab.active{background:var(--gold);color:#111;font-weight:800}
+.search{width:100%;padding:13px;border-radius:12px;background:var(--panel);border:1px solid var(--line);color:white;margin:8px 0 13px;outline:none}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:11px;min-width:0}
+.imagebox{height:120px;background:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:8px;overflow:hidden}
+.imagebox img{width:100%;height:100%;object-fit:contain}
+.img-error{font-size:11px;color:#555;text-align:center}
+.card strong{font-size:12px;display:block;margin-top:10px;line-height:1.45}
+.card p{font-size:10px;color:var(--muted);line-height:1.5;margin:5px 0}
+.tag{display:inline-block;font-size:9px;background:#263650;color:#d5e2f5;border-radius:20px;padding:5px 8px;margin-top:5px}
 .pagination{display:flex;justify-content:center;align-items:center;gap:6px;flex-wrap:wrap;margin:18px 0}
-.page-btn{border:1px solid var(--line);background:var(--panel);color:white;border-radius:9px;padding:9px 12px;font-size:12px}
-.page-btn.active{background:var(--gold);color:#111;font-weight:800}
-.page-btn:disabled{opacity:.35;cursor:not-allowed}
-.panel{background:var(--panel);border:1px solid var(--line);padding:17px;border-radius:17px}
-.action-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
-.action{background:var(--panel2);border:1px solid var(--line);padding:15px;border-radius:14px;color:white;text-align:left}
-.action strong{display:block;font-size:13px;margin-bottom:5px}
-.action span{font-size:11px;color:var(--muted)}
-.primary{background:var(--gold);border:0;color:#161616;font-weight:800;padding:13px 17px;border-radius:11px}
-.secondary{background:var(--panel2);border:1px solid var(--line);color:white;padding:12px 15px;border-radius:11px}
-.quiz-option{width:100%;text-align:left;padding:14px;background:var(--panel2);border:1px solid var(--line);border-radius:12px;color:white;margin:6px 0;font-size:13px}
-.quiz-option.selected{border-color:var(--gold)}
-.quiz-option.correct{border-color:var(--green);background:#123629}
-.quiz-option.wrong{border-color:var(--red);background:#3b2029}
-.quiz-top{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin-bottom:12px}
-.progress{height:7px;background:#27344a;border-radius:20px;overflow:hidden;margin-bottom:17px}
-.progress div{height:100%;background:var(--gold);width:0;transition:.2s}
+.pg{border:1px solid var(--line);background:var(--panel);color:white;border-radius:8px;padding:9px 12px;font-size:12px}
+.pg.active{background:var(--gold);color:#111;font-weight:800}.pg:disabled{opacity:.35}
+.actiongrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:13px}
+.action{background:var(--panel2);border:1px solid var(--line);border-radius:13px;padding:15px;color:white;text-align:left}
+.action b{display:block;font-size:13px;margin-bottom:5px}.action span{font-size:11px;color:var(--muted)}
+.primary{background:var(--gold);color:#111;border:0;padding:13px 16px;border-radius:10px;font-weight:800}
+.secondary{background:var(--panel2);border:1px solid var(--line);color:white;padding:10px 14px;border-radius:10px}
 .hidden{display:none!important}
-.notice{padding:13px;background:#30291b;border:1px solid #69552a;border-radius:12px;color:#f7d58b;font-size:12px;line-height:1.5}
-.result{text-align:center;padding:25px 10px}
-.result-score{font-size:48px;font-weight:800;color:var(--gold)}
-.history-row{padding:12px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:10px;font-size:12px}
-footer{text-align:center;color:var(--muted);font-size:10px;padding:25px 0}
-@media(min-width:700px){
- .sign-grid{grid-template-columns:repeat(4,1fr)}
- .hero h1{font-size:34px}
-}
-@media(max-width:380px){
- .sign-grid{grid-template-columns:repeat(2,1fr)}
- .stats{gap:6px}.stat{padding:10px}
-}
+.quizopt{display:block;width:100%;text-align:left;padding:13px;margin:7px 0;border:1px solid var(--line);background:var(--panel2);border-radius:11px;color:white;font-size:13px}
+.quizopt.selected{border-color:var(--gold)}
+.progress{height:6px;background:#263650;border-radius:20px;margin:14px 0;overflow:hidden}
+.progress div{height:100%;background:var(--gold);width:0}
+.row{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid var(--line);font-size:12px}
+.result{text-align:center;padding:20px}.score{font-size:48px;font-weight:800;color:var(--gold)}
+footer{text-align:center;color:var(--muted);font-size:10px;padding:25px}
+@media(min-width:700px){.grid{grid-template-columns:repeat(4,1fr)}.hero h1{font-size:34px}}
+@media(max-width:380px){.grid{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
-
 <body>
 <div class="wrap">
-
 <header>
- <div>
-  <div class="brand">ABHINAASH <span>A1</span></div>
-  <div class="small">DRIVING CLASSES · BARIPADA</div>
- </div>
+ <div><div class="brand">ABHINAASH <span>A1</span></div><div class="small">DRIVING CLASSES · BARIPADA</div></div>
  <a class="back" href="student-dashboard.html">← Dashboard</a>
 </header>
 
-<div id="loading" class="panel">Verifying your student account...</div>
+<div id="loading" class="panel">Verifying student account...</div>
 
 <div id="app" class="hidden">
+ <section class="hero">
+  <div style="color:#f5b942;font-size:11px;margin-bottom:10px">🚦 STUDENT LEARNING ZONE</div>
+  <h1>Traffic Academy</h1>
+  <p>Learn Indian road signs with real reference images. Understand their meanings and practise traffic knowledge tests.</p>
+  <p style="margin-top:12px">Welcome, <b id="studentName">Student</b></p>
+ </section>
 
-<section class="hero">
- <div class="hero-tag">🚦 STUDENT LEARNING ZONE</div>
- <h1>Traffic Academy</h1>
- <p>Learn Indian road signs, understand road safety rules and practise for your driving knowledge test.</p>
- <p style="margin-top:12px">Welcome, <b id="studentName">Student</b></p>
-</section>
-
-<div class="stats">
- <div class="stat"><strong id="signCount">0</strong><span>Road Signs</span></div>
- <div class="stat"><strong>10</strong><span>Daily Test Questions</span></div>
- <div class="stat"><strong id="bestScore">—</strong><span>Best Score</span></div>
-</div>
-
-<section class="section">
- <div class="section-head">
-  <h2>📚 Learn Road Signs</h2>
-  <span class="muted" id="showingCount"></span>
+ <div class="stats">
+  <div class="stat"><strong id="totalSigns">0</strong><span>Real Sign Images</span></div>
+  <div class="stat"><strong>10</strong><span>Daily Questions</span></div>
+  <div class="stat"><strong id="bestScore">—</strong><span>Best Score</span></div>
  </div>
 
- <div class="tabs" id="categoryTabs">
-  <button class="tab active" data-cat="All">All Signs</button>
-  <button class="tab" data-cat="Mandatory">Mandatory</button>
-  <button class="tab" data-cat="Warning">Warning</button>
-  <button class="tab" data-cat="Informatory">Informatory</button>
- </div>
-
- <input id="signSearch" class="searchbar" placeholder="🔍 Search sign name..." autocomplete="off">
-
- <div id="signGrid" class="sign-grid"></div>
- <div class="pagination" id="pagination"></div>
-</section>
-
-<section class="section">
- <h2>📝 Traffic Knowledge Test</h2>
- <div class="panel" style="margin-top:13px">
-  <p class="muted">Test your knowledge of Indian traffic signs. Daily test contains 10 questions. Practice mode can be repeated.</p>
-  <div class="action-grid">
-   <button class="action" onclick="startQuiz('daily')">
-    <strong>🎯 Daily Test</strong>
-    <span>10 questions · Once per day</span>
-   </button>
-   <button class="action" onclick="startQuiz('practice')">
-    <strong>📖 Practice Test</strong>
-    <span>10 random questions · Repeat anytime</span>
-   </button>
+ <section class="section">
+  <div class="head"><h2>📚 Indian Road Signs</h2><span class="muted" id="countLabel"></span></div>
+  <div class="tabs" id="tabs">
+   <button class="tab active" data-cat="All">All Signs</button>
+   <button class="tab" data-cat="Mandatory">Mandatory</button>
+   <button class="tab" data-cat="Warning">Warning</button>
+   <button class="tab" data-cat="Informatory">Informatory</button>
   </div>
-  <p id="dailyStatus" class="muted" style="margin-top:13px"></p>
- </div>
-</section>
+  <input id="search" class="search" placeholder="Search road sign...">
+  <div class="grid" id="signGrid"></div>
+  <div class="pagination" id="pagination"></div>
+  <p class="muted">Images: Maharashtra Highway Traffic Police official road-sign catalogue.</p>
+  <a href="https://highwaypolice.maharashtra.gov.in/road-signs-page/" target="_blank" rel="noopener" style="color:#f5b942;font-size:12px">Open official source catalogue ↗</a>
+ </section>
 
-<section id="quizSection" class="section hidden">
- <div class="section-head">
-  <h2 id="quizTitle">Traffic Test</h2>
-  <button class="secondary" onclick="closeQuiz()">Close</button>
- </div>
- <div class="panel">
-  <div id="quizArea">
-   <div class="quiz-top">
-    <span id="questionCount">Question 1/10</span>
-    <span id="quizMode">Daily Test</span>
+ <section class="section">
+  <h2>📝 Traffic Knowledge Test</h2>
+  <div class="panel" style="margin-top:13px">
+   <p class="muted">Daily test: 10 questions, once per day. Practice test: repeat anytime.</p>
+   <div class="actiongrid">
+    <button class="action" onclick="startQuiz('daily')"><b>🎯 Daily Test</b><span>10 questions · Once per day</span></button>
+    <button class="action" onclick="startQuiz('practice')"><b>📖 Practice Test</b><span>10 random questions</span></button>
    </div>
-   <div class="progress"><div id="quizProgress"></div></div>
-   <div id="questionText" style="font-size:16px;font-weight:700;line-height:1.5"></div>
-   <div id="options" style="margin-top:15px"></div>
-   <button id="nextBtn" class="primary" style="width:100%;margin-top:12px" onclick="nextQuestion()" disabled>Next Question →</button>
+   <p class="muted" id="dailyStatus" style="margin-top:13px"></p>
   </div>
-  <div id="resultArea" class="hidden"></div>
- </div>
-</section>
+ </section>
 
-<section class="section">
- <div class="section-head">
-  <h2>🏆 My Test History</h2>
-  <span class="muted">Your results</span>
- </div>
- <div class="panel" id="historyList">
-  <p class="muted">Loading test history...</p>
- </div>
-</section>
+ <section id="quizSection" class="section hidden">
+  <div class="head"><h2 id="quizTitle">Test</h2><button class="secondary" onclick="closeQuiz()">Close</button></div>
+  <div class="panel">
+   <div id="quizArea">
+    <div class="row"><span id="questionNo">Question 1/10</span><span id="modeLabel">Daily Test</span></div>
+    <div class="progress"><div id="bar"></div></div>
+    <div id="question" style="font-weight:700;font-size:15px;line-height:1.5"></div>
+    <div id="options"></div>
+    <button id="next" class="primary" style="width:100%;margin-top:12px" disabled onclick="nextQuestion()">Next →</button>
+   </div>
+   <div id="result" class="hidden"></div>
+  </div>
+ </section>
 
-<div class="notice" style="margin-top:20px">
- ⚠️ This academy is a learning aid. Always follow actual road signs, traffic police instructions and applicable traffic laws while driving.
+ <section class="section">
+  <div class="head"><h2>🏆 My Test History</h2></div>
+  <div class="panel" id="history"><p class="muted">Loading...</p></div>
+ </section>
+ <div class="panel" style="margin-top:20px;color:#f3d18a;font-size:11px;line-height:1.6">Note: This is a learning reference. Always follow actual road signs, traffic police instructions and applicable Indian traffic laws.</div>
 </div>
-
-</div>
-
-<footer>© ABHINAASH A1 Driving Classes · Baripada, Odisha</footer>
+<footer>© ABHINAASH A1 Driving Classes · Baripada</footer>
 </div>
 
 <script type="module">
-import {initializeApp} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-import {
- getFirestore,doc,getDoc,setDoc,collection,query,where,
- getDocs,orderBy,limit,serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+import{initializeApp}from"https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+import{getFirestore,doc,getDoc,setDoc,collection,getDocs,query,where,serverTimestamp}from"https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
 const firebaseConfig={
  apiKey:"AIzaSyC3gWi8p85z-wkoJeWb3N3jYoQpcIar8Sww",
@@ -204,346 +141,217 @@ const firebaseConfig={
  messagingSenderId:"641148830173",
  appId:"1:641148830173:web:b7a500e5e7e2463da0f634"
 };
-
-const appFirebase=initializeApp(firebaseConfig);
-const db=getFirestore(appFirebase);
-
+const db=getFirestore(initializeApp(firebaseConfig));
 const $=id=>document.getElementById(id);
-let mobile="",student={},category="All",page=1;
-const PAGE_SIZE=12;
-let quiz=[],current=0,selected=null,answers=[],quizMode="practice";
-let startedAt=0;
+const BASE="https://cdnbbsr.s3waas.gov.in/s35dec707028b05bcbd3a1db5640f842c5/uploads/";
+const img=(folder,file)=>BASE+folder+"/"+file;
 
+const M="2025/04/",W="2025/06/";
 const signs=[
-// MANDATORY
-["Stop","Mandatory","Stop completely before proceeding.","STOP","octagon"],
-["Give Way","Mandatory","Give priority to traffic on the main road.","GIVE WAY","giveway"],
-["No Entry","Mandatory","Vehicles are not allowed to enter.","—","noentry"],
-["One Way","Mandatory","Traffic must move only in the indicated direction.","↑","blue"],
-["No Parking","Mandatory","Parking is prohibited here.","P","nopark"],
-["No Stopping","Mandatory","Stopping or standing is prohibited.","S","nostop"],
-["U-Turn Prohibited","Mandatory","Taking a U-turn is not allowed.","U","prohibit"],
-["Right Turn Prohibited","Mandatory","Turning right is prohibited.","↱","prohibit"],
-["Left Turn Prohibited","Mandatory","Turning left is prohibited.","↰","prohibit"],
-["Overtaking Prohibited","Mandatory","Do not overtake other vehicles.","🚗","prohibit"],
-["Horn Prohibited","Mandatory","Do not blow the horn.","HORN","prohibit"],
-["Speed Limit 30","Mandatory","Maximum permitted speed is 30 km/h.","30","limit"],
-["Speed Limit 40","Mandatory","Maximum permitted speed is 40 km/h.","40","limit"],
-["Speed Limit 50","Mandatory","Maximum permitted speed is 50 km/h.","50","limit"],
-["Speed Limit 60","Mandatory","Maximum permitted speed is 60 km/h.","60","limit"],
-["Speed Limit 80","Mandatory","Maximum permitted speed is 80 km/h.","80","limit"],
-["All Vehicles Prohibited","Mandatory","Entry is prohibited for all vehicles.","🚗","prohibit"],
-["Truck Prohibited","Mandatory","Entry is prohibited for trucks.","🚚","prohibit"],
-["Cycle Prohibited","Mandatory","Cycles are not allowed.","🚲","prohibit"],
-["Pedestrians Prohibited","Mandatory","Pedestrian movement is prohibited.","🚶","prohibit"],
-["Two Wheeler Prohibited","Mandatory","Two-wheelers are not allowed.","🏍","prohibit"],
-["Height Limit","Mandatory","Vehicles exceeding the displayed height are prohibited.","4.5m","limit"],
-["Width Limit","Mandatory","Vehicles exceeding the displayed width are prohibited.","2.5m","limit"],
-["Load Limit","Mandatory","Vehicles exceeding the displayed load are prohibited.","10T","limit"],
-["Length Limit","Mandatory","Vehicles exceeding the displayed length are prohibited.","10m","limit"],
-["Compulsory Ahead","Mandatory","Proceed straight ahead only.","↑","blue"],
-["Compulsory Turn Left","Mandatory","Turn left as indicated.","←","blue"],
-["Compulsory Turn Right","Mandatory","Turn right as indicated.","→","blue"],
-["Keep Left","Mandatory","Keep to the left side of the road.","↙","blue"],
-["Compulsory Cycle Track","Mandatory","Cycles must use the designated cycle track.","🚲","blue"],
-["Restriction Ends","Mandatory","The indicated restriction has ended.","END","blue"],
+["No Entry","Mandatory",img(M,"202504171512611236.png")],
+["Vehicles Prohibited One Direction","Mandatory",img(M,"202504171975753615.png")],
+["Vehicles Prohibited One Direction","Mandatory",img(M,"202504172085198522.png")],
+["Pedestrians Prohibited","Mandatory",img(M,"202504171151310533.png")],
+["No Parking","Mandatory",img(M,"202504171347970427.png")],
+["Speed Limit 50","Mandatory",img(M,"202504172053467690.png")],
+["U-Turn Prohibited","Mandatory",img(M,"20250417681388142.png")],
+["Right Turn Prohibited","Mandatory",img(M,"20250417269871263.png")],
+["Left Turn Prohibited","Mandatory",img(M,"202504171490543271.png")],
+["All Vehicles Prohibited","Mandatory",img(W,"202506092112340000.png")],
+["Trucks Prohibited","Mandatory",img(W,"20250609901552799.png")],
+["Cycles Prohibited","Mandatory",img(W,"202506091673636368.png")],
+["Horns Prohibited","Mandatory",img(W,"202506091335781708.png")],
+["Bullock Carts Prohibited","Mandatory",img(W,"202506091713505126.png")],
+["Tongas Prohibited","Mandatory",img(W,"202506091404335154.png")],
+["Hand Carts Prohibited","Mandatory",img(W,"20250609604846907.png")],
+["No Parking and No Stopping","Mandatory",img(W,"20250609845002072.png")],
+["Overtaking Prohibited","Mandatory",img(W,"20250609789548728.png")],
+["Width Limit","Mandatory",img(W,"20250609429398567.png")],
+["Height Limit","Mandatory",img(W,"202506091183876800.png")],
+["Length Limit","Mandatory",img(W,"202506091582595644.png")],
+["Load Limit","Mandatory",img(W,"20250609568912016.png")],
+["Axle Load Limit","Mandatory",img(W,"2025060975903640.png")],
+["Compulsory Bus Stop","Mandatory",img(W,"202506092009786630.png")],
+["Compulsory Cycle Track","Mandatory",img(W,"202506091196506236.png")],
+["Compulsory Sound Horn","Mandatory",img(W,"20250609356311375.png")],
+["Compulsory Keep Left","Mandatory",img(W,"202506091747339301.png")],
+["Advance Direction","Informatory",img(W,"20250610749410162.png")],
+["Destination Sign","Informatory",img(W,"202506101446945838.png")],
+["Direction Sign","Informatory",img(W,"20250610295406710.png")],
+["Re-Assurance Sign","Informatory",img(W,"20250610252608669.png")],
+["Telephone Booth","Informatory",img(W,"20250610858557977.png")],
+["Medical Facility","Informatory",img(W,"20250610750601828.png")],
+["Eating Place","Informatory",img(W,"20250610940276691.png")],
+["Light Refreshment","Informatory",img(W,"202506101091050022.png")],
+["Resting Place","Informatory",img(W,"202506101114340470.png")],
+["No Through Road","Informatory",img(W,"20250610850799420.png")],
+["Park In This Direction","Informatory",img(W,"20250610650576937.png")],
+["Parking Both Sides","Informatory",img(W,"20250610413251138.png")],
+["Scooter & Motorcycle Stand","Informatory",img(W,"20250610394039017.png")],
+["Cycle Stand","Informatory",img(W,"202506101940424193.png")],
+["Taxi Stand","Informatory",img(W,"202506101073949106.png")],
+["Auto Rickshaw Stand","Informatory",img(W,"2025061042299348.png")],
+["Cycle Rickshaw Stand","Informatory",img(W,"202506101250129408.png")],
+["Flood Gauge","Informatory",img(W,"20250610673659966.png")],
+["Right Hand Curve","Warning",img(W,"20250610479245585.png")],
+["Left Hand Curve","Warning",img(W,"20250610711346741.png")],
+["Right Hair Pin Bend","Warning",img(W,"20250610714070869.png")],
+["Left Hair Pin Bend","Warning",img(W,"20250610261701563.png")],
+["Right Reverse Bend","Warning",img(W,"202506101114181112.png")],
+["Steep Ascent","Warning",img(W,"202506101959178946.png")],
+["Steep Descent","Warning",img(W,"202506101333083699.png")],
+["Narrow Road Ahead","Warning",img(W,"202506101299558342.png")],
+["Road Wideness Ahead","Warning",img(W,"20250610611992463.png")],
+["Narrow Bridge","Warning",img(W,"20250610294378077.png")],
+["Slippery Road","Warning",img(W,"202506101356168144.png")],
+["Loose Gravel","Warning",img(W,"202506101789313274.png")],
+["Cycle Crossing","Warning",img(W,"20250610785085104.png")],
+["Pedestrian Crossing","Warning",img(W,"202506101038660115.png")],
+["School Ahead","Warning",img(W,"20250610907100235.png")],
+["Men at Work","Warning",img(W,"20250610128141306.png")],
+["Cattle","Warning",img(W,"20250610186308959.png")],
+["Falling Rocks","Warning",img(W,"202506102025635575.png")],
+["Ferry","Warning",img(W,"202506101428315684.png")],
+["Cross Road","Warning",img(W,"202506101746247905.png")],
+["Gap in Median","Warning",img(W,"202506101740914579.png")],
+["Side Road Right","Warning",img(W,"20250610962369005.png")],
+["Side Road Left","Warning",img(W,"20250610394908769.png")],
+["T-Intersection","Warning",img(W,"202506101670879939.png")],
+["Roundabout","Warning",img(W,"202506101674423054.png")],
+["Dangerous Dip","Warning",img(W,"20250610564845628.png")],
+["Hump or Rough Road","Warning",img(W,"20250610610357936.png")],
+["Barrier Ahead","Warning",img(W,"20250610174215881.png")]
+].map((s,i)=>({id:i,name:s[0],cat:s[1],url:s[2]}));
 
-// WARNING
-["Right Hand Curve","Warning","A right-hand curve is ahead.","↷","warning"],
-["Left Hand Curve","Warning","A left-hand curve is ahead.","↶","warning"],
-["Right Hairpin Bend","Warning","A sharp right turn is ahead.","↱","warning"],
-["Left Hairpin Bend","Warning","A sharp left turn is ahead.","↰","warning"],
-["Right Reverse Bend","Warning","A series of bends starts to the right.","〽","warning"],
-["Left Reverse Bend","Warning","A series of bends starts to the left.","〽","warning"],
-["Steep Ascent","Warning","A steep uphill slope is ahead.","↗","warning"],
-["Steep Descent","Warning","A steep downhill slope is ahead.","↘","warning"],
-["Narrow Road Ahead","Warning","The road becomes narrower ahead.","⇢","warning"],
-["Narrow Bridge","Warning","A narrow bridge is ahead.","▱","warning"],
-["Road Widens Ahead","Warning","The road becomes wider ahead.","↔","warning"],
-["Cross Road","Warning","A crossroad intersection is ahead.","✚","warning"],
-["T-Intersection","Warning","A T-shaped junction is ahead.","⊤","warning"],
-["Y-Intersection","Warning","A Y-shaped junction is ahead.","Y","warning"],
-["Staggered Intersection","Warning","A staggered junction is ahead.","✣","warning"],
-["Side Road Left","Warning","A side road joins from the left.","⊢","warning"],
-["Side Road Right","Warning","A side road joins from the right.","⊣","warning"],
-["Roundabout","Warning","A roundabout is ahead.","⟳","warning"],
-["Pedestrian Crossing","Warning","Pedestrians may cross ahead.","🚶","warning"],
-["School Ahead","Warning","A school zone or children crossing is ahead.","🏫","warning"],
-["Men at Work","Warning","Road construction or maintenance is ahead.","👷","warning"],
-["Slippery Road","Warning","The road surface may be slippery.","〰","warning"],
-["Falling Rocks","Warning","Risk of falling rocks ahead.","◆","warning"],
-["Cattle","Warning","Cattle may cross the road.","🐄","warning"],
-["Cycle Crossing","Warning","Cyclists may cross ahead.","🚲","warning"],
-["Hump or Speed Breaker","Warning","A road hump or speed breaker is ahead.","⌒","warning"],
-["Dangerous Dip","Warning","A dip in the road is ahead.","⌣","warning"],
-["Unguarded Railway Crossing","Warning","Railway crossing without a gate is ahead.","╳","warning"],
-["Guarded Railway Crossing","Warning","A guarded railway crossing is ahead.","🚧","warning"],
-["Barrier Ahead","Warning","A barrier or gate is ahead.","🚧","warning"],
-["Ferry","Warning","A ferry crossing is ahead.","⛴","warning"],
-["Loose Gravel","Warning","Loose gravel may affect vehicle control.","◌","warning"],
-["Gap in Median","Warning","A gap in the road median is ahead.","↕","warning"],
-["Dual Carriageway Ends","Warning","The divided carriageway ends ahead.","⇉","warning"],
-["Tunnel Ahead","Warning","A tunnel is ahead.","▰","warning"],
+let mobile="",student={},category="All",page=1;
+const PAGE=12;
+let quiz=[],current=0,selected=null,answers=[],mode="practice",started=0;
 
-// INFORMATORY
-["Hospital","Informatory","A hospital or medical facility is nearby.","H","info"],
-["Petrol Pump","Informatory","A fuel station is nearby.","⛽","info"],
-["Parking","Informatory","Parking facility is available.","P","info"],
-["First Aid Post","Informatory","First aid assistance is available.","✚","info"],
-["Eating Place","Informatory","A restaurant or eating facility is nearby.","🍴","info"],
-["Refreshment","Informatory","Light refreshments are available.","☕","info"],
-["Public Telephone","Informatory","A public telephone facility is available.","☎","info"],
-["Resting Place","Informatory","A resting facility is available.","休","info"],
-["Taxi Stand","Informatory","A taxi stand is available.","TAXI","info"],
-["Auto Rickshaw Stand","Informatory","An auto-rickshaw stand is available.","AUTO","info"],
-["Bus Stop","Informatory","A bus stop is available.","BUS","info"],
-["Railway Station","Informatory","A railway station is nearby.","🚆","info"],
-["Airport","Informatory","An airport is nearby.","✈","info"],
-["Hotel","Informatory","A hotel or accommodation is available.","HOTEL","info"],
-["Petrol and Service","Informatory","Vehicle service facilities are available.","🔧","info"],
-["Destination Sign","Informatory","Shows direction or distance to a destination.","→","info"],
-["No Through Road","Informatory","The road does not continue through.","T","info"],
-["Park This Side","Informatory","Parking is available on this side.","P ←","info"],
-["Park Both Sides","Informatory","Parking is available on both sides.","P ↔","info"],
-["Cycle Stand","Informatory","A cycle parking stand is available.","🚲","info"]
-].map((s,i)=>({id:i+1,name:s[0],cat:s[1],desc:s[2],label:s[3],type:s[4]}));
+$("totalSigns").textContent=signs.length;
 
-$("signCount").textContent=signs.length;
-
-function signSvg(s){
- const t=s.type;
- let shape="",content="";
- if(t==="octagon"){
-  shape='<polygon points="32,5 68,5 95,32 95,68 68,95 32,95 5,68 5,32" fill="#e51f2a" stroke="white" stroke-width="3"/>';
-  content=`<text x="50" y="56" text-anchor="middle" font-size="17" font-weight="900" fill="white">STOP</text>`;
- }else if(t==="giveway"){
-  shape='<path d="M50 7 L96 88 H4 Z" fill="white" stroke="#e51f2a" stroke-width="9"/>';
-  content='<text x="50" y="65" text-anchor="middle" font-size="11" font-weight="900" fill="#111">GIVE WAY</text>';
- }else if(t==="warning"){
-  shape='<path d="M50 5 L96 90 H4 Z" fill="#ffdc36" stroke="#d52222" stroke-width="7" stroke-linejoin="round"/>';
-  content=`<text x="50" y="61" text-anchor="middle" font-size="${s.label.length>5?19:29}" font-weight="900" fill="#111">${s.label}</text>`;
- }else if(t==="info"||t==="blue"){
-  shape='<rect x="8" y="8" width="84" height="84" rx="3" fill="#0756a7" stroke="white" stroke-width="2"/>';
-  content=`<text x="50" y="59" text-anchor="middle" font-size="${s.label.length>5?15:31}" font-weight="900" fill="white">${s.label}</text>`;
- }else{
-  shape='<circle cx="50" cy="50" r="43" fill="white" stroke="#df202b" stroke-width="8"/>';
-  if(t==="noentry") content='<rect x="16" y="43" width="68" height="14" rx="2" fill="#df202b"/>';
-  else if(t==="prohibit") content=`<text x="50" y="59" text-anchor="middle" font-size="31" font-weight="900" fill="#111">${s.label}</text><path d="M20 20 L80 80" stroke="#df202b" stroke-width="7"/>`;
-  else if(t==="nopark") content='<text x="50" y="62" text-anchor="middle" font-size="48" font-weight="900" fill="#164a9a">P</text><path d="M20 20 L80 80" stroke="#df202b" stroke-width="7"/>';
-  else if(t==="nostop") content='<text x="50" y="61" text-anchor="middle" font-size="42" font-weight="900" fill="#df202b">S</text><path d="M20 20 L80 80 M80 20 L20 80" stroke="#df202b" stroke-width="6"/>';
-  else content=`<text x="50" y="59" text-anchor="middle" font-size="${s.label.length>5?17:30}" font-weight="900" fill="#111">${s.label}</text>`;
- }
- return `<svg viewBox="0 0 100 100" role="img" aria-label="${s.name}">${shape}${content}</svg>`;
+function filtered(){
+ const term=$("search").value.trim().toLowerCase();
+ return signs.filter(s=>(category==="All"||s.cat===category)&&s.name.toLowerCase().includes(term));
 }
-
-function filteredSigns(){
- const q=$("signSearch").value.trim().toLowerCase();
- return signs.filter(s=>(category==="All"||s.cat===category)&&
- (s.name.toLowerCase().includes(q)||s.desc.toLowerCase().includes(q)));
-}
-
 function renderSigns(){
- const list=filteredSigns();
- const pages=Math.max(1,Math.ceil(list.length/PAGE_SIZE));
+ const list=filtered(),pages=Math.max(1,Math.ceil(list.length/PAGE));
  page=Math.min(page,pages);
- const start=(page-1)*PAGE_SIZE;
- $("showingCount").textContent=`${list.length} signs`;
- $("signGrid").innerHTML=list.slice(start,start+PAGE_SIZE).map(s=>`
-  <article class="sign-card">
-   <div class="sign-art">${signSvg(s)}</div>
-   <strong>${s.id}. ${s.name}</strong>
-   <p>${s.desc}</p>
-   <span class="pill">${s.cat}</span>
-  </article>`).join("")||'<p class="muted">No signs found.</p>';
-
- let html=`<button class="page-btn" ${page===1?"disabled":""} data-page="${page-1}">‹ Prev</button>`;
+ $("countLabel").textContent=list.length+" signs";
+ $("signGrid").innerHTML=list.slice((page-1)*PAGE,page*PAGE).map(s=>`
+ <article class="card">
+  <div class="imagebox">
+   <img src="${s.url}" alt="${s.name}" loading="lazy"
+    onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+   <div class="img-error" style="display:none">Image unavailable<br><small>Open official catalogue</small></div>
+  </div>
+  <strong>${s.name}</strong>
+  <span class="tag">${s.cat}</span>
+ </article>`).join("")||'<p class="muted">No signs found.</p>';
+ let h=`<button class="pg" data-p="${page-1}" ${page===1?"disabled":""}>‹ Prev</button>`;
  for(let i=1;i<=pages;i++){
-  if(pages>7&&i>2&&i<pages-1&&Math.abs(i-page)>1){
-   if(i===3||i===pages-2)html+='<span class="muted">…</span>';
-   continue;
-  }
-  html+=`<button class="page-btn ${i===page?"active":""}" data-page="${i}">${i}</button>`;
+  h+=`<button class="pg ${i===page?"active":""}" data-p="${i}">${i}</button>`;
  }
- html+=`<button class="page-btn" ${page===pages?"disabled":""} data-page="${page+1}">Next ›</button>`;
- $("pagination").innerHTML=html;
- $("pagination").querySelectorAll("[data-page]").forEach(b=>b.onclick=()=>{
-  page=Number(b.dataset.page);renderSigns();
-  $("signGrid").scrollIntoView({behavior:"smooth",block:"start"});
+ h+=`<button class="pg" data-p="${page+1}" ${page===pages?"disabled":""}>Next ›</button>`;
+ $("pagination").innerHTML=h;
+ $("pagination").querySelectorAll("[data-p]").forEach(b=>b.onclick=()=>{
+  page=Number(b.dataset.p);renderSigns();$("signGrid").scrollIntoView({behavior:"smooth"});
  });
 }
-
-$("categoryTabs").addEventListener("click",e=>{
+$("tabs").onclick=e=>{
  const b=e.target.closest("[data-cat]");if(!b)return;
  category=b.dataset.cat;page=1;
  document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x===b));
  renderSigns();
-});
-$("signSearch").addEventListener("input",()=>{page=1;renderSigns()});
-
-function dayKey(){
- const d=new Date();
- return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
-}
-
-function makeQuestions(){
- const pool=[...signs];
- const chosen=[];
- while(chosen.length<10&&pool.length){
-  const idx=Math.floor(Math.random()*pool.length);
-  chosen.push(pool.splice(idx,1)[0]);
- }
- return chosen.map(s=>{
-  const wrong=signs.filter(x=>x.id!==s.id).sort(()=>Math.random()-.5).slice(0,3);
-  const opts=[s,...wrong].sort(()=>Math.random()-.5);
-  return {sign:s,options:opts,answer:opts.findIndex(x=>x.id===s.id)};
- });
-}
-
-window.startQuiz=async mode=>{
- quizMode=mode;
- if(mode==="daily"){
-  const ref=doc(db,"trafficTestResults",`${mobile}_${dayKey()}`);
-  const snap=await getDoc(ref);
-  if(snap.exists()){
-   alert("Aaj ka Daily Test aap complete kar chuke hain. Kal phir try karein.");
-   return;
-  }
- }
- quiz=makeQuestions();current=0;selected=null;answers=[];
- startedAt=Date.now();
- $("quizSection").classList.remove("hidden");
- $("quizArea").classList.remove("hidden");
- $("resultArea").classList.add("hidden");
- $("quizTitle").textContent=mode==="daily"?"Daily Test":"Practice Test";
- $("quizMode").textContent=mode==="daily"?"Daily Test":"Practice";
- renderQuestion();
- $("quizSection").scrollIntoView({behavior:"smooth"});
 };
+$("search").oninput=()=>{page=1;renderSigns()};
 
-function renderQuestion(){
- const q=quiz[current];
- selected=null;
- $("questionCount").textContent=`Question ${current+1} / ${quiz.length}`;
- $("quizProgress").style.width=`${current/quiz.length*100}%`;
- $("questionText").innerHTML=`What does this road sign mean?<div class="sign-art" style="max-width:150px;margin:15px auto">${signSvg(q.sign)}</div>`;
- $("options").innerHTML=q.options.map((o,i)=>`
-  <button class="quiz-option" data-option="${i}">${String.fromCharCode(65+i)}. ${o.name}</button>
- `).join("");
- $("options").querySelectorAll("[data-option]").forEach(b=>b.onclick=()=>{
-  selected=Number(b.dataset.option);
-  $("options").querySelectorAll(".quiz-option").forEach(x=>x.classList.toggle("selected",x===b));
-  $("nextBtn").disabled=false;
- });
- $("nextBtn").textContent=current===quiz.length-1?"Submit Test":"Next Question →";
- $("nextBtn").disabled=true;
+function dateKey(){
+ const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
 }
-
+function makeQuiz(){
+ return [...signs].sort(()=>Math.random()-.5).slice(0,10).map(s=>{
+  const other=signs.filter(x=>x.id!==s.id).sort(()=>Math.random()-.5).slice(0,3);
+  const opts=[s,...other].sort(()=>Math.random()-.5);
+  return{sign:s,opts,answer:opts.findIndex(x=>x.id===s.id)};
+ });
+}
+window.startQuiz=async m=>{
+ mode=m;
+ if(m==="daily"){
+  const old=await getDoc(doc(db,"trafficTestResults",mobile+"_"+dateKey()));
+  if(old.exists()){alert("Aaj ka daily test already complete hai.");return;}
+ }
+ quiz=makeQuiz();current=0;answers=[];selected=null;started=Date.now();
+ $("quizSection").classList.remove("hidden");$("quizArea").classList.remove("hidden");$("result").classList.add("hidden");
+ $("quizTitle").textContent=m==="daily"?"Daily Test":"Practice Test";
+ $("modeLabel").textContent=m==="daily"?"Daily Test":"Practice";
+ showQuestion();$("quizSection").scrollIntoView({behavior:"smooth"});
+};
+function showQuestion(){
+ const q=quiz[current];selected=null;
+ $("questionNo").textContent=`Question ${current+1}/10`;
+ $("bar").style.width=(current/10*100)+"%";
+ $("question").innerHTML=`Identify this road sign:<div class="imagebox" style="max-width:170px;height:150px;margin:14px auto"><img src="${q.sign.url}" alt="${q.sign.name}"></div>`;
+ $("options").innerHTML=q.opts.map((o,i)=>`<button class="quizopt" data-i="${i}">${String.fromCharCode(65+i)}. ${o.name}</button>`).join("");
+ $("options").querySelectorAll("[data-i]").forEach(b=>b.onclick=()=>{
+  selected=Number(b.dataset.i);
+  $("options").querySelectorAll(".quizopt").forEach(x=>x.classList.toggle("selected",x===b));
+  $("next").disabled=false;
+ });
+ $("next").textContent=current===9?"Submit Test":"Next Question →";$("next").disabled=true;
+}
 window.nextQuestion=()=>{
  if(selected===null)return;
- answers.push({question:quiz[current].sign.name,chosen:quiz[current].options[selected].name,correct:quiz[current].sign.name,isCorrect:quiz[current].options[selected].id===quiz[current].sign.id});
- if(current<quiz.length-1){current++;renderQuestion()}
- else finishQuiz();
+ const q=quiz[current],chosen=q.opts[selected];
+ answers.push({question:q.sign.name,chosen:chosen.name,correct:q.sign.name,isCorrect:chosen.id===q.sign.id});
+ if(current<9){current++;showQuestion()}else finish();
 };
-
-async function finishQuiz(){
+async function finish(){
  const score=answers.filter(a=>a.isCorrect).length;
- const duration=Math.round((Date.now()-startedAt)/1000);
- const result={
-  studentMobile:mobile,studentName:student.name||"Student",
-  dateKey:dayKey(),mode:quizMode,score,total:quiz.length,
-  percentage:score*10,answers,durationSeconds:duration,
-  createdAt:serverTimestamp()
- };
- $("quizArea").classList.add("hidden");
- $("resultArea").classList.remove("hidden");
- $("resultArea").innerHTML=`
-  <div class="result">
-   <div class="muted">YOUR TEST RESULT</div>
-   <div class="result-score">${score}/10</div>
-   <h2>${score>=8?"Excellent! 🎉":score>=5?"Good effort!":"Keep practising!"}</h2>
-   <p class="muted">${score*10}% correct · ${duration} seconds</p>
-  </div>
-  <h3 style="font-size:14px">Answer Review</h3>
-  ${answers.map((a,i)=>`<div class="history-row" style="display:block">
-   <b>${i+1}. ${a.question}</b>
-   <div style="color:${a.isCorrect?"var(--green)":"var(--red)"};margin-top:5px">${a.isCorrect?"Correct":"Incorrect"} · Your answer: ${a.chosen}</div>
-   ${!a.isCorrect?`<div class="muted">Correct answer: ${a.correct}</div>`:""}
-  </div>`).join("")}
-  <button class="primary" style="width:100%;margin-top:15px" onclick="closeQuiz()">Done</button>
- `;
+ const resultData={studentMobile:mobile,studentName:student.name||"Student",dateKey:dateKey(),mode:mode,score,total:10,percentage:score*10,answers,durationSeconds:Math.round((Date.now()-started)/1000),createdAt:serverTimestamp()};
+ $("quizArea").classList.add("hidden");$("result").classList.remove("hidden");
+ $("result").innerHTML=`<div class="result"><div class="muted">YOUR RESULT</div><div class="score">${score}/10</div><h2>${score>=8?"Excellent!":score>=5?"Good effort!":"Keep practising!"}</h2><p class="muted">${score*10}% correct</p></div>
+ <h3 style="font-size:14px">Answer Review</h3>
+ ${answers.map((a,i)=>`<div class="row" style="display:block"><b>${i+1}. ${a.question}</b><div style="margin-top:5px;color:${a.isCorrect?"#22c58b":"#ff626d"}">${a.isCorrect?"Correct":"Incorrect"} · Your answer: ${a.chosen}</div>${!a.isCorrect?`<div class="muted">Correct: ${a.correct}</div>`:""}</div>`).join("")}
+ <button class="primary" style="width:100%;margin-top:15px" onclick="closeQuiz()">Done</button>`;
  try{
-  if(quizMode==="daily"){
-   await setDoc(doc(db,"trafficTestResults",`${mobile}_${dayKey()}`),result);
-  }else{
-   await setDoc(doc(collection(db,"trafficTestResults")),result);
-  }
-  await loadHistory();
-  updateDailyStatus();
- }catch(err){
-  console.error(err);
-  alert("Result display ho gaya, lekin Firebase save nahi hua. Firestore rules check karein.");
- }
+  const id=mode==="daily"?mobile+"_"+dateKey():undefined;
+  if(id)await setDoc(doc(db,"trafficTestResults",id),resultData);
+  else await setDoc(doc(collection(db,"trafficTestResults")),resultData);
+  await loadHistory();await dailyStatus();
+ }catch(e){console.error(e);alert("Result save nahi hua. Firestore rules check karein.");}
 }
-
-window.closeQuiz=()=>{
- $("quizSection").classList.add("hidden");
-};
+window.closeQuiz=()=>$("quizSection").classList.add("hidden");
 
 async function loadHistory(){
- const q=query(collection(db,"trafficTestResults"),where("studentMobile","==",mobile));
- const snap=await getDocs(q);
+ const snap=await getDocs(query(collection(db,"trafficTestResults"),where("studentMobile","==",mobile)));
  const records=snap.docs.map(d=>d.data()).sort((a,b)=>(b.dateKey||"").localeCompare(a.dateKey||""));
- const daily=records.filter(r=>r.mode==="daily");
- const best=records.length?Math.max(...records.map(r=>Number(r.score)||0)):0;
- $("bestScore").textContent=records.length?`${best}/10`:"—";
- $("historyList").innerHTML=records.length?
- records.slice(0,10).map(r=>`
-  <div class="history-row">
-   <div><b>${r.mode==="daily"?"Daily Test":"Practice Test"}</b><div class="muted">${r.dateKey||""}</div></div>
-   <strong style="color:${r.score>=8?"var(--green)":"var(--gold)"}">${r.score}/${r.total}</strong>
-  </div>`).join(""):'<p class="muted">No test completed yet. Start your first test!</p>';
+ $("bestScore").textContent=records.length?Math.max(...records.map(x=>x.score||0))+"/10":"—";
+ $("history").innerHTML=records.length?records.slice(0,15).map(r=>`<div class="row"><div><b>${r.mode==="daily"?"Daily Test":"Practice Test"}</b><div class="muted">${r.dateKey||""}</div></div><b style="color:#f5b942">${r.score}/10</b></div>`).join(""):'<p class="muted">No test history yet.</p>';
 }
-
-async function updateDailyStatus(){
- const snap=await getDoc(doc(db,"trafficTestResults",`${mobile}_${dayKey()}`));
- $("dailyStatus").textContent=snap.exists()?"✅ Today's daily test completed.":"You have not attempted today's test yet.";
+async function dailyStatus(){
+ const s=await getDoc(doc(db,"trafficTestResults",mobile+"_"+dateKey()));
+ $("dailyStatus").textContent=s.exists()?"✅ Today's daily test completed.":"Today's daily test is available.";
 }
-
-async function verifyStudent(){
+async function verify(){
  try{
   const saved=localStorage.getItem("a1_student_mobile")||"";
   const param=new URLSearchParams(location.search).get("mobile");
   if(!/^[0-9]{10}$/.test(saved)){
-   $("loading").innerHTML='Student login not found. Please <a style="color:#f5b942" href="index.html">login from the home page</a> first.';
-   return;
+   $("loading").innerHTML='Please login from <a style="color:#f5b942" href="index.html">Student Login</a> first.';return;
   }
-  if(param&&param!==saved){
-   $("loading").textContent="Student verification failed. Please return to your dashboard.";
-   return;
-  }
+  if(param&&param!==saved){$("loading").textContent="Student verification failed.";return;}
   mobile=saved;
   const snap=await getDoc(doc(db,"studentData",mobile));
-  if(!snap.exists()){
-   $("loading").textContent="Student record not found. Please contact your driving instructor.";
-   return;
-  }
+  if(!snap.exists()){$("loading").textContent="Student record not found.";return;}
   student=snap.data();
-  if(student.notActive===true){
-   $("loading").textContent="Your student account is inactive. Please contact your instructor.";
-   return;
-  }
+  if(student.notActive===true){$("loading").textContent="Your account is inactive. Contact your instructor.";return;}
   $("studentName").textContent=student.name||"Student";
-  $("loading").classList.add("hidden");
-  $("app").classList.remove("hidden");
-  renderSigns();
-  await Promise.all([loadHistory(),updateDailyStatus()]);
- }catch(e){
-  console.error(e);
-  $("loading").textContent="Unable to verify account. Please check your internet connection and try again.";
- }
+  $("loading").classList.add("hidden");$("app").classList.remove("hidden");
+  renderSigns();await Promise.all([loadHistory(),dailyStatus()]);
+ }catch(e){console.error(e);$("loading").textContent="Unable to verify. Check internet and Firestore access.";}
 }
-
-verifyStudent();
+verify();
 </script>
 </body>
 </html>
