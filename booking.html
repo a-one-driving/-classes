@@ -1,0 +1,994 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#080D18">
+<meta name="description" content="Book your driving lessons online with ABHINAASH A1 Driving, Baripada.">
+<title>Online Admission | ABHINAASH A1 Driving</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+:root{
+  --bg:#080D18;
+  --card:#111A29;
+  --card2:#172337;
+  --gold:#F2BD45;
+  --muted:#A8B1C2;
+  --white:#fff;
+  --border:rgba(255,255,255,.09);
+  --green:#22c55e;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--white);
+  font-family:Inter,Arial,sans-serif;
+}
+a{text-decoration:none;color:inherit}
+button,input,select,textarea{font-family:inherit}
+.container{width:min(1100px,92%);margin:auto}
+svg{width:21px;height:21px;flex-shrink:0}
+
+/* HEADER */
+header{
+  height:70px;
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(8,13,24,.97);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(15px);
+}
+.nav{
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-icon{
+  height:42px;width:42px;
+  border:2px solid var(--gold);
+  border-radius:13px;
+  display:grid;place-items:center;
+  color:var(--gold);font-size:19px;font-weight:800;
+}
+.logo-text strong{font-size:15px}
+.logo-text strong span{color:var(--gold)}
+.logo-text small{
+  display:block;color:var(--muted);
+  font-size:9px;letter-spacing:5px;
+}
+.nav-links{display:flex;align-items:center;gap:25px}
+.nav-links a{font-size:12px;color:#d5d9e2}
+.nav-links a:hover,.nav-links a.active{color:var(--gold)}
+.menu-btn{display:none;background:none;border:0;color:white}
+
+/* PAGE HERO */
+.page-hero{
+  padding:55px 0 45px;
+  background:linear-gradient(110deg,#18263b,#080d18);
+  border-bottom:1px solid var(--border);
+}
+.breadcrumb{
+  display:flex;align-items:center;gap:9px;
+  color:var(--muted);font-size:11px;margin-bottom:23px;
+}
+.breadcrumb svg{width:14px;height:14px}
+.eyebrow{
+  color:var(--gold);
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:3px;
+  margin-bottom:13px;
+}
+.page-hero h1{
+  font-size:clamp(32px,5vw,48px);
+  letter-spacing:-1.5px;
+}
+.page-hero h1 span{color:var(--gold)}
+.page-hero p{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.8;
+  max-width:550px;
+  margin-top:12px;
+}
+
+/* MAIN LAYOUT */
+.booking-section{padding:45px 0 75px}
+.booking-layout{
+  display:grid;
+  grid-template-columns:1fr 340px;
+  gap:25px;
+  align-items:start;
+}
+
+/* FORM */
+.form-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:28px;
+}
+.form-heading{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:27px;
+}
+.heading-icon{
+  width:45px;height:45px;
+  border-radius:13px;
+  background:rgba(242,189,69,.12);
+  color:var(--gold);
+  display:grid;place-items:center;
+}
+.form-heading h2{font-size:19px}
+.form-heading p{font-size:11px;color:var(--muted);margin-top:5px}
+
+.form-section{margin-bottom:27px}
+.form-section-title{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:18px;
+  color:var(--gold);
+}
+.form-section-title svg{width:18px;height:18px}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+.field{margin-bottom:16px}
+.field.full{grid-column:1/-1}
+.field label{
+  display:block;
+  font-size:11px;
+  font-weight:600;
+  color:#c6cedb;
+  margin-bottom:8px;
+}
+.field label span{color:#ff7777}
+.field input,.field select,.field textarea{
+  width:100%;
+  padding:14px;
+  background:#080D18;
+  border:1px solid var(--border);
+  color:white;
+  border-radius:10px;
+  outline:none;
+  font-size:12px;
+  transition:.2s;
+}
+.field textarea{resize:vertical;min-height:85px}
+.field input:focus,.field select:focus,.field textarea:focus{
+  border-color:var(--gold);
+}
+.field input::placeholder,.field textarea::placeholder{color:#657186}
+.field select option{background:#111A29}
+
+/* PACKAGE OPTIONS */
+.package-options{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+.package-option input{display:none}
+.package-option label{
+  display:block;
+  cursor:pointer;
+  background:#080D18;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:16px 10px;
+  text-align:center;
+  transition:.2s;
+}
+.package-option input:checked+label{
+  border:1.5px solid var(--gold);
+  background:rgba(242,189,69,.09);
+}
+.package-option h3{font-size:12px;margin-bottom:8px}
+.package-option p{font-size:10px;color:var(--muted)}
+.package-option strong{
+  display:block;
+  color:var(--gold);
+  font-size:19px;
+  margin-top:9px;
+}
+
+/* PAYMENT OPTIONS */
+.payment-options{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+.payment-option input{display:none}
+.payment-option label{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  padding:13px 7px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:#080D18;
+  cursor:pointer;
+  font-size:11px;
+}
+.payment-option label svg{width:17px;height:17px;color:var(--gold)}
+.payment-option input:checked+label{
+  border-color:var(--gold);
+  background:rgba(242,189,69,.09);
+}
+
+/* CHECKBOX */
+.terms{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.7;
+  margin:20px 0;
+}
+.terms input{accent-color:var(--gold);margin-top:3px}
+
+/* SUBMIT */
+.submit-btn{
+  width:100%;
+  padding:16px;
+  border:0;
+  border-radius:12px;
+  background:var(--gold);
+  color:#111;
+  font-size:13px;
+  font-weight:800;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  cursor:pointer;
+  transition:.2s;
+}
+.submit-btn:hover{background:#ffd16b;transform:translateY(-2px)}
+.submit-btn svg{width:18px;height:18px}
+
+/* SIDE PANEL */
+.side-panel{
+  display:flex;
+  flex-direction:column;
+  gap:17px;
+  position:sticky;
+  top:90px;
+}
+.summary-card,.help-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:22px;
+}
+.summary-card h3{font-size:15px;margin-bottom:20px}
+.summary-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  padding:12px 0;
+  border-bottom:1px solid var(--border);
+  font-size:11px;
+}
+.summary-item span:first-child{color:var(--muted)}
+.summary-item strong{text-align:right;font-size:11px}
+.summary-total{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding-top:20px;
+}
+.summary-total span{font-size:12px;color:var(--muted)}
+.summary-total strong{font-size:25px;color:var(--gold)}
+.summary-note{
+  margin-top:15px;
+  color:var(--muted);
+  font-size:10px;
+  line-height:1.7;
+}
+.help-card h3{font-size:14px;margin-bottom:12px}
+.help-card p{
+  font-size:11px;color:var(--muted);line-height:1.7;
+  margin-bottom:17px;
+}
+.help-link{
+  display:flex;align-items:center;gap:9px;
+  color:var(--gold);font-size:12px;font-weight:700;
+}
+.help-link svg{width:18px;height:18px}
+
+/* STEPS */
+.steps{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-bottom:25px;
+}
+.step{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:14px;
+  display:flex;align-items:center;gap:10px;
+}
+.step-number{
+  width:29px;height:29px;
+  border-radius:9px;
+  display:grid;place-items:center;
+  background:rgba(242,189,69,.12);
+  color:var(--gold);
+  font-weight:800;font-size:11px;
+}
+.step strong{font-size:10px}
+
+/* FOOTER */
+footer{
+  border-top:1px solid var(--border);
+  background:#060a12;
+  padding:30px 0 95px;
+}
+.footer-row{
+  display:flex;justify-content:space-between;
+  gap:20px;align-items:center;
+}
+.footer-row p{color:var(--muted);font-size:11px}
+
+/* BOTTOM NAV */
+.bottom-nav{
+  display:none;
+  position:fixed;bottom:0;left:0;
+  width:100%;height:68px;
+  z-index:99;background:rgba(8,13,24,.98);
+  border-top:1px solid var(--border);
+  backdrop-filter:blur(15px);
+  padding-bottom:env(safe-area-inset-bottom);
+}
+.bottom-nav a{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:5px;color:var(--muted);font-size:10px;
+}
+.bottom-nav a.active{color:var(--gold)}
+.bottom-nav svg{width:21px;height:21px}
+
+/* RESPONSIVE */
+@media(max-width:850px){
+  .booking-layout{grid-template-columns:1fr 290px}
+}
+@media(max-width:650px){
+  header{height:65px}
+  .nav-links{
+    display:none;position:absolute;top:65px;left:0;
+    width:100%;background:#0d1523;padding:22px;
+    flex-direction:column;align-items:stretch;gap:20px;
+    border-bottom:1px solid var(--border);
+  }
+  .nav-links.open{display:flex}
+  .nav-links a{font-size:14px}
+  .menu-btn{display:block}
+  .page-hero{padding:45px 0}
+  .booking-layout{grid-template-columns:1fr}
+  .form-card{padding:20px}
+  .side-panel{position:static}
+  .package-options{grid-template-columns:1fr}
+  .package-option label{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:13px;
+  }
+  .package-option h3{margin:0}
+  .package-option p{display:none}
+  .package-option strong{margin:0}
+  .steps{grid-template-columns:1fr}
+  .footer-row{flex-direction:column;text-align:center}
+  .bottom-nav{display:flex}
+}
+@media(max-width:380px){
+  .form-grid{grid-template-columns:1fr}
+  .field.full{grid-column:auto}
+  .payment-options{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+<div class="container nav">
+
+  <a href="index.html" class="logo">
+    <div class="logo-icon">A1</div>
+    <div class="logo-text">
+      <strong>ABHINAASH <span>A1</span></strong>
+      <small>DRIVING</small>
+    </div>
+  </a>
+
+  <nav class="nav-links" id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="courses.html">Packages</a>
+    <a href="booking.html" class="active">Booking</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <button class="menu-btn" onclick="toggleMenu()" aria-label="Open menu">
+    <i data-lucide="menu"></i>
+  </button>
+
+</div>
+</header>
+
+<!-- HERO -->
+<section class="page-hero">
+<div class="container">
+
+  <div class="breadcrumb">
+    <a href="index.html">Home</a>
+    <i data-lucide="chevron-right"></i>
+    <span>Online Admission</span>
+  </div>
+
+  <div class="eyebrow">START YOUR DRIVING JOURNEY</div>
+
+  <h1>Book Your <span>Driving Class.</span></h1>
+
+  <p>
+    Complete the admission form below. Our team will contact you
+    to confirm your booking and training schedule.
+  </p>
+
+</div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking-section">
+<div class="container">
+
+  <!-- PROCESS -->
+  <div class="steps">
+    <div class="step">
+      <div class="step-number">01</div>
+      <strong>Fill Details</strong>
+    </div>
+    <div class="step">
+      <div class="step-number">02</div>
+      <strong>Select Package</strong>
+    </div>
+    <div class="step">
+      <div class="step-number">03</div>
+      <strong>Confirm Booking</strong>
+    </div>
+  </div>
+
+  <div class="booking-layout">
+
+    <!-- FORM -->
+    <div class="form-card">
+
+      <div class="form-heading">
+        <div class="heading-icon">
+          <i data-lucide="clipboard-list"></i>
+        </div>
+        <div>
+          <h2>Admission Application</h2>
+          <p>Fill in your correct information.</p>
+        </div>
+      </div>
+
+      <form id="bookingForm">
+
+        <!-- PERSONAL DETAILS -->
+        <div class="form-section">
+
+          <div class="form-section-title">
+            <i data-lucide="user-round"></i>
+            Personal Information
+          </div>
+
+          <div class="form-grid">
+
+            <div class="field">
+              <label>Full Name <span>*</span></label>
+              <input id="name" type="text" maxlength="80"
+                placeholder="Enter your full name" required>
+            </div>
+
+            <div class="field">
+              <label>Mobile Number <span>*</span></label>
+              <input id="phone" type="tel" inputmode="numeric"
+                maxlength="10" pattern="[0-9]{10}"
+                placeholder="10 digit mobile number" required>
+            </div>
+
+            <div class="field">
+              <label>Email Address</label>
+              <input id="email" type="email"
+                placeholder="Your email address">
+            </div>
+
+            <div class="field">
+              <label>Age <span>*</span></label>
+              <input id="age" type="number"
+                min="18" max="100" placeholder="Your age" required>
+            </div>
+
+            <div class="field">
+              <label>Gender</label>
+              <select id="gender">
+                <option value="">Select gender</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+                <option>Prefer not to say</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>City / Town <span>*</span></label>
+              <input id="city" type="text"
+                placeholder="Enter your city" required>
+            </div>
+
+            <div class="field full">
+              <label>Full Address</label>
+              <textarea id="address"
+                placeholder="Enter your complete address"></textarea>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- COURSE -->
+        <div class="form-section">
+
+          <div class="form-section-title">
+            <i data-lucide="car-front"></i>
+            Select Your Training Package
+          </div>
+
+          <div class="package-options">
+
+            <div class="package-option">
+              <input type="radio" name="package"
+                id="standard" value="Standard Plan" data-price="3500">
+
+              <label for="standard">
+                <h3>Standard</h3>
+                <p>20 Days</p>
+                <strong>₹3,500</strong>
+              </label>
+            </div>
+
+            <div class="package-option">
+              <input type="radio" name="package"
+                id="premium" value="Premium Plan" data-price="4500">
+
+              <label for="premium">
+                <h3>Premium</h3>
+                <p>30 Days</p>
+                <strong>₹4,500</strong>
+              </label>
+            </div>
+
+            <div class="package-option">
+              <input type="radio" name="package"
+                id="personal" value="Personal Plan" data-price="8000">
+
+              <label for="personal">
+                <h3>Personal</h3>
+                <p>Flexible</p>
+                <strong>₹8,000</strong>
+              </label>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- SCHEDULE -->
+        <div class="form-section">
+
+          <div class="form-section-title">
+            <i data-lucide="calendar-clock"></i>
+            Preferred Schedule
+          </div>
+
+          <div class="form-grid">
+
+            <div class="field">
+              <label>Preferred Start Date <span>*</span></label>
+              <input id="startDate" type="date" required>
+            </div>
+
+            <div class="field">
+              <label>Preferred Timing <span>*</span></label>
+              <select id="timing" required>
+                <option value="">Choose timing</option>
+                <option>Morning - 6 AM to 9 AM</option>
+                <option>Morning - 9 AM to 12 PM</option>
+                <option>Afternoon - 12 PM to 3 PM</option>
+                <option>Evening - 3 PM to 6 PM</option>
+              </select>
+            </div>
+
+          </div>
+
+          <div class="field">
+            <label>Previous Driving Experience</label>
+            <select id="experience">
+              <option value="">Select experience</option>
+              <option>Complete Beginner</option>
+              <option>Basic Driving Knowledge</option>
+              <option>Some Driving Experience</option>
+              <option>Need Practice & Confidence</option>
+            </select>
+          </div>
+
+        </div>
+
+        <!-- PAYMENT -->
+        <div class="form-section">
+
+          <div class="form-section-title">
+            <i data-lucide="wallet"></i>
+            Payment Preference
+          </div>
+
+          <div class="payment-options">
+
+            <div class="payment-option">
+              <input type="radio" name="payment"
+                id="cash" value="Cash">
+              <label for="cash">
+                <i data-lucide="banknote"></i>
+                Cash
+              </label>
+            </div>
+
+            <div class="payment-option">
+              <input type="radio" name="payment"
+                id="upi" value="UPI">
+              <label for="upi">
+                <i data-lucide="smartphone"></i>
+                UPI
+              </label>
+            </div>
+
+            <div class="payment-option">
+              <input type="radio" name="payment"
+                id="later" value="Pay Later">
+              <label for="later">
+                <i data-lucide="clock"></i>
+                Pay Later
+              </label>
+            </div>
+
+          </div>
+
+        </div>
+
+        <label class="terms">
+          <input type="checkbox" id="terms" required>
+          <span>
+            I confirm that the information provided is correct.
+            I understand that my booking is subject to confirmation
+            by ABHINAASH A1 Driving.
+          </span>
+        </label>
+
+        <button type="submit" class="submit-btn">
+          Submit Admission Request
+          <i data-lucide="arrow-right"></i>
+        </button>
+
+      </form>
+
+    </div>
+
+    <!-- SUMMARY -->
+    <aside class="side-panel">
+
+      <div class="summary-card">
+
+        <h3>Booking Summary</h3>
+
+        <div class="summary-item">
+          <span>Selected Package</span>
+          <strong id="summaryPackage">Not Selected</strong>
+        </div>
+
+        <div class="summary-item">
+          <span>Duration</span>
+          <strong id="summaryDuration">--</strong>
+        </div>
+
+        <div class="summary-item">
+          <span>Training Fee</span>
+          <strong id="summaryFee">₹0</strong>
+        </div>
+
+        <div class="summary-total">
+          <span>Total Amount</span>
+          <strong id="summaryTotal">₹0</strong>
+        </div>
+
+        <p class="summary-note">
+          This is an admission enquiry, not a confirmed booking.
+          Final schedule and payment will be confirmed by our team.
+        </p>
+
+      </div>
+
+      <div class="help-card">
+
+        <h3>Need Assistance?</h3>
+
+        <p>
+          Have questions about our training packages?
+          Contact our team for help with admission and scheduling.
+        </p>
+
+        <a href="#" class="help-link" id="helpLink">
+          <i data-lucide="message-circle"></i>
+          Chat on WhatsApp
+          <i data-lucide="arrow-up-right"></i>
+        </a>
+
+      </div>
+
+      <div class="help-card">
+
+        <h3>Important Information</h3>
+
+        <p>
+          Please provide an active mobile number.
+          Our team will contact you to verify your admission request.
+          Submitting the form does not guarantee a time slot.
+        </p>
+
+      </div>
+
+    </aside>
+
+  </div>
+
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+<div class="container footer-row">
+  <a href="index.html" class="logo">
+    <div class="logo-icon">A1</div>
+    <div class="logo-text">
+      <strong>ABHINAASH <span>A1</span></strong>
+      <small>DRIVING</small>
+    </div>
+  </a>
+
+  <p>© <span id="year"></span> ABHINAASH A1 Driving. All Rights Reserved.</p>
+</div>
+</footer>
+
+<!-- MOBILE NAV -->
+<nav class="bottom-nav">
+
+  <a href="index.html">
+    <i data-lucide="house"></i>
+    Home
+  </a>
+
+  <a href="courses.html">
+    <i data-lucide="car-front"></i>
+    Packages
+  </a>
+
+  <a href="booking.html" class="active">
+    <i data-lucide="calendar-days"></i>
+    Booking
+  </a>
+
+  <a href="contact.html">
+    <i data-lucide="phone"></i>
+    Contact
+  </a>
+
+</nav>
+
+<script>
+
+/* CONFIGURATION */
+
+// Enter your actual WhatsApp business number.
+// Format: 91 + 10 digit number.
+
+const WHATSAPP_NUMBER = "91XXXXXXXXXX";
+
+/* INITIALIZATION */
+
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+
+function toggleMenu(){
+  document.getElementById("navLinks").classList.toggle("open");
+}
+
+/* DATE */
+
+const startDate = document.getElementById("startDate");
+
+const now = new Date();
+const localToday = new Date(
+  now.getTime()-now.getTimezoneOffset()*60000
+).toISOString().split("T")[0];
+
+startDate.min = localToday;
+
+/* PACKAGE SUMMARY */
+
+const packageRadios =
+  document.querySelectorAll('input[name="package"]');
+
+function updateSummary(){
+
+  const selected =
+    document.querySelector('input[name="package"]:checked');
+
+  if(!selected){
+
+    document.getElementById("summaryPackage").textContent="Not Selected";
+    document.getElementById("summaryDuration").textContent="--";
+    document.getElementById("summaryFee").textContent="₹0";
+    document.getElementById("summaryTotal").textContent="₹0";
+
+    return;
+  }
+
+  const price = Number(selected.dataset.price);
+
+  const durations = {
+    standard:"20 Days",
+    premium:"30 Days",
+    personal:"Flexible"
+  };
+
+  document.getElementById("summaryPackage").textContent=selected.value;
+
+  document.getElementById("summaryDuration").textContent=
+    durations[selected.id];
+
+  document.getElementById("summaryFee").textContent=
+    "₹"+price.toLocaleString("en-IN");
+
+  document.getElementById("summaryTotal").textContent=
+    "₹"+price.toLocaleString("en-IN");
+}
+
+packageRadios.forEach(radio=>{
+  radio.addEventListener("change",updateSummary);
+});
+
+/* READ PACKAGE FROM URL */
+
+const params = new URLSearchParams(window.location.search);
+const requestedPackage = params.get("package");
+
+const packageMap = {
+  standard:"standard",
+  premium:"premium",
+  personal:"personal"
+};
+
+if(packageMap[requestedPackage]){
+  document.getElementById(packageMap[requestedPackage]).checked=true;
+  updateSummary();
+}
+
+/* WHATSAPP SUPPORT */
+
+document.getElementById("helpLink").href =
+  "https://wa.me/"+WHATSAPP_NUMBER;
+
+/* FORM SUBMISSION */
+
+document.getElementById("bookingForm").addEventListener("submit",function(e){
+
+  e.preventDefault();
+
+  const name=document.getElementById("name").value.trim();
+  const phone=document.getElementById("phone").value.trim();
+  const email=document.getElementById("email").value.trim();
+  const age=document.getElementById("age").value;
+  const gender=document.getElementById("gender").value;
+  const city=document.getElementById("city").value.trim();
+  const address=document.getElementById("address").value.trim();
+
+  const selectedPackage=
+    document.querySelector('input[name="package"]:checked');
+
+  const date=document.getElementById("startDate").value;
+  const timing=document.getElementById("timing").value;
+  const experience=document.getElementById("experience").value;
+
+  const payment=
+    document.querySelector('input[name="payment"]:checked');
+
+  if(!selectedPackage){
+    alert("Please select a driving package.");
+    return;
+  }
+
+  if(!/^[0-9]{10}$/.test(phone)){
+    alert("Please enter a valid 10 digit mobile number.");
+    return;
+  }
+
+  if(!/^[0-9]{10,15}$/.test(WHATSAPP_NUMBER)){
+    alert("Please configure the WhatsApp number in the code first.");
+    return;
+  }
+
+  const amount=Number(selectedPackage.dataset.price);
+
+  const message=
+`NEW ADMISSION REQUEST
+ABHINAASH A1 DRIVING
+
+PERSONAL DETAILS
+Name: ${name}
+Phone: ${phone}
+Email: ${email || "Not provided"}
+Age: ${age}
+Gender: ${gender || "Not provided"}
+City: ${city}
+Address: ${address || "Not provided"}
+
+COURSE DETAILS
+Package: ${selectedPackage.value}
+Fee: Rs. ${amount}
+Start Date: ${date}
+Preferred Timing: ${timing}
+Experience: ${experience || "Not provided"}
+
+PAYMENT PREFERENCE
+${payment ? payment.value : "Not selected"}
+
+Booking Status: Awaiting Confirmation`;
+
+  const url =
+    "https://wa.me/"+WHATSAPP_NUMBER+
+    "?text="+encodeURIComponent(message);
+
+  window.open(url,"_blank");
+
+});
+
+/* LUCIDE ICONS */
+
+if(window.lucide){
+  lucide.createIcons();
+}
+
+</script>
+
+</body>
+</html>
