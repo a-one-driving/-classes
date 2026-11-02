@@ -1,0 +1,546 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#080D18">
+<title>Instructor Dashboard | ABHINAASH A1 Driving</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+:root{
+  --bg:#080D18;--card:#111A29;--card2:#172337;
+  --gold:#F2BD45;--white:#F8FAFC;--muted:#A8B1C2;
+  --border:rgba(255,255,255,.09);
+  --green:#35C98A;--red:#FF7777;--blue:#65A9FF;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,sans-serif;background:var(--bg);color:var(--white);line-height:1.5}
+a{text-decoration:none;color:inherit}
+button{font:inherit;cursor:pointer}
+.container{width:min(1160px,93%);margin:auto}
+header{position:sticky;top:0;z-index:100;background:rgba(8,13,24,.95);backdrop-filter:blur(15px);border-bottom:1px solid var(--border)}
+.topbar{height:68px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:17px;font-weight:800}
+.logo span{color:var(--gold)}
+.header-right{display:flex;align-items:center;gap:16px}
+.header-right a{font-size:11px;color:var(--muted)}
+.avatar{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:rgba(242,189,69,.13);color:var(--gold);font-weight:800}
+main{padding:30px 0 100px}
+.heading{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:24px}
+.eyebrow{font-size:10px;color:var(--gold);font-weight:800;letter-spacing:1.7px;text-transform:uppercase}
+h1{font-size:clamp(25px,4vw,34px);margin:7px 0}
+.heading p{font-size:12px;color:var(--muted)}
+.date-chip{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 13px;font-size:10px;color:var(--muted);white-space:nowrap}
+
+/* WELCOME */
+.welcome-card{
+  background:linear-gradient(120deg,#1B2B42,#111A29);
+  border:1px solid rgba(242,189,69,.2);
+  border-radius:20px;padding:24px;margin-bottom:19px;
+  display:flex;justify-content:space-between;align-items:center;gap:15px;
+}
+.welcome-card h2{font-size:21px;margin:5px 0}
+.welcome-card p{font-size:11px;color:var(--muted)}
+.role-tag{display:inline-flex;gap:7px;align-items:center;color:var(--gold);font-size:9px;font-weight:800;letter-spacing:1px}
+.welcome-right{text-align:right}
+.welcome-right strong{display:block;font-size:25px;color:var(--gold)}
+.welcome-right span{font-size:10px;color:var(--muted)}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:19px}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:15px;padding:17px}
+.stat-top{display:flex;justify-content:space-between;align-items:center}
+.stat-icon{width:36px;height:36px;display:grid;place-items:center;background:var(--card2);color:var(--gold);border-radius:11px}
+.stat strong{display:block;font-size:24px;margin-top:13px}
+.stat p{font-size:10px;color:var(--muted);margin-top:3px}
+
+/* GRID AND PANELS */
+.grid{display:grid;grid-template-columns:1.2fr .8fr;gap:17px;margin-bottom:18px}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:17px;padding:20px}
+.panel-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:17px}
+.panel-head h2{font-size:14px}
+.panel-head a,.panel-head span{font-size:10px;color:var(--gold);font-weight:700}
+.schedule-list{display:grid;gap:10px}
+.schedule-item{display:flex;align-items:center;gap:12px;background:var(--card2);padding:13px;border-radius:12px}
+.time-box{width:57px;flex-shrink:0;text-align:center;padding:8px 4px;border-radius:9px;background:rgba(242,189,69,.1);color:var(--gold);font-size:10px;font-weight:800}
+.schedule-info{flex:1;min-width:0}
+.schedule-info strong{display:block;font-size:11px}
+.schedule-info span{display:block;font-size:9px;color:var(--muted);margin-top:4px}
+.schedule-status{font-size:9px;font-weight:800;color:var(--green)}
+.schedule-status.pending{color:var(--gold)}
+.schedule-status.cancelled{color:var(--red)}
+
+/* TASKS */
+.task-list{display:grid;gap:10px}
+.task{display:flex;gap:11px;align-items:flex-start;padding:12px;background:var(--card2);border-radius:11px}
+.task-icon{width:33px;height:33px;display:grid;place-items:center;background:rgba(242,189,69,.1);color:var(--gold);border-radius:9px;flex-shrink:0}
+.task-info{flex:1}
+.task-info strong{display:block;font-size:10px}
+.task-info span{display:block;font-size:9px;color:var(--muted);margin-top:3px}
+.task-count{font-size:10px;color:var(--gold);font-weight:800}
+
+/* STUDENTS */
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:550px}
+th{text-align:left;font-size:9px;color:var(--muted);padding:12px 10px;border-bottom:1px solid var(--border)}
+td{font-size:10px;padding:13px 10px;border-bottom:1px solid var(--border)}
+tbody tr:last-child td{border:0}
+.student-name{font-weight:700}
+.student-id{font-size:9px;color:var(--muted);margin-top:3px}
+.badge{display:inline-block;padding:5px 8px;border-radius:20px;font-size:9px;font-weight:800}
+.present{background:rgba(53,201,138,.12);color:var(--green)}
+.pending{background:rgba(242,189,69,.12);color:var(--gold)}
+.absent{background:rgba(255,119,119,.12);color:var(--red)}
+.action-link{color:var(--gold);font-size:10px;font-weight:800}
+
+/* QUICK LINKS */
+.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}
+.quick-link{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:13px;padding:14px;transition:.2s}
+.quick-link:hover{border-color:rgba(242,189,69,.5)}
+.quick-icon{width:35px;height:35px;display:grid;place-items:center;border-radius:10px;background:var(--card2);color:var(--gold);flex-shrink:0}
+.quick-link strong{display:block;font-size:10px}
+.quick-link span{display:block;font-size:9px;color:var(--muted);margin-top:3px}
+
+/* NOTICE */
+.notice{display:flex;gap:10px;padding:13px;margin-top:17px;border-radius:12px;background:rgba(101,169,255,.07);border:1px solid rgba(101,169,255,.15)}
+.notice i{color:var(--blue);width:17px;flex-shrink:0}
+.notice strong{font-size:10px}
+.notice p{font-size:9px;color:var(--muted);margin-top:3px}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:22px 0 100px}
+.footer-inner{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.footer-inner p{font-size:10px;color:var(--muted)}
+.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(12,19,32,.97);border-top:1px solid var(--border);padding:10px 5px calc(10px + env(safe-area-inset-bottom));justify-content:space-around;backdrop-filter:blur(15px)}
+.bottom-nav a{display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--muted);font-size:9px;font-weight:700;min-width:55px}
+.bottom-nav a.active{color:var(--gold)}
+.bottom-nav i{width:19px;height:19px}
+
+@media(max-width:850px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .grid{grid-template-columns:1fr}
+  .quick-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+  .topbar{height:62px}
+  main{padding-top:23px}
+  .heading{align-items:flex-start;flex-direction:column}
+  .welcome-card{align-items:flex-start;flex-direction:column;padding:19px}
+  .welcome-right{text-align:left}
+  .stat{padding:14px}
+  .stat strong{font-size:21px}
+  .panel{padding:16px}
+  .quick-grid{gap:8px}
+  .quick-link{padding:11px 9px;gap:8px}
+  .quick-icon{width:31px;height:31px}
+  .bottom-nav{display:flex}
+  .footer-inner{flex-direction:column}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container topbar">
+    <a href="index.html" class="logo">ABHINAASH <span>A1</span></a>
+    <div class="header-right">
+      <a href="contact.html">Support</a>
+      <div class="avatar" id="avatar">IN</div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="heading">
+    <div>
+      <div class="eyebrow">Instructor Workspace</div>
+      <h1>Instructor Dashboard</h1>
+      <p>Manage your daily classes, assigned students and training activities.</p>
+    </div>
+    <div class="date-chip">
+      <i data-lucide="calendar-days" width="14"></i>
+      <span id="todayDate"></span>
+    </div>
+  </section>
+
+  <!-- WELCOME -->
+  <section class="welcome-card">
+    <div>
+      <div class="role-tag"><i data-lucide="shield-check" width="13"></i> INSTRUCTOR PORTAL</div>
+      <h2>Welcome, <span id="instructorName">Instructor</span></h2>
+      <p>Keep your students on track and make every lesson count.</p>
+    </div>
+    <div class="welcome-right">
+      <strong id="todayClasses">0</strong>
+      <span>Classes scheduled today</span>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats">
+    <div class="stat">
+      <div class="stat-top">
+        <div class="stat-icon"><i data-lucide="users"></i></div>
+      </div>
+      <strong id="assignedStudents">0</strong>
+      <p>Assigned Students</p>
+    </div>
+    <div class="stat">
+      <div class="stat-top">
+        <div class="stat-icon"><i data-lucide="calendar-check"></i></div>
+      </div>
+      <strong id="completedClasses">0</strong>
+      <p>Completed Classes</p>
+    </div>
+    <div class="stat">
+      <div class="stat-top">
+        <div class="stat-icon"><i data-lucide="clipboard-list"></i></div>
+      </div>
+      <strong id="pendingAttendance">0</strong>
+      <p>Pending Attendance</p>
+    </div>
+    <div class="stat">
+      <div class="stat-top">
+        <div class="stat-icon"><i data-lucide="clock"></i></div>
+      </div>
+      <strong id="upcomingClasses">0</strong>
+      <p>Upcoming Classes</p>
+    </div>
+  </section>
+
+  <!-- SCHEDULE + TASKS -->
+  <section class="grid">
+
+    <div class="panel">
+      <div class="panel-head">
+        <h2>Today's Class Schedule</h2>
+        <a href="instructor-classes.html">Manage Classes ↗</a>
+      </div>
+
+      <div class="schedule-list" id="scheduleList">
+        <div class="schedule-item">
+          <div class="time-box">09:00 AM</div>
+          <div class="schedule-info">
+            <strong>Student Training Session</strong>
+            <span>Vehicle practice · TATA TIGOR</span>
+          </div>
+          <span class="schedule-status pending">Scheduled</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <h2>Pending Tasks</h2>
+        <span>Action required</span>
+      </div>
+
+      <div class="task-list">
+        <div class="task">
+          <div class="task-icon"><i data-lucide="clipboard-check" width="16"></i></div>
+          <div class="task-info">
+            <strong>Update Attendance</strong>
+            <span>Complete attendance for today's sessions.</span>
+          </div>
+          <span class="task-count" id="attendanceTaskCount">0</span>
+        </div>
+
+        <div class="task">
+          <div class="task-icon"><i data-lucide="notebook-pen" width="16"></i></div>
+          <div class="task-info">
+            <strong>Training Notes</strong>
+            <span>Update student lesson progress.</span>
+          </div>
+          <span class="task-count" id="notesTaskCount">0</span>
+        </div>
+
+        <div class="task">
+          <div class="task-icon"><i data-lucide="calendar-clock" width="16"></i></div>
+          <div class="task-info">
+            <strong>Upcoming Sessions</strong>
+            <span>Review your next scheduled classes.</span>
+          </div>
+          <span class="task-count" id="upcomingTaskCount">0</span>
+        </div>
+      </div>
+
+      <div class="notice">
+        <i data-lucide="info"></i>
+        <div>
+          <strong>Instructor Reminder</strong>
+          <p>Update attendance after each class and keep student progress records accurate.</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ASSIGNED STUDENTS -->
+  <section class="panel" style="margin-bottom:18px">
+    <div class="panel-head">
+      <h2>My Assigned Students</h2>
+      <a href="instructor-classes.html">View All ↗</a>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Student</th>
+            <th>Package</th>
+            <th>Training Progress</th>
+            <th>Today's Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="studentTable">
+          <tr>
+            <td>
+              <div class="student-name">Sample Student</div>
+              <div class="student-id">A1-XXXX</div>
+            </td>
+            <td>Premium</td>
+            <td>40%</td>
+            <td><span class="badge pending">Pending</span></td>
+            <td><a href="instructor-classes.html" class="action-link">Manage</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- QUICK ACTIONS -->
+  <section class="panel">
+    <div class="panel-head">
+      <h2>Quick Actions</h2>
+      <span>Instructor tools</span>
+    </div>
+
+    <div class="quick-grid">
+      <a href="instructor-classes.html" class="quick-link">
+        <div class="quick-icon"><i data-lucide="calendar-days"></i></div>
+        <div><strong>Class Management</strong><span>View daily schedule</span></div>
+      </a>
+
+      <a href="instructor-classes.html#attendance" class="quick-link">
+        <div class="quick-icon"><i data-lucide="clipboard-check"></i></div>
+        <div><strong>Attendance</strong><span>Update student records</span></div>
+      </a>
+
+      <a href="instructor-classes.html#students" class="quick-link">
+        <div class="quick-icon"><i data-lucide="users"></i></div>
+        <div><strong>My Students</strong><span>View assigned students</span></div>
+      </a>
+
+      <a href="contact.html" class="quick-link">
+        <div class="quick-icon"><i data-lucide="headset"></i></div>
+        <div><strong>Support</strong><span>Contact administration</span></div>
+      </a>
+    </div>
+
+    <div class="notice">
+      <i data-lucide="database"></i>
+      <div>
+        <strong>Demo Dashboard</strong>
+        <p>The displayed schedule and student records are sample UI data. Instructor login, assigned student records and live attendance will be connected to Firebase in the integration stage.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <a href="index.html" class="logo">ABHINAASH <span>A1</span></a>
+    <p>Instructor Portal · ABHINAASH A1 Driving · Baripada, Odisha</p>
+  </div>
+</footer>
+
+<nav class="bottom-nav">
+  <a href="instructor-dashboard.html" class="active">
+    <i data-lucide="layout-dashboard"></i>Dashboard
+  </a>
+  <a href="instructor-classes.html">
+    <i data-lucide="calendar-days"></i>Classes
+  </a>
+  <a href="instructor-classes.html#attendance">
+    <i data-lucide="clipboard-check"></i>Attendance
+  </a>
+  <a href="contact.html">
+    <i data-lucide="headset"></i>Support
+  </a>
+</nav>
+
+<script>
+/*
+  DEMO INSTRUCTOR DATA
+  No Firebase reads or writes are performed here.
+*/
+
+const INSTRUCTOR_DATA = {
+  name:"Instructor",
+  assignedStudents:12,
+  completedClasses:38,
+  pendingAttendance:2,
+
+  schedule:[
+    {
+      time:"09:00 AM",
+      student:"Sample Student 1",
+      vehicle:"TATA TIGOR XZ+",
+      status:"Scheduled"
+    },
+    {
+      time:"11:00 AM",
+      student:"Sample Student 2",
+      vehicle:"TATA TIGOR XZ+",
+      status:"Completed"
+    },
+    {
+      time:"02:00 PM",
+      student:"Sample Student 3",
+      vehicle:"TATA TIGOR XZ+",
+      status:"Scheduled"
+    }
+  ],
+
+  students:[
+    {
+      name:"Sample Student 1",
+      id:"A1-1001",
+      package:"Premium",
+      progress:40,
+      status:"Pending"
+    },
+    {
+      name:"Sample Student 2",
+      id:"A1-1002",
+      package:"Standard",
+      progress:65,
+      status:"Present"
+    },
+    {
+      name:"Sample Student 3",
+      id:"A1-1003",
+      package:"Personal",
+      progress:25,
+      status:"Pending"
+    }
+  ]
+};
+
+function renderInstructor(data){
+  document.getElementById("instructorName").textContent = data.name;
+  document.getElementById("avatar").textContent =
+    data.name.trim().split(/\s+/).map(x=>x[0]).join("").slice(0,2).toUpperCase();
+
+  document.getElementById("assignedStudents").textContent = data.assignedStudents;
+  document.getElementById("completedClasses").textContent = data.completedClasses;
+  document.getElementById("pendingAttendance").textContent = data.pendingAttendance;
+
+  const todayClasses = data.schedule.length;
+  const completedToday = data.schedule.filter(x=>x.status==="Completed").length;
+  const upcoming = todayClasses-completedToday;
+
+  document.getElementById("todayClasses").textContent = todayClasses;
+  document.getElementById("upcomingClasses").textContent = upcoming;
+  document.getElementById("attendanceTaskCount").textContent = data.pendingAttendance;
+  document.getElementById("notesTaskCount").textContent = data.students.length;
+  document.getElementById("upcomingTaskCount").textContent = upcoming;
+
+  const scheduleList = document.getElementById("scheduleList");
+  scheduleList.innerHTML = "";
+
+  if(!data.schedule.length){
+    scheduleList.innerHTML = '<div class="empty">No classes scheduled today.</div>';
+  }
+
+  data.schedule.forEach(item=>{
+    const row = document.createElement("div");
+    row.className = "schedule-item";
+
+    const time = document.createElement("div");
+    time.className = "time-box";
+    time.textContent = item.time;
+
+    const info = document.createElement("div");
+    info.className = "schedule-info";
+
+    const title = document.createElement("strong");
+    title.textContent = item.student;
+
+    const subtitle = document.createElement("span");
+    subtitle.textContent = "Practical Training · " + item.vehicle;
+
+    info.append(title,subtitle);
+
+    const status = document.createElement("span");
+    status.className = "schedule-status " +
+      (item.status==="Completed" ? "" : "pending");
+    status.textContent = item.status;
+
+    row.append(time,info,status);
+    scheduleList.appendChild(row);
+  });
+
+  const studentTable = document.getElementById("studentTable");
+  studentTable.innerHTML = "";
+
+  data.students.forEach(student=>{
+    const row = document.createElement("tr");
+
+    const nameCell = document.createElement("td");
+    const name = document.createElement("div");
+    name.className = "student-name";
+    name.textContent = student.name;
+    const id = document.createElement("div");
+    id.className = "student-id";
+    id.textContent = student.id;
+    nameCell.append(name,id);
+
+    const packageCell = document.createElement("td");
+    packageCell.textContent = student.package;
+
+    const progressCell = document.createElement("td");
+    progressCell.textContent = student.progress + "%";
+
+    const statusCell = document.createElement("td");
+    const badge = document.createElement("span");
+    badge.className = "badge " +
+      (student.status==="Present" ? "present" :
+       student.status==="Absent" ? "absent" : "pending");
+    badge.textContent = student.status;
+    statusCell.appendChild(badge);
+
+    const actionCell = document.createElement("td");
+    const link = document.createElement("a");
+    link.href = "instructor-classes.html#students";
+    link.className = "action-link";
+    link.textContent = "Manage";
+    actionCell.appendChild(link);
+
+    row.append(nameCell,packageCell,progressCell,statusCell,actionCell);
+    studentTable.appendChild(row);
+  });
+}
+
+document.getElementById("todayDate").textContent =
+  new Date().toLocaleDateString("en-IN",{
+    weekday:"short",day:"2-digit",month:"short",year:"numeric"
+  });
+
+renderInstructor(INSTRUCTOR_DATA);
+
+if(window.lucide) lucide.createIcons();
+</script>
+
+</body>
+</html>
