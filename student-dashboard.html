@@ -38,10 +38,12 @@ header{
 .header-right{display:flex;align-items:center;gap:12px}
 .header-link{font-size:11px;color:var(--muted)}
 .avatar{
- width:39px;height:39px;border-radius:13px;display:grid;place-items:center;
- background:rgba(242,189,69,.14);border:1px solid rgba(242,189,69,.25);
- color:var(--gold);font-weight:800
+ width:39px;height:39px;border-radius:13px;overflow:hidden;
+ display:grid;place-items:center;background:rgba(242,189,69,.14);
+ border:1px solid rgba(242,189,69,.25);color:var(--gold);font-weight:800
 }
+.avatar img{width:100%;height:100%;object-fit:cover}
+
 main{padding:27px 0 100px}
 .panel,.stat-card{background:var(--card);border:1px solid var(--border);border-radius:18px}
 .panel{padding:21px;margin-bottom:20px}
@@ -71,6 +73,38 @@ main{padding:27px 0 100px}
 .welcome h1{font-size:clamp(24px,4vw,34px);margin:6px 0}
 .welcome p{font-size:12px;color:var(--muted)}
 .date-chip{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);padding:10px 13px;border-radius:11px;color:var(--muted);font-size:10px;white-space:nowrap}
+
+/* STUDENT PROFILE */
+.student-profile{
+ display:flex;align-items:center;gap:14px;
+ padding:15px 17px;margin-bottom:20px;
+ border-radius:19px;background:linear-gradient(115deg,#192B43,#111A29 75%);
+ border:1px solid rgba(242,189,69,.2)
+}
+.profile-avatar{
+ width:68px;height:68px;min-width:68px;
+ padding:3px;border-radius:50%;position:relative;
+ background:linear-gradient(135deg,#D99A25,#FFE3A4);
+ animation:avatarFloat 3s ease-in-out infinite
+}
+.profile-avatar img{
+ width:100%;height:100%;display:block;
+ border-radius:50%;object-fit:cover;background:#25364b
+}
+.profile-online{
+ position:absolute;right:2px;bottom:4px;
+ width:13px;height:13px;border:2px solid #192B43;
+ border-radius:50%;background:var(--green)
+}
+.profile-info{flex:1;min-width:0}
+.profile-info small{color:var(--gold);font-size:9px;font-weight:800;letter-spacing:1.5px}
+.profile-info h2{font-size:17px;margin:3px 0;overflow-wrap:anywhere}
+.profile-info p{font-size:10px;color:var(--muted)}
+.profile-arrow{color:var(--gold);padding:8px}
+@keyframes avatarFloat{
+ 0%,100%{transform:translateY(0)}
+ 50%{transform:translateY(-5px)}
+}
 
 .hero-card{
  position:relative;overflow:hidden;
@@ -115,14 +149,17 @@ main{padding:27px 0 100px}
 .milestone strong{display:block;font-size:11px;margin-top:6px}
 .milestone span{font-size:9px;color:var(--muted)}
 
+/* NEXT CLASS */
 .class-box{background:var(--card2);border:1px solid var(--border);border-radius:14px;padding:15px}
 .class-date{display:inline-block;background:rgba(242,189,69,.12);color:var(--gold);padding:6px 9px;border-radius:8px;font-size:9px;font-weight:800}
 .class-box h3{font-size:14px;margin:12px 0 7px}
 .class-details{display:grid;gap:9px;margin-top:12px}
 .class-details div{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:10px}
 .class-details i{width:15px;height:15px;color:var(--gold)}
-.class-status{margin-top:13px;padding-top:12px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:10px}
+.class-status{margin-top:13px;padding-top:12px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:10px;gap:8px}
 .status-pending{color:var(--gold);font-weight:700}
+.status-scheduled{color:var(--green);font-weight:700}
+.status-cancelled{color:var(--red);font-weight:700}
 
 .history-list,.feedback-list{display:grid;gap:10px}
 .history-item,.feedback-item{
@@ -192,6 +229,9 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
  .bottom-nav{display:flex}
  .footer-inner{flex-direction:column;align-items:flex-start}
 }
+@media(prefers-reduced-motion:reduce){
+ .profile-avatar{animation:none}
+}
 </style>
 </head>
 
@@ -202,26 +242,42 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
   <a href="index.html" class="logo">ABHINAASH <span>A1</span></a>
   <div class="header-right">
    <a href="contact.html" class="header-link">Need Help?</a>
-   <div class="avatar" id="userAvatar">ST</div>
+   <a href="student-account.html" class="avatar" aria-label="My Account">
+    <img id="userAvatar" alt="Student profile" src="">
+   </a>
   </div>
  </div>
 </header>
 
 <main class="container">
 
- <!-- AUTOMATIC STUDENT VERIFICATION -->
+ <!-- STUDENT VERIFICATION -->
  <section class="panel" id="loginPanel">
   <div class="panel-head">
    <h2>Student Verification</h2>
    <span style="font-size:10px;color:var(--gold)">Student Portal</span>
   </div>
-  <p class="login-description" id="loginMessage">
-   Verifying your registered student account...
-  </p>
+  <p class="login-description" id="loginMessage">Verifying your registered student account...</p>
   <div class="login-controls" id="manualLoginControls" style="display:none">
    <input type="tel" id="studentMobile" maxlength="10" inputmode="numeric" placeholder="Enter mobile number">
    <button class="btn-primary" id="loginButton" type="button">Connect Account</button>
   </div>
+ </section>
+
+ <!-- PROFILE -->
+ <section class="student-profile">
+  <div class="profile-avatar">
+   <img id="studentProfileAvatar" src="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student" alt="Student Avatar">
+   <span class="profile-online"></span>
+  </div>
+  <div class="profile-info">
+   <small>WELCOME BACK</small>
+   <h2 id="profileStudentName">Student</h2>
+   <p>A ONE DRIVING STUDENT</p>
+  </div>
+  <a href="student-account.html" class="profile-arrow" aria-label="Open profile">
+   <i data-lucide="chevron-right"></i>
+  </a>
  </section>
 
  <!-- WELCOME -->
@@ -384,25 +440,23 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
     <div class="quick-icon"><i data-lucide="car-front"></i></div>
     <div><strong>My Training</strong><span>Lessons & progress</span></div>
    </a>
-  
-  <a href="traffic-academy.html" class="quick-action"
-   onclick="this.href='traffic-academy.html?mobile='+encodeURIComponent(localStorage.getItem('a1_student_mobile')||'')">
-  <div class="quick-icon">
-    <i data-lucide="traffic-cone"></i>
-  </div>
-  <div>
-    <strong>Traffic Academy</strong>
-    <span>Learn signs & daily MCQ</span>
-  </div>
-</a>
+
+   <a href="traffic-academy.html" class="quick-action"
+    onclick="this.href='traffic-academy.html?mobile='+encodeURIComponent(localStorage.getItem('a1_student_mobile')||'')">
+    <div class="quick-icon"><i data-lucide="traffic-cone"></i></div>
+    <div><strong>Traffic Academy</strong><span>Learn signs & daily MCQ</span></div>
+   </a>
+
    <a href="#attendanceHistory" class="quick-action">
     <div class="quick-icon"><i data-lucide="clipboard-check"></i></div>
     <div><strong>Attendance</strong><span>Class history</span></div>
    </a>
+
    <a href="student-account.html#payments" class="quick-action">
     <div class="quick-icon"><i data-lucide="receipt"></i></div>
     <div><strong>Payments</strong><span>Fee information</span></div>
    </a>
+
    <a href="student-account.html" class="quick-action">
     <div class="quick-icon"><i data-lucide="user-round"></i></div>
     <div><strong>My Account</strong><span>Profile details</span></div>
@@ -427,10 +481,14 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
 </nav>
 
 <script type="module">
-import {initializeApp} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-import {getFirestore,doc,onSnapshot} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+import {initializeApp,getApps}
+from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
 
-/* FIREBASE CONFIGURATION - KEEP SAME PROJECT */
+import {
+ getFirestore,doc,onSnapshot
+} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
+/* EXISTING PROJECT CONFIGURATION */
 const firebaseConfig={
  apiKey:"AIzaSyC3gWi8p85z-wkoJeWb3N3jYoQpcIar8Sww",
  authDomain:"abinash-driving.firebaseapp.com",
@@ -443,7 +501,7 @@ const firebaseConfig={
 const WHATSAPP_NUMBER="918984225311";
 const STORAGE_KEY="a1_student_mobile";
 
-const app=initializeApp(firebaseConfig);
+const app=getApps().length?getApps()[0]:initializeApp(firebaseConfig);
 const db=getFirestore(app);
 
 let unsubscribeStudent=null;
@@ -469,21 +527,42 @@ function value(data,key,fallback=""){
 
 function formatDate(input){
  if(!input)return "--";
+
  if(typeof input==="string"){
   const match=input.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+
   if(match){
    return new Date(+match[1],+match[2]-1,+match[3])
-    .toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"});
+    .toLocaleDateString("en-IN",{
+     day:"2-digit",month:"short",year:"numeric"
+    });
   }
+
   return input;
  }
+
  if(input?.toDate){
-  return input.toDate().toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"});
+  return input.toDate().toLocaleDateString("en-IN",{
+   day:"2-digit",month:"short",year:"numeric"
+  });
  }
+
  if(input instanceof Date){
-  return input.toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"});
+  return input.toLocaleDateString("en-IN",{
+   day:"2-digit",month:"short",year:"numeric"
+  });
  }
+
  return String(input);
+}
+
+/* UNIQUE STUDENT AVATAR */
+function getStudentAvatar(student){
+ const seed=student.mobile||student.name||"A1Student";
+
+ return student.profilePhoto ||
+  "https://api.dicebear.com/9.x/avataaars/svg?seed="+
+  encodeURIComponent(seed);
 }
 
 function parseLog(log){
@@ -522,7 +601,6 @@ function renderHistory(logs){
 
  [...logs].reverse().forEach((log,index)=>{
   const parsed=parseLog(log);
-
   const item=document.createElement("div");
   item.className="history-item";
 
@@ -592,18 +670,65 @@ function renderFeedback(logs){
  });
 }
 
+/* NEXT CLASS LIVE DATA */
+function updateNextClass(student,left){
+
+ const nextDate=value(student,"nextClassDate","");
+ const nextTime=value(student,"nextClassTime","");
+ const nextLocation=value(student,"nextClassLocation","");
+ const nextStatus=value(student,"nextClassStatus","scheduled");
+
+ $("nextClassDate").textContent=
+  nextDate?formatDate(nextDate):"Schedule Pending";
+
+ $("nextClassTime").textContent=
+  nextTime||"Time to be confirmed";
+
+ $("nextClassLocation").textContent=
+  nextLocation||"Location to be confirmed";
+
+ const title=$("nextClassTitle");
+ const status=$("nextClassStatus");
+
+ status.className="status-pending";
+
+ if(nextStatus==="cancelled"){
+  title.textContent="Class Cancelled";
+  status.textContent="Cancelled";
+  status.className="status-cancelled";
+ }else if(nextStatus==="completed"||left===0){
+  title.textContent="Training Completed";
+  status.textContent="Completed";
+  status.className="status-scheduled";
+ }else if(nextDate&&nextTime){
+  title.textContent="Your next driving session";
+  status.textContent="Scheduled";
+  status.className="status-scheduled";
+ }else{
+  title.textContent="Your next driving session";
+  status.textContent="Awaiting Schedule";
+  status.className="status-pending";
+ }
+}
+
 function renderDashboard(student,mobile){
+
  currentStudentName=value(student,"name","Student");
  currentStudentActive=student.notActive!==true;
 
- const logs=Array.isArray(student.attendanceLogs)?student.attendanceLogs:[];
+ const logs=Array.isArray(student.attendanceLogs)
+  ?student.attendanceLogs:[];
+
  const total=Math.max(Number(value(student,"totalClasses",20))||20,1);
 
  /*
-  Existing admin logic increments remaining by 1 per attendance.
-  So "remaining" is interpreted as completed class count.
+   Existing admin logic increments "remaining" by 1 for each attendance.
+   Therefore this field is treated as completed classes.
  */
- const storedCompleted=Math.max(Number(value(student,"remaining",0))||0,0);
+ const storedCompleted=Math.max(
+  Number(value(student,"remaining",0))||0,0
+ );
+
  const completed=Math.min(
   logs.length>0?Math.max(logs.length,storedCompleted):storedCompleted,
   total
@@ -615,37 +740,53 @@ function renderDashboard(student,mobile){
  const classType=value(student,"classType","Group");
  const admissionDate=formatDate(value(student,"admissionDate",""));
 
+ /* Student profile */
  $("studentName").textContent=currentStudentName;
- $("userAvatar").textContent=currentStudentName.trim().split(/\s+/)
-  .map(w=>w[0]).join("").slice(0,2).toUpperCase()||"ST";
+ $("profileStudentName").textContent=currentStudentName;
 
+ const avatarURL=getStudentAvatar({...student,mobile});
+
+ $("studentProfileAvatar").src=avatarURL;
+ $("userAvatar").src=avatarURL;
+
+ $("studentProfileAvatar").onerror=()=>{
+  $("studentProfileAvatar").src=
+   "https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student";
+ };
+
+ $("userAvatar").onerror=()=>{
+  $("userAvatar").src=
+   "https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student";
+ };
+
+ /* Package details */
  $("studentId").textContent="A1-"+mobile.slice(-4);
- $("packageName").textContent=classType==="Personal"?"Personal Training":"Group Training";
+ $("packageName").textContent=
+  classType==="Personal"?"Personal Training":"Group Training";
  $("classType").textContent=classType;
  $("admissionDate").textContent=admissionDate;
  $("accountStatus").textContent=currentStudentActive?"Active":"Not Active";
- $("accountStatus").style.color=currentStudentActive?"var(--green)":"var(--red)";
+ $("accountStatus").style.color=
+  currentStudentActive?"var(--green)":"var(--red)";
 
+ /* Statistics */
  $("completedClasses").textContent=completed;
  $("remainingClasses").textContent=left;
  $("totalClasses").textContent=total;
- $("totalDistance").textContent=(logs.length*5)+" KM";
 
+ const distancePerClass=Number(value(student,"distancePerClass",5))||5;
+ $("totalDistance").textContent=(logs.length*distancePerClass)+" KM";
+
+ /* Progress */
  $("progressPercent").textContent=percent+"%";
  $("progressBar").style.width=percent+"%";
  $("progressDone").textContent=completed+" classes completed";
  $("progressTotal").textContent=total+" total classes";
 
- const nextDate=value(student,"nextClassDate",value(student,"classDate",""));
- const nextTime=value(student,"nextClassTime",value(student,"classTime",""));
- const nextLocation=value(student,"nextClassLocation",value(student,"classLocation",""));
+ /* Next class */
+ updateNextClass(student,left);
 
- $("nextClassDate").textContent=nextDate?formatDate(nextDate):"Schedule Pending";
- $("nextClassTime").textContent=nextTime||"Time to be confirmed";
- $("nextClassLocation").textContent=nextLocation||"Location to be confirmed";
- $("nextClassTitle").textContent=left===0?"Training Completed":"Your next driving session";
- $("nextClassStatus").textContent=left===0?"Completed":(nextDate?"Scheduled":"Awaiting Schedule");
-
+ /* History and remarks */
  renderHistory(logs);
  renderFeedback(logs);
 
@@ -659,7 +800,12 @@ function resetDashboard(){
 
  $("loginPanel").style.display="block";
  $("studentName").textContent="Student";
- $("userAvatar").textContent="ST";
+ $("profileStudentName").textContent="Student";
+
+ const fallback="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student";
+ $("studentProfileAvatar").src=fallback;
+ $("userAvatar").src=fallback;
+
  $("studentId").textContent="--";
  $("packageName").textContent="Driving Training";
  $("classType").textContent="--";
@@ -680,9 +826,14 @@ function resetDashboard(){
  $("nextClassLocation").textContent="Location to be confirmed";
  $("nextClassTitle").textContent="Your next driving session";
  $("nextClassStatus").textContent="Awaiting Schedule";
+ $("nextClassStatus").className="status-pending";
 
- $("historyList").innerHTML='<div class="empty">Connect your account to view class history.</div>';
- $("feedbackList").innerHTML='<div class="empty">Instructor remarks will appear here.</div>';
+ $("historyList").innerHTML=
+  '<div class="empty">Connect your account to view class history.</div>';
+
+ $("feedbackList").innerHTML=
+  '<div class="empty">Instructor remarks will appear here.</div>';
+
  $("historyCount").textContent="0 classes";
 }
 
@@ -693,8 +844,9 @@ function showManualLogin(message){
 }
 
 function connectStudent(mobile){
+
  if(!/^[0-9]{10}$/.test(mobile)){
-  showManualLogin("No valid saved mobile number found. Please login from the main website.");
+  showManualLogin("Please enter a valid registered mobile number.");
   return;
  }
 
@@ -709,10 +861,11 @@ function connectStudent(mobile){
  const studentRef=doc(db,"studentData",mobile);
 
  unsubscribeStudent=onSnapshot(studentRef,snapshot=>{
+
   if(!snapshot.exists()){
    localStorage.removeItem(STORAGE_KEY);
    resetDashboard();
-   showManualLogin("Student record not found. Please login again from the main website.");
+   showManualLogin("Student record not found. Please login again.");
    return;
   }
 
@@ -721,21 +874,22 @@ function connectStudent(mobile){
   if(student.notActive===true){
    localStorage.removeItem(STORAGE_KEY);
    resetDashboard();
-   showManualLogin("Your student account is inactive. Please contact the institute.");
+   showManualLogin("Your student account is inactive. Please contact your instructor.");
    return;
   }
 
   $("manualLoginControls").style.display="none";
   renderDashboard(student,mobile);
+
   showMessage("Account verified successfully.","var(--green)");
 
  },error=>{
-  console.error("Firebase student verification error:",error);
-  showMessage("Unable to verify your account. Please check your internet connection or Firebase permissions.","var(--red)");
+  console.error("Student verification error:",error);
+  showMessage("Unable to verify your account. Please check your internet connection or database permissions.","var(--red)");
  });
 }
 
-/* OPTIONAL MANUAL CONNECTION */
+/* MANUAL CONNECTION */
 $("studentMobile").addEventListener("input",function(){
  this.value=this.value.replace(/\D/g,"").slice(0,10);
 });
@@ -757,13 +911,17 @@ $("studentMobile").addEventListener("keydown",e=>{
  if(e.key==="Enter")$("loginButton").click();
 });
 
-/* AUTOMATIC LOGIN FROM INDEX OR SAVED BROWSER */
+/* AUTO LOGIN */
 const urlMobile=new URLSearchParams(window.location.search).get("mobile");
 const savedMobile=localStorage.getItem(STORAGE_KEY);
-const mobileToVerify=urlMobile||savedMobile;
 
-if(mobileToVerify && /^[0-9]{10}$/.test(mobileToVerify)){
- localStorage.setItem(STORAGE_KEY,mobileToVerify);
+/*
+  If a saved mobile exists, do not allow a different URL mobile
+  to silently replace it.
+*/
+const mobileToVerify=savedMobile||urlMobile;
+
+if(mobileToVerify&&/^[0-9]{10}$/.test(mobileToVerify)){
  $("manualLoginControls").style.display="none";
  connectStudent(mobileToVerify);
 }else{
@@ -771,7 +929,7 @@ if(mobileToVerify && /^[0-9]{10}$/.test(mobileToVerify)){
  $("manualLoginControls").style.display="none";
 }
 
-/* STUDENT FEEDBACK THROUGH WHATSAPP */
+/* WHATSAPP FEEDBACK */
 $("feedbackForm").addEventListener("submit",e=>{
  e.preventDefault();
 
@@ -798,12 +956,15 @@ Rating: ${rating}/5
 Feedback:
 ${message}`;
 
- const url="https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(text);
+ const url="https://wa.me/"+WHATSAPP_NUMBER+
+  "?text="+encodeURIComponent(text);
+
  window.open(url,"_blank");
 });
 
-/* ICONS */
+/* LUCIDE ICONS */
 if(window.lucide)window.lucide.createIcons();
+
 </script>
 
 </body>
