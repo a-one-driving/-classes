@@ -1,0 +1,852 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#080D18">
+<meta name="description" content="Explore ABHINAASH A1 Driving training courses and packages in Baripada.">
+<title>Driving Courses & Packages | ABHINAASH A1</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+:root{
+  --bg:#080D18;
+  --card:#111A29;
+  --card2:#172337;
+  --gold:#F2BD45;
+  --muted:#A8B1C2;
+  --white:#fff;
+  --border:rgba(255,255,255,.09);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:85px}
+body{
+  background:var(--bg);
+  color:var(--white);
+  font-family:Inter,Arial,sans-serif;
+  overflow-x:hidden;
+}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer}
+.container{width:min(1150px,92%);margin:auto}
+svg{width:22px;height:22px;flex-shrink:0}
+
+/* HEADER */
+header{
+  height:70px;
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(8,13,24,.97);
+  backdrop-filter:blur(15px);
+  border-bottom:1px solid var(--border);
+}
+.nav{
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-icon{
+  width:42px;height:42px;
+  border:2px solid var(--gold);
+  border-radius:13px;
+  display:grid;place-items:center;
+  color:var(--gold);
+  font-weight:800;font-size:19px;
+}
+.logo-text strong{font-size:15px}
+.logo-text strong span{color:var(--gold)}
+.logo-text small{
+  display:block;font-size:9px;
+  letter-spacing:5px;color:var(--muted);
+}
+.nav-links{display:flex;align-items:center;gap:25px}
+.nav-links a{font-size:12px;color:#d3d9e4}
+.nav-links a:hover,.nav-links a.active{color:var(--gold)}
+.nav-cta{
+  padding:12px 18px;
+  background:var(--gold);
+  color:#111!important;
+  border-radius:30px;
+  font-weight:800;
+}
+.menu-btn{
+  display:none;background:none;
+  color:white;border:0;
+}
+
+/* HERO */
+.hero{
+  padding:85px 0 75px;
+  background:
+  linear-gradient(90deg,rgba(8,13,24,.98),rgba(8,13,24,.75)),
+  url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1600&q=85')
+  center/cover;
+}
+.breadcrumb{
+  display:flex;gap:9px;
+  align-items:center;
+  font-size:12px;color:var(--muted);
+  margin-bottom:25px;
+}
+.breadcrumb a:hover{color:var(--gold)}
+.breadcrumb svg{width:14px;height:14px}
+.eyebrow{
+  color:var(--gold);
+  font-size:11px;
+  letter-spacing:3px;
+  font-weight:800;
+  margin-bottom:17px;
+}
+.hero h1{
+  font-size:clamp(36px,6vw,58px);
+  line-height:1.12;
+  letter-spacing:-2px;
+  max-width:700px;
+}
+.hero h1 span{color:var(--gold)}
+.hero p{
+  color:#b8c1d0;
+  font-size:14px;
+  line-height:1.8;
+  max-width:570px;
+  margin-top:18px;
+}
+.hero-actions{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+.btn{
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  gap:9px;
+  padding:14px 20px;
+  border-radius:11px;
+  font-size:13px;
+  font-weight:800;
+  transition:.25s;
+  border:1px solid transparent;
+}
+.btn svg{width:18px;height:18px}
+.btn-primary{background:var(--gold);color:#111}
+.btn-primary:hover{background:#ffd16b;transform:translateY(-2px)}
+.btn-outline{border-color:#566071;color:white}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+
+/* SECTION */
+.section{padding:75px 0 0}
+.section-head{text-align:center;margin-bottom:35px}
+.section-head .eyebrow{margin-bottom:12px}
+.section-head h2{
+  font-size:clamp(25px,4vw,36px);
+  letter-spacing:-1px;
+}
+.section-head h2 span{color:var(--gold)}
+.section-head p{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.7;
+  margin-top:10px;
+}
+
+/* PACKAGE CARDS */
+.packages{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+.package{
+  position:relative;
+  background:linear-gradient(145deg,#162236,#101827);
+  border:1px solid var(--border);
+  border-radius:21px;
+  padding:26px 22px;
+  display:flex;
+  flex-direction:column;
+  transition:.3s;
+}
+.package:hover{
+  transform:translateY(-5px);
+  border-color:var(--gold);
+}
+.package.popular{border:1.5px solid var(--gold)}
+.popular-label{
+  position:absolute;
+  top:-14px;left:50%;
+  transform:translateX(-50%);
+  background:var(--gold);
+  color:#111;
+  padding:7px 17px;
+  font-size:10px;
+  font-weight:800;
+  border-radius:20px;
+  white-space:nowrap;
+}
+.package-icon{
+  width:52px;height:52px;
+  background:rgba(242,189,69,.1);
+  border-radius:15px;
+  display:grid;place-items:center;
+  color:var(--gold);
+  margin-bottom:20px;
+}
+.package-icon svg{width:29px;height:29px}
+.package h3{font-size:19px}
+.duration{color:var(--muted);font-size:12px;margin-top:7px}
+.price{
+  color:var(--gold);
+  font-size:35px;
+  font-weight:800;
+  margin:24px 0 5px;
+}
+.price small{font-size:12px;color:var(--muted);font-weight:500}
+.description{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.7;
+  min-height:42px;
+  margin-bottom:22px;
+}
+.package-divider{height:1px;background:var(--border);margin-bottom:20px}
+.package h4{
+  font-size:12px;
+  margin-bottom:17px;
+  color:#dce1e9;
+}
+.features{list-style:none;flex:1}
+.features li{
+  display:flex;
+  gap:10px;
+  font-size:12px;
+  line-height:1.5;
+  color:#d3d9e4;
+  margin-bottom:16px;
+}
+.features svg{
+  width:16px;height:16px;
+  color:var(--gold);
+  stroke-width:2.5;
+}
+.package .btn{width:100%;margin-top:22px}
+.btn-card{
+  background:transparent;
+  border:1px solid var(--gold);
+  color:var(--gold);
+}
+.popular .btn-card{background:var(--gold);color:#111}
+
+/* COMPARISON */
+.comparison{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  overflow:hidden;
+}
+.comparison-title{
+  padding:22px;
+  font-size:17px;
+  border-bottom:1px solid var(--border);
+}
+.table-wrap{overflow-x:auto}
+table{
+  border-collapse:collapse;
+  width:100%;
+  min-width:570px;
+}
+th,td{
+  padding:17px 16px;
+  text-align:center;
+  font-size:12px;
+  border-bottom:1px solid var(--border);
+}
+th{color:var(--gold);font-size:12px}
+td:first-child,th:first-child{text-align:left}
+td:first-child{color:#d9dfeb}
+td{color:var(--muted)}
+.yes{color:#4ade80}
+.no{color:#687386}
+.table-price{color:var(--gold);font-weight:800}
+
+/* PROCESS */
+.process-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+}
+.process-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:17px;
+  padding:23px 16px;
+  text-align:center;
+}
+.process-number{
+  width:39px;height:39px;
+  display:grid;place-items:center;
+  background:rgba(242,189,69,.12);
+  color:var(--gold);
+  border-radius:12px;
+  font-weight:800;
+  margin:0 auto 15px;
+}
+.process-card h3{font-size:13px;margin-bottom:8px}
+.process-card p{
+  color:var(--muted);
+  font-size:11px;line-height:1.7;
+}
+
+/* CTA */
+.cta{
+  margin-top:75px;
+  padding:35px;
+  border:1px solid var(--gold);
+  border-radius:21px;
+  background:linear-gradient(110deg,#302616,#151b26);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+}
+.cta h2{font-size:23px;margin-bottom:10px}
+.cta p{font-size:12px;color:#d0d3d9;line-height:1.7}
+
+/* FOOTER */
+footer{
+  margin-top:80px;
+  padding:45px 0 100px;
+  background:#060a12;
+  border-top:1px solid var(--border);
+}
+.footer-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  gap:30px;
+}
+.footer-about p{
+  max-width:380px;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.8;
+  margin-top:15px;
+}
+footer h3{font-size:13px;margin-bottom:17px}
+footer ul{list-style:none}
+footer li{margin-bottom:13px}
+footer li a{font-size:12px;color:var(--muted)}
+footer li a:hover{color:var(--gold)}
+.copyright{
+  text-align:center;
+  border-top:1px solid var(--border);
+  margin-top:30px;
+  padding-top:20px;
+  color:#738096;
+  font-size:11px;
+}
+
+/* BOTTOM NAV */
+.bottom-nav{
+  display:none;
+  position:fixed;
+  z-index:99;
+  bottom:0;left:0;
+  width:100%;
+  height:68px;
+  background:rgba(8,13,24,.98);
+  border-top:1px solid var(--border);
+  backdrop-filter:blur(15px);
+  padding-bottom:env(safe-area-inset-bottom);
+}
+.bottom-nav a{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:5px;
+  color:var(--muted);
+  font-size:10px;
+}
+.bottom-nav a.active{color:var(--gold)}
+.bottom-nav svg{width:21px;height:21px}
+
+/* MOBILE */
+@media(max-width:800px){
+  .packages{gap:12px}
+  .package{padding:20px 15px}
+}
+@media(max-width:650px){
+  header{height:65px}
+  .nav-links{
+    display:none;
+    position:absolute;
+    top:65px;left:0;
+    width:100%;
+    background:#0d1523;
+    padding:22px;
+    flex-direction:column;
+    align-items:stretch;
+    gap:20px;
+    border-bottom:1px solid var(--border);
+  }
+  .nav-links.open{display:flex}
+  .nav-links a{font-size:14px}
+  .menu-btn{display:block}
+  .hero{padding:60px 0}
+  .hero h1{font-size:41px}
+  .hero p{font-size:13px}
+  .packages{grid-template-columns:1fr;gap:23px}
+  .package{padding:25px}
+  .package.popular{margin-top:8px}
+  .section{padding-top:60px}
+  .section-head{text-align:left}
+  .process-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .process-card{padding:20px 12px}
+  .cta{flex-direction:column;align-items:flex-start;padding:24px}
+  .cta .btn{width:100%}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:25px}
+  .footer-about{grid-column:1/-1}
+  .bottom-nav{display:flex}
+  footer{padding-bottom:95px}
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+<div class="container nav">
+
+  <a href="index.html" class="logo">
+    <div class="logo-icon">A1</div>
+    <div class="logo-text">
+      <strong>ABHINAASH <span>A1</span></strong>
+      <small>DRIVING</small>
+    </div>
+  </a>
+
+  <nav class="nav-links" id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="courses.html" class="active">Packages</a>
+    <a href="index.html#vehicle">Our Vehicle</a>
+    <a href="index.html#why">Why Us</a>
+    <a href="contact.html">Contact</a>
+    <a href="booking.html" class="nav-cta">Book Now →</a>
+  </nav>
+
+  <button class="menu-btn" onclick="toggleMenu()" aria-label="Open menu">
+    <i data-lucide="menu"></i>
+  </button>
+
+</div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+<div class="container">
+
+  <div class="breadcrumb">
+    <a href="index.html">Home</a>
+    <i data-lucide="chevron-right"></i>
+    <span>Courses & Packages</span>
+  </div>
+
+  <div class="eyebrow">DRIVING TRAINING PROGRAMS</div>
+
+  <h1>
+    Choose Your Perfect<br>
+    <span>Driving Package.</span>
+  </h1>
+
+  <p>
+    From beginner driving lessons to personalised training,
+    find a package that matches your learning goals and schedule.
+  </p>
+
+  <div class="hero-actions">
+    <a href="#packages" class="btn btn-primary">
+      Explore Packages
+      <i data-lucide="arrow-down"></i>
+    </a>
+
+    <a href="contact.html" class="btn btn-outline">
+      <i data-lucide="phone"></i>
+      Talk to Us
+    </a>
+  </div>
+
+</div>
+</section>
+
+<!-- PACKAGES -->
+<section class="section" id="packages">
+<div class="container">
+
+  <div class="section-head">
+    <div class="eyebrow">OUR PRICING</div>
+    <h2>Driving Training <span>Packages</span></h2>
+    <p>Transparent pricing. Practical learning. Confident driving.</p>
+  </div>
+
+  <div class="packages">
+
+    <!-- STANDARD -->
+    <article class="package">
+
+      <div class="package-icon">
+        <i data-lucide="car-front"></i>
+      </div>
+
+      <h3>Standard Plan</h3>
+      <div class="duration">20 Days Training</div>
+
+      <div class="price">₹3,500 <small>/ course</small></div>
+
+      <p class="description">
+        A practical starting point for learners who want to
+        build essential driving skills.
+      </p>
+
+      <div class="package-divider"></div>
+
+      <h4>PACKAGE INCLUDES</h4>
+
+      <ul class="features">
+        <li><i data-lucide="check-circle-2"></i> Daily practical training</li>
+        <li><i data-lucide="check-circle-2"></i> Basic driving controls</li>
+        <li><i data-lucide="check-circle-2"></i> Steering and braking practice</li>
+        <li><i data-lucide="check-circle-2"></i> Basic road practice</li>
+        <li><i data-lucide="check-circle-2"></i> Driving safety guidance</li>
+      </ul>
+
+      <a href="booking.html?package=standard" class="btn btn-card">
+        Select Standard
+        <i data-lucide="arrow-right"></i>
+      </a>
+
+    </article>
+
+    <!-- PREMIUM -->
+    <article class="package popular">
+
+      <div class="popular-label">MOST POPULAR</div>
+
+      <div class="package-icon">
+        <i data-lucide="car-front"></i>
+      </div>
+
+      <h3>Premium Plan</h3>
+      <div class="duration">30 Days Training</div>
+
+      <div class="price">₹4,500 <small>/ course</small></div>
+
+      <p class="description">
+        Comprehensive practical training for learners
+        who want more road experience.
+      </p>
+
+      <div class="package-divider"></div>
+
+      <h4>PACKAGE INCLUDES</h4>
+
+      <ul class="features">
+        <li><i data-lucide="check-circle-2"></i> Complete practical training</li>
+        <li><i data-lucide="check-circle-2"></i> City and traffic practice</li>
+        <li><i data-lucide="check-circle-2"></i> Reverse driving practice</li>
+        <li><i data-lucide="check-circle-2"></i> Parking and U-turn practice</li>
+        <li><i data-lucide="check-circle-2"></i> Road safety guidance</li>
+        <li><i data-lucide="check-circle-2"></i> Licence process guidance</li>
+      </ul>
+
+      <a href="booking.html?package=premium" class="btn btn-card">
+        Select Premium
+        <i data-lucide="arrow-right"></i>
+      </a>
+
+    </article>
+
+    <!-- PERSONAL -->
+    <article class="package">
+
+      <div class="package-icon">
+        <i data-lucide="user-round-check"></i>
+      </div>
+
+      <h3>Personal Plan</h3>
+      <div class="duration">Flexible Training</div>
+
+      <div class="price">₹8,000 <small>/ course</small></div>
+
+      <p class="description">
+        Personalised driving practice with flexible
+        scheduling and focused learning.
+      </p>
+
+      <div class="package-divider"></div>
+
+      <h4>PACKAGE INCLUDES</h4>
+
+      <ul class="features">
+        <li><i data-lucide="check-circle-2"></i> Personalised training</li>
+        <li><i data-lucide="check-circle-2"></i> Flexible class timing</li>
+        <li><i data-lucide="check-circle-2"></i> Advanced road practice</li>
+        <li><i data-lucide="check-circle-2"></i> Parking and reverse practice</li>
+        <li><i data-lucide="check-circle-2"></i> Individual skill assessment</li>
+        <li><i data-lucide="check-circle-2"></i> Licence process guidance</li>
+      </ul>
+
+      <a href="booking.html?package=personal" class="btn btn-card">
+        Select Personal
+        <i data-lucide="arrow-right"></i>
+      </a>
+
+    </article>
+
+  </div>
+</div>
+</section>
+
+<!-- COMPARISON -->
+<section class="section">
+<div class="container">
+
+  <div class="section-head">
+    <div class="eyebrow">COMPARE YOUR OPTIONS</div>
+    <h2>Package <span>Comparison</span></h2>
+    <p>Compare the training features before selecting your package.</p>
+  </div>
+
+  <div class="comparison">
+
+    <div class="comparison-title">Training Features</div>
+
+    <div class="table-wrap">
+      <table>
+
+        <thead>
+          <tr>
+            <th>Features</th>
+            <th>Standard</th>
+            <th>Premium</th>
+            <th>Personal</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>Duration</td>
+            <td>20 Days</td>
+            <td>30 Days</td>
+            <td>Flexible</td>
+          </tr>
+
+          <tr>
+            <td>Practical Training</td>
+            <td class="yes">Included</td>
+            <td class="yes">Included</td>
+            <td class="yes">Included</td>
+          </tr>
+
+          <tr>
+            <td>Basic Road Practice</td>
+            <td class="yes">Included</td>
+            <td class="yes">Included</td>
+            <td class="yes">Included</td>
+          </tr>
+
+          <tr>
+            <td>Traffic Practice</td>
+            <td class="no">—</td>
+            <td class="yes">Included</td>
+            <td class="yes">Included</td>
+          </tr>
+
+          <tr>
+            <td>Parking Practice</td>
+            <td class="no">—</td>
+            <td class="yes">Included</td>
+            <td class="yes">Included</td>
+          </tr>
+
+          <tr>
+            <td>Flexible Timing</td>
+            <td class="no">—</td>
+            <td class="no">—</td>
+            <td class="yes">Included</td>
+          </tr>
+
+          <tr>
+            <td>Price</td>
+            <td class="table-price">₹3,500</td>
+            <td class="table-price">₹4,500</td>
+            <td class="table-price">₹8,000</td>
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- TRAINING PROCESS -->
+<section class="section">
+<div class="container">
+
+  <div class="section-head">
+    <div class="eyebrow">SIMPLE LEARNING JOURNEY</div>
+    <h2>How Your Training <span>Works</span></h2>
+    <p>Four simple steps to begin your driving journey.</p>
+  </div>
+
+  <div class="process-grid">
+
+    <div class="process-card">
+      <div class="process-number">01</div>
+      <h3>Choose Package</h3>
+      <p>Select a training package according to your needs.</p>
+    </div>
+
+    <div class="process-card">
+      <div class="process-number">02</div>
+      <h3>Book Admission</h3>
+      <p>Submit your details and preferred start date.</p>
+    </div>
+
+    <div class="process-card">
+      <div class="process-number">03</div>
+      <h3>Start Training</h3>
+      <p>Attend practical classes with your instructor.</p>
+    </div>
+
+    <div class="process-card">
+      <div class="process-number">04</div>
+      <h3>Build Confidence</h3>
+      <p>Improve your driving skills through practice.</p>
+    </div>
+
+  </div>
+
+</div>
+</section>
+
+<!-- CTA -->
+<div class="container">
+
+  <div class="cta">
+
+    <div>
+      <div class="eyebrow">READY TO START?</div>
+      <h2>Your Driving Journey Starts Here.</h2>
+      <p>Choose your package and contact our team to discuss admission.</p>
+    </div>
+
+    <a href="booking.html" class="btn btn-primary">
+      Book Your Class
+      <i data-lucide="arrow-right"></i>
+    </a>
+
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+<div class="container">
+
+  <div class="footer-grid">
+
+    <div class="footer-about">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">A1</div>
+        <div class="logo-text">
+          <strong>ABHINAASH <span>A1</span></strong>
+          <small>DRIVING</small>
+        </div>
+      </a>
+
+      <p>
+        Your trusted driving training partner.
+        Learn practical driving skills and develop safe driving habits.
+      </p>
+    </div>
+
+    <div>
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="courses.html">Packages</a></li>
+        <li><a href="booking.html">Book Admission</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3>Useful Links</h3>
+      <ul>
+        <li><a href="https://parivahan.gov.in/" target="_blank">Parivahan Portal</a></li>
+        <li><a href="index.html#vehicle">Our Vehicle</a></li>
+        <li><a href="index.html#why">Why Choose Us</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="copyright">
+    © <span id="year"></span> ABHINAASH A1 Driving. All Rights Reserved.
+  </div>
+
+</div>
+</footer>
+
+<!-- MOBILE NAV -->
+<nav class="bottom-nav">
+
+  <a href="index.html">
+    <i data-lucide="house"></i>
+    Home
+  </a>
+
+  <a href="courses.html" class="active">
+    <i data-lucide="car-front"></i>
+    Packages
+  </a>
+
+  <a href="booking.html">
+    <i data-lucide="calendar-days"></i>
+    Booking
+  </a>
+
+  <a href="contact.html">
+    <i data-lucide="phone"></i>
+    Contact
+  </a>
+
+</nav>
+
+<script>
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+
+function toggleMenu(){
+  document.getElementById("navLinks").classList.toggle("open");
+}
+
+document.querySelectorAll(".nav-links a").forEach(link=>{
+  link.addEventListener("click",()=>{
+    document.getElementById("navLinks").classList.remove("open");
+  });
+});
+
+if(window.lucide){
+  lucide.createIcons();
+}
+</script>
+
+</body>
+</html>
