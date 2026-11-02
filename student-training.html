@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <meta name="theme-color" content="#080D18">
+<meta name="description" content="ABHINAASH A1 Driving student training dashboard">
 <title>My Training | ABHINAASH A1 Driving</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,8 +51,9 @@ h1{font-size:clamp(25px,4vw,34px);margin:7px 0}
 .login-controls input{flex:1;min-width:190px;padding:12px;border-radius:10px;border:1px solid var(--border);background:var(--card2);color:white;outline:none}
 .login-controls input:focus{border-color:var(--gold)}
 .login-btn{padding:12px 16px;border:0;border-radius:10px;background:var(--gold);color:#171717;font-size:11px;font-weight:800}
-.login-btn:disabled{opacity:.6}
+.login-btn:disabled{opacity:.6;cursor:not-allowed}
 .login-message{font-size:11px;margin-top:10px;color:var(--muted)}
+.logout-btn{display:none;margin-top:10px;padding:8px 12px;background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:8px;font-size:10px}
 
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:20px}
 .stat{background:var(--card);border:1px solid var(--border);border-radius:15px;padding:17px}
@@ -69,7 +71,7 @@ h1{font-size:clamp(25px,4vw,34px);margin:7px 0}
 .progress-top strong{font-size:13px;color:var(--gold)}
 .track{height:9px;background:#273449;border-radius:20px;overflow:hidden}
 .fill{height:100%;width:0;background:linear-gradient(90deg,#D99A25,var(--gold));border-radius:20px;transition:width .3s}
-.progress-foot{display:flex;justify-content:space-between;margin-top:9px;font-size:10px;color:var(--muted)}
+.progress-foot{display:flex;justify-content:space-between;gap:10px;margin-top:9px;font-size:10px;color:var(--muted)}
 .lesson-list{display:grid;gap:10px;margin-top:22px}
 .lesson{display:flex;align-items:center;gap:12px;padding:12px;background:var(--card2);border-radius:12px}
 .lesson-icon{width:35px;height:35px;display:grid;place-items:center;background:rgba(242,189,69,.1);color:var(--gold);border-radius:10px;flex-shrink:0}
@@ -91,15 +93,16 @@ h1{font-size:clamp(25px,4vw,34px);margin:7px 0}
 
 .attendance-panel{margin-bottom:18px}
 .table-wrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;min-width:520px}
+table{width:100%;border-collapse:collapse;min-width:650px}
 th{text-align:left;font-size:10px;color:var(--muted);font-weight:600;padding:12px;border-bottom:1px solid var(--border)}
-td{font-size:11px;padding:14px 12px;border-bottom:1px solid var(--border)}
+td{font-size:11px;padding:14px 12px;border-bottom:1px solid var(--border);vertical-align:top}
 tbody tr:last-child td{border-bottom:0}
 .badge{display:inline-flex;padding:5px 9px;border-radius:20px;font-size:9px;font-weight:800}
 .present{background:rgba(53,201,138,.12);color:var(--green)}
 .absent{background:rgba(255,119,119,.12);color:var(--red)}
 .pending{background:rgba(242,189,69,.12);color:var(--gold)}
 .empty{padding:25px;text-align:center;color:var(--muted);font-size:11px}
+.remark{display:block;color:var(--muted);font-size:9px;margin-top:5px;max-width:220px;white-space:normal}
 
 .skill-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .skill{background:var(--card2);border-radius:13px;padding:14px}
@@ -115,6 +118,9 @@ tbody tr:last-child td{border-bottom:0}
 .notice strong{font-size:10px}
 .notice p{font-size:10px;color:var(--muted);margin-top:3px}
 
+.account-status{display:none;margin-bottom:17px;padding:12px 14px;border:1px solid rgba(53,201,138,.2);background:rgba(53,201,138,.07);border-radius:12px;font-size:11px;color:var(--green)}
+.account-status.inactive{border-color:rgba(255,119,119,.2);background:rgba(255,119,119,.07);color:var(--red)}
+
 footer{border-top:1px solid var(--border);padding:22px 0 100px}
 .footer-inner{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
 .footer-inner p{font-size:10px;color:var(--muted)}
@@ -124,20 +130,20 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
 .bottom-nav i{width:19px;height:19px}
 
 @media(max-width:850px){
-.grid{grid-template-columns:1fr}
-.stats{grid-template-columns:repeat(2,1fr)}
+  .grid{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:600px){
-.topbar{height:62px}
-main{padding-top:23px}
-.page-heading{align-items:flex-start;flex-direction:column}
-.stats{gap:9px}
-.stat{padding:14px}
-.stat strong{font-size:21px}
-.panel{padding:16px}
-.skill-grid{grid-template-columns:1fr 1fr}
-.bottom-nav{display:flex}
-.footer-inner{flex-direction:column}
+  .topbar{height:62px}
+  main{padding-top:23px}
+  .page-heading{align-items:flex-start;flex-direction:column}
+  .stats{gap:9px}
+  .stat{padding:14px}
+  .stat strong{font-size:21px}
+  .panel{padding:16px}
+  .skill-grid{grid-template-columns:1fr 1fr}
+  .bottom-nav{display:flex}
+  .footer-inner{flex-direction:column}
 }
 </style>
 </head>
@@ -165,7 +171,8 @@ main{padding-top:23px}
     <a href="student-dashboard.html" class="back-link">← Dashboard</a>
   </section>
 
-  <!-- STUDENT LOGIN -->
+  <div class="account-status" id="accountStatus"></div>
+
   <section class="login-panel" id="loginPanel">
     <div class="login-head">
       <h2>Student Login</h2>
@@ -173,13 +180,14 @@ main{padding-top:23px}
     </div>
     <p>Enter your registered 10-digit mobile number to view your training records.</p>
     <div class="login-controls">
-      <input id="studentMobile" type="tel" maxlength="10" inputmode="numeric" placeholder="Registered mobile number">
+      <input id="studentMobile" type="tel" maxlength="10" inputmode="numeric" autocomplete="tel" placeholder="Registered mobile number">
       <button class="login-btn" id="loginButton" type="button">Connect Account</button>
     </div>
     <div class="login-message" id="loginMessage">Please enter your registered mobile number.</div>
   </section>
 
-  <!-- TRAINING STATS -->
+  <button class="logout-btn" id="logoutButton" type="button">Disconnect Student Record</button>
+
   <section class="stats">
     <div class="stat">
       <div class="stat-icon"><i data-lucide="calendar-check"></i></div>
@@ -203,7 +211,6 @@ main{padding-top:23px}
     </div>
   </section>
 
-  <!-- PROGRESS AND UPCOMING CLASS -->
   <section class="grid">
 
     <div class="panel">
@@ -221,7 +228,7 @@ main{padding-top:23px}
       </div>
       <div class="progress-foot">
         <span id="completedText">0 sessions completed</span>
-        <span id="remainingText">-- days remaining</span>
+        <span id="remainingText">-- sessions remaining</span>
       </div>
 
       <div class="lesson-list">
@@ -306,7 +313,6 @@ main{padding-top:23px}
 
   </section>
 
-  <!-- ATTENDANCE HISTORY -->
   <section class="panel attendance-panel" id="attendance">
     <div class="panel-head">
       <h2>Attendance History</h2>
@@ -317,20 +323,20 @@ main{padding-top:23px}
       <table>
         <thead>
           <tr>
-            <th>Date</th>
-            <th>Training Session</th>
-            <th>Duration</th>
+            <th>Date & Time</th>
+            <th>Route / Session</th>
+            <th>Distance</th>
+            <th>Remark</th>
             <th>Status</th>
           </tr>
         </thead>
         <tbody id="attendanceBody">
-          <tr><td colspan="4" class="empty">Connect your student account to view attendance.</td></tr>
+          <tr><td colspan="5" class="empty">Connect your student account to view attendance.</td></tr>
         </tbody>
       </table>
     </div>
   </section>
 
-  <!-- SKILLS -->
   <section class="panel">
     <div class="panel-head">
       <h2>Driving Skills</h2>
@@ -374,7 +380,7 @@ main{padding-top:23px}
       <i data-lucide="info"></i>
       <div>
         <strong>Skills Assessment</strong>
-        <p>Skill percentages above are illustrative indicators, not Firebase assessment records. They should not be treated as official instructor evaluations.</p>
+        <p>Skill percentages are illustrative only. They are not official instructor evaluations or Firebase assessment records.</p>
       </div>
     </div>
   </section>
@@ -397,9 +403,13 @@ main{padding-top:23px}
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-import { getFirestore, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+import {
+  getFirestore,
+  doc,
+  onSnapshot
+} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
-/* EXISTING FIREBASE PROJECT */
+/* EXISTING FIREBASE PROJECT - UNCHANGED */
 const firebaseConfig = {
   apiKey: "AIzaSyC3gWi8p85z-wkoJeWb3N3jYoQpcIar8Sww",
   authDomain: "abinash-driving.firebaseapp.com",
@@ -413,6 +423,8 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 let unsubscribeStudent = null;
+let currentMobile = "";
+
 const $ = id => document.getElementById(id);
 
 function showMessage(message,color="var(--muted)"){
@@ -429,19 +441,27 @@ function getValue(data,keys,fallback=""){
   return fallback;
 }
 
+function safeText(value){
+  return String(value ?? "").trim();
+}
+
 function parseDate(value){
   if(!value) return "—";
 
   try{
-    let date;
-
     if(value && typeof value.toDate === "function"){
-      date = value.toDate();
-    }else if(value instanceof Date){
-      date = value;
-    }else{
-      date = new Date(value);
+      return value.toDate().toLocaleDateString("en-IN",{
+        day:"2-digit",month:"short",year:"numeric"
+      });
     }
+
+    if(value instanceof Date && !Number.isNaN(value.getTime())){
+      return value.toLocaleDateString("en-IN",{
+        day:"2-digit",month:"short",year:"numeric"
+      });
+    }
+
+    const date = new Date(value);
 
     if(!Number.isNaN(date.getTime())){
       return date.toLocaleDateString("en-IN",{
@@ -455,96 +475,110 @@ function parseDate(value){
   return String(value);
 }
 
-/* READ ATTENDANCE LOGS */
-function normalizeLogs(logs){
-  if(Array.isArray(logs)){
-    return logs.map((item,index)=>normalizeRecord(item,index));
-  }
+/*
+  ACTUAL ADMIN ATTENDANCE FORMAT:
+  DD MMM YYYY | hh:mm AM/PM — Route: ROUTE | Distance: 5 KM | Remark: REMARK
+*/
 
-  if(logs && typeof logs === "object"){
-    return Object.entries(logs).map(([key,item],index)=>{
-      const record = normalizeRecord(item,index);
-      if(record.date === "—") record.date = parseDate(key);
-      return record;
-    });
-  }
+function parseAdminAttendanceLog(log,index){
+  const text = safeText(log);
 
-  return [];
-}
+  const parts = text.split("|").map(part=>part.trim());
 
-function normalizeRecord(item,index){
-  if(typeof item === "string"){
-    const distance = item.match(/Distance:\s*([\d.]+)\s*KM/i);
+  const dateTime = parts[0] || "—";
 
-    return {
-      date:extractDate(item),
-      session:"Driving Practice",
-      duration:distance ? distance[1] + " KM" : "Not recorded",
-      status:extractStatus(item)
-    };
-  }
+  let route = "Driving Practice";
+  let distance = "Not recorded";
+  let remark = "";
 
-  if(!item || typeof item !== "object"){
-    return {
-      date:"—",
-      session:"Driving Practice",
-      duration:"Not recorded",
-      status:"Pending"
-    };
-  }
+  parts.slice(1).forEach(part=>{
+    if(/^Route:/i.test(part)){
+      route = part.replace(/^Route:\s*/i,"").trim() || route;
+    }
 
-  const date = getValue(
-    item,["date","attendanceDate","createdAt","timestamp","time"],"—"
-  );
+    if(/^Distance:/i.test(part)){
+      distance = part.replace(/^Distance:\s*/i,"").trim() || distance;
+    }
 
-  const session = getValue(
-    item,["session","lesson","title","description","activity","topic"],
-    "Driving Practice"
-  );
-
-  const duration = getValue(
-    item,["duration","distance","timeTaken","km"],"Not recorded"
-  );
-
-  const status = getValue(
-    item,["status","attendance","attendanceStatus"],"Pending"
-  );
+    if(/^Remark:/i.test(part)){
+      remark = part.replace(/^Remark:\s*/i,"").trim();
+    }
+  });
 
   return {
-    date:parseDate(date),
-    session:String(session),
-    duration:String(duration),
-    status:String(status)
+    id:index,
+    date:dateTime,
+    session:route,
+    distance,
+    remark,
+    status:"Present"
   };
 }
 
-function extractDate(text){
-  const match = text.match(/\d{1,2}[/-]\d{1,2}[/-]\d{2,4}/);
-  return match ? match[0] : "—";
-}
+/* Convert attendanceLogs into display records */
+function normalizeLogs(logs){
+  if(!Array.isArray(logs)) return [];
 
-function extractStatus(text){
-  const lower = text.toLowerCase();
+  return logs.map((item,index)=>{
+    if(typeof item === "string"){
+      return parseAdminAttendanceLog(item,index);
+    }
 
-  if(lower.includes("absent")) return "Absent";
-  if(lower.includes("present")) return "Present";
+    if(item && typeof item === "object"){
+      const date = getValue(
+        item,["date","attendanceDate","createdAt","timestamp"],"—"
+      );
 
-  return "Present";
+      return {
+        id:index,
+        date:parseDate(date),
+        session:safeText(getValue(
+          item,["route","session","lesson","title","description"],
+          "Driving Practice"
+        )),
+        distance:safeText(getValue(
+          item,["distance","km","duration"],"Not recorded"
+        )),
+        remark:safeText(getValue(
+          item,["remark","remarks","instructorRemark","feedback"],""
+        )),
+        status:safeText(getValue(
+          item,["status","attendance","attendanceStatus"],"Present"
+        ))
+      };
+    }
+
+    return {
+      id:index,
+      date:"—",
+      session:"Driving Practice",
+      distance:"Not recorded",
+      remark:"",
+      status:"Present"
+    };
+  });
 }
 
 function isPresent(status){
   return ["present","approved","completed","done"].includes(
-    String(status).toLowerCase()
+    safeText(status).toLowerCase()
   );
 }
 
 function isAbsent(status){
   return ["absent","rejected"].includes(
-    String(status).toLowerCase()
+    safeText(status).toLowerCase()
   );
 }
 
-/* RENDER ATTENDANCE */
+/* Safe table rendering */
+function addCell(row,value){
+  const cell = document.createElement("td");
+  cell.textContent = value || "—";
+  row.appendChild(cell);
+  return cell;
+}
+
 function renderAttendance(records){
   const body = $("attendanceBody");
   body.replaceChildren();
@@ -554,7 +588,7 @@ function renderAttendance(records){
   if(!records.length){
     const row = document.createElement("tr");
     const cell = document.createElement("td");
-    cell.colSpan = 4;
+    cell.colSpan = 5;
     cell.className = "empty";
     cell.textContent = "No attendance records available yet.";
     row.appendChild(cell);
@@ -565,16 +599,26 @@ function renderAttendance(records){
   records.slice().reverse().forEach(record=>{
     const row = document.createElement("tr");
 
-    [record.date,record.session,record.duration].forEach(value=>{
-      const cell = document.createElement("td");
-      cell.textContent = value || "—";
-      row.appendChild(cell);
-    });
+    addCell(row,record.date);
+    addCell(row,record.session);
+    addCell(row,record.distance);
+
+    const remarkCell = document.createElement("td");
+
+    if(record.remark){
+      const remark = document.createElement("span");
+      remark.className = "remark";
+      remark.textContent = record.remark;
+      remarkCell.appendChild(remark);
+    }else{
+      remarkCell.textContent = "—";
+    }
+
+    row.appendChild(remarkCell);
 
     const statusCell = document.createElement("td");
     const badge = document.createElement("span");
-
-    const status = record.status || "Pending";
+    const status = record.status || "Present";
 
     badge.className = "badge " +
       (isPresent(status) ? "present" :
@@ -583,66 +627,83 @@ function renderAttendance(records){
     badge.textContent = status;
     statusCell.appendChild(badge);
     row.appendChild(statusCell);
+
     body.appendChild(row);
   });
 }
 
-/* RENDER STUDENT TRAINING */
+/* Render student details using the real admin schema */
 function renderTraining(student,mobile){
 
   const records = normalizeLogs(student.attendanceLogs);
 
-  const presentCount = records.filter(
-    record=>isPresent(record.status)
-  ).length;
-
-  const absentCount = records.filter(
-    record=>isAbsent(record.status)
-  ).length;
-
-  const pendingCount = records.filter(
-    record=>!isPresent(record.status) && !isAbsent(record.status)
-  ).length;
-
   /*
-   * Preserve compatibility with the existing student record:
-   * if attendance logs are present, count their actual statuses.
-   * If the older record has no attendance logs, use its legacy
-   * remaining field as completed count, as used by the earlier profile page.
-   */
-  let completed = records.length ? presentCount : 0;
+    In the existing admin code:
+    - remaining = completed class count
+    - totalClasses = total package classes
+    - every attendance log is a completed class
+  */
+  const adminCompleted = Number(student.remaining || 0);
 
-  if(records.length === 0){
-    completed = Number(student.remaining || 0);
-  }
-
-  const duration = Number(getValue(
-    student,["duration","totalDays","packageDays"],30
-  )) || 30;
-
-  const remaining = Math.max(duration-completed,0);
-  const percent = Math.min(Math.round(completed/duration*100),100);
-
-  const packageName = getValue(
-    student,["packageName","package","courseName","planName"],"Driving Package"
+  const completed = Math.min(
+    Math.max(records.length,adminCompleted,0),
+    Math.max(Number(student.totalClasses || 0),records.length,adminCompleted)
   );
 
-  $("avatar").textContent = String(
-    getValue(student,["name","studentName"],"Student")
-  ).trim().split(/\s+/).map(part=>part[0]).join("").slice(0,2).toUpperCase();
+  const totalClasses = Math.max(
+    Number(student.totalClasses || 0),
+    completed
+  );
 
-  $("courseName").textContent = packageName + " · " + duration + " Days";
+  const remainingClasses = Math.max(totalClasses-completed,0);
 
-  $("totalPresent").textContent = presentCount || (records.length ? 0 : completed);
+  const percent = totalClasses > 0
+    ? Math.min(Math.round(completed/totalClasses*100),100)
+    : 0;
+
+  const presentCount = records.length;
+  const absentCount = 0;
+
+  const totalDistance = records.reduce((sum,record)=>{
+    const match = String(record.distance).match(/([\d.]+)/);
+    return sum + (match ? Number(match[1]) : 0);
+  },0);
+
+  const studentName = safeText(
+    getValue(student,["name"],"Student")
+  );
+
+  const classType = safeText(
+    getValue(student,["classType"],"Driving")
+  );
+
+  const notActive = student.notActive === true;
+
+  $("avatar").textContent = studentName
+    .split(/\s+/)
+    .map(part=>part[0] || "")
+    .join("")
+    .slice(0,2)
+    .toUpperCase() || "ST";
+
+  $("courseName").textContent =
+    classType + " · " + totalClasses + " Classes";
+
+  $("totalPresent").textContent = presentCount;
   $("totalAbsent").textContent = absentCount;
-  $("totalLessons").textContent = records.length || completed;
+  $("totalLessons").textContent = completed;
   $("completion").textContent = percent + "%";
 
   $("progressText").textContent = percent + "%";
   $("progressFill").style.width = percent + "%";
-  $("completedText").textContent = completed + " days completed";
-  $("remainingText").textContent = remaining + " days remaining";
 
+  $("completedText").textContent =
+    completed + " of " + totalClasses + " classes completed";
+
+  $("remainingText").textContent =
+    remainingClasses + " classes remaining";
+
+  /* Next class fields are optional and not currently written by admin */
   const nextDate = getValue(
     student,["nextClassDate","classDate","scheduledDate"],""
   );
@@ -664,7 +725,10 @@ function renderTraining(student,mobile){
     "Training location to be confirmed"
   );
 
-  $("nextDate").textContent = nextDate ? parseDate(nextDate) : "Schedule Pending";
+  $("nextDate").textContent = nextDate
+    ? parseDate(nextDate)
+    : "Schedule Pending";
+
   $("nextTime").textContent = nextTime || "Time to be confirmed";
   $("nextTitle").textContent = nextTitle;
   $("nextStatus").textContent = nextStatus;
@@ -672,18 +736,74 @@ function renderTraining(student,mobile){
 
   renderAttendance(records);
 
+  const statusBox = $("accountStatus");
+  statusBox.style.display = "block";
+
+  if(notActive){
+    statusBox.className = "account-status inactive";
+    statusBox.textContent =
+      "Your training account is currently marked inactive. Please contact the driving school.";
+  }else{
+    statusBox.className = "account-status";
+    statusBox.textContent =
+      "Live training record connected · " + studentName +
+      " · " + mobile +
+      " · Recorded practice distance: " + totalDistance + " KM";
+  }
+
   $("loginPanel").style.display = "none";
+  $("logoutButton").style.display = "inline-block";
 
   if(window.lucide) window.lucide.createIcons();
 }
 
-/* CONNECT FIREBASE */
+/* Reset display when disconnecting */
+function disconnectStudent(){
+  if(unsubscribeStudent){
+    unsubscribeStudent();
+    unsubscribeStudent = null;
+  }
+
+  currentMobile = "";
+
+  $("loginPanel").style.display = "block";
+  $("logoutButton").style.display = "none";
+  $("accountStatus").style.display = "none";
+
+  $("studentMobile").value = "";
+
+  $("totalPresent").textContent = "--";
+  $("totalAbsent").textContent = "--";
+  $("totalLessons").textContent = "--";
+  $("completion").textContent = "--";
+
+  $("courseName").textContent = "Package not assigned";
+  $("progressText").textContent = "0%";
+  $("progressFill").style.width = "0%";
+  $("completedText").textContent = "0 sessions completed";
+  $("remainingText").textContent = "-- sessions remaining";
+
+  $("nextDate").textContent = "Schedule Pending";
+  $("nextTime").textContent = "Time to be confirmed";
+  $("nextTitle").textContent = "Your next driving lesson";
+  $("nextStatus").textContent = "Awaiting Schedule";
+  $("nextLocation").textContent = "Training location to be confirmed";
+
+  renderAttendance([]);
+
+  showMessage("Please enter your registered mobile number.");
+}
+
+/* Connect to Firestore */
 function connectStudent(){
   const mobile = $("studentMobile").value.trim();
   const button = $("loginButton");
 
   if(!/^[6-9]\d{9}$/.test(mobile)){
-    showMessage("Please enter a valid 10-digit mobile number.","var(--red)");
+    showMessage(
+      "Please enter a valid 10-digit mobile number.",
+      "var(--red)"
+    );
     return;
   }
 
@@ -692,39 +812,49 @@ function connectStudent(){
     unsubscribeStudent = null;
   }
 
+  currentMobile = mobile;
+
   button.disabled = true;
   button.textContent = "Connecting...";
   showMessage("Connecting to your student records...");
 
   const studentRef = doc(db,"studentData",mobile);
 
-  unsubscribeStudent = onSnapshot(studentRef,snapshot=>{
+  unsubscribeStudent = onSnapshot(
+    studentRef,
+    snapshot=>{
 
-    button.disabled = false;
-    button.textContent = "Connect Account";
+      button.disabled = false;
+      button.textContent = "Connect Account";
 
-    if(!snapshot.exists()){
+      if(!snapshot.exists()){
+        $("accountStatus").style.display = "none";
+        showMessage(
+          "Student record not found. Please check your registered mobile number.",
+          "var(--red)"
+        );
+        return;
+      }
+
+      renderTraining(snapshot.data(),mobile);
       showMessage(
-        "Student record not found. Please check your registered mobile number.",
+        "Training records connected successfully.",
+        "var(--green)"
+      );
+
+    },
+    error=>{
+      console.error("Firebase error:",error);
+
+      button.disabled = false;
+      button.textContent = "Connect Account";
+
+      showMessage(
+        "Unable to load records. Please check Firebase permissions.",
         "var(--red)"
       );
-      return;
     }
-
-    renderTraining(snapshot.data(),mobile);
-    showMessage("Training records connected successfully.","var(--green)");
-
-  },error=>{
-    console.error("Firebase error:",error);
-
-    button.disabled = false;
-    button.textContent = "Connect Account";
-
-    showMessage(
-      "Unable to load records. Please check Firebase permissions.",
-      "var(--red)"
-    );
-  });
+  );
 }
 
 $("loginButton").addEventListener("click",connectStudent);
@@ -732,6 +862,8 @@ $("loginButton").addEventListener("click",connectStudent);
 $("studentMobile").addEventListener("keydown",event=>{
   if(event.key === "Enter") connectStudent();
 });
+
+$("logoutButton").addEventListener("click",disconnectStudent);
 
 if(window.lucide) window.lucide.createIcons();
 </script>
