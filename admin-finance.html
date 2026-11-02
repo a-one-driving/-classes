@@ -42,8 +42,6 @@ a{text-decoration:none;color:inherit}
 .btn svg{width:16px;height:16px}
 .gold{background:var(--gold);color:#151515}
 .dark{background:var(--card2);color:white;border:1px solid var(--line)}
-.green-btn{background:rgba(53,201,138,.13);color:var(--green);border:1px solid rgba(53,201,138,.2)}
-.red-btn{background:rgba(255,107,117,.13);color:var(--red);border:1px solid rgba(255,107,117,.2)}
 .notice{background:rgba(242,189,69,.08);border:1px solid rgba(242,189,69,.2);color:#EACB83;padding:12px 15px;border-radius:12px;font-size:10px;line-height:1.6;margin-bottom:22px}
 .notice svg{width:15px;vertical-align:middle;margin-right:5px}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
@@ -61,7 +59,7 @@ a{text-decoration:none;color:inherit}
 .panel-head p{font-size:10px;color:var(--muted);margin:0}
 .chart{height:210px;display:flex;align-items:flex-end;gap:13px;padding:10px 4px 0;border-bottom:1px solid var(--line)}
 .bar-col{flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:8px;min-width:0}
-.bar{width:min(34px,75%);background:linear-gradient(180deg,#F2BD45,#B98524);border-radius:7px 7px 2px 2px;min-height:5px;position:relative}
+.bar{width:min(34px,75%);background:linear-gradient(180deg,#F2BD45,#B98524);border-radius:7px 7px 2px 2px;min-height:3px}
 .bar-label{font-size:9px;color:var(--muted)}
 .bar-value{font-size:8px;color:#E9D39C;white-space:nowrap}
 .legend{display:flex;gap:15px;margin-top:14px;font-size:9px;color:var(--muted)}
@@ -111,12 +109,14 @@ tr:last-child td{border-bottom:0}
 .field input,.field select{width:100%}
 .modal-actions{display:flex;gap:9px;margin-top:12px}
 .modal-actions button{flex:1}
-.toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:#1C2B40;border:1px solid var(--line);padding:12px 18px;border-radius:12px;font-size:11px;display:none;z-index:30}
+.toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:#1C2B40;border:1px solid var(--line);padding:12px 18px;border-radius:12px;font-size:11px;display:none;z-index:30;max-width:90%;text-align:center}
 .toast.show{display:block}
+.error{display:none;padding:13px;background:#3b1820;color:#ffb8be;border:1px solid #76313b;border-radius:12px;font-size:11px;margin-bottom:15px;line-height:1.5}
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#0D1523;border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:10px 5px calc(10px + env(safe-area-inset-bottom));z-index:10}
 .bottom-nav a{display:flex;flex-direction:column;align-items:center;gap:5px;color:var(--muted);font-size:9px}
 .bottom-nav svg{width:18px}
 .bottom-nav a.active{color:var(--gold)}
+.empty{text-align:center;color:var(--muted);padding:25px;font-size:11px}
 @media(min-width:800px){.bottom-nav{display:none}}
 @media(max-width:850px){.stats{grid-template-columns:repeat(2,1fr)}.main-grid{grid-template-columns:1fr}}
 @media(max-width:550px){.app{padding:17px 14px 100px}.profile .profile-text{display:none}.heading{align-items:flex-start;flex-direction:column}.heading .btn{width:100%}.panel{padding:15px}.expense-grid{grid-template-columns:1fr}.stat{padding:14px}.stat h2{font-size:22px}}
@@ -125,13 +125,14 @@ tr:last-child td{border-bottom:0}
 
 <body>
 <div class="app">
+
 <header class="topbar">
  <a class="brand" href="admin-dashboard.html">
   <div class="brand-icon"><i data-lucide="car-front"></i></div>
   <div><h2>ABHINAASH A1</h2><small>DRIVING SCHOOL · ADMIN</small></div>
  </a>
  <div class="top-actions">
-  <button class="icon-btn" onclick="toast('No new notifications')"><i data-lucide="bell"></i></button>
+  <button class="icon-btn" onclick="location.reload()"><i data-lucide="refresh-cw"></i></button>
   <div class="profile"><div class="avatar">A</div><div class="profile-text"><strong>Administrator</strong><small>Owner account</small></div></div>
  </div>
 </header>
@@ -139,59 +140,65 @@ tr:last-child td{border-bottom:0}
 <div class="breadcrumb"><a href="admin-dashboard.html">Dashboard</a> / <a href="admin-management.html">Management</a> / Finance</div>
 
 <section class="heading">
- <div><h1>Finance Dashboard</h1><p>Track revenue, fees, payments and expenses.</p></div>
+ <div><h1>Finance Dashboard</h1><p>Live payments, collections and business expenses.</p></div>
  <button class="btn gold" onclick="openPaymentModal()"><i data-lucide="plus"></i> Record Payment</button>
 </section>
 
-<div class="notice"><i data-lucide="info"></i><strong>Demo mode:</strong> All financial records below are sample data. New payments and expenses remain in browser memory only. No real payment or Firebase transaction is performed.</div>
+<div class="notice">
+ <i data-lucide="database"></i>
+ Firebase Live Mode · Records are stored in Firestore collection
+ <b>financeTransactions</b>.
+</div>
+
+<div id="errorBox" class="error"></div>
 
 <section class="stats">
- <div class="stat"><div class="stat-head">Total Revenue <span class="stat-icon"><i data-lucide="wallet"></i></span></div><h2 id="totalRevenue">₹48,500</h2><small class="positive">Demo collected amount</small></div>
- <div class="stat"><div class="stat-head">Pending Fees <span class="stat-icon"><i data-lucide="clock"></i></span></div><h2 id="pendingFees">₹9,000</h2><small class="negative">Awaiting collection</small></div>
- <div class="stat"><div class="stat-head">Total Expenses <span class="stat-icon"><i data-lucide="receipt"></i></span></div><h2 id="totalExpenses">₹8,500</h2><small>Recorded demo expenses</small></div>
- <div class="stat"><div class="stat-head">Net Balance <span class="stat-icon"><i data-lucide="chart-no-axes-combined"></i></span></div><h2 id="netBalance">₹40,000</h2><small>Revenue minus expenses</small></div>
+ <div class="stat"><div class="stat-head">Total Revenue <span class="stat-icon"><i data-lucide="wallet"></i></span></div><h2 id="totalRevenue">₹0</h2><small class="positive">Successful payments</small></div>
+ <div class="stat"><div class="stat-head">Pending Payments <span class="stat-icon"><i data-lucide="clock"></i></span></div><h2 id="pendingFees">₹0</h2><small>Recorded pending payment entries</small></div>
+ <div class="stat"><div class="stat-head">Total Expenses <span class="stat-icon"><i data-lucide="receipt"></i></span></div><h2 id="totalExpenses">₹0</h2><small>Recorded expenses</small></div>
+ <div class="stat"><div class="stat-head">Net Balance <span class="stat-icon"><i data-lucide="chart-no-axes-combined"></i></span></div><h2 id="netBalance">₹0</h2><small>Revenue minus expenses</small></div>
 </section>
 
 <div class="main-grid">
  <section class="panel">
-  <div class="panel-head"><div><h2>Monthly Revenue</h2><p>Illustrative revenue for the last six months</p></div><span class="status paid">Demo chart</span></div>
-  <div class="chart" id="revenueChart"></div>
+  <div class="panel-head"><div><h2>Monthly Revenue</h2><p>Successful payments · Last six months</p></div></div>
+  <div class="chart" id="revenueChart"><div class="empty">Loading...</div></div>
   <div class="legend"><span><i class="dot"></i>Collected revenue</span></div>
  </section>
 
  <section class="panel">
-  <div class="panel-head"><div><h2>Financial Overview</h2><p>Current demo account summary</p></div></div>
+  <div class="panel-head"><div><h2>Financial Overview</h2><p>Live Firebase account summary</p></div></div>
   <div class="quick-list">
-   <div class="quick-item"><div class="quick-left"><div class="quick-icon"><i data-lucide="banknote"></i></div><div><strong>Collected Fees</strong><small>Successful collections</small></div></div><b id="collectedAmount">₹48,500</b></div>
-   <div class="quick-item"><div class="quick-left"><div class="quick-icon"><i data-lucide="hourglass"></i></div><div><strong>Unpaid Fees</strong><small>Outstanding balance</small></div></div><b id="unpaidAmount">₹9,000</b></div>
-   <div class="quick-item"><div class="quick-left"><div class="quick-icon"><i data-lucide="trending-down"></i></div><div><strong>Expenses</strong><small>Business spending</small></div></div><b id="expenseAmount">₹8,500</b></div>
-   <div class="quick-item"><div class="quick-left"><div class="quick-icon"><i data-lucide="wallet-cards"></i></div><div><strong>Net Balance</strong><small>After expenses</small></div></div><b class="positive" id="overviewNet">₹40,000</b></div>
+   <div class="quick-item"><div class="quick-left"><div class="quick-icon"><i data-lucide="banknote"></i></div><div><strong>Collected Fees</strong><small>Successful payments</small></div></div><b id="collectedAmount">₹0</b></div>
+   <div class="quick-item"><div class="quick-left"><div class="quick-icon"><i data-lucide="hourglass"></i></div><div><strong>Pending Payments</strong><small>Pending entries</small></div></div><b id="unpaidAmount">₹0</b></div>
+   <div class="quick-item"><div class="quick-left"><div class="quick-icon"><i data-lucide="trending-down"></i></div><div><strong>Expenses</strong><small>Recorded spending</small></div></div><b id="expenseAmount">₹0</b></div>
+   <div class="quick-item"><div class="quick-left"><div class="quick-icon"><i data-lucide="wallet-cards"></i></div><div><strong>Net Balance</strong><small>After expenses</small></div></div><b class="positive" id="overviewNet">₹0</b></div>
   </div>
  </section>
 </div>
 
 <section class="panel">
- <div class="panel-head"><div><h2>Fee Collection & Payment History</h2><p>Review recorded student payments</p></div><button class="btn dark" onclick="exportCSV()"><i data-lucide="download"></i> Export CSV</button></div>
+ <div class="panel-head"><div><h2>Payment History</h2><p>Firebase payment records</p></div><button class="btn dark" onclick="exportCSV()"><i data-lucide="download"></i> Export CSV</button></div>
  <div class="tools">
   <div class="search"><i data-lucide="search"></i><input id="paymentSearch" placeholder="Search student or payment ID..." oninput="renderPayments()"></div>
   <select id="paymentFilter" onchange="renderPayments()"><option value="all">All Payments</option><option value="Paid">Paid</option><option value="Pending">Pending</option></select>
  </div>
  <div class="table-wrap"><table>
   <thead><tr><th>STUDENT</th><th>PAYMENT ID</th><th>AMOUNT</th><th>METHOD</th><th>DATE</th><th>STATUS</th><th>ACTION</th></tr></thead>
-  <tbody id="paymentRows"></tbody>
+  <tbody id="paymentRows"><tr><td colspan="7" class="empty">Loading payment records...</td></tr></tbody>
  </table></div>
 </section>
 
 <section class="panel">
- <div class="panel-head"><div><h2>Expense Management</h2><p>Track business operating expenses</p></div><button class="btn gold" onclick="openExpenseModal()"><i data-lucide="plus"></i> Add Expense</button></div>
+ <div class="panel-head"><div><h2>Expense Management</h2><p>Firebase business expense records</p></div><button class="btn gold" onclick="openExpenseModal()"><i data-lucide="plus"></i> Add Expense</button></div>
  <div class="expense-grid">
-  <div class="expense-card"><small>Vehicle Fuel</small><h3 id="fuelTotal">₹4,000</h3><span>Demo expense category</span></div>
-  <div class="expense-card"><small>Vehicle Maintenance</small><h3 id="maintenanceTotal">₹2,500</h3><span>Demo expense category</span></div>
-  <div class="expense-card"><small>Other Expenses</small><h3 id="otherTotal">₹2,000</h3><span>Demo expense category</span></div>
+  <div class="expense-card"><small>Vehicle Fuel</small><h3 id="fuelTotal">₹0</h3><span>Fuel expenses</span></div>
+  <div class="expense-card"><small>Vehicle Maintenance</small><h3 id="maintenanceTotal">₹0</h3><span>Maintenance expenses</span></div>
+  <div class="expense-card"><small>Other Expenses</small><h3 id="otherTotal">₹0</h3><span>Other business expenses</span></div>
  </div>
  <div class="table-wrap" style="margin-top:18px"><table>
   <thead><tr><th>EXPENSE</th><th>CATEGORY</th><th>DATE</th><th>AMOUNT</th></tr></thead>
-  <tbody id="expenseRows"></tbody>
+  <tbody id="expenseRows"><tr><td colspan="4" class="empty">Loading expenses...</td></tr></tbody>
  </table></div>
 </section>
 
@@ -208,12 +215,12 @@ tr:last-child td{border-bottom:0}
  <a href="index.html"><i data-lucide="house"></i>Website</a>
 </nav>
 
-<!-- PAYMENT MODAL -->
 <div class="modal-bg" id="paymentModal">
  <div class="modal">
   <div class="modal-head"><h2>Record Student Payment</h2><button class="icon-btn" onclick="closeModal('paymentModal')"><i data-lucide="x"></i></button></div>
   <form id="paymentForm">
    <div class="field"><label>Student Name</label><input id="payStudent" required placeholder="Enter student name"></div>
+   <div class="field"><label>Student Mobile (optional)</label><input id="payMobile" inputmode="numeric" maxlength="10" placeholder="10 digit mobile number"></div>
    <div class="field"><label>Amount (₹)</label><input id="payAmount" type="number" min="1" required placeholder="Enter amount"></div>
    <div class="field"><label>Payment Method</label><select id="payMethod"><option>UPI</option><option>Cash</option><option>Bank Transfer</option><option>Card</option></select></div>
    <div class="field"><label>Payment Status</label><select id="payStatus"><option>Paid</option><option>Pending</option></select></div>
@@ -222,7 +229,6 @@ tr:last-child td{border-bottom:0}
  </div>
 </div>
 
-<!-- EXPENSE MODAL -->
 <div class="modal-bg" id="expenseModal">
  <div class="modal">
   <div class="modal-head"><h2>Add Business Expense</h2><button class="icon-btn" onclick="closeModal('expenseModal')"><i data-lucide="x"></i></button></div>
@@ -238,117 +244,362 @@ tr:last-child td{border-bottom:0}
 
 <div class="toast" id="toast"></div>
 
-<script>
-const payments=[
- {id:"PAY-1001",name:"Rahul Kumar",amount:4500,method:"UPI",date:"02 Nov 2026",status:"Paid"},
- {id:"PAY-1002",name:"Priya Das",amount:2000,method:"Cash",date:"01 Nov 2026",status:"Pending"},
- {id:"PAY-1003",name:"Amit Mohanty",amount:3500,method:"UPI",date:"31 Oct 2026",status:"Paid"},
- {id:"PAY-1004",name:"Sneha Sahu",amount:4500,method:"Bank Transfer",date:"29 Oct 2026",status:"Paid"},
- {id:"PAY-1005",name:"Demo Student",amount:7000,method:"Cash",date:"28 Oct 2026",status:"Pending"}
-];
-const expenses=[
- {name:"Vehicle Fuel",category:"Vehicle Fuel",date:"02 Nov 2026",amount:4000},
- {name:"Vehicle Servicing",category:"Vehicle Maintenance",date:"28 Oct 2026",amount:2500},
- {name:"Other Operating Cost",category:"Other",date:"25 Oct 2026",amount:2000}
-];
-const monthly=[18000,24000,21000,32000,38000,48500];
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+import {
+ getFirestore,collection,addDoc,onSnapshot,doc,updateDoc,
+ serverTimestamp,query,orderBy
+} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
-const money=n=>"₹"+Number(n).toLocaleString("en-IN");
-function toast(msg){
- const el=document.getElementById("toast");el.textContent=msg;
- el.classList.add("show");setTimeout(()=>el.classList.remove("show"),2300);
+const firebaseConfig={
+ apiKey:"AIzaSyC3gWi8p85z-wkoJeWb3N3jYoQpcIar8Sww",
+ authDomain:"abinash-driving.firebaseapp.com",
+ projectId:"abinash-driving",
+ storageBucket:"abinash-driving.appspot.com",
+ messagingSenderId:"641148830173",
+ appId:"1:641148830173:web:b7a500e5e7e2463da0f634"
+};
+
+const app=initializeApp(firebaseConfig);
+const db=getFirestore(app);
+const financeRef=collection(db,"financeTransactions");
+
+let transactions=[];
+let busy=false;
+
+const $=id=>document.getElementById(id);
+const money=n=>"₹"+Number(n||0).toLocaleString("en-IN");
+
+function showToast(message){
+ const el=$("toast");
+ el.textContent=message;
+ el.classList.add("show");
+ setTimeout(()=>el.classList.remove("show"),2800);
 }
-function icons(){if(window.lucide)lucide.createIcons()}
-function openPaymentModal(){document.getElementById("paymentModal").classList.add("show")}
+
+function showError(message){
+ $("errorBox").style.display="block";
+ $("errorBox").textContent=message;
+}
+
+function hideError(){
+ $("errorBox").style.display="none";
+}
+
+function icons(){
+ if(window.lucide) lucide.createIcons();
+}
+
+function openPaymentModal(){
+ $("paymentModal").classList.add("show");
+}
 function openExpenseModal(){
- document.getElementById("expenseDate").value=new Date().toISOString().slice(0,10);
- document.getElementById("expenseModal").classList.add("show");
+ $("expenseDate").value=new Date().toLocaleDateString("en-CA");
+ $("expenseModal").classList.add("show");
 }
-function closeModal(id){document.getElementById(id).classList.remove("show")}
-function renderChart(){
- const max=Math.max(...monthly);
- const labels=["Jun","Jul","Aug","Sep","Oct","Nov"];
- document.getElementById("revenueChart").innerHTML=monthly.map((v,i)=>`
- <div class="bar-col">
-  <span class="bar-value">${money(v)}</span>
-  <div class="bar" style="height:${Math.max(5,v/max*72)}%"></div>
-  <span class="bar-label">${labels[i]}</span>
- </div>`).join("");
+function closeModal(id){
+ $(id).classList.remove("show");
 }
-function totals(){
- const collected=payments.filter(p=>p.status==="Paid").reduce((a,p)=>a+p.amount,0)+34000;
- const pending=payments.filter(p=>p.status==="Pending").reduce((a,p)=>a+p.amount,0)+1500;
- const expense=expenses.reduce((a,e)=>a+e.amount,0);
- const net=collected-expense;
- document.getElementById("totalRevenue").textContent=money(collected);
- document.getElementById("pendingFees").textContent=money(pending);
- document.getElementById("totalExpenses").textContent=money(expense);
- document.getElementById("netBalance").textContent=money(net);
- document.getElementById("collectedAmount").textContent=money(collected);
- document.getElementById("unpaidAmount").textContent=money(pending);
- document.getElementById("expenseAmount").textContent=money(expense);
- document.getElementById("overviewNet").textContent=money(net);
- document.getElementById("fuelTotal").textContent=money(expenses.filter(e=>e.category==="Vehicle Fuel").reduce((a,e)=>a+e.amount,0));
- document.getElementById("maintenanceTotal").textContent=money(expenses.filter(e=>e.category==="Vehicle Maintenance").reduce((a,e)=>a+e.amount,0));
- document.getElementById("otherTotal").textContent=money(expenses.filter(e=>e.category==="Other").reduce((a,e)=>a+e.amount,0));
+
+window.openPaymentModal=openPaymentModal;
+window.openExpenseModal=openExpenseModal;
+window.closeModal=closeModal;
+window.renderPayments=renderPayments;
+window.exportCSV=exportCSV;
+
+function asDate(value){
+ if(value?.toDate) return value.toDate();
+ if(value instanceof Date) return value;
+ if(typeof value==="string"){
+  const d=new Date(value);
+  return isNaN(d.getTime())?null:d;
+ }
+ return null;
 }
+
+function formatDate(value){
+ const d=asDate(value);
+ return d?d.toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"}):"—";
+}
+
+function paymentsList(){
+ return transactions.filter(t=>t.type==="payment");
+}
+function expensesList(){
+ return transactions.filter(t=>t.type==="expense");
+}
+
+function renderDashboard(){
+ const payments=paymentsList();
+ const expenses=expensesList();
+
+ const paid=payments.filter(p=>p.status==="Paid")
+  .reduce((sum,p)=>sum+Number(p.amount||0),0);
+
+ const pending=payments.filter(p=>p.status==="Pending")
+  .reduce((sum,p)=>sum+Number(p.amount||0),0);
+
+ const expenseTotal=expenses.reduce((sum,e)=>sum+Number(e.amount||0),0);
+ const net=paid-expenseTotal;
+
+ $("totalRevenue").textContent=money(paid);
+ $("pendingFees").textContent=money(pending);
+ $("totalExpenses").textContent=money(expenseTotal);
+ $("netBalance").textContent=money(net);
+ $("collectedAmount").textContent=money(paid);
+ $("unpaidAmount").textContent=money(pending);
+ $("expenseAmount").textContent=money(expenseTotal);
+ $("overviewNet").textContent=money(net);
+
+ $("fuelTotal").textContent=money(expenses.filter(e=>e.category==="Vehicle Fuel").reduce((a,e)=>a+Number(e.amount||0),0));
+ $("maintenanceTotal").textContent=money(expenses.filter(e=>e.category==="Vehicle Maintenance").reduce((a,e)=>a+Number(e.amount||0),0));
+ $("otherTotal").textContent=money(expenses.filter(e=>e.category==="Other").reduce((a,e)=>a+Number(e.amount||0),0));
+
+ renderChart(payments);
+ renderExpenses();
+ renderPayments();
+}
+
+function renderChart(payments){
+ const now=new Date();
+ const months=[];
+
+ for(let i=5;i>=0;i--){
+  const d=new Date(now.getFullYear(),now.getMonth()-i,1);
+  months.push({
+   year:d.getFullYear(),
+   month:d.getMonth(),
+   label:d.toLocaleDateString("en-IN",{month:"short"})
+  });
+ }
+
+ const values=months.map(m=>payments
+  .filter(p=>{
+   if(p.status!=="Paid") return false;
+   const d=asDate(p.date)||asDate(p.createdAt);
+   return d&&d.getFullYear()===m.year&&d.getMonth()===m.month;
+  })
+  .reduce((sum,p)=>sum+Number(p.amount||0),0)
+ );
+
+ const max=Math.max(1,...values);
+
+ $("revenueChart").innerHTML=months.map((m,i)=>`
+  <div class="bar-col">
+   <span class="bar-value">${money(values[i])}</span>
+   <div class="bar" style="height:${Math.max(2,values[i]/max*75)}%"></div>
+   <span class="bar-label">${m.label}</span>
+  </div>
+ `).join("");
+}
+
 function renderPayments(){
- const q=document.getElementById("paymentSearch").value.toLowerCase();
- const f=document.getElementById("paymentFilter").value;
- const list=payments.filter(p=>(p.name+" "+p.id).toLowerCase().includes(q)&&(f==="all"||p.status===f));
- document.getElementById("paymentRows").innerHTML=list.length?list.map(p=>`
- <tr>
-  <td><div class="person"><div class="person-avatar">${p.name.charAt(0)}</div><div><strong>${p.name}</strong><small>Student</small></div></div></td>
-  <td>${p.id}</td><td><strong>${money(p.amount)}</strong></td><td>${p.method}</td><td>${p.date}</td>
-  <td><span class="status ${p.status==="Paid"?"paid":"pending"}">${p.status}</span></td>
-  <td>${p.status==="Pending"?`<button class="action-btn" title="Mark paid" onclick="markPaid('${p.id}')"><i data-lucide="check"></i></button>`:"—"}</td>
- </tr>`).join(""):`<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:25px">No payment records found.</td></tr>`;
- totals();icons();
+ const q=$("paymentSearch").value.toLowerCase();
+ const filter=$("paymentFilter").value;
+
+ const list=paymentsList().filter(p=>{
+  const text=[p.name,p.studentMobile,p.paymentId,p.id].join(" ").toLowerCase();
+  return text.includes(q)&&(filter==="all"||p.status===filter);
+ }).sort((a,b)=>{
+  const da=asDate(a.createdAt)||asDate(a.date)||new Date(0);
+  const db=asDate(b.createdAt)||asDate(b.date)||new Date(0);
+  return db-da;
+ });
+
+ $("paymentRows").innerHTML=list.length?list.map(p=>{
+  const id=String(p.id);
+  const safeId=escapeHTML(id);
+  const status=p.status==="Paid"?"Paid":"Pending";
+  return `
+   <tr>
+    <td><div class="person">
+     <div class="person-avatar">${escapeHTML((p.name||"S").charAt(0).toUpperCase())}</div>
+     <div><strong>${escapeHTML(p.name||"Student")}</strong><small>${escapeHTML(p.studentMobile||"")}</small></div>
+    </div></td>
+    <td>${escapeHTML(p.paymentId||id)}</td>
+    <td><strong>${money(p.amount)}</strong></td>
+    <td>${escapeHTML(p.method||"—")}</td>
+    <td>${formatDate(p.date||p.createdAt)}</td>
+    <td><span class="status ${status==="Paid"?"paid":"pending"}">${status}</span></td>
+    <td>${status==="Pending"?`<button class="action-btn" title="Mark paid" onclick="markPaid('${safeId}')"><i data-lucide="check"></i></button>`:"—"}</td>
+   </tr>`;
+ }).join(""):`<tr><td colspan="7" class="empty">No payment records found.</td></tr>`;
+
+ icons();
 }
+
+function escapeHTML(value){
+ return String(value??"").replace(/[&<>"']/g,c=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+ })[c]);
+}
+
 function renderExpenses(){
- document.getElementById("expenseRows").innerHTML=expenses.map(e=>`
- <tr><td><strong>${e.name}</strong></td><td>${e.category}</td><td>${e.date}</td><td><strong>${money(e.amount)}</strong></td></tr>`).join("");
- totals();
-}
-function markPaid(id){
- const p=payments.find(x=>x.id===id);p.status="Paid";
- renderPayments();toast("Payment marked as paid");
-}
-document.getElementById("paymentForm").addEventListener("submit",e=>{
- e.preventDefault();
- payments.unshift({
-  id:"PAY-"+(1001+payments.length),
-  name:document.getElementById("payStudent").value.trim(),
-  amount:Number(document.getElementById("payAmount").value),
-  method:document.getElementById("payMethod").value,
-  status:document.getElementById("payStatus").value,
-  date:new Date().toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"})
+ const list=expensesList().sort((a,b)=>{
+  const da=asDate(a.createdAt)||asDate(a.date)||new Date(0);
+  const db=asDate(b.createdAt)||asDate(b.date)||new Date(0);
+  return db-da;
  });
- e.target.reset();closeModal("paymentModal");renderPayments();toast("Payment record added");
-});
-document.getElementById("expenseForm").addEventListener("submit",e=>{
+
+ $("expenseRows").innerHTML=list.length?list.map(e=>`
+  <tr>
+   <td><strong>${escapeHTML(e.name||"Expense")}</strong></td>
+   <td>${escapeHTML(e.category||"Other")}</td>
+   <td>${formatDate(e.date||e.createdAt)}</td>
+   <td><strong>${money(e.amount)}</strong></td>
+  </tr>
+ `).join(""):`<tr><td colspan="4" class="empty">No expenses recorded yet.</td></tr>`;
+
+ icons();
+}
+
+async function savePayment(data){
+ if(busy)return;
+ busy=true;
+ try{
+  const paymentId="PAY-"+Date.now();
+  await addDoc(financeRef,{
+   type:"payment",
+   paymentId,
+   name:data.name,
+   studentMobile:data.studentMobile,
+   amount:data.amount,
+   method:data.method,
+   status:data.status,
+   date:new Date().toISOString(),
+   createdAt:serverTimestamp()
+  });
+  closeModal("paymentModal");
+  $("paymentForm").reset();
+  showToast("Payment saved to Firebase successfully.");
+ }catch(error){
+  console.error(error);
+  showError("Payment save nahi hua: "+error.message);
+ }finally{busy=false;}
+}
+
+async function saveExpense(data){
+ if(busy)return;
+ busy=true;
+ try{
+  await addDoc(financeRef,{
+   type:"expense",
+   name:data.name,
+   category:data.category,
+   amount:data.amount,
+   date:data.date,
+   createdAt:serverTimestamp()
+  });
+  closeModal("expenseModal");
+  $("expenseForm").reset();
+  showToast("Expense saved to Firebase successfully.");
+ }catch(error){
+  console.error(error);
+  showError("Expense save nahi hua: "+error.message);
+ }finally{busy=false;}
+}
+
+window.markPaid=async function(id){
+ if(!confirm("Is payment ko Paid mark karna hai?"))return;
+ try{
+  await updateDoc(doc(db,"financeTransactions",id),{
+   status:"Paid",
+   updatedAt:serverTimestamp()
+  });
+  showToast("Payment status updated.");
+ }catch(error){
+  console.error(error);
+  showError("Payment update nahi hua: "+error.message);
+ }
+};
+
+$("paymentForm").addEventListener("submit",async e=>{
  e.preventDefault();
- const dateValue=document.getElementById("expenseDate").value;
- expenses.unshift({
-  name:document.getElementById("expenseName").value.trim(),
-  category:document.getElementById("expenseCategory").value,
-  amount:Number(document.getElementById("expenseValue").value),
-  date:new Date(dateValue+"T12:00:00").toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"})
+ const name=$("payStudent").value.trim();
+ const mobile=$("payMobile").value.trim();
+ const amount=Number($("payAmount").value);
+
+ if(!name||!Number.isFinite(amount)||amount<=0){
+  showToast("Please enter valid payment details.");
+  return;
+ }
+ if(mobile && !/^\d{10}$/.test(mobile)){
+  showToast("Mobile number 10 digits ka hona chahiye.");
+  return;
+ }
+
+ await savePayment({
+  name,
+  studentMobile:mobile,
+  amount,
+  method:$("payMethod").value,
+  status:$("payStatus").value
  });
- e.target.reset();closeModal("expenseModal");renderExpenses();toast("Expense added successfully");
 });
+
+$("expenseForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ const name=$("expenseName").value.trim();
+ const amount=Number($("expenseValue").value);
+ const date=$("expenseDate").value;
+
+ if(!name||!Number.isFinite(amount)||amount<=0||!date){
+  showToast("Please enter valid expense details.");
+  return;
+ }
+
+ await saveExpense({
+  name,
+  category:$("expenseCategory").value,
+  amount,
+  date
+ });
+});
+
 function exportCSV(){
- const rows=[["Student","Payment ID","Amount","Method","Date","Status"],...payments.map(p=>[p.name,p.id,p.amount,p.method,p.date,p.status])];
- const csv=rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(",")).join("\n");
- const blob=new Blob([csv],{type:"text/csv;charset=utf-8;"});
- const url=URL.createObjectURL(blob);const a=document.createElement("a");
- a.href=url;a.download="a1-driving-payment-history.csv";a.click();URL.revokeObjectURL(url);
- toast("CSV export downloaded");
+ const rows=[
+  ["Type","Name","Mobile","Category","Payment ID","Amount","Method","Status","Date"],
+  ...transactions.map(t=>[
+   t.type||"",
+   t.name||"",
+   t.studentMobile||"",
+   t.category||"",
+   t.paymentId||"",
+   t.amount||0,
+   t.method||"",
+   t.status||"",
+   formatDate(t.date||t.createdAt)
+  ])
+ ];
+ const csv=rows.map(row=>row.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(",")).join("\n");
+ const blob=new Blob(["\uFEFF"+csv],{type:"text/csv;charset=utf-8;"});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement("a");
+ a.href=url;
+ a.download="a1-driving-finance-report.csv";
+ a.click();
+ URL.revokeObjectURL(url);
 }
-document.querySelectorAll(".modal-bg").forEach(bg=>bg.addEventListener("click",e=>{
- if(e.target===bg)bg.classList.remove("show");
-}));
-renderChart();renderPayments();renderExpenses();icons();
+function startRealtime(){
+ const q=query(financeRef,orderBy("createdAt","desc"));
+ onSnapshot(q,snapshot=>{
+  hideError();
+  transactions=snapshot.docs.map(d=>({id:d.id,...d.data()}));
+  renderDashboard();
+ },error=>{
+  console.error(error);
+  showError("Firebase read error: "+error.message+" | Firestore Rules aur collection permissions check karein.");
+ });
+}
+
+document.querySelectorAll(".modal-bg").forEach(bg=>{
+ bg.addEventListener("click",e=>{
+  if(e.target===bg)bg.classList.remove("show");
+ });
+});
+
+icons();
+startRealtime();
 </script>
 </body>
 </html>
