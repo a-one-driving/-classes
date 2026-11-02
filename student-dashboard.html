@@ -384,6 +384,17 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
     <div class="quick-icon"><i data-lucide="car-front"></i></div>
     <div><strong>My Training</strong><span>Lessons & progress</span></div>
    </a>
+  
+  <a href="traffic-academy.html" class="quick-action"
+   onclick="this.href='traffic-academy.html?mobile='+encodeURIComponent(localStorage.getItem('a1_student_mobile')||'')">
+  <div class="quick-icon">
+    <i data-lucide="traffic-cone"></i>
+  </div>
+  <div>
+    <strong>Traffic Academy</strong>
+    <span>Learn signs & daily MCQ</span>
+  </div>
+</a>
    <a href="#attendanceHistory" class="quick-action">
     <div class="quick-icon"><i data-lucide="clipboard-check"></i></div>
     <div><strong>Attendance</strong><span>Class history</span></div>
