@@ -1,0 +1,528 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#080D18">
+<title>Class Scheduler | A ONE DRIVING</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+ --bg:#080D18;
+ --card:#111A29;
+ --card2:#172337;
+ --gold:#F2BD45;
+ --white:#F8FAFC;
+ --muted:#A8B1C2;
+ --border:rgba(255,255,255,.09);
+ --green:#35C98A;
+ --red:#FF7777;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+ font-family:Inter,Arial,sans-serif;
+ background:var(--bg);
+ color:var(--white);
+ min-height:100vh;
+ padding:20px 12px 50px;
+}
+.container{width:min(650px,100%);margin:auto}
+header{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ padding:15px 0 22px;
+ border-bottom:1px solid var(--border);
+ margin-bottom:25px;
+}
+.brand{font-size:18px;font-weight:800}
+.brand span{color:var(--gold)}
+.admin-label{font-size:10px;color:var(--gold);font-weight:700}
+.card{
+ background:var(--card);
+ border:1px solid var(--border);
+ border-radius:19px;
+ padding:20px;
+ margin-bottom:17px;
+}
+.card h2{font-size:17px;margin-bottom:7px}
+.subtitle{
+ font-size:11px;color:var(--muted);
+ line-height:1.7;margin-bottom:18px
+}
+label{
+ display:block;font-size:11px;font-weight:700;
+ color:var(--muted);margin-bottom:8px
+}
+input,select{
+ width:100%;padding:14px;border-radius:11px;
+ background:var(--bg);color:white;
+ border:1px solid var(--border);
+ outline:none;font-size:13px
+}
+input:focus,select:focus{border-color:var(--gold)}
+.field{margin-bottom:16px}
+.search-row{display:flex;gap:9px}
+.search-row input{flex:1;min-width:0}
+button{
+ border:0;border-radius:10px;padding:13px 16px;
+ font-weight:800;font-size:11px;cursor:pointer
+}
+.primary{background:var(--gold);color:#171717}
+.secondary{
+ background:var(--card2);color:white;
+ border:1px solid var(--border)
+}
+.danger{
+ background:rgba(255,119,119,.13);
+ color:var(--red);
+ border:1px solid rgba(255,119,119,.2)
+}
+button:disabled{opacity:.5;cursor:not-allowed}
+.student-box{
+ display:none;background:var(--card2);
+ border:1px solid var(--border);
+ border-radius:14px;padding:15px;margin-top:15px
+}
+.student-box.active{display:block}
+.student-name{font-size:17px;font-weight:800}
+.student-meta{
+ font-size:11px;color:var(--muted);
+ margin-top:5px;line-height:1.9
+}
+.student-status{
+ display:inline-block;
+ background:rgba(53,201,138,.12);
+ color:var(--green);
+ padding:5px 9px;border-radius:20px;
+ font-size:9px;font-weight:800;margin-top:10px
+}
+.student-status.inactive{
+ color:var(--red);background:rgba(255,119,119,.12)
+}
+.form-grid{
+ display:grid;grid-template-columns:1fr 1fr;gap:13px
+}
+.form-grid .field{margin-bottom:13px}
+.full{grid-column:1/-1}
+.schedule-preview{
+ background:var(--card2);
+ border:1px solid var(--border);
+ border-radius:14px;padding:16px;margin:17px 0
+}
+.preview-title{font-size:12px;font-weight:800;margin-bottom:13px}
+.preview-row{
+ display:flex;align-items:center;gap:10px;
+ padding:8px 0;color:var(--muted);font-size:11px
+}
+.preview-row strong{
+ color:white;margin-left:auto;text-align:right
+}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.actions button:first-child{grid-column:1/-1}
+.status{
+ font-size:11px;line-height:1.7;
+ margin-top:13px;color:var(--muted);
+ overflow-wrap:anywhere
+}
+.status.success{color:var(--green)}
+.status.error{color:var(--red)}
+.status.warning{color:var(--gold)}
+.note{
+ font-size:10px;color:var(--muted);
+ line-height:1.7;margin-top:13px
+}
+footer{text-align:center;font-size:10px;color:var(--muted);padding:20px 0}
+@media(max-width:420px){
+ .card{padding:16px}
+ .form-grid{grid-template-columns:1fr}
+ .full{grid-column:auto}
+ .search-row button{padding:12px}
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<header>
+ <div class="brand">A ONE <span>DRIVING</span></div>
+ <div class="admin-label">CLASS SCHEDULER</div>
+</header>
+
+<section class="card">
+ <h2>Schedule Next Driving Class</h2>
+ <p class="subtitle">
+  Search a registered student and manage their next driving lesson.
+ </p>
+
+ <label>Student Registered Mobile Number</label>
+ <div class="search-row">
+  <input type="tel" id="searchMobile" maxlength="10"
+   inputmode="numeric" placeholder="Enter 10-digit mobile number">
+  <button class="primary" id="searchButton" type="button">Search</button>
+ </div>
+
+ <div class="status" id="searchStatus"></div>
+
+ <div class="student-box" id="studentBox">
+  <div class="student-name" id="studentName">Student Name</div>
+  <div class="student-meta">
+   Mobile: <span id="studentMobile">--</span><br>
+   Class Type: <span id="studentClassType">--</span><br>
+   Total Classes: <span id="studentTotal">--</span>
+  </div>
+  <span class="student-status" id="studentAccountStatus">ACTIVE STUDENT</span>
+ </div>
+</section>
+
+<section class="card" id="scheduleCard" style="display:none">
+ <h2>Class Schedule Details</h2>
+ <p class="subtitle">Set or change the student's next driving lesson.</p>
+
+ <form id="scheduleForm">
+  <div class="form-grid">
+   <div class="field">
+    <label>Class Date</label>
+    <input type="date" id="classDate" required>
+   </div>
+
+   <div class="field">
+    <label>Class Time</label>
+    <input type="time" id="classTime" required>
+   </div>
+
+   <div class="field full">
+    <label>Training Location</label>
+    <input type="text" id="classLocation"
+     maxlength="150" placeholder="Enter training location" required>
+   </div>
+
+   <div class="field full">
+    <label>Class Status</label>
+    <select id="classStatus">
+     <option value="scheduled">Scheduled</option>
+     <option value="cancelled">Cancelled</option>
+    </select>
+   </div>
+  </div>
+
+  <div class="schedule-preview">
+   <div class="preview-title">CURRENT SCHEDULE</div>
+   <div class="preview-row">Date <strong id="oldDate">Not scheduled</strong></div>
+   <div class="preview-row">Time <strong id="oldTime">Not scheduled</strong></div>
+   <div class="preview-row">Location <strong id="oldLocation">Not scheduled</strong></div>
+   <div class="preview-row">Status <strong id="oldStatus">Not scheduled</strong></div>
+  </div>
+
+  <div class="actions">
+   <button class="primary" type="submit" id="saveButton">Save Class Schedule</button>
+   <button class="secondary" type="button" id="clearButton">Clear Form</button>
+   <button class="danger" type="button" id="cancelButton">Cancel Scheduled Class</button>
+  </div>
+
+  <div class="status" id="saveStatus"></div>
+ </form>
+</section>
+
+<section class="card">
+ <h2>Schedule Management</h2>
+ <p class="subtitle">
+  Schedule changes are saved to the selected student's existing record.
+  Their dashboard receives updates automatically.
+ </p>
+ <div class="note">
+  Only use this page in a trusted, controlled environment. It does not have a login or PIN.
+ </div>
+</section>
+
+<footer>A ONE DRIVING · Class Management</footer>
+</div>
+
+<script type="module">
+import {initializeApp,getApps}
+from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+
+import {
+ getFirestore,doc,getDoc,updateDoc
+} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
+/* EXISTING PROJECT CONFIGURATION */
+const firebaseConfig={
+ apiKey:"AIzaSyC3gWi8p85z-wkoJeWb3N3jYoQpcIar8Sww",
+ authDomain:"abinash-driving.firebaseapp.com",
+ projectId:"abinash-driving",
+ storageBucket:"abinash-driving.appspot.com",
+ messagingSenderId:"641148830173",
+ appId:"1:641148830173:web:b7a500e5e7e2463da0f634"
+};
+
+const app=getApps().length?getApps()[0]:initializeApp(firebaseConfig);
+const db=getFirestore(app);
+
+const $=id=>document.getElementById(id);
+
+let selectedMobile="";
+let selectedStudent=null;
+let saving=false;
+
+function setStatus(id,message,type=""){
+ const el=$(id);
+ el.textContent=message;
+ el.className="status "+type;
+}
+
+function displayDate(value){
+ if(!value)return "Not scheduled";
+ const match=String(value).match(/^(\d{4})-(\d{2})-(\d{2})$/);
+ if(!match)return String(value);
+
+ return new Date(+match[1],+match[2]-1,+match[3])
+  .toLocaleDateString("en-IN",{
+   day:"2-digit",month:"short",year:"numeric"
+  });
+}
+
+function dateToInput(value){
+ if(!value)return "";
+ const match=String(value).match(/^(\d{4}-\d{2}-\d{2})/);
+ return match?match[1]:"";
+}
+
+function timeToInput(value){
+ if(!value)return "";
+
+ const match=String(value).match(/^(\d{1,2}):(\d{2})\s*(AM|PM)?$/i);
+ if(!match)return "";
+
+ let hour=Number(match[1]);
+ const minute=match[2];
+ const period=match[3]?.toUpperCase();
+
+ if(period==="PM"&&hour<12)hour+=12;
+ if(period==="AM"&&hour===12)hour=0;
+
+ return String(hour).padStart(2,"0")+":"+minute;
+}
+
+function formatTime(value){
+ if(!value)return "";
+
+ const match=String(value).match(/^(\d{1,2}):(\d{2})$/);
+ if(!match)return value;
+
+ let hour=Number(match[1]);
+ const minute=match[2];
+ const period=hour>=12?"PM":"AM";
+ hour=hour%12||12;
+
+ return String(hour).padStart(2,"0")+":"+minute+" "+period;
+}
+
+function refreshCurrentSchedule(student){
+ $("oldDate").textContent=displayDate(student.nextClassDate);
+ $("oldTime").textContent=student.nextClassTime||"Not scheduled";
+ $("oldLocation").textContent=student.nextClassLocation||"Not scheduled";
+ $("oldStatus").textContent=student.nextClassStatus||"Not scheduled";
+}
+
+/* SEARCH STUDENT */
+$("searchMobile").addEventListener("input",function(){
+ this.value=this.value.replace(/\D/g,"").slice(0,10);
+});
+
+$("searchButton").addEventListener("click",searchStudent);
+
+$("searchMobile").addEventListener("keydown",event=>{
+ if(event.key==="Enter"){
+  event.preventDefault();
+  searchStudent();
+ }
+});
+
+async function searchStudent(){
+ const mobile=$("searchMobile").value.trim();
+
+ if(!/^\d{10}$/.test(mobile)){
+  setStatus("searchStatus","Enter a valid 10-digit mobile number.","error");
+  return;
+ }
+
+ const button=$("searchButton");
+ button.disabled=true;
+ setStatus("searchStatus","Searching student...");
+
+ try{
+  const snapshot=await getDoc(doc(db,"studentData",mobile));
+
+  if(!snapshot.exists()){
+   selectedMobile="";
+   selectedStudent=null;
+   $("studentBox").classList.remove("active");
+   $("scheduleCard").style.display="none";
+   setStatus("searchStatus","Student record not found.","error");
+   return;
+  }
+
+  const student=snapshot.data();
+
+  selectedMobile=mobile;
+  selectedStudent=student;
+
+  $("studentName").textContent=student.name||"Student";
+  $("studentMobile").textContent=mobile;
+  $("studentClassType").textContent=student.classType||"Not specified";
+  $("studentTotal").textContent=student.totalClasses??"--";
+
+  const active=student.notActive!==true;
+  $("studentAccountStatus").textContent=
+   active?"ACTIVE STUDENT":"INACTIVE STUDENT";
+
+  $("studentAccountStatus").className=
+   "student-status"+(active?"":" inactive");
+
+  $("studentBox").classList.add("active");
+  $("scheduleCard").style.display="block";
+
+  $("classDate").value=dateToInput(student.nextClassDate);
+  $("classTime").value=timeToInput(student.nextClassTime);
+  $("classLocation").value=student.nextClassLocation||"";
+  $("classStatus").value=
+   student.nextClassStatus==="cancelled"?"cancelled":"scheduled";
+
+  refreshCurrentSchedule(student);
+
+  $("saveButton").disabled=!active;
+  $("cancelButton").disabled=!active;
+
+  setStatus("searchStatus",
+   active?"Student found successfully.":"Student is inactive. Scheduling is disabled.",
+   active?"success":"warning"
+  );
+
+ }catch(error){
+  console.error(error);
+  setStatus("searchStatus",
+   "Unable to search student. Check Firestore permissions.","error");
+ }finally{
+  button.disabled=false;
+ }
+}
+
+/* SAVE SCHEDULE */
+$("scheduleForm").addEventListener("submit",async event=>{
+ event.preventDefault();
+
+ if(!selectedMobile||!selectedStudent){
+  setStatus("saveStatus","Search for a student first.","error");
+  return;
+ }
+
+ if(selectedStudent.notActive===true){
+  setStatus("saveStatus","Inactive students cannot be scheduled.","error");
+  return;
+ }
+
+ if(saving)return;
+
+ const date=$("classDate").value;
+ const time=$("classTime").value;
+ const location=$("classLocation").value.trim();
+ const status=$("classStatus").value;
+
+ if(!date||!time||!location){
+  setStatus("saveStatus","Please complete all schedule details.","error");
+  return;
+ }
+
+ if(status==="scheduled"){
+  const chosen=new Date(date+"T"+time+":00");
+
+  if(Number.isNaN(chosen.getTime())||chosen.getTime()<=Date.now()){
+   setStatus("saveStatus","Please select a future date and time.","error");
+   return;
+  }
+ }
+
+ saving=true;
+ $("saveButton").disabled=true;
+ setStatus("saveStatus","Saving schedule...");
+
+ try{
+  await updateDoc(doc(db,"studentData",selectedMobile),{
+   nextClassDate:date,
+   nextClassTime:formatTime(time),
+   nextClassLocation:location,
+   nextClassStatus:status
+  });
+
+  selectedStudent={
+   ...selectedStudent,
+   nextClassDate:date,
+   nextClassTime:formatTime(time),
+   nextClassLocation:location,
+   nextClassStatus:status
+  };
+
+  refreshCurrentSchedule(selectedStudent);
+
+  setStatus("saveStatus",
+   status==="cancelled"
+    ?"Class cancelled successfully."
+    :"Driving class scheduled successfully. Student dashboard will update automatically.",
+   "success"
+  );
+
+ }catch(error){
+  console.error(error);
+  setStatus("saveStatus",
+   "Unable to save. Check Firestore permissions.","error");
+ }finally{
+  saving=false;
+  $("saveButton").disabled=selectedStudent?.notActive===true;
+ }
+});
+
+/* CANCEL CLASS */
+$("cancelButton").addEventListener("click",async()=>{
+ if(!selectedMobile||!selectedStudent)return;
+ if(selectedStudent.notActive===true)return;
+
+ if(!confirm("Cancel this scheduled class?"))return;
+
+ $("cancelButton").disabled=true;
+ setStatus("saveStatus","Cancelling class...");
+
+ try{
+  await updateDoc(doc(db,"studentData",selectedMobile),{
+   nextClassStatus:"cancelled"
+  });
+
+  selectedStudent.nextClassStatus="cancelled";
+  refreshCurrentSchedule(selectedStudent);
+  $("classStatus").value="cancelled";
+
+  setStatus("saveStatus","Class cancelled successfully.","success");
+
+ }catch(error){
+  console.error(error);
+  setStatus("saveStatus","Unable to cancel class.","error");
+ }finally{
+  $("cancelButton").disabled=selectedStudent?.notActive===true;
+ }
+});
+
+/* CLEAR FORM */
+$("clearButton").addEventListener("click",()=>{
+ $("scheduleForm").reset();
+ $("classStatus").value="scheduled";
+ setStatus("saveStatus",
+  "Form cleared. Existing saved schedule has not changed.","warning");
+});
+</script>
+
+</body>
+</html>
