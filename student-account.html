@@ -1,0 +1,639 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#080D18">
+<meta name="description" content="Student account and profile - ABHINAASH A1 Driving">
+<title>My Account | ABHINAASH A1 Driving</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+:root{
+  --bg:#080D18;--card:#111A29;--card2:#172337;
+  --gold:#F2BD45;--white:#F8FAFC;--muted:#A8B1C2;
+  --border:rgba(255,255,255,.09);
+  --green:#35C98A;--red:#FF7777;--blue:#65A9FF;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,sans-serif;background:var(--bg);color:var(--white);line-height:1.5}
+a{text-decoration:none;color:inherit}
+button,input{font:inherit}
+.container{width:min(1120px,93%);margin:auto}
+header{position:sticky;top:0;z-index:100;background:rgba(8,13,24,.95);backdrop-filter:blur(15px);border-bottom:1px solid var(--border)}
+.topbar{height:68px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:17px;font-weight:800}
+.logo span{color:var(--gold)}
+.top-right{display:flex;align-items:center;gap:15px}
+.top-right a{font-size:11px;color:var(--muted)}
+.avatar{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:rgba(242,189,69,.13);color:var(--gold);font-weight:800}
+main{padding:30px 0 100px}
+.heading{display:flex;justify-content:space-between;align-items:flex-end;gap:15px;margin-bottom:23px}
+.eyebrow{font-size:10px;color:var(--gold);font-weight:800;letter-spacing:1.7px;text-transform:uppercase}
+h1{font-size:clamp(25px,4vw,34px);margin:7px 0}
+.heading p{font-size:12px;color:var(--muted)}
+.back{color:var(--gold);font-size:11px;font-weight:700;white-space:nowrap}
+
+/* PROFILE HERO */
+.profile-hero{
+  background:linear-gradient(120deg,#1B2B42,#111A29);
+  border:1px solid rgba(242,189,69,.2);
+  border-radius:21px;padding:25px;
+  display:flex;align-items:center;gap:20px;
+  margin-bottom:20px;
+}
+.profile-avatar{
+  width:76px;height:76px;flex-shrink:0;
+  display:grid;place-items:center;border-radius:22px;
+  background:rgba(242,189,69,.14);
+  border:1px solid rgba(242,189,69,.25);
+  color:var(--gold);font-size:25px;font-weight:800;
+}
+.profile-info{flex:1;min-width:0}
+.profile-info h2{font-size:21px}
+.profile-info p{font-size:11px;color:var(--muted);margin-top:4px}
+.student-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:10px;padding:6px 9px;border-radius:7px;
+  background:rgba(53,201,138,.1);color:var(--green);
+  font-size:9px;font-weight:800;
+}
+.edit-btn{
+  display:flex;align-items:center;gap:7px;
+  border:1px solid var(--border);background:rgba(255,255,255,.04);
+  color:var(--white);padding:10px 13px;border-radius:10px;
+  font-size:10px;font-weight:700;cursor:pointer;
+}
+
+/* LAYOUT */
+.main-grid{display:grid;grid-template-columns:1fr 1fr;gap:17px}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:17px;padding:21px}
+.panel-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:18px}
+.panel-head h2{font-size:14px}
+.panel-head span{font-size:10px;color:var(--muted)}
+.info-list{display:grid;grid-template-columns:1fr 1fr;gap:17px}
+.info-item label{display:block;font-size:9px;color:var(--muted);margin-bottom:5px}
+.info-item strong{font-size:11px;font-weight:600;overflow-wrap:anywhere}
+.info-item.full{grid-column:1/-1}
+.divider{height:1px;background:var(--border);margin:18px 0}
+
+/* PACKAGE */
+.package-card{
+  background:linear-gradient(135deg,#1B2B42,#111A29);
+  border:1px solid rgba(242,189,69,.2);
+  border-radius:14px;padding:17px;
+}
+.package-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.package-top span{font-size:9px;color:var(--gold);font-weight:800;letter-spacing:1px}
+.package-top strong{font-size:21px;color:var(--gold)}
+.package-card h3{font-size:16px;margin:13px 0 5px}
+.package-card p{font-size:10px;color:var(--muted)}
+.package-meta{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px;padding-top:14px;border-top:1px solid var(--border)}
+.package-meta small{display:block;color:var(--muted);font-size:9px}
+.package-meta b{font-size:11px;display:block;margin-top:3px}
+
+/* PAYMENT */
+.payment-summary{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:17px}
+.pay-box{background:var(--card2);border-radius:12px;padding:14px}
+.pay-box span{display:block;font-size:9px;color:var(--muted)}
+.pay-box strong{display:block;font-size:19px;margin-top:5px}
+.pay-box.due strong{color:var(--gold)}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:430px}
+th{text-align:left;font-size:9px;color:var(--muted);padding:11px 9px;border-bottom:1px solid var(--border)}
+td{font-size:10px;padding:13px 9px;border-bottom:1px solid var(--border)}
+tbody tr:last-child td{border:0}
+.badge{display:inline-block;padding:5px 8px;border-radius:20px;font-size:9px;font-weight:800}
+.paid{background:rgba(53,201,138,.12);color:var(--green)}
+.pending{background:rgba(242,189,69,.12);color:var(--gold)}
+
+/* ACCOUNT SETTINGS */
+.settings-list{display:grid;gap:9px}
+.setting{
+  display:flex;align-items:center;gap:12px;
+  padding:13px;background:var(--card2);
+  border-radius:12px;
+}
+.setting-icon{
+  width:35px;height:35px;display:grid;place-items:center;
+  border-radius:10px;background:rgba(242,189,69,.1);
+  color:var(--gold);flex-shrink:0;
+}
+.setting-info{flex:1;min-width:0}
+.setting-info strong{display:block;font-size:10px}
+.setting-info span{display:block;font-size:9px;color:var(--muted);margin-top:3px}
+.setting-arrow{color:var(--muted);width:15px}
+.setting button{
+  border:0;background:none;color:inherit;
+  display:flex;align-items:center;gap:12px;
+  width:100%;text-align:left;cursor:pointer;
+}
+.logout-btn{
+  width:100%;margin-top:12px;padding:13px;
+  background:rgba(255,119,119,.08);
+  border:1px solid rgba(255,119,119,.2);
+  color:var(--red);border-radius:11px;
+  font-size:11px;font-weight:800;cursor:pointer;
+}
+
+/* NOTICE */
+.notice{display:flex;gap:10px;padding:13px;margin-top:17px;border-radius:12px;background:rgba(101,169,255,.07);border:1px solid rgba(101,169,255,.15)}
+.notice i{color:var(--blue);width:17px;flex-shrink:0}
+.notice strong{font-size:10px}
+.notice p{font-size:9px;color:var(--muted);margin-top:3px}
+
+/* EDIT MODAL */
+.modal{
+  display:none;position:fixed;inset:0;z-index:300;
+  background:rgba(0,0,0,.7);padding:20px;
+  align-items:center;justify-content:center;
+}
+.modal.show{display:flex}
+.modal-card{
+  width:min(440px,100%);background:var(--card);
+  border:1px solid var(--border);border-radius:18px;
+  padding:22px;max-height:90vh;overflow:auto;
+}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.modal-head h2{font-size:16px}
+.close-btn{background:none;border:0;color:var(--muted);cursor:pointer}
+.form-field{margin-bottom:13px}
+.form-field label{display:block;font-size:10px;color:var(--muted);margin-bottom:6px}
+.form-field input{
+  width:100%;padding:12px;border:1px solid var(--border);
+  border-radius:10px;background:#0B1321;color:var(--white);outline:none;
+}
+.form-field input:focus{border-color:var(--gold)}
+.save-btn{
+  width:100%;border:0;background:var(--gold);color:#171717;
+  padding:13px;border-radius:10px;font-size:11px;font-weight:800;
+}
+
+/* FOOTER + NAV */
+footer{border-top:1px solid var(--border);padding:22px 0 100px}
+.footer-inner{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.footer-inner p{font-size:10px;color:var(--muted)}
+.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(12,19,32,.97);border-top:1px solid var(--border);padding:10px 5px calc(10px + env(safe-area-inset-bottom));justify-content:space-around;backdrop-filter:blur(15px)}
+.bottom-nav a{display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--muted);font-size:9px;font-weight:700;min-width:55px}
+.bottom-nav a.active{color:var(--gold)}
+.bottom-nav i{width:19px;height:19px}
+
+@media(max-width:800px){.main-grid{grid-template-columns:1fr}}
+@media(max-width:600px){
+  .topbar{height:62px}
+  main{padding-top:23px}
+  .heading{align-items:flex-start;flex-direction:column}
+  .profile-hero{padding:18px;gap:13px;flex-wrap:wrap}
+  .profile-avatar{width:61px;height:61px;border-radius:17px;font-size:21px}
+  .profile-info h2{font-size:17px}
+  .edit-btn{margin-left:auto}
+  .panel{padding:16px}
+  .bottom-nav{display:flex}
+  .footer-inner{flex-direction:column}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container topbar">
+    <a href="index.html" class="logo">ABHINAASH <span>A1</span></a>
+    <div class="top-right">
+      <a href="contact.html">Support</a>
+      <div class="avatar" id="topAvatar">ST</div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="heading">
+    <div>
+      <div class="eyebrow">Student Portal</div>
+      <h1>My Account</h1>
+      <p>Manage your personal information, package and payments.</p>
+    </div>
+    <a href="student-dashboard.html" class="back">← Back to Dashboard</a>
+  </section>
+
+  <!-- PROFILE HERO -->
+  <section class="profile-hero">
+    <div class="profile-avatar" id="profileAvatar">ST</div>
+    <div class="profile-info">
+      <h2 id="profileName">Student Name</h2>
+      <p id="profileEmail">Email not provided</p>
+      <span class="student-tag">
+        <i data-lucide="shield-check" width="12"></i>
+        Active Student
+      </span>
+    </div>
+    <button class="edit-btn" id="editProfileBtn">
+      <i data-lucide="pencil" width="14"></i> Edit Profile
+    </button>
+  </section>
+
+  <section class="main-grid">
+
+    <!-- PERSONAL DETAILS -->
+    <div class="panel">
+      <div class="panel-head">
+        <h2>Personal Information</h2>
+        <span>Profile details</span>
+      </div>
+
+      <div class="info-list">
+        <div class="info-item">
+          <label>Full Name</label>
+          <strong id="infoName">Student Name</strong>
+        </div>
+        <div class="info-item">
+          <label>Student ID</label>
+          <strong id="infoId">A1-XXXX</strong>
+        </div>
+        <div class="info-item">
+          <label>Mobile Number</label>
+          <strong id="infoPhone">Not provided</strong>
+        </div>
+        <div class="info-item">
+          <label>Email Address</label>
+          <strong id="infoEmail">Not provided</strong>
+        </div>
+        <div class="info-item">
+          <label>Date of Birth</label>
+          <strong id="infoDob">Not provided</strong>
+        </div>
+        <div class="info-item">
+          <label>Gender</label>
+          <strong id="infoGender">Not provided</strong>
+        </div>
+        <div class="info-item full">
+          <label>Address</label>
+          <strong id="infoAddress">Not provided</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- PACKAGE DETAILS -->
+    <div class="panel">
+      <div class="panel-head">
+        <h2>My Enrolled Package</h2>
+        <span>Course information</span>
+      </div>
+
+      <div class="package-card">
+        <div class="package-top">
+          <span>ACTIVE PACKAGE</span>
+          <strong id="packagePrice">₹4,500</strong>
+        </div>
+        <h3 id="packageName">Premium Driving Package</h3>
+        <p id="packageDescription">30 days of driving training.</p>
+
+        <div class="package-meta">
+          <div>
+            <small>Duration</small>
+            <b id="packageDuration">30 Days</b>
+          </div>
+          <div>
+            <small>Admission Date</small>
+            <b id="admissionDate">Not provided</b>
+          </div>
+          <div>
+            <small>Training Vehicle</small>
+            <b>TATA TIGOR XZ+</b>
+          </div>
+          <div>
+            <small>Package Status</small>
+            <b style="color:var(--green)">Active</b>
+          </div>
+        </div>
+      </div>
+
+      <div class="notice">
+        <i data-lucide="info"></i>
+        <div>
+          <strong>Package Support</strong>
+          <p>Contact the institute for package changes or training-related assistance.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAYMENT SUMMARY -->
+    <div class="panel" id="payments">
+      <div class="panel-head">
+        <h2>Payment Summary</h2>
+        <span>Fee overview</span>
+      </div>
+
+      <div class="payment-summary">
+        <div class="pay-box">
+          <span>Total Package Fee</span>
+          <strong id="totalFee">₹4,500</strong>
+        </div>
+        <div class="pay-box">
+          <span>Amount Paid</span>
+          <strong id="amountPaid" style="color:var(--green)">₹4,500</strong>
+        </div>
+        <div class="pay-box due">
+          <span>Remaining Balance</span>
+          <strong id="balanceDue">₹0</strong>
+        </div>
+        <div class="pay-box">
+          <span>Payment Status</span>
+          <strong id="paymentStatus" style="font-size:14px;color:var(--green)">Paid</strong>
+        </div>
+      </div>
+
+      <div class="panel-head" style="margin-top:20px;margin-bottom:10px">
+        <h2 style="font-size:12px">Payment History</h2>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Amount</th>
+              <th>Method</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="paymentHistory">
+            <tr>
+              <td>Sample date</td>
+              <td>₹4,500</td>
+              <td>UPI</td>
+              <td><span class="badge paid">Paid</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ACCOUNT SETTINGS -->
+    <div class="panel">
+      <div class="panel-head">
+        <h2>Account Settings</h2>
+        <span>Security & support</span>
+      </div>
+
+      <div class="settings-list">
+        <div class="setting">
+          <div class="setting-icon"><i data-lucide="lock-keyhole"></i></div>
+          <div class="setting-info">
+            <strong>Password & Security</strong>
+            <span>Account security settings</span>
+          </div>
+          <i data-lucide="chevron-right" class="setting-arrow"></i>
+        </div>
+
+        <a href="contact.html" class="setting">
+          <div class="setting-icon"><i data-lucide="headset"></i></div>
+          <div class="setting-info">
+            <strong>Contact Support</strong>
+            <span>Get help from our team</span>
+          </div>
+          <i data-lucide="chevron-right" class="setting-arrow"></i>
+        </a>
+
+        <a href="student-training.html" class="setting">
+          <div class="setting-icon"><i data-lucide="clipboard-check"></i></div>
+          <div class="setting-info">
+            <strong>Training Records</strong>
+            <span>Attendance and lessons</span>
+          </div>
+          <i data-lucide="chevron-right" class="setting-arrow"></i>
+        </a>
+      </div>
+
+      <button class="logout-btn" id="logoutBtn">
+        <i data-lucide="log-out" width="15" style="vertical-align:middle"></i>
+        Sign Out
+      </button>
+
+      <div class="notice">
+        <i data-lucide="shield-check"></i>
+        <div>
+          <strong>Your account matters</strong>
+          <p>Never share your password or verification code with anyone.</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <a href="index.html" class="logo">ABHINAASH <span>A1</span></a>
+    <p>Student Account Portal · Baripada, Odisha</p>
+  </div>
+</footer>
+
+<nav class="bottom-nav">
+  <a href="student-dashboard.html">
+    <i data-lucide="layout-dashboard"></i>Dashboard
+  </a>
+  <a href="student-training.html">
+    <i data-lucide="car-front"></i>Training
+  </a>
+  <a href="student-training.html#attendance">
+    <i data-lucide="clipboard-check"></i>Attendance
+  </a>
+  <a href="student-account.html" class="active">
+    <i data-lucide="user-round"></i>Account
+  </a>
+</nav>
+
+<!-- EDIT PROFILE MODAL -->
+<div class="modal" id="editModal">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h2>Edit Personal Details</h2>
+      <button class="close-btn" id="closeModal" aria-label="Close">
+        <i data-lucide="x"></i>
+      </button>
+    </div>
+
+    <form id="editForm">
+      <div class="form-field">
+        <label for="editName">Full Name</label>
+        <input id="editName" type="text" required>
+      </div>
+      <div class="form-field">
+        <label for="editPhone">Mobile Number</label>
+        <input id="editPhone" type="tel" maxlength="10">
+      </div>
+      <div class="form-field">
+        <label for="editEmail">Email Address</label>
+        <input id="editEmail" type="email">
+      </div>
+      <div class="form-field">
+        <label for="editAddress">Address</label>
+        <input id="editAddress" type="text">
+      </div>
+      <button type="submit" class="save-btn">Save Changes</button>
+    </form>
+  </div>
+</div>
+
+<script>
+/*
+  DEMO ACCOUNT DATA
+  This page currently uses sample data.
+  It does not read or write Firebase.
+*/
+
+const STUDENT_ACCOUNT = {
+  name:"Student Name",
+  studentId:"A1-XXXX",
+  phone:"Not provided",
+  email:"Not provided",
+  dob:"Not provided",
+  gender:"Not provided",
+  address:"Not provided",
+
+  package:{
+    name:"Premium Driving Package",
+    price:4500,
+    duration:30,
+    description:"30 days of driving training.",
+    admissionDate:"Not provided"
+  },
+
+  payment:{
+    total:4500,
+    paid:4500,
+    history:[
+      {
+        date:"Sample date",
+        amount:4500,
+        method:"UPI",
+        status:"Paid"
+      }
+    ]
+  }
+};
+
+const money = value =>
+  "₹" + Number(value || 0).toLocaleString("en-IN");
+
+function renderAccount(data){
+  const initials = (data.name || "Student")
+    .trim().split(/\s+/).map(x=>x[0]).join("")
+    .slice(0,2).toUpperCase();
+
+  document.getElementById("profileAvatar").textContent = initials;
+  document.getElementById("topAvatar").textContent = initials;
+
+  document.getElementById("profileName").textContent = data.name;
+  document.getElementById("profileEmail").textContent = data.email;
+  document.getElementById("infoName").textContent = data.name;
+  document.getElementById("infoId").textContent = data.studentId;
+  document.getElementById("infoPhone").textContent = data.phone;
+  document.getElementById("infoEmail").textContent = data.email;
+  document.getElementById("infoDob").textContent = data.dob;
+  document.getElementById("infoGender").textContent = data.gender;
+  document.getElementById("infoAddress").textContent = data.address;
+
+  const pkg = data.package;
+  document.getElementById("packageName").textContent = pkg.name;
+  document.getElementById("packagePrice").textContent = money(pkg.price);
+  document.getElementById("packageDescription").textContent = pkg.description;
+  document.getElementById("packageDuration").textContent = pkg.duration + " Days";
+  document.getElementById("admissionDate").textContent = pkg.admissionDate;
+
+  const total = Number(data.payment.total) || 0;
+  const paid = Number(data.payment.paid) || 0;
+  const due = Math.max(total-paid,0);
+
+  document.getElementById("totalFee").textContent = money(total);
+  document.getElementById("amountPaid").textContent = money(paid);
+  document.getElementById("balanceDue").textContent = money(due);
+
+  const status = due === 0 ? "Paid" : paid > 0 ? "Partial" : "Pending";
+  const statusElement = document.getElementById("paymentStatus");
+  statusElement.textContent = status;
+  statusElement.style.color = due === 0 ? "var(--green)" : "var(--gold)";
+
+  const history = document.getElementById("paymentHistory");
+  history.innerHTML = "";
+
+  if(!data.payment.history || data.payment.history.length === 0){
+    history.innerHTML = `<tr><td colspan="4" style="text-align:center;color:var(--muted)">No payment records available.</td></tr>`;
+  }else{
+    data.payment.history.forEach(item=>{
+      const row = document.createElement("tr");
+
+      [item.date,money(item.amount),item.method].forEach(value=>{
+        const td = document.createElement("td");
+        td.textContent = value;
+        row.appendChild(td);
+      });
+
+      const statusCell = document.createElement("td");
+      const badge = document.createElement("span");
+      badge.className = "badge " + (item.status === "Paid" ? "paid" : "pending");
+      badge.textContent = item.status;
+      statusCell.appendChild(badge);
+      row.appendChild(statusCell);
+      history.appendChild(row);
+    });
+  }
+}
+
+renderAccount(STUDENT_ACCOUNT);
+
+/* EDIT PROFILE - LOCAL DEMO ONLY */
+const modal = document.getElementById("editModal");
+
+document.getElementById("editProfileBtn").addEventListener("click",()=>{
+  document.getElementById("editName").value = STUDENT_ACCOUNT.name;
+  document.getElementById("editPhone").value =
+    STUDENT_ACCOUNT.phone === "Not provided" ? "" : STUDENT_ACCOUNT.phone;
+  document.getElementById("editEmail").value =
+    STUDENT_ACCOUNT.email === "Not provided" ? "" : STUDENT_ACCOUNT.email;
+  document.getElementById("editAddress").value =
+    STUDENT_ACCOUNT.address === "Not provided" ? "" : STUDENT_ACCOUNT.address;
+
+  modal.classList.add("show");
+});
+
+document.getElementById("closeModal").addEventListener("click",()=>{
+  modal.classList.remove("show");
+});
+
+modal.addEventListener("click",e=>{
+  if(e.target === modal) modal.classList.remove("show");
+});
+
+document.getElementById("editForm").addEventListener("submit",e=>{
+  e.preventDefault();
+
+  STUDENT_ACCOUNT.name = document.getElementById("editName").value.trim();
+  STUDENT_ACCOUNT.phone = document.getElementById("editPhone").value.trim() || "Not provided";
+  STUDENT_ACCOUNT.email = document.getElementById("editEmail").value.trim() || "Not provided";
+  STUDENT_ACCOUNT.address = document.getElementById("editAddress").value.trim() || "Not provided";
+
+  renderAccount(STUDENT_ACCOUNT);
+  modal.classList.remove("show");
+
+  alert("Profile updated in this page preview only. Firebase saving is not connected yet.");
+});
+
+/* No authentication is connected yet. */
+document.getElementById("logoutBtn").addEventListener("click",()=>{
+  alert("Student login authentication is not connected yet. Sign-out will be enabled after Firebase Auth integration.");
+});
+
+if(window.lucide) lucide.createIcons();
+</script>
+
+</body>
+</html>
