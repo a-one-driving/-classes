@@ -1,0 +1,706 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#080D18">
+<meta name="description" content="ABHINAASH A1 Driving Admin Dashboard">
+<title>Admin Dashboard | ABHINAASH A1 Driving</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+:root{
+  --bg:#080D18;--card:#111A29;--card2:#172337;
+  --gold:#F2BD45;--white:#F8FAFC;--muted:#A8B1C2;
+  --border:rgba(255,255,255,.09);
+  --green:#35C98A;--red:#FF7777;--blue:#65A9FF;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,sans-serif;background:var(--bg);color:var(--white);line-height:1.5}
+a{text-decoration:none;color:inherit}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.container{width:min(1200px,94%);margin:auto}
+
+/* HEADER */
+header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(8,13,24,.96);
+  backdrop-filter:blur(15px);
+  border-bottom:1px solid var(--border);
+}
+.topbar{height:68px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:17px;font-weight:800}
+.logo span{color:var(--gold)}
+.header-right{display:flex;align-items:center;gap:15px}
+.header-right a{font-size:11px;color:var(--muted)}
+.avatar{
+  width:38px;height:38px;border-radius:12px;
+  display:grid;place-items:center;
+  background:rgba(242,189,69,.13);
+  color:var(--gold);font-weight:800;
+}
+main{padding:29px 0 100px}
+
+/* PAGE HEADING */
+.heading{
+  display:flex;justify-content:space-between;
+  align-items:center;gap:15px;margin-bottom:24px;
+}
+.eyebrow{
+  font-size:10px;color:var(--gold);font-weight:800;
+  letter-spacing:1.7px;text-transform:uppercase;
+}
+h1{font-size:clamp(25px,4vw,34px);margin:7px 0}
+.heading p{font-size:12px;color:var(--muted)}
+.heading-actions{display:flex;align-items:center;gap:9px}
+.date-chip{
+  display:flex;align-items:center;gap:8px;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:10px;padding:10px 13px;
+  color:var(--muted);font-size:10px;white-space:nowrap;
+}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  gap:7px;padding:11px 14px;border-radius:10px;
+  border:1px solid transparent;font-size:10px;font-weight:800;
+}
+.btn-gold{background:var(--gold);color:#171717}
+.btn-outline{background:rgba(255,255,255,.04);border-color:var(--border);color:var(--white)}
+
+/* WELCOME */
+.welcome{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:20px;padding:22px 24px;margin-bottom:19px;
+  border-radius:19px;
+  background:linear-gradient(115deg,#1B2B42,#111A29);
+  border:1px solid rgba(242,189,69,.2);
+}
+.welcome h2{font-size:21px;margin:5px 0}
+.welcome p{font-size:11px;color:var(--muted)}
+.admin-tag{
+  display:inline-flex;align-items:center;gap:7px;
+  color:var(--gold);font-size:9px;font-weight:800;letter-spacing:1px;
+}
+.welcome-right{text-align:right}
+.welcome-right strong{display:block;font-size:23px;color:var(--gold)}
+.welcome-right span{font-size:10px;color:var(--muted)}
+
+/* KPI */
+.kpi-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:13px;margin-bottom:19px;
+}
+.kpi{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:15px;padding:17px;min-width:0;
+}
+.kpi-top{display:flex;justify-content:space-between;align-items:center}
+.kpi-icon{
+  width:37px;height:37px;border-radius:11px;
+  display:grid;place-items:center;background:var(--card2);color:var(--gold);
+}
+.kpi strong{display:block;font-size:25px;margin-top:13px;overflow-wrap:anywhere}
+.kpi p{font-size:10px;color:var(--muted);margin-top:3px}
+.kpi-foot{font-size:9px;color:var(--green);margin-top:9px}
+
+/* PANELS */
+.grid-main{
+  display:grid;grid-template-columns:1.2fr .8fr;
+  gap:17px;margin-bottom:18px;
+}
+.panel{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:17px;padding:20px;min-width:0;
+}
+.panel-head{
+  display:flex;justify-content:space-between;
+  align-items:center;gap:10px;margin-bottom:18px;
+}
+.panel-head h2{font-size:14px}
+.panel-head p{font-size:10px;color:var(--muted);margin-top:4px}
+.panel-head a{font-size:10px;color:var(--gold);font-weight:700}
+
+/* REVENUE CHART */
+.chart-legend{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:9px;color:var(--muted)}
+.legend-dot{width:7px;height:7px;border-radius:50%;background:var(--gold)}
+.chart{
+  height:190px;display:flex;align-items:flex-end;
+  justify-content:space-around;gap:10px;
+  border-bottom:1px solid var(--border);
+  padding:10px 4px 0;
+}
+.chart-column{
+  flex:1;height:100%;display:flex;
+  flex-direction:column;justify-content:flex-end;
+  align-items:center;gap:8px;min-width:0;
+}
+.bar{
+  width:min(34px,70%);min-height:4px;
+  background:linear-gradient(180deg,#F2BD45,#B47D21);
+  border-radius:7px 7px 0 0;
+  transition:height .3s;
+}
+.chart-column span{font-size:9px;color:var(--muted);padding-bottom:8px}
+.chart-caption{font-size:9px;color:var(--muted);margin-top:12px}
+
+/* COLLECTIONS */
+.collection-list{display:grid;gap:13px}
+.collection-item{display:flex;align-items:center;gap:11px}
+.collection-icon{
+  width:36px;height:36px;display:grid;place-items:center;
+  border-radius:10px;background:var(--card2);color:var(--gold);
+  flex-shrink:0;
+}
+.collection-info{flex:1;min-width:0}
+.collection-info strong{display:block;font-size:10px}
+.collection-info span{font-size:9px;color:var(--muted)}
+.collection-value{font-size:11px;font-weight:800;white-space:nowrap}
+
+/* TABLE */
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:650px}
+th{text-align:left;padding:12px 10px;font-size:9px;color:var(--muted);border-bottom:1px solid var(--border);font-weight:600}
+td{padding:13px 10px;border-bottom:1px solid var(--border);font-size:10px}
+tbody tr:last-child td{border-bottom:0}
+.student-name{font-weight:700}
+.student-id{font-size:9px;color:var(--muted);margin-top:3px}
+.badge{display:inline-flex;padding:5px 8px;border-radius:20px;font-size:9px;font-weight:800}
+.active-badge{background:rgba(53,201,138,.12);color:var(--green)}
+.pending-badge{background:rgba(242,189,69,.12);color:var(--gold)}
+.action-link{font-size:10px;color:var(--gold);font-weight:800}
+
+/* QUICK LINKS */
+.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}
+.quick-link{
+  display:flex;align-items:center;gap:10px;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:13px;padding:14px;transition:.2s;
+}
+.quick-link:hover{border-color:rgba(242,189,69,.5);transform:translateY(-2px)}
+.quick-icon{
+  width:35px;height:35px;display:grid;place-items:center;
+  border-radius:10px;background:var(--card2);color:var(--gold);flex-shrink:0;
+}
+.quick-link strong{display:block;font-size:10px}
+.quick-link span{display:block;font-size:9px;color:var(--muted);margin-top:3px}
+
+/* ALERTS */
+.alert-list{display:grid;gap:10px}
+.alert{
+  display:flex;align-items:flex-start;gap:10px;
+  padding:12px;background:var(--card2);border-radius:11px;
+}
+.alert-icon{
+  width:31px;height:31px;display:grid;place-items:center;
+  border-radius:9px;background:rgba(242,189,69,.1);
+  color:var(--gold);flex-shrink:0;
+}
+.alert strong{display:block;font-size:10px}
+.alert p{font-size:9px;color:var(--muted);margin-top:3px}
+
+/* NOTICE */
+.notice{
+  display:flex;gap:10px;padding:13px;margin-top:17px;
+  border-radius:12px;background:rgba(101,169,255,.07);
+  border:1px solid rgba(101,169,255,.15);
+}
+.notice i{width:17px;color:var(--blue);flex-shrink:0}
+.notice strong{font-size:10px}
+.notice p{font-size:9px;color:var(--muted);margin-top:3px}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:22px 0 100px}
+.footer-inner{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.footer-inner p{font-size:10px;color:var(--muted)}
+.bottom-nav{
+  display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;
+  background:rgba(12,19,32,.97);border-top:1px solid var(--border);
+  padding:10px 5px calc(10px + env(safe-area-inset-bottom));
+  justify-content:space-around;backdrop-filter:blur(15px);
+}
+.bottom-nav a{
+  display:flex;flex-direction:column;align-items:center;
+  gap:4px;color:var(--muted);font-size:9px;font-weight:700;min-width:55px;
+}
+.bottom-nav a.active{color:var(--gold)}
+.bottom-nav i{width:19px;height:19px}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+  .grid-main{grid-template-columns:1fr}
+  .quick-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+  .topbar{height:62px}
+  main{padding-top:22px}
+  .heading{align-items:flex-start;flex-direction:column}
+  .heading-actions{width:100%;justify-content:space-between}
+  .welcome{align-items:flex-start;flex-direction:column;padding:18px}
+  .welcome-right{text-align:left}
+  .kpi-grid{gap:9px}
+  .kpi{padding:13px}
+  .kpi strong{font-size:21px}
+  .panel{padding:15px}
+  .quick-grid{gap:8px}
+  .quick-link{padding:11px 9px;gap:8px}
+  .quick-icon{width:31px;height:31px}
+  .bottom-nav{display:flex}
+  .footer-inner{flex-direction:column}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container topbar">
+    <a href="index.html" class="logo">ABHINAASH <span>A1</span></a>
+    <div class="header-right">
+      <a href="contact.html">Support</a>
+      <div class="avatar">AD</div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="heading">
+    <div>
+      <div class="eyebrow">Owner Control Centre</div>
+      <h1>Admin Dashboard</h1>
+      <p>Monitor admissions, revenue, students and daily operations.</p>
+    </div>
+    <div class="heading-actions">
+      <div class="date-chip">
+        <i data-lucide="calendar-days" width="14"></i>
+        <span id="todayDate"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- WELCOME -->
+  <section class="welcome">
+    <div>
+      <div class="admin-tag">
+        <i data-lucide="shield-check" width="13"></i>
+        ADMINISTRATOR ACCESS
+      </div>
+      <h2>Welcome to Control Centre</h2>
+      <p>Here is your driving school business overview.</p>
+    </div>
+    <div class="welcome-right">
+      <strong id="activeStudentsWelcome">0</strong>
+      <span>Active Students</span>
+    </div>
+  </section>
+
+  <!-- KPI -->
+  <section class="kpi-grid">
+
+    <div class="kpi">
+      <div class="kpi-top">
+        <div class="kpi-icon"><i data-lucide="users"></i></div>
+      </div>
+      <strong id="totalStudents">0</strong>
+      <p>Total Students</p>
+      <div class="kpi-foot">All registered students</div>
+    </div>
+
+    <div class="kpi">
+      <div class="kpi-top">
+        <div class="kpi-icon"><i data-lucide="user-check"></i></div>
+      </div>
+      <strong id="activeStudents">0</strong>
+      <p>Active Admissions</p>
+      <div class="kpi-foot">Currently in training</div>
+    </div>
+
+    <div class="kpi">
+      <div class="kpi-top">
+        <div class="kpi-icon"><i data-lucide="wallet"></i></div>
+      </div>
+      <strong id="totalRevenue">₹0</strong>
+      <p>Total Collections</p>
+      <div class="kpi-foot">Recorded payments</div>
+    </div>
+
+    <div class="kpi">
+      <div class="kpi-top">
+        <div class="kpi-icon"><i data-lucide="clock"></i></div>
+      </div>
+      <strong id="pendingFees">₹0</strong>
+      <p>Pending Fees</p>
+      <div class="kpi-foot" style="color:var(--gold)">Outstanding balance</div>
+    </div>
+
+    <div class="kpi">
+      <div class="kpi-top">
+        <div class="kpi-icon"><i data-lucide="calendar-plus"></i></div>
+      </div>
+      <strong id="newAdmissions">0</strong>
+      <p>New Admissions</p>
+      <div class="kpi-foot">This month</div>
+    </div>
+
+    <div class="kpi">
+      <div class="kpi-top">
+        <div class="kpi-icon"><i data-lucide="car-front"></i></div>
+      </div>
+      <strong id="todayClasses">0</strong>
+      <p>Today's Classes</p>
+      <div class="kpi-foot">Scheduled sessions</div>
+    </div>
+
+    <div class="kpi">
+      <div class="kpi-top">
+        <div class="kpi-icon"><i data-lucide="clipboard-list"></i></div>
+      </div>
+      <strong id="pendingBookings">0</strong>
+      <p>Pending Bookings</p>
+      <div class="kpi-foot" style="color:var(--gold)">Require confirmation</div>
+    </div>
+
+    <div class="kpi">
+      <div class="kpi-top">
+        <div class="kpi-icon"><i data-lucide="contact-round"></i></div>
+      </div>
+      <strong id="totalInstructors">0</strong>
+      <p>Instructors</p>
+      <div class="kpi-foot">Active team members</div>
+    </div>
+
+  </section>
+
+  <!-- REVENUE + ALERTS -->
+  <section class="grid-main">
+
+    <div class="panel">
+      <div class="panel-head">
+        <div>
+          <h2>Revenue Overview</h2>
+          <p>Monthly collection summary</p>
+        </div>
+        <a href="admin-management.html#finance">View Reports ↗</a>
+      </div>
+
+      <div class="chart-legend">
+        <div class="legend-item"><span class="legend-dot"></span> Monthly Collections</div>
+      </div>
+
+      <div class="chart" id="revenueChart"></div>
+      <div class="chart-caption">Illustrative sample revenue values. Replace with actual payment records.</div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <div>
+          <h2>Action Centre</h2>
+          <p>Items that need your attention</p>
+        </div>
+        <span style="font-size:10px;color:var(--gold)" id="alertCount">0 alerts</span>
+      </div>
+
+      <div class="alert-list">
+        <div class="alert">
+          <div class="alert-icon"><i data-lucide="wallet" width="15"></i></div>
+          <div>
+            <strong>Pending Fee Collection</strong>
+            <p id="feeAlert">Review outstanding student balances.</p>
+          </div>
+        </div>
+
+        <div class="alert">
+          <div class="alert-icon"><i data-lucide="calendar-clock" width="15"></i></div>
+          <div>
+            <strong>Booking Confirmation</strong>
+            <p id="bookingAlert">Review pending admission requests.</p>
+          </div>
+        </div>
+
+        <div class="alert">
+          <div class="alert-icon"><i data-lucide="clipboard-check" width="15"></i></div>
+          <div>
+            <strong>Attendance Review</strong>
+            <p id="attendanceAlert">Check instructor attendance updates.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- RECENT ADMISSIONS -->
+  <section class="panel" style="margin-bottom:18px">
+    <div class="panel-head">
+      <div>
+        <h2>Recent Admissions</h2>
+        <p>Latest registered students</p>
+      </div>
+      <a href="admin-management.html#students">Manage Students ↗</a>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Student</th>
+            <th>Package</th>
+            <th>Admission Date</th>
+            <th>Fee</th>
+            <th>Payment</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="admissionTable"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- QUICK MANAGEMENT -->
+  <section class="panel">
+    <div class="panel-head">
+      <div>
+        <h2>Management Shortcuts</h2>
+        <p>Quick access to important admin sections</p>
+      </div>
+    </div>
+
+    <div class="quick-grid">
+
+      <a href="admin-management.html#students" class="quick-link">
+        <div class="quick-icon"><i data-lucide="users"></i></div>
+        <div><strong>Students</strong><span>Admissions & profiles</span></div>
+      </a>
+
+      <a href="admin-management.html#instructors" class="quick-link">
+        <div class="quick-icon"><i data-lucide="contact-round"></i></div>
+        <div><strong>Instructors</strong><span>Manage staff</span></div>
+      </a>
+
+      <a href="admin-management.html#bookings" class="quick-link">
+        <div class="quick-icon"><i data-lucide="calendar-check"></i></div>
+        <div><strong>Bookings</strong><span>Admission requests</span></div>
+      </a>
+
+      <a href="admin-finance.html" class="quick-link">
+        <div class="quick-icon"><i data-lucide="wallet"></i></div>
+        <div><strong>Finance</strong><span>Fees & collections</span></div>
+      </a>
+
+    </div>
+
+    <div class="notice">
+      <i data-lucide="database"></i>
+      <div>
+        <strong>Demo Dashboard</strong>
+        <p>All displayed values are sample figures. This page does not read or write your existing Firebase database. Real business metrics will be connected after the admin authentication and data structure are confirmed.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <a href="index.html" class="logo">ABHINAASH <span>A1</span></a>
+    <p>Admin Control Centre · ABHINAASH A1 Driving · Baripada, Odisha</p>
+  </div>
+</footer>
+
+<nav class="bottom-nav">
+  <a href="admin-dashboard.html" class="active">
+    <i data-lucide="layout-dashboard"></i>Dashboard
+  </a>
+  <a href="admin-management.html">
+    <i data-lucide="users"></i>Manage
+  </a>
+  <a href="admin-finance.html">
+    <i data-lucide="wallet"></i>Finance
+  </a>
+  <a href="contact.html">
+    <i data-lucide="headset"></i>Support
+  </a>
+</nav>
+
+<script>
+/*
+  ADMIN DASHBOARD SAMPLE DATA
+  Not connected to Firebase.
+  Replace with secured admin data after authentication setup.
+*/
+
+const ADMIN_DATA = {
+  totalStudents:156,
+  activeStudents:32,
+  totalRevenue:485000,
+  pendingFees:28500,
+  newAdmissions:14,
+  todayClasses:8,
+  pendingBookings:5,
+  totalInstructors:3,
+
+  monthlyRevenue:[
+    {month:"May",amount:28000},
+    {month:"Jun",amount:35000},
+    {month:"Jul",amount:42000},
+    {month:"Aug",amount:38000},
+    {month:"Sep",amount:51000},
+    {month:"Oct",amount:47000},
+    {month:"Nov",amount:58000}
+  ],
+
+  admissions:[
+    {
+      name:"Sample Student 1",
+      id:"A1-1001",
+      package:"Premium",
+      date:"02 Nov 2026",
+      fee:4500,
+      paid:4500,
+      status:"Active"
+    },
+    {
+      name:"Sample Student 2",
+      id:"A1-1002",
+      package:"Standard",
+      date:"01 Nov 2026",
+      fee:3500,
+      paid:2000,
+      status:"Active"
+    },
+    {
+      name:"Sample Student 3",
+      id:"A1-1003",
+      package:"Personal",
+      date:"31 Oct 2026",
+      fee:8000,
+      paid:8000,
+      status:"Active"
+    },
+    {
+      name:"Sample Student 4",
+      id:"A1-1004",
+      package:"Premium",
+      date:"30 Oct 2026",
+      fee:4500,
+      paid:0,
+      status:"Pending"
+    }
+  ]
+};
+
+const money = value =>
+  "₹" + Number(value || 0).toLocaleString("en-IN");
+
+function renderDashboard(data){
+
+  $("totalStudents").textContent = data.totalStudents;
+  $("activeStudents").textContent = data.activeStudents;
+  $("activeStudentsWelcome").textContent = data.activeStudents;
+  $("totalRevenue").textContent = money(data.totalRevenue);
+  $("pendingFees").textContent = money(data.pendingFees);
+  $("newAdmissions").textContent = data.newAdmissions;
+  $("todayClasses").textContent = data.todayClasses;
+  $("pendingBookings").textContent = data.pendingBookings;
+  $("totalInstructors").textContent = data.totalInstructors;
+
+  $("feeAlert").textContent =
+    money(data.pendingFees) + " pending fee balance to review.";
+
+  $("bookingAlert").textContent =
+    data.pendingBookings + " admission requests awaiting review.";
+
+  $("attendanceAlert").textContent =
+    "Review today's instructor attendance records.";
+
+  $("alertCount").textContent =
+    (data.pendingBookings + (data.pendingFees>0 ? 1 : 0)) + " alerts";
+
+  renderChart(data.monthlyRevenue);
+  renderAdmissions(data.admissions);
+}
+
+function $(id){return document.getElementById(id)}
+
+function renderChart(records){
+  const chart = $("revenueChart");
+  chart.innerHTML = "";
+
+  const max = Math.max(...records.map(x=>x.amount),1);
+
+  records.forEach(item=>{
+    const column = document.createElement("div");
+    column.className = "chart-column";
+
+    const bar = document.createElement("div");
+    bar.className = "bar";
+    bar.style.height = Math.max((item.amount/max)*100,4) + "%";
+    bar.title = item.month + ": " + money(item.amount);
+
+    const label = document.createElement("span");
+    label.textContent = item.month;
+
+    column.append(bar,label);
+    chart.appendChild(column);
+  });
+}
+
+function renderAdmissions(records){
+  const body = $("admissionTable");
+  body.innerHTML = "";
+
+  records.forEach(student=>{
+    const row = document.createElement("tr");
+
+    const nameCell = document.createElement("td");
+    const name = document.createElement("div");
+    name.className = "student-name";
+    name.textContent = student.name;
+    const id = document.createElement("div");
+    id.className = "student-id";
+    id.textContent = student.id;
+    nameCell.append(name,id);
+
+    const pkg = document.createElement("td");
+    pkg.textContent = student.package;
+
+    const date = document.createElement("td");
+    date.textContent = student.date;
+
+    const fee = document.createElement("td");
+    fee.textContent = money(student.fee);
+
+    const payment = document.createElement("td");
+    payment.textContent = money(student.paid) + " paid";
+
+    const statusCell = document.createElement("td");
+    const badge = document.createElement("span");
+    badge.className = "badge " +
+      (student.status==="Active" ? "active-badge" : "pending-badge");
+    badge.textContent = student.status;
+    statusCell.appendChild(badge);
+
+    row.append(nameCell,pkg,date,fee,payment,statusCell);
+    body.appendChild(row);
+  });
+}
+
+$("todayDate").textContent = new Date().toLocaleDateString("en-IN",{
+  weekday:"short",day:"2-digit",month:"short",year:"numeric"
+});
+
+renderDashboard(ADMIN_DATA);
+
+if(window.lucide) lucide.createIcons();
+</script>
+
+</body>
+</html>
