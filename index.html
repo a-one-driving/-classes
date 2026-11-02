@@ -40,7 +40,7 @@ header{
   border-bottom:1px solid var(--border);
 }
 .nav{height:100%;display:flex;align-items:center;justify-content:space-between}
-.logo{display:flex;align-items:center;gap:10px}
+.logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
 .logo-icon{
   width:44px;height:44px;border:2px solid var(--gold);
   border-radius:14px;display:grid;place-items:center;
@@ -49,22 +49,25 @@ header{
 .logo-text strong{display:block;font-size:16px;letter-spacing:-.5px}
 .logo-text strong span{color:var(--gold)}
 .logo-text small{font-size:10px;letter-spacing:5px;color:var(--muted)}
-.nav-right{display:flex;align-items:center;gap:17px}
+
+.nav-right{display:flex;align-items:center;gap:14px}
 .nav-links{display:flex;align-items:center;gap:24px}
 .nav-links a{font-size:13px;color:#D5D9E2;transition:.2s}
 .nav-links a:hover{color:var(--gold)}
 .nav-btn{background:var(--gold);color:#10131B!important;padding:12px 20px;border-radius:30px;font-weight:800}
+
 .profile-btn{
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  padding:11px 17px;border:1px solid var(--gold);
-  border-radius:30px;background:rgba(242,189,69,.10);
-  color:var(--gold);font-size:12px;font-weight:800;
+  padding:10px 16px;border:1px solid var(--gold);
+  border-radius:13px;background:rgba(242,189,69,.10);
+  color:var(--gold);font-size:13px;font-weight:800;
   white-space:nowrap;transition:.2s
 }
 .profile-btn:hover{background:var(--gold);color:#10131B}
-.profile-btn svg{width:17px;height:17px}
-.menu-btn{display:none;background:none;border:0;color:white}
-.menu-btn svg{width:25px;height:25px}
+.profile-btn svg{width:19px;height:19px}
+
+.menu-btn{display:none;background:none;border:0;color:white;padding:5px}
+.menu-btn svg{width:28px;height:28px}
 
 /* BUTTONS */
 .btn{
@@ -186,8 +189,6 @@ footer ul{list-style:none}
 footer li{margin-bottom:13px}
 footer li a{color:var(--muted);font-size:13px}
 footer li a:hover{color:var(--gold)}
-.footer-contact{display:flex;align-items:center;gap:9px}
-.footer-contact svg{width:16px;height:16px;color:var(--gold)}
 .copyright{margin-top:35px;padding-top:20px;border-top:1px solid var(--border);color:#737E91;font-size:11px;text-align:center}
 
 /* BOTTOM NAVIGATION */
@@ -203,7 +204,7 @@ footer li a:hover{color:var(--gold)}
 .bottom-nav a.active{color:var(--gold)}
 .bottom-nav .nav-icon svg{width:21px;height:21px;stroke-width:1.8}
 
-/* BOOKING MODAL */
+/* MODALS */
 .modal{
   display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.8);
   padding:20px;align-items:center;justify-content:center
@@ -225,6 +226,16 @@ footer li a:hover{color:var(--gold)}
 .form-group input:focus,.form-group select:focus{border-color:var(--gold)}
 .modal-box .btn{width:100%}
 
+/* LOGIN */
+.dashboard-access{
+  display:none;margin-top:18px;padding:16px;
+  background:#172337;border:1px solid rgba(242,189,69,.3);
+  border-radius:13px
+}
+.dashboard-access strong{color:var(--gold);font-size:13px}
+.dashboard-access p{font-size:12px;color:var(--muted);line-height:1.6;margin-top:7px}
+.login-note{font-size:11px;color:var(--muted);line-height:1.6;margin-top:15px}
+
 /* RESPONSIVE */
 @media(max-width:850px){
   .nav-links{gap:15px}
@@ -233,10 +244,12 @@ footer li a:hover{color:var(--gold)}
   .package{padding:22px 16px}
   .why-grid{grid-template-columns:repeat(2,1fr)}
 }
+
 @media(max-width:650px){
   header{height:65px}
   .container{width:91%}
-  .nav-right{gap:12px}
+  .nav-right{gap:10px}
+
   .nav-links{
     display:none;position:absolute;top:65px;left:0;width:100%;
     background:#0D1523;padding:22px;flex-direction:column;
@@ -245,11 +258,13 @@ footer li a:hover{color:var(--gold)}
   .nav-links.open{display:flex}
   .nav-links a{font-size:14px}
   .nav-links .nav-btn{text-align:center}
-  .profile-btn{padding:9px 12px;font-size:11px;gap:6px}
-  .profile-btn svg{width:16px;height:16px}
+
+  .profile-btn{padding:9px 12px;font-size:11px;gap:6px;border-radius:11px}
+  .profile-btn svg{width:17px;height:17px}
   .menu-btn{display:block}
+
   .hero{
-    min-height:520px;
+    min-height:650px;
     background:linear-gradient(90deg,rgba(8,13,24,.95),rgba(8,13,24,.55)),
     url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=900&q=85') center/cover
   }
@@ -257,9 +272,14 @@ footer li a:hover{color:var(--gold)}
   .hero h1{font-size:43px}
   .hero p{font-size:13px}
   .btn{padding:14px 17px;font-size:12px}
+
   .feature-strip{grid-template-columns:repeat(2,1fr);margin-top:-25px}
-  .feature{padding:18px 8px;border-bottom:1px solid var(--border)}
+  .feature{padding:22px 8px;border-bottom:1px solid var(--border)}
   .feature:nth-child(2){border-right:0}
+  .feature:nth-child(3),.feature:nth-child(4){border-bottom:0}
+  .feature:nth-child(4){border-right:0}
+  .feature-icon svg{width:35px;height:35px}
+
   section.content-section{padding-top:60px}
   .packages{grid-template-columns:1fr;gap:22px}
   .package{min-height:0;padding:25px}
@@ -277,6 +297,7 @@ footer li a:hover{color:var(--gold)}
   .bottom-nav{display:flex}
   footer{padding-bottom:100px}
 }
+
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;transition:none!important}
 }
@@ -297,6 +318,13 @@ footer li a:hover{color:var(--gold)}
     </a>
 
     <div class="nav-right">
+
+      <!-- LOGIN / DASHBOARD BUTTON -->
+      <a href="#" class="profile-btn" id="headerLoginBtn" onclick="handleHeaderAccess(event)">
+        <i data-lucide="user-round"></i>
+        <span id="headerAccessText">Login</span>
+      </a>
+
       <nav class="nav-links" id="navLinks">
         <a href="#home">Home</a>
         <a href="#packages">Packages</a>
@@ -306,21 +334,13 @@ footer li a:hover{color:var(--gold)}
         <a href="#booking" class="nav-btn" onclick="openBooking(event)">
           Book Now <i data-lucide="arrow-up-right"></i>
         </a>
-        <a href="student-account.html" class="profile-btn mobile-profile">
-          <i data-lucide="user-round"></i> My Profile
-        </a>
       </nav>
-
-      <a href="student-account.html" class="profile-btn desktop-profile">
-        <i data-lucide="user-round"></i>
-        My Profile
-      </a>
 
       <button class="menu-btn" onclick="toggleMenu()" aria-label="Open menu">
         <i data-lucide="menu"></i>
       </button>
-    </div>
 
+    </div>
   </div>
 </header>
 
@@ -349,10 +369,27 @@ footer li a:hover{color:var(--gold)}
 
 <div class="container">
   <div class="feature-strip">
-    <div class="feature"><div class="feature-icon"><i data-lucide="steering-wheel"></i></div><h3>Practical<br>Training</h3></div>
-    <div class="feature"><div class="feature-icon"><i data-lucide="user-check"></i></div><h3>Experienced<br>Instructors</h3></div>
-    <div class="feature"><div class="feature-icon"><i data-lucide="id-card"></i></div><h3>Licence<br>Guidance</h3></div>
-    <div class="feature"><div class="feature-icon"><i data-lucide="shield-check"></i></div><h3>Safe &<br>Reliable</h3></div>
+
+    <div class="feature">
+      <div class="feature-icon"><i data-lucide="steering-wheel"></i></div>
+      <h3>Practical<br>Training</h3>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon"><i data-lucide="user-check"></i></div>
+      <h3>Experienced<br>Instructors</h3>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon"><i data-lucide="id-card"></i></div>
+      <h3>Licence<br>Guidance</h3>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon"><i data-lucide="shield-check"></i></div>
+      <h3>Safe &<br>Reliable</h3>
+    </div>
+
   </div>
 </div>
 
@@ -364,6 +401,7 @@ footer li a:hover{color:var(--gold)}
     </div>
 
     <div class="packages">
+
       <article class="package">
         <div class="package-top">
           <div class="package-icon"><i data-lucide="car-front"></i></div>
@@ -408,6 +446,7 @@ footer li a:hover{color:var(--gold)}
         </ul>
         <button class="btn btn-package" onclick="selectPackage('Personal Plan - ₹8,000')">Choose Plan <i data-lucide="arrow-right"></i></button>
       </article>
+
     </div>
   </div>
 </section>
@@ -418,6 +457,7 @@ footer li a:hover{color:var(--gold)}
       <h2 class="section-title">Why Choose <span>ABHINAASH A1?</span></h2>
       <p class="section-subtitle">A trusted driving school for safe and confident drivers.</p>
     </div>
+
     <div class="why-grid">
       <div class="why-card"><div class="feature-icon"><i data-lucide="award"></i></div><h3>Experienced Trainers</h3><p>Guided practical learning.</p></div>
       <div class="why-card"><div class="feature-icon"><i data-lucide="car-front"></i></div><h3>Modern Vehicle</h3><p>Comfortable driving practice.</p></div>
@@ -433,13 +473,18 @@ footer li a:hover{color:var(--gold)}
       <h2 class="section-title">Our Training <span>Vehicle</span></h2>
       <p class="section-subtitle">Learn with comfort and confidence.</p>
     </div>
+
     <div class="vehicle-card">
       <div class="vehicle-image"></div>
       <div class="vehicle-info">
         <div class="eyebrow">OUR TRAINING CAR</div>
         <h2>TATA TIGOR XZ+</h2>
         <p>Experience practical driving lessons with our training vehicle and guided instruction.</p>
-        <div class="vehicle-tags"><span>Comfortable</span><span>Practical Training</span><span>Safety Focused</span></div>
+        <div class="vehicle-tags">
+          <span>Comfortable</span>
+          <span>Practical Training</span>
+          <span>Safety Focused</span>
+        </div>
         <button class="btn btn-primary" onclick="openBooking()">
           <i data-lucide="calendar-check"></i> Book Training <i data-lucide="arrow-right"></i>
         </button>
@@ -452,7 +497,10 @@ footer li a:hover{color:var(--gold)}
   <div class="licence-banner">
     <div class="licence-left">
       <div class="licence-icon"><i data-lucide="id-card"></i></div>
-      <div><h2>Driving Licence Guidance</h2><p>Get guidance through the applicable driving licence process.</p></div>
+      <div>
+        <h2>Driving Licence Guidance</h2>
+        <p>Get guidance through the applicable driving licence process.</p>
+      </div>
     </div>
     <a href="https://parivahan.gov.in/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
       Licence Information <i data-lucide="external-link"></i>
@@ -465,6 +513,7 @@ footer li a:hover{color:var(--gold)}
 <footer id="contact">
   <div class="container">
     <div class="footer-grid">
+
       <div class="footer-about">
         <a href="#home" class="logo">
           <div class="logo-icon">A1</div>
@@ -472,6 +521,7 @@ footer li a:hover{color:var(--gold)}
         </a>
         <p>Your trusted driving training partner. Learn practical driving skills and develop safe driving habits with confidence.</p>
       </div>
+
       <div>
         <h3>Quick Links</h3>
         <ul>
@@ -481,15 +531,17 @@ footer li a:hover{color:var(--gold)}
           <li><a href="#why">Why Choose Us</a></li>
         </ul>
       </div>
+
       <div>
         <h3>Information</h3>
         <ul>
           <li><a href="#booking" onclick="openBooking(event)">Book Admission</a></li>
-          <li><a href="student-account.html">My Profile</a></li>
+          <li><a href="#" onclick="openLogin(event)">Student Login</a></li>
           <li><a href="https://parivahan.gov.in/" target="_blank" rel="noopener noreferrer">Licence Portal</a></li>
           <li><a href="#contact">Contact Us</a></li>
         </ul>
       </div>
+
     </div>
     <div class="copyright">© <span id="year"></span> ABHINAASH A1 Driving. All Rights Reserved.</div>
   </div>
@@ -499,25 +551,31 @@ footer li a:hover{color:var(--gold)}
   <a href="#home" class="active"><span class="nav-icon"><i data-lucide="house"></i></span>Home</a>
   <a href="#packages"><span class="nav-icon"><i data-lucide="car-front"></i></span>Packages</a>
   <a href="#booking" onclick="openBooking(event)"><span class="nav-icon"><i data-lucide="calendar-days"></i></span>Booking</a>
-  <a href="student-account.html"><span class="nav-icon"><i data-lucide="user-round"></i></span>Profile</a>
+  <a href="#" onclick="openLogin(event)"><span class="nav-icon"><i data-lucide="log-in"></i></span>Login</a>
 </nav>
 
 <!-- BOOKING MODAL -->
 <div class="modal" id="bookingModal">
   <div class="modal-box">
     <div class="modal-header">
-      <div><div class="eyebrow">START YOUR JOURNEY</div><h2>Book Your Class</h2></div>
+      <div>
+        <div class="eyebrow">START YOUR JOURNEY</div>
+        <h2>Book Your Class</h2>
+      </div>
       <button class="close-btn" onclick="closeBooking()" aria-label="Close booking"><i data-lucide="x"></i></button>
     </div>
+
     <form id="bookingForm">
       <div class="form-group">
         <label>Full Name</label>
         <input id="customerName" type="text" placeholder="Enter your name" maxlength="80" required>
       </div>
+
       <div class="form-group">
         <label>Mobile Number</label>
         <input id="customerPhone" type="tel" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="10 digit mobile number" required>
       </div>
+
       <div class="form-group">
         <label>Select Package</label>
         <select id="customerPackage" required>
@@ -527,20 +585,74 @@ footer li a:hover{color:var(--gold)}
           <option>Personal Plan - ₹8,000</option>
         </select>
       </div>
+
       <div class="form-group">
         <label>Preferred Start Date</label>
         <input id="customerDate" type="date" required>
       </div>
+
       <button type="submit" class="btn btn-primary"><i data-lucide="send"></i> Submit Booking via WhatsApp</button>
     </form>
+  </div>
+</div>
+
+<!-- STUDENT LOGIN MODAL -->
+<div class="modal" id="loginModal">
+  <div class="modal-box">
+
+    <div class="modal-header">
+      <div>
+        <div class="eyebrow">STUDENT PORTAL</div>
+        <h2>Student Login</h2>
+      </div>
+      <button class="close-btn" onclick="closeLogin()" aria-label="Close login">
+        <i data-lucide="x"></i>
+      </button>
+    </div>
+
+    <div class="form-group">
+      <label>Registered Mobile Number</label>
+      <input
+        id="loginPhone"
+        type="tel"
+        inputmode="numeric"
+        maxlength="10"
+        pattern="[0-9]{10}"
+        placeholder="Enter your 10 digit number"
+        autocomplete="tel"
+      >
+    </div>
+
+    <button type="button" class="btn btn-primary" onclick="showDashboardAccess()">
+      <i data-lucide="arrow-right"></i>
+      Continue
+    </button>
+
+    <div class="dashboard-access" id="dashboardAccess">
+      <div style="display:flex;align-items:center;gap:10px">
+        <i data-lucide="check-circle" style="color:#F2BD45;width:20px;height:20px"></i>
+        <strong>Mobile Number Entered</strong>
+      </div>
+
+      <p>Continue to open your student dashboard.</p>
+
+      <button type="button" class="btn btn-primary" style="width:100%;margin-top:15px" onclick="accessDashboard()">
+        <i data-lucide="layout-dashboard"></i>
+        Access Dashboard
+      </button>
+    </div>
+
+    <p class="login-note">Enter your registered mobile number to continue.</p>
   </div>
 </div>
 
 <script>
 const WHATSAPP_NUMBER = "918984225311";
 
+/* YEAR */
 document.getElementById("year").textContent = new Date().getFullYear();
 
+/* MENU */
 function toggleMenu(){
   document.getElementById("navLinks").classList.toggle("open");
 }
@@ -551,6 +663,7 @@ document.querySelectorAll(".nav-links a").forEach(link=>{
   });
 });
 
+/* BOOKING */
 function openBooking(event){
   if(event) event.preventDefault();
   document.getElementById("bookingModal").classList.add("show");
@@ -587,11 +700,6 @@ document.getElementById("bookingForm").addEventListener("submit",function(e){
     return;
   }
 
-  if(!/^[0-9]{10,15}$/.test(WHATSAPP_NUMBER)){
-    alert("Please configure the WhatsApp number in the website code first.");
-    return;
-  }
-
   const message=`NEW DRIVING ADMISSION ENQUIRY
 
 Name: ${name}
@@ -605,6 +713,100 @@ Source: ABHINAASH A1 Driving Website`;
   window.open(url,"_blank");
 });
 
+/* LOGIN */
+function openLogin(event){
+  if(event) event.preventDefault();
+
+  document.getElementById("loginModal").classList.add("show");
+  document.getElementById("dashboardAccess").style.display="none";
+  document.getElementById("loginPhone").value="";
+
+  if(window.lucide) lucide.createIcons();
+}
+
+function closeLogin(){
+  document.getElementById("loginModal").classList.remove("show");
+}
+
+/* SHOW DASHBOARD BUTTON AFTER MOBILE ENTRY */
+function showDashboardAccess(){
+
+  const phone=document.getElementById("loginPhone").value.trim();
+
+  if(!/^[0-9]{10}$/.test(phone)){
+    alert("Please enter a valid 10 digit mobile number.");
+    document.getElementById("loginPhone").focus();
+    return;
+  }
+
+  /* Store entered mobile locally for the current browser */
+  sessionStorage.setItem("a1_student_mobile",phone);
+
+  document.getElementById("dashboardAccess").style.display="block";
+
+  if(window.lucide) lucide.createIcons();
+}
+
+/* OPEN STUDENT DASHBOARD */
+function accessDashboard(){
+
+  const phone=document.getElementById("loginPhone").value.trim();
+
+  if(!/^[0-9]{10}$/.test(phone)){
+    alert("Please enter a valid mobile number.");
+    return;
+  }
+
+  sessionStorage.setItem("a1_student_mobile",phone);
+
+  window.location.href="student-dashboard.html?mobile="+encodeURIComponent(phone);
+}
+
+/* HEADER BUTTON CHANGES TO DASHBOARD AFTER CONTINUE */
+function handleHeaderAccess(event){
+  event.preventDefault();
+
+  const savedMobile=sessionStorage.getItem("a1_student_mobile");
+
+  if(savedMobile && /^[0-9]{10}$/.test(savedMobile)){
+    window.location.href="student-dashboard.html?mobile="+encodeURIComponent(savedMobile);
+  }else{
+    openLogin();
+  }
+}
+
+/* RESTORE DASHBOARD LABEL WHEN PAGE LOADS */
+function updateHeaderAccess(){
+
+  const savedMobile=sessionStorage.getItem("a1_student_mobile");
+  const text=document.getElementById("headerAccessText");
+  const button=document.getElementById("headerLoginBtn");
+
+  if(savedMobile && /^[0-9]{10}$/.test(savedMobile)){
+    text.textContent="Dashboard";
+    button.querySelector("i").setAttribute("data-lucide","layout-dashboard");
+  }else{
+    text.textContent="Login";
+    button.querySelector("i").setAttribute("data-lucide","user-round");
+  }
+
+  if(window.lucide) lucide.createIcons();
+}
+
+/* LOGIN MODAL CLOSE */
+document.getElementById("loginModal").addEventListener("click",function(e){
+  if(e.target.id==="loginModal") closeLogin();
+});
+
+/* ESCAPE KEY */
+document.addEventListener("keydown",function(e){
+  if(e.key==="Escape"){
+    closeBooking();
+    closeLogin();
+  }
+});
+
+/* BOTTOM NAV ACTIVE */
 const sections=document.querySelectorAll("main section[id]");
 const bottomLinks=document.querySelectorAll(".bottom-nav a");
 
@@ -612,7 +814,10 @@ const observer=new IntersectionObserver(entries=>{
   entries.forEach(entry=>{
     if(entry.isIntersecting){
       bottomLinks.forEach(link=>{
-        link.classList.toggle("active",link.getAttribute("href")==="#"+entry.target.id);
+        link.classList.toggle(
+          "active",
+          link.getAttribute("href")==="#"+entry.target.id
+        );
       });
     }
   });
@@ -620,6 +825,8 @@ const observer=new IntersectionObserver(entries=>{
 
 sections.forEach(section=>observer.observe(section));
 
+/* INITIALIZE */
+updateHeaderAccess();
 if(window.lucide) lucide.createIcons();
 </script>
 
