@@ -23,7 +23,6 @@
   --white:#FFFFFF;
   --muted:#A8B1C2;
   --border:rgba(255,255,255,.09);
-  --radius:20px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:90px}
@@ -108,7 +107,7 @@ header{
 .feature-icon svg{width:34px;height:34px;stroke-width:1.7}
 .feature h3{font-size:13px;line-height:1.5}
 
-/* GENERAL SECTIONS */
+/* SECTIONS */
 section.content-section{padding:85px 0 0}
 .section-heading{margin-bottom:28px}
 .section-title{font-size:clamp(25px,4vw,36px);font-weight:800;letter-spacing:-1px}
@@ -168,7 +167,7 @@ section.content-section{padding:85px 0 0}
 .vehicle-tags{display:flex;gap:9px;flex-wrap:wrap;margin:20px 0}
 .vehicle-tags span{background:var(--card2);border:1px solid var(--border);padding:8px 12px;border-radius:30px;font-size:11px}
 
-/* LICENCE BANNER */
+/* LICENCE */
 .licence-banner{
   margin-top:75px;border:1px solid var(--gold);border-radius:20px;padding:30px;
   display:flex;align-items:center;justify-content:space-between;gap:20px;
@@ -191,7 +190,7 @@ footer li a{color:var(--muted);font-size:13px}
 footer li a:hover{color:var(--gold)}
 .copyright{margin-top:35px;padding-top:20px;border-top:1px solid var(--border);color:#737E91;font-size:11px;text-align:center}
 
-/* BOTTOM NAVIGATION */
+/* BOTTOM NAV */
 .bottom-nav{
   display:none;position:fixed;bottom:0;left:0;width:100%;height:70px;
   z-index:99;background:rgba(8,13,24,.97);border-top:1px solid var(--border);
@@ -244,12 +243,10 @@ footer li a:hover{color:var(--gold)}
   .package{padding:22px 16px}
   .why-grid{grid-template-columns:repeat(2,1fr)}
 }
-
 @media(max-width:650px){
   header{height:65px}
   .container{width:91%}
   .nav-right{gap:10px}
-
   .nav-links{
     display:none;position:absolute;top:65px;left:0;width:100%;
     background:#0D1523;padding:22px;flex-direction:column;
@@ -258,11 +255,9 @@ footer li a:hover{color:var(--gold)}
   .nav-links.open{display:flex}
   .nav-links a{font-size:14px}
   .nav-links .nav-btn{text-align:center}
-
   .profile-btn{padding:9px 12px;font-size:11px;gap:6px;border-radius:11px}
   .profile-btn svg{width:17px;height:17px}
   .menu-btn{display:block}
-
   .hero{
     min-height:650px;
     background:linear-gradient(90deg,rgba(8,13,24,.95),rgba(8,13,24,.55)),
@@ -272,14 +267,12 @@ footer li a:hover{color:var(--gold)}
   .hero h1{font-size:43px}
   .hero p{font-size:13px}
   .btn{padding:14px 17px;font-size:12px}
-
   .feature-strip{grid-template-columns:repeat(2,1fr);margin-top:-25px}
   .feature{padding:22px 8px;border-bottom:1px solid var(--border)}
   .feature:nth-child(2){border-right:0}
   .feature:nth-child(3),.feature:nth-child(4){border-bottom:0}
   .feature:nth-child(4){border-right:0}
   .feature-icon svg{width:35px;height:35px}
-
   section.content-section{padding-top:60px}
   .packages{grid-template-columns:1fr;gap:22px}
   .package{min-height:0;padding:25px}
@@ -297,7 +290,6 @@ footer li a:hover{color:var(--gold)}
   .bottom-nav{display:flex}
   footer{padding-bottom:100px}
 }
-
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;transition:none!important}
 }
@@ -319,7 +311,7 @@ footer li a:hover{color:var(--gold)}
 
     <div class="nav-right">
 
-      <!-- LOGIN / DASHBOARD BUTTON -->
+      <!-- LOGIN / DASHBOARD LEFT OF MENU -->
       <a href="#" class="profile-btn" id="headerLoginBtn" onclick="handleHeaderAccess(event)">
         <i data-lucide="user-round"></i>
         <span id="headerAccessText">Login</span>
@@ -369,27 +361,22 @@ footer li a:hover{color:var(--gold)}
 
 <div class="container">
   <div class="feature-strip">
-
     <div class="feature">
       <div class="feature-icon"><i data-lucide="steering-wheel"></i></div>
       <h3>Practical<br>Training</h3>
     </div>
-
     <div class="feature">
       <div class="feature-icon"><i data-lucide="user-check"></i></div>
       <h3>Experienced<br>Instructors</h3>
     </div>
-
     <div class="feature">
       <div class="feature-icon"><i data-lucide="id-card"></i></div>
       <h3>Licence<br>Guidance</h3>
     </div>
-
     <div class="feature">
       <div class="feature-icon"><i data-lucide="shield-check"></i></div>
       <h3>Safe &<br>Reliable</h3>
     </div>
-
   </div>
 </div>
 
@@ -401,7 +388,6 @@ footer li a:hover{color:var(--gold)}
     </div>
 
     <div class="packages">
-
       <article class="package">
         <div class="package-top">
           <div class="package-icon"><i data-lucide="car-front"></i></div>
@@ -446,7 +432,6 @@ footer li a:hover{color:var(--gold)}
         </ul>
         <button class="btn btn-package" onclick="selectPackage('Personal Plan - ₹8,000')">Choose Plan <i data-lucide="arrow-right"></i></button>
       </article>
-
     </div>
   </div>
 </section>
@@ -457,7 +442,6 @@ footer li a:hover{color:var(--gold)}
       <h2 class="section-title">Why Choose <span>ABHINAASH A1?</span></h2>
       <p class="section-subtitle">A trusted driving school for safe and confident drivers.</p>
     </div>
-
     <div class="why-grid">
       <div class="why-card"><div class="feature-icon"><i data-lucide="award"></i></div><h3>Experienced Trainers</h3><p>Guided practical learning.</p></div>
       <div class="why-card"><div class="feature-icon"><i data-lucide="car-front"></i></div><h3>Modern Vehicle</h3><p>Comfortable driving practice.</p></div>
@@ -473,7 +457,6 @@ footer li a:hover{color:var(--gold)}
       <h2 class="section-title">Our Training <span>Vehicle</span></h2>
       <p class="section-subtitle">Learn with comfort and confidence.</p>
     </div>
-
     <div class="vehicle-card">
       <div class="vehicle-image"></div>
       <div class="vehicle-info">
@@ -513,7 +496,6 @@ footer li a:hover{color:var(--gold)}
 <footer id="contact">
   <div class="container">
     <div class="footer-grid">
-
       <div class="footer-about">
         <a href="#home" class="logo">
           <div class="logo-icon">A1</div>
@@ -541,7 +523,6 @@ footer li a:hover{color:var(--gold)}
           <li><a href="#contact">Contact Us</a></li>
         </ul>
       </div>
-
     </div>
     <div class="copyright">© <span id="year"></span> ABHINAASH A1 Driving. All Rights Reserved.</div>
   </div>
@@ -570,12 +551,10 @@ footer li a:hover{color:var(--gold)}
         <label>Full Name</label>
         <input id="customerName" type="text" placeholder="Enter your name" maxlength="80" required>
       </div>
-
       <div class="form-group">
         <label>Mobile Number</label>
         <input id="customerPhone" type="tel" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="10 digit mobile number" required>
       </div>
-
       <div class="form-group">
         <label>Select Package</label>
         <select id="customerPackage" required>
@@ -585,12 +564,10 @@ footer li a:hover{color:var(--gold)}
           <option>Personal Plan - ₹8,000</option>
         </select>
       </div>
-
       <div class="form-group">
         <label>Preferred Start Date</label>
         <input id="customerDate" type="date" required>
       </div>
-
       <button type="submit" class="btn btn-primary"><i data-lucide="send"></i> Submit Booking via WhatsApp</button>
     </form>
   </div>
@@ -631,28 +608,27 @@ footer li a:hover{color:var(--gold)}
     <div class="dashboard-access" id="dashboardAccess">
       <div style="display:flex;align-items:center;gap:10px">
         <i data-lucide="check-circle" style="color:#F2BD45;width:20px;height:20px"></i>
-        <strong>Mobile Number Entered</strong>
+        <strong>Mobile Number Saved</strong>
       </div>
-
-      <p>Continue to open your student dashboard.</p>
-
+      <p>Your mobile number is saved on this device. Continue to your student dashboard.</p>
       <button type="button" class="btn btn-primary" style="width:100%;margin-top:15px" onclick="accessDashboard()">
         <i data-lucide="layout-dashboard"></i>
         Access Dashboard
       </button>
     </div>
 
-    <p class="login-note">Enter your registered mobile number to continue.</p>
+    <p class="login-note">Your mobile number will be remembered on this browser for your next visit.</p>
   </div>
 </div>
 
 <script>
 const WHATSAPP_NUMBER = "918984225311";
+const STUDENT_STORAGE_KEY = "a1_student_mobile";
 
 /* YEAR */
 document.getElementById("year").textContent = new Date().getFullYear();
 
-/* MENU */
+/* MOBILE MENU */
 function toggleMenu(){
   document.getElementById("navLinks").classList.toggle("open");
 }
@@ -713,9 +689,22 @@ Source: ABHINAASH A1 Driving Website`;
   window.open(url,"_blank");
 });
 
-/* LOGIN */
+/* STUDENT LOGIN */
+function getSavedMobile(){
+  const phone=localStorage.getItem(STUDENT_STORAGE_KEY);
+  return phone && /^[0-9]{10}$/.test(phone) ? phone : null;
+}
+
 function openLogin(event){
   if(event) event.preventDefault();
+
+  const savedMobile=getSavedMobile();
+
+  // If already remembered, go directly to dashboard
+  if(savedMobile){
+    window.location.href="student-dashboard.html?mobile="+encodeURIComponent(savedMobile);
+    return;
+  }
 
   document.getElementById("loginModal").classList.add("show");
   document.getElementById("dashboardAccess").style.display="none";
@@ -728,7 +717,7 @@ function closeLogin(){
   document.getElementById("loginModal").classList.remove("show");
 }
 
-/* SHOW DASHBOARD BUTTON AFTER MOBILE ENTRY */
+/* SAVE MOBILE NUMBER */
 function showDashboardAccess(){
 
   const phone=document.getElementById("loginPhone").value.trim();
@@ -739,61 +728,63 @@ function showDashboardAccess(){
     return;
   }
 
-  /* Store entered mobile locally for the current browser */
-  sessionStorage.setItem("a1_student_mobile",phone);
+  // Save mobile number persistently on this browser
+  localStorage.setItem(STUDENT_STORAGE_KEY,phone);
 
+  // Update header immediately
+  updateHeaderAccess();
+
+  // Show dashboard button
   document.getElementById("dashboardAccess").style.display="block";
 
   if(window.lucide) lucide.createIcons();
 }
 
-/* OPEN STUDENT DASHBOARD */
+/* OPEN DASHBOARD */
 function accessDashboard(){
 
-  const phone=document.getElementById("loginPhone").value.trim();
+  const phone=getSavedMobile();
 
-  if(!/^[0-9]{10}$/.test(phone)){
-    alert("Please enter a valid mobile number.");
+  if(!phone){
+    openLogin();
     return;
   }
-
-  sessionStorage.setItem("a1_student_mobile",phone);
 
   window.location.href="student-dashboard.html?mobile="+encodeURIComponent(phone);
 }
 
-/* HEADER BUTTON CHANGES TO DASHBOARD AFTER CONTINUE */
+/* HEADER LOGIN / DASHBOARD */
 function handleHeaderAccess(event){
   event.preventDefault();
 
-  const savedMobile=sessionStorage.getItem("a1_student_mobile");
+  const phone=getSavedMobile();
 
-  if(savedMobile && /^[0-9]{10}$/.test(savedMobile)){
-    window.location.href="student-dashboard.html?mobile="+encodeURIComponent(savedMobile);
+  if(phone){
+    window.location.href="student-dashboard.html?mobile="+encodeURIComponent(phone);
   }else{
     openLogin();
   }
 }
 
-/* RESTORE DASHBOARD LABEL WHEN PAGE LOADS */
+/* UPDATE HEADER WHEN WEBSITE OPENS */
 function updateHeaderAccess(){
 
-  const savedMobile=sessionStorage.getItem("a1_student_mobile");
+  const phone=getSavedMobile();
   const text=document.getElementById("headerAccessText");
-  const button=document.getElementById("headerLoginBtn");
+  const icon=document.querySelector("#headerLoginBtn i");
 
-  if(savedMobile && /^[0-9]{10}$/.test(savedMobile)){
+  if(phone){
     text.textContent="Dashboard";
-    button.querySelector("i").setAttribute("data-lucide","layout-dashboard");
+    icon.setAttribute("data-lucide","layout-dashboard");
   }else{
     text.textContent="Login";
-    button.querySelector("i").setAttribute("data-lucide","user-round");
+    icon.setAttribute("data-lucide","user-round");
   }
 
   if(window.lucide) lucide.createIcons();
 }
 
-/* LOGIN MODAL CLOSE */
+/* CLOSE LOGIN MODAL */
 document.getElementById("loginModal").addEventListener("click",function(e){
   if(e.target.id==="loginModal") closeLogin();
 });
