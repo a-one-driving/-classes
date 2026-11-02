@@ -1,0 +1,814 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#080D18">
+<title>Class Management | ABHINAASH A1 Driving</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+:root{
+  --bg:#080D18;--card:#111A29;--card2:#172337;
+  --gold:#F2BD45;--white:#F8FAFC;--muted:#A8B1C2;
+  --border:rgba(255,255,255,.09);
+  --green:#35C98A;--red:#FF7777;--blue:#65A9FF;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,sans-serif;background:var(--bg);color:var(--white);line-height:1.5}
+a{text-decoration:none;color:inherit}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.container{width:min(1160px,93%);margin:auto}
+header{position:sticky;top:0;z-index:100;background:rgba(8,13,24,.95);backdrop-filter:blur(15px);border-bottom:1px solid var(--border)}
+.topbar{height:68px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:17px;font-weight:800}
+.logo span{color:var(--gold)}
+.header-right{display:flex;align-items:center;gap:15px}
+.header-right a{font-size:11px;color:var(--muted)}
+.avatar{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:rgba(242,189,69,.13);color:var(--gold);font-weight:800}
+main{padding:28px 0 100px}
+.heading{display:flex;justify-content:space-between;align-items:flex-end;gap:15px;margin-bottom:23px}
+.eyebrow{font-size:10px;color:var(--gold);font-weight:800;letter-spacing:1.7px;text-transform:uppercase}
+h1{font-size:clamp(25px,4vw,34px);margin:7px 0}
+.heading p{font-size:12px;color:var(--muted)}
+.back{font-size:11px;color:var(--gold);font-weight:700;white-space:nowrap}
+
+/* BUTTONS */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  gap:7px;padding:11px 14px;border-radius:10px;
+  border:1px solid transparent;font-size:10px;font-weight:800;
+}
+.btn-gold{background:var(--gold);color:#171717}
+.btn-outline{background:rgba(255,255,255,.04);border-color:var(--border);color:var(--white)}
+.btn-small{padding:7px 10px;font-size:9px}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:19px}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:15px;padding:16px}
+.stat-icon{width:35px;height:35px;display:grid;place-items:center;background:var(--card2);border-radius:10px;color:var(--gold)}
+.stat strong{display:block;font-size:23px;margin-top:12px}
+.stat span{font-size:10px;color:var(--muted)}
+
+/* PANELS */
+.panel{background:var(--card);border:1px solid var(--border);border-radius:17px;padding:20px;margin-bottom:17px}
+.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:17px}
+.panel-head h2{font-size:14px}
+.panel-head p{font-size:10px;color:var(--muted);margin-top:4px}
+.panel-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+
+/* FILTERS */
+.filters{display:grid;grid-template-columns:1fr 190px 150px;gap:10px;margin-bottom:16px}
+.field input,.field select,.field textarea{
+  width:100%;background:#0B1321;color:var(--white);
+  border:1px solid var(--border);border-radius:10px;
+  padding:11px 12px;outline:none;font-size:11px;
+}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold)}
+.field label{display:block;font-size:9px;color:var(--muted);margin-bottom:6px}
+.field select option{background:var(--card)}
+
+/* TABLE */
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:760px}
+th{text-align:left;padding:12px 10px;font-size:9px;color:var(--muted);border-bottom:1px solid var(--border);font-weight:600}
+td{padding:13px 10px;border-bottom:1px solid var(--border);font-size:10px;vertical-align:middle}
+tbody tr:last-child td{border-bottom:0}
+.student-name{font-weight:700}
+.student-id{font-size:9px;color:var(--muted);margin-top:3px}
+.badge{display:inline-flex;padding:5px 8px;border-radius:20px;font-size:9px;font-weight:800}
+.present{background:rgba(53,201,138,.12);color:var(--green)}
+.absent{background:rgba(255,119,119,.12);color:var(--red)}
+.scheduled{background:rgba(242,189,69,.12);color:var(--gold)}
+.completed{background:rgba(53,201,138,.12);color:var(--green)}
+.cancelled{background:rgba(255,119,119,.12);color:var(--red)}
+.action-buttons{display:flex;gap:6px;align-items:center}
+.icon-btn{width:29px;height:29px;display:grid;place-items:center;background:var(--card2);border:1px solid var(--border);border-radius:8px;color:var(--muted)}
+.icon-btn:hover{color:var(--gold);border-color:var(--gold)}
+.icon-btn i{width:13px;height:13px}
+
+/* STUDENTS */
+.student-list{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
+.student-card{background:var(--card2);border:1px solid var(--border);border-radius:13px;padding:14px}
+.student-card-top{display:flex;align-items:center;gap:10px}
+.student-initial{width:35px;height:35px;display:grid;place-items:center;background:rgba(242,189,69,.12);color:var(--gold);border-radius:10px;font-size:11px;font-weight:800}
+.student-card h3{font-size:11px}
+.student-card p{font-size:9px;color:var(--muted);margin-top:3px}
+.student-card-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:11px;border-top:1px solid var(--border)}
+.student-card-bottom span{font-size:9px;color:var(--muted)}
+.student-card-bottom strong{font-size:10px;color:var(--gold)}
+
+/* NOTES */
+.notes-area{width:100%;min-height:95px;resize:vertical;background:#0B1321;color:var(--white);border:1px solid var(--border);border-radius:10px;padding:12px;font-size:11px;outline:none}
+.notes-area:focus{border-color:var(--gold)}
+.notes-actions{display:flex;justify-content:flex-end;margin-top:10px}
+
+/* MODAL */
+.modal{display:none;position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.72);padding:18px;align-items:center;justify-content:center}
+.modal.show{display:flex}
+.modal-card{width:min(470px,100%);max-height:90vh;overflow:auto;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:21px}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.modal-head h2{font-size:16px}
+.close-btn{border:0;background:none;color:var(--muted)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-field.full{grid-column:1/-1}
+.form-field label{display:block;font-size:10px;color:var(--muted);margin-bottom:6px}
+.form-field input,.form-field select,.form-field textarea{
+  width:100%;padding:12px;background:#0B1321;
+  border:1px solid var(--border);border-radius:9px;
+  color:var(--white);font-size:11px;outline:none;
+}
+.form-field textarea{min-height:80px;resize:vertical}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:var(--gold)}
+.form-field option{background:var(--card)}
+.modal-submit{width:100%;margin-top:17px;border:0}
+
+/* NOTICE */
+.notice{display:flex;gap:10px;padding:13px;border-radius:12px;background:rgba(101,169,255,.07);border:1px solid rgba(101,169,255,.15)}
+.notice i{width:17px;color:var(--blue);flex-shrink:0}
+.notice strong{font-size:10px}
+.notice p{font-size:9px;color:var(--muted);margin-top:3px}
+
+/* FOOTER / NAV */
+footer{border-top:1px solid var(--border);padding:22px 0 100px}
+.footer-inner{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.footer-inner p{font-size:10px;color:var(--muted)}
+.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(12,19,32,.97);border-top:1px solid var(--border);padding:10px 5px calc(10px + env(safe-area-inset-bottom));justify-content:space-around;backdrop-filter:blur(15px)}
+.bottom-nav a{display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--muted);font-size:9px;font-weight:700;min-width:55px}
+.bottom-nav a.active{color:var(--gold)}
+.bottom-nav i{width:19px;height:19px}
+.empty{text-align:center;padding:25px;color:var(--muted);font-size:11px}
+
+@media(max-width:850px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .student-list{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+  .topbar{height:62px}
+  main{padding-top:22px}
+  .heading{align-items:flex-start;flex-direction:column}
+  .stats{gap:9px}
+  .stat{padding:13px}
+  .stat strong{font-size:21px}
+  .panel{padding:15px}
+  .filters{grid-template-columns:1fr 1fr}
+  .filters .field:first-child{grid-column:1/-1}
+  .student-list{grid-template-columns:1fr}
+  .panel-head{align-items:flex-start;flex-direction:column}
+  .form-grid{grid-template-columns:1fr}
+  .form-field.full{grid-column:auto}
+  .bottom-nav{display:flex}
+  .footer-inner{flex-direction:column}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container topbar">
+    <a href="index.html" class="logo">ABHINAASH <span>A1</span></a>
+    <div class="header-right">
+      <a href="contact.html">Support</a>
+      <div class="avatar">IN</div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="heading">
+    <div>
+      <div class="eyebrow">Instructor Workspace</div>
+      <h1>Class Management</h1>
+      <p>Manage classes, attendance and student training notes.</p>
+    </div>
+    <a href="instructor-dashboard.html" class="back">← Dashboard</a>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats">
+    <div class="stat">
+      <div class="stat-icon"><i data-lucide="calendar-days"></i></div>
+      <strong id="totalClasses">0</strong>
+      <span>Total Classes</span>
+    </div>
+    <div class="stat">
+      <div class="stat-icon"><i data-lucide="calendar-check"></i></div>
+      <strong id="completedCount">0</strong>
+      <span>Completed</span>
+    </div>
+    <div class="stat">
+      <div class="stat-icon"><i data-lucide="clock"></i></div>
+      <strong id="scheduledCount">0</strong>
+      <span>Scheduled</span>
+    </div>
+    <div class="stat">
+      <div class="stat-icon"><i data-lucide="clipboard-list"></i></div>
+      <strong id="pendingCount">0</strong>
+      <span>Attendance Pending</span>
+    </div>
+  </section>
+
+  <!-- CLASS SCHEDULE -->
+  <section class="panel">
+    <div class="panel-head">
+      <div>
+        <h2>Training Schedule</h2>
+        <p>Review and manage assigned driving sessions.</p>
+      </div>
+      <div class="panel-actions">
+        <button class="btn btn-gold" id="addClassBtn">
+          <i data-lucide="plus" width="14"></i> Add Class
+        </button>
+      </div>
+    </div>
+
+    <div class="filters">
+      <div class="field">
+        <input id="searchClass" type="search" placeholder="Search student or class...">
+      </div>
+      <div class="field">
+        <select id="statusFilter">
+          <option value="all">All Status</option>
+          <option value="Scheduled">Scheduled</option>
+          <option value="Completed">Completed</option>
+          <option value="Cancelled">Cancelled</option>
+        </select>
+      </div>
+      <div class="field">
+        <input id="dateFilter" type="date" aria-label="Filter by date">
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Student</th>
+            <th>Date & Time</th>
+            <th>Training Type</th>
+            <th>Duration</th>
+            <th>Status</th>
+            <th>Attendance</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="classTable"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ATTENDANCE -->
+  <section class="panel" id="attendance">
+    <div class="panel-head">
+      <div>
+        <h2>Attendance Management</h2>
+        <p>Mark attendance for scheduled student sessions.</p>
+      </div>
+      <span style="font-size:10px;color:var(--gold)" id="attendanceSummary">0 pending</span>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Student</th>
+            <th>Class Date</th>
+            <th>Training</th>
+            <th>Attendance</th>
+            <th>Update</th>
+          </tr>
+        </thead>
+        <tbody id="attendanceTable"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ASSIGNED STUDENTS -->
+  <section class="panel" id="students">
+    <div class="panel-head">
+      <div>
+        <h2>Assigned Students</h2>
+        <p>Students assigned to this instructor.</p>
+      </div>
+      <span id="studentCountLabel">0 students</span>
+    </div>
+    <div class="student-list" id="studentCards"></div>
+  </section>
+
+  <!-- TRAINING NOTES -->
+  <section class="panel">
+    <div class="panel-head">
+      <div>
+        <h2>Training Notes</h2>
+        <p>Write observations about a student's driving progress.</p>
+      </div>
+    </div>
+
+    <div class="form-field" style="margin-bottom:12px">
+      <label for="noteStudent">Select Student</label>
+      <select id="noteStudent" style="width:100%;padding:12px;background:#0B1321;color:white;border:1px solid var(--border);border-radius:10px"></select>
+    </div>
+
+    <textarea id="trainingNote" class="notes-area" placeholder="Enter training observations, improvement areas and next lesson goals..."></textarea>
+
+    <div class="notes-actions">
+      <button class="btn btn-gold" id="saveNoteBtn">
+        <i data-lucide="save" width="14"></i> Save Training Note
+      </button>
+    </div>
+  </section>
+
+  <div class="notice">
+    <i data-lucide="info"></i>
+    <div>
+      <strong>Demo Mode</strong>
+      <p>Class, attendance and notes changes are stored only in this page's JavaScript memory. They will reset when the page is refreshed. Firebase saving is not connected yet.</p>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <a href="index.html" class="logo">ABHINAASH <span>A1</span></a>
+    <p>Instructor Portal · ABHINAASH A1 Driving</p>
+  </div>
+</footer>
+
+<nav class="bottom-nav">
+  <a href="instructor-dashboard.html">
+    <i data-lucide="layout-dashboard"></i>Dashboard
+  </a>
+  <a href="instructor-classes.html" class="active">
+    <i data-lucide="calendar-days"></i>Classes
+  </a>
+  <a href="instructor-classes.html#attendance">
+    <i data-lucide="clipboard-check"></i>Attendance
+  </a>
+  <a href="contact.html">
+    <i data-lucide="headset"></i>Support
+  </a>
+</nav>
+
+<!-- ADD CLASS MODAL -->
+<div class="modal" id="classModal">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h2 id="modalTitle">Add Training Class</h2>
+      <button class="close-btn" id="closeClassModal" aria-label="Close">
+        <i data-lucide="x"></i>
+      </button>
+    </div>
+
+    <form id="classForm">
+      <div class="form-grid">
+        <div class="form-field full">
+          <label for="classStudent">Select Student *</label>
+          <select id="classStudent" required></select>
+        </div>
+
+        <div class="form-field">
+          <label for="classDate">Class Date *</label>
+          <input type="date" id="classDate" required>
+        </div>
+
+        <div class="form-field">
+          <label for="classTime">Class Time *</label>
+          <input type="time" id="classTime" required>
+        </div>
+
+        <div class="form-field">
+          <label for="classType">Training Type *</label>
+          <select id="classType" required>
+            <option value="Basic Driving">Basic Driving</option>
+            <option value="Road Practice">Road Practice</option>
+            <option value="Parking Practice">Parking Practice</option>
+            <option value="Reverse Practice">Reverse Practice</option>
+            <option value="Final Assessment">Final Assessment</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="classDuration">Duration</label>
+          <select id="classDuration">
+            <option value="30 min">30 Minutes</option>
+            <option value="45 min" selected>45 Minutes</option>
+            <option value="60 min">60 Minutes</option>
+            <option value="90 min">90 Minutes</option>
+          </select>
+        </div>
+
+        <div class="form-field full">
+          <label for="classRemark">Remark (Optional)</label>
+          <textarea id="classRemark" placeholder="Additional class information..."></textarea>
+        </div>
+      </div>
+
+      <button class="btn btn-gold modal-submit" type="submit">Save Class Schedule</button>
+    </form>
+  </div>
+</div>
+
+<script>
+/*
+  DEMO DATA ONLY
+  Replace these arrays with authenticated Firebase data later.
+  No existing Firestore collections are accessed or modified.
+*/
+
+const STUDENTS = [
+  {id:"A1-1001",name:"Sample Student 1",package:"Premium",progress:40},
+  {id:"A1-1002",name:"Sample Student 2",package:"Standard",progress:65},
+  {id:"A1-1003",name:"Sample Student 3",package:"Personal",progress:25}
+];
+
+let CLASSES = [
+  {
+    id:1,
+    studentId:"A1-1001",
+    date:"2026-11-02",
+    time:"09:00",
+    type:"Basic Driving",
+    duration:"45 min",
+    status:"Scheduled",
+    attendance:"Pending",
+    remark:""
+  },
+  {
+    id:2,
+    studentId:"A1-1002",
+    date:"2026-11-02",
+    time:"11:00",
+    type:"Road Practice",
+    duration:"45 min",
+    status:"Completed",
+    attendance:"Present",
+    remark:""
+  },
+  {
+    id:3,
+    studentId:"A1-1003",
+    date:"2026-11-03",
+    time:"14:00",
+    type:"Parking Practice",
+    duration:"60 min",
+    status:"Scheduled",
+    attendance:"Pending",
+    remark:""
+  }
+];
+
+let TRAINING_NOTES = {};
+let editingClassId = null;
+
+const $ = id => document.getElementById(id);
+
+function getStudent(id){
+  return STUDENTS.find(s=>s.id===id);
+}
+
+function formatDate(value){
+  if(!value) return "—";
+  const d = new Date(value + "T00:00:00");
+  return d.toLocaleDateString("en-IN",{
+    day:"2-digit",month:"short",year:"numeric"
+  });
+}
+
+function formatTime(value){
+  if(!value) return "—";
+  const [h,m] = value.split(":").map(Number);
+  const d = new Date();
+  d.setHours(h,m,0,0);
+  return d.toLocaleTimeString("en-IN",{
+    hour:"2-digit",minute:"2-digit"
+  });
+}
+
+function badgeClass(value){
+  if(value==="Present") return "present";
+  if(value==="Absent") return "absent";
+  if(value==="Completed") return "completed";
+  if(value==="Cancelled") return "cancelled";
+  return "scheduled";
+}
+
+function renderStats(){
+  $("totalClasses").textContent = CLASSES.length;
+  $("completedCount").textContent =
+    CLASSES.filter(c=>c.status==="Completed").length;
+  $("scheduledCount").textContent =
+    CLASSES.filter(c=>c.status==="Scheduled").length;
+  $("pendingCount").textContent =
+    CLASSES.filter(c=>c.attendance==="Pending" && c.status!=="Cancelled").length;
+
+  const pending = CLASSES.filter(c=>
+    c.attendance==="Pending" && c.status!=="Cancelled"
+  ).length;
+
+  $("attendanceSummary").textContent = pending + " pending";
+}
+
+function renderClasses(){
+  const body = $("classTable");
+  body.innerHTML = "";
+
+  const search = $("searchClass").value.toLowerCase().trim();
+  const statusFilter = $("statusFilter").value;
+  const dateFilter = $("dateFilter").value;
+
+  const filtered = CLASSES.filter(c=>{
+    const student = getStudent(c.studentId);
+    const text = (student?.name + " " + c.type + " " + c.studentId).toLowerCase();
+
+    return (!search || text.includes(search)) &&
+      (statusFilter==="all" || c.status===statusFilter) &&
+      (!dateFilter || c.date===dateFilter);
+  });
+
+  if(!filtered.length){
+    body.innerHTML = '<tr><td colspan="7" class="empty">No matching classes found.</td></tr>';
+    return;
+  }
+
+  filtered.forEach(c=>{
+    const student = getStudent(c.studentId);
+    const row = document.createElement("tr");
+
+    const studentCell = document.createElement("td");
+    const name = document.createElement("div");
+    name.className = "student-name";
+    name.textContent = student?.name || "Unknown student";
+    const id = document.createElement("div");
+    id.className = "student-id";
+    id.textContent = c.studentId;
+    studentCell.append(name,id);
+
+    const dateCell = document.createElement("td");
+    dateCell.textContent = formatDate(c.date) + " · " + formatTime(c.time);
+
+    const typeCell = document.createElement("td");
+    typeCell.textContent = c.type;
+
+    const durationCell = document.createElement("td");
+    durationCell.textContent = c.duration;
+
+    const statusCell = document.createElement("td");
+    const statusBadge = document.createElement("span");
+    statusBadge.className = "badge " + badgeClass(c.status);
+    statusBadge.textContent = c.status;
+    statusCell.appendChild(statusBadge);
+
+    const attendanceCell = document.createElement("td");
+    const attendanceBadge = document.createElement("span");
+    attendanceBadge.className = "badge " + badgeClass(c.attendance);
+    attendanceBadge.textContent = c.attendance;
+    attendanceCell.appendChild(attendanceBadge);
+
+    const actions = document.createElement("td");
+    const actionGroup = document.createElement("div");
+    actionGroup.className = "action-buttons";
+
+    const edit = document.createElement("button");
+    edit.className = "icon-btn";
+    edit.title = "Edit class";
+    edit.innerHTML = '<i data-lucide="pencil"></i>';
+    edit.addEventListener("click",()=>editClass(c.id));
+
+    const complete = document.createElement("button");
+    complete.className = "icon-btn";
+    complete.title = "Mark completed";
+    complete.innerHTML = '<i data-lucide="check"></i>';
+    complete.addEventListener("click",()=>completeClass(c.id));
+
+    actionGroup.append(edit,complete);
+    actions.appendChild(actionGroup);
+
+    row.append(studentCell,dateCell,typeCell,durationCell,statusCell,attendanceCell,actions);
+    body.appendChild(row);
+  });
+
+  if(window.lucide) lucide.createIcons();
+}
+
+function renderAttendance(){
+  const body = $("attendanceTable");
+  body.innerHTML = "";
+
+  const records = CLASSES.filter(c=>c.status!=="Cancelled");
+
+  if(!records.length){
+    body.innerHTML = '<tr><td colspan="5" class="empty">No attendance records.</td></tr>';
+    return;
+  }
+
+  records.forEach(c=>{
+    const student = getStudent(c.studentId);
+    const row = document.createElement("tr");
+
+    const nameCell = document.createElement("td");
+    nameCell.textContent = student?.name || "Unknown student";
+
+    const dateCell = document.createElement("td");
+    dateCell.textContent = formatDate(c.date);
+
+    const typeCell = document.createElement("td");
+    typeCell.textContent = c.type;
+
+    const statusCell = document.createElement("td");
+    const badge = document.createElement("span");
+    badge.className = "badge " + badgeClass(c.attendance);
+    badge.textContent = c.attendance;
+    statusCell.appendChild(badge);
+
+    const actionCell = document.createElement("td");
+    const select = document.createElement("select");
+    select.style.cssText = "background:#0B1321;color:white;border:1px solid var(--border);padding:8px;border-radius:8px;font-size:10px";
+    select.innerHTML = `
+      <option value="Pending">Pending</option>
+      <option value="Present">Present</option>
+      <option value="Absent">Absent</option>
+    `;
+    select.value = c.attendance;
+
+    select.addEventListener("change",()=>{
+      c.attendance = select.value;
+      if(c.attendance==="Present") c.status="Completed";
+      renderAll();
+    });
+
+    actionCell.appendChild(select);
+    row.append(nameCell,dateCell,typeCell,statusCell,actionCell);
+    body.appendChild(row);
+  });
+}
+
+function renderStudents(){
+  const wrap = $("studentCards");
+  wrap.innerHTML = "";
+
+  $("studentCountLabel").textContent = STUDENTS.length + " students";
+
+  STUDENTS.forEach(s=>{
+    const card = document.createElement("div");
+    card.className = "student-card";
+
+    const top = document.createElement("div");
+    top.className = "student-card-top";
+
+    const initials = document.createElement("div");
+    initials.className = "student-initial";
+    initials.textContent = s.name.split(" ").map(x=>x[0]).join("").slice(0,2);
+
+    const details = document.createElement("div");
+    const name = document.createElement("h3");
+    name.textContent = s.name;
+    const id = document.createElement("p");
+    id.textContent = s.id;
+    details.append(name,id);
+    top.append(initials,details);
+
+    const bottom = document.createElement("div");
+    bottom.className = "student-card-bottom";
+
+    const pkg = document.createElement("span");
+    pkg.textContent = s.package + " Package";
+
+    const progress = document.createElement("strong");
+    progress.textContent = s.progress + "%";
+
+    bottom.append(pkg,progress);
+    card.append(top,bottom);
+    wrap.appendChild(card);
+  });
+}
+
+function populateStudentOptions(){
+  ["classStudent","noteStudent"].forEach(id=>{
+    const select = $(id);
+    select.innerHTML = "";
+
+    STUDENTS.forEach(s=>{
+      const option = document.createElement("option");
+      option.value = s.id;
+      option.textContent = s.name + " (" + s.id + ")";
+      select.appendChild(option);
+    });
+  });
+}
+
+function renderNote(){
+  const id = $("noteStudent").value;
+  $("trainingNote").value = TRAINING_NOTES[id] || "";
+}
+
+function renderAll(){
+  renderStats();
+  renderClasses();
+  renderAttendance();
+}
+
+function openClassModal(){
+  editingClassId = null;
+  $("modalTitle").textContent = "Add Training Class";
+  $("classForm").reset();
+  $("classDate").value = new Date().toISOString().slice(0,10);
+  $("classModal").classList.add("show");
+}
+
+function editClass(id){
+  const c = CLASSES.find(x=>x.id===id);
+  if(!c) return;
+
+  editingClassId = id;
+  $("modalTitle").textContent = "Edit Training Class";
+  $("classStudent").value = c.studentId;
+  $("classDate").value = c.date;
+  $("classTime").value = c.time;
+  $("classType").value = c.type;
+  $("classDuration").value = c.duration;
+  $("classRemark").value = c.remark || "";
+  $("classModal").classList.add("show");
+}
+
+function completeClass(id){
+  const c = CLASSES.find(x=>x.id===id);
+  if(!c) return;
+
+  c.status = "Completed";
+  renderAll();
+}
+
+function closeClassModal(){
+  $("classModal").classList.remove("show");
+}
+
+$("addClassBtn").addEventListener("click",openClassModal);
+$("closeClassModal").addEventListener("click",closeClassModal);
+
+$("classModal").addEventListener("click",e=>{
+  if(e.target===$("classModal")) closeClassModal();
+});
+
+$("classForm").addEventListener("submit",e=>{
+  e.preventDefault();
+
+  const record = {
+    studentId:$("classStudent").value,
+    date:$("classDate").value,
+    time:$("classTime").value,
+    type:$("classType").value,
+    duration:$("classDuration").value,
+    remark:$("classRemark").value.trim(),
+    status:"Scheduled",
+    attendance:"Pending"
+  };
+
+  if(editingClassId){
+    const existing = CLASSES.find(c=>c.id===editingClassId);
+    if(existing) Object.assign(existing,record);
+  }else{
+    record.id = Date.now();
+    CLASSES.push(record);
+  }
+
+  closeClassModal();
+  renderAll();
+});
+
+$("searchClass").addEventListener("input",renderClasses);
+$("statusFilter").addEventListener("change",renderClasses);
+$("dateFilter").addEventListener("change",renderClasses);
+$("noteStudent").addEventListener("change",renderNote);
+
+$("saveNoteBtn").addEventListener("click",()=>{
+  const id = $("noteStudent").value;
+  if(!id){
+    alert("Please select a student.");
+    return;
+  }
+
+  TRAINING_NOTES[id] = $("trainingNote").value.trim();
+  alert("Training note saved in this page preview only.");
+});
+
+$("todayDate").textContent = new Date().toLocaleDateString("en-IN",{
+  weekday:"short",day:"2-digit",month:"short",year:"numeric"
+});
+
+populateStudentOptions();
+renderAll();
+
+if(window.lucide) lucide.createIcons();
+</script>
+
+</body>
+</html>
