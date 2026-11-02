@@ -5,396 +5,369 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <meta name="theme-color" content="#080D18">
-<meta name="description" content="ABHINAASH A1 Driving Admin Dashboard">
-<title>Admin Dashboard | ABHINAASH A1 Driving</title>
+<title>BlackTerminal | Driving Admin Dashboard</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
 :root{
-  --bg:#080D18;--card:#111A29;--card2:#172337;
-  --gold:#F2BD45;--white:#F8FAFC;--muted:#A8B1C2;
-  --border:rgba(255,255,255,.09);
-  --green:#35C98A;--red:#FF7777;--blue:#65A9FF;
+  --bg:#080D18;
+  --card:#111A29;
+  --card2:#172337;
+  --gold:#F2BD45;
+  --white:#F8FAFC;
+  --muted:#A8B1C2;
+  --green:#35C98A;
+  --blue:#65A9FF;
+  --red:#FF7373;
+  --border:rgba(255,255,255,.08);
 }
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Inter,sans-serif;background:var(--bg);color:var(--white);line-height:1.5}
-a{text-decoration:none;color:inherit}
-button,input,select{font:inherit}
-button{cursor:pointer}
-.container{width:min(1200px,94%);margin:auto}
-
-header{
-  position:sticky;top:0;z-index:100;
-  background:rgba(8,13,24,.96);
-  backdrop-filter:blur(15px);
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--white);
+  font-family:Inter,Arial,sans-serif;
+}
+button{font:inherit}
+.layout{display:flex;min-height:100vh}
+.sidebar{
+  width:250px;
+  background:#0D1523;
+  border-right:1px solid var(--border);
+  padding:25px 16px;
+  position:fixed;
+  inset:0 auto 0 0;
+  z-index:10;
+}
+.brand{
+  display:flex;align-items:center;gap:12px;
+  padding:0 8px 28px;
   border-bottom:1px solid var(--border);
 }
-.topbar{height:68px;display:flex;align-items:center;justify-content:space-between}
-.logo{font-size:17px;font-weight:800}
-.logo span{color:var(--gold)}
-.header-right{display:flex;align-items:center;gap:15px}
-.header-right a{font-size:11px;color:var(--muted)}
-.avatar{
-  width:38px;height:38px;border-radius:12px;
+.brand-icon{
+  width:42px;height:42px;border-radius:13px;
   display:grid;place-items:center;
-  background:rgba(242,189,69,.13);
-  color:var(--gold);font-weight:800;
+  background:var(--gold);color:#101827;font-size:19px;
 }
-main{padding:29px 0 100px}
-
-.heading{
-  display:flex;justify-content:space-between;
-  align-items:center;gap:15px;margin-bottom:24px;
+.brand strong{font-size:15px;display:block}
+.brand small{color:var(--muted);font-size:11px}
+.nav-title{
+  color:#728096;font-size:10px;font-weight:800;
+  letter-spacing:1.5px;margin:27px 10px 12px;
 }
-.eyebrow{
-  font-size:10px;color:var(--gold);font-weight:800;
-  letter-spacing:1.7px;text-transform:uppercase;
+.nav a{
+  display:flex;align-items:center;gap:13px;
+  padding:13px 12px;margin:5px 0;
+  border-radius:10px;text-decoration:none;
+  color:#AAB5C7;font-size:13px;font-weight:600;
 }
-h1{font-size:clamp(25px,4vw,34px);margin:7px 0}
-.heading p{font-size:12px;color:var(--muted)}
-.heading-actions{display:flex;align-items:center;gap:9px}
-.date-chip{
-  display:flex;align-items:center;gap:8px;
-  background:var(--card);border:1px solid var(--border);
-  border-radius:10px;padding:10px 13px;
-  color:var(--muted);font-size:10px;white-space:nowrap;
+.nav a.active,.nav a:hover{
+  background:rgba(242,189,69,.12);color:var(--gold);
 }
-
-.welcome{
+.nav a i{width:18px;text-align:center}
+.sidebar-bottom{
+  position:absolute;bottom:22px;left:20px;right:20px;
+  color:var(--muted);font-size:11px;line-height:1.7;
+}
+.main{margin-left:250px;width:calc(100% - 250px);padding:28px 30px 50px}
+.topbar{
   display:flex;justify-content:space-between;align-items:center;
-  gap:20px;padding:22px 24px;margin-bottom:19px;
-  border-radius:19px;
-  background:linear-gradient(115deg,#1B2B42,#111A29);
-  border:1px solid rgba(242,189,69,.2);
+  gap:15px;margin-bottom:28px;
 }
-.welcome h2{font-size:21px;margin:5px 0}
-.welcome p{font-size:11px;color:var(--muted)}
-.admin-tag{
+.topbar h1{font-size:25px;margin:0 0 6px}
+.topbar p{margin:0;color:var(--muted);font-size:12px}
+.top-actions{display:flex;align-items:center;gap:10px}
+.icon-btn{
+  border:1px solid var(--border);background:var(--card);
+  color:var(--white);width:40px;height:40px;border-radius:11px;
+}
+.profile{
+  display:flex;align-items:center;gap:10px;
+  padding:7px 12px;border:1px solid var(--border);
+  border-radius:12px;background:var(--card);
+}
+.avatar{
+  width:32px;height:32px;border-radius:50%;
+  display:grid;place-items:center;background:#26364C;color:var(--gold);
+}
+.profile b{font-size:12px}
+.profile small{display:block;color:var(--muted);font-size:10px;margin-top:3px}
+.section-heading{
+  display:flex;align-items:center;justify-content:space-between;
+  margin:25px 0 14px;gap:12px;
+}
+.section-heading h2{font-size:15px;margin:0}
+.section-heading span{color:var(--muted);font-size:11px}
+.status{
   display:inline-flex;align-items:center;gap:7px;
-  color:var(--gold);font-size:9px;font-weight:800;letter-spacing:1px;
+  color:var(--green);font-size:11px;font-weight:700;
 }
-.welcome-right{text-align:right}
-.welcome-right strong{display:block;font-size:23px;color:var(--gold)}
-.welcome-right span{font-size:10px;color:var(--muted)}
-
-.kpi-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  gap:13px;margin-bottom:19px;
+.dot{width:7px;height:7px;border-radius:50%;background:currentColor}
+.grid{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;
 }
-.kpi{
+.stat-card{
   background:var(--card);border:1px solid var(--border);
-  border-radius:15px;padding:17px;min-width:0;
+  border-radius:16px;padding:18px;min-width:0;
 }
-.kpi-top{display:flex;justify-content:space-between;align-items:center}
-.kpi-icon{
-  width:37px;height:37px;border-radius:11px;
-  display:grid;place-items:center;background:var(--card2);color:var(--gold);
+.stat-top{display:flex;justify-content:space-between;align-items:center}
+.stat-icon{
+  width:38px;height:38px;border-radius:11px;
+  display:grid;place-items:center;font-size:15px;
 }
-.kpi strong{display:block;font-size:25px;margin-top:13px;overflow-wrap:anywhere}
-.kpi p{font-size:10px;color:var(--muted);margin-top:3px}
-.kpi-foot{font-size:9px;color:var(--green);margin-top:9px}
-
-.grid-main{
-  display:grid;grid-template-columns:1.2fr .8fr;
-  gap:17px;margin-bottom:18px;
+.gold{background:rgba(242,189,69,.13);color:var(--gold)}
+.blue{background:rgba(101,169,255,.13);color:var(--blue)}
+.green{background:rgba(53,201,138,.13);color:var(--green)}
+.red{background:rgba(255,115,115,.13);color:var(--red)}
+.stat-label{color:var(--muted);font-size:11px;margin-top:16px}
+.stat-value{font-size:27px;font-weight:800;margin-top:7px;letter-spacing:-1px}
+.stat-note{font-size:10px;color:var(--muted);margin-top:7px}
+.panels{
+  display:grid;grid-template-columns:1.5fr 1fr;gap:15px;margin-top:18px;
 }
 .panel{
   background:var(--card);border:1px solid var(--border);
-  border-radius:17px;padding:20px;min-width:0;
+  border-radius:16px;padding:20px;min-width:0;
 }
-.panel-head{
-  display:flex;justify-content:space-between;
-  align-items:center;gap:10px;margin-bottom:18px;
+.panel h3{font-size:14px;margin:0}
+.panel-sub{color:var(--muted);font-size:10px;margin-top:5px}
+.chart{height:205px;margin-top:20px;display:flex;align-items:end;gap:12px}
+.bar-group{flex:1;display:flex;flex-direction:column;align-items:center;gap:9px;height:100%;justify-content:end}
+.bar-track{
+  height:160px;width:100%;max-width:35px;
+  background:#202D40;border-radius:8px;display:flex;align-items:end;overflow:hidden;
 }
-.panel-head h2{font-size:14px}
-.panel-head p{font-size:10px;color:var(--muted);margin-top:4px}
-.panel-head a{font-size:10px;color:var(--gold);font-weight:700}
-
-.chart-legend{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px}
-.legend-item{display:flex;align-items:center;gap:6px;font-size:9px;color:var(--muted)}
-.legend-dot{width:7px;height:7px;border-radius:50%;background:var(--gold)}
-.chart{
-  height:190px;display:flex;align-items:flex-end;
-  justify-content:space-around;gap:10px;
-  border-bottom:1px solid var(--border);
-  padding:10px 4px 0;
+.bar-fill{
+  width:100%;background:linear-gradient(180deg,#F7D477,var(--gold));
+  border-radius:8px 8px 0 0;min-height:2px;
 }
-.chart-column{
-  flex:1;height:100%;display:flex;
-  flex-direction:column;justify-content:flex-end;
-  align-items:center;gap:8px;min-width:0;
+.bar-label{font-size:9px;color:var(--muted)}
+.bar-number{font-size:9px;color:#DCE4F0}
+.quick-list{display:grid;gap:10px;margin-top:17px}
+.quick-item{
+  display:flex;align-items:center;gap:12px;
+  background:var(--card2);border:1px solid var(--border);
+  border-radius:12px;padding:13px;text-decoration:none;color:var(--white);
 }
-.bar{
-  width:min(34px,70%);min-height:4px;
-  background:linear-gradient(180deg,#F2BD45,#B47D21);
-  border-radius:7px 7px 0 0;
-  transition:height .3s;
+.quick-item i{color:var(--gold);width:18px;text-align:center}
+.quick-item b{font-size:11px;display:block}
+.quick-item small{font-size:9px;color:var(--muted);display:block;margin-top:4px}
+.table-panel{
+  margin-top:18px;background:var(--card);
+  border:1px solid var(--border);border-radius:16px;overflow:hidden;
 }
-.chart-column span{font-size:9px;color:var(--muted);padding-bottom:8px}
-.chart-caption{font-size:9px;color:var(--muted);margin-top:12px}
-
-.alert-list{display:grid;gap:10px}
-.alert{
-  display:flex;align-items:flex-start;gap:10px;
-  padding:12px;background:var(--card2);border-radius:11px;
+.table-head{
+  padding:19px 20px;display:flex;justify-content:space-between;
+  align-items:center;gap:10px;
 }
-.alert-icon{
-  width:31px;height:31px;display:grid;place-items:center;
-  border-radius:9px;background:rgba(242,189,69,.1);
-  color:var(--gold);flex-shrink:0;
-}
-.alert strong{display:block;font-size:10px}
-.alert p{font-size:9px;color:var(--muted);margin-top:3px}
-
+.table-head h3{font-size:14px;margin:0}
 .table-wrap{overflow-x:auto}
 table{width:100%;border-collapse:collapse;min-width:650px}
-th{text-align:left;padding:12px 10px;font-size:9px;color:var(--muted);border-bottom:1px solid var(--border);font-weight:600}
-td{padding:13px 10px;border-bottom:1px solid var(--border);font-size:10px}
-tbody tr:last-child td{border-bottom:0}
+th{
+  text-align:left;padding:12px 20px;background:#172337;
+  color:#9EACC0;font-size:10px;text-transform:uppercase;letter-spacing:.5px;
+}
+td{padding:14px 20px;border-top:1px solid var(--border);font-size:11px}
 .student-name{font-weight:700}
-.student-id{font-size:9px;color:var(--muted);margin-top:3px}
-.badge{display:inline-flex;padding:5px 8px;border-radius:20px;font-size:9px;font-weight:800}
-.active-badge{background:rgba(53,201,138,.12);color:var(--green)}
-.pending-badge{background:rgba(242,189,69,.12);color:var(--gold)}
-.empty{padding:25px;text-align:center;color:var(--muted);font-size:11px}
-
-.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}
-.quick-link{
-  display:flex;align-items:center;gap:10px;
-  background:var(--card);border:1px solid var(--border);
-  border-radius:13px;padding:14px;transition:.2s;
+.muted{color:var(--muted)}
+.pill{
+  padding:5px 9px;border-radius:20px;font-size:9px;font-weight:700;
+  display:inline-block;background:rgba(53,201,138,.12);color:var(--green);
 }
-.quick-link:hover{border-color:rgba(242,189,69,.5);transform:translateY(-2px)}
-.quick-icon{
-  width:35px;height:35px;display:grid;place-items:center;
-  border-radius:10px;background:var(--card2);color:var(--gold);flex-shrink:0;
-}
-.quick-link strong{display:block;font-size:10px}
-.quick-link span{display:block;font-size:9px;color:var(--muted);margin-top:3px}
-
+.pill.inactive{background:rgba(255,115,115,.12);color:var(--red)}
+.empty{text-align:center;padding:28px;color:var(--muted)}
 .notice{
-  display:flex;gap:10px;padding:13px;margin-top:17px;
-  border-radius:12px;background:rgba(101,169,255,.07);
-  border:1px solid rgba(101,169,255,.15);
+  background:rgba(101,169,255,.08);
+  border:1px solid rgba(101,169,255,.2);
+  border-radius:12px;padding:13px 15px;
+  color:#B9D8FF;font-size:11px;line-height:1.6;margin-top:18px;
 }
-.notice i{width:17px;color:var(--blue);flex-shrink:0}
-.notice strong{font-size:10px}
-.notice p{font-size:9px;color:var(--muted);margin-top:3px}
-
-footer{border-top:1px solid var(--border);padding:22px 0 100px}
-.footer-inner{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
-.footer-inner p{font-size:10px;color:var(--muted)}
-.bottom-nav{
-  display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;
-  background:rgba(12,19,32,.97);border-top:1px solid var(--border);
-  padding:10px 5px calc(10px + env(safe-area-inset-bottom));
-  justify-content:space-around;backdrop-filter:blur(15px);
+.error{
+  display:none;background:rgba(255,115,115,.1);
+  border:1px solid rgba(255,115,115,.3);
+  color:#FFB1B1;border-radius:12px;padding:13px;
+  font-size:11px;margin-bottom:15px;
 }
-.bottom-nav a{
-  display:flex;flex-direction:column;align-items:center;
-  gap:4px;color:var(--muted);font-size:9px;font-weight:700;min-width:55px;
+.loading{color:var(--muted);font-size:12px}
+.footer{text-align:center;color:#6F7D91;font-size:10px;margin-top:30px}
+@media(max-width:950px){
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .panels{grid-template-columns:1fr}
 }
-.bottom-nav a.active{color:var(--gold)}
-.bottom-nav i{width:19px;height:19px}
-
-@media(max-width:900px){
-  .kpi-grid{grid-template-columns:repeat(2,1fr)}
-  .grid-main{grid-template-columns:1fr}
-  .quick-grid{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:600px){
-  .topbar{height:62px}
-  main{padding-top:22px}
-  .heading{align-items:flex-start;flex-direction:column}
-  .heading-actions{width:100%;justify-content:space-between}
-  .welcome{align-items:flex-start;flex-direction:column;padding:18px}
-  .welcome-right{text-align:left}
-  .kpi-grid{gap:9px}
-  .kpi{padding:13px}
-  .kpi strong{font-size:21px}
-  .panel{padding:15px}
-  .quick-grid{gap:8px}
-  .quick-link{padding:11px 9px;gap:8px}
-  .quick-icon{width:31px;height:31px}
-  .bottom-nav{display:flex}
-  .footer-inner{flex-direction:column}
+@media(max-width:650px){
+  .sidebar{display:none}
+  .main{margin:0;width:100%;padding:20px 14px 35px}
+  .topbar h1{font-size:21px}
+  .profile{padding:5px 8px}
+  .profile small{display:none}
+  .grid{gap:10px}
+  .stat-card{padding:14px}
+  .stat-value{font-size:23px}
+  .stat-label{font-size:10px}
+  .stat-note{font-size:9px}
+  .panel{padding:16px}
 }
 </style>
 </head>
 
 <body>
+<div class="layout">
 
-<header>
-  <div class="container topbar">
-    <a href="index.html" class="logo">ABHINAASH <span>A1</span></a>
-    <div class="header-right">
-      <a href="contact.html">Support</a>
-      <div class="avatar">AD</div>
+<aside class="sidebar">
+  <div class="brand">
+    <div class="brand-icon"><i class="fa-solid fa-car-side"></i></div>
+    <div>
+      <strong>ABHINAASH A1</strong>
+      <small>Driving Academy</small>
     </div>
   </div>
-</header>
 
-<main class="container">
+  <div class="nav-title">MAIN MENU</div>
+  <nav class="nav">
+    <a class="active" href="#"><i class="fa-solid fa-chart-pie"></i> Dashboard</a>
+    <a href="admin-students.html"><i class="fa-solid fa-users"></i> Students</a>
+    <a href="admin-attendance.html"><i class="fa-solid fa-calendar-check"></i> Attendance</a>
+    <a href="admin-management.html"><i class="fa-solid fa-gears"></i> Management</a>
+    <a href="admin-finance.html"><i class="fa-solid fa-wallet"></i> Finance</a>
+  </nav>
 
-  <section class="heading">
+  <div class="nav-title">SYSTEM</div>
+  <nav class="nav">
+    <a href="index.html"><i class="fa-solid fa-globe"></i> Visit Website</a>
+  </nav>
+
+  <div class="sidebar-bottom">
+    <b>ABHINAASH A1 Driving</b><br>
+    Admin Dashboard<br>
+    <span id="sideDate"></span>
+  </div>
+</aside>
+
+<main class="main">
+
+  <header class="topbar">
     <div>
-      <div class="eyebrow">Owner Control Centre</div>
-      <h1>Admin Dashboard</h1>
-      <p>Monitor admissions, students and daily operations.</p>
+      <h1>Dashboard</h1>
+      <p>Welcome back, Admin. Here's your live academy overview.</p>
     </div>
-    <div class="heading-actions">
-      <div class="date-chip">
-        <i data-lucide="calendar-days" width="14"></i>
-        <span id="todayDate">Loading...</span>
+    <div class="top-actions">
+      <button class="icon-btn" onclick="location.reload()" title="Refresh">
+        <i class="fa-solid fa-rotate"></i>
+      </button>
+      <div class="profile">
+        <div class="avatar"><i class="fa-solid fa-user-shield"></i></div>
+        <div><b>Administrator</b><small>Academy Control</small></div>
       </div>
     </div>
-  </section>
+  </header>
 
-  <section class="welcome">
-    <div>
-      <div class="admin-tag">
-        <i data-lucide="shield-check" width="13"></i>
-        ADMINISTRATOR ACCESS
+  <div id="errorBox" class="error"></div>
+
+  <div class="section-heading">
+    <h2>Live Overview</h2>
+    <span class="status"><span class="dot"></span> Firebase Connected</span>
+  </div>
+
+  <section class="grid">
+    <div class="stat-card">
+      <div class="stat-top">
+        <div class="stat-icon gold"><i class="fa-solid fa-users"></i></div>
       </div>
-      <h2>Welcome to Control Centre</h2>
-      <p>Here is your driving school business overview.</p>
+      <div class="stat-label">Total Students</div>
+      <div class="stat-value" id="totalStudents">—</div>
+      <div class="stat-note">All registered student records</div>
     </div>
-    <div class="welcome-right">
-      <strong id="activeStudentsWelcome">—</strong>
-      <span>Active Students</span>
+
+    <div class="stat-card">
+      <div class="stat-top">
+        <div class="stat-icon green"><i class="fa-solid fa-user-check"></i></div>
+      </div>
+      <div class="stat-label">Active Students</div>
+      <div class="stat-value" id="activeStudents">—</div>
+      <div class="stat-note">Students not marked inactive</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-top">
+        <div class="stat-icon red"><i class="fa-solid fa-user-slash"></i></div>
+      </div>
+      <div class="stat-label">Inactive Students</div>
+      <div class="stat-value" id="inactiveStudents">—</div>
+      <div class="stat-note">Students marked inactive</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-top">
+        <div class="stat-icon blue"><i class="fa-solid fa-user-plus"></i></div>
+      </div>
+      <div class="stat-label">New Admissions This Month</div>
+      <div class="stat-value" id="newAdmissions">—</div>
+      <div class="stat-note">Based on admissionDate</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-top">
+        <div class="stat-icon green"><i class="fa-solid fa-car"></i></div>
+      </div>
+      <div class="stat-label">Today's Completed Sessions</div>
+      <div class="stat-value" id="todaySessions">—</div>
+      <div class="stat-note">Attendance logs recorded today</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-top">
+        <div class="stat-icon gold"><i class="fa-solid fa-flag-checkered"></i></div>
+      </div>
+      <div class="stat-label">Total Completed Sessions</div>
+      <div class="stat-value" id="completedSessions">—</div>
+      <div class="stat-note">Based on student completion counts</div>
     </div>
   </section>
 
-  <section class="kpi-grid">
-
-    <div class="kpi">
-      <div class="kpi-top"><div class="kpi-icon"><i data-lucide="users"></i></div></div>
-      <strong id="totalStudents">—</strong>
-      <p>Total Students</p>
-      <div class="kpi-foot">All registered students</div>
-    </div>
-
-    <div class="kpi">
-      <div class="kpi-top"><div class="kpi-icon"><i data-lucide="user-check"></i></div></div>
-      <strong id="activeStudents">—</strong>
-      <p>Active Admissions</p>
-      <div class="kpi-foot">Currently in training</div>
-    </div>
-
-    <div class="kpi">
-      <div class="kpi-top"><div class="kpi-icon"><i data-lucide="wallet"></i></div></div>
-      <strong id="totalRevenue">Not configured</strong>
-      <p>Total Collections</p>
-      <div class="kpi-foot">Payment data required</div>
-    </div>
-
-    <div class="kpi">
-      <div class="kpi-top"><div class="kpi-icon"><i data-lucide="clock"></i></div></div>
-      <strong id="pendingFees">Not configured</strong>
-      <p>Pending Fees</p>
-      <div class="kpi-foot" style="color:var(--gold)">Payment data required</div>
-    </div>
-
-    <div class="kpi">
-      <div class="kpi-top"><div class="kpi-icon"><i data-lucide="calendar-plus"></i></div></div>
-      <strong id="newAdmissions">—</strong>
-      <p>New Admissions</p>
-      <div class="kpi-foot">This month</div>
-    </div>
-
-    <div class="kpi">
-      <div class="kpi-top"><div class="kpi-icon"><i data-lucide="car-front"></i></div></div>
-      <strong id="todayClasses">Not configured</strong>
-      <p>Today's Classes</p>
-      <div class="kpi-foot">Schedule data required</div>
-    </div>
-
-    <div class="kpi">
-      <div class="kpi-top"><div class="kpi-icon"><i data-lucide="clipboard-list"></i></div></div>
-      <strong id="pendingBookings">Not configured</strong>
-      <p>Pending Bookings</p>
-      <div class="kpi-foot" style="color:var(--gold)">Booking data required</div>
-    </div>
-
-    <div class="kpi">
-      <div class="kpi-top"><div class="kpi-icon"><i data-lucide="contact-round"></i></div></div>
-      <strong id="totalInstructors">Not configured</strong>
-      <p>Instructors</p>
-      <div class="kpi-foot">Instructor data required</div>
-    </div>
-
-  </section>
-
-  <section class="grid-main">
-
+  <section class="panels">
     <div class="panel">
-      <div class="panel-head">
-        <div>
-          <h2>Admissions Overview</h2>
-          <p>Monthly student registration summary</p>
-        </div>
-        <a href="admin-management.html#students">Manage Students ↗</a>
+      <h3>Admission Overview</h3>
+      <div class="panel-sub">Monthly admissions · Last 7 months</div>
+      <div class="chart" id="admissionChart">
+        <div class="loading">Loading admission data...</div>
       </div>
-
-      <div class="chart-legend">
-        <div class="legend-item"><span class="legend-dot"></span> Monthly Admissions</div>
-      </div>
-
-      <div class="chart" id="revenueChart">
-        <div class="empty">Loading admission data...</div>
-      </div>
-      <div class="chart-caption">Live monthly admissions from Firebase.</div>
     </div>
 
     <div class="panel">
-      <div class="panel-head">
-        <div>
-          <h2>Action Centre</h2>
-          <p>Items that need your attention</p>
-        </div>
-        <span style="font-size:10px;color:var(--gold)" id="alertCount">Loading</span>
-      </div>
-
-      <div class="alert-list">
-        <div class="alert">
-          <div class="alert-icon"><i data-lucide="wallet" width="15"></i></div>
-          <div>
-            <strong>Pending Fee Collection</strong>
-            <p id="feeAlert">Payment data not connected.</p>
-          </div>
-        </div>
-
-        <div class="alert">
-          <div class="alert-icon"><i data-lucide="calendar-clock" width="15"></i></div>
-          <div>
-            <strong>Booking Confirmation</strong>
-            <p id="bookingAlert">Booking data not connected.</p>
-          </div>
-        </div>
-
-        <div class="alert">
-          <div class="alert-icon"><i data-lucide="clipboard-check" width="15"></i></div>
-          <div>
-            <strong>Training Records</strong>
-            <p id="attendanceAlert">Loading attendance records...</p>
-          </div>
-        </div>
+      <h3>Quick Actions</h3>
+      <div class="panel-sub">Manage your driving academy</div>
+      <div class="quick-list">
+        <a class="quick-item" href="admin-students.html">
+          <i class="fa-solid fa-user-group"></i>
+          <span><b>Manage Students</b><small>View and manage student records</small></span>
+        </a>
+        <a class="quick-item" href="admin-attendance.html">
+          <i class="fa-solid fa-calendar-check"></i>
+          <span><b>Mark Attendance</b><small>Update student training records</small></span>
+        </a>
+        <a class="quick-item" href="admin-management.html">
+          <i class="fa-solid fa-sliders"></i>
+          <span><b>Academy Management</b><small>Manage academy operations</small></span>
+        </a>
+        <a class="quick-item" href="admin-finance.html">
+          <i class="fa-solid fa-indian-rupee-sign"></i>
+          <span><b>Finance & Payments</b><small>Open finance management</small></span>
+        </a>
       </div>
     </div>
-
   </section>
 
-  <section class="panel" style="margin-bottom:18px">
-    <div class="panel-head">
+  <section class="table-panel">
+    <div class="table-head">
       <div>
-        <h2>Recent Admissions</h2>
-        <p>Latest registered students</p>
+        <h3>Recent Admissions</h3>
+        <div class="panel-sub">Latest student records from Firebase</div>
       </div>
-      <a href="admin-management.html#students">Manage Students ↗</a>
+      <a href="admin-students.html" style="color:var(--gold);font-size:11px;text-decoration:none">View all <i class="fa-solid fa-arrow-right"></i></a>
     </div>
 
     <div class="table-wrap">
@@ -402,95 +375,39 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
         <thead>
           <tr>
             <th>Student</th>
+            <th>Mobile</th>
             <th>Class Type</th>
             <th>Admission Date</th>
-            <th>Total Classes</th>
-            <th>Completed</th>
+            <th>Progress</th>
             <th>Status</th>
           </tr>
         </thead>
-        <tbody id="admissionTable">
-          <tr><td colspan="6" class="empty">Loading student records...</td></tr>
+        <tbody id="recentAdmissions">
+          <tr><td colspan="6" class="empty">Loading students...</td></tr>
         </tbody>
       </table>
     </div>
   </section>
 
-  <section class="panel">
-    <div class="panel-head">
-      <div>
-        <h2>Management Shortcuts</h2>
-        <p>Quick access to important admin sections</p>
-      </div>
-    </div>
-
-    <div class="quick-grid">
-
-      <a href="admin-management.html#students" class="quick-link">
-        <div class="quick-icon"><i data-lucide="users"></i></div>
-        <div><strong>Students</strong><span>Admissions & profiles</span></div>
-      </a>
-
-      <a href="admin-management.html#instructors" class="quick-link">
-        <div class="quick-icon"><i data-lucide="contact-round"></i></div>
-        <div><strong>Instructors</strong><span>Manage staff</span></div>
-      </a>
-
-      <a href="admin-management.html#bookings" class="quick-link">
-        <div class="quick-icon"><i data-lucide="calendar-check"></i></div>
-        <div><strong>Bookings</strong><span>Admission requests</span></div>
-      </a>
-
-      <a href="admin-finance.html" class="quick-link">
-        <div class="quick-icon"><i data-lucide="wallet"></i></div>
-        <div><strong>Finance</strong><span>Fees & collections</span></div>
-      </a>
-
-    </div>
-
-    <div class="notice">
-      <i data-lucide="database"></i>
-      <div>
-        <strong>Firebase Live Dashboard</strong>
-        <p>Student counts, admission dates, class progress and recent admissions are loaded from your existing studentData collection. Finance, bookings, schedules and instructor data are not yet connected.</p>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<footer>
-  <div class="container footer-inner">
-    <a href="index.html" class="logo">ABHINAASH <span>A1</span></a>
-    <p>Admin Control Centre · ABHINAASH A1 Driving · Baripada, Odisha</p>
+  <div class="notice">
+    <i class="fa-solid fa-circle-info"></i>
+    Dashboard figures are calculated from your existing <b>studentData</b> collection.
+    Today's sessions count attendance logs recorded today; it is not a count of scheduled classes.
+    Payment, booking and instructor figures are not shown because their database fields have not yet been confirmed.
   </div>
-</footer>
 
-<nav class="bottom-nav">
-  <a href="admin-dashboard.html" class="active">
-    <i data-lucide="layout-dashboard"></i>Dashboard
-  </a>
-  <a href="admin-management.html">
-    <i data-lucide="users"></i>Manage
-  </a>
-  <a href="admin-finance.html">
-    <i data-lucide="wallet"></i>Finance
-  </a>
-  <a href="contact.html">
-    <i data-lucide="headset"></i>Support
-  </a>
-</nav>
+  <div class="footer">© <span id="year"></span> ABHINAASH A1 Driving Academy · Admin Panel</div>
+</main>
+</div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-
 import {
   getFirestore,
   collection,
   onSnapshot
 } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
-/* EXISTING FIREBASE PROJECT */
 const firebaseConfig = {
   apiKey: "AIzaSyC3gWi8p85z-wkoJeWb3N3jYoQpcIar8Sww",
   authDomain: "abinash-driving.firebaseapp.com",
@@ -505,333 +422,204 @@ const db = getFirestore(app);
 
 const $ = id => document.getElementById(id);
 
-function setText(id,value){
-  const element = $(id);
-  if(element) element.textContent = value;
+$("year").textContent = new Date().getFullYear();
+$("sideDate").textContent = new Date().toLocaleDateString("en-IN", {
+  day:"2-digit", month:"short", year:"numeric"
+});
+
+function escapeHTML(value){
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#039;"
+  })[char]);
 }
 
-/* ADMIN ATTENDANCE SCHEMA */
-function getCompleted(student){
-  const logs = Array.isArray(student.attendanceLogs)
-    ? student.attendanceLogs.length
-    : 0;
-
-  return Math.max(logs,Number(student.remaining || 0));
-}
-
-/* ADMISSION DATE */
-function getAdmissionDate(value){
+function parseAdmissionDate(value){
   if(!value) return null;
 
-  if(typeof value === "string"){
-    const match = value.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if(value instanceof Date && !isNaN(value)) return value;
 
-    if(match){
-      return new Date(
-        Number(match[1]),
-        Number(match[2])-1,
-        Number(match[3])
-      );
-    }
+  if(typeof value === "object" && value.seconds){
+    return new Date(value.seconds * 1000);
   }
 
-  if(value && typeof value.toDate === "function"){
-    return value.toDate();
+  const text = String(value).trim();
+
+  // ISO format: YYYY-MM-DD
+  let match = text.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+  if(match){
+    const date = new Date(
+      Number(match[1]), Number(match[2])-1, Number(match[3])
+    );
+    return isNaN(date) ? null : date;
   }
 
-  const date = new Date(value);
-  return Number.isNaN(date.getTime()) ? null : date;
+  // Admin attendance format: DD MMM YYYY
+  match = text.match(/^(\d{1,2})\s+([A-Za-z]{3,})\s+(\d{4})/);
+  if(match){
+    const date = new Date(`${match[1]} ${match[2]} ${match[3]} 12:00:00`);
+    return isNaN(date) ? null : date;
+  }
+
+  const fallback = new Date(text);
+  return isNaN(fallback) ? null : fallback;
+}
+
+function isTodayAttendance(log){
+  if(typeof log !== "string") return false;
+
+  const datePart = log.split("|")[0]?.trim();
+  const date = parseAdmissionDate(datePart);
+  if(!date) return false;
+
+  const today = new Date();
+  return date.getFullYear() === today.getFullYear() &&
+         date.getMonth() === today.getMonth() &&
+         date.getDate() === today.getDate();
+}
+
+function completedCount(student){
+  const logs = Array.isArray(student.attendanceLogs)
+    ? student.attendanceLogs.length : 0;
+
+  const remaining = Number(student.remaining || 0);
+  return Math.max(logs, remaining);
 }
 
 function formatDate(value){
-  const date = getAdmissionDate(value);
+  const date = parseAdmissionDate(value);
   if(!date) return "—";
-
-  return date.toLocaleDateString("en-IN",{
-    day:"2-digit",
-    month:"short",
-    year:"numeric"
+  return date.toLocaleDateString("en-IN", {
+    day:"2-digit", month:"short", year:"numeric"
   });
 }
 
-function isCurrentMonth(value){
-  const date = getAdmissionDate(value);
-  if(!date) return false;
-
+function renderChart(students){
+  const chart = $("admissionChart");
   const now = new Date();
+  const months = [];
 
-  return date.getMonth() === now.getMonth() &&
-         date.getFullYear() === now.getFullYear();
-}
-
-/* LAST SEVEN MONTHS ADMISSION COUNT */
-function getMonthlyAdmissions(students){
-  const now = new Date();
-  const result = [];
-
-  for(let offset=6; offset>=0; offset--){
-    const date = new Date(
-      now.getFullYear(),
-      now.getMonth()-offset,
-      1
-    );
-
-    const month = date.toLocaleDateString("en-IN",{
-      month:"short"
+  for(let i=6; i>=0; i--){
+    const date = new Date(now.getFullYear(), now.getMonth()-i, 1);
+    months.push({
+      year:date.getFullYear(),
+      month:date.getMonth(),
+      label:date.toLocaleDateString("en-IN",{month:"short"})
     });
-
-    const count = students.filter(student=>{
-      const admission = getAdmissionDate(student.admissionDate);
-
-      return admission &&
-        admission.getMonth() === date.getMonth() &&
-        admission.getFullYear() === date.getFullYear();
-    }).length;
-
-    result.push({month,amount:count});
   }
 
-  return result;
+  const counts = months.map(m => students.filter(s => {
+    const date = parseAdmissionDate(s.admissionDate);
+    return date &&
+      date.getFullYear() === m.year &&
+      date.getMonth() === m.month;
+  }).length);
+
+  const max = Math.max(1, ...counts);
+
+  chart.innerHTML = months.map((m,i) => {
+    const height = counts[i] === 0 ? 2 : Math.max(5, counts[i]/max*100);
+    return `
+      <div class="bar-group">
+        <div class="bar-number">${counts[i]}</div>
+        <div class="bar-track">
+          <div class="bar-fill" style="height:${height}%"></div>
+        </div>
+        <div class="bar-label">${m.label}</div>
+      </div>
+    `;
+  }).join("");
 }
 
-/* MONTHLY CHART */
-function renderChart(records){
-  const chart = $("revenueChart");
-  chart.replaceChildren();
+function renderRecent(students){
+  const recent = [...students]
+    .filter(s => parseAdmissionDate(s.admissionDate))
+    .sort((a,b) =>
+      parseAdmissionDate(b.admissionDate) - parseAdmissionDate(a.admissionDate)
+    )
+    .slice(0,8);
 
-  const max = Math.max(
-    ...records.map(item=>item.amount),
-    1
-  );
-
-  records.forEach(item=>{
-    const column = document.createElement("div");
-    column.className = "chart-column";
-
-    const bar = document.createElement("div");
-    bar.className = "bar";
-    bar.style.height = Math.max(
-      (item.amount/max)*100,
-      4
-    ) + "%";
-
-    bar.title = item.month + ": " + item.amount + " admissions";
-
-    const label = document.createElement("span");
-    label.textContent = item.month;
-
-    column.append(bar,label);
-    chart.appendChild(column);
-  });
-}
-
-/* RECENT ADMISSIONS */
-function renderAdmissions(students){
-  const body = $("admissionTable");
-  body.replaceChildren();
-
-  const sorted = [...students].sort((a,b)=>{
-    const dateA = getAdmissionDate(a.admissionDate);
-    const dateB = getAdmissionDate(b.admissionDate);
-
-    return (dateB?.getTime() || 0) -
-           (dateA?.getTime() || 0);
-  });
-
-  const recent = sorted.slice(0,6);
+  const tbody = $("recentAdmissions");
 
   if(!recent.length){
-    const row = document.createElement("tr");
-    const cell = document.createElement("td");
-
-    cell.colSpan = 6;
-    cell.className = "empty";
-    cell.textContent = "No student admissions found.";
-
-    row.appendChild(cell);
-    body.appendChild(row);
+    tbody.innerHTML = `<tr><td colspan="6" class="empty">No admission records found.</td></tr>`;
     return;
   }
 
-  recent.forEach(student=>{
-    const row = document.createElement("tr");
+  tbody.innerHTML = recent.map(s => {
+    const active = s.notActive !== true;
+    const done = completedCount(s);
+    const total = Number(s.totalClasses || 0);
 
-    const nameCell = document.createElement("td");
-
-    const name = document.createElement("div");
-    name.className = "student-name";
-    name.textContent = student.name || "Student";
-
-    const id = document.createElement("div");
-    id.className = "student-id";
-    id.textContent = student.id;
-
-    nameCell.append(name,id);
-
-    const typeCell = document.createElement("td");
-    typeCell.textContent = student.classType || "—";
-
-    const dateCell = document.createElement("td");
-    dateCell.textContent = formatDate(student.admissionDate);
-
-    const totalCell = document.createElement("td");
-    totalCell.textContent = Number(student.totalClasses || 0);
-
-    const completedCell = document.createElement("td");
-    completedCell.textContent = getCompleted(student);
-
-    const statusCell = document.createElement("td");
-    const badge = document.createElement("span");
-
-    badge.className = "badge " +
-      (student.notActive === true
-        ? "pending-badge"
-        : "active-badge");
-
-    badge.textContent = student.notActive === true
-      ? "Inactive"
-      : "Active";
-
-    statusCell.appendChild(badge);
-
-    row.append(
-      nameCell,
-      typeCell,
-      dateCell,
-      totalCell,
-      completedCell,
-      statusCell
-    );
-
-    body.appendChild(row);
-  });
+    return `
+      <tr>
+        <td><span class="student-name">${escapeHTML(s.name || "Unnamed Student")}</span></td>
+        <td>${escapeHTML(s.mobile || s.id || "—")}</td>
+        <td>${escapeHTML(s.classType || "—")}</td>
+        <td>${formatDate(s.admissionDate)}</td>
+        <td>${done} / ${total || "—"}</td>
+        <td><span class="pill ${active ? "" : "inactive"}">${active ? "Active" : "Inactive"}</span></td>
+      </tr>
+    `;
+  }).join("");
 }
 
-/* DASHBOARD RENDER */
-function renderDashboard(snapshot){
-
-  const students = snapshot.docs.map(document=>({
-    id:document.id,
-    ...document.data()
+function updateDashboard(snapshot){
+  const students = snapshot.docs.map(doc => ({
+    id:doc.id,
+    ...doc.data()
   }));
 
-  const totalStudents = students.length;
+  const total = students.length;
+  const active = students.filter(s => s.notActive !== true).length;
+  const inactive = total - active;
 
-  const activeStudents = students.filter(
-    student=>student.notActive !== true
-  ).length;
+  const now = new Date();
+  const newThisMonth = students.filter(s => {
+    const date = parseAdmissionDate(s.admissionDate);
+    return date &&
+      date.getFullYear() === now.getFullYear() &&
+      date.getMonth() === now.getMonth();
+  }).length;
 
-  const inactiveStudents = totalStudents-activeStudents;
+  const todaySessions = students.reduce((sum,s) => {
+    const logs = Array.isArray(s.attendanceLogs) ? s.attendanceLogs : [];
+    return sum + logs.filter(isTodayAttendance).length;
+  },0);
 
-  const newAdmissions = students.filter(
-    student=>isCurrentMonth(student.admissionDate)
-  ).length;
-
-  const completedClasses = students.reduce(
-    (sum,student)=>sum+getCompleted(student),
-    0
+  const allCompleted = students.reduce(
+    (sum,s) => sum + completedCount(s),0
   );
 
-  setText("totalStudents",totalStudents);
-  setText("activeStudents",activeStudents);
-  setText("activeStudentsWelcome",activeStudents);
-  setText("newAdmissions",newAdmissions);
+  $("totalStudents").textContent = total;
+  $("activeStudents").textContent = active;
+  $("inactiveStudents").textContent = inactive;
+  $("newAdmissions").textContent = newThisMonth;
+  $("todaySessions").textContent = todaySessions;
+  $("completedSessions").textContent = allCompleted;
 
-  /* These metrics need their own confirmed database structure */
-  setText("totalRevenue","Not configured");
-  setText("pendingFees","Not configured");
-  setText("todayClasses","Not configured");
-  setText("pendingBookings","Not configured");
-  setText("totalInstructors","Not configured");
-
-  setText(
-    "feeAlert",
-    "Payment collection data is not connected yet."
-  );
-
-  setText(
-    "bookingAlert",
-    "Booking collection is not connected yet."
-  );
-
-  setText(
-    "attendanceAlert",
-    completedClasses +
-    " completed classes recorded across all students."
-  );
-
-  setText(
-    "alertCount",
-    inactiveStudents + " inactive students"
-  );
-
-  renderChart(getMonthlyAdmissions(students));
-  renderAdmissions(students);
-
-  console.log("Firebase dashboard updated:",{
-    totalStudents,
-    activeStudents,
-    inactiveStudents,
-    newAdmissions,
-    completedClasses
-  });
+  renderChart(students);
+  renderRecent(students);
 }
 
-/* TODAY'S DATE */
-setText(
-  "todayDate",
-  new Date().toLocaleDateString("en-IN",{
-    weekday:"short",
-    day:"2-digit",
-    month:"short",
-    year:"numeric"
-  })
-);
-
-/* LIVE FIRESTORE LISTENER */
-const studentsRef = collection(db,"studentData");
-
-const unsubscribe = onSnapshot(
-  studentsRef,
-  snapshot=>{
-    renderDashboard(snapshot);
-  },
-  error=>{
-    console.error("Dashboard Firebase error:",error);
-
-    setText("totalStudents","Error");
-    setText("activeStudents","Error");
-    setText("activeStudentsWelcome","Error");
-    setText("newAdmissions","Error");
-
-    setText(
-      "attendanceAlert",
-      "Unable to load student records. Check Firebase permissions."
-    );
-
-    setText("alertCount","Connection error");
-
-    const body = $("admissionTable");
-
-    body.replaceChildren();
-
-    const row = document.createElement("tr");
-    const cell = document.createElement("td");
-
-    cell.colSpan = 6;
-    cell.className = "empty";
-    cell.textContent =
-      "Unable to load student records. Check Firebase permissions.";
-
-    row.appendChild(cell);
-    body.appendChild(row);
+onSnapshot(
+  collection(db,"studentData"),
+  updateDashboard,
+  error => {
+    console.error("Firebase dashboard error:",error);
+    $("errorBox").style.display = "block";
+    $("errorBox").textContent =
+      "Firebase data load nahi hua: " + error.message +
+      " | Firestore rules aur internet connection check karein.";
+    $("admissionChart").innerHTML =
+      '<div class="empty">Unable to load chart data.</div>';
+    $("recentAdmissions").innerHTML =
+      '<tr><td colspan="6" class="empty">Unable to load student records.</td></tr>';
   }
 );
-
-if(window.lucide){
-  window.lucide.createIcons();
-}
 </script>
-
 </body>
 </html>
