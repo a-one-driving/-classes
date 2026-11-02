@@ -132,7 +132,7 @@ main{padding:27px 0 100px}
 .history-top,.feedback-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
 .history-top strong,.feedback-top strong{font-size:11px}
 .history-date,.feedback-date{font-size:9px;color:var(--muted)}
-.history-details{font-size:10px;color:#DCE1E9;line-height:1.8;margin-top:8px;overflow-wrap:anywhere}
+.history-details{font-size:10px;color:#DCE1E9;line-height:1.8;margin-top:8px;overflow-wrap:anywhere;white-space:pre-line}
 .remark{margin-top:9px;padding:9px 11px;border-radius:9px;background:rgba(242,189,69,.08);color:var(--gold);font-size:10px;line-height:1.6}
 .status-pill{font-size:9px;font-weight:800;padding:5px 9px;border-radius:20px;background:rgba(53,201,138,.12);color:var(--green)}
 .status-pill.inactive{background:rgba(255,119,119,.12);color:var(--red)}
@@ -209,18 +209,19 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
 
 <main class="container">
 
- <!-- STUDENT LOGIN -->
+ <!-- AUTOMATIC STUDENT VERIFICATION -->
  <section class="panel" id="loginPanel">
   <div class="panel-head">
-   <h2>Student Login</h2>
+   <h2>Student Verification</h2>
    <span style="font-size:10px;color:var(--gold)">Student Portal</span>
   </div>
-  <p class="login-description">Enter your registered 10-digit mobile number.</p>
-  <div class="login-controls">
+  <p class="login-description" id="loginMessage">
+   Verifying your registered student account...
+  </p>
+  <div class="login-controls" id="manualLoginControls" style="display:none">
    <input type="tel" id="studentMobile" maxlength="10" inputmode="numeric" placeholder="Enter mobile number">
    <button class="btn-primary" id="loginButton" type="button">Connect Account</button>
   </div>
-  <p class="login-message" id="loginMessage">Please enter your registered mobile number.</p>
  </section>
 
  <!-- WELCOME -->
@@ -279,7 +280,7 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
   </div>
  </section>
 
- <!-- PROGRESS AND UPCOMING -->
+ <!-- PROGRESS AND NEXT CLASS -->
  <section class="content-grid">
   <div class="panel">
    <div class="panel-head"><h2>Training Progress</h2></div>
@@ -418,7 +419,7 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
 import {initializeApp} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
 import {getFirestore,doc,onSnapshot} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
-/* EXISTING FIREBASE CONFIG */
+/* FIREBASE CONFIGURATION - KEEP SAME PROJECT */
 const firebaseConfig={
  apiKey:"AIzaSyC3gWi8p85z-wkoJeWb3N3jYoQpcIar8Sww",
  authDomain:"abinash-driving.firebaseapp.com",
@@ -429,6 +430,7 @@ const firebaseConfig={
 };
 
 const WHATSAPP_NUMBER="918984225311";
+const STORAGE_KEY="a1_student_mobile";
 
 const app=initializeApp(firebaseConfig);
 const db=getFirestore(app);
@@ -436,6 +438,7 @@ const db=getFirestore(app);
 let unsubscribeStudent=null;
 let currentMobile="";
 let currentStudentName="";
+let currentStudentActive=false;
 
 const $=id=>document.getElementById(id);
 
@@ -453,22 +456,25 @@ function value(data,key,fallback=""){
  return v===undefined||v===null||v===""?fallback:v;
 }
 
-function formatDate(value){
- if(!value)return "--";
- if(typeof value==="string"){
-  const m=value.match(/^(\d{4})-(\d{2})-(\d{2})$/);
-  if(m)return new Date(+m[1],+m[2]-1,+m[3]).toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"});
-  return value;
+function formatDate(input){
+ if(!input)return "--";
+ if(typeof input==="string"){
+  const match=input.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if(match){
+   return new Date(+match[1],+match[2]-1,+match[3])
+    .toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"});
+  }
+  return input;
  }
- if(value?.toDate)return value.toDate().toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"});
- if(value instanceof Date)return value.toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"});
- return String(value);
+ if(input?.toDate){
+  return input.toDate().toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"});
+ }
+ if(input instanceof Date){
+  return input.toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"});
+ }
+ return String(input);
 }
 
-/*
- Admin code stores each attendance record as a string:
- Date | Time — Route: ... | Distance: 5 KM | Remark: ...
-*/
 function parseLog(log){
  const text=String(log||"");
  const parts=text.split("|").map(x=>x.trim());
@@ -577,14 +583,14 @@ function renderFeedback(logs){
 
 function renderDashboard(student,mobile){
  currentStudentName=value(student,"name","Student");
+ currentStudentActive=student.notActive!==true;
 
  const logs=Array.isArray(student.attendanceLogs)?student.attendanceLogs:[];
  const total=Math.max(Number(value(student,"totalClasses",20))||20,1);
 
  /*
-  The admin code increments remaining by 1 for every attendance.
-  Therefore, remaining is treated as completed classes here.
-  attendanceLogs is used as the primary source where available.
+  Existing admin logic increments remaining by 1 per attendance.
+  So "remaining" is interpreted as completed class count.
  */
  const storedCompleted=Math.max(Number(value(student,"remaining",0))||0,0);
  const completed=Math.min(
@@ -596,19 +602,18 @@ function renderDashboard(student,mobile){
  const percent=Math.min(Math.round(completed/total*100),100);
 
  const classType=value(student,"classType","Group");
- const active=student.notActive!==true;
  const admissionDate=formatDate(value(student,"admissionDate",""));
 
  $("studentName").textContent=currentStudentName;
  $("userAvatar").textContent=currentStudentName.trim().split(/\s+/)
-  .map(w=>w[0]).join("").slice(0,2).toUpperCase();
+  .map(w=>w[0]).join("").slice(0,2).toUpperCase()||"ST";
 
  $("studentId").textContent="A1-"+mobile.slice(-4);
  $("packageName").textContent=classType==="Personal"?"Personal Training":"Group Training";
  $("classType").textContent=classType;
  $("admissionDate").textContent=admissionDate;
- $("accountStatus").textContent=active?"Active":"Not Active";
- $("accountStatus").style.color=active?"var(--green)":"var(--red)";
+ $("accountStatus").textContent=currentStudentActive?"Active":"Not Active";
+ $("accountStatus").style.color=currentStudentActive?"var(--green)":"var(--red)";
 
  $("completedClasses").textContent=completed;
  $("remainingClasses").textContent=left;
@@ -620,7 +625,6 @@ function renderDashboard(student,mobile){
  $("progressDone").textContent=completed+" classes completed";
  $("progressTotal").textContent=total+" total classes";
 
- // Admin attendance code does not currently save a next-class schedule.
  const nextDate=value(student,"nextClassDate",value(student,"classDate",""));
  const nextTime=value(student,"nextClassTime",value(student,"classTime",""));
  const nextLocation=value(student,"nextClassLocation",value(student,"classLocation",""));
@@ -638,6 +642,10 @@ function renderDashboard(student,mobile){
 }
 
 function resetDashboard(){
+ currentMobile="";
+ currentStudentName="";
+ currentStudentActive=false;
+
  $("loginPanel").style.display="block";
  $("studentName").textContent="Student";
  $("userAvatar").textContent="ST";
@@ -647,7 +655,9 @@ function resetDashboard(){
  $("admissionDate").textContent="--";
  $("accountStatus").textContent="--";
 
- ["completedClasses","remainingClasses","totalClasses","totalDistance"].forEach(id=>$(id).textContent="--");
+ ["completedClasses","remainingClasses","totalClasses","totalDistance"].forEach(id=>{
+  $(id).textContent="--";
+ });
 
  $("progressPercent").textContent="0%";
  $("progressBar").style.width="0%";
@@ -665,12 +675,15 @@ function resetDashboard(){
  $("historyCount").textContent="0 classes";
 }
 
-function connectStudent(){
- const mobile=$("studentMobile").value.trim();
- const button=$("loginButton");
+function showManualLogin(message){
+ $("loginPanel").style.display="block";
+ $("manualLoginControls").style.display="flex";
+ showMessage(message,"var(--red)");
+}
 
+function connectStudent(mobile){
  if(!/^[0-9]{10}$/.test(mobile)){
-  showMessage("Please enter a valid 10-digit mobile number.","var(--red)");
+  showManualLogin("No valid saved mobile number found. Please login from the main website.");
   return;
  }
 
@@ -680,44 +693,79 @@ function connectStudent(){
  }
 
  currentMobile=mobile;
- button.disabled=true;
- button.textContent="Connecting...";
- showMessage("Connecting to student records...");
+ showMessage("Verifying your registered student account...");
 
  const studentRef=doc(db,"studentData",mobile);
 
  unsubscribeStudent=onSnapshot(studentRef,snapshot=>{
-  button.disabled=false;
-  button.textContent="Connect Account";
-
   if(!snapshot.exists()){
+   localStorage.removeItem(STORAGE_KEY);
    resetDashboard();
-   showMessage("Student record not found. Please check your registered mobile number.","var(--red)");
+   showManualLogin("Student record not found. Please login again from the main website.");
    return;
   }
 
-  renderDashboard(snapshot.data(),mobile);
-  showMessage("Student records connected successfully.","var(--green)");
+  const student=snapshot.data();
+
+  if(student.notActive===true){
+   localStorage.removeItem(STORAGE_KEY);
+   resetDashboard();
+   showManualLogin("Your student account is inactive. Please contact the institute.");
+   return;
+  }
+
+  $("manualLoginControls").style.display="none";
+  renderDashboard(student,mobile);
+  showMessage("Account verified successfully.","var(--green)");
 
  },error=>{
-  console.error("Firebase student fetch error:",error);
-  button.disabled=false;
-  button.textContent="Connect Account";
-  showMessage("Unable to fetch student records. Check Firebase permissions.","var(--red)");
+  console.error("Firebase student verification error:",error);
+  showMessage("Unable to verify your account. Please check your internet connection or Firebase permissions.","var(--red)");
  });
 }
 
-$("loginButton").addEventListener("click",connectStudent);
-$("studentMobile").addEventListener("keydown",e=>{
- if(e.key==="Enter")connectStudent();
+/* OPTIONAL MANUAL CONNECTION */
+$("studentMobile").addEventListener("input",function(){
+ this.value=this.value.replace(/\D/g,"").slice(0,10);
 });
 
-/* STUDENT FEEDBACK VIA WHATSAPP */
+$("loginButton").addEventListener("click",()=>{
+ const mobile=$("studentMobile").value.trim();
+
+ if(!/^[0-9]{10}$/.test(mobile)){
+  showManualLogin("Please enter a valid 10-digit mobile number.");
+  return;
+ }
+
+ localStorage.setItem(STORAGE_KEY,mobile);
+ $("manualLoginControls").style.display="none";
+ connectStudent(mobile);
+});
+
+$("studentMobile").addEventListener("keydown",e=>{
+ if(e.key==="Enter")$("loginButton").click();
+});
+
+/* AUTOMATIC LOGIN FROM INDEX OR SAVED BROWSER */
+const urlMobile=new URLSearchParams(window.location.search).get("mobile");
+const savedMobile=localStorage.getItem(STORAGE_KEY);
+const mobileToVerify=urlMobile||savedMobile;
+
+if(mobileToVerify && /^[0-9]{10}$/.test(mobileToVerify)){
+ localStorage.setItem(STORAGE_KEY,mobileToVerify);
+ $("manualLoginControls").style.display="none";
+ connectStudent(mobileToVerify);
+}else{
+ showManualLogin("Please login from the main website to access your dashboard.");
+ $("manualLoginControls").style.display="none";
+}
+
+/* STUDENT FEEDBACK THROUGH WHATSAPP */
 $("feedbackForm").addEventListener("submit",e=>{
  e.preventDefault();
 
- if(!currentMobile){
-  alert("Please connect your student account first.");
+ if(!currentMobile||!currentStudentActive){
+  alert("Please connect your active student account first.");
   return;
  }
 
@@ -743,6 +791,7 @@ ${message}`;
  window.open(url,"_blank");
 });
 
+/* ICONS */
 if(window.lucide)window.lucide.createIcons();
 </script>
 
