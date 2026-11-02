@@ -27,7 +27,6 @@ button,input,select{font:inherit}
 button{cursor:pointer}
 .container{width:min(1200px,94%);margin:auto}
 
-/* HEADER */
 header{
   position:sticky;top:0;z-index:100;
   background:rgba(8,13,24,.96);
@@ -47,7 +46,6 @@ header{
 }
 main{padding:29px 0 100px}
 
-/* PAGE HEADING */
 .heading{
   display:flex;justify-content:space-between;
   align-items:center;gap:15px;margin-bottom:24px;
@@ -65,15 +63,7 @@ h1{font-size:clamp(25px,4vw,34px);margin:7px 0}
   border-radius:10px;padding:10px 13px;
   color:var(--muted);font-size:10px;white-space:nowrap;
 }
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;
-  gap:7px;padding:11px 14px;border-radius:10px;
-  border:1px solid transparent;font-size:10px;font-weight:800;
-}
-.btn-gold{background:var(--gold);color:#171717}
-.btn-outline{background:rgba(255,255,255,.04);border-color:var(--border);color:var(--white)}
 
-/* WELCOME */
 .welcome{
   display:flex;justify-content:space-between;align-items:center;
   gap:20px;padding:22px 24px;margin-bottom:19px;
@@ -91,7 +81,6 @@ h1{font-size:clamp(25px,4vw,34px);margin:7px 0}
 .welcome-right strong{display:block;font-size:23px;color:var(--gold)}
 .welcome-right span{font-size:10px;color:var(--muted)}
 
-/* KPI */
 .kpi-grid{
   display:grid;grid-template-columns:repeat(4,1fr);
   gap:13px;margin-bottom:19px;
@@ -109,7 +98,6 @@ h1{font-size:clamp(25px,4vw,34px);margin:7px 0}
 .kpi p{font-size:10px;color:var(--muted);margin-top:3px}
 .kpi-foot{font-size:9px;color:var(--green);margin-top:9px}
 
-/* PANELS */
 .grid-main{
   display:grid;grid-template-columns:1.2fr .8fr;
   gap:17px;margin-bottom:18px;
@@ -126,7 +114,6 @@ h1{font-size:clamp(25px,4vw,34px);margin:7px 0}
 .panel-head p{font-size:10px;color:var(--muted);margin-top:4px}
 .panel-head a{font-size:10px;color:var(--gold);font-weight:700}
 
-/* REVENUE CHART */
 .chart-legend{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px}
 .legend-item{display:flex;align-items:center;gap:6px;font-size:9px;color:var(--muted)}
 .legend-dot{width:7px;height:7px;border-radius:50%;background:var(--gold)}
@@ -150,20 +137,19 @@ h1{font-size:clamp(25px,4vw,34px);margin:7px 0}
 .chart-column span{font-size:9px;color:var(--muted);padding-bottom:8px}
 .chart-caption{font-size:9px;color:var(--muted);margin-top:12px}
 
-/* COLLECTIONS */
-.collection-list{display:grid;gap:13px}
-.collection-item{display:flex;align-items:center;gap:11px}
-.collection-icon{
-  width:36px;height:36px;display:grid;place-items:center;
-  border-radius:10px;background:var(--card2);color:var(--gold);
-  flex-shrink:0;
+.alert-list{display:grid;gap:10px}
+.alert{
+  display:flex;align-items:flex-start;gap:10px;
+  padding:12px;background:var(--card2);border-radius:11px;
 }
-.collection-info{flex:1;min-width:0}
-.collection-info strong{display:block;font-size:10px}
-.collection-info span{font-size:9px;color:var(--muted)}
-.collection-value{font-size:11px;font-weight:800;white-space:nowrap}
+.alert-icon{
+  width:31px;height:31px;display:grid;place-items:center;
+  border-radius:9px;background:rgba(242,189,69,.1);
+  color:var(--gold);flex-shrink:0;
+}
+.alert strong{display:block;font-size:10px}
+.alert p{font-size:9px;color:var(--muted);margin-top:3px}
 
-/* TABLE */
 .table-wrap{overflow-x:auto}
 table{width:100%;border-collapse:collapse;min-width:650px}
 th{text-align:left;padding:12px 10px;font-size:9px;color:var(--muted);border-bottom:1px solid var(--border);font-weight:600}
@@ -174,9 +160,8 @@ tbody tr:last-child td{border-bottom:0}
 .badge{display:inline-flex;padding:5px 8px;border-radius:20px;font-size:9px;font-weight:800}
 .active-badge{background:rgba(53,201,138,.12);color:var(--green)}
 .pending-badge{background:rgba(242,189,69,.12);color:var(--gold)}
-.action-link{font-size:10px;color:var(--gold);font-weight:800}
+.empty{padding:25px;text-align:center;color:var(--muted);font-size:11px}
 
-/* QUICK LINKS */
 .quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}
 .quick-link{
   display:flex;align-items:center;gap:10px;
@@ -191,21 +176,6 @@ tbody tr:last-child td{border-bottom:0}
 .quick-link strong{display:block;font-size:10px}
 .quick-link span{display:block;font-size:9px;color:var(--muted);margin-top:3px}
 
-/* ALERTS */
-.alert-list{display:grid;gap:10px}
-.alert{
-  display:flex;align-items:flex-start;gap:10px;
-  padding:12px;background:var(--card2);border-radius:11px;
-}
-.alert-icon{
-  width:31px;height:31px;display:grid;place-items:center;
-  border-radius:9px;background:rgba(242,189,69,.1);
-  color:var(--gold);flex-shrink:0;
-}
-.alert strong{display:block;font-size:10px}
-.alert p{font-size:9px;color:var(--muted);margin-top:3px}
-
-/* NOTICE */
 .notice{
   display:flex;gap:10px;padding:13px;margin-top:17px;
   border-radius:12px;background:rgba(101,169,255,.07);
@@ -215,7 +185,6 @@ tbody tr:last-child td{border-bottom:0}
 .notice strong{font-size:10px}
 .notice p{font-size:9px;color:var(--muted);margin-top:3px}
 
-/* FOOTER */
 footer{border-top:1px solid var(--border);padding:22px 0 100px}
 .footer-inner{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
 .footer-inner p{font-size:10px;color:var(--muted)}
@@ -232,7 +201,6 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
 .bottom-nav a.active{color:var(--gold)}
 .bottom-nav i{width:19px;height:19px}
 
-/* RESPONSIVE */
 @media(max-width:900px){
   .kpi-grid{grid-template-columns:repeat(2,1fr)}
   .grid-main{grid-template-columns:1fr}
@@ -276,17 +244,16 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
     <div>
       <div class="eyebrow">Owner Control Centre</div>
       <h1>Admin Dashboard</h1>
-      <p>Monitor admissions, revenue, students and daily operations.</p>
+      <p>Monitor admissions, students and daily operations.</p>
     </div>
     <div class="heading-actions">
       <div class="date-chip">
         <i data-lucide="calendar-days" width="14"></i>
-        <span id="todayDate"></span>
+        <span id="todayDate">Loading...</span>
       </div>
     </div>
   </section>
 
-  <!-- WELCOME -->
   <section class="welcome">
     <div>
       <div class="admin-tag">
@@ -297,106 +264,90 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
       <p>Here is your driving school business overview.</p>
     </div>
     <div class="welcome-right">
-      <strong id="activeStudentsWelcome">0</strong>
+      <strong id="activeStudentsWelcome">—</strong>
       <span>Active Students</span>
     </div>
   </section>
 
-  <!-- KPI -->
   <section class="kpi-grid">
 
     <div class="kpi">
-      <div class="kpi-top">
-        <div class="kpi-icon"><i data-lucide="users"></i></div>
-      </div>
-      <strong id="totalStudents">0</strong>
+      <div class="kpi-top"><div class="kpi-icon"><i data-lucide="users"></i></div></div>
+      <strong id="totalStudents">—</strong>
       <p>Total Students</p>
       <div class="kpi-foot">All registered students</div>
     </div>
 
     <div class="kpi">
-      <div class="kpi-top">
-        <div class="kpi-icon"><i data-lucide="user-check"></i></div>
-      </div>
-      <strong id="activeStudents">0</strong>
+      <div class="kpi-top"><div class="kpi-icon"><i data-lucide="user-check"></i></div></div>
+      <strong id="activeStudents">—</strong>
       <p>Active Admissions</p>
       <div class="kpi-foot">Currently in training</div>
     </div>
 
     <div class="kpi">
-      <div class="kpi-top">
-        <div class="kpi-icon"><i data-lucide="wallet"></i></div>
-      </div>
-      <strong id="totalRevenue">₹0</strong>
+      <div class="kpi-top"><div class="kpi-icon"><i data-lucide="wallet"></i></div></div>
+      <strong id="totalRevenue">Not configured</strong>
       <p>Total Collections</p>
-      <div class="kpi-foot">Recorded payments</div>
+      <div class="kpi-foot">Payment data required</div>
     </div>
 
     <div class="kpi">
-      <div class="kpi-top">
-        <div class="kpi-icon"><i data-lucide="clock"></i></div>
-      </div>
-      <strong id="pendingFees">₹0</strong>
+      <div class="kpi-top"><div class="kpi-icon"><i data-lucide="clock"></i></div></div>
+      <strong id="pendingFees">Not configured</strong>
       <p>Pending Fees</p>
-      <div class="kpi-foot" style="color:var(--gold)">Outstanding balance</div>
+      <div class="kpi-foot" style="color:var(--gold)">Payment data required</div>
     </div>
 
     <div class="kpi">
-      <div class="kpi-top">
-        <div class="kpi-icon"><i data-lucide="calendar-plus"></i></div>
-      </div>
-      <strong id="newAdmissions">0</strong>
+      <div class="kpi-top"><div class="kpi-icon"><i data-lucide="calendar-plus"></i></div></div>
+      <strong id="newAdmissions">—</strong>
       <p>New Admissions</p>
       <div class="kpi-foot">This month</div>
     </div>
 
     <div class="kpi">
-      <div class="kpi-top">
-        <div class="kpi-icon"><i data-lucide="car-front"></i></div>
-      </div>
-      <strong id="todayClasses">0</strong>
+      <div class="kpi-top"><div class="kpi-icon"><i data-lucide="car-front"></i></div></div>
+      <strong id="todayClasses">Not configured</strong>
       <p>Today's Classes</p>
-      <div class="kpi-foot">Scheduled sessions</div>
+      <div class="kpi-foot">Schedule data required</div>
     </div>
 
     <div class="kpi">
-      <div class="kpi-top">
-        <div class="kpi-icon"><i data-lucide="clipboard-list"></i></div>
-      </div>
-      <strong id="pendingBookings">0</strong>
+      <div class="kpi-top"><div class="kpi-icon"><i data-lucide="clipboard-list"></i></div></div>
+      <strong id="pendingBookings">Not configured</strong>
       <p>Pending Bookings</p>
-      <div class="kpi-foot" style="color:var(--gold)">Require confirmation</div>
+      <div class="kpi-foot" style="color:var(--gold)">Booking data required</div>
     </div>
 
     <div class="kpi">
-      <div class="kpi-top">
-        <div class="kpi-icon"><i data-lucide="contact-round"></i></div>
-      </div>
-      <strong id="totalInstructors">0</strong>
+      <div class="kpi-top"><div class="kpi-icon"><i data-lucide="contact-round"></i></div></div>
+      <strong id="totalInstructors">Not configured</strong>
       <p>Instructors</p>
-      <div class="kpi-foot">Active team members</div>
+      <div class="kpi-foot">Instructor data required</div>
     </div>
 
   </section>
 
-  <!-- REVENUE + ALERTS -->
   <section class="grid-main">
 
     <div class="panel">
       <div class="panel-head">
         <div>
-          <h2>Revenue Overview</h2>
-          <p>Monthly collection summary</p>
+          <h2>Admissions Overview</h2>
+          <p>Monthly student registration summary</p>
         </div>
-        <a href="admin-management.html#finance">View Reports ↗</a>
+        <a href="admin-management.html#students">Manage Students ↗</a>
       </div>
 
       <div class="chart-legend">
-        <div class="legend-item"><span class="legend-dot"></span> Monthly Collections</div>
+        <div class="legend-item"><span class="legend-dot"></span> Monthly Admissions</div>
       </div>
 
-      <div class="chart" id="revenueChart"></div>
-      <div class="chart-caption">Illustrative sample revenue values. Replace with actual payment records.</div>
+      <div class="chart" id="revenueChart">
+        <div class="empty">Loading admission data...</div>
+      </div>
+      <div class="chart-caption">Live monthly admissions from Firebase.</div>
     </div>
 
     <div class="panel">
@@ -405,7 +356,7 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
           <h2>Action Centre</h2>
           <p>Items that need your attention</p>
         </div>
-        <span style="font-size:10px;color:var(--gold)" id="alertCount">0 alerts</span>
+        <span style="font-size:10px;color:var(--gold)" id="alertCount">Loading</span>
       </div>
 
       <div class="alert-list">
@@ -413,7 +364,7 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
           <div class="alert-icon"><i data-lucide="wallet" width="15"></i></div>
           <div>
             <strong>Pending Fee Collection</strong>
-            <p id="feeAlert">Review outstanding student balances.</p>
+            <p id="feeAlert">Payment data not connected.</p>
           </div>
         </div>
 
@@ -421,15 +372,15 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
           <div class="alert-icon"><i data-lucide="calendar-clock" width="15"></i></div>
           <div>
             <strong>Booking Confirmation</strong>
-            <p id="bookingAlert">Review pending admission requests.</p>
+            <p id="bookingAlert">Booking data not connected.</p>
           </div>
         </div>
 
         <div class="alert">
           <div class="alert-icon"><i data-lucide="clipboard-check" width="15"></i></div>
           <div>
-            <strong>Attendance Review</strong>
-            <p id="attendanceAlert">Check instructor attendance updates.</p>
+            <strong>Training Records</strong>
+            <p id="attendanceAlert">Loading attendance records...</p>
           </div>
         </div>
       </div>
@@ -437,7 +388,6 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
 
   </section>
 
-  <!-- RECENT ADMISSIONS -->
   <section class="panel" style="margin-bottom:18px">
     <div class="panel-head">
       <div>
@@ -452,19 +402,20 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
         <thead>
           <tr>
             <th>Student</th>
-            <th>Package</th>
+            <th>Class Type</th>
             <th>Admission Date</th>
-            <th>Fee</th>
-            <th>Payment</th>
+            <th>Total Classes</th>
+            <th>Completed</th>
             <th>Status</th>
           </tr>
         </thead>
-        <tbody id="admissionTable"></tbody>
+        <tbody id="admissionTable">
+          <tr><td colspan="6" class="empty">Loading student records...</td></tr>
+        </tbody>
       </table>
     </div>
   </section>
 
-  <!-- QUICK MANAGEMENT -->
   <section class="panel">
     <div class="panel-head">
       <div>
@@ -500,8 +451,8 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
     <div class="notice">
       <i data-lucide="database"></i>
       <div>
-        <strong>Demo Dashboard</strong>
-        <p>All displayed values are sample figures. This page does not read or write your existing Firebase database. Real business metrics will be connected after the admin authentication and data structure are confirmed.</p>
+        <strong>Firebase Live Dashboard</strong>
+        <p>Student counts, admission dates, class progress and recent admissions are loaded from your existing studentData collection. Finance, bookings, schedules and instructor data are not yet connected.</p>
       </div>
     </div>
   </section>
@@ -530,111 +481,128 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
   </a>
 </nav>
 
-<script>
-/*
-  ADMIN DASHBOARD SAMPLE DATA
-  Not connected to Firebase.
-  Replace with secured admin data after authentication setup.
-*/
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
 
-const ADMIN_DATA = {
-  totalStudents:156,
-  activeStudents:32,
-  totalRevenue:485000,
-  pendingFees:28500,
-  newAdmissions:14,
-  todayClasses:8,
-  pendingBookings:5,
-  totalInstructors:3,
+import {
+  getFirestore,
+  collection,
+  onSnapshot
+} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
-  monthlyRevenue:[
-    {month:"May",amount:28000},
-    {month:"Jun",amount:35000},
-    {month:"Jul",amount:42000},
-    {month:"Aug",amount:38000},
-    {month:"Sep",amount:51000},
-    {month:"Oct",amount:47000},
-    {month:"Nov",amount:58000}
-  ],
-
-  admissions:[
-    {
-      name:"Sample Student 1",
-      id:"A1-1001",
-      package:"Premium",
-      date:"02 Nov 2026",
-      fee:4500,
-      paid:4500,
-      status:"Active"
-    },
-    {
-      name:"Sample Student 2",
-      id:"A1-1002",
-      package:"Standard",
-      date:"01 Nov 2026",
-      fee:3500,
-      paid:2000,
-      status:"Active"
-    },
-    {
-      name:"Sample Student 3",
-      id:"A1-1003",
-      package:"Personal",
-      date:"31 Oct 2026",
-      fee:8000,
-      paid:8000,
-      status:"Active"
-    },
-    {
-      name:"Sample Student 4",
-      id:"A1-1004",
-      package:"Premium",
-      date:"30 Oct 2026",
-      fee:4500,
-      paid:0,
-      status:"Pending"
-    }
-  ]
+/* EXISTING FIREBASE PROJECT */
+const firebaseConfig = {
+  apiKey: "AIzaSyC3gWi8p85z-wkoJeWb3N3jYoQpcIar8Sww",
+  authDomain: "abinash-driving.firebaseapp.com",
+  projectId: "abinash-driving",
+  storageBucket: "abinash-driving.appspot.com",
+  messagingSenderId: "641148830173",
+  appId: "1:641148830173:web:b7a500e5e7e2463da0f634"
 };
 
-const money = value =>
-  "₹" + Number(value || 0).toLocaleString("en-IN");
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-function renderDashboard(data){
+const $ = id => document.getElementById(id);
 
-  $("totalStudents").textContent = data.totalStudents;
-  $("activeStudents").textContent = data.activeStudents;
-  $("activeStudentsWelcome").textContent = data.activeStudents;
-  $("totalRevenue").textContent = money(data.totalRevenue);
-  $("pendingFees").textContent = money(data.pendingFees);
-  $("newAdmissions").textContent = data.newAdmissions;
-  $("todayClasses").textContent = data.todayClasses;
-  $("pendingBookings").textContent = data.pendingBookings;
-  $("totalInstructors").textContent = data.totalInstructors;
-
-  $("feeAlert").textContent =
-    money(data.pendingFees) + " pending fee balance to review.";
-
-  $("bookingAlert").textContent =
-    data.pendingBookings + " admission requests awaiting review.";
-
-  $("attendanceAlert").textContent =
-    "Review today's instructor attendance records.";
-
-  $("alertCount").textContent =
-    (data.pendingBookings + (data.pendingFees>0 ? 1 : 0)) + " alerts";
-
-  renderChart(data.monthlyRevenue);
-  renderAdmissions(data.admissions);
+function setText(id,value){
+  const element = $(id);
+  if(element) element.textContent = value;
 }
 
-function $(id){return document.getElementById(id)}
+/* ADMIN ATTENDANCE SCHEMA */
+function getCompleted(student){
+  const logs = Array.isArray(student.attendanceLogs)
+    ? student.attendanceLogs.length
+    : 0;
 
+  return Math.max(logs,Number(student.remaining || 0));
+}
+
+/* ADMISSION DATE */
+function getAdmissionDate(value){
+  if(!value) return null;
+
+  if(typeof value === "string"){
+    const match = value.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+
+    if(match){
+      return new Date(
+        Number(match[1]),
+        Number(match[2])-1,
+        Number(match[3])
+      );
+    }
+  }
+
+  if(value && typeof value.toDate === "function"){
+    return value.toDate();
+  }
+
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function formatDate(value){
+  const date = getAdmissionDate(value);
+  if(!date) return "—";
+
+  return date.toLocaleDateString("en-IN",{
+    day:"2-digit",
+    month:"short",
+    year:"numeric"
+  });
+}
+
+function isCurrentMonth(value){
+  const date = getAdmissionDate(value);
+  if(!date) return false;
+
+  const now = new Date();
+
+  return date.getMonth() === now.getMonth() &&
+         date.getFullYear() === now.getFullYear();
+}
+
+/* LAST SEVEN MONTHS ADMISSION COUNT */
+function getMonthlyAdmissions(students){
+  const now = new Date();
+  const result = [];
+
+  for(let offset=6; offset>=0; offset--){
+    const date = new Date(
+      now.getFullYear(),
+      now.getMonth()-offset,
+      1
+    );
+
+    const month = date.toLocaleDateString("en-IN",{
+      month:"short"
+    });
+
+    const count = students.filter(student=>{
+      const admission = getAdmissionDate(student.admissionDate);
+
+      return admission &&
+        admission.getMonth() === date.getMonth() &&
+        admission.getFullYear() === date.getFullYear();
+    }).length;
+
+    result.push({month,amount:count});
+  }
+
+  return result;
+}
+
+/* MONTHLY CHART */
 function renderChart(records){
   const chart = $("revenueChart");
-  chart.innerHTML = "";
+  chart.replaceChildren();
 
-  const max = Math.max(...records.map(x=>x.amount),1);
+  const max = Math.max(
+    ...records.map(item=>item.amount),
+    1
+  );
 
   records.forEach(item=>{
     const column = document.createElement("div");
@@ -642,8 +610,12 @@ function renderChart(records){
 
     const bar = document.createElement("div");
     bar.className = "bar";
-    bar.style.height = Math.max((item.amount/max)*100,4) + "%";
-    bar.title = item.month + ": " + money(item.amount);
+    bar.style.height = Math.max(
+      (item.amount/max)*100,
+      4
+    ) + "%";
+
+    bar.title = item.month + ": " + item.amount + " admissions";
 
     const label = document.createElement("span");
     label.textContent = item.month;
@@ -653,53 +625,212 @@ function renderChart(records){
   });
 }
 
-function renderAdmissions(records){
+/* RECENT ADMISSIONS */
+function renderAdmissions(students){
   const body = $("admissionTable");
-  body.innerHTML = "";
+  body.replaceChildren();
 
-  records.forEach(student=>{
+  const sorted = [...students].sort((a,b)=>{
+    const dateA = getAdmissionDate(a.admissionDate);
+    const dateB = getAdmissionDate(b.admissionDate);
+
+    return (dateB?.getTime() || 0) -
+           (dateA?.getTime() || 0);
+  });
+
+  const recent = sorted.slice(0,6);
+
+  if(!recent.length){
+    const row = document.createElement("tr");
+    const cell = document.createElement("td");
+
+    cell.colSpan = 6;
+    cell.className = "empty";
+    cell.textContent = "No student admissions found.";
+
+    row.appendChild(cell);
+    body.appendChild(row);
+    return;
+  }
+
+  recent.forEach(student=>{
     const row = document.createElement("tr");
 
     const nameCell = document.createElement("td");
+
     const name = document.createElement("div");
     name.className = "student-name";
-    name.textContent = student.name;
+    name.textContent = student.name || "Student";
+
     const id = document.createElement("div");
     id.className = "student-id";
     id.textContent = student.id;
+
     nameCell.append(name,id);
 
-    const pkg = document.createElement("td");
-    pkg.textContent = student.package;
+    const typeCell = document.createElement("td");
+    typeCell.textContent = student.classType || "—";
 
-    const date = document.createElement("td");
-    date.textContent = student.date;
+    const dateCell = document.createElement("td");
+    dateCell.textContent = formatDate(student.admissionDate);
 
-    const fee = document.createElement("td");
-    fee.textContent = money(student.fee);
+    const totalCell = document.createElement("td");
+    totalCell.textContent = Number(student.totalClasses || 0);
 
-    const payment = document.createElement("td");
-    payment.textContent = money(student.paid) + " paid";
+    const completedCell = document.createElement("td");
+    completedCell.textContent = getCompleted(student);
 
     const statusCell = document.createElement("td");
     const badge = document.createElement("span");
+
     badge.className = "badge " +
-      (student.status==="Active" ? "active-badge" : "pending-badge");
-    badge.textContent = student.status;
+      (student.notActive === true
+        ? "pending-badge"
+        : "active-badge");
+
+    badge.textContent = student.notActive === true
+      ? "Inactive"
+      : "Active";
+
     statusCell.appendChild(badge);
 
-    row.append(nameCell,pkg,date,fee,payment,statusCell);
+    row.append(
+      nameCell,
+      typeCell,
+      dateCell,
+      totalCell,
+      completedCell,
+      statusCell
+    );
+
     body.appendChild(row);
   });
 }
 
-$("todayDate").textContent = new Date().toLocaleDateString("en-IN",{
-  weekday:"short",day:"2-digit",month:"short",year:"numeric"
-});
+/* DASHBOARD RENDER */
+function renderDashboard(snapshot){
 
-renderDashboard(ADMIN_DATA);
+  const students = snapshot.docs.map(document=>({
+    id:document.id,
+    ...document.data()
+  }));
 
-if(window.lucide) lucide.createIcons();
+  const totalStudents = students.length;
+
+  const activeStudents = students.filter(
+    student=>student.notActive !== true
+  ).length;
+
+  const inactiveStudents = totalStudents-activeStudents;
+
+  const newAdmissions = students.filter(
+    student=>isCurrentMonth(student.admissionDate)
+  ).length;
+
+  const completedClasses = students.reduce(
+    (sum,student)=>sum+getCompleted(student),
+    0
+  );
+
+  setText("totalStudents",totalStudents);
+  setText("activeStudents",activeStudents);
+  setText("activeStudentsWelcome",activeStudents);
+  setText("newAdmissions",newAdmissions);
+
+  /* These metrics need their own confirmed database structure */
+  setText("totalRevenue","Not configured");
+  setText("pendingFees","Not configured");
+  setText("todayClasses","Not configured");
+  setText("pendingBookings","Not configured");
+  setText("totalInstructors","Not configured");
+
+  setText(
+    "feeAlert",
+    "Payment collection data is not connected yet."
+  );
+
+  setText(
+    "bookingAlert",
+    "Booking collection is not connected yet."
+  );
+
+  setText(
+    "attendanceAlert",
+    completedClasses +
+    " completed classes recorded across all students."
+  );
+
+  setText(
+    "alertCount",
+    inactiveStudents + " inactive students"
+  );
+
+  renderChart(getMonthlyAdmissions(students));
+  renderAdmissions(students);
+
+  console.log("Firebase dashboard updated:",{
+    totalStudents,
+    activeStudents,
+    inactiveStudents,
+    newAdmissions,
+    completedClasses
+  });
+}
+
+/* TODAY'S DATE */
+setText(
+  "todayDate",
+  new Date().toLocaleDateString("en-IN",{
+    weekday:"short",
+    day:"2-digit",
+    month:"short",
+    year:"numeric"
+  })
+);
+
+/* LIVE FIRESTORE LISTENER */
+const studentsRef = collection(db,"studentData");
+
+const unsubscribe = onSnapshot(
+  studentsRef,
+  snapshot=>{
+    renderDashboard(snapshot);
+  },
+  error=>{
+    console.error("Dashboard Firebase error:",error);
+
+    setText("totalStudents","Error");
+    setText("activeStudents","Error");
+    setText("activeStudentsWelcome","Error");
+    setText("newAdmissions","Error");
+
+    setText(
+      "attendanceAlert",
+      "Unable to load student records. Check Firebase permissions."
+    );
+
+    setText("alertCount","Connection error");
+
+    const body = $("admissionTable");
+
+    body.replaceChildren();
+
+    const row = document.createElement("tr");
+    const cell = document.createElement("td");
+
+    cell.colSpan = 6;
+    cell.className = "empty";
+    cell.textContent =
+      "Unable to load student records. Check Firebase permissions.";
+
+    row.appendChild(cell);
+    body.appendChild(row);
+  }
+);
+
+if(window.lucide){
+  window.lucide.createIcons();
+}
 </script>
 
 </body>
