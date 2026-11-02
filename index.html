@@ -3,636 +3,1502 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#050505">
-<link rel="manifest" href="/manifest.webmanifest">
-<link rel="apple-touch-icon" href="/icons/icon-192.png">
-<meta name="apple-mobile-web-app-title" content="A One Driving">
-
-<meta name="description" content="Learn driving with ABHINAASH A One Driving Classes. Explore training packages, contact us on WhatsApp and find our location in Baripada, Odisha.">
-<title>Abhinaash A One | Driving Excellence</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#080D18">
+<meta name="description" content="ABHINAASH A1 Driving - Professional driving training in Baripada.">
+<title>ABHINAASH A1 Driving | Learn With Confidence</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script src="https://unpkg.com/lucide@latest"></script>
 
 <style>
 :root{
-  --gold:#d4af37;
-  --gold2:#f4d675;
-  --black:#050505;
-  --dark:#101010;
-  --muted:#929292;
-  --green:#25d366;
-  --border:#292929;
+  --bg:#080D18;
+  --card:#111A29;
+  --card2:#172337;
+  --gold:#F2BD45;
+  --gold2:#D6A52F;
+  --white:#FFFFFF;
+  --muted:#A8B1C2;
+  --border:rgba(255,255,255,.09);
+  --radius:20px;
 }
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;-webkit-tap-highlight-color:transparent}
-html{scroll-behavior:smooth;scroll-padding-top:90px}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+html{
+  scroll-behavior:smooth;
+  scroll-padding-top:90px;
+}
+
 body{
-  background:radial-gradient(circle at 50% -10%,rgba(212,175,55,.13),transparent 35%),var(--black);
-  color:#fff;overflow-x:hidden;padding-bottom:45px
+  font-family:Inter,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--white);
+  overflow-x:hidden;
 }
-a{color:inherit}
-button{font:inherit}
-button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--gold2);outline-offset:4px}
-#weather-container{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
-.cloud{position:absolute;background:rgba(255,255,255,.055);border-radius:100px;filter:blur(35px);animation:cloudMove linear infinite}
-@keyframes cloudMove{from{transform:translateX(-300px)}to{transform:translateX(110vw)}}
-.rain-drop{position:absolute;width:2px;height:30px;background:rgba(255,255,255,.25);top:-50px;animation:rainFall linear infinite}
-@keyframes rainFall{to{transform:translateY(110vh)}}
 
-header{position:sticky;top:0;z-index:1000;padding:13px 16px;background:rgba(5,5,5,.9);backdrop-filter:blur(18px);border-bottom:1px solid rgba(212,175,55,.35)}
-.nav{max-width:1100px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:12px}
-.logo{font-size:18px;font-weight:900;letter-spacing:1.5px;color:var(--gold)}
-.logo span{color:#fff;font-weight:400}
-.btn-profile-nav{text-decoration:none;color:var(--gold);border:1px solid rgba(212,175,55,.65);padding:8px 13px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:.6px}
-.container{max-width:1100px;margin:auto;padding:18px 14px;position:relative;z-index:1}
-.showroom-section{position:relative;overflow:hidden;padding:22px 18px 12px;margin-bottom:25px;border-radius:25px;border:1px solid rgba(212,175,55,.22);background:radial-gradient(circle at 50% 70%,rgba(212,175,55,.12),transparent 38%),linear-gradient(145deg,#151515,#070707);box-shadow:0 20px 60px rgba(0,0,0,.55)}
-.showroom-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
-.hero-small{color:var(--gold);font-size:8px;letter-spacing:1.8px;text-transform:uppercase;font-weight:700;margin-bottom:4px}
-.showroom-section h1{font-size:23px;font-weight:900;line-height:1.2}
-.showroom-section h1 span{color:var(--gold)}
-.showroom-description{font-size:9px;color:#777;margin-top:5px}
-.vehicle-badge{padding:6px 9px;border-radius:10px;background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.3);color:var(--gold);font-size:8px;font-weight:700;text-transform:uppercase}
-.car-platform{width:100%;max-width:500px;height:205px;margin:5px auto 0;position:relative;display:flex;justify-content:center;align-items:center;overflow:hidden}
-.yellow-road{position:absolute;bottom:16%;width:90%;height:2px;background:var(--gold);box-shadow:0 0 12px rgba(212,175,55,.7),0 0 30px rgba(212,175,55,.25);opacity:.8;z-index:1}
-.yellow-road:before{content:"";position:absolute;left:10%;right:10%;top:-15px;height:25px;background:radial-gradient(ellipse,rgba(212,175,55,.15),transparent 70%);filter:blur(7px)}
-.main-car{position:absolute;width:100%;height:100%;object-fit:contain;bottom:0;z-index:5;opacity:0;filter:blur(8px) brightness(.75);transform:translateX(35px) scale(.92);pointer-events:none}
-.main-car.active{opacity:1;animation:carEnter 1.25s cubic-bezier(.16,1,.3,1) forwards}
-@keyframes carEnter{0%{opacity:0;filter:blur(12px) brightness(.55);transform:translateX(55px) scale(.88)}65%{opacity:1;filter:blur(1px) brightness(.98);transform:translateX(-4px) scale(1.015)}100%{opacity:1;filter:blur(0) brightness(1);transform:translateX(0) scale(1)}}
-.car-platform:after{content:"";position:absolute;top:0;left:-30%;width:15%;height:100%;z-index:8;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),rgba(212,175,55,.15),transparent);transform:skewX(-18deg)}
-.car-platform.light-sweep:after{animation:lightSweep 1.2s ease-out}
-@keyframes lightSweep{0%{left:-30%;opacity:0}20%{opacity:.7}70%{opacity:.4}100%{left:120%;opacity:0}}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer}
+.container{width:min(1200px,92%);margin:auto}
 
-.section-title{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:28px 2px 13px}
-.section-title h2{font-size:14px;color:var(--gold);letter-spacing:.6px}
-.section-title span{font-size:9px;color:#777}
-.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:13px}
-.price-card{position:relative;overflow:hidden;padding:20px;border-radius:22px;background:linear-gradient(145deg,#171717,#0b0b0b);border:1px solid var(--border);box-shadow:0 15px 40px rgba(0,0,0,.3)}
-.price-card.featured{border-color:var(--gold);box-shadow:0 0 0 1px rgba(212,175,55,.08),0 18px 50px rgba(212,175,55,.09)}
-.package-header{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
-.package-title h3{font-size:14px;font-weight:700}
-.price-sub{font-size:9px;color:#777;margin-top:3px}
-.days-box{min-width:62px;padding:7px 9px;border-radius:12px;text-align:center;background:linear-gradient(145deg,rgba(212,175,55,.16),rgba(212,175,55,.05));border:1px solid rgba(212,175,55,.38)}
-.days-box strong{display:block;color:var(--gold2);font-size:20px;font-weight:900;line-height:1}
-.days-box span{display:block;color:#999;font-size:7px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;margin-top:4px}
-.price-tag{font-size:32px;font-weight:900;margin:14px 0;letter-spacing:-1px}
-.feature-list{list-style:none;margin:12px 0 17px}
-.feature-list li{color:#aaa;font-size:11px;margin-bottom:9px;display:flex;align-items:center;gap:7px}
-.feature-list li:before{content:"✓";color:var(--gold);font-weight:900}
-.best-label{position:absolute;top:12px;right:-31px;background:var(--gold);color:#000;padding:4px 35px;transform:rotate(45deg);font-size:8px;font-weight:900}
-.btn-gold{width:100%;border:0;padding:12px 18px;border-radius:12px;cursor:pointer;color:#000;font-weight:900;font-size:11px;background:linear-gradient(135deg,var(--gold),var(--gold2));box-shadow:0 7px 20px rgba(212,175,55,.15);transition:.2s}
-.btn-gold:active{transform:scale(.97)}
+svg{
+  display:block;
+  flex-shrink:0;
+}
 
-.personal-card{position:relative;overflow:hidden;margin-top:18px;padding:20px;border-radius:22px;background:radial-gradient(circle at 90% 0%,rgba(244,214,117,.18),transparent 34%),linear-gradient(145deg,#1b180d,#0b0b0b);border:1px solid rgba(212,175,55,.7);box-shadow:0 20px 55px rgba(212,175,55,.1)}
-.personal-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
-.personal-title small{display:block;color:var(--gold2);font-size:8px;font-weight:800;letter-spacing:1.3px;margin-bottom:5px}
-.personal-title h2{font-size:21px;font-weight:900;line-height:1.2}
-.personal-title h2 span{color:var(--gold2)}
-.personal-title p{color:#888;font-size:9px;margin-top:5px}
-.personal-badge{padding:7px 9px;border-radius:9px;background:var(--gold);color:#000;font-size:7px;line-height:1.3;font-weight:900;text-align:center}
-.personal-main-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:15px;padding-top:13px;border-top:1px solid rgba(212,175,55,.15)}
-.personal-price{font-size:30px;font-weight:900;letter-spacing:-1px}
-.personal-price small{display:block;color:#777;font-size:7px;font-weight:600;letter-spacing:.4px;margin-top:2px}
-.personal-days-box{min-width:62px;padding:7px 9px;border-radius:12px;text-align:center;background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.3)}
-.personal-days-box strong{display:block;color:var(--gold2);font-size:20px;line-height:1;font-weight:900}
-.personal-days-box span{display:block;color:#999;font-size:7px;font-weight:700;text-transform:uppercase;margin-top:4px}
-.personal-mini-info{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px}
-.personal-mini-item{padding:10px;border-radius:10px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.06)}
-.personal-mini-item strong{display:block;color:#eee;font-size:9px}
-.personal-mini-item span{display:block;color:#888;font-size:8px;margin-top:4px}
-.personal-features{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
-.personal-feature{padding:6px 8px;border-radius:8px;background:rgba(212,175,55,.06);border:1px solid rgba(212,175,55,.12);color:#aaa;font-size:8px}
-.personal-feature span{color:var(--gold2);margin-right:3px}
-.personal-button{margin-top:14px;width:100%;border:0;padding:13px;border-radius:12px;cursor:pointer;color:#000;font-size:10px;font-weight:900;letter-spacing:.5px;background:linear-gradient(135deg,var(--gold),var(--gold2))}
+/* HEADER */
 
-.dashboard-box{margin-top:28px;padding:24px 18px;text-align:center;border-radius:22px;background:radial-gradient(circle at center,rgba(212,175,55,.08),transparent 60%),#101010;border:1px solid var(--border)}
-.dashboard-box h3{color:var(--gold);font-size:15px;margin-bottom:6px}
-.dashboard-box p{color:#888;font-size:10px;margin-bottom:15px}
-.dashboard-btn{width:auto;padding:11px 30px}
+header{
+  height:76px;
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(8,13,24,.96);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
 
-/* TRUST SECTION */
-.trust-section{margin-top:32px}
-.trust-intro{text-align:center;margin:0 auto 18px;max-width:560px}
-.trust-intro h2{font-size:21px;line-height:1.35}
-.trust-intro h2 span{color:var(--gold)}
-.trust-intro p{color:#888;font-size:10px;line-height:1.8;margin-top:8px}
-.trust-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.trust-card{padding:17px 14px;border-radius:18px;background:linear-gradient(145deg,#171717,#0b0b0b);border:1px solid #282828}
-.trust-icon{width:39px;height:39px;display:grid;place-items:center;border-radius:12px;background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.2);font-size:19px;margin-bottom:11px}
-.trust-card h3{font-size:12px;margin-bottom:6px}
-.trust-card p{font-size:9px;line-height:1.8;color:#888}
-.trust-card a{display:inline-block;margin-top:11px;font-size:9px;color:var(--gold2);font-weight:700;text-decoration:none}
-.review-note{font-size:9px;color:#999;line-height:1.8;margin-top:12px;padding:12px 14px;background:#101010;border:1px solid #242424;border-radius:12px}
+.nav{
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
 
-/* LOCATION */
-.location-card{margin-top:25px;padding:19px;border-radius:20px;background:linear-gradient(145deg,#171717,#0b0b0b);border:1px solid rgba(212,175,55,.3)}
-.location-heading{display:flex;align-items:center;gap:11px;margin-bottom:10px}
-.location-heading .trust-icon{flex-shrink:0;margin:0}
-.location-heading h3{font-size:14px}
-.location-card p{font-size:10px;color:#999;line-height:1.8;margin:9px 0 14px}
-.action-row{display:flex;gap:9px;flex-wrap:wrap}
-.action-btn{display:inline-flex;justify-content:center;align-items:center;gap:7px;flex:1;min-width:125px;padding:12px 10px;border-radius:11px;text-decoration:none;text-align:center;font-size:10px;font-weight:800;border:1px solid #333}
-.action-map{color:var(--gold2);background:#17150e;border-color:rgba(212,175,55,.3)}
-.action-call{color:#fff;background:#171717}
-.action-whatsapp{color:#061b0c;background:var(--green);border-color:var(--green)}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
 
-/* FAQ */
-.faq-section{margin-top:30px}
-.faq-list{display:grid;gap:9px}
-.faq-item{border:1px solid #292929;border-radius:13px;background:linear-gradient(145deg,#151515,#0b0b0b);overflow:hidden}
-.faq-item summary{cursor:pointer;list-style:none;position:relative;padding:15px 38px 15px 14px;font-size:11px;font-weight:600}
-.faq-item summary::-webkit-details-marker{display:none}
-.faq-item summary:after{content:"+";position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--gold);font-size:19px}
-.faq-item[open] summary:after{content:"−"}
-.faq-answer{padding:0 14px 15px;color:#999;font-size:10px;line-height:1.9}
-.faq-answer a{color:var(--gold2)}
-.trust-cta{margin-top:22px;padding:20px 16px;text-align:center;border:1px solid rgba(212,175,55,.35);border-radius:19px;background:radial-gradient(circle at top,rgba(212,175,55,.12),transparent 65%),#101010}
-.trust-cta h3{font-size:16px;color:var(--gold2)}
-.trust-cta p{font-size:10px;color:#999;line-height:1.8;margin:7px 0 14px}
-.trust-cta .btn-gold{max-width:280px}
+.logo-icon{
+  width:44px;
+  height:44px;
+  border:2px solid var(--gold);
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  color:var(--gold);
+  font-size:20px;
+  font-weight:800;
+  transform:skew(-5deg);
+}
+
+.logo-text strong{
+  display:block;
+  font-size:16px;
+  letter-spacing:-.5px;
+}
+
+.logo-text strong span{color:var(--gold)}
+
+.logo-text small{
+  font-size:10px;
+  letter-spacing:5px;
+  color:var(--muted);
+}
+
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:27px;
+}
+
+.nav-links a{
+  font-size:13px;
+  color:#D5D9E2;
+  transition:.2s;
+}
+
+.nav-links a:hover{color:var(--gold)}
+
+.nav-btn{
+  background:var(--gold);
+  color:#10131B!important;
+  padding:12px 20px;
+  border-radius:30px;
+  font-weight:800;
+}
+
+.menu-btn{
+  display:none;
+  background:none;
+  border:0;
+  color:white;
+}
+
+.menu-btn svg{width:25px;height:25px}
+
+/* BUTTONS */
+
+.btn{
+  padding:15px 22px;
+  border-radius:12px;
+  font-weight:800;
+  font-size:13px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  transition:.25s;
+  border:1px solid transparent;
+}
+
+.btn svg{
+  width:18px;
+  height:18px;
+  stroke-width:2;
+}
+
+.btn-primary{
+  background:var(--gold);
+  color:#10131B;
+  border-color:var(--gold);
+}
+
+.btn-primary:hover{
+  background:#FFD16B;
+  transform:translateY(-2px);
+}
+
+.btn-outline{
+  border-color:rgba(255,255,255,.4);
+  color:white;
+  background:rgba(255,255,255,.04);
+}
+
+.btn-outline:hover{
+  border-color:var(--gold);
+  color:var(--gold);
+}
+
+/* HERO */
+
+.hero{
+  position:relative;
+  min-height:570px;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+  background:
+  linear-gradient(90deg,#080D18 0%,rgba(8,13,24,.94) 35%,rgba(8,13,24,.2) 100%),
+  url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1800&q=85') center/cover;
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+  max-width:590px;
+  padding:85px 0;
+}
+
+.eyebrow{
+  color:var(--gold);
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:3px;
+  margin-bottom:18px;
+}
+
+.hero h1{
+  font-size:clamp(40px,6vw,68px);
+  line-height:1.08;
+  letter-spacing:-2.5px;
+  margin-bottom:20px;
+}
+
+.hero h1 span,.section-title span{color:var(--gold)}
+
+.hero p{
+  color:#C0C7D4;
+  font-size:15px;
+  line-height:1.8;
+  max-width:470px;
+}
+
+.hero-actions{
+  display:flex;
+  gap:13px;
+  flex-wrap:wrap;
+  margin-top:30px;
+}
+
+/* FEATURE STRIP */
+
+.feature-strip{
+  position:relative;
+  z-index:5;
+  margin-top:-35px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  background:rgba(17,26,41,.97);
+  border:1px solid var(--border);
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 15px 45px rgba(0,0,0,.25);
+}
+
+.feature{
+  padding:25px 12px;
+  text-align:center;
+  border-right:1px solid var(--border);
+}
+
+.feature:last-child{border:0}
+
+.feature-icon{
+  color:var(--gold);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:12px;
+}
+
+.feature-icon svg{
+  width:34px;
+  height:34px;
+  stroke-width:1.7;
+}
+
+.feature h3{
+  font-size:13px;
+  line-height:1.5;
+}
+
+/* GENERAL SECTIONS */
+
+section.content-section{padding:85px 0 0}
+
+.section-heading{margin-bottom:28px}
+
+.section-title{
+  font-size:clamp(25px,4vw,36px);
+  font-weight:800;
+  letter-spacing:-1px;
+}
+
+.section-subtitle{
+  color:var(--muted);
+  margin-top:9px;
+  font-size:14px;
+  line-height:1.7;
+}
+
+/* PACKAGES */
+
+.packages{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.package{
+  position:relative;
+  background:linear-gradient(145deg,#141F30,#0E1725);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:27px 23px;
+  display:flex;
+  flex-direction:column;
+  min-height:365px;
+  transition:.3s;
+}
+
+.package:hover{
+  transform:translateY(-5px);
+  border-color:rgba(242,189,69,.5);
+}
+
+.package.popular{border:1.5px solid var(--gold)}
+
+.popular-label{
+  position:absolute;
+  top:-14px;
+  left:50%;
+  transform:translateX(-50%);
+  background:var(--gold);
+  color:#10131B;
+  padding:7px 18px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:800;
+  white-space:nowrap;
+}
+
+.package-top{
+  display:flex;
+  gap:13px;
+  align-items:center;
+}
+
+.package-icon{
+  width:48px;
+  height:48px;
+  background:rgba(242,189,69,.1);
+  border-radius:13px;
+  display:grid;
+  place-items:center;
+  color:var(--gold);
+}
+
+.package-icon svg{
+  width:28px;
+  height:28px;
+  stroke-width:1.8;
+}
+
+.package h3{font-size:18px}
+
+.package small{
+  color:var(--muted);
+  display:block;
+  margin-top:5px;
+}
+
+.price{
+  color:var(--gold);
+  font-size:34px;
+  font-weight:800;
+  margin:22px 0;
+}
+
+.package ul{list-style:none;flex:1}
+
+.package li{
+  color:#DCE1E9;
+  font-size:13px;
+  margin-bottom:14px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  line-height:1.5;
+}
+
+.package li svg{
+  width:17px;
+  height:17px;
+  color:var(--gold);
+  stroke-width:2.5;
+}
+
+.package .btn{width:100%;margin-top:20px}
+
+.btn-package{
+  border:1px solid var(--gold);
+  color:var(--gold);
+  background:transparent;
+}
+
+.popular .btn-package{
+  background:var(--gold);
+  color:#10131B;
+}
+
+/* WHY US */
+
+.why-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+}
+
+.why-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:17px;
+  padding:25px 15px;
+  text-align:center;
+  transition:.3s;
+}
+
+.why-card:hover{border-color:var(--gold)}
+
+.why-card .feature-icon svg{
+  width:35px;
+  height:35px;
+}
+
+.why-card h3{
+  font-size:14px;
+  margin-bottom:8px;
+}
+
+.why-card p{
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.6;
+}
+
+/* VEHICLE */
+
+.vehicle-card{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:22px;
+  overflow:hidden;
+}
+
+.vehicle-image{
+  min-height:300px;
+  background:
+  url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1000&q=85')
+  center/cover;
+}
+
+.vehicle-info{padding:35px}
+
+.vehicle-info h2{
+  font-size:27px;
+  margin-bottom:12px;
+}
+
+.vehicle-info p{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.8;
+}
+
+.vehicle-tags{
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
+  margin:20px 0;
+}
+
+.vehicle-tags span{
+  background:var(--card2);
+  border:1px solid var(--border);
+  padding:8px 12px;
+  border-radius:30px;
+  font-size:11px;
+}
+
+/* LICENCE BANNER */
+
+.licence-banner{
+  margin-top:75px;
+  border:1px solid var(--gold);
+  border-radius:20px;
+  padding:30px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  background:linear-gradient(110deg,#302616,#151B26);
+}
+
+.licence-left{
+  display:flex;
+  align-items:center;
+  gap:20px;
+}
+
+.licence-icon{
+  width:55px;
+  height:55px;
+  color:var(--gold);
+}
+
+.licence-icon svg{
+  width:48px;
+  height:48px;
+  stroke-width:1.5;
+}
+
+.licence-banner h2{
+  font-size:22px;
+  margin-bottom:8px;
+}
+
+.licence-banner p{
+  color:#D0D3D9;
+  font-size:13px;
+  line-height:1.7;
+}
 
 /* FOOTER */
-.site-footer{position:relative;z-index:1;text-align:center;padding:25px 15px 15px;border-top:1px solid #222;margin-top:30px}
-.site-footer strong{color:var(--gold);font-size:12px;letter-spacing:1px}
-.site-footer p{font-size:9px;color:#777;line-height:1.9;margin-top:8px}
-.footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:16px;margin-top:12px}
-.footer-links a{color:#aaa;text-decoration:none;font-size:9px}
-.footer-links a:hover{color:var(--gold2)}
 
-/* FLOATING CONTACT */
-.floating-contact{position:fixed;right:13px;bottom:17px;z-index:1500;display:flex;flex-direction:column;gap:10px;align-items:center}
-.float-btn{width:49px;height:49px;display:grid;place-items:center;border-radius:50%;text-decoration:none;box-shadow:0 5px 22px #0009;font-size:22px;border:1px solid #ffffff24}
-.float-whatsapp{background:var(--green);color:#05230d}
-.float-call{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#090909}
-.float-btn:active{transform:scale(.93)}
+footer{
+  margin-top:85px;
+  padding:45px 0 110px;
+  border-top:1px solid var(--border);
+  background:#060A12;
+}
+
+.footer-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  gap:35px;
+}
+
+.footer-about p{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.8;
+  margin-top:17px;
+  max-width:380px;
+}
+
+footer h3{
+  font-size:14px;
+  margin-bottom:17px;
+}
+
+footer ul{list-style:none}
+
+footer li{margin-bottom:13px}
+
+footer li a{
+  color:var(--muted);
+  font-size:13px;
+}
+
+footer li a:hover{color:var(--gold)}
+
+.footer-contact{
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+
+.footer-contact svg{
+  width:16px;
+  height:16px;
+  color:var(--gold);
+}
+
+.copyright{
+  margin-top:35px;
+  padding-top:20px;
+  border-top:1px solid var(--border);
+  color:#737E91;
+  font-size:11px;
+  text-align:center;
+}
+
+/* BOTTOM NAVIGATION */
+
+.bottom-nav{
+  display:none;
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:70px;
+  z-index:99;
+  background:rgba(8,13,24,.97);
+  border-top:1px solid var(--border);
+  backdrop-filter:blur(18px);
+  padding-bottom:env(safe-area-inset-bottom);
+}
+
+.bottom-nav a{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  color:var(--muted);
+  font-size:10px;
+  font-weight:600;
+}
+
+.bottom-nav a.active{color:var(--gold)}
+
+.bottom-nav .nav-icon svg{
+  width:23px;
+  height:23px;
+  stroke-width:1.8;
+}
 
 /* BOOKING MODAL */
-.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.88);backdrop-filter:blur(12px);z-index:3000}
-.modal-content{width:100%;max-width:400px;padding:23px;border-radius:22px;background:linear-gradient(145deg,#181818,#0b0b0b);border:1px solid var(--gold);box-shadow:0 25px 80px #000b;max-height:90dvh;overflow-y:auto}
-.modal-content h2{color:var(--gold);font-size:17px;margin-bottom:6px}
-.modal-subtitle{font-size:10px;color:#888;margin-bottom:17px;line-height:1.7}
-.status-input{width:100%;padding:13px 14px;margin-bottom:11px;border-radius:11px;border:1px solid #333;background:#050505;color:#fff;outline:none;font-size:12px}
-.status-input:focus{border-color:var(--gold)}
-.status-input option{background:#111;color:#fff}
-.cancel-btn{width:100%;padding:12px;margin-top:9px;border:1px solid #333;border-radius:12px;background:#171717;color:#bbb;font-size:11px;font-weight:700;cursor:pointer}
-.form-error{display:none;color:#ff7979;font-size:10px;margin:0 0 12px;line-height:1.7}
-body.modal-open{overflow:hidden}
 
-@media(min-width:700px){
- .trust-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
- .trust-intro h2{font-size:26px}
- .location-card{padding:24px}
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:200;
+  background:rgba(0,0,0,.8);
+  padding:20px;
+  align-items:center;
+  justify-content:center;
 }
-@media(max-width:600px){
- .container{padding:13px 11px}
- .showroom-section{padding:19px 15px 8px;border-radius:22px}
- .showroom-section h1{font-size:21px}
- .car-platform{height:185px}
- .pricing-grid{grid-template-columns:1fr}
- .price-card,.personal-card{padding:18px}
- .personal-title h2{font-size:20px}
- .trust-intro h2{font-size:19px}
+
+.modal.show{display:flex}
+
+.modal-box{
+  width:100%;
+  max-width:430px;
+  background:#111A29;
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:25px;
+  max-height:90vh;
+  overflow:auto;
 }
-@media(max-width:360px){
- .personal-mini-info{grid-template-columns:1fr}
- .logo{font-size:15px}
- .trust-grid{grid-template-columns:1fr}
+
+.modal-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:22px;
 }
+
+.close-btn{
+  border:0;
+  background:none;
+  color:white;
+  padding:5px;
+}
+
+.close-btn svg{
+  width:25px;
+  height:25px;
+}
+
+.form-group{margin-bottom:15px}
+
+.form-group label{
+  display:block;
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:8px;
+}
+
+.form-group input,
+.form-group select{
+  width:100%;
+  padding:14px;
+  background:#080D18;
+  border:1px solid var(--border);
+  border-radius:10px;
+  color:white;
+  outline:none;
+  font-family:inherit;
+  font-size:14px;
+}
+
+.form-group input:focus,
+.form-group select:focus{border-color:var(--gold)}
+
+.modal-box .btn{width:100%}
+
+/* RESPONSIVE */
+
+@media(max-width:850px){
+  .nav-links{gap:15px}
+  .nav-links a{font-size:11px}
+  .packages{gap:12px}
+  .package{padding:22px 16px}
+  .why-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+@media(max-width:650px){
+
+  header{height:65px}
+
+  .container{width:91%}
+
+  .nav-links{
+    display:none;
+    position:absolute;
+    top:65px;
+    left:0;
+    width:100%;
+    background:#0D1523;
+    padding:22px;
+    flex-direction:column;
+    align-items:stretch;
+    gap:20px;
+    border-bottom:1px solid var(--border);
+  }
+
+  .nav-links.open{display:flex}
+
+  .nav-links a{font-size:14px}
+
+  .menu-btn{display:block}
+
+  .hero{
+    min-height:520px;
+    background:
+    linear-gradient(90deg,rgba(8,13,24,.95),rgba(8,13,24,.55)),
+    url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=900&q=85')
+    center/cover;
+  }
+
+  .hero-content{padding:65px 0 90px}
+
+  .hero h1{font-size:43px}
+
+  .hero p{font-size:13px}
+
+  .btn{padding:14px 17px;font-size:12px}
+
+  .feature-strip{
+    grid-template-columns:repeat(2,1fr);
+    margin-top:-25px;
+  }
+
+  .feature{padding:18px 8px;border-bottom:1px solid var(--border)}
+
+  .feature:nth-child(2){border-right:0}
+
+  section.content-section{padding-top:60px}
+
+  .packages{grid-template-columns:1fr;gap:22px}
+
+  .package{min-height:0;padding:25px}
+
+  .package.popular{margin-top:10px}
+
+  .why-grid{gap:10px}
+
+  .why-card{padding:20px 10px}
+
+  .vehicle-card{grid-template-columns:1fr}
+
+  .vehicle-image{min-height:220px}
+
+  .vehicle-info{padding:25px}
+
+  .licence-banner{
+    flex-direction:column;
+    align-items:flex-start;
+    padding:23px;
+  }
+
+  .licence-left{align-items:flex-start}
+
+  .licence-banner .btn{width:100%}
+
+  .footer-grid{
+    grid-template-columns:1fr 1fr;
+    gap:25px;
+  }
+
+  .footer-about{grid-column:1/-1}
+
+  .bottom-nav{display:flex}
+
+  footer{padding-bottom:100px}
+}
+
 @media(prefers-reduced-motion:reduce){
- *,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  *,*::before,*::after{
+    scroll-behavior:auto!important;
+    transition:none!important;
+  }
 }
 </style>
 </head>
 
 <body>
-<div id="weather-container" aria-hidden="true"></div>
+
+<!-- HEADER -->
 
 <header>
-  <nav class="nav" aria-label="Main navigation">
-    <div class="logo">ABHINAASH <span>A1</span></div>
-    <a href="profile.html" class="btn-profile-nav">MY PROFILE</a>
-  </nav>
+  <div class="container nav">
+
+    <a href="#home" class="logo">
+      <div class="logo-icon">A1</div>
+      <div class="logo-text">
+        <strong>ABHINAASH <span>A1</span></strong>
+        <small>DRIVING</small>
+      </div>
+    </a>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#packages">Packages</a>
+      <a href="#vehicle">Our Vehicle</a>
+      <a href="#why">Why Us</a>
+      <a href="#contact">Contact</a>
+      <a href="#booking" class="nav-btn" onclick="openBooking(event)">
+        Book Now <i data-lucide="arrow-up-right"></i>
+      </a>
+    </nav>
+
+    <button class="menu-btn" onclick="toggleMenu()" aria-label="Open menu">
+      <i data-lucide="menu"></i>
+    </button>
+
+  </div>
 </header>
 
-<main class="container">
+<!-- HERO -->
 
-  <!-- SHOWROOM -->
-  <section class="showroom-section">
-    <div class="showroom-top">
-      <div>
-        <div class="hero-small">Driving Excellence</div>
-        <h1>TATA TIGOR <span>XZ+</span></h1>
-        <p class="showroom-description">Our Primary Training Vehicle</p>
+<main>
+
+<section class="hero" id="home">
+  <div class="container">
+    <div class="hero-content">
+
+      <div class="eyebrow">PROFESSIONAL DRIVING SCHOOL</div>
+
+      <h1>
+        Learn Driving<br>
+        with <span>Confidence.</span>
+      </h1>
+
+      <p>
+        Learn to drive safely with professional practical training,
+        experienced instructors and personalised guidance.
+      </p>
+
+      <div class="hero-actions">
+
+        <button class="btn btn-primary" onclick="openBooking()">
+          <i data-lucide="calendar-check"></i>
+          Book Your Class
+          <i data-lucide="arrow-right"></i>
+        </button>
+
+        <a href="#vehicle" class="btn btn-outline">
+          <i data-lucide="car-front"></i>
+          Explore Vehicle
+        </a>
+
       </div>
-      <div class="vehicle-badge">Training Car</div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+
+<div class="container">
+
+  <div class="feature-strip">
+
+    <div class="feature">
+      <div class="feature-icon">
+        <i data-lucide="steering-wheel"></i>
+      </div>
+      <h3>Practical<br>Training</h3>
     </div>
 
-    <div class="car-platform" id="carPlatform">
-      <div class="yellow-road"></div>
-      <img src="https://a-one-driving.github.io/-classes/tigor6.PNG" class="main-car active" alt="Tata Tigor training vehicle" fetchpriority="high">
-      <img src="https://a-one-driving.github.io/-classes/tigor7.PNG" class="main-car" alt="Tata Tigor training vehicle side view" loading="lazy">
-      <img src="https://a-one-driving.github.io/-classes/tigor10.PNG" class="main-car" alt="Tata Tigor training vehicle view" loading="lazy">
+    <div class="feature">
+      <div class="feature-icon">
+        <i data-lucide="user-check"></i>
+      </div>
+      <h3>Experienced<br>Instructors</h3>
     </div>
-  </section>
 
-  <!-- TRAINING PACKAGES -->
-  <div class="section-title">
-    <h2>💎 Training Packages</h2>
-    <span>Choose your plan</span>
+    <div class="feature">
+      <div class="feature-icon">
+        <i data-lucide="id-card"></i>
+      </div>
+      <h3>Licence<br>Guidance</h3>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">
+        <i data-lucide="shield-check"></i>
+      </div>
+      <h3>Safe &<br>Reliable</h3>
+    </div>
+
   </div>
 
-  <section class="pricing-grid" aria-label="Driving training packages">
+</div>
 
-    <article class="price-card">
-      <div class="package-header">
-        <div class="package-title">
-          <h3>Standard</h3>
-          <div class="price-sub">Basic Driving Training</div>
+<!-- PACKAGES -->
+
+<section class="content-section" id="packages">
+
+  <div class="container">
+
+    <div class="section-heading">
+      <h2 class="section-title">
+        Our Training <span>Packages</span>
+      </h2>
+      <p class="section-subtitle">
+        Choose the right plan for your driving journey.
+      </p>
+    </div>
+
+    <div class="packages">
+
+      <!-- STANDARD -->
+
+      <article class="package">
+
+        <div class="package-top">
+
+          <div class="package-icon">
+            <i data-lucide="car-front"></i>
+          </div>
+
+          <div>
+            <h3>Standard Plan</h3>
+            <small>20 Days Training</small>
+          </div>
+
         </div>
-        <div class="days-box"><strong>20</strong><span>Days</span></div>
-      </div>
-      <div class="price-tag">₹3,500</div>
-      <ul class="feature-list">
-        <li>20 Days Classes</li>
-        <li>Traffic Rules</li>
-        <li>Practical Driving</li>
-      </ul>
-      <button class="btn-gold" onclick="openBooking('Standard - 20 Days (₹3500)')">JOIN NOW</button>
-    </article>
 
-    <article class="price-card featured">
-      <div class="best-label">POPULAR</div>
-      <div class="package-header">
-        <div class="package-title">
-          <h3>Premium</h3>
-          <div class="price-sub">Complete Driving Training</div>
+        <div class="price">₹3,500</div>
+
+        <ul>
+          <li><i data-lucide="check"></i> Daily Practical Training</li>
+          <li><i data-lucide="check"></i> Basic to Road Practice</li>
+          <li><i data-lucide="check"></i> Driving Tips & Safety</li>
+        </ul>
+
+        <button class="btn btn-package"
+          onclick="selectPackage('Standard Plan - ₹3,500')">
+          Choose Plan <i data-lucide="arrow-right"></i>
+        </button>
+
+      </article>
+
+      <!-- PREMIUM -->
+
+      <article class="package popular">
+
+        <div class="popular-label">MOST POPULAR</div>
+
+        <div class="package-top">
+
+          <div class="package-icon">
+            <i data-lucide="car-front"></i>
+          </div>
+
+          <div>
+            <h3>Premium Plan</h3>
+            <small>30 Days Training</small>
+          </div>
+
         </div>
-        <div class="days-box"><strong>30</strong><span>Days</span></div>
+
+        <div class="price">₹4,500</div>
+
+        <ul>
+          <li><i data-lucide="check"></i> Complete Practical Training</li>
+          <li><i data-lucide="check"></i> City & Traffic Practice</li>
+          <li><i data-lucide="check"></i> Parking & Reverse Training</li>
+          <li><i data-lucide="check"></i> Licence Process Guidance</li>
+        </ul>
+
+        <button class="btn btn-package"
+          onclick="selectPackage('Premium Plan - ₹4,500')">
+          Choose Plan <i data-lucide="arrow-right"></i>
+        </button>
+
+      </article>
+
+      <!-- PERSONAL -->
+
+      <article class="package">
+
+        <div class="package-top">
+
+          <div class="package-icon">
+            <i data-lucide="car-front"></i>
+          </div>
+
+          <div>
+            <h3>Personal Plan</h3>
+            <small>Flexible Training</small>
+          </div>
+
+        </div>
+
+        <div class="price">₹8,000</div>
+
+        <ul>
+          <li><i data-lucide="check"></i> Personalised Training</li>
+          <li><i data-lucide="check"></i> Flexible Timing</li>
+          <li><i data-lucide="check"></i> Advanced Road Practice</li>
+          <li><i data-lucide="check"></i> Licence Process Guidance</li>
+        </ul>
+
+        <button class="btn btn-package"
+          onclick="selectPackage('Personal Plan - ₹8,000')">
+          Choose Plan <i data-lucide="arrow-right"></i>
+        </button>
+
+      </article>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- WHY CHOOSE US -->
+
+<section class="content-section" id="why">
+
+  <div class="container">
+
+    <div class="section-heading">
+      <h2 class="section-title">
+        Why Choose <span>ABHINAASH A1?</span>
+      </h2>
+      <p class="section-subtitle">
+        A trusted driving school for safe and confident drivers.
+      </p>
+    </div>
+
+    <div class="why-grid">
+
+      <div class="why-card">
+        <div class="feature-icon">
+          <i data-lucide="award"></i>
+        </div>
+        <h3>Experienced Trainers</h3>
+        <p>Guided practical learning.</p>
       </div>
-      <div class="price-tag">₹4,500</div>
-      <ul class="feature-list">
-        <li>30 Days Classes</li>
-        <li>Traffic Rules</li>
-        <li>DL / LL Assistance</li>
-        <li>Practical Training</li>
-      </ul>
-      <button class="btn-gold" onclick="openBooking('Premium - 30 Days (₹5000)')">JOIN NOW</button>
-    </article>
-  </section>
 
-  <!-- PERSONAL TRAINING -->
-  <section class="personal-card">
-    <div class="personal-top">
-      <div class="personal-title">
-        <small>⭐ PREMIUM TRAINING</small>
-        <h2>Personal <span>1-on-1</span></h2>
-        <p>Dedicated personal instructor</p>
+      <div class="why-card">
+        <div class="feature-icon">
+          <i data-lucide="car-front"></i>
+        </div>
+        <h3>Modern Vehicle</h3>
+        <p>Comfortable driving practice.</p>
       </div>
-      <div class="personal-badge">PERSONAL<br>PREMIUM</div>
-    </div>
 
-    <div class="personal-main-row">
-      <div class="personal-price">₹8,000<small>Complete Personal Training</small></div>
-      <div class="personal-days-box"><strong>30</strong><span>Days</span></div>
-    </div>
-
-    <div class="personal-mini-info">
-      <div class="personal-mini-item"><strong>🛣️ 5 KM = 1 Class</strong><span>Practical class calculation</span></div>
-      <div class="personal-mini-item"><strong>⏱️ 1 Hour Guidance</strong><span>Personal instructor guidance</span></div>
-      <div class="personal-mini-item"><strong>📅 30 Days</strong><span>Training period</span></div>
-      <div class="personal-mini-item"><strong>🚗 2–4 Classes / Day</strong><span>Subject to availability</span></div>
-    </div>
-
-    <div class="personal-features">
-      <div class="personal-feature"><span>✓</span>1-on-1 Instructor</div>
-      <div class="personal-feature"><span>✓</span>Flexible Training</div>
-      <div class="personal-feature"><span>✓</span>Road Practice</div>
-      <div class="personal-feature"><span>✓</span>DL / LL Guidance</div>
-    </div>
-
-    <button class="personal-button" onclick="openBooking('Personal 1-on-1 - 30 Days (₹8000)')">BOOK PERSONAL TRAINING</button>
-  </section>
-
-  <!-- STUDENT DASHBOARD -->
-  <section class="dashboard-box">
-    <h3>📊 Student Dashboard</h3>
-    <p>Check your classes, progress and profile</p>
-    <button class="btn-gold dashboard-btn" onclick="location.href='profile.html'">OPEN MY PROFILE</button>
-  </section>
-
-  <!-- NEW: TRUST & CONVERSION FEATURES -->
-  <section class="trust-section" id="why-choose-us">
-    <div class="trust-intro">
-      <div class="hero-small">YOUR JOURNEY STARTS HERE</div>
-      <h2>Drive with Confidence.<br><span>Learn with A One.</span></h2>
-      <p>Explore our training options, ask questions and contact us before choosing your driving course.</p>
-    </div>
-
-    <div class="trust-grid">
-      <article class="trust-card">
-        <div class="trust-icon" aria-hidden="true">🚘</div>
-        <h3>Practical Training</h3>
-        <p>Learn driving through practical sessions and guidance on road safety.</p>
-      </article>
-
-      <article class="trust-card">
-        <div class="trust-icon" aria-hidden="true">📋</div>
-        <h3>Clear Packages</h3>
-        <p>Compare course duration, fees and the features of each training package.</p>
-        <a href="#packages" onclick="document.getElementById('packages').scrollIntoView()">VIEW PACKAGES ↓</a>
-      </article>
-
-      <article class="trust-card">
-        <div class="trust-icon" aria-hidden="true">💬</div>
-        <h3>Direct Assistance</h3>
-        <p>Contact us to ask about class timings, availability and the admission process.</p>
-        <a href="https://wa.me/917008186187" target="_blank" rel="noopener noreferrer">CHAT ON WHATSAPP ↗</a>
-      </article>
-
-      <article class="trust-card">
-        <div class="trust-icon" aria-hidden="true">🛡️</div>
+      <div class="why-card">
+        <div class="feature-icon">
+          <i data-lucide="shield-check"></i>
+        </div>
         <h3>Safety First</h3>
-        <p>Understand traffic signs, safe driving habits and road awareness during training.</p>
-      </article>
+        <p>Safety-focused training.</p>
+      </div>
+
+      <div class="why-card">
+        <div class="feature-icon">
+          <i data-lucide="users"></i>
+        </div>
+        <h3>Student Support</h3>
+        <p>Personal learning assistance.</p>
+      </div>
+
     </div>
 
-    <!-- Add genuine student reviews here after obtaining permission. -->
-    <p class="review-note">
-      <strong style="color:var(--gold2)">Student feedback matters.</strong>
-      We welcome genuine feedback from our learners. Contact us on WhatsApp if you would like to share your experience.
-    </p>
+  </div>
 
-    <!-- LOCATION -->
-    <section class="location-card" id="location">
-      <div class="location-heading">
-        <div class="trust-icon" aria-hidden="true">📍</div>
-        <div>
-          <h3>Find A One Driving Classes</h3>
-          <p style="margin:3px 0 0;color:#888;font-size:9px">Baripada, Odisha</p>
+</section>
+
+<!-- VEHICLE -->
+
+<section class="content-section" id="vehicle">
+
+  <div class="container">
+
+    <div class="section-heading">
+      <h2 class="section-title">
+        Our Training <span>Vehicle</span>
+      </h2>
+      <p class="section-subtitle">
+        Learn with comfort and confidence.
+      </p>
+    </div>
+
+    <div class="vehicle-card">
+
+      <div class="vehicle-image"></div>
+
+      <div class="vehicle-info">
+
+        <div class="eyebrow">OUR TRAINING CAR</div>
+
+        <h2>TATA TIGOR XZ+</h2>
+
+        <p>
+          Experience practical driving lessons with our training
+          vehicle and guided instruction.
+        </p>
+
+        <div class="vehicle-tags">
+          <span>Comfortable</span>
+          <span>Practical Training</span>
+          <span>Safety Focused</span>
         </div>
-      </div>
-      <p>Need directions? Open Google Maps to search for A One Driving Classes in Baripada. Please verify the business pin before travelling.</p>
-      <div class="action-row">
-        <a class="action-btn action-map" href="https://www.google.com/maps/search/?api=1&amp;query=A+One+Driving+Classes+Baripada+Odisha" target="_blank" rel="noopener noreferrer">📍 OPEN MAPS</a>
-        <a class="action-btn action-call" href="tel:+917008186187">📞 CALL NOW</a>
-      </div>
-    </section>
 
-    <!-- FAQ -->
-    <section class="faq-section" id="faq">
-      <div class="section-title">
-        <h2>❓ Frequently Asked Questions</h2>
+        <button class="btn btn-primary" onclick="openBooking()">
+          <i data-lucide="calendar-check"></i>
+          Book Training
+          <i data-lucide="arrow-right"></i>
+        </button>
+
       </div>
 
-      <div class="faq-list">
-        <details class="faq-item">
-          <summary>What are the available training packages?</summary>
-          <div class="faq-answer">Standard training is ₹3,500 for 20 days, Premium training is ₹4,500 for 30 days, and Personal 1-on-1 training is ₹8,000 for 30 days. Contact us to confirm current availability and package details.</div>
-        </details>
+    </div>
 
-        <details class="faq-item">
-          <summary>How can I book a driving class?</summary>
-          <div class="faq-answer">Choose a package and tap its booking button. Enter your name and mobile number, then continue to WhatsApp to send your enquiry. Your booking is not confirmed until the class details are agreed with the school.</div>
-        </details>
+  </div>
 
-        <details class="faq-item">
-          <summary>Can I ask about class timings before admission?</summary>
-          <div class="faq-answer">Yes. Use the WhatsApp or call button to ask about available timings, training schedules and the admission process.</div>
-        </details>
+</section>
 
-        <details class="faq-item">
-          <summary>Do you provide DL / LL assistance?</summary>
-          <div class="faq-answer">DL / LL guidance is listed in the Premium and Personal packages. Ask us which assistance is available. A driving course does not guarantee a driving licence; eligibility, testing and issuance are subject to the relevant RTO requirements.</div>
-        </details>
+<!-- LICENCE BANNER -->
 
-        <details class="faq-item">
-          <summary>Where are you located?</summary>
-          <div class="faq-answer">Our location search is set to Baripada, Odisha. Tap Open Maps above and verify the exact business pin or call before visiting.</div>
-        </details>
+<div class="container">
 
-        <details class="faq-item">
-          <summary>How do I check my student profile?</summary>
-          <div class="faq-answer">Tap My Profile in the top navigation or Open My Profile in the Student Dashboard section. This opens profile.html, which must exist in your website.</div>
-        </details>
+  <div class="licence-banner">
+
+    <div class="licence-left">
+
+      <div class="licence-icon">
+        <i data-lucide="id-card"></i>
       </div>
-    </section>
 
-    <!-- CONVERSION CTA -->
-    <section class="trust-cta">
-      <h3>Ready to Start Driving?</h3>
-      <p>Choose a package or contact us to discuss your training requirements.</p>
-      <button class="btn-gold" onclick="openBooking('General Driving Training Enquiry')">ENQUIRE / BOOK NOW</button>
-    </section>
-  </section>
+      <div>
+        <h2>Driving Licence Guidance</h2>
+        <p>
+          Get guidance through the applicable driving licence process.
+        </p>
+      </div>
+
+    </div>
+
+    <a href="https://parivahan.gov.in/"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="btn btn-primary">
+
+      Licence Information
+      <i data-lucide="external-link"></i>
+
+    </a>
+
+  </div>
+
+</div>
+
 </main>
 
 <!-- FOOTER -->
-<footer class="site-footer">
-  <strong>ABHINAASH A ONE</strong>
-  <p>Driving Excellence · Baripada, Odisha<br>Learn safely. Drive responsibly.</p>
-  <div class="footer-links">
-    <a href="#why-choose-us">Why Choose Us</a>
-    <a href="#location">Location</a>
-    <a href="#faq">FAQs</a>
-    <a href="profile.html">Student Profile</a>
+
+<footer id="contact">
+
+  <div class="container">
+
+    <div class="footer-grid">
+
+      <div class="footer-about">
+
+        <a href="#home" class="logo">
+          <div class="logo-icon">A1</div>
+
+          <div class="logo-text">
+            <strong>ABHINAASH <span>A1</span></strong>
+            <small>DRIVING</small>
+          </div>
+        </a>
+
+        <p>
+          Your trusted driving training partner.
+          Learn practical driving skills and develop
+          safe driving habits with confidence.
+        </p>
+
+      </div>
+
+      <div>
+
+        <h3>Quick Links</h3>
+
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#packages">Packages</a></li>
+          <li><a href="#vehicle">Our Vehicle</a></li>
+          <li><a href="#why">Why Choose Us</a></li>
+        </ul>
+
+      </div>
+
+      <div>
+
+        <h3>Information</h3>
+
+        <ul>
+          <li>
+            <a href="#booking" onclick="openBooking(event)">Book Admission</a>
+          </li>
+          <li>
+            <a href="https://parivahan.gov.in/" target="_blank">
+              Licence Portal
+            </a>
+          </li>
+          <li>
+            <a href="#contact">Contact Us</a>
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+
+    <div class="copyright">
+      © <span id="year"></span> ABHINAASH A1 Driving. All Rights Reserved.
+    </div>
+
   </div>
-  <p>© <span id="currentYear"></span> Abhinaash A One Driving Classes</p>
+
 </footer>
 
-<!-- FLOATING CONTACT BUTTONS -->
-<div class="floating-contact" aria-label="Quick contact">
-  <a class="float-btn float-call" href="tel:+917008186187" aria-label="Call A One Driving Classes" title="Call us">☎</a>
-  <a class="float-btn float-whatsapp" href="https://wa.me/917008186187?text=Hello%2C%20I%20want%20to%20enquire%20about%20driving%20classes." target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp" title="WhatsApp">◉</a>
-</div>
+<!-- MOBILE BOTTOM NAVIGATION -->
+
+<nav class="bottom-nav">
+
+  <a href="#home" class="active">
+    <span class="nav-icon">
+      <i data-lucide="house"></i>
+    </span>
+    Home
+  </a>
+
+  <a href="#packages">
+    <span class="nav-icon">
+      <i data-lucide="car-front"></i>
+    </span>
+    Packages
+  </a>
+
+  <a href="#booking" onclick="openBooking(event)">
+    <span class="nav-icon">
+      <i data-lucide="calendar-days"></i>
+    </span>
+    Booking
+  </a>
+
+  <a href="#contact">
+    <span class="nav-icon">
+      <i data-lucide="phone"></i>
+    </span>
+    Contact
+  </a>
+
+</nav>
 
 <!-- BOOKING MODAL -->
-<div class="modal" id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-  <div class="modal-content">
-    <h2 id="modalTitle">Confirm Booking</h2>
-    <p class="modal-subtitle">Enter your details to send your training enquiry through WhatsApp.</p>
+
+<div class="modal" id="bookingModal">
+
+  <div class="modal-box">
+
+    <div class="modal-header">
+
+      <div>
+        <div class="eyebrow">START YOUR JOURNEY</div>
+        <h2>Book Your Class</h2>
+      </div>
+
+      <button class="close-btn"
+        onclick="closeBooking()"
+        aria-label="Close booking">
+
+        <i data-lucide="x"></i>
+
+      </button>
+
+    </div>
 
     <form id="bookingForm">
-      <label for="userName" style="display:block;font-size:10px;color:#aaa;margin-bottom:5px">Your name</label>
-      <input type="text" id="userName" name="name" placeholder="Your full name" class="status-input" autocomplete="name" maxlength="80" required>
 
-      <label for="userPhone" style="display:block;font-size:10px;color:#aaa;margin-bottom:5px">Mobile number</label>
-      <input type="tel" id="userPhone" name="phone" placeholder="10-digit mobile number" class="status-input" autocomplete="tel-national" inputmode="numeric" maxlength="10" pattern="[0-9]{10}" required>
+      <div class="form-group">
+        <label>Full Name</label>
+        <input
+          id="customerName"
+          type="text"
+          placeholder="Enter your name"
+          maxlength="80"
+          required>
+      </div>
 
-      <p class="form-error" id="formError" role="alert"></p>
-      <button type="submit" class="btn-gold">CONTINUE TO WHATSAPP ↗</button>
-      <button type="button" class="cancel-btn" onclick="closeModal()">CANCEL</button>
+      <div class="form-group">
+        <label>Mobile Number</label>
+        <input
+          id="customerPhone"
+          type="tel"
+          inputmode="numeric"
+          pattern="[0-9]{10}"
+          maxlength="10"
+          placeholder="10 digit mobile number"
+          required>
+      </div>
+
+      <div class="form-group">
+        <label>Select Package</label>
+
+        <select id="customerPackage" required>
+          <option value="">Choose package</option>
+          <option>Standard Plan - ₹3,500</option>
+          <option>Premium Plan - ₹4,500</option>
+          <option>Personal Plan - ₹8,000</option>
+        </select>
+
+      </div>
+
+      <div class="form-group">
+        <label>Preferred Start Date</label>
+        <input id="customerDate" type="date" required>
+      </div>
+
+      <button type="submit" class="btn btn-primary">
+        <i data-lucide="send"></i>
+        Submit Booking via WhatsApp
+      </button>
+
     </form>
+
   </div>
+
 </div>
 
 <script>
+
 /* CONFIGURATION */
-const WHATSAPP_NUMBER = "917008186187";
-let selectedPackage = "";
-let previousFocus = null;
+
+// Replace with your actual WhatsApp number.
+// Format: 91 followed by 10-digit mobile number.
+
+const WHATSAPP_NUMBER = "918984225311";
+
+/* YEAR */
+
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+
+/* MENU */
+
+function toggleMenu(){
+  document.getElementById("navLinks").classList.toggle("open");
+}
+
+document.querySelectorAll(".nav-links a").forEach(link=>{
+  link.addEventListener("click",()=>{
+    document.getElementById("navLinks").classList.remove("open");
+  });
+});
 
 /* BOOKING MODAL */
-const modal = document.getElementById("bookingModal");
-const bookingForm = document.getElementById("bookingForm");
-const formError = document.getElementById("formError");
 
-window.openBooking = function(label) {
-  selectedPackage = label;
-  previousFocus = document.activeElement;
-  document.getElementById("modalTitle").textContent = label;
-  formError.style.display = "none";
-  modal.style.display = "flex";
-  document.body.classList.add("modal-open");
-  document.getElementById("userName").focus();
+function openBooking(event){
+  if(event) event.preventDefault();
 
-  if (navigator.vibrate) navigator.vibrate(35);
-};
+  document.getElementById("bookingModal").classList.add("show");
+}
 
-window.closeModal = function() {
-  modal.style.display = "none";
-  document.body.classList.remove("modal-open");
-  if (previousFocus && typeof previousFocus.focus === "function") {
-    previousFocus.focus();
+function closeBooking(){
+  document.getElementById("bookingModal").classList.remove("show");
+}
+
+/* PACKAGE SELECTION */
+
+function selectPackage(packageName){
+
+  document.getElementById("customerPackage").value=packageName;
+
+  openBooking();
+}
+
+/* MODAL OUTSIDE CLICK */
+
+document.getElementById("bookingModal").addEventListener("click",e=>{
+
+  if(e.target.id==="bookingModal"){
+    closeBooking();
   }
-};
 
-bookingForm.addEventListener("submit", function(event) {
-  event.preventDefault();
+});
 
-  const name = document.getElementById("userName").value.trim();
-  const phone = document.getElementById("userPhone").value.trim();
+/* DATE MINIMUM */
 
-  if (!name) {
-    showError("Please enter your name.");
+const dateInput=document.getElementById("customerDate");
+
+const today=new Date();
+const localDate=new Date(
+  today.getTime()-today.getTimezoneOffset()*60000
+).toISOString().split("T")[0];
+
+dateInput.min=localDate;
+
+/* WHATSAPP BOOKING */
+
+document.getElementById("bookingForm").addEventListener("submit",function(e){
+
+  e.preventDefault();
+
+  const name=document.getElementById("customerName").value.trim();
+
+  const phone=document.getElementById("customerPhone").value.trim();
+
+  const selectedPackage=document.getElementById("customerPackage").value;
+
+  const date=document.getElementById("customerDate").value;
+
+  if(!/^[0-9]{10}$/.test(phone)){
+    alert("Please enter a valid 10 digit mobile number.");
     return;
   }
 
-  if (!/^[0-9]{10}$/.test(phone)) {
-    showError("Please enter a valid 10-digit mobile number.");
+  if(!/^[0-9]{10,15}$/.test(WHATSAPP_NUMBER)){
+    alert("Please configure the WhatsApp number in the website code first.");
     return;
   }
 
-  const message =
-`🚗 *A ONE DRIVING CLASSES*
+  const message=
+`NEW DRIVING ADMISSION ENQUIRY
 
-Hello, I want to enquire about driving training.
+Name: ${name}
+Mobile: ${phone}
+Package: ${selectedPackage}
+Preferred Date: ${date}
 
-👤 Name: ${name}
-📱 Mobile: ${phone}
-📦 Package: ${selectedPackage}
+Source: ABHINAASH A1 Driving Website`;
 
-Please contact me regarding availability and admission.`;
+  const url=
+    "https://wa.me/"+WHATSAPP_NUMBER+
+    "?text="+encodeURIComponent(message);
 
-  const url = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" +
-    encodeURIComponent(message);
+  window.open(url,"_blank");
 
-  // Keep this inside the submit gesture so mobile browsers allow navigation.
-  window.location.href = url;
 });
 
-function showError(message) {
-  formError.textContent = message;
-  formError.style.display = "block";
-}
+/* ACTIVE BOTTOM NAVIGATION */
 
-modal.addEventListener("click", function(event) {
-  if (event.target === modal) closeModal();
-});
+const sections=document.querySelectorAll("main section[id]");
 
-document.addEventListener("keydown", function(event) {
-  if (event.key === "Escape" && modal.style.display === "flex") {
-    closeModal();
-  }
-});
+const bottomLinks=document.querySelectorAll(".bottom-nav a");
 
-/* NORMALISE MOBILE INPUT */
-document.getElementById("userPhone").addEventListener("input", function() {
-  this.value = this.value.replace(/\D/g, "").slice(0, 10);
-});
+const observer=new IntersectionObserver(entries=>{
 
-/* CAR SLIDER */
-const cars = Array.from(document.querySelectorAll(".main-car"));
-const carPlatform = document.getElementById("carPlatform");
-let currentCar = 0;
-let sliderTimer = null;
+  entries.forEach(entry=>{
 
-function showNextCar() {
-  if (cars.length < 2) return;
+    if(entry.isIntersecting){
 
-  cars[currentCar].classList.remove("active");
-  currentCar = (currentCar + 1) % cars.length;
-  cars[currentCar].classList.remove("active");
-  void cars[currentCar].offsetWidth;
-  cars[currentCar].classList.add("active");
+      bottomLinks.forEach(link=>{
 
-  carPlatform.classList.remove("light-sweep");
-  void carPlatform.offsetWidth;
-  carPlatform.classList.add("light-sweep");
-}
+        link.classList.toggle(
+          "active",
+          link.getAttribute("href")==="#"+entry.target.id
+        );
 
-function startSlider() {
-  if (sliderTimer || cars.length < 2 ||
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  sliderTimer = setInterval(showNextCar, 4000);
-}
-
-function stopSlider() {
-  if (sliderTimer) clearInterval(sliderTimer);
-  sliderTimer = null;
-}
-
-startSlider();
-document.addEventListener("visibilitychange", function() {
-  if (document.hidden) stopSlider();
-  else startSlider();
-});
-
-setTimeout(function() {
-  carPlatform.classList.add("light-sweep");
-}, 500);
-
-/* DECORATIVE WEATHER BACKGROUND
-   Uses visual ambience only; no API key or location tracking required. */
-(function createAtmosphere() {
-  const container = document.getElementById("weather-container");
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  if (reduceMotion) return;
-
-  for (let i = 0; i < 4; i++) {
-    const cloud = document.createElement("div");
-    cloud.className = "cloud";
-    cloud.style.width = (140 + Math.random() * 160) + "px";
-    cloud.style.height = "60px";
-    cloud.style.top = (Math.random() * 48) + "vh";
-    cloud.style.left = "-250px";
-    cloud.style.animationDuration = (20 + Math.random() * 15) + "s";
-    cloud.style.animationDelay = (-Math.random() * 20) + "s";
-    container.appendChild(cloud);
-  }
-})();
-
-/* FOOTER YEAR */
-document.getElementById("currentYear").textContent = new Date().getFullYear();
-</script>
-
-
-
-
-<script>
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", function () {
-    navigator.serviceWorker
-      .register("/sw.js")
-      .then(function () {
-        console.log("A One Driving PWA ready");
-      })
-      .catch(function (error) {
-        console.error("PWA registration failed:", error);
       });
+
+    }
+
   });
+
+},{threshold:0.35});
+
+sections.forEach(section=>observer.observe(section));
+
+/* LUCIDE SVG INITIALIZATION */
+
+if(window.lucide){
+  lucide.createIcons();
 }
+
 </script>
 
 </body>
