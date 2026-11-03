@@ -1194,55 +1194,53 @@ function createGalleryCard(student){
   return card;
 }
 
-/* LOAD ONE PHOTO WITH ERROR HANDLING */
+
+/* LOAD ONLY THUMBNAIL - FAST HOMEPAGE */
 async function loadStudentPhoto(studentDoc){
   try{
-    const mobile=studentDoc.id;
-    const data=studentDoc.data();
+    const mobile = studentDoc.id;
+    const data = studentDoc.data();
 
-    if(!/^[0-9]{10}$/.test(mobile))return null;
-    if(data.notActive===true)return null;
-    if(isCourseCompleted(data))return null;
+    if(!/^[0-9]{10}$/.test(mobile)) return null;
+    if(data.notActive === true) return null;
+    if(isCourseCompleted(data)) return null;
 
-    const photoSnapshot=await withTimeout(
-      get(ref(rtdb,"profilePhotos/"+mobile)),
+    const snapshot = await withTimeout(
+      get(ref(rtdb, "profilePhotoThumbnails/" + mobile)),
       7000,
-      "Photo loading"
+      "Thumbnail loading"
     );
 
-    if(!photoSnapshot.exists())return null;
+    if(!snapshot.exists()) return null;
 
-    const photoData=photoSnapshot.val();
+    const thumbnailData = snapshot.val();
 
-    if(!photoData || photoData.showOnHomepage!==true){
+    if(!thumbnailData || thumbnailData.showOnHomepage !== true){
       return null;
     }
 
-    const photo=photoData.image;
-    const thumbnail=photoData.thumbnail;
+    const thumbnail = thumbnailData.thumbnail;
 
     if(
-      typeof photo!=="string" ||
-      !photo.startsWith("data:image/")
+      typeof thumbnail !== "string" ||
+      !thumbnail.startsWith("data:image/")
     ){
       return null;
     }
 
     return {
       mobile,
-      name:data.name || "A1 Student",
-      photo,
-      thumbnail:
-        typeof thumbnail==="string" && thumbnail.startsWith("data:image/")
-          ? thumbnail
-          : null
+      name: data.name || "A1 Student",
+      photo: thumbnail,
+      thumbnail
     };
 
   }catch(error){
-    console.warn("Photo skipped:",studentDoc.id,error.message);
+    console.warn("Thumbnail skipped:", studentDoc.id, error.message);
     return null;
   }
 }
+
 
 /* FAST PROGRESSIVE GALLERY */
 async function loadStudentGallery(){
