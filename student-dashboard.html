@@ -628,7 +628,6 @@ function blobToBase64(blob){
   reader.onerror=()=>reject(new Error("Image conversion failed."));
   reader.readAsDataURL(blob);
  });
-
 }
 
 /* SAVE PHOTO */
@@ -742,9 +741,12 @@ function parseLog(log){
 function renderHistory(logs){
  const container=$("historyList");
  container.replaceChildren();
- $("historyCount").textContent=logs.length+" classes";
 
- if(!logs.length){
+ // Same source as Classes Completed
+ const historyTotal=logs.length;
+ $("historyCount").textContent=historyTotal+" classes";
+
+ if(!historyTotal){
   const empty=document.createElement("div");
   empty.className="empty";
   empty.textContent="No attendance records found yet.";
@@ -761,7 +763,7 @@ function renderHistory(logs){
   top.className="history-top";
 
   const title=document.createElement("strong");
-  title.textContent="Driving Class "+(logs.length-index);
+  title.textContent="Driving Class "+(historyTotal-index);
 
   const status=document.createElement("span");
   status.className="status-pill";
@@ -824,7 +826,7 @@ function renderFeedback(logs){
  });
 }
 
-/* RENDER DASHBOARD - NON BLOCKING */
+/* RENDER DASHBOARD */
 function renderDashboard(student,mobile){
 
  if(currentMobile!==mobile)return;
@@ -832,18 +834,24 @@ function renderDashboard(student,mobile){
  currentStudentName=value(student,"name","Student");
  currentStudentActive=student.notActive!==true;
 
- const logs=Array.isArray(student.attendanceLogs)?student.attendanceLogs:[];
- const total=Math.max(Number(value(student,"totalClasses",20))||20,1);
+ const logs=Array.isArray(student.attendanceLogs)
+  ?student.attendanceLogs:[];
 
- // Preserve existing attendance field interpretation.
- const storedCompleted=Math.max(Number(value(student,"remaining",0))||0,0);
- const completed=Math.min(
-  logs.length>0?Math.max(logs.length,storedCompleted):storedCompleted,
-  total
+ const total=Math.max(
+  Number(value(student,"totalClasses",20))||20,
+  1
  );
+
+ /*
+  SINGLE SOURCE OF TRUTH:
+  Completed classes = attendanceLogs.length
+  History count = attendanceLogs.length
+ */
+ const completed=logs.length;
 
  const left=Math.max(total-completed,0);
  const percent=Math.min(Math.round(completed/total*100),100);
+
  const classType=value(student,"classType","Group");
  const admissionDate=formatDate(value(student,"admissionDate",""));
 
@@ -885,7 +893,7 @@ function renderDashboard(student,mobile){
  $("totalClasses").textContent=total;
 
  const distancePerClass=Number(value(student,"distancePerClass",5))||5;
- $("totalDistance").textContent=(logs.length*distancePerClass)+" KM";
+ $("totalDistance").textContent=(completed*distancePerClass)+" KM";
 
  /* PROGRESS */
  $("progressPercent").textContent=percent+"%";
@@ -893,7 +901,7 @@ function renderDashboard(student,mobile){
  $("progressDone").textContent=completed+" classes completed";
  $("progressTotal").textContent=total+" total classes";
 
- /* HISTORY */
+ /* HISTORY - SAME COUNT AS COMPLETED CLASSES */
  renderHistory(logs);
  renderFeedback(logs);
 
@@ -976,7 +984,6 @@ function connectStudent(mobile){
    return;
   }
 
-  // Direct dashboard access. No success or verification message.
   $("loginPanel").style.display="none";
   $("manualLoginControls").style.display="none";
 
