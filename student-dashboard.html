@@ -1007,7 +1007,11 @@ function renderDashboard(student,mobile){
  const logs=Array.isArray(student.attendanceLogs)?student.attendanceLogs:[];
 
  const total=Math.max(Number(value(student,"totalClasses",20))||20,1);
- const completed=logs.length;
+ const completed=Math.max(
+ logs.length,
+ Number(student.remaining||0),
+ 0
+);
  const left=Math.max(total-completed,0);
  const percent=Math.min(Math.round(completed/total*100),100);
  const classType=value(student,"classType","Group");
