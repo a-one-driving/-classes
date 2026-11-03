@@ -67,7 +67,6 @@ main{padding:27px 0 100px}
 .btn-primary:disabled{opacity:.6;cursor:not-allowed}
 .btn-outline{border-color:var(--border);color:var(--white);background:rgba(255,255,255,.04)}
 
-/* PROFILE */
 .student-profile{
  display:flex;align-items:center;gap:14px;
  padding:17px;margin-bottom:22px;
@@ -242,19 +241,20 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
 
 <main class="container">
 
-<section class="panel" id="loginPanel">
+<section class="panel" id="loginPanel" style="display:none">
  <div class="panel-head">
   <h2>Student Verification</h2>
   <span style="font-size:10px;color:var(--gold)">Student Portal</span>
  </div>
-<p class="login-description" id="loginMessage" style="display:none"></p>
+
+ <p class="login-description" id="loginMessage" style="display:none"></p>
+
  <div class="login-controls" id="manualLoginControls" style="display:none">
   <input type="tel" id="studentMobile" maxlength="10" inputmode="numeric" placeholder="Enter mobile number">
   <button class="btn-primary" id="loginButton" type="button">Connect Account</button>
  </div>
 </section>
 
-<!-- PROFILE -->
 <section class="student-profile">
  <div class="profile-avatar">
   <img id="studentProfileAvatar" src="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student" alt="Student Avatar">
@@ -278,7 +278,6 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
  </div>
 </section>
 
-<!-- TRAINING PLAN -->
 <section class="hero-card">
  <div class="hero-content">
   <div class="plan-label"><i data-lucide="crown" width="13"></i> Your Training Plan</div>
@@ -294,7 +293,6 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
  </div>
 </section>
 
-<!-- STATISTICS -->
 <section class="stats">
  <div class="stat-card">
   <div class="stat-icon"><i data-lucide="calendar-check"></i></div>
@@ -318,7 +316,6 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
  </div>
 </section>
 
-<!-- TRAINING PROGRESS -->
 <section class="content-grid">
  <div class="panel">
   <div class="panel-head"><h2>Training Progress</h2></div>
@@ -345,7 +342,6 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
  </div>
 </section>
 
-<!-- ATTENDANCE HISTORY -->
 <section class="panel" id="attendanceHistory">
  <div class="panel-head">
   <h2>My Class History</h2>
@@ -356,7 +352,6 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
  </div>
 </section>
 
-<!-- INSTRUCTOR FEEDBACK -->
 <section class="panel" id="instructorFeedback">
  <div class="panel-head">
   <h2>Instructor Remarks & Feedback</h2>
@@ -367,7 +362,6 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
  </div>
 </section>
 
-<!-- STUDENT FEEDBACK -->
 <section class="panel" id="studentFeedback">
  <div class="panel-head">
   <h2>Share Your Feedback</h2>
@@ -408,7 +402,6 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
  </div>
 </section>
 
-<!-- QUICK LINKS -->
 <section class="panel">
  <div class="panel-head"><h2>Quick Actions</h2></div>
  <div class="quick-grid">
@@ -493,9 +486,12 @@ let currentStudentActive=false;
 
 const $=id=>document.getElementById(id);
 
+/* ERROR MESSAGES ONLY */
 function showMessage(message,color="var(--muted)"){
- $("loginMessage").textContent=message;
- $("loginMessage").style.color=color;
+ const el=$("loginMessage");
+ el.textContent=message;
+ el.style.color=color;
+ el.style.display=message?"block":"none";
 }
 
 function value(data,key,fallback=""){
@@ -555,6 +551,7 @@ async function compressImage(file){
    canvas.height=Math.max(1,Math.round(image.height*scale));
 
    const ctx=canvas.getContext("2d");
+
    if(!ctx){
     reject(new Error("Canvas is not supported."));
     return;
@@ -574,7 +571,7 @@ async function compressImage(file){
      }
 
      if(blob.size>250*1024&&quality>.35){
-      quality-=.10;
+      quality=Math.max(.35,quality-.10);
       makeBlob();
       return;
      }
@@ -808,6 +805,8 @@ function renderFeedback(logs){
 /* RENDER DASHBOARD */
 async function renderDashboard(student,mobile){
 
+ if(currentMobile!==mobile)return;
+
  currentStudentName=value(student,"name","Student");
  currentStudentActive=student.notActive!==true;
 
@@ -816,7 +815,7 @@ async function renderDashboard(student,mobile){
 
  const total=Math.max(Number(value(student,"totalClasses",20))||20,1);
 
- // Existing attendance logic increments remaining for completed classes.
+ // Preserves the existing attendance field interpretation.
  const storedCompleted=Math.max(
   Number(value(student,"remaining",0))||0,0
  );
@@ -832,19 +831,16 @@ async function renderDashboard(student,mobile){
  const classType=value(student,"classType","Group");
  const admissionDate=formatDate(value(student,"admissionDate",""));
 
- /* STUDENT NAME */
  $("profileStudentName").textContent=currentStudentName;
 
- /* DEFAULT AVATAR */
  const defaultAvatar=getStudentAvatar({...student,mobile});
  $("studentProfileAvatar").src=defaultAvatar;
  $("userAvatar").src=defaultAvatar;
 
- /* LOAD REALTIME DATABASE PHOTO */
+ /* LOAD PROFILE PHOTO */
  try{
   const photo=await loadProfilePhoto(mobile);
 
-  // Prevent an old async response from updating another student's page.
   if(photo&&currentMobile===mobile){
    $("studentProfileAvatar").src=photo;
    $("userAvatar").src=photo;
@@ -852,6 +848,8 @@ async function renderDashboard(student,mobile){
  }catch(error){
   console.error("Profile photo loading error:",error);
  }
+
+ if(currentMobile!==mobile)return;
 
  $("studentProfileAvatar").onerror=()=>{
   $("studentProfileAvatar").src=
@@ -863,7 +861,6 @@ async function renderDashboard(student,mobile){
    "https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student";
  };
 
- /* PACKAGE */
  $("studentId").textContent="A1-"+mobile.slice(-4);
  $("packageName").textContent=
   classType==="Personal"?"Personal Training":"Group Training";
@@ -873,7 +870,6 @@ async function renderDashboard(student,mobile){
  $("accountStatus").style.color=
   currentStudentActive?"var(--green)":"var(--red)";
 
- /* STATS */
  $("completedClasses").textContent=completed;
  $("remainingClasses").textContent=left;
  $("totalClasses").textContent=total;
@@ -881,16 +877,15 @@ async function renderDashboard(student,mobile){
  const distancePerClass=Number(value(student,"distancePerClass",5))||5;
  $("totalDistance").textContent=(logs.length*distancePerClass)+" KM";
 
- /* PROGRESS */
  $("progressPercent").textContent=percent+"%";
  $("progressBar").style.width=percent+"%";
  $("progressDone").textContent=completed+" classes completed";
  $("progressTotal").textContent=total+" total classes";
 
- /* HISTORY */
  renderHistory(logs);
  renderFeedback(logs);
 
+ // Hide login panel after successful student verification.
  $("loginPanel").style.display="none";
 }
 
@@ -932,7 +927,7 @@ function resetDashboard(){
  $("uploadStatus").textContent="";
 }
 
-/* LOGIN MESSAGE */
+/* SHOW LOGIN ONLY WHEN NEEDED */
 function showManualLogin(message){
  $("loginPanel").style.display="block";
  $("manualLoginControls").style.display="flex";
@@ -941,6 +936,7 @@ function showManualLogin(message){
 
 /* CONNECT STUDENT */
 function connectStudent(mobile){
+
  if(!/^[0-9]{10}$/.test(mobile)){
   showManualLogin("Please enter a valid registered mobile number.");
   return;
@@ -952,11 +948,13 @@ function connectStudent(mobile){
  }
 
  currentMobile=mobile;
- 
 
  const studentRef=doc(db,"studentData",mobile);
 
  unsubscribeStudent=onSnapshot(studentRef,snapshot=>{
+
+  if(currentMobile!==mobile)return;
+
   if(!snapshot.exists()){
    localStorage.removeItem(STORAGE_KEY);
    resetDashboard();
@@ -973,17 +971,21 @@ function connectStudent(mobile){
    return;
   }
 
+  // No verification or success message.
+  $("loginPanel").style.display="none";
   $("manualLoginControls").style.display="none";
 
   renderDashboard(student,mobile).catch(error=>{
    console.error("Dashboard rendering error:",error);
   });
 
-  
-
  },error=>{
   console.error("Student verification error:",error);
-  showMessage("Unable to verify your account. Please check your internet connection or database permissions.","var(--red)");
+
+  if(currentMobile!==mobile)return;
+
+  $("loginPanel").style.display="block";
+  showManualLogin("Unable to verify your account. Please check your internet connection or database permissions.");
  });
 }
 
@@ -1001,8 +1003,10 @@ $("loginButton").addEventListener("click",()=>{
  }
 
  localStorage.setItem(STORAGE_KEY,mobile);
- $("manualLoginControls").style.display="none";
-$("loginPanel").style.display="none";
+
+ // Hide login panel while verification is in progress.
+ $("loginPanel").style.display="none";
+
  connectStudent(mobile);
 });
 
@@ -1016,11 +1020,15 @@ const savedMobile=localStorage.getItem(STORAGE_KEY);
 const mobileToVerify=savedMobile||urlMobile;
 
 if(mobileToVerify&&/^[0-9]{10}$/.test(mobileToVerify)){
+
+ // Hide login panel immediately. No verification text is shown.
+ $("loginPanel").style.display="none";
  $("manualLoginControls").style.display="none";
+
  connectStudent(mobileToVerify);
+
 }else{
  showManualLogin("Please login from the main website to access your dashboard.");
- $("manualLoginControls").style.display="none";
 }
 
 /* WHATSAPP FEEDBACK */
