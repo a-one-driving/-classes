@@ -1023,9 +1023,19 @@ window.openPhotoPreview=openPhotoPreview;
 <script type="module">
 import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
 
+
 import {
-  getFirestore, doc, getDoc, collection, getDocs
+  getFirestore,
+  doc,
+  getDoc,
+  collection,
+  getDocs,
+  query,
+  orderBy,
+  limit,
+  startAfter
 } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
 
 import {
   getDatabase, ref, get
@@ -1046,6 +1056,7 @@ const app=getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
 const db=getFirestore(app);
 const rtdb=getDatabase(app);
 
+const PAGE_SIZE=30;
 const BATCH_SIZE=10;
 const STORAGE_KEY="a1_student_mobile";
 
