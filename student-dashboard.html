@@ -881,10 +881,20 @@ function renderDashboard(student,mobile){
  $("studentName") && ($("studentName").textContent=currentStudentName);
  $("profileStudentName").textContent=currentStudentName;
 
- const avatarURL=getStudentAvatar({...student,mobile});
+ /* LOAD PROFILE PHOTO FROM REALTIME DATABASE */
+const defaultAvatar=getStudentAvatar({...student,mobile});
 
- $("studentProfileAvatar").src=avatarURL;
- $("userAvatar").src=avatarURL;
+$("studentProfileAvatar").src=defaultAvatar;
+$("userAvatar").src=defaultAvatar;
+
+loadProfilePhoto(mobile).then(photo=>{
+ if(photo){
+  $("studentProfileAvatar").src=photo;
+  $("userAvatar").src=photo;
+ }
+}).catch(error=>{
+ console.error("Profile photo loading error:",error);
+});
 
  $("studentProfileAvatar").onerror=()=>{
   $("studentProfileAvatar").src=
