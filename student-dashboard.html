@@ -49,7 +49,6 @@ main{padding:27px 0 100px}
 .panel{padding:21px;margin-bottom:20px}
 .panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
 .panel-head h2{font-size:15px}
-.panel-head a{font-size:10px;color:var(--gold);font-weight:700}
 
 .login-description{font-size:11px;color:var(--muted);margin-bottom:13px}
 .login-controls{display:flex;gap:10px;flex-wrap:wrap}
@@ -68,21 +67,15 @@ main{padding:27px 0 100px}
 .btn-primary:disabled{opacity:.6;cursor:not-allowed}
 .btn-outline{border-color:var(--border);color:var(--white);background:rgba(255,255,255,.04)}
 
-.welcome{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:22px}
-.welcome small{color:var(--gold);font-size:10px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase}
-.welcome h1{font-size:clamp(24px,4vw,34px);margin:6px 0}
-.welcome p{font-size:12px;color:var(--muted)}
-.date-chip{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);padding:10px 13px;border-radius:11px;color:var(--muted);font-size:10px;white-space:nowrap}
-
-/* STUDENT PROFILE */
+/* PROFILE */
 .student-profile{
  display:flex;align-items:center;gap:14px;
- padding:15px 17px;margin-bottom:20px;
+ padding:17px;margin-bottom:22px;
  border-radius:19px;background:linear-gradient(115deg,#192B43,#111A29 75%);
  border:1px solid rgba(242,189,69,.2)
 }
 .profile-avatar{
- width:68px;height:68px;min-width:68px;
+ width:76px;height:76px;min-width:76px;
  padding:3px;border-radius:50%;position:relative;
  background:linear-gradient(135deg,#D99A25,#FFE3A4);
  animation:avatarFloat 3s ease-in-out infinite
@@ -100,7 +93,16 @@ main{padding:27px 0 100px}
 .profile-info small{color:var(--gold);font-size:9px;font-weight:800;letter-spacing:1.5px}
 .profile-info h2{font-size:17px;margin:3px 0;overflow-wrap:anywhere}
 .profile-info p{font-size:10px;color:var(--muted)}
-.profile-arrow{color:var(--gold);padding:8px}
+.profile-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:9px}
+.photo-btn{
+ display:inline-flex;align-items:center;gap:6px;
+ padding:8px 11px;border-radius:9px;
+ background:rgba(242,189,69,.13);
+ border:1px solid rgba(242,189,69,.3);
+ color:var(--gold);font-size:10px;font-weight:800
+}
+.photo-btn:disabled{opacity:.6;cursor:not-allowed}
+.photo-hint{font-size:9px;color:var(--muted)}
 @keyframes avatarFloat{
  0%,100%{transform:translateY(0)}
  50%{transform:translateY(-5px)}
@@ -128,7 +130,6 @@ main{padding:27px 0 100px}
 .hero-meta div{display:flex;flex-direction:column;gap:3px}
 .hero-meta small{font-size:9px;color:var(--muted)}
 .hero-meta strong{font-size:12px}
-.hero-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:20px}
 
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
 .stat-card{padding:17px;border-radius:16px}
@@ -136,7 +137,7 @@ main{padding:27px 0 100px}
 .stat-card strong{display:block;font-size:25px;margin-top:13px}
 .stat-card p{font-size:10px;color:var(--muted);margin-top:3px}
 
-.content-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
+.content-grid{display:grid;grid-template-columns:1fr;gap:16px}
 .progress-row{display:flex;justify-content:space-between;gap:12px;margin-bottom:10px}
 .progress-row span{font-size:10px;color:var(--muted)}
 .progress-row strong{font-size:12px;color:var(--gold)}
@@ -149,18 +150,6 @@ main{padding:27px 0 100px}
 .milestone strong{display:block;font-size:11px;margin-top:6px}
 .milestone span{font-size:9px;color:var(--muted)}
 
-/* NEXT CLASS */
-.class-box{background:var(--card2);border:1px solid var(--border);border-radius:14px;padding:15px}
-.class-date{display:inline-block;background:rgba(242,189,69,.12);color:var(--gold);padding:6px 9px;border-radius:8px;font-size:9px;font-weight:800}
-.class-box h3{font-size:14px;margin:12px 0 7px}
-.class-details{display:grid;gap:9px;margin-top:12px}
-.class-details div{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:10px}
-.class-details i{width:15px;height:15px;color:var(--gold)}
-.class-status{margin-top:13px;padding-top:12px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:10px;gap:8px}
-.status-pending{color:var(--gold);font-weight:700}
-.status-scheduled{color:var(--green);font-weight:700}
-.status-cancelled{color:var(--red);font-weight:700}
-
 .history-list,.feedback-list{display:grid;gap:10px}
 .history-item,.feedback-item{
  background:var(--card2);border:1px solid var(--border);
@@ -172,7 +161,6 @@ main{padding:27px 0 100px}
 .history-details{font-size:10px;color:#DCE1E9;line-height:1.8;margin-top:8px;overflow-wrap:anywhere;white-space:pre-line}
 .remark{margin-top:9px;padding:9px 11px;border-radius:9px;background:rgba(242,189,69,.08);color:var(--gold);font-size:10px;line-height:1.6}
 .status-pill{font-size:9px;font-weight:800;padding:5px 9px;border-radius:20px;background:rgba(53,201,138,.12);color:var(--green)}
-.status-pill.inactive{background:rgba(255,119,119,.12);color:var(--red)}
 .empty{padding:20px;text-align:center;background:var(--card2);border-radius:12px;color:var(--muted);font-size:11px;line-height:1.8}
 
 .feedback-form{display:grid;gap:13px}
@@ -208,15 +196,21 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
 .bottom-nav a.active{color:var(--gold)}
 .bottom-nav i{width:19px;height:19px}
 
+/* PHOTO UPLOAD STATUS */
+.upload-status{
+ font-size:10px;color:var(--muted);margin-top:8px;
+ min-height:15px
+}
+.upload-status.success{color:var(--green)}
+.upload-status.error{color:var(--red)}
+
 @media(max-width:850px){
  .stats{grid-template-columns:repeat(2,1fr)}
- .content-grid{grid-template-columns:1fr}
  .quick-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:600px){
  .topbar{height:62px}.header-link{display:none}
  main{padding-top:22px}
- .welcome{align-items:flex-start;flex-direction:column}
  .hero-card{padding:20px}.hero-card h2{font-size:21px}
  .hero-meta{gap:17px}
  .stats{gap:9px}.stat-card{padding:14px}
@@ -228,6 +222,7 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
  .quick-icon{width:31px;height:31px}
  .bottom-nav{display:flex}
  .footer-inner{flex-direction:column;align-items:flex-start}
+ .profile-avatar{width:68px;height:68px;min-width:68px}
 }
 @media(prefers-reduced-motion:reduce){
  .profile-avatar{animation:none}
@@ -243,7 +238,7 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
   <div class="header-right">
    <a href="contact.html" class="header-link">Need Help?</a>
    <a href="student-account.html" class="avatar" aria-label="My Account">
-    <img id="userAvatar" alt="Student profile" src="">
+    <img id="userAvatar" alt="Student profile" src="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student">
    </a>
   </div>
  </div>
@@ -264,32 +259,28 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
   </div>
  </section>
 
- <!-- PROFILE -->
+ <!-- STUDENT PROFILE WITH PHOTO UPLOAD -->
  <section class="student-profile">
   <div class="profile-avatar">
    <img id="studentProfileAvatar" src="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student" alt="Student Avatar">
    <span class="profile-online"></span>
   </div>
+
   <div class="profile-info">
-   <small>WELCOME BACK</small>
+   <small>STUDENT PROFILE</small>
    <h2 id="profileStudentName">Student</h2>
    <p>A ONE DRIVING STUDENT</p>
-  </div>
-  <a href="student-account.html" class="profile-arrow" aria-label="Open profile">
-   <i data-lucide="chevron-right"></i>
-  </a>
- </section>
 
- <!-- WELCOME -->
- <section class="welcome">
-  <div>
-   <small>Student Portal</small>
-   <h1>Welcome, <span id="studentName">Student</span></h1>
-   <p>Your driving training progress at a glance.</p>
-  </div>
-  <div class="date-chip">
-   <i data-lucide="calendar-days" width="15"></i>
-   <span id="todayDate"></span>
+   <div class="profile-actions">
+    <button type="button" class="photo-btn" id="changePhotoBtn">
+     <i data-lucide="camera" width="13"></i>
+     Change Photo
+    </button>
+    <span class="photo-hint">JPG, PNG · Auto compressed</span>
+   </div>
+
+   <input type="file" id="profilePhotoInput" accept="image/jpeg,image/png,image/webp" hidden>
+   <div class="upload-status" id="uploadStatus"></div>
   </div>
  </section>
 
@@ -299,15 +290,12 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
    <div class="plan-label"><i data-lucide="crown" width="13"></i> Your Training Plan</div>
    <h2 id="packageName">Driving Training</h2>
    <p>Your registered training details.</p>
+
    <div class="hero-meta">
     <div><small>Student ID</small><strong id="studentId">--</strong></div>
     <div><small>Class Type</small><strong id="classType">--</strong></div>
     <div><small>Admission Date</small><strong id="admissionDate">--</strong></div>
     <div><small>Account Status</small><strong id="accountStatus">--</strong></div>
-   </div>
-   <div class="hero-actions">
-    <a href="student-training.html" class="btn-primary"><i data-lucide="car-front" width="15"></i> My Training</a>
-    <a href="student-account.html" class="btn-outline"><i data-lucide="user-round" width="15"></i> My Profile</a>
    </div>
   </div>
  </section>
@@ -319,16 +307,19 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
    <strong id="completedClasses">--</strong>
    <p>Classes Completed</p>
   </div>
+
   <div class="stat-card">
    <div class="stat-icon"><i data-lucide="calendar-clock"></i></div>
    <strong id="remainingClasses">--</strong>
    <p>Classes Remaining</p>
   </div>
+
   <div class="stat-card">
    <div class="stat-icon"><i data-lucide="car"></i></div>
    <strong id="totalClasses">--</strong>
    <p>Total Classes</p>
   </div>
+
   <div class="stat-card">
    <div class="stat-icon"><i data-lucide="route"></i></div>
    <strong id="totalDistance">--</strong>
@@ -336,39 +327,42 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
   </div>
  </section>
 
- <!-- PROGRESS AND NEXT CLASS -->
+ <!-- TRAINING PROGRESS -->
  <section class="content-grid">
   <div class="panel">
    <div class="panel-head"><h2>Training Progress</h2></div>
+
    <div class="progress-row">
     <span>Course completion</span>
     <strong id="progressPercent">0%</strong>
    </div>
-   <div class="progress-track"><div class="progress-fill" id="progressBar"></div></div>
+
+   <div class="progress-track">
+    <div class="progress-fill" id="progressBar"></div>
+   </div>
+
    <div class="progress-info">
     <span id="progressDone">0 completed</span>
     <span id="progressTotal">0 total</span>
    </div>
-   <div class="milestones">
-    <div class="milestone"><i data-lucide="book-open"></i><strong>Basics</strong><span>Learning</span></div>
-    <div class="milestone"><i data-lucide="steering-wheel"></i><strong>Practice</strong><span>Driving</span></div>
-    <div class="milestone"><i data-lucide="award"></i><strong>Final</strong><span>Assessment</span></div>
-   </div>
-  </div>
 
-  <div class="panel">
-   <div class="panel-head"><h2>Next Class</h2></div>
-   <div class="class-box">
-    <span class="class-date" id="nextClassDate">Schedule Pending</span>
-    <h3 id="nextClassTitle">Your next driving session</h3>
-    <div class="class-details">
-     <div><i data-lucide="clock"></i><span id="nextClassTime">Time to be confirmed</span></div>
-     <div><i data-lucide="car-front"></i><span>TATA TIGOR XZ+</span></div>
-     <div><i data-lucide="map-pin"></i><span id="nextClassLocation">Location to be confirmed</span></div>
+   <div class="milestones">
+    <div class="milestone">
+     <i data-lucide="book-open"></i>
+     <strong>Basics</strong>
+     <span>Learning</span>
     </div>
-    <div class="class-status">
-     <span>Class Status</span>
-     <span class="status-pending" id="nextClassStatus">Awaiting Schedule</span>
+
+    <div class="milestone">
+     <i data-lucide="steering-wheel"></i>
+     <strong>Practice</strong>
+     <span>Driving</span>
+    </div>
+
+    <div class="milestone">
+     <i data-lucide="award"></i>
+     <strong>Final</strong>
+     <span>Assessment</span>
     </div>
    </div>
   </div>
@@ -380,6 +374,7 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
    <h2>My Class History</h2>
    <span style="font-size:10px;color:var(--muted)" id="historyCount">0 classes</span>
   </div>
+
   <div class="history-list" id="historyList">
    <div class="empty">Connect your account to view class history.</div>
   </div>
@@ -391,6 +386,7 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
    <h2>Instructor Remarks & Feedback</h2>
    <i data-lucide="message-square" style="color:var(--gold)"></i>
   </div>
+
   <div class="feedback-list" id="feedbackList">
    <div class="empty">Instructor remarks will appear here after your classes.</div>
   </div>
@@ -402,6 +398,7 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
    <h2>Share Your Feedback</h2>
    <i data-lucide="send" style="color:var(--gold)"></i>
   </div>
+
   <p class="login-description">Tell us about your experience at ABHINAASH A1 Driving.</p>
 
   <form class="feedback-form" id="feedbackForm">
@@ -416,11 +413,15 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
      <option value="1">★ - Needs Improvement</option>
     </select>
    </div>
+
    <div>
     <label for="feedbackText">Your Feedback</label>
     <textarea id="feedbackText" maxlength="1000" placeholder="Write your experience..." required></textarea>
    </div>
-   <button class="btn-primary" type="submit"><i data-lucide="message-circle"></i> Send Feedback</button>
+
+   <button class="btn-primary" type="submit">
+    <i data-lucide="message-circle"></i> Send Feedback
+   </button>
   </form>
 
   <div class="notice">
@@ -435,6 +436,7 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
  <!-- QUICK LINKS -->
  <section class="panel">
   <div class="panel-head"><h2>Quick Actions</h2></div>
+
   <div class="quick-grid">
    <a href="student-training.html" class="quick-action">
     <div class="quick-icon"><i data-lucide="car-front"></i></div>
@@ -485,8 +487,12 @@ import {initializeApp,getApps}
 from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
 
 import {
- getFirestore,doc,onSnapshot
+ getFirestore,doc,onSnapshot,updateDoc
 } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
+import {
+ getStorage,ref,uploadBytes,getDownloadURL
+} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-storage.js";
 
 /* EXISTING PROJECT CONFIGURATION */
 const firebaseConfig={
@@ -503,6 +509,7 @@ const STORAGE_KEY="a1_student_mobile";
 
 const app=getApps().length?getApps()[0]:initializeApp(firebaseConfig);
 const db=getFirestore(app);
+const storage=getStorage(app);
 
 let unsubscribeStudent=null;
 let currentMobile="";
@@ -511,9 +518,9 @@ let currentStudentActive=false;
 
 const $=id=>document.getElementById(id);
 
-$("todayDate").textContent=new Date().toLocaleDateString("en-IN",{
+$("todayDate") && ($("todayDate").textContent=new Date().toLocaleDateString("en-IN",{
  day:"2-digit",month:"short",year:"numeric"
-});
+}));
 
 function showMessage(message,color="var(--muted)"){
  $("loginMessage").textContent=message;
@@ -556,7 +563,7 @@ function formatDate(input){
  return String(input);
 }
 
-/* UNIQUE STUDENT AVATAR */
+/* STUDENT AVATAR */
 function getStudentAvatar(student){
  const seed=student.mobile||student.name||"A1Student";
 
@@ -564,6 +571,142 @@ function getStudentAvatar(student){
   "https://api.dicebear.com/9.x/avataaars/svg?seed="+
   encodeURIComponent(seed);
 }
+
+/* AUTOMATIC IMAGE COMPRESSION */
+async function compressImage(file){
+ return new Promise((resolve,reject)=>{
+  const image=new Image();
+  const objectURL=URL.createObjectURL(file);
+
+  image.onload=()=>{
+   URL.revokeObjectURL(objectURL);
+
+   const maxSize=600;
+   const scale=Math.min(1,maxSize/Math.max(image.width,image.height));
+
+   const canvas=document.createElement("canvas");
+   canvas.width=Math.round(image.width*scale);
+   canvas.height=Math.round(image.height*scale);
+
+   const ctx=canvas.getContext("2d");
+   ctx.fillStyle="#FFFFFF";
+   ctx.fillRect(0,0,canvas.width,canvas.height);
+   ctx.drawImage(image,0,0,canvas.width,canvas.height);
+
+   let quality=.82;
+
+   const makeBlob=()=>{
+    canvas.toBlob(blob=>{
+     if(!blob){
+      reject(new Error("Image compression failed."));
+      return;
+     }
+
+     if(blob.size>250*1024&&quality>.35){
+      quality-=.10;
+      makeBlob();
+      return;
+     }
+
+     resolve(blob);
+    },"image/jpeg",quality);
+   };
+
+   makeBlob();
+  };
+
+  image.onerror=()=>{
+   URL.revokeObjectURL(objectURL);
+   reject(new Error("Unable to read this image."));
+  };
+
+  image.src=objectURL;
+ });
+}
+
+/* PROFILE PHOTO UPLOAD */
+$("changePhotoBtn").addEventListener("click",()=>{
+ if(!currentMobile||!currentStudentActive){
+  alert("Please connect your active student account first.");
+  return;
+ }
+
+ $("profilePhotoInput").click();
+});
+
+$("profilePhotoInput").addEventListener("change",async function(){
+ const file=this.files?.[0];
+ if(!file)return;
+
+ if(!file.type.startsWith("image/")){
+  alert("Please select a valid image.");
+  this.value="";
+  return;
+ }
+
+ if(file.size>10*1024*1024){
+  alert("Please select an image smaller than 10 MB.");
+  this.value="";
+  return;
+ }
+
+ if(!currentMobile||!currentStudentActive){
+  alert("Your student account is not active.");
+  this.value="";
+  return;
+ }
+
+ const btn=$("changePhotoBtn");
+ const status=$("uploadStatus");
+ const oldPhoto=$("studentProfileAvatar").src;
+
+ btn.disabled=true;
+ btn.textContent="Compressing...";
+ status.className="upload-status";
+ status.textContent="Preparing your profile photo...";
+
+ try{
+  const compressedBlob=await compressImage(file);
+
+  status.textContent=
+   "Compressed image: "+(compressedBlob.size/1024).toFixed(0)+" KB. Uploading...";
+
+  const fileRef=ref(storage,
+   "student-profile/"+currentMobile+"/profile.jpg"
+  );
+
+  await uploadBytes(fileRef,compressedBlob,{
+   contentType:"image/jpeg"
+  });
+
+  const photoURL=await getDownloadURL(fileRef);
+
+  await updateDoc(doc(db,"studentData",currentMobile),{
+   profilePhoto:photoURL,
+   profilePhotoPath:"student-profile/"+currentMobile+"/profile.jpg"
+  });
+
+  $("studentProfileAvatar").src=photoURL;
+  $("userAvatar").src=photoURL;
+
+  status.className="upload-status success";
+  status.textContent="Profile photo updated successfully.";
+
+ }catch(error){
+  console.error("Photo upload error:",error);
+
+  status.className="upload-status error";
+  status.textContent="Upload failed: "+error.message;
+
+  $("studentProfileAvatar").src=oldPhoto;
+
+ }finally{
+  btn.disabled=false;
+  btn.innerHTML='<i data-lucide="camera" width="13"></i> Change Photo';
+  this.value="";
+  if(window.lucide)window.lucide.createIcons();
+ }
+});
 
 function parseLog(log){
  const text=String(log||"");
@@ -670,47 +813,6 @@ function renderFeedback(logs){
  });
 }
 
-/* NEXT CLASS LIVE DATA */
-function updateNextClass(student,left){
-
- const nextDate=value(student,"nextClassDate","");
- const nextTime=value(student,"nextClassTime","");
- const nextLocation=value(student,"nextClassLocation","");
- const nextStatus=value(student,"nextClassStatus","scheduled");
-
- $("nextClassDate").textContent=
-  nextDate?formatDate(nextDate):"Schedule Pending";
-
- $("nextClassTime").textContent=
-  nextTime||"Time to be confirmed";
-
- $("nextClassLocation").textContent=
-  nextLocation||"Location to be confirmed";
-
- const title=$("nextClassTitle");
- const status=$("nextClassStatus");
-
- status.className="status-pending";
-
- if(nextStatus==="cancelled"){
-  title.textContent="Class Cancelled";
-  status.textContent="Cancelled";
-  status.className="status-cancelled";
- }else if(nextStatus==="completed"||left===0){
-  title.textContent="Training Completed";
-  status.textContent="Completed";
-  status.className="status-scheduled";
- }else if(nextDate&&nextTime){
-  title.textContent="Your next driving session";
-  status.textContent="Scheduled";
-  status.className="status-scheduled";
- }else{
-  title.textContent="Your next driving session";
-  status.textContent="Awaiting Schedule";
-  status.className="status-pending";
- }
-}
-
 function renderDashboard(student,mobile){
 
  currentStudentName=value(student,"name","Student");
@@ -722,8 +824,8 @@ function renderDashboard(student,mobile){
  const total=Math.max(Number(value(student,"totalClasses",20))||20,1);
 
  /*
-   Existing admin logic increments "remaining" by 1 for each attendance.
-   Therefore this field is treated as completed classes.
+ Existing admin logic increments "remaining" by 1 for each attendance.
+ Therefore this field is treated as completed classes.
  */
  const storedCompleted=Math.max(
   Number(value(student,"remaining",0))||0,0
@@ -740,8 +842,8 @@ function renderDashboard(student,mobile){
  const classType=value(student,"classType","Group");
  const admissionDate=formatDate(value(student,"admissionDate",""));
 
- /* Student profile */
- $("studentName").textContent=currentStudentName;
+ /* PROFILE */
+ $("studentName") && ($("studentName").textContent=currentStudentName);
  $("profileStudentName").textContent=currentStudentName;
 
  const avatarURL=getStudentAvatar({...student,mobile});
@@ -759,7 +861,7 @@ function renderDashboard(student,mobile){
    "https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student";
  };
 
- /* Package details */
+ /* PACKAGE DETAILS */
  $("studentId").textContent="A1-"+mobile.slice(-4);
  $("packageName").textContent=
   classType==="Personal"?"Personal Training":"Group Training";
@@ -769,7 +871,7 @@ function renderDashboard(student,mobile){
  $("accountStatus").style.color=
   currentStudentActive?"var(--green)":"var(--red)";
 
- /* Statistics */
+ /* STATISTICS */
  $("completedClasses").textContent=completed;
  $("remainingClasses").textContent=left;
  $("totalClasses").textContent=total;
@@ -777,16 +879,13 @@ function renderDashboard(student,mobile){
  const distancePerClass=Number(value(student,"distancePerClass",5))||5;
  $("totalDistance").textContent=(logs.length*distancePerClass)+" KM";
 
- /* Progress */
+ /* PROGRESS */
  $("progressPercent").textContent=percent+"%";
  $("progressBar").style.width=percent+"%";
  $("progressDone").textContent=completed+" classes completed";
  $("progressTotal").textContent=total+" total classes";
 
- /* Next class */
- updateNextClass(student,left);
-
- /* History and remarks */
+ /* HISTORY AND REMARKS */
  renderHistory(logs);
  renderFeedback(logs);
 
@@ -799,7 +898,6 @@ function resetDashboard(){
  currentStudentActive=false;
 
  $("loginPanel").style.display="block";
- $("studentName").textContent="Student";
  $("profileStudentName").textContent="Student";
 
  const fallback="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student";
@@ -821,13 +919,6 @@ function resetDashboard(){
  $("progressDone").textContent="0 completed";
  $("progressTotal").textContent="0 total";
 
- $("nextClassDate").textContent="Schedule Pending";
- $("nextClassTime").textContent="Time to be confirmed";
- $("nextClassLocation").textContent="Location to be confirmed";
- $("nextClassTitle").textContent="Your next driving session";
- $("nextClassStatus").textContent="Awaiting Schedule";
- $("nextClassStatus").className="status-pending";
-
  $("historyList").innerHTML=
   '<div class="empty">Connect your account to view class history.</div>';
 
@@ -835,6 +926,7 @@ function resetDashboard(){
   '<div class="empty">Instructor remarks will appear here.</div>';
 
  $("historyCount").textContent="0 classes";
+ $("uploadStatus").textContent="";
 }
 
 function showManualLogin(message){
@@ -914,11 +1006,6 @@ $("studentMobile").addEventListener("keydown",e=>{
 /* AUTO LOGIN */
 const urlMobile=new URLSearchParams(window.location.search).get("mobile");
 const savedMobile=localStorage.getItem(STORAGE_KEY);
-
-/*
-  If a saved mobile exists, do not allow a different URL mobile
-  to silently replace it.
-*/
 const mobileToVerify=savedMobile||urlMobile;
 
 if(mobileToVerify&&/^[0-9]{10}$/.test(mobileToVerify)){
