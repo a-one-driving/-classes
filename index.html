@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<script src="https://unpkg.com/lucide@latest"></script>
+<script defer src="https://unpkg.com/lucide@latest"></script>
 
 <style>
 :root{
@@ -233,6 +233,81 @@ footer{border-top:1px solid var(--border);padding:30px 0;margin-top:50px}
 .footer-inner p{font-size:12px;color:var(--muted)}
 .footer-inner strong{color:var(--gold)}
 
+/* NEW STUDENTS */
+.admission-month{
+  width:max-content;
+  max-width:100%;
+  margin:0 auto 25px;
+  padding:10px 16px;
+  border:1px solid rgba(242,189,69,.3);
+  background:rgba(242,189,69,.09);
+  color:var(--gold);
+  border-radius:30px;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  font-size:12px;
+  font-weight:800;
+}
+.student-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+}
+.student-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:17px;
+  padding:20px 14px;
+  text-align:center;
+  transition:.25s;
+}
+.student-card:hover{
+  transform:translateY(-4px);
+  border-color:var(--gold);
+}
+.student-photo{
+  width:88px;
+  height:88px;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid var(--gold);
+  background:var(--card2);
+  margin:0 auto 13px;
+  display:block;
+}
+.student-card h3{
+  font-size:14px;
+  margin-bottom:7px;
+  overflow-wrap:anywhere;
+}
+.student-card p{
+  font-size:11px;
+  color:var(--muted);
+}
+.student-badge{
+  display:inline-block;
+  margin-top:10px;
+  padding:6px 10px;
+  border-radius:20px;
+  background:rgba(242,189,69,.1);
+  color:var(--gold);
+  font-size:9px;
+  font-weight:800;
+}
+.student-loading,
+.student-empty,
+.student-error{
+  grid-column:1/-1;
+  text-align:center;
+  padding:35px 15px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  color:var(--muted);
+  font-size:13px;
+}
+
 /* MODAL */
 .modal{
   display:none;position:fixed;inset:0;z-index:2000;
@@ -263,6 +338,7 @@ footer{border-top:1px solid var(--border);padding:30px 0;margin-top:50px}
   background:var(--gold);color:#111;border:0;
   border-radius:11px;font-weight:900;cursor:pointer
 }
+.modal-submit:disabled{opacity:.6;cursor:not-allowed}
 .status-msg{font-size:12px;margin-top:12px;line-height:1.6}
 .status-msg.error{color:#ff8585}
 .status-msg.success{color:#8be0a6}
@@ -291,6 +367,7 @@ footer{border-top:1px solid var(--border);padding:30px 0;margin-top:50px}
   .feature-grid{grid-template-columns:repeat(2,1fr)}
   .package-grid{grid-template-columns:1fr 1fr}
   .why-grid{grid-template-columns:1fr 1fr}
+  .student-grid{grid-template-columns:repeat(3,1fr)}
 }
 @media(max-width:600px){
   .nav{min-height:68px}
@@ -317,6 +394,9 @@ footer{border-top:1px solid var(--border);padding:30px 0;margin-top:50px}
   .licence-banner{padding:25px}
   .licence-banner h2{font-size:20px}
   .contact-grid{grid-template-columns:1fr}
+  .student-grid{grid-template-columns:repeat(2,1fr);gap:11px}
+  .student-card{padding:17px 10px}
+  .student-photo{width:75px;height:75px}
   .bottom-nav{display:flex}
   body{padding-bottom:68px}
   footer{margin-bottom:5px}
@@ -338,6 +418,7 @@ footer{border-top:1px solid var(--border);padding:30px 0;margin-top:50px}
 
     <nav class="nav-links">
       <a href="#home">Home</a>
+      <a href="#newStudents">New Students</a>
       <a href="#packages">Packages</a>
       <a href="#vehicle">Our Vehicle</a>
       <a href="#why">Why Us</a>
@@ -357,6 +438,7 @@ footer{border-top:1px solid var(--border);padding:30px 0;margin-top:50px}
 
   <div class="mobile-menu" id="mobileMenu">
     <a href="#home" onclick="toggleMenu()">Home</a>
+    <a href="#newStudents" onclick="toggleMenu()">New Students</a>
     <a href="#packages" onclick="toggleMenu()">Packages</a>
     <a href="#vehicle" onclick="toggleMenu()">Our Vehicle</a>
     <a href="#why" onclick="toggleMenu()">Why Choose Us</a>
@@ -366,6 +448,7 @@ footer{border-top:1px solid var(--border);padding:30px 0;margin-top:50px}
 </header>
 
 <main>
+
 <section class="hero" id="home">
   <div class="container">
     <div class="hero-content">
@@ -402,6 +485,26 @@ footer{border-top:1px solid var(--border);padding:30px 0;margin-top:50px}
     </button>
   </div>
 </div>
+
+<!-- NEW ADMISSIONS SECTION -->
+<section class="section" id="newStudents">
+  <div class="container">
+    <div class="section-heading">
+      <span>OUR NEW LEARNERS</span>
+      <h2>Welcome Our New Students</h2>
+      <p>Meet the students who started their driving journey with us.</p>
+    </div>
+
+    <div class="admission-month">
+      <i data-lucide="calendar-days"></i>
+      <span id="admissionMonth">This Month's Admissions</span>
+    </div>
+
+    <div class="student-grid" id="studentGrid">
+      <div class="student-loading">Loading new students...</div>
+    </div>
+  </div>
+</section>
 
 <section class="section">
   <div class="container">
@@ -525,7 +628,7 @@ footer{border-top:1px solid var(--border);padding:30px 0;margin-top:50px}
       <h2>Learn With Confidence</h2>
     </div>
     <div class="vehicle-box">
-      <img src="https://i.ibb.co/p9FK8R3/tigor.webp" alt="Tata Tigor driving training vehicle">
+      <img src="https://i.ibb.co/p9FK8R3/tigor.webp" alt="Tata Tigor driving training vehicle" loading="lazy">
       <div class="vehicle-info">
         <span class="vehicle-label">TRAINING VEHICLE</span>
         <h2>TATA TIGOR XZ+</h2>
@@ -573,6 +676,7 @@ footer{border-top:1px solid var(--border);padding:30px 0;margin-top:50px}
     </div>
   </div>
 </section>
+
 </main>
 
 <footer>
@@ -604,15 +708,15 @@ footer{border-top:1px solid var(--border);padding:30px 0;margin-top:50px}
 
     <div class="booking-grid">
       <div class="full">
-        <label class="form-label">Full Name</label>
+        <label class="form-label" for="bookName">Full Name</label>
         <input class="form-control" id="bookName" placeholder="Enter your name">
       </div>
       <div class="full">
-        <label class="form-label">Mobile Number</label>
+        <label class="form-label" for="bookPhone">Mobile Number</label>
         <input class="form-control" id="bookPhone" type="tel" maxlength="10" inputmode="numeric" placeholder="10-digit mobile number">
       </div>
       <div class="full">
-        <label class="form-label">Select Package</label>
+        <label class="form-label" for="bookPackage">Select Package</label>
         <select class="form-control" id="bookPackage">
           <option value="">Choose package</option>
           <option>Standard Plan - ₹3,500</option>
@@ -621,7 +725,7 @@ footer{border-top:1px solid var(--border);padding:30px 0;margin-top:50px}
         </select>
       </div>
       <div class="full">
-        <label class="form-label">Preferred Start Date</label>
+        <label class="form-label" for="bookDate">Preferred Start Date</label>
         <input class="form-control" id="bookDate" type="date">
       </div>
     </div>
@@ -643,25 +747,30 @@ const STORAGE_KEY = "a1_student_mobile";
 function toggleMenu(){
   document.getElementById("mobileMenu").classList.toggle("show");
 }
+
 function openLogin(){
   document.getElementById("loginModal").classList.add("show");
   document.getElementById("loginStatus").textContent="";
   document.getElementById("loginMobile").focus();
 }
+
 function closeLogin(){
   document.getElementById("loginModal").classList.remove("show");
 }
+
 function openBooking(packageName=""){
   document.getElementById("bookingModal").classList.add("show");
   if(packageName){
     const select=document.getElementById("bookPackage");
     const option=[...select.options].find(o=>o.text.includes(packageName));
-    if(option)select.value=option.value;
+    if(option)select.value=option.text;
   }
 }
+
 function closeBooking(){
   document.getElementById("bookingModal").classList.remove("show");
 }
+
 function submitBooking(){
   const name=document.getElementById("bookName").value.trim();
   const phone=document.getElementById("bookPhone").value.trim();
@@ -689,13 +798,13 @@ Preferred Date: ${date}`;
 
 function updateHeaderAccess(name){
   const btn=document.getElementById("headerAccess");
-  const label=document.getElementById("headerAccessText");
+
   if(name){
-    label.textContent="Dashboard";
     btn.innerHTML='<i data-lucide="layout-dashboard"></i><span id="headerAccessText">Dashboard</span>';
   }else{
     btn.innerHTML='<i data-lucide="user-round"></i><span id="headerAccessText">Login</span>';
   }
+
   if(window.lucide)lucide.createIcons();
 }
 
@@ -712,15 +821,18 @@ function hideWelcome(){
 
 function accessDashboard(){
   const mobile=localStorage.getItem(STORAGE_KEY);
+
   if(!mobile){
     openLogin();
     return;
   }
+
   window.location.href="student-dashboard.html?mobile="+encodeURIComponent(mobile);
 }
 
 function handleHeaderAccess(){
   const mobile=localStorage.getItem(STORAGE_KEY);
+
   if(mobile){
     accessDashboard();
   }else{
@@ -728,13 +840,16 @@ function handleHeaderAccess(){
   }
 }
 
-// Firebase student lookup
 document.getElementById("loginMobile").addEventListener("input",function(){
   this.value=this.value.replace(/\D/g,"").slice(0,10);
 });
 
 document.getElementById("loginMobile").addEventListener("keydown",function(e){
   if(e.key==="Enter")verifyStudent();
+});
+
+document.getElementById("bookPhone").addEventListener("input",function(){
+  this.value=this.value.replace(/\D/g,"").slice(0,10);
 });
 
 window.addEventListener("load",()=>{
@@ -754,8 +869,15 @@ window.submitBooking=submitBooking;
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+
 import {
-  getFirestore, doc, getDoc
+  getFirestore,
+  doc,
+  getDoc,
+  collection,
+  getDocs,
+  query,
+  where
 } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -770,12 +892,15 @@ const firebaseConfig = {
 const app=initializeApp(firebaseConfig);
 const db=getFirestore(app);
 
+/* STUDENT LOGIN LOOKUP */
 async function findStudent(mobile){
   const studentRef=doc(db,"studentData",mobile);
   const snapshot=await getDoc(studentRef);
+
   if(!snapshot.exists())return null;
 
   const data=snapshot.data();
+
   if(data.notActive===true)return null;
 
   return {
@@ -784,12 +909,14 @@ async function findStudent(mobile){
   };
 }
 
+/* RESTORE PREVIOUS LOGIN */
 async function restoreLogin(){
   const savedMobile=localStorage.getItem("a1_student_mobile");
   if(!savedMobile)return;
 
   try{
     const student=await findStudent(savedMobile);
+
     if(student){
       showWelcome(student.name);
     }else{
@@ -798,11 +925,11 @@ async function restoreLogin(){
     }
   }catch(error){
     console.error("Student restore error:",error);
-    // Network error: keep saved mobile, but don't claim verification.
     hideWelcome();
   }
 }
 
+/* VERIFY STUDENT LOGIN */
 async function verifyStudent(){
   const input=document.getElementById("loginMobile");
   const status=document.getElementById("loginStatus");
@@ -850,8 +977,106 @@ async function verifyStudent(){
   }
 }
 
+/* LOAD THIS MONTH'S APPROVED PUBLIC STUDENTS */
+async function loadMonthlyStudents(){
+
+  const grid=document.getElementById("studentGrid");
+  const monthLabel=document.getElementById("admissionMonth");
+
+  const now=new Date();
+
+  // Use local calendar month
+  const year=now.getFullYear();
+  const month=String(now.getMonth()+1).padStart(2,"0");
+  const monthKey=`${year}-${month}`;
+
+  monthLabel.textContent=now.toLocaleDateString("en-IN",{
+    month:"long",
+    year:"numeric"
+  })+" Admissions";
+
+  try{
+
+    const studentsQuery=query(
+      collection(db,"publicStudents"),
+      where("admissionMonth","==",monthKey)
+    );
+
+    const snapshot=await getDocs(studentsQuery);
+
+    const students=[];
+
+    snapshot.forEach(docSnap=>{
+      const student=docSnap.data();
+
+      // Only approved public student profiles are displayed
+      if(student.approved===true && student.name){
+        students.push(student);
+      }
+    });
+
+    if(students.length===0){
+      grid.innerHTML=`
+        <div class="student-empty">
+          No new admissions to display this month.
+        </div>`;
+      return;
+    }
+
+    students.sort((a,b)=>{
+      const dateA=new Date(a.admissionDate||0);
+      const dateB=new Date(b.admissionDate||0);
+      return dateB-dateA;
+    });
+
+    grid.innerHTML="";
+
+    students.forEach(student=>{
+
+      const card=document.createElement("div");
+      card.className="student-card";
+
+      const photo=document.createElement("img");
+      photo.className="student-photo";
+      photo.alt=student.name;
+      photo.loading="lazy";
+      photo.src=student.photoUrl || "https://placehold.co/150x150/172337/F2BD45?text=Student";
+
+      photo.onerror=()=>{
+        photo.onerror=null;
+        photo.src="https://placehold.co/150x150/172337/F2BD45?text=Student";
+      };
+
+      const name=document.createElement("h3");
+      name.textContent=student.name;
+
+      const institute=document.createElement("p");
+      institute.textContent="ABHINAASH A1 Driving Classes";
+
+      const badge=document.createElement("span");
+      badge.className="student-badge";
+      badge.textContent="NEW STUDENT";
+
+      card.append(photo,name,institute,badge);
+      grid.appendChild(card);
+    });
+
+  }catch(error){
+
+    console.error("Monthly students error:",error);
+
+    grid.innerHTML=`
+      <div class="student-error">
+        Unable to load student admissions right now.
+        Please try again later.
+      </div>`;
+  }
+}
+
 window.verifyStudent=verifyStudent;
+
 restoreLogin();
+loadMonthlyStudents();
 </script>
 
 </body>
