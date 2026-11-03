@@ -321,6 +321,7 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
    <div><small>Student ID</small><strong id="studentId">--</strong></div>
    <div><small>Class Type</small><strong id="classType">--</strong></div>
    <div><small>Admission Date</small><strong id="admissionDate">--</strong></div>
+   <div><small>Expected Ending Date</small><strong id="expectedEndDate">--</strong></div>
    <div><small>Account Status</small><strong id="accountStatus">--</strong></div>
   </div>
  </div>
@@ -514,7 +515,6 @@ let currentMobile="";
 let currentStudentName="";
 let currentStudentActive=false;
 
-/* Prevent duplicate photo requests */
 const photoRequests=new Set();
 
 const $=id=>document.getElementById(id);
@@ -532,8 +532,16 @@ function value(data,key,fallback=""){
  return v===undefined||v===null||v===""?fallback:v;
 }
 
+/* DATE DISPLAY */
 function formatDate(input){
  if(!input)return "--";
+
+ if(input instanceof Date){
+  if(Number.isNaN(input.getTime()))return "--";
+  return input.toLocaleDateString("en-IN",{
+   day:"2-digit",month:"short",year:"numeric"
+  });
+ }
 
  if(typeof input==="string"){
   const match=input.match(/^(\d{4})-(\d{2})-(\d{2})$/);
@@ -547,18 +555,115 @@ function formatDate(input){
  }
 
  if(input?.toDate){
-  return input.toDate().toLocaleDateString("en-IN",{
-   day:"2-digit",month:"short",year:"numeric"
-  });
- }
-
- if(input instanceof Date){
-  return input.toLocaleDateString("en-IN",{
-   day:"2-digit",month:"short",year:"numeric"
-  });
+  return formatDate(input.toDate());
  }
 
  return String(input);
+}
+
+/* =========================================
+   CLASS 1 DATE + EXPECTED ENDING DATE
+========================================= */
+
+/*
+  Attendance log date formats supported:
+  YYYY-MM-DD
+  DD/MM/YYYY
+  DD-MM-YYYY
+  Other browser-readable date strings
+  Firestore Timestamp
+*/
+function parseAttendanceDate(log){
+
+ const parsed=parseLog(log);
+ const raw=parsed.date;
+
+ if(!raw||raw==="Date not recorded")return null;
+
+ // Firestore Timestamp
+ if(raw&&typeof raw==="object"&&typeof raw.toDate==="function"){
+  const date=raw.toDate();
+  return Number.isNaN(date.getTime())?null:
+   new Date(date.getFullYear(),date.getMonth(),date.getDate());
+ }
+
+ const text=String(raw).trim();
+
+ // YYYY-MM-DD
+ let match=text.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+
+ if(match){
+  const date=new Date(+match[1],+match[2]-1,+match[3]);
+  if(date.getFullYear()===+match[1]&&
+     date.getMonth()===+match[2]-1&&
+     date.getDate()===+match[3]){
+   return date;
+  }
+  return null;
+ }
+
+ // DD/MM/YYYY or DD-MM-YYYY
+ match=text.match(/^(\d{1,2})[/-](\d{1,2})[/-](\d{4})$/);
+
+ if(match){
+  const day=+match[1];
+  const month=+match[2];
+  const year=+match[3];
+
+  const date=new Date(year,month-1,day);
+
+  if(date.getFullYear()===year&&
+     date.getMonth()===month-1&&
+     date.getDate()===day){
+   return date;
+  }
+  return null;
+ }
+
+ // Other date formats such as 03 Nov 2026
+ const parsedDate=new Date(text);
+
+ if(!Number.isNaN(parsedDate.getTime())){
+  return new Date(
+   parsedDate.getFullYear(),
+   parsedDate.getMonth(),
+   parsedDate.getDate()
+  );
+ }
+
+ return null;
+}
+
+/* Find the earliest valid attendance date = Driving Class 1 */
+function getClassOneDate(logs){
+
+ if(!Array.isArray(logs)||!logs.length)return null;
+
+ const dates=logs
+  .map(parseAttendanceDate)
+  .filter(date=>date instanceof Date&&!Number.isNaN(date.getTime()));
+
+ if(!dates.length)return null;
+
+ return dates.reduce((earliest,current)=>{
+  return current<earliest?current:earliest;
+ });
+}
+
+/* Add 30 calendar days */
+function calculateEndingDate(startDate){
+
+ if(!startDate)return null;
+
+ const endingDate=new Date(
+  startDate.getFullYear(),
+  startDate.getMonth(),
+  startDate.getDate()
+ );
+
+ endingDate.setDate(endingDate.getDate()+30);
+
+ return endingDate;
 }
 
 /* DEFAULT AVATAR */
@@ -598,7 +703,6 @@ function removeCachedPhoto(mobile){
  }
 }
 
-/* Display photo in both avatar locations */
 function applyProfilePhoto(mobile,photo){
  if(!photo||currentMobile!==mobile)return;
 
@@ -609,11 +713,6 @@ function applyProfilePhoto(mobile,photo){
  if(headerImage.src!==photo)headerImage.src=photo;
 }
 
-/*
-  Instant cache + background Firebase refresh.
-  Cached image appears immediately.
-  Firebase is checked in the background for the latest image.
-*/
 async function refreshProfilePhoto(mobile){
 
  if(photoRequests.has(mobile))return;
@@ -774,7 +873,6 @@ $("profilePhotoInput").addEventListener("change",async function(){
 
   await saveProfilePhoto(uploadMobile,base64);
 
-  // Save the new photo to local cache
   cachePhoto(uploadMobile,base64);
 
   if(currentMobile===uploadMobile){
@@ -922,24 +1020,32 @@ function renderDashboard(student,mobile){
   1
  );
 
- /*
-   SINGLE SOURCE OF TRUTH:
-   Completed classes = attendanceLogs.length
-   History count = attendanceLogs.length
- */
  const completed=logs.length;
  const left=Math.max(total-completed,0);
  const percent=Math.min(Math.round(completed/total*100),100);
 
  const classType=value(student,"classType","Group");
- const admissionDate=formatDate(value(student,"admissionDate",""));
+
+ /*
+   ADMISSION DATE:
+   Earliest valid attendance date = Driving Class 1.
+
+   EXPECTED ENDING DATE:
+   Admission date + 30 calendar days.
+ */
+ const firstClassDate=getClassOneDate(logs);
+
+ const admissionDate=firstClassDate
+  ?formatDate(firstClassDate)
+  :"Not available";
+
+ const expectedEndingDate=firstClassDate
+  ?formatDate(calculateEndingDate(firstClassDate))
+  :"Not available";
 
  $("profileStudentName").textContent=currentStudentName;
 
- /* =====================================
-    INSTANT PHOTO DISPLAY
- ===================================== */
-
+ /* INSTANT PHOTO DISPLAY */
  const defaultAvatar=getStudentAvatar({...student,mobile});
 
  const profileImage=$("studentProfileAvatar");
@@ -953,18 +1059,15 @@ function renderDashboard(student,mobile){
   headerImage.src="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student";
  };
 
- // Show default avatar first
  profileImage.src=defaultAvatar;
  headerImage.src=defaultAvatar;
 
- // Show cached photo immediately
  const cachedPhoto=getCachedPhoto(mobile);
 
  if(cachedPhoto){
   applyProfilePhoto(mobile,cachedPhoto);
  }
 
- // Always check Firebase in background for latest photo
  refreshProfilePhoto(mobile);
 
  /* STUDENT DETAILS */
@@ -972,7 +1075,10 @@ function renderDashboard(student,mobile){
  $("packageName").textContent=
   classType==="Personal"?"Personal Training":"Group Training";
  $("classType").textContent=classType;
+
  $("admissionDate").textContent=admissionDate;
+ $("expectedEndDate").textContent=expectedEndingDate;
+
  $("accountStatus").textContent=currentStudentActive?"Active":"Not Active";
  $("accountStatus").style.color=currentStudentActive?"var(--green)":"var(--red)";
 
@@ -1016,6 +1122,7 @@ function resetDashboard(){
  $("packageName").textContent="Driving Training";
  $("classType").textContent="--";
  $("admissionDate").textContent="--";
+ $("expectedEndDate").textContent="--";
  $("accountStatus").textContent="--";
 
  ["completedClasses","remainingClasses","totalClasses","totalDistance"].forEach(id=>{
@@ -1165,7 +1272,6 @@ if(window.lucide)window.lucide.createIcons();
 else window.addEventListener("load",()=>{
  if(window.lucide)window.lucide.createIcons();
 });
-
 </script>
 </body>
 </html>
