@@ -247,7 +247,7 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
   <h2>Student Verification</h2>
   <span style="font-size:10px;color:var(--gold)">Student Portal</span>
  </div>
- <p class="login-description" id="loginMessage">Verifying your registered student account...</p>
+<p class="login-description" id="loginMessage" style="display:none"></p>
  <div class="login-controls" id="manualLoginControls" style="display:none">
   <input type="tel" id="studentMobile" maxlength="10" inputmode="numeric" placeholder="Enter mobile number">
   <button class="btn-primary" id="loginButton" type="button">Connect Account</button>
@@ -952,7 +952,7 @@ function connectStudent(mobile){
  }
 
  currentMobile=mobile;
- showMessage("Verifying your registered student account...");
+ 
 
  const studentRef=doc(db,"studentData",mobile);
 
@@ -1002,6 +1002,7 @@ $("loginButton").addEventListener("click",()=>{
 
  localStorage.setItem(STORAGE_KEY,mobile);
  $("manualLoginControls").style.display="none";
+$("loginPanel").style.display="none";
  connectStudent(mobile);
 });
 
