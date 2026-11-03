@@ -23,406 +23,111 @@
  --muted:#A8B1C2;
  --border:rgba(255,255,255,.09);
  --green:#35C98A;
+ --red:#FF7777;
 }
-
 *{box-sizing:border-box;margin:0;padding:0}
-
-body{
- font-family:Inter,Arial,sans-serif;
- background:var(--bg);
- color:var(--white);
- min-height:100vh;
- line-height:1.5;
-}
-
+body{font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--white);min-height:100vh;line-height:1.5}
 a{text-decoration:none;color:inherit}
 button,input{font:inherit}
-
-.container{
- width:min(1160px,93%);
- margin:auto;
-}
+.container{width:min(1160px,93%);margin:auto}
 
 /* HEADER */
-header{
- position:sticky;
- top:0;
- z-index:100;
- background:rgba(8,13,24,.96);
- backdrop-filter:blur(16px);
- border-bottom:1px solid var(--border);
-}
-
-.topbar{
- height:68px;
- display:flex;
- align-items:center;
- justify-content:space-between;
-}
-
-.logo{
- font-size:17px;
- font-weight:800;
-}
-
+header{position:sticky;top:0;z-index:100;background:rgba(8,13,24,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.topbar{height:68px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:17px;font-weight:800}
 .logo span{color:var(--gold)}
-
-.header-links{
- display:flex;
- align-items:center;
- gap:20px;
-}
-
-.header-links a{
- font-size:11px;
- color:var(--muted);
- transition:.2s;
-}
-
+.header-links{display:flex;align-items:center;gap:20px}
+.header-links a{font-size:11px;color:var(--muted);transition:.2s}
 .header-links a:hover{color:var(--gold)}
 
 /* HERO */
-.hero{
- padding:55px 0 35px;
- text-align:center;
-}
-
-.hero-label{
- display:inline-flex;
- align-items:center;
- gap:7px;
- padding:7px 13px;
- border-radius:30px;
- background:rgba(242,189,69,.12);
- border:1px solid rgba(242,189,69,.22);
- color:var(--gold);
- font-size:10px;
- font-weight:800;
- letter-spacing:1px;
-}
-
-.hero h1{
- font-size:clamp(27px,5vw,43px);
- margin:17px 0 10px;
- line-height:1.2;
-}
-
+.hero{padding:55px 0 35px;text-align:center}
+.hero-label{display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border-radius:30px;background:rgba(242,189,69,.12);border:1px solid rgba(242,189,69,.22);color:var(--gold);font-size:10px;font-weight:800;letter-spacing:1px}
+.hero h1{font-size:clamp(27px,5vw,43px);margin:17px 0 10px;line-height:1.2}
 .hero h1 span{color:var(--gold)}
-
-.hero p{
- color:var(--muted);
- font-size:12px;
- max-width:510px;
- margin:auto;
-}
+.hero p{color:var(--muted);font-size:12px;max-width:510px;margin:auto}
 
 /* STATS */
-.stats{
- display:flex;
- justify-content:center;
- margin:24px 0 30px;
-}
-
-.stat-box{
- display:flex;
- align-items:center;
- gap:12px;
- padding:14px 24px;
- background:var(--card);
- border:1px solid var(--border);
- border-radius:15px;
-}
-
-.stat-icon{
- width:40px;
- height:40px;
- display:grid;
- place-items:center;
- border-radius:12px;
- background:rgba(242,189,69,.12);
- color:var(--gold);
-}
-
-.stat-box strong{
- display:block;
- font-size:22px;
-}
-
-.stat-box small{
- display:block;
- color:var(--muted);
- font-size:10px;
-}
+.stats{display:flex;justify-content:center;margin:24px 0 30px}
+.stat-box{display:flex;align-items:center;gap:12px;padding:14px 24px;background:var(--card);border:1px solid var(--border);border-radius:15px}
+.stat-icon{width:40px;height:40px;display:grid;place-items:center;border-radius:12px;background:rgba(242,189,69,.12);color:var(--gold)}
+.stat-box strong{display:block;font-size:22px}
+.stat-box small{display:block;color:var(--muted);font-size:10px}
 
 /* TOOLBAR */
-.gallery-toolbar{
- display:flex;
- align-items:center;
- justify-content:space-between;
- gap:12px;
- flex-wrap:wrap;
- margin-bottom:20px;
-}
-
-.gallery-heading h2{
- font-size:17px;
-}
-
-.gallery-heading p{
- color:var(--muted);
- font-size:10px;
- margin-top:3px;
-}
-
-.search-box{
- display:flex;
- align-items:center;
- gap:9px;
- background:var(--card);
- border:1px solid var(--border);
- border-radius:11px;
- padding:0 13px;
- width:min(300px,100%);
-}
-
+.gallery-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+.gallery-heading h2{font-size:17px}
+.gallery-heading p{color:var(--muted);font-size:10px;margin-top:3px}
+.search-box{display:flex;align-items:center;gap:9px;background:var(--card);border:1px solid var(--border);border-radius:11px;padding:0 13px;width:min(300px,100%)}
 .search-box i{color:var(--muted);width:17px}
-
-.search-box input{
- width:100%;
- padding:12px 0;
- background:transparent;
- border:0;
- outline:none;
- color:white;
- font-size:11px;
-}
-
+.search-box input{width:100%;padding:12px 0;background:transparent;border:0;outline:none;color:white;font-size:11px}
 .search-box input::placeholder{color:#7E8A9D}
 
 /* GALLERY */
-.gallery{
- display:grid;
- grid-template-columns:repeat(4,minmax(0,1fr));
- gap:17px;
- padding-bottom:55px;
-}
-
-.student-card{
- position:relative;
- overflow:hidden;
- background:var(--card);
- border:1px solid var(--border);
- border-radius:17px;
- cursor:pointer;
- transition:transform .25s,border-color .25s;
- animation:fadeUp .45s ease both;
-}
-
-.student-card:hover{
- transform:translateY(-5px);
- border-color:rgba(242,189,69,.45);
-}
-
-.student-photo{
- width:100%;
- aspect-ratio:1/1;
- background:var(--card2);
- overflow:hidden;
-}
-
-.student-photo img{
- width:100%;
- height:100%;
- display:block;
- object-fit:cover;
- transition:transform .35s;
-}
-
-.student-card:hover .student-photo img{
- transform:scale(1.055);
-}
-
-.student-details{
- padding:13px 14px 15px;
-}
-
-.student-details h3{
- font-size:12px;
- font-weight:700;
- overflow-wrap:anywhere;
-}
-
-.student-details p{
- display:flex;
- align-items:center;
- gap:5px;
- margin-top:6px;
- font-size:9px;
- color:var(--green);
-}
-
-.student-details p i{
- width:12px;
- height:12px;
-}
-
-.photo-indicator{
- position:absolute;
- top:10px;
- right:10px;
- width:28px;
- height:28px;
- display:grid;
- place-items:center;
- border-radius:50%;
- background:rgba(8,13,24,.78);
- color:var(--gold);
- backdrop-filter:blur(8px);
-}
-
+.gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:17px;padding-bottom:55px}
+.student-card{position:relative;overflow:hidden;background:var(--card);border:1px solid var(--border);border-radius:17px;transition:transform .25s,border-color .25s;animation:fadeUp .35s ease both}
+.student-card:hover{transform:translateY(-4px);border-color:rgba(242,189,69,.45)}
+.student-photo{width:100%;aspect-ratio:1/1;background:var(--card2);overflow:hidden;cursor:pointer}
+.student-photo img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .35s}
+.student-card:hover .student-photo img{transform:scale(1.055)}
+.student-details{padding:13px 14px 15px}
+.student-details h3{font-size:12px;font-weight:700;overflow-wrap:anywhere}
+.student-details p{display:flex;align-items:center;gap:5px;margin-top:6px;font-size:9px;color:var(--green)}
+.student-details p i{width:12px;height:12px}
+.photo-indicator{position:absolute;top:10px;right:10px;width:28px;height:28px;display:grid;place-items:center;border-radius:50%;background:rgba(8,13,24,.78);color:var(--gold);backdrop-filter:blur(8px);pointer-events:none}
 .photo-indicator i{width:14px}
 
-/* LOADING */
-.loading-state,.empty-state,.error-state{
- grid-column:1/-1;
- padding:55px 15px;
- text-align:center;
- background:var(--card);
- border:1px solid var(--border);
- border-radius:17px;
-}
-
-.loader{
- width:38px;
- height:38px;
- margin:0 auto 15px;
- border:3px solid rgba(242,189,69,.15);
- border-top-color:var(--gold);
- border-radius:50%;
- animation:spin .8s linear infinite;
-}
-
-.loading-state p,.empty-state p,.error-state p{
- color:var(--muted);
- font-size:11px;
-}
-
-.state-icon{
- width:43px;
- height:43px;
- margin:0 auto 13px;
- color:var(--gold);
-}
-
-.error-state .state-icon{color:#FF7777}
-
-.retry-btn{
- margin-top:15px;
- padding:10px 16px;
- border:0;
- border-radius:9px;
- background:var(--gold);
- color:#171717;
- font-size:10px;
- font-weight:800;
-}
-
-/* MODAL */
-.modal{
- display:none;
- position:fixed;
- inset:0;
- z-index:500;
- background:rgba(0,0,0,.88);
- backdrop-filter:blur(9px);
- align-items:center;
- justify-content:center;
- padding:18px;
-}
-
-.modal.show{display:flex}
-
-.modal-content{
- position:relative;
- width:min(430px,100%);
- background:var(--card);
- border:1px solid var(--border);
- border-radius:19px;
- overflow:hidden;
- animation:fadeUp .2s ease;
-}
-
-.modal-image{
- width:100%;
- max-height:65vh;
- display:block;
- object-fit:contain;
- background:#080D18;
-}
-
-.modal-info{
- padding:17px;
- text-align:center;
-}
-
-.modal-info h3{font-size:16px}
-.modal-info p{
- font-size:10px;
- color:var(--muted);
- margin-top:5px;
-}
-
-.modal-close{
- position:absolute;
- top:11px;
- right:11px;
- width:35px;
- height:35px;
- display:grid;
- place-items:center;
- border:1px solid rgba(255,255,255,.2);
- border-radius:50%;
- background:rgba(0,0,0,.65);
- color:white;
- z-index:2;
-}
-
-.modal-close i{width:17px}
-
-/* FOOTER */
-footer{
- border-top:1px solid var(--border);
- padding:25px 0;
-}
-
-.footer-inner{
+/* HOMEPAGE TOGGLE */
+.visibility-control{
  display:flex;
  align-items:center;
  justify-content:space-between;
- gap:12px;
- flex-wrap:wrap;
+ gap:8px;
+ padding:11px 14px 13px;
+ border-top:1px solid var(--border);
 }
+.visibility-info{min-width:0}
+.visibility-title{font-size:9px;color:var(--muted);font-weight:600}
+.visibility-status{font-size:9px;color:var(--red);display:block;margin-top:3px}
+.visibility-status.visible{color:var(--green)}
+.visibility-status.saving{color:var(--gold)}
+.visibility-switch{position:relative;width:42px;height:23px;flex-shrink:0}
+.visibility-switch input{opacity:0;width:0;height:0}
+.visibility-slider{position:absolute;inset:0;border-radius:30px;background:#455166;cursor:pointer;transition:.2s}
+.visibility-slider:before{content:"";position:absolute;width:17px;height:17px;left:3px;top:3px;border-radius:50%;background:#fff;transition:.2s}
+.visibility-switch input:checked+.visibility-slider{background:var(--green)}
+.visibility-switch input:checked+.visibility-slider:before{transform:translateX(19px)}
+.visibility-switch input:disabled+.visibility-slider{opacity:.5;cursor:wait}
 
-.footer-inner p{
- font-size:10px;
- color:var(--muted);
-}
+/* STATES */
+.loading-state,.empty-state,.error-state{grid-column:1/-1;padding:55px 15px;text-align:center;background:var(--card);border:1px solid var(--border);border-radius:17px}
+.loader{width:38px;height:38px;margin:0 auto 15px;border:3px solid rgba(242,189,69,.15);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite}
+.loading-state p,.empty-state p,.error-state p{color:var(--muted);font-size:11px}
+.state-icon{width:43px;height:43px;margin:0 auto 13px;color:var(--gold)}
+.error-state .state-icon{color:#FF7777}
+.retry-btn{margin-top:15px;padding:10px 16px;border:0;border-radius:9px;background:var(--gold);color:#171717;font-size:10px;font-weight:800}
+.load-note{text-align:center;color:var(--muted);font-size:10px;margin:-35px 0 45px}
 
-/* ANIMATIONS */
-@keyframes spin{
- to{transform:rotate(360deg)}
-}
+/* MODAL */
+.modal{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.88);backdrop-filter:blur(9px);align-items:center;justify-content:center;padding:18px}
+.modal.show{display:flex}
+.modal-content{position:relative;width:min(430px,100%);background:var(--card);border:1px solid var(--border);border-radius:19px;overflow:hidden}
+.modal-image{width:100%;max-height:65vh;display:block;object-fit:contain;background:#080D18}
+.modal-info{padding:17px;text-align:center}
+.modal-info h3{font-size:16px}
+.modal-info p{font-size:10px;color:var(--muted);margin-top:5px}
+.modal-close{position:absolute;top:11px;right:11px;width:35px;height:35px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.2);border-radius:50%;background:rgba(0,0,0,.65);color:white;z-index:2}
+.modal-close i{width:17px}
 
-@keyframes fadeUp{
- from{opacity:0;transform:translateY(12px)}
- to{opacity:1;transform:translateY(0)}
-}
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:25px 0}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.footer-inner p{font-size:10px;color:var(--muted)}
 
-/* RESPONSIVE */
-@media(max-width:850px){
- .gallery{grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
-}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 
+@media(max-width:850px){.gallery{grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}}
 @media(max-width:600px){
  .topbar{height:62px}
  .header-links{gap:12px}
@@ -444,7 +149,6 @@ footer{
 <header>
  <div class="container topbar">
   <a href="index.html" class="logo">ABHINAASH <span>A1</span></a>
-
   <nav class="header-links">
    <a href="index.html">Home</a>
    <a href="student-dashboard.html">Student Portal</a>
@@ -460,19 +164,12 @@ footer{
    <i data-lucide="users" width="14"></i>
    OUR DRIVING FAMILY
   </div>
-
   <h1>Students <span>Gallery</span></h1>
-
-  <p>
-   Meet the students of ABHINAASH A1 Driving.
-   Celebrating every learner and every driving journey.
-  </p>
+  <p>Meet the students of ABHINAASH A1 Driving. Celebrating every learner and every driving journey.</p>
 
   <div class="stats">
    <div class="stat-box">
-    <div class="stat-icon">
-     <i data-lucide="users" width="21"></i>
-    </div>
+    <div class="stat-icon"><i data-lucide="users" width="21"></i></div>
     <div>
      <strong id="studentCount">--</strong>
      <small>Students with photos</small>
@@ -483,32 +180,23 @@ footer{
 
  <section>
   <div class="gallery-toolbar">
-
    <div class="gallery-heading">
     <h2>Our Students</h2>
     <p>Students who have uploaded their profile pictures</p>
    </div>
-
    <div class="search-box">
     <i data-lucide="search"></i>
-    <input
-     type="search"
-     id="searchInput"
-     placeholder="Search student name..."
-     autocomplete="off"
-    >
+    <input type="search" id="searchInput" placeholder="Search student name..." autocomplete="off">
    </div>
-
   </div>
 
   <div class="gallery" id="gallery">
-
    <div class="loading-state">
     <div class="loader"></div>
     <p>Loading students gallery...</p>
    </div>
-
   </div>
+  <div class="load-note" id="loadNote">Preparing gallery...</div>
  </section>
 
 </main>
@@ -520,21 +208,16 @@ footer{
  </div>
 </footer>
 
-<!-- PHOTO PREVIEW MODAL -->
 <div class="modal" id="photoModal">
  <div class="modal-content">
-
   <button class="modal-close" id="closeModal" aria-label="Close">
    <i data-lucide="x"></i>
   </button>
-
   <img class="modal-image" id="modalImage" alt="Student photo">
-
   <div class="modal-info">
    <h3 id="modalName">Student</h3>
    <p>ABHINAASH A1 Driving Student</p>
   </div>
-
  </div>
 </div>
 
@@ -543,15 +226,13 @@ footer{
 import {initializeApp,getApps}
 from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
 
-import {
- getFirestore,collection,getDocs
-} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+import {getFirestore,collection,getDocs}
+from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
 import {
- getDatabase,ref as databaseRef,get
+ getDatabase,ref as databaseRef,get,set
 } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-database.js";
 
-/* FIREBASE CONFIG */
 const firebaseConfig={
  apiKey:"AIzaSyC3gWi8p85z-wkoJeWb3N3jYoQpcIar8Sww",
  authDomain:"abinash-driving.firebaseapp.com",
@@ -562,10 +243,7 @@ const firebaseConfig={
  appId:"1:641148830173:web:b7a500e5e7e2463da0f634"
 };
 
-const app=getApps().length
- ?getApps()[0]
- :initializeApp(firebaseConfig);
-
+const app=getApps().length?getApps()[0]:initializeApp(firebaseConfig);
 const db=getFirestore(app);
 const realtimeDB=getDatabase(app);
 
@@ -573,164 +251,92 @@ const $=id=>document.getElementById(id);
 
 let allStudents=[];
 
-/* SAFE TEXT */
-function safeName(student){
- return String(student?.name||"Student").trim()||"Student";
+function withTimeout(promise,ms,label){
+ let timer;
+ return Promise.race([
+  promise,
+  new Promise((_,reject)=>{
+   timer=setTimeout(()=>reject(new Error(label+" timed out")),ms);
+  })
+ ]).finally(()=>clearTimeout(timer));
 }
 
-/* LOADING / EMPTY / ERROR */
+function safeName(value){
+ return String(value||"Student").trim()||"Student";
+}
+
 function showState(type,message){
-
  const gallery=$("gallery");
-
- const icon={
-  empty:"users",
-  error:"alert-circle"
- }[type]||"info";
+ const icon=type==="empty"?"users":"alert-circle";
 
  gallery.innerHTML=`
   <div class="${type}-state">
    <i class="state-icon" data-lucide="${icon}"></i>
    <p>${message}</p>
-   ${type==="error"
-    ?'<button class="retry-btn" id="retryButton">Try Again</button>'
-    :''}
-  </div>
- `;
+   ${type==="error"?'<button class="retry-btn" id="retryButton">Try Again</button>':""}
+  </div>`;
 
  if(window.lucide)window.lucide.createIcons();
-
  $("retryButton")?.addEventListener("click",loadGallery);
 }
 
-/*
-  Read student records from Firestore.
-  Read photos from:
-  profilePhotos/{mobile}
-  Only records with a valid uploaded photo are displayed.
-*/
-async function loadGallery(){
+/* FETCH PROFILE PHOTO */
+async function loadStudentPhoto(studentDoc){
+ const mobile=studentDoc.id;
+ const data=studentDoc.data();
 
- const gallery=$("gallery");
-
- gallery.innerHTML=`
-  <div class="loading-state">
-   <div class="loader"></div>
-   <p>Loading students gallery...</p>
-  </div>
- `;
-
- $("studentCount").textContent="...";
+ if(!/^\d{10}$/.test(mobile))return null;
+ if(data.notActive===true)return null;
 
  try{
-
-  const studentsSnapshot=await getDocs(
-   collection(db,"studentData")
+  const snapshot=await withTimeout(
+   get(databaseRef(realtimeDB,"profilePhotos/"+mobile)),
+   10000,
+   "Profile photo"
   );
 
-  const students=studentsSnapshot.docs;
+  if(!snapshot.exists())return null;
 
-  if(!students.length){
-   allStudents=[];
-   $("studentCount").textContent="0";
-   showState("empty","No student records found.");
-   return;
-  }
+  const photoData=snapshot.val();
+  const image=photoData?.image;
 
-  const photoResults=[];
+  /* No image = skip student */
+  if(typeof image!=="string"||!image.trim())return null;
 
-  /*
-    Fetch profile photos with limited parallel requests.
-    Avoids sending too many requests at once.
-  */
-  const batchSize=10;
+  /* Accept Base64 image or hosted image URL */
+  const validImage=
+   image.startsWith("data:image/")||
+   /^https?:\/\/\S+$/i.test(image);
 
-  for(let i=0;i<students.length;i+=batchSize){
+  if(!validImage)return null;
 
-   const batch=students.slice(i,i+batchSize);
-
-   const results=await Promise.all(
-    batch.map(async studentDoc=>{
-
-     const mobile=studentDoc.id;
-     const student=studentDoc.data();
-
-     try{
-
-      const photoSnapshot=await get(
-       databaseRef(realtimeDB,"profilePhotos/"+mobile)
-      );
-
-      if(!photoSnapshot.exists())return null;
-
-      const photo=photoSnapshot.val()?.image;
-
-      if(
-       typeof photo!=="string"||
-       !photo.startsWith("data:image/")
-      ){
-       return null;
-      }
-
-      return {
-       name:safeName(student),
-       photo:photo
-      };
-
-     }catch(error){
-      console.warn("Photo unavailable:",error);
-      return null;
-     }
-
-    })
-   );
-
-   photoResults.push(...results);
-  }
-
-  allStudents=photoResults.filter(Boolean);
-
-  $("studentCount").textContent=allStudents.length;
-
-  if(!allStudents.length){
-   showState(
-    "empty",
-    "No students have uploaded their profile pictures yet."
-   );
-   return;
-  }
-
-  renderGallery(allStudents);
+  return {
+   mobile,
+   name:safeName(data.name||data.studentName),
+   photo:image,
+   showOnHomepage:photoData.showOnHomepage===true
+  };
 
  }catch(error){
-
-  console.error("Gallery loading error:",error);
-
-  $("studentCount").textContent="--";
-
-  showState(
-   "error",
-   "Unable to load the gallery. Please check your Firebase permissions and internet connection."
-  );
+  console.warn("Skipping student photo:",mobile,error);
+  return null;
  }
 }
 
-/* RENDER STUDENT CARDS */
+/* RENDER */
 function renderGallery(students){
-
  const gallery=$("gallery");
  gallery.replaceChildren();
 
  if(!students.length){
-  showState("empty","No matching students found.");
+  showState("empty","No matching students with profile photos found.");
   return;
  }
 
  students.forEach((student,index)=>{
-
   const card=document.createElement("article");
   card.className="student-card";
-  card.style.animationDelay=Math.min(index*35,350)+"ms";
+  card.style.animationDelay=Math.min(index*25,300)+"ms";
 
   const photoBox=document.createElement("div");
   photoBox.className="student-photo";
@@ -744,18 +350,14 @@ function renderGallery(students){
   image.onerror=()=>{
    card.remove();
    $("studentCount").textContent=
-    gallery.querySelectorAll(".student-card").length;
+    document.querySelectorAll(".student-card").length;
   };
 
   photoBox.appendChild(image);
 
   const indicator=document.createElement("div");
   indicator.className="photo-indicator";
-
-  const cameraIcon=document.createElement("i");
-  cameraIcon.setAttribute("data-lucide","camera");
-
-  indicator.appendChild(cameraIcon);
+  indicator.innerHTML='<i data-lucide="camera"></i>';
 
   const details=document.createElement("div");
   details.className="student-details";
@@ -763,21 +365,51 @@ function renderGallery(students){
   const name=document.createElement("h3");
   name.textContent=student.name;
 
-  const status=document.createElement("p");
+  const studentLabel=document.createElement("p");
+  studentLabel.innerHTML='<i data-lucide="badge-check"></i> A1 Student';
 
-  const checkIcon=document.createElement("i");
-  checkIcon.setAttribute("data-lucide","badge-check");
+  details.append(name,studentLabel);
 
-  const statusText=document.createTextNode("A1 Student");
+  /* HOMEPAGE VISIBILITY CONTROL */
+  const visibility=document.createElement("div");
+  visibility.className="visibility-control";
 
-  status.append(checkIcon,statusText);
-  details.append(name,status);
+  const info=document.createElement("div");
+  info.className="visibility-info";
 
-  card.append(photoBox,indicator,details);
+  const title=document.createElement("div");
+  title.className="visibility-title";
+  title.textContent="Show on homepage";
 
-  card.addEventListener("click",()=>{
-   openPhoto(student);
-  });
+  const status=document.createElement("span");
+  status.className="visibility-status"+(student.showOnHomepage?" visible":"");
+  status.id="status-"+student.mobile;
+  status.textContent=student.showOnHomepage
+   ?"Visible on homepage"
+   :"Hidden from homepage";
+
+  info.append(title,status);
+
+  const label=document.createElement("label");
+  label.className="visibility-switch";
+
+  const toggle=document.createElement("input");
+  toggle.type="checkbox";
+  toggle.className="homepage-toggle";
+  toggle.dataset.mobile=student.mobile;
+  toggle.checked=student.showOnHomepage;
+  toggle.setAttribute("aria-label","Show "+student.name+" on homepage");
+
+  const slider=document.createElement("span");
+  slider.className="visibility-slider";
+
+  label.append(toggle,slider);
+  visibility.append(info,label);
+
+  card.append(photoBox,indicator,details,visibility);
+
+  /* Only photo area opens preview */
+  photoBox.addEventListener("click",()=>openPhoto(student));
 
   gallery.appendChild(card);
  });
@@ -786,52 +418,168 @@ function renderGallery(students){
 }
 
 /* SEARCH */
-$("searchInput").addEventListener("input",function(){
+function getFilteredStudents(){
+ const query=$("searchInput").value.trim().toLowerCase();
 
- const query=this.value.trim().toLowerCase();
+ if(!query)return allStudents;
 
- const filtered=allStudents.filter(student=>
-  student.name.toLowerCase().includes(query)
+ return allStudents.filter(student=>
+  student.name.toLowerCase().includes(query)||
+  student.mobile.includes(query)
  );
+}
 
- renderGallery(filtered);
-
+$("searchInput").addEventListener("input",()=>{
+ renderGallery(getFilteredStudents());
 });
 
-/* PHOTO MODAL */
-function openPhoto(student){
+/* LOAD GALLERY - 30 PHOTOS IN PARALLEL */
+async function loadGallery(){
+ allStudents=[];
+ $("studentCount").textContent="...";
+ $("loadNote").textContent="Loading student records...";
 
+ $("gallery").innerHTML=`
+  <div class="loading-state">
+   <div class="loader"></div>
+   <p>Loading students gallery...</p>
+  </div>`;
+
+ try{
+  const snapshot=await withTimeout(
+   getDocs(collection(db,"studentData")),
+   15000,
+   "Student records"
+  );
+
+  const studentDocs=snapshot.docs.filter(doc=>{
+   const data=doc.data();
+   return data.notActive!==true&&/^\d{10}$/.test(doc.id);
+  });
+
+  if(!studentDocs.length){
+   $("studentCount").textContent="0";
+   showState("empty","No active student records found.");
+   $("loadNote").textContent="";
+   return;
+  }
+
+  const batchSize=30;
+
+  for(let i=0;i<studentDocs.length;i+=batchSize){
+   const batch=studentDocs.slice(i,i+batchSize);
+
+   const results=await Promise.all(
+    batch.map(doc=>loadStudentPhoto(doc))
+   );
+
+   allStudents.push(...results.filter(Boolean));
+
+   $("studentCount").textContent=allStudents.length;
+   renderGallery(getFilteredStudents());
+
+   $("loadNote").textContent=
+    `Loaded ${Math.min(i+batch.length,studentDocs.length)} of ${studentDocs.length} student records`;
+  }
+
+  if(!allStudents.length){
+   showState("empty","No students have uploaded their profile pictures yet.");
+  }
+
+  $("studentCount").textContent=allStudents.length;
+  $("loadNote").textContent=
+   `Gallery ready · ${allStudents.length} profile photos loaded`;
+
+ }catch(error){
+  console.error("Gallery loading error:",error);
+  $("studentCount").textContent="--";
+  showState("error","Unable to load gallery. Check internet connection and Firebase permissions.");
+  $("loadNote").textContent="Loading failed.";
+ }
+}
+
+/* SAVE HOMEPAGE VISIBILITY */
+$("gallery").addEventListener("change",async event=>{
+ const toggle=event.target.closest(".homepage-toggle");
+ if(!toggle)return;
+
+ const mobile=toggle.dataset.mobile;
+ const enabled=toggle.checked;
+ const status=$("status-"+mobile);
+
+ toggle.disabled=true;
+ if(status){
+  status.textContent="Saving...";
+  status.className="visibility-status saving";
+ }
+
+ try{
+  await withTimeout(
+   set(
+    databaseRef(realtimeDB,"profilePhotos/"+mobile+"/showOnHomepage"),
+    enabled
+   ),
+   10000,
+   "Visibility update"
+  );
+
+  const student=allStudents.find(item=>item.mobile===mobile);
+  if(student)student.showOnHomepage=enabled;
+
+  if(status){
+   status.textContent=enabled?"Visible on homepage":"Hidden from homepage";
+   status.className="visibility-status"+(enabled?" visible":"");
+  }
+
+ }catch(error){
+  console.error("Toggle save error:",error);
+  toggle.checked=!enabled;
+
+  if(status){
+   status.textContent="Save failed - check permissions";
+   status.className="visibility-status";
+  }
+
+  alert("Visibility update failed. Please check Firebase Database Rules and admin permissions.");
+ }finally{
+  toggle.disabled=false;
+ }
+});
+
+/* PHOTO PREVIEW */
+function openPhoto(student){
  $("modalImage").src=student.photo;
  $("modalName").textContent=student.name;
-
  $("photoModal").classList.add("show");
  document.body.style.overflow="hidden";
 }
 
 function closePhoto(){
-
  $("photoModal").classList.remove("show");
- document.body.style.overflow="";
  $("modalImage").src="";
+ document.body.style.overflow="";
 }
 
 $("closeModal").addEventListener("click",closePhoto);
 
 $("photoModal").addEventListener("click",event=>{
- if(event.target===$("photoModal")){
-  closePhoto();
- }
+ if(event.target===$("photoModal"))closePhoto();
 });
 
 document.addEventListener("keydown",event=>{
  if(event.key==="Escape")closePhoto();
 });
 
-/* INITIALIZE */
+/* START */
 loadGallery();
 
-if(window.lucide)window.lucide.createIcons();
-
 </script>
+
+<script>
+document.addEventListener("DOMContentLoaded",()=>{
+ if(window.lucide)window.lucide.createIcons();
+});
+</script>
+
 </body>
 </html>
