@@ -19,48 +19,104 @@
   --card:#111A29;
   --card2:#172337;
   --gold:#F2BD45;
+  --gold2:#D6A52F;
   --white:#fff;
   --muted:#A8B1C2;
   --border:rgba(255,255,255,.09);
+  --radius:20px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:Inter,sans-serif;background:var(--bg);color:var(--white);overflow-x:hidden}
+body{
+  font-family:Inter,sans-serif;
+  background:var(--bg);
+  color:var(--white);
+  overflow-x:hidden;
+}
 button,input,select{font:inherit}
 a{text-decoration:none;color:inherit}
 .container{width:min(1160px,92%);margin:auto}
 .section{padding:75px 0}
 .section-heading{text-align:center;margin-bottom:38px}
-.section-heading span{color:var(--gold);font-size:12px;font-weight:800;letter-spacing:2px}
+.section-heading span{
+  color:var(--gold);font-size:12px;font-weight:800;
+  letter-spacing:2px;text-transform:uppercase
+}
 .section-heading h2{font-size:clamp(27px,5vw,40px);margin-top:10px}
 .section-heading p{color:var(--muted);margin-top:10px;font-size:14px;line-height:1.7}
 
 /* HEADER */
-header{position:sticky;top:0;z-index:1000;background:rgba(8,13,24,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
-.nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+header{
+  position:sticky;top:0;z-index:1000;
+  background:rgba(8,13,24,.95);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.nav{
+  min-height:76px;display:flex;align-items:center;
+  justify-content:space-between;gap:12px
+}
 .logo{display:flex;align-items:center;gap:11px;min-width:0}
-.logo-mark{width:43px;height:43px;border-radius:13px;background:linear-gradient(135deg,var(--gold),#f8d77d);color:#111;display:grid;place-items:center;font-size:19px;font-weight:900;flex-shrink:0}
+.logo-mark{
+  width:43px;height:43px;border-radius:13px;
+  background:linear-gradient(135deg,var(--gold),#f8d77d);
+  color:#111;display:grid;place-items:center;
+  font-size:19px;font-weight:900;flex-shrink:0
+}
 .logo-text strong{display:block;font-size:15px;letter-spacing:.5px}
 .logo-text small{font-size:10px;color:var(--gold);letter-spacing:2px}
 .nav-right{display:flex;align-items:center;gap:10px}
 .nav-links{display:flex;align-items:center;gap:25px}
 .nav-links a{font-size:13px;color:var(--muted);font-weight:600}
 .nav-links a:hover{color:var(--gold)}
-.header-access{display:flex;align-items:center;justify-content:center;gap:7px;background:var(--gold);color:#101010;border:0;border-radius:12px;padding:11px 14px;font-size:12px;font-weight:800;cursor:pointer;white-space:nowrap}
-.menu-btn{width:42px;height:42px;border:1px solid var(--border);background:var(--card);color:white;border-radius:12px;display:grid;place-items:center;cursor:pointer;flex-shrink:0}
-.mobile-menu{display:none;padding:12px 4%;border-top:1px solid var(--border);background:#0d1523}
+.header-access{
+  display:flex;align-items:center;justify-content:center;gap:7px;
+  background:var(--gold);color:#101010;border:0;
+  border-radius:12px;padding:11px 14px;
+  font-size:12px;font-weight:800;cursor:pointer;white-space:nowrap
+}
+.menu-btn{
+  width:42px;height:42px;border:1px solid var(--border);
+  background:var(--card);color:white;border-radius:12px;
+  display:grid;place-items:center;cursor:pointer;flex-shrink:0
+}
+.mobile-menu{
+  display:none;padding:12px 4%;
+  border-top:1px solid var(--border);background:#0d1523
+}
 .mobile-menu.show{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.mobile-menu a{padding:13px;background:var(--card);border-radius:10px;font-size:13px;color:var(--muted)}
+.mobile-menu a{
+  padding:13px;background:var(--card);border-radius:10px;
+  font-size:13px;color:var(--muted)
+}
 
 /* HERO */
-.hero{min-height:620px;display:flex;align-items:center;position:relative;overflow:hidden;background:linear-gradient(90deg,rgba(5,10,19,.96),rgba(5,10,19,.75),rgba(5,10,19,.25)),url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1800&q=85") center/cover}
+.hero{
+  min-height:620px;display:flex;align-items:center;
+  position:relative;overflow:hidden;
+  background:
+    linear-gradient(90deg,rgba(5,10,19,.96),rgba(5,10,19,.75),rgba(5,10,19,.25)),
+    url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1800&q=85") center/cover;
+}
 .hero-content{max-width:680px;padding:85px 0}
-.hero-tag{display:inline-flex;align-items:center;gap:8px;padding:9px 13px;border:1px solid rgba(242,189,69,.4);border-radius:30px;color:var(--gold);font-size:11px;font-weight:800;letter-spacing:1px}
-.hero h1{font-size:clamp(38px,7vw,67px);line-height:1.08;margin:24px 0 18px;font-weight:900}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:9px 13px;border:1px solid rgba(242,189,69,.4);
+  border-radius:30px;color:var(--gold);font-size:11px;
+  font-weight:800;letter-spacing:1px
+}
+.hero h1{
+  font-size:clamp(38px,7vw,67px);line-height:1.08;
+  margin:24px 0 18px;font-weight:900
+}
 .hero h1 em{color:var(--gold);font-style:normal}
 .hero p{color:#c4ccda;max-width:520px;font-size:15px;line-height:1.8}
 .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
-.btn-primary,.btn-outline{min-height:48px;padding:0 20px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;gap:9px;font-size:13px;font-weight:800;cursor:pointer}
+.btn-primary,.btn-outline{
+  min-height:48px;padding:0 20px;border-radius:12px;
+  display:inline-flex;align-items:center;justify-content:center;
+  gap:9px;font-size:13px;font-weight:800;cursor:pointer
+}
 .btn-primary{background:var(--gold);color:#101010;border:0}
 .btn-outline{border:1px solid rgba(255,255,255,.35);color:white;background:transparent}
 .hero-stats{display:flex;gap:30px;margin-top:45px;flex-wrap:wrap}
@@ -68,29 +124,61 @@ header{position:sticky;top:0;z-index:1000;background:rgba(8,13,24,.95);backdrop-
 .hero-stat small{font-size:11px;color:var(--muted)}
 
 /* WELCOME */
-.welcome-box{display:none;margin:25px auto 0;background:linear-gradient(120deg,#172337,#111a29);border:1px solid rgba(242,189,69,.3);padding:17px 20px;border-radius:16px;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.welcome-box{
+  display:none;margin:25px auto 0;
+  background:linear-gradient(120deg,#172337,#111a29);
+  border:1px solid rgba(242,189,69,.3);
+  padding:17px 20px;border-radius:16px;
+  align-items:center;justify-content:space-between;gap:12px;
+  flex-wrap:wrap
+}
 .welcome-box.show{display:flex}
 .welcome-box h3{font-size:16px}
 .welcome-box p{font-size:12px;color:var(--muted);margin-top:5px}
 .welcome-box strong{color:var(--gold)}
-.welcome-dashboard{border:0;background:var(--gold);color:#111;border-radius:10px;padding:11px 15px;font-size:12px;font-weight:800;cursor:pointer}
+.welcome-dashboard{
+  border:0;background:var(--gold);color:#111;
+  border-radius:10px;padding:11px 15px;font-size:12px;
+  font-weight:800;cursor:pointer
+}
 
 /* FEATURES */
-.feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
-.feature-card{padding:24px 19px;background:var(--card);border:1px solid var(--border);border-radius:17px;transition:.25s}
+.feature-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:15px
+}
+.feature-card{
+  padding:24px 19px;background:var(--card);
+  border:1px solid var(--border);border-radius:17px;
+  transition:.25s
+}
 .feature-card:hover{transform:translateY(-5px);border-color:var(--gold)}
-.feature-icon{width:47px;height:47px;border-radius:14px;display:grid;place-items:center;background:rgba(242,189,69,.12);color:var(--gold);margin-bottom:17px}
+.feature-icon{
+  width:47px;height:47px;border-radius:14px;
+  display:grid;place-items:center;background:rgba(242,189,69,.12);
+  color:var(--gold);margin-bottom:17px
+}
 .feature-card h3{font-size:15px;margin-bottom:8px}
 .feature-card p{font-size:12px;line-height:1.7;color:var(--muted)}
 
 /* PACKAGES */
 .package-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.package-card{background:var(--card);border:1px solid var(--border);border-radius:21px;padding:27px;position:relative}
+.package-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:21px;padding:27px;position:relative
+}
 .package-card.popular{border:1px solid var(--gold);background:linear-gradient(160deg,#1b2a40,#111a29)}
-.popular-label{position:absolute;right:17px;top:17px;background:var(--gold);color:#111;font-size:9px;font-weight:900;padding:7px 10px;border-radius:20px}
-.plan-icon{width:45px;height:45px;border-radius:13px;background:rgba(242,189,69,.13);color:var(--gold);display:grid;place-items:center;margin-bottom:18px}
+.popular-label{
+  position:absolute;right:17px;top:17px;
+  background:var(--gold);color:#111;font-size:9px;
+  font-weight:900;padding:7px 10px;border-radius:20px
+}
+.package-card .plan-icon{
+  width:45px;height:45px;border-radius:13px;
+  background:rgba(242,189,69,.13);color:var(--gold);
+  display:grid;place-items:center;margin-bottom:18px
+}
 .package-card h3{font-size:19px}
-.duration{font-size:12px;color:var(--muted);margin-top:7px}
+.package-card .duration{font-size:12px;color:var(--muted);margin-top:7px}
 .price{font-size:36px;font-weight:900;margin:22px 0}
 .price small{font-size:12px;color:var(--muted);font-weight:500}
 .package-card ul{list-style:none;display:grid;gap:13px;margin-bottom:25px}
@@ -100,26 +188,43 @@ header{position:sticky;top:0;z-index:1000;background:rgba(8,13,24,.95);backdrop-
 
 /* WHY US */
 .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.why-card{padding:23px;background:var(--card);border:1px solid var(--border);border-radius:17px}
+.why-card{
+  padding:23px;background:var(--card);border:1px solid var(--border);
+  border-radius:17px
+}
 .why-card i{color:var(--gold);width:28px;height:28px;margin-bottom:15px}
 .why-card h3{font-size:15px;margin-bottom:8px}
 .why-card p{font-size:12px;line-height:1.7;color:var(--muted)}
 
 /* VEHICLE */
-.vehicle-box{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:23px;overflow:hidden;padding:20px}
+.vehicle-box{
+  display:grid;grid-template-columns:1fr 1fr;gap:28px;
+  align-items:center;background:var(--card);
+  border:1px solid var(--border);border-radius:23px;
+  overflow:hidden;padding:20px
+}
 .vehicle-box img{width:100%;height:300px;object-fit:cover;border-radius:16px}
 .vehicle-info h2{font-size:29px;margin:12px 0}
 .vehicle-info p{color:var(--muted);font-size:13px;line-height:1.8}
 .vehicle-label{color:var(--gold);font-size:11px;font-weight:800;letter-spacing:2px}
 
 /* LICENCE */
-.licence-banner{padding:35px;border-radius:20px;background:linear-gradient(120deg,#202f46,#111a29);border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.licence-banner{
+  padding:35px;border-radius:20px;
+  background:linear-gradient(120deg,#202f46,#111a29);
+  border:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;
+  gap:20px;flex-wrap:wrap
+}
 .licence-banner h2{font-size:23px;margin-bottom:9px}
 .licence-banner p{font-size:13px;color:var(--muted);line-height:1.7}
 
-/* CONTACT */
+/* CONTACT / FOOTER */
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.contact-card{padding:25px;background:var(--card);border:1px solid var(--border);border-radius:18px}
+.contact-card{
+  padding:25px;background:var(--card);border:1px solid var(--border);
+  border-radius:18px
+}
 .contact-card h3{margin-bottom:12px}
 .contact-card p{color:var(--muted);font-size:13px;line-height:1.8}
 .contact-card i{color:var(--gold);margin-right:7px}
@@ -129,40 +234,131 @@ footer{border-top:1px solid var(--border);padding:30px 0;margin-top:50px}
 .footer-inner strong{color:var(--gold)}
 
 /* NEW STUDENTS */
-.admission-month{width:max-content;max-width:100%;margin:0 auto 25px;padding:10px 16px;border:1px solid rgba(242,189,69,.3);background:rgba(242,189,69,.09);color:var(--gold);border-radius:30px;display:flex;align-items:center;gap:9px;font-size:12px;font-weight:800}
-.student-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.student-card{background:var(--card);border:1px solid var(--border);border-radius:17px;padding:20px 14px;text-align:center;transition:.25s}
-.student-card:hover{transform:translateY(-4px);border-color:var(--gold)}
-.student-photo{width:88px;height:88px;border-radius:50%;object-fit:cover;border:3px solid var(--gold);background:var(--card2);margin:0 auto 13px;display:grid;place-items:center}
-.student-initial{width:88px;height:88px;border-radius:50%;border:3px solid var(--gold);background:linear-gradient(135deg,#263c57,#111a29);color:var(--gold);margin:0 auto 13px;display:grid;place-items:center;font-size:27px;font-weight:900}
-.student-card h3{font-size:14px;margin-bottom:7px;overflow-wrap:anywhere}
-.student-card p{font-size:11px;color:var(--muted)}
-.student-badge{display:inline-block;margin-top:10px;padding:6px 10px;border-radius:20px;background:rgba(242,189,69,.1);color:var(--gold);font-size:9px;font-weight:800}
-.student-loading,.student-empty,.student-error{grid-column:1/-1;text-align:center;padding:35px 15px;background:var(--card);border:1px solid var(--border);border-radius:16px;color:var(--muted);font-size:13px}
-.student-empty i{color:var(--gold);width:30px;height:30px;margin-bottom:12px}
-.student-empty strong{display:block;color:white;margin-bottom:7px}
+.admission-month{
+  width:max-content;
+  max-width:100%;
+  margin:0 auto 25px;
+  padding:10px 16px;
+  border:1px solid rgba(242,189,69,.3);
+  background:rgba(242,189,69,.09);
+  color:var(--gold);
+  border-radius:30px;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  font-size:12px;
+  font-weight:800;
+}
+.student-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+}
+.student-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:17px;
+  padding:20px 14px;
+  text-align:center;
+  transition:.25s;
+}
+.student-card:hover{
+  transform:translateY(-4px);
+  border-color:var(--gold);
+}
+.student-photo{
+  width:88px;
+  height:88px;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid var(--gold);
+  background:var(--card2);
+  margin:0 auto 13px;
+  display:block;
+}
+.student-card h3{
+  font-size:14px;
+  margin-bottom:7px;
+  overflow-wrap:anywhere;
+}
+.student-card p{
+  font-size:11px;
+  color:var(--muted);
+}
+.student-badge{
+  display:inline-block;
+  margin-top:10px;
+  padding:6px 10px;
+  border-radius:20px;
+  background:rgba(242,189,69,.1);
+  color:var(--gold);
+  font-size:9px;
+  font-weight:800;
+}
+.student-loading,
+.student-empty,
+.student-error{
+  grid-column:1/-1;
+  text-align:center;
+  padding:35px 15px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  color:var(--muted);
+  font-size:13px;
+}
 
-/* MODALS */
-.modal{display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.75);padding:18px;align-items:center;justify-content:center}
+/* MODAL */
+.modal{
+  display:none;position:fixed;inset:0;z-index:2000;
+  background:rgba(0,0,0,.75);padding:18px;
+  align-items:center;justify-content:center
+}
 .modal.show{display:flex}
-.modal-box{width:min(420px,100%);background:#111a29;border:1px solid var(--border);border-radius:21px;padding:25px;position:relative;max-height:90vh;overflow:auto}
-.modal-close{position:absolute;right:17px;top:16px;background:transparent;border:0;color:white;cursor:pointer}
+.modal-box{
+  width:min(420px,100%);background:#111a29;
+  border:1px solid var(--border);border-radius:21px;
+  padding:25px;position:relative
+}
+.modal-close{
+  position:absolute;right:17px;top:16px;
+  background:transparent;border:0;color:white;cursor:pointer
+}
 .modal-box h2{font-size:22px;margin-bottom:8px}
 .modal-box>p{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:20px}
 .form-label{display:block;font-size:11px;color:#dbe1eb;margin:14px 0 7px}
-.form-control{width:100%;height:47px;background:#080d18;border:1px solid var(--border);border-radius:10px;padding:0 13px;color:white;outline:none}
+.form-control{
+  width:100%;height:47px;background:#080d18;
+  border:1px solid var(--border);border-radius:10px;
+  padding:0 13px;color:white;outline:none
+}
 .form-control:focus{border-color:var(--gold)}
-.modal-submit{width:100%;height:48px;margin-top:18px;background:var(--gold);color:#111;border:0;border-radius:11px;font-weight:900;cursor:pointer}
+.modal-submit{
+  width:100%;height:48px;margin-top:18px;
+  background:var(--gold);color:#111;border:0;
+  border-radius:11px;font-weight:900;cursor:pointer
+}
 .modal-submit:disabled{opacity:.6;cursor:not-allowed}
 .status-msg{font-size:12px;margin-top:12px;line-height:1.6}
 .status-msg.error{color:#ff8585}
 .status-msg.success{color:#8be0a6}
+
+/* BOOKING */
 .booking-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .booking-grid .full{grid-column:1/-1}
 
 /* BOTTOM NAV */
-.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:900;background:rgba(8,13,24,.97);border-top:1px solid var(--border);padding:9px 5px calc(9px + env(safe-area-inset-bottom));justify-content:space-around}
-.bottom-nav a,.bottom-nav button{display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--muted);font-size:9px;background:none;border:0}
+.bottom-nav{
+  display:none;position:fixed;bottom:0;left:0;right:0;
+  z-index:900;background:rgba(8,13,24,.97);
+  border-top:1px solid var(--border);
+  padding:9px 5px calc(9px + env(safe-area-inset-bottom));
+  justify-content:space-around
+}
+.bottom-nav a,.bottom-nav button{
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  color:var(--muted);font-size:9px;background:none;border:0
+}
 .bottom-nav i{width:19px;height:19px}
 .bottom-nav .active{color:var(--gold)}
 
@@ -200,7 +396,7 @@ footer{border-top:1px solid var(--border);padding:30px 0;margin-top:50px}
   .contact-grid{grid-template-columns:1fr}
   .student-grid{grid-template-columns:repeat(2,1fr);gap:11px}
   .student-card{padding:17px 10px}
-  .student-photo,.student-initial{width:75px;height:75px}
+  .student-photo{width:75px;height:75px}
   .bottom-nav{display:flex}
   body{padding-bottom:68px}
   footer{margin-bottom:5px}
@@ -209,12 +405,17 @@ footer{border-top:1px solid var(--border);padding:30px 0;margin-top:50px}
 </head>
 
 <body>
+
 <header>
   <div class="container nav">
-    <a href="#home" class="logo">
+    <a href="#" class="logo">
       <div class="logo-mark">A1</div>
-      <div class="logo-text"><strong>ABHINAASH A1</strong><small>DRIVING CLASSES</small></div>
+      <div class="logo-text">
+        <strong>ABHINAASH A1</strong>
+        <small>DRIVING CLASSES</small>
+      </div>
     </a>
+
     <nav class="nav-links">
       <a href="#home">Home</a>
       <a href="#newStudents">New Students</a>
@@ -223,13 +424,18 @@ footer{border-top:1px solid var(--border);padding:30px 0;margin-top:50px}
       <a href="#why">Why Us</a>
       <a href="#contact">Contact</a>
     </nav>
+
     <div class="nav-right">
       <button class="header-access" id="headerAccess" onclick="handleHeaderAccess()">
-        <i data-lucide="user-round"></i><span id="headerAccessText">Login</span>
+        <i data-lucide="user-round"></i>
+        <span id="headerAccessText">Login</span>
       </button>
-      <button class="menu-btn" aria-label="Open menu" onclick="toggleMenu()"><i data-lucide="menu"></i></button>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu" onclick="toggleMenu()">
+        <i data-lucide="menu"></i>
+      </button>
     </div>
   </div>
+
   <div class="mobile-menu" id="mobileMenu">
     <a href="#home" onclick="toggleMenu()">Home</a>
     <a href="#newStudents" onclick="toggleMenu()">New Students</a>
@@ -242,16 +448,23 @@ footer{border-top:1px solid var(--border);padding:30px 0;margin-top:50px}
 </header>
 
 <main>
+
 <section class="hero" id="home">
   <div class="container">
     <div class="hero-content">
       <div class="hero-tag"><i data-lucide="award"></i> PROFESSIONAL DRIVING TRAINING</div>
       <h1>Learn Driving.<br><em>Drive With Confidence.</em></h1>
       <p>Start your driving journey with ABHINAASH A1 Driving Classes. Practical training, experienced guidance and confidence-building lessons in Baripada.</p>
+
       <div class="hero-actions">
-        <button class="btn-primary" onclick="openBooking()">Book Your Training <i data-lucide="arrow-right"></i></button>
-        <a class="btn-outline" href="#packages">Explore Packages <i data-lucide="chevron-down"></i></a>
+        <button class="btn-primary" onclick="openBooking()">
+          Book Your Training <i data-lucide="arrow-right"></i>
+        </button>
+        <a class="btn-outline" href="#packages">
+          Explore Packages <i data-lucide="chevron-down"></i>
+        </a>
       </div>
+
       <div class="hero-stats">
         <div class="hero-stat"><strong>20–30</strong><small>Training Days</small></div>
         <div class="hero-stat"><strong>1:1</strong><small>Personal Option</small></div>
@@ -263,11 +476,17 @@ footer{border-top:1px solid var(--border);padding:30px 0;margin-top:50px}
 
 <div class="container">
   <div class="welcome-box" id="welcomeBox">
-    <div><h3>Welcome Back, <strong id="welcomeName">Student</strong>! 👋</h3><p>Your driving learning journey is just one click away.</p></div>
-    <button class="welcome-dashboard" onclick="accessDashboard()">Open Dashboard <i data-lucide="arrow-right"></i></button>
+    <div>
+      <h3>Welcome Back, <strong id="welcomeName">Student</strong>! 👋</h3>
+      <p>Your driving learning journey is just one click away.</p>
+    </div>
+    <button class="welcome-dashboard" onclick="accessDashboard()">
+      Open Dashboard <i data-lucide="arrow-right"></i>
+    </button>
   </div>
 </div>
 
+<!-- NEW ADMISSIONS SECTION -->
 <section class="section" id="newStudents">
   <div class="container">
     <div class="section-heading">
@@ -275,7 +494,12 @@ footer{border-top:1px solid var(--border);padding:30px 0;margin-top:50px}
       <h2>Welcome Our New Students</h2>
       <p>Meet the students who started their driving journey with us.</p>
     </div>
-    <div class="admission-month"><i data-lucide="calendar-days"></i><span id="admissionMonth">This Month's Admissions</span></div>
+
+    <div class="admission-month">
+      <i data-lucide="calendar-days"></i>
+      <span id="admissionMonth">This Month's Admissions</span>
+    </div>
+
     <div class="student-grid" id="studentGrid">
       <div class="student-loading">Loading new students...</div>
     </div>
@@ -284,36 +508,86 @@ footer{border-top:1px solid var(--border);padding:30px 0;margin-top:50px}
 
 <section class="section">
   <div class="container">
-    <div class="section-heading"><span>OUR TRAINING</span><h2>Learn More Than Just Driving</h2><p>Build practical skills and confidence for real-world roads.</p></div>
+    <div class="section-heading">
+      <span>OUR TRAINING</span>
+      <h2>Learn More Than Just Driving</h2>
+      <p>Build practical skills and confidence for real-world roads.</p>
+    </div>
+
     <div class="feature-grid">
-      <div class="feature-card"><div class="feature-icon"><i data-lucide="steering-wheel"></i></div><h3>Practical Training</h3><p>Hands-on driving practice to improve your control and confidence.</p></div>
-      <div class="feature-card"><div class="feature-icon"><i data-lucide="user-check"></i></div><h3>Experienced Guidance</h3><p>Learn essential driving skills with guided training sessions.</p></div>
-      <div class="feature-card"><div class="feature-icon"><i data-lucide="file-check"></i></div><h3>Licence Guidance</h3><p>Get guidance about the driving licence application process.</p></div>
-      <div class="feature-card"><div class="feature-icon"><i data-lucide="shield-check"></i></div><h3>Safety First</h3><p>Understand road signs, traffic rules and responsible driving.</p></div>
+      <div class="feature-card">
+        <div class="feature-icon"><i data-lucide="steering-wheel"></i></div>
+        <h3>Practical Training</h3>
+        <p>Hands-on driving practice to improve your control and confidence.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i data-lucide="user-check"></i></div>
+        <h3>Experienced Guidance</h3>
+        <p>Learn essential driving skills with guided training sessions.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i data-lucide="file-check"></i></div>
+        <h3>Licence Guidance</h3>
+        <p>Get guidance about the driving licence application process.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i data-lucide="shield-check"></i></div>
+        <h3>Safety First</h3>
+        <p>Understand road signs, traffic rules and responsible driving.</p>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="section" id="packages">
   <div class="container">
-    <div class="section-heading"><span>TRAINING PACKAGES</span><h2>Choose Your Driving Plan</h2><p>Select a training package that matches your learning needs.</p></div>
+    <div class="section-heading">
+      <span>TRAINING PACKAGES</span>
+      <h2>Choose Your Driving Plan</h2>
+      <p>Select a training package that matches your learning needs.</p>
+    </div>
+
     <div class="package-grid">
       <div class="package-card">
-        <div class="plan-icon"><i data-lucide="car-front"></i></div><h3>Standard Plan</h3><p class="duration">20 Days Training</p>
+        <div class="plan-icon"><i data-lucide="car-front"></i></div>
+        <h3>Standard Plan</h3>
+        <p class="duration">20 Days Training</p>
         <div class="price">₹3,500 <small>/ course</small></div>
-        <ul><li><i data-lucide="check-circle"></i> Practical driving sessions</li><li><i data-lucide="check-circle"></i> Basic road knowledge</li><li><i data-lucide="check-circle"></i> Vehicle control training</li><li><i data-lucide="check-circle"></i> Traffic sign guidance</li></ul>
+        <ul>
+          <li><i data-lucide="check-circle"></i> Practical driving sessions</li>
+          <li><i data-lucide="check-circle"></i> Basic road knowledge</li>
+          <li><i data-lucide="check-circle"></i> Vehicle control training</li>
+          <li><i data-lucide="check-circle"></i> Traffic sign guidance</li>
+        </ul>
         <button class="btn-primary" onclick="openBooking('Standard Plan')">Choose Standard</button>
       </div>
+
       <div class="package-card popular">
-        <div class="popular-label">MOST POPULAR</div><div class="plan-icon"><i data-lucide="car"></i></div><h3>Premium Plan</h3><p class="duration">30 Days Training</p>
+        <div class="popular-label">MOST POPULAR</div>
+        <div class="plan-icon"><i data-lucide="car"></i></div>
+        <h3>Premium Plan</h3>
+        <p class="duration">30 Days Training</p>
         <div class="price">₹4,500 <small>/ course</small></div>
-        <ul><li><i data-lucide="check-circle"></i> Extended practical training</li><li><i data-lucide="check-circle"></i> Road confidence practice</li><li><i data-lucide="check-circle"></i> Parking guidance</li><li><i data-lucide="check-circle"></i> Traffic rule guidance</li></ul>
+        <ul>
+          <li><i data-lucide="check-circle"></i> Extended practical training</li>
+          <li><i data-lucide="check-circle"></i> Road confidence practice</li>
+          <li><i data-lucide="check-circle"></i> Parking guidance</li>
+          <li><i data-lucide="check-circle"></i> Traffic rule guidance</li>
+        </ul>
         <button class="btn-primary" onclick="openBooking('Premium Plan')">Choose Premium</button>
       </div>
+
       <div class="package-card">
-        <div class="plan-icon"><i data-lucide="user-round-check"></i></div><h3>Personal Plan</h3><p class="duration">Flexible Training</p>
+        <div class="plan-icon"><i data-lucide="user-round-check"></i></div>
+        <h3>Personal Plan</h3>
+        <p class="duration">Flexible Training</p>
         <div class="price">₹8,000 <small>/ course</small></div>
-        <ul><li><i data-lucide="check-circle"></i> Personal 1-on-1 training</li><li><i data-lucide="check-circle"></i> Individual learning focus</li><li><i data-lucide="check-circle"></i> Flexible schedule discussion</li><li><i data-lucide="check-circle"></i> Personal guidance</li></ul>
+        <ul>
+          <li><i data-lucide="check-circle"></i> Personal 1-on-1 training</li>
+          <li><i data-lucide="check-circle"></i> Individual learning focus</li>
+          <li><i data-lucide="check-circle"></i> Flexible schedule discussion</li>
+          <li><i data-lucide="check-circle"></i> Personal guidance</li>
+        </ul>
         <button class="btn-primary" onclick="openBooking('Personal Plan')">Choose Personal</button>
       </div>
     </div>
@@ -322,21 +596,47 @@ footer{border-top:1px solid var(--border);padding:30px 0;margin-top:50px}
 
 <section class="section" id="why">
   <div class="container">
-    <div class="section-heading"><span>WHY CHOOSE US</span><h2>Your Confidence Is Our Priority</h2><p>Our focus is to help learners become confident and responsible drivers.</p></div>
+    <div class="section-heading">
+      <span>WHY CHOOSE US</span>
+      <h2>Your Confidence Is Our Priority</h2>
+      <p>Our focus is to help learners become confident and responsible drivers.</p>
+    </div>
     <div class="why-grid">
-      <div class="why-card"><i data-lucide="route"></i><h3>Practical Road Experience</h3><p>Learn through practical sessions and guided road experience.</p></div>
-      <div class="why-card"><i data-lucide="calendar-check"></i><h3>Structured Training</h3><p>Training plans designed to help you learn step by step.</p></div>
-      <div class="why-card"><i data-lucide="heart-handshake"></i><h3>Friendly Guidance</h3><p>Supportive learning environment for new drivers.</p></div>
+      <div class="why-card">
+        <i data-lucide="route"></i>
+        <h3>Practical Road Experience</h3>
+        <p>Learn through practical sessions and guided road experience.</p>
+      </div>
+      <div class="why-card">
+        <i data-lucide="calendar-check"></i>
+        <h3>Structured Training</h3>
+        <p>Training plans designed to help you learn step by step.</p>
+      </div>
+      <div class="why-card">
+        <i data-lucide="heart-handshake"></i>
+        <h3>Friendly Guidance</h3>
+        <p>Supportive learning environment for new drivers.</p>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="section" id="vehicle">
   <div class="container">
-    <div class="section-heading"><span>OUR TRAINING VEHICLE</span><h2>Learn With Confidence</h2></div>
+    <div class="section-heading">
+      <span>OUR TRAINING VEHICLE</span>
+      <h2>Learn With Confidence</h2>
+    </div>
     <div class="vehicle-box">
       <img src="https://i.ibb.co/p9FK8R3/tigor.webp" alt="Tata Tigor driving training vehicle" loading="lazy">
-      <div class="vehicle-info"><span class="vehicle-label">TRAINING VEHICLE</span><h2>TATA TIGOR XZ+</h2><p>Learn essential driving skills with guided practical sessions. Focus on steering control, braking, parking, road awareness and safe driving habits.</p><div style="margin-top:20px"><button class="btn-primary" onclick="openBooking()">Book Training <i data-lucide="arrow-right"></i></button></div></div>
+      <div class="vehicle-info">
+        <span class="vehicle-label">TRAINING VEHICLE</span>
+        <h2>TATA TIGOR XZ+</h2>
+        <p>Learn essential driving skills with guided practical sessions. Focus on steering control, braking, parking, road awareness and safe driving habits.</p>
+        <div style="margin-top:20px">
+          <button class="btn-primary" onclick="openBooking()">Book Training <i data-lucide="arrow-right"></i></button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -344,30 +644,54 @@ footer{border-top:1px solid var(--border);padding:30px 0;margin-top:50px}
 <section class="section">
   <div class="container">
     <div class="licence-banner">
-      <div><h2>Need Driving Licence Guidance?</h2><p>Visit the official Parivahan portal for driving licence-related services and information.</p></div>
-      <a class="btn-primary" href="https://parivahan.gov.in/" target="_blank" rel="noopener">Visit Parivahan <i data-lucide="external-link"></i></a>
+      <div>
+        <h2>Need Driving Licence Guidance?</h2>
+        <p>Visit the official Parivahan portal for driving licence-related services and information.</p>
+      </div>
+      <a class="btn-primary" href="https://parivahan.gov.in/" target="_blank" rel="noopener">
+        Visit Parivahan <i data-lucide="external-link"></i>
+      </a>
     </div>
   </div>
 </section>
 
 <section class="section" id="contact">
   <div class="container">
-    <div class="section-heading"><span>GET IN TOUCH</span><h2>Start Your Driving Journey</h2><p>Contact us to discuss your training and booking.</p></div>
+    <div class="section-heading">
+      <span>GET IN TOUCH</span>
+      <h2>Start Your Driving Journey</h2>
+      <p>Contact us to discuss your training and booking.</p>
+    </div>
     <div class="contact-grid">
-      <div class="contact-card"><h3><i data-lucide="phone"></i> Call / WhatsApp</h3><p>8984225311</p><a class="btn-primary" style="margin-top:17px" href="https://wa.me/918984225311" target="_blank" rel="noopener">Chat on WhatsApp</a></div>
-      <div class="contact-card"><h3><i data-lucide="map-pin"></i> Location</h3><p>Baripada, Odisha, India</p><p style="margin-top:8px">Contact us for training schedule and admission details.</p></div>
+      <div class="contact-card">
+        <h3><i data-lucide="phone"></i> Call / WhatsApp</h3>
+        <p>8984225311</p>
+        <a class="btn-primary" style="margin-top:17px" href="https://wa.me/918984225311" target="_blank" rel="noopener">Chat on WhatsApp</a>
+      </div>
+      <div class="contact-card">
+        <h3><i data-lucide="map-pin"></i> Location</h3>
+        <p>Baripada, Odisha, India</p>
+        <p style="margin-top:8px">Contact us for training schedule and admission details.</p>
+      </div>
     </div>
   </div>
 </section>
+
 </main>
 
-<footer><div class="container footer-inner"><p><strong>ABHINAASH A1 DRIVING CLASSES</strong></p><p>© <span id="year"></span> All Rights Reserved.</p></div></footer>
+<footer>
+  <div class="container footer-inner">
+    <p><strong>ABHINAASH A1 DRIVING CLASSES</strong></p>
+    <p>© <span id="year"></span> All Rights Reserved.</p>
+  </div>
+</footer>
 
 <!-- LOGIN MODAL -->
 <div class="modal" id="loginModal">
   <div class="modal-box">
     <button class="modal-close" onclick="closeLogin()" aria-label="Close"><i data-lucide="x"></i></button>
-    <h2>Student Login</h2><p>Enter your registered mobile number to access your driving student dashboard.</p>
+    <h2>Student Login</h2>
+    <p>Enter your registered mobile number to access your driving student dashboard.</p>
     <label class="form-label" for="loginMobile">Registered Mobile Number</label>
     <input class="form-control" id="loginMobile" type="tel" inputmode="numeric" maxlength="10" placeholder="Enter 10-digit mobile number">
     <button class="modal-submit" id="loginSubmit" onclick="verifyStudent()">Continue</button>
@@ -379,12 +703,31 @@ footer{border-top:1px solid var(--border);padding:30px 0;margin-top:50px}
 <div class="modal" id="bookingModal">
   <div class="modal-box">
     <button class="modal-close" onclick="closeBooking()" aria-label="Close"><i data-lucide="x"></i></button>
-    <h2>Book Your Training</h2><p>Submit your details. We will connect with you on WhatsApp.</p>
+    <h2>Book Your Training</h2>
+    <p>Submit your details. We will connect with you on WhatsApp.</p>
+
     <div class="booking-grid">
-      <div class="full"><label class="form-label" for="bookName">Full Name</label><input class="form-control" id="bookName" placeholder="Enter your name"></div>
-      <div class="full"><label class="form-label" for="bookPhone">Mobile Number</label><input class="form-control" id="bookPhone" type="tel" maxlength="10" inputmode="numeric" placeholder="10-digit mobile number"></div>
-      <div class="full"><label class="form-label" for="bookPackage">Select Package</label><select class="form-control" id="bookPackage"><option value="">Choose package</option><option>Standard Plan - ₹3,500</option><option>Premium Plan - ₹4,500</option><option>Personal Plan - ₹8,000</option></select></div>
-      <div class="full"><label class="form-label" for="bookDate">Preferred Start Date</label><input class="form-control" id="bookDate" type="date"></div>
+      <div class="full">
+        <label class="form-label" for="bookName">Full Name</label>
+        <input class="form-control" id="bookName" placeholder="Enter your name">
+      </div>
+      <div class="full">
+        <label class="form-label" for="bookPhone">Mobile Number</label>
+        <input class="form-control" id="bookPhone" type="tel" maxlength="10" inputmode="numeric" placeholder="10-digit mobile number">
+      </div>
+      <div class="full">
+        <label class="form-label" for="bookPackage">Select Package</label>
+        <select class="form-control" id="bookPackage">
+          <option value="">Choose package</option>
+          <option>Standard Plan - ₹3,500</option>
+          <option>Premium Plan - ₹4,500</option>
+          <option>Personal Plan - ₹8,000</option>
+        </select>
+      </div>
+      <div class="full">
+        <label class="form-label" for="bookDate">Preferred Start Date</label>
+        <input class="form-control" id="bookDate" type="date">
+      </div>
     </div>
     <button class="modal-submit" onclick="submitBooking()">Continue on WhatsApp</button>
   </div>
@@ -398,12 +741,23 @@ footer{border-top:1px solid var(--border);padding:30px 0;margin-top:50px}
 </div>
 
 <script>
-const WHATSAPP_NUMBER="918984225311";
-const STORAGE_KEY="a1_student_mobile";
+const WHATSAPP_NUMBER = "918984225311";
+const STORAGE_KEY = "a1_student_mobile";
 
-function toggleMenu(){document.getElementById("mobileMenu").classList.toggle("show")}
-function openLogin(){document.getElementById("loginModal").classList.add("show");document.getElementById("loginStatus").textContent="";document.getElementById("loginMobile").focus()}
-function closeLogin(){document.getElementById("loginModal").classList.remove("show")}
+function toggleMenu(){
+  document.getElementById("mobileMenu").classList.toggle("show");
+}
+
+function openLogin(){
+  document.getElementById("loginModal").classList.add("show");
+  document.getElementById("loginStatus").textContent="";
+  document.getElementById("loginMobile").focus();
+}
+
+function closeLogin(){
+  document.getElementById("loginModal").classList.remove("show");
+}
+
 function openBooking(packageName=""){
   document.getElementById("bookingModal").classList.add("show");
   if(packageName){
@@ -412,14 +766,24 @@ function openBooking(packageName=""){
     if(option)select.value=option.text;
   }
 }
-function closeBooking(){document.getElementById("bookingModal").classList.remove("show")}
+
+function closeBooking(){
+  document.getElementById("bookingModal").classList.remove("show");
+}
+
 function submitBooking(){
   const name=document.getElementById("bookName").value.trim();
   const phone=document.getElementById("bookPhone").value.trim();
   const pack=document.getElementById("bookPackage").value;
   const date=document.getElementById("bookDate").value;
-  if(!name||!/^[0-9]{10}$/.test(phone)||!pack||!date){alert("Please enter all details correctly.");return}
-  const message=`Hello ABHINAASH A1 Driving Classes,
+
+  if(!name||!/^[0-9]{10}$/.test(phone)||!pack||!date){
+    alert("Please enter all details correctly.");
+    return;
+  }
+
+  const message=
+`Hello ABHINAASH A1 Driving Classes,
 
 I want to book driving training.
 
@@ -427,42 +791,76 @@ Name: ${name}
 Mobile: ${phone}
 Package: ${pack}
 Preferred Date: ${date}`;
+
   window.open("https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(message),"_blank");
   closeBooking();
 }
+
 function updateHeaderAccess(name){
   const btn=document.getElementById("headerAccess");
-  btn.innerHTML=name?'<i data-lucide="layout-dashboard"></i><span>Dashboard</span>':'<i data-lucide="user-round"></i><span>Login</span>';
+
+  if(name){
+    btn.innerHTML='<i data-lucide="layout-dashboard"></i><span id="headerAccessText">Dashboard</span>';
+  }else{
+    btn.innerHTML='<i data-lucide="user-round"></i><span id="headerAccessText">Login</span>';
+  }
+
   if(window.lucide)lucide.createIcons();
 }
+
 function showWelcome(name){
   document.getElementById("welcomeName").textContent=name;
   document.getElementById("welcomeBox").classList.add("show");
   updateHeaderAccess(name);
 }
+
 function hideWelcome(){
   document.getElementById("welcomeBox").classList.remove("show");
   updateHeaderAccess(null);
 }
+
 function accessDashboard(){
   const mobile=localStorage.getItem(STORAGE_KEY);
-  if(!mobile){openLogin();return}
+
+  if(!mobile){
+    openLogin();
+    return;
+  }
+
   window.location.href="student-dashboard.html?mobile="+encodeURIComponent(mobile);
 }
+
 function handleHeaderAccess(){
-  if(localStorage.getItem(STORAGE_KEY))accessDashboard();
-  else openLogin();
+  const mobile=localStorage.getItem(STORAGE_KEY);
+
+  if(mobile){
+    accessDashboard();
+  }else{
+    openLogin();
+  }
 }
-document.getElementById("loginMobile").addEventListener("input",function(){this.value=this.value.replace(/\D/g,"").slice(0,10)});
-document.getElementById("loginMobile").addEventListener("keydown",function(e){if(e.key==="Enter")verifyStudent()});
-document.getElementById("bookPhone").addEventListener("input",function(){this.value=this.value.replace(/\D/g,"").slice(0,10)});
+
+document.getElementById("loginMobile").addEventListener("input",function(){
+  this.value=this.value.replace(/\D/g,"").slice(0,10);
+});
+
+document.getElementById("loginMobile").addEventListener("keydown",function(e){
+  if(e.key==="Enter")verifyStudent();
+});
+
+document.getElementById("bookPhone").addEventListener("input",function(){
+  this.value=this.value.replace(/\D/g,"").slice(0,10);
+});
+
 window.addEventListener("load",()=>{
   document.getElementById("year").textContent=new Date().getFullYear();
   if(window.lucide)lucide.createIcons();
 });
+
 window.closeLogin=closeLogin;
 window.closeBooking=closeBooking;
 window.openBooking=openBooking;
+window.verifyStudent=()=>{};
 window.handleHeaderAccess=handleHeaderAccess;
 window.accessDashboard=accessDashboard;
 window.toggleMenu=toggleMenu;
@@ -470,37 +868,58 @@ window.submitBooking=submitBooking;
 </script>
 
 <script type="module">
-import {initializeApp} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-import {getFirestore,doc,getDoc,collection,getDocs,query,where} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
 
-const firebaseConfig={
-  apiKey:"AIzaSyC3wGi8p85z-wkoJeWb3N3jYoQpcIar8Sww",
-  authDomain:"abinash-driving.firebaseapp.com",
-  projectId:"abinash-driving",
-  storageBucket:"abinash-driving.appspot.com",
-  messagingSenderId:"641148830173",
-  appId:"1:641148830173:web:b7a500e5e7e2463da0f634"
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  collection,
+  getDocs,
+  query,
+  where
+} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC3gWi8p85z-wkoJeWb3N3jYoQpcIar8Sww",
+  authDomain: "abinash-driving.firebaseapp.com",
+  projectId: "abinash-driving",
+  storageBucket: "abinash-driving.appspot.com",
+  messagingSenderId: "641148830173",
+  appId: "1:641148830173:web:b7a500e5e7e2463da0f634"
 };
 
 const app=initializeApp(firebaseConfig);
 const db=getFirestore(app);
 
-/* STUDENT LOGIN */
+/* STUDENT LOGIN LOOKUP */
 async function findStudent(mobile){
-  const snapshot=await getDoc(doc(db,"studentData",mobile));
+  const studentRef=doc(db,"studentData",mobile);
+  const snapshot=await getDoc(studentRef);
+
   if(!snapshot.exists())return null;
+
   const data=snapshot.data();
+
   if(data.notActive===true)return null;
-  return {mobile,name:data.name||"Student"};
+
+  return {
+    mobile,
+    name:data.name || "Student"
+  };
 }
 
+/* RESTORE PREVIOUS LOGIN */
 async function restoreLogin(){
   const savedMobile=localStorage.getItem("a1_student_mobile");
   if(!savedMobile)return;
+
   try{
     const student=await findStudent(savedMobile);
-    if(student)showWelcome(student.name);
-    else{
+
+    if(student){
+      showWelcome(student.name);
+    }else{
       localStorage.removeItem("a1_student_mobile");
       hideWelcome();
     }
@@ -510,6 +929,7 @@ async function restoreLogin(){
   }
 }
 
+/* VERIFY STUDENT LOGIN */
 async function verifyStudent(){
   const input=document.getElementById("loginMobile");
   const status=document.getElementById("loginStatus");
@@ -529,6 +949,7 @@ async function verifyStudent(){
 
   try{
     const student=await findStudent(mobile);
+
     if(!student){
       status.className="status-msg error";
       status.textContent="Student record not found or account is inactive. Please contact the institute.";
@@ -537,6 +958,7 @@ async function verifyStudent(){
 
     localStorage.setItem("a1_student_mobile",mobile);
     showWelcome(student.name);
+
     status.className="status-msg success";
     status.textContent="Welcome, "+student.name+"! Your dashboard is ready.";
 
@@ -544,6 +966,7 @@ async function verifyStudent(){
       closeLogin();
       accessDashboard();
     },900);
+
   }catch(error){
     console.error("Login error:",error);
     status.className="status-msg error";
@@ -554,81 +977,75 @@ async function verifyStudent(){
   }
 }
 
-/* PUBLIC ADMISSIONS
-   Reads only the separate publicStudents collection.
-   Does NOT expose private studentData records.
-*/
+/* LOAD THIS MONTH'S APPROVED PUBLIC STUDENTS */
 async function loadMonthlyStudents(){
+
   const grid=document.getElementById("studentGrid");
   const monthLabel=document.getElementById("admissionMonth");
-  const now=new Date();
-  const monthKey=now.getFullYear()+"-"+String(now.getMonth()+1).padStart(2,"0");
 
-  monthLabel.textContent=now.toLocaleDateString("en-IN",{month:"long",year:"numeric"})+" Admissions";
-  grid.innerHTML='<div class="student-loading">Loading latest admissions...</div>';
+  const now=new Date();
+
+  // Use local calendar month
+  const year=now.getFullYear();
+  const month=String(now.getMonth()+1).padStart(2,"0");
+  const monthKey=`${year}-${month}`;
+
+  monthLabel.textContent=now.toLocaleDateString("en-IN",{
+    month:"long",
+    year:"numeric"
+  })+" Admissions";
 
   try{
+
     const studentsQuery=query(
       collection(db,"publicStudents"),
-      where("admissionMonth","==",monthKey),
-      where("approved","==",true)
+      where("admissionMonth","==",monthKey)
     );
+
     const snapshot=await getDocs(studentsQuery);
+
     const students=[];
 
     snapshot.forEach(docSnap=>{
       const student=docSnap.data();
-      if(student.name && student.approved===true){
+
+      // Only approved public student profiles are displayed
+      if(student.approved===true && student.name){
         students.push(student);
       }
     });
 
-    students.sort((a,b)=>
-      String(b.admissionDate||"").localeCompare(String(a.admissionDate||""))
-    );
-
-    if(!students.length){
+    if(students.length===0){
       grid.innerHTML=`
         <div class="student-empty">
-          <i data-lucide="users-round"></i>
-          <strong>New Admissions Coming Soon!</strong>
-          Our latest learners will be featured here.
+          No new admissions to display this month.
         </div>`;
-      if(window.lucide)lucide.createIcons();
       return;
     }
+
+    students.sort((a,b)=>{
+      const dateA=new Date(a.admissionDate||0);
+      const dateB=new Date(b.admissionDate||0);
+      return dateB-dateA;
+    });
 
     grid.innerHTML="";
 
     students.forEach(student=>{
+
       const card=document.createElement("div");
       card.className="student-card";
 
-      const photoUrl=typeof student.photoUrl==="string" &&
-        /^https:\/\//i.test(student.photoUrl)
-        ? student.photoUrl : "";
+      const photo=document.createElement("img");
+      photo.className="student-photo";
+      photo.alt=student.name;
+      photo.loading="lazy";
+      photo.src=student.photoUrl || "https://placehold.co/150x150/172337/F2BD45?text=Student";
 
-      if(photoUrl){
-        const photo=document.createElement("img");
-        photo.className="student-photo";
-        photo.alt="Student profile";
-        photo.loading="lazy";
-        photo.referrerPolicy="no-referrer";
-        photo.src=photoUrl;
-        photo.onerror=()=>{
-          photo.remove();
-          const fallback=document.createElement("div");
-          fallback.className="student-initial";
-          fallback.textContent=getInitials(student.name);
-          card.insertBefore(fallback,card.firstChild);
-        };
-        card.appendChild(photo);
-      }else{
-        const initials=document.createElement("div");
-        initials.className="student-initial";
-        initials.textContent=getInitials(student.name);
-        card.appendChild(initials);
-      }
+      photo.onerror=()=>{
+        photo.onerror=null;
+        photo.src="https://placehold.co/150x150/172337/F2BD45?text=Student";
+      };
 
       const name=document.createElement("h3");
       name.textContent=student.name;
@@ -640,28 +1057,20 @@ async function loadMonthlyStudents(){
       badge.className="student-badge";
       badge.textContent="NEW STUDENT";
 
-      card.append(name,institute,badge);
+      card.append(photo,name,institute,badge);
       grid.appendChild(card);
     });
 
-    if(window.lucide)lucide.createIcons();
-
   }catch(error){
+
     console.error("Monthly students error:",error);
+
     grid.innerHTML=`
       <div class="student-error">
-        Admissions are temporarily unavailable. Please try again later.
+        Unable to load student admissions right now.
+        Please try again later.
       </div>`;
   }
-}
-
-function getInitials(name){
-  return String(name||"Student")
-    .trim()
-    .split(/\s+/)
-    .slice(0,2)
-    .map(part=>part.charAt(0).toUpperCase())
-    .join("") || "S";
 }
 
 window.verifyStudent=verifyStudent;
@@ -669,5 +1078,6 @@ window.verifyStudent=verifyStudent;
 restoreLogin();
 loadMonthlyStudents();
 </script>
+
 </body>
 </html>
