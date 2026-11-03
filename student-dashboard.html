@@ -45,13 +45,21 @@ header{
 }
 .avatar img{width:100%;height:100%;object-fit:cover}
 
+/* LOGOUT BUTTON */
 .logout-btn{
- display:none;align-items:center;justify-content:center;gap:6px;
- padding:9px 12px;border-radius:10px;
+ display:none;
+ align-items:center;
+ justify-content:center;
+ gap:6px;
+ padding:9px 12px;
+ border-radius:10px;
  background:rgba(255,119,119,.10);
  border:1px solid rgba(255,119,119,.28);
- color:#FF7777;font-size:10px;font-weight:800;
- cursor:pointer;white-space:nowrap;
+ color:#FF7777;
+ font-size:10px;
+ font-weight:800;
+ cursor:pointer;
+ white-space:nowrap;
 }
 .logout-btn:active{transform:scale(.96)}
 
@@ -278,9 +286,12 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
   <a href="index.html" class="logo">ABHINAASH <span>A1</span></a>
   <div class="header-right">
    <a href="contact.html" class="header-link">Need Help?</a>
+
    <button type="button" id="logoutButton" class="logout-btn">
-    <i data-lucide="log-out" width="14"></i> Logout
+    <i data-lucide="log-out" width="14"></i>
+    Logout
    </button>
+
    <a href="student-account.html" class="avatar" aria-label="My Account">
     <img id="userAvatar" alt="Student profile" src="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student">
    </a>
@@ -315,7 +326,7 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
    <button type="button" class="photo-btn" id="changePhotoBtn">
     <i data-lucide="camera" width="13"></i> Change Photo
    </button>
-   <span class="photo-hint">JPG, PNG · Auto WebP compressed</span>
+   <span class="photo-hint">JPG, PNG · Auto compressed</span>
   </div>
   <input type="file" id="profilePhotoInput" accept="image/jpeg,image/png,image/webp" hidden>
   <div class="upload-status" id="uploadStatus"></div>
@@ -484,7 +495,7 @@ from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
 import {getFirestore,doc,onSnapshot}
 from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
-import {getDatabase,ref as databaseRef,get,update}
+import {getDatabase,ref as databaseRef,set,get}
 from "https://www.gstatic.com/firebasejs/12.8.0/firebase-database.js";
 
 /* FIREBASE CONFIG */
@@ -574,28 +585,39 @@ function parseLog(log){
 
 /* CLASS 1 DATE CALCULATION */
 function parseAttendanceDate(log,referenceYear){
+
  const raw=parseLog(log).date;
  if(!raw||raw==="Date not recorded")return null;
 
  const text=String(raw).trim();
+
+ // YYYY-MM-DD
  let match=text.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
 
  if(match){
   const year=+match[1],month=+match[2]-1,day=+match[3];
   const date=new Date(year,month,day);
-  if(date.getFullYear()===year&&date.getMonth()===month&&date.getDate()===day)return date;
+
+  if(date.getFullYear()===year&&date.getMonth()===month&&date.getDate()===day){
+   return date;
+  }
   return null;
  }
 
+ // DD/MM/YYYY or DD-MM-YYYY
  match=text.match(/^(\d{1,2})[/-](\d{1,2})[/-](\d{4})$/);
 
  if(match){
   const day=+match[1],month=+match[2]-1,year=+match[3];
   const date=new Date(year,month,day);
-  if(date.getFullYear()===year&&date.getMonth()===month&&date.getDate()===day)return date;
+
+  if(date.getFullYear()===year&&date.getMonth()===month&&date.getDate()===day){
+   return date;
+  }
   return null;
  }
 
+ // 05 Oct 2026 OR 05 Oct
  match=text.match(/^(\d{1,2})\s+([A-Za-z]+)(?:\s+(\d{4}))?/);
 
  if(match){
@@ -606,27 +628,45 @@ function parseAttendanceDate(log,referenceYear){
 
   if(month>=0&&year){
    const date=new Date(year,month,day);
-   if(date.getFullYear()===year&&date.getMonth()===month&&date.getDate()===day)return date;
+
+   if(date.getFullYear()===year&&date.getMonth()===month&&date.getDate()===day){
+    return date;
+   }
   }
   return null;
  }
 
+ // Other date formats
  const fallback=new Date(text);
+
  if(!Number.isNaN(fallback.getTime())){
-  return new Date(fallback.getFullYear(),fallback.getMonth(),fallback.getDate());
+  return new Date(
+   fallback.getFullYear(),
+   fallback.getMonth(),
+   fallback.getDate()
+  );
  }
+
  return null;
 }
 
 function getClassOneDate(logs){
+
  if(!Array.isArray(logs)||!logs.length)return null;
 
  let referenceYear=null;
+
+ // Find year from records containing a year.
  for(const log of logs){
   const raw=parseLog(log).date;
   const match=String(raw).match(/(?:^|\D)(20\d{2})(?:\D|$)/);
-  if(match){referenceYear=Number(match[1]);break;}
+
+  if(match){
+   referenceYear=Number(match[1]);
+   break;
+  }
  }
+
  if(!referenceYear)referenceYear=new Date().getFullYear();
 
  const dates=logs
@@ -634,12 +674,21 @@ function getClassOneDate(logs){
   .filter(date=>date instanceof Date&&!Number.isNaN(date.getTime()));
 
  if(!dates.length)return null;
- return dates.reduce((earliest,current)=>current<earliest?current:earliest);
+
+ return dates.reduce((earliest,current)=>
+  current<earliest?current:earliest
+ );
 }
 
 function calculateEndingDate(startDate){
  if(!startDate)return null;
- const endingDate=new Date(startDate.getFullYear(),startDate.getMonth(),startDate.getDate());
+
+ const endingDate=new Date(
+  startDate.getFullYear(),
+  startDate.getMonth(),
+  startDate.getDate()
+ );
+
  endingDate.setDate(endingDate.getDate()+30);
  return endingDate;
 }
@@ -687,11 +736,13 @@ function applyProfilePhoto(mobile,photo){
 }
 
 async function refreshProfilePhoto(mobile){
+
  if(photoRequests.has(mobile))return;
  photoRequests.add(mobile);
 
  try{
   const snapshot=await get(databaseRef(realtimeDB,"profilePhotos/"+mobile));
+
   if(currentMobile!==mobile)return;
 
   const latestPhoto=snapshot.exists()?snapshot.val()?.image||"":"";
@@ -702,6 +753,7 @@ async function refreshProfilePhoto(mobile){
   }else{
    removeCachedPhoto(mobile);
   }
+
  }catch(error){
   console.error("Background photo refresh error:",error);
  }finally{
@@ -709,59 +761,53 @@ async function refreshProfilePhoto(mobile){
  }
 }
 
-/* AUTOMATIC WEBP CONVERSION + COMPRESSION */
+/* IMAGE COMPRESSION */
 async function compressImage(file){
  return new Promise((resolve,reject)=>{
   const image=new Image();
   const objectURL=URL.createObjectURL(file);
 
-  image.onload=async()=>{
+  image.onload=()=>{
    URL.revokeObjectURL(objectURL);
 
-   try{
-    const MAX_WIDTH=1200;
-    const MAX_HEIGHT=1200;
+   const maxSize=600;
+   const scale=Math.min(1,maxSize/Math.max(image.width,image.height));
 
-    const scale=Math.min(
-     1,
-     MAX_WIDTH/image.width,
-     MAX_HEIGHT/image.height
-    );
+   const canvas=document.createElement("canvas");
+   canvas.width=Math.max(1,Math.round(image.width*scale));
+   canvas.height=Math.max(1,Math.round(image.height*scale));
 
-    const canvas=document.createElement("canvas");
-    canvas.width=Math.max(1,Math.round(image.width*scale));
-    canvas.height=Math.max(1,Math.round(image.height*scale));
+   const ctx=canvas.getContext("2d");
 
-    const ctx=canvas.getContext("2d",{alpha:false});
-    if(!ctx)throw new Error("Canvas is not supported.");
+   if(!ctx){
+    reject(new Error("Canvas is not supported."));
+    return;
+   }
 
-    ctx.fillStyle="#FFFFFF";
-    ctx.fillRect(0,0,canvas.width,canvas.height);
-    ctx.drawImage(image,0,0,canvas.width,canvas.height);
+   ctx.fillStyle="#FFFFFF";
+   ctx.fillRect(0,0,canvas.width,canvas.height);
+   ctx.drawImage(image,0,0,canvas.width,canvas.height);
 
-    let quality=.82;
-    let blob=null;
+   let quality=.82;
 
-    for(let attempt=0;attempt<7;attempt++){
-     blob=await new Promise(resolveBlob=>{
-      canvas.toBlob(resolveBlob,"image/webp",quality);
-     });
-
-     if(!blob)throw new Error("Image conversion failed.");
-
-     if(blob.type!=="image/webp"){
-      throw new Error("Your browser does not support WebP conversion.");
+   const makeBlob=()=>{
+    canvas.toBlob(blob=>{
+     if(!blob){
+      reject(new Error("Image compression failed."));
+      return;
      }
 
-     if(blob.size<=250*1024)break;
+     if(blob.size>250*1024&&quality>.35){
+      quality=Math.max(.35,quality-.10);
+      makeBlob();
+      return;
+     }
 
-     quality=Math.max(.25,quality-.10);
-    }
+     resolve(blob);
+    },"image/jpeg",quality);
+   };
 
-    resolve(blob);
-   }catch(error){
-    reject(error);
-   }
+   makeBlob();
   };
 
   image.onerror=()=>{
@@ -782,11 +828,8 @@ function blobToBase64(blob){
  });
 }
 
-/* UPDATE PHOTO WITHOUT DELETING showOnHomepage */
 async function saveProfilePhoto(mobile,imageBase64){
- const photoRef=databaseRef(realtimeDB,"profilePhotos/"+mobile);
-
- await update(photoRef,{
+ await set(databaseRef(realtimeDB,"profilePhotos/"+mobile),{
   image:imageBase64,
   updatedAt:Date.now()
  });
@@ -802,6 +845,7 @@ $("changePhotoBtn").addEventListener("click",()=>{
 });
 
 $("profilePhotoInput").addEventListener("change",async function(){
+
  const file=this.files?.[0];
  if(!file)return;
 
@@ -830,7 +874,7 @@ $("profilePhotoInput").addEventListener("change",async function(){
  btn.disabled=true;
  btn.textContent="Compressing...";
  status.className="upload-status";
- status.textContent="Converting to WebP and compressing...";
+ status.textContent="Compressing your photo...";
 
  try{
   const blob=await compressImage(file);
@@ -840,7 +884,7 @@ $("profilePhotoInput").addEventListener("change",async function(){
    throw new Error("Student account changed. Please try again.");
   }
 
-  status.textContent="Uploading WebP photo...";
+  status.textContent="Uploading photo...";
   await saveProfilePhoto(uploadMobile,base64);
 
   cachePhoto(uploadMobile,base64);
@@ -850,9 +894,7 @@ $("profilePhotoInput").addEventListener("change",async function(){
   }
 
   status.className="upload-status success";
-  status.textContent=
-   "WebP photo uploaded successfully ("+
-   (blob.size/1024).toFixed(0)+" KB).";
+  status.textContent="Photo updated successfully ("+(blob.size/1024).toFixed(0)+" KB).";
 
  }catch(error){
   console.error("Photo upload error:",error);
@@ -956,12 +998,14 @@ function renderFeedback(logs){
 
 /* RENDER DASHBOARD */
 function renderDashboard(student,mobile){
+
  if(currentMobile!==mobile)return;
 
  currentStudentName=value(student,"name","Student");
  currentStudentActive=student.notActive!==true;
 
  const logs=Array.isArray(student.attendanceLogs)?student.attendanceLogs:[];
+
  const total=Math.max(Number(value(student,"totalClasses",20))||20,1);
  const completed=logs.length;
  const left=Math.max(total-completed,0);
@@ -969,13 +1013,18 @@ function renderDashboard(student,mobile){
  const classType=value(student,"classType","Group");
 
  const firstClassDate=getClassOneDate(logs);
- const admissionDate=firstClassDate?formatDate(firstClassDate):"Not available";
+
+ const admissionDate=firstClassDate
+  ?formatDate(firstClassDate)
+  :"Not available";
+
  const expectedEndingDate=firstClassDate
   ?formatDate(calculateEndingDate(firstClassDate))
   :"Not available";
 
  $("profileStudentName").textContent=currentStudentName;
 
+ /* INSTANT PHOTO DISPLAY */
  const defaultAvatar=getStudentAvatar({...student,mobile});
  const profileImage=$("studentProfileAvatar");
  const headerImage=$("userAvatar");
@@ -983,6 +1032,7 @@ function renderDashboard(student,mobile){
  profileImage.onerror=()=>{
   profileImage.src="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student";
  };
+
  headerImage.onerror=()=>{
   headerImage.src="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student";
  };
@@ -995,6 +1045,7 @@ function renderDashboard(student,mobile){
 
  refreshProfilePhoto(mobile);
 
+ /* STUDENT DETAILS */
  $("studentId").textContent="A1-"+mobile.slice(-4);
  $("packageName").textContent=classType==="Personal"?"Personal Training":"Group Training";
  $("classType").textContent=classType;
@@ -1004,6 +1055,7 @@ function renderDashboard(student,mobile){
  $("accountStatus").textContent=currentStudentActive?"Active":"Not Active";
  $("accountStatus").style.color=currentStudentActive?"var(--green)":"var(--red)";
 
+ /* STATISTICS */
  $("completedClasses").textContent=completed;
  $("remainingClasses").textContent=left;
  $("totalClasses").textContent=total;
@@ -1011,6 +1063,7 @@ function renderDashboard(student,mobile){
  const distancePerClass=Number(value(student,"distancePerClass",5))||5;
  $("totalDistance").textContent=(completed*distancePerClass)+" KM";
 
+ /* PROGRESS */
  $("progressPercent").textContent=percent+"%";
  $("progressBar").style.width=percent+"%";
  $("progressDone").textContent=completed+" classes completed";
@@ -1025,6 +1078,7 @@ function renderDashboard(student,mobile){
 
 /* RESET DASHBOARD */
 function resetDashboard(){
+
  currentMobile="";
  currentStudentName="";
  currentStudentActive=false;
@@ -1033,6 +1087,7 @@ function resetDashboard(){
  $("profileStudentName").textContent="Student";
 
  const fallback="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student";
+
  $("studentProfileAvatar").src=fallback;
  $("userAvatar").src=fallback;
 
@@ -1056,27 +1111,38 @@ function resetDashboard(){
  $("feedbackList").innerHTML='<div class="empty">Instructor remarks will appear here.</div>';
  $("historyCount").textContent="0 classes";
  $("uploadStatus").textContent="";
+
  $("logoutButton").style.display="none";
 }
 
 /* LOGOUT */
 function logoutStudent(){
+
  const confirmed=confirm("Are you sure you want to logout?");
  if(!confirmed)return;
 
+ // Stop Firebase real-time listener
  if(unsubscribeStudent){
   unsubscribeStudent();
   unsubscribeStudent=null;
  }
 
+ // Clear saved login
  localStorage.removeItem(STORAGE_KEY);
+
+ // Reset student dashboard
  resetDashboard();
 
+ // Show login controls
  $("manualLoginControls").style.display="flex";
  $("studentMobile").value="";
 
- showMessage("You have successfully logged out. Login again to continue.","var(--green)");
+ showMessage(
+  "You have successfully logged out. Login again to continue.",
+  "var(--green)"
+ );
 
+ // Scroll to login
  $("loginPanel").scrollIntoView({
   behavior:"smooth",
   block:"start"
@@ -1094,6 +1160,7 @@ function showManualLogin(message){
 
 /* CONNECT STUDENT */
 function connectStudent(mobile){
+
  if(!/^[0-9]{10}$/.test(mobile)){
   showManualLogin("Please enter a valid registered mobile number.");
   return;
@@ -1105,9 +1172,11 @@ function connectStudent(mobile){
  }
 
  currentMobile=mobile;
+
  const studentRef=doc(db,"studentData",mobile);
 
  unsubscribeStudent=onSnapshot(studentRef,snapshot=>{
+
   if(currentMobile!==mobile)return;
 
   if(!snapshot.exists()){
@@ -1128,14 +1197,18 @@ function connectStudent(mobile){
 
   $("loginPanel").style.display="none";
   $("manualLoginControls").style.display="none";
+
   renderDashboard(student,mobile);
 
  },error=>{
+
   console.error("Student verification error:",error);
+
   if(currentMobile!==mobile)return;
 
   $("loginPanel").style.display="block";
   showManualLogin("Unable to verify your account. Please check your internet connection or database permissions.");
+
  });
 }
 
