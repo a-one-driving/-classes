@@ -503,6 +503,7 @@ const firebaseConfig={
 
 const WHATSAPP_NUMBER="918984225311";
 const STORAGE_KEY="a1_student_mobile";
+const PHOTO_CACHE_PREFIX="a1_profile_photo_";
 
 const app=getApps().length?getApps()[0]:initializeApp(firebaseConfig);
 const db=getFirestore(app);
@@ -512,6 +513,9 @@ let unsubscribeStudent=null;
 let currentMobile="";
 let currentStudentName="";
 let currentStudentActive=false;
+
+/* Prevent duplicate photo requests */
+const photoRequests=new Set();
 
 const $=id=>document.getElementById(id);
 
@@ -563,6 +567,84 @@ function getStudentAvatar(student){
  return "https://api.dicebear.com/9.x/avataaars/svg?seed="+encodeURIComponent(seed);
 }
 
+/* =========================================
+   PROFILE PHOTO CACHE
+========================================= */
+
+function getCachedPhoto(mobile){
+ try{
+  return localStorage.getItem(PHOTO_CACHE_PREFIX+mobile)||"";
+ }catch(error){
+  console.warn("Photo cache read error:",error);
+  return "";
+ }
+}
+
+function cachePhoto(mobile,photo){
+ try{
+  if(photo){
+   localStorage.setItem(PHOTO_CACHE_PREFIX+mobile,photo);
+  }
+ }catch(error){
+  console.warn("Photo cache storage unavailable:",error);
+ }
+}
+
+function removeCachedPhoto(mobile){
+ try{
+  localStorage.removeItem(PHOTO_CACHE_PREFIX+mobile);
+ }catch(error){
+  console.warn("Photo cache remove error:",error);
+ }
+}
+
+/* Display photo in both avatar locations */
+function applyProfilePhoto(mobile,photo){
+ if(!photo||currentMobile!==mobile)return;
+
+ const profileImage=$("studentProfileAvatar");
+ const headerImage=$("userAvatar");
+
+ if(profileImage.src!==photo)profileImage.src=photo;
+ if(headerImage.src!==photo)headerImage.src=photo;
+}
+
+/*
+  Instant cache + background Firebase refresh.
+  Cached image appears immediately.
+  Firebase is checked in the background for the latest image.
+*/
+async function refreshProfilePhoto(mobile){
+
+ if(photoRequests.has(mobile))return;
+
+ photoRequests.add(mobile);
+
+ try{
+  const snapshot=await get(
+   databaseRef(realtimeDB,"profilePhotos/"+mobile)
+  );
+
+  if(currentMobile!==mobile)return;
+
+  const latestPhoto=snapshot.exists()
+   ?snapshot.val()?.image||""
+   :"";
+
+  if(latestPhoto){
+   cachePhoto(mobile,latestPhoto);
+   applyProfilePhoto(mobile,latestPhoto);
+  }else{
+   removeCachedPhoto(mobile);
+  }
+
+ }catch(error){
+  console.error("Background photo refresh error:",error);
+ }finally{
+  photoRequests.delete(mobile);
+ }
+}
+
 /* COMPRESS PHOTO */
 async function compressImage(file){
  return new Promise((resolve,reject)=>{
@@ -580,6 +662,7 @@ async function compressImage(file){
    canvas.height=Math.max(1,Math.round(image.height*scale));
 
    const ctx=canvas.getContext("2d");
+
    if(!ctx){
     reject(new Error("Canvas is not supported."));
     return;
@@ -638,13 +721,6 @@ async function saveProfilePhoto(mobile,imageBase64){
  });
 }
 
-/* LOAD PHOTO */
-async function loadProfilePhoto(mobile){
- const snapshot=await get(databaseRef(realtimeDB,"profilePhotos/"+mobile));
- if(snapshot.exists())return snapshot.val()?.image||"";
- return "";
-}
-
 /* PROFILE PHOTO UPLOAD */
 $("changePhotoBtn").addEventListener("click",()=>{
  if(!currentMobile||!currentStudentActive){
@@ -655,6 +731,7 @@ $("changePhotoBtn").addEventListener("click",()=>{
 });
 
 $("profilePhotoInput").addEventListener("change",async function(){
+
  const file=this.files?.[0];
  if(!file)return;
 
@@ -694,11 +771,14 @@ $("profilePhotoInput").addEventListener("change",async function(){
   }
 
   status.textContent="Uploading photo...";
+
   await saveProfilePhoto(uploadMobile,base64);
 
+  // Save the new photo to local cache
+  cachePhoto(uploadMobile,base64);
+
   if(currentMobile===uploadMobile){
-   $("studentProfileAvatar").src=base64;
-   $("userAvatar").src=base64;
+   applyProfilePhoto(uploadMobile,base64);
   }
 
   status.className="upload-status success";
@@ -713,6 +793,7 @@ $("profilePhotoInput").addEventListener("change",async function(){
   btn.disabled=false;
   btn.innerHTML='<i data-lucide="camera" width="13"></i> Change Photo';
   this.value="";
+
   if(window.lucide)window.lucide.createIcons();
  }
 });
@@ -742,7 +823,6 @@ function renderHistory(logs){
  const container=$("historyList");
  container.replaceChildren();
 
- // Same source as Classes Completed
  const historyTotal=logs.length;
  $("historyCount").textContent=historyTotal+" classes";
 
@@ -843,12 +923,11 @@ function renderDashboard(student,mobile){
  );
 
  /*
-  SINGLE SOURCE OF TRUTH:
-  Completed classes = attendanceLogs.length
-  History count = attendanceLogs.length
+   SINGLE SOURCE OF TRUTH:
+   Completed classes = attendanceLogs.length
+   History count = attendanceLogs.length
  */
  const completed=logs.length;
-
  const left=Math.max(total-completed,0);
  const percent=Math.min(Math.round(completed/total*100),100);
 
@@ -857,26 +936,36 @@ function renderDashboard(student,mobile){
 
  $("profileStudentName").textContent=currentStudentName;
 
+ /* =====================================
+    INSTANT PHOTO DISPLAY
+ ===================================== */
+
  const defaultAvatar=getStudentAvatar({...student,mobile});
- $("studentProfileAvatar").src=defaultAvatar;
- $("userAvatar").src=defaultAvatar;
 
- $("studentProfileAvatar").onerror=()=>{
-  $("studentProfileAvatar").src="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student";
- };
- $("userAvatar").onerror=()=>{
-  $("userAvatar").src="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student";
+ const profileImage=$("studentProfileAvatar");
+ const headerImage=$("userAvatar");
+
+ profileImage.onerror=()=>{
+  profileImage.src="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student";
  };
 
- /* PROFILE PHOTO LOADS IN BACKGROUND */
- loadProfilePhoto(mobile)
-  .then(photo=>{
-   if(photo&&currentMobile===mobile){
-    $("studentProfileAvatar").src=photo;
-    $("userAvatar").src=photo;
-   }
-  })
-  .catch(error=>console.error("Profile photo loading error:",error));
+ headerImage.onerror=()=>{
+  headerImage.src="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student";
+ };
+
+ // Show default avatar first
+ profileImage.src=defaultAvatar;
+ headerImage.src=defaultAvatar;
+
+ // Show cached photo immediately
+ const cachedPhoto=getCachedPhoto(mobile);
+
+ if(cachedPhoto){
+  applyProfilePhoto(mobile,cachedPhoto);
+ }
+
+ // Always check Firebase in background for latest photo
+ refreshProfilePhoto(mobile);
 
  /* STUDENT DETAILS */
  $("studentId").textContent="A1-"+mobile.slice(-4);
@@ -901,7 +990,7 @@ function renderDashboard(student,mobile){
  $("progressDone").textContent=completed+" classes completed";
  $("progressTotal").textContent=total+" total classes";
 
- /* HISTORY - SAME COUNT AS COMPLETED CLASSES */
+ /* HISTORY */
  renderHistory(logs);
  renderFeedback(logs);
 
@@ -910,6 +999,7 @@ function renderDashboard(student,mobile){
 
 /* RESET */
 function resetDashboard(){
+
  currentMobile="";
  currentStudentName="";
  currentStudentActive=false;
@@ -918,6 +1008,7 @@ function resetDashboard(){
  $("profileStudentName").textContent="Student";
 
  const fallback="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student";
+
  $("studentProfileAvatar").src=fallback;
  $("userAvatar").src=fallback;
 
@@ -951,6 +1042,7 @@ function showManualLogin(message){
 
 /* CONNECT STUDENT */
 function connectStudent(mobile){
+
  if(!/^[0-9]{10}$/.test(mobile)){
   showManualLogin("Please enter a valid registered mobile number.");
   return;
@@ -966,6 +1058,7 @@ function connectStudent(mobile){
  const studentRef=doc(db,"studentData",mobile);
 
  unsubscribeStudent=onSnapshot(studentRef,snapshot=>{
+
   if(currentMobile!==mobile)return;
 
   if(!snapshot.exists()){
@@ -990,12 +1083,14 @@ function connectStudent(mobile){
   renderDashboard(student,mobile);
 
  },error=>{
+
   console.error("Student verification error:",error);
 
   if(currentMobile!==mobile)return;
 
   $("loginPanel").style.display="block";
   showManualLogin("Unable to verify your account. Please check your internet connection or database permissions.");
+
  });
 }
 
