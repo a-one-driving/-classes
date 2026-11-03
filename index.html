@@ -10,6 +10,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://www.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/lucide@latest"></script>
 
@@ -134,18 +135,12 @@ header{
   background:linear-gradient(120deg,#172337,#111a29);
   border:1px solid rgba(242,189,69,.3);
   padding:17px 20px;border-radius:16px;
-  align-items:center;justify-content:space-between;gap:12px;
-  flex-wrap:wrap
+  align-items:center;gap:12px;
 }
 .welcome-box.show{display:flex}
 .welcome-box h3{font-size:16px}
 .welcome-box p{font-size:12px;color:var(--muted);margin-top:5px}
 .welcome-box strong{color:var(--gold)}
-.welcome-dashboard{
-  border:0;background:var(--gold);color:#111;
-  border-radius:10px;padding:11px 15px;font-size:12px;
-  font-weight:800;cursor:pointer
-}
 
 /* GALLERY */
 .gallery-section{padding-top:55px}
@@ -159,9 +154,11 @@ header{
   border:1px solid var(--border);
   border-radius:17px;
   overflow:hidden;
-  transition:.25s;
+  transition:transform .25s,border-color .25s;
   cursor:pointer;
-  min-width:0
+  min-width:0;
+  content-visibility:auto;
+  contain-intrinsic-size:260px;
 }
 .gallery-card:hover{
   transform:translateY(-5px);
@@ -172,8 +169,12 @@ header{
   height:220px;
   display:block;
   object-fit:cover;
-  background:var(--card2)
+  background:var(--card2);
+  opacity:1;
+  transition:opacity .2s ease;
 }
+.gallery-photo.loading{opacity:.45}
+.gallery-card.photo-error{display:none}
 .gallery-details{
   text-align:center;
   padding:15px 10px 17px
@@ -207,6 +208,12 @@ header{
   border-radius:50%;
   animation:gallerySpin .8s linear infinite;
   margin:0 auto 13px
+}
+.gallery-progress{
+  text-align:center;
+  color:var(--muted);
+  font-size:11px;
+  margin-top:14px
 }
 @keyframes gallerySpin{to{transform:rotate(360deg)}}
 
@@ -499,15 +506,13 @@ footer{border-top:1px solid var(--border);padding:30px 0;margin-top:50px}
   </div>
 </section>
 
+<!-- WELCOME: NAME ONLY -->
 <div class="container">
   <div class="welcome-box" id="welcomeBox">
     <div>
       <h3>Welcome Back, <strong id="welcomeName">Student</strong>! 👋</h3>
-      <p>Your driving learning journey is just one click away.</p>
+      <p>Your driving learning journey continues with ABHINAASH A1.</p>
     </div>
-    <button class="welcome-dashboard" onclick="accessDashboard()">
-      Open Dashboard <i data-lucide="arrow-right"></i>
-    </button>
   </div>
 </div>
 
@@ -651,7 +656,7 @@ footer{border-top:1px solid var(--border);padding:30px 0;margin-top:50px}
       <h2>Learn With Confidence</h2>
     </div>
     <div class="vehicle-box">
-      <img src="https://i.ibb.co/p9FK8R3/tigor.webp" alt="Tata Tigor driving training vehicle">
+      <img src="https://i.ibb.co/p9FK8R3/tigor.webp" alt="Tata Tigor driving training vehicle" loading="lazy">
       <div class="vehicle-info">
         <span class="vehicle-label">TRAINING VEHICLE</span>
         <h2>TATA TIGOR XZ+</h2>
@@ -779,25 +784,31 @@ const STORAGE_KEY = "a1_student_mobile";
 function toggleMenu(){
   document.getElementById("mobileMenu").classList.toggle("show");
 }
+
 function openLogin(){
   document.getElementById("loginModal").classList.add("show");
   document.getElementById("loginStatus").textContent="";
   document.getElementById("loginMobile").focus();
 }
+
 function closeLogin(){
   document.getElementById("loginModal").classList.remove("show");
 }
+
 function openBooking(packageName=""){
   document.getElementById("bookingModal").classList.add("show");
+
   if(packageName){
     const select=document.getElementById("bookPackage");
     const option=[...select.options].find(o=>o.text.includes(packageName));
     if(option)select.value=option.value;
   }
 }
+
 function closeBooking(){
   document.getElementById("bookingModal").classList.remove("show");
 }
+
 function submitBooking(){
   const name=document.getElementById("bookName").value.trim();
   const phone=document.getElementById("bookPhone").value.trim();
@@ -819,17 +830,23 @@ Mobile: ${phone}
 Package: ${pack}
 Preferred Date: ${date}`;
 
-  window.open("https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(message),"_blank");
+  window.open(
+    "https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(message),
+    "_blank"
+  );
+
   closeBooking();
 }
 
 function updateHeaderAccess(name){
   const btn=document.getElementById("headerAccess");
+
   if(name){
     btn.innerHTML='<i data-lucide="layout-dashboard"></i><span id="headerAccessText">Dashboard</span>';
   }else{
     btn.innerHTML='<i data-lucide="user-round"></i><span id="headerAccessText">Login</span>';
   }
+
   if(window.lucide)lucide.createIcons();
 }
 
@@ -846,15 +863,18 @@ function hideWelcome(){
 
 function accessDashboard(){
   const mobile=localStorage.getItem(STORAGE_KEY);
+
   if(!mobile){
     openLogin();
     return;
   }
+
   window.location.href="student-dashboard.html?mobile="+encodeURIComponent(mobile);
 }
 
 function handleHeaderAccess(){
   const mobile=localStorage.getItem(STORAGE_KEY);
+
   if(mobile){
     accessDashboard();
   }else{
@@ -866,6 +886,7 @@ function closePhotoPreview(event){
   if(event && event.target !== document.getElementById("photoPreview"))return;
   document.getElementById("photoPreview").classList.remove("show");
 }
+
 function openPhotoPreview(photo,name){
   document.getElementById("previewImage").src=photo;
   document.getElementById("previewName").textContent=name;
@@ -878,6 +899,10 @@ document.getElementById("loginMobile").addEventListener("input",function(){
 
 document.getElementById("loginMobile").addEventListener("keydown",function(e){
   if(e.key==="Enter")verifyStudent();
+});
+
+document.getElementById("bookPhone").addEventListener("input",function(){
+  this.value=this.value.replace(/\D/g,"").slice(0,10);
 });
 
 window.addEventListener("load",()=>{
@@ -894,17 +919,21 @@ window.accessDashboard=accessDashboard;
 window.toggleMenu=toggleMenu;
 window.submitBooking=submitBooking;
 window.closePhotoPreview=closePhotoPreview;
+window.openPhotoPreview=openPhotoPreview;
 </script>
 
 <script type="module">
 import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+
 import {
   getFirestore, doc, getDoc, collection, getDocs
 } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
 import {
   getDatabase, ref, get
 } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-database.js";
 
+/* EXISTING FIREBASE CONFIG - PRESERVED */
 const firebaseConfig = {
   apiKey: "AIzaSyC3gWi8p85z-wkoJeWb3N3jYoQpcIar8Sww",
   authDomain: "abinash-driving.firebaseapp.com",
@@ -919,23 +948,35 @@ const app=getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
 const db=getFirestore(app);
 const rtdb=getDatabase(app);
 
-/* TIMEOUT HELPER: clears timer after success or failure */
+const BATCH_SIZE=30;
+const STORAGE_KEY="a1_student_mobile";
+
+/* TIMEOUT HELPER */
 function withTimeout(promise,ms,label){
   let timer;
+
   const timeout=new Promise((_,reject)=>{
     timer=setTimeout(()=>{
-      reject(new Error(label+" timed out after "+ms+"ms"));
+      reject(new Error(label+" timed out"));
     },ms);
   });
-  return Promise.race([promise,timeout]).finally(()=>clearTimeout(timer));
+
+  return Promise.race([promise,timeout])
+    .finally(()=>clearTimeout(timer));
 }
 
+/* STUDENT LOOKUP */
 async function findStudent(mobile){
-  const studentRef=doc(db,"studentData",mobile);
-  const snapshot=await withTimeout(getDoc(studentRef),15000,"Student lookup");
+  const snapshot=await withTimeout(
+    getDoc(doc(db,"studentData",mobile)),
+    10000,
+    "Student lookup"
+  );
+
   if(!snapshot.exists())return null;
 
   const data=snapshot.data();
+
   if(data.notActive===true)return null;
 
   return {
@@ -944,7 +985,7 @@ async function findStudent(mobile){
   };
 }
 
-/* CHECK WHETHER STUDENT HAS COMPLETED TRAINING */
+/* COURSE COMPLETION CHECK */
 function isCourseCompleted(data){
   const fields=[
     "courseStatus",
@@ -957,84 +998,137 @@ function isCourseCompleted(data){
     "isCompleted"
   ];
 
-  for(const field of fields){
+  return fields.some(field=>{
     const value=data[field];
 
     if(value===true || value===1)return true;
 
     if(typeof value==="string"){
-      const v=value.trim().toLowerCase();
-      if([
+      return [
         "completed",
         "complete",
         "course completed",
         "class completed",
         "classes completed",
         "finished"
-      ].includes(v))return true;
+      ].includes(value.trim().toLowerCase());
     }
-  }
-  return false;
+
+    return false;
+  });
 }
 
+/* SAFE MESSAGE */
 function showGalleryMessage(message){
   const gallery=document.getElementById("studentGallery");
-  gallery.innerHTML='<div class="gallery-message">'+message+'</div>';
+  gallery.replaceChildren();
+
+  const box=document.createElement("div");
+  box.className="gallery-message";
+  box.textContent=message;
+
+  gallery.appendChild(box);
 }
 
-function renderGallery(students){
-  const gallery=document.getElementById("studentGallery");
+/* CREATE GALLERY CARD */
+function createGalleryCard(student){
+  const card=document.createElement("div");
+  card.className="gallery-card";
+  card.tabIndex=0;
+  card.setAttribute("role","button");
+  card.setAttribute("aria-label","View photo of "+student.name);
 
-  if(!students.length){
-    showGalleryMessage("No student photos available right now.");
-    return;
-  }
+  const img=document.createElement("img");
+  img.className="gallery-photo loading";
+  img.src=student.photo;
+  img.alt=student.name;
+  img.loading="lazy";
+  img.decoding="async";
 
-  gallery.innerHTML='<div class="gallery-grid" id="galleryGrid"></div>';
-  const grid=document.getElementById("galleryGrid");
+  img.onload=()=>{
+    img.classList.remove("loading");
+  };
 
-  students.forEach(student=>{
-    const card=document.createElement("div");
-    card.className="gallery-card";
-    card.tabIndex=0;
-    card.setAttribute("role","button");
-    card.setAttribute("aria-label","View photo of "+student.name);
+  img.onerror=()=>{
+    card.classList.add("photo-error");
+  };
 
-    const img=document.createElement("img");
-    img.className="gallery-photo";
-    img.src=student.photo;
-    img.alt=student.name;
-    img.loading="lazy";
+  const details=document.createElement("div");
+  details.className="gallery-details";
 
-    const details=document.createElement("div");
-    details.className="gallery-details";
+  const name=document.createElement("h3");
+  name.textContent=student.name;
 
-    const name=document.createElement("h3");
-    name.textContent=student.name;
+  const label=document.createElement("p");
+  label.textContent="A1 Driving Student";
 
-    const label=document.createElement("p");
-    label.textContent="A1 Driving Student";
+  details.append(name,label);
+  card.append(img,details);
 
-    details.append(name,label);
-    card.append(img,details);
+  const preview=()=>{
+    if(!img.complete || img.naturalWidth===0)return;
+    window.openPhotoPreview(student.photo,student.name);
+  };
 
-    card.addEventListener("click",()=>{
-      window.openPhotoPreview(student.photo,student.name);
-    });
-    card.addEventListener("keydown",event=>{
-      if(event.key==="Enter" || event.key===" "){
-        event.preventDefault();
-        window.openPhotoPreview(student.photo,student.name);
-      }
-    });
+  card.addEventListener("click",preview);
 
-    grid.appendChild(card);
+  card.addEventListener("keydown",event=>{
+    if(event.key==="Enter" || event.key===" "){
+      event.preventDefault();
+      preview();
+    }
   });
 
-  if(window.lucide)window.lucide.createIcons();
+  return card;
 }
 
-/* LOAD STUDENT GALLERY WITH TIMEOUT + CATCH + FINALLY */
+/* LOAD ONE PHOTO WITH ERROR HANDLING */
+async function loadStudentPhoto(studentDoc){
+  try{
+    const mobile=studentDoc.id;
+    const data=studentDoc.data();
+
+    if(!/^[0-9]{10}$/.test(mobile))return null;
+    if(data.notActive===true)return null;
+    if(isCourseCompleted(data))return null;
+
+    const photoSnapshot=await withTimeout(
+      get(ref(rtdb,"profilePhotos/"+mobile)),
+      7000,
+      "Photo loading"
+    );
+
+    if(!photoSnapshot.exists())return null;
+
+    const photoData=photoSnapshot.val();
+
+    /* Homepage visibility must be ON */
+    if(!photoData || photoData.showOnHomepage!==true){
+      return null;
+    }
+
+    const photo=photoData.image;
+
+    if(
+      typeof photo!=="string" ||
+      !photo.startsWith("data:image/")
+    ){
+      return null;
+    }
+
+    return {
+      mobile,
+      name:data.name || "A1 Student",
+      photo
+    };
+
+  }catch(error){
+    console.warn("Photo skipped:",studentDoc.id,error.message);
+    return null;
+  }
+}
+
+/* FAST PROGRESSIVE GALLERY */
 async function loadStudentGallery(){
   const gallery=document.getElementById("studentGallery");
 
@@ -1046,89 +1140,114 @@ async function loadStudentGallery(){
       </div>
     `;
 
+    /* Fetch Firestore student list once */
     const snapshot=await withTimeout(
       getDocs(collection(db,"studentData")),
-      15000,
-      "Student gallery query"
+      12000,
+      "Student list"
     );
 
-    const photoTasks=[];
+    const eligibleStudents=[];
 
     snapshot.forEach(studentDoc=>{
       const data=studentDoc.data();
-      const mobile=studentDoc.id;
 
-      // Skip inactive and completed students
-      if(data.notActive===true || isCourseCompleted(data))return;
-
-      photoTasks.push((async()=>{
-        try{
-          const photoSnapshot=await withTimeout(
-            get(ref(rtdb,"profilePhotos/"+mobile)),
-            12000,
-            "Photo request for "+mobile
-          );
-
-          if(!photoSnapshot.exists())return null;
-
-          const photoData=photoSnapshot.val();
-          const photo=photoData && photoData.image;
-
-          if(typeof photo!=="string" || !photo.startsWith("data:image/")){
-            console.warn("Invalid student photo:",mobile);
-            return null;
-          }
-
-          return {
-            mobile,
-            name:data.name || "A1 Student",
-            photo
-          };
-        }catch(photoError){
-          console.error("Student photo loading error:",mobile,photoError);
-          return null;
-        }
-      })());
+      if(
+        data.notActive!==true &&
+        !isCourseCompleted(data) &&
+        /^[0-9]{10}$/.test(studentDoc.id)
+      ){
+        eligibleStudents.push(studentDoc);
+      }
     });
 
-    const results=await withTimeout(
-      Promise.all(photoTasks),
-      20000,
-      "Gallery photo processing"
-    );
+    if(!eligibleStudents.length){
+      showGalleryMessage("No student photos available right now.");
+      return;
+    }
 
-    const students=results.filter(Boolean);
-    renderGallery(students);
+    /* Create grid */
+    gallery.innerHTML="";
+
+    const grid=document.createElement("div");
+    grid.className="gallery-grid";
+    gallery.appendChild(grid);
+
+    const progress=document.createElement("div");
+    progress.className="gallery-progress";
+    progress.textContent="Loading student photos...";
+    gallery.appendChild(progress);
+
+    let displayed=0;
+
+    /* Fetch photos in batches */
+    for(
+      let start=0;
+      start<eligibleStudents.length;
+      start+=BATCH_SIZE
+    ){
+      const batch=eligibleStudents.slice(start,start+BATCH_SIZE);
+
+      const results=await Promise.allSettled(
+        batch.map(studentDoc=>loadStudentPhoto(studentDoc))
+      );
+
+      results.forEach(result=>{
+        if(result.status==="fulfilled" && result.value){
+          grid.appendChild(createGalleryCard(result.value));
+          displayed++;
+        }
+      });
+
+      progress.textContent=displayed+" student photos loaded";
+
+      /* Give browser time to render */
+      await new Promise(resolve=>{
+        requestAnimationFrame(resolve);
+      });
+    }
+
+    if(displayed===0){
+      showGalleryMessage(
+        "No approved student photos available right now."
+      );
+      return;
+    }
+
+    progress.textContent=
+      displayed+" students in our driving family";
 
   }catch(error){
-    console.error("STUDENT GALLERY ERROR:",error);
+    console.error("Gallery loading error:",error);
+
     showGalleryMessage(
-      "Gallery could not load. Please check your internet connection or Firebase database permissions. Please try again later."
+      "Student gallery could not load. Please check your internet connection and try again."
     );
-  }finally{
-    const spinner=gallery.querySelector(".gallery-spinner");
-    if(spinner)spinner.remove();
   }
 }
 
+/* RESTORE LOGIN */
 async function restoreLogin(){
-  const savedMobile=localStorage.getItem("a1_student_mobile");
+  const savedMobile=localStorage.getItem(STORAGE_KEY);
+
   if(!savedMobile)return;
 
   try{
     const student=await findStudent(savedMobile);
+
     if(student){
       window.showWelcome(student.name);
     }else{
-      localStorage.removeItem("a1_student_mobile");
+      localStorage.removeItem(STORAGE_KEY);
       window.hideWelcome();
     }
+
   }catch(error){
-    console.error("Student restore error:",error);
-    window.hideWelcome();
+    console.error("Login restore error:",error);
   }
 }
 
+/* VERIFY LOGIN */
 async function verifyStudent(){
   const input=document.getElementById("loginMobile");
   const status=document.getElementById("loginStatus");
@@ -1143,6 +1262,7 @@ async function verifyStudent(){
 
   submit.disabled=true;
   submit.textContent="Checking...";
+
   status.className="status-msg";
   status.textContent="Verifying your student record...";
 
@@ -1151,15 +1271,17 @@ async function verifyStudent(){
 
     if(!student){
       status.className="status-msg error";
-      status.textContent="Student record not found or account is inactive. Please contact the institute.";
+      status.textContent=
+        "Student record not found or account is inactive. Please contact the institute.";
       return;
     }
 
-    localStorage.setItem("a1_student_mobile",mobile);
+    localStorage.setItem(STORAGE_KEY,mobile);
     window.showWelcome(student.name);
 
     status.className="status-msg success";
-    status.textContent="Welcome, "+student.name+"! Your dashboard is ready.";
+    status.textContent=
+      "Welcome, "+student.name+"! Your dashboard is ready.";
 
     setTimeout(()=>{
       window.closeLogin();
@@ -1168,28 +1290,36 @@ async function verifyStudent(){
 
   }catch(error){
     console.error("Login error:",error);
+
     status.className="status-msg error";
-    status.textContent="Unable to verify right now. Please check your internet connection and try again.";
+    status.textContent=
+      "Unable to verify right now. Please check your internet connection and try again.";
+
   }finally{
     submit.disabled=false;
     submit.textContent="Continue";
   }
 }
 
+/* EXPOSE FUNCTIONS */
 window.verifyStudent=verifyStudent;
 window.loadStudentGallery=loadStudentGallery;
+
 window.showWelcome=name=>{
   document.getElementById("welcomeName").textContent=name;
   document.getElementById("welcomeBox").classList.add("show");
   updateHeaderAccess(name);
 };
+
 window.hideWelcome=()=>{
   document.getElementById("welcomeBox").classList.remove("show");
   updateHeaderAccess(null);
 };
 
+/* START */
 restoreLogin();
 loadStudentGallery();
+
 </script>
 
 </body>
