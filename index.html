@@ -1128,8 +1128,9 @@ function showGalleryMessage(message){
   gallery.appendChild(box);
 }
 
-/* CREATE GALLERY CARD */
+/* OPTIMIZED CREATE GALLERY CARD */
 function createGalleryCard(student){
+
   const card=document.createElement("div");
   card.className="gallery-card";
   card.tabIndex=0;
@@ -1138,10 +1139,14 @@ function createGalleryCard(student){
 
   const img=document.createElement("img");
   img.className="gallery-photo loading";
-  img.src=student.thumbnail || student.photo;
-  img.alt=student.name;
+
+  img.alt=student.name || "A1 Driving Student";
   img.loading="lazy";
   img.decoding="async";
+  img.fetchPriority="low";
+  img.referrerPolicy="no-referrer";
+
+  img.src=student.thumbnail || student.photo;
 
   img.onload=()=>{
     img.classList.remove("loading");
@@ -1151,6 +1156,7 @@ function createGalleryCard(student){
     if(student.thumbnail && img.src!==student.photo){
       img.src=student.photo;
     }else{
+      img.classList.remove("loading");
       card.classList.add("photo-error");
     }
   };
@@ -1159,7 +1165,7 @@ function createGalleryCard(student){
   details.className="gallery-details";
 
   const name=document.createElement("h3");
-  name.textContent=student.name;
+  name.textContent=student.name || "A1 Student";
 
   const label=document.createElement("p");
   label.textContent="A1 Driving Student";
@@ -1169,7 +1175,11 @@ function createGalleryCard(student){
 
   const preview=()=>{
     if(!img.complete || img.naturalWidth===0)return;
-    window.openPhotoPreview(student.photo,student.name);
+
+    window.openPhotoPreview(
+      student.photo,
+      student.name
+    );
   };
 
   card.addEventListener("click",preview);
