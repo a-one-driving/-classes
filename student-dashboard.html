@@ -293,19 +293,16 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
   <img id="studentProfileAvatar" src="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student" alt="Student Avatar">
   <span class="profile-online"></span>
  </div>
-
  <div class="profile-info">
   <small>STUDENT PROFILE</small>
   <h2 id="profileStudentName">Student</h2>
   <p>A ONE DRIVING STUDENT</p>
-
   <div class="profile-actions">
    <button type="button" class="photo-btn" id="changePhotoBtn">
     <i data-lucide="camera" width="13"></i> Change Photo
    </button>
    <span class="photo-hint">JPG, PNG · Auto compressed</span>
   </div>
-
   <input type="file" id="profilePhotoInput" accept="image/jpeg,image/png,image/webp" hidden>
   <div class="upload-status" id="uploadStatus"></div>
  </div>
@@ -316,7 +313,6 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
   <div class="plan-label"><i data-lucide="crown" width="13"></i> Your Training Plan</div>
   <h2 id="packageName">Driving Training</h2>
   <p>Your registered training details.</p>
-
   <div class="hero-meta">
    <div><small>Student ID</small><strong id="studentId">--</strong></div>
    <div><small>Class Type</small><strong id="classType">--</strong></div>
@@ -330,23 +326,19 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
 <section class="stats">
  <div class="stat-card">
   <div class="stat-icon"><i data-lucide="calendar-check"></i></div>
-  <strong id="completedClasses">--</strong>
-  <p>Classes Completed</p>
+  <strong id="completedClasses">--</strong><p>Classes Completed</p>
  </div>
  <div class="stat-card">
   <div class="stat-icon"><i data-lucide="calendar-clock"></i></div>
-  <strong id="remainingClasses">--</strong>
-  <p>Classes Remaining</p>
+  <strong id="remainingClasses">--</strong><p>Classes Remaining</p>
  </div>
  <div class="stat-card">
   <div class="stat-icon"><i data-lucide="car"></i></div>
-  <strong id="totalClasses">--</strong>
-  <p>Total Classes</p>
+  <strong id="totalClasses">--</strong><p>Total Classes</p>
  </div>
  <div class="stat-card">
   <div class="stat-icon"><i data-lucide="route"></i></div>
-  <strong id="totalDistance">--</strong>
-  <p>Total Practice Distance</p>
+  <strong id="totalDistance">--</strong><p>Total Practice Distance</p>
  </div>
 </section>
 
@@ -354,12 +346,9 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
  <div class="panel">
   <div class="panel-head"><h2>Training Progress</h2></div>
   <div class="progress-row">
-   <span>Course completion</span>
-   <strong id="progressPercent">0%</strong>
+   <span>Course completion</span><strong id="progressPercent">0%</strong>
   </div>
-  <div class="progress-track">
-   <div class="progress-fill" id="progressBar"></div>
-  </div>
+  <div class="progress-track"><div class="progress-fill" id="progressBar"></div></div>
   <div class="progress-info">
    <span id="progressDone">0 completed</span>
    <span id="progressTotal">0 total</span>
@@ -397,9 +386,7 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
   <h2>Share Your Feedback</h2>
   <i data-lucide="send" style="color:var(--gold)"></i>
  </div>
-
  <p class="login-description">Tell us about your experience at ABHINAASH A1 Driving.</p>
-
  <form class="feedback-form" id="feedbackForm">
   <div>
    <label for="rating">Your Rating</label>
@@ -412,17 +399,14 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
     <option value="1">★ - Needs Improvement</option>
    </select>
   </div>
-
   <div>
    <label for="feedbackText">Your Feedback</label>
    <textarea id="feedbackText" maxlength="1000" placeholder="Write your experience..." required></textarea>
   </div>
-
   <button class="btn-primary" type="submit">
    <i data-lucide="message-circle"></i> Send Feedback
   </button>
  </form>
-
  <div class="notice">
   <i data-lucide="info"></i>
   <div>
@@ -439,23 +423,19 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
    <div class="quick-icon"><i data-lucide="car-front"></i></div>
    <div><strong>My Training</strong><span>Lessons & progress</span></div>
   </a>
-
   <a href="traffic-academy.html" class="quick-action"
    onclick="this.href='traffic-academy.html?mobile='+encodeURIComponent(localStorage.getItem('a1_student_mobile')||'')">
    <div class="quick-icon"><i data-lucide="traffic-cone"></i></div>
    <div><strong>Traffic Academy</strong><span>Learn signs & daily MCQ</span></div>
   </a>
-
   <a href="#attendanceHistory" class="quick-action">
    <div class="quick-icon"><i data-lucide="clipboard-check"></i></div>
    <div><strong>Attendance</strong><span>Class history</span></div>
   </a>
-
   <a href="student-account.html#payments" class="quick-action">
    <div class="quick-icon"><i data-lucide="receipt"></i></div>
    <div><strong>Payments</strong><span>Fee information</span></div>
   </a>
-
   <a href="student-account.html" class="quick-action">
    <div class="quick-icon"><i data-lucide="user-round"></i></div>
    <div><strong>My Account</strong><span>Profile details</span></div>
@@ -483,13 +463,11 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
 import {initializeApp,getApps}
 from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
 
-import {
- getFirestore,doc,onSnapshot
-} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+import {getFirestore,doc,onSnapshot}
+from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
-import {
- getDatabase,ref as databaseRef,set,get
-} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-database.js";
+import {getDatabase,ref as databaseRef,set,get}
+from "https://www.gstatic.com/firebasejs/12.8.0/firebase-database.js";
 
 /* FIREBASE CONFIG */
 const firebaseConfig={
@@ -516,10 +494,8 @@ let currentStudentName="";
 let currentStudentActive=false;
 
 const photoRequests=new Set();
-
 const $=id=>document.getElementById(id);
 
-/* ERROR MESSAGES ONLY */
 function showMessage(message,color="var(--muted)"){
  const el=$("loginMessage");
  el.textContent=message;
@@ -532,7 +508,6 @@ function value(data,key,fallback=""){
  return v===undefined||v===null||v===""?fallback:v;
 }
 
-/* DATE DISPLAY */
 function formatDate(input){
  if(!input)return "--";
 
@@ -554,105 +529,122 @@ function formatDate(input){
   return input;
  }
 
- if(input?.toDate){
-  return formatDate(input.toDate());
- }
+ if(input?.toDate)return formatDate(input.toDate());
 
  return String(input);
 }
 
 /* =========================================
-   CLASS 1 DATE + EXPECTED ENDING DATE
+   CORRECT CLASS 1 DATE CALCULATION
 ========================================= */
 
-/*
-  Attendance log date formats supported:
-  YYYY-MM-DD
-  DD/MM/YYYY
-  DD-MM-YYYY
-  Other browser-readable date strings
-  Firestore Timestamp
-*/
-function parseAttendanceDate(log){
+function parseAttendanceDate(log,referenceYear){
 
- const parsed=parseLog(log);
- const raw=parsed.date;
-
+ const raw=parseLog(log).date;
  if(!raw||raw==="Date not recorded")return null;
-
- // Firestore Timestamp
- if(raw&&typeof raw==="object"&&typeof raw.toDate==="function"){
-  const date=raw.toDate();
-  return Number.isNaN(date.getTime())?null:
-   new Date(date.getFullYear(),date.getMonth(),date.getDate());
- }
 
  const text=String(raw).trim();
 
- // YYYY-MM-DD
+ // ISO: 2026-10-05
  let match=text.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
 
  if(match){
-  const date=new Date(+match[1],+match[2]-1,+match[3]);
-  if(date.getFullYear()===+match[1]&&
-     date.getMonth()===+match[2]-1&&
-     date.getDate()===+match[3]){
+  const year=+match[1],month=+match[2]-1,day=+match[3];
+  const date=new Date(year,month,day);
+
+  if(date.getFullYear()===year&&date.getMonth()===month&&date.getDate()===day){
    return date;
   }
   return null;
  }
 
- // DD/MM/YYYY or DD-MM-YYYY
+ // Indian format: 05/10/2026 or 05-10-2026
  match=text.match(/^(\d{1,2})[/-](\d{1,2})[/-](\d{4})$/);
 
  if(match){
-  const day=+match[1];
-  const month=+match[2];
-  const year=+match[3];
+  const day=+match[1],month=+match[2]-1,year=+match[3];
+  const date=new Date(year,month,day);
 
-  const date=new Date(year,month-1,day);
-
-  if(date.getFullYear()===year&&
-     date.getMonth()===month-1&&
-     date.getDate()===day){
+  if(date.getFullYear()===year&&date.getMonth()===month&&date.getDate()===day){
    return date;
   }
   return null;
  }
 
- // Other date formats such as 03 Nov 2026
- const parsedDate=new Date(text);
+ // Text format: 05 Oct 2026 OR 05 Oct
+ match=text.match(/^(\d{1,2})\s+([A-Za-z]+)(?:\s+(\d{4}))?/);
 
- if(!Number.isNaN(parsedDate.getTime())){
+ if(match){
+  const day=+match[1];
+  const monthNames=["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"];
+  const month=monthNames.findIndex(m=>m===match[2].toLowerCase().slice(0,3));
+  const year=Number(match[3]||referenceYear);
+
+  if(month>=0&&year){
+   const date=new Date(year,month,day);
+
+   if(date.getFullYear()===year&&date.getMonth()===month&&date.getDate()===day){
+    return date;
+   }
+  }
+  return null;
+ }
+
+ // Firestore Timestamp-like object
+ if(raw&&typeof raw==="object"&&typeof raw.toDate==="function"){
+  const date=raw.toDate();
+  if(!Number.isNaN(date.getTime())){
+   return new Date(date.getFullYear(),date.getMonth(),date.getDate());
+  }
+ }
+
+ const fallback=new Date(text);
+
+ if(!Number.isNaN(fallback.getTime())){
   return new Date(
-   parsedDate.getFullYear(),
-   parsedDate.getMonth(),
-   parsedDate.getDate()
+   fallback.getFullYear(),
+   fallback.getMonth(),
+   fallback.getDate()
   );
  }
 
  return null;
 }
 
-/* Find the earliest valid attendance date = Driving Class 1 */
+/* Find the actual earliest date, regardless of array order */
 function getClassOneDate(logs){
 
  if(!Array.isArray(logs)||!logs.length)return null;
 
+ let referenceYear=null;
+
+ // Find the year from any record that contains a year.
+ for(const log of logs){
+  const raw=parseLog(log).date;
+  const match=String(raw).match(/(?:^|\D)(20\d{2})(?:\D|$)/);
+
+  if(match){
+   referenceYear=Number(match[1]);
+   break;
+  }
+ }
+
+ if(!referenceYear){
+  referenceYear=new Date().getFullYear();
+ }
+
  const dates=logs
-  .map(parseAttendanceDate)
+  .map(log=>parseAttendanceDate(log,referenceYear))
   .filter(date=>date instanceof Date&&!Number.isNaN(date.getTime()));
 
  if(!dates.length)return null;
 
- return dates.reduce((earliest,current)=>{
-  return current<earliest?current:earliest;
- });
+ return dates.reduce((earliest,current)=>
+  current<earliest?current:earliest
+ );
 }
 
-/* Add 30 calendar days */
 function calculateEndingDate(startDate){
-
  if(!startDate)return null;
 
  const endingDate=new Date(
@@ -662,7 +654,6 @@ function calculateEndingDate(startDate){
  );
 
  endingDate.setDate(endingDate.getDate()+30);
-
  return endingDate;
 }
 
@@ -672,35 +663,21 @@ function getStudentAvatar(student){
  return "https://api.dicebear.com/9.x/avataaars/svg?seed="+encodeURIComponent(seed);
 }
 
-/* =========================================
-   PROFILE PHOTO CACHE
-========================================= */
-
+/* PROFILE PHOTO CACHE */
 function getCachedPhoto(mobile){
- try{
-  return localStorage.getItem(PHOTO_CACHE_PREFIX+mobile)||"";
- }catch(error){
-  console.warn("Photo cache read error:",error);
-  return "";
- }
+ try{return localStorage.getItem(PHOTO_CACHE_PREFIX+mobile)||"";}
+ catch(error){console.warn("Photo cache read error:",error);return "";}
 }
 
 function cachePhoto(mobile,photo){
  try{
-  if(photo){
-   localStorage.setItem(PHOTO_CACHE_PREFIX+mobile,photo);
-  }
- }catch(error){
-  console.warn("Photo cache storage unavailable:",error);
- }
+  if(photo)localStorage.setItem(PHOTO_CACHE_PREFIX+mobile,photo);
+ }catch(error){console.warn("Photo cache storage unavailable:",error);}
 }
 
 function removeCachedPhoto(mobile){
- try{
-  localStorage.removeItem(PHOTO_CACHE_PREFIX+mobile);
- }catch(error){
-  console.warn("Photo cache remove error:",error);
- }
+ try{localStorage.removeItem(PHOTO_CACHE_PREFIX+mobile);}
+ catch(error){console.warn("Photo cache remove error:",error);}
 }
 
 function applyProfilePhoto(mobile,photo){
@@ -716,19 +693,14 @@ function applyProfilePhoto(mobile,photo){
 async function refreshProfilePhoto(mobile){
 
  if(photoRequests.has(mobile))return;
-
  photoRequests.add(mobile);
 
  try{
-  const snapshot=await get(
-   databaseRef(realtimeDB,"profilePhotos/"+mobile)
-  );
+  const snapshot=await get(databaseRef(realtimeDB,"profilePhotos/"+mobile));
 
   if(currentMobile!==mobile)return;
 
-  const latestPhoto=snapshot.exists()
-   ?snapshot.val()?.image||""
-   :"";
+  const latestPhoto=snapshot.exists()?snapshot.val()?.image||"":"";
 
   if(latestPhoto){
    cachePhoto(mobile,latestPhoto);
@@ -736,7 +708,6 @@ async function refreshProfilePhoto(mobile){
   }else{
    removeCachedPhoto(mobile);
   }
-
  }catch(error){
   console.error("Background photo refresh error:",error);
  }finally{
@@ -802,17 +773,15 @@ async function compressImage(file){
  });
 }
 
-/* CONVERT BLOB TO BASE64 */
 function blobToBase64(blob){
  return new Promise((resolve,reject)=>{
   const reader=new FileReader();
   reader.onload=()=>resolve(reader.result);
   reader.onerror=()=>reject(new Error("Image conversion failed."));
   reader.readAsDataURL(blob);
- });
+ }
 }
 
-/* SAVE PHOTO */
 async function saveProfilePhoto(mobile,imageBase64){
  await set(databaseRef(realtimeDB,"profilePhotos/"+mobile),{
   image:imageBase64,
@@ -820,7 +789,7 @@ async function saveProfilePhoto(mobile,imageBase64){
  });
 }
 
-/* PROFILE PHOTO UPLOAD */
+/* PHOTO UPLOAD */
 $("changePhotoBtn").addEventListener("click",()=>{
  if(!currentMobile||!currentStudentActive){
   alert("Please connect your active student account first.");
@@ -870,7 +839,6 @@ $("profilePhotoInput").addEventListener("change",async function(){
   }
 
   status.textContent="Uploading photo...";
-
   await saveProfilePhoto(uploadMobile,base64);
 
   cachePhoto(uploadMobile,base64);
@@ -880,8 +848,7 @@ $("profilePhotoInput").addEventListener("change",async function(){
   }
 
   status.className="upload-status success";
-  status.textContent="Photo updated successfully ("+
-   (blob.size/1024).toFixed(0)+" KB).";
+  status.textContent="Photo updated successfully ("+(blob.size/1024).toFixed(0)+" KB).";
 
  }catch(error){
   console.error("Photo upload error:",error);
@@ -891,7 +858,6 @@ $("profilePhotoInput").addEventListener("change",async function(){
   btn.disabled=false;
   btn.innerHTML='<i data-lucide="camera" width="13"></i> Change Photo';
   this.value="";
-
   if(window.lucide)window.lucide.createIcons();
  }
 });
@@ -1012,27 +978,15 @@ function renderDashboard(student,mobile){
  currentStudentName=value(student,"name","Student");
  currentStudentActive=student.notActive!==true;
 
- const logs=Array.isArray(student.attendanceLogs)
-  ?student.attendanceLogs:[];
+ const logs=Array.isArray(student.attendanceLogs)?student.attendanceLogs:[];
 
- const total=Math.max(
-  Number(value(student,"totalClasses",20))||20,
-  1
- );
-
+ const total=Math.max(Number(value(student,"totalClasses",20))||20,1);
  const completed=logs.length;
  const left=Math.max(total-completed,0);
  const percent=Math.min(Math.round(completed/total*100),100);
-
  const classType=value(student,"classType","Group");
 
- /*
-   ADMISSION DATE:
-   Earliest valid attendance date = Driving Class 1.
-
-   EXPECTED ENDING DATE:
-   Admission date + 30 calendar days.
- */
+ // Class 1 date is the earliest attendance date.
  const firstClassDate=getClassOneDate(logs);
 
  const admissionDate=firstClassDate
@@ -1047,7 +1001,6 @@ function renderDashboard(student,mobile){
 
  /* INSTANT PHOTO DISPLAY */
  const defaultAvatar=getStudentAvatar({...student,mobile});
-
  const profileImage=$("studentProfileAvatar");
  const headerImage=$("userAvatar");
 
@@ -1063,19 +1016,14 @@ function renderDashboard(student,mobile){
  headerImage.src=defaultAvatar;
 
  const cachedPhoto=getCachedPhoto(mobile);
-
- if(cachedPhoto){
-  applyProfilePhoto(mobile,cachedPhoto);
- }
+ if(cachedPhoto)applyProfilePhoto(mobile,cachedPhoto);
 
  refreshProfilePhoto(mobile);
 
  /* STUDENT DETAILS */
  $("studentId").textContent="A1-"+mobile.slice(-4);
- $("packageName").textContent=
-  classType==="Personal"?"Personal Training":"Group Training";
+ $("packageName").textContent=classType==="Personal"?"Personal Training":"Group Training";
  $("classType").textContent=classType;
-
  $("admissionDate").textContent=admissionDate;
  $("expectedEndDate").textContent=expectedEndingDate;
 
@@ -1096,7 +1044,6 @@ function renderDashboard(student,mobile){
  $("progressDone").textContent=completed+" classes completed";
  $("progressTotal").textContent=total+" total classes";
 
- /* HISTORY */
  renderHistory(logs);
  renderFeedback(logs);
 
@@ -1140,7 +1087,7 @@ function resetDashboard(){
  $("uploadStatus").textContent="";
 }
 
-/* LOGIN ONLY FOR ERRORS / MANUAL LOGIN */
+/* LOGIN */
 function showManualLogin(message){
  $("loginPanel").style.display="block";
  $("manualLoginControls").style.display="flex";
@@ -1161,7 +1108,6 @@ function connectStudent(mobile){
  }
 
  currentMobile=mobile;
-
  const studentRef=doc(db,"studentData",mobile);
 
  unsubscribeStudent=onSnapshot(studentRef,snapshot=>{
