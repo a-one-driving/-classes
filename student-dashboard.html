@@ -45,6 +45,24 @@ header{
 }
 .avatar img{width:100%;height:100%;object-fit:cover}
 
+/* LOGOUT BUTTON */
+.logout-btn{
+ display:none;
+ align-items:center;
+ justify-content:center;
+ gap:6px;
+ padding:9px 12px;
+ border-radius:10px;
+ background:rgba(255,119,119,.10);
+ border:1px solid rgba(255,119,119,.28);
+ color:#FF7777;
+ font-size:10px;
+ font-weight:800;
+ cursor:pointer;
+ white-space:nowrap;
+}
+.logout-btn:active{transform:scale(.96)}
+
 main{padding:27px 0 100px}
 .panel,.stat-card{background:var(--card);border:1px solid var(--border);border-radius:18px}
 .panel{padding:21px;margin-bottom:20px}
@@ -239,6 +257,7 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
 }
 @media(max-width:600px){
  .topbar{height:62px}.header-link{display:none}
+ .logout-btn{padding:8px;font-size:9px}
  main{padding-top:22px}
  .hero-card{padding:20px}.hero-card h2{font-size:21px}
  .hero-meta{gap:17px}
@@ -267,6 +286,12 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
   <a href="index.html" class="logo">ABHINAASH <span>A1</span></a>
   <div class="header-right">
    <a href="contact.html" class="header-link">Need Help?</a>
+
+   <button type="button" id="logoutButton" class="logout-btn">
+    <i data-lucide="log-out" width="14"></i>
+    Logout
+   </button>
+
    <a href="student-account.html" class="avatar" aria-label="My Account">
     <img id="userAvatar" alt="Student profile" src="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student">
    </a>
@@ -351,7 +376,7 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
   <div class="progress-track"><div class="progress-fill" id="progressBar"></div></div>
   <div class="progress-info">
    <span id="progressDone">0 completed</span>
-   <span id="progressTotal">0 total</span>
+   <span id="progressTotal">0 total classes</span>
   </div>
   <div class="milestones">
    <div class="milestone"><i data-lucide="book-open"></i><strong>Basics</strong><span>Learning</span></div>
@@ -423,19 +448,23 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
    <div class="quick-icon"><i data-lucide="car-front"></i></div>
    <div><strong>My Training</strong><span>Lessons & progress</span></div>
   </a>
+
   <a href="traffic-academy.html" class="quick-action"
    onclick="this.href='traffic-academy.html?mobile='+encodeURIComponent(localStorage.getItem('a1_student_mobile')||'')">
    <div class="quick-icon"><i data-lucide="traffic-cone"></i></div>
    <div><strong>Traffic Academy</strong><span>Learn signs & daily MCQ</span></div>
   </a>
+
   <a href="#attendanceHistory" class="quick-action">
    <div class="quick-icon"><i data-lucide="clipboard-check"></i></div>
    <div><strong>Attendance</strong><span>Class history</span></div>
   </a>
+
   <a href="student-account.html#payments" class="quick-action">
    <div class="quick-icon"><i data-lucide="receipt"></i></div>
    <div><strong>Payments</strong><span>Fee information</span></div>
   </a>
+
   <a href="student-account.html" class="quick-action">
    <div class="quick-icon"><i data-lucide="user-round"></i></div>
    <div><strong>My Account</strong><span>Profile details</span></div>
@@ -496,6 +525,7 @@ let currentStudentActive=false;
 const photoRequests=new Set();
 const $=id=>document.getElementById(id);
 
+/* COMMON */
 function showMessage(message,color="var(--muted)"){
  const el=$("loginMessage");
  el.textContent=message;
@@ -530,14 +560,30 @@ function formatDate(input){
  }
 
  if(input?.toDate)return formatDate(input.toDate());
-
  return String(input);
 }
 
-/* =========================================
-   CORRECT CLASS 1 DATE CALCULATION
-========================================= */
+/* PARSE ATTENDANCE */
+function parseLog(log){
+ const text=String(log||"");
+ const parts=text.split("|").map(x=>x.trim());
 
+ const date=parts[0]||"Date not recorded";
+ const time=parts[1]||"";
+ const routeMatch=text.match(/Route:\s*([^|]+)/i);
+ const distanceMatch=text.match(/Distance:\s*([^|]+)/i);
+ const remarkMatch=text.match(/Remark:\s*(.*)$/i);
+
+ return {
+  date,
+  time:time.replace(/^—\s*/,""),
+  route:routeMatch?routeMatch[1].trim():"Not recorded",
+  distance:distanceMatch?distanceMatch[1].trim():"Not recorded",
+  remark:remarkMatch?remarkMatch[1].trim():""
+ };
+}
+
+/* CLASS 1 DATE CALCULATION */
 function parseAttendanceDate(log,referenceYear){
 
  const raw=parseLog(log).date;
@@ -545,7 +591,7 @@ function parseAttendanceDate(log,referenceYear){
 
  const text=String(raw).trim();
 
- // ISO: 2026-10-05
+ // YYYY-MM-DD
  let match=text.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
 
  if(match){
@@ -558,7 +604,7 @@ function parseAttendanceDate(log,referenceYear){
   return null;
  }
 
- // Indian format: 05/10/2026 or 05-10-2026
+ // DD/MM/YYYY or DD-MM-YYYY
  match=text.match(/^(\d{1,2})[/-](\d{1,2})[/-](\d{4})$/);
 
  if(match){
@@ -571,7 +617,7 @@ function parseAttendanceDate(log,referenceYear){
   return null;
  }
 
- // Text format: 05 Oct 2026 OR 05 Oct
+ // 05 Oct 2026 OR 05 Oct
  match=text.match(/^(\d{1,2})\s+([A-Za-z]+)(?:\s+(\d{4}))?/);
 
  if(match){
@@ -590,14 +636,7 @@ function parseAttendanceDate(log,referenceYear){
   return null;
  }
 
- // Firestore Timestamp-like object
- if(raw&&typeof raw==="object"&&typeof raw.toDate==="function"){
-  const date=raw.toDate();
-  if(!Number.isNaN(date.getTime())){
-   return new Date(date.getFullYear(),date.getMonth(),date.getDate());
-  }
- }
-
+ // Other date formats
  const fallback=new Date(text);
 
  if(!Number.isNaN(fallback.getTime())){
@@ -611,14 +650,13 @@ function parseAttendanceDate(log,referenceYear){
  return null;
 }
 
-/* Find the actual earliest date, regardless of array order */
 function getClassOneDate(logs){
 
  if(!Array.isArray(logs)||!logs.length)return null;
 
  let referenceYear=null;
 
- // Find the year from any record that contains a year.
+ // Find year from records containing a year.
  for(const log of logs){
   const raw=parseLog(log).date;
   const match=String(raw).match(/(?:^|\D)(20\d{2})(?:\D|$)/);
@@ -629,9 +667,7 @@ function getClassOneDate(logs){
   }
  }
 
- if(!referenceYear){
-  referenceYear=new Date().getFullYear();
- }
+ if(!referenceYear)referenceYear=new Date().getFullYear();
 
  const dates=logs
   .map(log=>parseAttendanceDate(log,referenceYear))
@@ -665,19 +701,28 @@ function getStudentAvatar(student){
 
 /* PROFILE PHOTO CACHE */
 function getCachedPhoto(mobile){
- try{return localStorage.getItem(PHOTO_CACHE_PREFIX+mobile)||"";}
- catch(error){console.warn("Photo cache read error:",error);return "";}
+ try{
+  return localStorage.getItem(PHOTO_CACHE_PREFIX+mobile)||"";
+ }catch(error){
+  console.warn("Photo cache read error:",error);
+  return "";
+ }
 }
 
 function cachePhoto(mobile,photo){
  try{
   if(photo)localStorage.setItem(PHOTO_CACHE_PREFIX+mobile,photo);
- }catch(error){console.warn("Photo cache storage unavailable:",error);}
+ }catch(error){
+  console.warn("Photo cache storage unavailable:",error);
+ }
 }
 
 function removeCachedPhoto(mobile){
- try{localStorage.removeItem(PHOTO_CACHE_PREFIX+mobile);}
- catch(error){console.warn("Photo cache remove error:",error);}
+ try{
+  localStorage.removeItem(PHOTO_CACHE_PREFIX+mobile);
+ }catch(error){
+  console.warn("Photo cache remove error:",error);
+ }
 }
 
 function applyProfilePhoto(mobile,photo){
@@ -708,6 +753,7 @@ async function refreshProfilePhoto(mobile){
   }else{
    removeCachedPhoto(mobile);
   }
+
  }catch(error){
   console.error("Background photo refresh error:",error);
  }finally{
@@ -715,7 +761,7 @@ async function refreshProfilePhoto(mobile){
  }
 }
 
-/* COMPRESS PHOTO */
+/* IMAGE COMPRESSION */
 async function compressImage(file){
  return new Promise((resolve,reject)=>{
   const image=new Image();
@@ -779,7 +825,7 @@ function blobToBase64(blob){
   reader.onload=()=>resolve(reader.result);
   reader.onerror=()=>reject(new Error("Image conversion failed."));
   reader.readAsDataURL(blob);
- }
+ });
 }
 
 async function saveProfilePhoto(mobile,imageBase64){
@@ -861,26 +907,6 @@ $("profilePhotoInput").addEventListener("change",async function(){
   if(window.lucide)window.lucide.createIcons();
  }
 });
-
-/* PARSE ATTENDANCE */
-function parseLog(log){
- const text=String(log||"");
- const parts=text.split("|").map(x=>x.trim());
-
- const date=parts[0]||"Date not recorded";
- const time=parts[1]||"";
- const routeMatch=text.match(/Route:\s*([^|]+)/i);
- const distanceMatch=text.match(/Distance:\s*([^|]+)/i);
- const remarkMatch=text.match(/Remark:\s*(.*)$/i);
-
- return {
-  date,
-  time:time.replace(/^—\s*/,""),
-  route:routeMatch?routeMatch[1].trim():"Not recorded",
-  distance:distanceMatch?distanceMatch[1].trim():"Not recorded",
-  remark:remarkMatch?remarkMatch[1].trim():""
- };
-}
 
 /* RENDER HISTORY */
 function renderHistory(logs){
@@ -986,7 +1012,6 @@ function renderDashboard(student,mobile){
  const percent=Math.min(Math.round(completed/total*100),100);
  const classType=value(student,"classType","Group");
 
- // Class 1 date is the earliest attendance date.
  const firstClassDate=getClassOneDate(logs);
 
  const admissionDate=firstClassDate
@@ -1048,9 +1073,10 @@ function renderDashboard(student,mobile){
  renderFeedback(logs);
 
  $("loginPanel").style.display="none";
+ $("logoutButton").style.display="inline-flex";
 }
 
-/* RESET */
+/* RESET DASHBOARD */
 function resetDashboard(){
 
  currentMobile="";
@@ -1085,7 +1111,45 @@ function resetDashboard(){
  $("feedbackList").innerHTML='<div class="empty">Instructor remarks will appear here.</div>';
  $("historyCount").textContent="0 classes";
  $("uploadStatus").textContent="";
+
+ $("logoutButton").style.display="none";
 }
+
+/* LOGOUT */
+function logoutStudent(){
+
+ const confirmed=confirm("Are you sure you want to logout?");
+ if(!confirmed)return;
+
+ // Stop Firebase real-time listener
+ if(unsubscribeStudent){
+  unsubscribeStudent();
+  unsubscribeStudent=null;
+ }
+
+ // Clear saved login
+ localStorage.removeItem(STORAGE_KEY);
+
+ // Reset student dashboard
+ resetDashboard();
+
+ // Show login controls
+ $("manualLoginControls").style.display="flex";
+ $("studentMobile").value="";
+
+ showMessage(
+  "You have successfully logged out. Login again to continue.",
+  "var(--green)"
+ );
+
+ // Scroll to login
+ $("loginPanel").scrollIntoView({
+  behavior:"smooth",
+  block:"start"
+ });
+}
+
+$("logoutButton").addEventListener("click",logoutStudent);
 
 /* LOGIN */
 function showManualLogin(message){
@@ -1108,6 +1172,7 @@ function connectStudent(mobile){
  }
 
  currentMobile=mobile;
+
  const studentRef=doc(db,"studentData",mobile);
 
  unsubscribeStudent=onSnapshot(studentRef,snapshot=>{
