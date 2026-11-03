@@ -282,7 +282,9 @@ function safe(v){
  }[c]));
 }
 function getLogs(s){return Array.isArray(s.attendanceLogs)?s.attendanceLogs:[]}
-function getDone(s){return Math.max(getLogs(s).length,Number(s.remaining||0),0)}
+function getDone(s){
+ return getLogs(s).length;
+}
 function getTotal(s){return Math.max(Number(s.totalClasses||1),1)}
 function isCompleted(s){return getDone(s)>=getTotal(s)}
 function isInactive(s){return s.notActive===true}
@@ -519,9 +521,13 @@ window.saveStudent=async function(){
   const admissionDate=`${n.getFullYear()}-${String(n.getMonth()+1).padStart(2,"0")}-${String(n.getDate()).padStart(2,"0")}`;
 
   await setDoc(doc(db,"studentData",phone),{
-   name,totalClasses:total,remaining:0,attendanceLogs:[],
-   classType:addClassType,notActive:false,admissionDate
-  });
+ name,
+ totalClasses:total,
+ attendanceLogs:[],
+ classType:addClassType,
+ notActive:false,
+ admissionDate
+});
 
   closeModal("addModal");showToast("Student admission saved ✓");await loadStudents();
  }catch(e){console.error(e);showToast("Could not save student. Check Firebase permissions")}
@@ -594,8 +600,9 @@ window.saveAttendance=async function(){
   const log=`${date} | ${time} — Route: ${route} | Distance: 5 KM${remark?" | Remark: "+remark:""}`;
 
   await updateDoc(doc(db,"studentData",currentStudentId),{
-   remaining:getDone(s)+1,attendanceLogs:arrayUnion(log),notActive:false
-  });
+ attendanceLogs:arrayUnion(log),
+ notActive:false
+});
   closeModal("attendanceModal");showToast("Attendance saved ✓");await loadStudents();
  }catch(e){console.error(e);showToast("Could not save attendance")}
  finally{btn.disabled=false;btn.textContent="SAVE ATTENDANCE"}
