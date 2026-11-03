@@ -498,6 +498,7 @@ async function loadGallery(){
  }
 }
 
+
 /* SAVE HOMEPAGE VISIBILITY */
 $("gallery").addEventListener("change",async event=>{
  const toggle=event.target.closest(".homepage-toggle");
@@ -508,31 +509,46 @@ $("gallery").addEventListener("change",async event=>{
  const status=$("status-"+mobile);
 
  toggle.disabled=true;
+
  if(status){
   status.textContent="Saving...";
   status.className="visibility-status saving";
  }
 
  try{
+  // Update original photo record
   await withTimeout(
    set(
     databaseRef(realtimeDB,"profilePhotos/"+mobile+"/showOnHomepage"),
     enabled
    ),
    10000,
-   "Visibility update"
+   "Original visibility update"
+  );
+
+  // Update separate thumbnail record
+  await withTimeout(
+   set(
+    databaseRef(realtimeDB,"profilePhotoThumbnails/"+mobile+"/showOnHomepage"),
+    enabled
+   ),
+   10000,
+   "Thumbnail visibility update"
   );
 
   const student=allStudents.find(item=>item.mobile===mobile);
   if(student)student.showOnHomepage=enabled;
 
   if(status){
-   status.textContent=enabled?"Visible on homepage":"Hidden from homepage";
+   status.textContent=enabled
+    ?"Visible on homepage"
+    :"Hidden from homepage";
    status.className="visibility-status"+(enabled?" visible":"");
   }
 
  }catch(error){
   console.error("Toggle save error:",error);
+
   toggle.checked=!enabled;
 
   if(status){
@@ -540,35 +556,12 @@ $("gallery").addEventListener("change",async event=>{
    status.className="visibility-status";
   }
 
-  alert("Visibility update failed. Please check Firebase Database Rules and admin permissions.");
+  alert("Visibility update failed. Please check Firebase Database Rules and permissions.");
  }finally{
   toggle.disabled=false;
  }
 });
 
-/* PHOTO PREVIEW */
-function openPhoto(student){
- $("modalImage").src=student.photo;
- $("modalName").textContent=student.name;
- $("photoModal").classList.add("show");
- document.body.style.overflow="hidden";
-}
-
-function closePhoto(){
- $("photoModal").classList.remove("show");
- $("modalImage").src="";
- document.body.style.overflow="";
-}
-
-$("closeModal").addEventListener("click",closePhoto);
-
-$("photoModal").addEventListener("click",event=>{
- if(event.target===$("photoModal"))closePhoto();
-});
-
-document.addEventListener("keydown",event=>{
- if(event.key==="Escape")closePhoto();
-});
 
 /* START */
 loadGallery();
