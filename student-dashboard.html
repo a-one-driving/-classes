@@ -50,7 +50,8 @@ header{
  padding:9px 12px;border-radius:10px;
  background:rgba(255,119,119,.10);
  border:1px solid rgba(255,119,119,.28);
- color:#FF7777;font-size:10px;font-weight:800;cursor:pointer;white-space:nowrap
+ color:#FF7777;font-size:10px;font-weight:800;
+ cursor:pointer;white-space:nowrap;
 }
 .logout-btn:active{transform:scale(.96)}
 
@@ -77,18 +78,20 @@ main{padding:27px 0 100px}
 .btn-outline{border-color:var(--border);color:var(--white);background:rgba(255,255,255,.04)}
 
 .student-profile{
- display:flex;align-items:center;gap:14px;padding:17px;margin-bottom:22px;
- border-radius:19px;background:linear-gradient(115deg,#192B43,#111A29 75%);
+ display:flex;align-items:center;gap:14px;
+ padding:17px;margin-bottom:22px;border-radius:19px;
+ background:linear-gradient(115deg,#192B43,#111A29 75%);
  border:1px solid rgba(242,189,69,.2)
 }
 .profile-avatar{
- width:76px;height:76px;min-width:76px;padding:3px;border-radius:50%;
- position:relative;background:linear-gradient(135deg,#D99A25,#FFE3A4);
+ width:76px;height:76px;min-width:76px;padding:3px;
+ border-radius:50%;position:relative;
+ background:linear-gradient(135deg,#D99A25,#FFE3A4);
  animation:avatarFloat 3s ease-in-out infinite
 }
 .profile-avatar img{
- width:100%;height:100%;display:block;border-radius:50%;
- object-fit:cover;background:#25364b
+ width:100%;height:100%;display:block;
+ border-radius:50%;object-fit:cover;background:#25364b
 }
 .profile-online{
  position:absolute;right:2px;bottom:4px;width:13px;height:13px;
@@ -157,7 +160,8 @@ main{padding:27px 0 100px}
 .progress-track{height:9px;border-radius:20px;background:#263247;overflow:hidden}
 .progress-fill{
  width:0;height:100%;border-radius:20px;
- background:linear-gradient(90deg,#D99A25,var(--gold));transition:width .4s
+ background:linear-gradient(90deg,#D99A25,var(--gold));
+ transition:width .4s
 }
 .progress-info{display:flex;justify-content:space-between;margin-top:9px;font-size:9px;color:var(--muted)}
 .milestones{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:22px}
@@ -648,24 +652,36 @@ function getStudentAvatar(student){
 
 /* PROFILE PHOTO CACHE */
 function getCachedPhoto(mobile){
- try{return localStorage.getItem(PHOTO_CACHE_PREFIX+mobile)||"";}
- catch(error){console.warn("Photo cache read error:",error);return "";}
+ try{
+  return localStorage.getItem(PHOTO_CACHE_PREFIX+mobile)||"";
+ }catch(error){
+  console.warn("Photo cache read error:",error);
+  return "";
+ }
 }
 
 function cachePhoto(mobile,photo){
- try{if(photo)localStorage.setItem(PHOTO_CACHE_PREFIX+mobile,photo);}
- catch(error){console.warn("Photo cache storage unavailable:",error);}
+ try{
+  if(photo)localStorage.setItem(PHOTO_CACHE_PREFIX+mobile,photo);
+ }catch(error){
+  console.warn("Photo cache storage unavailable:",error);
+ }
 }
 
 function removeCachedPhoto(mobile){
- try{localStorage.removeItem(PHOTO_CACHE_PREFIX+mobile);}
- catch(error){console.warn("Photo cache remove error:",error);}
+ try{
+  localStorage.removeItem(PHOTO_CACHE_PREFIX+mobile);
+ }catch(error){
+  console.warn("Photo cache remove error:",error);
+ }
 }
 
 function applyProfilePhoto(mobile,photo){
  if(!photo||currentMobile!==mobile)return;
+
  const profileImage=$("studentProfileAvatar");
  const headerImage=$("userAvatar");
+
  if(profileImage.src!==photo)profileImage.src=photo;
  if(headerImage.src!==photo)headerImage.src=photo;
 }
@@ -743,7 +759,6 @@ async function compressImage(file){
     }
 
     resolve(blob);
-
    }catch(error){
     reject(error);
    }
@@ -764,9 +779,10 @@ function blobToBase64(blob){
   reader.onload=()=>resolve(reader.result);
   reader.onerror=()=>reject(new Error("Image conversion failed."));
   reader.readAsDataURL(blob);
+ });
 }
 
-/* UPDATE ONLY PHOTO FIELDS - PRESERVES showOnHomepage */
+/* UPDATE PHOTO WITHOUT DELETING showOnHomepage */
 async function saveProfilePhoto(mobile,imageBase64){
  const photoRef=databaseRef(realtimeDB,"profilePhotos/"+mobile);
 
@@ -1061,7 +1077,10 @@ function logoutStudent(){
 
  showMessage("You have successfully logged out. Login again to continue.","var(--green)");
 
- $("loginPanel").scrollIntoView({behavior:"smooth",block:"start"});
+ $("loginPanel").scrollIntoView({
+  behavior:"smooth",
+  block:"start"
+ });
 }
 
 $("logoutButton").addEventListener("click",logoutStudent);
