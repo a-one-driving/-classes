@@ -745,15 +745,15 @@ footer{border-top:1px solid var(--border);padding:30px 0;margin-top:50px}
 
     <div class="booking-grid">
       <div class="full">
-        <label class="form-label">Full Name</label>
+        <label class="form-label" for="bookName">Full Name</label>
         <input class="form-control" id="bookName" placeholder="Enter your name">
       </div>
       <div class="full">
-        <label class="form-label">Mobile Number</label>
+        <label class="form-label" for="bookPhone">Mobile Number</label>
         <input class="form-control" id="bookPhone" type="tel" maxlength="10" inputmode="numeric" placeholder="10-digit mobile number">
       </div>
       <div class="full">
-        <label class="form-label">Select Package</label>
+        <label class="form-label" for="bookPackage">Select Package</label>
         <select class="form-control" id="bookPackage">
           <option value="">Choose package</option>
           <option>Standard Plan - ₹3,500</option>
@@ -762,7 +762,7 @@ footer{border-top:1px solid var(--border);padding:30px 0;margin-top:50px}
         </select>
       </div>
       <div class="full">
-        <label class="form-label">Preferred Start Date</label>
+        <label class="form-label" for="bookDate">Preferred Start Date</label>
         <input class="form-control" id="bookDate" type="date">
       </div>
     </div>
@@ -885,6 +885,7 @@ function handleHeaderAccess(){
 function closePhotoPreview(event){
   if(event && event.target !== document.getElementById("photoPreview"))return;
   document.getElementById("photoPreview").classList.remove("show");
+  document.getElementById("previewImage").src="";
 }
 
 function openPhotoPreview(photo,name){
@@ -948,7 +949,7 @@ const app=getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
 const db=getFirestore(app);
 const rtdb=getDatabase(app);
 
-const BATCH_SIZE=30;
+const BATCH_SIZE=10;
 const STORAGE_KEY="a1_student_mobile";
 
 /* TIMEOUT HELPER */
@@ -1040,7 +1041,7 @@ function createGalleryCard(student){
 
   const img=document.createElement("img");
   img.className="gallery-photo loading";
-  img.src=student.photo;
+  img.src=student.thumbnail || student.photo;
   img.alt=student.name;
   img.loading="lazy";
   img.decoding="async";
@@ -1050,7 +1051,11 @@ function createGalleryCard(student){
   };
 
   img.onerror=()=>{
-    card.classList.add("photo-error");
+    if(student.thumbnail && img.src!==student.photo){
+      img.src=student.photo;
+    }else{
+      card.classList.add("photo-error");
+    }
   };
 
   const details=document.createElement("div");
@@ -1102,12 +1107,12 @@ async function loadStudentPhoto(studentDoc){
 
     const photoData=photoSnapshot.val();
 
-    /* Homepage visibility must be ON */
     if(!photoData || photoData.showOnHomepage!==true){
       return null;
     }
 
     const photo=photoData.image;
+    const thumbnail=photoData.thumbnail;
 
     if(
       typeof photo!=="string" ||
@@ -1119,7 +1124,11 @@ async function loadStudentPhoto(studentDoc){
     return {
       mobile,
       name:data.name || "A1 Student",
-      photo
+      photo,
+      thumbnail:
+        typeof thumbnail==="string" && thumbnail.startsWith("data:image/")
+          ? thumbnail
+          : null
     };
 
   }catch(error){
@@ -1140,7 +1149,6 @@ async function loadStudentGallery(){
       </div>
     `;
 
-    /* Fetch Firestore student list once */
     const snapshot=await withTimeout(
       getDocs(collection(db,"studentData")),
       12000,
@@ -1166,8 +1174,7 @@ async function loadStudentGallery(){
       return;
     }
 
-    /* Create grid */
-    gallery.innerHTML="";
+    gallery.replaceChildren();
 
     const grid=document.createElement("div");
     grid.className="gallery-grid";
@@ -1180,7 +1187,6 @@ async function loadStudentGallery(){
 
     let displayed=0;
 
-    /* Fetch photos in batches */
     for(
       let start=0;
       start<eligibleStudents.length;
@@ -1201,7 +1207,6 @@ async function loadStudentGallery(){
 
       progress.textContent=displayed+" student photos loaded";
 
-      /* Give browser time to render */
       await new Promise(resolve=>{
         requestAnimationFrame(resolve);
       });
