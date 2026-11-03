@@ -656,9 +656,10 @@ async function loadProfilePhoto(mobile){
   return "";
 }
 
-/* PROFILE PHOTO UPLOAD */
+/* PROFILE PHOTO UPLOAD - REALTIME DATABASE */
+
 $("changePhotoBtn").addEventListener("click",()=>{
- if(!currentMobile||!currentStudentActive){
+ if(!currentMobile || !currentStudentActive){
   alert("Please connect your active student account first.");
   return;
  }
@@ -667,6 +668,7 @@ $("changePhotoBtn").addEventListener("click",()=>{
 });
 
 $("profilePhotoInput").addEventListener("change",async function(){
+
  const file=this.files?.[0];
  if(!file)return;
 
@@ -682,7 +684,7 @@ $("profilePhotoInput").addEventListener("change",async function(){
   return;
  }
 
- if(!currentMobile||!currentStudentActive){
+ if(!currentMobile || !currentStudentActive){
   alert("Your student account is not active.");
   this.value="";
   return;
@@ -690,54 +692,55 @@ $("profilePhotoInput").addEventListener("change",async function(){
 
  const btn=$("changePhotoBtn");
  const status=$("uploadStatus");
- const oldPhoto=$("studentProfileAvatar").src;
 
  btn.disabled=true;
  btn.textContent="Compressing...";
  status.className="upload-status";
- status.textContent="Preparing your profile photo...";
+ status.textContent="Compressing your photo...";
 
  try{
-  const compressedBlob=await compressImage(file);
 
-  status.textContent=
-   "Compressed image: "+(compressedBlob.size/1024).toFixed(0)+" KB. Uploading...";
+  // Compress image to JPEG
+  const blob=await compressImage(file);
 
-  const fileRef=ref(storage,
-   "student-profile/"+currentMobile+"/profile.jpg"
-  );
-
-  await uploadBytes(fileRef,compressedBlob,{
-   contentType:"image/jpeg"
+  // Convert compressed image to Base64
+  const base64=await new Promise((resolve,reject)=>{
+   const reader=new FileReader();
+   reader.onload=()=>resolve(reader.result);
+   reader.onerror=()=>reject(new Error("Image conversion failed."));
+   reader.readAsDataURL(blob);
   });
 
-  const photoURL=await getDownloadURL(fileRef);
+  status.textContent="Uploading photo...";
 
-  await updateDoc(doc(db,"studentData",currentMobile),{
-   profilePhoto:photoURL,
-   profilePhotoPath:"student-profile/"+currentMobile+"/profile.jpg"
-  });
+  // Save in Realtime Database
+  await saveProfilePhoto(currentMobile,base64);
 
-  $("studentProfileAvatar").src=photoURL;
-  $("userAvatar").src=photoURL;
+  // Update both dashboard avatars
+  $("studentProfileAvatar").src=base64;
+  $("userAvatar").src=base64;
 
   status.className="upload-status success";
-  status.textContent="Profile photo updated successfully.";
+  status.textContent=
+   "Photo updated successfully ("+
+   (blob.size/1024).toFixed(0)+" KB).";
 
  }catch(error){
+
   console.error("Photo upload error:",error);
 
   status.className="upload-status error";
   status.textContent="Upload failed: "+error.message;
 
-  $("studentProfileAvatar").src=oldPhoto;
-
  }finally{
+
   btn.disabled=false;
   btn.innerHTML='<i data-lucide="camera" width="13"></i> Change Photo';
   this.value="";
+
   if(window.lucide)window.lucide.createIcons();
  }
+
 });
 
 function parseLog(log){
