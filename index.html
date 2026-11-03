@@ -1128,6 +1128,7 @@ function showGalleryMessage(message){
   gallery.appendChild(box);
 }
 
+
 /* OPTIMIZED CREATE GALLERY CARD */
 function createGalleryCard(student){
 
@@ -1139,13 +1140,12 @@ function createGalleryCard(student){
 
   const img=document.createElement("img");
   img.className="gallery-photo loading";
-
   img.alt=student.name || "A1 Driving Student";
   img.loading="lazy";
   img.decoding="async";
   img.fetchPriority="low";
-  img.referrerPolicy="no-referrer";
 
+  // Homepage loads thumbnail only
   img.src=student.thumbnail || student.photo;
 
   img.onload=()=>{
@@ -1153,12 +1153,8 @@ function createGalleryCard(student){
   };
 
   img.onerror=()=>{
-    if(student.thumbnail && img.src!==student.photo){
-      img.src=student.photo;
-    }else{
-      img.classList.remove("loading");
-      card.classList.add("photo-error");
-    }
+    img.classList.remove("loading");
+    card.classList.add("photo-error");
   };
 
   const details=document.createElement("div");
@@ -1173,13 +1169,44 @@ function createGalleryCard(student){
   details.append(name,label);
   card.append(img,details);
 
-  const preview=()=>{
-    if(!img.complete || img.naturalWidth===0)return;
+  // Load original photo only when clicked
+  let opening=false;
 
-    window.openPhotoPreview(
-      student.photo,
-      student.name
-    );
+  const preview=async()=>{
+    if(opening)return;
+    opening=true;
+
+    try{
+      const snapshot=await get(
+        ref(rtdb,"profilePhotos/"+student.mobile+"/image")
+      );
+
+      if(!snapshot.exists()){
+        alert("Original photo not found.");
+        return;
+      }
+
+      const originalPhoto=snapshot.val();
+
+      if(
+        typeof originalPhoto!=="string" ||
+        !originalPhoto.startsWith("data:image/")
+      ){
+        alert("Original photo is invalid.");
+        return;
+      }
+
+      window.openPhotoPreview(
+        originalPhoto,
+        student.name
+      );
+
+    }catch(error){
+      console.error("Original photo loading failed:",error);
+      alert("Unable to load original photo. Please try again.");
+    }finally{
+      opening=false;
+    }
   };
 
   card.addEventListener("click",preview);
@@ -1193,6 +1220,7 @@ function createGalleryCard(student){
 
   return card;
 }
+
 
 
 /* LOAD ONLY THUMBNAIL - FAST HOMEPAGE */
