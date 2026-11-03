@@ -630,6 +630,32 @@ async function compressImage(file){
  });
 }
 
+
+
+/* SAVE PROFILE PHOTO TO REALTIME DATABASE */
+async function saveProfilePhoto(mobile, imageBase64){
+  await set(
+    ref(realtimeDB, "profilePhotos/" + mobile),
+    {
+      image: imageBase64,
+      updatedAt: Date.now()
+    }
+  );
+}
+
+/* LOAD PROFILE PHOTO */
+async function loadProfilePhoto(mobile){
+  const snapshot = await get(
+    ref(realtimeDB, "profilePhotos/" + mobile)
+  );
+
+  if(snapshot.exists()){
+    return snapshot.val().image || "";
+  }
+
+  return "";
+}
+
 /* PROFILE PHOTO UPLOAD */
 $("changePhotoBtn").addEventListener("click",()=>{
  if(!currentMobile||!currentStudentActive){
