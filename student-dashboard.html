@@ -103,6 +103,10 @@ main{padding:27px 0 100px}
 }
 .photo-btn:disabled{opacity:.6;cursor:not-allowed}
 .photo-hint{font-size:9px;color:var(--muted)}
+.upload-status{font-size:10px;color:var(--muted);margin-top:8px;min-height:15px}
+.upload-status.success{color:var(--green)}
+.upload-status.error{color:var(--red)}
+
 @keyframes avatarFloat{
  0%,100%{transform:translateY(0)}
  50%{transform:translateY(-5px)}
@@ -157,7 +161,7 @@ main{padding:27px 0 100px}
 }
 .history-top,.feedback-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
 .history-top strong,.feedback-top strong{font-size:11px}
-.history-date,.feedback-date{font-size:9px;color:var(--muted)}
+.feedback-date{font-size:9px;color:var(--muted)}
 .history-details{font-size:10px;color:#DCE1E9;line-height:1.8;margin-top:8px;overflow-wrap:anywhere;white-space:pre-line}
 .remark{margin-top:9px;padding:9px 11px;border-radius:9px;background:rgba(242,189,69,.08);color:var(--gold);font-size:10px;line-height:1.6}
 .status-pill{font-size:9px;font-weight:800;padding:5px 9px;border-radius:20px;background:rgba(53,201,138,.12);color:var(--green)}
@@ -195,14 +199,6 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
 .bottom-nav a{display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--muted);font-size:9px;font-weight:700;min-width:55px}
 .bottom-nav a.active{color:var(--gold)}
 .bottom-nav i{width:19px;height:19px}
-
-/* PHOTO UPLOAD STATUS */
-.upload-status{
- font-size:10px;color:var(--muted);margin-top:8px;
- min-height:15px
-}
-.upload-status.success{color:var(--green)}
-.upload-status.error{color:var(--red)}
 
 @media(max-width:850px){
  .stats{grid-template-columns:repeat(2,1fr)}
@@ -246,225 +242,203 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
 
 <main class="container">
 
- <!-- STUDENT VERIFICATION -->
- <section class="panel" id="loginPanel">
-  <div class="panel-head">
-   <h2>Student Verification</h2>
-   <span style="font-size:10px;color:var(--gold)">Student Portal</span>
-  </div>
-  <p class="login-description" id="loginMessage">Verifying your registered student account...</p>
-  <div class="login-controls" id="manualLoginControls" style="display:none">
-   <input type="tel" id="studentMobile" maxlength="10" inputmode="numeric" placeholder="Enter mobile number">
-   <button class="btn-primary" id="loginButton" type="button">Connect Account</button>
-  </div>
- </section>
+<section class="panel" id="loginPanel">
+ <div class="panel-head">
+  <h2>Student Verification</h2>
+  <span style="font-size:10px;color:var(--gold)">Student Portal</span>
+ </div>
+ <p class="login-description" id="loginMessage">Verifying your registered student account...</p>
+ <div class="login-controls" id="manualLoginControls" style="display:none">
+  <input type="tel" id="studentMobile" maxlength="10" inputmode="numeric" placeholder="Enter mobile number">
+  <button class="btn-primary" id="loginButton" type="button">Connect Account</button>
+ </div>
+</section>
 
- <!-- STUDENT PROFILE WITH PHOTO UPLOAD -->
- <section class="student-profile">
-  <div class="profile-avatar">
-   <img id="studentProfileAvatar" src="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student" alt="Student Avatar">
-   <span class="profile-online"></span>
-  </div>
+<!-- PROFILE -->
+<section class="student-profile">
+ <div class="profile-avatar">
+  <img id="studentProfileAvatar" src="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student" alt="Student Avatar">
+  <span class="profile-online"></span>
+ </div>
 
-  <div class="profile-info">
-   <small>STUDENT PROFILE</small>
-   <h2 id="profileStudentName">Student</h2>
-   <p>A ONE DRIVING STUDENT</p>
+ <div class="profile-info">
+  <small>STUDENT PROFILE</small>
+  <h2 id="profileStudentName">Student</h2>
+  <p>A ONE DRIVING STUDENT</p>
 
-   <div class="profile-actions">
-    <button type="button" class="photo-btn" id="changePhotoBtn">
-     <i data-lucide="camera" width="13"></i>
-     Change Photo
-    </button>
-    <span class="photo-hint">JPG, PNG · Auto compressed</span>
-   </div>
-
-   <input type="file" id="profilePhotoInput" accept="image/jpeg,image/png,image/webp" hidden>
-   <div class="upload-status" id="uploadStatus"></div>
-  </div>
- </section>
-
- <!-- PACKAGE -->
- <section class="hero-card">
-  <div class="hero-content">
-   <div class="plan-label"><i data-lucide="crown" width="13"></i> Your Training Plan</div>
-   <h2 id="packageName">Driving Training</h2>
-   <p>Your registered training details.</p>
-
-   <div class="hero-meta">
-    <div><small>Student ID</small><strong id="studentId">--</strong></div>
-    <div><small>Class Type</small><strong id="classType">--</strong></div>
-    <div><small>Admission Date</small><strong id="admissionDate">--</strong></div>
-    <div><small>Account Status</small><strong id="accountStatus">--</strong></div>
-   </div>
-  </div>
- </section>
-
- <!-- STATS -->
- <section class="stats">
-  <div class="stat-card">
-   <div class="stat-icon"><i data-lucide="calendar-check"></i></div>
-   <strong id="completedClasses">--</strong>
-   <p>Classes Completed</p>
-  </div>
-
-  <div class="stat-card">
-   <div class="stat-icon"><i data-lucide="calendar-clock"></i></div>
-   <strong id="remainingClasses">--</strong>
-   <p>Classes Remaining</p>
-  </div>
-
-  <div class="stat-card">
-   <div class="stat-icon"><i data-lucide="car"></i></div>
-   <strong id="totalClasses">--</strong>
-   <p>Total Classes</p>
-  </div>
-
-  <div class="stat-card">
-   <div class="stat-icon"><i data-lucide="route"></i></div>
-   <strong id="totalDistance">--</strong>
-   <p>Total Practice Distance</p>
-  </div>
- </section>
-
- <!-- TRAINING PROGRESS -->
- <section class="content-grid">
-  <div class="panel">
-   <div class="panel-head"><h2>Training Progress</h2></div>
-
-   <div class="progress-row">
-    <span>Course completion</span>
-    <strong id="progressPercent">0%</strong>
-   </div>
-
-   <div class="progress-track">
-    <div class="progress-fill" id="progressBar"></div>
-   </div>
-
-   <div class="progress-info">
-    <span id="progressDone">0 completed</span>
-    <span id="progressTotal">0 total</span>
-   </div>
-
-   <div class="milestones">
-    <div class="milestone">
-     <i data-lucide="book-open"></i>
-     <strong>Basics</strong>
-     <span>Learning</span>
-    </div>
-
-    <div class="milestone">
-     <i data-lucide="steering-wheel"></i>
-     <strong>Practice</strong>
-     <span>Driving</span>
-    </div>
-
-    <div class="milestone">
-     <i data-lucide="award"></i>
-     <strong>Final</strong>
-     <span>Assessment</span>
-    </div>
-   </div>
-  </div>
- </section>
-
- <!-- ATTENDANCE HISTORY -->
- <section class="panel" id="attendanceHistory">
-  <div class="panel-head">
-   <h2>My Class History</h2>
-   <span style="font-size:10px;color:var(--muted)" id="historyCount">0 classes</span>
-  </div>
-
-  <div class="history-list" id="historyList">
-   <div class="empty">Connect your account to view class history.</div>
-  </div>
- </section>
-
- <!-- INSTRUCTOR FEEDBACK -->
- <section class="panel" id="instructorFeedback">
-  <div class="panel-head">
-   <h2>Instructor Remarks & Feedback</h2>
-   <i data-lucide="message-square" style="color:var(--gold)"></i>
-  </div>
-
-  <div class="feedback-list" id="feedbackList">
-   <div class="empty">Instructor remarks will appear here after your classes.</div>
-  </div>
- </section>
-
- <!-- STUDENT FEEDBACK -->
- <section class="panel" id="studentFeedback">
-  <div class="panel-head">
-   <h2>Share Your Feedback</h2>
-   <i data-lucide="send" style="color:var(--gold)"></i>
-  </div>
-
-  <p class="login-description">Tell us about your experience at ABHINAASH A1 Driving.</p>
-
-  <form class="feedback-form" id="feedbackForm">
-   <div>
-    <label for="rating">Your Rating</label>
-    <select id="rating" required>
-     <option value="">Select rating</option>
-     <option value="5">★★★★★ - Excellent</option>
-     <option value="4">★★★★ - Very Good</option>
-     <option value="3">★★★ - Good</option>
-     <option value="2">★★ - Average</option>
-     <option value="1">★ - Needs Improvement</option>
-    </select>
-   </div>
-
-   <div>
-    <label for="feedbackText">Your Feedback</label>
-    <textarea id="feedbackText" maxlength="1000" placeholder="Write your experience..." required></textarea>
-   </div>
-
-   <button class="btn-primary" type="submit">
-    <i data-lucide="message-circle"></i> Send Feedback
+  <div class="profile-actions">
+   <button type="button" class="photo-btn" id="changePhotoBtn">
+    <i data-lucide="camera" width="13"></i> Change Photo
    </button>
-  </form>
-
-  <div class="notice">
-   <i data-lucide="info"></i>
-   <div>
-    <strong>Feedback submission</strong>
-    <p>Your feedback will be sent to the driving school through WhatsApp. It is not saved to Firestore by this form.</p>
-   </div>
+   <span class="photo-hint">JPG, PNG · Auto compressed</span>
   </div>
- </section>
 
- <!-- QUICK LINKS -->
- <section class="panel">
-  <div class="panel-head"><h2>Quick Actions</h2></div>
+  <input type="file" id="profilePhotoInput" accept="image/jpeg,image/png,image/webp" hidden>
+  <div class="upload-status" id="uploadStatus"></div>
+ </div>
+</section>
 
-  <div class="quick-grid">
-   <a href="student-training.html" class="quick-action">
-    <div class="quick-icon"><i data-lucide="car-front"></i></div>
-    <div><strong>My Training</strong><span>Lessons & progress</span></div>
-   </a>
+<!-- TRAINING PLAN -->
+<section class="hero-card">
+ <div class="hero-content">
+  <div class="plan-label"><i data-lucide="crown" width="13"></i> Your Training Plan</div>
+  <h2 id="packageName">Driving Training</h2>
+  <p>Your registered training details.</p>
 
-   <a href="traffic-academy.html" class="quick-action"
-    onclick="this.href='traffic-academy.html?mobile='+encodeURIComponent(localStorage.getItem('a1_student_mobile')||'')">
-    <div class="quick-icon"><i data-lucide="traffic-cone"></i></div>
-    <div><strong>Traffic Academy</strong><span>Learn signs & daily MCQ</span></div>
-   </a>
-
-   <a href="#attendanceHistory" class="quick-action">
-    <div class="quick-icon"><i data-lucide="clipboard-check"></i></div>
-    <div><strong>Attendance</strong><span>Class history</span></div>
-   </a>
-
-   <a href="student-account.html#payments" class="quick-action">
-    <div class="quick-icon"><i data-lucide="receipt"></i></div>
-    <div><strong>Payments</strong><span>Fee information</span></div>
-   </a>
-
-   <a href="student-account.html" class="quick-action">
-    <div class="quick-icon"><i data-lucide="user-round"></i></div>
-    <div><strong>My Account</strong><span>Profile details</span></div>
-   </a>
+  <div class="hero-meta">
+   <div><small>Student ID</small><strong id="studentId">--</strong></div>
+   <div><small>Class Type</small><strong id="classType">--</strong></div>
+   <div><small>Admission Date</small><strong id="admissionDate">--</strong></div>
+   <div><small>Account Status</small><strong id="accountStatus">--</strong></div>
   </div>
- </section>
+ </div>
+</section>
+
+<!-- STATISTICS -->
+<section class="stats">
+ <div class="stat-card">
+  <div class="stat-icon"><i data-lucide="calendar-check"></i></div>
+  <strong id="completedClasses">--</strong>
+  <p>Classes Completed</p>
+ </div>
+ <div class="stat-card">
+  <div class="stat-icon"><i data-lucide="calendar-clock"></i></div>
+  <strong id="remainingClasses">--</strong>
+  <p>Classes Remaining</p>
+ </div>
+ <div class="stat-card">
+  <div class="stat-icon"><i data-lucide="car"></i></div>
+  <strong id="totalClasses">--</strong>
+  <p>Total Classes</p>
+ </div>
+ <div class="stat-card">
+  <div class="stat-icon"><i data-lucide="route"></i></div>
+  <strong id="totalDistance">--</strong>
+  <p>Total Practice Distance</p>
+ </div>
+</section>
+
+<!-- TRAINING PROGRESS -->
+<section class="content-grid">
+ <div class="panel">
+  <div class="panel-head"><h2>Training Progress</h2></div>
+
+  <div class="progress-row">
+   <span>Course completion</span>
+   <strong id="progressPercent">0%</strong>
+  </div>
+
+  <div class="progress-track">
+   <div class="progress-fill" id="progressBar"></div>
+  </div>
+
+  <div class="progress-info">
+   <span id="progressDone">0 completed</span>
+   <span id="progressTotal">0 total</span>
+  </div>
+
+  <div class="milestones">
+   <div class="milestone"><i data-lucide="book-open"></i><strong>Basics</strong><span>Learning</span></div>
+   <div class="milestone"><i data-lucide="steering-wheel"></i><strong>Practice</strong><span>Driving</span></div>
+   <div class="milestone"><i data-lucide="award"></i><strong>Final</strong><span>Assessment</span></div>
+  </div>
+ </div>
+</section>
+
+<!-- ATTENDANCE HISTORY -->
+<section class="panel" id="attendanceHistory">
+ <div class="panel-head">
+  <h2>My Class History</h2>
+  <span style="font-size:10px;color:var(--muted)" id="historyCount">0 classes</span>
+ </div>
+ <div class="history-list" id="historyList">
+  <div class="empty">Connect your account to view class history.</div>
+ </div>
+</section>
+
+<!-- INSTRUCTOR FEEDBACK -->
+<section class="panel" id="instructorFeedback">
+ <div class="panel-head">
+  <h2>Instructor Remarks & Feedback</h2>
+  <i data-lucide="message-square" style="color:var(--gold)"></i>
+ </div>
+ <div class="feedback-list" id="feedbackList">
+  <div class="empty">Instructor remarks will appear here after your classes.</div>
+ </div>
+</section>
+
+<!-- STUDENT FEEDBACK -->
+<section class="panel" id="studentFeedback">
+ <div class="panel-head">
+  <h2>Share Your Feedback</h2>
+  <i data-lucide="send" style="color:var(--gold)"></i>
+ </div>
+
+ <p class="login-description">Tell us about your experience at ABHINAASH A1 Driving.</p>
+
+ <form class="feedback-form" id="feedbackForm">
+  <div>
+   <label for="rating">Your Rating</label>
+   <select id="rating" required>
+    <option value="">Select rating</option>
+    <option value="5">★★★★★ - Excellent</option>
+    <option value="4">★★★★ - Very Good</option>
+    <option value="3">★★★ - Good</option>
+    <option value="2">★★ - Average</option>
+    <option value="1">★ - Needs Improvement</option>
+   </select>
+  </div>
+
+  <div>
+   <label for="feedbackText">Your Feedback</label>
+   <textarea id="feedbackText" maxlength="1000" placeholder="Write your experience..." required></textarea>
+  </div>
+
+  <button class="btn-primary" type="submit">
+   <i data-lucide="message-circle"></i> Send Feedback
+  </button>
+ </form>
+
+ <div class="notice">
+  <i data-lucide="info"></i>
+  <div>
+   <strong>Feedback submission</strong>
+   <p>Your feedback will be sent to the driving school through WhatsApp. It is not saved to Firestore by this form.</p>
+  </div>
+ </div>
+</section>
+
+<!-- QUICK LINKS -->
+<section class="panel">
+ <div class="panel-head"><h2>Quick Actions</h2></div>
+ <div class="quick-grid">
+  <a href="student-training.html" class="quick-action">
+   <div class="quick-icon"><i data-lucide="car-front"></i></div>
+   <div><strong>My Training</strong><span>Lessons & progress</span></div>
+  </a>
+
+  <a href="traffic-academy.html" class="quick-action"
+   onclick="this.href='traffic-academy.html?mobile='+encodeURIComponent(localStorage.getItem('a1_student_mobile')||'')">
+   <div class="quick-icon"><i data-lucide="traffic-cone"></i></div>
+   <div><strong>Traffic Academy</strong><span>Learn signs & daily MCQ</span></div>
+  </a>
+
+  <a href="#attendanceHistory" class="quick-action">
+   <div class="quick-icon"><i data-lucide="clipboard-check"></i></div>
+   <div><strong>Attendance</strong><span>Class history</span></div>
+  </a>
+
+  <a href="student-account.html#payments" class="quick-action">
+   <div class="quick-icon"><i data-lucide="receipt"></i></div>
+   <div><strong>Payments</strong><span>Fee information</span></div>
+  </a>
+
+  <a href="student-account.html" class="quick-action">
+   <div class="quick-icon"><i data-lucide="user-round"></i></div>
+   <div><strong>My Account</strong><span>Profile details</span></div>
+  </a>
+ </div>
+</section>
 
 </main>
 
@@ -487,18 +461,14 @@ import {initializeApp,getApps}
 from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
 
 import {
- getFirestore,doc,onSnapshot,updateDoc
+ getFirestore,doc,onSnapshot
 } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
 import {
- getDatabase,ref,set,get
+ getDatabase,ref as databaseRef,set,get
 } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-database.js";
 
-import {
- getStorage,ref,uploadBytes,getDownloadURL
-} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-storage.js";
-
-/* EXISTING PROJECT CONFIGURATION */
+/* FIREBASE CONFIG */
 const firebaseConfig={
  apiKey:"AIzaSyC3gWi8p85z-wkoJeWb3N3jYoQpcIar8Sww",
  authDomain:"abinash-driving.firebaseapp.com",
@@ -515,7 +485,6 @@ const STORAGE_KEY="a1_student_mobile";
 const app=getApps().length?getApps()[0]:initializeApp(firebaseConfig);
 const db=getFirestore(app);
 const realtimeDB=getDatabase(app);
-const storage=getStorage(app);
 
 let unsubscribeStudent=null;
 let currentMobile="";
@@ -523,10 +492,6 @@ let currentStudentName="";
 let currentStudentActive=false;
 
 const $=id=>document.getElementById(id);
-
-$("todayDate") && ($("todayDate").textContent=new Date().toLocaleDateString("en-IN",{
- day:"2-digit",month:"short",year:"numeric"
-}));
 
 function showMessage(message,color="var(--muted)"){
  $("loginMessage").textContent=message;
@@ -543,14 +508,12 @@ function formatDate(input){
 
  if(typeof input==="string"){
   const match=input.match(/^(\d{4})-(\d{2})-(\d{2})$/);
-
   if(match){
    return new Date(+match[1],+match[2]-1,+match[3])
     .toLocaleDateString("en-IN",{
      day:"2-digit",month:"short",year:"numeric"
     });
   }
-
   return input;
  }
 
@@ -569,16 +532,13 @@ function formatDate(input){
  return String(input);
 }
 
-/* STUDENT AVATAR */
+/* DEFAULT AVATAR */
 function getStudentAvatar(student){
  const seed=student.mobile||student.name||"A1Student";
-
- return student.profilePhoto ||
-  "https://api.dicebear.com/9.x/avataaars/svg?seed="+
-  encodeURIComponent(seed);
+ return "https://api.dicebear.com/9.x/avataaars/svg?seed="+encodeURIComponent(seed);
 }
 
-/* AUTOMATIC IMAGE COMPRESSION */
+/* COMPRESS PHOTO */
 async function compressImage(file){
  return new Promise((resolve,reject)=>{
   const image=new Image();
@@ -591,10 +551,15 @@ async function compressImage(file){
    const scale=Math.min(1,maxSize/Math.max(image.width,image.height));
 
    const canvas=document.createElement("canvas");
-   canvas.width=Math.round(image.width*scale);
-   canvas.height=Math.round(image.height*scale);
+   canvas.width=Math.max(1,Math.round(image.width*scale));
+   canvas.height=Math.max(1,Math.round(image.height*scale));
 
    const ctx=canvas.getContext("2d");
+   if(!ctx){
+    reject(new Error("Canvas is not supported."));
+    return;
+   }
+
    ctx.fillStyle="#FFFFFF";
    ctx.fillRect(0,0,canvas.width,canvas.height);
    ctx.drawImage(image,0,0,canvas.width,canvas.height);
@@ -630,50 +595,52 @@ async function compressImage(file){
  });
 }
 
-
-
-/* SAVE PROFILE PHOTO TO REALTIME DATABASE */
-async function saveProfilePhoto(mobile, imageBase64){
-  await set(
-    ref(realtimeDB, "profilePhotos/" + mobile),
-    {
-      image: imageBase64,
-      updatedAt: Date.now()
-    }
-  );
+/* CONVERT BLOB TO BASE64 */
+function blobToBase64(blob){
+ return new Promise((resolve,reject)=>{
+  const reader=new FileReader();
+  reader.onload=()=>resolve(reader.result);
+  reader.onerror=()=>reject(new Error("Image conversion failed."));
+  reader.readAsDataURL(blob);
+ });
 }
 
-/* LOAD PROFILE PHOTO */
+/* SAVE PHOTO */
+async function saveProfilePhoto(mobile,imageBase64){
+ await set(databaseRef(realtimeDB,"profilePhotos/"+mobile),{
+  image:imageBase64,
+  updatedAt:Date.now()
+ });
+}
+
+/* LOAD PHOTO */
 async function loadProfilePhoto(mobile){
-  const snapshot = await get(
-    ref(realtimeDB, "profilePhotos/" + mobile)
-  );
+ const snapshot=await get(
+  databaseRef(realtimeDB,"profilePhotos/"+mobile)
+ );
 
-  if(snapshot.exists()){
-    return snapshot.val().image || "";
-  }
+ if(snapshot.exists()){
+  return snapshot.val()?.image||"";
+ }
 
-  return "";
+ return "";
 }
 
-/* PROFILE PHOTO UPLOAD - REALTIME DATABASE */
-
+/* PROFILE PHOTO UPLOAD */
 $("changePhotoBtn").addEventListener("click",()=>{
- if(!currentMobile || !currentStudentActive){
+ if(!currentMobile||!currentStudentActive){
   alert("Please connect your active student account first.");
   return;
  }
-
  $("profilePhotoInput").click();
 });
 
 $("profilePhotoInput").addEventListener("change",async function(){
-
  const file=this.files?.[0];
  if(!file)return;
 
- if(!file.type.startsWith("image/")){
-  alert("Please select a valid image.");
+ if(!["image/jpeg","image/png","image/webp"].includes(file.type)){
+  alert("Please select a JPG, PNG or WEBP image.");
   this.value="";
   return;
  }
@@ -684,7 +651,7 @@ $("profilePhotoInput").addEventListener("change",async function(){
   return;
  }
 
- if(!currentMobile || !currentStudentActive){
+ if(!currentMobile||!currentStudentActive){
   alert("Your student account is not active.");
   this.value="";
   return;
@@ -692,6 +659,7 @@ $("profilePhotoInput").addEventListener("change",async function(){
 
  const btn=$("changePhotoBtn");
  const status=$("uploadStatus");
+ const uploadMobile=currentMobile;
 
  btn.disabled=true;
  btn.textContent="Compressing...";
@@ -699,50 +667,39 @@ $("profilePhotoInput").addEventListener("change",async function(){
  status.textContent="Compressing your photo...";
 
  try{
-
-  // Compress image to JPEG
   const blob=await compressImage(file);
+  const base64=await blobToBase64(blob);
 
-  // Convert compressed image to Base64
-  const base64=await new Promise((resolve,reject)=>{
-   const reader=new FileReader();
-   reader.onload=()=>resolve(reader.result);
-   reader.onerror=()=>reject(new Error("Image conversion failed."));
-   reader.readAsDataURL(blob);
-  });
+  if(currentMobile!==uploadMobile){
+   throw new Error("Student account changed. Please try again.");
+  }
 
   status.textContent="Uploading photo...";
 
-  // Save in Realtime Database
-  await saveProfilePhoto(currentMobile,base64);
+  await saveProfilePhoto(uploadMobile,base64);
 
-  // Update both dashboard avatars
-  $("studentProfileAvatar").src=base64;
-  $("userAvatar").src=base64;
+  if(currentMobile===uploadMobile){
+   $("studentProfileAvatar").src=base64;
+   $("userAvatar").src=base64;
+  }
 
   status.className="upload-status success";
-  status.textContent=
-   "Photo updated successfully ("+
+  status.textContent="Photo updated successfully ("+
    (blob.size/1024).toFixed(0)+" KB).";
 
  }catch(error){
-
   console.error("Photo upload error:",error);
-
   status.className="upload-status error";
   status.textContent="Upload failed: "+error.message;
-
  }finally{
-
   btn.disabled=false;
   btn.innerHTML='<i data-lucide="camera" width="13"></i> Change Photo';
   this.value="";
-
   if(window.lucide)window.lucide.createIcons();
  }
-
 });
 
+/* PARSE ATTENDANCE */
 function parseLog(log){
  const text=String(log||"");
  const parts=text.split("|").map(x=>x.trim());
@@ -754,7 +711,6 @@ function parseLog(log){
  const remarkMatch=text.match(/Remark:\s*(.*)$/i);
 
  return {
-  original:text,
   date,
   time:time.replace(/^—\s*/,""),
   route:routeMatch?routeMatch[1].trim():"Not recorded",
@@ -763,10 +719,10 @@ function parseLog(log){
  };
 }
 
+/* RENDER HISTORY */
 function renderHistory(logs){
  const container=$("historyList");
  container.replaceChildren();
-
  $("historyCount").textContent=logs.length+" classes";
 
  if(!logs.length){
@@ -807,6 +763,7 @@ function renderHistory(logs){
  });
 }
 
+/* RENDER INSTRUCTOR REMARKS */
 function renderFeedback(logs){
  const container=$("feedbackList");
  container.replaceChildren();
@@ -819,7 +776,7 @@ function renderFeedback(logs){
  if(!entries.length){
   const empty=document.createElement("div");
   empty.className="empty";
-  empty.textContent="No instructor remarks have been recorded yet. Your instructor's remarks will appear here after they are added during attendance.";
+  empty.textContent="No instructor remarks have been recorded yet.";
   container.appendChild(empty);
   return;
  }
@@ -848,7 +805,8 @@ function renderFeedback(logs){
  });
 }
 
-function renderDashboard(student,mobile){
+/* RENDER DASHBOARD */
+async function renderDashboard(student,mobile){
 
  currentStudentName=value(student,"name","Student");
  currentStudentActive=student.notActive!==true;
@@ -858,10 +816,7 @@ function renderDashboard(student,mobile){
 
  const total=Math.max(Number(value(student,"totalClasses",20))||20,1);
 
- /*
- Existing admin logic increments "remaining" by 1 for each attendance.
- Therefore this field is treated as completed classes.
- */
+ // Existing attendance logic increments remaining for completed classes.
  const storedCompleted=Math.max(
   Number(value(student,"remaining",0))||0,0
  );
@@ -877,24 +832,26 @@ function renderDashboard(student,mobile){
  const classType=value(student,"classType","Group");
  const admissionDate=formatDate(value(student,"admissionDate",""));
 
- /* PROFILE */
- $("studentName") && ($("studentName").textContent=currentStudentName);
+ /* STUDENT NAME */
  $("profileStudentName").textContent=currentStudentName;
 
- /* LOAD PROFILE PHOTO FROM REALTIME DATABASE */
-const defaultAvatar=getStudentAvatar({...student,mobile});
+ /* DEFAULT AVATAR */
+ const defaultAvatar=getStudentAvatar({...student,mobile});
+ $("studentProfileAvatar").src=defaultAvatar;
+ $("userAvatar").src=defaultAvatar;
 
-$("studentProfileAvatar").src=defaultAvatar;
-$("userAvatar").src=defaultAvatar;
+ /* LOAD REALTIME DATABASE PHOTO */
+ try{
+  const photo=await loadProfilePhoto(mobile);
 
-loadProfilePhoto(mobile).then(photo=>{
- if(photo){
-  $("studentProfileAvatar").src=photo;
-  $("userAvatar").src=photo;
+  // Prevent an old async response from updating another student's page.
+  if(photo&&currentMobile===mobile){
+   $("studentProfileAvatar").src=photo;
+   $("userAvatar").src=photo;
+  }
+ }catch(error){
+  console.error("Profile photo loading error:",error);
  }
-}).catch(error=>{
- console.error("Profile photo loading error:",error);
-});
 
  $("studentProfileAvatar").onerror=()=>{
   $("studentProfileAvatar").src=
@@ -906,7 +863,7 @@ loadProfilePhoto(mobile).then(photo=>{
    "https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student";
  };
 
- /* PACKAGE DETAILS */
+ /* PACKAGE */
  $("studentId").textContent="A1-"+mobile.slice(-4);
  $("packageName").textContent=
   classType==="Personal"?"Personal Training":"Group Training";
@@ -916,7 +873,7 @@ loadProfilePhoto(mobile).then(photo=>{
  $("accountStatus").style.color=
   currentStudentActive?"var(--green)":"var(--red)";
 
- /* STATISTICS */
+ /* STATS */
  $("completedClasses").textContent=completed;
  $("remainingClasses").textContent=left;
  $("totalClasses").textContent=total;
@@ -930,13 +887,14 @@ loadProfilePhoto(mobile).then(photo=>{
  $("progressDone").textContent=completed+" classes completed";
  $("progressTotal").textContent=total+" total classes";
 
- /* HISTORY AND REMARKS */
+ /* HISTORY */
  renderHistory(logs);
  renderFeedback(logs);
 
  $("loginPanel").style.display="none";
 }
 
+/* RESET */
 function resetDashboard(){
  currentMobile="";
  currentStudentName="";
@@ -974,14 +932,15 @@ function resetDashboard(){
  $("uploadStatus").textContent="";
 }
 
+/* LOGIN MESSAGE */
 function showManualLogin(message){
  $("loginPanel").style.display="block";
  $("manualLoginControls").style.display="flex";
  showMessage(message,"var(--red)");
 }
 
+/* CONNECT STUDENT */
 function connectStudent(mobile){
-
  if(!/^[0-9]{10}$/.test(mobile)){
   showManualLogin("Please enter a valid registered mobile number.");
   return;
@@ -998,7 +957,6 @@ function connectStudent(mobile){
  const studentRef=doc(db,"studentData",mobile);
 
  unsubscribeStudent=onSnapshot(studentRef,snapshot=>{
-
   if(!snapshot.exists()){
    localStorage.removeItem(STORAGE_KEY);
    resetDashboard();
@@ -1016,7 +974,10 @@ function connectStudent(mobile){
   }
 
   $("manualLoginControls").style.display="none";
-  renderDashboard(student,mobile);
+
+  renderDashboard(student,mobile).catch(error=>{
+   console.error("Dashboard rendering error:",error);
+  });
 
   showMessage("Account verified successfully.","var(--green)");
 
@@ -1026,7 +987,7 @@ function connectStudent(mobile){
  });
 }
 
-/* MANUAL CONNECTION */
+/* MANUAL LOGIN */
 $("studentMobile").addEventListener("input",function(){
  this.value=this.value.replace(/\D/g,"").slice(0,10);
 });
@@ -1094,10 +1055,9 @@ ${message}`;
  window.open(url,"_blank");
 });
 
-/* LUCIDE ICONS */
+/* LUCIDE */
 if(window.lucide)window.lucide.createIcons();
 
 </script>
-
 </body>
 </html>
