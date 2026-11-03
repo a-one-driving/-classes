@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="https://unpkg.com/lucide@latest"></script>
+<script defer src="https://unpkg.com/lucide@latest"></script>
 
 <style>
 :root{
@@ -29,7 +29,8 @@ button{cursor:pointer}
 
 header{
  position:sticky;top:0;z-index:100;
- background:rgba(8,13,24,.96);backdrop-filter:blur(16px);
+ background:rgba(8,13,24,.96);
+ backdrop-filter:blur(16px);
  border-bottom:1px solid var(--border)
 }
 .topbar{height:68px;display:flex;align-items:center;justify-content:space-between}
@@ -49,7 +50,6 @@ main{padding:27px 0 100px}
 .panel{padding:21px;margin-bottom:20px}
 .panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
 .panel-head h2{font-size:15px}
-
 .login-description{font-size:11px;color:var(--muted);margin-bottom:13px}
 .login-controls{display:flex;gap:10px;flex-wrap:wrap}
 .login-controls input{
@@ -69,13 +69,13 @@ main{padding:27px 0 100px}
 
 .student-profile{
  display:flex;align-items:center;gap:14px;
- padding:17px;margin-bottom:22px;
- border-radius:19px;background:linear-gradient(115deg,#192B43,#111A29 75%);
+ padding:17px;margin-bottom:22px;border-radius:19px;
+ background:linear-gradient(115deg,#192B43,#111A29 75%);
  border:1px solid rgba(242,189,69,.2)
 }
 .profile-avatar{
- width:76px;height:76px;min-width:76px;
- padding:3px;border-radius:50%;position:relative;
+ width:76px;height:76px;min-width:76px;padding:3px;
+ border-radius:50%;position:relative;
  background:linear-gradient(135deg,#D99A25,#FFE3A4);
  animation:avatarFloat 3s ease-in-out infinite
 }
@@ -84,9 +84,8 @@ main{padding:27px 0 100px}
  border-radius:50%;object-fit:cover;background:#25364b
 }
 .profile-online{
- position:absolute;right:2px;bottom:4px;
- width:13px;height:13px;border:2px solid #192B43;
- border-radius:50%;background:var(--green)
+ position:absolute;right:2px;bottom:4px;width:13px;height:13px;
+ border:2px solid #192B43;border-radius:50%;background:var(--green)
 }
 .profile-info{flex:1;min-width:0}
 .profile-info small{color:var(--gold);font-size:9px;font-weight:800;letter-spacing:1.5px}
@@ -94,9 +93,8 @@ main{padding:27px 0 100px}
 .profile-info p{font-size:10px;color:var(--muted)}
 .profile-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:9px}
 .photo-btn{
- display:inline-flex;align-items:center;gap:6px;
- padding:8px 11px;border-radius:9px;
- background:rgba(242,189,69,.13);
+ display:inline-flex;align-items:center;gap:6px;padding:8px 11px;
+ border-radius:9px;background:rgba(242,189,69,.13);
  border:1px solid rgba(242,189,69,.3);
  color:var(--gold);font-size:10px;font-weight:800
 }
@@ -105,7 +103,6 @@ main{padding:27px 0 100px}
 .upload-status{font-size:10px;color:var(--muted);margin-top:8px;min-height:15px}
 .upload-status.success{color:var(--green)}
 .upload-status.error{color:var(--red)}
-
 @keyframes avatarFloat{
  0%,100%{transform:translateY(0)}
  50%{transform:translateY(-5px)}
@@ -114,17 +111,20 @@ main{padding:27px 0 100px}
 .hero-card{
  position:relative;overflow:hidden;
  background:linear-gradient(115deg,#192B43,#111A29 75%);
- border:1px solid rgba(242,189,69,.2);border-radius:22px;padding:25px;margin-bottom:20px
+ border:1px solid rgba(242,189,69,.2);
+ border-radius:22px;padding:25px;margin-bottom:20px
 }
 .hero-card:after{
- content:"";position:absolute;width:220px;height:220px;border-radius:50%;
- border:1px solid rgba(242,189,69,.12);right:-65px;top:-100px;
+ content:"";position:absolute;width:220px;height:220px;
+ border-radius:50%;border:1px solid rgba(242,189,69,.12);
+ right:-65px;top:-100px;
  box-shadow:0 0 0 28px rgba(242,189,69,.025),0 0 0 58px rgba(242,189,69,.02)
 }
 .hero-content{position:relative;z-index:1}
 .plan-label{
- display:inline-flex;align-items:center;gap:7px;background:rgba(242,189,69,.12);
- color:var(--gold);padding:7px 11px;border-radius:30px;font-size:9px;
+ display:inline-flex;align-items:center;gap:7px;
+ background:rgba(242,189,69,.12);color:var(--gold);
+ padding:7px 11px;border-radius:30px;font-size:9px;
  font-weight:800;text-transform:uppercase;letter-spacing:1px
 }
 .hero-card h2{font-size:24px;margin:14px 0 5px}
@@ -136,7 +136,10 @@ main{padding:27px 0 100px}
 
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
 .stat-card{padding:17px;border-radius:16px}
-.stat-icon{width:36px;height:36px;display:grid;place-items:center;border-radius:11px;background:var(--card2);color:var(--gold)}
+.stat-icon{
+ width:36px;height:36px;display:grid;place-items:center;
+ border-radius:11px;background:var(--card2);color:var(--gold)
+}
 .stat-card strong{display:block;font-size:25px;margin-top:13px}
 .stat-card p{font-size:10px;color:var(--muted);margin-top:3px}
 
@@ -145,7 +148,11 @@ main{padding:27px 0 100px}
 .progress-row span{font-size:10px;color:var(--muted)}
 .progress-row strong{font-size:12px;color:var(--gold)}
 .progress-track{height:9px;border-radius:20px;background:#263247;overflow:hidden}
-.progress-fill{width:0;height:100%;border-radius:20px;background:linear-gradient(90deg,#D99A25,var(--gold));transition:width .4s}
+.progress-fill{
+ width:0;height:100%;border-radius:20px;
+ background:linear-gradient(90deg,#D99A25,var(--gold));
+ transition:width .4s
+}
 .progress-info{display:flex;justify-content:space-between;margin-top:9px;font-size:9px;color:var(--muted)}
 .milestones{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:22px}
 .milestone{background:var(--card2);border-radius:12px;padding:12px 7px;text-align:center}
@@ -161,28 +168,52 @@ main{padding:27px 0 100px}
 .history-top,.feedback-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
 .history-top strong,.feedback-top strong{font-size:11px}
 .feedback-date{font-size:9px;color:var(--muted)}
-.history-details{font-size:10px;color:#DCE1E9;line-height:1.8;margin-top:8px;overflow-wrap:anywhere;white-space:pre-line}
-.remark{margin-top:9px;padding:9px 11px;border-radius:9px;background:rgba(242,189,69,.08);color:var(--gold);font-size:10px;line-height:1.6}
-.status-pill{font-size:9px;font-weight:800;padding:5px 9px;border-radius:20px;background:rgba(53,201,138,.12);color:var(--green)}
-.empty{padding:20px;text-align:center;background:var(--card2);border-radius:12px;color:var(--muted);font-size:11px;line-height:1.8}
+.history-details{
+ font-size:10px;color:#DCE1E9;line-height:1.8;
+ margin-top:8px;overflow-wrap:anywhere;white-space:pre-line
+}
+.remark{
+ margin-top:9px;padding:9px 11px;border-radius:9px;
+ background:rgba(242,189,69,.08);color:var(--gold);
+ font-size:10px;line-height:1.6
+}
+.status-pill{
+ font-size:9px;font-weight:800;padding:5px 9px;border-radius:20px;
+ background:rgba(53,201,138,.12);color:var(--green)
+}
+.empty{
+ padding:20px;text-align:center;background:var(--card2);
+ border-radius:12px;color:var(--muted);font-size:11px;line-height:1.8
+}
 
 .feedback-form{display:grid;gap:13px}
 .feedback-form label{display:block;font-size:10px;color:var(--muted);margin-bottom:7px}
 .feedback-form select,.feedback-form textarea{
- width:100%;padding:12px;background:#080D18;border:1px solid var(--border);
- border-radius:10px;color:white;outline:none;font-size:12px
+ width:100%;padding:12px;background:#080D18;
+ border:1px solid var(--border);border-radius:10px;
+ color:white;outline:none;font-size:12px
 }
 .feedback-form textarea{min-height:100px;resize:vertical}
 .feedback-form select:focus,.feedback-form textarea:focus{border-color:var(--gold)}
 .feedback-form button{width:100%}
-.notice{display:flex;align-items:flex-start;gap:11px;margin-top:17px;padding:13px;border-radius:12px;background:rgba(101,169,255,.07);border:1px solid rgba(101,169,255,.17)}
+.notice{
+ display:flex;align-items:flex-start;gap:11px;margin-top:17px;
+ padding:13px;border-radius:12px;background:rgba(101,169,255,.07);
+ border:1px solid rgba(101,169,255,.17)
+}
 .notice i{color:var(--blue);width:17px;flex-shrink:0}
 .notice strong{font-size:10px}
 .notice p{font-size:9px;color:var(--muted);margin-top:3px;line-height:1.6}
 
 .quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.quick-action{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 11px;display:flex;align-items:center;gap:10px}
-.quick-icon{width:35px;height:35px;flex-shrink:0;display:grid;place-items:center;border-radius:10px;background:var(--card2);color:var(--gold)}
+.quick-action{
+ background:var(--card);border:1px solid var(--border);
+ border-radius:14px;padding:14px 11px;display:flex;align-items:center;gap:10px
+}
+.quick-icon{
+ width:35px;height:35px;flex-shrink:0;display:grid;place-items:center;
+ border-radius:10px;background:var(--card2);color:var(--gold)
+}
 .quick-action strong{display:block;font-size:10px}
 .quick-action span{display:block;font-size:9px;color:var(--muted);margin-top:3px}
 
@@ -195,7 +226,10 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
  padding:10px 5px calc(10px + env(safe-area-inset-bottom));
  justify-content:space-around;backdrop-filter:blur(16px)
 }
-.bottom-nav a{display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--muted);font-size:9px;font-weight:700;min-width:55px}
+.bottom-nav a{
+ display:flex;flex-direction:column;align-items:center;gap:4px;
+ color:var(--muted);font-size:9px;font-weight:700;min-width:55px
+}
 .bottom-nav a.active{color:var(--gold)}
 .bottom-nav i{width:19px;height:19px}
 
@@ -221,6 +255,7 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
 }
 @media(prefers-reduced-motion:reduce){
  .profile-avatar{animation:none}
+ .progress-fill{transition:none}
 }
 </style>
 </head>
@@ -246,9 +281,7 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
   <h2>Student Verification</h2>
   <span style="font-size:10px;color:var(--gold)">Student Portal</span>
  </div>
-
  <p class="login-description" id="loginMessage" style="display:none"></p>
-
  <div class="login-controls" id="manualLoginControls" style="display:none">
   <input type="tel" id="studentMobile" maxlength="10" inputmode="numeric" placeholder="Enter mobile number">
   <button class="btn-primary" id="loginButton" type="button">Connect Account</button>
@@ -319,21 +352,17 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
 <section class="content-grid">
  <div class="panel">
   <div class="panel-head"><h2>Training Progress</h2></div>
-
   <div class="progress-row">
    <span>Course completion</span>
    <strong id="progressPercent">0%</strong>
   </div>
-
   <div class="progress-track">
    <div class="progress-fill" id="progressBar"></div>
   </div>
-
   <div class="progress-info">
    <span id="progressDone">0 completed</span>
    <span id="progressTotal">0 total</span>
   </div>
-
   <div class="milestones">
    <div class="milestone"><i data-lucide="book-open"></i><strong>Basics</strong><span>Learning</span></div>
    <div class="milestone"><i data-lucide="steering-wheel"></i><strong>Practice</strong><span>Driving</span></div>
@@ -551,7 +580,6 @@ async function compressImage(file){
    canvas.height=Math.max(1,Math.round(image.height*scale));
 
    const ctx=canvas.getContext("2d");
-
    if(!ctx){
     reject(new Error("Canvas is not supported."));
     return;
@@ -600,6 +628,7 @@ function blobToBase64(blob){
   reader.onerror=()=>reject(new Error("Image conversion failed."));
   reader.readAsDataURL(blob);
  });
+
 }
 
 /* SAVE PHOTO */
@@ -612,14 +641,8 @@ async function saveProfilePhoto(mobile,imageBase64){
 
 /* LOAD PHOTO */
 async function loadProfilePhoto(mobile){
- const snapshot=await get(
-  databaseRef(realtimeDB,"profilePhotos/"+mobile)
- );
-
- if(snapshot.exists()){
-  return snapshot.val()?.image||"";
- }
-
+ const snapshot=await get(databaseRef(realtimeDB,"profilePhotos/"+mobile));
+ if(snapshot.exists())return snapshot.val()?.image||"";
  return "";
 }
 
@@ -672,7 +695,6 @@ $("profilePhotoInput").addEventListener("change",async function(){
   }
 
   status.textContent="Uploading photo...";
-
   await saveProfilePhoto(uploadMobile,base64);
 
   if(currentMobile===uploadMobile){
@@ -802,24 +824,19 @@ function renderFeedback(logs){
  });
 }
 
-/* RENDER DASHBOARD */
-async function renderDashboard(student,mobile){
+/* RENDER DASHBOARD - NON BLOCKING */
+function renderDashboard(student,mobile){
 
  if(currentMobile!==mobile)return;
 
  currentStudentName=value(student,"name","Student");
  currentStudentActive=student.notActive!==true;
 
- const logs=Array.isArray(student.attendanceLogs)
-  ?student.attendanceLogs:[];
-
+ const logs=Array.isArray(student.attendanceLogs)?student.attendanceLogs:[];
  const total=Math.max(Number(value(student,"totalClasses",20))||20,1);
 
- // Preserves the existing attendance field interpretation.
- const storedCompleted=Math.max(
-  Number(value(student,"remaining",0))||0,0
- );
-
+ // Preserve existing attendance field interpretation.
+ const storedCompleted=Math.max(Number(value(student,"remaining",0))||0,0);
  const completed=Math.min(
   logs.length>0?Math.max(logs.length,storedCompleted):storedCompleted,
   total
@@ -827,7 +844,6 @@ async function renderDashboard(student,mobile){
 
  const left=Math.max(total-completed,0);
  const percent=Math.min(Math.round(completed/total*100),100);
-
  const classType=value(student,"classType","Group");
  const admissionDate=formatDate(value(student,"admissionDate",""));
 
@@ -837,39 +853,33 @@ async function renderDashboard(student,mobile){
  $("studentProfileAvatar").src=defaultAvatar;
  $("userAvatar").src=defaultAvatar;
 
- /* LOAD PROFILE PHOTO */
- try{
-  const photo=await loadProfilePhoto(mobile);
-
-  if(photo&&currentMobile===mobile){
-   $("studentProfileAvatar").src=photo;
-   $("userAvatar").src=photo;
-  }
- }catch(error){
-  console.error("Profile photo loading error:",error);
- }
-
- if(currentMobile!==mobile)return;
-
  $("studentProfileAvatar").onerror=()=>{
-  $("studentProfileAvatar").src=
-   "https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student";
+  $("studentProfileAvatar").src="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student";
  };
-
  $("userAvatar").onerror=()=>{
-  $("userAvatar").src=
-   "https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student";
+  $("userAvatar").src="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student";
  };
 
+ /* PROFILE PHOTO LOADS IN BACKGROUND */
+ loadProfilePhoto(mobile)
+  .then(photo=>{
+   if(photo&&currentMobile===mobile){
+    $("studentProfileAvatar").src=photo;
+    $("userAvatar").src=photo;
+   }
+  })
+  .catch(error=>console.error("Profile photo loading error:",error));
+
+ /* STUDENT DETAILS */
  $("studentId").textContent="A1-"+mobile.slice(-4);
  $("packageName").textContent=
   classType==="Personal"?"Personal Training":"Group Training";
  $("classType").textContent=classType;
  $("admissionDate").textContent=admissionDate;
  $("accountStatus").textContent=currentStudentActive?"Active":"Not Active";
- $("accountStatus").style.color=
-  currentStudentActive?"var(--green)":"var(--red)";
+ $("accountStatus").style.color=currentStudentActive?"var(--green)":"var(--red)";
 
+ /* STATISTICS */
  $("completedClasses").textContent=completed;
  $("remainingClasses").textContent=left;
  $("totalClasses").textContent=total;
@@ -877,15 +887,16 @@ async function renderDashboard(student,mobile){
  const distancePerClass=Number(value(student,"distancePerClass",5))||5;
  $("totalDistance").textContent=(logs.length*distancePerClass)+" KM";
 
+ /* PROGRESS */
  $("progressPercent").textContent=percent+"%";
  $("progressBar").style.width=percent+"%";
  $("progressDone").textContent=completed+" classes completed";
  $("progressTotal").textContent=total+" total classes";
 
+ /* HISTORY */
  renderHistory(logs);
  renderFeedback(logs);
 
- // Hide login panel after successful student verification.
  $("loginPanel").style.display="none";
 }
 
@@ -917,17 +928,13 @@ function resetDashboard(){
  $("progressDone").textContent="0 completed";
  $("progressTotal").textContent="0 total";
 
- $("historyList").innerHTML=
-  '<div class="empty">Connect your account to view class history.</div>';
-
- $("feedbackList").innerHTML=
-  '<div class="empty">Instructor remarks will appear here.</div>';
-
+ $("historyList").innerHTML='<div class="empty">Connect your account to view class history.</div>';
+ $("feedbackList").innerHTML='<div class="empty">Instructor remarks will appear here.</div>';
  $("historyCount").textContent="0 classes";
  $("uploadStatus").textContent="";
 }
 
-/* SHOW LOGIN ONLY WHEN NEEDED */
+/* LOGIN ONLY FOR ERRORS / MANUAL LOGIN */
 function showManualLogin(message){
  $("loginPanel").style.display="block";
  $("manualLoginControls").style.display="flex";
@@ -936,7 +943,6 @@ function showManualLogin(message){
 
 /* CONNECT STUDENT */
 function connectStudent(mobile){
-
  if(!/^[0-9]{10}$/.test(mobile)){
   showManualLogin("Please enter a valid registered mobile number.");
   return;
@@ -952,7 +958,6 @@ function connectStudent(mobile){
  const studentRef=doc(db,"studentData",mobile);
 
  unsubscribeStudent=onSnapshot(studentRef,snapshot=>{
-
   if(currentMobile!==mobile)return;
 
   if(!snapshot.exists()){
@@ -971,13 +976,11 @@ function connectStudent(mobile){
    return;
   }
 
-  // No verification or success message.
+  // Direct dashboard access. No success or verification message.
   $("loginPanel").style.display="none";
   $("manualLoginControls").style.display="none";
 
-  renderDashboard(student,mobile).catch(error=>{
-   console.error("Dashboard rendering error:",error);
-  });
+  renderDashboard(student,mobile);
 
  },error=>{
   console.error("Student verification error:",error);
@@ -1003,10 +1006,7 @@ $("loginButton").addEventListener("click",()=>{
  }
 
  localStorage.setItem(STORAGE_KEY,mobile);
-
- // Hide login panel while verification is in progress.
  $("loginPanel").style.display="none";
-
  connectStudent(mobile);
 });
 
@@ -1020,13 +1020,9 @@ const savedMobile=localStorage.getItem(STORAGE_KEY);
 const mobileToVerify=savedMobile||urlMobile;
 
 if(mobileToVerify&&/^[0-9]{10}$/.test(mobileToVerify)){
-
- // Hide login panel immediately. No verification text is shown.
  $("loginPanel").style.display="none";
  $("manualLoginControls").style.display="none";
-
  connectStudent(mobileToVerify);
-
 }else{
  showManualLogin("Please login from the main website to access your dashboard.");
 }
@@ -1058,14 +1054,15 @@ Rating: ${rating}/5
 Feedback:
 ${message}`;
 
- const url="https://wa.me/"+WHATSAPP_NUMBER+
-  "?text="+encodeURIComponent(text);
-
+ const url="https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(text);
  window.open(url,"_blank");
 });
 
-/* LUCIDE */
+/* ICONS */
 if(window.lucide)window.lucide.createIcons();
+else window.addEventListener("load",()=>{
+ if(window.lucide)window.lucide.createIcons();
+});
 
 </script>
 </body>
