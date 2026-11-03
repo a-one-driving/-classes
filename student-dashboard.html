@@ -1007,22 +1007,20 @@ function renderDashboard(student,mobile){
  const logs=Array.isArray(student.attendanceLogs)?student.attendanceLogs:[];
 
  const total=Math.max(Number(value(student,"totalClasses",20))||20,1);
- const completed=Math.max(
- logs.length,
- Number(student.remaining||0),
- 0
-);
+ const completed=logs.length;
  const left=Math.max(total-completed,0);
  const percent=Math.min(Math.round(completed/total*100),100);
  const classType=value(student,"classType","Group");
 
  const firstClassDate=getClassOneDate(logs);
 
- const admissionDate=firstClassDate
-  ?formatDate(firstClassDate)
+const actualAdmissionDate=student.admissionDate
+  ?formatDate(student.admissionDate)
   :"Not available";
 
- const expectedEndingDate=firstClassDate
+const admissionDate=actualAdmissionDate;
+
+const expectedEndingDate=firstClassDate
   ?formatDate(calculateEndingDate(firstClassDate))
   :"Not available";
 
