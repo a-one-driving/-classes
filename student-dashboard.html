@@ -491,6 +491,10 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
 import {
+ getDatabase,ref,set,get
+} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-database.js";
+
+import {
  getStorage,ref,uploadBytes,getDownloadURL
 } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-storage.js";
 
@@ -510,6 +514,7 @@ const STORAGE_KEY="a1_student_mobile";
 
 const app=getApps().length?getApps()[0]:initializeApp(firebaseConfig);
 const db=getFirestore(app);
+const realtimeDB=getDatabase(app);
 const storage=getStorage(app);
 
 let unsubscribeStudent=null;
