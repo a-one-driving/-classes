@@ -907,21 +907,47 @@ function blobToBase64(blob){
  });
 }
 
-/* SAVE PHOTO WITHOUT OVERWRITING EXISTING FIELDS */
+
+/* SAVE ORIGINAL PHOTO + SEPARATE THUMBNAIL */
 async function saveProfilePhoto(
- mobile,
- imageBase64,
- thumbnailBase64
+  mobile,
+  imageBase64,
+  thumbnailBase64
 ){
- await update(
-  databaseRef(realtimeDB,"profilePhotos/"+mobile),
-  {
-   image:imageBase64,
-   thumbnail:thumbnailBase64,
-   updatedAt:Date.now()
-  }
- );
+  const originalRef = databaseRef(
+    realtimeDB,
+    "profilePhotos/" + mobile
+  );
+
+  const thumbnailRef = databaseRef(
+    realtimeDB,
+    "profilePhotoThumbnails/" + mobile
+  );
+
+  // Preserve existing homepage visibility
+  const existingSnapshot = await get(originalRef);
+
+  const existingData = existingSnapshot.exists()
+    ? existingSnapshot.val()
+    : {};
+
+  const showOnHomepage =
+    existingData?.showOnHomepage === true;
+
+  // Save original photo without overwriting other fields
+  await update(originalRef, {
+    image: imageBase64,
+    updatedAt: Date.now()
+  });
+
+  // Save thumbnail separately
+  await update(thumbnailRef, {
+    thumbnail: thumbnailBase64,
+    showOnHomepage: showOnHomepage,
+    updatedAt: Date.now()
+  });
 }
+
 
 /* PHOTO UPLOAD */
 $("changePhotoBtn").addEventListener("click",()=>{
