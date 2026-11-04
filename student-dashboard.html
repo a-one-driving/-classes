@@ -455,30 +455,25 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
 </section>
 
 <section class="panel">
- <div class="panel-head"><h2>Quick Actions</h2></div>
- <div class="quick-grid">
-  <a href="student-training.html" class="quick-action">
-   <div class="quick-icon"><i data-lucide="car-front"></i></div>
-   <div><strong>My Training</strong><span>Lessons & progress</span></div>
-  </a>
-  <a href="traffic-academy.html" class="quick-action"
-   onclick="this.href='traffic-academy.html?mobile='+encodeURIComponent(localStorage.getItem('a1_student_mobile')||'')">
-   <div class="quick-icon"><i data-lucide="traffic-cone"></i></div>
-   <div><strong>Traffic Academy</strong><span>Learn signs & daily MCQ</span></div>
-  </a>
-  <a href="#attendanceHistory" class="quick-action">
-   <div class="quick-icon"><i data-lucide="clipboard-check"></i></div>
-   <div><strong>Attendance</strong><span>Class history</span></div>
-  </a>
-  <a href="student-account.html#payments" class="quick-action">
-   <div class="quick-icon"><i data-lucide="receipt"></i></div>
-   <div><strong>Payments</strong><span>Fee information</span></div>
-  </a>
-  <a href="student-account.html" class="quick-action">
-   <div class="quick-icon"><i data-lucide="user-round"></i></div>
-   <div><strong>My Account</strong><span>Profile details</span></div>
-  </a>
- </div>
+  <div class="panel-head">
+    <h2>Quick Actions</h2>
+  </div>
+
+  <div class="quick-grid">
+    <a href="traffic-academy.html" class="quick-action"
+       onclick="this.href='traffic-academy.html?mobile='+encodeURIComponent(localStorage.getItem('a1_student_mobile')||'')">
+
+      <div class="quick-icon">
+        <i data-lucide="traffic-cone"></i>
+      </div>
+
+      <div>
+        <strong>Traffic Academy</strong>
+        <span>Learn signs & daily MCQ</span>
+      </div>
+
+    </a>
+  </div>
 </section>
 
 </main>
