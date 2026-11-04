@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,119 +11,267 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<script defer src="https://unpkg.com/lucide@latest"></script>
+
+<!-- FONT AWESOME -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 <style>
 :root{
- --bg:#080D18;--card:#111A29;--card2:#172337;
- --gold:#F2BD45;--white:#F8FAFC;--muted:#A8B1C2;
- --border:rgba(255,255,255,.09);--green:#35C98A;
- --blue:#65A9FF;--red:#FF7777;
+ --bg:#080D18;
+ --card:#111A29;
+ --card2:#172337;
+ --gold:#F2BD45;
+ --white:#F8FAFC;
+ --muted:#A8B1C2;
+ --border:rgba(255,255,255,.09);
+ --green:#35C98A;
+ --blue:#65A9FF;
+ --red:#FF7777;
 }
+
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--white);line-height:1.5}
+
+body{
+ font-family:Inter,Arial,sans-serif;
+ background:var(--bg);
+ color:var(--white);
+ line-height:1.5
+}
+
 a{text-decoration:none;color:inherit}
 button,input,textarea,select{font:inherit}
 button{cursor:pointer}
 .container{width:min(1160px,93%);margin:auto}
 
+i.fa-solid,i.fa-regular,i.fa-brands{
+ display:inline-flex;
+ align-items:center;
+ justify-content:center;
+ line-height:1;
+}
+
+/* HEADER */
 header{
- position:sticky;top:0;z-index:100;
+ position:sticky;
+ top:0;
+ z-index:100;
  background:rgba(8,13,24,.96);
  backdrop-filter:blur(16px);
  border-bottom:1px solid var(--border)
 }
-.topbar{height:68px;display:flex;align-items:center;justify-content:space-between}
+
+.topbar{
+ height:68px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between
+}
+
 .logo{font-size:17px;font-weight:800}
 .logo span{color:var(--gold)}
-.header-right{display:flex;align-items:center;gap:12px}
-.header-link{font-size:11px;color:var(--muted)}
-.avatar{
- width:39px;height:39px;border-radius:13px;overflow:hidden;
- display:grid;place-items:center;background:rgba(242,189,69,.14);
- border:1px solid rgba(242,189,69,.25);color:var(--gold);font-weight:800
+
+.header-right{
+ display:flex;
+ align-items:center;
+ gap:12px
 }
+
+.header-link{font-size:11px;color:var(--muted)}
+
+.avatar{
+ width:39px;
+ height:39px;
+ border-radius:13px;
+ overflow:hidden;
+ display:grid;
+ place-items:center;
+ background:rgba(242,189,69,.14);
+ border:1px solid rgba(242,189,69,.25);
+ color:var(--gold);
+ font-weight:800
+}
+
 .avatar img{width:100%;height:100%;object-fit:cover}
 
 .logout-btn{
- display:none;align-items:center;justify-content:center;gap:6px;
- padding:9px 12px;border-radius:10px;
+ display:none;
+ align-items:center;
+ justify-content:center;
+ gap:7px;
+ padding:9px 12px;
+ border-radius:10px;
  background:rgba(255,119,119,.10);
  border:1px solid rgba(255,119,119,.28);
- color:#FF7777;font-size:10px;font-weight:800;
- cursor:pointer;white-space:nowrap
+ color:#FF7777;
+ font-size:10px;
+ font-weight:800;
+ white-space:nowrap
 }
+
 .logout-btn:active{transform:scale(.96)}
 
 main{padding:27px 0 100px}
+
 .panel,.stat-card{
  background:var(--card);
  border:1px solid var(--border);
  border-radius:18px
 }
+
 .panel{padding:21px;margin-bottom:20px}
+
 .panel-head{
- display:flex;justify-content:space-between;
- align-items:center;gap:12px;margin-bottom:16px
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:12px;
+ margin-bottom:16px
 }
+
 .panel-head h2{font-size:15px}
-.login-description{font-size:11px;color:var(--muted);margin-bottom:13px}
-.login-controls{display:flex;gap:10px;flex-wrap:wrap}
-.login-controls input{
- flex:1;min-width:190px;padding:13px;border-radius:10px;
- border:1px solid var(--border);background:var(--card2);
- color:white;outline:none
+
+.login-description{
+ font-size:11px;
+ color:var(--muted);
+ margin-bottom:13px
 }
+
+.login-controls{
+ display:flex;
+ gap:10px;
+ flex-wrap:wrap
+}
+
+.login-controls input{
+ flex:1;
+ min-width:190px;
+ padding:13px;
+ border-radius:10px;
+ border:1px solid var(--border);
+ background:var(--card2);
+ color:white;
+ outline:none
+}
+
 .login-controls input:focus{border-color:var(--gold)}
-.login-message{font-size:11px;margin-top:12px;color:var(--muted)}
+
+.login-message{
+ font-size:11px;
+ margin-top:12px;
+ color:var(--muted)
+}
 
 .btn-primary,.btn-outline{
- display:inline-flex;align-items:center;justify-content:center;gap:8px;
- padding:11px 15px;border-radius:10px;font-size:11px;
- font-weight:800;border:1px solid transparent
+ display:inline-flex;
+ align-items:center;
+ justify-content:center;
+ gap:8px;
+ padding:11px 15px;
+ border-radius:10px;
+ font-size:11px;
+ font-weight:800;
+ border:1px solid transparent
 }
+
 .btn-primary{background:var(--gold);color:#171717}
 .btn-primary:disabled{opacity:.6;cursor:not-allowed}
+
 .btn-outline{
- border-color:var(--border);color:var(--white);
+ border-color:var(--border);
+ color:var(--white);
  background:rgba(255,255,255,.04)
 }
 
+/* STUDENT PROFILE */
 .student-profile{
- display:flex;align-items:center;gap:14px;padding:17px;
- margin-bottom:22px;border-radius:19px;
+ display:flex;
+ align-items:center;
+ gap:14px;
+ padding:17px;
+ margin-bottom:22px;
+ border-radius:19px;
  background:linear-gradient(115deg,#192B43,#111A29 75%);
  border:1px solid rgba(242,189,69,.2)
 }
+
 .profile-avatar{
- width:76px;height:76px;min-width:76px;padding:3px;
- border-radius:50%;position:relative;
+ width:76px;
+ height:76px;
+ min-width:76px;
+ padding:3px;
+ border-radius:50%;
+ position:relative;
  background:linear-gradient(135deg,#D99A25,#FFE3A4);
  animation:avatarFloat 3s ease-in-out infinite
 }
+
 .profile-avatar img{
- width:100%;height:100%;display:block;
- border-radius:50%;object-fit:cover;background:#25364b
+ width:100%;
+ height:100%;
+ display:block;
+ border-radius:50%;
+ object-fit:cover;
+ background:#25364b
 }
+
 .profile-online{
- position:absolute;right:2px;bottom:4px;width:13px;height:13px;
- border:2px solid #192B43;border-radius:50%;background:var(--green)
+ position:absolute;
+ right:2px;
+ bottom:4px;
+ width:13px;
+ height:13px;
+ border:2px solid #192B43;
+ border-radius:50%;
+ background:var(--green)
 }
+
 .profile-info{flex:1;min-width:0}
+
 .profile-info small{
- color:var(--gold);font-size:9px;font-weight:800;letter-spacing:1.5px
+ color:var(--gold);
+ font-size:9px;
+ font-weight:800;
+ letter-spacing:1.5px
 }
-.profile-info h2{font-size:17px;margin:3px 0;overflow-wrap:anywhere}
+
+.profile-info h2{
+ font-size:17px;
+ margin:3px 0;
+ overflow-wrap:anywhere
+}
+
 .profile-info p{font-size:10px;color:var(--muted)}
-.profile-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:9px}
-.photo-btn{
- display:inline-flex;align-items:center;gap:6px;padding:8px 11px;
- border-radius:9px;background:rgba(242,189,69,.13);
- border:1px solid rgba(242,189,69,.3);
- color:var(--gold);font-size:10px;font-weight:800
+
+.profile-actions{
+ display:flex;
+ align-items:center;
+ gap:8px;
+ flex-wrap:wrap;
+ margin-top:9px
 }
+
+.photo-btn{
+ display:inline-flex;
+ align-items:center;
+ gap:6px;
+ padding:8px 11px;
+ border-radius:9px;
+ background:rgba(242,189,69,.13);
+ border:1px solid rgba(242,189,69,.3);
+ color:var(--gold);
+ font-size:10px;
+ font-weight:800
+}
+
 .photo-btn:disabled{opacity:.6;cursor:not-allowed}
-.upload-status{font-size:10px;color:var(--muted);margin-top:8px;min-height:15px}
+
+.upload-status{
+ font-size:10px;
+ color:var(--muted);
+ margin-top:8px;
+ min-height:15px
+}
+
 .upload-status.success{color:var(--green)}
 .upload-status.error{color:var(--red)}
 
@@ -131,75 +280,179 @@ main{padding:27px 0 100px}
  50%{transform:translateY(-5px)}
 }
 
+/* TRAINING PLAN */
 .hero-card{
- position:relative;overflow:hidden;
+ position:relative;
+ overflow:hidden;
  background:linear-gradient(115deg,#192B43,#111A29 75%);
  border:1px solid rgba(242,189,69,.2);
- border-radius:22px;padding:25px;margin-bottom:20px
+ border-radius:22px;
+ padding:25px;
+ margin-bottom:20px
 }
+
 .hero-card:after{
- content:"";position:absolute;width:220px;height:220px;
- border-radius:50%;border:1px solid rgba(242,189,69,.12);
- right:-65px;top:-100px;
+ content:"";
+ position:absolute;
+ width:220px;
+ height:220px;
+ border-radius:50%;
+ border:1px solid rgba(242,189,69,.12);
+ right:-65px;
+ top:-100px;
  box-shadow:0 0 0 28px rgba(242,189,69,.025),0 0 0 58px rgba(242,189,69,.02)
 }
+
 .hero-content{position:relative;z-index:1}
+
 .plan-label{
- display:inline-flex;align-items:center;gap:7px;
- background:rgba(242,189,69,.12);color:var(--gold);
- padding:7px 11px;border-radius:30px;font-size:9px;
- font-weight:800;text-transform:uppercase;letter-spacing:1px
+ display:inline-flex;
+ align-items:center;
+ gap:7px;
+ background:rgba(242,189,69,.12);
+ color:var(--gold);
+ padding:7px 11px;
+ border-radius:30px;
+ font-size:9px;
+ font-weight:800;
+ text-transform:uppercase;
+ letter-spacing:1px
 }
+
 .hero-card h2{font-size:24px;margin:14px 0 5px}
 .hero-card p{font-size:11px;color:var(--muted)}
-.hero-meta{display:flex;gap:25px;flex-wrap:wrap;margin-top:19px}
+
+.hero-meta{
+ display:flex;
+ gap:25px;
+ flex-wrap:wrap;
+ margin-top:19px
+}
+
 .hero-meta div{display:flex;flex-direction:column;gap:3px}
 .hero-meta small{font-size:9px;color:var(--muted)}
 .hero-meta strong{font-size:12px}
 
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
-.stat-card{padding:17px;border-radius:16px}
-.stat-icon{
- width:36px;height:36px;display:grid;place-items:center;
- border-radius:11px;background:var(--card2);color:var(--gold)
+/* STATS */
+.stats{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:12px;
+ margin-bottom:20px
 }
-.stat-card strong{display:block;font-size:25px;margin-top:13px}
-.stat-card p{font-size:10px;color:var(--muted);margin-top:3px}
 
-.content-grid{display:grid;grid-template-columns:1fr;gap:16px}
-.progress-row{display:flex;justify-content:space-between;gap:12px;margin-bottom:10px}
+.stat-card{padding:17px;border-radius:16px}
+
+.stat-icon{
+ width:36px;
+ height:36px;
+ display:grid;
+ place-items:center;
+ border-radius:11px;
+ background:var(--card2);
+ color:var(--gold)
+}
+
+.stat-icon i{font-size:17px}
+
+.stat-card strong{
+ display:block;
+ font-size:25px;
+ margin-top:13px;
+ font-variant-numeric:tabular-nums
+}
+
+.stat-card p{
+ font-size:10px;
+ color:var(--muted);
+ margin-top:3px
+}
+
+.stat-card strong.counter-animate{
+ animation:counterPulse .45s ease-out
+}
+
+@keyframes counterPulse{
+ 0%{opacity:.55;transform:translateY(5px)}
+ 65%{opacity:1;transform:translateY(-2px)}
+ 100%{opacity:1;transform:translateY(0)}
+}
+
+/* PROGRESS */
+.content-grid{
+ display:grid;
+ grid-template-columns:1fr;
+ gap:16px
+}
+
+.progress-row{
+ display:flex;
+ justify-content:space-between;
+ gap:12px;
+ margin-bottom:10px
+}
+
 .progress-row span{font-size:10px;color:var(--muted)}
 .progress-row strong{font-size:12px;color:var(--gold)}
-.progress-track{height:9px;border-radius:20px;background:#263247;overflow:hidden}
+
+.progress-track{
+ height:9px;
+ border-radius:20px;
+ background:#263247;
+ overflow:hidden
+}
+
 .progress-fill{
- width:0;height:100%;border-radius:20px;
+ width:0;
+ height:100%;
+ border-radius:20px;
  background:linear-gradient(90deg,#D99A25,var(--gold));
  transition:width .4s
 }
-.progress-info{display:flex;justify-content:space-between;margin-top:9px;font-size:9px;color:var(--muted)}
-.milestones{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:22px}
-.milestone{background:var(--card2);border-radius:12px;padding:12px 7px;text-align:center}
-.milestone i{color:var(--gold);width:18px;height:18px}
+
+.progress-info{
+ display:flex;
+ justify-content:space-between;
+ margin-top:9px;
+ font-size:9px;
+ color:var(--muted)
+}
+
+.milestones{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:9px;
+ margin-top:22px
+}
+
+.milestone{
+ background:var(--card2);
+ border-radius:12px;
+ padding:12px 7px;
+ text-align:center
+}
+
+.milestone i{color:var(--gold);font-size:18px}
 .milestone strong{display:block;font-size:11px;margin-top:6px}
 .milestone span{font-size:9px;color:var(--muted)}
 
-/* PREMIUM CLASS HISTORY TIMELINE */
+/* CLASS HISTORY */
 .history-list{
  display:grid;
  gap:0;
- padding:5px 0 5px 8px;
+ padding:5px 0 5px 8px
 }
 
 .history-item{
  position:relative;
  margin-left:12px;
  padding:0 0 24px 25px;
- border-left:2px solid rgba(242,189,69,.25);
+ border-left:2px solid rgba(242,189,69,.25)
 }
 
 .history-item:last-child{
  border-left-color:transparent;
- padding-bottom:5px;
+ padding-bottom:5px
 }
 
 .history-dot{
@@ -211,7 +464,7 @@ main{padding:27px 0 100px}
  border-radius:50%;
  background:var(--gold);
  border:4px solid var(--card);
- box-shadow:0 0 0 2px rgba(242,189,69,.25);
+ box-shadow:0 0 0 2px rgba(242,189,69,.25)
 }
 
 .history-card{
@@ -219,12 +472,12 @@ main{padding:27px 0 100px}
  border:1px solid var(--border);
  border-radius:15px;
  padding:15px;
- transition:transform .2s,border-color .2s;
+ transition:transform .2s,border-color .2s
 }
 
 .history-card:hover{
  transform:translateY(-2px);
- border-color:rgba(242,189,69,.35);
+ border-color:rgba(242,189,69,.35)
 }
 
 .history-card-head{
@@ -232,24 +485,21 @@ main{padding:27px 0 100px}
  justify-content:space-between;
  align-items:flex-start;
  gap:10px;
- flex-wrap:wrap;
+ flex-wrap:wrap
 }
 
-.history-class-title{
- font-size:12px;
- font-weight:800;
-}
+.history-class-title{font-size:12px;font-weight:800}
 
 .history-date{
  font-size:10px;
  color:var(--gold);
- margin-top:5px;
+ margin-top:5px
 }
 
 .history-time{
  font-size:9px;
  color:var(--muted);
- margin-top:2px;
+ margin-top:2px
 }
 
 .history-badge{
@@ -259,14 +509,14 @@ main{padding:27px 0 100px}
  padding:5px 9px;
  font-size:8px;
  font-weight:800;
- letter-spacing:.5px;
+ letter-spacing:.5px
 }
 
 .history-data-grid{
  display:grid;
  grid-template-columns:1fr 1fr;
  gap:9px;
- margin-top:14px;
+ margin-top:14px
 }
 
 .history-data{
@@ -274,21 +524,21 @@ main{padding:27px 0 100px}
  border:1px solid rgba(255,255,255,.055);
  border-radius:10px;
  padding:10px;
- min-width:0;
+ min-width:0
 }
 
 .history-data small{
  display:block;
  color:var(--muted);
  font-size:9px;
- margin-bottom:4px;
+ margin-bottom:4px
 }
 
 .history-data strong{
  display:block;
  font-size:10px;
  color:var(--white);
- overflow-wrap:anywhere;
+ overflow-wrap:anywhere
 }
 
 .history-remark{
@@ -296,7 +546,7 @@ main{padding:27px 0 100px}
  padding:11px;
  background:rgba(242,189,69,.08);
  border:1px solid rgba(242,189,69,.13);
- border-radius:10px;
+ border-radius:10px
 }
 
 .history-remark small{
@@ -304,98 +554,206 @@ main{padding:27px 0 100px}
  font-size:9px;
  color:var(--gold);
  font-weight:800;
- margin-bottom:5px;
+ margin-bottom:5px
 }
 
 .history-remark p{
  font-size:10px;
  color:#E5EAF2;
  line-height:1.7;
- overflow-wrap:anywhere;
+ overflow-wrap:anywhere
 }
 
 .history-no-remark{
  margin-top:10px;
  font-size:9px;
- color:var(--muted);
+ color:var(--muted)
 }
 
-@media(max-width:600px){
- .history-card{padding:13px}
- .history-data-grid{gap:7px}
- .history-item{padding-left:19px}
-}
-.remark{
- margin-top:9px;padding:9px 11px;border-radius:9px;
- background:rgba(242,189,69,.08);color:var(--gold);
- font-size:10px;line-height:1.6
-}
-.status-pill{
- font-size:9px;font-weight:800;padding:5px 9px;border-radius:20px;
- background:rgba(53,201,138,.12);color:var(--green)
-}
 .empty{
- padding:20px;text-align:center;background:var(--card2);
- border-radius:12px;color:var(--muted);font-size:11px;line-height:1.8
+ padding:20px;
+ text-align:center;
+ background:var(--card2);
+ border-radius:12px;
+ color:var(--muted);
+ font-size:11px;
+ line-height:1.8
 }
 
+/* FEEDBACK */
 .feedback-form{display:grid;gap:13px}
-.feedback-form label{display:block;font-size:10px;color:var(--muted);margin-bottom:7px}
-.feedback-form select,.feedback-form textarea{
- width:100%;padding:12px;background:#080D18;
- border:1px solid var(--border);border-radius:10px;
- color:white;outline:none;font-size:12px
+
+.feedback-form label{
+ display:block;
+ font-size:10px;
+ color:var(--muted);
+ margin-bottom:7px
 }
+
+.feedback-form select,
+.feedback-form textarea{
+ width:100%;
+ padding:12px;
+ background:#080D18;
+ border:1px solid var(--border);
+ border-radius:10px;
+ color:white;
+ outline:none;
+ font-size:12px
+}
+
 .feedback-form textarea{min-height:100px;resize:vertical}
-.feedback-form select:focus,.feedback-form textarea:focus{border-color:var(--gold)}
+
+.feedback-form select:focus,
+.feedback-form textarea:focus{border-color:var(--gold)}
+
 .feedback-form button{width:100%}
 
 .notice{
- display:flex;align-items:flex-start;gap:11px;margin-top:17px;
- padding:13px;border-radius:12px;background:rgba(101,169,255,.07);
+ display:flex;
+ align-items:flex-start;
+ gap:11px;
+ margin-top:17px;
+ padding:13px;
+ border-radius:12px;
+ background:rgba(101,169,255,.07);
  border:1px solid rgba(101,169,255,.17)
 }
-.notice i{color:var(--blue);width:17px;flex-shrink:0}
+
+.notice i{color:var(--blue);font-size:17px;flex-shrink:0}
 .notice strong{font-size:10px}
-.notice p{font-size:9px;color:var(--muted);margin-top:3px;line-height:1.6}
 
-.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.notice p{
+ font-size:9px;
+ color:var(--muted);
+ margin-top:3px;
+ line-height:1.6
+}
+
+/* QUICK ACTIONS */
+.quick-grid{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:10px
+}
+
 .quick-action{
- background:var(--card);border:1px solid var(--border);
- border-radius:14px;padding:14px 11px;
- display:flex;align-items:center;gap:10px
+ background:var(--card);
+ border:1px solid var(--border);
+ border-radius:14px;
+ padding:14px 11px;
+ display:flex;
+ align-items:center;
+ gap:10px;
+ transition:transform .2s,border-color .2s
 }
-.quick-icon{
- width:35px;height:35px;flex-shrink:0;display:grid;place-items:center;
- border-radius:10px;background:var(--card2);color:var(--gold)
-}
-.quick-action strong{display:block;font-size:10px}
-.quick-action span{display:block;font-size:9px;color:var(--muted);margin-top:3px}
 
-footer{border-top:1px solid var(--border);padding:22px 0 100px}
-.footer-inner{
- display:flex;justify-content:space-between;align-items:center;
- gap:15px;flex-wrap:wrap
+.quick-action:hover{
+ transform:translateY(-2px);
+ border-color:rgba(242,189,69,.35)
 }
+
+.quick-icon{
+ width:35px;
+ height:35px;
+ flex-shrink:0;
+ display:grid;
+ place-items:center;
+ border-radius:10px;
+ background:var(--card2);
+ color:var(--gold)
+}
+
+.quick-icon i{font-size:17px}
+
+.quick-action strong{display:block;font-size:10px}
+.quick-action span{
+ display:block;
+ font-size:9px;
+ color:var(--muted);
+ margin-top:3px
+}
+
+/* FOOTER */
+footer{
+ border-top:1px solid var(--border);
+ padding:22px 0 100px
+}
+
+.footer-inner{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:15px;
+ flex-wrap:wrap
+}
+
 .footer-inner p{font-size:10px;color:var(--muted)}
 
+/* BOTTOM NAV */
 .bottom-nav{
- display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;
- background:rgba(12,19,32,.97);border-top:1px solid var(--border);
+ display:none;
+ position:fixed;
+ bottom:0;
+ left:0;
+ right:0;
+ z-index:200;
+ background:rgba(12,19,32,.97);
+ border-top:1px solid var(--border);
  padding:10px 5px calc(10px + env(safe-area-inset-bottom));
- justify-content:space-around;backdrop-filter:blur(16px)
+ justify-content:space-around;
+ backdrop-filter:blur(16px)
 }
-.bottom-nav a{
- display:flex;flex-direction:column;align-items:center;gap:4px;
- color:var(--muted);font-size:9px;font-weight:700;min-width:55px
-}
-.bottom-nav a.active{color:var(--gold)}
-.bottom-nav i{width:19px;height:19px}
 
+.bottom-nav a{
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ gap:4px;
+ color:var(--muted);
+ font-size:9px;
+ font-weight:700;
+ min-width:55px
+}
+
+.bottom-nav a.active{color:var(--gold)}
+.bottom-nav i{font-size:19px}
+
+/* MICRO ANIMATIONS */
+.panel,.stat-card,.hero-card,.student-profile,
+.quick-action,.history-card,.milestone,
+.btn-primary,.btn-outline,.photo-btn,.logout-btn{
+ transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease
+}
+
+.panel:hover{
+ border-color:rgba(242,189,69,.18)
+}
+
+.stat-card:hover{
+ transform:translateY(-3px);
+ border-color:rgba(242,189,69,.3)
+}
+
+.stat-icon i{transition:transform .25s ease}
+.stat-card:hover .stat-icon i{transform:scale(1.12)}
+
+.btn-primary:active,.btn-outline:active,.photo-btn:active{
+ transform:scale(.97)
+}
+
+.login-controls input:focus,
+.feedback-form textarea:focus,
+.feedback-form select:focus{
+ box-shadow:0 0 0 3px rgba(242,189,69,.08)
+}
+
+/* RESPONSIVE */
 @media(max-width:850px){
  .stats{grid-template-columns:repeat(2,1fr)}
  .quick-grid{grid-template-columns:repeat(2,1fr)}
 }
+
 @media(max-width:600px){
  .topbar{height:62px}
  .header-link{display:none}
@@ -416,45 +774,23 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
  .bottom-nav{display:flex}
  .footer-inner{flex-direction:column;align-items:flex-start}
  .profile-avatar{width:68px;height:68px;min-width:68px}
-}
-@media(prefers-reduced-motion:reduce){
- .profile-avatar{animation:none}
- .progress-fill{transition:none}
-}
-
-
-
-/* SUBTLE STAT COUNTER ANIMATION */
-.stat-card strong{
- display:block;
- font-size:25px;
- margin-top:13px;
- font-variant-numeric:tabular-nums;
- transition:color .25s ease;
+ .history-card{padding:13px}
+ .history-data-grid{gap:7px}
+ .history-item{padding-left:19px}
 }
 
-.stat-card strong.counter-animate{
- animation:counterPulse .45s ease-out;
+@media(max-width:400px){
+ .history-data-grid{grid-template-columns:1fr 1fr}
 }
 
-@keyframes counterPulse{
- 0%{
-  opacity:.55;
-  transform:translateY(5px);
- }
- 65%{
-  opacity:1;
-  transform:translateY(-2px);
- }
- 100%{
-  opacity:1;
-  transform:translateY(0);
- }
+@media(hover:none){
+ .stat-card:hover,.quick-action:hover{transform:none}
 }
 
 @media(prefers-reduced-motion:reduce){
- .stat-card strong.counter-animate{
-  animation:none;
+ *,*::before,*::after{
+  animation-duration:.01ms!important;
+  transition-duration:.01ms!important;
  }
 }
 </style>
@@ -465,13 +801,18 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
 <header>
  <div class="container topbar">
   <a href="index.html" class="logo">ABHINAASH <span>A1</span></a>
+
   <div class="header-right">
    <a href="contact.html" class="header-link">Need Help?</a>
+
    <button type="button" id="logoutButton" class="logout-btn">
-    <i data-lucide="log-out" width="14"></i> Logout
+    <i class="fa-solid fa-right-from-bracket"></i>
+    Logout
    </button>
+
    <a href="student-account.html" class="avatar" aria-label="My Account">
-    <img id="userAvatar" alt="Student profile" src="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student">
+    <img id="userAvatar" alt="Student profile"
+    src="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student">
    </a>
   </div>
  </div>
@@ -479,42 +820,62 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
 
 <main class="container">
 
+<!-- LOGIN -->
 <section class="panel" id="loginPanel" style="display:none">
  <div class="panel-head">
   <h2>Student Verification</h2>
   <span style="font-size:10px;color:var(--gold)">Student Portal</span>
  </div>
+
  <p class="login-description" id="loginMessage" style="display:none"></p>
+
  <div class="login-controls" id="manualLoginControls" style="display:none">
-  <input type="tel" id="studentMobile" maxlength="10" inputmode="numeric" placeholder="Enter mobile number">
-  <button class="btn-primary" id="loginButton" type="button">Connect Account</button>
+  <input type="tel" id="studentMobile" maxlength="10"
+  inputmode="numeric" placeholder="Enter mobile number">
+  <button class="btn-primary" id="loginButton" type="button">
+   <i class="fa-solid fa-right-to-bracket"></i> Connect Account
+  </button>
  </div>
 </section>
 
+<!-- STUDENT PROFILE -->
 <section class="student-profile">
  <div class="profile-avatar">
-  <img id="studentProfileAvatar" src="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student" alt="Student Avatar">
+  <img id="studentProfileAvatar"
+  src="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student"
+  alt="Student Avatar">
   <span class="profile-online"></span>
  </div>
+
  <div class="profile-info">
   <small>STUDENT PROFILE</small>
   <h2 id="profileStudentName">Student</h2>
   <p>A ONE DRIVING STUDENT</p>
+
   <div class="profile-actions">
    <button type="button" class="photo-btn" id="changePhotoBtn">
-    <i data-lucide="camera" width="13"></i> Change Photo
+    <i class="fa-solid fa-camera"></i> Change Photo
    </button>
   </div>
-  <input type="file" id="profilePhotoInput" accept="image/jpeg,image/png,image/webp" hidden>
+
+  <input type="file" id="profilePhotoInput"
+  accept="image/jpeg,image/png,image/webp" hidden>
+
   <div class="upload-status" id="uploadStatus"></div>
  </div>
 </section>
 
+<!-- TRAINING PLAN -->
 <section class="hero-card">
  <div class="hero-content">
-  <div class="plan-label"><i data-lucide="crown" width="13"></i> Your Training Plan</div>
+  <div class="plan-label">
+   <i class="fa-solid fa-crown"></i>
+   Your Training Plan
+  </div>
+
   <h2 id="packageName">Driving Training</h2>
   <p>Your registered training details.</p>
+
   <div class="hero-meta">
    <div><small>Student ID</small><strong id="studentId">--</strong></div>
    <div><small>Class Type</small><strong id="classType">--</strong></div>
@@ -525,63 +886,110 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
  </div>
 </section>
 
+<!-- STATS -->
 <section class="stats">
+
  <div class="stat-card">
-  <div class="stat-icon"><i data-lucide="calendar-check"></i></div>
-  <strong id="completedClasses">--</strong><p>Classes Completed</p>
+  <div class="stat-icon"><i class="fa-solid fa-calendar-check"></i></div>
+  <strong id="completedClasses">--</strong>
+  <p>Classes Completed</p>
  </div>
+
  <div class="stat-card">
-  <div class="stat-icon"><i data-lucide="calendar-clock"></i></div>
-  <strong id="remainingClasses">--</strong><p>Classes Remaining</p>
+  <div class="stat-icon"><i class="fa-solid fa-calendar-days"></i></div>
+  <strong id="remainingClasses">--</strong>
+  <p>Classes Remaining</p>
  </div>
+
  <div class="stat-card">
-  <div class="stat-icon"><i data-lucide="car"></i></div>
-  <strong id="totalClasses">--</strong><p>Total Classes</p>
+  <div class="stat-icon"><i class="fa-solid fa-car"></i></div>
+  <strong id="totalClasses">--</strong>
+  <p>Total Classes</p>
  </div>
+
  <div class="stat-card">
-  <div class="stat-icon"><i data-lucide="route"></i></div>
-  <strong id="totalDistance">--</strong><p>Total Practice Distance</p>
+  <div class="stat-icon"><i class="fa-solid fa-route"></i></div>
+  <strong id="totalDistance">--</strong>
+  <p>Total Practice Distance</p>
  </div>
+
 </section>
 
+<!-- TRAINING PROGRESS -->
 <section class="content-grid">
  <div class="panel">
-  <div class="panel-head"><h2>Training Progress</h2></div>
-  <div class="progress-row">
-   <span>Course completion</span><strong id="progressPercent">0%</strong>
+
+  <div class="panel-head">
+   <h2>Training Progress</h2>
+   <i class="fa-solid fa-chart-line" style="color:var(--gold)"></i>
   </div>
-  <div class="progress-track"><div class="progress-fill" id="progressBar"></div></div>
+
+  <div class="progress-row">
+   <span>Course completion</span>
+   <strong id="progressPercent">0%</strong>
+  </div>
+
+  <div class="progress-track">
+   <div class="progress-fill" id="progressBar"></div>
+  </div>
+
   <div class="progress-info">
    <span id="progressDone">0 completed</span>
    <span id="progressTotal">0 total classes</span>
   </div>
+
   <div class="milestones">
-   <div class="milestone"><i data-lucide="book-open"></i><strong>Basics</strong><span>Learning</span></div>
-   <div class="milestone"><i data-lucide="steering-wheel"></i><strong>Practice</strong><span>Driving</span></div>
-   <div class="milestone"><i data-lucide="award"></i><strong>Final</strong><span>Assessment</span></div>
+
+   <div class="milestone">
+    <i class="fa-solid fa-book-open"></i>
+    <strong>Basics</strong>
+    <span>Learning</span>
+   </div>
+
+   <div class="milestone">
+    <i class="fa-solid fa-car-side"></i>
+    <strong>Practice</strong>
+    <span>Driving</span>
+   </div>
+
+   <div class="milestone">
+    <i class="fa-solid fa-award"></i>
+    <strong>Final</strong>
+    <span>Assessment</span>
+   </div>
+
   </div>
  </div>
 </section>
 
+<!-- CLASS HISTORY -->
 <section class="panel" id="attendanceHistory">
+
  <div class="panel-head">
   <h2>My Class History</h2>
   <span style="font-size:10px;color:var(--muted)" id="historyCount">0 classes</span>
  </div>
+
  <div class="history-list" id="historyList">
   <div class="empty">Connect your account to view class history.</div>
  </div>
+
 </section>
 
-
-
+<!-- FEEDBACK -->
 <section class="panel" id="studentFeedback">
+
  <div class="panel-head">
   <h2>Share Your Feedback</h2>
-  <i data-lucide="send" style="color:var(--gold)"></i>
+  <i class="fa-solid fa-paper-plane" style="color:var(--gold)"></i>
  </div>
- <p class="login-description">Tell us about your experience at ABHINAASH A1 Driving.</p>
+
+ <p class="login-description">
+  Tell us about your experience at ABHINAASH A1 Driving.
+ </p>
+
  <form class="feedback-form" id="feedbackForm">
+
   <div>
    <label for="rating">Your Rating</label>
    <select id="rating" required>
@@ -593,47 +1001,59 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
     <option value="1">★ - Needs Improvement</option>
    </select>
   </div>
+
   <div>
    <label for="feedbackText">Your Feedback</label>
-   <textarea id="feedbackText" maxlength="1000" placeholder="Write your experience..." required></textarea>
+   <textarea id="feedbackText" maxlength="1000"
+   placeholder="Write your experience..." required></textarea>
   </div>
+
   <button class="btn-primary" type="submit">
-   <i data-lucide="message-circle"></i> Send Feedback
+   <i class="fa-solid fa-comment-dots"></i>
+   Send Feedback
   </button>
+
  </form>
+
  <div class="notice">
-  <i data-lucide="info"></i>
+  <i class="fa-solid fa-circle-info"></i>
   <div>
    <strong>Feedback submission</strong>
    <p>Your feedback will be sent to the driving school through WhatsApp. It is not saved to Firestore by this form.</p>
   </div>
  </div>
+
 </section>
 
+<!-- QUICK ACTIONS -->
 <section class="panel">
-  <div class="panel-head">
-    <h2>Quick Actions</h2>
-  </div>
 
-  <div class="quick-grid">
-    <a href="traffic-academy.html" class="quick-action"
-       onclick="this.href='traffic-academy.html?mobile='+encodeURIComponent(localStorage.getItem('a1_student_mobile')||'')">
+ <div class="panel-head">
+  <h2>Quick Actions</h2>
+ </div>
 
-      <div class="quick-icon">
-        <i data-lucide="traffic-cone"></i>
-      </div>
+ <div class="quick-grid">
 
-      <div>
-        <strong>Traffic Academy</strong>
-        <span>Learn signs & daily MCQ</span>
-      </div>
+  <a href="traffic-academy.html" class="quick-action"
+  onclick="this.href='traffic-academy.html?mobile='+encodeURIComponent(localStorage.getItem('a1_student_mobile')||'')">
 
-    </a>
-  </div>
+   <div class="quick-icon">
+    <i class="fa-solid fa-traffic-light"></i>
+   </div>
+
+   <div>
+    <strong>Traffic Academy</strong>
+    <span>Learn signs & daily MCQ</span>
+   </div>
+
+  </a>
+
+ </div>
 </section>
 
 </main>
 
+<!-- FOOTER -->
 <footer>
  <div class="container footer-inner">
   <a href="index.html" class="logo">ABHINAASH <span>A1</span></a>
@@ -641,13 +1061,33 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
  </div>
 </footer>
 
+<!-- BOTTOM NAV -->
 <nav class="bottom-nav">
- <a href="student-dashboard.html" class="active"><i data-lucide="layout-dashboard"></i>Dashboard</a>
- <a href="student-training.html"><i data-lucide="car-front"></i>Training</a>
- <a href="#attendanceHistory"><i data-lucide="clipboard-check"></i>History</a>
- <a href="student-account.html"><i data-lucide="user-round"></i>Account</a>
+
+ <a href="student-dashboard.html" class="active">
+  <i class="fa-solid fa-table-columns"></i>
+  Dashboard
+ </a>
+
+ <a href="student-training.html">
+  <i class="fa-solid fa-car-side"></i>
+  Training
+ </a>
+
+ <a href="#attendanceHistory">
+  <i class="fa-solid fa-clipboard-check"></i>
+  History
+ </a>
+
+ <a href="student-account.html">
+  <i class="fa-solid fa-user"></i>
+  Account
+ </a>
+
 </nav>
+
 <script type="module">
+
 import {initializeApp,getApps}
 from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
 
@@ -701,8 +1141,7 @@ function showMessage(message,color="var(--muted)"){
 
 function value(data,key,fallback=""){
  const v=data?.[key];
- return v===undefined||v===null||v===""
-  ?fallback:v;
+ return v===undefined||v===null||v===""?fallback:v;
 }
 
 function formatDate(input){
@@ -724,6 +1163,7 @@ function formatDate(input){
      day:"2-digit",month:"short",year:"numeric"
     });
   }
+
   return input;
  }
 
@@ -744,7 +1184,7 @@ function parseLog(log){
  const distanceMatch=text.match(/Distance:\s*([^|]+)/i);
  const remarkMatch=text.match(/Remark:\s*(.*)$/i);
 
- return {
+ return{
   date,
   time:time.replace(/^—\s*/,""),
   route:routeMatch?routeMatch[1].trim():"Not recorded",
@@ -753,7 +1193,7 @@ function parseLog(log){
  };
 }
 
-/* CLASS 1 DATE CALCULATION */
+/* CLASS DATE CALCULATION */
 function parseAttendanceDate(log,referenceYear){
 
  const raw=parseLog(log).date;
@@ -894,9 +1334,7 @@ function getStudentAvatar(student){
 /* PROFILE PHOTO CACHE */
 function getCachedPhoto(mobile){
  try{
-  return localStorage.getItem(
-   PHOTO_CACHE_PREFIX+mobile
-  )||"";
+  return localStorage.getItem(PHOTO_CACHE_PREFIX+mobile)||"";
  }catch(error){
   console.warn("Photo cache read error:",error);
   return "";
@@ -906,10 +1344,7 @@ function getCachedPhoto(mobile){
 function cachePhoto(mobile,photo){
  try{
   if(photo){
-   localStorage.setItem(
-    PHOTO_CACHE_PREFIX+mobile,
-    photo
-   );
+   localStorage.setItem(PHOTO_CACHE_PREFIX+mobile,photo);
   }
  }catch(error){
   console.warn("Photo cache storage unavailable:",error);
@@ -987,13 +1422,8 @@ async function compressImage(
 
    const canvas=document.createElement("canvas");
 
-   canvas.width=Math.max(
-    1,Math.round(image.width*scale)
-   );
-
-   canvas.height=Math.max(
-    1,Math.round(image.height*scale)
-   );
+   canvas.width=Math.max(1,Math.round(image.width*scale));
+   canvas.height=Math.max(1,Math.round(image.height*scale));
 
    const ctx=canvas.getContext("2d");
 
@@ -1005,9 +1435,7 @@ async function compressImage(
    ctx.fillStyle="#FFFFFF";
    ctx.fillRect(0,0,canvas.width,canvas.height);
 
-   ctx.drawImage(
-    image,0,0,canvas.width,canvas.height
-   );
+   ctx.drawImage(image,0,0,canvas.width,canvas.height);
 
    let quality=.82;
 
@@ -1058,47 +1486,42 @@ function blobToBase64(blob){
  });
 }
 
-
-/* SAVE ORIGINAL PHOTO + SEPARATE THUMBNAIL */
+/* SAVE PROFILE PHOTO */
 async function saveProfilePhoto(
-  mobile,
-  imageBase64,
-  thumbnailBase64
+ mobile,
+ imageBase64,
+ thumbnailBase64
 ){
-  const originalRef = databaseRef(
-    realtimeDB,
-    "profilePhotos/" + mobile
-  );
+ const originalRef=databaseRef(
+  realtimeDB,
+  "profilePhotos/"+mobile
+ );
 
-  const thumbnailRef = databaseRef(
-    realtimeDB,
-    "profilePhotoThumbnails/" + mobile
-  );
+ const thumbnailRef=databaseRef(
+  realtimeDB,
+  "profilePhotoThumbnails/"+mobile
+ );
 
-  // Preserve existing homepage visibility
-  const existingSnapshot = await get(originalRef);
+ const existingSnapshot=await get(originalRef);
 
-  const existingData = existingSnapshot.exists()
-    ? existingSnapshot.val()
-    : {};
+ const existingData=existingSnapshot.exists()
+  ?existingSnapshot.val()
+  :{};
 
-  const showOnHomepage =
-    existingData?.showOnHomepage === true;
+ const showOnHomepage=
+  existingData?.showOnHomepage===true;
 
-  // Save original photo without overwriting other fields
-  await update(originalRef, {
-    image: imageBase64,
-    updatedAt: Date.now()
-  });
+ await update(originalRef,{
+  image:imageBase64,
+  updatedAt:Date.now()
+ });
 
-  // Save thumbnail separately
-  await update(thumbnailRef, {
-    thumbnail: thumbnailBase64,
-    showOnHomepage: showOnHomepage,
-    updatedAt: Date.now()
-  });
+ await update(thumbnailRef,{
+  thumbnail:thumbnailBase64,
+  showOnHomepage:showOnHomepage,
+  updatedAt:Date.now()
+ });
 }
-
 
 /* PHOTO UPLOAD */
 $("changePhotoBtn").addEventListener("click",()=>{
@@ -1119,11 +1542,7 @@ $("profilePhotoInput").addEventListener(
 
   if(!file)return;
 
-  if(![
-   "image/jpeg",
-   "image/png",
-   "image/webp"
-  ].includes(file.type)){
+  if(!["image/jpeg","image/png","image/webp"].includes(file.type)){
    alert("Please select a JPG, PNG or WEBP image.");
    this.value="";
    return;
@@ -1153,26 +1572,14 @@ $("profilePhotoInput").addEventListener(
 
   try{
 
-   /* ORIGINAL IMAGE */
-   const blob=await compressImage(
-    file,600,250*1024
-   );
-
+   const blob=await compressImage(file,600,250*1024);
    const base64=await blobToBase64(blob);
 
-   /* SMALL HOMEPAGE THUMBNAIL */
-   const thumbnailBlob=await compressImage(
-    file,240,40*1024
-   );
-
-   const thumbnailBase64=await blobToBase64(
-    thumbnailBlob
-   );
+   const thumbnailBlob=await compressImage(file,240,40*1024);
+   const thumbnailBase64=await blobToBase64(thumbnailBlob);
 
    if(currentMobile!==uploadMobile){
-    throw new Error(
-     "Student account changed. Please try again."
-    );
+    throw new Error("Student account changed. Please try again.");
    }
 
    status.textContent="Uploading photo...";
@@ -1207,13 +1614,9 @@ $("profilePhotoInput").addEventListener(
    btn.disabled=false;
 
    btn.innerHTML=
-    '<i data-lucide="camera" width="13"></i> Change Photo';
+    '<i class="fa-solid fa-camera"></i> Change Photo';
 
    this.value="";
-
-   if(window.lucide){
-    window.lucide.createIcons();
-   }
   }
  }
 );
@@ -1226,15 +1629,12 @@ function renderHistory(logs){
 
  const historyTotal=logs.length;
 
- $("historyCount").textContent=
-  historyTotal+" classes";
+ $("historyCount").textContent=historyTotal+" classes";
 
  if(!historyTotal){
   const empty=document.createElement("div");
   empty.className="empty";
-  empty.textContent=
-   "No attendance records found yet.";
-
+  empty.textContent="No attendance records found yet.";
   container.appendChild(empty);
   return;
  }
@@ -1243,18 +1643,15 @@ function renderHistory(logs){
 
   const parsed=parseLog(log);
 
-  /* TIMELINE ITEM */
   const item=document.createElement("div");
   item.className="history-item";
 
   const dot=document.createElement("span");
   dot.className="history-dot";
 
-  /* CARD */
   const card=document.createElement("div");
   card.className="history-card";
 
-  /* HEADER */
   const head=document.createElement("div");
   head.className="history-card-head";
 
@@ -1262,8 +1659,7 @@ function renderHistory(logs){
 
   const title=document.createElement("div");
   title.className="history-class-title";
-  title.textContent=
-   "Driving Class "+(historyTotal-index);
+  title.textContent="Driving Class "+(historyTotal-index);
 
   const date=document.createElement("div");
   date.className="history-date";
@@ -1283,7 +1679,6 @@ function renderHistory(logs){
 
   head.append(titleWrap,badge);
 
-  /* ROUTE AND DISTANCE */
   const dataGrid=document.createElement("div");
   dataGrid.className="history-data-grid";
 
@@ -1310,10 +1705,8 @@ function renderHistory(logs){
   distanceBox.append(distanceLabel,distanceValue);
 
   dataGrid.append(routeBox,distanceBox);
-
   card.append(head,dataGrid);
 
-  /* INSTRUCTOR REMARK */
   if(parsed.remark){
 
    const remarkBox=document.createElement("div");
@@ -1332,23 +1725,20 @@ function renderHistory(logs){
 
    const noRemark=document.createElement("div");
    noRemark.className="history-no-remark";
-   noRemark.textContent=
-    "No instructor remark for this class.";
+   noRemark.textContent="No instructor remark for this class.";
 
    card.appendChild(noRemark);
   }
 
   item.append(dot,card);
   container.appendChild(item);
-
  });
 }
 
-/* ANIMATED STAT COUNTER */
+/* ANIMATED COUNTER */
 function animateCounter(elementId,target,suffix="",duration=850){
 
  const element=$(elementId);
-
  if(!element)return;
 
  const finalValue=Number(target)||0;
@@ -1361,33 +1751,21 @@ function animateCounter(elementId,target,suffix="",duration=850){
  const startTime=performance.now();
 
  element.classList.remove("counter-animate");
-
- // Restart animation
  void element.offsetWidth;
-
  element.classList.add("counter-animate");
 
  function updateCounter(currentTime){
 
-  const progress=Math.min(
-   (currentTime-startTime)/duration,
-   1
-  );
-
-  // Smooth ease-out
+  const progress=Math.min((currentTime-startTime)/duration,1);
   const eased=1-Math.pow(1-progress,3);
-
   const currentValue=Math.round(finalValue*eased);
 
-  element.textContent=
-   currentValue.toLocaleString("en-IN")+suffix;
+  element.textContent=currentValue.toLocaleString("en-IN")+suffix;
 
   if(progress<1){
    requestAnimationFrame(updateCounter);
   }else{
-   element.textContent=
-    finalValue.toLocaleString("en-IN")+suffix;
-
+   element.textContent=finalValue.toLocaleString("en-IN")+suffix;
    element.classList.remove("counter-animate");
   }
  }
@@ -1400,10 +1778,7 @@ function renderDashboard(student,mobile){
 
  if(currentMobile!==mobile)return;
 
- currentStudentName=value(
-  student,"name","Student"
- );
-
+ currentStudentName=value(student,"name","Student");
  currentStudentActive=student.notActive!==true;
 
  const logs=Array.isArray(student.attendanceLogs)
@@ -1423,10 +1798,7 @@ function renderDashboard(student,mobile){
   100
  );
 
- const classType=value(
-  student,"classType","Group"
- );
-
+ const classType=value(student,"classType","Group");
  const firstClassDate=getClassOneDate(logs);
 
  const admissionDate=student.admissionDate
@@ -1437,10 +1809,9 @@ function renderDashboard(student,mobile){
   ?formatDate(calculateEndingDate(firstClassDate))
   :"Not available";
 
- $("profileStudentName").textContent=
-  currentStudentName;
+ $("profileStudentName").textContent=currentStudentName;
 
- /* INSTANT PHOTO DISPLAY */
+ /* PROFILE PHOTO */
  const defaultAvatar=getStudentAvatar({
   ...student,mobile
  });
@@ -1449,13 +1820,11 @@ function renderDashboard(student,mobile){
  const headerImage=$("userAvatar");
 
  profileImage.onerror=()=>{
-  profileImage.src=
-   "https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student";
+  profileImage.src="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student";
  };
 
  headerImage.onerror=()=>{
-  headerImage.src=
-   "https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student";
+  headerImage.src="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student";
  };
 
  profileImage.src=defaultAvatar;
@@ -1470,8 +1839,7 @@ function renderDashboard(student,mobile){
  refreshProfilePhoto(mobile);
 
  /* STUDENT DETAILS */
- $("studentId").textContent=
-  "A1-"+mobile.slice(-4);
+ $("studentId").textContent="A1-"+mobile.slice(-4);
 
  $("packageName").textContent=
   classType==="Personal"
@@ -1480,51 +1848,40 @@ function renderDashboard(student,mobile){
 
  $("classType").textContent=classType;
  $("admissionDate").textContent=admissionDate;
-
- $("expectedEndDate").textContent=
-  expectedEndingDate;
+ $("expectedEndDate").textContent=expectedEndingDate;
 
  $("accountStatus").textContent=
   currentStudentActive?"Active":"Not Active";
 
  $("accountStatus").style.color=
-  currentStudentActive
-   ?"var(--green)"
-   :"var(--red)";
+  currentStudentActive?"var(--green)":"var(--red)";
 
- /* ANIMATED STATISTICS */
-$("remainingClasses").textContent=left;
-$("totalClasses").textContent=total;
+ /* STATISTICS */
+ $("remainingClasses").textContent=left;
+ $("totalClasses").textContent=total;
 
-const distancePerClass=
- Number(value(student,"distancePerClass",5))||5;
+ const distancePerClass=
+  Number(value(student,"distancePerClass",5))||5;
 
-const totalPracticeDistance=
- completed*distancePerClass;
+ const totalPracticeDistance=
+  completed*distancePerClass;
 
-animateCounter(
- "completedClasses",
- completed
-);
+ animateCounter("completedClasses",completed);
 
-animateCounter(
- "totalDistance",
- totalPracticeDistance,
- " KM"
-);
+ animateCounter(
+  "totalDistance",
+  totalPracticeDistance,
+  " KM"
+ );
 
  /* PROGRESS */
  $("progressPercent").textContent=percent+"%";
  $("progressBar").style.width=percent+"%";
 
- $("progressDone").textContent=
-  completed+" classes completed";
-
- $("progressTotal").textContent=
-  total+" total classes";
+ $("progressDone").textContent=completed+" classes completed";
+ $("progressTotal").textContent=total+" total classes";
 
  renderHistory(logs);
- 
 
  $("loginPanel").style.display="none";
  $("logoutButton").style.display="inline-flex";
@@ -1570,8 +1927,6 @@ function resetDashboard(){
  $("historyList").innerHTML=
   '<div class="empty">Connect your account to view class history.</div>';
 
-
-
  $("historyCount").textContent="0 classes";
  $("uploadStatus").textContent="";
  $("logoutButton").style.display="none";
@@ -1580,10 +1935,7 @@ function resetDashboard(){
 /* LOGOUT */
 function logoutStudent(){
 
- const confirmed=confirm(
-  "Are you sure you want to logout?"
- );
-
+ const confirmed=confirm("Are you sure you want to logout?");
  if(!confirmed)return;
 
  if(unsubscribeStudent){
@@ -1609,12 +1961,9 @@ function logoutStudent(){
  });
 }
 
-$("logoutButton").addEventListener(
- "click",
- logoutStudent
-);
+$("logoutButton").addEventListener("click",logoutStudent);
 
-/* LOGIN */
+/* MANUAL LOGIN */
 function showManualLogin(message){
 
  $("loginPanel").style.display="block";
@@ -1627,9 +1976,7 @@ function showManualLogin(message){
 function connectStudent(mobile){
 
  if(!/^[0-9]{10}$/.test(mobile)){
-  showManualLogin(
-   "Please enter a valid registered mobile number."
-  );
+  showManualLogin("Please enter a valid registered mobile number.");
   return;
  }
 
@@ -1640,11 +1987,7 @@ function connectStudent(mobile){
 
  currentMobile=mobile;
 
- const studentRef=doc(
-  db,
-  "studentData",
-  mobile
- );
+ const studentRef=doc(db,"studentData",mobile);
 
  unsubscribeStudent=onSnapshot(
   studentRef,
@@ -1686,10 +2029,7 @@ function connectStudent(mobile){
   },
   error=>{
 
-   console.error(
-    "Student verification error:",
-    error
-   );
+   console.error("Student verification error:",error);
 
    if(currentMobile!==mobile)return;
 
@@ -1702,7 +2042,7 @@ function connectStudent(mobile){
  );
 }
 
-/* MANUAL LOGIN */
+/* MOBILE INPUT */
 $("studentMobile").addEventListener(
  "input",
  function(){
@@ -1710,46 +2050,35 @@ $("studentMobile").addEventListener(
  }
 );
 
+/* LOGIN BUTTON */
 $("loginButton").addEventListener("click",()=>{
 
  const mobile=$("studentMobile").value.trim();
 
  if(!/^[0-9]{10}$/.test(mobile)){
-  showManualLogin(
-   "Please enter a valid 10-digit mobile number."
-  );
+  showManualLogin("Please enter a valid 10-digit mobile number.");
   return;
  }
 
  localStorage.setItem(STORAGE_KEY,mobile);
-
  $("loginPanel").style.display="none";
 
  connectStudent(mobile);
 });
 
-$("studentMobile").addEventListener(
- "keydown",
- e=>{
-  if(e.key==="Enter"){
-   $("loginButton").click();
-  }
- }
-);
+$("studentMobile").addEventListener("keydown",e=>{
+ if(e.key==="Enter")$("loginButton").click();
+});
 
 /* AUTO LOGIN */
 const urlMobile=
  new URLSearchParams(window.location.search).get("mobile");
 
-const savedMobile=
- localStorage.getItem(STORAGE_KEY);
-
+const savedMobile=localStorage.getItem(STORAGE_KEY);
 const mobileToVerify=savedMobile||urlMobile;
 
-if(
- mobileToVerify&&
- /^[0-9]{10}$/.test(mobileToVerify)
-){
+if(mobileToVerify&&/^[0-9]{10}$/.test(mobileToVerify)){
+
  $("loginPanel").style.display="none";
  $("manualLoginControls").style.display="none";
 
@@ -1763,30 +2092,24 @@ if(
 }
 
 /* WHATSAPP FEEDBACK */
-$("feedbackForm").addEventListener(
- "submit",
- e=>{
+$("feedbackForm").addEventListener("submit",e=>{
 
-  e.preventDefault();
+ e.preventDefault();
 
-  if(!currentMobile||!currentStudentActive){
-   alert(
-    "Please connect your active student account first."
-   );
-   return;
-  }
+ if(!currentMobile||!currentStudentActive){
+  alert("Please connect your active student account first.");
+  return;
+ }
 
-  const rating=$("rating").value;
-  const message=$("feedbackText").value.trim();
+ const rating=$("rating").value;
+ const message=$("feedbackText").value.trim();
 
-  if(!rating||!message){
-   alert(
-    "Please select your rating and write your feedback."
-   );
-   return;
-  }
+ if(!rating||!message){
+  alert("Please select your rating and write your feedback.");
+  return;
+ }
 
-  const text=
+ const text=
 `STUDENT FEEDBACK - ABHINAASH A1 DRIVING
 
 Student Name: ${currentStudentName}
@@ -1796,25 +2119,14 @@ Rating: ${rating}/5
 Feedback:
 ${message}`;
 
-  const url=
-   "https://wa.me/"+
-   WHATSAPP_NUMBER+
-   "?text="+encodeURIComponent(text);
+ const url=
+  "https://wa.me/"+
+  WHATSAPP_NUMBER+
+  "?text="+encodeURIComponent(text);
 
-  window.open(url,"_blank");
- }
-);
+ window.open(url,"_blank");
+});
 
-/* ICONS */
-if(window.lucide){
- window.lucide.createIcons();
-}else{
- window.addEventListener("load",()=>{
-  if(window.lucide){
-   window.lucide.createIcons();
-  }
- });
-}
 </script>
 
 </body>
