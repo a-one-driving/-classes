@@ -1190,7 +1190,7 @@ $("profilePhotoInput").addEventListener(
  }
 );
 
-/* RENDER HISTORY */
+/* PREMIUM TIMELINE CLASS HISTORY */
 function renderHistory(logs){
 
  const container=$("historyList");
@@ -1204,7 +1204,8 @@ function renderHistory(logs){
  if(!historyTotal){
   const empty=document.createElement("div");
   empty.className="empty";
-  empty.textContent="No attendance records found yet.";
+  empty.textContent=
+   "No attendance records found yet.";
 
   container.appendChild(empty);
   return;
@@ -1214,37 +1215,106 @@ function renderHistory(logs){
 
   const parsed=parseLog(log);
 
+  /* TIMELINE ITEM */
   const item=document.createElement("div");
   item.className="history-item";
 
-  const top=document.createElement("div");
-  top.className="history-top";
+  const dot=document.createElement("span");
+  dot.className="history-dot";
 
-  const title=document.createElement("strong");
+  /* CARD */
+  const card=document.createElement("div");
+  card.className="history-card";
+
+  /* HEADER */
+  const head=document.createElement("div");
+  head.className="history-card-head";
+
+  const titleWrap=document.createElement("div");
+
+  const title=document.createElement("div");
+  title.className="history-class-title";
   title.textContent=
    "Driving Class "+(historyTotal-index);
 
-  const status=document.createElement("span");
-  status.className="status-pill";
-  status.textContent="COMPLETED";
+  const date=document.createElement("div");
+  date.className="history-date";
+  date.textContent="📅 "+parsed.date;
 
-  top.append(title,status);
+  const time=document.createElement("div");
+  time.className="history-time";
+  time.textContent=parsed.time
+   ?"⏰ "+parsed.time
+   :"Time not recorded";
 
-  const details=document.createElement("div");
-  details.className="history-details";
+  titleWrap.append(title,date,time);
 
-  details.textContent=
-   "📅 "+parsed.date+
-   (parsed.time?" · "+parsed.time:"")+
-   "\n📍 Route: "+parsed.route+
-   "\n🚗 Distance: "+parsed.distance;
+  const badge=document.createElement("span");
+  badge.className="history-badge";
+  badge.textContent="✓ COMPLETED";
 
-  item.append(top,details);
+  head.append(titleWrap,badge);
 
+  /* ROUTE AND DISTANCE */
+  const dataGrid=document.createElement("div");
+  dataGrid.className="history-data-grid";
+
+  const routeBox=document.createElement("div");
+  routeBox.className="history-data";
+
+  const routeLabel=document.createElement("small");
+  routeLabel.textContent="📍 Training Route";
+
+  const routeValue=document.createElement("strong");
+  routeValue.textContent=parsed.route;
+
+  routeBox.append(routeLabel,routeValue);
+
+  const distanceBox=document.createElement("div");
+  distanceBox.className="history-data";
+
+  const distanceLabel=document.createElement("small");
+  distanceLabel.textContent="🚗 Practice Distance";
+
+  const distanceValue=document.createElement("strong");
+  distanceValue.textContent=parsed.distance;
+
+  distanceBox.append(distanceLabel,distanceValue);
+
+  dataGrid.append(routeBox,distanceBox);
+
+  card.append(head,dataGrid);
+
+  /* INSTRUCTOR REMARK */
+  if(parsed.remark){
+
+   const remarkBox=document.createElement("div");
+   remarkBox.className="history-remark";
+
+   const remarkTitle=document.createElement("small");
+   remarkTitle.textContent="✦ INSTRUCTOR REMARK";
+
+   const remarkText=document.createElement("p");
+   remarkText.textContent=parsed.remark;
+
+   remarkBox.append(remarkTitle,remarkText);
+   card.appendChild(remarkBox);
+
+  }else{
+
+   const noRemark=document.createElement("div");
+   noRemark.className="history-no-remark";
+   noRemark.textContent=
+    "No instructor remark for this class.";
+
+   card.appendChild(noRemark);
+  }
+
+  item.append(dot,card);
   container.appendChild(item);
+
  });
 }
-
 /* RENDER INSTRUCTOR REMARKS */
 function renderFeedback(logs){
 
