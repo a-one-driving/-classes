@@ -537,15 +537,7 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
  </div>
 </section>
 
-<section class="panel" id="instructorFeedback">
- <div class="panel-head">
-  <h2>Instructor Remarks & Feedback</h2>
-  <i data-lucide="message-square" style="color:var(--gold)"></i>
- </div>
- <div class="feedback-list" id="feedbackList">
-  <div class="empty">Instructor remarks will appear here after your classes.</div>
- </div>
-</section>
+
 
 <section class="panel" id="studentFeedback">
  <div class="panel-head">
@@ -1315,53 +1307,7 @@ function renderHistory(logs){
 
  });
 }
-/* RENDER INSTRUCTOR REMARKS */
-function renderFeedback(logs){
 
- const container=$("feedbackList");
- container.replaceChildren();
-
- const entries=logs.map((log,index)=>({
-  parsed:parseLog(log),
-  number:index+1
- })).filter(x=>x.parsed.remark);
-
- if(!entries.length){
-  const empty=document.createElement("div");
-  empty.className="empty";
-  empty.textContent=
-   "No instructor remarks have been recorded yet.";
-
-  container.appendChild(empty);
-  return;
- }
-
- entries.reverse().forEach(entry=>{
-
-  const card=document.createElement("div");
-  card.className="feedback-item";
-
-  const top=document.createElement("div");
-  top.className="feedback-top";
-
-  const title=document.createElement("strong");
-  title.textContent=
-   "Instructor Remark · Class "+entry.number;
-
-  const date=document.createElement("span");
-  date.className="feedback-date";
-  date.textContent=entry.parsed.date;
-
-  const remark=document.createElement("div");
-  remark.className="remark";
-  remark.textContent=entry.parsed.remark;
-
-  top.append(title,date);
-  card.append(top,remark);
-
-  container.appendChild(card);
- });
-}
 
 /* RENDER DASHBOARD */
 function renderDashboard(student,mobile){
@@ -1482,7 +1428,7 @@ function renderDashboard(student,mobile){
   total+" total classes";
 
  renderHistory(logs);
- renderFeedback(logs);
+ 
 
  $("loginPanel").style.display="none";
  $("logoutButton").style.display="inline-flex";
@@ -1528,8 +1474,7 @@ function resetDashboard(){
  $("historyList").innerHTML=
   '<div class="empty">Connect your account to view class history.</div>';
 
- $("feedbackList").innerHTML=
-  '<div class="empty">Instructor remarks will appear here.</div>';
+
 
  $("historyCount").textContent="0 classes";
  $("uploadStatus").textContent="";
