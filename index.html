@@ -268,25 +268,36 @@ header{
 .welcome-box strong{color:var(--gold)}
 
 /* GALLERY */
-.gallery-section{padding-top:55px}
+.gallery-section{
+  padding-top:55px;
+}
+
+/* Reserve gallery space to reduce layout shift */
 #studentGallery{
   min-height:650px;
+  align-content:start;
 }
+
 .gallery-grid{
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:17px
+  gap:17px;
 }
 
-/* PREVENT GALLERY LAYOUT SHIFT */
-#studentGallery {
-  min-height: 300px;
-  align-content: start;
+@media(max-width:850px){
+  .gallery-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
 }
 
-@media(max-width:600px) {
-  #studentGallery {
-    min-height: 245px;
+@media(max-width:600px){
+  #studentGallery{
+    min-height:650px;
+  }
+
+  .gallery-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:11px;
   }
 }
 .gallery-card{
