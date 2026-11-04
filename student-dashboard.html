@@ -1423,11 +1423,13 @@ function renderDashboard(student,mobile){
 
  const firstClassDate=getClassOneDate(logs);
 
- const admissionDate=student.admissionDate
-  ?formatDate(student.admissionDate)
+ // CLASS 1 DATE = ADMISSION DATE
+const admissionDate=firstClassDate
+  ?formatDate(firstClassDate)
   :"Not available";
 
- const expectedEndingDate=firstClassDate
+// EXPECTED ENDING DATE = CLASS 1 DATE + 30 DAYS
+const expectedEndingDate=firstClassDate
   ?formatDate(calculateEndingDate(firstClassDate))
   :"Not available";
 
