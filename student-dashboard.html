@@ -421,6 +421,42 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
  .profile-avatar{animation:none}
  .progress-fill{transition:none}
 }
+
+
+
+/* SUBTLE STAT COUNTER ANIMATION */
+.stat-card strong{
+ display:block;
+ font-size:25px;
+ margin-top:13px;
+ font-variant-numeric:tabular-nums;
+ transition:color .25s ease;
+}
+
+.stat-card strong.counter-animate{
+ animation:counterPulse .45s ease-out;
+}
+
+@keyframes counterPulse{
+ 0%{
+  opacity:.55;
+  transform:translateY(5px);
+ }
+ 65%{
+  opacity:1;
+  transform:translateY(-2px);
+ }
+ 100%{
+  opacity:1;
+  transform:translateY(0);
+ }
+}
+
+@media(prefers-reduced-motion:reduce){
+ .stat-card strong.counter-animate{
+  animation:none;
+ }
+}
 </style>
 </head>
 
@@ -1308,6 +1344,56 @@ function renderHistory(logs){
  });
 }
 
+/* ANIMATED STAT COUNTER */
+function animateCounter(elementId,target,suffix="",duration=850){
+
+ const element=$(elementId);
+
+ if(!element)return;
+
+ const finalValue=Number(target)||0;
+
+ if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+  element.textContent=finalValue.toLocaleString("en-IN")+suffix;
+  return;
+ }
+
+ const startTime=performance.now();
+
+ element.classList.remove("counter-animate");
+
+ // Restart animation
+ void element.offsetWidth;
+
+ element.classList.add("counter-animate");
+
+ function updateCounter(currentTime){
+
+  const progress=Math.min(
+   (currentTime-startTime)/duration,
+   1
+  );
+
+  // Smooth ease-out
+  const eased=1-Math.pow(1-progress,3);
+
+  const currentValue=Math.round(finalValue*eased);
+
+  element.textContent=
+   currentValue.toLocaleString("en-IN")+suffix;
+
+  if(progress<1){
+   requestAnimationFrame(updateCounter);
+  }else{
+   element.textContent=
+    finalValue.toLocaleString("en-IN")+suffix;
+
+   element.classList.remove("counter-animate");
+  }
+ }
+
+ requestAnimationFrame(updateCounter);
+}
 
 /* RENDER DASHBOARD */
 function renderDashboard(student,mobile){
@@ -1406,16 +1492,26 @@ function renderDashboard(student,mobile){
    ?"var(--green)"
    :"var(--red)";
 
- /* STATISTICS */
- $("completedClasses").textContent=completed;
- $("remainingClasses").textContent=left;
- $("totalClasses").textContent=total;
+ /* ANIMATED STATISTICS */
+$("remainingClasses").textContent=left;
+$("totalClasses").textContent=total;
 
- const distancePerClass=
-  Number(value(student,"distancePerClass",5))||5;
+const distancePerClass=
+ Number(value(student,"distancePerClass",5))||5;
 
- $("totalDistance").textContent=
-  (completed*distancePerClass)+" KM";
+const totalPracticeDistance=
+ completed*distancePerClass;
+
+animateCounter(
+ "completedClasses",
+ completed
+);
+
+animateCounter(
+ "totalDistance",
+ totalPracticeDistance,
+ " KM"
+);
 
  /* PROGRESS */
  $("progressPercent").textContent=percent+"%";
