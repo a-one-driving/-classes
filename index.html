@@ -273,6 +273,18 @@ header{
   grid-template-columns:repeat(4,minmax(0,1fr));
   gap:17px
 }
+
+/* PREVENT GALLERY LAYOUT SHIFT */
+#studentGallery {
+  min-height: 300px;
+  align-content: start;
+}
+
+@media(max-width:600px) {
+  #studentGallery {
+    min-height: 245px;
+  }
+}
 .gallery-card{
   background:var(--card);
   border:1px solid var(--border);
