@@ -248,44 +248,13 @@ header{
   color:var(--muted);
 }
 
-.hero-visual{
-  position:relative;
-  width:100%;
-  min-width:0;
-}
 
-.hero-car-frame{
-  position:relative;
-  width:100%;
-  aspect-ratio: 1 / .82;
-  border-radius:25px;
-  overflow:hidden;
-  border:1px solid rgba(242,189,69,.25);
-  background:#111a29;
-  box-shadow:0 25px 65px rgba(0,0,0,.35);
-}
 
-.hero-car-frame img{
-  display:block;
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  object-position:center;
-}
 
-.hero-car-label{
-  position:absolute;
-  bottom:18px;
-  left:18px;
-  padding:11px 16px;
-  background:rgba(8,13,24,.88);
-  border:1px solid rgba(242,189,69,.35);
-  border-radius:12px;
-  color:var(--gold);
-  font-size:11px;
-  font-weight:900;
-  letter-spacing:1px;
-}
+
+
+
+
 
 @media(max-width:850px){
   .hero{
@@ -294,13 +263,22 @@ header{
 
   .hero-content{
     grid-template-columns:1fr;
-    gap:30px;
-    padding:55px 0;
+max-width:850px;
+margin:auto;
   }
 
-  .hero-info{
-    text-align:center;
-  }
+ .hero-info{
+  text-align:center;
+}
+
+.hero p{
+  margin:auto;
+}
+
+.hero-actions,
+.hero-stats{
+  justify-content:center;
+}
 
   .hero p{
     margin:auto;
@@ -878,24 +856,7 @@ footer{border-top:1px solid var(--border);padding:30px 0;margin-top:50px}
 
       </div>
 
-      <div class="hero-visual">
-        <div class="hero-car-frame">
 
-          <img
-            src="https://i.ibb.co/p9FK8R3/tigor.webp"
-            alt="Tata Tigor XZ Plus driving training car"
-            width="720"
-            height="590"
-            fetchpriority="high"
-            decoding="async"
-          >
-
-          <div class="hero-car-label">
-            TATA TIGOR XZ+
-          </div>
-
-        </div>
-      </div>
 
     </div>
   </div>
