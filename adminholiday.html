@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#080d18">
+<meta name="robots" content="noindex,nofollow">
+<title>Holiday Admin | A One Driving Classes</title>
+
+<style>
+:root{
+--bg:#080d18;--panel:#111a2b;--line:#263650;
+--text:#eef5ff;--muted:#91a3bd;--cyan:#35d7f2;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,sans-serif}
+.wrap{max-width:850px;margin:auto;padding:20px 14px 50px}
+.brand{color:var(--cyan);font-size:12px;font-weight:900;letter-spacing:1.5px}
+.card{background:linear-gradient(145deg,#142239,#101827);border:1px solid var(--line);border-radius:18px;padding:16px;margin:14px 0}
+h1{font-size:22px;margin:8px 0}
+h2{font-size:16px;margin:0 0 13px}
+.muted{color:var(--muted);font-size:12px;line-height:1.6}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.full{grid-column:1/-1}
+label{font-size:11px;color:var(--muted)}
+input,select,textarea{
+width:100%;min-width:0;padding:12px;background:#0b1422;color:white;
+border:1px solid #30435d;border-radius:11px;font:inherit;font-size:13px
+}
+textarea{min-height:70px}
+button{border:0;border-radius:10px;padding:12px 14px;background:#17465a;color:white;font-weight:750;cursor:pointer}
+button:disabled{opacity:.5;cursor:not-allowed}
+.secondary{background:#26364d}
+.danger{background:#6b2635}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.list{display:grid;gap:9px;margin-top:12px}
+.item{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px;background:#0b1422;border:1px solid var(--line);border-radius:13px}
+.item strong{font-size:13px}
+.item small{display:block;color:var(--muted);font-size:11px;margin-top:5px}
+.tag{display:inline-block;font-size:10px;background:#19344a;color:var(--cyan);padding:5px 8px;border-radius:20px;margin-top:7px}
+.notice{padding:11px;background:#132b40;border:1px solid #28516b;border-radius:12px;font-size:12px;line-height:1.6;margin:10px 0}
+.status{font-size:12px;color:var(--muted);margin-top:9px;line-height:1.6;overflow-wrap:anywhere}
+.empty{padding:15px;text-align:center;color:var(--muted);font-size:12px}
+@media(max-width:520px){
+.grid{grid-template-columns:1fr}
+.item{align-items:flex-start}
+.item .actions{flex-direction:column}
+.item button{width:100%}
+}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+<header>
+<div class="brand">A ONE DRIVING CLASSES</div>
+<h1>Holiday Management</h1>
+<p class="muted">Manage national, Odisha, optional, festival and institute holidays.</p>
+</header>
+
+<!-- IMPORT DATABASE -->
+<section class="card">
+<h2>2026 Holiday Database</h2>
+
+<div class="notice">
+Offline database. No external API required.
+Includes Odisha's official general and optional holidays, selected festival dates and Bhai Dooj.
+Existing matching holidays will be skipped during import.
+</div>
+
+<div class="grid">
+<div class="field">
+<label>Select Year</label>
+<select id="importYear">
+<option value="2026">2026</option>
+</select>
+</div>
+
+<div class="field">
+<label>Import Database</label>
+<button type="button" id="importBtn">Import 2026 Holidays</button>
+</div>
+</div>
+
+<div class="status" id="importStatus">Ready to import.</div>
+</section>
+
+<!-- ADD HOLIDAY -->
+<section class="card" id="editor">
+<h2 id="formTitle">Add Holiday</h2>
+
+<form id="holidayForm">
+<div class="grid">
+
+<div class="field full">
+<label>Holiday / Festival Name *</label>
+<input id="holidayName" required maxlength="100" placeholder="Example: Diwali Vacation">
+</div>
+
+<div class="field">
+<label>Date *</label>
+<input id="holidayDate" type="date" required>
+</div>
+
+<div class="field">
+<label>Category *</label>
+<select id="holidayCategory">
+<option value="Institute">A One Driving Classes</option>
+<option value="National">National Holiday</option>
+<option value="Odisha">Odisha Government</option>
+<option value="Odisha Optional">Odisha Optional</option>
+<option value="Festival">Festival Calendar</option>
+<option value="Local">Local / District</option>
+</select>
+</div>
+
+<div class="field full">
+<label>Note</label>
+<textarea id="holidayNote" maxlength="500" placeholder="Optional details"></textarea>
+</div>
+
+</div>
+
+<div class="actions" style="margin-top:12px">
+<button type="submit" id="saveBtn">Save Holiday</button>
+<button type="button" class="secondary" id="cancelBtn" hidden>Cancel</button>
+</div>
+
+<div class="status" id="formStatus"></div>
+</form>
+</section>
+
+<!-- SAVED HOLIDAYS -->
+<section class="card">
+<div class="row">
+<h2>Saved Holidays</h2>
+<span class="muted" id="holidayCount">0 holidays</span>
+</div>
+
+<div class="grid">
+<div class="field">
+<label>Year</label>
+<select id="filterYear"></select>
+</div>
+
+<div class="field">
+<label>Category</label>
+<select id="filterCategory">
+<option value="All">All Categories</option>
+<option value="National">National</option>
+<option value="Odisha">Odisha Government</option>
+<option value="Odisha Optional">Odisha Optional</option>
+<option value="Festival">Festival Calendar</option>
+<option value="Institute">Institute</option>
+<option value="Local">Local / District</option>
+</select>
+</div>
+</div>
+
+<div class="list" id="holidayList">
+<div class="empty">Loading holidays...</div>
+</div>
+</section>
+
+</div>
+
+<script type="module">
+import {initializeApp}
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+import {
+getFirestore,collection,addDoc,updateDoc,deleteDoc,doc,
+getDocs,onSnapshot,serverTimestamp
+}
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+/* A ONE DRIVING CLASSES FIREBASE CONFIG */
+const firebaseConfig={
+ apiKey:"AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
+ authDomain:"abinash-driving.firebaseapp.com",
+ databaseURL:"https://abinash-driving-default-rtdb.firebaseio.com/",
+ projectId:"abinash-driving",
+ storageBucket:"abinash-driving.appspot.com",
+ messagingSenderId:"641148830173",
+ appId:"1:641148830173:web:b7a500e5e7e2463da0f634"
+};
+
+const app=initializeApp(firebaseConfig);
+const db=getFirestore(app);
+const holidaysRef=collection(db,"holidays");
+
+const $=id=>document.getElementById(id);
+
+let holidays=[];
+let editingId=null;
+
+/* 2026 HOLIDAY DATABASE */
+
+const HOLIDAY_DATABASE={
+"2026":[
+
+/* NATIONAL + ODISHA GENERAL HOLIDAYS */
+
+{date:"2026-01-14",name:"Makar Sankranti",category:"Odisha"},
+{date:"2026-01-23",name:"Subash Chandra Bose Jayanti / Vir Surendra Sai Jayanti / Basanta Panchami",category:"Odisha"},
+{date:"2026-01-26",name:"Republic Day",category:"National"},
+
+{date:"2026-03-03",name:"Dola Purnima",category:"Odisha"},
+{date:"2026-03-04",name:"Holi",category:"Odisha"},
+{date:"2026-03-21",name:"Id-ul-Fitre",category:"Odisha"},
+{date:"2026-03-27",name:"Shree Rama Navami",category:"Odisha"},
+
+{date:"2026-04-01",name:"Utkal Divas",category:"Odisha"},
+{date:"2026-04-03",name:"Good Friday",category:"National"},
+{date:"2026-04-14",name:"Dr. B.R. Ambedkar Jayanti / Maha Visuva Sankranti",category:"Odisha"},
+
+{date:"2026-05-01",name:"Buddha Purnima / Pandit Raghunath Murmu Birthday",category:"Odisha"},
+{date:"2026-05-16",name:"Sabitri Amabasya",category:"Odisha"},
+{date:"2026-05-27",name:"Id-ul-Zuha",category:"Odisha"},
+
+{date:"2026-06-15",name:"Raja Sankranti",category:"Odisha"},
+{date:"2026-06-26",name:"Muharram",category:"Odisha"},
+
+{date:"2026-07-16",name:"Rath Yatra",category:"Odisha"},
+
+{date:"2026-08-15",name:"Independence Day",category:"National"},
+{date:"2026-08-26",name:"Birthday of Prophet Muhammad",category:"Odisha"},
+{date:"2026-08-27",name:"Jhulana Purnima",category:"Odisha"},
+
+{date:"2026-09-04",name:"Janmasthami",category:"Odisha"},
+{date:"2026-09-14",name:"Ganesh Puja",category:"Odisha"},
+{date:"2026-09-15",name:"Nuakhai",category:"Odisha"},
+{date:"2026-09-16",name:"Day Following Nuakhai",category:"Odisha"},
+
+{date:"2026-10-02",name:"Gandhi Jayanti",category:"National"},
+{date:"2026-10-17",name:"Mahasaptami",category:"Odisha"},
+{date:"2026-10-19",name:"Mahanavami",category:"Odisha"},
+{date:"2026-10-20",name:"Vijaya Dasami",category:"Odisha"},
+
+{date:"2026-11-24",name:"Rahas Purnima",category:"Odisha"},
+{date:"2026-12-25",name:"Christmas Day",category:"National"},
+
+/* ODISHA OPTIONAL HOLIDAYS */
+
+{date:"2026-01-06",name:"Guru Gobind Singh's Birthday",category:"Odisha Optional"},
+{date:"2026-03-17",name:"Sab-e-Quadar",category:"Odisha Optional"},
+{date:"2026-04-04",name:"Easter Saturday",category:"Odisha Optional"},
+{date:"2026-05-22",name:"Birthday of Raja Ram Mohan Roy",category:"Odisha Optional"},
+{date:"2026-07-24",name:"Bahuda Yatra",category:"Odisha Optional"},
+{date:"2026-08-20",name:"Foundation Day of Bramho Samaj",category:"Odisha Optional"},
+{date:"2026-11-18",name:"Anla Navami",category:"Odisha Optional"},
+{date:"2026-12-01",name:"Prathamastami",category:"Odisha Optional"},
+{date:"2026-12-24",name:"Christmas Eve",category:"Odisha Optional"},
+
+/* FESTIVAL CALENDAR */
+
+{date:"2026-02-15",name:"Maha Shivratri",category:"Festival"},
+{date:"2026-06-14",name:"Pahili Raja",category:"Festival"},
+{date:"2026-10-10",name:"Mahalaya",category:"Festival"},
+{date:"2026-10-18",name:"Mahasthami",category:"Festival"},
+{date:"2026-10-25",name:"Kumar Purnima",category:"Festival"},
+{date:"2026-11-08",name:"Diwali",category:"Festival"},
+
+{date:"2026-11-11",name:"Bhai Dooj",category:"Festival",
+note:"Festival calendar date. Confirm local panchang before announcing closure."}
+
+]};
+
+/* HELPERS */
+
+function setStatus(id,message){
+$(id).textContent=message;
+}
+
+function safe(value){
+return String(value??"").replace(/[&<>"']/g,c=>({
+"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+}[c]));
+}
+
+function validDate(value){
+if(typeof value!=="string"||!/^\d{4}-\d{2}-\d{2}$/.test(value))return false;
+const [y,m,d]=value.split("-").map(Number);
+const dt=new Date(y,m-1,d);
+return dt.getFullYear()===y&&dt.getMonth()===m-1&&dt.getDate()===d;
+}
+
+function dateLabel(value){
+if(!validDate(value))return "Invalid date";
+const [y,m,d]=value.split("-").map(Number);
+return new Date(y,m-1,d).toLocaleDateString("en-IN",{
+day:"2-digit",month:"short",year:"numeric"
+});
+}
+
+function errorMessage(error){
+if(error?.code==="permission-denied")
+return "Firebase permission denied. Check Firestore Security Rules.";
+if(error?.code==="unavailable")
+return "Firebase unavailable. Check internet connection.";
+return error?.message||String(error);
+}
+
+/* YEAR FILTER */
+
+const currentYear=new Date().getFullYear();
+
+for(let y=2025;y<=2030;y++){
+$("filterYear").add(new Option(String(y),String(y)));
+}
+
+$("filterYear").value=String(currentYear);
+
+/* FIRESTORE REALTIME LISTENER */
+
+onSnapshot(holidaysRef,snapshot=>{
+holidays=snapshot.docs.map(d=>({id:d.id,...d.data()}));
+render();
+},error=>{
+console.error(error);
+$("holidayList").innerHTML=
+'<div class="empty">Unable to load: '+safe(errorMessage(error))+'</div>';
+});
+
+/* RENDER */
+
+function render(){
+
+const year=$("filterYear").value;
+const category=$("filterCategory").value;
+
+const filtered=holidays
+.filter(h=>String(h.date||"").startsWith(year))
+.filter(h=>category==="All"||h.category===category)
+.sort((a,b)=>String(a.date||"").localeCompare(String(b.date||"")));
+
+$("holidayCount").textContent=filtered.length+" holidays";
+
+if(!filtered.length){
+$("holidayList").innerHTML='<div class="empty">No holidays found.</div>';
+return;
+}
+
+$("holidayList").innerHTML=filtered.map(h=>`
+<div class="item">
+<div>
+<strong>${safe(h.name)}</strong>
+<small>${dateLabel(h.date)}</small>
+${h.note?`<small>${safe(h.note)}</small>`:""}
+<span class="tag">${safe(h.category||"Uncategorized")}</span>
+</div>
+<div class="actions">
+<button type="button" class="secondary" data-edit="${safe(h.id)}">Edit</button>
+<button type="button" class="danger" data-delete="${safe(h.id)}">Delete</button>
+</div>
+</div>
+`).join("");
+
+}
+
+/* IMPORT DATABASE */
+
+$("importBtn").addEventListener("click",async()=>{
+
+const year=$("importYear").value;
+const dataset=HOLIDAY_DATABASE[year];
+
+if(!dataset){
+setStatus("importStatus","No offline database available for "+year+".");
+return;
+}
+
+if(!confirm("Import "+dataset.length+" records for "+year+"?"))return;
+
+$("importBtn").disabled=true;
+
+let added=0,skipped=0,failed=0;
+
+try{
+
+setStatus("importStatus","Checking existing holidays...");
+
+const snapshot=await getDocs(holidaysRef);
+const existing=snapshot.docs.map(d=>d.data());
+
+for(let i=0;i<dataset.length;i++){
+
+const holiday=dataset[i];
+
+const duplicate=existing.some(h=>
+h.date===holiday.date &&
+String(h.name||"").trim().toLowerCase()===
+holiday.name.trim().toLowerCase()
+);
+
+if(duplicate){
+skipped++;
+continue;
+}
+
+try{
+
+await addDoc(holidaysRef,{
+name:holiday.name,
+date:holiday.date,
+category:holiday.category,
+note:holiday.note||"",
+source:"A One Driving Classes 2026 Offline Database",
+sourceYear:year,
+createdAt:serverTimestamp(),
+updatedAt:serverTimestamp()
+});
+
+added++;
+existing.push({name:holiday.name,date:holiday.date});
+
+}catch(error){
+failed++;
+console.error("Import error:",error);
+}
+
+setStatus("importStatus",
+"Processing "+(i+1)+"/"+dataset.length+
+" | Added: "+added+
+" | Existing: "+skipped+
+" | Failed: "+failed);
+
+}
+
+setStatus("importStatus",
+"Import completed. "+added+" added, "+
+skipped+" already existed, "+failed+" failed.");
+
+}catch(error){
+
+console.error(error);
+setStatus("importStatus","Import failed: "+errorMessage(error));
+
+}finally{
+$("importBtn").disabled=false;
+}
+
+});
+
+/* RESET FORM */
+
+function resetForm(){
+
+editingId=null;
+$("holidayForm").reset();
+$("formTitle").textContent="Add Holiday";
+$("saveBtn").textContent="Save Holiday";
+$("cancelBtn").hidden=true;
+$("holidayCategory").value="Institute";
+setStatus("formStatus","");
+
+}
+
+/* ADD / UPDATE */
+
+$("holidayForm").addEventListener("submit",async e=>{
+
+e.preventDefault();
+
+const name=$("holidayName").value.trim();
+const date=$("holidayDate").value;
+const category=$("holidayCategory").value;
+const note=$("holidayNote").value.trim();
+
+if(!name||!validDate(date)){
+setStatus("formStatus","Please enter a valid name and date.");
+return;
+}
+
+$("saveBtn").disabled=true;
+
+try{
+
+const data={
+name,date,category,note,
+updatedAt:serverTimestamp()
+};
+
+if(editingId){
+
+await updateDoc(doc(db,"holidays",editingId),data);
+
+}else{
+
+await addDoc(holidaysRef,{
+...data,
+source:"A One Driving Classes",
+createdAt:serverTimestamp()
+});
+
+}
+
+resetForm();
+setStatus("formStatus","Holiday saved successfully.");
+
+}catch(error){
+
+console.error(error);
+setStatus("formStatus","Save failed: "+errorMessage(error));
+
+}finally{
+$("saveBtn").disabled=false;
+}
+
+});
+
+/* EDIT / DELETE */
+
+$("holidayList").addEventListener("click",async e=>{
+
+const edit=e.target.closest("[data-edit]");
+const del=e.target.closest("[data-delete]");
+
+if(edit){
+
+const h=holidays.find(x=>x.id===edit.dataset.edit);
+if(!h)return;
+
+editingId=h.id;
+$("holidayName").value=h.name||"";
+$("holidayDate").value=h.date||"";
+$("holidayCategory").value=h.category||"Institute";
+$("holidayNote").value=h.note||"";
+
+$("formTitle").textContent="Edit Holiday";
+$("saveBtn").textContent="Update Holiday";
+$("cancelBtn").hidden=false;
+
+$("editor").scrollIntoView({behavior:"smooth"});
+
+}
+
+if(del){
+
+const h=holidays.find(x=>x.id===del.dataset.delete);
+if(!h)return;
+
+if(!confirm("Delete "+h.name+"?"))return;
+
+try{
+
+await deleteDoc(doc(db,"holidays",h.id));
+
+}catch(error){
+
+console.error(error);
+alert("Delete failed: "+errorMessage(error));
+
+}
+
+}
+
+});
+
+/* CANCEL + FILTERS */
+
+$("cancelBtn").addEventListener("click",resetForm);
+$("filterYear").addEventListener("change",render);
+$("filterCategory").addEventListener("change",render);
+
+</script>
+</body>
+</html>
