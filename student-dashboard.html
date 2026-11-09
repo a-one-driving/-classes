@@ -455,6 +455,89 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
   animation:none;
  }
 }
+
+
+
+
+/* UPCOMING HOLIDAYS */
+.holiday-list{
+ display:grid;
+ gap:11px;
+}
+
+.holiday-card{
+ display:flex;
+ align-items:center;
+ gap:13px;
+ padding:13px;
+ background:linear-gradient(145deg,#17263B,#111A29);
+ border:1px solid var(--border);
+ border-radius:14px;
+}
+
+.holiday-date-box{
+ min-width:58px;
+ width:58px;
+ height:62px;
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ align-items:center;
+ background:rgba(242,189,69,.12);
+ border:1px solid rgba(242,189,69,.22);
+ border-radius:11px;
+}
+
+.holiday-date-box strong{
+ font-size:21px;
+ line-height:1.2;
+ color:var(--gold);
+}
+
+.holiday-date-box span{
+ font-size:9px;
+ color:var(--muted);
+ text-transform:uppercase;
+ font-weight:800;
+}
+
+.holiday-info{
+ flex:1;
+ min-width:0;
+}
+
+.holiday-info strong{
+ display:block;
+ font-size:12px;
+ overflow-wrap:anywhere;
+}
+
+.holiday-info p{
+ font-size:10px;
+ color:var(--muted);
+ margin-top:5px;
+}
+
+.holiday-category{
+ display:inline-block;
+ margin-top:7px;
+ padding:4px 8px;
+ border-radius:20px;
+ background:rgba(101,169,255,.10);
+ color:var(--blue);
+ font-size:8px;
+ font-weight:800;
+}
+
+.holiday-empty{
+ padding:18px;
+ text-align:center;
+ background:var(--card2);
+ border-radius:12px;
+ color:var(--muted);
+ font-size:11px;
+ line-height:1.7;
+}
 </style>
 </head>
 
@@ -561,6 +644,33 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
  </div>
 </section>
 
+<!-- UPCOMING HOLIDAYS -->
+<section class="panel" id="upcomingHolidays">
+
+ <div class="panel-head">
+  <h2>
+   <i data-lucide="calendar-days"
+      style="color:var(--gold);width:17px;vertical-align:middle">
+   </i>
+   Upcoming Holidays
+  </h2>
+
+  <span style="font-size:10px;color:var(--muted)">
+   Next 3
+  </span>
+ </div>
+
+ <div class="holiday-list" id="upcomingHolidayList">
+
+  <div class="holiday-empty">
+   Loading upcoming holidays...
+  </div>
+
+ </div>
+
+</section>
+
+
 <section class="panel" id="attendanceHistory">
  <div class="panel-head">
   <h2>My Class History</h2>
@@ -647,8 +757,12 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
 import {initializeApp,getApps}
 from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
 
-import {getFirestore,doc,onSnapshot}
-from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+import {
+ getFirestore,
+ doc,
+ onSnapshot,
+ collection
+} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
 import {
  getDatabase,
@@ -677,6 +791,159 @@ const app=getApps().length
  :initializeApp(firebaseConfig);
 
 const db=getFirestore(app);
+/* UPCOMING HOLIDAYS - FIREBASE */
+
+const holidaysRef=collection(db,"holidays");
+
+function getLocalToday(){
+
+ const now=new Date();
+
+ const year=now.getFullYear();
+ const month=String(now.getMonth()+1).padStart(2,"0");
+ const day=String(now.getDate()).padStart(2,"0");
+
+ return `${year}-${month}-${day}`;
+}
+
+function formatHolidayDate(dateString){
+
+ const parts=dateString.split("-");
+
+ const date=new Date(
+  Number(parts[0]),
+  Number(parts[1])-1,
+  Number(parts[2])
+ );
+
+ return {
+  day:date.toLocaleDateString("en-IN",{
+   day:"2-digit"
+  }),
+
+  month:date.toLocaleDateString("en-IN",{
+   month:"short"
+  }),
+
+  full:date.toLocaleDateString("en-IN",{
+   weekday:"long",
+   day:"2-digit",
+   month:"long",
+   year:"numeric"
+  })
+ };
+
+}
+
+function renderUpcomingHolidays(snapshot){
+
+ const container=$("upcomingHolidayList");
+
+ const today=getLocalToday();
+
+ const upcoming=snapshot.docs
+
+  .map(document=>({
+   id:document.id,
+   ...document.data()
+  }))
+
+  .filter(holiday=>
+   /^\d{4}-\d{2}-\d{2}$/.test(holiday.date||"") &&
+   holiday.date>=today
+  )
+
+  .sort((a,b)=>
+   a.date.localeCompare(b.date)
+  )
+
+  .slice(0,3);
+
+ container.replaceChildren();
+
+ if(!upcoming.length){
+
+  const empty=document.createElement("div");
+
+  empty.className="holiday-empty";
+
+  empty.textContent=
+   "No upcoming holidays announced. Enjoy your driving practice!";
+
+  container.appendChild(empty);
+
+  return;
+ }
+
+ upcoming.forEach(holiday=>{
+
+  const date=formatHolidayDate(holiday.date);
+
+  const card=document.createElement("div");
+  card.className="holiday-card";
+
+  const dateBox=document.createElement("div");
+  dateBox.className="holiday-date-box";
+
+  const day=document.createElement("strong");
+  day.textContent=date.day;
+
+  const month=document.createElement("span");
+  month.textContent=date.month;
+
+  dateBox.append(day,month);
+
+  const info=document.createElement("div");
+  info.className="holiday-info";
+
+  const title=document.createElement("strong");
+  title.textContent=holiday.name||"Holiday";
+
+  const fullDate=document.createElement("p");
+  fullDate.textContent=date.full;
+
+  info.append(title,fullDate);
+
+  if(holiday.category){
+
+   const category=document.createElement("span");
+
+   category.className="holiday-category";
+
+   category.textContent=holiday.category;
+
+   info.appendChild(category);
+  }
+
+  card.append(dateBox,info);
+
+  container.appendChild(card);
+
+ });
+
+}
+
+/* REALTIME FIRESTORE LISTENER */
+
+onSnapshot(
+ holidaysRef,
+
+ snapshot=>{
+  renderUpcomingHolidays(snapshot);
+ },
+
+ error=>{
+
+  console.error(
+   "Upcoming holiday loading error:",
+   error
+  );
+
+  $("upcomingHolidayList").textContent=
+   "Unable to load holidays. Please try again later.";
+
+ }
+);
 const realtimeDB=getDatabase(app);
 
 let unsubscribeStudent=null;
