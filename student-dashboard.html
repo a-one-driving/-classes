@@ -538,6 +538,104 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
  font-size:11px;
  line-height:1.7;
 }
+
+
+/* TRAINING ATTENDANCE TRACKER */
+.attendance-tracker{
+ background:linear-gradient(145deg,#17263B,#111A29);
+ border:1px solid rgba(242,189,69,.18);
+ border-radius:15px;
+ padding:16px;
+ margin-top:16px;
+}
+
+.attendance-tracker-head{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:10px;
+ margin-bottom:15px;
+}
+
+.attendance-tracker-head strong{
+ font-size:13px;
+}
+
+.attendance-status{
+ font-size:9px;
+ font-weight:800;
+ padding:6px 10px;
+ border-radius:20px;
+}
+
+.attendance-status.good{
+ background:rgba(53,201,138,.13);
+ color:var(--green);
+}
+
+.attendance-status.warning{
+ background:rgba(242,189,69,.13);
+ color:var(--gold);
+}
+
+.attendance-status.critical{
+ background:rgba(255,119,119,.13);
+ color:var(--red);
+}
+
+.attendance-numbers{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:8px;
+}
+
+.attendance-number{
+ background:rgba(255,255,255,.04);
+ border:1px solid var(--border);
+ border-radius:11px;
+ padding:11px 8px;
+}
+
+.attendance-number small{
+ display:block;
+ color:var(--muted);
+ font-size:9px;
+}
+
+.attendance-number strong{
+ display:block;
+ font-size:21px;
+ margin-top:5px;
+}
+
+.attendance-track{
+ height:9px;
+ background:#263247;
+ border-radius:20px;
+ overflow:hidden;
+ margin-top:16px;
+}
+
+.attendance-track-fill{
+ height:100%;
+ width:0;
+ background:var(--green);
+ border-radius:20px;
+ transition:width .4s;
+}
+
+.attendance-message{
+ margin-top:12px;
+ font-size:11px;
+ line-height:1.7;
+ color:var(--muted);
+}
+
+@media(max-width:420px){
+ .attendance-numbers{gap:5px}
+ .attendance-number{padding:9px 6px}
+ .attendance-number strong{font-size:18px}
+}
 </style>
 </head>
 
@@ -642,6 +740,59 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
    <div class="milestone"><i data-lucide="award"></i><strong>Final</strong><span>Assessment</span></div>
   </div>
  </div>
+</section>
+
+<!-- TRAINING ATTENDANCE TRACKER -->
+<section class="panel" id="attendanceTracker">
+
+ <div class="panel-head">
+  <h2>Training Attendance</h2>
+  <span style="font-size:10px;color:var(--muted)">
+   Working Days
+  </span>
+ </div>
+
+ <div class="attendance-tracker">
+
+  <div class="attendance-tracker-head">
+   <strong>Attendance Performance</strong>
+   <span id="attendanceStatus"
+         class="attendance-status good">
+    Calculating...
+   </span>
+  </div>
+
+  <div class="attendance-numbers">
+
+   <div class="attendance-number">
+    <small>Expected</small>
+    <strong id="expectedClasses">0</strong>
+   </div>
+
+   <div class="attendance-number">
+    <small>Completed</small>
+    <strong id="actualExpectedClasses">0</strong>
+   </div>
+
+   <div class="attendance-number">
+    <small>Schedule Gap</small>
+    <strong id="attendanceGap">0</strong>
+   </div>
+
+  </div>
+
+  <div class="attendance-track">
+   <div class="attendance-track-fill"
+        id="attendanceTrackFill"></div>
+  </div>
+
+  <div class="attendance-message"
+       id="attendanceMessage">
+   Your attendance status will appear here.
+  </div>
+
+ </div>
+
 </section>
 
 <!-- UPCOMING HOLIDAYS -->
@@ -794,6 +945,16 @@ const db=getFirestore(app);
 /* UPCOMING HOLIDAYS - FIREBASE */
 
 const holidaysRef=collection(db,"holidays");
+/* DECLARED CLOSURE DATES FOR ATTENDANCE */
+
+let attendanceHolidayDates=new Set();
+
+const excludedHolidayCategories=[
+ "Institute",
+ "National",
+ "Odisha",
+ "Local"
+];
 
 function getLocalToday(){
 
@@ -929,8 +1090,33 @@ onSnapshot(
  holidaysRef,
 
  snapshot=>{
+
+  const holidayDocuments=snapshot.docs.map(document=>({
+   id:document.id,
+   ...document.data()
+  }));
+
+  // Only declared closure categories affect attendance
+  attendanceHolidayDates=new Set(
+   holidayDocuments
+    .filter(holiday=>
+     excludedHolidayCategories.includes(holiday.category)
+    )
+    .map(holiday=>holiday.date)
+    .filter(Boolean)
+  );
+
   renderUpcomingHolidays(snapshot);
- },
+
+  // Update tracker when admin changes holiday data
+  if(currentStudentActive){
+   updateAttendanceTracker(
+    currentAdmissionDate,
+    currentCompletedClasses
+   );
+  }
+
+},
 
  error=>{
 
@@ -1144,6 +1330,158 @@ function calculateEndingDate(startDate){
  endingDate.setDate(endingDate.getDate()+30);
 
  return endingDate;
+}
+
+
+/* EXPECTED WORKING DAY CALCULATOR */
+
+function toDateKey(date){
+
+ const year=date.getFullYear();
+ const month=String(date.getMonth()+1).padStart(2,"0");
+ const day=String(date.getDate()).padStart(2,"0");
+
+ return `${year}-${month}-${day}`;
+}
+
+function calculateExpectedWorkingDays(startDate,endDate){
+
+ if(!startDate||!endDate)return 0;
+
+ const start=new Date(
+  startDate.getFullYear(),
+  startDate.getMonth(),
+  startDate.getDate()
+ );
+
+ const end=new Date(
+  endDate.getFullYear(),
+  endDate.getMonth(),
+  endDate.getDate()
+ );
+
+ if(start>end)return 0;
+
+ let count=0;
+
+ const current=new Date(start);
+
+ while(current<=end){
+
+  const day=current.getDay();
+
+  const isWeekend=
+   day===0||day===6;
+
+  const dateKey=toDateKey(current);
+
+  const isDeclaredHoliday=
+   attendanceHolidayDates.has(dateKey);
+
+  if(!isWeekend&&!isDeclaredHoliday){
+   count++;
+  }
+
+  current.setDate(current.getDate()+1);
+ }
+
+ return count;
+}
+
+/* ATTENDANCE TRACKER RENDER */
+
+let currentAdmissionDate=null;
+let currentCompletedClasses=0;
+
+function updateAttendanceTracker(admissionDate,completed){
+
+ const expectedElement=$("expectedClasses");
+ const actualElement=$("actualExpectedClasses");
+ const gapElement=$("attendanceGap");
+ const statusElement=$("attendanceStatus");
+ const messageElement=$("attendanceMessage");
+ const fillElement=$("attendanceTrackFill");
+
+ if(!admissionDate){
+
+  expectedElement.textContent="--";
+  actualElement.textContent=completed||0;
+  gapElement.textContent="--";
+
+  statusElement.textContent="Date Missing";
+  statusElement.className="attendance-status warning";
+
+  messageElement.textContent=
+   "Admission date could not be calculated from attendance records.";
+
+  fillElement.style.width="0%";
+
+  return;
+ }
+
+ const today=new Date();
+
+ const todayDate=new Date(
+  today.getFullYear(),
+  today.getMonth(),
+  today.getDate()
+ );
+
+ const expected=calculateExpectedWorkingDays(
+  admissionDate,
+  todayDate
+ );
+
+ const actual=Number(completed)||0;
+
+ const gap=Math.max(expected-actual,0);
+
+ const percentage=expected>0
+  ?Math.min(Math.round(actual/expected*100),100)
+  :100;
+
+ expectedElement.textContent=expected;
+ actualElement.textContent=actual;
+ gapElement.textContent=gap;
+
+ fillElement.style.width=percentage+"%";
+
+ if(gap===0){
+
+  statusElement.textContent="On Track";
+  statusElement.className="attendance-status good";
+
+  fillElement.style.background="var(--green)";
+
+  messageElement.textContent=
+   "Excellent! Your attendance is on schedule. Keep practising regularly.";
+
+ }else if(gap<5){
+
+  statusElement.textContent="Behind Schedule";
+  statusElement.className="attendance-status warning";
+
+  fillElement.style.background="var(--gold)";
+
+  messageElement.textContent=
+   "You should have completed "+expected+
+   " classes by today, but you have completed "+actual+
+   ". You are "+gap+" class"+(gap===1?"":"es")+
+   " behind schedule.";
+
+ }else{
+
+  statusElement.textContent="Attendance Critical";
+  statusElement.className="attendance-status critical";
+
+  fillElement.style.background="var(--red)";
+
+  messageElement.textContent=
+   "Your attendance is "+gap+
+   " classes behind schedule. Please contact your instructor to plan your remaining practice sessions.";
+
+ }
+
 }
 
 /* DEFAULT AVATAR */
@@ -1689,6 +2027,15 @@ function renderDashboard(student,mobile){
  );
 
  const firstClassDate=getClassOneDate(logs);
+/* SAVE ADMISSION DATE AND ATTENDANCE COUNT */
+
+currentAdmissionDate=firstClassDate;
+currentCompletedClasses=completed;
+
+updateAttendanceTracker(
+ currentAdmissionDate,
+ currentCompletedClasses
+);
 
  // CLASS 1 DATE = ADMISSION DATE
 const admissionDate=firstClassDate
