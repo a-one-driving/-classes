@@ -253,15 +253,48 @@ main{padding:27px 0 100px}
 }
 
 .history-badge{
- background:rgba(53,201,138,.12);
- color:var(--green);
- border-radius:20px;
- padding:5px 9px;
+ display:inline-flex;
+ align-items:center;
+ justify-content:center;
+ gap:5px;
+
+ background:linear-gradient(
+  135deg,
+  rgba(53,201,138,.18),
+  rgba(53,201,138,.08)
+ );
+
+ color:#48E0A0;
+
+ border:1px solid rgba(53,201,138,.35);
+ border-radius:30px;
+
+ padding:6px 11px;
+
  font-size:8px;
- font-weight:800;
- letter-spacing:.5px;
+ font-weight:900;
+ letter-spacing:.7px;
+
+ white-space:nowrap;
+
+ box-shadow:
+  0 3px 12px rgba(53,201,138,.08);
 }
 
+.history-badge::before{
+ content:"✓";
+ display:grid;
+ place-items:center;
+
+ width:15px;
+ height:15px;
+
+ border-radius:50%;
+ background:rgba(53,201,138,.20);
+
+ font-size:10px;
+ font-weight:900;
+}
 .history-data-grid{
  display:grid;
  grid-template-columns:1fr 1fr;
@@ -1877,8 +1910,8 @@ function renderHistory(logs){
   titleWrap.append(title,date,time);
 
   const badge=document.createElement("span");
-  badge.className="history-badge";
-  badge.textContent="✓ COMPLETED";
+badge.className="history-badge";
+badge.textContent="COMPLETED";
 
   head.append(titleWrap,badge);
 
