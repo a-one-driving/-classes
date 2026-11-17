@@ -5,11 +5,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#080D18">
-<meta name="description" content="ABHINAASH A1 Driving Student Dashboard">
 <title>Student Dashboard | ABHINAASH A1 Driving</title>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script defer src="https://unpkg.com/lucide@latest"></script>
 
@@ -27,32 +24,16 @@ button,input,textarea,select{font:inherit}
 button{cursor:pointer}
 .container{width:min(1160px,93%);margin:auto}
 
-header{
- position:sticky;top:0;z-index:100;
- background:rgba(8,13,24,.96);
- backdrop-filter:blur(16px);
- border-bottom:1px solid var(--border)
-}
+header{position:sticky;top:0;z-index:100;background:rgba(8,13,24,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
 .topbar{height:68px;display:flex;align-items:center;justify-content:space-between}
 .logo{font-size:17px;font-weight:800}
 .logo span{color:var(--gold)}
 .header-right{display:flex;align-items:center;gap:12px}
 .header-link{font-size:11px;color:var(--muted)}
-.avatar{
- width:39px;height:39px;border-radius:13px;overflow:hidden;
- display:grid;place-items:center;background:rgba(242,189,69,.14);
- border:1px solid rgba(242,189,69,.25);color:var(--gold);font-weight:800
-}
+.avatar{width:39px;height:39px;border-radius:13px;overflow:hidden;display:grid;place-items:center;background:rgba(242,189,69,.14);border:1px solid rgba(242,189,69,.25)}
 .avatar img{width:100%;height:100%;object-fit:cover}
-.logout-btn{
- display:none;align-items:center;justify-content:center;gap:6px;
- padding:9px 12px;border-radius:10px;
- background:rgba(255,119,119,.10);
- border:1px solid rgba(255,119,119,.28);
- color:#FF7777;font-size:10px;font-weight:800;
- cursor:pointer;white-space:nowrap
-}
-.logout-btn:active{transform:scale(.96)}
+.logout-btn{display:none;align-items:center;gap:6px;padding:9px 12px;border-radius:10px;background:rgba(255,119,119,.1);border:1px solid rgba(255,119,119,.28);color:#FF7777;font-size:10px;font-weight:800}
+
 main{padding:27px 0 100px}
 .panel,.stat-card{background:var(--card);border:1px solid var(--border);border-radius:18px}
 .panel{padding:21px;margin-bottom:20px}
@@ -60,67 +41,26 @@ main{padding:27px 0 100px}
 .panel-head h2{font-size:15px}
 .login-description{font-size:11px;color:var(--muted);margin-bottom:13px}
 .login-controls{display:flex;gap:10px;flex-wrap:wrap}
-.login-controls input{
- flex:1;min-width:190px;padding:13px;border-radius:10px;
- border:1px solid var(--border);background:var(--card2);color:white;outline:none
-}
-.login-controls input:focus{border-color:var(--gold)}
+.login-controls input{flex:1;min-width:190px;padding:13px;border-radius:10px;border:1px solid var(--border);background:var(--card2);color:white;outline:none}
+.btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 15px;border-radius:10px;font-size:11px;font-weight:800;border:0;background:var(--gold);color:#171717}
 .login-message{font-size:11px;margin-top:12px;color:var(--muted)}
-.btn-primary,.btn-outline{
- display:inline-flex;align-items:center;justify-content:center;gap:8px;
- padding:11px 15px;border-radius:10px;font-size:11px;
- font-weight:800;border:1px solid transparent
-}
-.btn-primary{background:var(--gold);color:#171717}
-.btn-primary:disabled{opacity:.6;cursor:not-allowed}
-.btn-outline{border-color:var(--border);color:var(--white);background:rgba(255,255,255,.04)}
 
-.student-profile{
- display:flex;align-items:center;gap:14px;padding:17px;margin-bottom:22px;
- border-radius:19px;background:linear-gradient(115deg,#192B43,#111A29 75%);
- border:1px solid rgba(242,189,69,.2)
-}
-.profile-avatar{
- width:76px;height:76px;min-width:76px;padding:3px;border-radius:50%;
- position:relative;background:linear-gradient(135deg,#D99A25,#FFE3A4);
- animation:avatarFloat 3s ease-in-out infinite
-}
-.profile-avatar img{width:100%;height:100%;display:block;border-radius:50%;object-fit:cover;background:#25364b}
-.profile-online{
- position:absolute;right:2px;bottom:4px;width:13px;height:13px;
- border:2px solid #192B43;border-radius:50%;background:var(--green)
-}
+.student-profile{display:flex;align-items:center;gap:14px;padding:17px;margin-bottom:22px;border-radius:19px;background:linear-gradient(115deg,#192B43,#111A29 75%);border:1px solid rgba(242,189,69,.2)}
+.profile-avatar{width:76px;height:76px;min-width:76px;padding:3px;border-radius:50%;background:linear-gradient(135deg,#D99A25,#FFE3A4)}
+.profile-avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover}
+.profile-online{position:absolute}
 .profile-info{flex:1;min-width:0}
 .profile-info small{color:var(--gold);font-size:9px;font-weight:800;letter-spacing:1.5px}
-.profile-info h2{font-size:17px;margin:3px 0;overflow-wrap:anywhere}
+.profile-info h2{font-size:17px;margin:3px 0}
 .profile-info p{font-size:10px;color:var(--muted)}
-.profile-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:9px}
-.photo-btn{
- display:inline-flex;align-items:center;gap:6px;padding:8px 11px;border-radius:9px;
- background:rgba(242,189,69,.13);border:1px solid rgba(242,189,69,.3);
- color:var(--gold);font-size:10px;font-weight:800
-}
-.photo-btn:disabled{opacity:.6;cursor:not-allowed}
-.upload-status{font-size:10px;color:var(--muted);margin-top:8px;min-height:15px}
+.profile-actions{margin-top:9px}
+.photo-btn{padding:8px 11px;border-radius:9px;background:rgba(242,189,69,.13);border:1px solid rgba(242,189,69,.3);color:var(--gold);font-size:10px;font-weight:800}
+.upload-status{font-size:10px;color:var(--muted);margin-top:8px}
 .upload-status.success{color:var(--green)}
 .upload-status.error{color:var(--red)}
-@keyframes avatarFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
 
-.hero-card{
- position:relative;overflow:hidden;background:linear-gradient(115deg,#192B43,#111A29 75%);
- border:1px solid rgba(242,189,69,.2);border-radius:22px;padding:25px;margin-bottom:20px
-}
-.hero-card:after{
- content:"";position:absolute;width:220px;height:220px;border-radius:50%;
- border:1px solid rgba(242,189,69,.12);right:-65px;top:-100px;
- box-shadow:0 0 0 28px rgba(242,189,69,.025),0 0 0 58px rgba(242,189,69,.02)
-}
-.hero-content{position:relative;z-index:1}
-.plan-label{
- display:inline-flex;align-items:center;gap:7px;background:rgba(242,189,69,.12);
- color:var(--gold);padding:7px 11px;border-radius:30px;font-size:9px;
- font-weight:800;text-transform:uppercase;letter-spacing:1px
-}
+.hero-card{position:relative;overflow:hidden;background:linear-gradient(115deg,#192B43,#111A29 75%);border:1px solid rgba(242,189,69,.2);border-radius:22px;padding:25px;margin-bottom:20px}
+.plan-label{display:inline-flex;align-items:center;gap:7px;background:rgba(242,189,69,.12);color:var(--gold);padding:7px 11px;border-radius:30px;font-size:9px;font-weight:800}
 .hero-card h2{font-size:24px;margin:14px 0 5px}
 .hero-card p{font-size:11px;color:var(--muted)}
 .hero-meta{display:flex;gap:25px;flex-wrap:wrap;margin-top:19px}
@@ -130,142 +70,64 @@ main{padding:27px 0 100px}
 
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
 .stat-card{padding:17px;border-radius:16px}
-.stat-icon{
- width:36px;height:36px;display:grid;place-items:center;border-radius:11px;
- background:var(--card2);color:var(--gold)
-}
+.stat-icon{width:36px;height:36px;display:grid;place-items:center;border-radius:11px;background:var(--card2);color:var(--gold)}
 .stat-card strong{display:block;font-size:25px;margin-top:13px;font-variant-numeric:tabular-nums}
 .stat-card p{font-size:10px;color:var(--muted);margin-top:3px}
-.stat-card strong.counter-animate{animation:counterPulse .45s ease-out}
-@keyframes counterPulse{
- 0%{opacity:.55;transform:translateY(5px)}
- 65%{opacity:1;transform:translateY(-2px)}
- 100%{opacity:1;transform:translateY(0)}
-}
 
 .content-grid{display:grid;grid-template-columns:1fr;gap:16px}
-.progress-row{display:flex;justify-content:space-between;gap:12px;margin-bottom:10px}
-.progress-row span{font-size:10px;color:var(--muted)}
+.progress-row{display:flex;justify-content:space-between;margin-bottom:10px}
+.progress-row span,.progress-info{font-size:10px;color:var(--muted)}
 .progress-row strong{font-size:12px;color:var(--gold)}
 .progress-track{height:9px;border-radius:20px;background:#263247;overflow:hidden}
-.progress-fill{
- width:0;height:100%;border-radius:20px;
- background:linear-gradient(90deg,#D99A25,var(--gold));transition:width .4s
-}
-.progress-info{display:flex;justify-content:space-between;margin-top:9px;font-size:9px;color:var(--muted)}
+.progress-fill{width:0;height:100%;border-radius:20px;background:linear-gradient(90deg,#D99A25,var(--gold));transition:width .4s}
+.progress-info{display:flex;justify-content:space-between;margin-top:9px;font-size:9px}
 .milestones{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:22px}
 .milestone{background:var(--card2);border-radius:12px;padding:12px 7px;text-align:center}
-.milestone i{color:var(--gold);width:18px;height:18px}
+.milestone i{color:var(--gold);width:18px}
 .milestone strong{display:block;font-size:11px;margin-top:6px}
 .milestone span{font-size:9px;color:var(--muted)}
 
-.history-list{display:grid;gap:0;padding:5px 0 5px 8px}
+.history-list{display:grid;padding:5px 0 5px 8px}
 .history-item{position:relative;margin-left:12px;padding:0 0 24px 25px;border-left:2px solid rgba(242,189,69,.25)}
-.history-item:last-child{border-left-color:transparent;padding-bottom:5px}
-.history-dot{
- position:absolute;left:-9px;top:2px;width:16px;height:16px;border-radius:50%;
- background:var(--gold);border:4px solid var(--card);box-shadow:0 0 0 2px rgba(242,189,69,.25)
-}
-.history-card{
- background:linear-gradient(145deg,#17263B,#111A29);border:1px solid var(--border);
- border-radius:15px;padding:15px;transition:transform .2s,border-color .2s
-}
-.history-card:hover{transform:translateY(-2px);border-color:rgba(242,189,69,.35)}
-.history-card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}
+.history-item:last-child{border-left-color:transparent}
+.history-dot{position:absolute;left:-9px;top:2px;width:16px;height:16px;border-radius:50%;background:var(--gold);border:4px solid var(--card)}
+.history-card{background:linear-gradient(145deg,#17263B,#111A29);border:1px solid var(--border);border-radius:15px;padding:15px}
+.history-card-head{display:flex;justify-content:space-between;gap:10px}
 .history-class-title{font-size:12px;font-weight:800}
 .history-date{font-size:10px;color:var(--gold);margin-top:5px}
 .history-time{font-size:9px;color:var(--muted);margin-top:2px}
-.history-badge{
- background:rgba(53,201,138,.12);color:var(--green);border-radius:20px;
- padding:5px 9px;font-size:8px;font-weight:800;letter-spacing:.5px
-}
+.history-badge{background:rgba(53,201,138,.12);color:var(--green);border-radius:20px;padding:5px 9px;font-size:8px;font-weight:800}
 .history-data-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}
-.history-data{
- background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.055);
- border-radius:10px;padding:10px;min-width:0
-}
+.history-data{background:rgba(255,255,255,.035);border:1px solid var(--border);border-radius:10px;padding:10px}
 .history-data small{display:block;color:var(--muted);font-size:9px;margin-bottom:4px}
-.history-data strong{display:block;font-size:10px;color:var(--white);overflow-wrap:anywhere}
-.history-remark{
- margin-top:11px;padding:11px;background:rgba(242,189,69,.08);
- border:1px solid rgba(242,189,69,.13);border-radius:10px
-}
+.history-data strong{display:block;font-size:10px;overflow-wrap:anywhere}
+.history-remark{margin-top:11px;padding:11px;background:rgba(242,189,69,.08);border-radius:10px}
 .history-remark small{display:block;font-size:9px;color:var(--gold);font-weight:800;margin-bottom:5px}
-.history-remark p{font-size:10px;color:#E5EAF2;line-height:1.7;overflow-wrap:anywhere}
+.history-remark p{font-size:10px;line-height:1.7}
 .history-no-remark{margin-top:10px;font-size:9px;color:var(--muted)}
-.remark{margin-top:9px;padding:9px 11px;border-radius:9px;background:rgba(242,189,69,.08);color:var(--gold);font-size:10px;line-height:1.6}
-.status-pill{font-size:9px;font-weight:800;padding:5px 9px;border-radius:20px;background:rgba(53,201,138,.12);color:var(--green)}
-.empty{padding:20px;text-align:center;background:var(--card2);border-radius:12px;color:var(--muted);font-size:11px;line-height:1.8}
 
+.empty{padding:20px;text-align:center;background:var(--card2);border-radius:12px;color:var(--muted);font-size:11px;line-height:1.8}
 .feedback-form{display:grid;gap:13px}
 .feedback-form label{display:block;font-size:10px;color:var(--muted);margin-bottom:7px}
-.feedback-form select,.feedback-form textarea{
- width:100%;padding:12px;background:#080D18;border:1px solid var(--border);
- border-radius:10px;color:white;outline:none;font-size:12px
-}
+.feedback-form select,.feedback-form textarea{width:100%;padding:12px;background:#080D18;border:1px solid var(--border);border-radius:10px;color:white;outline:none;font-size:12px}
 .feedback-form textarea{min-height:100px;resize:vertical}
-.feedback-form select:focus,.feedback-form textarea:focus{border-color:var(--gold)}
-.feedback-form button{width:100%}
-.notice{
- display:flex;align-items:flex-start;gap:11px;margin-top:17px;padding:13px;
- border-radius:12px;background:rgba(101,169,255,.07);border:1px solid rgba(101,169,255,.17)
-}
-.notice i{color:var(--blue);width:17px;flex-shrink:0}
+.notice{display:flex;align-items:flex-start;gap:11px;margin-top:17px;padding:13px;border-radius:12px;background:rgba(101,169,255,.07);border:1px solid rgba(101,169,255,.17)}
+.notice i{color:var(--blue);width:17px}
 .notice strong{font-size:10px}
 .notice p{font-size:9px;color:var(--muted);margin-top:3px;line-height:1.6}
-.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.quick-action{
- background:var(--card);border:1px solid var(--border);border-radius:14px;
- padding:14px 11px;display:flex;align-items:center;gap:10px
-}
-.quick-icon{
- width:35px;height:35px;flex-shrink:0;display:grid;place-items:center;
- border-radius:10px;background:var(--card2);color:var(--gold)
-}
-.quick-action strong{display:block;font-size:10px}
-.quick-action span{display:block;font-size:9px;color:var(--muted);margin-top:3px}
 
-footer{border-top:1px solid var(--border);padding:22px 0 100px}
-.footer-inner{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
-.footer-inner p{font-size:10px;color:var(--muted)}
-.bottom-nav{
- display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;
- background:rgba(12,19,32,.97);border-top:1px solid var(--border);
- padding:10px 5px calc(10px + env(safe-area-inset-bottom));
- justify-content:space-around;backdrop-filter:blur(16px)
-}
-.bottom-nav a{display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--muted);font-size:9px;font-weight:700;min-width:55px}
-.bottom-nav a.active{color:var(--gold)}
-.bottom-nav i{width:19px;height:19px}
-
-/* UPCOMING HOLIDAYS */
 .holiday-list{display:grid;gap:11px}
-.holiday-card{
- display:flex;align-items:center;gap:13px;padding:13px;
- background:linear-gradient(145deg,#17263B,#111A29);
- border:1px solid var(--border);border-radius:14px
-}
-.holiday-date-box{
- min-width:58px;width:58px;height:62px;display:flex;flex-direction:column;
- justify-content:center;align-items:center;background:rgba(242,189,69,.12);
- border:1px solid rgba(242,189,69,.22);border-radius:11px
-}
-.holiday-date-box strong{font-size:21px;line-height:1.2;color:var(--gold)}
-.holiday-date-box span{font-size:9px;color:var(--muted);text-transform:uppercase;font-weight:800}
+.holiday-card{display:flex;align-items:center;gap:13px;padding:13px;background:linear-gradient(145deg,#17263B,#111A29);border:1px solid var(--border);border-radius:14px}
+.holiday-date-box{min-width:58px;width:58px;height:62px;display:flex;flex-direction:column;justify-content:center;align-items:center;background:rgba(242,189,69,.12);border:1px solid rgba(242,189,69,.22);border-radius:11px}
+.holiday-date-box strong{font-size:21px;color:var(--gold)}
+.holiday-date-box span{font-size:9px;color:var(--muted);font-weight:800}
 .holiday-info{flex:1;min-width:0}
-.holiday-info strong{display:block;font-size:12px;overflow-wrap:anywhere}
+.holiday-info strong{display:block;font-size:12px}
 .holiday-info p{font-size:10px;color:var(--muted);margin-top:5px}
-.holiday-category{
- display:inline-block;margin-top:7px;padding:4px 8px;border-radius:20px;
- background:rgba(101,169,255,.10);color:var(--blue);font-size:8px;font-weight:800
-}
-.holiday-empty{padding:18px;text-align:center;background:var(--card2);border-radius:12px;color:var(--muted);font-size:11px;line-height:1.7}
+.holiday-category{display:inline-block;margin-top:7px;padding:4px 8px;border-radius:20px;background:rgba(101,169,255,.1);color:var(--blue);font-size:8px;font-weight:800}
+.holiday-empty{padding:18px;text-align:center;background:var(--card2);border-radius:12px;color:var(--muted);font-size:11px}
 
-/* ATTENDANCE TRACKER */
-.attendance-tracker{
- background:linear-gradient(145deg,#17263B,#111A29);
- border:1px solid rgba(242,189,69,.18);border-radius:15px;padding:16px;margin-top:16px
-}
+.attendance-tracker{background:linear-gradient(145deg,#17263B,#111A29);border:1px solid rgba(242,189,69,.18);border-radius:15px;padding:16px;margin-top:16px}
 .attendance-tracker-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:15px}
 .attendance-tracker-head strong{font-size:13px}
 .attendance-status{font-size:9px;font-weight:800;padding:6px 10px;border-radius:20px}
@@ -280,114 +142,48 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
 .attendance-track-fill{height:100%;width:0;background:var(--green);border-radius:20px;transition:width .4s}
 .attendance-message{margin-top:12px;font-size:11px;line-height:1.7;color:var(--muted)}
 
-/* LL DL INQUIRY */
-.inquiry-card{
- display:none;margin-bottom:20px;padding:21px;border-radius:18px;
- background:linear-gradient(120deg,#263B57,#111A29);
- border:1px solid rgba(242,189,69,.35)
-}
-.inquiry-card h2{font-size:17px;margin:9px 0 5px}
-.inquiry-card p{font-size:11px;color:var(--muted);line-height:1.7}
-.inquiry-tag{
- display:inline-block;padding:6px 10px;border-radius:20px;
- background:rgba(242,189,69,.13);color:var(--gold);
- font-size:9px;font-weight:800;letter-spacing:1px
-}
-.inquiry-button{
- margin-top:14px;padding:12px 16px;border:0;border-radius:10px;
- background:var(--gold);color:#171717;font-size:11px;font-weight:800
-}
-.chat-modal{
- display:none;position:fixed;inset:0;z-index:1000;
- background:rgba(0,0,0,.78);padding:15px;
- align-items:center;justify-content:center
-}
-.chat-window{
- width:min(520px,100%);max-height:90dvh;display:flex;
- flex-direction:column;overflow:hidden;background:var(--card);
- border:1px solid rgba(242,189,69,.3);border-radius:18px
-}
-.chat-header{
- display:flex;justify-content:space-between;align-items:center;
- padding:16px;background:#192B43;border-bottom:1px solid var(--border)
-}
-.chat-header h3{font-size:14px}
-.chat-header p{font-size:9px;color:var(--muted)}
-.chat-close{background:transparent;border:0;color:white;font-size:23px}
-.chat-options{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:13px}
-.chat-option{
- padding:10px 8px;border-radius:9px;background:var(--card2);
- border:1px solid var(--border);color:white;font-size:10px;text-align:left
-}
-.chat-messages{
- min-height:150px;max-height:35dvh;overflow-y:auto;padding:13px;
- display:flex;flex-direction:column;gap:10px
-}
-.chat-message{
- max-width:88%;padding:10px 12px;border-radius:12px;
- font-size:11px;line-height:1.6;overflow-wrap:anywhere
-}
-.chat-message.student{align-self:flex-end;background:rgba(242,189,69,.16);border:1px solid rgba(242,189,69,.2)}
-.chat-message.admin{align-self:flex-start;background:var(--card2);border:1px solid var(--border)}
-.chat-message small{display:block;color:var(--muted);font-size:8px;margin-top:4px}
-.chat-compose{display:flex;gap:8px;padding:12px;border-top:1px solid var(--border)}
-.chat-compose input{
- min-width:0;flex:1;padding:11px;border-radius:9px;
- border:1px solid var(--border);background:#080D18;color:white;outline:none
-}
-.chat-compose button{
- padding:10px 14px;border:0;border-radius:9px;
- background:var(--gold);color:#171717;font-weight:800
-}
-.decision-area{padding:13px;border-top:1px solid var(--border)}
-.decision-area label{display:block;color:var(--muted);font-size:10px;margin-bottom:7px}
-.decision-area select{
- width:100%;padding:11px;border-radius:9px;
- background:#080D18;border:1px solid var(--border);color:white
-}
-.decision-area button{
- width:100%;margin-top:9px;padding:11px;border:0;border-radius:9px;
- background:var(--gold);color:#171717;font-size:11px;font-weight:800
-}
-.chat-status{padding:8px 13px;font-size:9px;color:var(--muted)}
+/* LL/DL SLIDER */
+.assistance-card{display:none;margin-bottom:20px;padding:20px;border-radius:19px;background:linear-gradient(135deg,#1C304A,#111A29);border:1px solid rgba(242,189,69,.3)}
+.assistance-card h2{font-size:17px;margin:10px 0 5px}
+.assistance-card p{font-size:11px;color:var(--muted);line-height:1.7}
+.assistance-label{display:inline-block;padding:6px 10px;background:rgba(242,189,69,.13);color:var(--gold);border-radius:20px;font-size:9px;font-weight:800;letter-spacing:1px}
+.assistance-select{width:100%;margin-top:14px;padding:12px;border-radius:10px;background:#080D18;color:white;border:1px solid var(--border);outline:none;font-size:11px}
+.car-slider{position:relative;height:60px;margin-top:17px;padding:5px;border-radius:40px;background:#26364D;border:1px solid rgba(255,255,255,.1);touch-action:pan-y;overflow:hidden}
+.car-slider-track{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#D8DFE9;font-size:10px;font-weight:700;pointer-events:none}
+.car-slider input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:grab;z-index:3;margin:0}
+.car-slider-thumb{position:absolute;top:5px;left:5px;width:48px;height:48px;display:grid;place-items:center;border-radius:50%;background:var(--gold);color:#171717;z-index:2;pointer-events:none;transition:left .08s linear}
+.car-slider-thumb svg{width:34px;height:34px}
+.assistance-result{display:none;margin-top:13px;padding:12px;border-radius:10px;background:rgba(53,201,138,.1);border:1px solid rgba(53,201,138,.25);color:var(--green);font-size:11px;line-height:1.6}
+.assistance-result.error{background:rgba(255,119,119,.1);border-color:rgba(255,119,119,.25);color:var(--red)}
 
-@media(max-width:850px){
- .stats{grid-template-columns:repeat(2,1fr)}
- .quick-grid{grid-template-columns:repeat(2,1fr)}
-}
+.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.quick-action{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 11px;display:flex;align-items:center;gap:10px}
+.quick-icon{width:35px;height:35px;flex-shrink:0;display:grid;place-items:center;border-radius:10px;background:var(--card2);color:var(--gold)}
+.quick-action strong{display:block;font-size:10px}
+.quick-action span{display:block;font-size:9px;color:var(--muted);margin-top:3px}
+
+footer{border-top:1px solid var(--border);padding:22px 0 100px}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
+.footer-inner p{font-size:10px;color:var(--muted)}
+.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(12,19,32,.97);border-top:1px solid var(--border);padding:10px 5px calc(10px + env(safe-area-inset-bottom));justify-content:space-around;backdrop-filter:blur(16px)}
+.bottom-nav a{display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--muted);font-size:9px;font-weight:700;min-width:55px}
+.bottom-nav a.active{color:var(--gold)}
+.bottom-nav i{width:19px;height:19px}
+
+@media(max-width:850px){.stats{grid-template-columns:repeat(2,1fr)}.quick-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){
- .topbar{height:62px}
- .header-link{display:none}
- .logout-btn{padding:8px;font-size:9px}
- main{padding-top:22px}
- .hero-card{padding:20px}
- .hero-card h2{font-size:21px}
- .hero-meta{gap:17px}
- .stats{gap:9px}
- .stat-card{padding:14px}
- .stat-card strong{font-size:22px}
- .panel{padding:16px}
- .milestones{gap:6px}
- .milestone{padding:10px 4px}
- .quick-grid{gap:8px}
- .quick-action{padding:11px 8px;gap:8px}
- .quick-icon{width:31px;height:31px}
- .bottom-nav{display:flex}
+ .topbar{height:62px}.header-link{display:none}
+ main{padding-top:22px}.hero-card{padding:20px}.hero-card h2{font-size:21px}
+ .hero-meta{gap:17px}.stats{gap:9px}.stat-card{padding:14px}
+ .stat-card strong{font-size:22px}.panel{padding:16px}
+ .milestones{gap:6px}.milestone{padding:10px 4px}
+ .quick-grid{gap:8px}.quick-action{padding:11px 8px;gap:8px}
+ .quick-icon{width:31px;height:31px}.bottom-nav{display:flex}
  .footer-inner{flex-direction:column;align-items:flex-start}
  .profile-avatar{width:68px;height:68px;min-width:68px}
- .history-card{padding:13px}
  .history-data-grid{gap:7px}
- .history-item{padding-left:19px}
 }
-@media(max-width:420px){
- .attendance-numbers{gap:5px}
- .attendance-number{padding:9px 6px}
- .attendance-number strong{font-size:18px}
-}
-@media(prefers-reduced-motion:reduce){
- .profile-avatar,.stat-card strong.counter-animate{animation:none}
- .progress-fill,.attendance-track-fill{transition:none}
-}
+@media(max-width:420px){.attendance-numbers{gap:5px}.attendance-number{padding:9px 6px}.attendance-number strong{font-size:18px}}
 </style>
 </head>
 <body>
@@ -397,12 +193,8 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
   <a href="index.html" class="logo">ABHINAASH <span>A1</span></a>
   <div class="header-right">
    <a href="contact.html" class="header-link">Need Help?</a>
-   <button type="button" id="logoutButton" class="logout-btn">
-    <i data-lucide="log-out" width="14"></i> Logout
-   </button>
-   <a href="student-account.html" class="avatar" aria-label="My Account">
-    <img id="userAvatar" alt="Student profile" src="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student">
-   </a>
+   <button type="button" id="logoutButton" class="logout-btn">Logout</button>
+   <a href="student-account.html" class="avatar"><img id="userAvatar" alt="Student profile" src="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student"></a>
   </div>
  </div>
 </header>
@@ -410,10 +202,7 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
 <main class="container">
 
 <section class="panel" id="loginPanel" style="display:none">
- <div class="panel-head">
-  <h2>Student Verification</h2>
-  <span style="font-size:10px;color:var(--gold)">Student Portal</span>
- </div>
+ <div class="panel-head"><h2>Student Verification</h2></div>
  <p class="login-description" id="loginMessage" style="display:none"></p>
  <div class="login-controls" id="manualLoginControls" style="display:none">
   <input type="tel" id="studentMobile" maxlength="10" inputmode="numeric" placeholder="Enter mobile number">
@@ -424,16 +213,13 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
 <section class="student-profile">
  <div class="profile-avatar">
   <img id="studentProfileAvatar" src="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student" alt="Student Avatar">
-  <span class="profile-online"></span>
  </div>
  <div class="profile-info">
   <small>STUDENT PROFILE</small>
   <h2 id="profileStudentName">Student</h2>
   <p>A ONE DRIVING STUDENT</p>
   <div class="profile-actions">
-   <button type="button" class="photo-btn" id="changePhotoBtn">
-    <i data-lucide="camera" width="13"></i> Change Photo
-   </button>
+   <button type="button" class="photo-btn" id="changePhotoBtn">Change Photo</button>
   </div>
   <input type="file" id="profilePhotoInput" accept="image/jpeg,image/png,image/webp" hidden>
   <div class="upload-status" id="uploadStatus"></div>
@@ -441,17 +227,15 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
 </section>
 
 <section class="hero-card">
- <div class="hero-content">
-  <div class="plan-label"><i data-lucide="crown" width="13"></i> Your Training Plan</div>
-  <h2 id="packageName">Driving Training</h2>
-  <p>Your registered training details.</p>
-  <div class="hero-meta">
-   <div><small>Student ID</small><strong id="studentId">--</strong></div>
-   <div><small>Class Type</small><strong id="classType">--</strong></div>
-   <div><small>Admission Date</small><strong id="admissionDate">--</strong></div>
-   <div><small>Expected Ending Date</small><strong id="expectedEndDate">--</strong></div>
-   <div><small>Account Status</small><strong id="accountStatus">--</strong></div>
-  </div>
+ <div class="plan-label">YOUR TRAINING PLAN</div>
+ <h2 id="packageName">Driving Training</h2>
+ <p>Your registered training details.</p>
+ <div class="hero-meta">
+  <div><small>Student ID</small><strong id="studentId">--</strong></div>
+  <div><small>Class Type</small><strong id="classType">--</strong></div>
+  <div><small>Admission Date</small><strong id="admissionDate">--</strong></div>
+  <div><small>Expected Ending Date</small><strong id="expectedEndDate">--</strong></div>
+  <div><small>Account Status</small><strong id="accountStatus">--</strong></div>
  </div>
 </section>
 
@@ -462,12 +246,33 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
  <div class="stat-card"><div class="stat-icon"><i data-lucide="route"></i></div><strong id="totalDistance">--</strong><p>Total Practice Distance</p></div>
 </section>
 
-<!-- LL & DL INQUIRY -->
-<section class="inquiry-card" id="llDlInquiry">
- <span class="inquiry-tag">20 CLASSES COMPLETED</span>
- <h2>Your Next Step: Learner's Licence & Driving Licence</h2>
- <p>Your driving practice is progressing. Start a private inquiry to learn about LL and DL, pricing, documents and the application process.</p>
- <button class="inquiry-button" id="openInquiryChat" type="button">START LL & DL INQUIRY →</button>
+<!-- LL/DL ASSISTANCE SLIDER -->
+<section class="assistance-card" id="assistanceCard">
+ <span class="assistance-label">20 CLASSES COMPLETED</span>
+ <h2>Ready for Your Next Driving Journey?</h2>
+ <p>Interested in Learner's Licence (LL) or Driving Licence (DL)? Request assistance from ABHINAASH A1.</p>
+
+ <select id="assistanceType" class="assistance-select">
+  <option value="Interested in LL and DL">I am interested in LL & DL</option>
+  <option value="Interested in DL">I am interested in DL</option>
+  <option value="Interested in LL">I am interested in LL</option>
+  <option value="Call me for LL and DL assistance">Call me for LL & DL assistance</option>
+ </select>
+
+ <div class="car-slider" id="carSlider">
+  <div class="car-slider-track">SLIDE TO SEND YOUR REQUEST →</div>
+  <div class="car-slider-thumb" id="carSliderThumb">
+   <svg viewBox="0 0 64 40" fill="none">
+    <path d="M8 25L13 13H47L56 25V31H8V25Z" fill="#171717"/>
+    <path d="M19 13L23 5H40L46 13" stroke="#171717" stroke-width="3"/>
+    <circle cx="18" cy="31" r="6" fill="#171717"/>
+    <circle cx="46" cy="31" r="6" fill="#171717"/>
+    <path d="M22 8H39L43 13H18L22 8Z" fill="#F2BD45"/>
+   </svg>
+  </div>
+  <input type="range" id="assistanceSlider" min="0" max="100" value="0" aria-label="Slide to request assistance">
+ </div>
+ <div class="assistance-result" id="assistanceResult"></div>
 </section>
 
 <section class="content-grid">
@@ -487,10 +292,7 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
 <section class="panel" id="attendanceTracker">
  <div class="panel-head"><h2>Training Attendance</h2><span style="font-size:10px;color:var(--muted)">Working Days</span></div>
  <div class="attendance-tracker">
-  <div class="attendance-tracker-head">
-   <strong>Attendance Performance</strong>
-   <span id="attendanceStatus" class="attendance-status good">Calculating...</span>
-  </div>
+  <div class="attendance-tracker-head"><strong>Attendance Performance</strong><span id="attendanceStatus" class="attendance-status good">Calculating...</span></div>
   <div class="attendance-numbers">
    <div class="attendance-number"><small>Expected</small><strong id="expectedClasses">0</strong></div>
    <div class="attendance-number"><small>Completed</small><strong id="actualExpectedClasses">0</strong></div>
@@ -502,27 +304,17 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
 </section>
 
 <section class="panel" id="upcomingHolidays">
- <div class="panel-head">
-  <h2><i data-lucide="calendar-days" style="color:var(--gold);width:17px;vertical-align:middle"></i> Upcoming Holidays</h2>
-  <span style="font-size:10px;color:var(--muted)">Next 3</span>
- </div>
- <div class="holiday-list" id="upcomingHolidayList">
-  <div class="holiday-empty">Loading upcoming holidays...</div>
- </div>
+ <div class="panel-head"><h2>Upcoming Holidays</h2><span style="font-size:10px;color:var(--muted)">Next 3</span></div>
+ <div class="holiday-list" id="upcomingHolidayList"><div class="holiday-empty">Loading upcoming holidays...</div></div>
 </section>
 
 <section class="panel" id="attendanceHistory">
- <div class="panel-head">
-  <h2>My Class History</h2>
-  <span style="font-size:10px;color:var(--muted)" id="historyCount">0 classes</span>
- </div>
- <div class="history-list" id="historyList">
-  <div class="empty">Connect your account to view class history.</div>
- </div>
+ <div class="panel-head"><h2>My Class History</h2><span style="font-size:10px;color:var(--muted)" id="historyCount">0 classes</span></div>
+ <div class="history-list" id="historyList"><div class="empty">Connect your account to view class history.</div></div>
 </section>
 
 <section class="panel" id="studentFeedback">
- <div class="panel-head"><h2>Share Your Feedback</h2><i data-lucide="send" style="color:var(--gold)"></i></div>
+ <div class="panel-head"><h2>Share Your Feedback</h2></div>
  <p class="login-description">Tell us about your experience at ABHINAASH A1 Driving.</p>
  <form class="feedback-form" id="feedbackForm">
   <div>
@@ -536,23 +328,16 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
     <option value="1">★ - Needs Improvement</option>
    </select>
   </div>
-  <div>
-   <label for="feedbackText">Your Feedback</label>
-   <textarea id="feedbackText" maxlength="1000" placeholder="Write your experience..." required></textarea>
-  </div>
-  <button class="btn-primary" type="submit"><i data-lucide="message-circle"></i> Send Feedback</button>
+  <div><label for="feedbackText">Your Feedback</label><textarea id="feedbackText" maxlength="1000" placeholder="Write your experience..." required></textarea></div>
+  <button class="btn-primary" type="submit">Send Feedback</button>
  </form>
- <div class="notice">
-  <i data-lucide="info"></i>
-  <div><strong>Feedback submission</strong><p>Your feedback will be sent to the driving school through WhatsApp. It is not saved to Firestore by this form.</p></div>
- </div>
+ <div class="notice"><div><strong>Feedback submission</strong><p>Your feedback will be sent to the driving school through WhatsApp. It is not saved to Firestore by this form.</p></div></div>
 </section>
 
 <section class="panel">
  <div class="panel-head"><h2>Quick Actions</h2></div>
  <div class="quick-grid">
-  <a href="traffic-academy.html" class="quick-action"
-   onclick="this.href='traffic-academy.html?mobile='+encodeURIComponent(localStorage.getItem('a1_student_mobile')||'')">
+  <a href="traffic-academy.html" class="quick-action" onclick="this.href='traffic-academy.html?mobile='+encodeURIComponent(localStorage.getItem('a1_student_mobile')||'')">
    <div class="quick-icon"><i data-lucide="traffic-cone"></i></div>
    <div><strong>Traffic Academy</strong><span>Learn signs & daily MCQ</span></div>
   </a>
@@ -560,49 +345,6 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
 </section>
 
 </main>
-
-<!-- PRIVATE LL/DL CHAT -->
-<div class="chat-modal" id="inquiryChatModal">
- <div class="chat-window">
-  <div class="chat-header">
-   <div><h3>ABHINAASH A1 · Inquiry Chat</h3><p>Ask us about LL & DL</p></div>
-   <button class="chat-close" id="closeInquiryChat" type="button" aria-label="Close chat">×</button>
-  </div>
-
-  <div class="chat-options">
-   <button class="chat-option" data-question="What is the price of LL?">LL Price</button>
-   <button class="chat-option" data-question="What is the price of DL?">DL Price</button>
-   <button class="chat-option" data-question="What is the price for both LL and DL?">LL + DL Price</button>
-   <button class="chat-option" data-question="What documents are required?">Required Documents</button>
-   <button class="chat-option" data-question="Explain the application process.">Application Process</button>
-   <button class="chat-option" data-question="I want to talk to the instructor.">Talk to Instructor</button>
-  </div>
-
-  <div class="chat-messages" id="inquiryMessages">
-   <div class="chat-message admin">Welcome to ABHINAASH A1! How can we help you with your LL and DL inquiry?</div>
-  </div>
-
-  <div class="chat-compose">
-   <input id="inquiryChatInput" type="text" maxlength="500" placeholder="Type your message...">
-   <button id="sendInquiryMessage" type="button">Send</button>
-  </div>
-
-  <div class="decision-area">
-   <label for="inquiryDecision">Your Final Decision</label>
-   <select id="inquiryDecision">
-    <option value="">Select your decision</option>
-    <option value="Interested in LL">Interested in LL</option>
-    <option value="Interested in DL">Interested in DL</option>
-    <option value="Interested in Both LL and DL">Interested in Both LL and DL</option>
-    <option value="Need More Information">Need More Information</option>
-    <option value="Not Interested Right Now">Not Interested Right Now</option>
-   </select>
-   <button id="submitInquiryDecision" type="button">SUBMIT MY DECISION</button>
-  </div>
-
-  <div class="chat-status" id="inquiryChatStatus">Your inquiry chat.</div>
- </div>
-</div>
 
 <footer>
  <div class="container footer-inner">
@@ -619,26 +361,15 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
 </nav>
 
 <script type="module">
-import {initializeApp,getApps}
-from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+import {initializeApp,getApps} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
 
 import {
- getFirestore,
- doc,
- onSnapshot,
- collection,
- addDoc,
- query,
- orderBy,
- serverTimestamp,
- setDoc
+ getFirestore,doc,onSnapshot,collection,
+ setDoc,serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
 import {
- getDatabase,
- ref as databaseRef,
- get,
- update
+ getDatabase,ref as databaseRef,get,update
 } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-database.js";
 
 const firebaseConfig={
@@ -666,26 +397,25 @@ let currentStudentName="";
 let currentStudentActive=false;
 let currentAdmissionDate=null;
 let currentCompletedClasses=0;
-let unsubscribeInquiryChat=null;
 let photoRequests=new Set();
+let assistanceSubmitting=false;
 
 const holidaysRef=collection(db,"holidays");
 let attendanceHolidayDates=new Set();
-
 const excludedHolidayCategories=["Institute","National","Odisha","Local"];
 
 function getLocalToday(){
- const now=new Date();
- return `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,"0")}-${String(now.getDate()).padStart(2,"0")}`;
+ const d=new Date();
+ return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
 }
 
-function formatHolidayDate(dateString){
- const parts=dateString.split("-");
- const date=new Date(Number(parts[0]),Number(parts[1])-1,Number(parts[2]));
+function formatHolidayDate(s){
+ const p=s.split("-");
+ const d=new Date(+p[0],+p[1]-1,+p[2]);
  return {
-  day:date.toLocaleDateString("en-IN",{day:"2-digit"}),
-  month:date.toLocaleDateString("en-IN",{month:"short"}),
-  full:date.toLocaleDateString("en-IN",{weekday:"long",day:"2-digit",month:"long",year:"numeric"})
+  day:d.toLocaleDateString("en-IN",{day:"2-digit"}),
+  month:d.toLocaleDateString("en-IN",{month:"short"}),
+  full:d.toLocaleDateString("en-IN",{weekday:"long",day:"2-digit",month:"long",year:"numeric"})
  };
 }
 
@@ -695,8 +425,7 @@ function renderUpcomingHolidays(snapshot){
 
  const upcoming=snapshot.docs.map(d=>({id:d.id,...d.data()}))
   .filter(h=>/^\d{4}-\d{2}-\d{2}$/.test(h.date||"")&&h.date>=today)
-  .sort((a,b)=>a.date.localeCompare(b.date))
-  .slice(0,3);
+  .sort((a,b)=>a.date.localeCompare(b.date)).slice(0,3);
 
  container.replaceChildren();
 
@@ -708,62 +437,48 @@ function renderUpcomingHolidays(snapshot){
   return;
  }
 
- upcoming.forEach(holiday=>{
-  const date=formatHolidayDate(holiday.date);
+ upcoming.forEach(h=>{
+  const date=formatHolidayDate(h.date);
   const card=document.createElement("div");
   card.className="holiday-card";
-
   const dateBox=document.createElement("div");
   dateBox.className="holiday-date-box";
-
   const day=document.createElement("strong");
   day.textContent=date.day;
-
   const month=document.createElement("span");
   month.textContent=date.month;
-
   dateBox.append(day,month);
 
   const info=document.createElement("div");
   info.className="holiday-info";
-
   const title=document.createElement("strong");
-  title.textContent=holiday.name||"Holiday";
-
+  title.textContent=h.name||"Holiday";
   const fullDate=document.createElement("p");
   fullDate.textContent=date.full;
-
   info.append(title,fullDate);
 
-  if(holiday.category){
+  if(h.category){
    const category=document.createElement("span");
    category.className="holiday-category";
-   category.textContent=holiday.category;
+   category.textContent=h.category;
    info.appendChild(category);
   }
-
   card.append(dateBox,info);
   container.appendChild(card);
  });
 }
 
 onSnapshot(holidaysRef,snapshot=>{
- const holidayDocuments=snapshot.docs.map(d=>({id:d.id,...d.data()}));
-
+ const docs=snapshot.docs.map(d=>d.data());
  attendanceHolidayDates=new Set(
-  holidayDocuments
-   .filter(h=>excludedHolidayCategories.includes(h.category))
+  docs.filter(h=>excludedHolidayCategories.includes(h.category))
    .map(h=>h.date).filter(Boolean)
  );
-
  renderUpcomingHolidays(snapshot);
-
- if(currentStudentActive){
-  updateAttendanceTracker(currentAdmissionDate,currentCompletedClasses);
- }
+ if(currentStudentActive)updateAttendanceTracker(currentAdmissionDate,currentCompletedClasses);
 },error=>{
- console.error("Upcoming holiday loading error:",error);
- $("upcomingHolidayList").textContent="Unable to load holidays. Please try again later.";
+ console.error("Holiday error:",error);
+ $("upcomingHolidayList").textContent="Unable to load holidays.";
 });
 
 function showMessage(message,color="var(--muted)"){
@@ -785,11 +500,8 @@ function formatDate(input){
   return input.toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"});
  }
  if(typeof input==="string"){
-  const match=input.match(/^(\d{4})-(\d{2})-(\d{2})$/);
-  if(match){
-   return new Date(+match[1],+match[2]-1,+match[3])
-    .toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"});
-  }
+  const m=input.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if(m)return new Date(+m[1],+m[2]-1,+m[3]).toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"});
   return input;
  }
  if(input?.toDate)return formatDate(input.toDate());
@@ -799,16 +511,15 @@ function formatDate(input){
 function parseLog(log){
  const text=String(log||"");
  const parts=text.split("|").map(x=>x.trim());
- const routeMatch=text.match(/Route:\s*([^|]+)/i);
- const distanceMatch=text.match(/Distance:\s*([^|]+)/i);
- const remarkMatch=text.match(/Remark:\s*(.*)$/i);
-
+ const route=text.match(/Route:\s*([^|]+)/i);
+ const distance=text.match(/Distance:\s*([^|]+)/i);
+ const remark=text.match(/Remark:\s*(.*)$/i);
  return {
   date:parts[0]||"Date not recorded",
   time:(parts[1]||"").replace(/^—\s*/,""),
-  route:routeMatch?routeMatch[1].trim():"Not recorded",
-  distance:distanceMatch?distanceMatch[1].trim():"Not recorded",
-  remark:remarkMatch?remarkMatch[1].trim():""
+  route:route?route[1].trim():"Not recorded",
+  distance:distance?distance[1].trim():"Not recorded",
+  remark:remark?remark[1].trim():""
  };
 }
 
@@ -816,83 +527,65 @@ function parseAttendanceDate(log,referenceYear){
  const text=String(parseLog(log).date||"").trim();
  if(!text||text==="Date not recorded")return null;
 
- let match=text.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
- if(match){
-  const year=+match[1],month=+match[2]-1,day=+match[3];
-  const date=new Date(year,month,day);
-  return date.getFullYear()===year&&date.getMonth()===month&&date.getDate()===day?date:null;
+ let m=text.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+ if(m){
+  const y=+m[1],mo=+m[2]-1,d=+m[3],date=new Date(y,mo,d);
+  return date.getFullYear()===y&&date.getMonth()===mo&&date.getDate()===d?date:null;
  }
 
- match=text.match(/^(\d{1,2})[/-](\d{1,2})[/-](\d{4})$/);
- if(match){
-  const day=+match[1],month=+match[2]-1,year=+match[3];
-  const date=new Date(year,month,day);
-  return date.getFullYear()===year&&date.getMonth()===month&&date.getDate()===day?date:null;
+ m=text.match(/^(\d{1,2})[/-](\d{1,2})[/-](\d{4})$/);
+ if(m){
+  const d=+m[1],mo=+m[2]-1,y=+m[3],date=new Date(y,mo,d);
+  return date.getFullYear()===y&&date.getMonth()===mo&&date.getDate()===d?date:null;
  }
 
- match=text.match(/^(\d{1,2})\s+([A-Za-z]+)(?:\s+(\d{4}))?/);
- if(match){
-  const day=+match[1];
-  const monthNames=["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"];
-  const month=monthNames.findIndex(m=>m===match[2].toLowerCase().slice(0,3));
-  const year=Number(match[3]||referenceYear);
-  if(month>=0&&year){
-   const date=new Date(year,month,day);
-   return date.getFullYear()===year&&date.getMonth()===month&&date.getDate()===day?date:null;
+ m=text.match(/^(\d{1,2})\s+([A-Za-z]+)(?:\s+(\d{4}))?/);
+ if(m){
+  const months=["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"];
+  const mo=months.findIndex(x=>x===m[2].toLowerCase().slice(0,3));
+  const y=Number(m[3]||referenceYear);
+  if(mo>=0&&y){
+   const date=new Date(y,mo,+m[1]);
+   return date.getFullYear()===y&&date.getMonth()===mo&&date.getDate()===+m[1]?date:null;
   }
   return null;
  }
 
  const fallback=new Date(text);
- if(!Number.isNaN(fallback.getTime())){
-  return new Date(fallback.getFullYear(),fallback.getMonth(),fallback.getDate());
- }
- return null;
+ return Number.isNaN(fallback.getTime())?null:new Date(fallback.getFullYear(),fallback.getMonth(),fallback.getDate());
 }
 
 function getClassOneDate(logs){
  if(!Array.isArray(logs)||!logs.length)return null;
-
- let referenceYear=null;
+ let year=null;
  for(const log of logs){
-  const raw=parseLog(log).date;
-  const match=String(raw).match(/(?:^|\D)(20\d{2})(?:\D|$)/);
-  if(match){referenceYear=Number(match[1]);break;}
+  const m=String(parseLog(log).date).match(/(?:^|\D)(20\d{2})(?:\D|$)/);
+  if(m){year=+m[1];break;}
  }
- if(!referenceYear)referenceYear=new Date().getFullYear();
-
- const dates=logs.map(log=>parseAttendanceDate(log,referenceYear))
-  .filter(date=>date instanceof Date&&!Number.isNaN(date.getTime()));
-
- return dates.length?dates.reduce((earliest,current)=>current<earliest?current:earliest):null;
+ if(!year)year=new Date().getFullYear();
+ const dates=logs.map(x=>parseAttendanceDate(x,year)).filter(Boolean);
+ return dates.length?dates.reduce((a,b)=>b<a?b:a):null;
 }
 
-function calculateEndingDate(startDate){
- if(!startDate)return null;
- const endingDate=new Date(startDate.getFullYear(),startDate.getMonth(),startDate.getDate());
- endingDate.setDate(endingDate.getDate()+30);
- return endingDate;
+function calculateEndingDate(start){
+ if(!start)return null;
+ const end=new Date(start.getFullYear(),start.getMonth(),start.getDate());
+ end.setDate(end.getDate()+30);
+ return end;
 }
 
 function toDateKey(date){
  return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,"0")}-${String(date.getDate()).padStart(2,"0")}`;
 }
 
-function calculateExpectedWorkingDays(startDate,endDate){
- if(!startDate||!endDate)return 0;
-
- const start=new Date(startDate.getFullYear(),startDate.getMonth(),startDate.getDate());
- const end=new Date(endDate.getFullYear(),endDate.getMonth(),endDate.getDate());
- if(start>end)return 0;
-
+function calculateExpectedWorkingDays(start,end){
+ if(!start||!end)return 0;
+ const current=new Date(start.getFullYear(),start.getMonth(),start.getDate());
+ const last=new Date(end.getFullYear(),end.getMonth(),end.getDate());
  let count=0;
- const current=new Date(start);
-
- while(current<=end){
+ while(current<=last){
   const day=current.getDay();
-  const isWeekend=day===0||day===6;
-  const isDeclaredHoliday=attendanceHolidayDates.has(toDateKey(current));
-  if(!isWeekend&&!isDeclaredHoliday)count++;
+  if(day!==0&&day!==6&&!attendanceHolidayDates.has(toDateKey(current)))count++;
   current.setDate(current.getDate()+1);
  }
  return count;
@@ -902,24 +595,23 @@ function updateAttendanceTracker(admissionDate,completed){
  const expectedElement=$("expectedClasses");
  const actualElement=$("actualExpectedClasses");
  const gapElement=$("attendanceGap");
- const statusElement=$("attendanceStatus");
- const messageElement=$("attendanceMessage");
- const fillElement=$("attendanceTrackFill");
+ const status=$("attendanceStatus");
+ const message=$("attendanceMessage");
+ const fill=$("attendanceTrackFill");
 
  if(!admissionDate){
   expectedElement.textContent="--";
   actualElement.textContent=completed||0;
   gapElement.textContent="--";
-  statusElement.textContent="Date Missing";
-  statusElement.className="attendance-status warning";
-  messageElement.textContent="Admission date could not be calculated from attendance records.";
-  fillElement.style.width="0%";
+  status.textContent="Date Missing";
+  status.className="attendance-status warning";
+  message.textContent="Admission date could not be calculated from attendance records.";
+  fill.style.width="0%";
   return;
  }
 
  const today=new Date();
- const todayDate=new Date(today.getFullYear(),today.getMonth(),today.getDate());
- const expected=calculateExpectedWorkingDays(admissionDate,todayDate);
+ const expected=calculateExpectedWorkingDays(admissionDate,new Date(today.getFullYear(),today.getMonth(),today.getDate()));
  const actual=Number(completed)||0;
  const gap=Math.max(expected-actual,0);
  const percentage=expected>0?Math.min(Math.round(actual/expected*100),100):100;
@@ -927,46 +619,42 @@ function updateAttendanceTracker(admissionDate,completed){
  expectedElement.textContent=expected;
  actualElement.textContent=actual;
  gapElement.textContent=gap;
- fillElement.style.width=percentage+"%";
+ fill.style.width=percentage+"%";
 
  if(gap===0){
-  statusElement.textContent="On Track";
-  statusElement.className="attendance-status good";
-  fillElement.style.background="var(--green)";
-  messageElement.textContent="Excellent! Your attendance is on schedule. Keep practising regularly.";
+  status.textContent="On Track";
+  status.className="attendance-status good";
+  fill.style.background="var(--green)";
+  message.textContent="Excellent! Your attendance is on schedule. Keep practising regularly.";
  }else if(gap<5){
-  statusElement.textContent="Behind Schedule";
-  statusElement.className="attendance-status warning";
-  fillElement.style.background="var(--gold)";
-  messageElement.textContent="You should have completed "+expected+" classes by today, but you have completed "+actual+". You are "+gap+" class"+(gap===1?"":"es")+" behind schedule.";
+  status.textContent="Behind Schedule";
+  status.className="attendance-status warning";
+  fill.style.background="var(--gold)";
+  message.textContent=`You should have completed ${expected} classes by today, but you have completed ${actual}. You are ${gap} classes behind schedule.`;
  }else{
-  statusElement.textContent="Attendance Critical";
-  statusElement.className="attendance-status critical";
-  fillElement.style.background="var(--red)";
-  messageElement.textContent="Your attendance is "+gap+" classes behind schedule. Please contact your instructor to plan your remaining practice sessions.";
+  status.textContent="Attendance Critical";
+  status.className="attendance-status critical";
+  fill.style.background="var(--red)";
+  message.textContent=`Your attendance is ${gap} classes behind schedule. Please contact your instructor.`;
  }
 }
 
 function getStudentAvatar(student){
- const seed=student.mobile||student.name||"A1Student";
- return "https://api.dicebear.com/9.x/avataaars/svg?seed="+encodeURIComponent(seed);
+ return "https://api.dicebear.com/9.x/avataaars/svg?seed="+encodeURIComponent(student.mobile||student.name||"A1Student");
 }
 
 function getCachedPhoto(mobile){
  try{return localStorage.getItem(PHOTO_CACHE_PREFIX+mobile)||"";}
- catch(error){console.warn("Photo cache read error:",error);return "";}
+ catch(e){return "";}
 }
-
 function cachePhoto(mobile,photo){
  try{if(photo)localStorage.setItem(PHOTO_CACHE_PREFIX+mobile,photo);}
- catch(error){console.warn("Photo cache storage unavailable:",error);}
+ catch(e){console.warn(e);}
 }
-
 function removeCachedPhoto(mobile){
  try{localStorage.removeItem(PHOTO_CACHE_PREFIX+mobile);}
- catch(error){console.warn("Photo cache remove error:",error);}
+ catch(e){console.warn(e);}
 }
-
 function applyProfilePhoto(mobile,photo){
  if(!photo||currentMobile!==mobile)return;
  $("studentProfileAvatar").src=photo;
@@ -979,55 +667,40 @@ async function refreshProfilePhoto(mobile){
  try{
   const snapshot=await get(databaseRef(realtimeDB,"profilePhotos/"+mobile));
   if(currentMobile!==mobile)return;
-  const latestPhoto=snapshot.exists()?snapshot.val()?.image||"":"";
-  if(latestPhoto){cachePhoto(mobile,latestPhoto);applyProfilePhoto(mobile,latestPhoto);}
+  const photo=snapshot.exists()?snapshot.val()?.image||"":"";
+  if(photo){cachePhoto(mobile,photo);applyProfilePhoto(mobile,photo);}
   else removeCachedPhoto(mobile);
- }catch(error){
-  console.error("Background photo refresh error:",error);
- }finally{
-  photoRequests.delete(mobile);
- }
+ }catch(e){console.error("Photo refresh error:",e);}
+ finally{photoRequests.delete(mobile);}
 }
 
 async function compressImage(file,maxSize=600,maxBytes=250*1024){
  return new Promise((resolve,reject)=>{
   const image=new Image();
-  const objectURL=URL.createObjectURL(file);
-
+  const url=URL.createObjectURL(file);
   image.onload=()=>{
-   URL.revokeObjectURL(objectURL);
+   URL.revokeObjectURL(url);
    const scale=Math.min(1,maxSize/Math.max(image.width,image.height));
    const canvas=document.createElement("canvas");
    canvas.width=Math.max(1,Math.round(image.width*scale));
    canvas.height=Math.max(1,Math.round(image.height*scale));
    const ctx=canvas.getContext("2d");
-
-   if(!ctx){reject(new Error("Canvas is not supported."));return;}
-
-   ctx.fillStyle="#FFFFFF";
+   if(!ctx){reject(new Error("Canvas unsupported"));return;}
+   ctx.fillStyle="#fff";
    ctx.fillRect(0,0,canvas.width,canvas.height);
    ctx.drawImage(image,0,0,canvas.width,canvas.height);
-
    let quality=.82;
-   const makeBlob=()=>{
+   const make=()=>{
     canvas.toBlob(blob=>{
-     if(!blob){reject(new Error("Image compression failed."));return;}
-     if(blob.size>maxBytes&&quality>.35){
-      quality=Math.max(.35,quality-.10);
-      makeBlob();
-      return;
-     }
-     resolve(blob);
+     if(!blob){reject(new Error("Image compression failed"));return;}
+     if(blob.size>maxBytes&&quality>.35){quality=Math.max(.35,quality-.1);make();}
+     else resolve(blob);
     },"image/jpeg",quality);
    };
-   makeBlob();
+   make();
   };
-
-  image.onerror=()=>{
-   URL.revokeObjectURL(objectURL);
-   reject(new Error("Unable to read this image."));
-  };
-  image.src=objectURL;
+  image.onerror=()=>{URL.revokeObjectURL(url);reject(new Error("Unable to read image"));};
+  image.src=url;
  });
 }
 
@@ -1035,54 +708,35 @@ function blobToBase64(blob){
  return new Promise((resolve,reject)=>{
   const reader=new FileReader();
   reader.onload=()=>resolve(reader.result);
-  reader.onerror=()=>reject(new Error("Image conversion failed."));
+  reader.onerror=()=>reject(new Error("Image conversion failed"));
   reader.readAsDataURL(blob);
  });
 }
 
-async function saveProfilePhoto(mobile,imageBase64,thumbnailBase64){
+async function saveProfilePhoto(mobile,image,thumbnail){
  const originalRef=databaseRef(realtimeDB,"profilePhotos/"+mobile);
- const thumbnailRef=databaseRef(realtimeDB,"profilePhotoThumbnails/"+mobile);
- const existingSnapshot=await get(originalRef);
- const existingData=existingSnapshot.exists()?existingSnapshot.val():{};
- const showOnHomepage=existingData?.showOnHomepage===true;
-
- await update(originalRef,{image:imageBase64,updatedAt:Date.now()});
- await update(thumbnailRef,{thumbnail:thumbnailBase64,showOnHomepage,updatedAt:Date.now()});
+ const thumbRef=databaseRef(realtimeDB,"profilePhotoThumbnails/"+mobile);
+ const existing=await get(originalRef);
+ const showOnHomepage=existing.exists()&&existing.val()?.showOnHomepage===true;
+ await update(originalRef,{image,updatedAt:Date.now()});
+ await update(thumbRef,{thumbnail,showOnHomepage,updatedAt:Date.now()});
 }
 
 $("changePhotoBtn").addEventListener("click",()=>{
- if(!currentMobile||!currentStudentActive){
-  alert("Please connect your active student account first.");
-  return;
- }
+ if(!currentMobile||!currentStudentActive){alert("Please connect your active student account first.");return;}
  $("profilePhotoInput").click();
 });
 
 $("profilePhotoInput").addEventListener("change",async function(){
  const file=this.files?.[0];
  if(!file)return;
+ if(!["image/jpeg","image/png","image/webp"].includes(file.type)){alert("Please select a JPG, PNG or WEBP image.");this.value="";return;}
+ if(file.size>10*1024*1024){alert("Please select an image smaller than 10 MB.");this.value="";return;}
+ if(!currentMobile||!currentStudentActive){alert("Your student account is not active.");this.value="";return;}
 
- if(!["image/jpeg","image/png","image/webp"].includes(file.type)){
-  alert("Please select a JPG, PNG or WEBP image.");
-  this.value="";
-  return;
- }
- if(file.size>10*1024*1024){
-  alert("Please select an image smaller than 10 MB.");
-  this.value="";
-  return;
- }
- if(!currentMobile||!currentStudentActive){
-  alert("Your student account is not active.");
-  this.value="";
-  return;
- }
-
+ const mobile=currentMobile;
  const btn=$("changePhotoBtn");
  const status=$("uploadStatus");
- const uploadMobile=currentMobile;
-
  btn.disabled=true;
  btn.textContent="Compressing...";
  status.className="upload-status";
@@ -1090,39 +744,31 @@ $("profilePhotoInput").addEventListener("change",async function(){
 
  try{
   const blob=await compressImage(file,600,250*1024);
-  const base64=await blobToBase64(blob);
-  const thumbnailBlob=await compressImage(file,240,40*1024);
-  const thumbnailBase64=await blobToBase64(thumbnailBlob);
-
-  if(currentMobile!==uploadMobile)throw new Error("Student account changed. Please try again.");
-
+  const image=await blobToBase64(blob);
+  const thumb=await compressImage(file,240,40*1024);
+  const thumbnail=await blobToBase64(thumb);
+  if(currentMobile!==mobile)throw new Error("Student account changed.");
   status.textContent="Uploading photo...";
-  await saveProfilePhoto(uploadMobile,base64,thumbnailBase64);
-  cachePhoto(uploadMobile,base64);
-
-  if(currentMobile===uploadMobile)applyProfilePhoto(uploadMobile,base64);
-
+  await saveProfilePhoto(mobile,image,thumbnail);
+  cachePhoto(mobile,image);
+  applyProfilePhoto(mobile,image);
   status.className="upload-status success";
-  status.textContent="Photo updated successfully ("+(blob.size/1024).toFixed(0)+" KB).";
- }catch(error){
-  console.error("Photo upload error:",error);
+  status.textContent="Photo updated successfully.";
+ }catch(e){
   status.className="upload-status error";
-  status.textContent="Upload failed: "+error.message;
+  status.textContent="Upload failed: "+e.message;
  }finally{
   btn.disabled=false;
-  btn.innerHTML='<i data-lucide="camera" width="13"></i> Change Photo';
+  btn.textContent="Change Photo";
   this.value="";
-  if(window.lucide)window.lucide.createIcons();
  }
 });
 
 function renderHistory(logs){
  const container=$("historyList");
  container.replaceChildren();
- const historyTotal=logs.length;
- $("historyCount").textContent=historyTotal+" classes";
-
- if(!historyTotal){
+ $("historyCount").textContent=logs.length+" classes";
+ if(!logs.length){
   const empty=document.createElement("div");
   empty.className="empty";
   empty.textContent="No attendance records found yet.";
@@ -1134,244 +780,127 @@ function renderHistory(logs){
   const parsed=parseLog(log);
   const item=document.createElement("div");
   item.className="history-item";
-
   const dot=document.createElement("span");
   dot.className="history-dot";
-
   const card=document.createElement("div");
   card.className="history-card";
-
   const head=document.createElement("div");
   head.className="history-card-head";
-
   const titleWrap=document.createElement("div");
   const title=document.createElement("div");
   title.className="history-class-title";
-  title.textContent="Driving Class "+(historyTotal-index);
-
+  title.textContent="Driving Class "+(logs.length-index);
   const date=document.createElement("div");
   date.className="history-date";
   date.textContent="📅 "+parsed.date;
-
   const time=document.createElement("div");
   time.className="history-time";
   time.textContent=parsed.time?"⏰ "+parsed.time:"Time not recorded";
-
   titleWrap.append(title,date,time);
-
   const badge=document.createElement("span");
   badge.className="history-badge";
   badge.textContent="✓ COMPLETED";
   head.append(titleWrap,badge);
 
-  const dataGrid=document.createElement("div");
-  dataGrid.className="history-data-grid";
-
-  const routeBox=document.createElement("div");
-  routeBox.className="history-data";
+  const grid=document.createElement("div");
+  grid.className="history-data-grid";
+  const route=document.createElement("div");
+  route.className="history-data";
   const routeLabel=document.createElement("small");
   routeLabel.textContent="📍 Training Route";
   const routeValue=document.createElement("strong");
   routeValue.textContent=parsed.route;
-  routeBox.append(routeLabel,routeValue);
-
-  const distanceBox=document.createElement("div");
-  distanceBox.className="history-data";
+  route.append(routeLabel,routeValue);
+  const distance=document.createElement("div");
+  distance.className="history-data";
   const distanceLabel=document.createElement("small");
   distanceLabel.textContent="🚗 Practice Distance";
   const distanceValue=document.createElement("strong");
   distanceValue.textContent=parsed.distance;
-  distanceBox.append(distanceLabel,distanceValue);
-
-  dataGrid.append(routeBox,distanceBox);
-  card.append(head,dataGrid);
+  distance.append(distanceLabel,distanceValue);
+  grid.append(route,distance);
+  card.append(head,grid);
 
   if(parsed.remark){
-   const remarkBox=document.createElement("div");
-   remarkBox.className="history-remark";
-   const remarkTitle=document.createElement("small");
-   remarkTitle.textContent="✦ INSTRUCTOR REMARK";
-   const remarkText=document.createElement("p");
-   remarkText.textContent=parsed.remark;
-   remarkBox.append(remarkTitle,remarkText);
-   card.appendChild(remarkBox);
+   const box=document.createElement("div");
+   box.className="history-remark";
+   const label=document.createElement("small");
+   label.textContent="✦ INSTRUCTOR REMARK";
+   const text=document.createElement("p");
+   text.textContent=parsed.remark;
+   box.append(label,text);
+   card.appendChild(box);
   }else{
    const noRemark=document.createElement("div");
    noRemark.className="history-no-remark";
    noRemark.textContent="No instructor remark for this class.";
    card.appendChild(noRemark);
   }
-
   item.append(dot,card);
   container.appendChild(item);
  });
 }
 
-function animateCounter(elementId,target,suffix="",duration=850){
- const element=$(elementId);
- if(!element)return;
- const finalValue=Number(target)||0;
-
- if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){
-  element.textContent=finalValue.toLocaleString("en-IN")+suffix;
-  return;
- }
-
- const startTime=performance.now();
- element.classList.remove("counter-animate");
- void element.offsetWidth;
- element.classList.add("counter-animate");
-
- function updateCounter(currentTime){
-  const progress=Math.min((currentTime-startTime)/duration,1);
-  const eased=1-Math.pow(1-progress,3);
-  const currentValue=Math.round(finalValue*eased);
-  element.textContent=currentValue.toLocaleString("en-IN")+suffix;
-
-  if(progress<1)requestAnimationFrame(updateCounter);
-  else{
-   element.textContent=finalValue.toLocaleString("en-IN")+suffix;
-   element.classList.remove("counter-animate");
-  }
- }
- requestAnimationFrame(updateCounter);
+/* SLIDER VISIBILITY */
+function updateAssistanceVisibility(completed){
+ const card=$("assistanceCard");
+ card.style.display=currentStudentActive&&completed>=20?"block":"none";
 }
 
-/* LL/DL INQUIRY CHAT */
-function updateInquiryVisibility(completed){
- $("llDlInquiry").style.display=
-  currentStudentActive&&completed>=20?"block":"none";
-}
+/* SUBMIT REQUEST TO FIRESTORE */
+const slider=$("assistanceSlider");
+const thumb=$("carSliderThumb");
+const result=$("assistanceResult");
 
-function openInquiryChat(){
- if(!currentMobile||!currentStudentActive){
-  alert("Please connect your active student account first.");
-  return;
- }
- if(currentCompletedClasses<20){
-  alert("Complete 20 classes to unlock this inquiry.");
-  return;
- }
- $("inquiryChatModal").style.display="flex";
- listenToInquiryMessages();
-}
+slider.addEventListener("input",()=>{
+ const val=Number(slider.value);
+ const track=$("carSlider");
+ const maxLeft=track.clientWidth-58;
+ thumb.style.left=(5+(maxLeft-5)*(val/100))+"px";
+ if(val>=100)submitAssistanceRequest();
+});
 
-function closeInquiryChat(){
- $("inquiryChatModal").style.display="none";
- if(unsubscribeInquiryChat){
-  unsubscribeInquiryChat();
-  unsubscribeInquiryChat=null;
- }
-}
-
-function listenToInquiryMessages(){
- if(unsubscribeInquiryChat){
-  unsubscribeInquiryChat();
-  unsubscribeInquiryChat=null;
- }
-
- const chatRef=doc(db,"llDlInquiries",currentMobile);
- const messagesRef=collection(chatRef,"messages");
- const messagesQuery=query(messagesRef,orderBy("createdAt","asc"));
-
- unsubscribeInquiryChat=onSnapshot(messagesQuery,snapshot=>{
-  const container=$("inquiryMessages");
-  container.replaceChildren();
-
-  if(snapshot.empty){
-   const welcome=document.createElement("div");
-   welcome.className="chat-message admin";
-   welcome.textContent="Welcome to ABHINAASH A1! Ask us about LL, DL, prices or documents.";
-   container.appendChild(welcome);
-  }
-
-  snapshot.forEach(messageDoc=>{
-   const data=messageDoc.data();
-   const message=document.createElement("div");
-   message.className="chat-message "+(data.sender==="student"?"student":"admin");
-
-   const text=document.createElement("div");
-   text.textContent=data.text||"";
-
-   const time=document.createElement("small");
-   const date=data.createdAt?.toDate?data.createdAt.toDate():null;
-   time.textContent=date?date.toLocaleString("en-IN"):"Just now";
-
-   message.append(text,time);
-   container.appendChild(message);
-  });
-
-  container.scrollTop=container.scrollHeight;
-  $("inquiryChatStatus").textContent="Connected · Your inquiry history is available here.";
- },error=>{
-  console.error("Inquiry listener error:",error);
-  $("inquiryChatStatus").textContent="Unable to load messages. Check your connection or permissions.";
- });
-}
-
-async function sendInquiryMessage(message){
- const text=String(message||"").trim();
- if(!text)return;
+async function submitAssistanceRequest(){
+ if(assistanceSubmitting)return;
 
  if(!currentMobile||!currentStudentActive||currentCompletedClasses<20){
-  alert("Your account is not eligible for this inquiry.");
+  slider.value=0;
+  thumb.style.left="5px";
   return;
  }
+
+ assistanceSubmitting=true;
+ slider.disabled=true;
+ result.style.display="block";
+ result.className="assistance-result";
+ result.textContent="Submitting your request...";
 
  try{
-  const chatRef=doc(db,"llDlInquiries",currentMobile);
+  const requestRef=doc(db,"dlLlAssistanceRequests",currentMobile);
 
-  await setDoc(chatRef,{
+  await setDoc(requestRef,{
    studentName:currentStudentName,
-   studentMobile:currentMobile,
-   updatedAt:serverTimestamp()
-  },{merge:true});
-
-  await addDoc(collection(chatRef,"messages"),{
-   text,
-   sender:"student",
-   studentName:currentStudentName,
-   createdAt:serverTimestamp()
+   mobile:currentMobile,
+   completedClasses:currentCompletedClasses,
+   requestType:$("assistanceType").value,
+   status:"New",
+   requestedAt:serverTimestamp()
   });
 
-  $("inquiryChatInput").value="";
+  result.textContent="✓ Your request has been submitted successfully! Our team will contact you.";
+  slider.style.display="none";
+
  }catch(error){
-  console.error("Send inquiry error:",error);
-  $("inquiryChatStatus").textContent="Message could not be sent. Please try again.";
+  console.error("Assistance request error:",error);
+  result.textContent="Unable to submit your request. Please try again.";
+  result.className="assistance-result error";
+  slider.value=0;
+  thumb.style.left="5px";
+  slider.disabled=false;
+ }finally{
+  assistanceSubmitting=false;
  }
 }
-
-$("openInquiryChat").addEventListener("click",openInquiryChat);
-$("closeInquiryChat").addEventListener("click",closeInquiryChat);
-
-$("inquiryChatModal").addEventListener("click",event=>{
- if(event.target.id==="inquiryChatModal")closeInquiryChat();
-});
-
-$("sendInquiryMessage").addEventListener("click",()=>{
- sendInquiryMessage($("inquiryChatInput").value);
-});
-
-$("inquiryChatInput").addEventListener("keydown",event=>{
- if(event.key==="Enter")sendInquiryMessage($("inquiryChatInput").value);
-});
-
-document.querySelectorAll("[data-question]").forEach(button=>{
- button.addEventListener("click",()=>{
-  sendInquiryMessage(button.dataset.question);
- });
-});
-
-$("submitInquiryDecision").addEventListener("click",async()=>{
- const decision=$("inquiryDecision").value;
- if(!decision){
-  alert("Please select your final decision.");
-  return;
- }
-
- await sendInquiryMessage("MY FINAL DECISION: "+decision);
- $("inquiryChatStatus").textContent="Your decision has been submitted.";
-});
 
 /* RENDER DASHBOARD */
 function renderDashboard(student,mobile){
@@ -1390,46 +919,38 @@ function renderDashboard(student,mobile){
 
  currentAdmissionDate=firstClassDate;
  currentCompletedClasses=completed;
- updateAttendanceTracker(currentAdmissionDate,currentCompletedClasses);
- updateInquiryVisibility(completed);
 
- const admissionDate=firstClassDate?formatDate(firstClassDate):"Not available";
- const expectedEndingDate=firstClassDate?formatDate(calculateEndingDate(firstClassDate)):"Not available";
+ updateAttendanceTracker(firstClassDate,completed);
+ updateAssistanceVisibility(completed);
 
  $("profileStudentName").textContent=currentStudentName;
-
  const defaultAvatar=getStudentAvatar({...student,mobile});
- const profileImage=$("studentProfileAvatar");
- const headerImage=$("userAvatar");
+ $("studentProfileAvatar").src=defaultAvatar;
+ $("userAvatar").src=defaultAvatar;
 
- profileImage.onerror=()=>{
-  profileImage.src="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student";
+ $("studentProfileAvatar").onerror=()=>{
+  $("studentProfileAvatar").src="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student";
  };
- headerImage.onerror=()=>{
-  headerImage.src="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student";
+ $("userAvatar").onerror=()=>{
+  $("userAvatar").src="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student";
  };
 
- profileImage.src=defaultAvatar;
- headerImage.src=defaultAvatar;
-
- const cachedPhoto=getCachedPhoto(mobile);
- if(cachedPhoto)applyProfilePhoto(mobile,cachedPhoto);
+ const cached=getCachedPhoto(mobile);
+ if(cached)applyProfilePhoto(mobile,cached);
  refreshProfilePhoto(mobile);
 
  $("studentId").textContent="A1-"+mobile.slice(-4);
  $("packageName").textContent=classType==="Personal"?"Personal Training":"Group Training";
  $("classType").textContent=classType;
- $("admissionDate").textContent=admissionDate;
- $("expectedEndDate").textContent=expectedEndingDate;
+ $("admissionDate").textContent=firstClassDate?formatDate(firstClassDate):"Not available";
+ $("expectedEndDate").textContent=firstClassDate?formatDate(calculateEndingDate(firstClassDate)):"Not available";
  $("accountStatus").textContent=currentStudentActive?"Active":"Not Active";
  $("accountStatus").style.color=currentStudentActive?"var(--green)":"var(--red)";
 
+ $("completedClasses").textContent=completed;
  $("remainingClasses").textContent=left;
  $("totalClasses").textContent=total;
-
- const distancePerClass=Number(value(student,"distancePerClass",5))||5;
- animateCounter("completedClasses",completed);
- animateCounter("totalDistance",completed*distancePerClass," KM");
+ $("totalDistance").textContent=(completed*(Number(value(student,"distancePerClass",5))||5))+" KM";
 
  $("progressPercent").textContent=percent+"%";
  $("progressBar").style.width=percent+"%";
@@ -1441,7 +962,7 @@ function renderDashboard(student,mobile){
  $("logoutButton").style.display="inline-flex";
 }
 
-/* RESET DASHBOARD */
+/* RESET */
 function resetDashboard(){
  currentMobile="";
  currentStudentName="";
@@ -1449,8 +970,12 @@ function resetDashboard(){
  currentAdmissionDate=null;
  currentCompletedClasses=0;
 
- updateInquiryVisibility(0);
- closeInquiryChat();
+ updateAssistanceVisibility(0);
+ $("assistanceResult").style.display="none";
+ $("assistanceSlider").style.display="block";
+ $("assistanceSlider").disabled=false;
+ $("assistanceSlider").value=0;
+ $("carSliderThumb").style.left="5px";
 
  $("loginPanel").style.display="block";
  $("profileStudentName").textContent="Student";
@@ -1459,22 +984,14 @@ function resetDashboard(){
  $("studentProfileAvatar").src=fallback;
  $("userAvatar").src=fallback;
 
- $("studentId").textContent="--";
+ ["studentId","classType","admissionDate","expectedEndDate","accountStatus"].forEach(id=>$(id).textContent="--");
  $("packageName").textContent="Driving Training";
- $("classType").textContent="--";
- $("admissionDate").textContent="--";
- $("expectedEndDate").textContent="--";
- $("accountStatus").textContent="--";
-
- ["completedClasses","remainingClasses","totalClasses","totalDistance"].forEach(id=>{
-  $(id).textContent="--";
- });
+ ["completedClasses","remainingClasses","totalClasses","totalDistance"].forEach(id=>$(id).textContent="--");
 
  $("progressPercent").textContent="0%";
  $("progressBar").style.width="0%";
  $("progressDone").textContent="0 completed";
  $("progressTotal").textContent="0 total";
-
  $("historyList").innerHTML='<div class="empty">Connect your account to view class history.</div>';
  $("historyCount").textContent="0 classes";
  $("uploadStatus").textContent="";
@@ -1483,24 +1000,15 @@ function resetDashboard(){
 
 /* LOGOUT */
 function logoutStudent(){
- const confirmed=confirm("Are you sure you want to logout?");
- if(!confirmed)return;
-
- if(unsubscribeStudent){
-  unsubscribeStudent();
-  unsubscribeStudent=null;
- }
-
+ if(!confirm("Are you sure you want to logout?"))return;
+ if(unsubscribeStudent){unsubscribeStudent();unsubscribeStudent=null;}
  localStorage.removeItem(STORAGE_KEY);
  resetDashboard();
-
  $("manualLoginControls").style.display="flex";
  $("studentMobile").value="";
  showMessage("You have successfully logged out. Login again to continue.","var(--green)");
-
  $("loginPanel").scrollIntoView({behavior:"smooth",block:"start"});
 }
-
 $("logoutButton").addEventListener("click",logoutStudent);
 
 function showManualLogin(message){
@@ -1516,11 +1024,7 @@ function connectStudent(mobile){
   return;
  }
 
- if(unsubscribeStudent){
-  unsubscribeStudent();
-  unsubscribeStudent=null;
- }
-
+ if(unsubscribeStudent){unsubscribeStudent();unsubscribeStudent=null;}
  currentMobile=mobile;
 
  const studentRef=doc(db,"studentData",mobile);
@@ -1536,7 +1040,6 @@ function connectStudent(mobile){
   }
 
   const student=snapshot.data();
-
   if(student.notActive===true){
    localStorage.removeItem(STORAGE_KEY);
    resetDashboard();
@@ -1547,11 +1050,11 @@ function connectStudent(mobile){
   $("loginPanel").style.display="none";
   $("manualLoginControls").style.display="none";
   renderDashboard(student,mobile);
+
  },error=>{
   console.error("Student verification error:",error);
   if(currentMobile!==mobile)return;
-  $("loginPanel").style.display="block";
-  showManualLogin("Unable to verify your account. Please check your internet connection or database permissions.");
+  showManualLogin("Unable to verify your account. Check your internet connection or database permissions.");
  });
 }
 
@@ -1559,26 +1062,22 @@ function connectStudent(mobile){
 $("studentMobile").addEventListener("input",function(){
  this.value=this.value.replace(/\D/g,"").slice(0,10);
 });
-
 $("loginButton").addEventListener("click",()=>{
  const mobile=$("studentMobile").value.trim();
-
  if(!/^[0-9]{10}$/.test(mobile)){
   showManualLogin("Please enter a valid 10-digit mobile number.");
   return;
  }
-
  localStorage.setItem(STORAGE_KEY,mobile);
  $("loginPanel").style.display="none";
  connectStudent(mobile);
 });
-
 $("studentMobile").addEventListener("keydown",e=>{
  if(e.key==="Enter")$("loginButton").click();
 });
 
 /* AUTO LOGIN */
-const urlMobile=new URLSearchParams(window.location.search).get("mobile");
+const urlMobile=new URLSearchParams(location.search).get("mobile");
 const savedMobile=localStorage.getItem(STORAGE_KEY);
 const mobileToVerify=savedMobile||urlMobile;
 
@@ -1593,19 +1092,13 @@ if(mobileToVerify&&/^[0-9]{10}$/.test(mobileToVerify)){
 /* WHATSAPP FEEDBACK */
 $("feedbackForm").addEventListener("submit",e=>{
  e.preventDefault();
-
  if(!currentMobile||!currentStudentActive){
   alert("Please connect your active student account first.");
   return;
  }
-
  const rating=$("rating").value;
  const message=$("feedbackText").value.trim();
-
- if(!rating||!message){
-  alert("Please select your rating and write your feedback.");
-  return;
- }
+ if(!rating||!message){alert("Please select your rating and write your feedback.");return;}
 
  const text=`STUDENT FEEDBACK - ABHINAASH A1 DRIVING
 
@@ -1616,18 +1109,12 @@ Rating: ${rating}/5
 Feedback:
 ${message}`;
 
- const url="https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(text);
- window.open(url,"_blank");
+ window.open("https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(text),"_blank");
 });
 
 /* ICONS */
-if(window.lucide){
- window.lucide.createIcons();
-}else{
- window.addEventListener("load",()=>{
-  if(window.lucide)window.lucide.createIcons();
- });
-}
+if(window.lucide)window.lucide.createIcons();
+else window.addEventListener("load",()=>{if(window.lucide)window.lucide.createIcons();});
 </script>
 </body>
 </html>
