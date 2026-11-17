@@ -1,1919 +1,1532 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#080D18">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Student Dashboard | ABHINAASH A1 Driving</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<script defer src="https://unpkg.com/lucide@latest"></script>
 
 <style>
-:root{
- --bg:#080D18;--card:#111A29;--card2:#172337;
- --gold:#F2BD45;--white:#F8FAFC;--muted:#A8B1C2;
- --border:rgba(255,255,255,.09);--green:#35C98A;
- --blue:#65A9FF;--red:#FF7777;
+:root {
+  --bg: #07111f;
+  --card: #101d30;
+  --card2: #14243a;
+  --gold: #e9b95b;
+  --gold-light: #f7d995;
+  --text: #f4f6fa;
+  --muted: #9ba9bc;
+  --border: rgba(255,255,255,.09);
+  --green: #35c98b;
+  --red: #ff6b6b;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--white);line-height:1.5}
-a{text-decoration:none;color:inherit}
-button,input,textarea,select{font:inherit}
-button{cursor:pointer}
-.container{width:min(1160px,93%);margin:auto}
 
-header{position:sticky;top:0;z-index:100;background:rgba(8,13,24,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
-.topbar{height:68px;display:flex;align-items:center;justify-content:space-between}
-.logo{font-size:17px;font-weight:800}
-.logo span{color:var(--gold)}
-.header-right{display:flex;align-items:center;gap:12px}
-.header-link{font-size:11px;color:var(--muted)}
-.avatar{width:39px;height:39px;border-radius:13px;overflow:hidden;display:grid;place-items:center;background:rgba(242,189,69,.14);border:1px solid rgba(242,189,69,.25)}
-.avatar img{width:100%;height:100%;object-fit:cover}
-.logout-btn{display:none;align-items:center;gap:6px;padding:9px 12px;border-radius:10px;background:rgba(255,119,119,.1);border:1px solid rgba(255,119,119,.28);color:#FF7777;font-size:10px;font-weight:800}
-
-main{padding:27px 0 100px}
-.panel,.stat-card{background:var(--card);border:1px solid var(--border);border-radius:18px}
-.panel{padding:21px;margin-bottom:20px}
-.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
-.panel-head h2{font-size:15px}
-.login-description{font-size:11px;color:var(--muted);margin-bottom:13px}
-.login-controls{display:flex;gap:10px;flex-wrap:wrap}
-.login-controls input{flex:1;min-width:190px;padding:13px;border-radius:10px;border:1px solid var(--border);background:var(--card2);color:white;outline:none}
-.btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 15px;border-radius:10px;font-size:11px;font-weight:800;border:0;background:var(--gold);color:#171717}
-.login-message{font-size:11px;margin-top:12px;color:var(--muted)}
-
-.student-profile{display:flex;align-items:center;gap:14px;padding:17px;margin-bottom:22px;border-radius:19px;background:linear-gradient(115deg,#192B43,#111A29 75%);border:1px solid rgba(242,189,69,.2)}
-.profile-avatar{width:76px;height:76px;min-width:76px;padding:3px;border-radius:50%;background:linear-gradient(135deg,#D99A25,#FFE3A4)}
-.profile-avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover}
-.profile-online{position:absolute}
-.profile-info{flex:1;min-width:0}
-.profile-info small{color:var(--gold);font-size:9px;font-weight:800;letter-spacing:1.5px}
-.profile-info h2{font-size:17px;margin:3px 0}
-.profile-info p{font-size:10px;color:var(--muted)}
-.profile-actions{margin-top:9px}
-.photo-btn{padding:8px 11px;border-radius:9px;background:rgba(242,189,69,.13);border:1px solid rgba(242,189,69,.3);color:var(--gold);font-size:10px;font-weight:800}
-.upload-status{font-size:10px;color:var(--muted);margin-top:8px}
-.upload-status.success{color:var(--green)}
-.upload-status.error{color:var(--red)}
-
-.hero-card{position:relative;overflow:hidden;background:linear-gradient(115deg,#192B43,#111A29 75%);border:1px solid rgba(242,189,69,.2);border-radius:22px;padding:25px;margin-bottom:20px}
-.plan-label{display:inline-flex;align-items:center;gap:7px;background:rgba(242,189,69,.12);color:var(--gold);padding:7px 11px;border-radius:30px;font-size:9px;font-weight:800}
-.hero-card h2{font-size:24px;margin:14px 0 5px}
-.hero-card p{font-size:11px;color:var(--muted)}
-.hero-meta{display:flex;gap:25px;flex-wrap:wrap;margin-top:19px}
-.hero-meta div{display:flex;flex-direction:column;gap:3px}
-.hero-meta small{font-size:9px;color:var(--muted)}
-.hero-meta strong{font-size:12px}
-
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
-.stat-card{padding:17px;border-radius:16px}
-.stat-icon{width:36px;height:36px;display:grid;place-items:center;border-radius:11px;background:var(--card2);color:var(--gold)}
-.stat-card strong{display:block;font-size:25px;margin-top:13px;font-variant-numeric:tabular-nums}
-.stat-card p{font-size:10px;color:var(--muted);margin-top:3px}
-
-.content-grid{display:grid;grid-template-columns:1fr;gap:16px}
-.progress-row{display:flex;justify-content:space-between;margin-bottom:10px}
-.progress-row span,.progress-info{font-size:10px;color:var(--muted)}
-.progress-row strong{font-size:12px;color:var(--gold)}
-.progress-track{height:9px;border-radius:20px;background:#263247;overflow:hidden}
-.progress-fill{width:0;height:100%;border-radius:20px;background:linear-gradient(90deg,#D99A25,var(--gold));transition:width .4s}
-.progress-info{display:flex;justify-content:space-between;margin-top:9px;font-size:9px}
-.milestones{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:22px}
-.milestone{background:var(--card2);border-radius:12px;padding:12px 7px;text-align:center}
-.milestone i{color:var(--gold);width:18px}
-.milestone strong{display:block;font-size:11px;margin-top:6px}
-.milestone span{font-size:9px;color:var(--muted)}
-
-.history-list{display:grid;padding:5px 0 5px 8px}
-.history-item{position:relative;margin-left:12px;padding:0 0 24px 25px;border-left:2px solid rgba(242,189,69,.25)}
-.history-item:last-child{border-left-color:transparent}
-.history-dot{position:absolute;left:-9px;top:2px;width:16px;height:16px;border-radius:50%;background:var(--gold);border:4px solid var(--card)}
-.history-card{background:linear-gradient(145deg,#17263B,#111A29);border:1px solid var(--border);border-radius:15px;padding:15px}
-.history-card-head{display:flex;justify-content:space-between;gap:10px}
-.history-class-title{font-size:12px;font-weight:800}
-.history-date{font-size:10px;color:var(--gold);margin-top:5px}
-.history-time{font-size:9px;color:var(--muted);margin-top:2px}
-.history-badge{background:rgba(53,201,138,.12);color:var(--green);border-radius:20px;padding:5px 9px;font-size:8px;font-weight:800}
-.history-data-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}
-.history-data{background:rgba(255,255,255,.035);border:1px solid var(--border);border-radius:10px;padding:10px}
-.history-data small{display:block;color:var(--muted);font-size:9px;margin-bottom:4px}
-.history-data strong{display:block;font-size:10px;overflow-wrap:anywhere}
-.history-remark{margin-top:11px;padding:11px;background:rgba(242,189,69,.08);border-radius:10px}
-.history-remark small{display:block;font-size:9px;color:var(--gold);font-weight:800;margin-bottom:5px}
-.history-remark p{font-size:10px;line-height:1.7}
-.history-no-remark{margin-top:10px;font-size:9px;color:var(--muted)}
-
-.empty{padding:20px;text-align:center;background:var(--card2);border-radius:12px;color:var(--muted);font-size:11px;line-height:1.8}
-.feedback-form{display:grid;gap:13px}
-.feedback-form label{display:block;font-size:10px;color:var(--muted);margin-bottom:7px}
-.feedback-form select,.feedback-form textarea{width:100%;padding:12px;background:#080D18;border:1px solid var(--border);border-radius:10px;color:white;outline:none;font-size:12px}
-.feedback-form textarea{min-height:100px;resize:vertical}
-.notice{display:flex;align-items:flex-start;gap:11px;margin-top:17px;padding:13px;border-radius:12px;background:rgba(101,169,255,.07);border:1px solid rgba(101,169,255,.17)}
-.notice i{color:var(--blue);width:17px}
-.notice strong{font-size:10px}
-.notice p{font-size:9px;color:var(--muted);margin-top:3px;line-height:1.6}
-
-.holiday-list{display:grid;gap:11px}
-.holiday-card{display:flex;align-items:center;gap:13px;padding:13px;background:linear-gradient(145deg,#17263B,#111A29);border:1px solid var(--border);border-radius:14px}
-.holiday-date-box{min-width:58px;width:58px;height:62px;display:flex;flex-direction:column;justify-content:center;align-items:center;background:rgba(242,189,69,.12);border:1px solid rgba(242,189,69,.22);border-radius:11px}
-.holiday-date-box strong{font-size:21px;color:var(--gold)}
-.holiday-date-box span{font-size:9px;color:var(--muted);font-weight:800}
-.holiday-info{flex:1;min-width:0}
-.holiday-info strong{display:block;font-size:12px}
-.holiday-info p{font-size:10px;color:var(--muted);margin-top:5px}
-.holiday-category{display:inline-block;margin-top:7px;padding:4px 8px;border-radius:20px;background:rgba(101,169,255,.1);color:var(--blue);font-size:8px;font-weight:800}
-.holiday-empty{padding:18px;text-align:center;background:var(--card2);border-radius:12px;color:var(--muted);font-size:11px}
-
-.attendance-tracker{background:linear-gradient(145deg,#17263B,#111A29);border:1px solid rgba(242,189,69,.18);border-radius:15px;padding:16px;margin-top:16px}
-.attendance-tracker-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:15px}
-.attendance-tracker-head strong{font-size:13px}
-.attendance-status{font-size:9px;font-weight:800;padding:6px 10px;border-radius:20px}
-.attendance-status.good{background:rgba(53,201,138,.13);color:var(--green)}
-.attendance-status.warning{background:rgba(242,189,69,.13);color:var(--gold)}
-.attendance-status.critical{background:rgba(255,119,119,.13);color:var(--red)}
-.attendance-numbers{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.attendance-number{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:11px;padding:11px 8px}
-.attendance-number small{display:block;color:var(--muted);font-size:9px}
-.attendance-number strong{display:block;font-size:21px;margin-top:5px}
-.attendance-track{height:9px;background:#263247;border-radius:20px;overflow:hidden;margin-top:16px}
-.attendance-track-fill{height:100%;width:0;background:var(--green);border-radius:20px;transition:width .4s}
-.attendance-message{margin-top:12px;font-size:11px;line-height:1.7;color:var(--muted)}
-
-/* PREMIUM LL / DL ASSISTANCE */
-.assistance-card{
- display:none;position:relative;overflow:hidden;
- margin-bottom:20px;padding:22px;border-radius:22px;
- background:radial-gradient(circle at 100% 0%,rgba(242,189,69,.15),transparent 42%),linear-gradient(145deg,#192B43,#0D1727);
- border:1px solid rgba(242,189,69,.28);
- box-shadow:0 15px 40px rgba(0,0,0,.22);
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
-.assist-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.assist-eyebrow{font-size:9px;font-weight:800;letter-spacing:2px;color:var(--gold)}
-.assist-top h2{font-size:19px;margin:8px 0 5px}
-.assist-top p{font-size:10px;color:var(--muted);line-height:1.7}
-.assist-car-icon{width:55px;height:55px;flex-shrink:0;display:grid;place-items:center;border-radius:17px;background:rgba(242,189,69,.12);border:1px solid rgba(242,189,69,.2);font-size:27px}
-.assist-divider{height:1px;background:rgba(255,255,255,.08);margin:19px 0}
-.assist-select-label,.assist-slider-heading{display:block;font-size:9px;font-weight:800;letter-spacing:1px;color:var(--muted)}
-.assistance-select{width:100%;padding:14px;margin-top:9px;border-radius:12px;background:#0A1220;color:white;border:1px solid rgba(255,255,255,.1);outline:none;font-size:11px}
-.assist-slider-heading{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:22px 0 10px}
-.assist-secure{color:var(--green);font-size:8px;letter-spacing:0}
-.car-slider{height:66px;position:relative;padding:6px;overflow:hidden;border-radius:40px;background:linear-gradient(90deg,#26364D,#17263B);border:1px solid rgba(242,189,69,.24);box-shadow:inset 0 2px 8px rgba(0,0,0,.25);touch-action:none;user-select:none;-webkit-user-select:none}
-.car-slider-progress{position:absolute;top:0;left:0;bottom:0;width:0;border-radius:40px;background:linear-gradient(90deg,rgba(242,189,69,.08),rgba(242,189,69,.25));pointer-events:none}
-.car-slider-track{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:9px;color:#DCE4F0;font-size:9px;font-weight:800;letter-spacing:1px;pointer-events:none;transition:opacity .15s}
-.slider-arrows{color:var(--gold);font-size:20px;letter-spacing:0;animation:arrowMove 1s infinite ease-in-out}
-@keyframes arrowMove{0%,100%{transform:translateX(0);opacity:.5}50%{transform:translateX(5px);opacity:1}}
-.car-slider-thumb{position:absolute;left:6px;top:6px;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;z-index:2;background:linear-gradient(145deg,#FFE39B,#E6A92E);box-shadow:0 4px 15px rgba(242,189,69,.35);cursor:grab;touch-action:none}
-.car-slider-thumb:active{cursor:grabbing;transform:scale(1.04)}
-.car-slider-thumb svg{width:37px;height:37px}
-.assist-result{display:none;padding:13px;margin-top:14px;border-radius:12px;font-size:11px;line-height:1.7;color:var(--green);background:rgba(53,201,138,.1);border:1px solid rgba(53,201,138,.22)}
-.assist-result.error{color:var(--red);background:rgba(255,119,119,.1);border-color:rgba(255,119,119,.25)}
-.assist-footer{display:flex;justify-content:space-between;gap:8px;margin-top:17px;font-size:8px;letter-spacing:.8px;color:#78869B;font-weight:800}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+button, input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.container {
+  width: min(100% - 28px, 900px);
+  margin: auto;
+}
+
+header {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--gold), #a87524);
+  display: grid;
+  place-items: center;
+  color: #111;
+  font-weight: 900;
+  font-size: 17px;
+}
+
+.brand h1 {
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.brand p {
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 3px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-btn {
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 9px 12px;
+  font-size: 12px;
+}
+
+main {
+  padding: 22px 0 100px;
+}
+
+.welcome {
+  margin-bottom: 18px;
+}
+
+.welcome h2 {
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.welcome p {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 18px;
+  margin-bottom: 16px;
+}
+
+.card-title {
+  font-size: 15px;
+  font-weight: 800;
+  margin-bottom: 14px;
+}
+
+.profile-section {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.profile-photo {
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  background: var(--card2);
+  border: 2px solid var(--gold);
+  object-fit: cover;
+}
+
+.profile-info h3 {
+  font-size: 17px;
+}
+
+.profile-info p {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.stat-box {
+  padding: 15px;
+  background: var(--card2);
+  border-radius: 13px;
+  border: 1px solid var(--border);
+}
+
+.stat-box small {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.stat-box strong {
+  display: block;
+  font-size: 23px;
+  margin-top: 7px;
+  color: var(--gold-light);
+}
+
+.progress-track {
+  height: 9px;
+  background: #26364b;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 12px;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #c58b32, var(--gold-light));
+  border-radius: inherit;
+  transition: width .3s ease;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+
+.info-row:last-child {
+  border-bottom: 0;
+}
+
+.info-row span:first-child {
+  color: var(--muted);
+}
+
+.info-row strong {
+  text-align: right;
+}
+
+.action-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.action-btn {
+  background: var(--card2);
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  padding: 14px;
+  color: var(--text);
+  text-align: left;
+}
+
+.action-btn strong {
+  display: block;
+  font-size: 13px;
+}
+
+.action-btn small {
+  color: var(--muted);
+  display: block;
+  margin-top: 5px;
+  font-size: 11px;
+}
+
+.history-item {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+
+.history-item:last-child {
+  border-bottom: 0;
+}
+
+.history-item small {
+  color: var(--muted);
+  display: block;
+  margin-top: 5px;
+}
+
+.empty-state {
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  padding: 18px 5px;
+}
+
+/* LL & DL ASSISTANCE - COMPACT DESIGN */
+
+.assistance-card {
+  background: linear-gradient(145deg, #14243a, #0d192b);
+  border: 1px solid rgba(233,185,91,.24);
+  border-radius: 18px;
+  padding: 17px;
+  position: relative;
+  overflow: hidden;
+}
+
+.assistance-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.assistance-eyebrow {
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  margin-bottom: 6px;
+}
+
+.assistance-heading {
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.assistance-car-icon {
+  width: 43px;
+  height: 43px;
+  color: var(--gold-light);
+  flex-shrink: 0;
+}
+
+.car-slider {
+  height: 58px;
+  background: #07111f;
+  border: 1px solid rgba(233,185,91,.28);
+  border-radius: 40px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  overflow: hidden;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.slider-progress {
+  position: absolute;
+  inset: 5px auto 5px 5px;
+  width: 0%;
+  background: linear-gradient(90deg, #9b6a20, #e9b95b);
+  border-radius: 30px;
+  opacity: .35;
+  pointer-events: none;
+}
+
+.slider-text {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  color: #c4ccda;
+  font-size: 12px;
+  font-weight: 700;
+  pointer-events: none;
+  padding: 0 55px;
+}
+
+.car-thumb {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #f7d995, #d99a36);
+  color: #142033;
+  display: grid;
+  place-items: center;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  cursor: grab;
+  box-shadow: 0 3px 12px rgba(0,0,0,.25);
+  touch-action: none;
+}
+
+.car-thumb:active {
+  cursor: grabbing;
+}
+
+.car-thumb svg {
+  width: 25px;
+  height: 25px;
+}
+
+.assistance-terms {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.terms-link {
+  color: var(--gold-light);
+  background: none;
+  border: 0;
+  text-decoration: underline;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.assistance-success {
+  display: none;
+  text-align: center;
+  padding: 15px 5px 5px;
+}
+
+.assistance-success svg {
+  width: 38px;
+  height: 38px;
+  color: var(--green);
+  margin-bottom: 8px;
+}
+
+.assistance-success h3 {
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.assistance-success p {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
 
 /* TERMS MODAL */
-.terms-overlay{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.78);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)}
-.terms-overlay.show{display:flex}
-.terms-modal{width:100%;max-width:430px;max-height:90vh;overflow-y:auto;padding:25px;border-radius:22px;background:linear-gradient(145deg,#19283D,#0D1523);border:1px solid rgba(242,189,69,.3);box-shadow:0 25px 80px rgba(0,0,0,.5);animation:modalAppear .25s ease}
-@keyframes modalAppear{from{opacity:0;transform:translateY(15px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
-.terms-modal-icon{width:48px;height:48px;display:grid;place-items:center;border-radius:15px;background:rgba(242,189,69,.12);font-size:23px;margin-bottom:17px}
-.terms-eyebrow{font-size:9px;font-weight:800;color:var(--gold);letter-spacing:1.5px}
-.terms-modal h2{font-size:22px;margin:7px 0}
-.terms-intro{font-size:11px;color:var(--muted);line-height:1.7}
-.terms-content{padding:16px;margin-top:16px;border-radius:13px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08)}
-.terms-content h3{font-size:12px;color:var(--gold);margin-bottom:9px}
-.terms-content p{font-size:10px;color:#D0D7E2;line-height:1.85;margin-bottom:10px}
-.terms-content p:last-child{margin-bottom:0}
-.terms-content .terms-highlight{padding:10px;border-radius:9px;color:var(--gold);background:rgba(242,189,69,.08)}
-.terms-checkbox{display:flex;align-items:flex-start;gap:10px;margin:18px 0;font-size:10px;color:#DCE4F0;line-height:1.7;cursor:pointer}
-.terms-checkbox input{width:17px;height:17px;margin-top:1px;accent-color:var(--gold);flex-shrink:0}
-#agreeTermsBtn{width:100%;padding:14px;border:0;border-radius:12px;background:linear-gradient(100deg,#F2BD45,#FFD978);color:#171717;font-size:11px;font-weight:900;letter-spacing:.5px;display:flex;justify-content:center;align-items:center;gap:10px}
-#agreeTermsBtn:disabled{opacity:.4;cursor:not-allowed}
-.terms-cancel{width:100%;padding:12px;margin-top:8px;background:transparent;border:0;color:var(--muted);font-size:10px}
 
-.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.quick-action{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 11px;display:flex;align-items:center;gap:10px}
-.quick-icon{width:35px;height:35px;flex-shrink:0;display:grid;place-items:center;border-radius:10px;background:var(--card2);color:var(--gold)}
-.quick-action strong{display:block;font-size:10px}
-.quick-action span{display:block;font-size:9px;color:var(--muted);margin-top:3px}
-
-footer{border-top:1px solid var(--border);padding:22px 0 100px}
-.footer-inner{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
-.footer-inner p{font-size:10px;color:var(--muted)}
-.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(12,19,32,.97);border-top:1px solid var(--border);padding:10px 5px calc(10px + env(safe-area-inset-bottom));justify-content:space-around;backdrop-filter:blur(16px)}
-.bottom-nav a{display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--muted);font-size:9px;font-weight:700;min-width:55px}
-.bottom-nav a.active{color:var(--gold)}
-.bottom-nav i{width:19px;height:19px}
-
-@media(max-width:850px){.stats{grid-template-columns:repeat(2,1fr)}.quick-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:600px){
- .topbar{height:62px}.header-link{display:none}
- main{padding-top:22px}.hero-card{padding:20px}.hero-card h2{font-size:21px}
- .hero-meta{gap:17px}.stats{gap:9px}.stat-card{padding:14px}
- .stat-card strong{font-size:22px}.panel{padding:16px}
- .milestones{gap:6px}.milestone{padding:10px 4px}
- .quick-grid{gap:8px}.quick-action{padding:11px 8px;gap:8px}
- .quick-icon{width:31px;height:31px}.bottom-nav{display:flex}
- .footer-inner{flex-direction:column;align-items:flex-start}
- .profile-avatar{width:68px;height:68px;min-width:68px}
- .history-data-grid{gap:7px}
- .assistance-card{padding:17px}
- .terms-modal{padding:20px}
+.terms-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.78);
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
 }
-@media(max-width:420px){.attendance-numbers{gap:5px}.attendance-number{padding:9px 6px}.attendance-number strong{font-size:18px}}
+
+.terms-modal.active {
+  display: flex;
+}
+
+.terms-dialog {
+  width: min(100%, 440px);
+  background: #122137;
+  border: 1px solid rgba(233,185,91,.3);
+  border-radius: 20px;
+  padding: 22px;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.terms-icon {
+  width: 42px;
+  height: 42px;
+  color: var(--gold-light);
+  margin-bottom: 12px;
+}
+
+.terms-dialog h2 {
+  font-size: 19px;
+  margin-bottom: 10px;
+}
+
+.terms-intro {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.terms-list {
+  padding-left: 18px;
+  color: #d8dfeb;
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.terms-list li {
+  margin-bottom: 9px;
+}
+
+.terms-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin-top: 18px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #e2e8f0;
+}
+
+.terms-check input {
+  margin-top: 3px;
+  accent-color: var(--gold);
+}
+
+.terms-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.terms-buttons button {
+  flex: 1;
+  border-radius: 11px;
+  padding: 12px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.terms-cancel {
+  color: var(--text);
+  background: #26364b;
+  border: 1px solid var(--border);
+}
+
+.terms-agree {
+  color: #182234;
+  background: var(--gold);
+  border: 0;
+}
+
+.terms-agree:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
+footer {
+  text-align: center;
+  padding: 22px 10px;
+  color: var(--muted);
+  font-size: 11px;
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 420px) {
+  .container {
+    width: min(100% - 22px, 900px);
+  }
+
+  .card {
+    padding: 15px;
+  }
+
+  .assistance-card {
+    padding: 15px;
+  }
+
+  .assistance-heading {
+    font-size: 16px;
+  }
+
+  .header-btn {
+    padding: 8px 9px;
+    font-size: 11px;
+  }
+}
 </style>
 </head>
+
 <body>
 
 <header>
- <div class="container topbar">
-  <a href="index.html" class="logo">ABHINAASH <span>A1</span></a>
-  <div class="header-right">
-   <a href="contact.html" class="header-link">Need Help?</a>
-   <button type="button" id="logoutButton" class="logout-btn">Logout</button>
-   <a href="student-account.html" class="avatar"><img id="userAvatar" alt="Student profile" src="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student"></a>
+  <div class="container header-inner">
+    <div class="brand">
+      <div class="brand-logo">A1</div>
+      <div>
+        <h1>ABHINAASH A1</h1>
+        <p>DRIVING CLASSES</p>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <button class="header-btn" onclick="window.open('https://wa.me/918984225311','_blank')">
+        Need Help
+      </button>
+      <button class="header-btn" id="logoutBtn">
+        Logout
+      </button>
+    </div>
   </div>
- </div>
 </header>
 
 <main class="container">
 
-<section class="panel" id="loginPanel" style="display:none">
- <div class="panel-head"><h2>Student Verification</h2></div>
- <p class="login-description" id="loginMessage" style="display:none"></p>
- <div class="login-controls" id="manualLoginControls" style="display:none">
-  <input type="tel" id="studentMobile" maxlength="10" inputmode="numeric" placeholder="Enter mobile number">
-  <button class="btn-primary" id="loginButton" type="button">Connect Account</button>
- </div>
-</section>
+  <section class="welcome">
+    <h2>Welcome, <span id="studentName">Student</span></h2>
+    <p>Your driving learning dashboard</p>
+  </section>
 
-<section class="student-profile">
- <div class="profile-avatar">
-  <img id="studentProfileAvatar" src="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student" alt="Student Avatar">
- </div>
- <div class="profile-info">
-  <small>STUDENT PROFILE</small>
-  <h2 id="profileStudentName">Student</h2>
-  <p>A ONE DRIVING STUDENT</p>
-  <div class="profile-actions">
-   <button type="button" class="photo-btn" id="changePhotoBtn">Change Photo</button>
+  <section class="card">
+    <div class="profile-section">
+      <img
+        src="https://placehold.co/100x100/14243a/e9b95b?text=A1"
+        class="profile-photo"
+        id="profilePhoto"
+        alt="Student Photo"
+      >
+      <div class="profile-info">
+        <h3 id="profileName">Student Name</h3>
+        <p id="profileMobile">Mobile: --</p>
+        <p id="studentStatus">Status: Loading...</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h3 class="card-title">Your Progress</h3>
+
+    <div class="stats-grid">
+      <div class="stat-box">
+        <small>Completed Classes</small>
+        <strong id="completedClasses">0</strong>
+      </div>
+
+      <div class="stat-box">
+        <small>Total Classes</small>
+        <strong id="totalClasses">0</strong>
+      </div>
+
+      <div class="stat-box">
+        <small>Attendance</small>
+        <strong id="attendancePercent">0%</strong>
+      </div>
+
+      <div class="stat-box">
+        <small>Remaining Classes</small>
+        <strong id="remainingClasses">0</strong>
+      </div>
+    </div>
+
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h3 class="card-title">Course Information</h3>
+
+    <div class="info-row">
+      <span>Admission Date</span>
+      <strong id="admissionDate">--</strong>
+    </div>
+
+    <div class="info-row">
+      <span>Expected End Date</span>
+      <strong id="expectedEndDate">--</strong>
+    </div>
+
+    <div class="info-row">
+      <span>Course Status</span>
+      <strong id="courseStatus">--</strong>
+    </div>
+  </section>
+
+  <!-- LL & DL ASSISTANCE SECTION -->
+  <section class="assistance-card" id="assistanceCard" style="display:none;">
+
+    <div id="assistanceMain">
+
+      <div class="assistance-top">
+        <div>
+          <div class="assistance-eyebrow">YOUR NEXT STEP</div>
+          <h3 class="assistance-heading">Ready for Your LL & DL?</h3>
+        </div>
+
+        <svg class="assistance-car-icon" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="1.6"
+          stroke-linecap="round" stroke-linejoin="round"
+          aria-hidden="true">
+          <path d="M5 17h14l1-5-2-5H6l-2 5 1 5Z"/>
+          <path d="M4 12h16M7 7l1.5-3h7L17 7"/>
+          <circle cx="7.5" cy="17.5" r="1.5"/>
+          <circle cx="16.5" cy="17.5" r="1.5"/>
+          <path d="M4 14H2m20 0h-2"/>
+        </svg>
+      </div>
+
+      <div class="car-slider" id="carSlider">
+        <div class="slider-progress" id="sliderProgress"></div>
+
+        <span class="slider-text" id="sliderText">
+          Slide to Request LL & DL Assistance
+        </span>
+
+        <div class="car-thumb" id="carThumb">
+          <svg viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round"
+            aria-hidden="true">
+            <path d="M3 14l1.5-5h15L21 14v5h-2v-2H5v2H3v-5Z"/>
+            <path d="M5 9l2-4h10l2 4"/>
+            <circle cx="7" cy="14" r="1"/>
+            <circle cx="17" cy="14" r="1"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="assistance-terms">
+        <span>By proceeding, you agree to the terms.</span>
+        <button class="terms-link" id="readTermsBtn">Read Terms</button>
+      </div>
+
+    </div>
+
+    <div class="assistance-success" id="assistanceSuccess">
+      <svg viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="1.8"
+        stroke-linecap="round" stroke-linejoin="round"
+        aria-hidden="true">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="m8 12 2.5 2.5L16 9"/>
+      </svg>
+      <h3>Request Submitted Successfully</h3>
+      <p>Your LL & DL assistance request has been received. Our team will contact you if required.</p>
+    </div>
+
+  </section>
+
+  <!-- TERMS AND CONDITIONS MODAL -->
+  <div class="terms-modal" id="termsModal">
+    <div class="terms-dialog">
+
+      <svg class="terms-icon" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="1.6"
+        stroke-linecap="round" stroke-linejoin="round"
+        aria-hidden="true">
+        <path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/>
+        <path d="m9 12 2 2 4-4"/>
+      </svg>
+
+      <h2>Terms & Conditions</h2>
+
+      <p class="terms-intro">
+        Please read the following information carefully before requesting LL & DL assistance.
+      </p>
+
+      <ol class="terms-list">
+        <li>ABHINAASH A1 Driving Classes only connects interested students with independent third-party brokers for LL/DL-related services.</li>
+
+        <li>ABHINAASH A1 Driving Classes is not a licensing authority and does not guarantee approval, issuance, or any specific service result.</li>
+
+        <li>Any payment, agreement, delay, dispute, or transaction is directly between the student and the independent third-party broker.</li>
+
+        <li>Students should independently verify the broker's identity, service details, fees, and process before making any payment.</li>
+
+        <li>Students choose to proceed at their own discretion. ABHINAASH A1 Driving Classes is not responsible for third-party broker services or transactions.</li>
+      </ol>
+
+      <label class="terms-check">
+        <input type="checkbox" id="termsCheckbox">
+        <span>I have read and agree to the Terms & Conditions.</span>
+      </label>
+
+      <div class="terms-buttons">
+        <button class="terms-cancel" id="termsCancelBtn">Cancel</button>
+        <button class="terms-agree" id="termsAgreeBtn" disabled>
+          I Agree
+        </button>
+      </div>
+
+    </div>
   </div>
-  <input type="file" id="profilePhotoInput" accept="image/jpeg,image/png,image/webp" hidden>
-  <div class="upload-status" id="uploadStatus"></div>
- </div>
-</section>
 
-<section class="hero-card">
- <div class="plan-label">YOUR TRAINING PLAN</div>
- <h2 id="packageName">Driving Training</h2>
- <p>Your registered training details.</p>
- <div class="hero-meta">
-  <div><small>Student ID</small><strong id="studentId">--</strong></div>
-  <div><small>Class Type</small><strong id="classType">--</strong></div>
-  <div><small>Admission Date</small><strong id="admissionDate">--</strong></div>
-  <div><small>Expected Ending Date</small><strong id="expectedEndDate">--</strong></div>
-  <div><small>Account Status</small><strong id="accountStatus">--</strong></div>
- </div>
-</section>
+  <section class="card">
+    <h3 class="card-title">Quick Actions</h3>
 
-<section class="stats">
- <div class="stat-card"><div class="stat-icon"><i data-lucide="calendar-check"></i></div><strong id="completedClasses">--</strong><p>Classes Completed</p></div>
- <div class="stat-card"><div class="stat-icon"><i data-lucide="calendar-clock"></i></div><strong id="remainingClasses">--</strong><p>Classes Remaining</p></div>
- <div class="stat-card"><div class="stat-icon"><i data-lucide="car"></i></div><strong id="totalClasses">--</strong><p>Total Classes</p></div>
- <div class="stat-card"><div class="stat-icon"><i data-lucide="route"></i></div><strong id="totalDistance">--</strong><p>Total Practice Distance</p></div>
-</section>
+    <div class="action-grid">
+      <button class="action-btn" onclick="location.href='traffic-academy.html'">
+        <strong>Traffic Academy</strong>
+        <small>Learn traffic rules</small>
+      </button>
 
-<!-- PREMIUM LL / DL ASSISTANCE -->
-<section class="assistance-card" id="assistanceCard">
+      <button class="action-btn" onclick="window.open('https://wa.me/918984225311','_blank')">
+        <strong>Contact Support</strong>
+        <small>Chat with our team</small>
+      </button>
+    </div>
+  </section>
 
- <div class="assist-top">
-  <div>
-   <span class="assist-eyebrow">YOUR NEXT STEP</span>
-   <h2>Ready for Your LL & DL?</h2>
-   <p>Get connected with an independent licence service broker.</p>
-  </div>
-  <div class="assist-car-icon">🚘</div>
- </div>
+  <section class="card">
+    <h3 class="card-title">Attendance History</h3>
+    <div id="attendanceHistory">
+      <div class="empty-state">Loading attendance...</div>
+    </div>
+  </section>
 
- <div class="assist-divider"></div>
+  <section class="card">
+    <h3 class="card-title">Class History</h3>
+    <div id="classHistory">
+      <div class="empty-state">Loading class history...</div>
+    </div>
+  </section>
 
- <label class="assist-select-label" for="assistanceType">SELECT YOUR REQUIREMENT</label>
+  <section class="card">
+    <h3 class="card-title">Holiday Calendar</h3>
+    <div id="holidayList">
+      <div class="empty-state">Loading holidays...</div>
+    </div>
+  </section>
 
- <select id="assistanceType" class="assistance-select">
-  <option value="Interested in LL and DL">LL & DL Both</option>
-  <option value="Interested in DL">Driving Licence (DL)</option>
-  <option value="Interested in LL">Learner's Licence (LL)</option>
-  <option value="Call me for LL and DL assistance">Call Me for Assistance</option>
- </select>
-
- <div class="assist-slider-heading">
-  <span>CONFIRM YOUR REQUEST</span>
-  <span class="assist-secure">● Request Confirmation</span>
- </div>
-
- <div class="car-slider" id="carSlider" role="group" aria-label="Slide to submit LL and DL assistance request">
-  <div class="car-slider-progress" id="carSliderProgress"></div>
-
-  <div class="car-slider-track" id="carSliderTrack">
-   <span id="carSliderText">READ TERMS & SLIDE TO SUBMIT</span>
-   <span class="slider-arrows">› › ›</span>
-  </div>
-
-  <div class="car-slider-thumb" id="carSliderThumb" aria-label="Drag car to submit">
-   <svg viewBox="0 0 64 40" fill="none">
-    <path d="M8 25L13 13H47L56 25V31H8V25Z" fill="#171717"/>
-    <path d="M19 13L23 5H40L46 13" stroke="#171717" stroke-width="3"/>
-    <circle cx="18" cy="31" r="6" fill="#171717"/>
-    <circle cx="46" cy="31" r="6" fill="#171717"/>
-    <path d="M22 8H39L43 13H18L22 8Z" fill="#F2BD45"/>
-   </svg>
-  </div>
- </div>
-
- <div class="assist-result" id="assistanceResult"></div>
-
- <div class="assist-footer">
-  <span>ABHINAASH A1 DRIVING</span>
-  <span>LL / DL CONNECT SERVICE</span>
- </div>
-</section>
-
-<!-- TERMS & CONDITIONS POPUP -->
-<div class="terms-overlay" id="termsModal" role="dialog" aria-modal="true" aria-labelledby="termsTitle">
- <div class="terms-modal">
-
-  <div class="terms-modal-icon">⚖️</div>
-
-  <span class="terms-eyebrow">PLEASE READ CAREFULLY</span>
-  <h2 id="termsTitle">Terms & Conditions</h2>
-
-  <p class="terms-intro">
-   Before proceeding with LL / DL assistance, please understand the following:
-  </p>
-
-  <div class="terms-content">
-   <h3>Important Disclaimer</h3>
-
-   <p>
-    You are proceeding at your own risk. ABHINAASH A1 Driving Classes
-    is not responsible for any payments, dealings, services, delays,
-    disputes, or outcomes involving third-party brokers.
-   </p>
-
-   <p>
-    We only connect interested students with independent brokers who
-    handle Learner's Licence (LL) and Driving Licence (DL) related services.
-   </p>
-
-   <p>
-    Any agreement, payment, or transaction is strictly between you
-    and the broker. Please verify all details directly with the broker
-    before making any payment.
-   </p>
-
-   <p class="terms-highlight">
-    ABHINAASH A1 Driving Classes does not guarantee licence approval
-    or the outcome of any third-party service.
-   </p>
-  </div>
-
-  <label class="terms-checkbox">
-   <input type="checkbox" id="termsCheckbox">
-   <span>I have read and understood the Terms & Conditions. I agree to proceed.</span>
-  </label>
-
-  <button type="button" id="agreeTermsBtn" disabled>
-   I AGREE & CONTINUE <span>→</span>
-  </button>
-
-  <button type="button" id="cancelTermsBtn" class="terms-cancel">Cancel</button>
- </div>
-</div>
-
-<section class="content-grid">
- <div class="panel">
-  <div class="panel-head"><h2>Training Progress</h2></div>
-  <div class="progress-row"><span>Course completion</span><strong id="progressPercent">0%</strong></div>
-  <div class="progress-track"><div class="progress-fill" id="progressBar"></div></div>
-  <div class="progress-info"><span id="progressDone">0 completed</span><span id="progressTotal">0 total classes</span></div>
-  <div class="milestones">
-   <div class="milestone"><i data-lucide="book-open"></i><strong>Basics</strong><span>Learning</span></div>
-   <div class="milestone"><i data-lucide="steering-wheel"></i><strong>Practice</strong><span>Driving</span></div>
-   <div class="milestone"><i data-lucide="award"></i><strong>Final</strong><span>Assessment</span></div>
-  </div>
- </div>
-</section>
-
-<section class="panel" id="attendanceTracker">
- <div class="panel-head"><h2>Training Attendance</h2><span style="font-size:10px;color:var(--muted)">Working Days</span></div>
- <div class="attendance-tracker">
-  <div class="attendance-tracker-head"><strong>Attendance Performance</strong><span id="attendanceStatus" class="attendance-status good">Calculating...</span></div>
-  <div class="attendance-numbers">
-   <div class="attendance-number"><small>Expected</small><strong id="expectedClasses">0</strong></div>
-   <div class="attendance-number"><small>Completed</small><strong id="actualExpectedClasses">0</strong></div>
-   <div class="attendance-number"><small>Schedule Gap</small><strong id="attendanceGap">0</strong></div>
-  </div>
-  <div class="attendance-track"><div class="attendance-track-fill" id="attendanceTrackFill"></div></div>
-  <div class="attendance-message" id="attendanceMessage">Your attendance status will appear here.</div>
- </div>
-</section>
-
-<section class="panel" id="upcomingHolidays">
- <div class="panel-head"><h2>Upcoming Holidays</h2><span style="font-size:10px;color:var(--muted)">Next 3</span></div>
- <div class="holiday-list" id="upcomingHolidayList"><div class="holiday-empty">Loading upcoming holidays...</div></div>
-</section>
-
-<section class="panel" id="attendanceHistory">
- <div class="panel-head"><h2>My Class History</h2><span style="font-size:10px;color:var(--muted)" id="historyCount">0 classes</span></div>
- <div class="history-list" id="historyList"><div class="empty">Connect your account to view class history.</div></div>
-</section>
-
-<section class="panel" id="studentFeedback">
- <div class="panel-head"><h2>Share Your Feedback</h2></div>
- <p class="login-description">Tell us about your experience at ABHINAASH A1 Driving.</p>
- <form class="feedback-form" id="feedbackForm">
-  <div>
-   <label for="rating">Your Rating</label>
-   <select id="rating" required>
-    <option value="">Select rating</option>
-    <option value="5">★★★★★ - Excellent</option>
-    <option value="4">★★★★ - Very Good</option>
-    <option value="3">★★★ - Good</option>
-    <option value="2">★★ - Average</option>
-    <option value="1">★ - Needs Improvement</option>
-   </select>
-  </div>
-  <div><label for="feedbackText">Your Feedback</label><textarea id="feedbackText" maxlength="1000" placeholder="Write your experience..." required></textarea></div>
-  <button class="btn-primary" type="submit">Send Feedback</button>
- </form>
- <div class="notice"><div><strong>Feedback submission</strong><p>Your feedback will be sent to the driving school through WhatsApp. It is not saved to Firestore by this form.</p></div></div>
-</section>
-
-<section class="panel">
- <div class="panel-head"><h2>Quick Actions</h2></div>
- <div class="quick-grid">
-  <a href="traffic-academy.html" class="quick-action" onclick="this.href='traffic-academy.html?mobile='+encodeURIComponent(localStorage.getItem('a1_student_mobile')||'')">
-   <div class="quick-icon"><i data-lucide="traffic-cone"></i></div>
-   <div><strong>Traffic Academy</strong><span>Learn signs & daily MCQ</span></div>
-  </a>
- </div>
-</section>
+  <section class="card">
+    <h3 class="card-title">Share Your Feedback</h3>
+    <p style="color:var(--muted);font-size:12px;line-height:1.6;margin-bottom:12px;">
+      Your feedback helps us improve our driving classes.
+    </p>
+    <button class="header-btn" onclick="window.open('https://wa.me/918984225311?text=I%20want%20to%20share%20my%20feedback','_blank')">
+      Send Feedback on WhatsApp
+    </button>
+  </section>
 
 </main>
 
 <footer>
- <div class="container footer-inner">
-  <a href="index.html" class="logo">ABHINAASH <span>A1</span></a>
-  <p>Student Portal · ABHINAASH A1 Driving · Baripada, Odisha</p>
- </div>
+  © ABHINAASH A1 Driving Classes. All rights reserved.
 </footer>
 
-<nav class="bottom-nav">
- <a href="student-dashboard.html" class="active"><i data-lucide="layout-dashboard"></i>Dashboard</a>
- <a href="student-training.html"><i data-lucide="car-front"></i>Training</a>
- <a href="#attendanceHistory"><i data-lucide="clipboard-check"></i>History</a>
- <a href="student-account.html"><i data-lucide="user-round"></i>Account</a>
-</nav>
-
-<!-- PART 2 CONTINUES HERE -->
-
+<!-- PART 2 JAVASCRIPT WILL CONTINUE HERE -->
 <script type="module">
-import {initializeApp,getApps} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
 
 import {
- getFirestore,doc,onSnapshot,collection,
- setDoc,getDoc,serverTimestamp
+  getFirestore,
+  doc,
+  onSnapshot,
+  collection,
+  getDoc,
+  setDoc,
+  serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
 import {
- getDatabase,ref as databaseRef,get,update
+  getDatabase,
+  ref as databaseRef,
+  get
 } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-database.js";
 
-const firebaseConfig={
- apiKey:"AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
- authDomain:"abinash-driving.firebaseapp.com",
- databaseURL:"https://abinash-driving-default-rtdb.firebaseio.com/",
- projectId:"abinash-driving",
- storageBucket:"abinash-driving.appspot.com",
- messagingSenderId:"641148830173",
- appId:"1:641148830173:web:b7a500e5e7e2463da0f634"
+
+/* FIREBASE CONFIG */
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC3gWi8p85z-wKoJeWbN3jYoQpcIar8Sww",
+  authDomain: "abinash-driving.firebaseapp.com",
+  databaseURL: "https://abinash-driving-default-rtdb.firebaseio.com/",
+  projectId: "abinash-driving",
+  storageBucket: "abinash-driving.appspot.com",
+  messagingSenderId: "641148830173",
+  appId: "1:641148830173:web:b7a500e5e7e2463da0f634"
 };
 
-const WHATSAPP_NUMBER="918984225311";
-const STORAGE_KEY="a1_student_mobile";
-const PHOTO_CACHE_PREFIX="a1_profile_photo_";
-const ASSISTANCE_HIDE_AFTER=48*60*60*1000;
-
-const app=getApps().length?getApps()[0]:initializeApp(firebaseConfig);
-const db=getFirestore(app);
-const realtimeDB=getDatabase(app);
-const $=id=>document.getElementById(id);
-
-let unsubscribeStudent=null;
-let currentMobile="";
-let currentStudentName="";
-let currentStudentActive=false;
-let currentAdmissionDate=null;
-let currentCompletedClasses=0;
-let photoRequests=new Set();
-
-let assistanceSubmitting=false;
-let assistanceDragging=false;
-let assistanceCompleted=false;
-let assistanceTermsAccepted=false;
-let assistancePointerId=null;
-
-const holidaysRef=collection(db,"holidays");
-let attendanceHolidayDates=new Set();
-const excludedHolidayCategories=["Institute","National","Odisha","Local"];
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const rtdb = getDatabase(app);
 
 
-/* =========================================
-   HOLIDAYS
-========================================= */
+/* GLOBAL VARIABLES */
 
-function getLocalToday(){
- const d=new Date();
- return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+let currentMobile = "";
+let currentStudent = null;
+let unsubscribeStudent = null;
+let unsubscribeHolidays = null;
+
+let completedClassesCount = 0;
+let totalClassesCount = 30;
+
+const ASSISTANCE_HIDE_AFTER = 48 * 60 * 60 * 1000;
+
+
+/* BASIC HELPERS */
+
+const $ = id => document.getElementById(id);
+
+function safeText(value, fallback = "--") {
+  if (value === undefined || value === null || value === "") {
+    return fallback;
+  }
+  return String(value);
 }
 
-function formatHolidayDate(s){
- const p=s.split("-");
- const d=new Date(+p[0],+p[1]-1,+p[2]);
- return {
-  day:d.toLocaleDateString("en-IN",{day:"2-digit"}),
-  month:d.toLocaleDateString("en-IN",{month:"short"}),
-  full:d.toLocaleDateString("en-IN",{weekday:"long",day:"2-digit",month:"long",year:"numeric"})
- };
-}
+function formatDate(value) {
+  if (!value) return "--";
 
-function renderUpcomingHolidays(snapshot){
- const container=$("upcomingHolidayList");
- const today=getLocalToday();
+  let date;
 
- const upcoming=snapshot.docs.map(d=>({id:d.id,...d.data()}))
-  .filter(h=>/^\d{4}-\d{2}-\d{2}$/.test(h.date||"")&&h.date>=today)
-  .sort((a,b)=>a.date.localeCompare(b.date)).slice(0,3);
-
- container.replaceChildren();
-
- if(!upcoming.length){
-  const empty=document.createElement("div");
-  empty.className="holiday-empty";
-  empty.textContent="No upcoming holidays announced. Enjoy your driving practice!";
-  container.appendChild(empty);
-  return;
- }
-
- upcoming.forEach(h=>{
-  const date=formatHolidayDate(h.date);
-  const card=document.createElement("div");
-  card.className="holiday-card";
-
-  const dateBox=document.createElement("div");
-  dateBox.className="holiday-date-box";
-
-  const day=document.createElement("strong");
-  day.textContent=date.day;
-
-  const month=document.createElement("span");
-  month.textContent=date.month;
-
-  dateBox.append(day,month);
-
-  const info=document.createElement("div");
-  info.className="holiday-info";
-
-  const title=document.createElement("strong");
-  title.textContent=h.name||"Holiday";
-
-  const fullDate=document.createElement("p");
-  fullDate.textContent=date.full;
-
-  info.append(title,fullDate);
-
-  if(h.category){
-   const category=document.createElement("span");
-   category.className="holiday-category";
-   category.textContent=h.category;
-   info.appendChild(category);
+  if (value?.toDate) {
+    date = value.toDate();
+  } else if (typeof value === "number") {
+    date = new Date(value);
+  } else {
+    date = new Date(value);
   }
 
-  card.append(dateBox,info);
-  container.appendChild(card);
- });
+  if (isNaN(date.getTime())) return "--";
+
+  return date.toLocaleDateString("en-IN", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric"
+  });
 }
 
-onSnapshot(holidaysRef,snapshot=>{
- const docs=snapshot.docs.map(d=>d.data());
+function getClassOneDate(logs) {
+  if (!Array.isArray(logs) || !logs.length) return null;
 
- attendanceHolidayDates=new Set(
-  docs.filter(h=>excludedHolidayCategories.includes(h.category))
-   .map(h=>h.date).filter(Boolean)
- );
+  const dates = logs
+    .map(item => item.date || item.timestamp || item.createdAt)
+    .filter(Boolean)
+    .map(value => {
+      if (value?.toDate) return value.toDate();
+      return new Date(value);
+    })
+    .filter(date => !isNaN(date.getTime()));
 
- renderUpcomingHolidays(snapshot);
+  if (!dates.length) return null;
 
- if(currentStudentActive){
-  updateAttendanceTracker(currentAdmissionDate,currentCompletedClasses);
- }
+  dates.sort((a, b) => a - b);
+  return dates[0];
+}
 
-},error=>{
- console.error("Holiday error:",error);
- $("upcomingHolidayList").textContent="Unable to load holidays.";
+
+/* LOGIN */
+
+const savedMobile = localStorage.getItem("a1_student_mobile");
+
+if (!savedMobile || !/^\d{10}$/.test(savedMobile)) {
+  alert("Please login first.");
+  window.location.href = "index.html";
+} else {
+  currentMobile = savedMobile;
+  loadStudentDashboard();
+}
+
+
+/* LOGOUT */
+
+$("logoutBtn")?.addEventListener("click", () => {
+  if (!confirm("Are you sure you want to logout?")) return;
+
+  localStorage.removeItem("a1_student_mobile");
+
+  if (unsubscribeStudent) unsubscribeStudent();
+  if (unsubscribeHolidays) unsubscribeHolidays();
+
+  window.location.href = "index.html";
 });
 
 
-/* =========================================
-   COMMON HELPERS
-========================================= */
+/* LOAD STUDENT DATA */
 
-function showMessage(message,color="var(--muted)"){
- const el=$("loginMessage");
- el.textContent=message;
- el.style.color=color;
- el.style.display=message?"block":"none";
+function loadStudentDashboard() {
+  const studentRef = doc(db, "studentData", currentMobile);
+
+  unsubscribeStudent = onSnapshot(
+    studentRef,
+    async snapshot => {
+      if (!snapshot.exists()) {
+        alert("Student record not found. Please contact the institute.");
+        return;
+      }
+
+      if (currentMobile !== localStorage.getItem("a1_student_mobile")) {
+        return;
+      }
+
+      const data = snapshot.data();
+      currentStudent = data;
+
+      renderStudentData(data);
+
+      await loadProfilePhoto();
+
+      updateAssistanceVisibility(data);
+
+    },
+    error => {
+      console.error("Student data error:", error);
+      alert("Unable to load student data. Please try again.");
+    }
+  );
+
+  loadHolidayCalendar();
 }
 
-function value(data,key,fallback=""){
- const v=data?.[key];
- return v===undefined||v===null||v===""?fallback:v;
-}
 
-function formatDate(input){
- if(!input)return "--";
+/* RENDER STUDENT DATA */
 
- if(input instanceof Date){
-  if(Number.isNaN(input.getTime()))return "--";
-  return input.toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"});
- }
+function renderStudentData(data) {
 
- if(typeof input==="string"){
-  const m=input.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  const studentName =
+    data.name ||
+    data.studentName ||
+    data.fullName ||
+    "Student";
 
-  if(m){
-   return new Date(+m[1],+m[2]-1,+m[3])
-    .toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"});
+  $("studentName").textContent = studentName;
+  $("profileName").textContent = studentName;
+  $("profileMobile").textContent = "Mobile: " + currentMobile;
+
+  const status = data.status || data.courseStatus || "Active";
+  $("studentStatus").textContent = "Status: " + status;
+  $("courseStatus").textContent = status;
+
+  const logs = Array.isArray(data.logs)
+    ? data.logs
+    : Array.isArray(data.attendanceLogs)
+      ? data.attendanceLogs
+      : [];
+
+  const completed = Number(
+    data.completedClasses ??
+    data.completed ??
+    data.totalCompleted ??
+    logs.length ??
+    0
+  );
+
+  const total = Number(
+    data.totalClasses ??
+    data.courseClasses ??
+    data.total ??
+    30
+  );
+
+  completedClassesCount = completed;
+  totalClassesCount = total;
+
+  const remaining = Math.max(0, total - completed);
+  const percentage = total > 0
+    ? Math.min(100, Math.round((completed / total) * 100))
+    : 0;
+
+  $("completedClasses").textContent = completed;
+  $("totalClasses").textContent = total;
+  $("remainingClasses").textContent = remaining;
+  $("attendancePercent").textContent = percentage + "%";
+  $("progressFill").style.width = percentage + "%";
+
+  const admissionDate =
+    data.admissionDate ||
+    data.joiningDate ||
+    getClassOneDate(logs);
+
+  $("admissionDate").textContent = formatDate(admissionDate);
+
+  let expectedEnd = "--";
+
+  if (admissionDate && total > 0) {
+    const startDate = admissionDate?.toDate
+      ? admissionDate.toDate()
+      : new Date(admissionDate);
+
+    if (!isNaN(startDate.getTime())) {
+      const endDate = new Date(startDate);
+      endDate.setDate(endDate.getDate() + total - 1);
+      expectedEnd = formatDate(endDate);
+    }
   }
 
-  return input;
- }
+  $("expectedEndDate").textContent =
+    data.expectedEndDate
+      ? formatDate(data.expectedEndDate)
+      : expectedEnd;
 
- if(input?.toDate)return formatDate(input.toDate());
-
- return String(input);
-}
-
-function parseLog(log){
- const text=String(log||"");
- const parts=text.split("|").map(x=>x.trim());
- const route=text.match(/Route:\s*([^|]+)/i);
- const distance=text.match(/Distance:\s*([^|]+)/i);
- const remark=text.match(/Remark:\s*(.*)$/i);
-
- return {
-  date:parts[0]||"Date not recorded",
-  time:(parts[1]||"").replace(/^—\s*/,""),
-  route:route?route[1].trim():"Not recorded",
-  distance:distance?distance[1].trim():"Not recorded",
-  remark:remark?remark[1].trim():""
- };
-}
-
-function parseAttendanceDate(log,referenceYear){
- const text=String(parseLog(log).date||"").trim();
-
- if(!text||text==="Date not recorded")return null;
-
- let m=text.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
-
- if(m){
-  const y=+m[1],mo=+m[2]-1,d=+m[3],date=new Date(y,mo,d);
-  return date.getFullYear()===y&&date.getMonth()===mo&&date.getDate()===d?date:null;
- }
-
- m=text.match(/^(\d{1,2})[/-](\d{1,2})[/-](\d{4})$/);
-
- if(m){
-  const d=+m[1],mo=+m[2]-1,y=+m[3],date=new Date(y,mo,d);
-  return date.getFullYear()===y&&date.getMonth()===mo&&date.getDate()===d?date:null;
- }
-
- m=text.match(/^(\d{1,2})\s+([A-Za-z]+)(?:\s+(\d{4}))?/);
-
- if(m){
-  const months=["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"];
-  const mo=months.findIndex(x=>x===m[2].toLowerCase().slice(0,3));
-  const y=Number(m[3]||referenceYear);
-
-  if(mo>=0&&y){
-   const date=new Date(y,mo,+m[1]);
-   return date.getFullYear()===y&&date.getMonth()===mo&&date.getDate()===+m[1]?date:null;
-  }
-
-  return null;
- }
-
- const fallback=new Date(text);
- return Number.isNaN(fallback.getTime())?null:new Date(fallback.getFullYear(),fallback.getMonth(),fallback.getDate());
-}
-
-function getClassOneDate(logs){
- if(!Array.isArray(logs)||!logs.length)return null;
-
- let year=null;
-
- for(const log of logs){
-  const m=String(parseLog(log).date).match(/(?:^|\D)(20\d{2})(?:\D|$)/);
-  if(m){year=+m[1];break;}
- }
-
- if(!year)year=new Date().getFullYear();
-
- const dates=logs.map(x=>parseAttendanceDate(x,year)).filter(Boolean);
-
- return dates.length?dates.reduce((a,b)=>b<a?b:a):null;
-}
-
-function calculateEndingDate(start){
- if(!start)return null;
-
- const end=new Date(start.getFullYear(),start.getMonth(),start.getDate());
- end.setDate(end.getDate()+30);
-
- return end;
-}
-
-function toDateKey(date){
- return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,"0")}-${String(date.getDate()).padStart(2,"0")}`;
-}
-
-function calculateExpectedWorkingDays(start,end){
- if(!start||!end)return 0;
-
- const current=new Date(start.getFullYear(),start.getMonth(),start.getDate());
- const last=new Date(end.getFullYear(),end.getMonth(),end.getDate());
-
- let count=0;
-
- while(current<=last){
-  const day=current.getDay();
-
-  if(day!==0&&day!==6&&!attendanceHolidayDates.has(toDateKey(current))){
-   count++;
-  }
-
-  current.setDate(current.getDate()+1);
- }
-
- return count;
+  renderAttendanceHistory(logs);
+  renderClassHistory(logs);
 }
 
 
-/* =========================================
-   ATTENDANCE TRACKER
-========================================= */
+/* ATTENDANCE HISTORY */
 
-function updateAttendanceTracker(admissionDate,completed){
+function renderAttendanceHistory(logs) {
+  const container = $("attendanceHistory");
 
- const expectedElement=$("expectedClasses");
- const actualElement=$("actualExpectedClasses");
- const gapElement=$("attendanceGap");
- const status=$("attendanceStatus");
- const message=$("attendanceMessage");
- const fill=$("attendanceTrackFill");
-
- if(!admissionDate){
-  expectedElement.textContent="--";
-  actualElement.textContent=completed||0;
-  gapElement.textContent="--";
-  status.textContent="Date Missing";
-  status.className="attendance-status warning";
-  message.textContent="Admission date could not be calculated from attendance records.";
-  fill.style.width="0%";
-  return;
- }
-
- const today=new Date();
-
- const expected=calculateExpectedWorkingDays(
-  admissionDate,
-  new Date(today.getFullYear(),today.getMonth(),today.getDate())
- );
-
- const actual=Number(completed)||0;
- const gap=Math.max(expected-actual,0);
- const percentage=expected>0?Math.min(Math.round(actual/expected*100),100):100;
-
- expectedElement.textContent=expected;
- actualElement.textContent=actual;
- gapElement.textContent=gap;
- fill.style.width=percentage+"%";
-
- if(gap===0){
-  status.textContent="On Track";
-  status.className="attendance-status good";
-  fill.style.background="var(--green)";
-  message.textContent="Excellent! Your attendance is on schedule. Keep practising regularly.";
-
- }else if(gap<5){
-  status.textContent="Behind Schedule";
-  status.className="attendance-status warning";
-  fill.style.background="var(--gold)";
-  message.textContent=`You should have completed ${expected} classes by today, but you have completed ${actual}. You are ${gap} classes behind schedule.`;
-
- }else{
-  status.textContent="Attendance Critical";
-  status.className="attendance-status critical";
-  fill.style.background="var(--red)";
-  message.textContent=`Your attendance is ${gap} classes behind schedule. Please contact your instructor.`;
- }
-}
-
-
-/* =========================================
-   PROFILE PHOTO
-========================================= */
-
-function getStudentAvatar(student){
- return "https://api.dicebear.com/9.x/avataaars/svg?seed="+encodeURIComponent(student.mobile||student.name||"A1Student");
-}
-
-function getCachedPhoto(mobile){
- try{return localStorage.getItem(PHOTO_CACHE_PREFIX+mobile)||"";}
- catch(e){return "";}
-}
-
-function cachePhoto(mobile,photo){
- try{
-  if(photo)localStorage.setItem(PHOTO_CACHE_PREFIX+mobile,photo);
- }catch(e){console.warn(e);}
-}
-
-function removeCachedPhoto(mobile){
- try{localStorage.removeItem(PHOTO_CACHE_PREFIX+mobile);}
- catch(e){console.warn(e);}
-}
-
-function applyProfilePhoto(mobile,photo){
- if(!photo||currentMobile!==mobile)return;
-
- $("studentProfileAvatar").src=photo;
- $("userAvatar").src=photo;
-}
-
-async function refreshProfilePhoto(mobile){
-
- if(photoRequests.has(mobile))return;
-
- photoRequests.add(mobile);
-
- try{
-  const snapshot=await get(databaseRef(realtimeDB,"profilePhotos/"+mobile));
-
-  if(currentMobile!==mobile)return;
-
-  const photo=snapshot.exists()?snapshot.val()?.image||"":"";
-
-  if(photo){
-   cachePhoto(mobile,photo);
-   applyProfilePhoto(mobile,photo);
-  }else{
-   removeCachedPhoto(mobile);
-  }
-
- }catch(e){
-  console.error("Photo refresh error:",e);
- }finally{
-  photoRequests.delete(mobile);
- }
-}
-
-async function compressImage(file,maxSize=600,maxBytes=250*1024){
-
- return new Promise((resolve,reject)=>{
-
-  const image=new Image();
-  const url=URL.createObjectURL(file);
-
-  image.onload=()=>{
-   URL.revokeObjectURL(url);
-
-   const scale=Math.min(1,maxSize/Math.max(image.width,image.height));
-
-   const canvas=document.createElement("canvas");
-   canvas.width=Math.max(1,Math.round(image.width*scale));
-   canvas.height=Math.max(1,Math.round(image.height*scale));
-
-   const ctx=canvas.getContext("2d");
-
-   if(!ctx){
-    reject(new Error("Canvas unsupported"));
+  if (!logs || !logs.length) {
+    container.innerHTML =
+      '<div class="empty-state">No attendance records found.</div>';
     return;
-   }
+  }
 
-   ctx.fillStyle="#fff";
-   ctx.fillRect(0,0,canvas.width,canvas.height);
-   ctx.drawImage(image,0,0,canvas.width,canvas.height);
+  const sorted = [...logs].sort((a, b) => {
+    const dateA = new Date(a.date || a.timestamp || 0);
+    const dateB = new Date(b.date || b.timestamp || 0);
+    return dateB - dateA;
+  });
 
-   let quality=.82;
+  container.innerHTML = sorted.slice(0, 15).map(item => {
+    const date = formatDate(
+      item.date || item.timestamp || item.createdAt
+    );
 
-   const make=()=>{
-    canvas.toBlob(blob=>{
-     if(!blob){
-      reject(new Error("Image compression failed"));
+    const status = item.status || item.attendance || "Present";
+
+    return `
+      <div class="history-item">
+        <strong>${escapeHTML(date)}</strong>
+        <small>Status: ${escapeHTML(status)}</small>
+      </div>
+    `;
+  }).join("");
+}
+
+
+/* CLASS HISTORY */
+
+function renderClassHistory(logs) {
+  const container = $("classHistory");
+
+  if (!logs || !logs.length) {
+    container.innerHTML =
+      '<div class="empty-state">No class history found.</div>';
+    return;
+  }
+
+  const sorted = [...logs].reverse();
+
+  container.innerHTML = sorted.slice(0, 15).map((item, index) => {
+    const date = formatDate(
+      item.date || item.timestamp || item.createdAt
+    );
+
+    const classNumber = item.classNumber || item.classNo || (index + 1);
+
+    return `
+      <div class="history-item">
+        <strong>Class ${escapeHTML(classNumber)}</strong>
+        <small>${escapeHTML(date)}</small>
+      </div>
+    `;
+  }).join("");
+}
+
+
+/* HTML ESCAPE */
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
+
+
+/* PROFILE PHOTO */
+
+async function loadProfilePhoto() {
+  try {
+    const thumbnailRef = databaseRef(
+      rtdb,
+      "profilePhotoThumbnails/" + currentMobile
+    );
+
+    const thumbnailSnapshot = await get(thumbnailRef);
+
+    if (thumbnailSnapshot.exists()) {
+      $("profilePhoto").src = thumbnailSnapshot.val();
       return;
-     }
+    }
 
-     if(blob.size>maxBytes&&quality>.35){
-      quality=Math.max(.35,quality-.1);
-      make();
-     }else{
-      resolve(blob);
-     }
-    },"image/jpeg",quality);
-   };
+    const photoRef = databaseRef(
+      rtdb,
+      "profilePhotos/" + currentMobile
+    );
 
-   make();
-  };
+    const photoSnapshot = await get(photoRef);
 
-  image.onerror=()=>{
-   URL.revokeObjectURL(url);
-   reject(new Error("Unable to read image"));
-  };
+    if (photoSnapshot.exists()) {
+      $("profilePhoto").src = photoSnapshot.val();
+    }
 
-  image.src=url;
- });
+  } catch (error) {
+    console.error("Profile photo error:", error);
+  }
 }
 
-function blobToBase64(blob){
- return new Promise((resolve,reject)=>{
-  const reader=new FileReader();
-  reader.onload=()=>resolve(reader.result);
-  reader.onerror=()=>reject(new Error("Image conversion failed"));
-  reader.readAsDataURL(blob);
- });
+
+/* HOLIDAY CALENDAR */
+
+function loadHolidayCalendar() {
+  const holidayCollection = collection(db, "holidays");
+
+  unsubscribeHolidays = onSnapshot(
+    holidayCollection,
+    snapshot => {
+      const container = $("holidayList");
+
+      if (snapshot.empty) {
+        container.innerHTML =
+          '<div class="empty-state">No holidays announced.</div>';
+        return;
+      }
+
+      const holidays = [];
+
+      snapshot.forEach(item => {
+        holidays.push(item.data());
+      });
+
+      holidays.sort((a, b) => {
+        return new Date(a.date || 0) - new Date(b.date || 0);
+      });
+
+      container.innerHTML = holidays.map(holiday => `
+        <div class="history-item">
+          <strong>${escapeHTML(holiday.title || holiday.name || "Holiday")}</strong>
+          <small>
+            ${escapeHTML(formatDate(holiday.date))}
+            ${holiday.description
+              ? " · " + escapeHTML(holiday.description)
+              : ""}
+          </small>
+        </div>
+      `).join("");
+    },
+    error => {
+      console.error("Holiday listener error:", error);
+      $("holidayList").innerHTML =
+        '<div class="empty-state">Unable to load holidays.</div>';
+    }
+  );
 }
 
-async function saveProfilePhoto(mobile,image,thumbnail){
 
- const originalRef=databaseRef(realtimeDB,"profilePhotos/"+mobile);
- const thumbRef=databaseRef(realtimeDB,"profilePhotoThumbnails/"+mobile);
+/* ==========================================
+   LL & DL ASSISTANCE
+========================================== */
 
- const existing=await get(originalRef);
+const assistanceCard = $("assistanceCard");
+const assistanceMain = $("assistanceMain");
+const assistanceSuccess = $("assistanceSuccess");
 
- const showOnHomepage=existing.exists()&&existing.val()?.showOnHomepage===true;
+const carSlider = $("carSlider");
+const carThumb = $("carThumb");
+const sliderProgress = $("sliderProgress");
+const sliderText = $("sliderText");
 
- await update(originalRef,{image,updatedAt:Date.now()});
+const termsModal = $("termsModal");
+const termsCheckbox = $("termsCheckbox");
+const termsAgreeBtn = $("termsAgreeBtn");
 
- await update(thumbRef,{
-  thumbnail,
-  showOnHomepage,
-  updatedAt:Date.now()
- });
-}
+let termsAccepted = false;
+let assistanceSubmitting = false;
+let assistanceCompleted = false;
 
-$("changePhotoBtn").addEventListener("click",()=>{
- if(!currentMobile||!currentStudentActive){
-  alert("Please connect your active student account first.");
-  return;
- }
-
- $("profilePhotoInput").click();
-});
-
-$("profilePhotoInput").addEventListener("change",async function(){
-
- const file=this.files?.[0];
- if(!file)return;
-
- if(!["image/jpeg","image/png","image/webp"].includes(file.type)){
-  alert("Please select a JPG, PNG or WEBP image.");
-  this.value="";
-  return;
- }
-
- if(file.size>10*1024*1024){
-  alert("Please select an image smaller than 10 MB.");
-  this.value="";
-  return;
- }
-
- if(!currentMobile||!currentStudentActive){
-  alert("Your student account is not active.");
-  this.value="";
-  return;
- }
-
- const mobile=currentMobile;
- const btn=$("changePhotoBtn");
- const status=$("uploadStatus");
-
- btn.disabled=true;
- btn.textContent="Compressing...";
- status.className="upload-status";
- status.textContent="Compressing your photo...";
-
- try{
-  const blob=await compressImage(file,600,250*1024);
-  const image=await blobToBase64(blob);
-
-  const thumb=await compressImage(file,240,40*1024);
-  const thumbnail=await blobToBase64(thumb);
-
-  if(currentMobile!==mobile)throw new Error("Student account changed.");
-
-  status.textContent="Uploading photo...";
-
-  await saveProfilePhoto(mobile,image,thumbnail);
-
-  cachePhoto(mobile,image);
-  applyProfilePhoto(mobile,image);
-
-  status.className="upload-status success";
-  status.textContent="Photo updated successfully.";
-
- }catch(e){
-
-  status.className="upload-status error";
-  status.textContent="Upload failed: "+e.message;
-
- }finally{
-
-  btn.disabled=false;
-  btn.textContent="Change Photo";
-  this.value="";
- }
-});
+let dragging = false;
+let dragStartX = 0;
+let dragStartLeft = 0;
+let maxDrag = 0;
 
 
-/* =========================================
-   CLASS HISTORY
-========================================= */
+/* SHOW / HIDE ASSISTANCE */
 
-function renderHistory(logs){
+async function updateAssistanceVisibility(studentData) {
 
- const container=$("historyList");
+  const status = String(
+    studentData.status || studentData.courseStatus || "Active"
+  ).toLowerCase();
 
- container.replaceChildren();
+  const isActive =
+    status === "active" ||
+    status === "running" ||
+    status === "ongoing";
 
- $("historyCount").textContent=logs.length+" classes";
+  const completed = Number(
+    studentData.completedClasses ??
+    studentData.completed ??
+    studentData.totalCompleted ??
+    0
+  );
 
- if(!logs.length){
-  const empty=document.createElement("div");
-  empty.className="empty";
-  empty.textContent="No attendance records found yet.";
-  container.appendChild(empty);
-  return;
- }
-
- [...logs].reverse().forEach((log,index)=>{
-
-  const parsed=parseLog(log);
-
-  const item=document.createElement("div");
-  item.className="history-item";
-
-  const dot=document.createElement("span");
-  dot.className="history-dot";
-
-  const card=document.createElement("div");
-  card.className="history-card";
-
-  const head=document.createElement("div");
-  head.className="history-card-head";
-
-  const titleWrap=document.createElement("div");
-
-  const title=document.createElement("div");
-  title.className="history-class-title";
-  title.textContent="Driving Class "+(logs.length-index);
-
-  const date=document.createElement("div");
-  date.className="history-date";
-  date.textContent="📅 "+parsed.date;
-
-  const time=document.createElement("div");
-  time.className="history-time";
-  time.textContent=parsed.time?"⏰ "+parsed.time:"Time not recorded";
-
-  titleWrap.append(title,date,time);
-
-  const badge=document.createElement("span");
-  badge.className="history-badge";
-  badge.textContent="✓ COMPLETED";
-
-  head.append(titleWrap,badge);
-
-  const grid=document.createElement("div");
-  grid.className="history-data-grid";
-
-  const route=document.createElement("div");
-  route.className="history-data";
-
-  const routeLabel=document.createElement("small");
-  routeLabel.textContent="📍 Training Route";
-
-  const routeValue=document.createElement("strong");
-  routeValue.textContent=parsed.route;
-
-  route.append(routeLabel,routeValue);
-
-  const distance=document.createElement("div");
-  distance.className="history-data";
-
-  const distanceLabel=document.createElement("small");
-  distanceLabel.textContent="🚗 Practice Distance";
-
-  const distanceValue=document.createElement("strong");
-  distanceValue.textContent=parsed.distance;
-
-  distance.append(distanceLabel,distanceValue);
-
-  grid.append(route,distance);
-  card.append(head,grid);
-
-  if(parsed.remark){
-
-   const box=document.createElement("div");
-   box.className="history-remark";
-
-   const label=document.createElement("small");
-   label.textContent="✦ INSTRUCTOR REMARK";
-
-   const text=document.createElement("p");
-   text.textContent=parsed.remark;
-
-   box.append(label,text);
-   card.appendChild(box);
-
-  }else{
-
-   const noRemark=document.createElement("div");
-   noRemark.className="history-no-remark";
-   noRemark.textContent="No instructor remark for this class.";
-
-   card.appendChild(noRemark);
+  if (!isActive || completed < 20) {
+    assistanceCard.style.display = "none";
+    return;
   }
 
-  item.append(dot,card);
-  container.appendChild(item);
- });
+  await checkExistingAssistanceRequest();
 }
 
 
-/* =========================================
-   LL / DL ASSISTANCE
-========================================= */
+/* CHECK PREVIOUS REQUEST */
 
-const assistanceCard=$("assistanceCard");
-const termsModal=$("termsModal");
-const termsCheckbox=$("termsCheckbox");
-const agreeTermsBtn=$("agreeTermsBtn");
-const cancelTermsBtn=$("cancelTermsBtn");
+async function checkExistingAssistanceRequest() {
 
-const carSlider=$("carSlider");
-const carThumb=$("carSliderThumb");
-const carTrack=$("carSliderTrack");
-const carSliderText=$("carSliderText");
-const carProgress=$("carSliderProgress");
-const assistanceResult=$("assistanceResult");
+  try {
+    const requestRef = doc(
+      db,
+      "dlLlAssistanceRequests",
+      currentMobile
+    );
 
-function closeAssistanceTerms(){
- termsModal.classList.remove("show");
- document.body.style.overflow="";
+    const requestSnapshot = await getDoc(requestRef);
+
+    if (currentMobile !== localStorage.getItem("a1_student_mobile")) {
+      return;
+    }
+
+    if (!requestSnapshot.exists()) {
+      assistanceCard.style.display = "block";
+      assistanceMain.style.display = "block";
+      assistanceSuccess.style.display = "none";
+      return;
+    }
+
+    const requestData = requestSnapshot.data();
+
+    let submittedTime = Number(requestData.submittedAtMs || 0);
+
+    if (!submittedTime && requestData.requestedAt?.toMillis) {
+      submittedTime = requestData.requestedAt.toMillis();
+    }
+
+    if (!submittedTime && requestData.submittedAt?.toMillis) {
+      submittedTime = requestData.submittedAt.toMillis();
+    }
+
+    if (!submittedTime) {
+      assistanceCard.style.display = "none";
+      return;
+    }
+
+    const elapsed = Date.now() - submittedTime;
+
+    if (elapsed < ASSISTANCE_HIDE_AFTER) {
+      assistanceCard.style.display = "block";
+      assistanceMain.style.display = "none";
+      assistanceSuccess.style.display = "block";
+    } else {
+      assistanceCard.style.display = "none";
+    }
+
+  } catch (error) {
+    console.error("Assistance request check error:", error);
+    assistanceCard.style.display = "none";
+  }
 }
 
-function openAssistanceTerms(){
 
- if(
-  !currentMobile||
-  !currentStudentActive||
-  currentCompletedClasses<20||
-  assistanceCompleted||
-  assistanceSubmitting
- ){
-  return;
- }
+/* OPEN TERMS */
 
- termsCheckbox.checked=false;
- agreeTermsBtn.disabled=true;
-
- termsModal.classList.add("show");
- document.body.style.overflow="hidden";
+function openTermsModal() {
+  termsModal.classList.add("active");
 }
 
-termsCheckbox.addEventListener("change",()=>{
- agreeTermsBtn.disabled=!termsCheckbox.checked;
+function closeTermsModal() {
+  termsModal.classList.remove("active");
+}
+
+$("readTermsBtn").addEventListener("click", openTermsModal);
+
+$("termsCancelBtn").addEventListener("click", closeTermsModal);
+
+termsCheckbox.addEventListener("change", () => {
+  termsAgreeBtn.disabled = !termsCheckbox.checked;
 });
 
-cancelTermsBtn.addEventListener("click",closeAssistanceTerms);
+termsAgreeBtn.addEventListener("click", () => {
+  if (!termsCheckbox.checked) return;
 
-termsModal.addEventListener("click",event=>{
- if(event.target===termsModal)closeAssistanceTerms();
-});
-
-agreeTermsBtn.addEventListener("click",()=>{
-
- if(!termsCheckbox.checked)return;
-
- assistanceTermsAccepted=true;
-
- closeAssistanceTerms();
-
- carSlider.scrollIntoView({
-  behavior:"smooth",
-  block:"center"
- });
-
- carSliderText.textContent="NOW SLIDE THE CAR TO SUBMIT";
+  termsAccepted = true;
+  closeTermsModal();
 });
 
 
-/* SLIDER LIMITS */
+/* REQUIRE TERMS BEFORE SLIDING */
 
-function getSliderLimits(){
+carSlider.addEventListener("pointerdown", event => {
+  if (assistanceCompleted || assistanceSubmitting) return;
 
- return {
-  min:6,
-  max:Math.max(6,carSlider.clientWidth-carThumb.offsetWidth-6)
- };
+  if (!termsAccepted) {
+    event.preventDefault();
+    openTermsModal();
+  }
+});
+
+
+/* SLIDER POSITION */
+
+function getSliderBounds() {
+  const sliderRect = carSlider.getBoundingClientRect();
+  const thumbRect = carThumb.getBoundingClientRect();
+
+  maxDrag = sliderRect.width - thumbRect.width - 10;
+  return maxDrag;
 }
 
-function resetAssistanceSlider(){
+function moveAssistanceCar(clientX) {
+  const sliderRect = carSlider.getBoundingClientRect();
 
- const limits=getSliderLimits();
+  const position = clientX - sliderRect.left - dragStartX + dragStartLeft;
 
- carThumb.style.left=limits.min+"px";
- carProgress.style.width="0%";
- carTrack.style.opacity="1";
-}
+  const boundedPosition = Math.max(
+    0,
+    Math.min(maxDrag, position)
+  );
 
-function moveAssistanceCar(clientX){
+  carThumb.style.transform = `translateX(${boundedPosition}px)`;
 
- const rect=carSlider.getBoundingClientRect();
- const limits=getSliderLimits();
+  const percentage = maxDrag > 0
+    ? (boundedPosition / maxDrag) * 100
+    : 0;
 
- let left=clientX-rect.left-carThumb.offsetWidth/2;
+  sliderProgress.style.width = percentage + "%";
 
- left=Math.max(limits.min,Math.min(limits.max,left));
-
- carThumb.style.left=left+"px";
-
- const percentage=(left-limits.min)/(limits.max-limits.min)*100;
-
- carProgress.style.width=percentage+"%";
- carTrack.style.opacity=String(Math.max(.1,1-percentage/100));
-
- if(percentage>=98&&!assistanceCompleted){
-  assistanceCompleted=true;
-  assistanceDragging=false;
-  submitAssistanceRequest();
- }
+  if (percentage >= 98) {
+    assistanceCompleted = true;
+    carThumb.style.transform = `translateX(${maxDrag}px)`;
+    sliderProgress.style.width = "100%";
+    sliderText.textContent = "Submitting Request...";
+    submitAssistanceRequest();
+  }
 }
 
 
-/* POINTER / TOUCH DRAG */
+/* START DRAG */
 
-carThumb.addEventListener("pointerdown",event=>{
+carThumb.addEventListener("pointerdown", event => {
+  if (!termsAccepted) {
+    openTermsModal();
+    return;
+  }
 
- if(
-  !assistanceTermsAccepted||
-  assistanceCompleted||
-  assistanceSubmitting||
-  !currentStudentActive
- ){
-  return;
- }
+  if (assistanceCompleted || assistanceSubmitting) return;
 
- event.preventDefault();
+  event.preventDefault();
 
- assistanceDragging=true;
- assistancePointerId=event.pointerId;
+  dragging = true;
+  dragStartX = event.clientX;
+  dragStartLeft = 0;
 
- try{
+  getSliderBounds();
+
   carThumb.setPointerCapture(event.pointerId);
- }catch(error){
-  console.warn("Pointer capture unavailable:",error);
- }
 });
 
-carThumb.addEventListener("pointermove",event=>{
 
- if(!assistanceDragging||event.pointerId!==assistancePointerId)return;
+/* DRAG MOVE */
 
- event.preventDefault();
- moveAssistanceCar(event.clientX);
+carThumb.addEventListener("pointermove", event => {
+  if (!dragging) return;
+
+  moveAssistanceCar(event.clientX);
 });
 
-function stopAssistanceDragging(event){
 
- if(
-  !assistanceDragging||
-  (event&&event.pointerId!==assistancePointerId)
- ){
-  return;
- }
+/* DRAG END */
 
- assistanceDragging=false;
- assistancePointerId=null;
+function stopDragging() {
+  if (!dragging) return;
 
- if(!assistanceCompleted){
-  resetAssistanceSlider();
- }
-}
+  dragging = false;
 
-carThumb.addEventListener("pointerup",stopAssistanceDragging);
-carThumb.addEventListener("pointercancel",stopAssistanceDragging);
-
-
-/* FIRESTORE REQUEST HELPERS */
-
-function getAssistanceRequestRef(mobile){
- return doc(db,"dlLlAssistanceRequests",mobile);
-}
-
-function getRequestTime(data){
-
- if(Number.isFinite(Number(data?.submittedAtMs))&&Number(data.submittedAtMs)>0){
-  return Number(data.submittedAtMs);
- }
-
- if(data?.requestedAt?.toMillis){
-  return data.requestedAt.toMillis();
- }
-
- if(data?.requestedAt?.seconds){
-  return data.requestedAt.seconds*1000;
- }
-
- return 0;
-}
-
-function showAssistanceSuccess(){
-
- assistanceCompleted=true;
- assistanceTermsAccepted=true;
-
- carSlider.style.display="none";
-
- assistanceResult.style.display="block";
- assistanceResult.className="assist-result";
-
- assistanceResult.textContent=
-  "✓ Your request has already been submitted successfully. Our team will contact you.";
-
-}
-
-function hideAssistanceCard(){
- assistanceCard.style.display="none";
-}
-
-async function checkExistingAssistanceRequest(mobile){
-
- const requestRef=getAssistanceRequestRef(mobile);
-
- try{
-
-  const snapshot=await getDoc(requestRef);
-
-  if(currentMobile!==mobile)return;
-
-  if(!snapshot.exists()){
-   assistanceCard.dataset.requestState="not-submitted";
-   return;
+  if (!assistanceCompleted) {
+    carThumb.style.transform = "translateX(0px)";
+    sliderProgress.style.width = "0%";
   }
-
-  const data=snapshot.data();
-  const submittedAt=getRequestTime(data);
-
-  if(!submittedAt){
-   // Existing record without a usable timestamp:
-   // keep it hidden rather than allow a duplicate request.
-   assistanceCard.dataset.requestState="submitted";
-   hideAssistanceCard();
-   return;
-  }
-
-  const age=Date.now()-submittedAt;
-
-  if(age>=ASSISTANCE_HIDE_AFTER){
-   assistanceCard.dataset.requestState="expired";
-   hideAssistanceCard();
-   return;
-  }
-
-  assistanceCard.dataset.requestState="submitted";
-  showAssistanceSuccess();
-
- }catch(error){
-
-  console.error("Assistance request check error:",error);
-
-  if(currentMobile!==mobile)return;
-
-  assistanceCard.dataset.requestState="check-error";
-  assistanceResult.style.display="block";
-  assistanceResult.className="assist-result error";
-  assistanceResult.textContent=
-   "Unable to check your previous assistance request. Please refresh or contact the institute.";
-
-  // Do not allow a new request if the previous request cannot be checked.
-  carSlider.style.display="none";
- }
 }
 
-
-/* SHOW FEATURE ONLY AFTER 20 CLASSES */
-
-async function updateAssistanceVisibility(completed){
-
- if(!currentMobile||!currentStudentActive||Number(completed)<20){
-  hideAssistanceCard();
-  return;
- }
-
- assistanceCard.style.display="block";
-
- const mobile=currentMobile;
-
- assistanceCard.dataset.requestState="checking";
-
- carSlider.style.display="block";
- assistanceResult.style.display="none";
-
- await checkExistingAssistanceRequest(mobile);
-}
+carThumb.addEventListener("pointerup", stopDragging);
+carThumb.addEventListener("pointercancel", stopDragging);
 
 
 /* SUBMIT REQUEST */
 
-async function submitAssistanceRequest(){
+async function submitAssistanceRequest() {
 
- if(assistanceSubmitting)return;
+  if (assistanceSubmitting) return;
 
- if(
-  !currentMobile||
-  !currentStudentActive||
-  currentCompletedClasses<20||
-  !assistanceTermsAccepted
- ){
-  assistanceCompleted=false;
-  resetAssistanceSlider();
-  return;
- }
+  assistanceSubmitting = true;
 
- assistanceSubmitting=true;
+  try {
+    const requestRef = doc(
+      db,
+      "dlLlAssistanceRequests",
+      currentMobile
+    );
 
- carThumb.style.pointerEvents="none";
+    const existingRequest = await getDoc(requestRef);
 
- assistanceResult.style.display="block";
- assistanceResult.className="assist-result";
- assistanceResult.textContent="Submitting your request...";
+    if (existingRequest.exists()) {
+      await checkExistingAssistanceRequest();
+      return;
+    }
 
- const mobileAtSubmission=currentMobile;
- const submittedAt=Date.now();
+    const studentName =
+      currentStudent?.name ||
+      currentStudent?.studentName ||
+      currentStudent?.fullName ||
+      "Student";
 
- try{
+    await setDoc(requestRef, {
+      studentName: studentName,
+      mobile: currentMobile,
+      completedClasses: completedClassesCount,
+      requestType: "Interested in LL and DL",
+      status: "New",
 
-  const requestRef=getAssistanceRequestRef(mobileAtSubmission);
+      termsAccepted: true,
+      termsTextVersion: "LL-DL-Disclaimer-v2",
+      termsAcceptedAt: serverTimestamp(),
 
-  // Check again to avoid overwriting an existing request.
-  const existing=await getDoc(requestRef);
+      requestedAt: serverTimestamp(),
+      submittedAtMs: Date.now()
+    });
 
-  if(currentMobile!==mobileAtSubmission)return;
-
-  if(existing.exists()){
-
-   const existingTime=getRequestTime(existing.data());
-
-   if(!existingTime||Date.now()-existingTime<ASSISTANCE_HIDE_AFTER){
     showAssistanceSuccess();
-    return;
-   }
 
-   // An expired request is not overwritten.
-   // Keep the original request history intact.
-   hideAssistanceCard();
-   return;
+  } catch (error) {
+    console.error("Assistance submission error:", error);
+
+    alert(
+      "Unable to submit your request. Please check your internet connection and try again."
+    );
+
+    assistanceCompleted = false;
+    carThumb.style.transform = "translateX(0px)";
+    sliderProgress.style.width = "0%";
+    sliderText.textContent = "Slide to Request LL & DL Assistance";
+
+  } finally {
+    assistanceSubmitting = false;
   }
-
-  await setDoc(requestRef,{
-
-   studentName:currentStudentName,
-   mobile:mobileAtSubmission,
-   completedClasses:currentCompletedClasses,
-
-   requestType:$("assistanceType").value,
-
-   status:"New",
-
-   termsAccepted:true,
-
-   termsTextVersion:"LL-DL-Disclaimer-v1",
-
-   termsAcceptedAt:serverTimestamp(),
-
-   requestedAt:serverTimestamp(),
-
-   submittedAtMs:submittedAt
-
-  });
-
-  if(currentMobile!==mobileAtSubmission)return;
-
-  assistanceCard.dataset.requestState="submitted";
-
-  carProgress.style.width="100%";
-  carThumb.style.left=getSliderLimits().max+"px";
-
-  showAssistanceSuccess();
-
- }catch(error){
-
-  console.error("Assistance submission error:",error);
-
-  assistanceCompleted=false;
-
-  assistanceResult.style.display="block";
-  assistanceResult.className="assist-result error";
-
-  assistanceResult.textContent=
-   "Unable to submit your request. Please check your internet connection and try again.";
-
-  resetAssistanceSlider();
-
- }finally{
-
-  assistanceSubmitting=false;
-  carThumb.style.pointerEvents="";
- }
 }
 
 
-/* INITIAL SLIDER STATE */
-
-resetAssistanceSlider();
-
-
-/* =========================================
-   DASHBOARD RENDER
-========================================= */
-
-function renderDashboard(student,mobile){
-
- if(currentMobile!==mobile)return;
-
- currentStudentName=value(student,"name","Student");
- currentStudentActive=student.notActive!==true;
-
- const logs=Array.isArray(student.attendanceLogs)?student.attendanceLogs:[];
- const total=Math.max(Number(value(student,"totalClasses",20))||20,1);
- const completed=logs.length;
- const left=Math.max(total-completed,0);
- const percent=Math.min(Math.round(completed/total*100),100);
- const classType=value(student,"classType","Group");
- const firstClassDate=getClassOneDate(logs);
-
- currentAdmissionDate=firstClassDate;
- currentCompletedClasses=completed;
-
- updateAttendanceTracker(firstClassDate,completed);
-
- // Check Firestore before showing the slider.
- updateAssistanceVisibility(completed);
-
- $("profileStudentName").textContent=currentStudentName;
-
- const defaultAvatar=getStudentAvatar({...student,mobile});
-
- $("studentProfileAvatar").src=defaultAvatar;
- $("userAvatar").src=defaultAvatar;
-
- $("studentProfileAvatar").onerror=()=>{
-  $("studentProfileAvatar").src="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student";
- };
-
- $("userAvatar").onerror=()=>{
-  $("userAvatar").src="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student";
- };
-
- const cached=getCachedPhoto(mobile);
-
- if(cached)applyProfilePhoto(mobile,cached);
-
- refreshProfilePhoto(mobile);
-
- $("studentId").textContent="A1-"+mobile.slice(-4);
-
- $("packageName").textContent=classType==="Personal"?"Personal Training":"Group Training";
-
- $("classType").textContent=classType;
-
- $("admissionDate").textContent=firstClassDate?formatDate(firstClassDate):"Not available";
-
- $("expectedEndDate").textContent=firstClassDate?formatDate(calculateEndingDate(firstClassDate)):"Not available";
-
- $("accountStatus").textContent=currentStudentActive?"Active":"Not Active";
-
- $("accountStatus").style.color=currentStudentActive?"var(--green)":"var(--red)";
-
- $("completedClasses").textContent=completed;
- $("remainingClasses").textContent=left;
- $("totalClasses").textContent=total;
-
- $("totalDistance").textContent=
-  (completed*(Number(value(student,"distancePerClass",5))||5))+" KM";
-
- $("progressPercent").textContent=percent+"%";
- $("progressBar").style.width=percent+"%";
- $("progressDone").textContent=completed+" classes completed";
- $("progressTotal").textContent=total+" total classes";
-
- renderHistory(logs);
-
- $("loginPanel").style.display="none";
- $("logoutButton").style.display="inline-flex";
-}
-
-
-/* =========================================
-   RESET DASHBOARD
-========================================= */
-
-function resetAssistanceFeature(){
-
- assistanceDragging=false;
- assistanceCompleted=false;
- assistanceTermsAccepted=false;
- assistancePointerId=null;
- assistanceSubmitting=false;
-
- closeAssistanceTerms();
-
- assistanceCard.style.display="none";
- assistanceResult.style.display="none";
- assistanceResult.textContent="";
-
- carSlider.style.display="block";
- carThumb.style.pointerEvents="";
- carTrack.style.opacity="1";
- carSliderText.textContent="READ TERMS & SLIDE TO SUBMIT";
-
- resetAssistanceSlider();
-}
-
-function resetDashboard(){
-
- currentMobile="";
- currentStudentName="";
- currentStudentActive=false;
- currentAdmissionDate=null;
- currentCompletedClasses=0;
-
- resetAssistanceFeature();
-
- $("loginPanel").style.display="block";
- $("profileStudentName").textContent="Student";
-
- const fallback="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student";
-
- $("studentProfileAvatar").src=fallback;
- $("userAvatar").src=fallback;
-
- ["studentId","classType","admissionDate","expectedEndDate","accountStatus"].forEach(id=>{
-  $(id).textContent="--";
- });
-
- $("packageName").textContent="Driving Training";
-
- ["completedClasses","remainingClasses","totalClasses","totalDistance"].forEach(id=>{
-  $(id).textContent="--";
- });
-
- $("progressPercent").textContent="0%";
- $("progressBar").style.width="0%";
- $("progressDone").textContent="0 completed";
- $("progressTotal").textContent="0 total";
-
- $("historyList").innerHTML=
-  '<div class="empty">Connect your account to view class history.</div>';
-
- $("historyCount").textContent="0 classes";
- $("uploadStatus").textContent="";
-
- $("logoutButton").style.display="none";
-}
-
-
-/* =========================================
-   LOGOUT
-========================================= */
-
-function logoutStudent(){
-
- if(!confirm("Are you sure you want to logout?"))return;
-
- if(unsubscribeStudent){
-  unsubscribeStudent();
-  unsubscribeStudent=null;
- }
-
- localStorage.removeItem(STORAGE_KEY);
-
- resetDashboard();
-
- $("manualLoginControls").style.display="flex";
- $("studentMobile").value="";
-
- showMessage(
-  "You have successfully logged out. Login again to continue.",
-  "var(--green)"
- );
-
- $("loginPanel").scrollIntoView({
-  behavior:"smooth",
-  block:"start"
- });
-}
-
-$("logoutButton").addEventListener("click",logoutStudent);
-
-function showManualLogin(message){
-
- $("loginPanel").style.display="block";
- $("manualLoginControls").style.display="flex";
-
- showMessage(message,"var(--red)");
-}
-
-
-/* =========================================
-   CONNECT STUDENT
-========================================= */
-
-function connectStudent(mobile){
-
- if(!/^[0-9]{10}$/.test(mobile)){
-  showManualLogin("Please enter a valid registered mobile number.");
-  return;
- }
-
- if(unsubscribeStudent){
-  unsubscribeStudent();
-  unsubscribeStudent=null;
- }
-
- currentMobile=mobile;
-
- const studentRef=doc(db,"studentData",mobile);
-
- unsubscribeStudent=onSnapshot(studentRef,snapshot=>{
-
-  if(currentMobile!==mobile)return;
-
-  if(!snapshot.exists()){
-
-   localStorage.removeItem(STORAGE_KEY);
-
-   resetDashboard();
-
-   showManualLogin("Student record not found. Please login again.");
-
-   return;
-  }
-
-  const student=snapshot.data();
-
-  if(student.notActive===true){
-
-   localStorage.removeItem(STORAGE_KEY);
-
-   resetDashboard();
-
-   showManualLogin("Your student account is inactive. Please contact your instructor.");
-
-   return;
-  }
-
-  $("loginPanel").style.display="none";
-  $("manualLoginControls").style.display="none";
-
-  renderDashboard(student,mobile);
-
- },error=>{
-
-  console.error("Student verification error:",error);
-
-  if(currentMobile!==mobile)return;
-
-  showManualLogin(
-   "Unable to verify your account. Check your internet connection or database permissions."
-  );
- });
-}
-
-
-/* =========================================
-   MANUAL LOGIN
-========================================= */
-
-$("studentMobile").addEventListener("input",function(){
- this.value=this.value.replace(/\D/g,"").slice(0,10);
-});
-
-$("loginButton").addEventListener("click",()=>{
-
- const mobile=$("studentMobile").value.trim();
-
- if(!/^[0-9]{10}$/.test(mobile)){
-  showManualLogin("Please enter a valid 10-digit mobile number.");
-  return;
- }
-
- localStorage.setItem(STORAGE_KEY,mobile);
-
- $("loginPanel").style.display="none";
-
- connectStudent(mobile);
-});
-
-$("studentMobile").addEventListener("keydown",e=>{
- if(e.key==="Enter")$("loginButton").click();
-});
-
-
-/* =========================================
-   AUTO LOGIN
-========================================= */
-
-const urlMobile=new URLSearchParams(location.search).get("mobile");
-const savedMobile=localStorage.getItem(STORAGE_KEY);
-const mobileToVerify=savedMobile||urlMobile;
-
-if(mobileToVerify&&/^[0-9]{10}$/.test(mobileToVerify)){
-
- $("loginPanel").style.display="none";
- $("manualLoginControls").style.display="none";
-
- connectStudent(mobileToVerify);
-
-}else{
-
- showManualLogin("Please login from the main website to access your dashboard.");
-}
-
-
-/* =========================================
-   WHATSAPP FEEDBACK
-========================================= */
-
-$("feedbackForm").addEventListener("submit",e=>{
-
- e.preventDefault();
-
- if(!currentMobile||!currentStudentActive){
-  alert("Please connect your active student account first.");
-  return;
- }
-
- const rating=$("rating").value;
- const message=$("feedbackText").value.trim();
-
- if(!rating||!message){
-  alert("Please select your rating and write your feedback.");
-  return;
- }
-
- const text=`STUDENT FEEDBACK - ABHINAASH A1 DRIVING
-
-Student Name: ${currentStudentName}
-Mobile: ${currentMobile}
-Rating: ${rating}/5
-
-Feedback:
-${message}`;
-
- window.open(
-  "https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(text),
-  "_blank"
- );
-});
-
-
-/* =========================================
-   ICONS
-========================================= */
-
-if(window.lucide){
- window.lucide.createIcons();
-}else{
- window.addEventListener("load",()=>{
-  if(window.lucide)window.lucide.createIcons();
- });
+/* SUCCESS UI */
+
+function showAssistanceSuccess() {
+  assistanceMain.style.display = "none";
+  assistanceSuccess.style.display = "block";
+  assistanceCard.style.display = "block";
 }
 
 </script>
+
 </body>
 </html>
