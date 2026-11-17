@@ -142,19 +142,55 @@ main{padding:27px 0 100px}
 .attendance-track-fill{height:100%;width:0;background:var(--green);border-radius:20px;transition:width .4s}
 .attendance-message{margin-top:12px;font-size:11px;line-height:1.7;color:var(--muted)}
 
-/* LL/DL SLIDER */
-.assistance-card{display:none;margin-bottom:20px;padding:20px;border-radius:19px;background:linear-gradient(135deg,#1C304A,#111A29);border:1px solid rgba(242,189,69,.3)}
-.assistance-card h2{font-size:17px;margin:10px 0 5px}
-.assistance-card p{font-size:11px;color:var(--muted);line-height:1.7}
-.assistance-label{display:inline-block;padding:6px 10px;background:rgba(242,189,69,.13);color:var(--gold);border-radius:20px;font-size:9px;font-weight:800;letter-spacing:1px}
-.assistance-select{width:100%;margin-top:14px;padding:12px;border-radius:10px;background:#080D18;color:white;border:1px solid var(--border);outline:none;font-size:11px}
-.car-slider{position:relative;height:60px;margin-top:17px;padding:5px;border-radius:40px;background:#26364D;border:1px solid rgba(255,255,255,.1);touch-action:pan-y;overflow:hidden}
-.car-slider-track{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#D8DFE9;font-size:10px;font-weight:700;pointer-events:none}
-.car-slider input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:grab;z-index:3;margin:0}
-.car-slider-thumb{position:absolute;top:5px;left:5px;width:48px;height:48px;display:grid;place-items:center;border-radius:50%;background:var(--gold);color:#171717;z-index:2;pointer-events:none;transition:left .08s linear}
-.car-slider-thumb svg{width:34px;height:34px}
-.assistance-result{display:none;margin-top:13px;padding:12px;border-radius:10px;background:rgba(53,201,138,.1);border:1px solid rgba(53,201,138,.25);color:var(--green);font-size:11px;line-height:1.6}
-.assistance-result.error{background:rgba(255,119,119,.1);border-color:rgba(255,119,119,.25);color:var(--red)}
+/* PREMIUM LL / DL ASSISTANCE */
+.assistance-card{
+ display:none;position:relative;overflow:hidden;
+ margin-bottom:20px;padding:22px;border-radius:22px;
+ background:radial-gradient(circle at 100% 0%,rgba(242,189,69,.15),transparent 42%),linear-gradient(145deg,#192B43,#0D1727);
+ border:1px solid rgba(242,189,69,.28);
+ box-shadow:0 15px 40px rgba(0,0,0,.22);
+}
+.assist-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.assist-eyebrow{font-size:9px;font-weight:800;letter-spacing:2px;color:var(--gold)}
+.assist-top h2{font-size:19px;margin:8px 0 5px}
+.assist-top p{font-size:10px;color:var(--muted);line-height:1.7}
+.assist-car-icon{width:55px;height:55px;flex-shrink:0;display:grid;place-items:center;border-radius:17px;background:rgba(242,189,69,.12);border:1px solid rgba(242,189,69,.2);font-size:27px}
+.assist-divider{height:1px;background:rgba(255,255,255,.08);margin:19px 0}
+.assist-select-label,.assist-slider-heading{display:block;font-size:9px;font-weight:800;letter-spacing:1px;color:var(--muted)}
+.assistance-select{width:100%;padding:14px;margin-top:9px;border-radius:12px;background:#0A1220;color:white;border:1px solid rgba(255,255,255,.1);outline:none;font-size:11px}
+.assist-slider-heading{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:22px 0 10px}
+.assist-secure{color:var(--green);font-size:8px;letter-spacing:0}
+.car-slider{height:66px;position:relative;padding:6px;overflow:hidden;border-radius:40px;background:linear-gradient(90deg,#26364D,#17263B);border:1px solid rgba(242,189,69,.24);box-shadow:inset 0 2px 8px rgba(0,0,0,.25);touch-action:none;user-select:none;-webkit-user-select:none}
+.car-slider-progress{position:absolute;top:0;left:0;bottom:0;width:0;border-radius:40px;background:linear-gradient(90deg,rgba(242,189,69,.08),rgba(242,189,69,.25));pointer-events:none}
+.car-slider-track{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:9px;color:#DCE4F0;font-size:9px;font-weight:800;letter-spacing:1px;pointer-events:none;transition:opacity .15s}
+.slider-arrows{color:var(--gold);font-size:20px;letter-spacing:0;animation:arrowMove 1s infinite ease-in-out}
+@keyframes arrowMove{0%,100%{transform:translateX(0);opacity:.5}50%{transform:translateX(5px);opacity:1}}
+.car-slider-thumb{position:absolute;left:6px;top:6px;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;z-index:2;background:linear-gradient(145deg,#FFE39B,#E6A92E);box-shadow:0 4px 15px rgba(242,189,69,.35);cursor:grab;touch-action:none}
+.car-slider-thumb:active{cursor:grabbing;transform:scale(1.04)}
+.car-slider-thumb svg{width:37px;height:37px}
+.assist-result{display:none;padding:13px;margin-top:14px;border-radius:12px;font-size:11px;line-height:1.7;color:var(--green);background:rgba(53,201,138,.1);border:1px solid rgba(53,201,138,.22)}
+.assist-result.error{color:var(--red);background:rgba(255,119,119,.1);border-color:rgba(255,119,119,.25)}
+.assist-footer{display:flex;justify-content:space-between;gap:8px;margin-top:17px;font-size:8px;letter-spacing:.8px;color:#78869B;font-weight:800}
+
+/* TERMS MODAL */
+.terms-overlay{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.78);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)}
+.terms-overlay.show{display:flex}
+.terms-modal{width:100%;max-width:430px;max-height:90vh;overflow-y:auto;padding:25px;border-radius:22px;background:linear-gradient(145deg,#19283D,#0D1523);border:1px solid rgba(242,189,69,.3);box-shadow:0 25px 80px rgba(0,0,0,.5);animation:modalAppear .25s ease}
+@keyframes modalAppear{from{opacity:0;transform:translateY(15px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.terms-modal-icon{width:48px;height:48px;display:grid;place-items:center;border-radius:15px;background:rgba(242,189,69,.12);font-size:23px;margin-bottom:17px}
+.terms-eyebrow{font-size:9px;font-weight:800;color:var(--gold);letter-spacing:1.5px}
+.terms-modal h2{font-size:22px;margin:7px 0}
+.terms-intro{font-size:11px;color:var(--muted);line-height:1.7}
+.terms-content{padding:16px;margin-top:16px;border-radius:13px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08)}
+.terms-content h3{font-size:12px;color:var(--gold);margin-bottom:9px}
+.terms-content p{font-size:10px;color:#D0D7E2;line-height:1.85;margin-bottom:10px}
+.terms-content p:last-child{margin-bottom:0}
+.terms-content .terms-highlight{padding:10px;border-radius:9px;color:var(--gold);background:rgba(242,189,69,.08)}
+.terms-checkbox{display:flex;align-items:flex-start;gap:10px;margin:18px 0;font-size:10px;color:#DCE4F0;line-height:1.7;cursor:pointer}
+.terms-checkbox input{width:17px;height:17px;margin-top:1px;accent-color:var(--gold);flex-shrink:0}
+#agreeTermsBtn{width:100%;padding:14px;border:0;border-radius:12px;background:linear-gradient(100deg,#F2BD45,#FFD978);color:#171717;font-size:11px;font-weight:900;letter-spacing:.5px;display:flex;justify-content:center;align-items:center;gap:10px}
+#agreeTermsBtn:disabled{opacity:.4;cursor:not-allowed}
+.terms-cancel{width:100%;padding:12px;margin-top:8px;background:transparent;border:0;color:var(--muted);font-size:10px}
 
 .quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 .quick-action{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 11px;display:flex;align-items:center;gap:10px}
@@ -182,6 +218,8 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
  .footer-inner{flex-direction:column;align-items:flex-start}
  .profile-avatar{width:68px;height:68px;min-width:68px}
  .history-data-grid{gap:7px}
+ .assistance-card{padding:17px}
+ .terms-modal{padding:20px}
 }
 @media(max-width:420px){.attendance-numbers{gap:5px}.attendance-number{padding:9px 6px}.attendance-number strong{font-size:18px}}
 </style>
@@ -246,22 +284,43 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
  <div class="stat-card"><div class="stat-icon"><i data-lucide="route"></i></div><strong id="totalDistance">--</strong><p>Total Practice Distance</p></div>
 </section>
 
-<!-- LL/DL ASSISTANCE SLIDER -->
+<!-- PREMIUM LL / DL ASSISTANCE -->
 <section class="assistance-card" id="assistanceCard">
- <span class="assistance-label">20 CLASSES COMPLETED</span>
- <h2>Ready for Your Next Driving Journey?</h2>
- <p>Interested in Learner's Licence (LL) or Driving Licence (DL)? Request assistance from ABHINAASH A1.</p>
+
+ <div class="assist-top">
+  <div>
+   <span class="assist-eyebrow">YOUR NEXT STEP</span>
+   <h2>Ready for Your LL & DL?</h2>
+   <p>Get connected with an independent licence service broker.</p>
+  </div>
+  <div class="assist-car-icon">🚘</div>
+ </div>
+
+ <div class="assist-divider"></div>
+
+ <label class="assist-select-label" for="assistanceType">SELECT YOUR REQUIREMENT</label>
 
  <select id="assistanceType" class="assistance-select">
-  <option value="Interested in LL and DL">I am interested in LL & DL</option>
-  <option value="Interested in DL">I am interested in DL</option>
-  <option value="Interested in LL">I am interested in LL</option>
-  <option value="Call me for LL and DL assistance">Call me for LL & DL assistance</option>
+  <option value="Interested in LL and DL">LL & DL Both</option>
+  <option value="Interested in DL">Driving Licence (DL)</option>
+  <option value="Interested in LL">Learner's Licence (LL)</option>
+  <option value="Call me for LL and DL assistance">Call Me for Assistance</option>
  </select>
 
- <div class="car-slider" id="carSlider">
-  <div class="car-slider-track">SLIDE TO SEND YOUR REQUEST →</div>
-  <div class="car-slider-thumb" id="carSliderThumb">
+ <div class="assist-slider-heading">
+  <span>CONFIRM YOUR REQUEST</span>
+  <span class="assist-secure">● Request Confirmation</span>
+ </div>
+
+ <div class="car-slider" id="carSlider" role="group" aria-label="Slide to submit LL and DL assistance request">
+  <div class="car-slider-progress" id="carSliderProgress"></div>
+
+  <div class="car-slider-track" id="carSliderTrack">
+   <span id="carSliderText">READ TERMS & SLIDE TO SUBMIT</span>
+   <span class="slider-arrows">› › ›</span>
+  </div>
+
+  <div class="car-slider-thumb" id="carSliderThumb" aria-label="Drag car to submit">
    <svg viewBox="0 0 64 40" fill="none">
     <path d="M8 25L13 13H47L56 25V31H8V25Z" fill="#171717"/>
     <path d="M19 13L23 5H40L46 13" stroke="#171717" stroke-width="3"/>
@@ -270,10 +329,67 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
     <path d="M22 8H39L43 13H18L22 8Z" fill="#F2BD45"/>
    </svg>
   </div>
-  <input type="range" id="assistanceSlider" min="0" max="100" value="0" aria-label="Slide to request assistance">
  </div>
- <div class="assistance-result" id="assistanceResult"></div>
+
+ <div class="assist-result" id="assistanceResult"></div>
+
+ <div class="assist-footer">
+  <span>ABHINAASH A1 DRIVING</span>
+  <span>LL / DL CONNECT SERVICE</span>
+ </div>
 </section>
+
+<!-- TERMS & CONDITIONS POPUP -->
+<div class="terms-overlay" id="termsModal" role="dialog" aria-modal="true" aria-labelledby="termsTitle">
+ <div class="terms-modal">
+
+  <div class="terms-modal-icon">⚖️</div>
+
+  <span class="terms-eyebrow">PLEASE READ CAREFULLY</span>
+  <h2 id="termsTitle">Terms & Conditions</h2>
+
+  <p class="terms-intro">
+   Before proceeding with LL / DL assistance, please understand the following:
+  </p>
+
+  <div class="terms-content">
+   <h3>Important Disclaimer</h3>
+
+   <p>
+    You are proceeding at your own risk. ABHINAASH A1 Driving Classes
+    is not responsible for any payments, dealings, services, delays,
+    disputes, or outcomes involving third-party brokers.
+   </p>
+
+   <p>
+    We only connect interested students with independent brokers who
+    handle Learner's Licence (LL) and Driving Licence (DL) related services.
+   </p>
+
+   <p>
+    Any agreement, payment, or transaction is strictly between you
+    and the broker. Please verify all details directly with the broker
+    before making any payment.
+   </p>
+
+   <p class="terms-highlight">
+    ABHINAASH A1 Driving Classes does not guarantee licence approval
+    or the outcome of any third-party service.
+   </p>
+  </div>
+
+  <label class="terms-checkbox">
+   <input type="checkbox" id="termsCheckbox">
+   <span>I have read and understood the Terms & Conditions. I agree to proceed.</span>
+  </label>
+
+  <button type="button" id="agreeTermsBtn" disabled>
+   I AGREE & CONTINUE <span>→</span>
+  </button>
+
+  <button type="button" id="cancelTermsBtn" class="terms-cancel">Cancel</button>
+ </div>
+</div>
 
 <section class="content-grid">
  <div class="panel">
@@ -360,12 +476,14 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
  <a href="student-account.html"><i data-lucide="user-round"></i>Account</a>
 </nav>
 
+<!-- PART 2 CONTINUES HERE -->
+
 <script type="module">
 import {initializeApp,getApps} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
 
 import {
  getFirestore,doc,onSnapshot,collection,
- setDoc,serverTimestamp
+ setDoc,getDoc,serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
 import {
@@ -385,6 +503,7 @@ const firebaseConfig={
 const WHATSAPP_NUMBER="918984225311";
 const STORAGE_KEY="a1_student_mobile";
 const PHOTO_CACHE_PREFIX="a1_profile_photo_";
+const ASSISTANCE_HIDE_AFTER=48*60*60*1000;
 
 const app=getApps().length?getApps()[0]:initializeApp(firebaseConfig);
 const db=getFirestore(app);
@@ -398,11 +517,21 @@ let currentStudentActive=false;
 let currentAdmissionDate=null;
 let currentCompletedClasses=0;
 let photoRequests=new Set();
+
 let assistanceSubmitting=false;
+let assistanceDragging=false;
+let assistanceCompleted=false;
+let assistanceTermsAccepted=false;
+let assistancePointerId=null;
 
 const holidaysRef=collection(db,"holidays");
 let attendanceHolidayDates=new Set();
 const excludedHolidayCategories=["Institute","National","Odisha","Local"];
+
+
+/* =========================================
+   HOLIDAYS
+========================================= */
 
 function getLocalToday(){
  const d=new Date();
@@ -441,20 +570,27 @@ function renderUpcomingHolidays(snapshot){
   const date=formatHolidayDate(h.date);
   const card=document.createElement("div");
   card.className="holiday-card";
+
   const dateBox=document.createElement("div");
   dateBox.className="holiday-date-box";
+
   const day=document.createElement("strong");
   day.textContent=date.day;
+
   const month=document.createElement("span");
   month.textContent=date.month;
+
   dateBox.append(day,month);
 
   const info=document.createElement("div");
   info.className="holiday-info";
+
   const title=document.createElement("strong");
   title.textContent=h.name||"Holiday";
+
   const fullDate=document.createElement("p");
   fullDate.textContent=date.full;
+
   info.append(title,fullDate);
 
   if(h.category){
@@ -463,6 +599,7 @@ function renderUpcomingHolidays(snapshot){
    category.textContent=h.category;
    info.appendChild(category);
   }
+
   card.append(dateBox,info);
   container.appendChild(card);
  });
@@ -470,16 +607,27 @@ function renderUpcomingHolidays(snapshot){
 
 onSnapshot(holidaysRef,snapshot=>{
  const docs=snapshot.docs.map(d=>d.data());
+
  attendanceHolidayDates=new Set(
   docs.filter(h=>excludedHolidayCategories.includes(h.category))
    .map(h=>h.date).filter(Boolean)
  );
+
  renderUpcomingHolidays(snapshot);
- if(currentStudentActive)updateAttendanceTracker(currentAdmissionDate,currentCompletedClasses);
+
+ if(currentStudentActive){
+  updateAttendanceTracker(currentAdmissionDate,currentCompletedClasses);
+ }
+
 },error=>{
  console.error("Holiday error:",error);
  $("upcomingHolidayList").textContent="Unable to load holidays.";
 });
+
+
+/* =========================================
+   COMMON HELPERS
+========================================= */
 
 function showMessage(message,color="var(--muted)"){
  const el=$("loginMessage");
@@ -495,16 +643,25 @@ function value(data,key,fallback=""){
 
 function formatDate(input){
  if(!input)return "--";
+
  if(input instanceof Date){
   if(Number.isNaN(input.getTime()))return "--";
   return input.toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"});
  }
+
  if(typeof input==="string"){
   const m=input.match(/^(\d{4})-(\d{2})-(\d{2})$/);
-  if(m)return new Date(+m[1],+m[2]-1,+m[3]).toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"});
+
+  if(m){
+   return new Date(+m[1],+m[2]-1,+m[3])
+    .toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"});
+  }
+
   return input;
  }
+
  if(input?.toDate)return formatDate(input.toDate());
+
  return String(input);
 }
 
@@ -514,6 +671,7 @@ function parseLog(log){
  const route=text.match(/Route:\s*([^|]+)/i);
  const distance=text.match(/Distance:\s*([^|]+)/i);
  const remark=text.match(/Remark:\s*(.*)$/i);
+
  return {
   date:parts[0]||"Date not recorded",
   time:(parts[1]||"").replace(/^—\s*/,""),
@@ -525,29 +683,35 @@ function parseLog(log){
 
 function parseAttendanceDate(log,referenceYear){
  const text=String(parseLog(log).date||"").trim();
+
  if(!text||text==="Date not recorded")return null;
 
  let m=text.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+
  if(m){
   const y=+m[1],mo=+m[2]-1,d=+m[3],date=new Date(y,mo,d);
   return date.getFullYear()===y&&date.getMonth()===mo&&date.getDate()===d?date:null;
  }
 
  m=text.match(/^(\d{1,2})[/-](\d{1,2})[/-](\d{4})$/);
+
  if(m){
   const d=+m[1],mo=+m[2]-1,y=+m[3],date=new Date(y,mo,d);
   return date.getFullYear()===y&&date.getMonth()===mo&&date.getDate()===d?date:null;
  }
 
  m=text.match(/^(\d{1,2})\s+([A-Za-z]+)(?:\s+(\d{4}))?/);
+
  if(m){
   const months=["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"];
   const mo=months.findIndex(x=>x===m[2].toLowerCase().slice(0,3));
   const y=Number(m[3]||referenceYear);
+
   if(mo>=0&&y){
    const date=new Date(y,mo,+m[1]);
    return date.getFullYear()===y&&date.getMonth()===mo&&date.getDate()===+m[1]?date:null;
   }
+
   return null;
  }
 
@@ -557,20 +721,27 @@ function parseAttendanceDate(log,referenceYear){
 
 function getClassOneDate(logs){
  if(!Array.isArray(logs)||!logs.length)return null;
+
  let year=null;
+
  for(const log of logs){
   const m=String(parseLog(log).date).match(/(?:^|\D)(20\d{2})(?:\D|$)/);
   if(m){year=+m[1];break;}
  }
+
  if(!year)year=new Date().getFullYear();
+
  const dates=logs.map(x=>parseAttendanceDate(x,year)).filter(Boolean);
+
  return dates.length?dates.reduce((a,b)=>b<a?b:a):null;
 }
 
 function calculateEndingDate(start){
  if(!start)return null;
+
  const end=new Date(start.getFullYear(),start.getMonth(),start.getDate());
  end.setDate(end.getDate()+30);
+
  return end;
 }
 
@@ -580,18 +751,32 @@ function toDateKey(date){
 
 function calculateExpectedWorkingDays(start,end){
  if(!start||!end)return 0;
+
  const current=new Date(start.getFullYear(),start.getMonth(),start.getDate());
  const last=new Date(end.getFullYear(),end.getMonth(),end.getDate());
+
  let count=0;
+
  while(current<=last){
   const day=current.getDay();
-  if(day!==0&&day!==6&&!attendanceHolidayDates.has(toDateKey(current)))count++;
+
+  if(day!==0&&day!==6&&!attendanceHolidayDates.has(toDateKey(current))){
+   count++;
+  }
+
   current.setDate(current.getDate()+1);
  }
+
  return count;
 }
 
+
+/* =========================================
+   ATTENDANCE TRACKER
+========================================= */
+
 function updateAttendanceTracker(admissionDate,completed){
+
  const expectedElement=$("expectedClasses");
  const actualElement=$("actualExpectedClasses");
  const gapElement=$("attendanceGap");
@@ -611,7 +796,12 @@ function updateAttendanceTracker(admissionDate,completed){
  }
 
  const today=new Date();
- const expected=calculateExpectedWorkingDays(admissionDate,new Date(today.getFullYear(),today.getMonth(),today.getDate()));
+
+ const expected=calculateExpectedWorkingDays(
+  admissionDate,
+  new Date(today.getFullYear(),today.getMonth(),today.getDate())
+ );
+
  const actual=Number(completed)||0;
  const gap=Math.max(expected-actual,0);
  const percentage=expected>0?Math.min(Math.round(actual/expected*100),100):100;
@@ -626,11 +816,13 @@ function updateAttendanceTracker(admissionDate,completed){
   status.className="attendance-status good";
   fill.style.background="var(--green)";
   message.textContent="Excellent! Your attendance is on schedule. Keep practising regularly.";
+
  }else if(gap<5){
   status.textContent="Behind Schedule";
   status.className="attendance-status warning";
   fill.style.background="var(--gold)";
   message.textContent=`You should have completed ${expected} classes by today, but you have completed ${actual}. You are ${gap} classes behind schedule.`;
+
  }else{
   status.textContent="Attendance Critical";
   status.className="attendance-status critical";
@@ -638,6 +830,11 @@ function updateAttendanceTracker(admissionDate,completed){
   message.textContent=`Your attendance is ${gap} classes behind schedule. Please contact your instructor.`;
  }
 }
+
+
+/* =========================================
+   PROFILE PHOTO
+========================================= */
 
 function getStudentAvatar(student){
  return "https://api.dicebear.com/9.x/avataaars/svg?seed="+encodeURIComponent(student.mobile||student.name||"A1Student");
@@ -647,59 +844,105 @@ function getCachedPhoto(mobile){
  try{return localStorage.getItem(PHOTO_CACHE_PREFIX+mobile)||"";}
  catch(e){return "";}
 }
+
 function cachePhoto(mobile,photo){
- try{if(photo)localStorage.setItem(PHOTO_CACHE_PREFIX+mobile,photo);}
- catch(e){console.warn(e);}
+ try{
+  if(photo)localStorage.setItem(PHOTO_CACHE_PREFIX+mobile,photo);
+ }catch(e){console.warn(e);}
 }
+
 function removeCachedPhoto(mobile){
  try{localStorage.removeItem(PHOTO_CACHE_PREFIX+mobile);}
  catch(e){console.warn(e);}
 }
+
 function applyProfilePhoto(mobile,photo){
  if(!photo||currentMobile!==mobile)return;
+
  $("studentProfileAvatar").src=photo;
  $("userAvatar").src=photo;
 }
 
 async function refreshProfilePhoto(mobile){
+
  if(photoRequests.has(mobile))return;
+
  photoRequests.add(mobile);
+
  try{
   const snapshot=await get(databaseRef(realtimeDB,"profilePhotos/"+mobile));
+
   if(currentMobile!==mobile)return;
+
   const photo=snapshot.exists()?snapshot.val()?.image||"":"";
-  if(photo){cachePhoto(mobile,photo);applyProfilePhoto(mobile,photo);}
-  else removeCachedPhoto(mobile);
- }catch(e){console.error("Photo refresh error:",e);}
- finally{photoRequests.delete(mobile);}
+
+  if(photo){
+   cachePhoto(mobile,photo);
+   applyProfilePhoto(mobile,photo);
+  }else{
+   removeCachedPhoto(mobile);
+  }
+
+ }catch(e){
+  console.error("Photo refresh error:",e);
+ }finally{
+  photoRequests.delete(mobile);
+ }
 }
 
 async function compressImage(file,maxSize=600,maxBytes=250*1024){
+
  return new Promise((resolve,reject)=>{
+
   const image=new Image();
   const url=URL.createObjectURL(file);
+
   image.onload=()=>{
    URL.revokeObjectURL(url);
+
    const scale=Math.min(1,maxSize/Math.max(image.width,image.height));
+
    const canvas=document.createElement("canvas");
    canvas.width=Math.max(1,Math.round(image.width*scale));
    canvas.height=Math.max(1,Math.round(image.height*scale));
+
    const ctx=canvas.getContext("2d");
-   if(!ctx){reject(new Error("Canvas unsupported"));return;}
+
+   if(!ctx){
+    reject(new Error("Canvas unsupported"));
+    return;
+   }
+
    ctx.fillStyle="#fff";
    ctx.fillRect(0,0,canvas.width,canvas.height);
    ctx.drawImage(image,0,0,canvas.width,canvas.height);
+
    let quality=.82;
+
    const make=()=>{
     canvas.toBlob(blob=>{
-     if(!blob){reject(new Error("Image compression failed"));return;}
-     if(blob.size>maxBytes&&quality>.35){quality=Math.max(.35,quality-.1);make();}
-     else resolve(blob);
+     if(!blob){
+      reject(new Error("Image compression failed"));
+      return;
+     }
+
+     if(blob.size>maxBytes&&quality>.35){
+      quality=Math.max(.35,quality-.1);
+      make();
+     }else{
+      resolve(blob);
+     }
     },"image/jpeg",quality);
    };
+
    make();
   };
-  image.onerror=()=>{URL.revokeObjectURL(url);reject(new Error("Unable to read image"));};
+
+  image.onerror=()=>{
+   URL.revokeObjectURL(url);
+   reject(new Error("Unable to read image"));
+  };
+
   image.src=url;
  });
 }
@@ -714,29 +957,59 @@ function blobToBase64(blob){
 }
 
 async function saveProfilePhoto(mobile,image,thumbnail){
+
  const originalRef=databaseRef(realtimeDB,"profilePhotos/"+mobile);
  const thumbRef=databaseRef(realtimeDB,"profilePhotoThumbnails/"+mobile);
+
  const existing=await get(originalRef);
+
  const showOnHomepage=existing.exists()&&existing.val()?.showOnHomepage===true;
+
  await update(originalRef,{image,updatedAt:Date.now()});
- await update(thumbRef,{thumbnail,showOnHomepage,updatedAt:Date.now()});
+
+ await update(thumbRef,{
+  thumbnail,
+  showOnHomepage,
+  updatedAt:Date.now()
+ });
 }
 
 $("changePhotoBtn").addEventListener("click",()=>{
- if(!currentMobile||!currentStudentActive){alert("Please connect your active student account first.");return;}
+ if(!currentMobile||!currentStudentActive){
+  alert("Please connect your active student account first.");
+  return;
+ }
+
  $("profilePhotoInput").click();
 });
 
 $("profilePhotoInput").addEventListener("change",async function(){
+
  const file=this.files?.[0];
  if(!file)return;
- if(!["image/jpeg","image/png","image/webp"].includes(file.type)){alert("Please select a JPG, PNG or WEBP image.");this.value="";return;}
- if(file.size>10*1024*1024){alert("Please select an image smaller than 10 MB.");this.value="";return;}
- if(!currentMobile||!currentStudentActive){alert("Your student account is not active.");this.value="";return;}
+
+ if(!["image/jpeg","image/png","image/webp"].includes(file.type)){
+  alert("Please select a JPG, PNG or WEBP image.");
+  this.value="";
+  return;
+ }
+
+ if(file.size>10*1024*1024){
+  alert("Please select an image smaller than 10 MB.");
+  this.value="";
+  return;
+ }
+
+ if(!currentMobile||!currentStudentActive){
+  alert("Your student account is not active.");
+  this.value="";
+  return;
+ }
 
  const mobile=currentMobile;
  const btn=$("changePhotoBtn");
  const status=$("uploadStatus");
+
  btn.disabled=true;
  btn.textContent="Compressing...";
  status.className="upload-status";
@@ -745,29 +1018,48 @@ $("profilePhotoInput").addEventListener("change",async function(){
  try{
   const blob=await compressImage(file,600,250*1024);
   const image=await blobToBase64(blob);
+
   const thumb=await compressImage(file,240,40*1024);
   const thumbnail=await blobToBase64(thumb);
+
   if(currentMobile!==mobile)throw new Error("Student account changed.");
+
   status.textContent="Uploading photo...";
+
   await saveProfilePhoto(mobile,image,thumbnail);
+
   cachePhoto(mobile,image);
   applyProfilePhoto(mobile,image);
+
   status.className="upload-status success";
   status.textContent="Photo updated successfully.";
+
  }catch(e){
+
   status.className="upload-status error";
   status.textContent="Upload failed: "+e.message;
+
  }finally{
+
   btn.disabled=false;
   btn.textContent="Change Photo";
   this.value="";
  }
 });
 
+
+/* =========================================
+   CLASS HISTORY
+========================================= */
+
 function renderHistory(logs){
+
  const container=$("historyList");
+
  container.replaceChildren();
+
  $("historyCount").textContent=logs.length+" classes";
+
  if(!logs.length){
   const empty=document.createElement("div");
   empty.className="empty";
@@ -777,133 +1069,500 @@ function renderHistory(logs){
  }
 
  [...logs].reverse().forEach((log,index)=>{
+
   const parsed=parseLog(log);
+
   const item=document.createElement("div");
   item.className="history-item";
+
   const dot=document.createElement("span");
   dot.className="history-dot";
+
   const card=document.createElement("div");
   card.className="history-card";
+
   const head=document.createElement("div");
   head.className="history-card-head";
+
   const titleWrap=document.createElement("div");
+
   const title=document.createElement("div");
   title.className="history-class-title";
   title.textContent="Driving Class "+(logs.length-index);
+
   const date=document.createElement("div");
   date.className="history-date";
   date.textContent="📅 "+parsed.date;
+
   const time=document.createElement("div");
   time.className="history-time";
   time.textContent=parsed.time?"⏰ "+parsed.time:"Time not recorded";
+
   titleWrap.append(title,date,time);
+
   const badge=document.createElement("span");
   badge.className="history-badge";
   badge.textContent="✓ COMPLETED";
+
   head.append(titleWrap,badge);
 
   const grid=document.createElement("div");
   grid.className="history-data-grid";
+
   const route=document.createElement("div");
   route.className="history-data";
+
   const routeLabel=document.createElement("small");
   routeLabel.textContent="📍 Training Route";
+
   const routeValue=document.createElement("strong");
   routeValue.textContent=parsed.route;
+
   route.append(routeLabel,routeValue);
+
   const distance=document.createElement("div");
   distance.className="history-data";
+
   const distanceLabel=document.createElement("small");
   distanceLabel.textContent="🚗 Practice Distance";
+
   const distanceValue=document.createElement("strong");
   distanceValue.textContent=parsed.distance;
+
   distance.append(distanceLabel,distanceValue);
+
   grid.append(route,distance);
   card.append(head,grid);
 
   if(parsed.remark){
+
    const box=document.createElement("div");
    box.className="history-remark";
+
    const label=document.createElement("small");
    label.textContent="✦ INSTRUCTOR REMARK";
+
    const text=document.createElement("p");
    text.textContent=parsed.remark;
+
    box.append(label,text);
    card.appendChild(box);
+
   }else{
+
    const noRemark=document.createElement("div");
    noRemark.className="history-no-remark";
    noRemark.textContent="No instructor remark for this class.";
+
    card.appendChild(noRemark);
   }
+
   item.append(dot,card);
   container.appendChild(item);
  });
 }
 
-/* SLIDER VISIBILITY */
-function updateAssistanceVisibility(completed){
- const card=$("assistanceCard");
- card.style.display=currentStudentActive&&completed>=20?"block":"none";
+
+/* =========================================
+   LL / DL ASSISTANCE
+========================================= */
+
+const assistanceCard=$("assistanceCard");
+const termsModal=$("termsModal");
+const termsCheckbox=$("termsCheckbox");
+const agreeTermsBtn=$("agreeTermsBtn");
+const cancelTermsBtn=$("cancelTermsBtn");
+
+const carSlider=$("carSlider");
+const carThumb=$("carSliderThumb");
+const carTrack=$("carSliderTrack");
+const carSliderText=$("carSliderText");
+const carProgress=$("carSliderProgress");
+const assistanceResult=$("assistanceResult");
+
+function closeAssistanceTerms(){
+ termsModal.classList.remove("show");
+ document.body.style.overflow="";
 }
 
-/* SUBMIT REQUEST TO FIRESTORE */
-const slider=$("assistanceSlider");
-const thumb=$("carSliderThumb");
-const result=$("assistanceResult");
+function openAssistanceTerms(){
 
-slider.addEventListener("input",()=>{
- const val=Number(slider.value);
- const track=$("carSlider");
- const maxLeft=track.clientWidth-58;
- thumb.style.left=(5+(maxLeft-5)*(val/100))+"px";
- if(val>=100)submitAssistanceRequest();
+ if(
+  !currentMobile||
+  !currentStudentActive||
+  currentCompletedClasses<20||
+  assistanceCompleted||
+  assistanceSubmitting
+ ){
+  return;
+ }
+
+ termsCheckbox.checked=false;
+ agreeTermsBtn.disabled=true;
+
+ termsModal.classList.add("show");
+ document.body.style.overflow="hidden";
+}
+
+termsCheckbox.addEventListener("change",()=>{
+ agreeTermsBtn.disabled=!termsCheckbox.checked;
 });
 
+cancelTermsBtn.addEventListener("click",closeAssistanceTerms);
+
+termsModal.addEventListener("click",event=>{
+ if(event.target===termsModal)closeAssistanceTerms();
+});
+
+agreeTermsBtn.addEventListener("click",()=>{
+
+ if(!termsCheckbox.checked)return;
+
+ assistanceTermsAccepted=true;
+
+ closeAssistanceTerms();
+
+ carSlider.scrollIntoView({
+  behavior:"smooth",
+  block:"center"
+ });
+
+ carSliderText.textContent="NOW SLIDE THE CAR TO SUBMIT";
+});
+
+
+/* SLIDER LIMITS */
+
+function getSliderLimits(){
+
+ return {
+  min:6,
+  max:Math.max(6,carSlider.clientWidth-carThumb.offsetWidth-6)
+ };
+}
+
+function resetAssistanceSlider(){
+
+ const limits=getSliderLimits();
+
+ carThumb.style.left=limits.min+"px";
+ carProgress.style.width="0%";
+ carTrack.style.opacity="1";
+}
+
+function moveAssistanceCar(clientX){
+
+ const rect=carSlider.getBoundingClientRect();
+ const limits=getSliderLimits();
+
+ let left=clientX-rect.left-carThumb.offsetWidth/2;
+
+ left=Math.max(limits.min,Math.min(limits.max,left));
+
+ carThumb.style.left=left+"px";
+
+ const percentage=(left-limits.min)/(limits.max-limits.min)*100;
+
+ carProgress.style.width=percentage+"%";
+ carTrack.style.opacity=String(Math.max(.1,1-percentage/100));
+
+ if(percentage>=98&&!assistanceCompleted){
+  assistanceCompleted=true;
+  assistanceDragging=false;
+  submitAssistanceRequest();
+ }
+}
+
+
+/* POINTER / TOUCH DRAG */
+
+carThumb.addEventListener("pointerdown",event=>{
+
+ if(
+  !assistanceTermsAccepted||
+  assistanceCompleted||
+  assistanceSubmitting||
+  !currentStudentActive
+ ){
+  return;
+ }
+
+ event.preventDefault();
+
+ assistanceDragging=true;
+ assistancePointerId=event.pointerId;
+
+ try{
+  carThumb.setPointerCapture(event.pointerId);
+ }catch(error){
+  console.warn("Pointer capture unavailable:",error);
+ }
+});
+
+carThumb.addEventListener("pointermove",event=>{
+
+ if(!assistanceDragging||event.pointerId!==assistancePointerId)return;
+
+ event.preventDefault();
+ moveAssistanceCar(event.clientX);
+});
+
+function stopAssistanceDragging(event){
+
+ if(
+  !assistanceDragging||
+  (event&&event.pointerId!==assistancePointerId)
+ ){
+  return;
+ }
+
+ assistanceDragging=false;
+ assistancePointerId=null;
+
+ if(!assistanceCompleted){
+  resetAssistanceSlider();
+ }
+}
+
+carThumb.addEventListener("pointerup",stopAssistanceDragging);
+carThumb.addEventListener("pointercancel",stopAssistanceDragging);
+
+
+/* FIRESTORE REQUEST HELPERS */
+
+function getAssistanceRequestRef(mobile){
+ return doc(db,"dlLlAssistanceRequests",mobile);
+}
+
+function getRequestTime(data){
+
+ if(Number.isFinite(Number(data?.submittedAtMs))&&Number(data.submittedAtMs)>0){
+  return Number(data.submittedAtMs);
+ }
+
+ if(data?.requestedAt?.toMillis){
+  return data.requestedAt.toMillis();
+ }
+
+ if(data?.requestedAt?.seconds){
+  return data.requestedAt.seconds*1000;
+ }
+
+ return 0;
+}
+
+function showAssistanceSuccess(){
+
+ assistanceCompleted=true;
+ assistanceTermsAccepted=true;
+
+ carSlider.style.display="none";
+
+ assistanceResult.style.display="block";
+ assistanceResult.className="assist-result";
+
+ assistanceResult.textContent=
+  "✓ Your request has already been submitted successfully. Our team will contact you.";
+
+}
+
+function hideAssistanceCard(){
+ assistanceCard.style.display="none";
+}
+
+async function checkExistingAssistanceRequest(mobile){
+
+ const requestRef=getAssistanceRequestRef(mobile);
+
+ try{
+
+  const snapshot=await getDoc(requestRef);
+
+  if(currentMobile!==mobile)return;
+
+  if(!snapshot.exists()){
+   assistanceCard.dataset.requestState="not-submitted";
+   return;
+  }
+
+  const data=snapshot.data();
+  const submittedAt=getRequestTime(data);
+
+  if(!submittedAt){
+   // Existing record without a usable timestamp:
+   // keep it hidden rather than allow a duplicate request.
+   assistanceCard.dataset.requestState="submitted";
+   hideAssistanceCard();
+   return;
+  }
+
+  const age=Date.now()-submittedAt;
+
+  if(age>=ASSISTANCE_HIDE_AFTER){
+   assistanceCard.dataset.requestState="expired";
+   hideAssistanceCard();
+   return;
+  }
+
+  assistanceCard.dataset.requestState="submitted";
+  showAssistanceSuccess();
+
+ }catch(error){
+
+  console.error("Assistance request check error:",error);
+
+  if(currentMobile!==mobile)return;
+
+  assistanceCard.dataset.requestState="check-error";
+  assistanceResult.style.display="block";
+  assistanceResult.className="assist-result error";
+  assistanceResult.textContent=
+   "Unable to check your previous assistance request. Please refresh or contact the institute.";
+
+  // Do not allow a new request if the previous request cannot be checked.
+  carSlider.style.display="none";
+ }
+}
+
+
+/* SHOW FEATURE ONLY AFTER 20 CLASSES */
+
+async function updateAssistanceVisibility(completed){
+
+ if(!currentMobile||!currentStudentActive||Number(completed)<20){
+  hideAssistanceCard();
+  return;
+ }
+
+ assistanceCard.style.display="block";
+
+ const mobile=currentMobile;
+
+ assistanceCard.dataset.requestState="checking";
+
+ carSlider.style.display="block";
+ assistanceResult.style.display="none";
+
+ await checkExistingAssistanceRequest(mobile);
+}
+
+
+/* SUBMIT REQUEST */
+
 async function submitAssistanceRequest(){
+
  if(assistanceSubmitting)return;
 
- if(!currentMobile||!currentStudentActive||currentCompletedClasses<20){
-  slider.value=0;
-  thumb.style.left="5px";
+ if(
+  !currentMobile||
+  !currentStudentActive||
+  currentCompletedClasses<20||
+  !assistanceTermsAccepted
+ ){
+  assistanceCompleted=false;
+  resetAssistanceSlider();
   return;
  }
 
  assistanceSubmitting=true;
- slider.disabled=true;
- result.style.display="block";
- result.className="assistance-result";
- result.textContent="Submitting your request...";
+
+ carThumb.style.pointerEvents="none";
+
+ assistanceResult.style.display="block";
+ assistanceResult.className="assist-result";
+ assistanceResult.textContent="Submitting your request...";
+
+ const mobileAtSubmission=currentMobile;
+ const submittedAt=Date.now();
 
  try{
-  const requestRef=doc(db,"dlLlAssistanceRequests",currentMobile);
+
+  const requestRef=getAssistanceRequestRef(mobileAtSubmission);
+
+  // Check again to avoid overwriting an existing request.
+  const existing=await getDoc(requestRef);
+
+  if(currentMobile!==mobileAtSubmission)return;
+
+  if(existing.exists()){
+
+   const existingTime=getRequestTime(existing.data());
+
+   if(!existingTime||Date.now()-existingTime<ASSISTANCE_HIDE_AFTER){
+    showAssistanceSuccess();
+    return;
+   }
+
+   // An expired request is not overwritten.
+   // Keep the original request history intact.
+   hideAssistanceCard();
+   return;
+  }
 
   await setDoc(requestRef,{
+
    studentName:currentStudentName,
-   mobile:currentMobile,
+   mobile:mobileAtSubmission,
    completedClasses:currentCompletedClasses,
+
    requestType:$("assistanceType").value,
+
    status:"New",
-   requestedAt:serverTimestamp()
+
+   termsAccepted:true,
+
+   termsTextVersion:"LL-DL-Disclaimer-v1",
+
+   termsAcceptedAt:serverTimestamp(),
+
+   requestedAt:serverTimestamp(),
+
+   submittedAtMs:submittedAt
+
   });
 
-  result.textContent="✓ Your request has been submitted successfully! Our team will contact you.";
-  slider.style.display="none";
+  if(currentMobile!==mobileAtSubmission)return;
+
+  assistanceCard.dataset.requestState="submitted";
+
+  carProgress.style.width="100%";
+  carThumb.style.left=getSliderLimits().max+"px";
+
+  showAssistanceSuccess();
 
  }catch(error){
-  console.error("Assistance request error:",error);
-  result.textContent="Unable to submit your request. Please try again.";
-  result.className="assistance-result error";
-  slider.value=0;
-  thumb.style.left="5px";
-  slider.disabled=false;
+
+  console.error("Assistance submission error:",error);
+
+  assistanceCompleted=false;
+
+  assistanceResult.style.display="block";
+  assistanceResult.className="assist-result error";
+
+  assistanceResult.textContent=
+   "Unable to submit your request. Please check your internet connection and try again.";
+
+  resetAssistanceSlider();
+
  }finally{
+
   assistanceSubmitting=false;
+  carThumb.style.pointerEvents="";
  }
 }
 
-/* RENDER DASHBOARD */
+
+/* INITIAL SLIDER STATE */
+
+resetAssistanceSlider();
+
+
+/* =========================================
+   DASHBOARD RENDER
+========================================= */
+
 function renderDashboard(student,mobile){
+
  if(currentMobile!==mobile)return;
 
  currentStudentName=value(student,"name","Student");
@@ -921,36 +1580,51 @@ function renderDashboard(student,mobile){
  currentCompletedClasses=completed;
 
  updateAttendanceTracker(firstClassDate,completed);
+
+ // Check Firestore before showing the slider.
  updateAssistanceVisibility(completed);
 
  $("profileStudentName").textContent=currentStudentName;
+
  const defaultAvatar=getStudentAvatar({...student,mobile});
+
  $("studentProfileAvatar").src=defaultAvatar;
  $("userAvatar").src=defaultAvatar;
 
  $("studentProfileAvatar").onerror=()=>{
   $("studentProfileAvatar").src="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student";
  };
+
  $("userAvatar").onerror=()=>{
   $("userAvatar").src="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student";
  };
 
  const cached=getCachedPhoto(mobile);
+
  if(cached)applyProfilePhoto(mobile,cached);
+
  refreshProfilePhoto(mobile);
 
  $("studentId").textContent="A1-"+mobile.slice(-4);
+
  $("packageName").textContent=classType==="Personal"?"Personal Training":"Group Training";
+
  $("classType").textContent=classType;
+
  $("admissionDate").textContent=firstClassDate?formatDate(firstClassDate):"Not available";
+
  $("expectedEndDate").textContent=firstClassDate?formatDate(calculateEndingDate(firstClassDate)):"Not available";
+
  $("accountStatus").textContent=currentStudentActive?"Active":"Not Active";
+
  $("accountStatus").style.color=currentStudentActive?"var(--green)":"var(--red)";
 
  $("completedClasses").textContent=completed;
  $("remainingClasses").textContent=left;
  $("totalClasses").textContent=total;
- $("totalDistance").textContent=(completed*(Number(value(student,"distancePerClass",5))||5))+" KM";
+
+ $("totalDistance").textContent=
+  (completed*(Number(value(student,"distancePerClass",5))||5))+" KM";
 
  $("progressPercent").textContent=percent+"%";
  $("progressBar").style.width=percent+"%";
@@ -958,147 +1632,259 @@ function renderDashboard(student,mobile){
  $("progressTotal").textContent=total+" total classes";
 
  renderHistory(logs);
+
  $("loginPanel").style.display="none";
  $("logoutButton").style.display="inline-flex";
 }
 
-/* RESET */
+
+/* =========================================
+   RESET DASHBOARD
+========================================= */
+
+function resetAssistanceFeature(){
+
+ assistanceDragging=false;
+ assistanceCompleted=false;
+ assistanceTermsAccepted=false;
+ assistancePointerId=null;
+ assistanceSubmitting=false;
+
+ closeAssistanceTerms();
+
+ assistanceCard.style.display="none";
+ assistanceResult.style.display="none";
+ assistanceResult.textContent="";
+
+ carSlider.style.display="block";
+ carThumb.style.pointerEvents="";
+ carTrack.style.opacity="1";
+ carSliderText.textContent="READ TERMS & SLIDE TO SUBMIT";
+
+ resetAssistanceSlider();
+}
+
 function resetDashboard(){
+
  currentMobile="";
  currentStudentName="";
  currentStudentActive=false;
  currentAdmissionDate=null;
  currentCompletedClasses=0;
 
- updateAssistanceVisibility(0);
- $("assistanceResult").style.display="none";
- $("assistanceSlider").style.display="block";
- $("assistanceSlider").disabled=false;
- $("assistanceSlider").value=0;
- $("carSliderThumb").style.left="5px";
+ resetAssistanceFeature();
 
  $("loginPanel").style.display="block";
  $("profileStudentName").textContent="Student";
 
  const fallback="https://api.dicebear.com/9.x/avataaars/svg?seed=A1Student";
+
  $("studentProfileAvatar").src=fallback;
  $("userAvatar").src=fallback;
 
- ["studentId","classType","admissionDate","expectedEndDate","accountStatus"].forEach(id=>$(id).textContent="--");
+ ["studentId","classType","admissionDate","expectedEndDate","accountStatus"].forEach(id=>{
+  $(id).textContent="--";
+ });
+
  $("packageName").textContent="Driving Training";
- ["completedClasses","remainingClasses","totalClasses","totalDistance"].forEach(id=>$(id).textContent="--");
+
+ ["completedClasses","remainingClasses","totalClasses","totalDistance"].forEach(id=>{
+  $(id).textContent="--";
+ });
 
  $("progressPercent").textContent="0%";
  $("progressBar").style.width="0%";
  $("progressDone").textContent="0 completed";
  $("progressTotal").textContent="0 total";
- $("historyList").innerHTML='<div class="empty">Connect your account to view class history.</div>';
+
+ $("historyList").innerHTML=
+  '<div class="empty">Connect your account to view class history.</div>';
+
  $("historyCount").textContent="0 classes";
  $("uploadStatus").textContent="";
+
  $("logoutButton").style.display="none";
 }
 
-/* LOGOUT */
+
+/* =========================================
+   LOGOUT
+========================================= */
+
 function logoutStudent(){
+
  if(!confirm("Are you sure you want to logout?"))return;
- if(unsubscribeStudent){unsubscribeStudent();unsubscribeStudent=null;}
+
+ if(unsubscribeStudent){
+  unsubscribeStudent();
+  unsubscribeStudent=null;
+ }
+
  localStorage.removeItem(STORAGE_KEY);
+
  resetDashboard();
+
  $("manualLoginControls").style.display="flex";
  $("studentMobile").value="";
- showMessage("You have successfully logged out. Login again to continue.","var(--green)");
- $("loginPanel").scrollIntoView({behavior:"smooth",block:"start"});
+
+ showMessage(
+  "You have successfully logged out. Login again to continue.",
+  "var(--green)"
+ );
+
+ $("loginPanel").scrollIntoView({
+  behavior:"smooth",
+  block:"start"
+ });
 }
+
 $("logoutButton").addEventListener("click",logoutStudent);
 
 function showManualLogin(message){
+
  $("loginPanel").style.display="block";
  $("manualLoginControls").style.display="flex";
+
  showMessage(message,"var(--red)");
 }
 
-/* CONNECT STUDENT */
+
+/* =========================================
+   CONNECT STUDENT
+========================================= */
+
 function connectStudent(mobile){
+
  if(!/^[0-9]{10}$/.test(mobile)){
   showManualLogin("Please enter a valid registered mobile number.");
   return;
  }
 
- if(unsubscribeStudent){unsubscribeStudent();unsubscribeStudent=null;}
+ if(unsubscribeStudent){
+  unsubscribeStudent();
+  unsubscribeStudent=null;
+ }
+
  currentMobile=mobile;
 
  const studentRef=doc(db,"studentData",mobile);
 
  unsubscribeStudent=onSnapshot(studentRef,snapshot=>{
+
   if(currentMobile!==mobile)return;
 
   if(!snapshot.exists()){
+
    localStorage.removeItem(STORAGE_KEY);
+
    resetDashboard();
+
    showManualLogin("Student record not found. Please login again.");
+
    return;
   }
 
   const student=snapshot.data();
+
   if(student.notActive===true){
+
    localStorage.removeItem(STORAGE_KEY);
+
    resetDashboard();
+
    showManualLogin("Your student account is inactive. Please contact your instructor.");
+
    return;
   }
 
   $("loginPanel").style.display="none";
   $("manualLoginControls").style.display="none";
+
   renderDashboard(student,mobile);
 
  },error=>{
+
   console.error("Student verification error:",error);
+
   if(currentMobile!==mobile)return;
-  showManualLogin("Unable to verify your account. Check your internet connection or database permissions.");
+
+  showManualLogin(
+   "Unable to verify your account. Check your internet connection or database permissions."
+  );
  });
 }
 
-/* MANUAL LOGIN */
+
+/* =========================================
+   MANUAL LOGIN
+========================================= */
+
 $("studentMobile").addEventListener("input",function(){
  this.value=this.value.replace(/\D/g,"").slice(0,10);
 });
+
 $("loginButton").addEventListener("click",()=>{
+
  const mobile=$("studentMobile").value.trim();
+
  if(!/^[0-9]{10}$/.test(mobile)){
   showManualLogin("Please enter a valid 10-digit mobile number.");
   return;
  }
+
  localStorage.setItem(STORAGE_KEY,mobile);
+
  $("loginPanel").style.display="none";
+
  connectStudent(mobile);
 });
+
 $("studentMobile").addEventListener("keydown",e=>{
  if(e.key==="Enter")$("loginButton").click();
 });
 
-/* AUTO LOGIN */
+
+/* =========================================
+   AUTO LOGIN
+========================================= */
+
 const urlMobile=new URLSearchParams(location.search).get("mobile");
 const savedMobile=localStorage.getItem(STORAGE_KEY);
 const mobileToVerify=savedMobile||urlMobile;
 
 if(mobileToVerify&&/^[0-9]{10}$/.test(mobileToVerify)){
+
  $("loginPanel").style.display="none";
  $("manualLoginControls").style.display="none";
+
  connectStudent(mobileToVerify);
+
 }else{
+
  showManualLogin("Please login from the main website to access your dashboard.");
 }
 
-/* WHATSAPP FEEDBACK */
+
+/* =========================================
+   WHATSAPP FEEDBACK
+========================================= */
+
 $("feedbackForm").addEventListener("submit",e=>{
+
  e.preventDefault();
+
  if(!currentMobile||!currentStudentActive){
   alert("Please connect your active student account first.");
   return;
  }
+
  const rating=$("rating").value;
  const message=$("feedbackText").value.trim();
- if(!rating||!message){alert("Please select your rating and write your feedback.");return;}
+
+ if(!rating||!message){
+  alert("Please select your rating and write your feedback.");
+  return;
+ }
 
  const text=`STUDENT FEEDBACK - ABHINAASH A1 DRIVING
 
@@ -1109,12 +1895,25 @@ Rating: ${rating}/5
 Feedback:
 ${message}`;
 
- window.open("https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(text),"_blank");
+ window.open(
+  "https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(text),
+  "_blank"
+ );
 });
 
-/* ICONS */
-if(window.lucide)window.lucide.createIcons();
-else window.addEventListener("load",()=>{if(window.lucide)window.lucide.createIcons();});
+
+/* =========================================
+   ICONS
+========================================= */
+
+if(window.lucide){
+ window.lucide.createIcons();
+}else{
+ window.addEventListener("load",()=>{
+  if(window.lucide)window.lucide.createIcons();
+ });
+}
+
 </script>
 </body>
 </html>
