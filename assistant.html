@@ -1,0 +1,560 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A One | DL & LL Assistance</title>
+
+<style>
+:root{
+ --navy:#111827;
+ --navy2:#202f46;
+ --gold:#f5b942;
+ --bg:#f4f6fa;
+ --green:#159b62;
+ --text:#182235;
+ --muted:#8490a2;
+ --border:#e7ebf1;
+}
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family:Arial,sans-serif;
+ background:var(--bg);
+ color:var(--text);
+}
+button,input{font:inherit}
+.header{
+ background:linear-gradient(125deg,#101827,#263751);
+ color:white;
+ padding:23px 17px 28px;
+}
+.header-inner,.container{
+ max-width:950px;
+ margin:auto;
+}
+.brand{display:flex;align-items:center;gap:11px}
+.logo{
+ width:45px;height:45px;
+ background:var(--gold);
+ border-radius:13px;
+ display:grid;place-items:center;
+ color:#111827;font-size:20px;font-weight:900;
+}
+.brand-name{font-size:14px;font-weight:900;letter-spacing:1px}
+.brand-sub{font-size:10px;color:#c1cad7;margin-top:4px}
+.header-title{margin-top:26px}
+.header-title h1{margin:0;font-size:25px}
+.header-title p{
+ color:#c1cad7;font-size:12px;line-height:1.6;
+ margin:8px 0 0;
+}
+.container{padding:20px 15px 45px}
+.stats{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:12px;
+}
+.stat{
+ background:white;border:1px solid var(--border);
+ border-radius:15px;padding:16px;
+}
+.stat-number{font-size:27px;font-weight:900}
+.stat-label{font-size:11px;color:var(--muted);margin-top:5px}
+.toolbar{
+ display:flex;gap:10px;margin:21px 0 14px;
+}
+.search-wrap{flex:1;position:relative}
+.search-wrap input{
+ width:100%;padding:14px 14px 14px 38px;
+ border:1px solid var(--border);
+ border-radius:12px;background:white;
+ outline:none;font-size:13px;
+}
+.search-icon{
+ position:absolute;left:14px;top:13px;color:#8b95a5;
+}
+.refresh{
+ border:0;border-radius:12px;padding:13px 16px;
+ background:var(--navy);color:white;
+ font-size:12px;font-weight:800;cursor:pointer;
+}
+.refresh:disabled{opacity:.6}
+.privacy{
+ background:#fff8e8;color:#8b6414;
+ border:1px solid #f4e4bd;padding:12px 14px;
+ border-radius:12px;font-size:11px;line-height:1.6;
+ margin-bottom:18px;
+}
+.section-heading{
+ display:flex;justify-content:space-between;
+ align-items:center;margin:18px 0 12px;
+}
+.section-heading h2{font-size:15px;margin:0}
+.section-heading span{font-size:11px;color:var(--muted)}
+.student-list{display:grid;gap:12px}
+.student-card{
+ background:white;border:1px solid var(--border);
+ border-radius:16px;padding:14px;
+ display:flex;align-items:center;gap:13px;
+ box-shadow:0 5px 18px #14213a05;
+}
+.avatar{
+ width:56px;height:56px;border-radius:50%;
+ object-fit:cover;background:#edf0f5;flex-shrink:0;
+}
+.student-info{flex:1;min-width:0}
+.student-name{
+ font-size:14px;font-weight:800;margin-bottom:6px;
+ overflow-wrap:anywhere;
+}
+.class-tag{
+ display:inline-block;background:#e8f8ef;
+ color:#12804e;padding:5px 8px;
+ border-radius:20px;font-size:10px;font-weight:900;
+}
+.decision-tag{
+ display:inline-block;background:#eff4ff;
+ color:#355a9c;padding:5px 8px;
+ border-radius:20px;font-size:10px;font-weight:800;
+ margin-top:7px;
+}
+.chat-status{display:block;font-size:10px;color:#929aaa;margin-top:7px}
+.chat-btn{
+ background:var(--navy);color:white;border:0;
+ border-radius:10px;padding:11px 13px;
+ font-size:11px;font-weight:900;white-space:nowrap;
+ cursor:pointer;
+}
+.chat-btn.started{background:#e8f8ef;color:#12804e}
+.chat-btn:disabled{opacity:.7;cursor:default}
+.loading,.empty,.error{
+ text-align:center;background:white;padding:32px 16px;
+ border:1px solid var(--border);border-radius:15px;
+ color:#7d8797;font-size:13px;line-height:1.7;
+}
+.error{color:#b42318}
+.footer{
+ text-align:center;color:#a1a9b6;
+ font-size:10px;padding:25px 0 0;
+}
+@media(max-width:480px){
+ .student-card{gap:10px;padding:11px}
+ .avatar{width:48px;height:48px}
+ .student-name{font-size:13px}
+ .chat-btn{padding:10px;font-size:10px}
+ .header-title h1{font-size:23px}
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+ <div class="header-inner">
+  <div class="brand">
+   <div class="logo">A1</div>
+   <div>
+    <div class="brand-name">A ONE DRIVING CLASSES</div>
+    <div class="brand-sub">DRIVING TRAINING · BARIPADA</div>
+   </div>
+  </div>
+  <div class="header-title">
+   <h1>DL & LL Assistance</h1>
+   <p>Helping our students take the next step towards their driving licence.</p>
+  </div>
+ </div>
+</header>
+
+<main class="container">
+
+ <div class="stats">
+  <div class="stat">
+   <div class="stat-number" id="totalCount">0</div>
+   <div class="stat-label">Eligible Students</div>
+  </div>
+  <div class="stat">
+   <div class="stat-number">20+</div>
+   <div class="stat-label">Actual Classes Required</div>
+  </div>
+ </div>
+
+ <div class="toolbar">
+  <div class="search-wrap">
+   <span class="search-icon">⌕</span>
+   <input id="searchInput" type="search"
+    placeholder="Search student name...">
+  </div>
+  <button class="refresh" id="refreshBtn">↻ Refresh</button>
+ </div>
+
+ <div class="privacy">
+  🔒 Student mobile numbers are not displayed on this page.
+ </div>
+
+ <div class="section-heading">
+  <h2>Eligible Students</h2>
+  <span id="resultCount">0 students</span>
+ </div>
+
+ <div class="student-list" id="studentList">
+  <div class="loading">Connecting to Firebase...</div>
+ </div>
+
+ <div class="footer">A ONE DRIVING CLASSES · BARIPADA</div>
+</main>
+
+<script type="module">
+
+import {initializeApp}
+from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+
+import {
+ getFirestore,
+ collection,
+ getDocs,
+ addDoc,
+ query,
+ where,
+ limit,
+ serverTimestamp
+}
+from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
+import {
+ getDatabase,
+ ref,
+ get
+}
+from "https://www.gstatic.com/firebasejs/12.8.0/firebase-database.js";
+
+const firebaseConfig={
+ apiKey:"AIzaSyC3gWi8p85z-wkoJeWbN3jYoQpcIar8Sww",
+ authDomain:"abinash-driving.firebaseapp.com",
+ databaseURL:"https://abinash-driving-default-rtdb.firebaseio.com/",
+ projectId:"abinash-driving",
+ storageBucket:"abinash-driving.appspot.com",
+ messagingSenderId:"641148830173",
+ appId:"1:641148830173:web:b7a500e5e7e2463da0f634"
+};
+
+const app=initializeApp(firebaseConfig);
+const db=getFirestore(app);
+const realtimeDB=getDatabase(app);
+
+const $=id=>document.getElementById(id);
+
+let students=[];
+let loading=false;
+
+function escapeHTML(value){
+ return String(value??"").replace(/[&<>"']/g,c=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;",
+  '"':"&quot;","'":"&#39;"
+ })[c]);
+}
+
+function getCompletedClasses(student){
+ const logs=Array.isArray(student.attendanceLogs)
+  ? student.attendanceLogs : [];
+
+ return logs.length;
+}
+
+function withTimeout(promise,ms){
+ return Promise.race([
+  promise,
+  new Promise((_,reject)=>
+   setTimeout(()=>reject(new Error("Request timed out")),ms)
+  )
+ ]);
+}
+
+async function getPhoto(mobile){
+ try{
+  const photoPromise=(async()=>{
+   const thumb=await get(
+    ref(realtimeDB,`profilePhotoThumbnails/${mobile}`)
+   );
+
+   if(thumb.exists()){
+    const value=thumb.val();
+    if(typeof value==="string")return value;
+    if(value?.thumbnail)return value.thumbnail;
+    if(value?.image)return value.image;
+   }
+
+   const original=await get(
+    ref(realtimeDB,`profilePhotos/${mobile}`)
+   );
+
+   if(original.exists()){
+    const value=original.val();
+    if(typeof value==="string")return value;
+    if(value?.image)return value.image;
+    if(value?.url)return value.url;
+   }
+
+   return "";
+  })();
+
+  return await withTimeout(photoPromise,5000);
+
+ }catch(error){
+  console.warn("Profile photo unavailable:",error);
+  return "";
+ }
+}
+
+function decisionName(value){
+ const labels={
+  DL:"Interested in DL",
+  LL:"Interested in LL",
+  BOTH:"Interested in DL & LL",
+  INFO:"Needs Information",
+  NOT_INTERESTED:"Not Interested",
+  PENDING:"Waiting for Decision"
+ };
+ return labels[value]||"Waiting for Decision";
+}
+
+function renderStudents(){
+ const search=$("searchInput").value.trim().toLowerCase();
+
+ const filtered=students.filter(s=>
+  s.name.toLowerCase().includes(search)
+ );
+
+ $("totalCount").textContent=students.length;
+ $("resultCount").textContent=filtered.length+" students";
+
+ if(!filtered.length){
+  $("studentList").innerHTML=
+   '<div class="empty">No eligible students found.</div>';
+  return;
+ }
+
+ $("studentList").innerHTML=filtered.map(s=>{
+  const photo=s.photo||
+   "https://placehold.co/100x100/e8edf5/64748b?text=A1";
+
+  const started=Boolean(s.chatId);
+
+  return `
+   <div class="student-card">
+    <img class="avatar"
+     src="${escapeHTML(photo)}"
+     alt="Student"
+     onerror="this.onerror=null;this.src='https://placehold.co/100x100/e8edf5/64748b?text=A1'">
+
+    <div class="student-info">
+     <div class="student-name">${escapeHTML(s.name)}</div>
+     <span class="class-tag">✓ ${s.completed} CLASSES COMPLETED</span>
+     <div>
+      <span class="decision-tag">
+       ${escapeHTML(decisionName(s.decision))}
+      </span>
+     </div>
+     <span class="chat-status">
+      ${started?"Assistance initiated":"Assistance not started"}
+     </span>
+    </div>
+
+    <button class="chat-btn ${started?"started":""}"
+     data-id="${escapeHTML(s.studentId)}"
+     ${started?"disabled":""}>
+     ${started?"STARTED":"💬 CHAT"}
+    </button>
+   </div>
+  `;
+ }).join("");
+
+ $("studentList").querySelectorAll(".chat-btn:not(:disabled)")
+ .forEach(button=>{
+  button.addEventListener("click",()=>{
+   initiateChat(button.dataset.id,button);
+  });
+ });
+}
+
+async function initiateChat(studentId,button){
+ if(!studentId)return;
+
+ if(!confirm("Start DL & LL assistance for this student?"))return;
+
+ button.disabled=true;
+ button.textContent="PLEASE WAIT";
+
+ try{
+  const existingQuery=query(
+   collection(db,"assistanceChats"),
+   where("studentId","==",studentId),
+   limit(1)
+  );
+
+  const existing=await getDocs(existingQuery);
+
+  let chatId;
+
+  if(!existing.empty){
+   chatId=existing.docs[0].id;
+  }else{
+   const newChat=await addDoc(
+    collection(db,"assistanceChats"),
+    {
+     studentId:studentId,
+     status:"initiated",
+     decision:"PENDING",
+     createdAt:serverTimestamp(),
+     updatedAt:serverTimestamp()
+    }
+   );
+
+   chatId=newChat.id;
+  }
+
+  const student=students.find(s=>s.studentId===studentId);
+
+  if(student){
+   student.chatId=chatId;
+   student.decision="PENDING";
+  }
+
+  renderStudents();
+  alert("Assistance initiated successfully.");
+
+ }catch(error){
+  console.error("Chat initiation error:",error);
+
+  button.disabled=false;
+  button.textContent="💬 CHAT";
+
+  alert(
+   "Chat could not be started. Firebase permission or login issue: "+
+   error.message
+  );
+ }
+}
+
+async function loadStudents(){
+ if(loading)return;
+ loading=true;
+
+ $("refreshBtn").disabled=true;
+ $("refreshBtn").textContent="Loading...";
+ $("studentList").innerHTML=
+  '<div class="loading">Loading student records...</div>';
+
+ try{
+  console.log("Fetching studentData...");
+
+  const snapshot=await withTimeout(
+   getDocs(collection(db,"studentData")),
+   15000
+  );
+
+  console.log("Student records received:",snapshot.size);
+
+  const records=[];
+
+  snapshot.forEach(docSnap=>{
+   const data=docSnap.data();
+   const completed=getCompletedClasses(data);
+
+   if(data.notActive===true||completed<20)return;
+
+   records.push({
+    studentId:docSnap.id,
+    name:data.name||"Student",
+    completed,
+    decision:"PENDING",
+    chatId:null
+   });
+  });
+
+  console.log("Eligible students:",records.length);
+
+  // Show names immediately, without waiting for photos.
+  students=records;
+  renderStudents();
+
+  // Existing chat records are optional. If collection is not
+  // readable, student list still remains available.
+  try{
+   const chats=await withTimeout(
+    getDocs(collection(db,"assistanceChats")),
+    7000
+   );
+
+   const chatMap=new Map();
+
+   chats.forEach(docSnap=>{
+    const data=docSnap.data();
+    if(data.studentId){
+     chatMap.set(data.studentId,{
+      chatId:docSnap.id,
+      decision:data.decision||"PENDING"
+     });
+    }
+   });
+
+   students.forEach(student=>{
+    const chat=chatMap.get(student.studentId);
+    if(chat){
+     student.chatId=chat.chatId;
+     student.decision=chat.decision;
+    }
+   });
+
+  }catch(chatError){
+   console.warn("Chat status unavailable:",chatError);
+  }
+
+  renderStudents();
+
+  // Photos load independently. A slow photo never blocks the list.
+  const photoResults=await Promise.all(
+   records.map(async student=>({
+    studentId:student.studentId,
+    photo:await getPhoto(student.studentId)
+   }))
+  );
+
+  const photoMap=new Map(
+   photoResults.map(item=>[item.studentId,item.photo])
+  );
+
+  students.forEach(student=>{
+   student.photo=photoMap.get(student.studentId)||"";
+  });
+
+  renderStudents();
+
+ }catch(error){
+  console.error("Student loading error:",error);
+
+  $("studentList").innerHTML=`
+   <div class="error">
+    <b>Unable to load student records.</b><br><br>
+    ${escapeHTML(error.message)}
+    <br><br>
+    Please check internet connection and Firestore read permissions.
+   </div>
+  `;
+
+ }finally{
+  loading=false;
+  $("refreshBtn").disabled=false;
+  $("refreshBtn").textContent="↻ Refresh";
+ }
+}
+
+$("searchInput").addEventListener("input",renderStudents);
+$("refreshBtn").addEventListener("click",loadStudents);
+
+loadStudents();
+
+</script>
+</body>
+</html>
