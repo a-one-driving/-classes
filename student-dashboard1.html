@@ -659,21 +659,7 @@ footer{border-top:1px solid var(--border);padding:22px 0 100px}
 
  <div class="assist-divider"></div>
 
- <!-- LOCKED STATE: 15 TO 19 CLASSES -->
- <div id="assistanceLockedContent">
-  <div class="assist-progress-head">
-   <span>Classes completed</span>
-   <strong id="assistanceClassCount">0 / 20</strong>
-  </div>
 
-  <div class="assist-progress-track">
-   <div class="assist-progress-fill" id="assistanceProgressBar"></div>
-  </div>
-
-  <p class="assist-locked-message">
-   Complete 20 classes to unlock LL and DL assistance.
-  </p>
- </div>
 
  <!-- UNLOCKED STATE: 20 OR MORE CLASSES -->
  <div id="assistanceUnlockedContent" style="display:none">
@@ -1086,11 +1072,7 @@ function updateAssistanceVisibility(completed){
 
  card.style.display="block";
 
- $("assistanceClassCount").textContent=
-  Math.min(count,20)+" / 20";
 
- $("assistanceProgressBar").style.width=
-  Math.min(count/20*100,100)+"%";
 
  if(count<20){
 
